@@ -28,6 +28,8 @@ from growth_pages import development_page, roads_page
 from schools_page import schools_page
 from emergency_page import emergency_page
 from hurricane_prep_page import hurricane_prep_page
+from elections_hub_page import results_page as election_results_page, voting_page
+from notices_jobs_page import notices_page, jobs_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -685,6 +687,10 @@ PAGES = [
     ('/connections/campaign-gifts', 'Campaign gifts and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/public-money/budget-compare', 'Compare budgets across years', "Compare any Bay County government's budget in two fiscal years, such as Lynn Haven FY2025 and FY2026: what grew, what shrank and what's new, by department, service and fund, in dollars and percent.", lambda: budget_compare_page(OUT, None)),
     *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
+    ('/elections/results', 'Election results since 2016', "Results of every contest on a Bay County ballot since 2016, from the Supervisor of Elections: votes for each candidate and ballot question, on Election Day, early and by mail, and turnout for every election.", election_results_page),
+    ('/elections/voting', 'Where and when to vote', "Bay County election dates, every early voting site, each precinct's Election Day polling place, and the local races on your ballot by address.", voting_page),
+    ('/notices', 'Public notices', "Bids, public hearings and meetings that Bay County, the School Board, the cities and other public agencies announce, in one searchable list linked to the government that posted each.", notices_page),
+    ('/jobs', 'Government jobs', "Open jobs at Bay County, Bay District Schools, the cities and the airport, read daily from each employer's own job board, with pay, closing dates and where to apply.", jobs_page),
     ('/elections/past', 'Past local elections, 2016 to 2025', 'Every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers, with what each raised and spent and which businesses and groups gave.', past_elections_page),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),

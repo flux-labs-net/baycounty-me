@@ -7025,7 +7025,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 150,
+   "rows": 163,
    "columns": [
     {
      "name": "topic",
@@ -7043,6 +7043,7 @@
       "Elections",
       "Emergencies and hurricane prep",
       "Fees and bills",
+      "Government jobs",
       "Hurricane Michael",
       "Meetings and agendas",
       "My Address lookups",
@@ -7051,6 +7052,7 @@
       "Officials by year",
       "Pay",
       "Property tax",
+      "Public notices",
       "Public records contacts",
       "Public schools",
       "Redevelopment agencies (CRAs)",
@@ -7077,10 +7079,12 @@
       "emergency",
       "events",
       "fees",
+      "jobs",
       "meetings",
       "michael",
       "news",
       "nonprofits",
+      "notices",
       "officials",
       "outdoors",
       "property-tax",
@@ -7152,38 +7156,7 @@
     },
     {
      "name": "refresh",
-     "type": "string",
-     "values": [
-      "As boards change",
-      "As minutes are adopted",
-      "As needed",
-      "As new filings post",
-      "As pages change",
-      "As reports post",
-      "As seats change",
-      "As the district posts events",
-      "As the district redraws zones",
-      "As updated",
-      "Daily",
-      "Daily (zones); live (address lookups)",
-      "Daily, and live on the page",
-      "Each election",
-      "Each meeting",
-      "Each search",
-      "Each season",
-      "Each year",
-      "Each year, as audits are filed",
-      "Each year, when adopted",
-      "Every 30 minutes on weekdays, and twice a day",
-      "Every 5 minutes",
-      "Monthly",
-      "Once",
-      "Quarterly",
-      "Weekly",
-      "Weekly (Census posts monthly)",
-      "Yearly (about a year behind)",
-      "Yearly (grades in July)"
-     ]
+     "type": "string"
     },
     {
      "name": "what_we_take",
@@ -7206,10 +7179,12 @@
       "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
       "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
       "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
+      "Government legal notices are read every day from the county's public notice website, which keeps 30 days; notices already on file stay as an archive.",
       "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
       "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
       "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
       "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
+      "Open jobs are read every day from each employer's public job board. Boards that turn automated readers away are listed with a link instead.",
       "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
       "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
       "Records custodians, portals and policies are taken from each agency's official pages.",
@@ -7228,6 +7203,7 @@
      "values": [
       "A name match is only a lead: nothing about a person is published until it is checked by hand. Street addresses are never stored or shown.",
       "Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.",
+      "Court, tax deed, foreclosure, probate and other private notices are left out. The posting government is matched from the notice's opening words.",
       "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them.",
       "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
       "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
@@ -7235,6 +7211,7 @@
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
       "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
       "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
+      "Jobs whose closing date has passed are dropped.",
       "Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.",
       "Matches between the map and the schedule are listed with their method.",
       "Names are checked against each board's roster. Every split or failed vote found is included.",
@@ -7269,8 +7246,10 @@
       "/emergency",
       "/events",
       "/governments",
+      "/jobs",
       "/meetings",
       "/my-address",
+      "/notices",
       "/people",
       "/public-money/budget-compare",
       "/public-money/contracts",
@@ -7549,7 +7528,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 363,
+   "rows": 384,
    "columns": [
     {
      "name": "website",
@@ -7571,12 +7550,14 @@
       "Elections",
       "Emergencies and hurricane prep",
       "Fees and bills",
+      "Government jobs",
       "Hurricane Michael",
       "Meetings and agendas",
       "My Address lookups",
       "Nonprofits",
       "Pay",
       "Property tax",
+      "Public notices",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
       "Road projects",
@@ -7602,9 +7583,11 @@
       "emergency",
       "events",
       "fees",
+      "jobs",
       "meetings",
       "michael",
       "nonprofits",
+      "notices",
       "outdoors",
       "property-tax",
       "records",
@@ -7636,7 +7619,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 64,
+   "rows": 68,
    "columns": [
     {
      "name": "place_id",
@@ -12540,6 +12523,998 @@
    "json": "/downloads/rebuild-money.json",
    "csv": "/downloads/rebuild-money.csv",
    "api": "/api/v1/datasets/rebuild-money"
+  },
+  {
+   "id": "elections",
+   "title": "Elections since 2016",
+   "description": "Every election the Bay County Supervisor of Elections has held since 2016, one row each: the date, name and kind (primary, general, municipal, runoff, referendum, recall, presidential preference primary), registered voters, ballots cast, turnout and precincts reporting. status is final (completely reported), counting (results still coming in) or canceled. A city's own view of a municipal election day and the 2018 recounts are folded into the countywide election. Contest results are in election-results.",
+   "rows": 32,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "election_id",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "values": [
+      "General Election",
+      "Lynn Haven Recall Election",
+      "Lynn Haven Runoff",
+      "Lynn Haven Runoff Election",
+      "Mexico Beach Referendum",
+      "Municipal Runoff Election",
+      "Municipal Super Tuesday",
+      "Municipal Super Tuesday Election",
+      "Panama City Ward 2 Runoff",
+      "Presidential Preference Primary",
+      "Presidential Preference Primary Election",
+      "Primary",
+      "Primary Election",
+      "School Board Referendum / Municipal Election"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "general",
+      "municipal",
+      "presidential preference primary",
+      "primary",
+      "recall",
+      "referendum",
+      "runoff"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "canceled",
+      "final"
+     ]
+    },
+    {
+     "name": "registered_voters",
+     "type": "number"
+    },
+    {
+     "name": "ballots_cast",
+     "type": "number"
+    },
+    {
+     "name": "turnout_pct",
+     "type": "number"
+    },
+    {
+     "name": "precincts_reporting",
+     "type": "number"
+    },
+    {
+     "name": "precincts_total",
+     "type": "number"
+    },
+    {
+     "name": "contests",
+     "type": "number"
+    },
+    {
+     "name": "updated",
+     "type": "string",
+     "values": [
+      "2019-06-05T22:16:27",
+      "2020-04-24T09:34:07",
+      "2020-11-16T12:29:08",
+      "2020-11-16T12:30:57",
+      "2020-11-16T12:32:26",
+      "2020-11-16T12:33:16",
+      "2020-11-16T12:33:56",
+      "2021-06-22T13:34:48",
+      "2021-06-22T13:39:16",
+      "2021-06-22T13:41:11",
+      "2021-06-22T13:43:27",
+      "2021-06-22T13:44:45",
+      "2021-06-23T10:14:43",
+      "2021-06-23T11:03:00",
+      "2022-06-27T12:32:13",
+      "2022-08-31T15:52:03",
+      "2023-01-12T08:58:16",
+      "2023-04-21T11:23:07",
+      "2023-05-18T10:41:21",
+      "2023-05-19T09:50:24",
+      "2024-04-08T14:41:14",
+      "2024-04-19T09:20:30",
+      "2025-04-25T11:16:02",
+      "2025-05-23T08:41:26",
+      "2026-01-05T16:02:06",
+      "2026-03-16T15:13:14",
+      "2026-03-16T15:38:55",
+      "2026-03-16T15:43:51",
+      "2026-04-24T10:00:37",
+      "2026-08-24T09:41:07"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/elections.json",
+   "csv": "/downloads/elections.csv",
+   "api": "/api/v1/datasets/elections"
+  },
+  {
+   "id": "election-results",
+   "title": "Election results since 2016",
+   "description": "Official results of every contest on a Bay County ballot since 2016, one row per choice: votes on Election Day, in early voting and by mail, the total and percent, and rank in the contest. level is Federal, State, Court, County, School district, City, Special district or Party; gov_id is the local government a contest elects or decides. measure is true for a yes-or-no ballot question. party_primary is REP or DEM for a closed party primary, or Universal primary when every voter could vote. recount is true where the 2018 recount figures replace the first count. person_entity_id links a local candidate to their profile. A blank vote count is 1 to 29 votes, which the law keeps from being reported for privacy. From the Supervisor of Elections' election results site.",
+   "rows": 756,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "election_id",
+     "type": "number"
+    },
+    {
+     "name": "election_date",
+     "type": "string"
+    },
+    {
+     "name": "election_name",
+     "type": "string",
+     "values": [
+      "General Election",
+      "Lynn Haven Recall Election",
+      "Lynn Haven Runoff",
+      "Lynn Haven Runoff Election",
+      "Mexico Beach Referendum",
+      "Municipal Runoff Election",
+      "Municipal Super Tuesday",
+      "Municipal Super Tuesday Election",
+      "Panama City Ward 2 Runoff",
+      "Presidential Preference Primary",
+      "Presidential Preference Primary Election",
+      "Primary",
+      "Primary Election",
+      "School Board Referendum / Municipal Election"
+     ]
+    },
+    {
+     "name": "election_kind",
+     "type": "string",
+     "values": [
+      "general",
+      "municipal",
+      "presidential preference primary",
+      "primary",
+      "recall",
+      "referendum",
+      "runoff"
+     ]
+    },
+    {
+     "name": "contest_id",
+     "type": "number"
+    },
+    {
+     "name": "contest",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "City",
+      "County",
+      "Court",
+      "Federal",
+      "Party",
+      "School district",
+      "Special district",
+      "State"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "measure",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "party_primary",
+     "type": "string",
+     "values": [
+      "DEM",
+      "REP",
+      "Universal primary"
+     ]
+    },
+    {
+     "name": "recount",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "choice",
+     "type": "string"
+    },
+    {
+     "name": "party",
+     "type": "string",
+     "values": [
+      "ASP",
+      "CPF",
+      "DEM",
+      "GRE",
+      "LPF",
+      "NON",
+      "NPA",
+      "PSL",
+      "REF",
+      "REP"
+     ]
+    },
+    {
+     "name": "person_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "election_day",
+     "type": "number"
+    },
+    {
+     "name": "early_voting",
+     "type": "number"
+    },
+    {
+     "name": "vote_by_mail",
+     "type": "number"
+    },
+    {
+     "name": "votes",
+     "type": "number"
+    },
+    {
+     "name": "pct",
+     "type": "number"
+    },
+    {
+     "name": "rank",
+     "type": "number"
+    },
+    {
+     "name": "over_votes",
+     "type": "number"
+    },
+    {
+     "name": "under_votes",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/election-results.json",
+   "csv": "/downloads/election-results.csv",
+   "api": "/api/v1/datasets/election-results"
+  },
+  {
+   "id": "election-dates",
+   "title": "Election dates",
+   "description": "Key dates for Bay County elections: registration deadlines, early voting, vote-by-mail request and return deadlines and election days (kept by hand from the Supervisor of Elections' voter guide), plus the upcoming events on the Supervisor of Elections' calendar (canvassing board meetings, tests of the voting equipment), read daily. kind says which; starts_at is the start time when one is given.",
+   "rows": 18,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "2026-03-23",
+      "2026-04-21",
+      "2026-07-20",
+      "2026-08-18",
+      "2026-10-05",
+      "2026-10-19",
+      "2026-10-22",
+      "2026-10-29",
+      "2026-10-31",
+      "2026-11-01",
+      "2026-11-03",
+      "2026-11-05",
+      "2026-11-07",
+      "2026-11-13"
+     ]
+    },
+    {
+     "name": "end_date",
+     "type": "string",
+     "values": [
+      "2026-10-31"
+     ]
+    },
+    {
+     "name": "starts_at",
+     "type": "string",
+     "values": [
+      "2026-10-29T08:30",
+      "2026-11-01T13:00",
+      "2026-11-03T07:00",
+      "2026-11-03T15:00",
+      "2026-11-03T18:30",
+      "2026-11-05T17:01",
+      "2026-11-07T00:00",
+      "2026-11-13T17:01"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2026 General Election",
+      "2026 Municipal Election (Mexico Beach and Springfield)",
+      "2026 Primary Election"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "early_voting",
+      "election_day",
+      "mail_ballot_request_deadline",
+      "mail_ballot_return_deadline",
+      "registration_deadline",
+      "soe_event"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Supervisor of Elections events",
+      "Supervisor of Elections voter guide"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string",
+     "values": [
+      "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
+      "https://www.bayvotesfl.gov/elections/upcoming-elections/",
+      "https://www.bayvotesfl.gov/events/canvass-of-vote-by-mail-ballots-2/",
+      "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-ballots/",
+      "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-report-preliminary-results/",
+      "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
+      "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
+      "https://www.bayvotesfl.gov/events/canvassing-board-meeting/",
+      "https://www.bayvotesfl.gov/events/early-voting-general-election-2/",
+      "https://www.bayvotesfl.gov/events/general-election/",
+      "https://www.bayvotesfl.gov/events/recount-if-required/",
+      "https://www.bayvotesfl.gov/voters/vote-early/"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
+      "https://www.bayvotesfl.gov/elections/events/",
+      "https://www.bayvotesfl.gov/elections/upcoming-elections/",
+      "https://www.bayvotesfl.gov/voters/vote-early/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/election-dates.json",
+   "csv": "/downloads/election-dates.csv",
+   "api": "/api/v1/datasets/election-dates"
+  },
+  {
+   "id": "voting-locations",
+   "title": "Where to vote",
+   "description": "Every early voting site for the next countywide election (kind early_voting: any registered Bay County voter can vote at any of them, with the dates and hours) and the Election Day polling place for each of the county's precincts (kind polling_place: on Election Day you vote only at your own precinct's polling place). lat and lon place each on a map, from Bay County's address points. From the Supervisor of Elections.",
+   "rows": 38,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "early_voting",
+      "polling_place"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2026 General Election"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string",
+     "values": [
+      "2026-10-19"
+     ]
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-10-31"
+     ]
+    },
+    {
+     "name": "hours",
+     "type": "string",
+     "values": [
+      "10 a.m. to 6 p.m. every day; the Supervisor of Elections Office opens at 8:30 a.m.",
+      "7 a.m. to 7 p.m. on Election Day",
+      "8:30 a.m. to 6 p.m."
+     ]
+    },
+    {
+     "name": "precinct",
+     "type": "string",
+     "values": [
+      "1",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "2",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "3",
+      "30",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Fountain",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Southport",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32413",
+      "32438",
+      "32444",
+      "32456",
+      "32466"
+     ]
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lon",
+     "type": "number"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.bayvotesfl.gov/voters/vote-early/",
+      "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/voting-locations.json",
+   "csv": "/downloads/voting-locations.csv",
+   "api": "/api/v1/datasets/voting-locations"
+  },
+  {
+   "id": "public-notices",
+   "title": "Public notices",
+   "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive.",
+   "rows": 63,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "notice_id",
+     "type": "string"
+    },
+    {
+     "name": "published",
+     "type": "string",
+     "values": [
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-02",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-09",
+      "2026-10-10",
+      "2026-10-12",
+      "2026-10-13",
+      "2026-10-14",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-19",
+      "2026-10-21",
+      "2026-10-23",
+      "2026-10-25",
+      "2026-10-26",
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pc",
+      "pcb",
+      "schools"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay County Tax Collector",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "Community development district",
+      "Gulf Coast State College",
+      "Panama City Port Authority"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "bid",
+      "hearing",
+      "meeting",
+      "other"
+     ]
+    },
+    {
+     "name": "kind_label",
+     "type": "string",
+     "values": [
+      "Bid or proposal request",
+      "Other notice",
+      "Public hearing or ordinance",
+      "Public meeting"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "event_date",
+     "type": "string",
+     "values": [
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-08",
+      "2026-10-13",
+      "2026-10-14",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-20",
+      "2026-10-22",
+      "2026-10-26",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-06",
+      "2026-11-09",
+      "2026-11-10",
+      "2026-11-13",
+      "2026-11-16",
+      "2026-11-17",
+      "2026-11-24",
+      "2026-12-15"
+     ]
+    },
+    {
+     "name": "notice_type",
+     "type": "string",
+     "values": [
+      "Display Ad (document upload)",
+      "Public Notice (Other)"
+     ]
+    },
+    {
+     "name": "text",
+     "type": "string"
+    },
+    {
+     "name": "pdf_url",
+     "type": "string",
+     "values": [
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-028.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/mlwyHIF8RUrB6T3Ot2Df/d59b./cropped-510.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ubbtWJbCLCwAynktGtIJ/91ea./cropped-729.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/vTRrMPSA0xFut5Wk3QPA/1c8d./cropped-728.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/vji28BvaPG4UNufZGc0N/be71./cropped-699.pdf"
+     ]
+    },
+    {
+     "name": "publication",
+     "type": "string",
+     "values": [
+      "Bay County Publications"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://publicnoticesbaycountyfl.gov/"
+     ]
+    }
+   ],
+   "json": "/downloads/public-notices.json",
+   "csv": "/downloads/public-notices.csv",
+   "api": "/api/v1/datasets/public-notices"
+  },
+  {
+   "id": "job-openings",
+   "title": "Government job openings",
+   "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.",
+   "rows": 126,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "job_id",
+     "type": "string"
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "airport",
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "schools"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "schools"
+     ]
+    },
+    {
+     "name": "employer",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Parker",
+      "Northwest Florida Beaches International Airport"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "department",
+     "type": "string"
+    },
+    {
+     "name": "job_type",
+     "type": "string",
+     "values": [
+      "Confidential",
+      "Full Time",
+      "Full time",
+      "Full- Time",
+      "Instructional",
+      "Licensed",
+      "Part time",
+      "Part-Time",
+      "Substitutes",
+      "Support"
+     ]
+    },
+    {
+     "name": "pay",
+     "type": "string",
+     "values": [
+      "$16.07 Hourly",
+      "$33,425.60 Annually",
+      "$34,756.80 Annually",
+      "$36,150.40 Annually",
+      "$37,585.60 Annually",
+      "$39,104.00 Annually",
+      "$40,643.20 Annually",
+      "$43,950.40 Annually",
+      "$48,526.40 Annually",
+      "$51,958.40 Annually"
+     ]
+    },
+    {
+     "name": "posted",
+     "type": "string"
+    },
+    {
+     "name": "closes",
+     "type": "string",
+     "values": [
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-06",
+      "2027-04-30"
+     ]
+    },
+    {
+     "name": "ref",
+     "type": "string"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site",
+      "https://cityofparker.com/government/careers/",
+      "https://focus.bayschools.net/focus/jobs/#!Jobs",
+      "https://jobs.keldair.com/cityoflynnhaven",
+      "https://www.cityofcallaway.com/Jobs.aspx",
+      "https://www.governmentjobs.com/careers/pcgov",
+      "https://www.iflybeaches.com/airport-district/employment"
+     ]
+    }
+   ],
+   "json": "/downloads/job-openings.json",
+   "csv": "/downloads/job-openings.csv",
+   "api": "/api/v1/datasets/job-openings"
+  },
+  {
+   "id": "job-boards",
+   "title": "Government job boards",
+   "description": "Each local government's job board and whether its openings are read automatically: openings is how many are open now, blank where the board cannot be read (note says why and where to look).",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "employer",
+     "type": "string"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "read",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "openings",
+     "type": "number"
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Mexico Beach takes applications on its employment page; openings are not listed one by one.",
+      "Springfield posts openings as notices on its website.",
+      "The city's website turns away automated readers; see its job openings page."
+     ]
+    },
+    {
+     "name": "checked",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    }
+   ],
+   "json": "/downloads/job-boards.json",
+   "csv": "/downloads/job-boards.csv",
+   "api": "/api/v1/datasets/job-boards"
   },
   {
    "id": "tax-districts",

@@ -162,6 +162,13 @@ data class DatasetSpec(
                                   amount = listOf("pay_max", "pay_mid", "pay_min"), filters = listOf("employer", "category", "fiscal_year"),
                                   page = "people"),
         // Elections
+        "elections" to DatasetSpec(Section.ELECTIONS, "checkmark.seal", title = listOf("name"), subtitle = listOf("date", "kind"), date = listOf("date"), badge = "status", filters = listOf("kind", "status"), page = "elections/results"),
+        "election-results" to DatasetSpec(Section.ELECTIONS, "chart.bar", title = listOf("choice"), subtitle = listOf("office", "election_name"), date = listOf("election_date"), badge = "level", filters = listOf("election_date", "level", "gov_id"), page = "elections/results"),
+        "election-dates" to DatasetSpec(Section.ELECTIONS, "calendar", title = listOf("title"), subtitle = listOf("election", "kind"), date = listOf("date"), badge = "kind", filters = listOf("kind"), page = "elections/voting"),
+        "voting-locations" to DatasetSpec(Section.ELECTIONS, "mappin.and.ellipse", title = listOf("name"), subtitle = listOf("address", "city"), detail = "hours", badge = "kind", filters = listOf("kind", "city"), page = "elections/voting"),
+        "public-notices" to DatasetSpec(Section.MORE, "megaphone", title = listOf("title"), subtitle = listOf("agency", "kind_label"), detail = "text", date = listOf("published"), badge = "kind_label", filters = listOf("agency", "kind"), page = "notices"),
+        "job-openings" to DatasetSpec(Section.MORE, "briefcase", title = listOf("title"), subtitle = listOf("employer", "department"), detail = "pay", date = listOf("posted"), badge = "job_type", filters = listOf("employer", "job_type"), page = "jobs"),
+        "job-boards" to DatasetSpec(Section.MORE, "building.2", title = listOf("employer"), subtitle = listOf("note"), page = "jobs"),
         "candidates-2026" to DatasetSpec(Section.ELECTIONS, "checkmark.seal", title = listOf("candidate"), subtitle = listOf("office", "party"),
                                  amount = listOf("total_raised"), badge = "status", filters = listOf("office", "government", "status"), page = "elections"),
         "campaign-finance" to DatasetSpec(Section.ELECTIONS, "chart.bar", title = listOf("official"), subtitle = listOf("office", "election"),

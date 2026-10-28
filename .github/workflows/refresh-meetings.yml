@@ -17,7 +17,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -91,6 +91,31 @@ jobs:
         # checked every 5 minutes by the site itself; this keeps the downloadable archive. A failure keeps yesterday's files.
         continue-on-error: true
         run: node data/emergency/fetch_emergency.js
+      - name: Fetch election results
+        # Every Bay County election since 2016 (data/elections/scripts/fetch_results.py). Elections from the last 60 days
+        # are read again; a failure keeps the file as it was.
+        continue-on-error: true
+        run: python data/elections/scripts/fetch_results.py
+      - name: Fetch voting dates and polling places
+        continue-on-error: true
+        run: python data/elections/scripts/fetch_voting.py
+      - name: Set up a browser for notices and jobs
+        # The public notice site and several job boards only show their lists in a browser.
+        id: browser
+        continue-on-error: true
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Fetch public notices
+        if: steps.browser.outcome == 'success'
+        continue-on-error: true
+        run: |
+          node data/notices/fetch_notices.js > "$RUNNER_TEMP/notices_raw.json"
+          python data/notices/build_notices.py "$RUNNER_TEMP/notices_raw.json"
+      - name: Fetch government job openings
+        if: steps.browser.outcome == 'success'
+        continue-on-error: true
+        run: node data/jobs/fetch_jobs.js
       - name: Check campaign finance freshness
         # refresh.sh keeps the old file when the Elections Office site is down, so a long outage would be silent.
         id: finance_freshness
@@ -153,10 +178,10 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes and campaign finance, emergency notices ($(date -u +%Y-%m-%d))" $src
+          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes, campaign finance, elections, notices, jobs and emergency notices ($(date -u +%Y-%m-%d))" $src
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store

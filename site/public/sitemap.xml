@@ -79,6 +79,14 @@
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/elections/results</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/elections/voting</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/emergency</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
@@ -201,6 +209,10 @@
     <lastmod>2026-10-27</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/jobs</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/meetings</loc>
     <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/meetings"/>
@@ -213,6 +225,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/my-address"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/mi-direccion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/my-address"/>
+  </url>
+  <url>
+    <loc>https://baycounty.me/notices</loc>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
