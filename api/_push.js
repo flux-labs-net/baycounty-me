@@ -32,9 +32,9 @@ function apnsPayload(msg) {
 }
 // One connection to one APNs host; returns [{status, data}] in token order.
 async function apnsPost(host, tokens, msg) {
+  const body = apnsPayload(msg), auth = 'bearer ' + apnsToken(); // before connecting: a bad key throws here
   const client = http2.connect(host);
   client.on('error', () => {});
-  const body = apnsPayload(msg), auth = 'bearer ' + apnsToken();
   const one = token => new Promise(resolve => {
     const req = client.request({':method': 'POST', ':path': `/3/device/${token}`, authorization: auth, 'apns-topic': process.env.APNS_TOPIC || 'me.baycounty.app',
       'apns-push-type': 'alert', 'apns-priority': '10', 'apns-collapse-id': String(msg.notice_id).slice(0, 64), 'content-type': 'application/json'});
@@ -114,7 +114,7 @@ function chunks(a, n) { const out = []; for (let i = 0; i < a.length; i += n) ou
 
 // devices: [{token, platform}]. Platforms without keys are skipped (counted as not sent).
 async function send(devices, msg) {
-  const r = ready(), res = {delivered: 0, failed: 0, skipped: 0, dead: []};
+  const r = ready(), res = {delivered: 0, failed: 0, skipped: 0, dead: [], reasons: []};
   const add = x => { res.delivered += x.delivered; res.failed += x.failed; res.dead.push(...x.dead); res.reasons.push(...(x.reasons || (x.e ? [String(x.e.message || x.e)] : []))); };
   const ios = devices.filter(d => d.platform === 'ios').map(d => d.token), android = devices.filter(d => d.platform === 'android').map(d => d.token);
   if (r.ios) add(await sendApns(ios, msg).catch(e => ({delivered: 0, failed: ios.length, dead: [], e}))); else res.skipped += ios.length;

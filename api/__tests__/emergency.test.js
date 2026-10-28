@@ -142,3 +142,8 @@ test('Apple failure reasons are read from the answer body', () => {
   assert.equal(P.apnsReason({status: 0}), null);
   assert.equal(P.apnsReason({status: 500, data: 'oops'}), null);
 });
+
+test('push send reports Apple and Google reasons without crashing', async () => {
+  const r = await P.send([], {title: 't', body: 'b', topic: 'test', notice_id: 'test', url: 'https://baycounty.me'});
+  assert.deepEqual(r, {delivered: 0, failed: 0, skipped: 0, dead: [], reasons: []});
+});

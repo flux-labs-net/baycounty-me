@@ -348,6 +348,9 @@ async function readAll(place = 'fl-bay', now = Date.now()) {
   const keyOf = n => `${n.gov_id}|${n.title.toLowerCase()}`;
   const inAlerts = new Set(out.notices.filter(n => n.source_type === 'alert-center').map(keyOf));
   out.notices = out.notices.filter(n => n.source_type !== 'news' || !inAlerts.has(keyOf(n)));
+  // A feed can list one post twice (once per category); one notice per id, or the store's upsert fails.
+  const ids = new Set();
+  out.notices = out.notices.filter(n => !ids.has(n.notice_id) && ids.add(n.notice_id));
   return out;
 }
 
