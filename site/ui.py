@@ -342,20 +342,18 @@ def directory(cards, label, chips=(), govs=(), search='Search', sorts=(('c', 'Mo
             '<p class="muted ui-dir-none" data-dir-none hidden>No matches. Try fewer words or another filter.</p></div>')
 
 
-NOTE_KEY = 'ingest-2026-10'  # change this to show the notice again to people who closed it
+NOTE_KEY = 'daily-2026-10'  # change this to show the notice again to people who closed it
 
 
 def data_notice(es=False):
-    """Site-wide strip under the header: the data is still being loaded, so some totals are not final.
+    """Site-wide strip under the header: new records arrive every day.
     The close button hides it for that browser (ui.js); the inline script hides it before paint on later visits."""
     if es:
-        msg = ('<b>Seguimos cargando datos.</b> Todavía estamos incorporando y revisando registros, '
-               'así que algunos totales no son definitivos y pueden cambiar. '
+        msg = ('Se agregan registros nuevos todos los días. '
                '<a href="/data-sources" hreflang="en">De dónde vienen los datos</a> (en inglés)')
         close = 'Cerrar aviso'
     else:
-        msg = ('<b>Data is still coming in.</b> We are still loading and checking records, so some totals '
-               'are not final and may change. <a href="/data-sources">Where our data comes from</a>')
+        msg = ('New records are added every day. <a href="/data-sources">Where our data comes from</a>')
         close = 'Close notice'
     return (f'<div class="data-note" id="dataNote" role="note" data-report="skip" data-key="{NOTE_KEY}"><div class="data-note-in">'
             f'{ico("info")}<p>{msg}</p>'
