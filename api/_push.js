@@ -30,10 +30,8 @@ function apnsPayload(msg) {
   return JSON.stringify({aps: {alert: {title: msg.title, body: msg.body}, sound: 'default', 'thread-id': msg.topic,
     'interruption-level': msg.critical ? 'time-sensitive' : 'active'}, notice_id: msg.notice_id, url: msg.url});
 }
-async function sendApns(tokens, msg) {
-  const out = {delivered: 0, failed: 0, dead: []};
-  if (!tokens.length) return out;
-  const host = process.env.APNS_ENV === 'development' ? 'https://api.sandbox.push.apple.com' : 'https://api.push.apple.com';
+// One connection to one APNs host; returns [{status, data}] in token order.
+async function apnsPost(host, tokens, msg) {
   const client = http2.connect(host);
   client.on('error', () => {});
   const body = apnsPayload(msg), auth = 'bearer ' + apnsToken();
@@ -48,15 +46,29 @@ async function sendApns(tokens, msg) {
     req.on('error', () => resolve({status: 0}));
     req.end(body);
   });
-  try {
-    for (const batch of chunks(tokens, 50)) {
-      const rs = await Promise.all(batch.map(one));
-      rs.forEach((r, i) => {
-        if (r.status === 200) out.delivered++;
-        else { out.failed++; if (r.status === 410 || /BadDeviceToken|Unregistered|DeviceTokenNotForTopic/.test(r.data || '')) out.dead.push(batch[i]); }
-      });
-    }
-  } finally { client.close(); }
+  const rs = [];
+  try { for (const batch of chunks(tokens, 50)) rs.push(...await Promise.all(batch.map(one))); } finally { client.close(); }
+  return rs;
+}
+const APNS_PROD = 'https://api.push.apple.com', APNS_SANDBOX = 'https://api.sandbox.push.apple.com';
+const apnsReason = r => { try { return JSON.parse(r.data || '{}').reason || null; } catch (e) { return null; } };
+// A phone running a build installed from Xcode has a sandbox token, which production calls BadDeviceToken; those are
+// tried once on the sandbox before they count as gone. reasons: Apple's answer per failure, for the test button.
+async function sendApns(tokens, msg) {
+  const out = {delivered: 0, failed: 0, dead: [], reasons: []};
+  if (!tokens.length) return out;
+  const dev = process.env.APNS_ENV === 'development';
+  const first = await apnsPost(dev ? APNS_SANDBOX : APNS_PROD, tokens, msg);
+  const retry = dev ? [] : tokens.filter((t, i) => apnsReason(first[i]) === 'BadDeviceToken');
+  const second = retry.length ? await apnsPost(APNS_SANDBOX, retry, msg) : [];
+  const final = tokens.map((t, i) => { const j = retry.indexOf(t); return j >= 0 ? second[j] : first[i]; });
+  final.forEach((r, i) => {
+    if (r.status === 200) { out.delivered++; return; }
+    out.failed++;
+    const why = apnsReason(r) || (r.status ? 'HTTP ' + r.status : 'no answer');
+    out.reasons.push(why);
+    if (r.status === 410 || /BadDeviceToken|Unregistered|DeviceTokenNotForTopic/.test(why)) out.dead.push(tokens[i]);
+  });
   return out;
 }
 
@@ -103,7 +115,7 @@ function chunks(a, n) { const out = []; for (let i = 0; i < a.length; i += n) ou
 // devices: [{token, platform}]. Platforms without keys are skipped (counted as not sent).
 async function send(devices, msg) {
   const r = ready(), res = {delivered: 0, failed: 0, skipped: 0, dead: []};
-  const add = x => { res.delivered += x.delivered; res.failed += x.failed; res.dead.push(...x.dead); };
+  const add = x => { res.delivered += x.delivered; res.failed += x.failed; res.dead.push(...x.dead); res.reasons.push(...(x.reasons || (x.e ? [String(x.e.message || x.e)] : []))); };
   const ios = devices.filter(d => d.platform === 'ios').map(d => d.token), android = devices.filter(d => d.platform === 'android').map(d => d.token);
   if (r.ios) add(await sendApns(ios, msg).catch(e => ({delivered: 0, failed: ios.length, dead: [], e}))); else res.skipped += ios.length;
   if (r.android) add(await sendFcm(android, msg).catch(e => ({delivered: 0, failed: android.length, dead: [], e}))); else res.skipped += android.length;
@@ -123,4 +135,4 @@ function message(n, topic, site = 'https://baycounty.me') {
   return {title, body, topic, notice_id: n.notice_id, url: `${site}/emergency#n-${encodeURIComponent(n.notice_id)}`, critical: topic === 'evacuation' || (topic === 'weather' && n.severity === 'extreme')};
 }
 
-module.exports = {ready, send, message, apnsToken, apnsPayload, chunks};
+module.exports = {ready, send, message, apnsToken, apnsPayload, apnsReason, chunks};

@@ -136,3 +136,9 @@ test('CivicPlus feed times are local clock times', () => {
     {gov: 'cw', name: 'Callaway', url: 'https://x.gov/RSSFeed.aspx?ModID=1'}, 'fl-bay', 'news');
   assert.equal(n.issued, '2026-10-28T18:48:00.000Z');
 });
+
+test('Apple failure reasons are read from the answer body', () => {
+  assert.equal(P.apnsReason({status: 400, data: '{"reason":"BadDeviceToken"}'}), 'BadDeviceToken');
+  assert.equal(P.apnsReason({status: 0}), null);
+  assert.equal(P.apnsReason({status: 500, data: 'oops'}), null);
+});
