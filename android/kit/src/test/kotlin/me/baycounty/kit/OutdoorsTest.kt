@@ -17,7 +17,10 @@ class OutdoorsTest {
         assertTrue(access.size > 100)
         val wc = Outdoors.accesses(access, Outdoors.AccessFilter.WHEELCHAIR)
         assertTrue(wc.isNotEmpty() && wc.all { it.bool("wheelchair_access") == true })
-        assertNotNull(Outdoors.directions(access[0]))
+        val geo = Outdoors.directions(access[0])
+        assertNotNull(geo)
+        assertTrue(geo!!.startsWith("geo:"))
+        assertTrue(Outdoors.webDirections(geo)!!.startsWith("https://www.google.com/maps/dir/?api=1&destination="))
     }
 
     @Test fun parksRead() {
