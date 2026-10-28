@@ -1919,6 +1919,16 @@ def official_photos():
              'image_source_url': r['image_source_url'], 'fetched_on': r['fetched_on']} for r in d['photos']]
 
 
+def person_photos():
+    """Every person photo on the site, one row per profile (site/person_photos.py): government headshots, then chamber
+    board and staff headshots. The one lookup every page and app uses to show a face instead of initials."""
+    from person_photos import rows
+    from place import PLACE_ID
+    return [{'place_id': PLACE_ID, 'entity_id': r['entity_id'], 'person_id': r['person_id'], 'name': r['name'],
+             'photo_url': r['photo_url'], 'photo_path': r['photo_path'], 'published_by': r['published_by'], 'credit': r['credit'],
+             'source_url': r['source_url'], 'image_source_url': r['image_source_url'], 'fetched_on': r['fetched_on']} for r in rows()]
+
+
 def data_completeness():
     import completeness
     return completeness.rows()
@@ -2057,6 +2067,7 @@ DATASETS = [
     ('officeholder-terms', 'Officeholders by year', "Who held each elected seat, and each government's appointed manager, on every local government since 2016: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before 2016; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).", officeholder_terms),
     ('data-sources', 'Where the data comes from', "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.", data_sources),
     ('official-photos', 'Official photos', "Official headshots of current elected officials and department leaders, one row per person: the photo on BayCounty.me (photo_url, a 320px square WebP), who published it (credit) and the government page it came from (source_url), and when it was copied. Only photos a government publishes on its own website; never campaign, news or social media photos. person_id joins officeholder-terms and entity_id joins entity-profiles. Anyone not listed has no published photo and is shown with initials.", official_photos),
+    ('person-photos', 'Person photos', "Every photo of a person on BayCounty.me, one row per profile: officials' headshots their government publishes (published_by government, same as official-photos) and chamber of commerce board and staff headshots the chamber publishes on its own site (published_by chamber). entity_id is the profile (person: for officials, member: for board members) and joins entity-profiles and chamber-leaders; person_id is set for officials. photo_url is the 320px square WebP BayCounty.me serves, credit who published it and source_url the page it came from. A government photo wins over a chamber photo for the same person. Anyone not listed is shown with initials.", person_photos),
     ('data-completeness', 'How complete each government\'s data is', "For each government and each portion of its records (adopted budgets, audited spending, tax rates, debt, audit findings, officials by year): the years since 2016 we expect (period, expected), how many we have on file (have), the percent loaded (pct) and a status: complete (100%), partial (50-99%) or missing (under 50%). missing lists the fiscal years not on file. For officials, have and expected are seat-years and pct is the share where the officeholder is confirmed. Votes read from minutes change every few hours and are in /api/v1/import-progress instead.", data_completeness),
     ('data-source-sites', 'Websites our records cite', "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.", data_source_sites),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),

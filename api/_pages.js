@@ -36,9 +36,9 @@ const PAGES = {
   '/new-businesses': {datasets: ['new-businesses', 'restaurants']},
   '/this-week': {datasets: ['weekly-roundup', 'community-events', 'meetings', 'votes', 'contracts', 'change-orders']},
   '/volunteer': {datasets: ['volunteer-needs', 'volunteer-orgs', 'nonprofits']},
-  '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
+  '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits', 'person-photos']},
   '/military': {datasets: ['military-installations', 'military-news', 'federal-contracts', 'federal-contract-years']},
-  '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
+  '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations', 'person-photos']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
   '/emergency': {datasets: ['evacuation-zones', 'emergency-shelters', 'emergency-resources', 'emergency-notices'], endpoints: ['/emergency', '/evacuation-zone']},
   '/hurricane-prep': {datasets: ['hurricane-prep', 'disaster-declarations', 'rebuild-money'], endpoints: ['/emergency']},
@@ -68,19 +68,19 @@ const PAGES = {
   '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts', 'money-map-gifts', 'money-map-contracts', 'money-map-votes']},
   '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'entity-profiles', 'entity-connections'],
     endpoints: ['/entities/{id}']},
-  '/people': {datasets: ['entity-profiles', 'people-directory', 'owner-gifts', 'officials-pay', 'salary-leaders', 'officeholder-terms', 'official-photos'], endpoints: ['/entities']},
+  '/people': {datasets: ['entity-profiles', 'people-directory', 'owner-gifts', 'officials-pay', 'salary-leaders', 'officeholder-terms', 'official-photos', 'person-photos'], endpoints: ['/entities']},
   // one shell page for every other profile: /profile/<kind>/<id> (vercel.json rewrite), filled from the API
-  '/profile': {datasets: ['entity-profiles', 'entity-connections', 'business-officers', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts'],
+  '/profile': {datasets: ['entity-profiles', 'entity-connections', 'business-officers', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'person-photos'],
     endpoints: ['/entities/{id}']},
 };
 // Page families: each government's profile page.
 // a government's page carries the dashboards' records for that government (gov.js narrows them by city and year), and its
 // whole budget, debt, audits and savings ideas (site/gov_detail.py), which used to be dashboards of their own
 const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
-  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms', 'official-photos', 'data-completeness'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials', '/import-progress']},
+  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms', 'official-photos', 'person-photos', 'data-completeness'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials', '/import-progress']},
   // each official's and candidate's profile (site/people_pages.py)
   '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'campaign-history', 'candidates-2026', 'officials-pay', 'salary-leaders',
-    'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms', 'official-photos'], endpoints: ['/entities/{id}']},
+    'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms', 'official-photos', 'person-photos'], endpoints: ['/entities/{id}']},
   '/public-money/vendors/': {datasets: ['vendors-directory', 'contracts', 'change-orders', 'emergency-purchases', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'campaign-contributions-history', 'votes',
     'entity-profiles', 'entity-connections'], endpoints: ['/entities/{id}']}};
 

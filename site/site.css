@@ -618,6 +618,8 @@ html.sx-open{overflow:hidden}
 .sx-g a{display:flex;flex-direction:column;gap:2px;min-height:44px;justify-content:center;padding:8px 10px;margin:0 -10px;border-radius:10px;color:var(--ink);text-decoration:none}
 .sx-g a:hover,.sx-g a:focus-visible{background:var(--sunken);outline:none}
 .sx-g a:focus-visible{box-shadow:inset 0 0 0 2px var(--blue)}
+.sx-g a.sx-ph{display:grid;grid-template-columns:32px 1fr;column-gap:10px;align-items:center}
+.sx-g a.sx-ph img{grid-row:span 2;width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--sunken)}
 .sx-g b{font-weight:500;font-size:.95rem}
 .sx-g span{font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sx-g mark{background:var(--tint-amber);color:inherit;border-radius:3px}

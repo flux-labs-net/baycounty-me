@@ -194,7 +194,7 @@ window.BCSearch = window.BCSearch || (() => {
     cnt.textContent = hits.length ? `${hits.length.toLocaleString()} ${hits.length === 1 ? (I.result || 'result') : (I.results || 'results')}` + (pend ? ` · ${I.loading || 'still loading records…'}` : '')
       : pend ? (I.loadingNone || 'Loading records…') : (I.none || 'No results. Try fewer or different words.');
     res.innerHTML = [...groups].slice(0, 6).map(([k, rows]) => `<section class="sx-g"><h2>${S.esc(groupName(k))}</h2><ul>` +
-      rows.slice(0, 4).map(r => `<li><a href="${S.esc(r.u)}"><b>${S.hl(r.t, words)}</b><span>${S.hl(r.s, words)}</span></a></li>`).join('') + '</ul></section>').join('') +
+      rows.slice(0, 4).map(r => `<li><a href="${S.esc(r.u)}"${r.p ? ' class="sx-ph"' : ''}>${r.p ? `<img src="${S.esc(r.p)}" alt="" width="32" height="32" loading="lazy">` : ''}<b>${S.hl(r.t, words)}</b><span>${S.hl(r.s, words)}</span></a></li>`).join('') + '</ul></section>').join('') +
       (hits.length ? `<a class="sx-all" href="${all}">${I.all || 'See all results'} →</a>` : '');
   }
   S.onUpdate(() => { if (!dlg.hidden && inp.value.trim()) run(); });

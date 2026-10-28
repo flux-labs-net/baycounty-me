@@ -50,13 +50,17 @@
   }
 
   const S = {orgs: [], byId: new Map(), pays: new Map(), offs: new Map(), multi: [], donorBiz: new Map(), donorSeats: [],
-    orgDonors: new Map(), people: [], view: 'org', tab: 'connected', ptab: 'top', shown: PAGE, sel: null};
+    orgDonors: new Map(), faces: new Map(), people: [], view: 'org', tab: 'connected', ptab: 'top', shown: PAGE, sel: null};
+
+  const face = id => S.faces.has(id) ? `<img class="np-face" src="${esc(S.faces.get(id))}" alt="" width="48" height="48" loading="lazy">` : '';
 
   async function load() {
     let o, p, f;
     try {
       [o, p, f] = await Promise.all([rows('nonprofits', 'fields=' + LIST_FIELDS), rows('nonprofit-payments'), rows('nonprofit-officials').catch(() => [])]);
     } catch (e) { $('#npList').innerHTML = '<p class="np-empty">Couldn’t load the list. Try again in a moment.</p>'; return; }
+    // board members' published photos (person-photos: a chamber's board page), by board-member id
+    rows('person-photos', 'fields=entity_id,photo_path').then(ph => { S.faces = new Map(ph.filter(r => String(r.entity_id).startsWith('member:')).map(r => [r.entity_id.slice(7), r.photo_path])); }).catch(() => {});
     S.orgs = o; S.byId = new Map(o.map(x => [x.nonprofit_id, x])); S.pays = group(p, 'nonprofit_id'); S.offs = group(f, 'nonprofit_id'); S.offRows = f;
     const isHoa = id => (S.byId.get(id) || {}).kind === HOA;
     // people: current seats on several boards, and board members whose businesses gave to campaigns
@@ -217,7 +221,7 @@
     const shared = cur.filter(r => r.other_current_boards > 0);
     if (shared.length) ties.push(`<div class="np-tie"><b>Shares board members with ${plural(x.shares_board_with || shared.length, 'other nonprofit')}</b><div class="m">${shared.slice(0, 6).map(r => `<button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button> (+${r.other_current_boards})`).join(' · ')}</div></div>`);
     // Board
-    const tr = r => `<tr><td><button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button>${offIds.has(r.person_id) ? ` <a class="np-chip hot" href="/people/${encodeURIComponent(offIds.get(r.person_id))}" title="Checked by hand: open the official's page">official</a>` : ''}${r.other_current_boards ? ` <span class="np-chip">+${r.other_current_boards}</span>` : ''}<div class="m">${esc(r.titles || r.role)} · ${esc(years(r))}</div></td>
+    const tr = r => `<tr><td>${face(r.person_id)}<button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button>${offIds.has(r.person_id) ? ` <a class="np-chip hot" href="/people/${encodeURIComponent(offIds.get(r.person_id))}" title="Checked by hand: open the official's page">official</a>` : ''}${r.other_current_boards ? ` <span class="np-chip">+${r.other_current_boards}</span>` : ''}<div class="m">${esc(r.titles || r.role)} · ${esc(years(r))}</div></td>
       <td class="num">${r.compensation ? usd(r.compensation) + '<div class="m">pay ' + esc(r.compensation_year || '') + '</div>' : ''}<a class="small" href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources)}</a></td></tr>`;
     const boardHtml = board.length ? `<table data-tt="off"><tbody>${cur.map(tr).join('')}</tbody></table>${past.length ? `<details><summary class="small">${plural(past.length, 'earlier board member')}</summary><table data-tt="off"><tbody>${past.map(tr).join('')}</tbody></table></details>` : ''}<p class="m">Grouped by name across boards, so two people with the same name can show up together.</p>`
       : '<p class="muted small">No board listed in its filings.</p>';
@@ -259,7 +263,7 @@
     const bline = b => `<div class="np-tie"><a href="/profile/business/${encodeURIComponent(String(b.doc_number || '').toLowerCase())}">${esc(title(b.business))}</a> · <a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">State record</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.closed_year) : (b.business_status === 'Active' ? '' : ' (inactive)')}
       <div class="m">${Number(b.campaign_gifts_total) > 0 ? `Gave ${usd(b.campaign_gifts_total)} to campaigns${b.candidates ? ': ' + esc(b.candidates) : ''} · ` : ''}${b.match === 'Name' ? 'matched by name' : 'matched by name and address'}</div></div>`;
     const on = 'boards';
-    showPanel(`<h2>${esc(pname(seats[0].person))}</h2><div class="m">${plural(cur.length, 'current board')}${biz.length ? ' · ' + plural(biz.length, 'business', 'businesses') : ''} · <a href="/profile/member/${encodeURIComponent(id)}">Full profile and network</a></div>`
+    showPanel(`<h2>${face(id)}${esc(pname(seats[0].person))}</h2><div class="m">${plural(cur.length, 'current board')}${biz.length ? ' · ' + plural(biz.length, 'business', 'businesses') : ''} · <a href="/profile/member/${encodeURIComponent(id)}">Full profile and network</a></div>`
       + `<div class="np-kv"><div><b>${num(cur.length)}</b><span>boards now</span></div><div><b>${num(biz.length)}</b><span>businesses</span></div><div><b>${gifts ? big(gifts) : '—'}</b><span>business gifts to campaigns</span></div></div>`
       + tabsHtml([['boards', `Boards (${seats.length})`], ['biz', `Businesses (${biz.length})`]], on)
       + pane('boards', on, cur.map(seat).join('') + (past.length ? `<details><summary class="small">${plural(past.length, 'earlier seat')}</summary>${past.map(seat).join('')}</details>` : ''))
