@@ -231,6 +231,8 @@ public struct DatasetSpec: Sendable {
                                        amount: ["total_revenue"], badge: "status", filters: ["status", "city"], page: "connections/nonprofits"),
         "nonprofit-officials": .init(.accountability, "person.crop.square", title: ["official"], subtitle: ["nonprofit", "titles"],
                                      badge: "sources", filters: ["official", "nonprofit"], page: "connections/nonprofits"),
+        "business-officers": .init(.elections, "person.text.rectangle", title: ["officer"], subtitle: ["title", "business"],
+                                   detail: "sunbiz_doc_number", badge: "business_status", filters: ["business_status", "officer_kind"], page: "connections/business-ties"),
         "official-businesses": .init(.elections, "briefcase", title: ["business"], subtitle: ["official", "official_role"],
                                      detail: "titles", badge: "business_status", filters: ["official"], page: "connections/business-ties"),
         "official-business-links": .init(.elections, "link", title: ["detail"], subtitle: ["official"],
@@ -254,9 +256,6 @@ public struct DatasetSpec: Sendable {
         "owner-gifts": .init(.elections, "person.text.rectangle", title: ["donor"], subtitle: ["candidate", "businesses"], amount: ["amount"],
                              date: ["last_date"], filters: ["candidate", "office"], page: "connections/campaign-gifts"),
         // Entity profiles (every person, company, nonprofit and government, and how they connect)
-        // officers, managers and registered agent of each business with a profile (Sunbiz; names and titles, never addresses)
-        "business-officers": .init(.accountability, "person.2", title: ["officer"], subtitle: ["title", "business"], badge: "business_status",
-                                   filters: ["officer_kind", "business_status"], page: "new-businesses"),
         // Emergencies and hurricane prep
         "evacuation-zones": .init(.more, "map", title: ["zone"], subtitle: ["where_it_is"], detail: "when_ordered", page: "emergency"),
         "emergency-shelters": .init(.more, "house.lodge", title: ["name"], subtitle: ["address", "group_name"], detail: "note", badge: "status", filters: ["shelter_type", "status", "evacuation_zone"], page: "emergency"),

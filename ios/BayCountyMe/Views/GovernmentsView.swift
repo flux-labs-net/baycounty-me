@@ -17,6 +17,7 @@ struct GovernmentsView: View {
                             ProgressView().frame(maxWidth: .infinity, minHeight: 200)
                         }
                     } else {
+                        decidesSection
                         compareCard
                         governmentsSection
                     }
@@ -27,7 +28,7 @@ struct GovernmentsView: View {
                 .padding(.bottom, 24)
             }
             .background(Brand.canvas)
-            .navigationTitle("Places")
+            .navigationTitle("Who decides")
             .refreshable { await store.loadGovernments() }
             .withRoutes()
         }
@@ -83,12 +84,25 @@ struct GovernmentsView: View {
             .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
     }
 
+    /// The site's "Who decides" menu: officials, meetings, votes, connections and elections.
+    private var decidesSection: some View {
+        CardList {
+            RouteRow(route: .people, title: "Officials, leaders and candidates", symbol: "person.3")
+            RowDivider(inset: 50)
+            RouteRow(route: .meetings, title: "Meetings", detail: "When every board meets, with agendas", symbol: "calendar")
+            RowDivider(inset: 50)
+            RouteRow(route: .dataset("votes"), title: "How they voted", symbol: "checkmark.seal")
+            RowDivider(inset: 50)
+            RouteRow(route: .donorContracts, title: "Campaign gifts and contracts", symbol: "point.3.connected.trianglepath.dotted")
+            RowDivider(inset: 50)
+            RouteRow(route: .dataset("candidates-2026"), title: "Elections", detail: "Who's running, where to vote, results", symbol: "checkmark.rectangle.stack")
+        }
+    }
+
     private var peopleSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             SectionHeader(title: "People")
             CardList {
-                RouteRow(route: .people, title: "Officials, leaders and candidates", symbol: "person.3")
-                RowDivider(inset: 50)
                 RouteRow(route: .schools, title: "Public schools", detail: "Calendar, grades and students for every school", symbol: "graduationcap")
                 RowDivider(inset: 50)
                 RouteRow(route: .dataset("officials-pay"), title: "What officials are paid", symbol: "person.text.rectangle")

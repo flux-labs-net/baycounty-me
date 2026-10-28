@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 class ScreensTest(@Suppress("unused") private val label: String, private val screen: String, private val dark: Boolean) {
     companion object {
-        val screens = (System.getProperty("screens") ?: "home,tab:governments,tab:money,tab:meetings,tab:search").split(",").filter { it.isNotBlank() }
+        val screens = (System.getProperty("screens") ?: "home,tab:living,tab:governments,tab:money,tab:meetings,tab:search").split(",").filter { it.isNotBlank() }
 
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")

@@ -195,7 +195,7 @@ private fun MeetingsSection() {
     var picked by rememberSaveable { mutableStateOf<String?>(null) }
     val current = days.firstOrNull { it.key == picked } ?: days[0]
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SectionHeader("Meetings coming up", "See all") { nav.select(Tab.MEETINGS) }
+        SectionHeader("Meetings coming up", "See all") { nav.push(Route.Meetings) }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             for (d in days) {
                 val on = d.key == current.key

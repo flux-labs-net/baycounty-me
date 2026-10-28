@@ -7542,7 +7542,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 75,
+   "rows": 73,
    "columns": [
     {
      "name": "place_id",
@@ -7563,18 +7563,17 @@
      "name": "section",
      "type": "string",
      "values": [
+      "About & data",
       "Dinero público",
+      "Elections",
+      "Get involved",
       "Glosario",
-      "Governments",
       "Inicio",
+      "Living here",
       "Mi dirección",
-      "Outdoors",
       "Participe",
-      "People",
-      "Spending",
-      "Take part",
-      "Taxes",
-      "Watchdog"
+      "Who decides",
+      "Your money"
      ]
     },
     {
@@ -7585,30 +7584,31 @@
      "name": "question",
      "type": "string",
      "values": [
-      "Beaches, water and parks",
-      "Is it spent well?",
-      "Show up, ask, reuse",
-      "What you pay",
-      "Where it goes",
-      "Who decides, and who's connected",
-      "Who runs what"
+      "Day-to-day in the county",
+      "Governments and the people in them",
+      "Nov 3: who's running and where to vote",
+      "Show up, ask, help",
+      "Sources, downloads and help",
+      "What you pay, where it goes"
      ]
     },
     {
      "name": "item_group",
      "type": "string",
      "values": [
-      "Beaches, water and parks",
-      "Building and roads",
+      "About & data",
+      "Around town",
+      "Elections",
+      "Governments",
+      "Home and family",
       "Impuestos y tarifas",
       "Is it spent well?",
-      "Local businesses",
-      "Local governments",
-      "Show up, ask, reuse",
+      "Outdoors and storms",
+      "Show up, ask, help",
       "Su voz",
       "What you pay",
       "Where it goes",
-      "Who decides, and who's connected"
+      "Who's connected"
      ]
     },
     {
