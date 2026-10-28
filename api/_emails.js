@@ -75,6 +75,26 @@ function realtorSignInEmail(link, minutes = 20) {
       footer: 'You’re getting this because someone asked to sign in to the BayCounty.me realtor console with this address.'})};
 }
 
+// A property report an agent emails from the realtor console (_realtor.js action=email). It goes out from
+// hello@baycounty.me under the agent's name with Reply-To set to the agent; the PDF is attached by the caller.
+// agent: {name, title, brokerage, phone, email}; message: the agent's own note (plain text), optional.
+function realtorReportEmail({agent, address, message, preparedFor}) {
+  const who = agent.name || agent.email;
+  const subject = `Property report: ${address}`;
+  const facts = [['Prepared by', esc(who) + (agent.title ? `, ${esc(agent.title)}` : '')], agent.brokerage && ['Brokerage', esc(agent.brokerage)],
+    agent.phone && ['Phone', esc(agent.phone)], ['Email', esc(agent.email)], preparedFor && ['Prepared for', esc(preparedFor)]].filter(Boolean);
+  const intro = message ? ui.quote(message) : ui.p(`${esc(who)} sent you a property report for <b>${esc(address)}</b>.`);
+  const html = ui.layout({title: subject, preheader: `${who} sent you a property report for ${address}. The PDF is attached.`, kicker: 'Property report',
+    hero: {tone: 'blue', icon: 'file', eyebrow: agent.brokerage ? `${who} · ${agent.brokerage}` : who, title: address},
+    body: intro + ui.facts(facts) + ui.note(`The full report is attached as a PDF. Reply to this email to reach ${esc(who)}.`),
+    footer: `${esc(who)} sent this report from the BayCounty.me realtor console. BayCounty.me compiles Bay County public records and isn’t part of any sale. Replies go to ${esc(who)}, not to BayCounty.me.`});
+  const text = [message || `${who} sent you a property report for ${address}.`, '',
+    ...facts.map(([k, v]) => `${k}: ${v.replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')}`), '',
+    `The full report is attached as a PDF. Reply to this email to reach ${who}.`, '',
+    `${who} sent this report from the BayCounty.me realtor console. BayCounty.me compiles Bay County public records and isn't part of any sale.`].join('\n');
+  return {subject, html, text};
+}
+
 // Weekly digest for one government (digest.js), from one entry of /data/digest.json. Returns null when there's
 // nothing new in the last `days` days and no meeting in the next 8, which means no email that week.
 // The footer keeps Resend's broadcast placeholders ({{{RESEND_UNSUBSCRIBE_URL}}}, the prefs_token property).
@@ -177,4 +197,4 @@ function weeklyEmail(ed) {
   return {subject, html, text, counts: n};
 }
 
-module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, digestEmail, weeklyEmail, clip};
+module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};

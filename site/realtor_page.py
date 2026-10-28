@@ -107,6 +107,9 @@ CSS = r"""
 .rc-brand{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
 .rc-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .rc-grid2 .span{grid-column:1/-1}
+.rc-mail{margin:0 0 16px}
+.rc-check{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:.9rem}
+.rc-check input{width:18px;height:18px;accent-color:var(--navy)}
 .rc-imgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
 .rc-img{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px dashed var(--line);border-radius:14px;min-width:0}
 .rc-img .prev{height:64px;display:flex;align-items:center;justify-content:center;background:var(--sunken);border-radius:10px;overflow:hidden;color:var(--muted);font-size:.82rem}
@@ -140,7 +143,7 @@ CSS = r"""
   .rc-hist li{flex-direction:column;align-items:flex-start}
 }
 @media print{
-  header.site,footer.site,.rc-top,.rc-tabs,.rc-card.rc-runbox,.rc-acts,.crumbs,nav{display:none!important}
+  header.site,footer.site,.rc-top,.rc-tabs,.rc-card.rc-runbox,.rc-acts,.rc-mail,.crumbs,nav{display:none!important}
   .rc-sheet{box-shadow:none;border-radius:0}
   .rc-band,.rc-tiles div{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -156,7 +159,6 @@ WHAT = [
     ('Roads and projects', 'Sales tax and road work within a mile'),
     ('Parks and beaches', 'The closest parks and beach accesses'),
     ('Who represents it', 'Commission, city, school board, state and U.S.'),
-    ('Coming up', 'Public meetings and community events'),
 ]
 
 
@@ -207,8 +209,21 @@ def realtor_page(out_dir):
       </form>
       <div class="rc-acts" id="reportActs" hidden>
         <button type="button" class="rc-btn" id="pdfBtn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Download branded PDF</button>
+        <button type="button" class="rc-btn ghost" id="mailBtn" aria-expanded="false" aria-controls="mailForm"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12v8H2zM2 4l6 5 6-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Email report</button>
         <button type="button" class="rc-btn ghost" id="printBtn">Print</button>
       </div>
+      <form class="rc-card rc-mail" id="mailForm" hidden>
+        <h2>Email this report</h2>
+        <p class="muted small" id="mailFrom"></p>
+        <div class="rc-grid2">
+          <label class="rc-fld span"><span>To (up to 5, separated by commas)</span><input id="m_to" type="text" inputmode="email" autocomplete="email" maxlength="600" placeholder="client@example.com"></label>
+          <label class="rc-fld span"><span>Subject</span><input id="m_subject" type="text" maxlength="160"></label>
+          <label class="rc-fld span"><span>Message</span><textarea id="m_message" maxlength="2000"></textarea></label>
+        </div>
+        <label class="rc-check"><input id="m_cc" type="checkbox" checked> Send me a copy</label>
+        <div class="rc-acts"><button class="rc-btn" id="mailSend" type="submit">Send with PDF attached</button><button type="button" class="rc-btn ghost" id="mailCancel">Cancel</button></div>
+        <p class="rc-msg small" id="mailMsg" role="status"></p>
+      </form>
       <div id="report" aria-live="polite"></div>
     </div>
 

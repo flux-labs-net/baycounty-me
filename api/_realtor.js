@@ -9,6 +9,8 @@
 //   POST brand {…}            save branding (names, contact, colors, logo and photo as small data: URLs)
 //   POST report {address,…}   add a report to the agent's history (the report itself comes from /api/v1/address-report)
 //   POST delete_report {id}   remove one report from history
+//   POST email {to, pdf, …}   email the PDF (made in the browser) from hello@baycounty.me under the agent's name, with
+//                             Reply-To set to the agent; up to 5 recipients, 3 MB, EMAILS_PER_DAY sends a day
 //   POST delete_account       delete the agent, their branding and their history
 //   POST logout
 // Every POST except login/verify needs the X-BCM-Agent: 1 header and a same-site Origin. Sign-up: REALTOR_SIGNUP=open
@@ -17,7 +19,7 @@ const crypto = require('crypto');
 const {q, hasDb} = require('./_db');
 const {derive, ipOf} = require('./_gate');
 const {FROM, resend, sameOrigin} = require('./_alerts');
-const {realtorSignInEmail} = require('./_emails');
+const {realtorSignInEmail, realtorReportEmail} = require('./_emails');
 const {admins} = require('./_session');
 
 const SITE = 'https://baycounty.me';
@@ -25,6 +27,7 @@ const COOKIE = 'bcm_agent';
 const SESSION_DAYS = 30;
 const LINK_MIN = 20;
 const MAX_LOGO = 400000, MAX_PHOTO = 300000;
+const MAX_PDF = 3 * 1024 * 1024, MAX_TO = 5, EMAILS_PER_DAY = 30;
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status, expose: true});
 
 /* ---------- signed tokens (same shape as the admin session, its own key) ---------- */
@@ -103,6 +106,38 @@ function confirmPage(ok, email, tok) {
     : `<h1>This link has expired</h1><p>Sign-in links last ${LINK_MIN} minutes and work once.</p><a class="btn" href="/realtor">Get a new link</a>`}</div></body></html>`;
 }
 
+/* ---------- emailing a report ---------- */
+// Checks an email request from the console and returns the Resend message: from hello@baycounty.me with the agent's
+// name as the display name (the only address we can send from), Reply-To the agent's branding email or their sign-in
+// email, the agent's note, and the PDF the browser made as the attachment.
+function reportEmail(b, agent, brand) {
+  const to = [...new Set(String(Array.isArray(b.to) ? b.to.join(',') : b.to || '').split(/[\s,;]+/).map(x => x.trim().toLowerCase()).filter(Boolean))];
+  if (!to.length) throw bad('Add at least one email address.');
+  if (to.length > MAX_TO) throw bad(`Send to ${MAX_TO} people or fewer at a time.`);
+  const wrong = to.find(x => !EMAIL.test(x));
+  if (wrong) throw bad(`“${wrong.slice(0, 80)}” isn’t a valid email address.`);
+  const address = text(b.address, 160);
+  if (!address) throw bad('Run a report first.');
+  const pdf = String(b.pdf || '').replace(/^data:application\/pdf;base64,/, '');
+  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(pdf)) throw bad('The PDF didn’t come through. Try again.');
+  const bytes = Buffer.from(pdf, 'base64');
+  if (bytes.length > MAX_PDF) throw bad('That PDF is too big to email. Try a smaller cover photo, or download it and attach it yourself.', 413);
+  if (bytes.subarray(0, 5).toString('latin1') !== '%PDF-') throw bad('The PDF didn’t come through. Try again.');
+  const br = brand || {};
+  const replyTo = br.email && EMAIL.test(br.email) ? String(br.email).toLowerCase() : agent.email;
+  const name = text(br.agent_name, 80);
+  const message = String(b.message || '').replace(/\r/g, '').replace(/[\u0000-\u0008\u000b-\u001f\u007f]/g, '').trim().slice(0, 2000) || null;
+  const m = realtorReportEmail({agent: {name, title: text(br.title, 80), brokerage: text(br.brokerage, 120), phone: text(br.phone, 40), email: replyTo},
+    address, message, preparedFor: text(b.prepared_for, 120)});
+  const fromName = (name ? `${name} via BayCounty.me` : 'BayCounty.me').replace(/["<>\\]/g, '');
+  const fromAddr = (FROM.match(/<([^>]+)>/) || [, FROM])[1];
+  const filename = typeof b.filename === 'string' && /^[\w.-]{1,120}\.pdf$/.test(b.filename) ? b.filename : 'property-report.pdf';
+  const out = {from: `"${fromName}" <${fromAddr}>`, to, reply_to: replyTo, subject: text(b.subject, 160) || m.subject, html: m.html, text: m.text,
+    attachments: [{filename, content: pdf}]};
+  if (b.cc_me && !to.includes(replyTo)) out.cc = [replyTo];
+  return out;
+}
+
 /* ---------- handler ---------- */
 const loginHits = new Map();
 const body = req => (typeof req.body === 'string' ? (() => { try { return JSON.parse(req.body || '{}'); } catch (e) { return Object.fromEntries(new URLSearchParams(req.body)); } })() : req.body || {});
@@ -177,6 +212,18 @@ async function handler(req, res) {
       await q('update realtor.agents set reports_run = reports_run + 1 where id = $1', [agent.id]);
       return res.status(200).json({ok: true, id: r.id, created_at: r.created_at});
     }
+    if (action === 'email') {
+      const [{n}] = await q(`select count(*)::int as n from realtor.report_emails where agent_id = $1 and sent_at > now() - interval '1 day'`, [agent.id]);
+      if (n >= EMAILS_PER_DAY) throw bad(`You’ve sent ${EMAILS_PER_DAY} reports in the last day. Try again tomorrow, or download the PDF.`, 429);
+      const [brand] = await q('select agent_name, title, brokerage, phone, email from realtor.brands where agent_id = $1', [agent.id]);
+      const mail = reportEmail(b, agent, brand);
+      const r = await resend('/emails', 'POST', mail, process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY);
+      if (!r.ok) { console.error('realtor email', r.status, r.body && r.body.message); throw bad('The email couldn’t be sent. Try again in a minute.', 502); }
+      await q(`insert into realtor.report_emails (agent_id, report_id, recipients, resend_id)
+               values ($1, (select id from realtor.reports where id = $2 and agent_id = $1), $3, $4)`, [agent.id, Number(b.report_id) || null, mail.to.length, (r.body && r.body.id) || null]);
+      await q('update realtor.agents set reports_emailed = reports_emailed + 1 where id = $1', [agent.id]);
+      return res.status(200).json({ok: true, sent_to: mail.to, reply_to: mail.reply_to});
+    }
     if (action === 'delete_report') {
       await q('delete from realtor.reports where id = $1 and agent_id = $2', [Number(b.id) || 0, agent.id]);
       return res.status(200).json({ok: true});
@@ -195,7 +242,7 @@ async function handler(req, res) {
 
 /* ---------- admin (api/admin.js tab "Realtor agents") ---------- */
 async function adminList() {
-  const rows = await q(`select a.email, a.status, a.created_at, a.last_login_at, a.login_count, a.reports_run, b.agent_name, b.brokerage, b.phone
+  const rows = await q(`select a.email, a.status, a.created_at, a.last_login_at, a.login_count, a.reports_run, a.reports_emailed, b.agent_name, b.brokerage, b.phone
                         from realtor.agents a left join realtor.brands b on b.agent_id = a.id order by (a.status = 'pending') desc, a.created_at desc limit 500`);
   const n = s => rows.filter(r => r.status === s).length;
   return {signup: signupMode(), counts: {total: rows.length, active: n('active'), pending: n('pending'), paused: n('paused')}, rows};
@@ -212,4 +259,4 @@ async function adminSet(b) {
 module.exports = handler;
 module.exports.adminList = adminList;
 module.exports.adminSet = adminSet;
-Object.assign(module.exports, {cleanBrand, image, website, makeToken, readToken, signupMode, COOKIE});
+Object.assign(module.exports, {cleanBrand, image, website, makeToken, readToken, signupMode, reportEmail, COOKIE});

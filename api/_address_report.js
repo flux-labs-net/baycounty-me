@@ -290,18 +290,6 @@ const SECTIONS = [
     return {data: {local_government: cityName ? `City of ${cityName}` : `Unincorporated ${PLACES[c.place].name}`, gov_id: cityGov || 'county', seats, city_council: council},
       note: 'Districts and names from the county GIS server, which can lag an election by a few weeks.'};
   }},
-  {id: 'events', title: 'Coming up nearby', async run(c) {
-    const [community, meetings] = await Promise.all([c.rows('community-events'), c.rows('meetings')]);
-    const cityName = await c.cityName(), gov = CITY_GOV[cityName] || 'county', today = new Date().toISOString().slice(0, 10);
-    const town = s => String(s || '').toLowerCase();
-    const ev = (community || []).filter(e => e.starts && String(e.starts).slice(0, 10) >= today && (!cityName || !e.town || town(e.town) === town(cityName) || e.gov === gov))
-      .sort((a, b) => String(a.starts).localeCompare(String(b.starts))).slice(0, 6)
-      .map(e => ({title: e.title, starts: e.starts, venue: e.venue || null, town: e.town || null, url: e.url || e.source_url || null}));
-    const mt = (meetings || []).filter(m => !m.past && m.start >= today && [gov, 'county', 'schools'].includes(m.gov_id))
-      .sort((a, b) => String(a.start).localeCompare(String(b.start))).slice(0, 5)
-      .map(m => ({title: m.title, board: m.board, starts: m.start, location: m.location || null, url: m.agenda_url || null, gov_id: m.gov_id}));
-    return {data: {events: ev, meetings: mt}, status: community ? 'ok' : 'partial', note: community ? null : 'Community events will appear here once the events calendar is published.'};
-  }},
 ];
 
 /* ---------- the report ---------- */
