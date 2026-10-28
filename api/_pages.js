@@ -5,6 +5,9 @@
 const PAGES = {
   '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments', 'community-events'],
     endpoints: ['/search']},
+  // the realtor console prints the address report; agent accounts and branding are private (api/_realtor.js, migration 0074)
+  '/realtor': {datasets: ['tax-districts', 'property-tax-rates', 'sales-tax-projects', 'people-directory', 'officeholder-terms', 'meetings'], endpoints: ['/address-report'],
+    note: 'Live map lookups (parcel, flood, districts) are made by the address-report endpoint at request time. Sections for utilities, schools, parks, beaches, development and events read their datasets when those are published.'},
   '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'schools', 'school-zones'], endpoints: ['/schools', 'utility-providers', 'trash-pickup', 'trash-holidays'],
     endpoints: ['/utilities'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
@@ -30,7 +33,12 @@ const PAGES = {
   '/roads': {datasets: ['road-contracts', 'road-work-program', 'sales-tax-projects', 'entity-profiles']},
   '/schools': {datasets: ['schools', 'school-grades', 'school-spending', 'school-enrollment', 'school-calendar', 'school-zones', 'meetings'], endpoints: ['/schools']},
   '/utilities': {datasets: ['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'], endpoints: ['/utilities']},
+  '/restaurants': {datasets: ['restaurants', 'restaurant-inspections']},
+  '/new-businesses': {datasets: ['new-businesses', 'restaurants']},
+  '/this-week': {datasets: ['weekly-roundup', 'community-events', 'meetings', 'votes', 'contracts', 'change-orders']},
+  '/volunteer': {datasets: ['volunteer-needs', 'volunteer-orgs', 'nonprofits']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
+  '/military': {datasets: ['military-installations', 'military-news', 'federal-contracts', 'federal-contract-years']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
   '/emergency': {datasets: ['evacuation-zones', 'emergency-shelters', 'emergency-resources', 'emergency-notices'], endpoints: ['/emergency', '/evacuation-zone']},

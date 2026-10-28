@@ -3739,7 +3739,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 64,
+   "rows": 66,
    "columns": [
     {
      "name": "date",
@@ -6578,7 +6578,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16500,
+   "rows": 16762,
    "columns": [
     {
      "name": "entity_id",
@@ -6695,7 +6695,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19764,
+   "rows": 20187,
    "columns": [
     {
      "name": "link_id",
@@ -7027,79 +7027,15 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 168,
+   "rows": 176,
    "columns": [
     {
      "name": "topic",
-     "type": "string",
-     "values": [
-      "Audits and debt",
-      "Beaches and parks",
-      "Budgets",
-      "Building and development",
-      "Businesses and owners",
-      "Campaign money",
-      "Chambers of commerce",
-      "Community events",
-      "Contracts and change orders",
-      "Elections",
-      "Emergencies and hurricane prep",
-      "Fees and bills",
-      "Government jobs",
-      "Hurricane Michael",
-      "Meetings and agendas",
-      "My Address lookups",
-      "News and context",
-      "Nonprofits",
-      "Officials by year",
-      "Pay",
-      "Property tax",
-      "Public notices",
-      "Public records contacts",
-      "Public schools",
-      "Redevelopment agencies (CRAs)",
-      "Road projects",
-      "Sales tax projects",
-      "Tourist tax",
-      "Utilities and trash day",
-      "Votes"
-     ]
+     "type": "string"
     },
     {
      "name": "topic_id",
-     "type": "string",
-     "values": [
-      "address",
-      "audits",
-      "budgets",
-      "businesses",
-      "campaign",
-      "chambers",
-      "contracts",
-      "cra",
-      "development",
-      "elections",
-      "emergency",
-      "events",
-      "fees",
-      "jobs",
-      "meetings",
-      "michael",
-      "news",
-      "nonprofits",
-      "notices",
-      "officials",
-      "outdoors",
-      "property-tax",
-      "records",
-      "roads",
-      "salaries",
-      "sales-tax",
-      "schools",
-      "tourist-tax",
-      "utilities",
-      "votes"
-     ]
+     "type": "string"
     },
     {
      "name": "government",
@@ -7168,110 +7104,15 @@
     },
     {
      "name": "how_we_process",
-     "type": "string",
-     "values": [
-      "Address lookups go straight from your browser to the county's and FEMA's public map servers at the moment you search.",
-      "Adopted budget books are downloaded from each government's website and the totals, funds and departments typed into the data. Where a budget book is not posted, the Annual Financial Report the government files with the state is used. Audited revenue and spending come from the state's Local Government Financial Reports.",
-      "Assessments come from the state's non-ad valorem assessment roll file. Utility rates and fees come from city and county fee schedules and budget books.",
-      "Audited financial statements filed with the Florida Auditor General are read for debt (bonds, notes, loans, leases), audit findings and the auditor's opinion.",
-      "Awards, change orders and emergency purchases are taken from agenda items and their attached memos and resolutions. An agenda item is a proposal, so where minutes exist the record is checked against them.",
-      "Bed tax collections come from the Clerk's monthly reports. Payments by the three tourism agencies come from the Clerk's monthly check registers, read from text PDFs in the Clerk's public records search. State tax rates and history come from EDR.",
-      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
-      "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
-      "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
-      "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
-      "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
-      "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
-      "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
-      "Government legal notices are read every day from the county's public notice website, which keeps 30 days; notices already on file stay as an archive.",
-      "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
-      "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
-      "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
-      "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
-      "Open jobs are read every day from each employer's public job board. Boards that turn automated readers away are listed with a link instead.",
-      "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
-      "Providers, pickup rules, holiday schedules and rates are copied by hand from each city's and the county's utility and sanitation pages, rate ordinances and Public Service Commission filings. Pickup routes and the electric co-op territory are read live from public map layers for each lookup; the address isn't kept.",
-      "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
-      "Records custodians, portals and policies are taken from each agency's official pages.",
-      "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
-      "Summary totals and the itemized export for each campaign are downloaded from the Supervisor of Elections' campaign finance system every day. Amended and deleted lines are applied, then businesses are matched to state corporate records.",
-      "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
-      "The beach flag, rip current risk and surf forecast are read every morning from the National Weather Service surf zone forecast (and again in the visitor's browser). Water quality samples are read every day from the Florida Department of Health's Healthy Beaches lookup. Beach accesses, parking, parks, boat ramps and trails come from the county's and Panama City Beach's public GIS maps and the state's coastal access survey.",
-      "The state's full corporate file (about 18 GB, updated quarterly) is filtered to businesses with an address in the county. Officers, managers and registered agents are grouped into people and matched to officials and donors.",
-      "Weather alerts, city and county alert centers and news feeds, FL511 road closures and the county shelter page are read every 5 minutes; a daily copy goes into the notices archive. Evacuation zones and address points come from the county's map service. Disaster declarations, FEMA housing aid and flood insurance claims come from OpenFEMA weekly.",
-      "Who held each seat since 2016 is built from election results, minutes, budget books, city websites and news reports."
-     ]
+     "type": "string"
     },
     {
      "name": "checks",
-     "type": "string",
-     "values": [
-      "A name match is only a lead: nothing about a person is published until it is checked by hand. Street addresses are never stored or shown.",
-      "Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.",
-      "Court, tax deed, foreclosure, probate and other private notices are left out. The posting government is matched from the notice's opening words.",
-      "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them.",
-      "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
-      "Each provider row links its source page. The live lookup is checked against known addresses in every city with a route map (Panama City, Lynn Haven, Callaway, Parker).",
-      "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
-      "Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.",
-      "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
-      "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
-      "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
-      "Jobs whose closing date has passed are dropped.",
-      "Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.",
-      "Matches between the map and the schedule are listed with their method.",
-      "Names are checked against each board's roster. Every split or failed vote found is included.",
-      "News is never the only source for a dollar figure.",
-      "Nothing you look up is sent to or stored by BayCounty.me.",
-      "Notices are sorted into kinds by the words in their titles; anything unclear stays a storm update. FEMA money is shown only as totals per ZIP code. Prep steps are summarized by hand and link their source.",
-      "Office names are checked against the Notice of General Election.",
-      "One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.",
-      "Only audited figures are used. When a government's latest audit is not yet filed, the previous year is used and labeled.",
-      "Only elected officials and department leaders are named. Other staff are counted, not named.",
-      "Only portals linked from an official page are listed.",
-      "Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.",
-      "Panama City records were checked against 124 of 126 meetings' minutes and Panama City Beach against 38 of 50; Bay County and Lynn Haven come from agendas only. Known changes are noted on the record.",
-      "Projects with no date, or nothing on record since 2016, are left out. Census figures marked estimated are the Bureau's own estimates for a government that sent no monthly reports.",
-      "Rates are checked against each government's adopted millage resolution where posted.",
-      "The data is FEMA's own; nothing is retyped.",
-      "Totals are added back up and compared with the printed totals. Each year links to its document.",
-      "Where a code-to-name match is inferred rather than published, it is labeled."
-     ]
+     "type": "string"
     },
     {
      "name": "page",
-     "type": "string",
-     "values": [
-      "/beaches",
-      "/chambers",
-      "/connections/business-ties",
-      "/connections/campaign-gifts",
-      "/connections/nonprofits",
-      "/development",
-      "/elections",
-      "/emergency",
-      "/events",
-      "/governments",
-      "/jobs",
-      "/meetings",
-      "/my-address",
-      "/notices",
-      "/people",
-      "/public-money/budget-compare",
-      "/public-money/contracts",
-      "/public-money/cra-spending",
-      "/public-money/fees-and-bills",
-      "/public-money/hurricane-michael",
-      "/public-money/sales-tax-projects",
-      "/public-money/tax-dollars",
-      "/public-money/tourist-tax",
-      "/public-money/votes",
-      "/records-request",
-      "/roads",
-      "/schools",
-      "/updates",
-      "/utilities"
-     ]
+     "type": "string"
     },
     {
      "name": "gov_id",
@@ -7535,7 +7376,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 402,
+   "rows": 411,
    "columns": [
     {
      "name": "website",
@@ -7560,6 +7401,7 @@
       "Government jobs",
       "Hurricane Michael",
       "Meetings and agendas",
+      "Military and the bases",
       "My Address lookups",
       "Nonprofits",
       "Pay",
@@ -7567,10 +7409,12 @@
       "Public notices",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
+      "Restaurant inspections",
       "Road projects",
       "Sales tax projects",
       "Tourist tax",
       "Utilities and trash day",
+      "Volunteer needs",
       "Votes"
      ]
     },
@@ -7594,16 +7438,19 @@
       "jobs",
       "meetings",
       "michael",
+      "military",
       "nonprofits",
       "notices",
       "outdoors",
       "property-tax",
       "records",
+      "restaurants",
       "roads",
       "salaries",
       "sales-tax",
       "tourist-tax",
       "utilities",
+      "volunteer",
       "votes"
      ]
     },
@@ -7628,7 +7475,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 69,
+   "rows": 75,
    "columns": [
     {
      "name": "place_id",
@@ -7688,6 +7535,7 @@
       "Building and roads",
       "Impuestos y tarifas",
       "Is it spent well?",
+      "Local businesses",
       "Local governments",
       "Show up, ask, reuse",
       "Su voz",
@@ -14371,6 +14219,1366 @@
    "api": "/api/v1/datasets/trash-holidays"
   },
   {
+   "id": "restaurants",
+   "title": "Restaurants and food service",
+   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
+   "rows": 1435,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "license_number",
+     "type": "string"
+    },
+    {
+     "name": "license_type",
+     "type": "string",
+     "values": [
+      "Caterer",
+      "Food truck or cart",
+      "Restaurant or food service",
+      "Temporary event vendor",
+      "Vending machine"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Caterer",
+      "Food truck",
+      "Food truck or cart",
+      "Hot dog cart",
+      "Restaurant or food service",
+      "Restaurant with seating",
+      "Takeout, no seating",
+      "Temporary event vendor",
+      "Vending machine"
+     ]
+    },
+    {
+     "name": "business_name",
+     "type": "string"
+    },
+    {
+     "name": "licensee",
+     "type": "string"
+    },
+    {
+     "name": "licensee_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Bradenton",
+      "Callaway",
+      "Cottondale",
+      "Crestview",
+      "Fountain",
+      "Inlet Beach",
+      "Laguna Beach",
+      "Lynn Haven",
+      "Marianna",
+      "Mexico Bch",
+      "Mexico Beach",
+      "Panama",
+      "Panama Cith Bch",
+      "Panama City",
+      "Panama City Bch",
+      "Panama City Beach",
+      "Parker",
+      "Santa Rosa Beach",
+      "Shalimar",
+      "Southport",
+      "Springfield",
+      "Sunnyside",
+      "Tyndall Afb",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32412",
+      "32413",
+      "32414",
+      "32417",
+      "32431",
+      "32438",
+      "32444",
+      "32446",
+      "32456",
+      "32459",
+      "32461",
+      "32466",
+      "32536",
+      "32579"
+     ]
+    },
+    {
+     "name": "seats",
+     "type": "number"
+    },
+    {
+     "name": "licensed_now",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "license_expires",
+     "type": "string",
+     "values": [
+      "2025-06-01",
+      "2026-06-01",
+      "2027-04-28",
+      "2027-06-01",
+      "2028-06-01"
+     ]
+    },
+    {
+     "name": "risk_level",
+     "type": "string",
+     "values": [
+      "Risk Level 1",
+      "Risk Level 2",
+      "Risk Level 3 - HSP"
+     ]
+    },
+    {
+     "name": "opened",
+     "type": "string"
+    },
+    {
+     "name": "first_inspection",
+     "type": "string"
+    },
+    {
+     "name": "last_inspection",
+     "type": "string"
+    },
+    {
+     "name": "last_result",
+     "type": "string",
+     "values": [
+      "Allowed to reopen",
+      "Fine recommended (administrative complaint)",
+      "Follow-up after complaint: fixed",
+      "Follow-up visit: fixed",
+      "Follow-up visit: more time given",
+      "Follow-up visit: not fixed, fine recommended",
+      "Met inspection standards",
+      "Stayed closed: more time given",
+      "Warning, follow-up visit set"
+     ]
+    },
+    {
+     "name": "last_result_level",
+     "type": "string",
+     "values": [
+      "closed",
+      "fine",
+      "ok",
+      "warning"
+     ]
+    },
+    {
+     "name": "last_high_priority",
+     "type": "number"
+    },
+    {
+     "name": "last_routine_date",
+     "type": "string"
+    },
+    {
+     "name": "last_routine_violations",
+     "type": "number"
+    },
+    {
+     "name": "last_routine_high_priority",
+     "type": "number"
+    },
+    {
+     "name": "inspections",
+     "type": "number"
+    },
+    {
+     "name": "inspections_last_year",
+     "type": "number"
+    },
+    {
+     "name": "high_priority_last_year",
+     "type": "number"
+    },
+    {
+     "name": "closures",
+     "type": "number"
+    },
+    {
+     "name": "last_closure",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www2.myfloridalicense.com/hotels-restaurants/public-records/",
+      "https://www2.myfloridalicense.com/sto/file_download/extracts/hrfood6.csv"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/restaurants.json",
+   "csv": "/downloads/restaurants.csv",
+   "api": "/api/v1/datasets/restaurants"
+  },
+  {
+   "id": "restaurant-inspections",
+   "title": "Restaurant inspections",
+   "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
+   "rows": 17180,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "visit_id",
+     "type": "string"
+    },
+    {
+     "name": "license_number",
+     "type": "string"
+    },
+    {
+     "name": "business_name",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Bradenton",
+      "Callaway",
+      "Cottondale",
+      "Crestview",
+      "Fountain",
+      "Inlet Beach",
+      "Laguna Beach",
+      "Lynn Haven",
+      "Marianna",
+      "Mexico Bch",
+      "Mexico Beach",
+      "Panama",
+      "Panama Cith Bch",
+      "Panama City",
+      "Panama City Bch",
+      "Panama City Bea",
+      "Panama City Beach",
+      "Parker",
+      "Santa Rosa Beach",
+      "Shalimar",
+      "Southport",
+      "Springfield",
+      "Sunnyside",
+      "Tyndall Afb",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "inspection_type",
+     "type": "string",
+     "values": [
+      "Complaint Full",
+      "Complaint Partial",
+      "Food-Licensing Inspection",
+      "Routine - Food",
+      "Routine - Lodging"
+     ]
+    },
+    {
+     "name": "visit_number",
+     "type": "number"
+    },
+    {
+     "name": "disposition",
+     "type": "string",
+     "values": [
+      "Admin. Complaint Callback Complied",
+      "Admin. Complaint Callback Not Complied",
+      "Administrative Complaint Time Extension",
+      "Administrative complaint recommended",
+      "Administrative determination recommended",
+      "Call Back - Admin. complaint recommended",
+      "Call Back - Complied",
+      "Call Back - Extension given, pending",
+      "Emergency Order Callback Complied",
+      "Emergency Order Callback Not Complied",
+      "Emergency Order Callback Time Extension",
+      "Emergency order recommended",
+      "Inspection Completed - No Further Action",
+      "Not available electronically",
+      "Seasonal (Active/Inactive)",
+      "Warning Issued"
+     ]
+    },
+    {
+     "name": "result",
+     "type": "string",
+     "values": [
+      "Allowed to reopen",
+      "Fine recommended (administrative complaint)",
+      "Follow-up after complaint: fixed",
+      "Follow-up after complaint: more time given",
+      "Follow-up after complaint: not fixed",
+      "Follow-up visit: fixed",
+      "Follow-up visit: more time given",
+      "Follow-up visit: not fixed, fine recommended",
+      "Met inspection standards",
+      "Not available electronically",
+      "Ordered closed (emergency order)",
+      "Referred for an administrative decision",
+      "Seasonal (Active/Inactive)",
+      "Stayed closed: more time given",
+      "Stayed closed: not fixed",
+      "Warning, follow-up visit set"
+     ]
+    },
+    {
+     "name": "result_level",
+     "type": "string",
+     "values": [
+      "closed",
+      "fine",
+      "ok",
+      "warning"
+     ]
+    },
+    {
+     "name": "high_priority",
+     "type": "number"
+    },
+    {
+     "name": "intermediate",
+     "type": "number"
+    },
+    {
+     "name": "basic",
+     "type": "number"
+    },
+    {
+     "name": "total_violations",
+     "type": "number"
+    },
+    {
+     "name": "violation_codes",
+     "type": "string"
+    },
+    {
+     "name": "violation_items",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www2.myfloridalicense.com/hotels-restaurants/public-records/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/restaurant-inspections.json",
+   "csv": "/downloads/restaurant-inspections.csv",
+   "api": "/api/v1/datasets/restaurant-inspections"
+  },
+  {
+   "id": "new-businesses",
+   "title": "New businesses",
+   "description": "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.",
+   "rows": 41946,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "doc_number",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "filing_type",
+     "type": "string",
+     "values": [
+      "Florida LLC",
+      "Florida corporation",
+      "Florida limited partnership",
+      "Florida nonprofit corporation",
+      "Out-of-state LLC",
+      "Out-of-state corporation",
+      "Out-of-state limited partnership",
+      "Out-of-state nonprofit"
+     ]
+    },
+    {
+     "name": "filed_date",
+     "type": "string"
+    },
+    {
+     "name": "filed_month",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string"
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32406",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32411",
+      "32412",
+      "32413",
+      "32417",
+      "32438",
+      "32444",
+      "32466"
+     ]
+    },
+    {
+     "name": "last_filing_date",
+     "type": "string"
+    },
+    {
+     "name": "latest_annual_report",
+     "type": "number"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "restaurants",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/new-businesses.json",
+   "csv": "/downloads/new-businesses.csv",
+   "api": "/api/v1/datasets/new-businesses"
+  },
+  {
+   "id": "weekly-roundup",
+   "title": "This week in Bay County",
+   "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
+   "rows": 47,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "week_of",
+     "type": "string",
+     "values": [
+      "2026-10-26"
+     ]
+    },
+    {
+     "name": "section",
+     "type": "string",
+     "values": [
+      "contract",
+      "event",
+      "meeting"
+     ]
+    },
+    {
+     "name": "rank",
+     "type": "number"
+    },
+    {
+     "name": "featured",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string",
+     "values": [
+      "Contract 26-57, Military Point automatic backwash filter rehab",
+      "Elgin Pelican mechanical street sweeper for the Front Beach Road CRA",
+      "Pierce Enforcer Ascendant 107-foot ladder aerial fire truck"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "2026-10-20",
+      "2026-10-22",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-10-31"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-10-27T09:30:00",
+      "2026-10-27T10:30:00",
+      "2026-10-27T11:00:00",
+      "2026-10-27T15:00:00",
+      "2026-10-27T15:30:00",
+      "2026-10-27T17:00:00",
+      "2026-10-27T18:30:00",
+      "2026-10-27T19:00:00",
+      "2026-10-27T20:00:00",
+      "2026-10-28T10:00:00",
+      "2026-10-28T15:00:00",
+      "2026-10-28T17:00:00",
+      "2026-10-28T18:30:00",
+      "2026-10-28T21:00:00",
+      "2026-10-29T10:30:00",
+      "2026-10-29T11:00:00",
+      "2026-10-29T13:00:00",
+      "2026-10-29T17:00:00",
+      "2026-10-29T19:00:00",
+      "2026-10-29T20:00:00",
+      "2026-10-30T11:00:00",
+      "2026-10-30T12:00:00",
+      "2026-10-30T14:00:00",
+      "2026-10-30T16:00:00",
+      "2026-10-30T17:00:00",
+      "2026-10-31T13:00:00",
+      "2026-10-31T16:00:00",
+      "2026-10-31T23:59:59",
+      "2026-11-01T23:59:59"
+     ]
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pc",
+      "pcb",
+      "schools"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Lynn Haven City Commission",
+      "Mexico Beach City Council",
+      "Panama City City Commission"
+     ]
+    },
+    {
+     "name": "town",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string",
+     "values": [
+      "1311 Balboa Ave, Panama City, FL 32401",
+      "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
+      "Bay County Public Library",
+      "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "Dave & Buster’s",
+      "Hammerhead Fred’s",
+      "Panama City Beach Public Library",
+      "Papa Joe’s Bayside",
+      "Parker Park",
+      "PeoplesSouth Bank",
+      "The Sapp House",
+      "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "Wild Root Coffee & Tea",
+      "ZooWorld"
+     ]
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Chamber",
+      "Community",
+      "Library"
+     ]
+    },
+    {
+     "name": "recurring",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "agenda_posted",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "new_total",
+     "type": "string"
+    },
+    {
+     "name": "method",
+     "type": "string",
+     "values": [
+      "Competitive sealed bid (invitation to bid)",
+      "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell)",
+      "Not stated in agenda item"
+     ]
+    },
+    {
+     "name": "outcome",
+     "type": "string"
+    },
+    {
+     "name": "tally",
+     "type": "string"
+    },
+    {
+     "name": "split",
+     "type": "string"
+    },
+    {
+     "name": "voted_no",
+     "type": "string"
+    },
+    {
+     "name": "people",
+     "type": "string"
+    },
+    {
+     "name": "vendor",
+     "type": "string",
+     "values": [
+      "Marshall Brothers",
+      "Sansom Equipment Company, Inc.",
+      "Ten-8 Fire & Safety, LLC"
+     ]
+    },
+    {
+     "name": "vendor_entity_id",
+     "type": "string",
+     "values": [
+      "vendor:marshall-brothers",
+      "vendor:sansom-equipment",
+      "vendor:ten-8"
+     ]
+    },
+    {
+     "name": "vendor_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/profile/vendor/sansom-equipment",
+      "https://baycounty.me/public-money/vendors/marshall-brothers",
+      "https://baycounty.me/public-money/vendors/ten-8"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "page_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/events",
+      "https://baycounty.me/meetings",
+      "https://baycounty.me/public-money/contracts"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Panama City",
+      "Mexico Beach (visitor events)",
+      "Northwest Regional Library System",
+      "Panama City Beach Chamber"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=5259",
+      "https://lynnhavenfl.portal.civicclerk.com/",
+      "https://mexicobeachfl.gov/government/council-meetings/",
+      "https://pcbeach.org/local-events/",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
+      "https://www.bay.k12.fl.us/school-board-meetings",
+      "https://www.baycountyfl.gov/Calendar.aspx",
+      "https://www.cityofcallaway.com/AgendaCenter",
+      "https://www.mexicobeach.com/events/",
+      "https://www.nwrls.com/events",
+      "https://www.panamacity.gov/AgendaCenter",
+      "https://www.panamacity.gov/Calendar.aspx"
+     ]
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-20",
+      "2026-10-22"
+     ]
+    }
+   ],
+   "json": "/downloads/weekly-roundup.json",
+   "csv": "/downloads/weekly-roundup.csv",
+   "api": "/api/v1/datasets/weekly-roundup"
+  },
+  {
+   "id": "military-installations",
+   "title": "Military installations",
+   "description": "One row per military base in the county: branch, host unit, commander (with the change-of-command story that names them), mission, main tenant commands, size and history, its website and DVIDS page, and how many news stories are on file. Hand-checked from the units' own stories and public base histories; commanders change every two to three years.",
+   "rows": 2,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "installation_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "short_name",
+     "type": "string"
+    },
+    {
+     "name": "branch",
+     "type": "string"
+    },
+    {
+     "name": "host_unit",
+     "type": "string"
+    },
+    {
+     "name": "commander",
+     "type": "string"
+    },
+    {
+     "name": "commander_title",
+     "type": "string"
+    },
+    {
+     "name": "commander_since",
+     "type": "string"
+    },
+    {
+     "name": "commander_source_url",
+     "type": "string"
+    },
+    {
+     "name": "location",
+     "type": "string"
+    },
+    {
+     "name": "opened",
+     "type": "number"
+    },
+    {
+     "name": "acres",
+     "type": "number"
+    },
+    {
+     "name": "personnel",
+     "type": "number"
+    },
+    {
+     "name": "mission",
+     "type": "string"
+    },
+    {
+     "name": "storm",
+     "type": "string",
+     "values": [
+      "Hurricane Michael hit the base on October 10, 2018. In April 2019 the Air Force estimated the damage at $4.7 billion; the base is being rebuilt as an \"installation of the future.\""
+     ]
+    },
+    {
+     "name": "tenants",
+     "type": "string"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "dvids_url",
+     "type": "string"
+    },
+    {
+     "name": "news_units",
+     "type": "string"
+    },
+    {
+     "name": "stories",
+     "type": "number"
+    },
+    {
+     "name": "latest_story",
+     "type": "string"
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/military-installations.json",
+   "csv": "/downloads/military-installations.csv",
+   "api": "/api/v1/datasets/military-installations"
+  },
+  {
+   "id": "military-news",
+   "title": "Military news from the bases",
+   "description": "News stories published by the public affairs offices of the units at Tyndall Air Force Base and Naval Support Activity Panama City (325th Fighter Wing, 601st Air and Space Operations Center, NSA Panama City, Naval Surface Warfare Center Panama City Division, Navy Experimental Diving Unit), read daily from each unit's DVIDS feed: title, summary, date (Central time), author and the story's own link. Story text and photos stay on DVIDS. 2016 and later.",
+   "rows": 43,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "news_id",
+     "type": "string"
+    },
+    {
+     "name": "installation_id",
+     "type": "string",
+     "values": [
+      "nsa-panama-city",
+      "tyndall-afb"
+     ]
+    },
+    {
+     "name": "installation",
+     "type": "string",
+     "values": [
+      "NSA Panama City",
+      "Tyndall AFB"
+     ]
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "325th Fighter Wing",
+      "601st Air and Space Operations Center",
+      "Naval Support Activity Panama City",
+      "Naval Surface Warfare Center Panama City Division",
+      "Navy Experimental Diving Unit"
+     ]
+    },
+    {
+     "name": "unit_id",
+     "type": "string",
+     "values": [
+      "325fw",
+      "601aoc",
+      "nedu",
+      "nsapc",
+      "nswc-pcd"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    },
+    {
+     "name": "published",
+     "type": "string"
+    },
+    {
+     "name": "author",
+     "type": "string",
+     "values": [
+      "2nd Lt. Tyler Turnmire",
+      "Airman 1st Class Courtney McCants",
+      "Airman 1st Class Rosario Garcia",
+      "Airman Max Davis",
+      "Jeremy Roman",
+      "Lt. Col. Andrew Scott",
+      "Lt. Jennifer Jewell",
+      "Lt. Megan Leonard",
+      "Master Sgt. Regina Young",
+      "Michael Sparks",
+      "Petty Officer 1st Class Kyle Merritt",
+      "Re-Essa Buckels",
+      "Senior Airman Amanda Alvarez",
+      "Shauna Love-vonKnoblauch",
+      "Tech. Sgt. Charles Welty",
+      "Zachary Harris"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "image_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.dvidshub.net/unit/325FWPA",
+      "https://www.dvidshub.net/unit/601AOC",
+      "https://www.dvidshub.net/unit/NEDU",
+      "https://www.dvidshub.net/unit/NSAPC",
+      "https://www.dvidshub.net/unit/NSWC-PCD"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/military-news.json",
+   "csv": "/downloads/military-news.csv",
+   "api": "/api/v1/datasets/military-news"
+  },
+  {
+   "id": "federal-contracts",
+   "title": "Federal contracts to local companies",
+   "description": "Every federal contract with money obligated since 2016 to a company whose business address is in the county, from USAspending.gov: recipient (as registered in SAM.gov, with its city, never its street address), the agency and branch that signed it, what it buys (description, industry and product codes), start and end dates, and obligated, the money obligated from 2016 on (modifications and cuts included, so it can be negative). award_amount is USAspending's lifetime total, which can include earlier years. defense is true for Department of Defense contracts. recipient_entity_id links to the company's profile; recipient_match says how it was joined to other records (blank: by its own name only).",
+   "rows": 6425,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "award_key",
+     "type": "string"
+    },
+    {
+     "name": "award_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient",
+     "type": "string"
+    },
+    {
+     "name": "recipient_uei",
+     "type": "string"
+    },
+    {
+     "name": "recipient_city",
+     "type": "string",
+     "values": [
+      "Chipley",
+      "Crestview",
+      "Fountain",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Port Saint Joe",
+      "Tyndall Afb",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "recipient_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient_url",
+     "type": "string"
+    },
+    {
+     "name": "recipient_match",
+     "type": "string",
+     "values": [
+      "same name as a business campaign donor (Sunbiz)",
+      "same name as a company local governments paid"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Department of Agriculture",
+      "Department of Commerce",
+      "Department of Defense",
+      "Department of Health and Human Services",
+      "Department of Homeland Security",
+      "Department of Justice",
+      "Department of State",
+      "Department of Transportation",
+      "Department of Veterans Affairs",
+      "Department of the Interior",
+      "Department of the Treasury",
+      "Environmental Protection Agency",
+      "General Services Administration",
+      "National Aeronautics and Space Administration",
+      "Office of Personnel Management",
+      "U.S. Agency for Global Media"
+     ]
+    },
+    {
+     "name": "sub_agency",
+     "type": "string"
+    },
+    {
+     "name": "agency_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "defense",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "award_type",
+     "type": "string",
+     "values": [
+      "BPA CALL",
+      "DEFINITIVE CONTRACT",
+      "DELIVERY ORDER",
+      "PURCHASE ORDER"
+     ]
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "naics",
+     "type": "string"
+    },
+    {
+     "name": "naics_description",
+     "type": "string"
+    },
+    {
+     "name": "psc",
+     "type": "string"
+    },
+    {
+     "name": "psc_description",
+     "type": "string"
+    },
+    {
+     "name": "start_date",
+     "type": "string"
+    },
+    {
+     "name": "end_date",
+     "type": "string"
+    },
+    {
+     "name": "first_action_date",
+     "type": "string"
+    },
+    {
+     "name": "last_action_date",
+     "type": "string"
+    },
+    {
+     "name": "actions",
+     "type": "number"
+    },
+    {
+     "name": "obligated",
+     "type": "number"
+    },
+    {
+     "name": "award_amount",
+     "type": "number"
+    },
+    {
+     "name": "performance_city",
+     "type": "string"
+    },
+    {
+     "name": "performance_county",
+     "type": "string"
+    },
+    {
+     "name": "performance_state",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/federal-contracts.json",
+   "csv": "/downloads/federal-contracts.csv",
+   "api": "/api/v1/datasets/federal-contracts"
+  },
+  {
+   "id": "federal-contract-years",
+   "title": "Federal contracts to local companies by year",
+   "description": "Money obligated each calendar year since 2016 on federal contracts to companies based in the county, per company and signing agency, from USAspending.gov contract transactions: obligated dollars, number of contract actions and number of contracts.",
+   "rows": 1477,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "recipient",
+     "type": "string"
+    },
+    {
+     "name": "recipient_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient_url",
+     "type": "string"
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Department of Agriculture",
+      "Department of Commerce",
+      "Department of Defense",
+      "Department of Health and Human Services",
+      "Department of Homeland Security",
+      "Department of Justice",
+      "Department of State",
+      "Department of Transportation",
+      "Department of Veterans Affairs",
+      "Department of the Interior",
+      "Department of the Treasury",
+      "Environmental Protection Agency",
+      "General Services Administration",
+      "National Aeronautics and Space Administration",
+      "Office of Personnel Management",
+      "U.S. Agency for Global Media"
+     ]
+    },
+    {
+     "name": "sub_agency",
+     "type": "string"
+    },
+    {
+     "name": "agency_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "defense",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "obligated",
+     "type": "number"
+    },
+    {
+     "name": "actions",
+     "type": "number"
+    },
+    {
+     "name": "awards",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.usaspending.gov/search"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/federal-contract-years.json",
+   "csv": "/downloads/federal-contract-years.csv",
+   "api": "/api/v1/datasets/federal-contract-years"
+  },
+  {
    "id": "tax-districts",
    "title": "Tax districts",
    "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",
@@ -14413,6 +15621,404 @@
    "json": "/downloads/tax-districts.json",
    "csv": "/downloads/tax-districts.csv",
    "api": "/api/v1/datasets/tax-districts"
+  },
+  {
+   "id": "volunteer-needs",
+   "title": "Volunteer needs",
+   "description": "Open volunteer needs in the county, read every day from public volunteer boards (United Way of Northwest Florida's volunteer center and Idealist): what volunteers do, the organization, a plain cause, when (ongoing, one day or shifts), the city and ZIP, and the board's sign-up link. nonprofit_id and organization_entity_id link to the local nonprofit's profile where the name matches. No street addresses or contact details.",
+   "rows": 18,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "need_id",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "organization",
+     "type": "string",
+     "values": [
+      "American Red Cross - North Central Florida Region",
+      "Bay Education Foundation",
+      "Big Brothers Big Sisters of Northwest Florida",
+      "Boys & Girls Clubs of Bay County",
+      "Club 360, Inc.",
+      "Emerald Coast Hospice - Panama City",
+      "LEAD Coalition of Bay County, Inc",
+      "Lasagna Love",
+      "NorthWest Student Exchange",
+      "Rebuild Bay County, Inc",
+      "United Way of Northwest Florida",
+      "VITAS Healthcare of Pensacola"
+     ]
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string",
+     "values": [
+      "np-590863698",
+      "np-591114292",
+      "np-592987826",
+      "np-812636147",
+      "np-833817372",
+      "np-842966557"
+     ]
+    },
+    {
+     "name": "organization_entity_id",
+     "type": "string",
+     "values": [
+      "nonprofit:np-590863698",
+      "nonprofit:np-591114292",
+      "nonprofit:np-592987826",
+      "nonprofit:np-812636147",
+      "nonprofit:np-833817372",
+      "nonprofit:np-842966557"
+     ]
+    },
+    {
+     "name": "organization_url",
+     "type": "string",
+     "values": [
+      "/profile/nonprofit/np-590863698",
+      "/profile/nonprofit/np-591114292",
+      "/profile/nonprofit/np-592987826",
+      "/profile/nonprofit/np-812636147",
+      "/profile/nonprofit/np-833817372",
+      "/profile/nonprofit/np-842966557"
+     ]
+    },
+    {
+     "name": "cause",
+     "type": "string",
+     "values": [
+      "Disaster and emergency",
+      "Events and fundraisers",
+      "Food and basic needs",
+      "Health and hospice",
+      "Kids and mentoring"
+     ]
+    },
+    {
+     "name": "board_interest",
+     "type": "string",
+     "values": [
+      "Education",
+      "Finance",
+      "Food Prep",
+      "Physical Labor"
+     ]
+    },
+    {
+     "name": "schedule",
+     "type": "string",
+     "values": [
+      "One day",
+      "Ongoing",
+      "Shifts"
+     ]
+    },
+    {
+     "name": "when_text",
+     "type": "string",
+     "values": [
+      "Happens On Dec 3, 2026",
+      "Is Ongoing",
+      "Multiple Shifts Available"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string",
+     "values": [
+      "2026-12-03"
+     ]
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-12-03"
+     ]
+    },
+    {
+     "name": "posted",
+     "type": "string",
+     "values": [
+      "2025-07-16",
+      "2025-12-08",
+      "2026-04-13",
+      "2026-04-20",
+      "2026-05-05",
+      "2026-10-01"
+     ]
+    },
+    {
+     "name": "closes",
+     "type": "string",
+     "values": [
+      "2027-03-10",
+      "2027-03-26",
+      "2027-03-30",
+      "2027-03-31",
+      "2027-04-18",
+      "2027-04-21"
+     ]
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "description",
+     "type": "string",
+     "values": [
+      "Assist in setting up tables with linens and decorations, placement of chairs, photobooth, signage and that nature.",
+      "Be Ready to help your local community! Due to predictions for an active hurricane and wildfire season and the complexities of COVID-19, the Red Cross will need thousands to care for people when disasters strike. Train now to be a Ready Red Cross Shelter Volunteer so you can answer the call when your community needs it most! We will need volunteers to help support emergency shelters by staffing different areas including reception, registration feeding, dormitory, information collection and other vital tasks. We have both associate and supervisory level opportunities available. Will you be…",
+      "Big Brothers Big Sisters of Northwest Florida seeks caring adults to serve as mentors to young children facing adversity in their lives. There are currently more than 100 children on our waiting list - mostly boys! Just a few hours each month can make a huge difference in the life of a child. As a volunteer you will be matched with a child between the ages of 5 and 13 who needs a caring adult role model and friend. In our community-based mentoring program, volunteers spend 1:1 time with their matched youth, known as \"Littles,\" in the community. Activities might include going to a sporting…",
+      "Do you enjoy helping people get connected and providing good customer service? Join us as a Front Office Hero! Welcome clients and members of the public who visit the office, as well as answer the incoming calls. Connect inquiries to appropriate departments and people, and assist with office support projects. K Tasks include: Front Desk communication with guests, staff, and volunteers Assist in office administration in Red Cross department Answer telephones and take messages Light typing, data entry, work filing, spread sheets Assist is preparation of mailings, course materials packaging…",
+      "For many in our communities, taxes can feel like a burden. VITA volunteers work to help lift that burden by offering low income families free tax preparation. Tax refunds give these families a springboard for the future by putting their hard-earned money back into their pockets. It's a simple way to offer a sense of hope. The United Way of Northwest Florida VITA program is now being offered in Bay, Calhoun, Gulf, Holmes, Jackson & Washington Counties. We need volunteers like you to help these families! Why Volunteer with VITA? Learn a New Skill - No experience is necessary. As a volunteer…",
+      "Glenwood Marketplace is looking for volunteers to help with set up and break down. Set up starts at 7am, breakdown starts at 2pm. We will be doing heavy lifting, pulling, and walking. Every Saturday the Marketplace will be open. For more details call .",
+      "Lasagna Love is a grassroots movement powered by thousands of volunteers cooking and delivering lasagna to neighbors in need. We are united by our commitment to offer a tangible act of love, compassion, and hope in communities often marked by uncertainty and stress. Together, we are proving that kindness has the power to nourish not only bodies, but also hearts and communities. Our purpose is simple yet profound: feed families, spread kindness, strengthen communities. As a volunteer Lasagna Chef, you decide what works for you. You choose how often you would like to volunteer—whether that’s…",
+      "Listen, Read, Sing Hold a hand Make gifts for patients Run Errands or perform light housekeeping Share a gift or baked goods Veteran-to-veteran Support",
+      "Mentoring is not rocket science. Check in and connect with a kid at the Club. It's that simple. We are in need of mentors who want to help young readers improve reading scores. Time on task in reading, site words, comprehension skills are so simple to lead, even a caveman can do it. Well almost...",
+      "ReadingPals is a statewide early literacy initiative that provides volunteer mentors for students from Pre-K to 3rd grade who may need extra help, utilizing one-on-one or small group settings. In Bay & Washington Counties, ReadingPals volunteers help elementary students build strong early literacy skills necessary for success. Being a ReadingPals volunteer means becoming a real-life superhero in a child’s story—someone who sparks imagination, builds confidence, and opens doors to a lifetime of possibilities through the power of reading. As a ReadingPal, you’re more than a volunteer; you’re a…",
+      "The A.D. Harris Food Pantry provides nutritious food and essential grocery items to individuals and families facing food insecurity. Through regular distributions, food rescue, community partnerships, and volunteer support, the pantry helps ensure that Bay County residents have reliable access to food and other critical resources. Volunteers needed for receiving, stocking and driving (Tues/Fri), and distribution (Tues, Sat).",
+      "The Bay Education Foundation is seeking caring adult volunteers to serve as mentors for students in the Take Stock in Children program. Mentors meet with their student just twice permonth during the school year, providing encouragement, guidance, and a positive role model as the student works toward graduation and a college scholarship provided by Bay Education Foundation. No special expertise is required, just a willingness to listen, support, and help a young person believe in their future. One hour a month can truly change a student’s life. If you’re interested in making a lasting…",
+      "VITAS Healthcare(r) is looking for people who love to sew who are able to share their skills with hospice patients and families. A Memory Bear, sewn by a volunteer with compassion and love, is a forever friend who can ease a hurting heart after the death of a VITAS hospice patient. Sewn from a favorite pair of PJ's, a pullover top, dress, bathrobe or nightgown, a Memory Bear may recall the closeness of a loved one, bring a smile to someone in distress, or offer a sense of security to a child who feels alone after the loss of a parent or sibling. This is a great opportunity for you to give…",
+      "Volunteer to Host a Foreign Exchange Student! Benefit from opening your home and heart to an exchange student for a term during the upcoming high school year by: Making life-long friendship connections abroad Giving a young person an opportunity to immerse themselves in our American culture and your family Gaining an international son/daughter Gain new perspectives on our American way of life through the eyes of your exchange student Choose from these ways to host; just a few weeks as a short-term Welcome Family, for a Semester, or school Year. You don't have to have your own child in high…"
+     ]
+    },
+    {
+     "name": "details",
+     "type": "string",
+     "values": [
+      "18 and older; Is Not Family Friendly; Is Not Outdoors; Is Wheelchair Accessible",
+      "18 and older; Virtual Need",
+      "Is Family Friendly; Is Outdoors; Is Wheelchair Accessible; Please wear closed-toe shoes.",
+      "Is Not Outdoors; Is Wheelchair Accessible; Please specify which county you would like to volunteer in the",
+      "Register by Dec 1, 2026; Is Not Outdoors",
+      "Team Size: 2 - 15 members per team; Is Outdoors"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32413",
+      "32444"
+     ]
+    },
+    {
+     "name": "remote",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Idealist",
+      "United Way of Northwest Florida"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://volunteer.unitedwaynwfl.org/need/",
+      "https://www.idealist.org/en/volunteer-in-panama-city-fl"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/volunteer-needs.json",
+   "csv": "/downloads/volunteer-needs.csv",
+   "api": "/api/v1/datasets/volunteer-needs"
+  },
+  {
+   "id": "volunteer-orgs",
+   "title": "Nonprofits that use volunteers",
+   "description": "Local nonprofits that reported volunteers on their latest IRS Form 990 (Part I line 6, the organization's own estimate, which can cover more than this county) or that have a volunteer need open now: what each does, a plain cause, website, volunteers and employees reported, revenue, and open needs. Homeowner associations, chambers and private foundations are left out unless they post a need.",
+   "rows": 79,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "cause",
+     "type": "string",
+     "values": [
+      "Animals",
+      "Arts and culture",
+      "Disaster and emergency",
+      "Environment",
+      "Faith",
+      "Food and basic needs",
+      "Health and hospice",
+      "Housing and neighborhoods",
+      "Kids and mentoring",
+      "Schools and reading",
+      "Seniors",
+      "Sports and recreation",
+      "Veterans and service clubs"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Animals",
+      "Arts and culture",
+      "Church or religious group",
+      "Club, lodge or veterans group",
+      "Community improvement",
+      "Crime and legal",
+      "Education",
+      "Food and agriculture",
+      "Health care",
+      "Human services",
+      "Mental health",
+      "Other nonprofit",
+      "Philanthropy and grantmaking",
+      "Public and societal benefit",
+      "Public safety and disaster",
+      "Recreation and sports",
+      "Youth development"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Parker"
+     ]
+    },
+    {
+     "name": "mission",
+     "type": "string"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "volunteers_reported",
+     "type": "number"
+    },
+    {
+     "name": "volunteers_year",
+     "type": "number"
+    },
+    {
+     "name": "employees",
+     "type": "number"
+    },
+    {
+     "name": "revenue",
+     "type": "number"
+    },
+    {
+     "name": "open_needs",
+     "type": "number"
+    },
+    {
+     "name": "needs_boards",
+     "type": "string",
+     "values": [
+      "United Way of Northwest Florida"
+     ]
+    },
+    {
+     "name": "latest_return_form",
+     "type": "string",
+     "values": [
+      "990",
+      "990EZ"
+     ]
+    },
+    {
+     "name": "latest_return_year",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/volunteer-orgs.json",
+   "csv": "/downloads/volunteer-orgs.csv",
+   "api": "/api/v1/datasets/volunteer-orgs"
   },
   {
    "id": "meetings",

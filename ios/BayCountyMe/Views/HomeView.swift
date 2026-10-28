@@ -389,8 +389,9 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
-            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "pastelections": .dataset("campaign-history"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "volunteer": .volunteer, "military": .military, "pastelections": .dataset("campaign-history"),
             "roads": .dataset("road-contracts"), "development": .dataset("development-projects"),
+            "restaurants": .dataset("restaurants"), "newbusinesses": .dataset("new-businesses"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { path = [.search]; return }

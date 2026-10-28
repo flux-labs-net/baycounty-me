@@ -31,6 +31,11 @@ from hurricane_prep_page import hurricane_prep_page
 from elections_hub_page import results_page as election_results_page, voting_page
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
+from restaurants_page import restaurants_page, new_businesses_page
+from weekly import this_week_page
+from volunteer_page import volunteer_page
+from military_page import military_page
+from realtor_page import realtor_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -142,7 +147,7 @@ FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
   <nav class="foot-cols" aria-label="Footer">
     <div><b>Follow the money</b><a href="/public-money/tax-dollars">Tax dollars</a><a href="/governments">Governments</a><a href="/compare">Compare governments</a><a href="/public-money/contracts">Contracts</a></div>
     <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/votes">How they voted</a><a href="/connections">Connections</a></div>
-    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
+    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/this-week">This week</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
   </nav>
   <div class="foot-base">
     <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/data-sources">Where our data comes from</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
@@ -627,7 +632,7 @@ def about_page():
 def privacy_page():
     return '''<div class="page prose">
   <h1>Privacy</h1>
-  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no accounts, no ads and no tracking cookies, on the website or in the iPhone and Android apps.</p>
+  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no ads and no tracking cookies, on the website or in the iPhone and Android apps. The only accounts are for the realtor console.</p>
   <h2>The website</h2>
   <ul>
     <li><b>Visits.</b> The site counts page views with Vercel Web Analytics, which uses no cookies and doesn't identify you.</li>
@@ -635,6 +640,7 @@ def privacy_page():
     <li><b>Contact form.</b> Your message, name and email come to us by email so we can answer. They aren't added to any list.</li>
     <li><b>API.</b> Requests to the public API are logged with the caller's IP address for 90 days to stop abuse, then deleted.</li>
     <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to an AI service to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Please don't type personal information.</li>
+    <li><b>Realtor console.</b> Agents who sign in to the <a href="/realtor">realtor console</a> have an account under their email address. We keep the branding they save (name, brokerage, contact details, logo, photo and colors) and the addresses they've run reports for, so they can run them again. A sign-in cookie keeps them signed in for 30 days. None of it is shared or shown to anyone else, and an agent can delete the account, branding and history from the console at any time. Addresses sent to the address report are not logged.</li>
     <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
   </ul>
   <h2>The iPhone and Android apps</h2>
@@ -668,6 +674,7 @@ PAGES = [
     ('/governments', "Bay County's local governments", 'A profile of every local government in Bay County, Florida: officials, budget, tax rate, debt, audits, votes, contracts and projects.', govs_index),
     ('/compare', 'Compare Bay County governments', 'Compare Bay County, its cities and the school district side by side: budget, property tax, debt, staff, audit findings, split votes and utility bills, per resident.', lambda: compare_page(OUT)),
     ('/open-data', 'Download the data', 'Every BayCounty.me dataset as CSV and JSON: votes, contracts, CRA spending, tax rates, debt, audits, FEMA projects and more.', lambda: opendata_page(OUT)),
+    ('/realtor', 'Realtor console: branded address reports', 'For real estate agents: type any Bay County address and download one branded PDF with the property, a tax estimate, flood and evacuation zones, schools, utilities, zoning and projects nearby, parks and who represents it.', lambda: realtor_page(OUT)),
     ('/developers', 'API for developers', 'Connect apps, spreadsheets and AI assistants to BayCounty.me: a free, read-only API and MCP server for Bay County public records.', lambda: developers_page(OUT)),
     ('/es', 'Registros públicos en español', 'BayCounty.me en español: estimado de impuestos por dirección, solicitudes de registros públicos y un glosario de términos de dinero público.', es_home),
     ('/es/mi-direccion', 'Mi dirección', 'Busque cualquier dirección del condado de Bay: estimado de impuestos a la propiedad, quién lo representa, escuelas, zonas de inundación y evacuación, y distritos de reurbanización.', lambda: es_addr_page(OUT)),
@@ -701,6 +708,8 @@ PAGES = [
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/events', 'Events in Bay County',
      "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
+    ('/this-week', 'This week in Bay County',
+     "What's happening in Bay County this week, the public meetings on the calendar, and the votes and contracts added last week. The same list goes out by email every Monday.", lambda: this_week_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
     ('/schools', 'Public schools',
@@ -717,6 +726,14 @@ PAGES = [
      "New homes permitted in Bay County each year, city by city, and the commercial buildings, subdivisions and apartments in planning review, with their status and dates, on a map.", lambda: development_page(OUT)),
     ('/roads', 'Road projects',
      "State highway work under way in Bay County and what each FDOT contract costs, FDOT's five-year plan for local roads, the contractors, and the county and city road jobs paid for by the half-cent sales tax.", lambda: roads_page(OUT)),
+    ('/restaurants', 'Restaurant inspections',
+     'Every restaurant, food truck and caterer in Bay County and what state food safety inspectors found on every visit since 2016: violations, warnings, fines recommended and emergency closures.', lambda: restaurants_page(OUT)),
+    ('/new-businesses', 'New businesses',
+     'Every company, nonprofit and partnership filed with the state since 2016 with its main address in Bay County, by month, city and type, and every new restaurant, food truck and caterer.', lambda: new_businesses_page(OUT)),
+    ('/volunteer', 'Volunteer in Bay County',
+     'Open volunteer needs from Bay County nonprofits, read every day from public volunteer boards, and the local nonprofits that rely on volunteers year-round, by cause.', lambda: volunteer_page(OUT)),
+    ('/military', 'Military and the bases',
+     "Tyndall Air Force Base and Naval Support Activity Panama City: what each base does and who commands it, the latest news from the units on them, and every federal contract since 2016 to companies based in Bay County, by company, agency and year.", lambda: military_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
@@ -728,7 +745,7 @@ PAGES = [
     ('/ask', 'Ask BayCounty.me', 'Ask a question in your own words about Bay County budgets, taxes, votes, contracts, meetings or officials, and get an answer from the public records on BayCounty.me, with links to each source.', ask_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
     ('/data-sources', 'Where our data comes from', 'Every source behind BayCounty.me: each government\'s agenda systems, websites and documents, and every state and federal database, with links, how often we check them and how we process the records.', data_sources_page),
-    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no accounts, no ads, no tracking.', privacy_page),
+    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no ads, no tracking, and accounts only for the realtor console.', privacy_page),
 ]
 
 

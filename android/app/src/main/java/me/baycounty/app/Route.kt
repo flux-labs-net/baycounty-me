@@ -41,6 +41,8 @@ sealed class Route {
     object Emergency : Route()
     object HurricanePrep : Route()
     data class Utilities(val match: AddressMatch? = null) : Route()
+    object Volunteer : Route()
+    object Military : Route()
     data class GovBudget(val id: String) : Route()
 }
 

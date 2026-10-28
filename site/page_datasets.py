@@ -743,6 +743,392 @@ def school_zones():
     return _school_rows()['zones']
 
 
+
+# --- Restaurant inspections (/restaurants) and new businesses (/new-businesses) ---------------------------------------
+
+DBPR_PAGE = 'https://www2.myfloridalicense.com/hotels-restaurants/public-records/'
+LICENSE_TYPE = {'2010': 'Restaurant or food service', '2012': 'Theme park food cart', '2013': 'Caterer', '2014': 'Food truck or cart',
+                '2015': 'Vending machine', '2016': 'Temporary event vendor'}
+RANK = {'SEAT': 'Restaurant with seating', 'NOST': 'Takeout, no seating', 'MFDV': 'Food truck', 'HTDG': 'Hot dog cart', 'CATR': 'Caterer',
+        'PARK': 'Theme park food cart', 'VEND': 'Vending machine'}
+NO_ADDRESS = {'2013', '2014', '2016'}  # caterers, food trucks and event vendors: the license address can be a home
+# plain words for each inspection outcome, and how serious it is (ok, warning, fine, closed)
+RESULT = {
+    'Inspection Completed - No Further Action': ('Met inspection standards', 'ok'),
+    'Warning Issued': ('Warning, follow-up visit set', 'warning'),
+    'Call Back - Complied': ('Follow-up visit: fixed', 'ok'),
+    'Call Back - Extension given, pending': ('Follow-up visit: more time given', 'warning'),
+    'Administrative complaint recommended': ('Fine recommended (administrative complaint)', 'fine'),
+    'Call Back - Admin. complaint recommended': ('Follow-up visit: not fixed, fine recommended', 'fine'),
+    'Admin. Complaint Callback Complied': ('Follow-up after complaint: fixed', 'ok'),
+    'Admin. Complaint Callback Not Complied': ('Follow-up after complaint: not fixed', 'fine'),
+    'Administrative Complaint Time Extension': ('Follow-up after complaint: more time given', 'fine'),
+    'Administrative determination recommended': ('Referred for an administrative decision', 'fine'),
+    'Emergency order recommended': ('Ordered closed (emergency order)', 'closed'),
+    'Emergency Order Callback Complied': ('Allowed to reopen', 'ok'),
+    'Emergency Order Callback Not Complied': ('Stayed closed: not fixed', 'closed'),
+    'Emergency Order Callback Time Extension': ('Stayed closed: more time given', 'closed'),
+}
+# the state's food service violation items since 2013 (DBPR public records layout), in short form
+VIOLATION = {
+    '01': 'Food from an approved source', '02': 'Labeling, date marking or consumer advisory', '03': 'Food held at the wrong temperature',
+    '04': 'Equipment to keep food hot or cold', '05': 'Food thermometers', '06': 'Thawing food', '07': 'Food served again',
+    '08': 'Cross-contamination', '09': 'Bare hands on ready-to-eat food', '10': 'Utensils stored in food', '11': 'Sick employee or health policy',
+    '12': 'Handwashing and hygiene', '13': 'Clothes, hair restraints, jewelry', '14': 'Equipment built or kept in poor repair',
+    '16': 'Dishwashing and sanitizer test kits', '21': 'Wiping cloths and linens', '22': 'Food-contact surfaces not clean or sanitized',
+    '23': 'Other surfaces not clean', '24': 'Storing clean equipment and utensils', '25': 'Single-use items', '27': 'Hot and cold water',
+    '28': 'Sewage and wastewater', '29': 'Plumbing, backflow, mop sink', '31': 'Handwashing sinks and supplies', '32': 'Bathrooms',
+    '33': 'Garbage and premises', '35': 'Roaches, rodents or other pests', '36': 'Floors, walls, ceilings, ventilation', '38': 'Lighting',
+    '40': "Employees' belongings", '41': 'Chemicals and toxic items', '42': 'Cleaning equipment', '43': 'Separated from living area',
+    '45': 'Fire extinguishers (reported to fire officials)', '46': 'Exits (reported to fire officials)', '47': 'Electrical (reported to fire officials)',
+    '48': 'Gas appliances (reported to fire officials)', '49': 'Flammable materials (reported to fire officials)', '50': 'License not displayed',
+    '51': 'Other sanitary or safety conditions', '52': 'Misrepresenting food', '53': 'Food manager certification or employee training',
+    '54': 'Florida Clean Indoor Air Act', '55': 'Automatic tip notice'}
+
+
+def _rest_dir():
+    from place import PLACE_ID
+    return os.path.join(HERE, '..', 'data', 'restaurants', PLACE_ID.split('-', 1)[-1])
+
+
+def _csv_rows(path):
+    import csv
+    return list(csv.DictReader(open(path, encoding='utf-8'))) if os.path.exists(path) else []
+
+
+def _licensee_entity(name, sunbiz):
+    """The profile id for a license holder: a company local governments paid, a nonprofit, or one Sunbiz filing with the
+    same name (business:<doc>, which the API turns into a profile even when nothing else names it)."""
+    import ids
+    from entity_graph import build
+    if not name:
+        return None
+    G = build()
+    gid = ids.gov_id(name)
+    if gid and 'gov:' + gid in G.ents and ids.gov(gid)['short'].lower() in name.lower():
+        return 'gov:' + gid
+    vid = ids.vendor_id(name)
+    if vid and 'vendor:' + vid in G.ents:
+        return 'vendor:' + vid
+    hit = sunbiz.get(_org_norm(name))
+    if hit:
+        bid = 'business:' + hit[0].lower()
+        return G.alias[bid][0] if bid in G.alias else bid
+    return None
+
+
+def _is_org(name):
+    import re
+    return bool(re.search(r'\b(LLC|L\.L\.C|INC|CORP|CORPORATION|CO|COMPANY|LTD|LP|LLP|PA|ENTERPRISES?|GROUP|HOLDINGS|RESTAURANTS?|FOODS?|'
+                          r'MANAGEMENT|SERVICES?|PARTNERS|ASSOCIATION|CLUB|CHURCH|SCHOOL|BOARD|COUNTY|CITY|UNIVERSITY|COLLEGE|HOSPITAL|'
+                          r'DISTRICT|TRUST|INTERNATIONAL|OF|THE|AND|&)\b', name or '', re.I))
+
+
+def _restaurant_rows():
+    """(restaurants, inspections) from data/restaurants/<county>/ (data/restaurants/fetch_dbpr.py)."""
+    if 'rest' in _RC:
+        return _RC['rest']
+    import ids
+    from collections import defaultdict
+    from place import PLACE_ID
+    d = _rest_dir()
+    ins = [r for r in _csv_rows(os.path.join(d, 'inspections.csv')) if r['date'][:4] >= str(cutoff.FIRST_YEAR)]
+    lic = _csv_rows(os.path.join(d, 'licenses.csv'))
+    if not ins and not lic:
+        _RC['rest'] = ([], [])
+        return _RC['rest']
+    src_cur = 'https://www2.myfloridalicense.com/sto/file_download/extracts/'
+    try:
+        import json
+        log = json.load(open(os.path.join(d, 'fetch.json')))
+        file_of = {u['url'].rsplit('/', 1)[1]: u['url'] for u in log.get('files', []) if u.get('url')}
+    except (OSError, ValueError):
+        file_of = {}
+    lic_file = next((u for n, u in file_of.items() if n.startswith('hrfood')), DBPR_PAGE)
+    today = __import__('datetime').date.today()
+    year_ago = (today - __import__('datetime').timedelta(days=365)).isoformat()
+
+    # inspections, newest first
+    out_i = []
+    by_lic = defaultdict(list)
+    for r in ins:
+        res, level = RESULT.get(r['disposition'], (r['disposition'], 'ok'))
+        items = []
+        for part in (r.get('violations') or '').split(';'):
+            if ':' in part:
+                code, n = part.split(':')
+                items.append(f"{VIOLATION.get(code, 'Item ' + code)}" + (f' ({n})' if n != '1' else ''))
+        row = {'place_id': PLACE_ID, 'visit_id': r['visit_id'] or f"{r['inspection_number']}-{r['visit_number']}", 'license_number': r['license_number'],
+               'business_name': ids.biz_case(r['business_name']), 'city': r['city'].title(), 'date': r['date'],
+               'inspection_type': r['inspection_type'], 'visit_number': int(r['visit_number'] or 1), 'disposition': r['disposition'],
+               'result': res, 'result_level': level, 'high_priority': int(r['high_priority'] or 0), 'intermediate': int(r['intermediate'] or 0),
+               'basic': int(r['basic'] or 0), 'total_violations': int(r['total_violations'] or 0),
+               'violation_codes': (r.get('violations') or '').replace(';', '; ') or None, 'violation_items': '; '.join(items) or None,
+               'source_url': DBPR_PAGE}
+        out_i.append(row)
+        by_lic[r['license_number']].append((row, r))
+
+    # one row per license: today's license list, plus every license inspected since 2016 that is no longer listed
+    sunbiz = _sunbiz_names()
+    cur = {re.sub(r'\D', '', l['license_number']).lstrip('0'): l for l in lic}
+    out_r = []
+    for key in sorted(set(cur) | {k.lstrip('0') for k in by_lic}):
+        l = cur.get(key)
+        hist = by_lic.get(key) or by_lic.get(key.zfill(7)) or []
+        last_row, last_raw = hist[0] if hist else (None, None)
+        tcode = (l or {}).get('license_type_code') or (last_raw or {}).get('license_type_code') or ''
+        if tcode not in LICENSE_TYPE:
+            continue  # hotels and condos inspected for their food service are on the lodging side of the state's records
+        name = (l or {}).get('business_name') or (last_raw or {}).get('business_name') or ''
+        addr = '' if tcode in NO_ADDRESS else ' '.join(x for x in [(l or {}).get('address') or (last_raw or {}).get('address'), (l or {}).get('address2')] if x and x.strip())
+        licensee = (l or {}).get('licensee') or None
+        lname = (ids.biz_case(licensee) if _is_org(licensee) else ids.sunbiz_person(licensee)) if licensee else None
+        opened = min((x['date'] for x, raw in hist if raw['inspection_type'] == 'Food-Licensing Inspection'), default=None)
+        recent = [x for x, raw in hist if x['date'] >= year_ago]
+        closures = [x for x, raw in hist if x['disposition'] == 'Emergency order recommended']
+        routine = [x for x, raw in hist if x['inspection_type'].startswith('Routine') and x['visit_number'] == 1]
+        out_r.append({
+            'place_id': PLACE_ID, 'license_number': key, 'license_type': LICENSE_TYPE[tcode], 'kind': RANK.get((l or {}).get('rank'), LICENSE_TYPE[tcode]),
+            'business_name': ids.biz_case(name), 'licensee': lname,
+            'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else None,
+            'address': ids.biz_case(addr) if addr else None, 'city': ((l or {}).get('city') or (last_raw or {}).get('city') or '').title() or None,
+            'zip': (l or {}).get('zip') or (last_raw or {}).get('zip') or None, 'seats': int(l['seats']) if l and l.get('seats') not in (None, '', '0') else None,
+            'licensed_now': bool(l), 'license_expires': (l or {}).get('expires') or None, 'risk_level': (l or {}).get('risk_level') or None,
+            'opened': opened, 'first_inspection': hist[-1][0]['date'] if hist else None,
+            'last_inspection': last_row['date'] if last_row else ((l or {}).get('last_inspection') or None),
+            'last_result': last_row['result'] if last_row else None, 'last_result_level': last_row['result_level'] if last_row else None,
+            'last_high_priority': last_row['high_priority'] if last_row else None,
+            'last_routine_date': routine[0]['date'] if routine else None, 'last_routine_violations': routine[0]['total_violations'] if routine else None,
+            'last_routine_high_priority': routine[0]['high_priority'] if routine else None,
+            'inspections': len(hist), 'inspections_last_year': len(recent), 'high_priority_last_year': sum(x['high_priority'] for x in recent),
+            'closures': len(closures), 'last_closure': closures[0]['date'] if closures else None,
+            'source_url': lic_file if l else DBPR_PAGE})
+    out_r.sort(key=lambda r: (r['business_name'] or '').lower())
+    _RC['rest'] = (out_r, out_i)
+    return _RC['rest']
+
+
+_RC = {}
+
+
+def restaurants():
+    return _restaurant_rows()[0]
+
+
+def restaurant_inspections():
+    return _restaurant_rows()[1]
+
+
+FILING_TYPE = {'FLAL': 'Florida LLC', 'DOMP': 'Florida corporation', 'DOMNP': 'Florida nonprofit corporation', 'DOMLP': 'Florida limited partnership',
+               'FORL': 'Out-of-state LLC', 'FORP': 'Out-of-state corporation', 'FORNP': 'Out-of-state nonprofit', 'FORLP': 'Out-of-state limited partnership'}
+
+
+def _clean_city(raw, c):
+    """One spelling per city: 'Pcb', 'P C Beach' and 'Panama City Bch, Fl' all become Panama City Beach."""
+    import difflib
+    t = re.sub(r'[^A-Z ]', ' ', (raw or '').upper())
+    t = re.sub(r'\b(FL|FLA|FLORIDA)\b', ' ', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    if not t:
+        return None
+    if t in ('PCB', 'PC BEACH', 'P C BEACH') or (re.match(r'^(PA|PC|P C)', t) and re.search(r'\b(BEACH|BCH|BEECH|BACH|BREACH)\b', t)):
+        return 'Panama City Beach'
+    names = {'PANAMA', 'PC', 'PANAMA CITY', 'PANAMA CTY'}
+    if t in names:
+        return 'Panama City'
+    fixed = {'LYNNHAVEN': 'LYNN HAVEN', 'SOUTH PORT': 'SOUTHPORT', 'TYNDALL AFB': 'TYNDALL AFB', 'TYNDALL': 'TYNDALL AFB'}
+    t = fixed.get(t, t)
+    known = sorted(c['cities'] - {'PCB', 'PC'})
+    if t not in known:
+        m = difflib.get_close_matches(t, known, n=1, cutoff=0.8)
+        t = m[0] if m else t
+    return 'Tyndall AFB' if t == 'TYNDALL AFB' else t.title()
+
+
+def new_businesses():
+    """Every business filed with the state since 2016 whose main (principal) address is in the county, from the
+    Division of Corporations quarterly file (data/sunbiz/<county>/entities.csv.gz). Out-of-state companies count from
+    the day they registered to do business in Florida. Only the city and ZIP are published: many small companies list
+    a home as their address. People (officers and agents) are on each company's state record, linked by source_url."""
+    import csv, gzip, ids
+    from place import PLACE_ID
+    from entity_graph import build
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'sunbiz'))
+    from counties import county
+    key = PLACE_ID.split('-', 1)[-1]
+    p = os.path.join(HERE, '..', 'data', 'sunbiz', key, 'entities.csv.gz')
+    if not os.path.exists(p):
+        return []
+    c = county(key)
+    G = build()
+    rest = {}
+    for r in restaurants():
+        if r.get('licensee_entity_id') and r['licensed_now']:
+            rest.setdefault(r['licensee_entity_id'], []).append(r['business_name'])
+    out = []
+    for r in csv.DictReader(gzip.open(p, 'rt', encoding='utf-8', errors='replace')):
+        d = r.get('file_date') or ''
+        if len(d) != 8 or d[4:] < str(cutoff.FIRST_YEAR):
+            continue
+        z = (r.get('zip') or '')[:5]
+        if z not in c['zips'] or (z in c.get('shared_zips', ()) and (r.get('city') or '').upper() not in c['cities']):
+            continue
+        city = _clean_city(r.get('city'), c)
+        if city and city.upper() in c.get('outside_places', ()):
+            continue
+        doc = r['doc_number'].strip()
+        bid = 'business:' + doc.lower()
+        eid = G.alias[bid][0] if bid in G.alias else bid
+        last = r.get('last_txn_date') or ''
+        out.append({'place_id': PLACE_ID, 'doc_number': doc, 'name': ids.biz_case(r['name'].strip()), 'filing_type': FILING_TYPE.get(r['filing_type'], r['filing_type']),
+                    'filed_date': f'{d[4:]}-{d[:2]}-{d[2:4]}', 'filed_month': f'{d[4:]}-{d[:2]}',
+                    'status': 'Active' if r.get('status') == 'A' else 'Inactive', 'city': city, 'zip': z,
+                    'last_filing_date': f'{last[4:]}-{last[:2]}-{last[2:4]}' if len(last) == 8 else None,
+                    'latest_annual_report': int(r['report_year_1']) if (r.get('report_year_1') or '').isdigit() else None,
+                    'entity_id': eid, 'restaurants': '; '.join(sorted(set(rest.get(eid, [])))) or None,
+                    'source_url': ids.sunbiz_url(r['name'].strip(), doc)})
+    out.sort(key=lambda r: (r['filed_date'], r['doc_number']), reverse=True)
+    return out
+
+
+def weekly_roundup():
+    from weekly import weekly_roundup as rows
+    return rows()
+
+
+# --- Military and the bases (/military) -----------------------------------------------------------------------------------
+
+def _military_files():
+    """data/military/<county>/installations.json (hand-checked), news.json (fetch_news.py) and federal_contracts.json
+    (fetch_contracts.py). Empty when the place has no military data."""
+    import json
+    from place import PLACE_ID
+    d = os.path.join(HERE, '..', 'data', 'military', PLACE_ID.split('-', 1)[-1])
+    load = lambda f, empty: json.load(open(os.path.join(d, f))) if os.path.exists(os.path.join(d, f)) else empty
+    return PLACE_ID, load('installations.json', {'installations': [], 'news_units': []}), load('news.json', {'stories': []}), \
+        load('federal_contracts.json', {'awards': [], 'transactions': []})
+
+
+DEFENSE = 'Department of Defense'
+FED_AGENCY_SHORT = {'Department of the Navy': 'U.S. Navy', 'Department of the Air Force': 'U.S. Air Force', 'Department of the Army': 'U.S. Army',
+                    'U.S. Coast Guard': 'U.S. Coast Guard', 'Defense Logistics Agency': 'Defense Logistics Agency'}
+
+
+def fed_agency_id(agency, sub_agency):
+    """Entity id for the federal agency that signed a contract: the military branch or sub-agency (Navy, Air Force, Coast
+    Guard, VA ...), so a company's profile says who in Washington paid it. Ids start with us- so they never meet a local
+    government key."""
+    import re
+    name = sub_agency or agency
+    return 'gov:us-' + re.sub(r'[^a-z0-9]+', '-', (name or '').lower()).strip('-')[:60] if name else None
+
+
+def fed_recipient_id(name, _c={}):
+    """One entity id per federal contractor, shared with the rest of the site: the company's vendor id when local
+    governments also paid it, its Sunbiz filing when it also gave to a campaign (business-donor-sunbiz), else a business
+    id from its name as registered in SAM.gov."""
+    import re
+    import ids
+    if 'doc' not in _c:
+        norm = lambda s: ' '.join(w for w in re.sub(r"[.,'&]", '', (s or '').lower()).split() if w not in ('inc', 'llc', 'co', 'corp', 'company', 'the', 'pa', 'pllc'))
+        _c['norm'] = norm
+        _c['doc'], _c['dv'] = {}, {}
+        for r in business_donor_sunbiz():
+            if r.get('sunbiz_doc_number'):
+                _c['doc'][norm(r['contributor'])] = r['sunbiz_doc_number'].lower()
+                if r.get('vendor_id'):
+                    _c['dv'][r['sunbiz_doc_number'].lower()] = r['vendor_id']
+    vid = ids.vendor_id(name)
+    if vid:
+        return 'vendor:' + vid, 'same name as a company local governments paid'
+    doc = _c['doc'].get(_c['norm'](name))
+    if doc:
+        return ('vendor:' + _c['dv'][doc], 'same Sunbiz filing as a local vendor') if doc in _c['dv'] else ('business:' + doc, 'same name as a business campaign donor (Sunbiz)')
+    return 'business:' + re.sub(r'[^a-z0-9]+', '-', (name or '').lower()).strip('-')[:80], None
+
+
+def _profile_url(eid):
+    from entity_graph import page_url
+    return page_url(eid) if eid else None
+
+
+def military_installations():
+    place, I, N, _ = _military_files()
+    out = []
+    for b in I['installations']:
+        st = [s for s in N['stories'] if s['installation_id'] == b['installation_id']]
+        out.append({'place_id': place, **{k: b.get(k) for k in ('installation_id', 'name', 'short_name', 'branch', 'host_unit', 'commander', 'commander_title',
+                    'commander_since', 'commander_source_url', 'location', 'opened', 'acres', 'personnel', 'mission', 'storm', 'tenants', 'website', 'dvids_url')},
+                    'news_units': '; '.join(u['unit'] for u in I['news_units'] if u['installation_id'] == b['installation_id']),
+                    'stories': len(st), 'latest_story': max((s['published'] or '' for s in st), default=None) or None,
+                    'as_of': I.get('as_of'), 'source_url': b.get('source_url')})
+    return out
+
+
+def military_news():
+    place, I, N, _ = _military_files()
+    name = {b['installation_id']: b['short_name'] for b in I['installations']}
+    return [{'place_id': place, 'news_id': s['news_id'], 'installation_id': s['installation_id'], 'installation': name.get(s['installation_id']),
+             'unit': s['unit'], 'unit_id': s['unit_id'], 'title': s['title'], 'summary': s.get('summary'), 'published': s.get('published'),
+             'author': s.get('author'), 'url': s['url'], 'image_url': s.get('image_url'), 'source_url': s.get('source_url')}
+            for s in N['stories'] if (s.get('published') or cutoff.FIRST_DATE) >= cutoff.FIRST_DATE]
+
+
+def _fed_rows():
+    if '_fed' in _MC:
+        return _MC['_fed']
+    from collections import defaultdict
+    place, _, _, F = _military_files()
+    tx = [t for t in F['transactions'] if (t.get('date') or '') >= cutoff.FIRST_DATE]
+    by_award = defaultdict(list)
+    for t in tx:
+        by_award[t['award_key']].append(t)
+    meta = {a['award_key']: a for a in F['awards']}
+    awards, years = [], defaultdict(lambda: {'obligated': 0.0, 'actions': 0, 'awards': set()})
+    for k, ts in by_award.items():
+        a = meta.get(k) or {}
+        if (a.get('end_date') or cutoff.FIRST_DATE) < cutoff.FIRST_DATE:
+            continue  # close-out entries on a contract that ended before 2016
+        name = a.get('recipient') or ts[-1]['recipient']
+        eid, match = fed_recipient_id(name)
+        agency, sub = a.get('agency') or ts[-1]['agency'], a.get('sub_agency') or ts[-1]['sub_agency']
+        dates = sorted(t['date'] for t in ts)
+        awards.append({'place_id': place, 'award_key': k, 'award_id': a.get('award_id') or ts[-1]['award_id'], 'recipient': name,
+                       'recipient_uei': a.get('uei') or ts[-1].get('uei'), 'recipient_city': a.get('recipient_city'),
+                       'recipient_entity_id': eid, 'recipient_url': _profile_url(eid), 'recipient_match': match,
+                       'agency': agency, 'sub_agency': sub, 'agency_entity_id': fed_agency_id(agency, sub), 'defense': agency == DEFENSE,
+                       'award_type': a.get('award_type'), 'description': a.get('description'), 'naics': a.get('naics'),
+                       'naics_description': a.get('naics_description'), 'psc': a.get('psc'), 'psc_description': a.get('psc_description'),
+                       'start_date': a.get('start_date'), 'end_date': a.get('end_date'), 'first_action_date': dates[0], 'last_action_date': dates[-1],
+                       'actions': len(ts), 'obligated': round(sum(t['amount'] or 0 for t in ts), 2), 'award_amount': a.get('award_amount'),
+                       'performance_city': a.get('performance_city'), 'performance_county': a.get('performance_county'),
+                       'performance_state': a.get('performance_state'), 'source_url': f'https://www.usaspending.gov/award/{k}'})
+        for t in ts:
+            y = years[(int(t['date'][:4]), eid, name, agency, sub)]
+            y['obligated'] += t['amount'] or 0
+            y['actions'] += 1
+            y['awards'].add(k)
+    awards.sort(key=lambda r: (-r['obligated'], r['award_key']))
+    yrows = [{'place_id': place, 'year': y, 'recipient': n, 'recipient_entity_id': eid, 'recipient_url': _profile_url(eid), 'agency': ag, 'sub_agency': sub,
+              'agency_entity_id': fed_agency_id(ag, sub), 'defense': ag == DEFENSE, 'obligated': round(v['obligated'], 2), 'actions': v['actions'],
+              'awards': len(v['awards']), 'source_url': 'https://www.usaspending.gov/search'}
+             for (y, eid, n, ag, sub), v in years.items()]
+    yrows.sort(key=lambda r: (r['year'], -r['obligated'], r['recipient']))
+    _MC['_fed'] = awards, yrows
+    return _MC['_fed']
+
+
+_MC = {}
+
+
+def federal_contracts():
+    return _fed_rows()[0]
+
+
+def federal_contract_years():
+    return _fed_rows()[1]
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -1564,5 +1950,16 @@ DATASETS = [
     ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
     ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
     ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
+    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
+    ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
+    ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),
+    ('weekly-roundup', 'This week in Bay County', "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.", weekly_roundup),
+    ('military-installations', 'Military installations', "One row per military base in the county: branch, host unit, commander (with the change-of-command story that names them), mission, main tenant commands, size and history, its website and DVIDS page, and how many news stories are on file. Hand-checked from the units' own stories and public base histories; commanders change every two to three years.", military_installations),
+    ('military-news', 'Military news from the bases', "News stories published by the public affairs offices of the units at Tyndall Air Force Base and Naval Support Activity Panama City (325th Fighter Wing, 601st Air and Space Operations Center, NSA Panama City, Naval Surface Warfare Center Panama City Division, Navy Experimental Diving Unit), read daily from each unit's DVIDS feed: title, summary, date (Central time), author and the story's own link. Story text and photos stay on DVIDS. 2016 and later.", military_news),
+    ('federal-contracts', 'Federal contracts to local companies', "Every federal contract with money obligated since 2016 to a company whose business address is in the county, from USAspending.gov: recipient (as registered in SAM.gov, with its city, never its street address), the agency and branch that signed it, what it buys (description, industry and product codes), start and end dates, and obligated, the money obligated from 2016 on (modifications and cuts included, so it can be negative). award_amount is USAspending's lifetime total, which can include earlier years. defense is true for Department of Defense contracts. recipient_entity_id links to the company's profile; recipient_match says how it was joined to other records (blank: by its own name only).", federal_contracts),
+    ('federal-contract-years', 'Federal contracts to local companies by year', "Money obligated each calendar year since 2016 on federal contracts to companies based in the county, per company and signing agency, from USAspending.gov contract transactions: obligated dollars, number of contract actions and number of contracts.", federal_contract_years),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]
+
+from volunteer_data import DATASETS as _VOLUNTEER  # noqa: E402  /volunteer (site/volunteer_data.py)
+DATASETS += _VOLUNTEER

@@ -24,6 +24,10 @@
       "schedule": "0 13 * * 1"
     },
     {
+      "path": "/api/weekly",
+      "schedule": "20 13 * * 1"
+    },
+    {
       "path": "/api/alerts-run",
       "schedule": "40 13 * * *"
     }
@@ -1780,6 +1784,10 @@
     {
       "source": "/alerts/manage",
       "destination": "/api/manage"
+    },
+    {
+      "source": "/api/realtor",
+      "destination": "/api/manage?app=realtor"
     },
     {
       "source": "/api/v1/:path*",
