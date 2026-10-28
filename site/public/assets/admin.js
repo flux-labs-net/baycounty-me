@@ -1260,30 +1260,57 @@
   let btTimer;
   $('#bt-q').addEventListener('input', () => { clearTimeout(btTimer); btTimer = setTimeout(loadTies, 300); });
 
-  // ---------- name matches: look-alike business names (api/_names.js) ----------
-  const NM_REV = {unreviewed: 'Unreviewed', confirmed: 'One company', rejected: 'Keep apart'};
-  const nmSide = s => `<b>${owNm((s.names || [])[0] || s.key)}</b>${(s.names || []).length > 1 ? `<div class="muted small">also ${(s.names || []).slice(1).map(owNm).join('; ')}</div>` : ''}
+  // ---------- name matches: look-alike business names, and posts listed twice (api/_name_matches.js) ----------
+  const nmKind = () => $('#nm-kind').value;
+  const NM_REV = {name: {unreviewed: 'Unreviewed', confirmed: 'One company', rejected: 'Keep apart'}, repeat: {unreviewed: 'Unreviewed', confirmed: 'One post', rejected: 'Keep apart'}};
+  const nmDay = v => { const d = v ? new Date(/T/.test(v) ? v : v + 'T12:00:00') : null; return d && !isNaN(d) ? d.toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric', ...(/T\d/.test(v) ? {hour: 'numeric', minute: '2-digit'} : {})}) : ''; };
+  const nmName = s => nmKind() === 'repeat' ? esc((s.names || [])[0] || s.key) : owNm((s.names || [])[0] || s.key);
+  const nmSide = s => nmKind() === 'repeat'
+    ? `<b>${nmName(s)}</b><div class="muted small">${[esc(s.source || ''), esc(nmDay(s.posted)), s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">source</a>` : ''].filter(Boolean).join(' · ')}</div>
+      ${s.text ? `<div class="small" style="margin-top:4px;max-width:46ch">${esc(s.text)}${s.text.length >= 280 ? '…' : ''}</div>` : ''}`
+    : `<b>${nmName(s)}</b>${(s.names || []).length > 1 ? `<div class="muted small">also ${(s.names || []).slice(1).map(owNm).join('; ')}</div>` : ''}
     <div class="muted small">${[s.vendor_id ? `<a href="/profile/vendor/${esc(s.vendor_id)}" target="_blank" rel="noopener">vendor</a>` : '',
       s.records ? Object.entries(s.records).map(([k, n]) => `${fmt(n)} ${esc(k.replace('_', ' '))}`).join(', ') : '',
       s.gifts ? `${fmt(s.gifts)} gift${s.gifts === 1 ? '' : 's'}, ${owUsd(s.given)}` : ''].filter(Boolean).join(' · ')}</div>`;
-  const nmBulk = bulkReview({table: '#nm-table', noun: ['pair', 'pairs'], action: 'names_review',
+  const nmOpts = {table: '#nm-table', noun: ['pair', 'pairs'], action: 'names_review',
     statuses: [['confirmed', 'One company', 'primary'], ['rejected', 'Keep apart', 'danger'], ['unreviewed', 'Back to unreviewed']],
     key: r => r.a_key + '|' + r.b_key,
-    body: list => ({items: list.map(r => ({a_key: r.a_key, b_key: r.b_key, a_name: (r.a.names || [])[0], b_name: (r.b.names || [])[0]}))}),
+    body: list => ({kind: nmKind(), items: list.map(r => ({a_key: r.a_key, b_key: r.b_key, a_name: (r.a.names || [])[0], b_name: (r.b.names || [])[0]}))}),
     confident: r => r.reason === 'spelling' && (r.a.gifts || r.b.gifts) && !(r.a.vendor_id && r.b.vendor_id), confidentLabel: 'Spelling slips',
     confidentHelp: 'Spelling slips: one or two letters apart, at least one name from a campaign filing, and not two separate vendors. Still read each one.',
-    warn: st => st === 'confirmed' ? 'The names are joined everywhere after the next daily refresh.' : '', reload: () => loadNames()});
+    warn: st => st === 'confirmed' ? (nmKind() === 'repeat' ? 'Each pair shows as one post: alerts within minutes, notices, events and jobs after the next daily refresh.' : 'The names are joined everywhere after the next daily refresh.') : '', reload: () => loadNames()};
+  const nmConfident = nmOpts.confident;
+  const nmBulk = bulkReview(nmOpts);
+  let nmShownKind = null;
+  function nmSetKind() {
+    const k = nmKind();
+    nmOpts.statuses[0][1] = NM_REV[k].confirmed;
+    nmOpts.confident = k === 'name' ? nmConfident : null;  // the "spelling slips" shortcut is for business names only
+    $('#nm-help-name').hidden = k !== 'name'; $('#nm-help-repeat').hidden = k !== 'repeat';
+    $('#nm-title').textContent = k === 'repeat' ? 'Repeated posts' : 'Look-alike names';
+    $('#nm-q').placeholder = k === 'repeat' ? 'Title' : 'Name';
+    $('#nm-status').querySelector('[value="confirmed"]').textContent = NM_REV[k].confirmed;
+    const th = $('#nm-table thead').querySelectorAll('th'); th[1].textContent = k === 'repeat' ? 'Post' : 'Name';
+  }
   async function loadNames() {
+    const k = nmKind();
+    if (k !== nmShownKind) { $('#nm-reason').value = ''; nmSetKind(); }
     let r;
-    try { r = await api('names', {params: {status: $('#nm-status').value, reason: $('#nm-reason').value, q: $('#nm-q').value.trim()}}); }
+    try { r = await api('names', {params: {kind: k, status: $('#nm-status').value, reason: $('#nm-reason').value, q: $('#nm-q').value.trim()}}); }
     catch (e) { $('#nm-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load name matches.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    if (k !== nmShownKind) {
+      $('#nm-reason').innerHTML = `<option value="">${k === 'repeat' ? 'Every kind of post' : 'Any reason'}</option>` + Object.entries(r.reasons || {}).map(([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`).join('');
+      nmShownKind = k;
+    }
     const c = r.counts;
-    $('#nm-tiles').innerHTML = [[fmt(c.pairs), 'Look-alike pairs in the last build'], [fmt(c.unreviewed), 'Not yet reviewed'], [fmt(c.confirmed), 'One company'], [fmt(c.rejected), 'Kept apart']]
+    $('#nm-tiles').innerHTML = (k === 'repeat'
+      ? [[fmt(c.pairs), 'Possible repeats now'], [fmt(c.unreviewed), 'Not yet reviewed'], [fmt(c.confirmed), 'One post'], [fmt(c.rejected), 'Kept apart']]
+      : [[fmt(c.pairs), 'Look-alike pairs in the last build'], [fmt(c.unreviewed), 'Not yet reviewed'], [fmt(c.confirmed), 'One company'], [fmt(c.rejected), 'Kept apart']])
       .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
     $('#nm-table tbody').innerHTML = r.rows.map(m => `<tr>${nmBulk.cell(m)}<td class="small">${nmSide(m.a)}</td><td class="small">${nmSide(m.b)}</td>
       <td class="small">${esc(m.reason_label || '')}</td>
-      <td><select class="sel" data-nm-a="${esc(m.a_key)}" data-nm-b="${esc(m.b_key)}" aria-label="Review">${Object.entries(NM_REV).map(([k, v]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${v}</option>`).join('')}</select>
-        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No pairs with these filters.</td></tr>';
+      <td><select class="sel" data-nm-a="${esc(m.a_key)}" data-nm-b="${esc(m.b_key)}" aria-label="Review">${Object.entries(NM_REV[k]).map(([v, l]) => `<option value="${v}"${v === m.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select>
+        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || `<tr><td colspan="5" class="empty">${k === 'repeat' ? 'No possible repeats with these filters.' : 'No pairs with these filters.'}</td></tr>`;
     if (r.total > r.rows.length) $('#nm-table tbody').insertAdjacentHTML('beforeend', `<tr><td colspan="5" class="empty">Showing ${fmt(r.rows.length)} of ${fmt(r.total)}. Narrow the list with the filters.</td></tr>`);
     nmBulk.set(r.rows);
   }
@@ -1291,12 +1318,12 @@
     const s = e.target.closest('[data-nm-a]'); if (!s) return;
     s.disabled = true;
     const row = s.closest('tr');
-    try { await api('names_review', {method: 'POST', body: {a_key: s.dataset.nmA, b_key: s.dataset.nmB, status: s.value,
+    try { await api('names_review', {method: 'POST', body: {kind: nmKind(), a_key: s.dataset.nmA, b_key: s.dataset.nmB, status: s.value,
       a_name: row.cells[1].querySelector('b').textContent, b_name: row.cells[2].querySelector('b').textContent}}); nmBulk.mark(s.dataset.nmA + '|' + s.dataset.nmB, s.value); }
     catch (err) { alert(err.message); }
     s.disabled = false;
   });
-  ['#nm-status', '#nm-reason'].forEach(s => $(s).addEventListener('change', loadNames));
+  ['#nm-kind', '#nm-status', '#nm-reason'].forEach(s => $(s).addEventListener('change', loadNames));
   let nmTimer;
   $('#nm-q').addEventListener('input', () => { clearTimeout(nmTimer); nmTimer = setTimeout(loadNames, 300); });
 

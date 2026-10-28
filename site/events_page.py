@@ -15,7 +15,7 @@ TONE = {'Public meeting': 'navy', 'Library': 'teal', 'Chamber': 'amber'}
 
 def rows():
     from page_datasets import community_events
-    return community_events()
+    return [r for r in community_events() if not r.get('same_as')]  # one event on two calendars shows once (data/dupes.py)
 
 
 def towns(rs):

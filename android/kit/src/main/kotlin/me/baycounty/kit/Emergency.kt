@@ -81,7 +81,7 @@ object Emergency {
 
     /** When the live feed can't be reached: active notices from the last daily archive, and the dataset shelters. */
     fun offlineFeed(notices: List<Row>, shelters: List<Row>, zones: List<Row>): Feed {
-        val active = sorted(notices.filter { it.string("status") == "active" })
+        val active = sorted(notices.filter { it.string("status") == "active" && it.string("same_as").isNullOrEmpty() })
         val sh = shelters.map { r -> if (r["type"] == null && r["shelter_type"] != null) Row(r.id, r.values + ("type" to r["shelter_type"]!!)) else r }
         return Feed(headline(active), null, active, sh, zones, emptyMap(), live = false)
     }
@@ -210,6 +210,14 @@ object Emergency {
             ?: runCatching { LocalDateTime.parse(s.take(16), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")).atZone(ZoneId.of("America/Chicago")).toInstant() }.getOrNull()
 
     /** "Oct 27, 2:05 PM" in Central time. */
+    /** The time line on a notice card: "Oct 23, 9:42 AM", or "Posted Oct 22, 3:10 PM · Updated Oct 23, 9:42 AM" for a notice
+     *  posted again with changes (first_posted from the live feed or the emergency-notices dataset; same as the site). */
+    fun posted(n: Row): String {
+        val issued = n.string("issued").orEmpty()
+        val first = n.string("first_posted")
+        return if (!first.isNullOrEmpty() && issued.isNotEmpty() && first < issued) "Posted ${whenLabel(first)} · Updated ${whenLabel(issued)}" else whenLabel(issued)
+    }
+
     fun whenLabel(s: String?): String {
         val i = s?.let(::parseInstant) ?: return ""
         return DateTimeFormatter.ofPattern("MMM d, h:mm a", Locale.US).withZone(ZoneId.of("America/Chicago")).format(i)

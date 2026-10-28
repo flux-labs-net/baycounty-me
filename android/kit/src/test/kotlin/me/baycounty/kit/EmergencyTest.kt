@@ -28,6 +28,15 @@ class EmergencyTest {
         assertEquals("1 weather advisory or watch in effect.", Emergency.headline(listOf(r[1])))
     }
 
+    @Test fun repeatedNoticeShowsOnceWithUpdatedLine() {
+        val r = Row.decodeList("""[{"notice_id":"alert:lh:145","kind":"utility","status":"active","issued":"2026-10-23T14:42:27.000Z","first_posted":"2026-10-23T14:35:50.000Z"},
+            {"notice_id":"alert:lh:144","kind":"utility","status":"active","issued":"2026-10-23T14:35:50.000Z","same_as":"alert:lh:145"}]""")
+        val f = Emergency.offlineFeed(r, emptyList(), emptyList())
+        assertEquals(listOf("alert:lh:145"), f.notices.map { it.string("notice_id") })
+        assertEquals("Posted Oct 23, 9:35 AM · Updated Oct 23, 9:42 AM", Emergency.posted(r[0]))
+        assertEquals("Oct 23, 9:35 AM", Emergency.posted(r[1]))
+    }
+
     @Test fun zoneAnswer() {
         val json = """{"found":true,"zone":"D","address":{"address":"825 OHIO AVE","community":"LYNN HAVEN"},"point":{"lat":30.24,"lng":-85.64},
             "what_to_do":"You're in evacuation Zone D.","orders_now":[{"title":"Order for Zone A","includes_you":false}],"nearest_shelters":[{"name":"Deane Bozeman","miles":4.2}]}"""

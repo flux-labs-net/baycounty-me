@@ -29,6 +29,16 @@ final class EmergencyTests: XCTestCase {
         XCTAssertEqual(Emergency.headline([row(["kind": .string("weather"), "event": .string("Tornado Watch")])]), "1 weather advisory or watch in effect.")
     }
 
+    func testRepeatedNoticeShowsOnceWithUpdatedLine() throws {
+        let json = #"[{"notice_id":"alert:lh:145","kind":"utility","status":"active","issued":"2026-10-23T14:42:27.000Z","first_posted":"2026-10-23T14:35:50.000Z"},"#
+            + #"{"notice_id":"alert:lh:144","kind":"utility","status":"active","issued":"2026-10-23T14:35:50.000Z","same_as":"alert:lh:145"}]"#
+        let r = try Row.decodeList(Data(json.utf8))
+        let f = Emergency.offlineFeed(notices: r, shelters: [], zones: [])
+        XCTAssertEqual(f.notices.map { $0.string("notice_id") }, ["alert:lh:145"])
+        XCTAssertEqual(Emergency.posted(r[0]), "Posted Oct 23, 9:35 AM · Updated Oct 23, 9:42 AM")
+        XCTAssertEqual(Emergency.posted(r[1]), "Oct 23, 9:35 AM")
+    }
+
     func testSortedPutsTheMostSeriousFirst() {
         let a = Row(id: 0, values: ["severity": .string("minor"), "issued": .string("2026-10-27T10:00")])
         let b = Row(id: 1, values: ["severity": .string("extreme"), "issued": .string("2026-10-26T10:00")])

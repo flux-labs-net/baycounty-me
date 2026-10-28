@@ -205,7 +205,8 @@ async function feed(loc, opts, deps) {
   const topics = (opts.topics && opts.topics.length ? opts.topics : ALL_TOPICS).filter(t => TOPICS[t]);
   const keys = new Set(['beachConditions', 'beachAccess', ...topics.flatMap(t => NEEDS[t] || [])]);
   const D = {};
-  await Promise.all([...keys].map(async k => { try { D[k] = (await deps.rowsOf(DATASETS[k])) || []; } catch (e) { D[k] = []; } }));
+  // Rows with same_as are a post listed twice (data/dupes.py); the kept row stands for both.
+  await Promise.all([...keys].map(async k => { try { D[k] = ((await deps.rowsOf(DATASETS[k])) || []).filter(r => !r.same_as); } catch (e) { D[k] = []; } }));
   const live = deps.live || {};
   const [notices, agenda, trash] = await Promise.all([
     live.notices ? live.notices().catch(() => []) : [],

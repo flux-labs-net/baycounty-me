@@ -53,6 +53,7 @@ CSS = r"""
 .em-n small{color:var(--muted);font-size:.8rem}
 .em-n details summary{cursor:pointer;font-size:.84rem;color:var(--blue)}
 .em-n details p{margin-top:6px;white-space:pre-line}
+.em-n .em-upd{font-weight:600;color:var(--ink)}.em-n details p.em-ver{font-size:.8rem;color:var(--muted);white-space:normal}
 .em-n[hidden],.em-sh[hidden]{display:none!important}
 .em-empty{padding:18px;border-radius:18px;background:var(--sunken);color:var(--muted);font-size:.92rem}
 .em-shg{display:flex;flex-direction:column;gap:10px}
@@ -99,15 +100,19 @@ JS = r"""
   const when = s => { if (!s) return ''; const d = new Date(/T\d\d:\d\d$/.test(s) ? s : s); if (isNaN(d)) return ''; return d.toLocaleString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago'}); };
   const ago = s => { const m = Math.round((Date.now() - Date.parse(s)) / 60000); return m < 1 ? 'just now' : m < 60 ? m + ' min ago' : Math.round(m / 60) + ' hr ago'; };
   let kind = '';
+  const earlier = n => (n.versions || []).length > 1 ? `<p class="em-ver">Earlier version${n.versions.length > 2 ? 's' : ''}: ${n.versions.slice(1).map(v =>
+    `${v.url ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)}</a>` : esc(v.title)} (${esc(when(v.issued))})`).join('; ')}</p>` : '';
   function card(n) {
     const k = KIND[n.kind] || ['Notice', 'info'];
     const src = n.gov_id ? govA(n.gov_id, n.source) : esc(n.source);
-    const times = [n.issued && 'Posted ' + when(n.issued), n.ends && (n.kind === 'weather' ? 'until ' + when(n.ends) : '')].filter(Boolean).join(' · ');
+    // A notice posted again with changes is one card: the newest text, with when it was first posted and updated.
+    const upd = n.first_posted && n.issued && n.first_posted < n.issued;
+    const times = [n.issued && (upd ? `Posted ${when(n.first_posted)} · <b class="em-upd">Updated ${when(n.issued)}</b>` : 'Posted ' + when(n.issued)), n.ends && (n.kind === 'weather' ? 'until ' + when(n.ends) : '')].filter(Boolean).join(' · ');
     const more = [n.summary && n.summary !== n.title ? n.summary : '', n.instruction || ''].filter(Boolean).join('\n\n');
     return `<article class="em-n" id="n-${esc(n.notice_id)}" data-k="${esc(n.kind)}" data-sev="${esc(n.severity)}">
       <span class="k"><span class="ico i-${k[1]}" aria-hidden="true"></span>${esc(n.kind === 'weather' && n.event ? n.event : k[0])}${n.zones ? ' · Zone' + (n.zones.includes(',') ? 's ' : ' ') + esc(n.zones) : ''}</span>
       <h3>${esc(n.title)}</h3>${n.area ? `<p>${esc(n.area.length > 220 ? n.area.slice(0, 217) + '…' : n.area)}</p>` : ''}
-      ${more ? `<details><summary>Details</summary><p>${esc(more.length > 1600 ? more.slice(0, 1597) + '…' : more)}</p></details>` : ''}
+      ${more ? `<details><summary>Details</summary><p>${esc(more.length > 1600 ? more.slice(0, 1597) + '…' : more)}</p>${earlier(n)}</details>` : ''}
       <small>${src}${times ? ' · ' + times : ''}${n.url ? ` · <a href="${esc(n.url)}" target="_blank" rel="noopener">Source</a>` : ''}</small></article>`;
   }
   function filter() {
@@ -185,14 +190,43 @@ def _when(s):
     return d.strftime('%b %-d, %Y')
 
 
+def _when_t(s):
+    """'Oct 23, 9:35 AM' in Central time (the date alone when there's no time)."""
+    try:
+        d = dt.datetime.fromisoformat(str(s).replace('Z', '+00:00'))
+    except ValueError:
+        return e(s)
+    if 'T' not in str(s):
+        return d.strftime('%b %-d, %Y')
+    if d.tzinfo:
+        d = d.astimezone(dt.timezone(dt.timedelta(hours=-5 if 3 <= d.month <= 10 else -6)))
+    return d.strftime('%b %-d, %-I:%M %p')
+
+
+def _posted(n):
+    """'Posted Oct 23, 2026', or 'Posted Oct 22, 2026 · Updated Oct 23, 2026' for a notice that was posted again."""
+    first = n.get('first_posted')
+    if first and str(first) < str(n.get('issued') or ''):
+        return f'Posted {_when_t(first)} · <b class="em-upd">Updated {_when_t(n.get("issued"))}</b>'
+    return f'Posted {_when(n.get("issued"))}'
+
+
+def _earlier(n):
+    vs = sorted(n.get('earlier') or [], key=lambda v: str(v.get('issued') or ''), reverse=True)
+    if not vs:
+        return ''
+    link = lambda v: f'<a href="{e(v["url"])}" target="_blank" rel="noopener">{e(v["title"])}</a>' if v.get('url') else e(v['title'])
+    return f'<p class="em-ver">Earlier version{"s" if len(vs) > 1 else ""}: ' + '; '.join(f'{link(v)} ({_when(v.get("issued"))})' for v in vs) + '</p>'
+
+
 def _notice(n):
     lab, icon, _ = KIND.get(n['kind'], ('Notice', 'info', 'blue'))
     src = gov_link(n['gov_id'], n['source']) if n.get('gov_id') else e(n['source'])
     more = '\n\n'.join(x for x in [n.get('summary') if n.get('summary') != n['title'] else '', n.get('instruction') or ''] if x)
     return (f'<article class="em-n" id="n-{e(n["notice_id"])}" data-k="{e(n["kind"])}" data-sev="{e(n["severity"])}">'
             f'<span class="k">{ico(icon)}{e(n["event"] if n["kind"] == "weather" and n.get("event") else lab)}</span><h3>{e(n["title"])}</h3>'
-            + (f'<details><summary>Details</summary><p>{e(more[:1600])}</p></details>' if more else '')
-            + f'<small>{src} · Posted {_when(n.get("issued"))}' + (f' · <a href="{e(n["url"])}" target="_blank" rel="noopener">Source</a>' if n.get('url') else '') + '</small></article>')
+            + (f'<details><summary>Details</summary><p>{e(more[:1600])}</p>{_earlier(n)}</details>' if more else '')
+            + f'<small>{src} · {_posted(n)}' + (f' · <a href="{e(n["url"])}" target="_blank" rel="noopener">Source</a>' if n.get('url') else '') + '</small></article>')
 
 
 def _project(zones, base, shelters, w=640):
@@ -226,6 +260,13 @@ def emergency_page(out_dir):
     import os
     from page_datasets import evacuation_zones, emergency_shelters, emergency_resources, emergency_notices, _emergency_file
     Z, S, R, N = evacuation_zones(), emergency_shelters(), emergency_resources(), emergency_notices()
+    # A notice posted twice shows once, as its newest version, with the earlier posts listed under Details (data/dupes.py).
+    for n in N:
+        if n.get('same_as'):
+            keep = next((m for m in N if m['notice_id'] == n['same_as']), None)
+            if keep is not None:
+                keep.setdefault('earlier', []).append(n)
+    N = [n for n in N if not n.get('same_as')]
     if not Z:
         return '<div class="page"><h1>Emergencies and alerts</h1><p>No emergency information on file for this place yet.</p></div>'
     zinfo = _emergency_file('zones.json')

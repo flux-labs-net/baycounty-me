@@ -1,0 +1,68 @@
+{
+ "about": "Shared cases for data/dupes.py and api/_dupes.js (api/__tests__/dupes.test.js). Each case: items, options, and the expected groups (kept post first) and maybe pairs.",
+ "cases": [
+  {"name": "Lynn Haven reuse water notice posted twice, the second adds an end date",
+   "items": [
+    {"id": "alert:lh:144", "group": "lh", "when": "2026-10-23T14:35:50.000Z", "title": "Reuse System Temporarily Out of Service", "body": "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main."},
+    {"id": "alert:lh:145", "group": "lh", "when": "2026-10-23T14:42:27.000Z", "title": "Reuse System Offline Due to Repair", "body": "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main."}],
+   "options": {"window_hours": 72},
+   "groups": [["alert:lh:145", "alert:lh:144"]], "maybe": []},
+  {"name": "Same text from two governments is not merged",
+   "items": [
+    {"id": "a", "group": "lh", "when": "2026-10-23T14:35:50Z", "title": "Boil water notice lifted", "body": "The precautionary boil water notice issued for customers on Ohio Avenue has been lifted after testing."},
+    {"id": "b", "group": "pc", "when": "2026-10-23T14:40:00Z", "title": "Boil water notice lifted", "body": "The precautionary boil water notice issued for customers on Ohio Avenue has been lifted after testing."}],
+   "options": {"window_hours": 72}, "groups": [], "maybe": []},
+  {"name": "Posted a week apart is outside the notice window",
+   "items": [
+    {"id": "a", "group": "lh", "when": "2026-10-01T10:00:00Z", "title": "Hydrant flushing this week", "body": "Crews will flush fire hydrants across the city this week. Water may look cloudy for a short time."},
+    {"id": "b", "group": "lh", "when": "2026-10-09T10:00:00Z", "title": "Hydrant flushing this week", "body": "Crews will flush fire hydrants across the city this week. Water may look cloudy for a short time."}],
+   "options": {"window_hours": 72}, "groups": [], "maybe": []},
+  {"name": "Two road closures from one city on the same template, different streets and dates",
+   "items": [
+    {"id": "r1", "group": "pc", "when": "2026-10-13T15:40:00Z", "title": "Road Closure Notice: Michigan Ave. between W 22nd St. and W 20th Ct.", "body": "Michigan Avenue between West 22nd Street and West 20th Court will be closed to through traffic from October 14 to October 16 for utility work. Please use alternate routes."},
+    {"id": "r2", "group": "pc", "when": "2026-10-13T16:10:00Z", "title": "Road Closure Notice: Harrison Ave. between 4th St. and 6th St.", "body": "Harrison Avenue between 4th Street and 6th Street will be closed to through traffic from October 20 to October 21 for utility work. Please use alternate routes."}],
+   "options": {"window_hours": 72}, "groups": [], "maybe": []},
+  {"name": "An update that changes the end date goes to review",
+   "items": [
+    {"id": "u1", "group": "lh", "when": "2026-10-23T10:00:00Z", "title": "Reuse system out of service", "body": "The reuse water system is out of service through November 1, 2026, due to repair of a broken reuse water main on Highway 77."},
+    {"id": "u2", "group": "lh", "when": "2026-10-25T10:00:00Z", "title": "Reuse system repair extended", "body": "The reuse water system is out of service through November 5, 2026, due to repair of a broken reuse water main on Highway 77."}],
+   "options": {"window_hours": 72}, "groups": [], "maybe": [{"a": "u1", "b": "u2"}]},
+  {"name": "A reviewer's call beats the score both ways",
+   "items": [
+    {"id": "u1", "group": "lh", "when": "2026-10-23T10:00:00Z", "title": "Reuse system out of service", "body": "The reuse water system is out of service through November 1, 2026, due to repair of a broken reuse water main on Highway 77."},
+    {"id": "u2", "group": "lh", "when": "2026-10-25T10:00:00Z", "title": "Reuse system repair extended", "body": "The reuse water system is out of service through November 5, 2026, due to repair of a broken reuse water main on Highway 77."},
+    {"id": "alert:lh:144", "group": "lh", "when": "2026-10-23T14:35:50.000Z", "title": "Reuse System Temporarily Out of Service", "body": "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main."},
+    {"id": "alert:lh:145", "group": "lh", "when": "2026-10-23T14:42:27.000Z", "title": "Reuse System Offline Due to Repair", "body": "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main."}],
+   "options": {"window_hours": 72, "decisions": {"confirmed": [{"a_key": "u2", "b_key": "u1"}], "rejected": [{"a_key": "alert:lh:144", "b_key": "alert:lh:145"}]}},
+   "groups": [["u2", "u1"]], "maybe": "any"},
+  {"name": "A legal notice published three days running is one notice",
+   "items": [
+    {"id": "pn:1", "group": "Bay County Tax Collector", "when": "2026-10-08", "title": "Certificate to Roll 2026", "body": "CERTIFICATE TO ROLL 2026 First Certification. The Tax Collector certifies the 2026 real and tangible personal property tax roll."},
+    {"id": "pn:2", "group": "Bay County Tax Collector", "when": "2026-10-09", "title": "Certificate to Roll 2026", "body": "CERTIFICATE TO ROLL 2026 First Certification. The Tax Collector certifies the 2026 real and tangible personal property tax roll."},
+    {"id": "pn:3", "group": "Bay County Tax Collector", "when": "2026-10-10", "title": "Certificate to Roll 2026", "body": "CERTIFICATE TO ROLL 2026 First Certification. The Tax Collector certifies the 2026 real and tangible personal property tax roll."}],
+   "options": {"window_hours": 504, "strict_numbers": true}, "groups": [["pn:3", "pn:2", "pn:1"]], "maybe": []},
+  {"name": "Legal notices on one template for two parcels stay apart (no review)",
+   "items": [
+    {"id": "p1", "group": "Lynn Haven", "when": "2026-10-08", "title": "Notice of Proposed Site Plan Development Order", "body": "Notice of proposed site plan development order for parcel 11873-000-000 at 1200 Ohio Avenue. Comments are due within 14 days of this notice to the Planning Department."},
+    {"id": "p2", "group": "Lynn Haven", "when": "2026-10-09", "title": "Notice of Proposed Site Plan Development Order", "body": "Notice of proposed site plan development order for parcel 11910-020-000 at 2405 Minnesota Avenue. Comments are due within 14 days of this notice to the Planning Department."}],
+   "options": {"window_hours": 504, "strict_numbers": true}, "groups": [], "maybe": []},
+  {"name": "One event on two calendars: the city's calendar is kept over the aggregator",
+   "items": [
+    {"id": "destination-pc:1", "group": "2026-12-12", "when": "2026-12-12T17:00:00", "title": "40th Annual Boat Parade of Lights", "place": "Panama City", "rank": 5},
+    {"id": "pcb-chamber:2", "group": "2026-12-12", "when": "2026-12-12T17:30:00", "title": "40th Annual Boat Parade of Lights", "place": "Panama City", "rank": 8},
+    {"id": "panama-city:3", "group": "2026-12-12", "when": "2026-12-12T17:00:00", "title": "Boat Parade of Lights (40th annual)", "place": "Panama City", "rank": 1}],
+   "options": {"window_hours": 2}, "groups": [["panama-city:3", "destination-pc:1", "pcb-chamber:2"]], "maybe": []},
+  {"name": "The same title in two towns is two events",
+   "items": [
+    {"id": "e1", "group": "2026-10-31", "when": "2026-10-31T17:00:00", "title": "Trunk or Treat", "place": "Lynn Haven"},
+    {"id": "e2", "group": "2026-10-31", "when": "2026-10-31T17:00:00", "title": "Trunk or Treat", "place": "Callaway"}],
+   "options": {"window_hours": 2}, "groups": [], "maybe": []},
+  {"name": "Two job requisitions with one title are two openings",
+   "items": [
+    {"id": "j1", "group": "county", "when": "2026-10-20", "title": "Firefighter/EMT", "ref": "JR100061"},
+    {"id": "j2", "group": "county", "when": "2026-10-21", "title": "Firefighter/EMT", "ref": "JR100062"},
+    {"id": "j3", "group": "lh", "when": "2026-10-20", "title": "Equipment Operator I"},
+    {"id": "j4", "group": "lh", "when": "2026-10-22", "title": "Equipment Operator I"}],
+   "options": {"window_hours": 720}, "groups": [["j4", "j3"]], "maybe": []}
+ ]
+}

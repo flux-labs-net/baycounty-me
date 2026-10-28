@@ -49,6 +49,8 @@ async function liveFeed(req, catalog, {place = 'fl-bay', refresh = true} = {}) {
     state = {checked_at: new Date().toISOString(), shelters: r.shelters, sources_ok: r.ok, errors: r.errors, push_ready: null};
     source = 'sources';
   } else notices = live.notices;
+  // A notice posted twice (re-posted with an update) is one card: the newest version, with first_posted and versions.
+  notices = require('./_dupes').mergeNotices(notices, await require('./_dupes').decisions());
   notices = notices.slice().sort(E.byUrgency).map(n => ({...n, page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`}));
   const [shelterRows, zoneRows] = await Promise.all([meta(req, catalog, 'emergency-shelters'), meta(req, catalog, 'evacuation-zones')]);
   const shelters = mergeShelters(shelterRows, state.shelters);

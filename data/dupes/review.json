@@ -1,0 +1,31 @@
+{
+ "about": "Posts that may be the same thing listed twice, for /admin > Name matches. Written by site/repeats.py; see data/dupes.py.",
+ "pairs": [
+  {
+   "a": {
+    "key": "job:13f4ad16036b",
+    "names": [
+     "Equipment Operator I (Second Position)"
+    ],
+    "source": "City of Callaway",
+    "posted": "2026-10-20",
+    "url": "https://www.cityofcallaway.com/Jobs.aspx?UniqueId=76&CommunityJobs=False&JobID=Equipment-Operator-I-Second-Position-200",
+    "text": null
+   },
+   "b": {
+    "key": "job:b892ce356ab3",
+    "names": [
+     "Equipment Operator I"
+    ],
+    "source": "City of Callaway",
+    "posted": "2026-10-20",
+    "url": "https://www.cityofcallaway.com/Jobs.aspx?UniqueId=76&CommunityJobs=False&JobID=Equipment-Operator-I-182",
+    "text": null
+   },
+   "title": 0.6,
+   "body": null,
+   "feed": "jobs",
+   "feed_label": "Job opening"
+  }
+ ]
+}

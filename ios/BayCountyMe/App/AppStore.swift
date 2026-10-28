@@ -98,7 +98,9 @@ final class AppStore {
         guard force || rows[id] == nil, !loading.contains(id) else { return }
         loading.insert(id); defer { loading.remove(id) }
         do {
-            let (r, f) = try await client.rows(datasetID: id)
+            let (all, f) = try await client.rows(datasetID: id)
+            // A row with same_as is a post listed twice (a re-posted alert, one event on two calendars); its kept row stands for it.
+            let r = all.filter { ($0.string("same_as") ?? "").isEmpty }
             rows[id] = r
             searchIndex[id] = Dictionary(uniqueKeysWithValues: r.map { ($0.id, $0.searchText) })
             freshness[id] = f; errors[id] = nil

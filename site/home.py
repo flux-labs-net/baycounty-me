@@ -161,7 +161,7 @@ def _today():
     flag = now.get('flag_color')
     beach = card('/beaches', 'flag', 'amber', html.escape(f'{flag} beach flag') if flag else 'Beach flags',
                  html.escape(f"{now['rip_current_risk']} rip current risk") if now.get('rip_current_risk') else "Today's flag at each beach")
-    act = [n for n in emergency_notices() if n.get('status') == 'active']
+    act = [n for n in emergency_notices() if n.get('status') == 'active' and not n.get('same_as')]
     kinds = {'weather': 'weather', 'boil-water': 'boil-water', 'evacuation': 'evacuation', 'road': 'road', 'utility': 'utility'}
     if act:
         by = {}
