@@ -12,8 +12,12 @@ final class NumberPadDoneTests: XCTestCase {
 
         // Tap the right end so the cursor lands after the digits, then clear and type a new value.
         field.coordinate(withNormalizedOffset: CGVector(dx: 0.97, dy: 0.5)).tap()
-        let old = (field.value as? String) ?? ""
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count + 4))
+        // One delete at a time: the field re-adds commas after each change, which can move the cursor.
+        for _ in 0..<20 {
+            let v = (field.value as? String) ?? ""
+            if !v.contains(where: \.isNumber) { break }
+            field.typeText(XCUIKeyboardKey.delete.rawValue)
+        }
         field.typeText("400000")
         XCTAssertEqual(field.value as? String, "400,000")
 
