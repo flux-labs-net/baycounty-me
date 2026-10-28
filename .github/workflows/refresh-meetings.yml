@@ -190,7 +190,7 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json data/restaurants/bay data/volunteer/bay/needs.json data/military/bay/news.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/dupes data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json data/restaurants/bay data/volunteer/bay/needs.json data/military/bay/news.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
           .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes, campaign finance, elections, notices, jobs and emergency notices ($(date -u +%Y-%m-%d))" $src

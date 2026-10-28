@@ -75,7 +75,7 @@ def _vendor(name):
 
 def _events(start, end):
     from page_datasets import community_events
-    rs = [r for r in community_events() if r.get('starts') and start.isoformat() <= r['starts'][:10] <= end.isoformat()
+    rs = [r for r in community_events() if not r.get('same_as') and r.get('starts') and start.isoformat() <= r['starts'][:10] <= end.isoformat()
           and r.get('category') != 'Public meeting']
     rs.sort(key=lambda r: (bool(r.get('recurring')), r['category'] != 'Community', r['starts']))
     out = []

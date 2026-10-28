@@ -215,7 +215,7 @@ private fun NoticeCard(n: DataRow) {
             if (open) Text(more, style = T.footnote, color = Brand.text)
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(listOfNotNull(n.string("source"), Emergency.whenLabel(n.string("issued")).ifEmpty { null }).joinToString(" · "), style = T.caption, color = Brand.secondary, modifier = Modifier.weight(1f))
+            Text(listOfNotNull(n.string("source"), Emergency.posted(n).ifEmpty { null }).joinToString(" · "), style = T.caption, color = Brand.secondary, modifier = Modifier.weight(1f))
             n.url("url")?.let { u -> Text("Source", style = T.caption, color = Brand.navy, modifier = Modifier.clickable { opener.open(u) }) }
         }
     }

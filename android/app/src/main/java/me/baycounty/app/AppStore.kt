@@ -150,7 +150,8 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
         if ((!force && rows[id] != null) || id in loading) return
         loading.add(id)
         try {
-            attempt(id, { withContext(Dispatchers.Default) { client.rows(id) } }) { rows[id] = it }
+            // A row with same_as is a post listed twice (a re-posted alert, one event on two calendars); its kept row stands for it.
+            attempt(id, { withContext(Dispatchers.Default) { client.rows(id) } }) { r -> rows[id] = r.filter { it.string("same_as").isNullOrEmpty() } }
         } finally { loading.remove(id) }
     }
 

@@ -116,7 +116,7 @@ def hurricane_prep_page(out_dir=None):
     P, D, M, N = hurricane_prep(), disaster_declarations(), rebuild_money(), emergency_notices()
     if not P:
         return '<div class="page"><h1>Hurricane prep</h1><p>No hurricane prep information on file for this place yet.</p></div>'
-    live = [n for n in N if n['status'] == 'active' and (n['kind'] in ('evacuation', 'shelter') or re.search(LIVE_RE, f"{n['title']} {n.get('event') or ''}", re.I))]
+    live = [n for n in N if n['status'] == 'active' and not n.get('same_as') and (n['kind'] in ('evacuation', 'shelter') or re.search(LIVE_RE, f"{n['title']} {n.get('event') or ''}", re.I))]
 
     topics = []
     for t in dict.fromkeys(p['topic'] for p in P):

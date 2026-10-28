@@ -195,7 +195,7 @@ struct EmergencyView: View {
                     .font(.footnote)
             }
             HStack(spacing: 6) {
-                Text([n.string("source"), Emergency.when(n.string("issued")).nilIfEmpty].compactMap { $0 }.joined(separator: " · "))
+                Text([n.string("source"), Emergency.posted(n).nilIfEmpty].compactMap { $0 }.joined(separator: " · "))
                     .font(.caption).foregroundStyle(.secondary)
                 Spacer()
                 if let u = n.url("url") { Button("Source") { store.open(u) }.font(.caption) }

@@ -57,3 +57,24 @@ test('candidates: read from the build file; a missing file gives none', () => {
   assert.deepEqual(N.candidates(() => { throw new Error('ENOENT'); }), []);
   assert.ok(Array.isArray(N.candidates()));
 });
+
+test('repeated posts: post ids are allowed only for kind repeat, stored with kind repeat', async () => {
+  assert.throws(() => N.cleanPairs({a_key: 'alert:lh:144', b_key: 'alert:lh:145'}), /Unknown name pair/);
+  assert.equal(N.cleanPairs({a_key: 'alert:lh:145', b_key: 'alert:lh:144'}, 'repeat')[0].a_key, 'alert:lh:144');
+  assert.throws(() => N.cleanPairs({a_key: "alert:lh:1' or 1=1", b_key: 'alert:lh:144'}, 'repeat'), /Unknown name pair/);
+  calls.length = 0;
+  reply = () => [{a_key: 'alert:lh:144', b_key: 'alert:lh:145', status: 'rejected'}];
+  await N.review({kind: 'repeat', status: 'rejected', a_key: 'alert:lh:145', b_key: 'alert:lh:144'}, 'x@y');
+  assert.match(calls[0].sql, /'repeat'/);
+  await assert.rejects(() => N.review({kind: 'other', status: 'rejected', a_key: 'abc', b_key: 'abd'}, 'x@y'), /Unknown review kind/);
+  reply = () => [];
+});
+
+test('repeated posts: build pairs are labeled with the kind of post and how alike they are', () => {
+  const rows = N.repeatPairs(N.repeatCandidates(() => JSON.stringify({pairs: [
+    {a: {key: 'u1', names: ['Reuse system out of service']}, b: {key: 'u2', names: ['Reuse system repair extended']}, title: 0.33, body: 0.86, feed: 'alerts'},
+    {a: {key: 'u2', names: ['x']}, b: {key: 'u1', names: ['y']}, title: 0.33, body: 0.86, feed: 'alerts'}]})));
+  assert.equal(rows.length, 1);  // the same pair twice is listed once
+  assert.equal(rows[0].reason_label, 'Alert: 86% same text, 33% title');
+  assert.equal(N.merge(rows, [], {status: ''})[0].reason_label, 'Alert: 86% same text, 33% title');
+});

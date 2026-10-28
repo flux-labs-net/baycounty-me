@@ -5,6 +5,7 @@
 const E = require('./_emergency');
 const db = require('./_db');
 const P = require('./_push');
+const D = require('./_dupes');
 
 const MIN_GAP_S = 110;
 const PUSH_MAX_AGE_H = 24;      // a notice first issued longer ago than this is recorded but not pushed (e.g. on first run)
@@ -52,7 +53,8 @@ async function devicesFor(place, topic, n) {
       and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, topic, n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null]);
 }
 
-async function pushNew(place, notices, nowMs = Date.now()) {
+// repeats: notice_id -> the other notice_ids of the same post (api/_dupes.js); a repeat of a post already sent is not sent again.
+async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) {
   const sent = [];
   for (const n of notices) {
     const topic = E.pushTopic(n);
@@ -63,6 +65,10 @@ async function pushNew(place, notices, nowMs = Date.now()) {
     let suppressed = stale;
     if (!suppressed && topic === 'weather') {
       const r = await db.q(`select 1 from push.sent where place_id = $1 and dedupe_key = $2 and sent_at > now() - make_interval(hours => $3) and not suppressed limit 1`, [place, dedupe, WEATHER_REPEAT_H]);
+      suppressed = r.length > 0;
+    }
+    if (!suppressed && (repeats.get(n.notice_id) || []).length) {
+      const r = await db.q(`select 1 from push.sent where notice_id = any($1::text[]) and not suppressed limit 1`, [repeats.get(n.notice_id)]);
       suppressed = r.length > 0;
     }
     // Claim the notice first, so two overlapping runs can never send it twice.
@@ -91,7 +97,12 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   const t0 = Date.now();
   const r = await E.readAll(place);
   const ended = await store(place, r.notices, r.ok);
-  const pushed = await pushNew(place, r.notices.filter(n => n.status === 'active'));
+  // The same post listed twice is sent once, as its newest version (kept versions go first).
+  const live = r.notices.filter(n => n.status === 'active');
+  const reps = D.noticeGroups(live, await D.decisions());
+  const repeats = new Map(reps.groups.flatMap(g => g.map(id => [id, g.filter(x => x !== id)])));
+  live.sort((a, b) => (reps.same_as[a.notice_id] ? 1 : 0) - (reps.same_as[b.notice_id] ? 1 : 0));
+  const pushed = await pushNew(place, live, Date.now(), repeats);
   let agenda = null;
   const due = await db.q(`update emergency_state set agenda_checked_at = now() where place_id = $1
       and (agenda_checked_at is null or agenda_checked_at < now() - interval '55 minutes') returning place_id`, [place]);
