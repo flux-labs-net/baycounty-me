@@ -54,6 +54,7 @@ RELATION = {
     'same': ('is the same organization as', 'is the same organization as'),
     'works': ('works at', 'has on its staff'),
     'hired': ('hired', 'was hired by'),
+    'charter': ('runs a charter school for', 'has a charter school run by'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -473,6 +474,13 @@ def build():
             oid = business(oid.split(':', 1)[1], r['organization'])
         if oid and oid in G.ents and not pid.startswith('person:'):
             G.link(pid, oid, 'works', None, when, f"Listed with it on the {r['chamber']} board", r.get('source_url'), key='chamber')
+
+    # charter schools: the local nonprofit that runs each one, and the school district that authorized it (schools dataset)
+    for r in _ds('schools'):
+        op, gid = r.get('operator_entity_id'), 'gov:' + (r.get('gov_id') or 'schools')
+        if op and op in G.ents and gid in G.ents:
+            G.link(op, gid, 'charter', None, r.get('enrollment_year'), r['name'] + (f" (grades {r['grades']})" if r.get('grades') else ''),
+                   'https://baycounty.me' + r['page_url'], key=r['school_id'])
 
     # people who run a registered business and gave to a campaign personally (data/campaign/owner_gifts.py)
     for r in _ds('owner-gifts'):

@@ -40,6 +40,7 @@ object SitePages {
         "/parks" to Coverage.Native("Parks"),
         "/development" to Coverage.Dataset("development-projects"),
         "/roads" to Coverage.Dataset("road-contracts"),
+        "/schools" to Coverage.Native("Public schools (SchoolsScreen); zoned schools are on My Address"),
         "/connections/business-ties" to Coverage.Web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence" to Coverage.Web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts" to Coverage.Web("email alert sign-up; push alerts are planned for the app"),

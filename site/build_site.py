@@ -25,6 +25,7 @@ from chambers_page import chambers_page
 from events_page import events_page
 from outdoors_page import beaches_page, parks_page
 from growth_pages import development_page, roads_page
+from schools_page import schools_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -689,6 +690,8 @@ PAGES = [
      "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
+    ('/schools', 'Public schools',
+     "Every public school in Bay County: which schools serve your address, the school district calendar, each school's state grades, students and spending per student since 2016, and schools that closed.", lambda: schools_page(OUT)),
     ('/chambers', 'Chambers of commerce',
      "Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff, upcoming events and programs, their IRS filings, the public money they get, and board members' businesses that do work for local governments.", lambda: chambers_page(OUT)),
     ('/beaches', 'Beaches: flags, rip currents, water quality and access',

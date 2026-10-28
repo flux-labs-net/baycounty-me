@@ -5065,7 +5065,7 @@ gov:pc,gov,Government,Panama City,City,/governments/panama-city,,134,32179.51,18
 gov:pcb,gov,Government,Panama City Beach,City,/governments/panama-city-beach,,109,585129.75,90032123.11,pcb,bay,
 gov:port,gov,Government,Port Authority,Special district,/profile/gov/port,,1,,,port,bay,
 gov:property_appraiser,gov,Government,Property Appraiser,Constitutional,/profile/gov/property_appraiser,,5,,,property_appraiser,bay,
-gov:schools,gov,Government,Bay District Schools,School district,/governments/bay-district-schools,,53,,,schools,bay,
+gov:schools,gov,Government,Bay District Schools,School district,/governments/bay-district-schools,,63,,,schools,bay,
 gov:sheriff,gov,Government,Sheriff,Constitutional,/profile/gov/sheriff,,13,38351.7,,sheriff,bay,
 gov:soe,gov,Government,Supervisor of Elections,Constitutional,/profile/gov/soe,,6,,,soe,bay,
 gov:sp,gov,Government,Springfield,City,/governments/springfield,,35,,31729701.43,sp,bay,
@@ -13067,7 +13067,7 @@ nonprofit:np-237630720,nonprofit,Nonprofit,Woodmen of the World Life Insurance S
 nonprofit:np-237641582,nonprofit,Nonprofit,Benevolent Patriotic Order of Does of the United States of America,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-237641582,,1,,,,bay,https://projects.propublica.org/nonprofits/organizations/237641582
 nonprofit:np-260010531,nonprofit,Nonprofit,Castaway Cats and Dogs Inc,Animals · Panama City,/profile/nonprofit/np-260010531,,5,,,,bay,https://projects.propublica.org/nonprofits/organizations/260010531
 nonprofit:np-260727807,nonprofit,Nonprofit,Bear Creek Feline Center Inc,Animals · Panama City,/profile/nonprofit/np-260727807,,8,,,,bay,https://projects.propublica.org/nonprofits/organizations/260727807
-nonprofit:np-261413851,nonprofit,Nonprofit,Palm Bay Education Group Inc,Education · Panama City,/profile/nonprofit/np-261413851,,14,,,,bay,https://projects.propublica.org/nonprofits/organizations/261413851
+nonprofit:np-261413851,nonprofit,Nonprofit,Palm Bay Education Group Inc,Education · Panama City,/profile/nonprofit/np-261413851,,16,,,,bay,https://projects.propublica.org/nonprofits/organizations/261413851
 nonprofit:np-261474213,nonprofit,Nonprofit,Panama City Parrot Head Club Inc,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-261474213,,17,,,,bay,https://projects.propublica.org/nonprofits/organizations/261474213
 nonprofit:np-261859804,nonprofit,Nonprofit,375 L E Tommy Thomas Unit,"Club, lodge or veterans group · Southport",/profile/nonprofit/np-261859804,,6,,,,bay,https://projects.propublica.org/nonprofits/organizations/261859804
 nonprofit:np-262688829,nonprofit,Nonprofit,Panama City Lions Foundation Inc,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-262688829,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/262688829
@@ -13623,7 +13623,7 @@ nonprofit:np-636045638,nonprofit,Nonprofit,Alabama Association of Housing and Re
 nonprofit:np-636118056,nonprofit,Nonprofit,Melissa Renee Biggs Memorial Trust,Other nonprofit · Panama City Beach,/profile/nonprofit/np-636118056,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/636118056
 nonprofit:np-650164167,nonprofit,Nonprofit,Operation Warmheart,Private foundation · Tyndall AFB,/profile/nonprofit/np-650164167,,20,,,,bay,https://projects.propublica.org/nonprofits/organizations/650164167
 nonprofit:np-651117669,nonprofit,Nonprofit,Historic St Andrew Church,Church or religious group · Panama City,/profile/nonprofit/np-651117669,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/651117669
-nonprofit:np-651121807,nonprofit,Nonprofit,Bay Haven Charter Academy Inc,Education · Panama City,/profile/nonprofit/np-651121807,,22,,,,bay,https://projects.propublica.org/nonprofits/organizations/651121807
+nonprofit:np-651121807,nonprofit,Nonprofit,Bay Haven Charter Academy Inc,Education · Panama City,/profile/nonprofit/np-651121807,,27,,,,bay,https://projects.propublica.org/nonprofits/organizations/651121807
 nonprofit:np-680574754,nonprofit,Nonprofit,Your Home Church Inc,Church or religious group · Panama City,/profile/nonprofit/np-680574754,,0,,,,bay,https://projects.propublica.org/nonprofits/organizations/680574754
 nonprofit:np-710957303,nonprofit,Nonprofit,Grace and Truth Fellowship of Deliverance Inc,Church or religious group · Panama City,/profile/nonprofit/np-710957303,,2,,,,bay,https://projects.propublica.org/nonprofits/organizations/710957303
 nonprofit:np-720962259,nonprofit,Nonprofit,Municipal Police Officers Association of Louisiana,Other nonprofit · Panama City Beach,/profile/nonprofit/np-720962259,,0,,,,bay,https://projects.propublica.org/nonprofits/organizations/720962259
@@ -13637,7 +13637,7 @@ nonprofit:np-800003787,nonprofit,Nonprofit,New Gulf Coast Missionary Baptist Ass
 nonprofit:np-800166030,nonprofit,Nonprofit,Bacot Academy Inc,Education · Panama City,/profile/nonprofit/np-800166030,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/800166030
 nonprofit:np-800199006,nonprofit,Nonprofit,Mark V Monument Project Inc,Arts and culture · Panama City Beach,/profile/nonprofit/np-800199006,,1,,,,bay,https://projects.propublica.org/nonprofits/organizations/800199006
 nonprofit:np-800241038,nonprofit,Nonprofit,Eternal Hope Connection Inc,Other nonprofit · Panama City,/profile/nonprofit/np-800241038,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/800241038
-nonprofit:np-800688292,nonprofit,Nonprofit,Rising Leaders Academy Inc,Education · Panama City,/profile/nonprofit/np-800688292,,21,,,,bay,https://projects.propublica.org/nonprofits/organizations/800688292
+nonprofit:np-800688292,nonprofit,Nonprofit,Rising Leaders Academy Inc,Education · Panama City,/profile/nonprofit/np-800688292,,22,,,,bay,https://projects.propublica.org/nonprofits/organizations/800688292
 nonprofit:np-810622496,nonprofit,Nonprofit,Liberty Baptist Church,Church or religious group · Panama City,/profile/nonprofit/np-810622496,,2,,,,bay,https://projects.propublica.org/nonprofits/organizations/810622496
 nonprofit:np-810643508,nonprofit,Nonprofit,Bay Law Enforcement Assistance Foundation Inc,Youth development · Panama City,/profile/nonprofit/np-810643508,,9,,,,bay,https://projects.propublica.org/nonprofits/organizations/810643508
 nonprofit:np-810730366,nonprofit,Nonprofit,Beauty for Ashes Transitional Home Inc,Human services · Panama City,/profile/nonprofit/np-810730366,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/810730366
@@ -13765,7 +13765,7 @@ nonprofit:np-853651152,nonprofit,Nonprofit,Nine Lives Kitty Rescue Inc,Animals �
 nonprofit:np-854137303,nonprofit,Nonprofit,Callaway Historical Society Inc,Arts and culture · Panama City,/profile/nonprofit/np-854137303,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/854137303
 nonprofit:np-854247849,nonprofit,Nonprofit,40 & 8 Voiture 472,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-854247849,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/854247849
 nonprofit:np-861123234,nonprofit,Nonprofit,Sponsors of Hope Ministries Inc,Church or religious group · Panama City,/profile/nonprofit/np-861123234,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/861123234
-nonprofit:np-861145087,nonprofit,Nonprofit,Chautauqua Charter School Inc,Education · Panama City,/profile/nonprofit/np-861145087,,9,,,,bay,https://projects.propublica.org/nonprofits/organizations/861145087
+nonprofit:np-861145087,nonprofit,Nonprofit,Chautauqua Charter School Inc,Education · Panama City,/profile/nonprofit/np-861145087,,10,,,,bay,https://projects.propublica.org/nonprofits/organizations/861145087
 nonprofit:np-861148983,nonprofit,Nonprofit,Emmanuel Clgi,Church or religious group · Panama City,/profile/nonprofit/np-861148983,,0,,,,bay,https://projects.propublica.org/nonprofits/organizations/861148983
 nonprofit:np-861247748,nonprofit,Nonprofit,Radiant New Life Church Inc,Church or religious group · Lynn Haven,/profile/nonprofit/np-861247748,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/861247748
 nonprofit:np-861419065,nonprofit,Nonprofit,Tomorrow Foundation,Environment · Panama City,/profile/nonprofit/np-861419065,,1,,,,bay,https://projects.propublica.org/nonprofits/organizations/861419065
@@ -13799,7 +13799,7 @@ nonprofit:np-873162570,nonprofit,Nonprofit,850 Crew Car Club Inc,Private foundat
 nonprofit:np-873250022,nonprofit,Nonprofit,Ever Hopeful Foundation Inc,Private foundation · Panama City Beach,/profile/nonprofit/np-873250022,,2,,,,bay,https://projects.propublica.org/nonprofits/organizations/873250022
 nonprofit:np-873995553,nonprofit,Nonprofit,Newton Family Foundation Inc,Private foundation · Lynn Haven,/profile/nonprofit/np-873995553,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/873995553
 nonprofit:np-874822371,nonprofit,Nonprofit,Bourbon Street House of Prayer,Church or religious group · Panama City,/profile/nonprofit/np-874822371,,0,,,,bay,https://projects.propublica.org/nonprofits/organizations/874822371
-nonprofit:np-880556695,nonprofit,Nonprofit,Amikids Maritime Academy Inc,Education · Panama City,/profile/nonprofit/np-880556695,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/880556695
+nonprofit:np-880556695,nonprofit,Nonprofit,Amikids Maritime Academy Inc,Education · Panama City,/profile/nonprofit/np-880556695,,5,,,,bay,https://projects.propublica.org/nonprofits/organizations/880556695
 nonprofit:np-880601522,nonprofit,Nonprofit,Shanti Peace Foundation Inc,Human services · Panama City Beach,/profile/nonprofit/np-880601522,,5,,,,bay,https://projects.propublica.org/nonprofits/organizations/880601522
 nonprofit:np-880611884,nonprofit,Nonprofit,Society for Watchdog Journalism,Crime and legal · Panama City Beach,/profile/nonprofit/np-880611884,,1,,,,bay,https://projects.propublica.org/nonprofits/organizations/880611884
 nonprofit:np-880698552,nonprofit,Nonprofit,Barry Masters Golf Foundation,Education · Panama City,/profile/nonprofit/np-880698552,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/880698552

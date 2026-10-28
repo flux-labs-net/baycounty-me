@@ -1,0 +1,487 @@
+place_id,school_id,school,year,school_year,enrollment,source_url,gov_id
+fl-bay,03-0061,Bay High School,2016,2015-16,1296,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2017,2016-17,1254,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2018,2017-18,1199,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2019,2018-19,1223,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2020,2019-20,1059,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2021,2020-21,1039,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2022,2021-22,1112,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2023,2022-23,1255,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2024,2023-24,1298,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0061,Bay High School,2025,2024-25,1289,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2016,2015-16,731,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2017,2016-17,716,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2018,2017-18,761,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2019,2018-19,762,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2020,2019-20,636,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2021,2020-21,621,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2022,2021-22,677,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2023,2022-23,701,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2024,2023-24,680,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0071,Merritt Brown Middle School,2025,2024-25,634,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2016,2015-16,571,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2017,2016-17,580,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2018,2017-18,589,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2019,2018-19,619,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2020,2019-20,634,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2021,2020-21,631,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2022,2021-22,656,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2023,2022-23,621,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2024,2023-24,585,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2025,2024-25,573,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2016,2015-16,480,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2017,2016-17,488,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2018,2017-18,469,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2019,2018-19,506,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2020,2019-20,622,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2021,2020-21,601,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2022,2021-22,569,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2023,2022-23,562,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2024,2023-24,554,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2025,2024-25,495,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2016,2015-16,556,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2017,2016-17,517,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2018,2017-18,539,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2019,2018-19,557,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2020,2019-20,394,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2021,2020-21,384,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2022,2021-22,469,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2023,2022-23,511,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2024,2023-24,537,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0101,Callaway Elementary School,2025,2024-25,622,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2016,2015-16,404,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2017,2016-17,362,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2018,2017-18,333,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2019,2018-19,330,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2020,2019-20,464,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2021,2020-21,444,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2022,2021-22,470,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2023,2022-23,362,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2024,2023-24,381,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2025,2024-25,343,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2016,2015-16,542,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2017,2016-17,545,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2018,2017-18,480,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2019,2018-19,449,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2020,2019-20,488,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2021,2020-21,455,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2022,2021-22,474,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2023,2022-23,503,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2024,2023-24,524,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2025,2024-25,543,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0141,Everitt Middle School,2016,2015-16,656,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0141,Everitt Middle School,2017,2016-17,679,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0141,Everitt Middle School,2018,2017-18,726,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0141,Everitt Middle School,2019,2018-19,689,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2016,2015-16,811,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2017,2016-17,780,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2018,2017-18,776,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2019,2018-19,736,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2020,2019-20,512,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2021,2020-21,494,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2022,2021-22,578,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2023,2022-23,643,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2024,2023-24,676,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0151,Hiland Park Elementary School,2025,2024-25,684,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2016,2015-16,568,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2017,2016-17,564,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2018,2017-18,588,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2019,2018-19,558,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2020,2019-20,402,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2021,2020-21,413,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2022,2021-22,504,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2023,2022-23,570,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2024,2023-24,583,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0161,Jinks Middle School,2025,2024-25,541,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2016,2015-16,779,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2017,2016-17,765,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2018,2017-18,709,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2019,2018-19,697,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2020,2019-20,580,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2021,2020-21,541,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2022,2021-22,645,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2023,2022-23,699,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2024,2023-24,676,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2025,2024-25,688,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0191,Oakland Terrace School for the Visual and Performing Arts,2016,2015-16,363,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0191,Oakland Terrace School for the Visual and Performing Arts,2017,2016-17,352,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0191,Oakland Terrace School for the Visual and Performing Arts,2018,2017-18,345,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0191,Oakland Terrace School for the Visual and Performing Arts,2019,2018-19,328,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2016,2015-16,768,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2017,2016-17,825,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2018,2017-18,809,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2019,2018-19,755,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2020,2019-20,796,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2021,2020-21,762,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2022,2021-22,791,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2023,2022-23,843,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2024,2023-24,825,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0201,Surfside Middle School,2025,2024-25,755,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2016,2015-16,598,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2017,2016-17,597,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2018,2017-18,524,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2019,2018-19,547,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2020,2019-20,617,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2021,2020-21,604,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2022,2021-22,703,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2023,2022-23,496,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2024,2023-24,502,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0211,Parker Elementary School,2025,2024-25,510,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2016,2015-16,420,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2017,2016-17,381,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2018,2017-18,397,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2019,2018-19,422,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2020,2019-20,439,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2021,2020-21,440,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2022,2021-22,479,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2023,2022-23,506,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2024,2023-24,503,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0221,Southport Elementary School,2025,2024-25,531,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0231,Springfield Elementary School,2016,2015-16,502,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0231,Springfield Elementary School,2017,2016-17,465,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0231,Springfield Elementary School,2018,2017-18,429,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0231,Springfield Elementary School,2019,2018-19,409,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2016,2015-16,127,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2017,2016-17,129,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2018,2017-18,120,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2019,2018-19,115,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2020,2019-20,99,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2021,2020-21,109,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2022,2021-22,114,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2023,2022-23,94,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2024,2023-24,68,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2025,2024-25,55,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2016,2015-16,463,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2017,2016-17,468,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2018,2017-18,487,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2019,2018-19,486,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2020,2019-20,419,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2021,2020-21,372,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2022,2021-22,387,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2023,2022-23,439,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2024,2023-24,420,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0251,Waller Elementary School,2025,2024-25,423,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2016,2015-16,325,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2017,2016-17,305,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2018,2017-18,304,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2019,2018-19,315,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2020,2019-20,356,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2021,2020-21,309,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2022,2021-22,308,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2023,2022-23,313,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2024,2023-24,357,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0262,West Bay Elementary School,2025,2024-25,362,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2016,2015-16,144,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2017,2016-17,153,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2018,2017-18,158,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2019,2018-19,156,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2020,2019-20,152,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2021,2020-21,167,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2022,2021-22,166,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2023,2022-23,182,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2024,2023-24,169,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2025,2024-25,170,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0291,Oscar Patterson Elementary Magnet,2016,2015-16,367,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0291,Oscar Patterson Elementary Magnet,2017,2016-17,315,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0291,Oscar Patterson Elementary Magnet,2018,2017-18,253,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0291,Oscar Patterson Elementary Magnet,2019,2018-19,261,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2016,2015-16,999,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2017,2016-17,1044,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2018,2017-18,1095,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2019,2018-19,1097,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2020,2019-20,832,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2021,2020-21,777,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2022,2021-22,841,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2023,2022-23,868,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2024,2023-24,818,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0331,Mowat Middle School,2025,2024-25,803,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2016,2015-16,1065,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2017,2016-17,1090,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2018,2017-18,1014,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2019,2018-19,1004,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2020,2019-20,1391,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2021,2020-21,1379,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2022,2021-22,1393,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2023,2022-23,1337,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2024,2023-24,1423,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0341,Rutherford High School,2025,2024-25,1394,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0391,Oscar Patterson Academy,2023,2022-23,250,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0391,Oscar Patterson Academy,2024,2023-24,322,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0391,Oscar Patterson Academy,2025,2024-25,394,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2016,2015-16,762,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2017,2016-17,794,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2018,2017-18,770,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2019,2018-19,736,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2020,2019-20,647,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2021,2020-21,562,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2022,2021-22,623,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2023,2022-23,705,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2024,2023-24,707,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0461,Deer Point Elementary School,2025,2024-25,735,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2016,2015-16,690,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2017,2016-17,710,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2018,2017-18,651,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2019,2018-19,601,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2020,2019-20,569,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2021,2020-21,561,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2022,2021-22,631,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2023,2022-23,598,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2024,2023-24,561,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0471,Northside Elementary School,2025,2024-25,569,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0481,Tom P. Haney Technical Center,2018,2017-18,3,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2016,2015-16,1721,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2017,2016-17,1783,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2018,2017-18,1863,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2019,2018-19,1802,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2020,2019-20,1816,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2021,2020-21,1784,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2022,2021-22,1925,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2023,2022-23,1901,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2024,2023-24,1838,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2025,2024-25,1864,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2016,2015-16,757,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2017,2016-17,772,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2018,2017-18,778,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2019,2018-19,737,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2020,2019-20,255,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2021,2020-21,388,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2022,2021-22,562,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2023,2022-23,800,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2024,2023-24,908,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0501,Tyndall Academy,2025,2024-25,883,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2016,2015-16,715,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2017,2016-17,693,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2018,2017-18,660,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2019,2018-19,678,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2020,2019-20,590,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2021,2020-21,519,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2022,2021-22,573,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2023,2022-23,639,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2024,2023-24,731,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2025,2024-25,677,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2016,2015-16,885,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2017,2016-17,805,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2018,2017-18,728,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2019,2018-19,742,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2020,2019-20,683,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2021,2020-21,650,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2022,2021-22,627,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2023,2022-23,648,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2024,2023-24,634,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0521,Patronis Elementary School,2025,2024-25,589,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2016,2015-16,118,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2017,2016-17,144,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2018,2017-18,145,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2019,2018-19,141,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2020,2019-20,110,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2021,2020-21,117,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2022,2021-22,112,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2023,2022-23,107,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2024,2023-24,91,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0531,New Horizons Learning Center,2025,2024-25,93,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2016,2015-16,1161,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2017,2016-17,1256,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2018,2017-18,1254,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2019,2018-19,1265,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2020,2019-20,1363,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2021,2020-21,1410,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2022,2021-22,1509,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2023,2022-23,1619,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2024,2023-24,1648,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0541,Deane Bozeman School,2025,2024-25,1690,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2016,2015-16,1762,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2017,2016-17,1756,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2018,2017-18,1755,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2019,2018-19,1674,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2020,2019-20,1640,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2021,2020-21,1563,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2022,2021-22,1504,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2023,2022-23,1617,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2024,2023-24,1637,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0551,J.R. Arnold High School,2025,2024-25,1629,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2016,2015-16,1131,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2017,2016-17,1121,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2018,2017-18,1096,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2019,2018-19,1143,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2020,2019-20,1161,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2021,2020-21,1048,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2022,2021-22,1037,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2023,2022-23,1058,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2024,2023-24,1044,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0571,Breakfast Point Academy,2025,2024-25,1089,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2016,2015-16,272,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2017,2016-17,194,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2018,2017-18,160,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2019,2018-19,174,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2020,2019-20,269,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2021,2020-21,227,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2022,2021-22,249,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2023,2022-23,345,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2024,2023-24,324,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0581,Rosenwald High School,2025,2024-25,351,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0591,C C Washington Academy,2016,2015-16,103,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0591,C C Washington Academy,2017,2016-17,85,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0591,C C Washington Academy,2018,2017-18,71,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0591,C C Washington Academy,2019,2018-19,91,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2016,2015-16,26,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2017,2016-17,31,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2018,2017-18,32,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2019,2018-19,18,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2020,2019-20,19,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2021,2020-21,14,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2022,2021-22,24,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2023,2022-23,23,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0602,Bay Regional Juvenile Detention Center,2024,2023-24,28,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0604,Panama City Marine Institute,2016,2015-16,88,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0604,Panama City Marine Institute,2017,2016-17,85,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0604,Panama City Marine Institute,2018,2017-18,71,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0604,Panama City Marine Institute,2019,2018-19,57,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2022,2021-22,230,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2023,2022-23,343,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2024,2023-24,423,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2025,2024-25,470,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2016,2015-16,690,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2017,2016-17,696,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2018,2017-18,767,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2019,2018-19,768,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2020,2019-20,838,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2021,2020-21,803,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2022,2021-22,786,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2023,2022-23,765,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2024,2023-24,765,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2025,2024-25,766,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2016,2015-16,518,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2017,2016-17,514,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2018,2017-18,462,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2019,2018-19,464,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2020,2019-20,416,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2021,2020-21,453,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2022,2021-22,438,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2023,2022-23,433,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2024,2023-24,432,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2025,2024-25,429,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2016,2015-16,509,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2017,2016-17,512,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2018,2017-18,526,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2019,2018-19,524,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2020,2019-20,526,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2021,2020-21,508,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2022,2021-22,525,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2023,2022-23,524,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2024,2023-24,525,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2025,2024-25,526,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2016,2015-16,659,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2017,2016-17,734,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2018,2017-18,759,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2019,2018-19,847,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2020,2019-20,855,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2021,2020-21,883,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2022,2021-22,906,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2023,2022-23,897,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2024,2023-24,882,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2025,2024-25,865,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2016,2015-16,695,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2017,2016-17,696,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2018,2017-18,696,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2019,2018-19,696,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2020,2019-20,697,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2021,2020-21,693,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2022,2021-22,697,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2023,2022-23,695,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2024,2023-24,694,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2025,2024-25,696,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2023,2022-23,22,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2024,2023-24,88,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2025,2024-25,26,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2016,2015-16,289,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2017,2016-17,295,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2018,2017-18,322,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2019,2018-19,355,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2020,2019-20,274,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2021,2020-21,259,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2022,2021-22,207,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2023,2022-23,195,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2024,2023-24,201,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2025,2024-25,203,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2016,2015-16,43,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2017,2016-17,48,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2018,2017-18,47,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2019,2018-19,51,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2020,2019-20,48,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2021,2020-21,41,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2022,2021-22,47,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2023,2022-23,46,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2024,2023-24,47,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0781,Chautauqua Charter School,2025,2024-25,52,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2016,2015-16,43,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2017,2016-17,151,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2018,2017-18,174,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2019,2018-19,198,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2020,2019-20,157,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2021,2020-21,126,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2022,2021-22,89,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2023,2022-23,93,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2024,2023-24,106,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0782,Central High School,2025,2024-25,99,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2018,2017-18,302,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2019,2018-19,375,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2020,2019-20,306,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2021,2020-21,303,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2022,2021-22,281,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2023,2022-23,316,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2024,2023-24,317,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-0801,Palm Bay Elementary School,2025,2024-25,321,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-0802,Central Academy,2020,2019-20,12,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-0802,Central Academy,2021,2020-21,7,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2016,2015-16,124,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2017,2016-17,140,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2018,2017-18,187,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2019,2018-19,207,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2020,2019-20,220,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2021,2020-21,254,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2022,2021-22,279,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2023,2022-23,301,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2024,2023-24,309,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-2701,Rising Leaders Academy,2025,2024-25,311,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2016,2015-16,366,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2017,2016-17,515,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2018,2017-18,575,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2019,2018-19,652,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2020,2019-20,669,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2021,2020-21,672,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2022,2021-22,679,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2023,2022-23,688,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2024,2023-24,707,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-2711,University Academy SABL Inc.,2025,2024-25,711,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2016,2015-16,34,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2017,2016-17,27,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2018,2017-18,22,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2019,2018-19,23,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2020,2019-20,14,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2021,2020-21,33,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2022,2021-22,11,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2023,2022-23,7,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2024,2023-24,7,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-7001,Bay Virtual Instruction Program,2025,2024-25,2,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2016,2015-16,59,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2017,2016-17,69,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2018,2017-18,80,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2019,2018-19,62,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2020,2019-20,46,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2021,2020-21,403,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2022,2021-22,139,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2023,2022-23,66,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2024,2023-24,26,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-7004,Bay Virtual Franchise,2025,2024-25,25,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-7006,Bay Virtual Instruction (Course Offerings),2016,2015-16,26,https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090,schools
+fl-bay,03-7006,Bay Virtual Instruction (Course Offerings),2017,2016-17,23,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools
+fl-bay,03-7006,Bay Virtual Instruction (Course Offerings),2018,2017-18,16,https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090,schools
+fl-bay,03-7006,Bay Virtual Instruction (Course Offerings),2019,2018-19,16,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2019,2018-19,7,https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2020,2019-20,13,https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2021,2020-21,455,https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2022,2021-22,171,https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2023,2022-23,117,https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2024,2023-24,91,https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2025,2024-25,14,https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090,schools
+fl-bay,03-9002,Exceptional Student Education,2017,2016-17,1,https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090,schools

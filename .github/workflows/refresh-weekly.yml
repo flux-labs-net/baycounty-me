@@ -45,10 +45,17 @@ jobs:
         id: fetch_roads
         continue-on-error: true
         run: python data/roads/fetch_fdot.py < /dev/null
+      - name: Fetch public schools and attendance zones
+        # The school directory and enrollment (U.S. Dept. of Education via the Urban Institute) and the attendance
+        # zones (Bay County GIS). School grades and per-school spending come from fldoe.org, which turns cloud servers
+        # away, so data/schools/fetch_fldoe.py runs by hand once a year when grades come out (July).
+        id: fetch_schools
+        continue-on-error: true
+        run: python data/schools/fetch_schools.py --only directory,zones < /dev/null
       - name: Report fetch failures
-        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure' || steps.fetch_development.outcome == 'failure' || steps.fetch_roads.outcome == 'failure'
+        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure' || steps.fetch_development.outcome == 'failure' || steps.fetch_roads.outcome == 'failure' || steps.fetch_schools.outcome == 'failure'
         run: |
-          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}; development: ${{ steps.fetch_development.outcome }}; roads: ${{ steps.fetch_roads.outcome }}. The previous files were kept."
+          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}; development: ${{ steps.fetch_development.outcome }}; roads: ${{ steps.fetch_roads.outcome }}; schools fetch: ${{ steps.fetch_schools.outcome }}. The previous files were kept."
       - name: Rebuild site
         id: rebuild_site
         run: |
@@ -65,7 +72,7 @@ jobs:
           # Commit whenever the rebuild changed anything, not only the two fetched files: data/build.py also
           # rebuilds people, vendor matches and other derived files from the daily inputs.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map, development, roads and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json data/development/bay/projects.json data/development/bay/permits.json data/roads/bay/fdot.json
+          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map, development, roads, schools and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json data/development/bay/projects.json data/development/bay/permits.json data/roads/bay/fdot.json data/schools/bay/schools.json data/schools/bay/zones.json
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store

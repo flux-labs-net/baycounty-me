@@ -69,6 +69,10 @@ TOPICS = [
      'Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). '
      'State charity registrations and state corporate filings are joined in.',
      'Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.'),
+    ('schools', 'Public schools', '/schools',
+     "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. "
+     "Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
+     'Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.'),
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
@@ -203,6 +207,10 @@ src('events', 'parker', 'City of Parker events feed', 'https://cityofparker.com/
 src('events', 'county', 'Northwest Regional Library System events feed', 'https://www.nwrls.com/events', AUTO_DAILY, 'Daily', 'Bay County library branch programs')
 src('events', 'county', 'Destination Panama City events feed', 'https://www.destinationpanamacity.com/events/', AUTO_DAILY, 'Daily', 'Visitor events in Panama City')
 src('events', 'mb', 'Mexico Beach visitor events calendar', 'https://www.mexicobeach.com/events/', AUTO_DAILY, 'Daily', 'Visitor events in Mexico Beach')
+src('schools', 'schools', 'U.S. Department of Education school directory (Common Core of Data), via the Urban Institute Education Data API', 'https://educationdata.urban.org/documentation/schools.html', AUTO_WEEKLY, 'Yearly (about a year behind)', 'Every public school: level, grades, address, students, teachers, free and reduced lunch')
+src('schools', 'schools', 'Bay County GIS school attendance zones', 'https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer', AUTO_WEEKLY, 'As the district redraws zones', 'Elementary, middle and high school zone shapes')
+src('schools', 'schools', 'Bay District Schools calendar', 'https://www.bay.k12.fl.us/o/bds/page/academic-calendar', AUTO_DAILY, 'As the district posts events', 'Days off, breaks, grading periods, graduations and School Board meetings')
+src('schools', 'schools', 'Florida Department of Education school grades and per-pupil expenditure reports', 'https://www.fldoe.org/accountability/accountability-reporting/school-grades/', BY_HAND, 'Yearly (grades in July)', 'Each school\'s grade and spending per student')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
