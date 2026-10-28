@@ -382,6 +382,9 @@ fun <K> FieldMenu(label: String, value: String, options: List<Pair<K, String>>, 
 /** A dollar amount typed with the number pad, shown with thousands commas as you type. */
 @Composable
 fun MoneyField(label: String, text: String, onChange: (String) -> Unit) {
+    // The number keyboard's action key reads Done and closes the keyboard (the estimate updates as you type).
+    val focus = androidx.compose.ui.platform.LocalFocusManager.current
+    val keyboard = androidx.compose.ui.platform.LocalSoftwareKeyboardController.current
     androidx.compose.material3.OutlinedTextField(
         text,
         { new -> val digits = new.filter { it.isDigit() }; onChange(if (digits.isEmpty()) "" else me.baycounty.kit.Format.number(minOf(digits.toDouble(), 1e9))) },
@@ -389,7 +392,11 @@ fun MoneyField(label: String, text: String, onChange: (String) -> Unit) {
         label = { Text(label) },
         prefix = { Text("$", style = T.body, color = Brand.secondary) },
         singleLine = true, shape = androidx.compose.foundation.shape.RoundedCornerShape(14.dp), textStyle = T.body,
-        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number),
+        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(
+            keyboardType = androidx.compose.ui.text.input.KeyboardType.Number,
+            imeAction = androidx.compose.ui.text.input.ImeAction.Done,
+        ),
+        keyboardActions = androidx.compose.foundation.text.KeyboardActions(onDone = { keyboard?.hide(); focus.clearFocus() }),
         colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
             focusedContainerColor = Brand.surface, unfocusedContainerColor = Brand.surface,
             focusedBorderColor = Brand.navy, unfocusedBorderColor = Brand.hairline, cursorColor = Brand.navy,

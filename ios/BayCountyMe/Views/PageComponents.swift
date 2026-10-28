@@ -185,6 +185,29 @@ extension View {
     }
 }
 
+/// Number pads have no return key, so a field using one gets a Done button above the keyboard.
+/// Only the focused field shows it, so two such fields on one screen don't stack two buttons.
+private struct NumberPadDone: ViewModifier {
+    @FocusState private var focused: Bool
+    func body(content: Content) -> some View {
+        content
+            .focused($focused)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    if focused {
+                        Spacer()
+                        Button("Done") { focused = false }.fontWeight(.semibold)
+                    }
+                }
+            }
+    }
+}
+
+extension View {
+    /// Adds a Done button above the number pad (see `NumberPadDone`).
+    func numberPadDone() -> some View { modifier(NumberPadDone()) }
+}
+
 /// A two-column grid of stat tiles on white cards.
 struct StatGrid<Content: View>: View {
     @ViewBuilder var content: Content

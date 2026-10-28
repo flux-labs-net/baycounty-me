@@ -57,6 +57,8 @@ struct TaxCalculatorView: View {
                     Spacer()
                     TextField("Value", text: $valueText)
                         .keyboardType(.numberPad)
+                        .numberPadDone()
+                        .accessibilityIdentifier("assessedValue")
                         .multilineTextAlignment(.trailing)
                         .frame(maxWidth: 160)
                         .onChange(of: valueText) { _, new in
@@ -306,7 +308,7 @@ struct Amendment3View: View {
                 HStack {
                     Text("Value before exemptions")
                     Spacer()
-                    TextField("Value", text: $valueText).keyboardType(.numberPad).multilineTextAlignment(.trailing).frame(maxWidth: 140)
+                    TextField("Value", text: $valueText).keyboardType(.numberPad).numberPadDone().multilineTextAlignment(.trailing).frame(maxWidth: 140)
                         .onChange(of: valueText) { _, new in
                             let digits = new.filter(\.isNumber)
                             let f = digits.isEmpty ? "" : Format.number(min(Double(digits) ?? 0, 1e9))

@@ -16,7 +16,16 @@ jobs:
         run: |
           xcodegen
           DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
+          # Show the on-screen keyboard (the number pad tests need it), not the Mac keyboard.
+          defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false
           set -o pipefail
           xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyMe -destination "id=$DEV" \
             -only-testing:BayCountyMeUITests CODE_SIGNING_ALLOWED=NO test | tee test.log | grep -E "error:|Test Case|passed|failed|TEST (SUCCEEDED|FAILED)" || true
           grep -q "TEST SUCCEEDED" test.log
+      - name: Upload screenshots taken by the tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-screenshots
+          path: /tmp/ui-shots
+          if-no-files-found: ignore
