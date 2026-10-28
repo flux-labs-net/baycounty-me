@@ -809,6 +809,88 @@ def _csv_rows(path):
     return list(csv.DictReader(open(path, encoding='utf-8'))) if os.path.exists(path) else []
 
 
+_KEEP_UPPER = {'LLC', 'II', 'III', 'IV', 'VI', 'USA', 'IHOP', 'TGI', 'YMCA', 'VFW', 'AFB', 'NSA', 'FSU', 'GCSC', 'USO', 'DBA', 'UPS', 'BP', 'AMC', 'TCBY'}
+_ABBR = {'ST', 'MT', 'DR', 'JR', 'SR', 'BLVD', 'HWY', 'PKWY', 'STE', 'RD', 'LN', 'CT', 'PL', 'CIR', 'PT', 'FT'}
+_KEEP_LOWER = {'AND', 'OF', 'THE', 'AT', 'ON', 'BY', 'FOR', 'DE', 'DEL', 'Y', 'N', 'IN', 'TO'}
+
+
+def rest_case(name):
+    """A restaurant name from the state's all-caps file in normal casing: "DON JOSE'S" -> "Don Jose's", "MOSEY`S
+    DOWNTOWN" -> "Mosey's Downtown", "BRINE BBQ" -> "Brine BBQ", "CAPTAIN D'S" -> "Captain D's". Short words with no
+    vowel (BBQ, PCB, KFC) and known initials stay in capitals. Names with lower-case letters are left as they are."""
+    if not name:
+        return name
+    name = re.sub(r"[`\u2019\u00b4]", "'", name.strip())
+    if re.search(r'[a-z]', name):
+        return name
+
+    def piece(w):
+        if not re.search(r'[A-Z]', w):
+            return w
+        base, apo, tail = w.partition("'")
+        core = re.sub(r'[^A-Z]', '', base)
+        if re.fullmatch(r'#?\d+[A-Z]', w):  # 30A
+            return w
+        if core in _KEEP_UPPER or (len(core) <= 4 and not re.search(r'[AEIOUY]', core) and not base.endswith('.') and core not in _ABBR):
+            return base + apo + (tail.lower() if len(re.sub(r'[^A-Z]', '', tail)) <= 2 else piece(tail))
+        out, cap = [], True
+        for i, ch in enumerate(w):
+            if ch == "'":
+                rest = re.match(r"[A-Z]*", w[i + 1:]).group(0)
+                out.append(ch); cap = len(rest) > 2  # O'CHARLEY -> O'Charley, D'S -> D's
+                continue
+            if ch.isalpha():
+                out.append(ch.upper() if cap else ch.lower()); cap = False
+            else:
+                out.append(ch); cap = ch in '-/.(&+'
+        t = ''.join(out)
+        return 'Mc' + t[2:].capitalize() if len(t) > 3 and t.startswith('Mc') else t
+
+    words = name.split()
+    return ' '.join(w.lower() if 0 < i < len(words) - 1 and w in _KEEP_LOWER else piece(w) for i, w in enumerate(words))
+
+
+_ADDR_UPPER = {'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW', 'US', 'SR', 'CR', 'FL', 'PO', 'II', 'III'}
+
+
+def rest_addr(addr):
+    """'1127 1/2 BECK AVE' -> '1127 1/2 Beck Ave', '1409 N US 231 STE B' -> '1409 N US 231 Ste B', 'HWY 77 S' -> 'Hwy 77 S'."""
+    if not addr:
+        return addr
+    if re.search(r'[a-z]', addr):
+        addr = addr.upper() if re.search(r'\b[A-Z]{2,}\b', addr) else addr
+        if re.search(r'[a-z]', addr):
+            return addr
+    words = addr.split()
+    out = []
+    for i, w in enumerate(words):
+        core = re.sub(r'[^A-Z]', '', w)
+        if core in _ADDR_UPPER or re.fullmatch(r'[#\d/-]+[A-Z]?', w) or (len(core) == 1 and i == len(words) - 1):
+            out.append(w)
+        else:
+            out.append(re.sub(r"[A-Z]+", lambda m: m.group(0).capitalize(), w))
+    return re.sub(r'\b(\d+)(St|Nd|Rd|Th)\b', lambda m: m.group(1) + m.group(2).lower(), ' '.join(out))
+
+def rest_city(raw):
+    """One spelling per city in the state's files: 'PANAMA CITY BCH' and 'PANAMA CITH BCH' are Panama City Beach."""
+    t = re.sub(r'\s+', ' ', (raw or '').upper()).strip()
+    if not t:
+        return None
+    if re.match(r'^PANAMA CIT\w* (B|BCH|BEA)', t):
+        t = 'PANAMA CITY BEACH'
+    elif t == 'PANAMA':
+        t = 'PANAMA CITY'
+    elif t == 'MEXICO BCH':
+        t = 'MEXICO BEACH'
+    return 'Tyndall AFB' if t == 'TYNDALL AFB' else t.title()
+
+
+def restaurant_slug(name, license_number):
+    """The page for one license: /restaurants/<name>-<license number>."""
+    s = re.sub(r'[^a-z0-9]+', '-', (name or '').lower().replace("'", '')).strip('-')[:60].strip('-')
+    return f'/restaurants/{s}-{license_number}' if s else f'/restaurants/{license_number}'
+
+
 def _officer_at(name, zip_code, address, _c={}):
     """The Sunbiz document number of the business a person runs when the name and street address on a license are the
     same as an officer, manager or registered agent on that filing ('' when they run several), else None."""
@@ -908,7 +990,7 @@ def _restaurant_rows():
                 code, n = part.split(':')
                 items.append(f"{VIOLATION.get(code, 'Item ' + code)}" + (f' ({n})' if n != '1' else ''))
         row = {'place_id': PLACE_ID, 'visit_id': r['visit_id'] or f"{r['inspection_number']}-{r['visit_number']}", 'license_number': r['license_number'],
-               'business_name': ids.biz_case(r['business_name']), 'city': r['city'].title(), 'date': r['date'],
+               'business_name': rest_case(r['business_name']), 'city': rest_city(r['city']), 'date': r['date'],
                'inspection_type': r['inspection_type'], 'visit_number': int(r['visit_number'] or 1), 'disposition': r['disposition'],
                'result': res, 'result_level': level, 'high_priority': int(r['high_priority'] or 0), 'intermediate': int(r['intermediate'] or 0),
                'basic': int(r['basic'] or 0), 'total_violations': int(r['total_violations'] or 0),
@@ -916,6 +998,11 @@ def _restaurant_rows():
                'source_url': DBPR_PAGE}
         out_i.append(row)
         by_lic[r['license_number']].append((row, r))
+    # newest first: by date, then the later visit of the same day (an emergency closure, then the reopening visit)
+    newest = lambda t: (t[0]['date'], t[0]['visit_number'], len(t[0]['visit_id']), t[0]['visit_id'])
+    for v in by_lic.values():
+        v.sort(key=newest, reverse=True)
+    out_i.sort(key=lambda x: (x['date'], x['visit_number'], len(x['visit_id']), x['visit_id']), reverse=True)
 
     # one row per license: today's license list, plus every license inspected since 2016 that is no longer listed
     sunbiz = _sunbiz_names()
@@ -941,9 +1028,9 @@ def _restaurant_rows():
         routine = [x for x, raw in hist if x['inspection_type'].startswith('Routine') and x['visit_number'] == 1]
         out_r.append({
             'place_id': PLACE_ID, 'license_number': key, 'license_type': LICENSE_TYPE[tcode], 'kind': RANK.get((l or {}).get('rank'), LICENSE_TYPE[tcode]),
-            'business_name': ids.biz_case(name), 'licensee': lname,
+            'business_name': rest_case(name), 'licensee': lname,
             'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else _doc_entity(runs) if runs else None,
-            'address': ids.biz_case(addr) if addr else None, 'city': ((l or {}).get('city') or (last_raw or {}).get('city') or '').title() or None,
+            'address': rest_addr(addr) if addr else None, 'city': rest_city((l or {}).get('city') or (last_raw or {}).get('city')),
             'zip': (l or {}).get('zip') or (last_raw or {}).get('zip') or None, 'seats': int(l['seats']) if l and l.get('seats') not in (None, '', '0') else None,
             'licensed_now': bool(l), 'license_expires': (l or {}).get('expires') or None, 'risk_level': (l or {}).get('risk_level') or None,
             'opened': opened, 'first_inspection': hist[-1][0]['date'] if hist else None,
@@ -954,6 +1041,9 @@ def _restaurant_rows():
             'last_routine_high_priority': routine[0]['high_priority'] if routine else None,
             'inspections': len(hist), 'inspections_last_year': len(recent), 'high_priority_last_year': sum(x['high_priority'] for x in recent),
             'closures': len(closures), 'last_closure': closures[0]['date'] if closures else None,
+            # the result level of the last six visits, newest first, for the track-record strip on the site and apps
+            'recent_results': ' '.join(x['result_level'] for x, raw in hist[:6]) or None,
+            'page_url': restaurant_slug(rest_case(name), key),
             'source_url': lic_file if l else DBPR_PAGE})
     out_r.sort(key=lambda r: (r['business_name'] or '').lower())
     _RC['rest'] = (out_r, out_i)
@@ -2117,7 +2207,7 @@ DATASETS = [
     ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
     ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
     ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
-    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
+    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
     ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
     ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),
     ('weekly-roundup', 'This week in Bay County', "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.", weekly_roundup),

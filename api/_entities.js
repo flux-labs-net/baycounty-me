@@ -264,7 +264,7 @@ async function getEntity(req, catalog, id) {
     const lic = await rowsWhere(req, catalog, 'restaurants', {licensee_entity_id: id}).catch(() => []);
     if (lic.length) ent = {...ent, restaurants: lic.map(r => ({license_number: r.license_number, name: r.business_name, kind: r.kind, city: r.city, licensed_now: r.licensed_now,
       opened: r.opened || null, last_inspection: r.last_inspection || null, last_result: r.last_result || null, last_result_level: r.last_result_level || null,
-      closures: r.closures || 0, page_url: `/restaurants#r${r.license_number}`}))};
+      closures: r.closures || 0, page_url: r.page_url || `/restaurants#r${r.license_number}`}))};
   }
   const all = mergeConfirmed(links, live);
   const labels = await personLabels(req, pm, all, id, source);

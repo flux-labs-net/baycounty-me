@@ -314,7 +314,7 @@ struct HomeView: View {
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
             "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "volunteer": .volunteer, "military": .military, "myhome": .myHome, "myhome:settings": .myHome, "pastelections": .dataset("campaign-history"),
             "roads": .dataset("road-contracts"), "development": .dataset("development-projects"),
-            "restaurants": .dataset("restaurants"), "newbusinesses": .dataset("new-businesses"),
+            "restaurants": .restaurants, "restaurant": .restaurant("1305433"), "newbusinesses": .dataset("new-businesses"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { store.tab = .search; return }

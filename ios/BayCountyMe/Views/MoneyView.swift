@@ -61,7 +61,7 @@ struct MoneyView: View {
         .init(title: "Nonprofit boards", symbol: "person.3", detail: "Who sits on each nonprofit's board", route: .dataset("nonprofit-board-members")),
         .init(title: "Volunteer", symbol: "hand.raised", detail: "Open needs from local nonprofits", route: .volunteer),
         .init(title: "Chambers of commerce", symbol: "storefront", detail: "Boards, events and public money", route: .chambers),
-        .init(title: "Restaurant inspections", symbol: "fork.knife", detail: "Every inspection, warning and closure since 2016", route: .dataset("restaurants")),
+        .init(title: "Restaurant inspections", symbol: "fork.knife", detail: "Every inspection, warning and closure since 2016", route: .restaurants),
         .init(title: "New businesses", symbol: "storefront", detail: "Companies filed in Bay County since 2016", route: .dataset("new-businesses")),
         .init(title: "Military and the bases", symbol: "shield", detail: "Base news and federal contracts to local firms", route: .military),
         .init(title: "Business ties", symbol: "briefcase", detail: "Officials' and candidates' businesses", site: "/connections/business-ties"),

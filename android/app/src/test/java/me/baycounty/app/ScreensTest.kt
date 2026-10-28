@@ -107,6 +107,8 @@ suspend fun preload(store: AppStore, route: Route?) {
             store.utilities[m.id] = me.baycounty.kit.UtilityLookup.decode(File(System.getProperty("repoRoot") ?: "../..", "ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/utilities-lynn-haven.json").readText())
         }
         Route.Volunteer -> store.load(listOf("volunteer-needs", "volunteer-orgs"))
+        Route.Restaurants -> store.load("restaurants")
+        is Route.Restaurant -> { store.load("restaurants"); store.loadRestaurantVisits(route.license) }
         Route.Military -> store.load(listOf("military-installations", "military-news", "federal-contract-years"))
         // My home needs an account and the live site; a snapshot uses the saved /api/v1/nearby answer for 825 Ohio Ave.
         Route.MyHome, Route.AccountSettings ->

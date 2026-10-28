@@ -65,6 +65,15 @@ public final class BayCountyClient: @unchecked Sendable {
         try await rows(path: "/downloads/\(datasetID).json")
     }
 
+    /// One restaurant's inspections, newest first: the API's filtered rows, or (offline) the full download filtered here.
+    public func restaurantInspections(license: String) async throws -> [Row] {
+        do {
+            return Restaurants.inspections(try Row.decodeRows(try await get(Restaurants.inspectionsPath(license)).data), license: license)
+        } catch {
+            return Restaurants.inspections(try await rows(datasetID: "restaurant-inspections").0, license: license)
+        }
+    }
+
     public func governments() async throws -> ([Government], Freshness) {
         let (rows, f) = try await rows(datasetID: "government-profiles")
         return (rows.map(Government.init(row:)), f)

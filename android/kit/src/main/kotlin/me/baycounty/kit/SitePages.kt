@@ -45,7 +45,7 @@ object SitePages {
         "/roads" to Coverage.Dataset("road-contracts"),
         "/schools" to Coverage.Native("Public schools (SchoolsScreen); zoned schools are on My Address"),
         "/utilities" to Coverage.Native("Utilities and trash day (UtilitiesScreen, from /api/v1/utilities)"),
-        "/restaurants" to Coverage.Dataset("restaurants"),
+        "/restaurants" to Coverage.Native("Restaurant inspections (RestaurantsScreen): search, latest result and six-visit strip"),
         "/new-businesses" to Coverage.Dataset("new-businesses"),
         "/this-week" to Coverage.Web("the weekly email's page with its sign-up form; the events, meetings, votes and contracts in it are on native screens"),
         "/military" to Coverage.Native("Military and the bases"),
@@ -84,6 +84,7 @@ object SitePages {
         "/governments/" to Coverage.Native("Government profile"),
         "/public-money/vendors/" to Coverage.Native("Company detail, opened from the Companies list"),
         "/people/" to Coverage.Native("Person detail, with a link to the web profile and its connection map"),
+        "/restaurants/" to Coverage.Native("Restaurant detail (RestaurantDetailScreen), its inspections from /api/v1/datasets/restaurant-inspections"),
         "/profile/" to Coverage.Web("entity profile and connection map, read live from /api/v1/entities/{id}"),
     )
 

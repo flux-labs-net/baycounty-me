@@ -31,7 +31,7 @@ from hurricane_prep_page import hurricane_prep_page
 from elections_hub_page import results_page as election_results_page, voting_page
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
-from restaurants_page import restaurants_page, new_businesses_page
+from restaurants_page import restaurants_page, new_businesses_page, restaurant_pages
 from weekly import this_week_page
 from volunteer_page import volunteer_page
 from military_page import military_page
@@ -363,8 +363,9 @@ def _layout(title, desc, path, body, extra_head=''):
     t, d = _h.escape(pt, quote=True), _h.escape(pd, quote=True)
     md = _h.escape(meta_desc(pd), quote=True)
     es = path.startswith('/es')
-    ver = OG_VER.get(path, '')
-    img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
+    og_path = '/restaurants' if path.startswith('/restaurants/') else path
+    ver = OG_VER.get(og_path, '')
+    img = f'{DOMAIN}/og/{_slug(og_path) if og_path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
     robots = '<meta name="robots" content="noindex, follow">\n' if path in ('/404', '/profile') else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
     ld = '' if path == '/404' else jsonld(path, pt, pd, PAGE_LABELS, modified=last_updated(es_updated_key(path)), out_dir=OUT,
                                            kind=page_kind(path), about=page_about(path))
@@ -805,6 +806,7 @@ PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendo
 from people_pages import pages as people_page_list, copy_assets as copy_profile_assets  # noqa: E402
 from entity_links import link_names, write_names as write_entity_names, entity_js  # noqa: E402
 PAGES += people_page_list()
+PAGES += restaurant_pages()  # one page per restaurant license (site/restaurants_page.py)
 
 PAGES += [(f'/governments/{g["slug"]}', g['short'] + ': budget, taxes, debt, votes and more',
            f'{g["short"]}, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.',
@@ -813,7 +815,7 @@ prune_es({p[0] for p in PAGES})
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 
 
-PROFILE_PREFIXES = ('/public-money/vendors/', '/people/', '/profile')
+PROFILE_PREFIXES = ('/public-money/vendors/', '/people/', '/profile', '/restaurants/')
 PAGE_LABELS = {}  # path -> short label for breadcrumbs, filled in main()
 
 
@@ -844,6 +846,9 @@ def page_about(path):
             area = 'Bay County, Florida' if g.get('kind') in ('county', 'schools') else g['short'] + ', Florida'
             return {'@type': 'GovernmentOrganization', 'name': g.get('name') or g['short'],
                     'areaServed': {'@type': 'AdministrativeArea', 'name': area}}
+    if path.startswith('/restaurants/'):
+        from restaurants_page import about
+        return about(path)
     if path.startswith('/public-money/vendors/'):
         t = next((t for p, t, _, _ in PAGES if p == path), '')
         n = t.rsplit(': contracts', 1)[0]
@@ -879,7 +884,7 @@ def main():
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
-    OG_VER.update(build_og(OUT, [x for x in PAGES if x[0] != '/profile'], MENU))  # /profile is a client-side shell: it uses the home card
+    OG_VER.update(build_og(OUT, [x for x in PAGES if x[0] != '/profile' and not x[0].startswith('/restaurants/')], MENU))  # /profile is a client-side shell: it uses the home card; each restaurant uses the /restaurants card
     PAGE_LABELS.update(_labels())
     from gov_detail import write_savings_data
     write_savings_data(OUT)  # savings ideas on each government's page

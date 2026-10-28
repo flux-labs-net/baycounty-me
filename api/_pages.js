@@ -85,6 +85,8 @@ const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'governmen
   // each official's and candidate's profile (site/people_pages.py)
   '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'campaign-history', 'candidates-2026', 'officials-pay', 'salary-leaders',
     'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms', 'official-photos', 'person-photos'], endpoints: ['/entities/{id}']},
+  // one page per restaurant license (site/restaurants_page.py, page_url in the restaurants dataset)
+  '/restaurants/': {datasets: ['restaurants', 'restaurant-inspections'], note: 'Filter by license_number: /api/v1/datasets/restaurant-inspections?license_number=...&sort=-date'},
   '/public-money/vendors/': {datasets: ['vendors-directory', 'contracts', 'change-orders', 'emergency-purchases', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'campaign-contributions-history', 'votes',
     'entity-profiles', 'entity-connections'], endpoints: ['/entities/{id}']}};
 
