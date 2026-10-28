@@ -371,7 +371,7 @@ def emergency_page(out_dir):
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">
       <li><b>Weather alerts</b> are every active watch, warning and advisory the National Weather Service issues for Bay County's land and coastal zones.</li>
-      <li><b>Boil-water notices, closures and storm updates</b> come from the alert centers and news feeds of Bay County, Panama City, Panama City Beach and Lynn Haven. Callaway, Springfield, Parker and Mexico Beach don't publish a feed we can read yet; check their sites or AlertBay.</li>
+      <li><b>Boil-water notices, closures and storm updates</b> come from the alert centers and news posts of Bay County, Panama City, Panama City Beach, Lynn Haven, Callaway, Parker and Mexico Beach, and from Springfield's boil-water notice page. All are checked every 5 minutes.</li>
       <li><b>State road closures</b> come from FL511, the Florida Department of Transportation's traffic service, for Bay County.</li>
       <li><b>Shelters</b> come from Bay County Emergency Services' shelter page; each address is placed on the map with the county's address points. <b>Zones</b> are the county's evacuation zone map.</li>
       <li>Everything is checked every 5 minutes. BayCounty.me is an independent site: when an order or notice here differs from what emergency officials say, follow the officials.</li>

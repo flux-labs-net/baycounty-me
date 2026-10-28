@@ -20,6 +20,7 @@ function sourceKey(n) {
   if (n.source_type === 'news') return 'news:' + n.gov_id;
   if (n.source_type === 'fl511') return 'fl511:' + ({Incident: 'Incidents', Closure: 'Closures', Construction: 'Construction'}[n.event] || 'Closures');
   if (n.source_type === 'shelters') return 'shelters';
+  if (n.source_type === 'status-page') return 'page:' + n.gov_id;
   return n.source_type;
 }
 

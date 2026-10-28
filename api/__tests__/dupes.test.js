@@ -67,3 +67,10 @@ json.dump(out, sys.stdout)`;
     assert.deepEqual(js.same_as, got[i].same_as);
   });
 });
+
+test('two short posts under one stock title stay apart', () => {
+  const a = {title: 'PRECAUTIONARY BOIL WATER NOTICE', body: 'Olokee St. between S. Comet and S. Jan Dr.'};
+  const b = {title: 'PRECAUTIONARY BOIL WATER NOTICE', body: 'All of Nelle Street and Harvey Street.'};
+  assert.equal(D.compare(a, b).verdict, null);
+  assert.equal(D.compare(a, {...a, body: 'Olokee St. between S. Comet and S. Jan Dr'}).verdict, 'same');
+});

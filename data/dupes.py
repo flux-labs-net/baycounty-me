@@ -81,6 +81,8 @@ def compare(a, b, strict_numbers=False):
         return out  # one title in two towns is two things
     if (a.get("ref") and b.get("ref") and a["ref"] != b["ref"]):
         return out  # two job requisitions, two openings
+    if body is None and words(a.get("body")) and words(b.get("body")) and jaccard(title_words(a.get("body")), title_words(b.get("body"))) < TITLE_MAYBE:
+        return out  # short, different bodies under one stock title ("PRECAUTIONARY BOIL WATER NOTICE"): two posts
     if nums and ((body is not None and body >= BODY_SAME) or (t >= TITLE_SAME and (body is None or body >= BODY_MAYBE))):
         out["verdict"] = "same"
     elif strict_numbers and not nums:

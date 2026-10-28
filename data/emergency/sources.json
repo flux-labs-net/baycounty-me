@@ -12,13 +12,20 @@
       {"gov": "county", "name": "Bay County", "url": "https://www.baycountyfl.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.baycountyfl.gov/AlertCenter.aspx"},
       {"gov": "pc", "name": "City of Panama City", "url": "https://www.panamacity.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.panamacity.gov/AlertCenter.aspx"},
       {"gov": "pcb", "name": "City of Panama City Beach", "url": "https://www.pcbfl.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.pcbfl.gov/AlertCenter.aspx"},
-      {"gov": "lh", "name": "City of Lynn Haven", "url": "https://www.cityoflynnhaven.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.cityoflynnhaven.gov/AlertCenter.aspx"}
+      {"gov": "lh", "name": "City of Lynn Haven", "url": "https://www.cityoflynnhaven.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.cityoflynnhaven.gov/AlertCenter.aspx"},
+      {"gov": "cw", "name": "City of Callaway", "url": "https://www.cityofcallaway.com/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.cityofcallaway.com/AlertCenter.aspx"}
     ],
     "news_feeds": [
       {"gov": "county", "name": "Bay County", "url": "https://www.baycountyfl.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
       {"gov": "pc", "name": "City of Panama City", "url": "https://www.panamacity.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
       {"gov": "pcb", "name": "City of Panama City Beach", "url": "https://www.pcbfl.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
-      {"gov": "lh", "name": "City of Lynn Haven", "url": "https://www.cityoflynnhaven.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"}
+      {"gov": "lh", "name": "City of Lynn Haven", "url": "https://www.cityoflynnhaven.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
+      {"gov": "cw", "name": "City of Callaway", "url": "https://www.cityofcallaway.com/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
+      {"gov": "parker", "name": "City of Parker", "url": "https://cityofparker.com/event/feed/", "page": "https://cityofparker.com/events/", "_note": "Parker posts boil-water notices as calendar events."},
+      {"gov": "mb", "name": "City of Mexico Beach", "url": "https://mexicobeachfl.gov/feed/?post_type=announcement", "page": "https://mexicobeachfl.gov/government/news/"}
+    ],
+    "status_pages": [
+      {"gov": "sp", "name": "City of Springfield", "kind": "boil-water", "page": "https://www.springfieldfl.net/community/page/precautionary-boil-water-notices", "none": "\\b(currently|presently) no\\b[^.]*\\b(PBWN|boil)", "_note": "Springfield keeps one page it edits in place; any text other than the no-notice line is a notice."}
     ],
     "fl511": {"county": "Bay", "url": "https://fl511.com/", "layers": ["Closures", "Incidents", "Construction"]},
     "shelters": {"page": "https://www.baycountyfl.gov/766/Emergency-Shelters", "gov": "county", "name": "Bay County Emergency Services"},
