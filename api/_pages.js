@@ -8,8 +8,7 @@ const PAGES = {
   // the realtor console prints the address report; agent accounts and branding are private (api/_realtor.js, migration 0074)
   '/realtor': {datasets: ['tax-districts', 'property-tax-rates', 'sales-tax-projects', 'people-directory', 'officeholder-terms', 'meetings'], endpoints: ['/address-report'],
     note: 'Live map lookups (parcel, flood, districts) are made by the address-report endpoint at request time. Sections for utilities, schools, parks, beaches, development and events read their datasets when those are published.'},
-  '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'schools', 'school-zones'], endpoints: ['/schools', 'utility-providers', 'trash-pickup', 'trash-holidays'],
-    endpoints: ['/utilities'],
+  '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'schools', 'school-zones', 'utility-providers', 'trash-pickup', 'trash-holidays'], endpoints: ['/schools', '/utilities'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
   '/public-money/cra-spending': {datasets: ['cra-payments']},
   '/public-money/cra-tax-increment': {datasets: ['cra-agencies', 'cra-tax-increment', 'cra-increment-checks', 'property-tax-rates']},
