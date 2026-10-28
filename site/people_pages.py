@@ -259,7 +259,7 @@ def title_rank(line):
     t = line.strip().lower()
     if t.startswith('ran for'):
         return 8
-    if t.startswith('former'):
+    if t.startswith('former') or re.search(r'\(former\b|\bformer,', t):  # 'City Clerk-Treasurer (former, through Aug 10, 2026)'
         return 7
     if t.startswith('2026 candidate') or t.startswith('running'):
         return 6

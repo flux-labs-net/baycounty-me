@@ -274,7 +274,31 @@ def organizations(county_key, entities):
         o['city'] = city_name(r['CITY'] if r else e['city'] if e else fd['city'])
         o['zip'] = ((r['ZIP'] if r else e['zip5'] if e else fd['zip']) or '')[:5]
         o['key'] = sb.biz_key(o['name'])
+    chapter_names(orgs.values())
     return orgs
+
+
+_GENERIC = {'INC', 'CORP', 'CORPORATION', 'THE', 'AND', 'FLORIDA', 'UNITED', 'STATES', 'AMERICA', 'AMERICAN', 'INTERNATIONAL', 'POST', 'LODGE'}
+
+
+def chapter_name(irs_name, sunbiz_name):
+    """The state filing name for a chapter whose IRS name is its parent's ('Free & Accepted Masons of Florida' ->
+    'Acme Lodge No. 222 Free and Accepted Masons of Florida'), or None when the filing doesn't share a real word with it."""
+    if not sunbiz_name:
+        return None
+    words = lambda n: {w for w in re.findall(r'[A-Z]{4,}', n.upper()) if w not in _GENERIC}
+    sn = ' '.join(sunbiz_name.split())
+    return sn if sn.upper() != irs_name.upper() and words(irs_name) & words(sn) else None
+
+
+def chapter_names(orgs):
+    """Chapters of one national group share its IRS name (6 Masonic lodges, 4 VFW posts). Show each one's own state
+    filing name instead, so they read as the separate organizations they are. The match key stays on the IRS name."""
+    orgs = list(orgs)
+    seen = collections.Counter(o['name'].upper() for o in orgs)
+    for o in orgs:
+        if seen[o['name'].upper()] > 1 and o.get('sunbiz'):
+            o['name'] = chapter_name(o['name'], o['sunbiz'].get('name')) or o['name']
 
 
 def _iso(s):

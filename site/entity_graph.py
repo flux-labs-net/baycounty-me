@@ -91,6 +91,22 @@ def _vendor_pages():
     return _C['vp']
 
 
+def _vendor_single_docs():
+    """vendor id -> Sunbiz doc (lowercase) when exactly one Bay County filing has that vendor's name (ids.vendor_id, an
+    exact match after the usual suffix and spacing cleanup). Vendors whose name two filings share are left out."""
+    if 'v1' not in _C:
+        import csv, gzip
+        docs = defaultdict(set)
+        p = os.path.join(HERE, '..', 'data', 'sunbiz', 'bay', 'entities.csv.gz')
+        if os.path.exists(p):
+            for r in csv.DictReader(gzip.open(p, 'rt', encoding='utf-8', errors='replace')):
+                vid = ids.vendor_id(r['name'])
+                if vid:
+                    docs[vid].add(r['doc_number'].strip().lower())
+        _C['v1'] = {vid: next(iter(d)) for vid, d in docs.items() if len(d) == 1}
+    return _C['v1']
+
+
 def page_url(entity_id):
     """The profile URL for any entity id (the rule every page and script follows)."""
     kind, _, key = entity_id.partition(':')
@@ -247,7 +263,7 @@ def service(p, gid, terms):
         a, b = (t.get('start_date') or '')[:4], (t.get('end_date') or '')[:4]
         return (a if a == b else f"{a}–{b or 'now'}") if a else f'until {b}' if b else 'current'
     parts, seats, kind = [], set(), None
-    pay = [r for r in roles if r.get('source') in ('salaries', 'officials-pay') and r.get('role')]
+    pay = [r for r in roles if r.get('source') in ('salaries', 'officials-pay') and r.get('role') and not re.search(r'(?i)\bformer\b', r['role'])]
     for t in now:
         seat = _seat(t.get('seat')) or (t.get('seat') or '').lower()
         title = next((r['role'] for r in pay if _seat(r['role']) == seat), None)  # 'Commissioner, Ward 4' from the pay record
@@ -359,6 +375,11 @@ def build():
         if kind in ('b', 's'):
             if payee_np.get(eid) and payee_np[eid] in np_names:
                 return np_names[payee_np[eid]]
+            gid = ids.gov_id(name)
+            if gid and 'gov:' + gid in G.ents:  # a city or county office paid as a payee
+                return 'gov:' + gid
+            if re.match(r'(?i)dda check\b', name or ''):
+                return None  # a bank check placeholder, not a payee
             return G.ent('business:' + key, name, 'Business paid by a local government')
         if kind == 'g':
             gid = ids.gov_id(name)
@@ -390,26 +411,48 @@ def build():
             if r.get('vendor_id'):
                 doc_vendor[r['sunbiz_doc_number'].lower()] = r['vendor_id']
 
+    np_doc = {n['sunbiz_doc_number'].lower(): np_names[n['nonprofit_id']] for n in _ds('nonprofits')
+              if n.get('sunbiz_doc_number') and n['nonprofit_id'] in np_names}
+    one_doc = _vendor_single_docs()
+
     def business(doc, name, sub=None, url=None):
         doc = doc.lower()
         if doc in doc_vendor and 'vendor:' + doc_vendor[doc] in G.ents:
             G.alias['business:' + doc] = ('vendor:' + doc_vendor[doc], ids.biz_case(name))  # /profile/business/<doc> still finds it
             return 'vendor:' + doc_vendor[doc]
+        if doc in np_doc:  # the filing of a local nonprofit
+            G.alias['business:' + doc] = (np_doc[doc], ids.biz_case(name))
+            return np_doc[doc]
+        vid = ids.vendor_id(name)
+        if vid and one_doc.get(vid) == doc and 'vendor:' + vid in G.ents:  # the only Bay filing with a vendor's exact name
+            G.alias['business:' + doc] = ('vendor:' + vid, ids.biz_case(name))
+            return 'vendor:' + vid
         return G.ent('business:' + doc, ids.biz_case(name), sub or 'Registered business', None, url or
                      ids.sunbiz_url(name, doc))
+
+    slug_of = {}
+
+    def donor_slug(name):
+        """One id per donor however the filings spell it ('Capt. Anderson's', 'Captain Andersons'): the first spelling's
+        slug for each matching key (ids.vkey, joined through name_joins.json)."""
+        k = ids.canon_key(ids.vkey(name)) or _slug(name)
+        return slug_of.setdefault(k, _slug(name))
 
     # campaign gifts from organizations (never individuals) to officials and candidates
     for r in _ds('connections-gifts'):
         pid = ids.person_id(r['official'])
         if not pid or 'person:' + pid not in G.ents:
             continue
+        if ids.gov_id(r['donor']) or re.search(r'(?i)supervisor of elect|^city of |board of county comm', r['donor'] or ''):
+            continue  # a qualifying-fee or filing refund from a government, not a campaign gift
         if r.get('payee_entity_id'):
             frm = payee(r['payee_entity_id'], r['donor'])
         elif r['donor_type'] == 'business':
-            doc = doc_of.get(_norm(r['donor']))
-            frm = business(doc, r['donor']) if doc else G.ent('business:' + _slug(r['donor']), ids.biz_case(r['donor']), 'Business that gave to a local campaign')
+            doc, vid = doc_of.get(_norm(r['donor'])), ids.vendor_id(r['donor'])
+            frm = (business(doc, r['donor']) if doc else 'vendor:' + vid if vid and 'vendor:' + vid in G.ents else
+                   G.ent('business:' + donor_slug(r['donor']), ids.biz_case(r['donor']), 'Business that gave to a local campaign'))
         else:
-            frm = G.ent('committee:' + _slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
+            frm = G.ent('committee:' + donor_slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
         if frm:
             G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else f" ({r['past_campaign_year']} campaign)" if r.get('past_campaign_year') else ''),
                    r.get('report_url'), key=r.get('office') or '')
@@ -516,6 +559,9 @@ def build():
             continue
         G.ent(aid, r['sub_agency'] or r['agency'],
               'Federal agency' + (f" · {r['agency']}" if r.get('sub_agency') and r['sub_agency'] != r['agency'] else ''), None, 'https://www.usaspending.gov/search')
+        gid = ids.gov_id(r.get('recipient'))
+        if gid and 'gov:' + gid in G.ents:  # a city or the county as a federal contract recipient
+            rid = 'gov:' + gid
         if rid.startswith('business:') and rid not in G.ents:
             G.ent(rid, ids.biz_case(r['recipient']), 'Company with federal contracts', None, 'https://www.usaspending.gov/search')
         if rid in G.ents:
@@ -561,15 +607,28 @@ def connection_rows():
     return out
 
 
+AWARDED = ('Contracts', 'Change orders', 'Emergency purchases')
+PAID = ('Check registers', 'Tourism agency payments')
+
+
 def profile_rows():
     G = build()
     deg, got, gave = defaultdict(int), defaultdict(float), defaultdict(float)
+    # A contract award and the checks paid under it are the same money: per payer and payee, count the larger of
+    # awarded (contracts, change orders, emergency purchases) and paid (check registers, tourism payments), plus the
+    # rest (CRA ledger, federal contracts), the rule the vendor pages use (vendor_pages.build).
+    pair = defaultdict(lambda: defaultdict(float))
     for x in G.links.values():
         deg[x['from_id']] += 1
         deg[x['to_id']] += 1
         if x['relation'] in ('paid', 'gift', 'grant') and x['amount']:
-            gave[x['from_id']] += x['amount']
-            got[x['to_id']] += x['amount']
+            rt = (x['detail'][0] if x['detail'] else '').split(' (')[0] if x['relation'] == 'paid' else ''
+            part = 'awarded' if rt in AWARDED else 'paid' if rt in PAID else 'other'
+            pair[(x['from_id'], x['to_id'])][part] += x['amount']
+    for (a, b), t in pair.items():
+        amt = max(t['awarded'], t['paid']) + t['other']
+        gave[a] += amt
+        got[b] += amt
     out = []
     for eid, e in G.ents.items():
         keep = e['kind'] in ('gov', 'person', 'nonprofit', 'vendor') or deg[eid]  # every vendor: page names link to them

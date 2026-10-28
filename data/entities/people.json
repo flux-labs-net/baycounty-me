@@ -1,6 +1,6 @@
 {
  "about": "Elected officials, department leaders, 2026 local candidates and local candidates since 2016 named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 329,
+ "count": 321,
  "people": [
   {
    "id": "adrian-welle",
@@ -1027,7 +1027,7 @@
    ],
    "roles": [
     {
-     "role": "Assistant City Manager and Interim City Clerk-Treasurer",
+     "role": "Assistant City Manager",
      "gov_id": "pc",
      "source": "salaries"
     },
@@ -2772,7 +2772,8 @@
    "id": "ed-cook",
    "name": "Ed Cook",
    "aliases": [
-    "Ed Cook"
+    "Ed Cook",
+    "Eddie Cook"
    ],
    "district": null,
    "gov_ids": [
@@ -2788,6 +2789,13 @@
      "role": "City Manager",
      "gov_id": "cw",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "since 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -2809,26 +2817,6 @@
      "year": 2025,
      "outcome": "lost",
      "source": "campaign_history"
-    }
-   ]
-  },
-  {
-   "id": "eddie-cook",
-   "name": "Eddie Cook",
-   "aliases": [
-    "Eddie Cook"
-   ],
-   "district": null,
-   "gov_ids": [
-    "cw"
-   ],
-   "roles": [
-    {
-     "role": "City Manager",
-     "gov_id": "cw",
-     "seat": "City Manager",
-     "years": "since 2017",
-     "source": "officeholders"
     }
    ]
   },
@@ -3662,30 +3650,10 @@
    ]
   },
   {
-   "id": "jack-kennington",
-   "name": "Jack Kennington",
-   "aliases": [
-    "Jack Kennington"
-   ],
-   "district": null,
-   "gov_ids": [
-    "sp"
-   ],
-   "roles": [
-    {
-     "role": "2018 candidate: Springfield Commission, Ward 3",
-     "gov_id": "sp",
-     "office": "Springfield Commission, Ward 3",
-     "year": 2018,
-     "outcome": "won",
-     "source": "campaign_history"
-    }
-   ]
-  },
-  {
    "id": "jackie-kennington",
    "name": "Jackie Kennington",
    "aliases": [
+    "Jack Kennington",
     "Jackie Kennington"
    ],
    "district": null,
@@ -3724,6 +3692,14 @@
      "gov_id": "sp",
      "office": "Springfield Commission, Ward 3",
      "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Springfield Commission, Ward 3",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 3",
+     "year": 2018,
      "outcome": "won",
      "source": "campaign_history"
     },
@@ -4113,13 +4089,19 @@
    "id": "jeff-snyder",
    "name": "Jeff Snyder",
    "aliases": [
-    "Jeff Snyder"
+    "Jeff Snyder",
+    "Jeffrey Snyder"
    ],
    "district": null,
    "gov_ids": [
     "lh"
    ],
    "roles": [
+    {
+     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    },
     {
      "role": "2025 candidate: Lynn Haven Commission, Seat 4",
      "gov_id": "lh",
@@ -4147,24 +4129,6 @@
      "seat": "Group 5",
      "years": "until 2016",
      "source": "officeholders"
-    }
-   ]
-  },
-  {
-   "id": "jeffrey-snyder",
-   "name": "Jeffrey Snyder",
-   "aliases": [
-    "Jeffrey Snyder"
-   ],
-   "district": null,
-   "gov_ids": [
-    "lh"
-   ],
-   "roles": [
-    {
-     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
-     "gov_id": "lh",
-     "source": "finance_2026"
     }
    ]
   },
@@ -4593,7 +4557,8 @@
    "id": "joe-townsend",
    "name": "Joe Townsend",
    "aliases": [
-    "Joe Townsend"
+    "Joe Townsend",
+    "Joseph Townsend"
    ],
    "district": null,
    "gov_ids": [
@@ -4607,6 +4572,13 @@
      "year": 2016,
      "outcome": "won",
      "source": "campaign_history"
+    },
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "cw",
+     "seat": "Ward 4",
+     "years": "2016–2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -5056,26 +5028,6 @@
    ]
   },
   {
-   "id": "joseph-townsend",
-   "name": "Joseph Townsend",
-   "aliases": [
-    "Joseph Townsend"
-   ],
-   "district": null,
-   "gov_ids": [
-    "cw"
-   ],
-   "roles": [
-    {
-     "role": "former city commissioner, Ward 4",
-     "gov_id": "cw",
-     "seat": "Ward 4",
-     "years": "2016–2018",
-     "source": "officeholders"
-    }
-   ]
-  },
-  {
    "id": "josh-balkom",
    "name": "Josh Balkom",
    "aliases": [
@@ -5230,51 +5182,10 @@
    ]
   },
   {
-   "id": "judith-tinder",
-   "name": "Judith Tinder",
-   "aliases": [
-    "Judith Tinder"
-   ],
-   "district": null,
-   "gov_ids": [
-    "lh"
-   ],
-   "roles": [
-    {
-     "role": "2021 candidate: Lynn Haven Commission, Seat 4",
-     "gov_id": "lh",
-     "office": "Lynn Haven Commission, Seat 4",
-     "year": 2021,
-     "outcome": "won",
-     "source": "campaign_history"
-    }
-   ]
-  },
-  {
-   "id": "judith-vandergrift",
-   "name": "Judith Vandergrift",
-   "aliases": [
-    "Judith Vandergrift"
-   ],
-   "district": null,
-   "gov_ids": [
-    "schools"
-   ],
-   "roles": [
-    {
-     "role": "2020 candidate: Superintendent of Schools",
-     "gov_id": "schools",
-     "office": "Superintendent of Schools",
-     "year": 2020,
-     "outcome": "lost",
-     "source": "campaign_history"
-    }
-   ]
-  },
-  {
    "id": "judy-tinder",
    "name": "Judy Tinder",
    "aliases": [
+    "Judith Tinder",
     "Judy Tinder"
    ],
    "district": null,
@@ -5315,6 +5226,14 @@
      "source": "campaign_history"
     },
     {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2017 candidate: Lynn Haven Commission, Seat 4",
      "gov_id": "lh",
      "office": "Lynn Haven Commission, Seat 4",
@@ -5342,11 +5261,13 @@
    "id": "judy-vandergrift",
    "name": "Judy Vandergrift",
    "aliases": [
+    "Judith Vandergrift",
     "Judy Vandergrift"
    ],
    "district": null,
    "gov_ids": [
-    "lh"
+    "lh",
+    "schools"
    ],
    "roles": [
     {
@@ -5366,6 +5287,14 @@
      "office": "Lynn Haven Commission, Seat 4",
      "year": 2023,
      "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2020,
+     "outcome": "lost",
      "source": "campaign_history"
     },
     {
@@ -5898,7 +5827,7 @@
    ],
    "roles": [
     {
-     "role": "City Clerk-Treasurer (proposed contract)",
+     "role": "City Clerk-Treasurer",
      "gov_id": "pc",
      "source": "salaries"
     }
@@ -7688,7 +7617,9 @@
    "id": "rich-musgrave",
    "name": "Rich Musgrave",
    "aliases": [
-    "Rich Musgrave"
+    "Rich Musgrave",
+    "Richard Musgrave",
+    "Richard P. Musgrave"
    ],
    "district": null,
    "gov_ids": [
@@ -7704,12 +7635,27 @@
      "source": "campaign_history"
     },
     {
+     "role": "2019 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2017 candidate: Parker Mayor",
      "gov_id": "parker",
      "office": "Parker Mayor",
      "year": 2017,
      "outcome": "won",
      "source": "campaign_history"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "parker",
+     "seat": "Mayor",
+     "years": "until 2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -7798,35 +7744,6 @@
      "year": 2020,
      "outcome": "lost",
      "source": "campaign_history"
-    }
-   ]
-  },
-  {
-   "id": "richard-musgrave",
-   "name": "Richard Musgrave",
-   "aliases": [
-    "Richard Musgrave",
-    "Richard P. Musgrave"
-   ],
-   "district": null,
-   "gov_ids": [
-    "parker"
-   ],
-   "roles": [
-    {
-     "role": "2019 candidate: Parker Mayor",
-     "gov_id": "parker",
-     "office": "Parker Mayor",
-     "year": 2019,
-     "outcome": "won",
-     "source": "campaign_history"
-    },
-    {
-     "role": "former mayor",
-     "gov_id": "parker",
-     "seat": "Mayor",
-     "years": "until 2021",
-     "source": "officeholders"
     }
    ]
   },
@@ -9207,7 +9124,8 @@
    "id": "tim-linderman",
    "name": "Tim Linderman",
    "aliases": [
-    "Tim Linderman"
+    "Tim Linderman",
+    "Timothy Linderman"
    ],
    "district": null,
    "gov_ids": [
@@ -9224,6 +9142,14 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "2024 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "former council member, Group 5",
@@ -9285,27 +9211,6 @@
      "role": "2026 candidate: Bay County Judge, Group 1",
      "gov_id": "county_court",
      "source": "candidates_2026"
-    }
-   ]
-  },
-  {
-   "id": "timothy-linderman",
-   "name": "Timothy Linderman",
-   "aliases": [
-    "Timothy Linderman"
-   ],
-   "district": null,
-   "gov_ids": [
-    "mb"
-   ],
-   "roles": [
-    {
-     "role": "2024 candidate: Mexico Beach Council, Group 5",
-     "gov_id": "mb",
-     "office": "Mexico Beach Council, Group 5",
-     "year": 2024,
-     "outcome": "won",
-     "source": "campaign_history"
     }
    ]
   },
@@ -9918,6 +9823,175 @@
     ]
    ],
    "why": "Tax Collector William (Chuck) Perdue; the salary file lists \"Chuck Perdue\"."
+  },
+  {
+   "keys": [
+    [
+     "edward",
+     "cook"
+    ],
+    [
+     "eddie",
+     "cook"
+    ]
+   ],
+   "why": "Callaway City Manager Edward \"Ed\"/\"Eddie\" Cook: officeholders.py notes \"Edward Cook\"; salary, state pay and contacts files say \"Ed Cook\"."
+  },
+  {
+   "keys": [
+    [
+     "jackie",
+     "kennington"
+    ],
+    [
+     "jack",
+     "kennington"
+    ]
+   ],
+   "why": "Springfield Ward 3: Jackie Kennington was re-elected in 2018; the 2018 SOE campaign filing (cand 408) says \"Jack\"."
+  },
+  {
+   "keys": [
+    [
+     "judy",
+     "tinder"
+    ],
+    [
+     "judith",
+     "tinder"
+    ]
+   ],
+   "why": "Lynn Haven Seat 4 2017-2023, re-elected 2021: the 2021 filing (cand 540) says \"Judith\"; election results say \"Judy\"."
+  },
+  {
+   "keys": [
+    [
+     "richard",
+     "musgrave"
+    ],
+    [
+     "rich",
+     "musgrave"
+    ]
+   ],
+   "why": "Parker Mayor: officeholders.py notes \"Rich Musgrave\"; 2017/2021 filings say \"Rich\", 2019 \"Richard P.\"."
+  },
+  {
+   "keys": [
+    [
+     "timothy",
+     "linderman"
+    ],
+    [
+     "tim",
+     "linderman"
+    ]
+   ],
+   "why": "Mexico Beach Group 5 from 2024-04-16: the 2024 filing (cand 668) says \"Timothy\"; votes and results say \"Tim\"."
+  },
+  {
+   "keys": [
+    [
+     "joseph",
+     "townsend"
+    ],
+    [
+     "joe",
+     "townsend"
+    ]
+   ],
+   "why": "Callaway Ward 4 2016-2018: won the April 2016 race as \"Joe Townsend\" (cand 316)."
+  },
+  {
+   "keys": [
+    [
+     "judy",
+     "vandergrift"
+    ],
+    [
+     "judith",
+     "vandergrift"
+    ]
+   ],
+   "why": "2020 Superintendent race: SOE results say \"Judy Vandergrift\", the filing (cand 502) \"Judith\"; Jeremy confirmed one person 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "jeff",
+     "snyder"
+    ],
+    [
+     "jeffrey",
+     "snyder"
+    ]
+   ],
+   "why": "Lynn Haven candidate 2025 (Seat 4) and 2026 (Seat 2); Jeremy confirmed one person 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "fred",
+     "broussard"
+    ],
+    [
+     "joseph",
+     "broussard"
+    ]
+   ],
+   "why": "2020 PCB Ward 2: results say \"Joseph F. Broussard\", the filing \"Fred Broussard\"; Jeremy confirmed 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "shiela",
+     "ware"
+    ],
+    [
+     "sheila",
+     "ware"
+    ]
+   ],
+   "why": "Panama City Housing director: pay files say \"Shiela\", the photo and votes \"Sheila\"; Jeremy confirmed 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "calvin",
+     "chester"
+    ],
+    [
+     "cal",
+     "chester"
+    ]
+   ],
+   "why": "2016 PCB Mayor race: results say \"Cal Chester\"."
+  },
+  {
+   "keys": [
+    [
+     "richard",
+     "mccoy"
+    ],
+    [
+     "dick",
+     "mccoy"
+    ]
+   ],
+   "why": "2020 Mexico Beach Group 5: results say \"Dick McCoy\"."
+  },
+  {
+   "keys": [
+    [
+     "ron",
+     "chaple"
+    ],
+    [
+     "ronald",
+     "chaple"
+    ]
+   ],
+   "why": "2021 Parker Seat 1: results say \"Ronald H. Chaple\"."
   }
  ],
  "multi_government": [
@@ -9929,6 +10003,17 @@
    ],
    "names": [
     "Phil Chester"
+   ]
+  },
+  {
+   "person_id": "judy-vandergrift",
+   "governments": [
+    "lh",
+    "schools"
+   ],
+   "names": [
+    "Judith Vandergrift",
+    "Judy Vandergrift"
    ]
   },
   {

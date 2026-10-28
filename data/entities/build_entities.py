@@ -324,6 +324,19 @@ def _clean_person(n):
 # hand-checked: different name keys that are one person (key, key, evidence)
 SAME_PERSON = [
     (('william', 'perdue'), ('charles', 'perdue'), 'Tax Collector William (Chuck) Perdue; the salary file lists "Chuck Perdue".'),
+    (('edward', 'cook'), ('eddie', 'cook'), 'Callaway City Manager Edward "Ed"/"Eddie" Cook: officeholders.py notes "Edward Cook"; salary, state pay and contacts files say "Ed Cook".'),
+    (('jackie', 'kennington'), ('jack', 'kennington'), 'Springfield Ward 3: Jackie Kennington was re-elected in 2018; the 2018 SOE campaign filing (cand 408) says "Jack".'),
+    (('judy', 'tinder'), ('judith', 'tinder'), 'Lynn Haven Seat 4 2017-2023, re-elected 2021: the 2021 filing (cand 540) says "Judith"; election results say "Judy".'),
+    (('richard', 'musgrave'), ('rich', 'musgrave'), 'Parker Mayor: officeholders.py notes "Rich Musgrave"; 2017/2021 filings say "Rich", 2019 "Richard P.".'),
+    (('timothy', 'linderman'), ('tim', 'linderman'), 'Mexico Beach Group 5 from 2024-04-16: the 2024 filing (cand 668) says "Timothy"; votes and results say "Tim".'),
+    (('joseph', 'townsend'), ('joe', 'townsend'), 'Callaway Ward 4 2016-2018: won the April 2016 race as "Joe Townsend" (cand 316).'),
+    (('judy', 'vandergrift'), ('judith', 'vandergrift'), '2020 Superintendent race: SOE results say "Judy Vandergrift", the filing (cand 502) "Judith"; Jeremy confirmed one person 2026-10-28.'),
+    (('jeff', 'snyder'), ('jeffrey', 'snyder'), 'Lynn Haven candidate 2025 (Seat 4) and 2026 (Seat 2); Jeremy confirmed one person 2026-10-28.'),
+    (('fred', 'broussard'), ('joseph', 'broussard'), '2020 PCB Ward 2: results say "Joseph F. Broussard", the filing "Fred Broussard"; Jeremy confirmed 2026-10-28.'),
+    (('shiela', 'ware'), ('sheila', 'ware'), 'Panama City Housing director: pay files say "Shiela", the photo and votes "Sheila"; Jeremy confirmed 2026-10-28.'),
+    (('calvin', 'chester'), ('cal', 'chester'), '2016 PCB Mayor race: results say "Cal Chester".'),
+    (('richard', 'mccoy'), ('dick', 'mccoy'), '2020 Mexico Beach Group 5: results say "Dick McCoy".'),
+    (('ron', 'chaple'), ('ronald', 'chaple'), '2021 Parker Seat 1: results say "Ronald H. Chaple".'),
 ]
 
 

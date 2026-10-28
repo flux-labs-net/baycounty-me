@@ -1,6 +1,6 @@
 {
  "about": "One record per vendor (business or organization paid by a Bay County government, CRA or tourism agency). aliases are every spelling found in contracts, change orders, emergency purchases, check registers (including 15-character truncations), TDC payments, the CRA ledger and business campaign contributions. Built by data/entities/build_entities.py; hand-reviewed joins carry merge_evidence. Look-alike names that were not joined are in vendor_review.json.",
- "count": 589,
+ "count": 591,
  "vendors": [
   {
    "id": "12elevenband",
@@ -470,7 +470,6 @@
    "aliases": [
     "AMERICAN SAND &",
     "American Sand",
-    "American Sand & Asphalt / X-Cavation",
     "American Sand & Asphalt Paving",
     "American Sand and Asphalt",
     "American Sand and Asphalt Pavi",
@@ -481,12 +480,11 @@
     "americansand",
     "americansandasphalt",
     "americansandasphaltpavi",
-    "americansandasphaltpaving",
-    "americansandasphaltxcavation"
+    "americansandasphaltpaving"
    ],
    "records": {
     "contract": 9,
-    "register": 5
+    "register": 3
    },
    "gov_ids": [
     "county",
@@ -496,6 +494,22 @@
    ],
    "site_vendor_type": "business",
    "merge_evidence": "\"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters."
+  },
+  {
+   "id": "american-sand-asphalt-x-cavation",
+   "name": "American Sand & Asphalt / X-Cavation",
+   "aliases": [
+    "American Sand & Asphalt / X-Cavation"
+   ],
+   "keys": [
+    "americansandasphaltxcavation"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
   },
   {
    "id": "amex",
@@ -5878,7 +5892,7 @@
    "aliases": [
     "MARSHALL BROTHERS",
     "Marshall Bothers",
-    "Marshall Brother\\'s",
+    "Marshall Brother's",
     "Marshall Brothers",
     "Marshall Brothers Construction",
     "Marshall Brothers Construction & Engineering",
@@ -6144,16 +6158,14 @@
    "name": "Mott MacDonald",
    "aliases": [
     "Mott MacDonald",
-    "Mott MacDonald Consultants, Inc.",
     "Mott MacDonald Florida LLC",
     "Mott MacDonald Florida, LLC"
    ],
    "keys": [
-    "mottmacdonald",
-    "mottmacdonaldconsultants"
+    "mottmacdonald"
    ],
    "records": {
-    "contract": 11,
+    "contract": 10,
     "change_order": 1
    },
    "gov_ids": [
@@ -6163,6 +6175,22 @@
     "pcb"
    ],
    "site_vendor_type": "business"
+  },
+  {
+   "id": "mott-macdonald-consultants",
+   "name": "Mott MacDonald Consultants, Inc.",
+   "aliases": [
+    "Mott MacDonald Consultants, Inc."
+   ],
+   "keys": [
+    "mottmacdonaldconsultants"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
   },
   {
    "id": "mr-fence",
@@ -8218,9 +8246,8 @@
    "id": "sam-s-club",
    "name": "Sam's Club",
    "aliases": [
-    "SAM\\'S CLUB",
-    "Sam's Club",
-    "Sam\\'s Club"
+    "SAM'S CLUB",
+    "Sam's Club"
    ],
    "keys": [
     "samsclub"

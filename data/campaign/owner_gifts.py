@@ -31,7 +31,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
 import build_sunbiz as B  # noqa: E402
-from ids import person_case  # noqa: E402  (build_sunbiz puts data/entities on the path)
+from ids import person_case, person_id  # noqa: E402  (build_sunbiz puts data/entities on the path)
 
 OUT = os.path.join(HERE, 'owner_gifts.json')
 SUFFIX = {'JR', 'SR', 'II', 'III', 'IV'}
@@ -160,6 +160,7 @@ def build(work):
         if not os.path.exists(p):
             continue
         cand = same_person(c['candidate'])
+        cand_pid = person_id(c['candidate'])
         for r in apply_amend(rows(p)):
             if r['Cont/Exp'] != 'C' or r['cont. type'] != 'I':
                 continue
@@ -171,8 +172,8 @@ def build(work):
             if 'protected' in (r['address 1'] or '').lower():
                 counts['protected_skipped'] += 1
                 continue
-            if same_person(name) == cand:
-                continue
+            if same_person(name) == cand or (cand_pid and person_id(name) == cand_pid):
+                continue  # the candidate's own money, also under a nickname (Judith / Judy Tinder)
             key, mid = B.split_name(name.upper())
             z, st = B.zip5(r['zip']), B.street_key(r['address 1'])
             if not key or not z or not st:

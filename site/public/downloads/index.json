@@ -2380,7 +2380,7 @@
    "id": "connections-payees",
    "title": "Connections: payees",
    "description": "Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.",
-   "rows": 637,
+   "rows": 639,
    "columns": [
     {
      "name": "entity_id",
@@ -2701,7 +2701,7 @@
    "id": "connections-gifts",
    "title": "Connections: business gifts to officials",
    "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
-   "rows": 2680,
+   "rows": 2676,
    "columns": [
     {
      "name": "donor",
@@ -3526,7 +3526,7 @@
    "id": "vendors-directory",
    "title": "Companies",
    "description": "Every company in BayCounty.me records, with its other spellings, the governments it works with and how many records name it.",
-   "rows": 589,
+   "rows": 591,
    "columns": [
     {
      "name": "vendor_id",
@@ -3573,7 +3573,7 @@
    "id": "people-directory",
    "title": "People",
    "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles. sort_order is the People page's order: by the government they are listed under (primary_gov_id), then title (title_rank 0 mayor, chair or elected officer to 8 past candidate, named in title_group), then last name. status is current (in office, on staff or on the 2026 ballot) or past (former officials and past candidates).",
-   "rows": 329,
+   "rows": 321,
    "columns": [
     {
      "name": "person_id",
@@ -5692,8 +5692,8 @@
      "name": "grantor",
      "type": "string",
      "values": [
-      "AMERICAN LEGION",
       "EASTERN SHIPBUILDING CHARITIES INC",
+      "EMERALD COAST POST 10555 VETERANS OF FOREIGN WARS OF THE UNITED STATES, INC.",
       "GRAND CHAPTER OF FLORIDA ORDER OF THE EASTERN STAR CHARITABLE",
       "GULF COAST STATE COLLEGE FOUNDATION INC",
       "GULF COAST WORKFORCE DEVELOPMENT BOARD INC",
@@ -5705,9 +5705,10 @@
       "MELISSA RENEE BIGGS MEMORIAL TRUST",
       "ONE POSITIVE PLACE INC",
       "PANAMA CITY ADVANCED SCHOOL CORPORATION",
+      "PAUL W. AIREY AMERICAN LEGION POST 392 INC.",
+      "POST NAME TOM GLAZE POST #8205 VETERANS OF FOREIGN WARS OF THE UNITED STATES, INC.",
       "ST ANDREWS EPISCOPAL CHURCH FOUNDATION INC",
       "UNITED WAY OF NORTHWEST FLORIDA",
-      "VETERANS OF FOREIGN WARS OF THE UNITED STATES DEPT OF FLORIDA",
       "WOMENS CIVIC CLUB OF PANAMA CITY BEACH INC",
       "WORLD CHANGERS STUDENT MISSIONS",
       "ZOOLOGICAL ASSOCIATION OF AMERICA INCORPORATED"
@@ -6453,10 +6454,76 @@
    "api": "/api/v1/datasets/official-business-links"
   },
   {
+   "id": "business-officers",
+   "title": "Business officers",
+   "description": "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.",
+   "rows": 13481,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "officer",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "officer_kind",
+     "type": "string",
+     "values": [
+      "organization",
+      "person"
+     ]
+    },
+    {
+     "name": "officer_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/business-officers.json",
+   "csv": "/downloads/business-officers.csv",
+   "api": "/api/v1/datasets/business-officers"
+  },
+  {
    "id": "owner-gifts",
    "title": "Campaign gifts from business owners",
    "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
-   "rows": 1116,
+   "rows": 1114,
    "columns": [
     {
      "name": "donor_id",
@@ -6578,7 +6645,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16762,
+   "rows": 16664,
    "columns": [
     {
      "name": "entity_id",
@@ -6695,7 +6762,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 20187,
+   "rows": 20137,
    "columns": [
     {
      "name": "link_id",
@@ -12699,8 +12766,10 @@
      "name": "gov_id",
      "type": "string",
      "values": [
+      "beach_mosquito",
       "county",
       "cw",
+      "lake_powell_cdd",
       "lh",
       "mb",
       "parker",
@@ -14348,8 +14417,8 @@
   {
    "id": "restaurants",
    "title": "Restaurants and food service",
-   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1435,
+   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
+   "rows": 1440,
    "columns": [
     {
      "name": "place_id",
@@ -14425,8 +14494,6 @@
       "Panama City Bch",
       "Panama City Beach",
       "Parker",
-      "Santa Rosa Beach",
-      "Shalimar",
       "Southport",
       "Springfield",
       "Sunnyside",
@@ -14456,11 +14523,9 @@
       "32444",
       "32446",
       "32456",
-      "32459",
       "32461",
       "32466",
-      "32536",
-      "32579"
+      "32536"
      ]
     },
     {
@@ -14511,14 +14576,14 @@
      "name": "last_result",
      "type": "string",
      "values": [
-      "Allowed to reopen",
       "Fine recommended (administrative complaint)",
       "Follow-up after complaint: fixed",
       "Follow-up visit: fixed",
       "Follow-up visit: more time given",
       "Follow-up visit: not fixed, fine recommended",
       "Met inspection standards",
-      "Stayed closed: more time given",
+      "Not available electronically",
+      "Ordered closed (emergency order)",
       "Warning, follow-up visit set"
      ]
     },
@@ -14589,7 +14654,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17180,
+   "rows": 17175,
    "columns": [
     {
      "name": "place_id",
@@ -15485,6 +15550,7 @@
      "name": "recipient_match",
      "type": "string",
      "values": [
+      "one active Bay County Sunbiz filing with the same name",
       "same name as a business campaign donor (Sunbiz)",
       "same name as a company local governments paid"
      ]
@@ -15614,7 +15680,7 @@
    "id": "federal-contract-years",
    "title": "Federal contracts to local companies by year",
    "description": "Money obligated each calendar year since 2016 on federal contracts to companies based in the county, per company and signing agency, from USAspending.gov contract transactions: obligated dollars, number of contract actions and number of contracts.",
-   "rows": 1477,
+   "rows": 1431,
    "columns": [
     {
      "name": "place_id",

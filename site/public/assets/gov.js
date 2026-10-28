@@ -209,7 +209,7 @@ function officials() {
   if (from > today) from = today;
   const on = t => (!t.start_date || t.start_date <= to) && (!t.end_date || t.end_date > from);
   const ap = (d, a) => (a ? 'about ' : '') + mon(d);
-  const cardsFor = (seats, tone0) => seats.flatMap((seat, i) => OH.filter(t => t.seat === seat && on(t)).map(t => {
+  const cardsFor = (seats, tone0, pays = {}) => seats.flatMap((seat, i) => OH.filter(t => t.seat === seat && on(t)).map(t => {
     const part = t.end_date && t.end_date <= to ? `until ${ap(t.end_date, t.end_approx)}` : t.start_date && t.start_date > from ? `from ${ap(t.start_date, t.start_approx)}` : '';
     const sub = [esc(seat), part].filter(Boolean).join(' · ');
     if (!t.person_name)
@@ -218,7 +218,7 @@ function officials() {
     const ph = t.person_id && (G.photos || {})[t.person_id];
     const av = ph ? `<span class="ui-av ui-av-ph t-${TONE[(i + tone0) % 4]}"><img src="${esc(ph)}" alt="" width="160" height="160" loading="lazy" decoding="async"></span>`
       : `<span class="ui-av t-${TONE[(i + tone0) % 4]}" aria-hidden="true">${esc(initials(t.person_name))}</span>`;
-    const inner = `${av}<span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}</span>`;
+    const inner = `${av}<span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}${pays[t.person_id] || pays[t.person_name] || ''}</span>`;
     const u = t.person_id && window.BC ? BC.href('person:' + t.person_id) : null;
     return u ? `<a class="ui-person" href="${esc(u)}" title="${esc(t.note || '')}">${inner}</a>` : `<div class="ui-person" title="${esc(t.note || '')}">${inner}</div>`;
   }));
@@ -227,8 +227,15 @@ function officials() {
   // the manager's card follows the year; other staff (no year record) stay as today's
   if (staffBox && mgr.length) {
     const tmp = document.createElement('div'); tmp.innerHTML = staff0;
-    $$('[data-seat]', tmp).forEach(c => { if (mgr.includes(c.dataset.seat)) c.remove(); });
-    staffBox.innerHTML = cardsFor(mgr, 1).join('') + tmp.innerHTML;
+    // today's pay line on a manager's card stays with that person when the year's card replaces it
+    const pays = {};
+    $$('[data-seat]', tmp).forEach(c => {
+      if (!mgr.includes(c.dataset.seat)) return;
+      const pay = c.querySelector('.gx-pay'), nm = c.querySelector('b');
+      if (pay) pays[c.dataset.pid || nm.textContent.trim()] = pay.outerHTML;
+      c.remove();
+    });
+    staffBox.innerHTML = cardsFor(mgr, 1, pays).join('') + tmp.innerHTML;
   }
   const changed = [...elected, ...mgr].filter(seat => OH.filter(t => t.seat === seat && on(t)).length > 1).length;
   if (boardNote) boardNote.innerHTML = `Officials in office in fiscal year ${y} (${esc(nice(from))} to ${esc(nice(to))})${changed ? `; ${plural(changed, 'seat')} changed hands that year, so each person who held it is listed` : ''}.${mgr.length ? ` The ${esc(mgr[0].toLowerCase())} below is that year's too; other staff and pay are today's.` : ' Staff below are today\'s.'} `

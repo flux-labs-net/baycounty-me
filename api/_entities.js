@@ -147,20 +147,36 @@ async function liveConnections(req, catalog, ent) {
 // filing) and a hand-checked official are often the same person on the same record. Show one row: the official's,
 // which links to their person page, keeping the amount and dates from the build row. A board seat merges when the
 // confirmed row names that board-member key; a business row merges when the names match on the same company's filing.
-const nameKey = s => { const w = String(s || '').toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(x => x && !/^(jr|sr|ii|iii|iv)$/.test(x)); return w.length > 1 ? w[0] + ' ' + w[w.length - 1] : w.join(''); };
+// Nicknames for this merge only: both rows already name the same board seat or company filing, so a looser match is
+// safe here (data/entities/ids.py NICK plus common short forms).
+const NICK = {doug: 'douglas', chris: 'christopher', dave: 'david', bob: 'robert', bobby: 'robert', rob: 'robert', robbie: 'robert', bill: 'william',
+  billy: 'william', will: 'william', chuck: 'charles', charlie: 'charles', jim: 'james', jimmy: 'james', jamie: 'james', mike: 'michael', steve: 'steven',
+  stephen: 'steven', tom: 'thomas', tommy: 'thomas', nick: 'nicholas', pat: 'patrick', dan: 'daniel', danny: 'daniel', ed: 'edward', eddie: 'edward',
+  andy: 'andrew', josh: 'joshua', sam: 'samuel', ken: 'kenneth', kenny: 'kenneth', rick: 'richard', rich: 'richard', dick: 'richard', joe: 'joseph',
+  judy: 'judith', tim: 'timothy', jeff: 'jeffrey', phil: 'phillip', philip: 'phillip', pam: 'pamela', pamm: 'pamela', don: 'donald', donny: 'donald',
+  greg: 'gregory', matt: 'matthew', tony: 'anthony', larry: 'lawrence', ron: 'ronald', ronnie: 'ronald', cal: 'calvin', jerry: 'gerald', terry: 'terrence'};
+// 'first last', with suffixes and lone initials ('A. Gary Walsingham') dropped and nicknames folded
+const nameKey = s => {
+  const w = String(s || '').toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(x => x && !/^(jr|sr|ii|iii|iv|dr|mr|mrs|ms)$/.test(x));
+  const f = w.length > 2 && w[0].length === 1 ? w.slice(1) : w;
+  return f.length > 1 ? (NICK[f[0]] || f[0]) + ' ' + f[f.length - 1] : f.join('');
+};
 function mergeConfirmed(links, live) {
   const seen = new Set(links.map(r => r.from_id + '|' + r.to_id + '|' + r.relation));
   const add = live.filter(r => !seen.has(r.from_id + '|' + r.to_id + '|' + r.relation));
   const drop = new Set();
   for (const r of add) {
     if (r.from_kind !== 'person') continue;
-    const twin = links.find(l => !drop.has(l) && l.relation === r.relation && l.to_id === r.to_id && l.from_id !== r.from_id &&
-      (r.same_as ? l.from_id === r.same_as : ['member', 'owner'].includes(l.from_kind) && nameKey(l.from_name) === nameKey(r.from_name)));
-    if (!twin) continue;
-    drop.add(twin);
-    for (const k of ['amount', 'first_date', 'last_date', 'detail', 'source_url']) if (r[k] == null && twin[k] != null) r[k] = twin[k];
-    if (twin.records > (r.records || 0)) r.records = twin.records;
-    r.merged_from = twin.from_id;
+    // every build row for the same person on this record (a board member and a business owner can both be there)
+    const twins = links.filter(l => !drop.has(l) && l.relation === r.relation && l.to_id === r.to_id && l.from_id !== r.from_id &&
+      (r.same_as && l.from_id === r.same_as || ['member', 'owner'].includes(l.from_kind) && nameKey(l.from_name) === nameKey(r.from_name)));
+    if (!twins.length) continue;
+    for (const twin of twins) {
+      drop.add(twin);
+      for (const k of ['amount', 'first_date', 'last_date', 'detail', 'source_url']) if (r[k] == null && twin[k] != null) r[k] = twin[k];
+      if (twin.records > (r.records || 0)) r.records = twin.records;
+    }
+    r.merged_from = twins[0].from_id;
   }
   return links.filter(l => !drop.has(l)).concat(add);
 }
@@ -232,6 +248,18 @@ async function getEntity(req, catalog, id) {
       const nb = (await rowsWhere(req, catalog, 'new-businesses', {doc_number: id.slice(9).toUpperCase()}).catch(() => []))[0];
       if (nb) ent = {...ent, filing: {doc_number: nb.doc_number, filing_type: nb.filing_type, filed_date: nb.filed_date, status: nb.status, city: nb.city,
         latest_annual_report: nb.latest_annual_report ?? null, source_url: nb.source_url}};
+    }
+    // officers, managers and registered agent on its state filing (business-officers); an officer an editor confirmed
+    // as an official (official-businesses) links to their person page
+    const offs = await rowsWhere(req, catalog, 'business-officers', {entity_id: id}).catch(() => []);
+    if (offs.length) {
+      const confirmed = new Map(live.filter(r => r.from_kind === 'person' && r.relation === 'runs').map(r => [nameKey(r.from_name), r]));
+      ent = {...ent, officers: offs.map(o => {
+        const c = o.officer_kind === 'person' ? confirmed.get(nameKey(o.officer)) : null;
+        const oid = c ? c.from_id : o.officer_entity_id || null;
+        return {name: o.officer, title: o.title, kind: o.officer_kind, entity_id: oid, page_url: oid ? (c ? c.from_url : urlFor(oid)) : null,
+          official: !!c, doc_number: o.sunbiz_doc_number, business_status: o.business_status, source_url: o.source_url};
+      })};
     }
     const lic = await rowsWhere(req, catalog, 'restaurants', {licensee_entity_id: id}).catch(() => []);
     if (lic.length) ent = {...ent, restaurants: lic.map(r => ({license_number: r.license_number, name: r.business_name, kind: r.kind, city: r.city, licensed_now: r.licensed_now,

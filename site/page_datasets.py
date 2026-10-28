@@ -275,8 +275,21 @@ def _member_key(name):
     return 'b_' + hashlib.sha1(f"{county}|{last} {ids.NICK.get(first, first).upper()}|".encode()).hexdigest()[:12]
 
 
-def _sunbiz_names():
+def _np_by_doc(_c={}):
+    """Sunbiz document number (lowercase) -> nonprofit entity id, for filings that are a nonprofit with a profile."""
+    if 'm' not in _c:
+        _c['m'] = {n['sunbiz_doc_number'].lower(): 'nonprofit:' + n['nonprofit_id'] for n in nonprofits() if n.get('sunbiz_doc_number')}
+    return _c['m']
+
+
+def _sunbiz_names(_c={}):
     """Active Bay County Sunbiz filings by normalized name (only names that match one filing)."""
+    if 'm' not in _c:
+        _c['m'] = _sunbiz_names_load()
+    return _c['m']
+
+
+def _sunbiz_names_load():
     import csv, gzip, re
     from collections import defaultdict
     p = os.path.join(HERE, '..', 'data', 'sunbiz', 'bay', 'entities.csv.gz')
@@ -796,6 +809,34 @@ def _csv_rows(path):
     return list(csv.DictReader(open(path, encoding='utf-8'))) if os.path.exists(path) else []
 
 
+def _officer_at(name, zip_code, address, _c={}):
+    """The Sunbiz document number of the business a person runs when the name and street address on a license are the
+    same as an officer, manager or registered agent on that filing ('' when they run several), else None."""
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'sunbiz'))
+    import build_sunbiz as B
+    from collections import defaultdict
+    if 'idx' not in _c:
+        _c['idx'] = defaultdict(set)
+        try:
+            _, roles = B.load_registry('bay')
+        except FileNotFoundError:
+            roles = []
+        for r in roles:
+            if r.get('is_person') and r.get('street') and r.get('zip5'):
+                _c['idx'][(B.split_name(r['raw_name'])[0], r['zip5'], r['street'])].add(r['doc_number'])
+    docs = _c['idx'].get((B.split_name((name or '').upper())[0], B.zip5(zip_code), B.street_key(address)))
+    if not docs:
+        return None
+    return next(iter(docs)) if len(docs) == 1 else ''
+
+
+def _doc_entity(doc):
+    from entity_graph import build
+    bid = 'business:' + doc.lower()
+    G = build()
+    return G.alias[bid][0] if bid in G.alias else bid
+
+
 def _licensee_entity(name, sunbiz):
     """The profile id for a license holder: a company local governments paid, a nonprofit, or one Sunbiz filing with the
     same name (business:<doc>, which the API turns into a profile even when nothing else names it)."""
@@ -813,7 +854,10 @@ def _licensee_entity(name, sunbiz):
     hit = sunbiz.get(_org_norm(name))
     if hit:
         bid = 'business:' + hit[0].lower()
-        return G.alias[bid][0] if bid in G.alias else bid
+        if bid in G.alias:
+            return G.alias[bid][0]
+        np = _np_by_doc().get(hit[0].lower())
+        return np if np and np in G.ents else bid
     return None
 
 
@@ -832,7 +876,12 @@ def _restaurant_rows():
     from collections import defaultdict
     from place import PLACE_ID
     d = _rest_dir()
-    ins = [r for r in _csv_rows(os.path.join(d, 'inspections.csv')) if r['date'][:4] >= str(cutoff.FIRST_YEAR)]
+    ins, seen = [], set()
+    for r in sorted(_csv_rows(os.path.join(d, 'inspections.csv')), key=lambda r: (len(r['visit_id'] or ''), r['visit_id'] or '')):
+        k = tuple(v for c, v in r.items() if c not in ('visit_id', 'inspection_number'))
+        if r['date'][:4] >= str(cutoff.FIRST_YEAR) and k not in seen:  # the state file records some visits twice under two ids
+            seen.add(k)
+            ins.append(r)
     lic = _csv_rows(os.path.join(d, 'licenses.csv'))
     if not ins and not lic:
         _RC['rest'] = ([], [])
@@ -882,6 +931,9 @@ def _restaurant_rows():
         name = (l or {}).get('business_name') or (last_raw or {}).get('business_name') or ''
         addr = '' if tcode in NO_ADDRESS else ' '.join(x for x in [(l or {}).get('address') or (last_raw or {}).get('address'), (l or {}).get('address2')] if x and x.strip())
         licensee = (l or {}).get('licensee') or None
+        runs = None if not licensee or _is_org(licensee) else _officer_at((l or {}).get('licensee'), (l or {}).get('zip'), (l or {}).get('address'))
+        if licensee and not _is_org(licensee) and runs is None:
+            licensee = None  # a private person is named only when they run a registered business (Jeremy, 2026-10-28)
         lname = (ids.biz_case(licensee) if _is_org(licensee) else ids.sunbiz_person(licensee)) if licensee else None
         opened = min((x['date'] for x, raw in hist if raw['inspection_type'] == 'Food-Licensing Inspection'), default=None)
         recent = [x for x, raw in hist if x['date'] >= year_ago]
@@ -890,7 +942,7 @@ def _restaurant_rows():
         out_r.append({
             'place_id': PLACE_ID, 'license_number': key, 'license_type': LICENSE_TYPE[tcode], 'kind': RANK.get((l or {}).get('rank'), LICENSE_TYPE[tcode]),
             'business_name': ids.biz_case(name), 'licensee': lname,
-            'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else None,
+            'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else _doc_entity(runs) if runs else None,
             'address': ids.biz_case(addr) if addr else None, 'city': ((l or {}).get('city') or (last_raw or {}).get('city') or '').title() or None,
             'zip': (l or {}).get('zip') or (last_raw or {}).get('zip') or None, 'seats': int(l['seats']) if l and l.get('seats') not in (None, '', '0') else None,
             'licensed_now': bool(l), 'license_expires': (l or {}).get('expires') or None, 'risk_level': (l or {}).get('risk_level') or None,
@@ -978,7 +1030,8 @@ def new_businesses():
             continue
         doc = r['doc_number'].strip()
         bid = 'business:' + doc.lower()
-        eid = G.alias[bid][0] if bid in G.alias else bid
+        np = _np_by_doc().get(doc.lower())
+        eid = np if np and np in G.ents else G.alias[bid][0] if bid in G.alias else bid
         last = r.get('last_txn_date') or ''
         out.append({'place_id': PLACE_ID, 'doc_number': doc, 'name': ids.biz_case(r['name'].strip()), 'filing_type': FILING_TYPE.get(r['filing_type'], r['filing_type']),
                     'filed_date': f'{d[4:]}-{d[:2]}-{d[2:4]}', 'filed_month': f'{d[4:]}-{d[:2]}',
@@ -1044,6 +1097,13 @@ def fed_recipient_id(name, _c={}):
     doc = _c['doc'].get(_c['norm'](name))
     if doc:
         return ('vendor:' + _c['dv'][doc], 'same Sunbiz filing as a local vendor') if doc in _c['dv'] else ('business:' + doc, 'same name as a business campaign donor (Sunbiz)')
+    hit = _sunbiz_names().get(_org_norm(name))
+    if hit:
+        doc = hit[0].lower()
+        if doc in _c['dv']:
+            return 'vendor:' + _c['dv'][doc], 'same Sunbiz filing as a local vendor'
+        np = _np_by_doc().get(doc)
+        return (np, 'same Sunbiz filing as a local nonprofit') if np else ('business:' + doc, 'one active Bay County Sunbiz filing with the same name')
     return 'business:' + re.sub(r'[^a-z0-9]+', '-', (name or '').lower()).strip('-')[:80], None
 
 
@@ -1074,6 +1134,13 @@ def military_news():
             for s in N['stories'] if (s.get('published') or cutoff.FIRST_DATE) >= cutoff.FIRST_DATE]
 
 
+def _fed_person(name):
+    """True for a recipient that is a person's name ('SMITH, DERON', 'WINNIE FEHNRICH'), not a company or a dba."""
+    if _is_org(name) or re.search(r'(?i)\b(incorporated|fund|fss|fsrl|department|resort|services?|camp|ground|music|navy|army|air force|electric|electrical|construction|roofing|plumbing|marine|supply|systems|solutions|technolog\w*|consulting|engineering|enterprises?|industries|group|associates|contracting|design|repair|builders|landscap\w*|lawn|pest|cleaning|janitorial|tech|aviation|equipment|machine|tool|works|shop|center|academy|realty|properties|holdings|partners|ventures|global|international|america|american|florida|gulf|coast|bay|panama|emerald|usa|us)\b|\d', name or ''):
+        return False
+    return 2 <= len(re.sub(r'[^A-Za-z ]', ' ', name).split()) <= 4
+
+
 def _fed_rows():
     if '_fed' in _MC:
         return _MC['_fed']
@@ -1091,6 +1158,8 @@ def _fed_rows():
             continue  # close-out entries on a contract that ended before 2016
         name = a.get('recipient') or ts[-1]['recipient']
         eid, match = fed_recipient_id(name)
+        if not match and _fed_person(name):  # a private person is named only when they run a registered business (Jeremy, 2026-10-28)
+            name, eid = 'Individual contractor (name withheld)', None
         agency, sub = a.get('agency') or ts[-1]['agency'], a.get('sub_agency') or ts[-1]['sub_agency']
         dates = sorted(t['date'] for t in ts)
         awards.append({'place_id': place, 'award_key': k, 'award_id': a.get('award_id') or ts[-1]['award_id'], 'recipient': name,
@@ -1545,6 +1614,89 @@ def business_donor_sunbiz():
     return rows
 
 
+_OFFICER_TITLE = {'RA': 'Registered agent', 'MGR': 'Manager', 'MANA': 'Manager', 'AMBR': 'Authorized member', 'MGRM': 'Managing member',
+                  'CEO': 'Chief executive', 'CFO': 'Chief financial officer', 'COO': 'Chief operating officer', 'AP': 'Authorized person',
+                  'AUTH': 'Authorized person', 'AR': 'Authorized representative', 'MBR': 'Member', 'MEMB': 'Member', 'OWNE': 'Owner',
+                  'G': 'General partner', 'GP': 'General partner', 'PRES': 'President', 'SECR': 'Secretary', 'SEC': 'Secretary', 'TREA': 'Treasurer',
+                  'DIR': 'Director', 'DIRE': 'Director', 'CHAI': 'Chair', 'CHAIR': 'Chair', 'VP': 'Vice president', 'VC': 'Vice chair',
+                  'ASST': 'Assistant officer', 'SVP': 'Senior vice president', 'EVP': 'Executive vice president', 'GM': 'General manager',
+                  # short forms Sunbiz filers type by hand
+                  **{k: 'Manager' for k in ('MGMR', 'MNGR', 'MANG', 'MANE', 'MRG', 'MRGR', 'MGRE', 'MGRS', 'MGT', 'MGRF', 'MGMT')},
+                  **{k: 'Managing member' for k in ('MMGR', 'MGMB', 'MNGM', 'MRGM', 'MGM', 'MBMG', 'MBG', 'MM', 'MEMP')},
+                  **{k: 'Member' for k in ('MMBR', 'MEM')}, **{k: 'Officer' for k in ('OFFI', 'OFF', 'OFC', 'O', 'OTHE')},
+                  **{k: 'Treasurer' for k in ('TRES', 'TRE', 'TRS', 'TR')}, **{k: 'Trustee' for k in ('TRUS', 'TRTE')},
+                  **{k: 'Owner' for k in ('OWNR', 'OWN')}, **{k: 'Partner' for k in ('PART', 'PTNR')},
+                  'AMGR': 'Authorized manager', 'AREP': 'Authorized representative', 'ASSI': 'Assistant officer', 'AS': 'Assistant secretary',
+                  'AT': 'Assistant treasurer', 'VPRE': 'Vice president', 'VICE': 'Vice president', 'VPA': 'Vice president',
+                  'BOAR': 'Board member', 'EXEC': 'Executive', 'CHMN': 'Chair', 'CIO': 'Chief information officer', 'CTO': 'Chief technology officer',
+                  'CAO': 'Chief administrative officer', 'CSEC': 'Corporate secretary', 'SCTY': 'Secretary', 'REGI': 'Registered agent',
+                  'COOW': 'Co-owner', 'GMGR': 'General manager', 'FNDR': 'Founder', 'PRIN': 'Principal'}
+_OFFICER_LETTER = {'P': 'President', 'V': 'Vice president', 'S': 'Secretary', 'T': 'Treasurer', 'D': 'Director', 'C': 'Chair'}
+
+
+def officer_title(code):
+    """Sunbiz title codes as words: 'PSTD' -> 'President, Secretary, Treasurer, Director'."""
+    c = re.sub(r'[^A-Z]', '', (code or '').upper())
+    if not c:
+        return 'Officer'
+    if c in _OFFICER_TITLE:
+        return _OFFICER_TITLE[c]
+    if set(c) <= set(_OFFICER_LETTER):
+        c = c.replace('VP', 'V')
+        return ', '.join(dict.fromkeys(_OFFICER_LETTER[x] for x in c))
+    return 'Officer'  # an unreadable hand-typed code ('Mrs.', 'Cpsf'); the Sunbiz link shows what was filed
+
+
+def business_officers():
+    """Officers, managers and registered agent of each registered business with a profile on the site, as filed with
+    the Florida Division of Corporations (Sunbiz). Names and titles only, never addresses. An officer who is also on a
+    profile for that business (a board member, or a business owner who gave to a campaign) carries that profile's id."""
+    import ids
+    from entity_graph import build
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'sunbiz'))
+    import build_sunbiz as B
+    from place import PLACE_ID
+    G = build()
+    want = {}  # doc (upper) -> the profile that shows it
+    for eid in list(G.ents) + list(G.alias):
+        if eid.startswith('business:') and re.match(r'^[a-z0-9]+$', eid[9:]):
+            want[eid[9:].upper()] = G.alias[eid][0] if eid in G.alias else eid
+    for r in restaurants():
+        lid = r.get('licensee_entity_id') or ''
+        if lid.startswith('business:'):
+            want.setdefault(lid[9:].upper(), lid)
+    try:
+        ents, roles = B.load_registry('bay')
+    except FileNotFoundError:
+        return []
+    who = {}  # (profile id, person key) -> member:/owner: id already linked to that business
+    for x in G.links.values():
+        if x['relation'] in ('runs', 'board') and x['from_id'].split(':')[0] in ('member', 'owner', 'person'):
+            k = ids.person_key(G.ents[x['from_id']]['name'])
+            if k:
+                who.setdefault((x['to_id'], k), x['from_id'])
+    out, seen = [], set()
+    for r in roles:
+        doc = r['doc_number']
+        eid = want.get(doc)
+        if not eid or not r['raw_name']:
+            continue
+        name = ids.sunbiz_person(r['raw_name']) if r['is_person'] else ids.biz_case(r['raw_name'])
+        title = officer_title(r['title'])
+        k = (doc, name.lower(), title)
+        if k in seen:
+            continue
+        seen.add(k)
+        e = ents.get(doc) or {}
+        out.append({'place_id': PLACE_ID, 'entity_id': eid, 'sunbiz_doc_number': doc, 'business': ids.biz_case(e.get('name') or ''),
+                    'business_status': 'Active' if e.get('status') == 'A' else 'Inactive', 'officer': name, 'title': title,
+                    'officer_kind': 'person' if r['is_person'] else 'organization',
+                    'officer_entity_id': who.get((eid, ids.person_key(name))) if r['is_person'] else None,
+                    'source_url': ids.sunbiz_url(e.get('name') or '', doc)})
+    out.sort(key=lambda r: (r['entity_id'], r['title'] == 'Registered agent', r['officer']))
+    return out
+
+
 def owner_gifts():
     """Personal campaign gifts from people who run a registered business (data/campaign/owner_gifts.py), one row per
     person and campaign. The person is named, with the businesses they run; no addresses or occupations."""
@@ -1554,9 +1706,12 @@ def owner_gifts():
     fp = os.path.join(HERE, '..', 'data', 'campaign', 'owner_gifts.json')
     if not os.path.exists(fp):
         return []
+    import cutoff
     d = json.load(open(fp))
     agg = {}
     for g in d['gifts']:
+        if not cutoff.keep(g.get('date')):
+            continue  # 2016 is the first year shown (some 2016 campaigns took gifts in 2015)
         r = agg.setdefault((g['owner_id'], g['cand_id']), {'n': 0, 'amt': 0.0, 'dates': []})
         r['n'] += 1
         r['amt'] += g['amount']
@@ -1905,6 +2060,7 @@ DATASETS = [
     ('nonprofit-officials', 'Officials on nonprofit boards', 'Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.', nonprofit_officials),
     ('official-businesses', "Officials' businesses", 'Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.', official_businesses),
     ('official-business-links', "Officials' business ties", "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.", official_business_links),
+    ('business-officers', 'Business officers', "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.", business_officers),
     ('owner-gifts', 'Campaign gifts from business owners', "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.", owner_gifts),
     ('entity-profiles', 'Profiles: people, companies and organizations', 'Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits\' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).', entity_profiles),
     ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),
@@ -1961,7 +2117,7 @@ DATASETS = [
     ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
     ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
     ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
-    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
+    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
     ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
     ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),
     ('weekly-roundup', 'This week in Bay County', "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.", weekly_roundup),

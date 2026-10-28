@@ -116,7 +116,7 @@ SAV_ASSETS = '<link rel="stylesheet" href="/assets/savings.css"><script src="/as
 
 
 def gov_page(key):
-    from fees_page import roster_li, STAFF
+    from fees_page import roster_li, STAFF, split_note
     p = profile(key)
     g = next(x for x in GOVS if x['key'] == key)
     b = p.get('budget') or {}
@@ -143,7 +143,17 @@ def gov_page(key):
         seats = off['seats']
         board = [s for s in seats if s.get('elected') or not STAFF.search(s['seat'])]
         staff = [s for s in seats if s not in board]
-        pay = ''.join(_pay_card(x) for x in p.get('pay') or [])
+        pay_rows = _fold_pay(p.get('pay') or [])
+        # a staff member who also has a pay row gets one card: the pay goes on their staff card
+        import ids
+        staff_pay = {}
+        for s in staff:
+            pid = ids.person_id(split_note(s.get('holder'))[0] or '')
+            hit = next((x for x in pay_rows if pid and x.get('name') and ids.person_id(x['name']) == pid), None)
+            if hit:
+                staff_pay[s['seat']] = hit
+                pay_rows.remove(hit)
+        pay = ''.join(_pay_card(x) for x in pay_rows)
         links = ''.join(x for x in [
             f'<a class="ui-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Website</a>' if off.get('website') else '',
             f'<a class="ui-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
@@ -151,7 +161,7 @@ def gov_page(key):
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="who">Who's in charge</h2><span class="muted">{e(off.get("form") or "")}</span></div>
           <p class="small muted" id="gxBoardNote">Today's officials. Pick a year in the bar at the top to see who held each seat, and who was manager, that year.</p>
           <div class="ui-people" id="gxBoard">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
-          {f'<h3 class="ui-h3">Appointed staff and pay</h3><div class="ui-row" id="gxStaff">{"".join(_person_card(s, i + 1, staff=True) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
+          {f'<h3 class="ui-h3">Appointed staff and pay</h3><div class="ui-row" id="gxStaff">{"".join(_person_card(s, i + 1, staff=True, pay=staff_pay.get(s['seat'])) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
           <div class="ui-links">{links}</div></section>''')
     # money
     if b.get('revenue') or b.get('spending'):
@@ -259,6 +269,38 @@ def gov_page(key):
 <script src="/assets/gov.js" defer></script><script src="/assets/completeness.js" defer></script>{SAV_ASSETS if 'id="svList"' in body else ''}'''
 
 
+def _pay_year(x):
+    import re
+    m = re.search(r'(19|20)\d\d', str(x.get('year') or ''))
+    return int(m.group(0)) if m else 0
+
+
+def _fold_pay(rows):
+    """One pay row per person and job, in the order given: the latest year, with the year before noted as 'was'."""
+    import ids
+    key = lambda x: (ids.person_id(x['name']) if x.get('name') else None, (x.get('title') or '').lower())
+    best = {}
+    for x in rows:
+        k = key(x)
+        best.setdefault(k, []).append(x)
+    out = []
+    for x in rows:
+        k = key(x)
+        if k not in best:
+            continue
+        group = sorted(best.pop(k), key=_pay_year, reverse=True)
+        top = dict(group[0])
+        if len(group) > 1 and group[1].get('annual'):
+            prev = group[1]
+            top['was'] = f"was {usd(prev['annual'])}" + (f" in {prev['year']}" if prev.get('year') else '')
+        out.append(top)
+    return out
+
+
+def _pay_line(x, with_title):
+    return ' · '.join(v for v in [e(x['title']) if with_title else '', usd(x['annual']), e(x.get('year') or ''), e(x.get('was') or '')] if v)
+
+
 def _pay_card(x):
     """One pay row as a card. The person's name is the title (linked to their profile, like the staff cards);
     the job, salary and year sit underneath. A row with no name (a combined board total) leads with the job."""
@@ -266,7 +308,7 @@ def _pay_card(x):
     from entity_graph import build
     import ids
     name = x.get('name')
-    sub = ' · '.join(v for v in [e(x['title']) if name else '', usd(x['annual']), e(x.get('year') or '')] if v)
+    sub = _pay_line(x, bool(name))
     if not name:
         return f'<div class="ui-person">{_avatar(None, "amber", "dollar")}<span><b>{e(x["title"])}</b><small>{sub}</small></span></div>'
     pid = ids.person_id(name)
@@ -275,7 +317,7 @@ def _pay_card(x):
     return f'<a class="ui-person" href="{e(url)}">{inner}</a>' if url else f'<div class="ui-person">{inner}</div>'
 
 
-def _person_card(s, i, staff=False):
+def _person_card(s, i, staff=False, pay=None):
     """One official as a card: initials, name, seat. The card links to the person's profile when there is one.
     A staff card carries data-seat, so gov.js can swap in whoever held that job in the year picked."""
     from fees_page import split_note, term_txt
@@ -289,8 +331,10 @@ def _person_card(s, i, staff=False):
     if not name:
         return f'<div class="ui-person vac"{ds}>{_avatar(None, "blue", "users")}<span><b>Not published online</b><small>{sub}</small></span></div>'
     pid = ids.person_id(name)
+    if staff and pid:
+        ds += f' data-pid="{e(pid)}"'
     url = href('person:' + pid) if pid and 'person:' + pid in build().ents else None
-    inner = f'{_avatar(name, TONES[i % 4], photo=photo_of(pid))}<span><b>{e(name)}</b><small>{sub}</small>{f"<small>{e(note)}</small>" if note else ""}</span>'
+    inner = f'{_avatar(name, TONES[i % 4], photo=photo_of(pid))}<span><b>{e(name)}</b><small>{sub}</small>{f"<small>{e(note)}</small>" if note else ""}{f'<small class="gx-pay">{_pay_line(pay, False)}</small>' if pay else ""}</span>'
     return f'<a class="ui-person" href="{e(url)}"{ds}>{inner}</a>' if url else f'<div class="ui-person"{ds}>{inner}</div>'
 
 

@@ -86,6 +86,33 @@ test('a board member or business officer confirmed as an official shows once, as
   assert.equal(allan.first_date, '2025');
 });
 
+test('a business profile lists its officers from the state filing, never their addresses', async () => {
+  const rows = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'business-officers.json'), 'utf8'));
+  assert.ok(rows.length > 1000);
+  for (const r of rows.slice(0, 2000)) assert.ok(!('address' in r) && !('street' in r) && !('zip' in r), 'no address columns');
+  const id = rows.find(r => r.entity_id.startsWith('business:')).entity_id;
+  const d = await E().getEntity({}, catalog(), id);
+  assert.ok(d.entity.officers && d.entity.officers.length, `${id} shows its officers`);
+  assert.ok(d.entity.officers.every(o => o.name && o.title));
+});
+
+test('the merge folds nicknames and lone initials, and drops every build row for the same person', () => {
+  const {mergeConfirmed} = E();
+  const links = [
+    {from_id: 'member:b_5', from_name: 'Doug Moore', from_kind: 'member', to_id: 'business:l2', relation: 'runs'},
+    {from_id: 'owner:o_6', from_name: 'DOUGLAS MOORE', from_kind: 'owner', to_id: 'business:l2', relation: 'runs', amount: 1000},
+    {from_id: 'owner:o_7', from_name: 'A. Gary Walsingham', from_kind: 'owner', to_id: 'business:l3', relation: 'runs'},
+    {from_id: 'owner:o_8', from_name: 'Doug Moore', from_kind: 'owner', to_id: 'business:l9', relation: 'runs'},
+  ];
+  const live = [
+    {from_id: 'person:douglas-moore', from_name: 'Douglas Moore', from_kind: 'person', to_id: 'business:l2', relation: 'runs'},
+    {from_id: 'person:gary-walsingham', from_name: 'Gary Walsingham', from_kind: 'person', to_id: 'business:l3', relation: 'runs'},
+  ];
+  const all = mergeConfirmed(links, live);
+  assert.deepEqual(all.map(r => r.from_id).sort(), ['owner:o_8', 'person:douglas-moore', 'person:gary-walsingham'], 'a different filing is never merged');
+  assert.equal(all.find(r => r.from_id === 'person:douglas-moore').amount, 1000);
+});
+
 test('each person has one row per government, with every role folded in', async () => {
   const links = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'entity-connections.json'), 'utf8'));
   const seen = new Map();
