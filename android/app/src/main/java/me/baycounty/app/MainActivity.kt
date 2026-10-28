@@ -139,6 +139,8 @@ fun RouteScreen(route: Route) {
         is Route.Utilities -> UtilitiesScreen(route.match)
         Route.Volunteer -> VolunteerScreen()
         Route.Military -> MilitaryScreen()
+        Route.MyHome -> MyHomeScreen()
+        Route.AccountSettings -> AccountSettingsScreen()
         is Route.BudgetCompare -> BudgetCompareScreen(route.govID)
         is Route.TaxCalculator -> TaxCalculatorScreen(route)
         is Route.GovBudget -> GovBudgetScreen(route.id)
@@ -163,11 +165,12 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
         "person" to Route.Person("clair-pease"), "explore" to Route.Explore, "votes" to Route.Dataset("votes"),
         "salaries" to Route.Dataset("salary-positions"), "accountability" to Route.Accountability,
         "accproject" to Route.AccountabilityProject("pcb-fbr-seg3"), "budget" to Route.BudgetCompare("lh"),
-        "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "events" to Route.Events, "beaches" to Route.Beaches, "parks" to Route.Parks, "schools" to Route.Schools, "emergency" to Route.Emergency, "hurricaneprep" to Route.HurricanePrep, "utilities" to Route.Utilities(UTILITIES_SAMPLE), "volunteer" to Route.Volunteer, "military" to Route.Military, "pastelections" to Route.Dataset("campaign-history"),
+        "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "events" to Route.Events, "beaches" to Route.Beaches, "parks" to Route.Parks, "schools" to Route.Schools, "emergency" to Route.Emergency, "hurricaneprep" to Route.HurricanePrep, "utilities" to Route.Utilities(UTILITIES_SAMPLE), "volunteer" to Route.Volunteer, "military" to Route.Military, "myhome" to Route.MyHome, "pastelections" to Route.Dataset("campaign-history"),
         "roads" to Route.Dataset("road-contracts"), "development" to Route.Dataset("development-projects"),
         "restaurants" to Route.Dataset("restaurants"), "newbusinesses" to Route.Dataset("new-businesses"),
     )
     simple[arg]?.let { nav.replace(it); return }
+    if (arg == "myhome:settings") { nav.replace(Route.MyHome); nav.push(Route.AccountSettings); return }
     when {
         arg == "tab:search" -> nav.replace(Route.Search)
         arg == "tab:governments" -> nav.tab = Tab.GOVERNMENTS

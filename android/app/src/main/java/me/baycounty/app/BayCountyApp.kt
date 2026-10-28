@@ -9,5 +9,6 @@ class BayCountyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Push.setUp(this)
+        Account.load(this)
     }
 }

@@ -232,7 +232,7 @@ private struct FeedContent: View {
             if let b = feed.todayCard.beach {
                 KPICard(title: "Beach flag", value: b.flag.capitalized, caption: b.ripCurrentRisk.map { "Rip current risk: \($0)" }, symbol: "flag", tone: .blue)
             } else {
-                KPICard(title: "Your government", value: feed.localGovernment, caption: feed.city == nil ? "Unincorporated" : "City limits", symbol: "building.columns", tone: .blue)
+                KPICard(title: "Your government", value: feed.city ?? "Bay County", caption: feed.city == nil ? "Unincorporated Bay County" : feed.localGovernment, symbol: "building.columns", tone: .blue)
             }
         }
         ForEach(feed.sections) { s in

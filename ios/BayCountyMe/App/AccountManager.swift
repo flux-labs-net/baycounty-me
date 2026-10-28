@@ -114,10 +114,10 @@ final class AccountManager {
          "home":{"label":"Home","address":"825 Ohio Ave","city":"Lynn Haven","zip":"32444","lat":30.2449,"lon":-85.6483,"gov_id":"lh","zone":"D"},
          "prefs":{"weekly_email":true,"alert_email":["evacuation","water"],"push_topics":["weather","evacuation","shelters","water","agenda"],"radius_mi":1,"topics":["meetings","events","projects","notices","food","business"]},
          "devices":1,
-         "choices":{"topics":{"meetings":"Public meetings","events":"Things to do","projects":"Building and road work","notices":"Public notices","food":"Restaurant inspections","business":"New businesses"},
+         "choices":{"topics":{"meetings":"Public meetings","events":"Things to do","projects":"Building and road work near me","notices":"Public notices","food":"Restaurant inspections in my ZIP","business":"New businesses in my ZIP"},
                     "radius_mi":[0.25,0.5,1,2,5],
-                    "push_topics":{"weather":"Weather warnings","evacuation":"Evacuation orders","shelters":"Shelters opening","water":"Boil-water notices","roads":"Road closures","agenda":"Agenda items near my home"},
-                    "alert_email":{"evacuation":"Evacuation orders for my zone","water":"Boil-water notices for my city","weather":"Weather warnings","shelters":"Shelters opening"}}}
+                    "push_topics":{"weather":"Weather warnings","evacuation":"Evacuation orders","shelters":"Shelter openings","water":"Boil-water notices","roads":"Full road closures","agenda":"Agenda items near my saved place"},
+                    "alert_email":{"evacuation":"Evacuation orders","water":"Boil-water notices","weather":"Weather warnings","shelters":"Shelter openings"}}}
         """#
         me = try? AccountMe.decode(Data(j.utf8))
         client.token = "demo"

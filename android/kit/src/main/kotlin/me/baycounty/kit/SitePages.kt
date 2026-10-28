@@ -19,6 +19,7 @@ object SitePages {
     val pages: Map<String, Coverage> = mapOf(
         "/" to Coverage.Native("Home"),
         "/my-address" to Coverage.Native("My Address"),
+        "/account" to Coverage.Native("My home: sign in with an emailed code, saved home, near-my-home feed from /api/v1/nearby and settings"),
         "/public-money/cra-spending" to Coverage.Native("CRA Spending"),
         "/public-money/cra-tax-increment" to Coverage.Native("CRA tax increment"),
         "/public-money/tax-dollars" to Coverage.Native("Tax calculator"),

@@ -108,6 +108,9 @@ suspend fun preload(store: AppStore, route: Route?) {
         }
         Route.Volunteer -> store.load(listOf("volunteer-needs", "volunteer-orgs"))
         Route.Military -> store.load(listOf("military-installations", "military-news", "federal-contract-years"))
+        // My home needs an account and the live site; a snapshot uses the saved /api/v1/nearby answer for 825 Ohio Ave.
+        Route.MyHome, Route.AccountSettings ->
+            Account.loadDemo(File(System.getProperty("repoRoot") ?: "../..", "ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/nearby-sample.json").readText())
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {
             store.load(route.datasetID); store.loadVendors(); store.loadPeople()

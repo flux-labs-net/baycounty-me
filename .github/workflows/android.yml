@@ -10,7 +10,7 @@ on:
     branches: [main]
     paths: ["android/**", ".github/workflows/android.yml"]
 env:
-  SCREENS: home,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,chambers,events,beaches,parks,roads,development,schools,emergency,hurricaneprep,utilities,restaurants,newbusinesses,volunteer,military,budget,pastelections,updates,about,explore,myaddress,record:contract,record:vote,record:board,record:nonprofit
+  SCREENS: home,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,chambers,events,beaches,parks,roads,development,schools,emergency,hurricaneprep,utilities,restaurants,newbusinesses,volunteer,military,budget,pastelections,updates,about,explore,myaddress,myhome,myhome:settings,record:contract,record:vote,record:board,record:nonprofit
 jobs:
   build:
     runs-on: ubuntu-latest
