@@ -23,6 +23,12 @@
   const toneOf = t => TONES[[...String(t || '')].reduce((a, c) => a + c.codePointAt(0), 0) % 4];  // same as ui.tone_of
   const ico = (n, t) => { const i = `<span class="ico i-${n}" aria-hidden="true"></span>`; return t ? `<span class="ui-ti t-${t}">${i}</span>` : i; };
   const ICON = {gov: 'county', vendor: 'store', business: 'store', nonprofit: 'heart', committee: 'megaphone'};
+  // photos are served by the site itself, so a preview build shows its own copies
+  const rel = u => String(u || '').replace(/^https:\/\/baycounty\.me(?=\/)/, '');
+  // a person's photo in a circle on the network map, ringed in the color of their kind
+  let faces = 0;
+  const face = (x, y, r, url, ring, cls) => { const k = 'pfc' + (++faces);
+    return `<clipPath id="${k}"><circle cx="${x}" cy="${y}" r="${r}"/></clipPath><circle cx="${x}" cy="${y}" r="${r}" fill="var(--sunken)"/><image href="${esc(rel(url))}" x="${(x - r).toFixed(1)}" y="${(y - r).toFixed(1)}" width="${(2 * r).toFixed(1)}" height="${(2 * r).toFixed(1)}" clip-path="url(#${k})" preserveAspectRatio="xMidYMid slice"/><circle class="pf-face${cls ? ' ' + cls : ''}" cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${ring}"/>`; };
   function initials(name) {
     const w = String(name || '').replace(/\([^)]*\)?|"[^"]*"?/g, ' ').split(/\s+/).filter(x => /^\p{L}/u.test(x));
     return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?';
@@ -31,12 +37,15 @@
     const h = document.getElementById('pfHead'); if (!h) return;
     document.title = e.name + ' · BayCounty.me';
     const tone = toneOf(e.name), ic = ICON[e.kind];
-    const badge = ic ? `<span class="ui-badge t-${tone}">${ico(ic)}</span>` : `<span class="ui-badge ui-badge-av t-${tone}" aria-hidden="true">${esc(initials(e.name))}</span>`;
+    const ph = !ic && e.photo && e.photo.url;
+    const badge = ph ? `<span class="ui-badge ui-badge-av ui-badge-ph t-${tone}"><img src="${esc(rel(ph))}" alt="Photo of ${esc(e.name)}" width="160" height="160" decoding="async"></span>`
+      : ic ? `<span class="ui-badge t-${tone}">${ico(ic)}</span>` : `<span class="ui-badge ui-badge-av t-${tone}" aria-hidden="true">${esc(initials(e.name))}</span>`;
+    const credit = ph && e.photo.credit ? `<p class="ui-photo-cr">Photo: ${e.photo.source_url ? `<a href="${esc(e.photo.source_url)}" target="_blank" rel="noopener">${esc(e.photo.credit)}</a>` : esc(e.photo.credit)}</p>` : '';
     const kp = (i, t, l, v, s) => v ? `<div class="kpi ui-k"><span class="kh">${ico(i, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>` : '';
     const tags = e.source_url ? `<div class="ui-tags"><a class="ui-tag" href="${esc(e.source_url)}" target="_blank" rel="noopener">${ico('link')}Public record</a></div>` : '';
     h.closest('.page')?.classList.add('ui-pfp');
     h.innerHTML = `<header class="tx-top ui-hero ui-pf"><div class="ui-id">${badge}<div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
-      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}${e.same_as && e.same_as.page_url ? `<p class="small">Checked by hand: this board member is <a href="${esc(e.same_as.page_url)}">${esc(e.same_as.name)}</a> <span class="pf-badge">Official</span></p>` : ''}</div>${tags}</div></div></header>
+      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${credit}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}${e.same_as && e.same_as.page_url ? `<p class="small">Checked by hand: this board member is <a href="${esc(e.same_as.page_url)}">${esc(e.same_as.name)}</a> <span class="pf-badge">Official</span></p>` : ''}</div>${tags}</div></div></header>
       <div class="kpis">${kp('network', 'blue', 'Connections', (e.connections || 0).toLocaleString('en-US'), 'in public records')}${kp('dollar', 'teal', 'Received', money(e.amount_received), 'payments, gifts and grants in the records')}${kp('wallet', 'amber', 'Gave or paid', money(e.amount_given), 'payments, gifts and grants in the records')}</div>`;
   }
 
@@ -63,7 +72,8 @@
       const right = i < half, j = right ? i : i - half, n = right ? half : nodes.length - half;
       const f = n > 1 ? j / (n - 1) : 0.5, a = -span + 2 * span * f;
       const t = right ? a : Math.PI - a;
-      return {c, right, x: cx + rx * Math.cos(t), y: cy + ry * Math.sin(a), r: 4 + 8 * Math.sqrt((c.amount || 0) / top)};
+      const r = 4 + 8 * Math.sqrt((c.amount || 0) / top);
+      return {c, right, x: cx + rx * Math.cos(t), y: cy + ry * Math.sin(a), r: c.other.photo ? Math.max(r, 11) : r};
     });
     let svg = '';
     pts.forEach(p => { svg += `<line class="pf-l ${LINE[p.c.relation] || ''}" x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}"/>`; });
@@ -71,11 +81,15 @@
     pts.forEach(p => {
       const dx = p.right ? p.r + 5 : -p.r - 5;
       const o = p.c.other, tip = `${o.name} (${KIND[o.kind] || o.kind}): ${p.c.label}${p.c.amount ? ' · ' + money(p.c.amount) : ''}`;
-      const inner = `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${COLOR[o.kind] || 'var(--muted)'}"/><text x="${(p.x + dx).toFixed(1)}" y="${(p.y + 4).toFixed(1)}" text-anchor="${p.right ? 'start' : 'end'}" data-w="${Math.floor(p.right ? W - p.x - dx - 4 : p.x + dx - 4)}">${esc(lab(o.name, narrow ? 15 : 30))}</text><title>${esc(tip)}</title>`;
+      const dot = o.photo ? face(+p.x.toFixed(1), +p.y.toFixed(1), +p.r.toFixed(1), o.photo, COLOR[o.kind] || 'var(--muted)')
+        : `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${COLOR[o.kind] || 'var(--muted)'}"/>`;
+      const inner = `${dot}<text x="${(p.x + dx).toFixed(1)}" y="${(p.y + 4).toFixed(1)}" text-anchor="${p.right ? 'start' : 'end'}" data-w="${Math.floor(p.right ? W - p.x - dx - 4 : p.x + dx - 4)}">${esc(lab(o.name, narrow ? 15 : 30))}</text><title>${esc(tip)}</title>`;
       svg += o.page_url ? `<a href="${esc(o.page_url)}">${inner}</a>` : `<g>${inner}</g>`;
     });
     const me = d.entity;
-    svg += `<circle class="pf-me" cx="${cx}" cy="${cy}" r="16" fill="${COLOR[me.kind] || 'var(--navy)'}"/><text class="pf-me-t" x="${cx}" y="${cy + 34}" text-anchor="middle">${esc(lab(me.name, narrow ? 22 : 34))}</text>`;
+    const mePh = me.photo && (me.photo.url || me.photo);
+    svg += mePh ? face(cx, cy, 24, mePh, COLOR[me.kind] || 'var(--navy)', 'pf-me-ph') + `<text class="pf-me-t" x="${cx}" y="${cy + 42}" text-anchor="middle">${esc(lab(me.name, narrow ? 22 : 34))}</text>`
+      : `<circle class="pf-me" cx="${cx}" cy="${cy}" r="16" fill="${COLOR[me.kind] || 'var(--navy)'}"/><text class="pf-me-t" x="${cx}" y="${cy + 34}" text-anchor="middle">${esc(lab(me.name, narrow ? 22 : 34))}</text>`;
     const kinds = [...new Set(nodes.map(c => c.other.kind === 'business' ? 'vendor' : c.other.kind).concat([me.kind === 'business' ? 'vendor' : me.kind]))];
     const rels = [...new Set(nodes.map(c => c.relation))];
     box.innerHTML = `<svg viewBox="0 0 ${W} ${H}"${narrow ? ' class="pf-sm"' : ''} role="img" aria-label="${esc(me.name)} and ${nodes.length} of its connections">${svg}</svg>
@@ -116,7 +130,7 @@
   // A hand-checked official gets an "Official" badge. When the build also listed the same person (as a board member
   // or business officer on the same record), the API has already merged the two into this one row.
   const what = c => c.merged_from && c.relation === 'board' ? 'Board member' : (c.other.kind_label || KIND[c.other.kind] || '');
-  const rowHtml = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}${c.other.kind === 'person' && c.checked_by_hand ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(what(c))}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
+  const rowHtml = c => `<tr><th scope="row">${c.other.photo ? `<img class="pf-row-ph" src="${esc(rel(c.other.photo))}" alt="" width="32" height="32" loading="lazy" decoding="async">` : ''}${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}${c.other.kind === 'person' && c.checked_by_hand ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(what(c))}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
         <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
         <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
   // a business's state filing (new-businesses) and the restaurants it holds a license for (restaurants)
@@ -127,6 +141,15 @@
     if (f) h += `<section class="pf-grp"><div class="sec-hd"><h3>State filing</h3><span class="muted">Florida Division of Corporations</span></div>
       <p>${esc(f.filing_type)} filed ${esc(f.filed_date)}${f.city ? ', ' + esc(f.city) : ''}. ${f.status === 'Active' ? 'Active' : 'Inactive'}${f.latest_annual_report ? `; latest annual report ${esc(f.latest_annual_report)}` : ''}.
       <a href="${esc(f.source_url)}" target="_blank" rel="noopener">State record</a> (officers and registered agent). <a href="/new-businesses">New businesses →</a></p></section>`;
+    const of = e.officers || [];
+    if (of.length) {  // one line per person, every title they hold on the filing
+      const by = new Map();
+      of.forEach(o => { const k = (o.entity_id || o.name).toLowerCase(); const x = by.get(k) || by.set(k, {...o, titles: []}).get(k); if (!x.titles.includes(o.title)) x.titles.push(o.title); });
+      const ppl = [...by.values()].sort((a, b) => (a.titles.includes('Registered agent') && a.titles.length === 1) - (b.titles.includes('Registered agent') && b.titles.length === 1) || a.name.localeCompare(b.name));
+      h += `<section class="pf-grp"><div class="sec-hd"><h3>Officers</h3><span class="muted">${ppl.length} · as filed with the state (Sunbiz)</span></div>
+      <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${ppl.map(o => `<tr><th scope="row">${o.page_url ? `<a href="${esc(o.page_url)}">${esc(o.name)}</a>` : esc(o.name)}${o.official ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(o.kind === 'organization' ? 'Company' : 'Person')}</small></th>
+        <td class="wrap small">${esc(o.titles.join(' · '))}</td><td><a class="src" href="${esc(o.source_url)}" target="_blank" rel="noopener">Source</a></td></tr>`).join('')}</tbody></table></div></section>`;
+    }
     const rs = e.restaurants || [];
     if (rs.length) h += `<section class="pf-grp"><div class="sec-hd"><h3>Restaurant licenses</h3><span class="muted">${rs.length} · state food safety inspections</span></div>
       <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${rs.map(r => `<tr><td><a href="${esc(r.page_url)}">${esc(r.name)}</a><small>${esc([r.kind, r.city, r.licensed_now ? null : 'no longer licensed'].filter(Boolean).join(' · '))}</small></td>
@@ -145,7 +168,7 @@
       return `<section class="pf-grp"><div class="sec-hd"><h3>${esc(lbl.charAt(0).toUpperCase() + lbl.slice(1))}</h3><span class="muted">${rs.length.toLocaleString('en-US')}${tot ? ' · ' + money(tot) + ' in the records' : ''}</span></div>
         <div class="tablewrap"><table class="tx-table vd-table" data-tt="off" data-cols="|What|Amount|Dates|"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
         ${rs.length > SHOW ? `<button type="button" class="pill pf-more" data-k="${esc(k)}">Show all ${rs.length.toLocaleString('en-US')}</button>` : ''}</section>`;
-    }).join('') || (d.entity.filing || d.entity.restaurants ? '' : '<p class="muted">No connections in the records yet.</p>');
+    }).join('') || (d.entity.filing || d.entity.restaurants || d.entity.officers ? '' : '<p class="muted">No connections in the records yet.</p>');
     box.insertAdjacentHTML('afterbegin', facts(d.entity));
     box.querySelectorAll('.pf-more').forEach(b => b.addEventListener('click', () => {
       const rs = groups.get(b.dataset.k), tb = b.previousElementSibling.querySelector('tbody');

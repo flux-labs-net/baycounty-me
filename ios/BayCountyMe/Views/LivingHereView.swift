@@ -1,54 +1,73 @@
 import SwiftUI
 import BayCountyKit
 
-/// The Living here tab: the day-to-day pages (the site's "Living here" menu): your address, trash day, schools,
-/// beaches, storms and what's going on around town.
+/// The Living here tab: the day-to-day pages (the site's "Living here" menu) as a grid of tiles, today's beach
+/// flag, then the rest of what's going on around town.
 struct LivingHereView: View {
     @Environment(AppStore.self) private var store
     @State private var path: [Route] = []
+
+    /// The nine tiles, three by three.
+    private var tiles: [(title: String, symbol: String, tone: Tone, route: Route)] {
+        [
+            ("Things to do", "calendar", .salmon, .events),
+            ("Beaches", "beach.umbrella", .blue, .beaches),
+            ("Parks and trails", "tree", .teal, .parks),
+            ("Schools", "graduationcap", .amber, .schools),
+            ("Trash and utilities", "trash", .teal, .utilities(store.home)),
+            ("Restaurants", "fork.knife", .salmon, .dataset("restaurants")),
+            ("New businesses", "storefront", .blue, .dataset("new-businesses")),
+            ("Jobs", "briefcase", .amber, .dataset("job-openings")),
+            ("Storms and alerts", "exclamationmark.triangle", .salmon, .emergency),
+        ]
+    }
 
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    section("Home and family") {
-                        RouteRow(route: .myHome, title: "My home", detail: "Sign in to see meetings, events, road work and alerts near your home", symbol: "person.crop.circle")
-                        RowDivider(inset: 50)
-                        if let home = store.home {
-                            RouteRow(route: .address(home), title: "My address", detail: home.display, symbol: "house")
-                        } else {
-                            RouteRow(route: .myAddress, title: "My address", detail: "Tax bill, districts and meetings for one address", symbol: "house")
+                    Text(store.home.map { "What to do and what you need, near \($0.display)." } ?? "What to do and what you need, around Bay County.")
+                        .font(.subheadline).foregroundStyle(.secondary)
+                        .padding(.top, -12)
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
+                        ForEach(tiles, id: \.title) { t in
+                            NavigationLink(value: t.route) {
+                                VStack(spacing: 8) {
+                                    ToneIcon(symbol: t.symbol, tone: t.tone, size: 42)
+                                    Text(t.title).font(.caption.weight(.semibold)).foregroundStyle(.primary)
+                                        .multilineTextAlignment(.center).lineLimit(2).minimumScaleFactor(0.85)
+                                }
+                                .frame(maxWidth: .infinity, minHeight: 96)
+                                .padding(.horizontal, 6)
+                                .card(16)
+                            }
+                            .buttonStyle(PressScale())
                         }
-                        RowDivider(inset: 50)
-                        RouteRow(route: .utilities(store.home), title: "Utilities and trash day", detail: "Who provides what, and your pickup day", symbol: "trash")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .schools, title: "Public schools", detail: "Your zoned schools, calendar and grades", symbol: "graduationcap")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .dataset("restaurants"), title: "Restaurant inspections", detail: "Every inspection, warning and closure", symbol: "fork.knife")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .dataset("job-openings"), title: "Government jobs", detail: "Open jobs at every local government", symbol: "briefcase")
                     }
-                    section("Outdoors and storms") {
-                        RouteRow(route: .beaches, title: "Beaches", detail: "Today's flag, rip currents and water quality", symbol: "flag")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .parks, title: "Parks", detail: "Parks, boat ramps and trails", symbol: "tree")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .emergency, title: "Emergencies and alerts", detail: "Warnings, evacuation zones, shelters", symbol: "exclamationmark.triangle")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .hurricanePrep, title: "Hurricane prep", detail: "Sandbags, generators, disaster help", symbol: "hurricane")
-                    }
-                    section("Around town") {
-                        RouteRow(route: .events, title: "Events", detail: "What's happening around the county", symbol: "calendar")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .dataset("new-businesses"), title: "New businesses", detail: "Companies filed, month by month", symbol: "storefront")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .dataset("development-projects"), title: "Building and development", detail: "New homes and projects in review", symbol: "building.2")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .dataset("road-contracts"), title: "Road projects", detail: "State road work and costs", symbol: "road.lanes")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .military, title: "Military and the bases", detail: "Base news and federal contracts", symbol: "shield")
-                        RowDivider(inset: 50)
-                        RouteRow(route: .volunteer, title: "Volunteer", detail: "Open needs from local nonprofits", symbol: "heart")
+                    beachCard
+                    VStack(alignment: .leading, spacing: 12) {
+                        SectionHeader(title: "More around town")
+                        CardList {
+                            RouteRow(route: .myHome, title: "My home", detail: "Sign in to see meetings, events, road work and alerts near your home", symbol: "person.crop.circle")
+                            RowDivider(inset: 50)
+                            if let home = store.home {
+                                RouteRow(route: .address(home), title: "My address", detail: home.display, symbol: "house")
+                            } else {
+                                RouteRow(route: .myAddress, title: "My address", detail: "Tax bill, districts and meetings for one address", symbol: "house")
+                            }
+                            RowDivider(inset: 50)
+                            RouteRow(route: .hurricanePrep, title: "Hurricane prep", detail: "Sandbags, generators, disaster help", symbol: "hurricane")
+                            RowDivider(inset: 50)
+                            RouteRow(route: .dataset("development-projects"), title: "Building and development", detail: "New homes and projects in review", symbol: "building.2")
+                            RowDivider(inset: 50)
+                            RouteRow(route: .dataset("road-contracts"), title: "Road projects", detail: "State road work and costs", symbol: "road.lanes")
+                            RowDivider(inset: 50)
+                            RouteRow(route: .chambers, title: "Business community", detail: "Chamber boards, events and public money", symbol: "person.3")
+                            RowDivider(inset: 50)
+                            RouteRow(route: .military, title: "Military and the bases", detail: "Base news and federal contracts", symbol: "shield")
+                            RowDivider(inset: 50)
+                            RouteRow(route: .volunteer, title: "Volunteer", detail: "Open needs from local nonprofits", symbol: "heart")
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -57,13 +76,38 @@ struct LivingHereView: View {
             .background(Brand.canvas)
             .navigationTitle("Living here")
             .withRoutes()
+            .task { await store.load("beach-conditions") }
         }
     }
 
-    private func section<C: View>(_ title: String, @ViewBuilder _ rows: () -> C) -> some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: title)
-            CardList { rows() }
+    /// Today's beach flag on navy, like the site's beach card. Hidden until the conditions load.
+    @ViewBuilder private var beachCard: some View {
+        let rows = store.rows["beach-conditions"] ?? []
+        if let now = Outdoors.forecast(rows).first, let flag = now.string("flag_color") {
+            NavigationLink(value: Route.beaches) {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Text("BEACHES TODAY").font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(.white.opacity(0.85))
+                        Spacer()
+                        Text("\(flag) flag").font(.caption.weight(.bold))
+                            .foregroundStyle(Self.darkText(flag) ? Color(hex: 0x161B24) : .white)
+                            .padding(.horizontal, 10).padding(.vertical, 4)
+                            .background(Color(hex: Outdoors.flagHex(flag)), in: Capsule())
+                    }
+                    Text([now.string("rip_current_risk").map { "\($0) rip current risk." }, now.string("surf_height").map { "Surf \($0)." }]
+                            .compactMap { $0 }.joined(separator: " "))
+                        .font(.headline).foregroundStyle(.white).multilineTextAlignment(.leading)
+                    Text("From the National Weather Service. Tap for water quality and beach access.")
+                        .font(.caption).foregroundStyle(.white.opacity(0.85)).multilineTextAlignment(.leading)
+                }
+                .padding(18)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Brand.navyFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            }
+            .buttonStyle(PressScale())
+            .accessibilityElement(children: .combine)
         }
     }
+
+    private static func darkText(_ flag: String) -> Bool { flag == "Yellow" || flag == "Green" }
 }

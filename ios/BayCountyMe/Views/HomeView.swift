@@ -1,40 +1,28 @@
 import SwiftUI
 import BayCountyKit
 
-/// The Today tab: what's coming up this week, the ballot, your tax bill, the big numbers, and a list to browse.
+/// The Today tab: a greeting, what's going on right now (beach flag, notices, next meeting, trash day), your address,
+/// this weekend's events, what's coming up at city hall, then your tax bill and the big numbers.
 struct HomeView: View {
     @Environment(AppStore.self) private var store
     @State private var path: [Route] = []
-    @State private var pickedDay: String?
+    @State private var utilities: UtilityLookup?
     @AppStorage("taxDistrict") private var savedDistrict = ""
 
-    private let browse: [(title: String, symbol: String, route: Route)] = [
-        ("Emergencies and alerts", "exclamationmark.triangle", .emergency),
-        ("Hurricane prep", "hurricane", .hurricanePrep),
-        ("CRA spending", "building.2", .cra),
-        ("Contracts", "signature", .dataset("contracts")),
-        ("How they voted", "hand.raised", .dataset("votes")),
-        ("Companies", "building", .vendors),
-        ("Campaign money", "chart.bar", .dataset("campaign-finance")),
-        ("Accountability console", "checklist", .accountability),
-        ("Beaches", "beach.umbrella", .beaches),
-        ("Parks, ramps and trails", "tree", .parks),
-        ("Glossary", "character.book.closed", .glossary),
-        ("What's new", "sparkles", .updates),
-    ]
+    private var today: String { Events.todayKey() }
 
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    searchField
+                    greeting
                     ballotBanner
+                    rightNow
                     addressCard
-                    eventsSection
-                    meetingsSection
+                    weekendSection
+                    cityHallSection
                     taxBillSection
                     numbersSection
-                    browseSection
                     VStack(spacing: 6) {
                         FreshnessNote()
                         PoweredByFlux()
@@ -46,11 +34,16 @@ struct HomeView: View {
             }
             .background(Brand.canvas)
             .navigationTitle("Today")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     // The app icon's mark, sized like an SF Symbol so it fits the toolbar's round button.
                     Button { path.append(.about) } label: { BayMark().frame(height: 24) }
                         .accessibilityLabel("About BayCounty.me")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button { path.append(.search) } label: { Image(systemName: "magnifyingglass") }
+                        .accessibilityLabel("Search")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { store.openSite("/ask") } label: { Image(systemName: "bubble.left.and.text.bubble.right") }
@@ -75,29 +68,54 @@ struct HomeView: View {
             .task {
                 await store.loadTax()
                 await store.loadAmendment3()
-                await store.load(Events.dataset)
+                await store.load([Events.dataset, "beach-conditions", "emergency-notices"])
                 await openScreenshotRoute()
+            }
+            .task(id: store.home?.id) {
+                // The saved home's trash day. The address isn't logged by the API and the answer isn't kept on disk.
+                guard let home = store.home else { utilities = nil; return }
+                utilities = try? await store.client.utilities(at: home.point)
             }
         }
     }
 
-    // MARK: Search
+    // MARK: Greeting
 
-    private var searchField: some View {
-        Button { path.append(.search) } label: {
-            HStack(spacing: 10) {
-                Image(systemName: "magnifyingglass")
-                Text("Search people, contracts, votes")
-                Spacer()
-            }
-            .font(.body)
-            .foregroundStyle(.secondary)
-            .padding(.horizontal, 14)
-            .frame(height: 46)
-            .card(14)
+    /// "Good morning" over "WEDNESDAY, OCT 28 · LYNN HAVEN": the date, and the saved home's city once it's known.
+    private var greeting: some View {
+        let place = utilities.map { $0.area == "county" ? "Bay County" : $0.areaName } ?? "Bay County"
+        return VStack(alignment: .leading, spacing: 4) {
+            Text("\(TodayBrief.dateLine(today)) · \(place)".uppercased())
+                .font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(.secondary)
+            Text(TodayBrief.greeting(hour: TodayBrief.hour())).font(.largeTitle.weight(.bold)).foregroundStyle(.primary)
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Search")
+        .padding(.top, 8)
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isHeader)
+    }
+
+    // MARK: Right now
+
+    /// Beach flag, active notices, next meeting and trash day, two by two. Same cards as the site's home page.
+    private var rightNow: some View {
+        let cards = TodayBrief.cards(beach: store.rows["beach-conditions"] ?? [], notices: store.rows["emergency-notices"] ?? [],
+                                     meetings: store.meetings, trashDays: TodayBrief.trashDays(utilities))
+        return LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
+            ForEach(cards) { c in
+                NavigationLink(value: route(c.target)) { RightNowCard(card: c) }
+                    .buttonStyle(PressScale())
+            }
+        }
+        .accessibilityIdentifier("rightNow")
+    }
+
+    private func route(_ t: TodayBrief.Target) -> Route {
+        switch t {
+        case .beaches: .beaches
+        case .emergency: .emergency
+        case .meetings: .meetings
+        case .utilities: .utilities(store.home)
+        }
     }
 
     // MARK: Ballot
@@ -160,123 +178,49 @@ struct HomeView: View {
         .accessibilityIdentifier("myAddressCard")
     }
 
-    // MARK: Meetings
+    // MARK: This weekend
 
-    /// The next few days that have meetings, within two weeks.
-    private var meetingDays: [(key: String, date: Date, meetings: [Meeting])] {
-        let soon = Meeting.upcoming(store.meetings).filter { ($0.start ?? .distantFuture) < Date().addingTimeInterval(14 * 86_400) }
-        let grouped = Dictionary(grouping: soon) { $0.start.map(Dates.dayKey) ?? "" }
-        return grouped.keys.sorted().prefix(4).compactMap { k in
-            guard let ms = grouped[k], let d = ms.first?.start else { return nil }
-            return (k, d, ms)
-        }
-    }
-
-    @ViewBuilder private var meetingsSection: some View {
-        let days = meetingDays
-        if !days.isEmpty {
-            let current = days.first { $0.key == pickedDay } ?? days[0]
-            VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "Meetings coming up", action: "See all") { path.append(.meetings) }
-                HStack(spacing: 8) {
-                    ForEach(days, id: \.key) { d in
-                        let on = d.key == current.key
-                        Button { withAnimation(.snappy) { pickedDay = d.key } } label: {
-                            VStack(spacing: 1) {
-                                Text(Self.weekday.string(from: d.date).uppercased()).font(.caption2.weight(.semibold))
-                                Text(Self.dayNumber.string(from: d.date)).font(.title3.weight(.heavy).monospacedDigit())
-                                Text(d.meetings.count == 1 ? "1 mtg" : "\(d.meetings.count) mtgs")
-                                    .font(.caption2).foregroundStyle(on ? Color.white.opacity(0.8) : .secondary)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 64)
-                            .foregroundStyle(on ? Color.white : .primary)
-                            .background(on ? Brand.navyFill : Brand.surface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("\(Dates.display(d.date, hasTime: false)), \(d.meetings.count) meetings")
-                        .accessibilityAddTraits(on ? .isSelected : [])
-                    }
-                }
-                CardList {
-                    ForEach(current.meetings) { m in
-                        NavigationLink(value: Route.meeting(m.id)) { TodayMeetingRow(meeting: m) }
-                            .buttonStyle(.plain)
-                        if m.id != current.meetings.last?.id { Divider().padding(.leading, 66) }
-                    }
-                }
-            }
-        }
-    }
-
-    // MARK: Events
-
-    /// What's on today and one-off events coming soon, from the community-events dataset (same picks as the site's home page).
-    @ViewBuilder private var eventsSection: some View {
+    /// One-off events this weekend (the coming Friday to Sunday, or the rest of it), or the next few weeks when the
+    /// weekend has nothing listed.
+    @ViewBuilder private var weekendSection: some View {
         let rows = store.rows[Events.dataset] ?? []
-        let today = Events.todayKey()
-        let now = Events.today(rows, today: today)
-        let soon = Events.featured(rows, today: today, until: Events.plusDays(21), limit: 6)
         if !rows.isEmpty {
+            let weekend = TodayBrief.weekendEvents(rows, today: today)
+            let picks = weekend.isEmpty ? Array(Events.featured(rows, today: today, until: Events.plusDays(21)).prefix(4)) : weekend
             VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "Happening today", action: "All events") { path.append(.events) }
-                if now.isEmpty {
-                    Text("Nothing listed for today.").font(.subheadline).foregroundStyle(.secondary)
+                SectionHeader(title: weekend.isEmpty ? "Coming up" : "This weekend", action: "All events") { path.append(.events) }
+                if picks.isEmpty {
+                    Text("Nothing listed yet.").font(.subheadline).foregroundStyle(.secondary)
                         .padding(14).frame(maxWidth: .infinity, alignment: .leading).card(14)
                 } else {
                     CardList {
-                        ForEach(now.prefix(4)) { r in
-                            EventRow(row: r)
-                            if r.id != now.prefix(4).last?.id { RowDivider(inset: 86) }
-                        }
-                        if now.count > 4 {
-                            RowDivider()
-                            Button("All \(now.count) today") { path.append(.events) }
-                                .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
+                        ForEach(picks) { r in
+                            WeekendEventRow(row: r)
+                            if r.id != picks.last?.id { RowDivider(inset: 74) }
                         }
                     }
                 }
-                if !soon.isEmpty {
-                    Text("Coming soon").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(soon) { r in soonCard(r) }
-                        }
-                    }
-                }
-                Button { path.append(.chambers) } label: {
-                    HStack(spacing: 12) {
-                        ToneIcon(symbol: "storefront", tone: .teal, size: 36)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text("Business community").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-                            Text("Chamber boards, events and public money").font(.caption).foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
-                    }
-                    .padding(14).card(14)
-                }
-                .buttonStyle(.plain)
             }
         }
     }
 
-    private func soonCard(_ r: Row) -> some View {
-        let d = Chambers.date(r)
-        return Button { if let u = r.url("url") { store.open(u) } } label: {
-            VStack(alignment: .leading, spacing: 6) {
-                Text(d.map { "\(Self.weekday.string(from: $0).uppercased()) \(Self.month.string(from: $0).uppercased()) \(Self.dayNumber.string(from: $0))" } ?? "")
-                    .font(.caption2.weight(.bold)).foregroundStyle(Brand.salmon)
-                Text(r.string("title") ?? "").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-                    .lineLimit(3).multilineTextAlignment(.leading)
-                Spacer(minLength: 0)
-                Text([r.string("venue"), r.string("town")].compactMap { $0 }.joined(separator: " · "))
-                    .font(.caption).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.leading)
+    // MARK: At city hall
+
+    /// The next three public meetings.
+    @ViewBuilder private var cityHallSection: some View {
+        let next = Array(Meeting.upcoming(store.meetings).prefix(3))
+        if !next.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                SectionHeader(title: "At city hall", action: "Meetings") { path.append(.meetings) }
+                CardList {
+                    ForEach(next) { m in
+                        NavigationLink(value: Route.meeting(m.id)) { TodayMeetingRow(meeting: m, showDay: true) }
+                            .buttonStyle(.plain)
+                        if m.id != next.last?.id { Divider().padding(.leading, 66) }
+                    }
+                }
             }
-            .padding(12)
-            .frame(width: 200, height: 132, alignment: .topLeading)
-            .card(14)
         }
-        .buttonStyle(.plain)
     }
 
     // MARK: Tax bill
@@ -348,31 +292,6 @@ struct HomeView: View {
                                bars: g.compactMap { $0.auditFindings.map(Double.init) }, color: Brand.amber, route: .dataset("audit-findings"))
                 }
                 Text("County, school district and the seven cities.").font(.caption).foregroundStyle(.secondary)
-            }
-        }
-    }
-
-    // MARK: Browse
-
-    private var browseSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            SectionHeader(title: "Browse", action: "All public money") { store.tab = .money }
-            CardList {
-                ForEach(browse, id: \.title) { b in
-                    NavigationLink(value: b.route) {
-                        HStack(spacing: 12) {
-                            Image(systemName: b.symbol).foregroundStyle(Brand.navy).frame(width: 24)
-                            Text(b.title).foregroundStyle(.primary)
-                            Spacer()
-                            Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
-                        }
-                        .frame(minHeight: 50)
-                        .padding(.horizontal, 14)
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.plain)
-                    if b.title != browse.last?.title { Divider().padding(.leading, 50) }
-                }
             }
         }
     }

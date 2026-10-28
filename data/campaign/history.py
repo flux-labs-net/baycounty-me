@@ -106,6 +106,8 @@ def main():
         c.pop('top_expenditures', None)  # payees can be private people: totals only here
         c.pop('cash_on_hand_estimate', None)
         c['contributors'] = [x for x in c['contributors'] if x.get('type') != 'individual']
+        for x in c['contributors']:
+            x['name'] = (x.get('name') or '').replace("\\'", "'")  # the SOE pages escape apostrophes (Adam\'s Pharmacy)
         early = [x for x in c['contributors'] if not cutoff.keep(x.get('date'))]
         if early:  # the site starts in 2016: itemized gifts dated earlier are left out; the campaign totals stay whole
             c['contributors'] = [x for x in c['contributors'] if cutoff.keep(x.get('date'))]

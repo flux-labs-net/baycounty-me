@@ -31,6 +31,12 @@ struct CardList<Content: View>: View {
 /// A meeting on the Today tab: government badge, board, time and place, and the dollars on its agenda.
 struct TodayMeetingRow: View {
     let meeting: Meeting
+    /// Lead the time line with the day ("Tue, Nov 3 · 9:00 AM"), for lists that span several days.
+    var showDay = false
+
+    private static let day: DateFormatter = {
+        let f = DateFormatter(); f.timeZone = TimeZone(identifier: "America/Chicago"); f.dateFormat = "EEE, MMM d"; return f
+    }()
 
     /// "Bay County Govt. Center - 840 W. 11th St Panama City FL" -> "Bay County Govt. Center"
     private var place: String? {
@@ -44,7 +50,8 @@ struct TodayMeetingRow: View {
             GovBadge(govID: meeting.govID)
             VStack(alignment: .leading, spacing: 2) {
                 Text(meeting.boardName).font(.subheadline.weight(.semibold)).lineLimit(1)
-                Text([meeting.hasTime ? meeting.start.map { MeetingRow.time.string(from: $0) } : "Time not posted", place]
+                Text([showDay ? meeting.start.map { Self.day.string(from: $0) } : nil,
+                      meeting.hasTime ? meeting.start.map { MeetingRow.time.string(from: $0) } : (showDay ? nil : "Time not posted"), place]
                         .compactMap { $0 }.joined(separator: " · "))
                     .font(.caption).foregroundStyle(.secondary).lineLimit(1)
             }
@@ -339,5 +346,69 @@ extension View {
     func card(_ radius: CGFloat = 16) -> some View {
         background(Brand.surface, in: RoundedRectangle(cornerRadius: radius, style: .continuous))
             .overlay { RoundedRectangle(cornerRadius: radius, style: .continuous).strokeBorder(Brand.hairline) }
+    }
+}
+
+/// One of the Today tab's "right now" cards: a tone icon, a bold line and a short line under it.
+struct RightNowCard: View {
+    let card: TodayBrief.Card
+
+    private var tone: Tone {
+        switch card.tone { case "teal": .teal; case "amber": .amber; case "salmon": .salmon; default: .blue }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            ToneIcon(symbol: card.symbol, tone: tone, size: 34)
+            Text(card.title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                .multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
+            Text(card.detail).font(.caption).foregroundStyle(.secondary)
+                .multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, minHeight: 128, alignment: .topLeading)
+        .card(16)
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// An event on the Today tab: a day tile (SAT 31), the title, and when and where. Opens the event's page.
+struct WeekendEventRow: View {
+    @Environment(AppStore.self) private var store
+    let row: Row
+
+    private static let weekday: DateFormatter = { let f = DateFormatter(); f.locale = Locale(identifier: "en_US_POSIX"); f.dateFormat = "EEE"; return f }()
+    private static let parse: DateFormatter = { let f = DateFormatter(); f.locale = Locale(identifier: "en_US_POSIX"); f.dateFormat = "yyyy-MM-dd"; return f }()
+
+    var body: some View {
+        let day = Self.parse.date(from: String((row.string("starts") ?? "").prefix(10)))
+        let community = row.string("category") != "Library"
+        Button { if let u = row.url("url") { store.open(u) } } label: {
+            HStack(spacing: 14) {
+                VStack(spacing: 0) {
+                    Text(day.map { Self.weekday.string(from: $0).uppercased() } ?? "").font(.caption2.weight(.bold))
+                    Text(String((row.string("starts") ?? "").dropFirst(8).prefix(2)).replacingOccurrences(of: "^0", with: "", options: .regularExpression))
+                        .font(.title3.weight(.semibold).monospacedDigit())
+                }
+                .foregroundStyle(community ? Brand.salmon : Brand.navy)
+                .frame(width: 46, height: 50)
+                .background((community ? Brand.salmon : Brand.navy).opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(row.string("title") ?? "").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                        .multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
+                    let when = Events.time(row) == "All day" ? nil : Events.time(row)
+                    Text([when, row.string("venue"), row.string("town")].compactMap { $0 }.joined(separator: " · "))
+                        .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.leading)
+                }
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
+            }
+            .padding(.horizontal, 14).padding(.vertical, 11)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("Opens the event page")
     }
 }

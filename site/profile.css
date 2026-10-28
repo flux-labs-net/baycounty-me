@@ -34,3 +34,8 @@
 .pf-res.ok{background:color-mix(in srgb,var(--teal) 14%,transparent);color:var(--teal)}
 .pf-res.warn{background:color-mix(in srgb,var(--amber) 26%,transparent);color:var(--ink)}
 .pf-res.bad{background:color-mix(in srgb,var(--salmon) 16%,transparent);color:var(--accent-ink)}
+/* faces: a person's published photo on the network map and beside their name in the connection list */
+.pf-net .pf-face{stroke-width:2}
+.pf-net .pf-me-ph{stroke-width:3}
+.pf-net a:hover .pf-face{stroke:var(--ink)}
+.pf-row-ph{float:left;width:32px;height:32px;border-radius:50%;object-fit:cover;margin:1px 10px 0 0;background:var(--sunken)}

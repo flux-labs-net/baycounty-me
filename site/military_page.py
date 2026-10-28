@@ -194,15 +194,16 @@ def military_page(out_dir):
         for c in ranked)
     big = A[:25]
     big_rows = ''.join(
-        f'<tr><td>{_co(a["recipient_entity_id"], a["recipient"])}<span class="sub">{e(a["sub_agency"] or a["agency"])}</span></td>'
+        f'<tr><td>{_co(a["recipient_entity_id"], a["recipient"])}<span class="sub">{link(a.get("agency_entity_id"), a["sub_agency"] or a["agency"])}</span></td>'
         f'<td class="hide-sm">{e((a.get("description") or "").capitalize()[:140])}<span class="sub">{e(a["award_id"])} · {e((a.get("start_date") or "")[:4])}–{e((a.get("end_date") or "")[:4])}</span></td>'
         f'<td class="n"><a href="{e(a["source_url"])}" rel="noopener" target="_blank">{_money(a["obligated"])}</a></td></tr>' for a in big)
-    ag = defaultdict(lambda: {'t': 0.0, 'co': set(), 'top': ''})
+    ag = defaultdict(lambda: {'t': 0.0, 'co': set(), 'top': '', 'eid': None})
     for r in Y:
         k = (r['agency'], r['sub_agency'] or r['agency'])
         ag[k]['t'] += r['obligated']
         ag[k]['co'].add(r['recipient_entity_id'])
-    ag_rows = ''.join(f'<tr><td>{e(sub)}{f"<span class=sub>{e(agency)}</span>" if sub != agency else ""}</td><td class="n">{len(v["co"])}</td><td class="n">{_money(v["t"])}</td></tr>'
+        ag[k]['eid'] = ag[k]['eid'] or r.get('agency_entity_id')
+    ag_rows = ''.join(f'<tr><td>{link(v["eid"], sub)}{f"<span class=sub>{e(agency)}</span>" if sub != agency else ""}</td><td class="n">{len(v["co"])}</td><td class="n">{_money(v["t"])}</td></tr>'
                       for (agency, sub), v in sorted(ag.items(), key=lambda kv: -kv[1]['t']) if v['t'] > 0)
     n_co = len(ranked)
     first_y, last_y = (min(years), max(years)) if years else (2016, 2016)

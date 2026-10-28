@@ -143,7 +143,7 @@ function graph(rows) {
   if (!N.length) { svg.append('text').attr('x', 20).attr('y', 30).attr('fill', 'var(--muted)').attr('font-size', 13).text('Nothing matches these filters.'); hl = null; return; }
   const rS = d3.scaleSqrt().domain([0, d3.max(N.filter(n => n.k !== 'payer'), d => d.total) || 1]).range([4, 22]);
   const wS = d3.scaleSqrt().domain([0, d3.max(L.filter(l => l.type === 'paid'), d => d.amt) || 1]).range([0.8, 7]);
-  N.forEach(n => n.r = n.k === 'payer' ? 17 : n.k === 'official' || n.k === 'candidate' ? 8 : Math.max(5, rS(n.total)));
+  N.forEach(n => n.r = n.k === 'payer' ? 17 : n.k === 'official' || n.k === 'candidate' ? ((D.off[n.id] || {}).ph ? 12 : 8) : Math.max(5, rS(n.total)));
   const connected = new Set(L.filter(l => l.type !== 'paid').flatMap(l => [l.source, l.target]));  // labelled when the graph is small
   N.forEach(d => { d.lbl = d.k === 'payer' ? d.n : (d.r > 13 || N.length < 60 || (N.length < 90 && (connected.has(d.id) || d.k === 'official'))) ? (d.n.length > 30 ? d.n.slice(0, 29) + '…' : d.n) : ''; });
   const g = svg.append('g');
@@ -169,6 +169,13 @@ function graph(rows) {
     .attr('tabindex', 0).attr('role', 'button').attr('aria-label', d => d.n)
     .on('click', (e, d) => select(d.id)).on('keydown', (e, d) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(d.id); } })
     .on('mousemove', (e, d) => tip(e, `<b>${esc(d.n)}</b><br>${d.k === 'payer' ? PKIND[D.payers[d.id.slice(2)].k] : KIND[d.k]}${d.total ? ' · ' + money(d.total) + ' in records' : ''}`, 'cnTip')).on('mouseleave', () => hideTip('cnTip'));
+  // an official's or candidate's published photo inside their circle (clicks still reach the circle underneath)
+  node.filter(d => (D.off[d.id] || {}).ph).each(function (d, i) {
+    const n = d3.select(this), k = 'cnph' + i + '-' + Math.random().toString(36).slice(2, 7), r = Math.max(d.r - 1.2, 1);
+    n.append('clipPath').attr('id', k).append('circle').attr('r', r);
+    n.append('image').attr('href', D.off[d.id].ph).attr('x', -r).attr('y', -r).attr('width', 2 * r).attr('height', 2 * r)
+      .attr('clip-path', `url(#${k})`).attr('preserveAspectRatio', 'xMidYMid slice').style('pointer-events', 'none');
+  });
   node.append('text').attr('dy', d => d.r + 12).attr('text-anchor', 'middle')
     .text(d => d.lbl)
     .attr('class', d => d.k === 'payer' ? 'cn-pl' : null);
