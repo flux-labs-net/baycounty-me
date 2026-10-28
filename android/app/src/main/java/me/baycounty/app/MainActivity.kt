@@ -163,6 +163,7 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
         "accproject" to Route.AccountabilityProject("pcb-fbr-seg3"), "budget" to Route.BudgetCompare("lh"),
         "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "events" to Route.Events, "beaches" to Route.Beaches, "parks" to Route.Parks, "schools" to Route.Schools, "emergency" to Route.Emergency, "hurricaneprep" to Route.HurricanePrep, "utilities" to Route.Utilities(UTILITIES_SAMPLE), "pastelections" to Route.Dataset("campaign-history"),
         "roads" to Route.Dataset("road-contracts"), "development" to Route.Dataset("development-projects"),
+        "restaurants" to Route.Dataset("restaurants"), "newbusinesses" to Route.Dataset("new-businesses"),
     )
     simple[arg]?.let { nav.replace(it); return }
     when {

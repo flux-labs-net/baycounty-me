@@ -743,6 +743,254 @@ def school_zones():
     return _school_rows()['zones']
 
 
+
+# --- Restaurant inspections (/restaurants) and new businesses (/new-businesses) ---------------------------------------
+
+DBPR_PAGE = 'https://www2.myfloridalicense.com/hotels-restaurants/public-records/'
+LICENSE_TYPE = {'2010': 'Restaurant or food service', '2012': 'Theme park food cart', '2013': 'Caterer', '2014': 'Food truck or cart',
+                '2015': 'Vending machine', '2016': 'Temporary event vendor'}
+RANK = {'SEAT': 'Restaurant with seating', 'NOST': 'Takeout, no seating', 'MFDV': 'Food truck', 'HTDG': 'Hot dog cart', 'CATR': 'Caterer',
+        'PARK': 'Theme park food cart', 'VEND': 'Vending machine'}
+NO_ADDRESS = {'2013', '2014', '2016'}  # caterers, food trucks and event vendors: the license address can be a home
+# plain words for each inspection outcome, and how serious it is (ok, warning, fine, closed)
+RESULT = {
+    'Inspection Completed - No Further Action': ('Met inspection standards', 'ok'),
+    'Warning Issued': ('Warning, follow-up visit set', 'warning'),
+    'Call Back - Complied': ('Follow-up visit: fixed', 'ok'),
+    'Call Back - Extension given, pending': ('Follow-up visit: more time given', 'warning'),
+    'Administrative complaint recommended': ('Fine recommended (administrative complaint)', 'fine'),
+    'Call Back - Admin. complaint recommended': ('Follow-up visit: not fixed, fine recommended', 'fine'),
+    'Admin. Complaint Callback Complied': ('Follow-up after complaint: fixed', 'ok'),
+    'Admin. Complaint Callback Not Complied': ('Follow-up after complaint: not fixed', 'fine'),
+    'Administrative Complaint Time Extension': ('Follow-up after complaint: more time given', 'fine'),
+    'Administrative determination recommended': ('Referred for an administrative decision', 'fine'),
+    'Emergency order recommended': ('Ordered closed (emergency order)', 'closed'),
+    'Emergency Order Callback Complied': ('Allowed to reopen', 'ok'),
+    'Emergency Order Callback Not Complied': ('Stayed closed: not fixed', 'closed'),
+    'Emergency Order Callback Time Extension': ('Stayed closed: more time given', 'closed'),
+}
+# the state's food service violation items since 2013 (DBPR public records layout), in short form
+VIOLATION = {
+    '01': 'Food from an approved source', '02': 'Labeling, date marking or consumer advisory', '03': 'Food held at the wrong temperature',
+    '04': 'Equipment to keep food hot or cold', '05': 'Food thermometers', '06': 'Thawing food', '07': 'Food served again',
+    '08': 'Cross-contamination', '09': 'Bare hands on ready-to-eat food', '10': 'Utensils stored in food', '11': 'Sick employee or health policy',
+    '12': 'Handwashing and hygiene', '13': 'Clothes, hair restraints, jewelry', '14': 'Equipment built or kept in poor repair',
+    '16': 'Dishwashing and sanitizer test kits', '21': 'Wiping cloths and linens', '22': 'Food-contact surfaces not clean or sanitized',
+    '23': 'Other surfaces not clean', '24': 'Storing clean equipment and utensils', '25': 'Single-use items', '27': 'Hot and cold water',
+    '28': 'Sewage and wastewater', '29': 'Plumbing, backflow, mop sink', '31': 'Handwashing sinks and supplies', '32': 'Bathrooms',
+    '33': 'Garbage and premises', '35': 'Roaches, rodents or other pests', '36': 'Floors, walls, ceilings, ventilation', '38': 'Lighting',
+    '40': "Employees' belongings", '41': 'Chemicals and toxic items', '42': 'Cleaning equipment', '43': 'Separated from living area',
+    '45': 'Fire extinguishers (reported to fire officials)', '46': 'Exits (reported to fire officials)', '47': 'Electrical (reported to fire officials)',
+    '48': 'Gas appliances (reported to fire officials)', '49': 'Flammable materials (reported to fire officials)', '50': 'License not displayed',
+    '51': 'Other sanitary or safety conditions', '52': 'Misrepresenting food', '53': 'Food manager certification or employee training',
+    '54': 'Florida Clean Indoor Air Act', '55': 'Automatic tip notice'}
+
+
+def _rest_dir():
+    from place import PLACE_ID
+    return os.path.join(HERE, '..', 'data', 'restaurants', PLACE_ID.split('-', 1)[-1])
+
+
+def _csv_rows(path):
+    import csv
+    return list(csv.DictReader(open(path, encoding='utf-8'))) if os.path.exists(path) else []
+
+
+def _licensee_entity(name, sunbiz):
+    """The profile id for a license holder: a company local governments paid, a nonprofit, or one Sunbiz filing with the
+    same name (business:<doc>, which the API turns into a profile even when nothing else names it)."""
+    import ids
+    from entity_graph import build
+    if not name:
+        return None
+    G = build()
+    gid = ids.gov_id(name)
+    if gid and 'gov:' + gid in G.ents and ids.gov(gid)['short'].lower() in name.lower():
+        return 'gov:' + gid
+    vid = ids.vendor_id(name)
+    if vid and 'vendor:' + vid in G.ents:
+        return 'vendor:' + vid
+    hit = sunbiz.get(_org_norm(name))
+    if hit:
+        bid = 'business:' + hit[0].lower()
+        return G.alias[bid][0] if bid in G.alias else bid
+    return None
+
+
+def _is_org(name):
+    import re
+    return bool(re.search(r'\b(LLC|L\.L\.C|INC|CORP|CORPORATION|CO|COMPANY|LTD|LP|LLP|PA|ENTERPRISES?|GROUP|HOLDINGS|RESTAURANTS?|FOODS?|'
+                          r'MANAGEMENT|SERVICES?|PARTNERS|ASSOCIATION|CLUB|CHURCH|SCHOOL|BOARD|COUNTY|CITY|UNIVERSITY|COLLEGE|HOSPITAL|'
+                          r'DISTRICT|TRUST|INTERNATIONAL|OF|THE|AND|&)\b', name or '', re.I))
+
+
+def _restaurant_rows():
+    """(restaurants, inspections) from data/restaurants/<county>/ (data/restaurants/fetch_dbpr.py)."""
+    if 'rest' in _RC:
+        return _RC['rest']
+    import ids
+    from collections import defaultdict
+    from place import PLACE_ID
+    d = _rest_dir()
+    ins = [r for r in _csv_rows(os.path.join(d, 'inspections.csv')) if r['date'][:4] >= str(cutoff.FIRST_YEAR)]
+    lic = _csv_rows(os.path.join(d, 'licenses.csv'))
+    if not ins and not lic:
+        _RC['rest'] = ([], [])
+        return _RC['rest']
+    src_cur = 'https://www2.myfloridalicense.com/sto/file_download/extracts/'
+    try:
+        import json
+        log = json.load(open(os.path.join(d, 'fetch.json')))
+        file_of = {u['url'].rsplit('/', 1)[1]: u['url'] for u in log.get('files', []) if u.get('url')}
+    except (OSError, ValueError):
+        file_of = {}
+    lic_file = next((u for n, u in file_of.items() if n.startswith('hrfood')), DBPR_PAGE)
+    today = __import__('datetime').date.today()
+    year_ago = (today - __import__('datetime').timedelta(days=365)).isoformat()
+
+    # inspections, newest first
+    out_i = []
+    by_lic = defaultdict(list)
+    for r in ins:
+        res, level = RESULT.get(r['disposition'], (r['disposition'], 'ok'))
+        items = []
+        for part in (r.get('violations') or '').split(';'):
+            if ':' in part:
+                code, n = part.split(':')
+                items.append(f"{VIOLATION.get(code, 'Item ' + code)}" + (f' ({n})' if n != '1' else ''))
+        row = {'place_id': PLACE_ID, 'visit_id': r['visit_id'] or f"{r['inspection_number']}-{r['visit_number']}", 'license_number': r['license_number'],
+               'business_name': ids.biz_case(r['business_name']), 'city': r['city'].title(), 'date': r['date'],
+               'inspection_type': r['inspection_type'], 'visit_number': int(r['visit_number'] or 1), 'disposition': r['disposition'],
+               'result': res, 'result_level': level, 'high_priority': int(r['high_priority'] or 0), 'intermediate': int(r['intermediate'] or 0),
+               'basic': int(r['basic'] or 0), 'total_violations': int(r['total_violations'] or 0),
+               'violation_codes': (r.get('violations') or '').replace(';', '; ') or None, 'violation_items': '; '.join(items) or None,
+               'source_url': DBPR_PAGE}
+        out_i.append(row)
+        by_lic[r['license_number']].append((row, r))
+
+    # one row per license: today's license list, plus every license inspected since 2016 that is no longer listed
+    sunbiz = _sunbiz_names()
+    cur = {re.sub(r'\D', '', l['license_number']).lstrip('0'): l for l in lic}
+    out_r = []
+    for key in sorted(set(cur) | {k.lstrip('0') for k in by_lic}):
+        l = cur.get(key)
+        hist = by_lic.get(key) or by_lic.get(key.zfill(7)) or []
+        last_row, last_raw = hist[0] if hist else (None, None)
+        tcode = (l or {}).get('license_type_code') or (last_raw or {}).get('license_type_code') or ''
+        if tcode not in LICENSE_TYPE:
+            continue  # hotels and condos inspected for their food service are on the lodging side of the state's records
+        name = (l or {}).get('business_name') or (last_raw or {}).get('business_name') or ''
+        addr = '' if tcode in NO_ADDRESS else ' '.join(x for x in [(l or {}).get('address') or (last_raw or {}).get('address'), (l or {}).get('address2')] if x and x.strip())
+        licensee = (l or {}).get('licensee') or None
+        lname = (ids.biz_case(licensee) if _is_org(licensee) else ids.sunbiz_person(licensee)) if licensee else None
+        opened = min((x['date'] for x, raw in hist if raw['inspection_type'] == 'Food-Licensing Inspection'), default=None)
+        recent = [x for x, raw in hist if x['date'] >= year_ago]
+        closures = [x for x, raw in hist if x['disposition'] == 'Emergency order recommended']
+        routine = [x for x, raw in hist if x['inspection_type'].startswith('Routine') and x['visit_number'] == 1]
+        out_r.append({
+            'place_id': PLACE_ID, 'license_number': key, 'license_type': LICENSE_TYPE[tcode], 'kind': RANK.get((l or {}).get('rank'), LICENSE_TYPE[tcode]),
+            'business_name': ids.biz_case(name), 'licensee': lname,
+            'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else None,
+            'address': ids.biz_case(addr) if addr else None, 'city': ((l or {}).get('city') or (last_raw or {}).get('city') or '').title() or None,
+            'zip': (l or {}).get('zip') or (last_raw or {}).get('zip') or None, 'seats': int(l['seats']) if l and l.get('seats') not in (None, '', '0') else None,
+            'licensed_now': bool(l), 'license_expires': (l or {}).get('expires') or None, 'risk_level': (l or {}).get('risk_level') or None,
+            'opened': opened, 'first_inspection': hist[-1][0]['date'] if hist else None,
+            'last_inspection': last_row['date'] if last_row else ((l or {}).get('last_inspection') or None),
+            'last_result': last_row['result'] if last_row else None, 'last_result_level': last_row['result_level'] if last_row else None,
+            'last_high_priority': last_row['high_priority'] if last_row else None,
+            'last_routine_date': routine[0]['date'] if routine else None, 'last_routine_violations': routine[0]['total_violations'] if routine else None,
+            'last_routine_high_priority': routine[0]['high_priority'] if routine else None,
+            'inspections': len(hist), 'inspections_last_year': len(recent), 'high_priority_last_year': sum(x['high_priority'] for x in recent),
+            'closures': len(closures), 'last_closure': closures[0]['date'] if closures else None,
+            'source_url': lic_file if l else DBPR_PAGE})
+    out_r.sort(key=lambda r: (r['business_name'] or '').lower())
+    _RC['rest'] = (out_r, out_i)
+    return _RC['rest']
+
+
+_RC = {}
+
+
+def restaurants():
+    return _restaurant_rows()[0]
+
+
+def restaurant_inspections():
+    return _restaurant_rows()[1]
+
+
+FILING_TYPE = {'FLAL': 'Florida LLC', 'DOMP': 'Florida corporation', 'DOMNP': 'Florida nonprofit corporation', 'DOMLP': 'Florida limited partnership',
+               'FORL': 'Out-of-state LLC', 'FORP': 'Out-of-state corporation', 'FORNP': 'Out-of-state nonprofit', 'FORLP': 'Out-of-state limited partnership'}
+
+
+def _clean_city(raw, c):
+    """One spelling per city: 'Pcb', 'P C Beach' and 'Panama City Bch, Fl' all become Panama City Beach."""
+    import difflib
+    t = re.sub(r'[^A-Z ]', ' ', (raw or '').upper())
+    t = re.sub(r'\b(FL|FLA|FLORIDA)\b', ' ', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    if not t:
+        return None
+    if t in ('PCB', 'PC BEACH', 'P C BEACH') or (re.match(r'^(PA|PC|P C)', t) and re.search(r'\b(BEACH|BCH|BEECH|BACH|BREACH)\b', t)):
+        return 'Panama City Beach'
+    names = {'PANAMA', 'PC', 'PANAMA CITY', 'PANAMA CTY'}
+    if t in names:
+        return 'Panama City'
+    fixed = {'LYNNHAVEN': 'LYNN HAVEN', 'SOUTH PORT': 'SOUTHPORT', 'TYNDALL AFB': 'TYNDALL AFB', 'TYNDALL': 'TYNDALL AFB'}
+    t = fixed.get(t, t)
+    known = sorted(c['cities'] - {'PCB', 'PC'})
+    if t not in known:
+        m = difflib.get_close_matches(t, known, n=1, cutoff=0.8)
+        t = m[0] if m else t
+    return 'Tyndall AFB' if t == 'TYNDALL AFB' else t.title()
+
+
+def new_businesses():
+    """Every business filed with the state since 2016 whose main (principal) address is in the county, from the
+    Division of Corporations quarterly file (data/sunbiz/<county>/entities.csv.gz). Out-of-state companies count from
+    the day they registered to do business in Florida. Only the city and ZIP are published: many small companies list
+    a home as their address. People (officers and agents) are on each company's state record, linked by source_url."""
+    import csv, gzip, ids
+    from place import PLACE_ID
+    from entity_graph import build
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'sunbiz'))
+    from counties import county
+    key = PLACE_ID.split('-', 1)[-1]
+    p = os.path.join(HERE, '..', 'data', 'sunbiz', key, 'entities.csv.gz')
+    if not os.path.exists(p):
+        return []
+    c = county(key)
+    G = build()
+    rest = {}
+    for r in restaurants():
+        if r.get('licensee_entity_id') and r['licensed_now']:
+            rest.setdefault(r['licensee_entity_id'], []).append(r['business_name'])
+    out = []
+    for r in csv.DictReader(gzip.open(p, 'rt', encoding='utf-8', errors='replace')):
+        d = r.get('file_date') or ''
+        if len(d) != 8 or d[4:] < str(cutoff.FIRST_YEAR):
+            continue
+        z = (r.get('zip') or '')[:5]
+        if z not in c['zips'] or (z in c.get('shared_zips', ()) and (r.get('city') or '').upper() not in c['cities']):
+            continue
+        city = _clean_city(r.get('city'), c)
+        if city and city.upper() in c.get('outside_places', ()):
+            continue
+        doc = r['doc_number'].strip()
+        bid = 'business:' + doc.lower()
+        eid = G.alias[bid][0] if bid in G.alias else bid
+        last = r.get('last_txn_date') or ''
+        out.append({'place_id': PLACE_ID, 'doc_number': doc, 'name': ids.biz_case(r['name'].strip()), 'filing_type': FILING_TYPE.get(r['filing_type'], r['filing_type']),
+                    'filed_date': f'{d[4:]}-{d[:2]}-{d[2:4]}', 'filed_month': f'{d[4:]}-{d[:2]}',
+                    'status': 'Active' if r.get('status') == 'A' else 'Inactive', 'city': city, 'zip': z,
+                    'last_filing_date': f'{last[4:]}-{last[:2]}-{last[2:4]}' if len(last) == 8 else None,
+                    'latest_annual_report': int(r['report_year_1']) if (r.get('report_year_1') or '').isdigit() else None,
+                    'entity_id': eid, 'restaurants': '; '.join(sorted(set(rest.get(eid, [])))) or None,
+                    'source_url': ids.sunbiz_url(r['name'].strip(), doc)})
+    out.sort(key=lambda r: (r['filed_date'], r['doc_number']), reverse=True)
+    return out
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -1564,5 +1812,8 @@ DATASETS = [
     ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
     ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
     ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
+    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
+    ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
+    ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

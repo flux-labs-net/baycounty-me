@@ -40,6 +40,8 @@ fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's co
 fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",7,Shared owners,/connections/shared-owners,Companies with a shared owner giving to one candidate,False,
 fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",8,Nonprofits,/connections/nonprofits,"Public money, and officials on their boards",False,
 fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",9,Chambers of commerce,/chambers,"Boards, events and public money",False,
+fl-bay,en,People,5,"Who decides, and who's connected",Local businesses,10,Restaurant inspections,/restaurants,"Every inspection, warning and closure since 2016",False,
+fl-bay,en,People,5,"Who decides, and who's connected",Local businesses,11,New businesses,/new-businesses,"Companies filed in Bay County, month by month",False,
 fl-bay,en,Outdoors,6,"Beaches, water and parks",,0,Beaches,/beaches,"Today's flag, rip currents, water quality, access",True,
 fl-bay,en,Outdoors,6,"Beaches, water and parks","Beaches, water and parks",1,Parks,/parks,"Parks, boat ramps, trails and sign-ups",False,
 fl-bay,en,Outdoors,6,"Beaches, water and parks","Beaches, water and parks",2,Water quality,/beaches#water,State bacteria tests at each beach,False,

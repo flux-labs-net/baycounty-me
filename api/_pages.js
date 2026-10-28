@@ -30,6 +30,8 @@ const PAGES = {
   '/roads': {datasets: ['road-contracts', 'road-work-program', 'sales-tax-projects', 'entity-profiles']},
   '/schools': {datasets: ['schools', 'school-grades', 'school-spending', 'school-enrollment', 'school-calendar', 'school-zones', 'meetings'], endpoints: ['/schools']},
   '/utilities': {datasets: ['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'], endpoints: ['/utilities']},
+  '/restaurants': {datasets: ['restaurants', 'restaurant-inspections']},
+  '/new-businesses': {datasets: ['new-businesses', 'restaurants']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},

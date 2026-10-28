@@ -31,6 +31,7 @@ from hurricane_prep_page import hurricane_prep_page
 from elections_hub_page import results_page as election_results_page, voting_page
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
+from restaurants_page import restaurants_page, new_businesses_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -717,6 +718,10 @@ PAGES = [
      "New homes permitted in Bay County each year, city by city, and the commercial buildings, subdivisions and apartments in planning review, with their status and dates, on a map.", lambda: development_page(OUT)),
     ('/roads', 'Road projects',
      "State highway work under way in Bay County and what each FDOT contract costs, FDOT's five-year plan for local roads, the contractors, and the county and city road jobs paid for by the half-cent sales tax.", lambda: roads_page(OUT)),
+    ('/restaurants', 'Restaurant inspections',
+     'Every restaurant, food truck and caterer in Bay County and what state food safety inspectors found on every visit since 2016: violations, warnings, fines recommended and emergency closures.', lambda: restaurants_page(OUT)),
+    ('/new-businesses', 'New businesses',
+     'Every company, nonprofit and partnership filed with the state since 2016 with its main address in Bay County, by month, city and type, and every new restaurant, food truck and caterer.', lambda: new_businesses_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',

@@ -73,6 +73,9 @@ def menu():
              _i('Shared owners', '/connections/shared-owners', 'Companies with a shared owner giving to one candidate'),
              _i('Nonprofits', '/connections/nonprofits', 'Public money, and officials on their boards'),
              _i('Chambers of commerce', '/chambers', 'Boards, events and public money'),
+         ]}, {'group': 'Local businesses', 'items': [
+             _i('Restaurant inspections', '/restaurants', 'Every inspection, warning and closure since 2016'),
+             _i('New businesses', '/new-businesses', 'Companies filed in Bay County, month by month'),
          ]}]},
         {'label': 'Outdoors', 'question': 'Beaches, water and parks',
          'start': _i('Beaches', '/beaches', "Today's flag, rip currents, water quality, access"),
