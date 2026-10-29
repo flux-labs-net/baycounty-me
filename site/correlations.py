@@ -565,7 +565,7 @@ def chamber_overlaps():
         oid = G.alias.get(oid, (oid,))[0] if oid else None
         if oid and oid not in G.ents:
             oid = None
-        org_paid = round(sum(paid.get(oid, {}).values()), 2) if oid else 0
+        org_paid = round(sum(v for g, v in paid.get(oid, {}).items() if ids.gov(g)), 2) if oid else 0  # local governments only, not federal contracts
         org_gave = round(sum(a or 0 for _, a, _, _ in gifts.get(oid, [])), 2) if oid else 0
         own = []
         if pid and pid.startswith('person:'):

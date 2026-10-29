@@ -7,6 +7,7 @@
   const usd = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
   const a = (id, text) => id && window.BC && BC.a ? BC.a(id, text) : esc(text);
   const src = (u, t) => u ? `<a href="${esc(u)}" rel="noopener" target="_blank">${esc(t)}</a>` : '';
+  const names = s => { const n = String(s).split('; '); return n.slice(0, 3).join(', ') + (n.length > 3 ? ` and ${n.length - 3} more` : ''); };
   const empty = (el, msg) => { el.innerHTML = `<p class="ov-empty">${esc(msg)}</p>`; el.setAttribute('aria-busy', 'false'); };
   const table = (el, head, rows) => {
     el.innerHTML = `<div class="tablewrap"><table class="tx-table ov-tbl" data-tt-year="off"><thead><tr>${head.map(([h, c]) => `<th${c ? ` class="${c}"` : ''}>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
@@ -29,7 +30,7 @@
     if (!x.rows.length) return empty(el, x.error ? 'Couldn’t load this part right now.' : 'No checkbook payee on file has given to a local campaign yet. Governments are added as they send their check registers.');
     table(el, [['Payee', ''], ['Paid by', ''], ['Paid', 'n'], ['Gave to campaigns', 'n']], x.rows.slice(0, 200).map(r => `<tr><td>${a(r.payee_id, r.payee)}${r.through_owner ? '<span class="sub">including gifts from its owner</span>' : ''}</td>
       <td>${a('gov:' + r.gov_id, r.government || r.gov_id)}<span class="sub">${esc(r.fiscal_years ? 'FY ' + r.fiscal_years : '')}</span></td><td class="n">${usd(r.paid)}<span class="sub">${r.payments} payments</span></td>
-      <td class="n">${usd(r.gave_to_campaigns)}<span class="sub">${r.gave_to_officials_here ? usd(r.gave_to_officials_here) + ' to officials here' : ''}${r.gave_to ? ' · to ' + esc(r.gave_to) : ''}</span></td></tr>`));
+      <td class="n">${usd(r.gave_to_campaigns)}<span class="sub">${r.gave_to_officials_here ? usd(r.gave_to_officials_here) + ' to officials here' : ''}${r.gave_to ? ' · to ' + esc(names(r.gave_to)) : ''}</span></td></tr>`));
   }
 
   function split(el, x) {

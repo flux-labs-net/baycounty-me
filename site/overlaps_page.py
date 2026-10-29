@@ -17,6 +17,8 @@ CSS = r"""
 .ov-tbl td,.ov-tbl th{vertical-align:top}
 .ov-tbl td.n,.ov-tbl th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ov-tbl .sub{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.ov-tbl td.n .sub{white-space:normal;min-width:9em;max-width:16em;margin-left:auto}
+.ov-tbl td:first-child{min-width:150px}
 .ov-tbl details summary{cursor:pointer;color:var(--blue);font-size:.84rem}
 .ov-tbl details ul{margin:6px 0 0;padding-left:18px;font-size:.84rem;line-height:1.5}
 .ov-tag{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--sunken);color:var(--muted);margin:2px 4px 0 0;white-space:nowrap}
@@ -34,7 +36,7 @@ def _money(n):
     if n is None:
         return '—'
     a = abs(n)
-    return f'${a / 1e6:.1f}M' if a >= 1e6 else f'${round(a / 1e3):,}K' if a >= 1e4 else f'${round(a):,}'
+    return f'${a / 1e9:.1f}B' if a >= 1e9 else f'${a / 1e6:.1f}M' if a >= 1e6 else f'${round(a / 1e3):,}K' if a >= 1e4 else f'${round(a):,}'
 
 
 def _ent(eid, name):
@@ -48,7 +50,11 @@ def _src(url, text='minutes'):
 
 
 def _to(r):
-    return f'<span class="sub">to {e(r["gave_to"])}</span>' if r.get('gave_to') else ''
+    if not r.get('gave_to'):
+        return ''
+    names = r['gave_to'].split('; ')
+    more = f' and {len(names) - 3} more' if len(names) > 3 else ''
+    return f'<span class="sub">to {e(", ".join(names[:3]))}{more}</span>'
 
 
 HOT = lambda t: f'<span class="sub"><span class="ov-tag hot">{t}</span></span>'
