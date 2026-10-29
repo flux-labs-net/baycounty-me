@@ -1,6 +1,7 @@
-// /connections/overlaps: the live parts, from GET /api/v1/overlaps (api/_overlaps.js): officials' own businesses and
-// nonprofits named in votes they cast (hand-checked matches only), checkbook payees that gave to campaigns, payments just
-// under a purchasing threshold, and school spending next to school grades. The rest of the page is built with the site.
+// Overlap sections (site/overlaps_page.py), on whichever page holds them: the "Show all" buttons on long tables, and the
+// live parts from GET /api/v1/overlaps (api/_overlaps.js): officials' own businesses and nonprofits named in votes they
+// cast (hand-checked matches only), checkbook payees that gave to campaigns, payments just under a purchasing threshold,
+// and school spending next to school grades. Each part renders only where its placeholder is on the page.
 (() => {
   const $ = id => document.getElementById(id);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -15,6 +16,7 @@
   };
 
   function own(el, biz, np) {
+    if (!el) return;
     const rows = [];
     for (const r of biz.rows) rows.push(`<tr><td>${a(r.person_id, r.official)}<span class="sub">${esc(r.board || '')}</span></td>
       <td>${a(r.business_id, r.business)}<span class="sub"><span class="ov-tag">their business</span>${r.paid_by_own_government ? `paid ${usd(r.paid_by_own_government)} by their government` : ''}</span></td>
@@ -27,6 +29,7 @@
   }
 
   function checkbook(el, x) {
+    if (!el) return;
     if (!x.rows.length) return empty(el, x.error ? 'Couldn’t load this part right now.' : 'No checkbook payee on file has given to a local campaign yet. Governments are added as they send their check registers.');
     table(el, [['Payee', ''], ['Paid by', ''], ['Paid', 'n'], ['Gave to campaigns', 'n']], x.rows.slice(0, 200).map(r => `<tr><td>${a(r.payee_id, r.payee)}${r.through_owner ? '<span class="sub">including gifts from its owner</span>' : ''}</td>
       <td>${a('gov:' + r.gov_id, r.government || r.gov_id)}<span class="sub">${esc(r.fiscal_years ? 'FY ' + r.fiscal_years : '')}</span></td><td class="n">${usd(r.paid)}<span class="sub">${r.payments} payments</span></td>
@@ -34,6 +37,7 @@
   }
 
   function split(el, x) {
+    if (!el) return;
     if (!x.rows.length) return empty(el, x.error ? 'Couldn’t load this part right now.' : 'No run of payments just under a threshold in the check registers on file.');
     table(el, [['Payee', ''], ['Government', ''], ['Payments', 'n'], ['Just under', 'n'], ['Total', 'n']], x.rows.slice(0, 100).map(r => `<tr><td>${a(r.payee_id, r.payee)}
       <details><summary>${esc(r.first_date)} to ${esc(r.last_date)}</summary><ul>${r.items.map(i => `<li>${esc(i.paid_on)}: ${usd(i.amount)}${i.description ? ' · ' + esc(i.description) : ''}${i.doc_no ? ' · #' + esc(i.doc_no) : ''}</li>`).join('')}</ul></details></td>
@@ -41,25 +45,41 @@
   }
 
   function schools(el, x) {
+    if (!el) return;
     if (!x.rows.length) return empty(el, x.error ? 'Couldn’t load this part right now.' : 'The state school grades and spending files are not on file for the same years yet. This fills in when both are.');
     table(el, [['School', ''], ['Year', 'n'], ['Grade', 'n'], ['Per student', 'n']], x.rows.map(r => `<tr><td><a href="/schools#${esc(r.school_id)}">${esc(r.school)}</a></td>
       <td class="n">${esc(r.year)}</td><td class="n">${esc(r.grade || '—')}</td><td class="n">${usd(r.per_student)}</td></tr>`));
   }
 
   async function load() {
-    const els = ['ovOwn', 'ovCheckbook', 'ovSplit', 'ovSchools'].map($);
-    if (!els[0]) return;
+    const ids = ['ovOwnBiz', 'ovOwnNp', 'ovCheckbook', 'ovSplit', 'ovSchools'], els = ids.map($);
+    if (!els.some(Boolean)) return;
+    const none = {rows: []};
     try {
       const r = await fetch('/api/v1/overlaps');
       if (!r.ok) throw new Error();
       const d = (await r.json()).data;
-      own(els[0], d.official_business_votes, d.nonprofit_board_money);
-      checkbook(els[1], d.checkbook_donors);
-      split(els[2], d.split_purchases);
-      schools(els[3], d.school_spending_grades);
+      own(els[0], d.official_business_votes, none);
+      own(els[1], none, d.nonprofit_board_money);
+      checkbook(els[2], d.checkbook_donors);
+      split(els[3], d.split_purchases);
+      schools(els[4], d.school_spending_grades);
     } catch (e) {
       els.forEach(el => el && empty(el, 'Couldn’t load this part right now. Try again in a moment.'));
     }
   }
+
+  // long tables show the first rows; "Show all", sorting or filtering shows every row
+  const uncut = t => { if (t) t.classList.remove('ov-cut'); };
+  document.addEventListener('click', ev => {
+    const b = ev.target.closest('[data-ov-more]');
+    if (b) { uncut(b.previousElementSibling && b.previousElementSibling.querySelector('table')); b.remove(); return; }
+    const th = ev.target.closest('.ov-cut th');
+    if (th) uncut(th.closest('table'));
+  });
+  document.addEventListener('input', ev => {
+    const sec = ev.target.closest('.ov-sec');
+    if (sec) sec.querySelectorAll('.ov-cut').forEach(t => { uncut(t); const b = t.closest('.tablewrap').nextElementSibling; if (b && b.matches('[data-ov-more]')) b.remove(); });
+  });
   load();
 })();

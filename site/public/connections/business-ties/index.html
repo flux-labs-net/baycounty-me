@@ -102,7 +102,47 @@
   </ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script src="/assets/business_ties.js" defer></script>
+<script src="/assets/business_ties.js" defer></script><style>
+.ov-tbl td,.ov-tbl th{vertical-align:top}
+.ov-tbl td.n,.ov-tbl th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ov-tbl .sub{display:block;color:var(--muted);font-size:.8rem;margin-top:2px}
+.ov-tbl td.n .sub{white-space:normal;min-width:9em;max-width:16em;margin-left:auto}
+.ov-tbl td:first-child{min-width:150px}
+.ov-tbl details summary{cursor:pointer;color:var(--blue);font-size:.84rem;white-space:nowrap}
+.ov-tbl details ul{margin:6px 0 0;padding-left:18px;font-size:.84rem;line-height:1.5}
+.ov-tag{display:inline-block;font-size:.72rem;font-weight:600;padding:1px 8px;border-radius:999px;background:var(--sunken);color:var(--muted);margin:2px 4px 0 0;white-space:nowrap}
+.ov-tag.hot{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
+.ov-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.ov-steps li{padding:14px 16px;border-radius:16px;background:var(--surface);box-shadow:var(--ui-shadow);font-size:.9rem;line-height:1.45}
+.ov-steps b{display:block;font-size:.95rem;margin-bottom:2px}
+.ov-live[aria-busy="true"]{opacity:.6}
+.ov-empty{color:var(--muted);font-size:.92rem;margin:8px 0}
+.ov-cut tr.ov-more{display:none!important}
+.ov-showall{margin:10px 0 0;cursor:pointer}
+.ov-here{padding-top:0}
+.ov-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.ov-card{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:16px;background:var(--surface);box-shadow:var(--ui-shadow)}
+.ov-card h3{margin:0;font-size:1rem}
+.ov-card .ov-stat{margin:0;font-size:.9rem;font-weight:600;color:var(--ink)}
+.ov-card ul{margin:2px 0 0;padding-left:18px;font-size:.86rem;line-height:1.5}
+.ov-card p.muted{margin:0;font-size:.84rem}
+.ov-card .ov-go{margin-top:auto;padding-top:6px;font-size:.88rem;font-weight:600}
+.ov-fig{margin:6px 0 10px}
+.ov-fig svg{width:100%;max-width:720px;height:auto;display:block}
+.ov-grid{stroke:var(--line);stroke-width:1}
+.ov-diag{stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 4}
+.ov-ax{fill:var(--muted);font-size:12px}
+.ov-axt{fill:var(--ink);font-size:13px}
+circle.ov-won{fill:var(--blue);stroke:var(--surface);stroke-width:2}
+circle.ov-lost{fill:var(--surface);stroke:var(--muted);stroke-width:2}
+.ov-fig figcaption{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:.86rem}
+.ov-key{display:inline-flex;align-items:center;gap:6px}
+.ov-key i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.ov-key i.ov-won{background:var(--blue)}
+.ov-key i.ov-lost{border:2px solid var(--muted);width:8px;height:8px}
+.ov-every summary{cursor:pointer;color:var(--blue);font-weight:600;margin:6px 0}
+@media (max-width:760px){.ov-tbl .hide-sm{display:none}}
+</style><div class="page tax ov ov-here"><section class="tx-sec ov-sec"><div class="sec-hd"><span class="ui-ti t-amber"><span class="ico i-vote" aria-hidden="true"></span></span><h2 id="ov-own-business" data-tile="Votes on an official&#x27;s own business">Votes on an official&#x27;s own business</h2><span class="muted">Hand-checked matches only, read live</span></div><div class="ov-live" id="ovOwnBiz" aria-busy="true" aria-live="polite"><p class="ov-empty">Loading…</p></div><p class="note">A business an official runs, named in a motion they voted on, with what their own government paid it.</p></section></div><link rel="stylesheet" href="/assets/tax.css"><script src="/assets/overlaps.js" defer></script>
 </main>
 <footer class="site-foot"><div class="site-foot-in">
   <div class="foot-brand"><a class="wordmark" href="/"><span>BayCounty<b>.me</b></span></a>

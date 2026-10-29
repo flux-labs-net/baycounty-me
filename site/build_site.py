@@ -38,7 +38,7 @@ from military_page import military_page
 from realtor_page import realtor_page
 from account_page import account_page
 from business_ties_page import business_ties_page
-from overlaps_page import overlaps_page
+from overlaps_page import overlaps_page, for_page as overlap_sections
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 from place import SITE, DOMAIN, LABEL as PLACE_LABEL, EMAIL, OPERATOR, OFFICIALS, wordmark_html, governments as _place_govs
@@ -920,7 +920,7 @@ def main():
     from gov_detail import write_savings_data
     write_savings_data(OUT)  # savings ideas on each government's page
     for path, title, desc, fn in PAGES:
-        write(path, layout(title, desc, path, fn()))
+        write(path, layout(title, desc, path, fn() + overlap_sections(path)))  # overlaps live on the page they belong to
     print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith(PROFILE_PREFIXES)]), 'entries')  # profiles: own indexers
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     from app_data import write_app_data
