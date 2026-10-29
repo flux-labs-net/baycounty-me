@@ -134,7 +134,8 @@ def _doors():
     from site_menu import menu, links
     from ui import ico
     out = []
-    for m in menu():
+    # the election-season card goes last: it's shorter than the others (no "All N" footer)
+    for m in sorted(menu(), key=lambda m: bool(m.get('season'))):
         if m.get('footer'):
             continue
         ls = links(m)
