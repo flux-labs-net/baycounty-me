@@ -1328,7 +1328,7 @@
   $('#nm-q').addEventListener('input', () => { clearTimeout(nmTimer); nmTimer = setTimeout(loadNames, 300); });
 
   // ---------- app usage (appusage.*, api/_app_usage.js) ----------
-  const AU_NAME = {'tab/today': 'Today tab', 'tab/living': 'Living here tab', 'tab/money': 'Money tab', 'tab/decides': 'Who decides tab', 'tab/search': 'Search tab',
+  const AU_NAME = {'tab/today': 'Today tab', 'tab/living': 'Living here tab', 'tab/money': 'Money tab', 'tab/decides': 'Government tab', 'tab/search': 'Search tab',
     myaddress: 'My Address', myhome: 'My home', accountsettings: 'My home settings', address: 'Address report', hurricaneprep: 'Hurricane prep',
     craincrement: 'CRA tax increment', cra: 'CRA spending', moneymap: 'Money map', donorcontracts: 'Donors with contracts', budgetcompare: 'Budget years',
     taxcalculator: 'Tax calculator', amendment3: 'Amendment 3', accountabilityproject: 'Accountability project', govbudget: 'Government budget',

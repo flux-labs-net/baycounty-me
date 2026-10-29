@@ -28,7 +28,7 @@ struct GovernmentsView: View {
                 .padding(.bottom, 24)
             }
             .background(Brand.canvas)
-            .navigationTitle("Who decides")
+            .navigationTitle("Government")
             .refreshable { await store.loadGovernments() }
             .withRoutes()
         }
@@ -84,7 +84,7 @@ struct GovernmentsView: View {
             .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
     }
 
-    /// The site's "Who decides" menu: officials, meetings, votes, connections and elections.
+    /// The site's "Your government" menu: officials, meetings, votes, connections and elections.
     private var decidesSection: some View {
         CardList {
             RouteRow(route: .people, title: "Officials, leaders and candidates", symbol: "person.3")
