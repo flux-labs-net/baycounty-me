@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-28",
+ "updated": "2026-10-29",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -13293,7 +13293,7 @@
   {
    "id": "public-notices",
    "title": "Public notices",
-   "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
+   "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
    "rows": 65,
    "columns": [
     {
@@ -13476,6 +13476,95 @@
      "values": [
       "2026-10-08"
      ]
+    },
+    {
+     "name": "reference",
+     "type": "string",
+     "values": [
+      "Bid PCB27-07",
+      "Bid PCB27-10",
+      "Emergency order 27-02",
+      "ITB 27-02",
+      "ITB 27-04",
+      "Ordinance 1152",
+      "Ordinance 1153",
+      "Ordinance 1154",
+      "Ordinance 1192R",
+      "Ordinance 1691",
+      "Ordinance 3315",
+      "Ordinance 904",
+      "Project 414877",
+      "Project R2025-14-0005600",
+      "RFP PCB26-51",
+      "RFQ 27-03"
+     ]
+    },
+    {
+     "name": "emails",
+     "type": "string",
+     "values": [
+      "buildingdepartment@pcbfl.gov",
+      "cityclerk@panamacity.gov",
+      "fulleln@bay.k12.fl.us",
+      "fulleln@bay.k12.fl.us; facilities@bay.k12.fl.us",
+      "harveam@bay.k12.fl.us",
+      "jpowell@mcneilcarroll.com",
+      "kmeyerl@panamacity.gov",
+      "lynne.fasone@pcbfl.gov",
+      "mell@mexicobeachfl.gov",
+      "planning@baycountyfl.gov",
+      "purchasing@cityoflynnhaven.com",
+      "purchasing@panamacity.gov",
+      "purchasing@pcbfl.gov",
+      "ryan.fowler@atkinsrealis.com",
+      "smoneyham@portpcfl.com",
+      "t.brunson@mexicobeachfl.gov",
+      "ward@pcbfl.gov; allison.marshall@pcbfl.gov"
+     ]
+    },
+    {
+     "name": "phones",
+     "type": "string",
+     "values": [
+      "(321) 263-0132",
+      "(407) 806-4582",
+      "(850) 215-6694",
+      "(850) 233-5000",
+      "(850) 233-5070",
+      "(850) 233-5100",
+      "(850) 248-0506",
+      "(850) 248-0506; (850) 248-0708; (800) 955-9771; (800) 955-9770",
+      "(850) 248-8250",
+      "(850) 248-8270",
+      "(850) 265-2121",
+      "(850) 648-5700",
+      "(850) 691-4902",
+      "(850) 723-3089",
+      "(850) 763-5730",
+      "(850) 767-3220",
+      "(850) 767-4100",
+      "(850) 767-4139",
+      "(850) 767-4363",
+      "(850) 872-3020"
+     ]
+    },
+    {
+     "name": "links",
+     "type": "string",
+     "values": [
+      "Beach.com",
+      "https://cityoflynnhaven.com/Bids.aspx",
+      "https://drive.google.com/drive/folders/1xcGtgH-2HGNKVYBXkhRnpbUbaTk-DBJC?usp=sharing",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1066/files/agenda/1051",
+      "https://mexicobeachfl.gov/bids/",
+      "https://panamacity.bonfirehub.com/portal/?tab=openOpportunities",
+      "https://procurement.opengov.com/signup",
+      "lynnhavenfl.portal.civicclerk.com",
+      "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
+      "www.demandstar.com; www.pcbfl.gov/bids.aspx",
+      "www.panamacity.gov",
+      "www.pcbfl.gov"
+     ]
     }
    ],
    "json": "/downloads/public-notices.json",
@@ -13486,7 +13575,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 108,
+   "rows": 104,
    "columns": [
     {
      "name": "place_id",
@@ -13614,7 +13703,6 @@
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-10-28",
       "2026-10-29",
       "2026-10-30",
       "2026-11-02",

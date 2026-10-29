@@ -266,7 +266,14 @@ def public_notices():
     import dupes
     items = [{'id': r['notice_id'], 'group': r['agency'] or r['gov_id'], 'when': r['published'], 'title': r['title'], 'body': r['text'],
               'source': r['agency'], 'url': r['pdf_url'] or r['source_url']} for r in rows]
-    return dupes.mark(rows, dupes.find(items, window_hours=21 * 24, strict_numbers=True, decisions=dupes.load_decisions(), feed='notices'), 'notice_id', 'published')
+    rows = dupes.mark(rows, dupes.find(items, window_hours=21 * 24, strict_numbers=True, decisions=dupes.load_decisions(), feed='notices'), 'notice_id', 'published')
+    # The text comes off the notice site as one run-on line: give it paragraphs, and pull out the bid or ordinance number,
+    # emails, phone numbers and web links so pages and apps can show them up top (site/longtext.py).
+    import longtext
+    for r in rows:
+        r.update(longtext.facts(r['text']))
+        r['text'] = longtext.paragraphs(r['text'])
+    return rows
 
 
 def notices_info():
