@@ -7623,7 +7623,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 74,
+   "rows": 75,
    "columns": [
     {
      "name": "place_id",
@@ -16128,6 +16128,428 @@
    "json": "/downloads/tax-districts.json",
    "csv": "/downloads/tax-districts.csv",
    "api": "/api/v1/datasets/tax-districts"
+  },
+  {
+   "id": "safety-agencies",
+   "title": "Police and fire departments",
+   "description": "Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string"
+    },
+    {
+     "name": "agency",
+     "type": "string"
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "fire",
+      "police"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "agency_gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sheriff",
+      "sp"
+     ]
+    },
+    {
+     "name": "arrangement",
+     "type": "string",
+     "values": [
+      "City fire department",
+      "City police department",
+      "County fire department for the unincorporated areas, paid by the fire services MSTU",
+      "Sheriff (countywide; unincorporated areas, the county jail and the cities that contract)",
+      "The city pays the Sheriff's Office to police Callaway",
+      "The city pays the Sheriff's Office to police Mexico Beach (since Nov 1, 2019; the city's own police department reported until 2019)"
+     ]
+    },
+    {
+     "name": "budget_amount",
+     "type": "number"
+    },
+    {
+     "name": "budget_lines",
+     "type": "string",
+     "values": [
+      "145 M.S.T.U. - Fire Services",
+      "Fire",
+      "Fire Department",
+      "Law Enforcement",
+      "Law Enforcement (Sheriff contract)",
+      "Police",
+      "Police (Sheriff contract)",
+      "Sheriff / law enforcement; Jail operations (Sheriff-run)"
+     ]
+    },
+    {
+     "name": "budget_fiscal_year",
+     "type": "string",
+     "values": [
+      "FY2026"
+     ]
+    },
+    {
+     "name": "budget_source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6275/Agenda-Budget-Meeting-091725.pdf",
+      "https://publicnoticesbaycountyfl.gov/public-notices",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09182025-374?packet=true",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "https://www.springfieldfl.net/media/10201"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030400",
+      "FL0030500",
+      "FL0030600",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "officers",
+     "type": "number"
+    },
+    {
+     "name": "civilians",
+     "type": "number"
+    },
+    {
+     "name": "staffing_year",
+     "type": "number"
+    },
+    {
+     "name": "website",
+     "type": "string",
+     "values": [
+      "https://bayso.org",
+      "https://www.panamacitypolice.gov"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bayso.org",
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6275/Agenda-Budget-Meeting-091725.pdf",
+      "https://publicnoticesbaycountyfl.gov/public-notices",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09182025-374?packet=true",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.panamacitypolice.gov",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "https://www.springfieldfl.net/media/10201",
+      "https://www.wjhg.com/2020/11/03/officials-look-back-at-transition-from-mexico-beach-police-department-to-bay-county-sheriffs-office"
+     ]
+    }
+   ],
+   "json": "/downloads/safety-agencies.json",
+   "csv": "/downloads/safety-agencies.csv",
+   "api": "/api/v1/datasets/safety-agencies"
+  },
+  {
+   "id": "crime-counts",
+   "title": "Crimes reported by police agency",
+   "description": "Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed) and the population the agency covers. A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.",
+   "rows": 580,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string",
+     "values": [
+      "bcso",
+      "lhpd",
+      "mb-police",
+      "parkerpd",
+      "pcbpd",
+      "pcpd",
+      "sppd"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County Sheriff's Office",
+      "Lynn Haven Police Department",
+      "Mexico Beach Police Department (reported until 2019)",
+      "Panama City Beach Police Department",
+      "Panama City Police Department",
+      "Parker Police Department",
+      "Springfield Police Department"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030400",
+      "FL0030500",
+      "FL0030600",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "offense_code",
+     "type": "string",
+     "values": [
+      "ARS",
+      "ASS",
+      "BUR",
+      "HOM",
+      "LAR",
+      "MVT",
+      "P",
+      "ROB",
+      "RPE",
+      "V"
+     ]
+    },
+    {
+     "name": "offense",
+     "type": "string",
+     "values": [
+      "Aggravated assault",
+      "Arson",
+      "Burglary",
+      "Larceny-theft",
+      "Motor vehicle theft",
+      "Murder",
+      "Property crime",
+      "Rape",
+      "Robbery",
+      "Violent crime"
+     ]
+    },
+    {
+     "name": "offense_group",
+     "type": "string",
+     "values": [
+      "property",
+      "violent"
+     ]
+    },
+    {
+     "name": "total_row",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "count",
+     "type": "number"
+    },
+    {
+     "name": "cleared",
+     "type": "number"
+    },
+    {
+     "name": "months_reported",
+     "type": "number"
+    },
+    {
+     "name": "population",
+     "type": "number"
+    },
+    {
+     "name": "per_1000",
+     "type": "number"
+    },
+    {
+     "name": "reporting",
+     "type": "string",
+     "values": [
+      "monthly incident reports (NIBRS)",
+      "yearly summary"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+     ]
+    }
+   ],
+   "json": "/downloads/crime-counts.json",
+   "csv": "/downloads/crime-counts.csv",
+   "api": "/api/v1/datasets/crime-counts"
+  },
+  {
+   "id": "police-staffing",
+   "title": "Police staffing",
+   "description": "Sworn officers and civilian employees at each police agency in the county on October 31 each year since 2016, as the agency reported them to the FBI (Crime Data Explorer police employee data), with employees per 1,000 residents covered. The Sheriff's reported civilian staff went from 71 in 2022 to 271 in 2023; the FBI data does not say why.",
+   "rows": 54,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string",
+     "values": [
+      "bcso",
+      "lhpd",
+      "mb-police",
+      "parkerpd",
+      "pcbpd",
+      "pcpd",
+      "sppd"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County Sheriff's Office",
+      "Lynn Haven Police Department",
+      "Mexico Beach Police Department (reported until 2019)",
+      "Panama City Beach Police Department",
+      "Panama City Police Department",
+      "Parker Police Department",
+      "Springfield Police Department"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030400",
+      "FL0030500",
+      "FL0030600",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "officers",
+     "type": "number"
+    },
+    {
+     "name": "civilians",
+     "type": "number"
+    },
+    {
+     "name": "employees",
+     "type": "number"
+    },
+    {
+     "name": "female_officers",
+     "type": "number"
+    },
+    {
+     "name": "employees_per_1000",
+     "type": "number"
+    },
+    {
+     "name": "population",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+     ]
+    }
+   ],
+   "json": "/downloads/police-staffing.json",
+   "csv": "/downloads/police-staffing.csv",
+   "api": "/api/v1/datasets/police-staffing"
   },
   {
    "id": "volunteer-needs",

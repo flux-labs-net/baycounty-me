@@ -2231,6 +2231,8 @@ DATASETS = [
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]
 
+from safety_data import DATASETS as _SAFETY  # noqa: E402  /public-safety (site/safety_data.py)
+DATASETS += _SAFETY
 from volunteer_data import DATASETS as _VOLUNTEER  # noqa: E402  /volunteer (site/volunteer_data.py)
 DATASETS += _VOLUNTEER
 from correlations import DATASETS as _OVERLAPS, COLUMNS as _OVERLAP_COLUMNS  # noqa: E402  /connections/overlaps (site/correlations.py)

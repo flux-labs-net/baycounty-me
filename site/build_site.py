@@ -35,6 +35,7 @@ from restaurants_page import restaurants_page, new_businesses_page, restaurant_p
 from weekly import this_week_page
 from volunteer_page import volunteer_page
 from military_page import military_page
+from safety_page import safety_page
 from realtor_page import realtor_page
 from account_page import account_page
 from business_ties_page import business_ties_page
@@ -808,6 +809,8 @@ PAGES = [
      'Open volunteer needs from Bay County nonprofits, read every day from public volunteer boards, and the local nonprofits that rely on volunteers year-round, by cause.', lambda: volunteer_page(OUT)),
     ('/military', 'Military and the bases',
      "Tyndall Air Force Base and Naval Support Activity Panama City: what each base does and who commands it, the latest news from the units on them, and every federal contract since 2016 to companies based in Bay County, by company, agency and year.", lambda: military_page(OUT)),
+    ('/public-safety', 'Police, fire and the Sheriff',
+     "Who polices and who fights fires in each part of Bay County, what each police and fire department costs, the crimes each police agency has reported to the FBI since 2016, and how many officers each has.", lambda: safety_page(OUT)),
     ('/connections/overlaps', 'Where the records overlap',
      "Where Bay County's public records meet: votes on motions naming an official's own campaign donors, companies on agendas, bids from notice to award, companies paid by one government that share an officer, chamber boards, emergency purchases, checkbook payees that gave to campaigns and money raised next to votes won.", lambda: overlaps_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",

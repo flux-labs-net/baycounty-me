@@ -40,6 +40,7 @@ public enum SitePages {
         "/parks": .native("Parks"),
         "/development": .dataset("development-projects"),
         "/roads": .dataset("road-contracts"),
+        "/public-safety": .dataset("safety-agencies"),
         "/schools": .native("Public schools (SchoolsView); zoned schools are on My Address"),
         "/utilities": .native("Utilities and trash day (UtilitiesView, from /api/v1/utilities)"),
         "/restaurants": .native("Restaurant inspections (RestaurantsView): search, latest result and six-visit strip"),

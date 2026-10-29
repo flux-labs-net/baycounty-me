@@ -42,6 +42,7 @@ const PAGES = {
   '/volunteer': {datasets: ['volunteer-needs', 'volunteer-orgs', 'nonprofits']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits', 'person-photos', 'chamber-overlaps']},
   '/military': {datasets: ['military-installations', 'military-news', 'federal-contracts', 'federal-contract-years']},
+  '/public-safety': {datasets: ['safety-agencies', 'crime-counts', 'police-staffing']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations', 'person-photos'], endpoints: ['/overlaps']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links'], endpoints: ['/overlaps']},
   // overlaps between datasets (site/correlations.py); the hand-confirmed and checkbook joins are live (api/_overlaps.js)

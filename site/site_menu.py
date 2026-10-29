@@ -49,6 +49,7 @@ def menu(today=None):
                  _i('Utilities & trash day', '/utilities', 'Who provides what, and your pickup day'),
                  _i('Public schools', '/schools', 'Your zoned schools, calendar, grades and spending'),
                  _i('Restaurant inspections', '/restaurants', 'Every inspection, warning and closure'),
+                 _i('Police, fire & Sheriff', '/public-safety', 'Who covers your town, crimes reported, budgets'),
                  _i('Government jobs', '/jobs', 'Open jobs at every local government'),
              ]},
              {'group': 'Outdoors and storms', 'items': [
