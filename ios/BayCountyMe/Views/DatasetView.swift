@@ -162,6 +162,8 @@ struct DatasetView: View {
                         NavigationLink(value: Route.record(datasetID, rowID: row.id)) {
                             CompactRecordRow(spec: spec, row: row, maxAmount: maxAmount, hide: hiddenMeta)
                         }
+                        .shareContextMenu(text: RecordShare.text(datasetID, row, columns: info?.columns ?? [], listTitle: info?.title),
+                                          url: RecordShare.url(datasetID, row))
                     }
                 } header: {
                     if group != .none {
@@ -366,6 +368,8 @@ struct DatasetView: View {
                         NavigationLink(value: Route.record(datasetID, rowID: v.id)) {
                             VoteRow(row: v, summary: summaries[v.id] ?? VoteSummary(v))
                         }
+                        .shareContextMenu(text: RecordShare.text(datasetID, v, columns: info?.columns ?? [], listTitle: info?.title),
+                                          url: RecordShare.url(datasetID, v))
                     }
                 } header: {
                     GroupHeader(title: m.board,
@@ -466,9 +470,9 @@ struct RecordDetailView: View {
             .navigationTitle(Self.noun[datasetID] ?? store.info(datasetID)?.title ?? "Record")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                if let url = DatasetSpec.sourceURL(row) {
-                    ShareLink(item: url, subject: Text(spec.title(row)),
-                              message: Text([spec.title(row), spec.amount(row).map { Format.money($0) }].compactMap { $0 }.joined(separator: " · ")))
+                ToolbarItem(placement: .topBarTrailing) {
+                    let info = store.info(datasetID)
+                    ShareMenu(text: RecordShare.text(datasetID, row, columns: info?.columns ?? [], listTitle: info?.title), url: RecordShare.url(datasetID, row))
                 }
             }
             .task { await loadRelated(row) }

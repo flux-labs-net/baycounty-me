@@ -50,6 +50,13 @@ struct GovernmentDetailView: View {
             }
             .navigationTitle(g.name)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    let url = g.pageURL ?? URL(string: "https://baycounty.me/governments/\(g.slug)")
+                    ShareMenu(text: RecordShare.page(title: g.name, summary: ["Budget, taxes, debt, votes and who's in charge"],
+                                                     path: url?.path ?? "/governments"), url: url)
+                }
+            }
             .task {
                 await store.load(Self.datasets)
                 await store.loadPeople()

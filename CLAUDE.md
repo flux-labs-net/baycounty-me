@@ -26,6 +26,14 @@ one profile URL, from `site/entity_graph.py` (`page_url`). Link names with `site
 automatically. A new dataset that names people or organizations should add its connections in `entity_graph.build()`
 (public rows only; hand-checked, database-only rows go in `api/_entities.js` `liveConnections`).
 
+## Share and link previews
+
+Every page gets a Share button and every table row, list item and card a Copy / Share menu from `site/share.js` (text
+summary + a link that jumps to the record). Lists it can't spot get `data-share-items` (on the list) or
+`data-share-record`; a record page can set its own text with `<div hidden data-share-text="...">`. Every page needs a
+preview image: static pages get one from `site/og.py` at build; per-record pages without one (restaurants, `/profile/*`)
+are drawn on request by `api/og.js` (link-preview crawlers get `/profile/*` titles from `api/meta.js`).
+
 ## Privacy
 
 Individual campaign donors are never named (summed totals only), except people who run a registered business: a

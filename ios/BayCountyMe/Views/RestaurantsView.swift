@@ -220,6 +220,18 @@ struct RestaurantDetailView: View {
         }
         .navigationTitle(row?.string("business_name") ?? "Restaurant")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            if let r = row {
+                ToolbarItem(placement: .topBarTrailing) {
+                    let url = Restaurants.pageURL(r)
+                    ShareMenu(text: RecordShare.page(title: r.string("business_name") ?? "Restaurant",
+                                                     summary: [[r.string("kind"), r.string("address"), r.string("city")].compactMap { $0 }.joined(separator: " · "),
+                                                               Restaurants.summary(r)],
+                                                     path: url?.path ?? "/restaurants"),
+                              url: url)
+                }
+            }
+        }
         .task {
             await store.load(Restaurants.datasets)
             do { visits = try await store.client.restaurantInspections(license: license) } catch { failed = true }

@@ -109,7 +109,7 @@ def events_page(out_dir=None):
         days.setdefault(max(r['starts'][:10], today), []).append(r)
     for k in sorted(days)[:7]:
         label = 'Today' if k == today else dt.date.fromisoformat(k).strftime('%A, %B %-d')
-        fallback.append(f'<section class="ev-day"><h3>{label}<span>{len(days[k])}</span></h3><ul class="ev-list">{"".join(_row(r, True) for r in days[k])}</ul></section>')
+        fallback.append(f'<section class="ev-day" data-share-date="{k}"><h3>{label}<span>{len(days[k])}</span></h3><ul class="ev-list">{"".join(_row(r, True) for r in days[k])}</ul></section>')
     n = lambda c: sum(1 for r in upcoming if r['category'] == c)
     week = (dt.date.today() + dt.timedelta(days=7)).isoformat()
     k = lambda t, v, c, tone: f'<div class="kpi"><span class="eyebrow">{t}</span><span class="v">{v}</span><span class="s">{c}</span></div>'

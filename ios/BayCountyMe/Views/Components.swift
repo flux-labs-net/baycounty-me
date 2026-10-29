@@ -494,3 +494,49 @@ struct BayOutline: Shape {
         }
     }
 }
+
+// MARK: - Copy and Share
+
+/// Copy and Share for one record or page (RecordShare in the kit, the same text as the website's Share button):
+/// copy the text summary, copy the link, or open the share sheet with the link and the summary.
+struct ShareMenu: View {
+    let text: String
+    let url: URL?
+
+    var body: some View {
+        Menu {
+            ShareActions(text: text, url: url)
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+        }
+        .accessibilityLabel("Share")
+    }
+}
+
+/// Copy link and Share, for a toolbar menu or a row's long-press menu. Share sends the link (titled with the record's
+/// name) so Messages and others draw its preview card; a record with no link shares its text instead.
+struct ShareActions: View {
+    let text: String
+    let url: URL?
+
+    var body: some View {
+        if let url {
+            Button {
+                UIPasteboard.general.url = url
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            } label: { Label("Copy link", systemImage: "link") }
+            ShareLink(item: url, subject: Text(text.components(separatedBy: "\n").first ?? "")) {
+                Label("Share…", systemImage: "square.and.arrow.up")
+            }
+        } else {
+            ShareLink(item: text) { Label("Share…", systemImage: "square.and.arrow.up") }
+        }
+    }
+}
+
+extension View {
+    /// Long-press a list row for Copy link and Share.
+    func shareContextMenu(text: @autoclosure @escaping () -> String, url: @autoclosure @escaping () -> URL?) -> some View {
+        contextMenu { ShareActions(text: text(), url: url()) }
+    }
+}

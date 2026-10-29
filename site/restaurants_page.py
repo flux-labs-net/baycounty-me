@@ -238,6 +238,13 @@ def summary(r, hist, today=None):
     return ' '.join(out)
 
 
+def _share_text(r, hist, where, today):
+    """What Share / Copy puts on the clipboard for this restaurant (site/share.js): name, where, the plain summary."""
+    import html as _h, re as _re
+    say = _h.unescape(_re.sub(r'<[^>]+>', '', summary(r, hist, today)))
+    return f'<div hidden data-share-text="{e(r["business_name"] + chr(10) + where + chr(10) + say)}"></div>'
+
+
 def about(path, _c={}):
     """What a restaurant's page is about, for search engines (build_site.page_about)."""
     if 'm' not in _c:
@@ -297,11 +304,11 @@ def restaurant_page(r, hist):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/restaurants">Restaurant inspections</a></span><h1>{e(r["business_name"])}</h1>
     <p class="lede">{e(where)}</p>{holder}</div>
     <div class="stamp">{_pill(SHORT.get(r['last_result'], r['last_result']), r['last_result_level'])}<span>{"Last inspected " + _fmt(r['last_inspection']) if r.get('last_inspection') else 'No inspections yet'}. State license {e(r['license_number'])}</span></div></header>
-  <p class="rs-say">{summary(r, hist, today)}</p>
+  <p class="rs-say">{summary(r, hist, today)}</p>{_share_text(r, hist, where, today)}
   {gone}
   <div class="kpis">{kpis}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="history">Every inspection since 2016</h2><span class="muted">Newest first</span></div>
-    {f'<ul class="rs-tl">{tl}</ul>' if tl else '<p>No inspections on file yet.</p>'}
+    {f'<ul class="rs-tl" data-share-items>{tl}</ul>' if tl else '<p>No inspections on file yet.</p>'}
     <p class="note">High-priority violations are the ones most likely to make someone sick. A warning means the inspector comes back to check. Fire safety items are reported to fire officials. The inspector's full notes are on the state's <a href="https://www.myfloridalicense.com/wl11.asp?mode=0&SID=&brd=H" rel="noopener" target="_blank">license search</a> (search license {e(r['license_number'])}).</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">

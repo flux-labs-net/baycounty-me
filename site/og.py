@@ -144,7 +144,7 @@ def person_cards():
         else:
             stat, label = '', ''
         role = x.get('subtitle') or ''
-        chip = '2026 candidate' if role.lower().startswith('2026 candidate') else 'Official'
+        chip = '2026 candidate' if role.lower().startswith('2026 candidate') else 'Past candidate' if role.lower().startswith('ran for') else 'Official'
         out[f'/people/{pid}'] = dict(kind='person', eyebrow=chip, title=x['name'], sub=role, stat=stat, label=label,
                                      desc=('Campaign money, platform and connections, from public records.' if chip != 'Official'
                                            else 'Where they serve, campaign gifts from businesses and groups, recorded votes and connections.'))
@@ -217,6 +217,12 @@ def _shrink(fn):
     im.quantize(colors=128, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG).save(fn, optimize=True)
 
 
+def _browser():
+    """OG_CHROMIUM=/path/to/chrome uses an installed browser when the Python Playwright's own isn't downloaded."""
+    exe = os.environ.get('OG_CHROMIUM')
+    return {'executable_path': exe} if exe else {}
+
+
 def build_og(out_dir, pages, menu):
     dest = os.path.join(HERE, 'og-cache'); os.makedirs(dest, exist_ok=True)
     cache_f = os.path.join(dest, '.cache.json')
@@ -240,7 +246,7 @@ def build_og(out_dir, pages, menu):
         mapsvg = _map_svg()
         tmp = os.path.join(dest, '_card.html')
         with sync_playwright() as p:
-            b = p.chromium.launch(); pg = b.new_page(viewport={'width': W, 'height': H})
+            b = p.chromium.launch(**_browser()); pg = b.new_page(viewport={'width': W, 'height': H})
             for path, (c, fn, h) in todo.items():
                 open(tmp, 'w').write(_card(c, mapsvg))
                 pg.goto('file://' + tmp); pg.evaluate('document.fonts.ready')
@@ -253,7 +259,7 @@ def build_og(out_dir, pages, menu):
     if not os.path.exists(icon):
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
-            b = p.chromium.launch(); pg = b.new_page(viewport={'width': 180, 'height': 180})
+            b = p.chromium.launch(**_browser()); pg = b.new_page(viewport={'width': 180, 'height': 180})
             pg.set_content('<body style="margin:0;width:180px;height:180px;background:#1E3A76;display:grid;place-items:center"><svg width="112" height="112" viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="#fff"/><circle cx="12" cy="10" r="3.2" fill="#1E3A76"/></svg></body>')
             pg.screenshot(path=icon); b.close()
     import shutil

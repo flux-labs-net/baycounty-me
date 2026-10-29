@@ -125,6 +125,12 @@ struct VendorDetailView: View {
         .screenshotScroll()
         .navigationTitle(v?.name ?? "Company")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                let url = v?.pageURL ?? URL(string: "https://baycounty.me/profile/vendor/\(vendorID)")
+                ShareMenu(text: RecordShare.page(title: v?.name ?? "Company", summary: [subtitle(v) ?? ""], path: url?.path ?? "/public-money/vendors"), url: url)
+            }
+        }
         .task {
             await store.loadVendors()
             await store.loadDonorContracts()

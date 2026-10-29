@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
+import me.baycounty.kit.BayCountyClient
+import me.baycounty.kit.RecordShare
 import me.baycounty.kit.Dates
 import me.baycounty.kit.Format
 import me.baycounty.kit.Governments
@@ -115,7 +117,11 @@ fun PersonScreen(personID: String) {
     val p = store.person(personID)
     val byDS = RecordLinks.recordsForPerson(personID, store.rows).toMap()
     var allGifts by rememberSaveable(personID) { mutableStateOf(false) }
-    Screen(p?.name ?: "Person") {
+    Screen(p?.name ?: "Person", actions = {
+        ShareMenuButton(p?.name ?: "Person", "${BayCountyClient.SITE}/people/$personID") {
+            RecordShare.page(p?.name ?: "Person", listOf(p?.headline), "/people/$personID")
+        }
+    }) {
         item { PageHero(p?.label ?: "People", p?.name ?: "Person", p?.headline, badge = { PersonInitials(p?.name ?: "?", 52.dp, p?.photoUrl) }) }
         val main = p?.mainRoles ?: emptyList()
         if (main.size > 1) item {

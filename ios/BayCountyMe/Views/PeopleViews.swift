@@ -171,6 +171,12 @@ struct PersonDetailView: View {
         }
         .navigationTitle(p?.name ?? "Person")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ShareMenu(text: RecordShare.page(title: p?.name ?? "Person", summary: [p?.headline ?? ""], path: "/people/\(personID)"),
+                          url: URL(string: "https://baycounty.me/people/\(personID)"))
+            }
+        }
         .task {
             await store.loadPeople()
             await store.loadDonorContracts()

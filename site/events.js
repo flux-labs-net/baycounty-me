@@ -82,7 +82,7 @@
       const days = new Map();
       for (const e of mine) { const k = e.s.slice(0, 10) < today ? today : e.s.slice(0, 10); if (!days.has(k)) days.set(k, []); days.get(k).push(e); }
       const keys = [...days.keys()].sort();
-      box.innerHTML = keys.slice(0, limit).map(k => `<section class="ev-day"><h3>${esc(dayLabel(k))}<span>${days.get(k).length}</span></h3><ul class="ev-list">${days.get(k).map(e => row(e, {src: true})).join('')}</ul></section>`).join('') ||
+      box.innerHTML = keys.slice(0, limit).map(k => `<section class="ev-day" data-share-date="${esc(k)}"><h3>${esc(dayLabel(k))}<span>${days.get(k).length}</span></h3><ul class="ev-list">${days.get(k).map(e => row(e, {src: true})).join('')}</ul></section>`).join('') ||
         '<p class="ev-none">No upcoming events match.</p>';
       more.hidden = keys.length <= limit;
       document.getElementById('evCount').textContent = `${mine.length} event${mine.length === 1 ? '' : 's'}`;

@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -213,14 +214,14 @@ fun GroupHeader(title: String, count: Int, total: Double?, noun: String = "recor
 
 /** One record in a line or two: name and amount, then a size bar and where and when. */
 @Composable
-fun CompactRecordRow(spec: DatasetSpec, row: DataRow, maxAmount: Double, hide: String? = null, onClick: () -> Unit) {
+fun CompactRecordRow(spec: DatasetSpec, row: DataRow, maxAmount: Double, hide: String? = null, onLongClick: (() -> Unit)? = null, onClick: () -> Unit) {
     val amount = spec.amount(row)
     val meta = spec.subtitleKeys.filter { it != spec.titleKeys.firstOrNull() && it != hide }.mapNotNull { key ->
         val v = row[key] ?: return@mapNotNull null
         val s = Format.value(v, key).takeIf { it.isNotEmpty() } ?: return@mapNotNull null
         if (key in listOf("government", "gov", "employer", "gov_id", "board")) Browse.shortGovernment(s) else s
     }.joinToString(" · ")
-    Column(Modifier.fillMaxWidth().clickable(onClick = onClick).padding(horizontal = 14.dp, vertical = 10.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
+    Column(Modifier.fillMaxWidth().combinedClickable(onLongClick = onLongClick, onClick = onClick).padding(horizontal = 14.dp, vertical = 10.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(spec.title(row), style = T.subheadBold, color = Brand.text, maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
             amount?.let { Text(Format.compactMoney(it), style = T.subheadBold, color = Brand.text) }
