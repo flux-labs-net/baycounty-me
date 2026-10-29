@@ -3125,7 +3125,7 @@
   {
    "id": "money-map-votes",
    "title": "Money map: votes on donors' contracts",
-   "description": "Recorded votes by an official on a contract with one of their own donors, and whether the gift came before or after.",
+   "description": "Recorded votes by an official on a contract with one of their own donors, with the gift dates and whether the gifts came before the vote, after it, or both (column gift_before_or_after_vote: before, after, before and after).",
    "rows": 18,
    "columns": [
     {
@@ -3261,7 +3261,7 @@
      "name": "gift_before_or_after_vote",
      "type": "string",
      "values": [
-      "after"
+      "before"
      ]
     },
     {

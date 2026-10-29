@@ -113,7 +113,9 @@ def map_data():
             before = [x for x in gf['dates'] if x <= v['date']]
             vrows.append({'d': gf['d'], 'o': gf['o'], 'gift': gf['a'], 'gift_dates': gf['dates'], 'date': v['date'], 'h': v.get('headline') or v['item'],
                           'amount': v.get('amount'), 'vote': mv, 'outcome': v.get('outcome'), 'tally': v.get('tally'), 'consent': 'consent' in (v.get('item') or '').lower(),
-                          'when': None if not gf['dates'] else ('after' if before else 'before'), 'url': v.get('source_url'), '_v': v})
+                          # 'when' is the vote's side of the gift (kept for older app builds); 'timing' is the gift's side of the vote
+                          'when': None if not gf['dates'] else ('after' if before else 'before'), 'timing': gift_timing(gf['dates'], v['date']),
+                          'url': v.get('source_url'), '_v': v})
     vrows.sort(key=lambda r: (officials[r['o']]['n'], r['date']))
     vgroups = vote_groups(vrows, officials)
     for r in vrows:
@@ -133,6 +135,47 @@ def map_data():
     return {'officials': officials, 'donors': dl, 'gifts': gifts, 'contracts': cons, 'votes': vrows, 'vgroups': vgroups, 'govs': GSHORT, 'as_of': d.get('as_of')}
 
 
+def gift_timing(dates, vote_date):
+    """When the gifts came, measured from the vote: 'before', 'after', 'before and after', or None with no dates.
+    A gift on the day of the vote counts as before it."""
+    if not dates:
+        return None
+    b, a = any(d <= vote_date for d in dates), any(d > vote_date for d in dates)
+    return 'before and after' if b and a else 'before' if b else 'after'
+
+
+def _day(s):
+    from datetime import date
+    return date.fromisoformat(str(s)[:10])
+
+
+def _nice(s):
+    d = _day(s)
+    return f"{d.strftime('%b')} {d.day}, {d.year}"
+
+
+def _gap(gift, vote, short=False):
+    n = (_day(vote) - _day(gift)).days
+    if n == 0:
+        return 'the same day as the vote'
+    days = f"{abs(n):,} day{'' if abs(n) == 1 else 's'}"
+    return f"{days} {'before' if n > 0 else 'after'}{'' if short else ' the vote'}"
+
+
+def gift_when_text(dates, vote_date):
+    """'on Mar 4, 2024, 834 days before the vote', or for more than one gift
+    'on Mar 4, 2024 (834 days before the vote) and Jan 5, 2026 (12 days after)'. Empty with no dates."""
+    if isinstance(dates, str):
+        dates = json.loads(dates) if dates.startswith('[') else [dates]
+    ds = sorted(set(d for d in (dates or []) if d))
+    if not ds or not vote_date:
+        return ''
+    if len(ds) == 1:
+        return f'on {_nice(ds[0])}, {_gap(ds[0], vote_date)}'
+    parts = [f'{_nice(d)} ({_gap(d, vote_date, short=i > 0)})' for i, d in enumerate(ds)]
+    return 'on ' + (', '.join(parts[:-1]) + ' and ' + parts[-1])
+
+
 def vote_groups(vrows, officials):
     """One row per recorded vote and donor, with the full roll call. Members who got a gift from that donor carry it."""
     groups = {}
@@ -147,7 +190,7 @@ def vote_groups(vrows, officials):
                          'consent': r['consent'], 'url': r['url'], 'roll': roll}
         for m in groups[k]['roll']:
             if m['n'].split()[-1].lower() == officials[r['o']]['n'].split()[-1].lower():
-                m.update({'o': r['o'], 'gift': r['gift'], 'gift_dates': r['gift_dates'], 'when': r['when']})
+                m.update({'o': r['o'], 'gift': r['gift'], 'gift_dates': r['gift_dates'], 'when': r['when'], 'timing': r['timing']})
     out = list(groups.values())
     for x in out:  # gift recipients first, then the rest of the board in the minutes' order
         x['roll'].sort(key=lambda m: 'gift' not in m)
