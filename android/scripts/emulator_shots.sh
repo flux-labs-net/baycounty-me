@@ -31,7 +31,7 @@ shot() { # name, dark (true/false), screen ("" for home)
   adb exec-out screencap -p > "$OUT/$1.png"
 }
 
-LIGHT="home address:825_Ohio_Ave tax amendment3 glossary vendors vendor people person moneymap donors contracts votes salaries accountability accproject cra craincrement budget pastelections updates about explore myaddress tab:living tab:governments tab:money tab:meetings tab:search gov:county gov:lh record:contract record:vote record:board record:nonprofit"
+LIGHT="home myhome restaurants restaurant beaches parks events emergency address:825_Ohio_Ave tax amendment3 glossary vendors vendor people person moneymap donors contracts votes salaries accountability accproject cra craincrement budget pastelections updates about explore myaddress tab:living tab:governments tab:money tab:meetings tab:search gov:county gov:lh record:contract record:vote record:board record:nonprofit"
 DARK="home tab:living tab:governments tab:money tab:meetings gov:county person budget tax cra craincrement record:board accountability"
 for s in $LIGHT; do
   screen=${s//_/ }; [ "$screen" = home ] && screen=""
