@@ -8,8 +8,8 @@
   const money = n => n == null ? '' : (n < 0 ? '−' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(2) + 'M' : '$' + Math.round(Math.abs(n)).toLocaleString('en-US'));
   const KIND = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Board member', owner: 'Business owner', business: 'Business', committee: 'Committee or PAC'};
   const COLOR = {gov: 'var(--navy)', vendor: 'var(--blue)', business: 'var(--blue)', person: 'var(--salmon)', nonprofit: 'var(--teal)', member: 'var(--amber)', owner: 'var(--amber)', committee: 'var(--muted)'};
-  const LINE = {gift: 'pf-l-gift', paid: 'pf-l-paid', board: 'pf-l-board', runs: 'pf-l-runs', voted: 'pf-l-voted', serves: 'pf-l-board', served: 'pf-l-board', candidate: 'pf-l-board', ran: 'pf-l-board', grant: 'pf-l-paid', related: 'pf-l-runs', same: 'pf-l-runs', works: 'pf-l-runs', hired: 'pf-l-paid', charter: 'pf-l-runs'};
-  const ORDER = ['serves', 'candidate', 'served', 'ran', 'paid', 'hired', 'gift', 'voted', 'board', 'works', 'charter', 'runs', 'grant', 'related', 'same'];
+  const LINE = {gift: 'pf-l-gift', paid: 'pf-l-paid', board: 'pf-l-board', runs: 'pf-l-runs', voted: 'pf-l-voted', serves: 'pf-l-board', served: 'pf-l-board', candidate: 'pf-l-board', ran: 'pf-l-board', grant: 'pf-l-paid', related: 'pf-l-runs', same: 'pf-l-runs', works: 'pf-l-runs', hired: 'pf-l-paid', charter: 'pf-l-runs', motion: 'pf-l-voted', agenda: 'pf-l-runs', project: 'pf-l-runs'};
+  const ORDER = ['serves', 'candidate', 'served', 'ran', 'paid', 'hired', 'gift', 'voted', 'motion', 'agenda', 'project', 'board', 'works', 'charter', 'runs', 'grant', 'related', 'same'];
   let id = root.dataset.id;
   if (!id) {  // /profile/<kind>/<key> or /profile?id=<kind>:<key>
     const m = location.pathname.match(/^\/profile\/([a-z]+)\/(.+?)\/?$/);
@@ -101,7 +101,7 @@
       try { while (s.length > 4 && t.getComputedTextLength() > w) { s = s.slice(0, -2).trimEnd() + '…'; t.textContent = s; } } catch (e) { /* not rendered */ }
     });
   }
-  const labelOf = r => ({serves: 'Serves', served: 'Served', candidate: 'Candidates', ran: 'Ran for office', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization', works: 'Works at', hired: 'Contracts', charter: 'Charter schools'}[r] || r);
+  const labelOf = r => ({serves: 'Serves', served: 'Served', candidate: 'Candidates', ran: 'Ran for office', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization', works: 'Works at', hired: 'Contracts', charter: 'Charter schools', motion: 'Motions naming', agenda: 'On agendas', project: 'Development projects'}[r] || r);
 
   // ---------- connection list ----------
   // One row per name and kind of connection. The records can name the same pair more than once (a company in both the

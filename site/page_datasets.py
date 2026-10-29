@@ -2233,3 +2233,6 @@ DATASETS = [
 
 from volunteer_data import DATASETS as _VOLUNTEER  # noqa: E402  /volunteer (site/volunteer_data.py)
 DATASETS += _VOLUNTEER
+from correlations import DATASETS as _OVERLAPS, COLUMNS as _OVERLAP_COLUMNS  # noqa: E402  /connections/overlaps (site/correlations.py)
+DATASETS += _OVERLAPS
+DB_ONLY_COLUMNS.update(_OVERLAP_COLUMNS)

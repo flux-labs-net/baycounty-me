@@ -101,6 +101,7 @@ def menu(today=None):
              {'group': "Who's connected", 'items': [
                  _i('Connections network', '/connections', 'Who governments paid, and who gave to officials'),
                  _i('Campaign gifts', '/connections/campaign-gifts', 'Who funds campaigns, and donors with contracts'),
+                 _i('Where records overlap', '/connections/overlaps', 'Votes naming donors, agendas, bids and more'),
                  _i('Business ties', '/connections/business-ties', "Officials' and candidates' businesses"),
                  _i('Shared owners', '/connections/shared-owners', 'Companies with a shared owner giving to one candidate'),
                  _i('Nonprofits', '/connections/nonprofits', 'Public money, and officials on their boards'),

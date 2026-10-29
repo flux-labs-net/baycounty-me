@@ -229,6 +229,7 @@ def _permit_table(rows):
 
 
 def development_page(out_dir):
+    from overlaps_page import development_business
     P, D = _rows('housing-permits'), _rows('development-projects')
     if not P and not D:
         return '<div class="page"><h1>Building and development</h1><p>No building or development data for this place yet.</p></div>'
@@ -273,7 +274,7 @@ def development_page(out_dir):
   <h3><span class="gr-pill {DEV_PILL.get(st, "")}">{e(st)}</span>{e(r["name"])}</h3>
   <p>{e(r.get("description") or "")}{(" · " if r.get("description") and r.get("location") else "") + e(r.get("location") or "")}</p>
   <div class="gr-meta">{"".join(f"<span>{m}</span>" for m in meta)}</div>
-  <div class="gr-meta"><span>{e(r["government"])}</span><span>{links}</span></div></article>''')
+  <div class="gr-meta"><span>{e(r["government"])}</span>{development_business(r["project_id"])}<span>{links}</span></div></article>''')
         pts.append((cid, r.get('lng'), r.get('lat'), DEV_COLOR.get(st, 'var(--faint)'), f'{r["name"]} ({st})'))
     dev_map = _map_svg('devMap', pts, f'Map of development projects in {PLACE_NAME}')
     leg = ''.join(f'<li><i style="background:{c}"></i>{t}</li>' for t, c in (('Under review', 'var(--gold)'), ('Approved', 'var(--teal)'), ('Permitted or built', 'var(--blue)')))
@@ -308,7 +309,7 @@ def development_page(out_dir):
         <p class="note" id="devNone" hidden>No projects match.</p>
         <button type="button" class="ui-btn gr-more" id="devMore" hidden>Show more</button></div>
     </div>
-    <p class="note">Bay County's map covers the unincorporated county, where the county is the planning authority. Panama City Beach's map{f" was last updated in {pcb_last[:4]}" if pcb_last else ""}, so its newer projects are missing, and the other cities don't publish a development map. Owners and developers are not named on these maps.</p></section>
+    <p class="note">Bay County's map covers the unincorporated county, where the county is the planning authority. Panama City Beach's map{f" was last updated in {pcb_last[:4]}" if pcb_last else ""}, so its newer projects are missing, and the other cities don't publish a development map. Owners and developers are not named on these maps; where a project has exactly the name of one active business filing, its card names that business.</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">

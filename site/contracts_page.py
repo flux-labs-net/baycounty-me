@@ -119,6 +119,7 @@ def vendor_profiles(d, cs):
 
 
 def contracts_page(out_dir):
+    from overlaps_page import emergency_gift
     d = json.load(open(SRC))
     cs = [c for c in d['contracts'] if c.get('amount')]
     for c in cs:
@@ -174,7 +175,7 @@ def contracts_page(out_dir):
     # change orders
     co = sorted(d['change_orders'], key=lambda x: -(x.get('change_amount') or 0))
     co_rows = ''.join(f'''<tr{data_g(x["government"])}><td>{e(SHORT.get(x["government"], x["government"]))}</td><td class="wrap"><b>{vlink(x.get("vendor"))}</b><br><span class="small muted">{e(x.get("project"))}</span></td><td class="num">{money(x.get("original_amount"))}</td><td class="num">{money(x.get("change_amount"))}</td><td class="num">{f'{x["pct_of_original"]:.0f}%' if isinstance(x.get("pct_of_original"), (int, float)) else "—"}</td><td class="wrap small">{e(x.get("reason"))}</td><td class="small">{e(x.get("date"))} <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></td></tr>''' for x in co)
-    em = ''.join(f'''<li{data_g(x["government"])}><b>{e(SHORT.get(x["government"], x["government"]))}, {e(x.get("date"))}: {money(x.get("amount"))}</b> to {vlink(x.get("vendor"))} for {e(x.get("purpose"))}. <span class="muted">{e(x.get("basis", ""))}</span> <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in sorted(d['emergency_purchases'], key=lambda x: x.get('date') or ''))
+    em = ''.join(f'''<li{data_g(x["government"])}><b>{e(SHORT.get(x["government"], x["government"]))}, {e(x.get("date"))}: {money(x.get("amount"))}</b> to {vlink(x.get("vendor"))} for {e(x.get("purpose"))}.{emergency_gift(x.get("date"), x.get("amount"))} <span class="muted">{e(x.get("basis", ""))}</span> <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in sorted(d['emergency_purchases'], key=lambda x: x.get('date') or ''))
     th = ''.join(f'''<li{data_g(x["government"])}><b>{e(SHORT.get(x["government"], x["government"]))}.</b> {e(x["rule"])} <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in d['thresholds'])
     # ledger data for JS
     rows = [{'g': SHORT.get(c['government'], c['government']), 'v': c['vendor'], 'id': c['vid'], 'a': c['amount'], 'p': c.get('purpose') or '', 'd': c.get('date') or '', 'm': c['b'], 'mf': c.get('method') or '',

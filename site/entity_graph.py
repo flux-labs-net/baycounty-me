@@ -56,6 +56,9 @@ RELATION = {
     'hired': ('hired', 'was hired by'),
     'charter': ('runs a charter school for', 'has a charter school run by'),
     'utility': ('provides utility service in', 'gets utility service from'),
+    'motion': ('voted on motions naming', 'was named in motions voted on by'),
+    'agenda': ('is on the agenda of', 'has on its agenda'),
+    'project': ('has a development project in', 'has development projects by'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -582,6 +585,11 @@ def build():
             to = 'vendor:' + r['vendor_id'] if r.get('vendor_id') and 'vendor:' + r['vendor_id'] in G.ents else \
                 G.ent('business:' + _slug(r['contractor']), ids.biz_case(r['contractor']), 'Road contractor hired by the state')
             G.link(fdot, to, 'hired', r.get('amount'), r.get('let_date'), 'State road contract', r.get('source_url'), key='fdot')
+
+    # votes and agendas that name a company or organization, and development projects named after a business
+    # (site/correlations.py)
+    import correlations
+    correlations.add_graph_links(G, business)
 
     _C['G'] = G
     return G
