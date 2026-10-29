@@ -37,6 +37,9 @@ const RELATION = {
   hired: ['hired', 'was hired by'],
   charter: ['runs a charter school for', 'has a charter school run by'],
   utility: ['provides utility service in', 'gets utility service from'],
+  motion: ['voted on motions naming', 'was named in motions voted on by'],
+  agenda: ['is on the agenda of', 'has on its agenda'],
+  project: ['has a development project in', 'has development projects by'],
 };
 const KIND_LABEL = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Nonprofit board member', owner: 'Business owner',
   business: 'Business', committee: 'Committee or PAC'};
@@ -137,6 +140,25 @@ async function liveConnections(req, catalog, ent) {
       to_id: pid.get(r.candidate).entity_id, to_name: r.candidate, to_kind: 'person', to_url: pid.get(r.candidate).page_url, relation: 'gift', amount: r.business_amount ?? null,
       detail: `${r.office || ''}: one of ${r.group_businesses} businesses that share an owner or officer and gave to this candidate`, source_url: r.campaign_report_url || r.source_url,
       dataset: 'shared-owner-groups'}));
+    }));
+  }
+  if (kind !== 'person' && kind !== 'gov' && kind !== 'member' && kind !== 'owner') {
+    // payments in a government's own checkbook (published from its finance files), one row per government and payee
+    tasks.push(rowsWhere(req, catalog, 'checkbook-payments', {payee_entity_id: ent.entity_id}).then(rs => {
+      const by = new Map();
+      for (const r of rs) {
+        if (!r.gov_id || r.payee_kind === 'individual') continue;
+        const x = by.get(r.gov_id) || {gov: r.gov_id, name: r.government, amount: 0, n: 0, dates: [], url: r.source_url};
+        x.amount += +r.amount || 0; x.n++; if (r.paid_on) x.dates.push(String(r.paid_on));
+        by.set(r.gov_id, x);
+      }
+      for (const x of by.values()) {
+        x.dates.sort();
+        add({link_id: 'cb:' + x.gov + ':' + ent.entity_id, from_id: 'gov:' + x.gov, from_name: x.name || x.gov, from_kind: 'gov', from_url: urlFor('gov:' + x.gov),
+          to_id: ent.entity_id, to_name: ent.name, to_kind: kind, to_url: ent.page_url, relation: 'paid', amount: Math.round(x.amount * 100) / 100, records: x.n,
+          first_date: x.dates[0] || null, last_date: x.dates[x.dates.length - 1] || null, detail: 'Checkbook payments', source_url: x.url || '/public-money/checkbook',
+          dataset: 'checkbook-payments', checked_by_hand: false});
+      }
     }));
   }
   await Promise.all(tasks.map(t => t.catch(() => null)));

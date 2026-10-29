@@ -44,6 +44,10 @@ const PAGES = {
   '/military': {datasets: ['military-installations', 'military-news', 'federal-contracts', 'federal-contract-years']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations', 'person-photos']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
+  // overlaps between datasets (site/correlations.py); the hand-confirmed and checkbook joins are live (api/_overlaps.js)
+  '/connections/overlaps': {datasets: ['donor-votes', 'vote-mentions', 'agenda-parties', 'development-companies', 'bid-trail', 'shared-owner-vendors', 'chamber-overlaps',
+    'emergency-purchase-donors', 'campaign-results', 'official-businesses', 'nonprofit-officials', 'nonprofit-payments', 'checkbook-payments', 'school-grades', 'school-spending'],
+  endpoints: ['/overlaps']},
   '/emergency': {datasets: ['evacuation-zones', 'emergency-shelters', 'emergency-resources', 'emergency-notices'], endpoints: ['/emergency', '/evacuation-zone']},
   '/hurricane-prep': {datasets: ['hurricane-prep', 'disaster-declarations', 'rebuild-money'], endpoints: ['/emergency']},
   '/alerts': {none: 'email alert sign-up form'},

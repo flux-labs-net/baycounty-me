@@ -98,6 +98,14 @@ const TOOLS = [
      since: {type: 'string', description: 'Only votes on or after this date (YYYY-MM-DD)'},
      limit: {type: 'integer', minimum: 1, maximum: 200, default: 25}}},
    annotations: {readOnlyHint: true}},
+  {name: 'donor_votes', title: 'Votes on motions naming a donor',
+   description: 'Recorded votes (hand-researched and read from the minutes since 2016) where a board member voted on a motion that names a company that gave to their campaign, or whose owner gave personally: the member and how they voted, the company, the gift total and dates, and whether the gifts came before or after the vote, each with the minutes link and the campaign report. A gift near a vote does not show why anyone voted the way they did; consent agendas pass many items in one vote. Individual donors are never named.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     member: {type: 'string', description: 'Part of a board member\'s name, e.g. "Brudnicki"'},
+     company: {type: 'string', description: 'Part of a company or donor name, e.g. "Panhandle Engineering"'},
+     gov: {type: 'string', description: 'county, schools, pc, pcb, lh, cw, sp, parker or mb'},
+     limit: {type: 'integer', minimum: 1, maximum: 200, default: 25}}},
+   annotations: {readOnlyHint: true}},
   {name: 'vendor_profile', title: 'Vendor profile',
    description: 'Everything BayCounty.me has on one company by name: contracts, change orders, check-register payment totals, CRA payments, and campaign contributions it made as a business (individual donors are never included). Names are normalized (case, punctuation, Inc/LLC/Co removed). A match between a contribution and a contract does not show why anything happened.',
    inputSchema: {type: 'object', required: ['vendor'], additionalProperties: false, properties: {
@@ -313,6 +321,15 @@ async function call(req, name, a = {}) {
     const [providers, trash, holidays, rates] = await Promise.all(['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'].map(id => rowsOf(req, c, id)));
     const r = await require('./_utilities').lookup({providers, trash, holidays, rates}, a);
     return {...r, page: `${SITE}/utilities`, cite: 'Cite each provider\'s and route\'s source_url.'};
+  }
+  if (name === 'donor_votes') {
+    const c = await load(req, '/downloads/index.json');
+    const low = x => String(x || '').toLowerCase();
+    const rows = (await rowsOf(req, c, 'donor-votes')).filter(r => (!a.member || low(r.member).includes(low(a.member)))
+      && (!a.company || low(r.company).includes(low(a.company)) || low(r.donor).includes(low(a.company))) && (!a.gov || r.gov_id === a.gov));
+    const lim = Math.min(Math.max(parseInt(a.limit || 25, 10) || 25, 1), 200);
+    return {total: rows.length, votes: new Set(rows.map(r => r.vote_id)).size, results: rows.slice(0, lim), page: `${SITE}/connections/overlaps#donor-votes`,
+      note: 'A gift near a vote does not show why anyone voted the way they did. Consent agendas pass many items in one vote.'};
   }
   if (name === 'government_checkbook' || name === 'budget_vs_actual') {
     const O = require('./_openbooks');

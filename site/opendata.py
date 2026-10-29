@@ -18,7 +18,10 @@ GOV_COLS = {'beach-access': ['run_by'], 'beach-parking': [], 'beach-water-sites'
             'bed-tax-collections': [], 'property-tax-exemptions': [],
             'connections-gifts': ['official_gov_id', 'office'], 'connections-payments': ['payer_gov_id'], 'donor-contracts': ['contract_gov_id'], 'connections-payees': [], 'connections-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
-            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': [], 'over-limit-gifts': [], 'official-businesses': ['gov_id'], 'official-business-links': ['gov_id'], 'checkbook-payments': ['gov_id'], 'budget-actuals': ['gov_id']}
+            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': [], 'over-limit-gifts': [], 'official-businesses': ['gov_id'], 'official-business-links': ['gov_id'], 'checkbook-payments': ['gov_id'], 'budget-actuals': ['gov_id'],
+            'nonprofit-payments': ['gov_id', 'payer'],  # the paying government or agency (it was blank before 2026-10-29)
+            'vote-mentions': ['gov_id'], 'donor-votes': ['gov_id'], 'agenda-parties': ['gov_id'], 'development-companies': ['gov_id'], 'bid-trail': ['gov_id'],
+            'shared-owner-vendors': ['gov_id'], 'chamber-overlaps': [], 'emergency-purchase-donors': ['gov_id'], 'campaign-results': ['gov_id']}
 # county bed tax in every zone; the county-wide tax roll; the school datasets are all the school district's
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county',
              'schools': 'schools', 'school-grades': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
@@ -135,7 +138,9 @@ FIRST_YEAR_COL = {'votes': 'date', 'member-votes': 'date', 'contracts': 'date', 
                   'school-grades': 'year', 'school-spending': 'year', 'school-enrollment': 'year', 'school-calendar': 'starts', 'emergency-notices': 'issued', 'disaster-declarations': 'declared', 'rebuild-money': 'year',
                   'elections': 'date', 'election-results': 'election_date', 'election-dates': 'date', 'public-notices': 'published',
                   'restaurant-inspections': 'date', 'new-businesses': 'filed_date',
-                  'military-news': 'published', 'federal-contracts': 'last_action_date', 'federal-contract-years': 'year'}
+                  'military-news': 'published', 'federal-contracts': 'last_action_date', 'federal-contract-years': 'year',
+                  'vote-mentions': 'date', 'donor-votes': 'date', 'agenda-parties': 'meeting_date', 'bid-trail': 'published', 'emergency-purchase-donors': 'date',
+                  'campaign-results': 'election_date'}
 DROPPED_BEFORE_FIRST_YEAR = {}  # dataset -> rows the last check dropped (should stay empty: fix the ingestion instead)
 
 

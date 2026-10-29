@@ -26,6 +26,7 @@
 //   GET /api/v1/utilities?lat=&lon=     water, sewer, power, gas, trash provider and pickup days at an address (api/_utilities.js)
 //   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
 //   GET /api/v1/nearby?address=|lat=&lon=&radius_mi=  what's happening near a place: alerts, meetings, events, work nearby (api/_nearby.js)
+//   GET /api/v1/overlaps?section=&gov=  live overlaps: officials' businesses and nonprofits in their votes, checkbook donors, split purchases (api/_overlaps.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -187,6 +188,11 @@ function openapi(catalog) {
         parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('year', 'Fiscal year, e.g. 2019 (the year it ends)', {type: 'integer'}), p('date', 'A date (YYYY-MM-DD) instead of a year')],
         responses: {200: {description: '{data: {gov_id, government, body, place_id, fiscal_year, from, to, seats: [{seat, appointed, holders: [{person_name, person_id, vacant, confirmed, start_date, end_date, start_approx, end_approx, how, part_of_period, note, source_title, source_url}]}], note}} or, without gov, {data: [{gov_id, government, body, seats, unconfirmed}]}'},
           400: {description: 'A bad year or date'}, 404: {description: 'Unknown government'}}}},
+      '/overlaps': {get: {operationId: 'overlaps', summary: 'Live overlaps between records: an official\'s own business or nonprofit named in a vote they cast, checkbook payees that gave to a campaign, and payments just under a purchasing threshold',
+        description: 'Joins that use hand-confirmed matches (official-businesses, nonprofit-officials) or rows only the database holds (checkbook-payments, school-grades, school-spending). Sections: official_business_votes (an official\'s registered business named in a motion they voted on, with what their own government paid it), nonprofit_board_money (a nonprofit with an official on its board: payments from that official\'s government and their votes naming it), checkbook_donors (checkbook payees that gave to a local campaign, or whose owners did), split_purchases (two or more payments to one payee within 30 days, each at least 90% of a common threshold: thresholds lists them) and school_spending_grades. Each section is {rows, error}. Individual donors are never named. The other overlaps are datasets: vote-mentions, donor-votes, agenda-parties, development-companies, bid-trail, shared-owner-vendors, chamber-overlaps, emergency-purchase-donors and campaign-results. A row puts two public records side by side; it is not a finding of wrongdoing.',
+        parameters: [p('section', 'One section: official_business_votes, nonprofit_board_money, checkbook_donors, split_purchases or school_spending_grades'), p('gov', 'Only one government: county, schools, pc, pcb, lh, cw, sp, parker, mb')],
+        responses: {200: {description: '{data: {official_business_votes: {rows, error}, nonprofit_board_money: {rows, error}, checkbook_donors: {rows, error}, split_purchases: {rows, error}, school_spending_grades: {rows, error}}, thresholds, note}'},
+          400: {description: 'Unknown section'}}}},
       '/checkbook': {get: {operationId: 'checkbook', summary: 'One government\'s payments in a fiscal year, from its own check register: total, by month, top payees, by fund and payment method, the largest payments',
         description: 'Without gov, uses the first government that has published its check register; fy defaults to its latest fiscal year. Every payment is in the checkbook-payments dataset (filter it with gov_id and fiscal_year). Voided checks are left out; payments to private individuals are counted but not named. When nothing is published yet, governments is empty.',
         parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('fy', 'Fiscal year, the year it ends (e.g. 2026 for Oct 2025 to Sep 2026)', {type: 'integer'})],
@@ -397,6 +403,12 @@ module.exports = async (req, res) => {
       const D = await utilityData(req, catalog);
       try { const r = await U.lookup(D, req.query); info.rows = r.services.length + r.pickup.length; return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
+    if (parts[0] === 'overlaps') {
+      res.locals.lastModified = null;
+      const r = await require('./_overlaps').overlaps(req.query);
+      info.rows = Object.values(r.data).reduce((a, x) => a + x.rows.length, 0);
+      return res.status(200).json(r);
     }
     if (parts[0] === 'checkbook' || parts[0] === 'budget-actual') {
       // Each government's own accounting, as published from its finance files. Rows can change any time a file is published.

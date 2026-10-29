@@ -113,7 +113,7 @@ PAGE_ICON = {
     '/public-money/accountability': 'shield', '/public-money/contracts': 'file', '/public-money/vendors': 'store',
     '/public-money/who-gets-paid': 'dollar', '/public-money/votes': 'vote', '/public-money/savings': 'piggy',
     '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/elections/past': 'flag', '/connections/campaign-gifts': 'heart',
-    '/connections/money-map': 'link', '/connections/business-ties': 'store', '/connections/shared-owners': 'network',
+    '/connections/money-map': 'link', '/connections/business-ties': 'store', '/connections/overlaps': 'link', '/connections/shared-owners': 'network',
     '/connections/nonprofits': 'heart', '/chambers': 'store', '/events': 'calendar', '/beaches': 'waves', '/parks': 'tree', '/schools': 'school', '/this-week': 'mail', '/volunteer': 'heart', '/military': 'shield', '/meetings': 'calendar', '/emergency': 'storm', '/hurricane-prep': 'shield', '/alerts': 'bell', '/records-request': 'mail',
     '/correspondence': 'mail', '/glossary': 'book', '/open-data': 'download', '/developers': 'code', '/updates': 'news',
     '/about': 'info', '/privacy': 'shield', '/search': 'search', '/people': 'users', '/profile': 'user',

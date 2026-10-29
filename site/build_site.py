@@ -38,6 +38,7 @@ from military_page import military_page
 from realtor_page import realtor_page
 from account_page import account_page
 from business_ties_page import business_ties_page
+from overlaps_page import overlaps_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 from place import SITE, DOMAIN, LABEL as PLACE_LABEL, EMAIL, OPERATOR, OFFICIALS, wordmark_html, governments as _place_govs
@@ -807,6 +808,8 @@ PAGES = [
      'Open volunteer needs from Bay County nonprofits, read every day from public volunteer boards, and the local nonprofits that rely on volunteers year-round, by cause.', lambda: volunteer_page(OUT)),
     ('/military', 'Military and the bases',
      "Tyndall Air Force Base and Naval Support Activity Panama City: what each base does and who commands it, the latest news from the units on them, and every federal contract since 2016 to companies based in Bay County, by company, agency and year.", lambda: military_page(OUT)),
+    ('/connections/overlaps', 'Where the records overlap',
+     "Where Bay County's public records meet: votes on motions naming an official's own campaign donors, companies on agendas, bids from notice to award, companies paid by one government that share an officer, chamber boards, emergency purchases, checkbook payees that gave to campaigns and money raised next to votes won.", lambda: overlaps_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
