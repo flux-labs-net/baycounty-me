@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   results:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 15
     steps:
       - name: Only on an election night
@@ -23,7 +23,7 @@ jobs:
         run: |
           # The schedule above repeats every year; run only in a year with a countywide election that night.
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(date -u +%Y)" = "2026" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; fi
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
         if: steps.gate.outputs.go == 'true'
       - uses: actions/setup-python@v5
         if: steps.gate.outputs.go == 'true'

@@ -13,13 +13,13 @@ env:
   SCREENS: home,tab:living,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,chambers,events,beaches,parks,roads,development,schools,emergency,hurricaneprep,utilities,restaurants,restaurant,newbusinesses,volunteer,military,publicsafety,overlaps,budget,pastelections,updates,about,explore,myaddress,myhome,myhome:settings,record:contract,record:vote,record:board,record:nonprofit
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 40
     defaults:
       run:
         working-directory: android
     steps:
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -41,10 +41,10 @@ jobs:
 
   emulator:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
       - uses: actions/download-artifact@v4
         with:
           name: apk-debug

@@ -9,7 +9,7 @@ on:
     branches: [main]
 jobs:
   api-tests:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 10
     services:
       postgres:
@@ -23,7 +23,7 @@ jobs:
     env:
       FINANCE_TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/financetest
     steps:
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: npm test
   migrations:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 10
     services:
       postgres:
@@ -43,7 +43,7 @@ jobs:
         options: >-
           --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
