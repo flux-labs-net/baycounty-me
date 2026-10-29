@@ -58,6 +58,7 @@ create table if not exists data_freshness (
   "source_url" text,
   "notes" text,
   "checked_on" text,
+  gov_id text,
   government_key text references governments(key),
   origin text not null default 'manual',
   ingest_run_id bigint references ingest_runs(id),
