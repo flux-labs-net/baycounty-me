@@ -65,6 +65,8 @@ function renderTop() {
     `<span class="mh-chip">${h.gov_id && h.gov_id !== 'county' ? 'City of ' + esc(h.city || '') : 'Unincorporated Bay County'}</span>`,
     h.zone ? `<span class="mh-chip zone">Evacuation zone ${esc(h.zone)}</span>` : `<span class="mh-chip">Not in an evacuation zone</span>`].join('') : '<span>Save your address to see what’s around it.</span>';
   $('who').textContent = ME.user.email;
+  // Same sign-in as the realtor console: an agent's account links straight to it.
+  $('rcLink').hidden = ME.realtor !== 'active';
 }
 
 /* ---------- the feed ---------- */

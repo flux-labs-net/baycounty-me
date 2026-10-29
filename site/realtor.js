@@ -28,6 +28,13 @@ async function api(action, body) {
   const r = await fetch(`/api/realtor?action=${action}`, body === undefined ? {credentials: 'same-origin'}
     : {method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json', 'X-BCM-Agent': '1'}, body: JSON.stringify(body)});
   const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw Object.assign(new Error(j.error || 'Something went wrong.'), {status: r.status, data: j});
+  return j;
+}
+// The site's one sign-in (api/_account.js): the console and My home share it.
+async function account(action, body) {
+  const r = await fetch(`/api/account?action=${action}`, {method: 'POST', credentials: 'same-origin', headers: {'Content-Type': 'application/json', 'X-BCM-Account': '1'}, body: JSON.stringify(body)});
+  const j = await r.json().catch(() => ({}));
   if (!r.ok) throw Object.assign(new Error(j.error || 'Something went wrong.'), {status: r.status});
   return j;
 }
@@ -44,12 +51,33 @@ function tab(name) {
 }
 document.querySelectorAll('.rc-tab').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
 
+function signMsg(text, kind) { $('signMsg').className = 'rc-msg' + (kind ? ' ' + kind : ''); $('signMsg').textContent = text || ''; }
+function step(name) { ['Email', 'Code', 'Join'].forEach(n => { $('step' + n).hidden = n !== name; }); $('signLede').hidden = name === 'Join'; $('signH').textContent = name === 'Join' ? 'Realtor console' : 'Sign in'; }
+// Signed in to BayCounty.me but not (yet) an agent: offer the console to that account, or say why it's waiting.
+function joinView(acct) {
+  show('out'); step('Join');
+  $('joinWho').textContent = acct.email;
+  const st = acct.agent_status;
+  $('joinBtn').hidden = st === 'paused' || st === 'pending';
+  signMsg(st === 'pending' ? 'Your request is in. BayCounty.me will turn on the realtor console for this account soon.'
+    : st === 'paused' ? 'Realtor access is paused for this account. Write to hello@baycounty.me.'
+    : acct.signup === 'invite' ? 'Ask for access and BayCounty.me will turn it on for this account.' : '', st === 'paused' ? 'err' : st ? 'ok' : '');
+  if (acct.signup === 'invite' && !st) $('joinBtn').textContent = 'Ask for realtor access';
+}
 async function start() {
   const u = new URL(location.href);
-  if (u.searchParams.get('signin') === 'expired') { $('signMsg').className = 'rc-msg err'; $('signMsg').textContent = 'That sign-in link expired or was already used. Send yourself a new one.'; }
+  if (u.searchParams.get('signin') === 'expired') signMsg('That sign-in link expired or was already used. Send yourself a new code.', 'err');
   try { ME = await api('me'); }
-  catch (e) { show('out'); if (e.status !== 401) { $('signMsg').className = 'rc-msg err'; $('signMsg').textContent = e.status === 503 ? 'The realtor console is being set up. Please check back soon.' : e.message; } return; }
-  show('in');
+  catch (e) {
+    show('out');
+    if (e.status === 401 && e.data && e.data.account) return joinView(e.data.account);
+    if (e.status !== 401) signMsg(e.status === 503 ? 'The realtor console is being set up. Please check back soon.' : e.message, 'err');
+    return;
+  }
+  enter(u);
+}
+function enter(u = new URL(location.href)) {
+  show('in'); step('Email'); signMsg('');
   $('who').textContent = ME.agent.email;
   fillBrand(ME.brand || {});
   renderHistory();
@@ -60,19 +88,42 @@ async function start() {
 }
 
 /* ---------- sign in ---------- */
+// The same emailed code as My home. Once signed in, the account opens the console (POST join adds it to the agent list
+// when sign-up is open), so a realtor already signed in anywhere on the site never signs in again.
+let EMAIL = '', verifying = false;
 $('signForm').addEventListener('submit', async e => {
   e.preventDefault();
-  const btn = $('signBtn'), msg = $('signMsg');
-  btn.disabled = true; msg.className = 'rc-msg'; msg.textContent = 'Sending…';
-  try {
-    const r = await fetch('/api/realtor?action=login', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: $('email').value})});
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(j.error || 'Couldn’t send the link. Try again.');
-    msg.className = 'rc-msg ok'; msg.textContent = j.message;
-  } catch (err) { msg.className = 'rc-msg err'; msg.textContent = err.message; }
-  btn.disabled = false;
+  if (!$('stepCode').hidden) return verify();
+  if (!$('stepEmail').hidden) return sendCode();
 });
-$('signOut').addEventListener('click', async () => { await api('logout', {}).catch(() => {}); location.href = '/realtor'; });
+async function sendCode() {
+  EMAIL = $('email').value.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(EMAIL)) return signMsg('Enter a valid email address.', 'err');
+  $('signBtn').disabled = true; signMsg('Sending…');
+  try {
+    const r = await account('start', {email: EMAIL, next: '/realtor'});
+    step('Code'); $('codeLbl').textContent = `Code sent to ${EMAIL}`; signMsg(r.message || 'Check your email for the code.', 'ok'); $('code').focus();
+  } catch (err) { signMsg(err.status === 503 ? 'The realtor console is being set up. Please check back soon.' : err.message, 'err'); }
+  $('signBtn').disabled = false;
+}
+async function verify() {
+  const code = $('code').value.replace(/\D/g, '');
+  if (code.length !== 6) return signMsg('Enter the 6 digits from the email.', 'err');
+  if (verifying) return; verifying = true; $('verifyBtn').disabled = true; signMsg('Checking…');
+  try { await account('verify', {email: EMAIL, code, client: 'web'}); await join(); }
+  catch (err) { signMsg(err.message, 'err'); }
+  verifying = false; $('verifyBtn').disabled = false;
+}
+async function join() {
+  try { ME = await api('join', {}); enter(); }
+  catch (err) { if (err.data && err.data.account) joinView(err.data.account); else signMsg(err.message, 'err'); }
+}
+$('code').addEventListener('input', () => { $('code').value = $('code').value.replace(/\D/g, '').slice(0, 6); if ($('code').value.length === 6) verify(); });
+$('backBtn').addEventListener('click', () => { step('Email'); signMsg(''); $('email').focus(); });
+$('joinBtn').addEventListener('click', async () => { $('joinBtn').disabled = true; signMsg('Opening…'); await join(); $('joinBtn').disabled = false; });
+async function signOut() { await api('logout', {}).catch(() => {}); location.href = '/realtor'; }
+$('joinOut').addEventListener('click', signOut);
+$('signOut').addEventListener('click', signOut);
 
 /* ---------- branding ---------- */
 const BF = ['agent_name', 'title', 'brokerage', 'license_no', 'phone', 'email', 'website', 'office_address', 'tagline', 'disclaimer'];

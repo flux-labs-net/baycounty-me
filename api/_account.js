@@ -2,8 +2,9 @@
 // what's happening near home. The website (/account) and both apps use it. Served at /api/account?action=... (vercel.json
 // rewrites it to api/manage.js, which hands the request here; that keeps the deployment's function count where it is).
 //
-//   POST start {email}                    email a 6-digit code and a one-tap link (always answers the same, so it can't
-//                                         be used to find out who has an account)
+//   POST start {email, next?}             email a 6-digit code and a one-tap link (always answers the same, so it can't
+//                                         be used to find out who has an account). next '/realtor' sends the one-tap
+//                                         link back to the realtor console instead of My home
 //   POST verify {email, code, client}     check the code; create the account the first time; start a session. client 'web'
 //                                         sets the session cookie; 'ios' / 'android' get {token} for an Authorization header
 //   GET  link?t=                          the one-tap link's confirm page; only its button (a POST) signs in, because email
@@ -55,11 +56,15 @@ const newCode = () => String(crypto.randomInt(0, 1e6)).padStart(6, '0');
 const manageUrl = userId => `${SITE}/api/account?action=emails&t=${encodeURIComponent(makeToken({kind: 'emails', u: userId}))}`;
 
 const cookies = req => Object.fromEntries(String(req.headers.cookie || '').split(';').map(c => c.trim().split('=')).filter(x => x[0]).map(([k, ...v]) => [k, decodeURIComponent(v.join('='))]));
-function setSession(res, token, days) {
+// bcm_in is readable by page scripts so the header can say "My home" without asking the server; it holds no secret.
+function sessionCookies(token, days = SESSION_DAYS.web) {
   const age = token ? days * 86400 : 0;
-  // bcm_in is readable by page scripts so the header can say "My home" without asking the server; it holds no secret.
-  res.setHeader('Set-Cookie', [`${COOKIE}=${token || ''}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`, `${FLAG}=${token ? 1 : ''}; Path=/; Secure; SameSite=Lax; Max-Age=${age}`]);
+  return [`${COOKIE}=${token || ''}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${age}`, `${FLAG}=${token ? 1 : ''}; Path=/; Secure; SameSite=Lax; Max-Age=${age}`];
 }
+function setSession(res, token, days) { res.setHeader('Set-Cookie', sessionCookies(token, days)); }
+// Pages a one-tap sign-in link may return to. The realtor console uses this same sign-in (one account for both).
+const NEXT = ['/account', '/realtor'];
+const nextOf = v => (NEXT.includes(v) ? v : '/account');
 
 /* ---------- validation ---------- */
 const EMAIL = /^[^\s@<>"]{1,64}@[^\s@<>"]{1,190}\.[a-z]{2,24}$/i;
@@ -103,7 +108,9 @@ async function me(u) {
   const [home] = await q(`select ${HOME_COLS.join(', ')} from account.homes where user_id = $1`, [u.id]);
   const [prefs] = await q(`select ${PREF_COLS.join(', ')} from account.prefs where user_id = $1`, [u.id]);
   const [{devices}] = await q('select count(*)::int as devices from push.devices where user_id = $1 and disabled_at is null', [u.id]);
-  return {user: {email: u.email, first_name: u.first_name, created_at: u.created_at, place_id: u.place_id},
+  // The same email on the realtor console's agent list (api/_realtor.js): one sign-in opens both.
+  const realtor = await q('select status from realtor.agents where email = $1', [u.email]).then(r => (r[0] ? r[0].status : null), () => null);
+  return {user: {email: u.email, first_name: u.first_name, created_at: u.created_at, place_id: u.place_id}, realtor,
     home: home ? {...home, lat: +home.lat, lon: +home.lon} : null, prefs: prefs ? {...prefs, radius_mi: +prefs.radius_mi} : null, devices,
     choices: {topics: N.TOPICS, radius_mi: N.RADII, push_topics: require('./_emergency').TOPICS, alert_email: Object.fromEntries(ALERT_EMAIL.map(k => [k, require('./_emergency').TOPICS[k]]))}};
 }
@@ -135,10 +142,10 @@ function page(title, inner) {
 label{display:flex;gap:10px;align-items:center;margin:0 0 10px}form{margin:0 0 12px}button,a.btn{display:inline-flex;min-height:44px;align-items:center;padding:0 20px;border-radius:10px;border:0;background:var(--navy);color:#fff;font:500 .95rem var(--f-body);cursor:pointer;text-decoration:none}button.plain{background:none;color:var(--ink);border:1px solid var(--line)}.note{background:var(--surface-2,#eef3fa);padding:10px 12px;border-radius:10px;color:var(--ink)}</style></head>
 <body><div class="b">${inner}</div></body></html>`;
 }
-function linkPage(ok, email, tok) {
+function linkPage(ok, email, tok, next = '/account') {
   return page('Sign in', ok ? `<h1>Sign in to BayCounty.me</h1><p>Signing in as ${escH(email)}.</p>
 <form method="post" action="/api/account?action=link"><input type="hidden" name="t" value="${escH(tok)}"><button type="submit" autofocus>Sign in</button></form>`
-    : `<h1>This link has expired</h1><p>Sign-in links last ${CODE_MIN} minutes and work once.</p><a class="btn" href="/account">Get a new code</a>`);
+    : `<h1>This link has expired</h1><p>Sign-in links last ${CODE_MIN} minutes and work once.</p><a class="btn" href="${escH(nextOf(next))}">Get a new code</a>`);
 }
 function emailsPage(tok, u, p, msg) {
   if (!u) return page('Your emails', '<h1>That link isn’t valid any more</h1><p>Sign in to change your emails.</p><a class="btn" href="/account">Sign in</a>');
@@ -174,7 +181,8 @@ async function handler(req, res) {
       if (n < 3) {
         const code = newCode(), nonce = crypto.randomBytes(9).toString('base64url');
         await q(`insert into account.codes (email, code_hash, nonce, expires_at) values ($1, $2, $3, now() + make_interval(mins => $4))`, [email, hashCode(email, code), nonce, CODE_MIN]);
-        const link = `${SITE}/api/account?action=link&t=${encodeURIComponent(makeToken({kind: 'link', e: email, n: nonce, exp: Date.now() + CODE_MIN * 60e3}))}`;
+        const next = nextOf(b.next);
+        const link = `${SITE}/api/account?action=link&t=${encodeURIComponent(makeToken({kind: 'link', e: email, n: nonce, exp: Date.now() + CODE_MIN * 60e3, ...(next === '/account' ? {} : {r: next})}))}`;
         const m = require('./_emails').accountCodeEmail(code, link, CODE_MIN);
         const r = await resend('/emails', 'POST', {from: FROM, to: [email], subject: m.subject, text: m.text, html: m.html}, key());
         if (!r.ok) console.error('account code email', r.status);
@@ -202,17 +210,18 @@ async function handler(req, res) {
     if (action === 'link' && req.method === 'GET') {
       if (!req.query.t && req.query['amp;t']) req.query.t = req.query['amp;t'];
       const t = readToken(req.query.t);
-      return html(200, linkPage(!!(t && t.kind === 'link'), t && t.e, String(req.query.t || '').replace(/[^A-Za-z0-9._-]/g, '')));
+      return html(200, linkPage(!!(t && t.kind === 'link'), t && t.e, String(req.query.t || '').replace(/[^A-Za-z0-9._-]/g, ''), t && t.r));
     }
     if (action === 'link' && req.method === 'POST') {
       const t = readToken(body(req).t);
-      const fail = () => { res.setHeader('Location', '/account?signin=expired'); return res.status(303).end(); };
+      const next = nextOf(t && t.r);
+      const fail = () => { res.setHeader('Location', next + '?signin=expired'); return res.status(303).end(); };
       if (!t || t.kind !== 'link') return fail();
       const used = await q('update account.codes set used_at = now() where nonce = $1 and email = $2 and used_at is null and expires_at > now() returning id', [t.n, t.e]);
       if (!used.length) return fail();
       const u = await signInUser(t.e);
       setSession(res, await startSession(u.id, 'web'), SESSION_DAYS.web);
-      res.setHeader('Location', '/account'); return res.status(303).end();
+      res.setHeader('Location', next); return res.status(303).end();
     }
     if (action === 'emails') {
       // From the footer of an account email: signed token, no sign-in. One-click unsubscribe (RFC 8058) stops both kinds.
@@ -385,4 +394,4 @@ async function adminSummary() {
 }
 
 module.exports = handler;
-Object.assign(module.exports, {makeToken, readToken, hashCode, hashSession, cleanPrefs, manageUrl, weeklyRun, emailNotice, adminSummary, homeFeed, COOKIE, PUSH_TOPICS, ALERT_EMAIL});
+Object.assign(module.exports, {session, signInUser, startSession, sessionCookies, nextOf, SESSION_DAYS, makeToken, readToken, hashCode, hashSession, cleanPrefs, manageUrl, weeklyRun, emailNotice, adminSummary, homeFeed, COOKIE, PUSH_TOPICS, ALERT_EMAIL});
