@@ -192,6 +192,6 @@ class Handler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=8765)
-    ap.add_argument("--host", default="0.0.0.0")
+    ap.add_argument("--host", default="127.0.0.1")
     a = ap.parse_args()
     ThreadingHTTPServer((a.host, a.port), Handler).serve_forever()
