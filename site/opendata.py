@@ -24,7 +24,7 @@ GOV_COLS = {'beach-access': ['run_by'], 'beach-parking': [], 'beach-water-sites'
             'shared-owner-vendors': ['gov_id'], 'chamber-overlaps': [], 'emergency-purchase-donors': ['gov_id'], 'campaign-results': ['gov_id']}
 # county bed tax in every zone; the county-wide tax roll; the school datasets are all the school district's
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county',
-             'schools': 'schools', 'school-grades': 'schools', 'school-grade-state': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
+             'schools': 'schools', 'school-grades': 'schools', 'school-grade-state': 'schools', 'school-bell-times': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',

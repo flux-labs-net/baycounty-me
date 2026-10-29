@@ -6,6 +6,7 @@ Built from the schools, school-grades, school-spending, school-enrollment, schoo
 address points and checks them against the school-zones shapes in the browser, the same test /api/v1/schools runs.
 """
 import datetime as dt
+import re
 import html
 
 from entity_links import a as link, build
@@ -64,6 +65,20 @@ CSS = r"""
 .sc-facts dt{font-size:.74rem;color:var(--muted)}
 .sc-facts dd{margin:2px 0 0;font:600 1rem var(--f-body);font-variant-numeric:tabular-nums}
 .sc-hist{display:flex;flex-wrap:wrap;gap:6px}
+.sc-hrs{margin:0;font-size:.88rem}.sc-hrs b{font-weight:600;margin-right:4px}
+.sc-map{height:480px;border-radius:24px;box-shadow:var(--ui-shadow);overflow:hidden;background:var(--sunken);z-index:0;margin-top:10px}
+:root[data-theme="dark"] .sc-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sc-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}}
+.sc-map .leaflet-popup-content{font:.85rem/1.5 var(--f-body);margin:10px 12px}
+.sc-map .leaflet-popup-content > b:first-child{display:block;font-size:.95rem;margin-bottom:2px}
+.sc-zsel{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+.sc-zsel select{min-height:36px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:0 12px;font:inherit}
+.sc-mkey{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:.8rem;color:var(--muted)}
+.sc-mkey span{display:inline-flex;align-items:center;gap:6px}
+.sc-mkey i{width:12px;height:12px;border-radius:50%;background:#8a94a3;border:1.5px solid #fff}
+.sc-mkey i.g-A{background:var(--teal)}.sc-mkey i.g-B{background:var(--blue)}.sc-mkey i.g-C{background:var(--amber,#C98A1B)}.sc-mkey i.g-D{background:var(--salmon)}
+.sc-mkey i.ch{background:transparent;border:2.5px solid var(--ink)}
+@media (max-width:760px){.sc-map{height:380px;border-radius:18px}}
 .sc-cps{display:grid;gap:7px}
 .sc-cp{display:grid;grid-template-columns:minmax(0,11.5em) minmax(60px,1fr) 3em 2.6em;align-items:center;gap:8px;font-size:.82rem}
 .sc-cp .lb{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -114,6 +129,51 @@ CSS = r"""
   .sc-z .lv{width:70px}.sc-bar{grid-template-columns:minmax(0,1fr) 90px;grid-template-areas:"n v" "t t";row-gap:4px}.sc-bar a{grid-area:n}.sc-bar .tr{grid-area:t}.sc-bar .v{grid-area:v}
   .sc-cp{grid-template-columns:minmax(0,9.5em) minmax(50px,1fr) 2.7em 2.3em;gap:6px;font-size:.78rem}.sc-mix{grid-template-columns:6.5em 1fr}
   .sc-enr small{font-size:.62rem}.sc-enr b{font-size:.62rem}.sc-facts dd{font-size:.92rem}}
+"""
+
+LEAFLET = ('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">'
+           '<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>')
+
+MAP_JS = r"""
+window.addEventListener('load', () => {
+  const el = document.getElementById('scMap'); if (!el || !window.L) return;
+  const S = __SCHOOLS__;
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const col = g => ({A: css('--teal') || '#1a8f7a', B: css('--blue') || '#2b5fb4', C: css('--amber') || '#C98A1B', D: css('--salmon') || '#d65a4a', F: css('--salmon') || '#d65a4a'})[g] || '#8a94a3';
+  const m = L.map(el, {scrollWheelZoom: false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(m);
+  const pts = [], all = [];
+  for (const [id, s] of Object.entries(S)) {
+    if (s.lat == null || s.lon == null || s.ty === 'Virtual' || /virtual/i.test(s.name)) continue;
+    const mk = L.circleMarker([s.lat, s.lon], {radius: 8, color: s.ch ? css('--ink') || '#111' : '#fff', weight: s.ch ? 2.5 : 1.5, fillColor: col(s.gr), fillOpacity: .95});
+    const dir = `https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}`;
+    mk.bindPopup(`<b>${esc(s.name)}</b>${s.gr ? `State grade <b class="g">${esc(s.gr)}</b> (${s.gy - 1}-${String(s.gy).slice(2)})<br>` : ''}${esc(s.lv)}${s.g ? ' · grades ' + esc(s.g) : ''}${s.ch ? ' · charter' : ''}${s.n ? ` · ${Number(s.n).toLocaleString()} students` : ''}`
+      + (s.hrs ? `<br>School day: ${esc(s.hrs)}` : '') + `<br><a href="#s-${esc(id)}" data-open="${esc(id)}">Details</a> · <a href="${dir}" target="_blank" rel="noopener">Directions</a>`);
+    mk.addTo(m); pts.push({mk, s}); all.push([s.lat, s.lon]);
+  }
+  if (all.length) m.fitBounds(all, {padding: [24, 24]});
+  el.addEventListener('click', ev => { const a = ev.target.closest('[data-open]'); if (!a) return; const d = document.getElementById('s-' + a.dataset.open); if (d) d.open = true; });
+  const lvBox = document.getElementById('scMapLv');
+  lvBox.addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    lvBox.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    const v = b.dataset.v;
+    for (const {mk, s} of pts) {
+      const on = !v || (v === 'charter' ? s.ch : s.lv === v || (s.lv === 'Combined' && v !== 'charter'));
+      on ? mk.addTo(m) : mk.remove();
+    }
+  });
+  let zl = null, zones = null;
+  document.getElementById('scMapZ').addEventListener('change', async ev => {
+    const v = ev.target.value; if (zl) { zl.remove(); zl = null; } if (!v) return;
+    try { zones = zones || await (await fetch('/downloads/school-zones.json')).json(); } catch (e) { return; }
+    const line = css('--blue') || '#2b5fb4';
+    zl = L.layerGroup(zones.filter(z => z.level === v && !z.mou_area).map(z => L.geoJSON(JSON.parse(z.geometry), {style: {color: line, weight: 1.5, fillColor: line, fillOpacity: .07}})
+      .bindTooltip(esc(z.school || z.zone_name), {sticky: true}))).addTo(m);
+    pts.forEach(({mk}) => mk.bringToFront && mk.bringToFront());
+  });
+});
 """
 
 JS = r"""
@@ -316,6 +376,24 @@ def _scores(g, prev, st):
             + ('<span>+/− change from the year before</span>' if prev else '') + '</div></div>')
 
 
+def _t(hhmm):
+    """'13:50' -> '1:50 p.m.'"""
+    if not hhmm:
+        return ''
+    h, m = map(int, hhmm.split(':'))
+    return f"{(h - 1) % 12 + 1}:{m:02d} {'a.m.' if h < 12 else 'p.m.'}"
+
+
+def _hours(rows):
+    """One school's day: '7:30 a.m. to 2:00 p.m.', or one line per grade band."""
+    if not rows:
+        return ''
+    if len(rows) == 1 and not rows[0].get('part'):
+        r = rows[0]
+        return f"{_t(r['start_time'])} to {_t(r['end_time'])}" + (f" ({e(r['note'])})" if r.get('note') else '')
+    return '; '.join(f"{e(r['part'] or '')}: {_t(r['start_time'])} to {_t(r['end_time'])}" + (f" ({e(r['note'])})" if r.get('note') else '') for r in rows)
+
+
 def _where(s):
     """The school's address as a map link and its phone as a tap-to-call link."""
     import re, urllib.parse
@@ -340,9 +418,16 @@ def _mix(counts, label):
 
 
 def schools_page(out_dir):
-    from page_datasets import schools, school_grades, school_grade_state, school_spending, school_enrollment, school_calendar, school_zones
+    from page_datasets import schools, school_grades, school_grade_state, school_bell_times, school_spending, school_enrollment, school_calendar, school_zones
     S, G, SP, EN, CAL, Z = schools(), school_grades(), school_spending(), school_enrollment(), school_calendar(), school_zones()
     GS = {(r['year'], r['school_type']): r for r in school_grade_state()}
+    BT = school_bell_times()
+    bell_by = {}
+    for r in BT:
+        if r['kind'] == 'school day' and r['school_id']:
+            bell_by.setdefault(r['school_id'], []).append(r)
+    early = [r for r in BT if r['kind'] == 'early release']
+    bell_year = next((r['school_year'] for r in BT), '')
     conf = PLACE.get('schools') or {}
     if not S:
         return '<div class="page"><h1>Public schools</h1><p>No school data for this place yet.</p></div>'
@@ -426,6 +511,7 @@ def schools_page(out_dir):
     {_scores(last, gh.get(latest_gy - 1), GS.get((latest_gy, last.get('school_type') or 'All')) or GS.get((latest_gy, 'All'))) if last else ''}
     {f'<div><div class="muted small">Enrollment, {enr[0][0] - 1}-{str(enr[0][0])[2:]} to {enr[-1][0] - 1}-{str(enr[-1][0])[2:]}: {enr[0][1]:,} to {enr[-1][1]:,}</div>{_spark(enr)}</div>' if len(enr) > 1 else ''}
     {op_html}
+    {f'<p class="sc-hrs"><b>School day {e(bell_year)}</b> {_hours(bell_by[sid])}</p>' if bell_by.get(sid) else ''}
     <p style="margin:0">{_where(s)}{(" · " + e(zoned)) if zoned else ""}{f" · {s['free_reduced_lunch_pct']:.0f}% of students qualify for free or reduced-price lunch" if s.get("free_reduced_lunch_pct") else ""}</p>
   </div>
 </details>''')
@@ -492,10 +578,14 @@ def schools_page(out_dir):
     board_html = ''.join(f'<li><b>{e(_when(c))}</b> · {e(c["title"])}{(" · " + e(_venue(c))) if c.get("venue") else ""}</li>' for c in board)
     zone_date = max((z['last_edited'] or '' for z in Z), default='')
 
-    js_s = {s['school_id']: {'name': s['name'], 'g': s.get('grades'), 'n': s.get('enrollment'), 'gr': s.get('latest_grade'), 'gy': s.get('latest_grade_year')} for s in open_s}
+    js_s = {s['school_id']: {'name': s['name'], 'g': s.get('grades'), 'n': s.get('enrollment'), 'gr': s.get('latest_grade'), 'gy': s.get('latest_grade_year'),
+                             'lat': s.get('latitude'), 'lon': s.get('longitude'), 'lv': s['level'], 'ch': bool(s['charter']), 'ty': s['school_type'],
+                             'city': s.get('city'), 'hrs': re.sub('<[^>]+>', '', _hours(bell_by.get(s['school_id'], [])))} for s in open_s}
+    early_html = (f'<p class="note">Early release days ({e(bell_year)}): ' + ', '.join(f"{e(r['part'].lower())} let out at {_t(r['end_time'])}" for r in early) +
+                  f'. Times are from the district\'s <a href="{e(BT[0]["source_url"])}" rel="noopener" target="_blank">start and end times chart</a>.</p>') if early else ''
     import json
     js = JS.replace('__SCHOOLS__', json.dumps(js_s, separators=(',', ':')))
-    return f'''<style>{CSS}</style>
+    return f'''<style>{CSS}</style>{LEAFLET}
 <div class="page tax sc">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Governments · {e(district)}</span><h1>Public schools</h1>
     <p class="lede">Find the schools zoned for your address, see what's coming up on the school calendar, and compare every public school in {e(PLACE["name"])}: grades, students, spending and how each has changed since 2016.</p></div>
@@ -510,6 +600,13 @@ def schools_page(out_dir):
       <div class="sc-box"><h3>Zoned schools</h3><div class="sc-res" id="scOut" hidden></div><p class="muted small" id="scHint">Pick an address to see its elementary, middle and high school.</p></div>
     </div></section>
 
+  <section class="tx-sec"><div class="sec-hd"><h2 id="map" data-tile="Map">Map of every school</h2><span class="muted">Colored by the latest state grade</span></div>
+    <div class="sc-ctl"><div class="chips" id="scMapLv" role="group" aria-label="Kind of school"><button type="button" class="chip" data-v="" aria-pressed="true">All</button><button type="button" class="chip" data-v="Elementary" aria-pressed="false">Elementary</button><button type="button" class="chip" data-v="Middle" aria-pressed="false">Middle</button><button type="button" class="chip" data-v="High" aria-pressed="false">High</button><button type="button" class="chip" data-v="charter" aria-pressed="false">Charter</button></div>
+      <label class="sc-zsel">Zones <select id="scMapZ" aria-label="Show attendance zones"><option value="">Off</option><option value="Elementary">Elementary</option><option value="Middle">Middle</option><option value="High">High</option></select></label></div>
+    <div class="sc-map" id="scMap" role="img" aria-label="Map of {len(open_s)} public schools in {e(PLACE["name"])}, colored by state grade"></div>
+    <div class="sc-mkey"><span><i class="g-A"></i>A</span><span><i class="g-B"></i>B</span><span><i class="g-C"></i>C</span><span><i class="g-D"></i>D or F</span><span><i></i>No grade</span><span><i class="ch"></i>Ring = charter</span></div>
+    <p class="note">Tap a dot for the school's grade, hours and details. Turn on zones to see which area each school serves. Virtual programs and schools without an address on file aren't shown.</p></section>
+
   <section class="tx-sec"><div class="sec-hd"><h2 id="calendar" data-tile="Calendar">School calendar</h2><span class="muted">From the <a href="{e(conf.get("calendar_page") or "#")}" rel="noopener" target="_blank">district's calendar</a>, checked daily</span></div>
     <div class="sc-ctl"><div class="chips" id="scCalK" role="group" aria-label="Kind of date"><button type="button" class="chip" data-v="" aria-pressed="true">Everything</button><button type="button" class="chip" data-v="off" aria-pressed="false">Days off</button><button type="button" class="chip" data-v="milestones" aria-pressed="false">Grading and graduation</button><button type="button" class="chip" data-v="board-meeting" aria-pressed="false">School Board</button></div></div>
     <div class="sc-cal" id="scCal">{"".join(cal_cards) or '<p class="muted">No upcoming dates posted.</p>'}</div>
@@ -519,7 +616,7 @@ def schools_page(out_dir):
     <div class="sc-ctl"><div class="chips" id="scLv" role="group" aria-label="Kind of school"><button type="button" class="chip" data-v="" aria-pressed="true">All</button>{lv_chips}</div><input type="search" id="scQ" placeholder="Find a school or city" aria-label="Find a school"></div>
     <div class="sc-list" id="scSchools">{"".join(cards)}</div>
     <p class="note" id="scNone" hidden>No school matches.</p>
-    <p class="note">The letter is the school's latest Florida school grade. Students and teachers are from the {e(year_label)} federal school directory; "per teacher" divides students by full-time teachers.</p></section>
+    <p class="note">The letter is the school's latest Florida school grade. Students and teachers are from the {e(year_label)} federal school directory; "per teacher" divides students by full-time teachers.</p>{early_html}</section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="grades" data-tile="Grades">School grades since 2016</h2><span class="muted">Florida Department of Education</span></div>
     {grades_html}</section>
@@ -550,4 +647,4 @@ def schools_page(out_dir):
     </ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script>{js}</script>'''
+<script>{js}</script><script>{MAP_JS.replace('__SCHOOLS__', json.dumps(js_s, separators=(',', ':')))}</script>'''

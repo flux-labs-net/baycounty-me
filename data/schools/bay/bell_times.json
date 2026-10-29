@@ -1,0 +1,491 @@
+{
+ "school_year": "2026-27",
+ "revised": "2026-08-11",
+ "source_url": "https://www.bay.k12.fl.us/page/start-end-times",
+ "image_url": "https://cmsv2-assets.apptegy.net/uploads/31249/file/6349816/c49fbd24-e983-4a07-820b-1515dc60c84f.png",
+ "note": "Typed by hand from the district's published start and end times chart (an image). Early release is 2.5 hours before the end of the school day.",
+ "times": [
+  {
+   "school_id": "03-0611",
+   "school": "A. Gary Walsingham",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0101",
+   "school": "Callaway",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0091",
+   "school": "Cedar Grove",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0461",
+   "school": "Deer Point",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0151",
+   "school": "Hiland Park",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0081",
+   "school": "Hutchison Beach",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0131",
+   "school": "Lucille Moore",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0171",
+   "school": "Lynn Haven",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0111",
+   "school": "Merriam Cherry Street",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0471",
+   "school": "Northside",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0391",
+   "school": "Oscar Patterson Academy",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0211",
+   "school": "Parker",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0521",
+   "school": "Patronis",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0221",
+   "school": "Southport",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0511",
+   "school": "Tommy Smith",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0251",
+   "school": "Waller",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0262",
+   "school": "West Bay",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Elementary schools"
+  },
+  {
+   "school_id": "03-0161",
+   "school": "Jinks",
+   "part": null,
+   "start": "09:00",
+   "end": "15:30",
+   "note": null,
+   "group": "Middle schools"
+  },
+  {
+   "school_id": "03-0071",
+   "school": "Merritt Brown",
+   "part": null,
+   "start": "09:00",
+   "end": "15:30",
+   "note": null,
+   "group": "Middle schools"
+  },
+  {
+   "school_id": "03-0331",
+   "school": "Mowat",
+   "part": null,
+   "start": "09:00",
+   "end": "15:30",
+   "note": null,
+   "group": "Middle schools"
+  },
+  {
+   "school_id": "03-0201",
+   "school": "Surfside",
+   "part": null,
+   "start": "09:00",
+   "end": "15:30",
+   "note": null,
+   "group": "Middle schools"
+  },
+  {
+   "school_id": "03-0491",
+   "school": "A. Crawford Mosley",
+   "part": null,
+   "start": "08:15",
+   "end": "15:00",
+   "note": null,
+   "group": "High schools"
+  },
+  {
+   "school_id": "03-0061",
+   "school": "Bay",
+   "part": null,
+   "start": "08:15",
+   "end": "15:00",
+   "note": null,
+   "group": "High schools"
+  },
+  {
+   "school_id": "03-0551",
+   "school": "J.R. Arnold",
+   "part": null,
+   "start": "08:15",
+   "end": "15:00",
+   "note": null,
+   "group": "High schools"
+  },
+  {
+   "school_id": "03-0571",
+   "school": "Breakfast Point",
+   "part": "Elementary (K-5)",
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Combination schools"
+  },
+  {
+   "school_id": "03-0571",
+   "school": "Breakfast Point",
+   "part": "Middle (6-8)",
+   "start": "07:30",
+   "end": "14:05",
+   "note": null,
+   "group": "Combination schools"
+  },
+  {
+   "school_id": "03-0541",
+   "school": "Deane Bozeman",
+   "part": "Elementary (K-5)",
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Combination schools"
+  },
+  {
+   "school_id": "03-0541",
+   "school": "Deane Bozeman",
+   "part": "Grades 6-12",
+   "start": "09:00",
+   "end": "15:30",
+   "note": null,
+   "group": "Combination schools"
+  },
+  {
+   "school_id": "03-0341",
+   "school": "Rutherford",
+   "part": "Grades 6-12",
+   "start": "08:15",
+   "end": "15:00",
+   "note": null,
+   "group": "Combination schools"
+  },
+  {
+   "school_id": "03-0501",
+   "school": "Tyndall Academy",
+   "part": "Grades K-8",
+   "start": "07:20",
+   "end": "13:50",
+   "note": null,
+   "group": "Combination schools"
+  },
+  {
+   "school_id": "03-0281",
+   "school": "Margaret K. Lewis School",
+   "part": null,
+   "start": "08:15",
+   "end": "14:15",
+   "note": null,
+   "group": "Special purpose schools"
+  },
+  {
+   "school_id": "03-0581",
+   "school": "Rosenwald",
+   "part": "Grades 6-12",
+   "start": "08:15",
+   "end": "15:00",
+   "note": null,
+   "group": "Special purpose schools"
+  },
+  {
+   "school_id": "03-0241",
+   "school": "St. Andrew Academy",
+   "part": null,
+   "start": "07:30",
+   "end": "14:00",
+   "note": null,
+   "group": "Special purpose schools"
+  },
+  {
+   "school_id": null,
+   "school": "Tom P. Haney Technical College",
+   "part": null,
+   "start": "07:00",
+   "end": "15:30",
+   "note": null,
+   "group": "Adult and technical"
+  },
+  {
+   "school_id": "03-0764",
+   "school": "AMIkids",
+   "part": null,
+   "start": "08:30",
+   "end": "15:30",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0701",
+   "school": "Bay Haven Elementary",
+   "part": "Grades K-2",
+   "start": "07:30",
+   "end": "14:30",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0701",
+   "school": "Bay Haven Elementary",
+   "part": "Grades 3-5",
+   "start": "07:30",
+   "end": "14:45",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0711",
+   "school": "Bay Haven Middle",
+   "part": "Grades 6-8",
+   "start": "07:45",
+   "end": "15:00",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0782",
+   "school": "Central High School",
+   "part": null,
+   "start": "08:00",
+   "end": "15:00",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0781",
+   "school": "Chautauqua Learn & Serve",
+   "part": null,
+   "start": "08:15",
+   "end": "15:00",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": null,
+   "school": "Cornerstone Prep",
+   "part": "Grades K-3",
+   "start": "07:45",
+   "end": "14:45",
+   "note": "Fridays 7:45-11:45",
+   "group": "Charter schools"
+  },
+  {
+   "school_id": null,
+   "school": "Cornerstone Prep",
+   "part": "Grades 4-8",
+   "start": "07:55",
+   "end": "14:55",
+   "note": "Fridays 7:55-11:55",
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0751",
+   "school": "North Bay Haven Elementary",
+   "part": "Grades K-2",
+   "start": "07:30",
+   "end": "14:30",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0751",
+   "school": "North Bay Haven Elementary",
+   "part": "Grades 3-5",
+   "start": "07:30",
+   "end": "14:45",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0731",
+   "school": "North Bay Haven Middle",
+   "part": "Grades 6-8",
+   "start": "07:55",
+   "end": "15:00",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0741",
+   "school": "North Bay Haven High",
+   "part": "Zero period (9-12)",
+   "start": "07:15",
+   "end": "08:05",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0741",
+   "school": "North Bay Haven High",
+   "part": "Regular day (9-12)",
+   "start": "08:25",
+   "end": "15:15",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0801",
+   "school": "Palm Bay Elementary",
+   "part": null,
+   "start": "08:00",
+   "end": "15:15",
+   "note": "Listed with Palm Bay Preparatory Academy",
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-0771",
+   "school": "Palm Bay Preparatory Academy",
+   "part": null,
+   "start": "08:00",
+   "end": "15:15",
+   "note": null,
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-2701",
+   "school": "Rising Leaders Academy",
+   "part": "Grades K-5",
+   "start": "07:40",
+   "end": "15:15",
+   "note": "Fridays 7:40-12:30",
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-2701",
+   "school": "Rising Leaders Academy",
+   "part": "Grades 6-12",
+   "start": "08:00",
+   "end": "15:30",
+   "note": "Fridays 8:00-12:45",
+   "group": "Charter schools"
+  },
+  {
+   "school_id": "03-2711",
+   "school": "University Academy",
+   "part": "Grades K-8",
+   "start": "07:30",
+   "end": "15:00",
+   "note": null,
+   "group": "Charter schools"
+  }
+ ],
+ "early_release": [
+  {
+   "level": "Elementary schools",
+   "dismissal": "11:30"
+  },
+  {
+   "level": "Middle schools",
+   "dismissal": "13:00"
+  },
+  {
+   "level": "High schools",
+   "dismissal": "12:30"
+  }
+ ]
+}

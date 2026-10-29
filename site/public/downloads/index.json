@@ -11530,6 +11530,145 @@
    "api": "/api/v1/datasets/school-grade-state"
   },
   {
+   "id": "school-bell-times",
+   "title": "School start and end times",
+   "description": "When each public school's day starts and ends this school year (24-hour HH:MM), from the district's published start and end times chart, typed in by hand. Some schools have more than one row: different grade bands (part), a zero period, or a shorter Friday (note). Rows with kind 'early release' give the dismissal time by school level on early release days. school_id is empty for programs that aren't in the federal school directory.",
+   "rows": 55,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "part",
+     "type": "string",
+     "values": [
+      "Elementary (K-5)",
+      "Elementary schools",
+      "Grades 3-5",
+      "Grades 4-8",
+      "Grades 6-12",
+      "Grades 6-8",
+      "Grades K-2",
+      "Grades K-3",
+      "Grades K-5",
+      "Grades K-8",
+      "High schools",
+      "Middle (6-8)",
+      "Middle schools",
+      "Regular day (9-12)",
+      "Zero period (9-12)"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "early release",
+      "school day"
+     ]
+    },
+    {
+     "name": "start_time",
+     "type": "string",
+     "values": [
+      "07:00",
+      "07:15",
+      "07:20",
+      "07:30",
+      "07:40",
+      "07:45",
+      "07:55",
+      "08:00",
+      "08:15",
+      "08:25",
+      "08:30",
+      "09:00"
+     ]
+    },
+    {
+     "name": "end_time",
+     "type": "string",
+     "values": [
+      "08:05",
+      "11:30",
+      "12:30",
+      "13:00",
+      "13:50",
+      "14:00",
+      "14:05",
+      "14:15",
+      "14:30",
+      "14:45",
+      "14:55",
+      "15:00",
+      "15:15",
+      "15:30"
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Early release days let out 2.5 hours before the end of the school day",
+      "Fridays 7:40-12:30",
+      "Fridays 7:45-11:45",
+      "Fridays 7:55-11:55",
+      "Fridays 8:00-12:45",
+      "Listed with Palm Bay Preparatory Academy"
+     ]
+    },
+    {
+     "name": "group_name",
+     "type": "string",
+     "values": [
+      "Adult and technical",
+      "Charter schools",
+      "Combination schools",
+      "Elementary schools",
+      "High schools",
+      "Middle schools",
+      "Special purpose schools"
+     ]
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2026-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.bay.k12.fl.us/page/start-end-times"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-bell-times.json",
+   "csv": "/downloads/school-bell-times.csv",
+   "api": "/api/v1/datasets/school-bell-times"
+  },
+  {
    "id": "school-spending",
    "title": "Spending per school",
    "description": "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.",

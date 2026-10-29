@@ -619,7 +619,8 @@ def _school_files():
     j = lambda n, default: json.load(open(os.path.join(d, n))) if os.path.exists(os.path.join(d, n)) else default
     return {'conf': PLACE.get('schools') or {}, 'place': PLACE_ID, 'dir': j('schools.json', None), 'zones': j('zones.json', {'zones': []}),
             'calendar': j('calendar.json', {'events': []}), 'grades': j('grades.json', {'rows': []}),
-            'spending': j('spending.json', {'rows': [], 'files': []}), 'zone_schools': j('zone_schools.json', {'zones': {}})}
+            'spending': j('spending.json', {'rows': [], 'files': []}), 'zone_schools': j('zone_schools.json', {'zones': {}}),
+            'bell': j('bell_times.json', {'times': [], 'early_release': []})}
 
 
 def _sy(end_year):
@@ -633,7 +634,7 @@ def _school_rows():
     F = _school_files()
     D = F['dir']
     if not D:
-        _SCH['_schools'] = {k: [] for k in ('schools', 'grades', 'grade_state', 'spending', 'enrollment', 'calendar', 'zones')}
+        _SCH['_schools'] = {k: [] for k in ('schools', 'grades', 'grade_state', 'spending', 'enrollment', 'calendar', 'zones', 'bell')}
         return _SCH['_schools']
     place = F['place']
     name = {s['school_number']: s['name'] for s in D['schools']}
@@ -748,7 +749,15 @@ def _school_rows():
     calendar = [{'place_id': place, 'event_id': e['event_id'], 'title': e['title'], 'kind': e['kind'], 'starts': e['starts'], 'ends': e.get('ends'),
                  'all_day': e['all_day'], 'venue': re.sub(r',?\s*(United States|USA)\s*$', '', e.get('venue') or '').strip(' ,') or None, 'school_year': e.get('school_year'), 'source_url': cal_src}
                 for e in F['calendar'].get('events', [])]
-    _SCH['_schools'] = {'schools': schools, 'grades': grades, 'grade_state': grade_state, 'spending': spending, 'enrollment': enrollment, 'calendar': calendar, 'zones': zones}
+    # start and end times, typed by hand from the district's yearly chart (data/schools/<county>/bell_times.json)
+    B = F['bell']
+    bell = [{'place_id': place, 'school_id': r['school_id'], 'school': name.get(r['school_id']) or r['school'], 'part': r.get('part'),
+             'kind': 'school day', 'start_time': r['start'], 'end_time': r['end'], 'note': r.get('note'), 'group_name': r.get('group'),
+             'school_year': B.get('school_year'), 'source_url': B.get('source_url')} for r in B.get('times', [])]
+    bell += [{'place_id': place, 'school_id': None, 'school': None, 'part': x['level'], 'kind': 'early release', 'start_time': None,
+              'end_time': x['dismissal'], 'note': 'Early release days let out 2.5 hours before the end of the school day', 'group_name': x['level'],
+              'school_year': B.get('school_year'), 'source_url': B.get('source_url')} for x in B.get('early_release', [])]
+    _SCH['_schools'] = {'schools': schools, 'grades': grades, 'grade_state': grade_state, 'bell': bell, 'spending': spending, 'enrollment': enrollment, 'calendar': calendar, 'zones': zones}
     return _SCH['_schools']
 
 
@@ -761,6 +770,10 @@ def schools():
 
 def school_grades():
     return _school_rows()['grades']
+
+
+def school_bell_times():
+    return _school_rows()['bell']
 
 
 def school_grade_state():
@@ -2219,6 +2232,7 @@ DATASETS = [
     ('schools', 'Public schools', "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).", schools),
     ('school-grades', 'School grades', "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). school_type is Elementary, Middle, High or Combination. Components (percent of students: third-grade reading (grade3_ela_achievement), English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for each year whose state file was read (the latest two). No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).", school_grades),
     ('school-grade-state', 'School grades statewide', "Florida-wide school grade results by school type (Elementary, Middle, High, Combination, and All), one row per school type and year, worked out from the Florida Department of Education's statewide school grades file: how many schools got each grade (grade_a to grade_i) and the average of each grade component across the state's schools (simple average of schools, not weighted by students). Used to compare a school with the state.", school_grade_state),
+    ('school-bell-times', 'School start and end times', "When each public school's day starts and ends this school year (24-hour HH:MM), from the district's published start and end times chart, typed in by hand. Some schools have more than one row: different grade bands (part), a zero period, or a shorter Friday (note). Rows with kind 'early release' give the dismissal time by school level on early release days. school_id is empty for programs that aren't in the federal school directory.", school_bell_times),
     ('school-spending', 'Spending per school', "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.", school_spending),
     ('school-enrollment', 'School enrollment by year', "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.", school_enrollment),
     ('school-calendar', 'School district calendar', "The school district's calendar as posted on its website: first and last day, holidays and breaks, no-school days, early release days, end of each grading period, graduations and School Board meetings. kind is first-day, last-day, no-school, break, early-release, grading, graduation, board-meeting or other. starts and ends are local dates (all_day) or local date and time. Refreshed daily; past events of the school year stay on file.", school_calendar),

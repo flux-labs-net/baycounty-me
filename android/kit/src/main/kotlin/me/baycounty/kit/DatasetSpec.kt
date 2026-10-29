@@ -216,6 +216,8 @@ data class DatasetSpec(
                                        filters = listOf("year", "grade", "school"), page = "schools"),
         "school-grade-state" to DatasetSpec(Section.MORE, "star", title = listOf("school_type"), subtitle = listOf("school_year"), amount = listOf("schools_graded"),
                                             filters = listOf("school_year", "school_type"), page = "schools"),
+        "school-bell-times" to DatasetSpec(Section.MORE, "clock", title = listOf("school", "part"), subtitle = listOf("part", "school_year"), detail = "note", badge = "kind",
+                                           filters = listOf("kind", "group_name"), page = "schools"),
         "school-spending" to DatasetSpec(Section.MORE, "dollarsign.circle", title = listOf("school"), subtitle = listOf("year"), amount = listOf("total_per_student"),
                                          filters = listOf("year", "school"), page = "schools"),
         "school-enrollment" to DatasetSpec(Section.MORE, "person.3", title = listOf("school"), subtitle = listOf("school_year"), amount = listOf("enrollment"),
