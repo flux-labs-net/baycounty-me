@@ -55,6 +55,9 @@ CSS = r"""
 .rc-loading{display:flex;align-items:center;gap:12px;padding:28px;color:var(--muted)}
 .rc-spin{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--blue);animation:rcspin 0.8s linear infinite}
 @keyframes rcspin{to{transform:rotate(360deg)}}
+.rc-code{font-size:1.4rem;letter-spacing:.3em;text-align:center;max-width:12ch}
+.rc-signed{margin:0 0 12px;color:var(--ink);overflow-wrap:anywhere}
+#signForm .rc-msg:empty{display:none}
 @media (prefers-reduced-motion:reduce){.rc-spin{animation:none}}
 /* the branded report sheet: always light, like the paper it prints on */
 .rc-sheet{--ink:#161B24;--muted:#5A6372;--line:#E1E6ED;--sunken:#F3F6FA;--surface:#fff;background:#fff;color:#161B24;border-radius:var(--rc-r);box-shadow:var(--ui-shadow);overflow:hidden;color-scheme:light}
@@ -175,10 +178,20 @@ def realtor_page(out_dir):
         <p class="lede">Type any Bay County address and get one report with the property, a tax estimate, flood and evacuation zones, schools, utilities, zoning and projects nearby, parks and who represents it. Download it as a PDF with your logo, colors and contact details.</p>
       </div>
       <form class="rc-card" id="signForm">
-        <h2>Sign in</h2>
-        <p>We email you a link. No password to remember.</p>
-        <label class="rc-fld"><span>Work email</span><input id="email" type="email" required maxlength="200" autocomplete="email" placeholder="you@brokerage.com"></label>
-        <div class="rc-acts" style="margin-bottom:0"><button class="rc-btn" id="signBtn" type="submit">Email me a sign-in link</button></div>
+        <h2 id="signH">Sign in</h2>
+        <p id="signLede">One BayCounty.me sign-in for the console and My home. We email you a code, no password.</p>
+        <div id="stepEmail">
+          <label class="rc-fld"><span>Work email</span><input id="email" type="email" maxlength="200" autocomplete="email" placeholder="you@brokerage.com"></label>
+          <div class="rc-acts" style="margin-bottom:0"><button class="rc-btn" id="signBtn" type="submit">Email me a code</button></div>
+        </div>
+        <div id="stepCode" hidden>
+          <label class="rc-fld"><span id="codeLbl">Code from the email</span><input id="code" class="rc-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="000000"></label>
+          <div class="rc-acts" style="margin-bottom:0"><button class="rc-btn" id="verifyBtn" type="submit">Sign in</button><button class="rc-btn ghost" id="backBtn" type="button">Use another email</button></div>
+        </div>
+        <div id="stepJoin" hidden>
+          <p class="rc-signed">Signed in as <b id="joinWho"></b></p>
+          <div class="rc-acts" style="margin-bottom:0"><button class="rc-btn" id="joinBtn" type="button">Open the realtor console</button><button class="rc-btn ghost" id="joinOut" type="button">Not you? Sign out</button></div>
+        </div>
         <p class="rc-msg" id="signMsg" role="status"></p>
       </form>
     </div>
