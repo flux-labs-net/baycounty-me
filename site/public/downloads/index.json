@@ -17139,7 +17139,7 @@
       "FY2025 for most governments; FY2024 for Bay County, City of Panama City",
       "FY2026 through July 2026 (10 months)",
       "FY2027 (Oct 1, 2026 to Sept 30, 2027)",
-      "Jan to Oct 2026",
+      "Jan to Jul 2026 for every agency; some through Oct",
       "Jan to Sep 2026",
       "Oct 31, 2025",
       "State FY2025 (July 2024 to June 2025)",
@@ -17221,9 +17221,9 @@
      "name": "notes",
      "type": "string",
      "values": [
-      "Florida moved to monthly reports in 2025, so this year is compared with the same months last year. The latest two months are left out of that comparison while agencies finish them.",
+      "Florida moved to monthly reports in 2025, so this year is compared with the same months last year. The latest months are left out of that comparison while agencies finish them.",
       "Police and fire department lines on /public-safety still use FY2026, the newest year with department lines for every government.",
-      "fldoe.org blocks automated downloads, so the newer state count has to be saved by hand and loaded with data/schools/fetch_fldoe.py."
+      "The state's education site blocks automated downloads, so the newer state count has to be saved by hand."
      ]
     },
     {
