@@ -13,16 +13,17 @@ const db = require('./_db');
 
 // Each kind of rule gets its own colored heading in the email.
 const LOOK = {contract: ['teal', 'dollar'], keyword: ['blue', 'search'], vote: ['amber', 'vote'], campaign: ['salmon', 'megaphone']};
-const MAX_EVENTS = 5000, MAX_PER_EMAIL = 40;
+// MAX_EVENTS caps one run. It was 5000, and a vote backfill of ~50,000 rows then took weeks to clear.
+const MAX_EVENTS = 50000, MAX_PER_EMAIL = 40;
 
 // Pure: group matches per subscriber. rules: [{id, email, rule_type, params}], events: [{dataset, record_hash, government_key, record}],
 // seen: Set of `${subscription_id}|${dedupe}` already delivered. Returns Map email -> [{rule, hits: [match...]}].
 function plan(rules, events, seen = new Set()) {
   const out = new Map();
+  // Meetings first: an item already listed from a meeting's agenda isn't sent again from the agenda reader.
+  const ordered = [...events].sort((a, b) => (a.dataset === 'agenda-items') - (b.dataset === 'agenda-items'));
   for (const rule of rules) {
     const hits = [], keys = new Set(), items = new Set();
-    // Meetings first: an item already listed from a meeting's agenda isn't sent again from the agenda reader.
-    const ordered = [...events].sort((a, b) => (a.dataset === 'agenda-items') - (b.dataset === 'agenda-items'));
     for (const ev of ordered) {
       const m = match(rule, ev);
       if (!m || keys.has(m.dedupe) || seen.has(`${rule.id}|${m.dedupe}`)) continue;
@@ -106,10 +107,15 @@ module.exports = async (req, res) => {
       let sent = 0; for (const o of drafts) if (await sendOne(key, o)) sent++;
       return res.status(200).json({ok: true, sent, drafts: drafts.length});
     }
-    const events = await db.q(`select id, dataset, record_hash, government_key, record from alerts.events where processed_at is null order by id limit ${MAX_EVENTS}`);
     const problems = health && health.problems ? health.problems.length : null;
-    if (!events.length) return res.status(200).json({ok: true, events: 0, emails: 0, ingest_problems: problems});
     const rules = await db.q(`select id, email, rule_type, params from alerts.subscriptions where confirmed and unsubscribed_at is null`);
+    // No one has a rule: nothing can match, so mark the whole queue checked in one statement.
+    if (!rules.length) {
+      const [c] = await db.q(`with u as (update alerts.events set processed_at = now() where processed_at is null returning 1) select count(*)::int n from u`);
+      return res.status(200).json({ok: true, events: c ? c.n : 0, rules: 0, emails: 0, ingest_problems: problems});
+    }
+    const events = await db.q(`select id, dataset, record_hash, government_key, record from alerts.events where processed_at is null order by id limit ${MAX_EVENTS}`);
+    if (!events.length) return res.status(200).json({ok: true, events: 0, emails: 0, ingest_problems: problems});
     const seen = new Set((rules.length ? await db.q(`select subscription_id, dedupe_key from alerts.deliveries where subscription_id = any($1)`, [rules.map(r => r.id)]) : [])
       .map(d => `${d.subscription_id}|${d.dedupe_key}`));
     const byEmail = plan(rules, events, seen);
