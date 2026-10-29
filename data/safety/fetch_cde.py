@@ -8,6 +8,8 @@ FBI's Uniform Crime Reporting program. Agencies are the ones in data/safety/<cou
 
 - Offenses: one call per agency and offense (violent and property totals plus the eight main offenses), monthly counts
   summed by year. A year with no reported months is stored as null (not reported), never as zero.
+- The statewide rate per 100,000 people for each offense and year comes with every call and is kept once,
+  for years when agencies covering at least 75% of the state reported (2021 is left out).
 - Staffing: sworn officers and civilian employees on Oct 31 each year (the FBI's police employee count).
 
 Florida agencies sent the FBI one yearly summary (filed under December) until 2024 and moved to monthly incident
@@ -23,6 +25,7 @@ import cutoff  # noqa: E402
 
 API = 'https://cde.ucr.cjis.gov/LATEST'
 UA = 'Mozilla/5.0 (compatible; BayCounty.me public data reader; +https://baycounty.me/about)'
+STATE_NAME = 'Florida'
 OFFENSES = [('V', 'Violent crime', 'violent'), ('P', 'Property crime', 'property'),
             ('HOM', 'Murder', 'violent'), ('RPE', 'Rape', 'violent'), ('ROB', 'Robbery', 'violent'), ('ASS', 'Aggravated assault', 'violent'),
             ('BUR', 'Burglary', 'property'), ('LAR', 'Larceny-theft', 'property'), ('MVT', 'Motor vehicle theft', 'property'), ('ARS', 'Arson', 'property')]
@@ -50,7 +53,7 @@ def by_year(series, first, last):
     return out
 
 
-def offenses(ori, first, last):
+def offenses(ori, first, last, state):
     rows = {}
     for code, label, group in OFFENSES:
         d = get(f'/summarized/agency/{ori}/{code}?from=01-{first}&to=12-{last}')
@@ -59,6 +62,13 @@ def offenses(ori, first, last):
         clr = next((k for k in act if k.endswith(' Clearances') and not k.startswith(('Florida ', 'United States '))), None)
         pop = (d.get('populations') or {}).get('population') or {}
         pkey = next((k for k in pop if k not in ('Florida', 'United States')), None)
+        rates = (d.get('offenses') or {}).get('rates') or {}
+        st = rates.get(f'{STATE_NAME} Offenses') or {}
+        for y in range(first, last + 1):  # statewide rate per 100,000 people: monthly rates added up over a full year
+            vals = [st.get(f'{m:02d}-{y}') for m in range(1, 13)]
+            cov = (((d.get('tooltips') or {}).get('Percent of Population Coverage') or {}).get(STATE_NAME) or {}).get(f'12-{y}')
+            if all(v is not None for v in vals) and (cov or 0) >= 75:  # 2021: only half the state reported
+                state.setdefault(str(y), {})[code] = round(sum(vals), 1)
         yrs = by_year(act.get(key) or {}, first, last)
         cl = by_year(act.get(clr) or {}, first, last)
         for y, v in yrs.items():
@@ -91,13 +101,13 @@ def main():
     path = os.path.join(HERE, a.county, 'fbi.json')
     old = json.load(open(path)) if os.path.exists(path) else {'agencies': {}}
     first, last = int(cutoff.FIRST_DATE[:4]), dt.date.today().year
-    out, errors = {}, []
+    out, errors, state = {}, [], {}
     for r in ag['agencies']:
         ori = r.get('fbi_ori')
         if not ori or ori in out:
             continue
         try:
-            off = offenses(ori, first, last)
+            off = offenses(ori, first, last, state)
             # A year with no violent and no property crime at all is a year the agency did not report (2021 statewide,
             # Lynn Haven 2022); a real year with none of either does not happen here.
             off = {y: v for y, v in off.items() if (v['V']['count'] or 0) + (v['P']['count'] or 0) > 0}
@@ -108,7 +118,8 @@ def main():
             if ori in old['agencies']:
                 out[ori] = old['agencies'][ori]
             print(f"{r['agency']}: failed ({e}); kept what was on file", file=sys.stderr)
-    json.dump({'as_of': dt.date.today().isoformat(), 'source_url': 'https://cde.ucr.cjis.gov/', 'errors': errors, 'agencies': out},
+    json.dump({'as_of': dt.date.today().isoformat(), 'source_url': 'https://cde.ucr.cjis.gov/', 'errors': errors,
+               'state': {'name': STATE_NAME, 'per_100k': state or old.get('state', {}).get('per_100k', {})}, 'agencies': out},
               open(path, 'w'), indent=1, ensure_ascii=False)
     print(f'{len(out)} agencies -> {path}')
 

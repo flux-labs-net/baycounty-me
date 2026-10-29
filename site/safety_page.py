@@ -8,6 +8,7 @@ import html
 from collections import defaultdict
 
 from entity_links import gov
+import safety_charts as ch
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 
@@ -136,23 +137,48 @@ def safety_page(out_dir):
             k('Sworn officers', _num(officers), 'Latest count each agency gave the FBI') +
             k(f'Violent crimes reported, {ky}', _num(v_ky), f'{pct(v_ky, v_first)} since {first_full}, same agencies; {_num(p_ky)} property crimes'))
 
+    state = (__import__('safety_data')._files()[2].get('state') or {}).get('per_100k') or {}
+    trend_agencies = [a for a in agencies if a[0] != 'mb-police'] + [a for a in agencies if a[0] == 'mb-police']
+    trend_pick = ''.join(f'<button type="button" class="chip" data-v="{c}" aria-pressed="{"true" if c == "V" else "false"}">{l}</button>' for c, l in (('V', 'Violent crime'), ('P', 'Property crime')))
+    trend_html = ch.trends(C, state, trend_agencies, 'V', 'Violent crime', False) + ch.trends(C, state, trend_agencies, 'P', 'Property crime', True)
+    solved_html = ch.solved(C, agencies, 'V', 'Violent crime', False) + ch.solved(C, agencies, 'P', 'Property crime', True)
+    towns_html = ch.town_cards(A, C, S, state, order)
+    cost_html = ch.per_resident(A, order)
+
     data = ' · '.join(f'<a href="/api/v1/datasets/{d}">{d}</a> (<a href="/downloads/{d}.csv">CSV</a>)' for d in ('safety-agencies', 'crime-counts', 'police-staffing'))
-    return f'''<style>{CSS}</style>
+    return f'''<style>{CSS}{ch.CSS}</style>
 <div class="page tax ps">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Living here · Police, fire and the Sheriff</span><h1>Police, fire and the Sheriff</h1>
     <p class="lede">Who answers when you call 911 in each part of Bay County, what each police and fire department costs, how many crimes each police agency has reported since 2016, and how many officers they have.</p></div>
-    <div class="stamp"><a class="pill" href="#crime">Crimes reported →</a><span>Crime counts from the FBI, budgets from each government</span></div></header>
+    <div class="stamp"><a class="pill" href="#town">Your town →</a><span>Crime counts from the FBI, budgets from each government</span></div></header>
   <div class="kpis">{kpis}</div>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Who covers what</h2>
     <ol class="ex-steps"><li><b>The Sheriff covers the whole county.</b> The {gov("sheriff", "Bay County Sheriff's Office")} patrols everywhere outside city limits, runs the county jail, and polices Callaway and Mexico Beach, which pay it by contract.</li>
     <li><b>Five cities have their own police.</b> Panama City, Panama City Beach, Lynn Haven, Springfield and Parker run police departments paid from their city budgets.</li>
     <li><b>Every city has a fire department.</b> Bay County Fire Rescue covers the unincorporated areas, paid by a fire fee on tax bills there.</li></ol></div></section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="who" data-tile="Who covers each town">Who covers each town</h2><span class="muted">{e(fy)} adopted budgets</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="town" data-tile="Your town">Your town</h2><span class="muted">Pick where you live</span></div>
+    {towns_html}</section>
+
+  <section class="tx-sec"><div class="sec-hd"><h2 id="trend" data-tile="Crime over time">Crime over time</h2><span class="muted">Crimes reported per 1,000 people, full years only</span></div>
+    <div class="chips" id="psTrendPick" role="group" aria-label="Kind of crime">{trend_pick}</div>
+    <p class="ps-key"><span><i></i>The agency</span><span><i class="ref"></i>Florida</span><span><i class="new"></i>New reporting system ({ch.NEW_SYSTEM} on)</span></p>
+    {trend_html}
+    <p class="note">Every panel uses the same scale. Gaps are years the agency sent the FBI nothing. Panama City Beach's rate counts only residents, not the visitors police there also serve. Hover a point for the count.</p></section>
+
+  <section class="tx-sec"><div class="sec-hd"><h2 id="solved" data-tile="Crimes solved">Share of crimes solved</h2><span class="muted">Cleared by arrest or otherwise closed, each agency's latest three yearly reports</span></div>
+    <div class="ps-chartcard">{solved_html}</div>
+    <p class="note">Uses the same Violent and Property switch as the chart above. Agencies with fewer than 20 crimes in those years are left out.</p></section>
+
+  <section class="tx-sec"><div class="sec-hd"><h2 id="cost" data-tile="Cost per resident">What police and fire cost per resident</h2><span class="muted">{e(fy)} budgets</span></div>
+    <div class="ps-chartcard">{cost_html}</div>
+    <p class="note">The budget divided by the people it serves: each city's residents, the whole county for the Sheriff (it runs the jail for everyone), and the unincorporated county for Bay County Fire Rescue. Beach towns serve many visitors who are not counted as residents, so their cost per resident runs high.</p></section>
+
+  <section class="tx-sec"><div class="sec-hd"><h2>Who covers each town</h2><span class="muted">{e(fy)} adopted budgets</span></div>
     <div class="tablewrap"><table class="tx-table ps-tbl" data-tt-year="off" data-tt-filter="off"><thead><tr><th>Government</th><th>Police</th><th class="n">Police budget</th><th>Fire</th><th class="n">Fire budget</th></tr></thead><tbody>{town_rows}</tbody></table></div>
     <p class="note">Budgets are the lines in each government's adopted budget, the same figures as the government pages. The Sheriff's line is the county's general fund money for law enforcement and the jail. Bay County Fire Rescue is the county's fire services fund (MSTU).</p></section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="crime" data-tile="Crimes reported">Crimes reported, by agency</h2><span class="muted">What each agency reported to the FBI, {years[0]} to {years[-1]}</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2>All the numbers: crimes reported</h2><span class="muted">What each agency reported to the FBI, {years[0]} to {years[-1]}</span></div>
     <div class="chips ps-chips" id="psOff" role="group" aria-label="Offense">{chips}</div>
     {tables}
     <div class="ps-two" style="margin-top:14px">
@@ -164,7 +190,7 @@ def safety_page(out_dir):
     <div class="tablewrap"><table class="tx-table ps-tbl" data-tt-year="off" data-tt-filter="off"><thead><tr><th>Agency</th>{s_head}</tr></thead><tbody>{s_rows}</tbody></table></div>
     <p class="note">As each agency reported to the FBI. The Sheriff's civilian count jumped from 71 in 2022 to 271 in 2023; the FBI data does not say why. Missing years were not reported.</p></section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="records" data-tile="Ask for records">Ask for police and fire records</h2></div>
+  <section class="tx-sec"><div class="sec-hd"><h2>Ask for police and fire records</h2></div>
     <p>Incident reports, call logs, body camera video and fire reports are public records in Florida, with some parts held back by law. Each agency's records contact is on the <a href="/records">public records page</a>.</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
@@ -176,4 +202,4 @@ def safety_page(out_dir):
     </ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script>{JS}</script>'''
+<script>{JS}{ch.JS}</script>'''

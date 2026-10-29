@@ -16,6 +16,8 @@ create table if not exists safety_agencies (
   "budget_lines" text,
   "budget_fiscal_year" text,
   "budget_source_url" text,
+  "residents" bigint,
+  "cost_per_resident" numeric,
   "fbi_ori" text,
   "officers" bigint,
   "civilians" bigint,
@@ -34,7 +36,7 @@ create table if not exists safety_agencies (
 create index if not exists safety_agencies_gov_idx on safety_agencies (government_key);
 create index if not exists safety_agencies_place_idx on safety_agencies (place_id, "agency_id", "service");
 
-insert into datasets (id, table_name, title, description) values ('safety-agencies', 'safety_agencies', $t$Police and fire departments$t$, $d$Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.$d$)
+insert into datasets (id, table_name, title, description) values ('safety-agencies', 'safety_agencies', $t$Police and fire departments$t$, $d$Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), cost_per_resident (the budget over residents: the city's population; the whole county for the Sheriff, who runs the jail for everyone; the unincorporated county for county fire), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.$d$)
   on conflict (id) do update set title = excluded.title, description = excluded.description, updated_at = now();
 
 alter table safety_agencies enable row level security;
@@ -60,6 +62,7 @@ create table if not exists crime_counts (
   "months_reported" bigint,
   "population" bigint,
   "per_1000" numeric,
+  "florida_per_1000" numeric,
   "reporting" text,
   "source_url" text,
   gov_id text,
@@ -74,7 +77,7 @@ create table if not exists crime_counts (
 create index if not exists crime_counts_gov_idx on crime_counts (government_key);
 create index if not exists crime_counts_place_idx on crime_counts (place_id, "agency_id", "year");
 
-insert into datasets (id, table_name, title, description) values ('crime-counts', 'crime_counts', $t$Crimes reported by police agency$t$, $d$Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed) and the population the agency covers. A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.$d$)
+insert into datasets (id, table_name, title, description) values ('crime-counts', 'crime_counts', $t$Crimes reported by police agency$t$, $d$Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed), the population the agency covers, and the statewide rate for the same offense and year (florida_per_1000; blank for 2021, when only half of Florida reported). A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.$d$)
   on conflict (id) do update set title = excluded.title, description = excluded.description, updated_at = now();
 
 alter table crime_counts enable row level security;

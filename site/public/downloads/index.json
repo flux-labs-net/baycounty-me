@@ -16132,7 +16132,7 @@
   {
    "id": "safety-agencies",
    "title": "Police and fire departments",
-   "description": "Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.",
+   "description": "Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), cost_per_resident (the budget over residents: the city's population; the whole county for the Sheriff, who runs the jail for everyone; the unincorporated county for county fire), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.",
    "rows": 16,
    "columns": [
     {
@@ -16253,6 +16253,14 @@
      ]
     },
     {
+     "name": "residents",
+     "type": "number"
+    },
+    {
+     "name": "cost_per_resident",
+     "type": "number"
+    },
+    {
      "name": "fbi_ori",
      "type": "string",
      "values": [
@@ -16310,7 +16318,7 @@
   {
    "id": "crime-counts",
    "title": "Crimes reported by police agency",
-   "description": "Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed) and the population the agency covers. A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.",
+   "description": "Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed), the population the agency covers, and the statewide rate for the same offense and year (florida_per_1000; blank for 2021, when only half of Florida reported). A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.",
    "rows": 580,
    "columns": [
     {
@@ -16433,6 +16441,10 @@
     },
     {
      "name": "per_1000",
+     "type": "number"
+    },
+    {
+     "name": "florida_per_1000",
      "type": "number"
     },
     {
