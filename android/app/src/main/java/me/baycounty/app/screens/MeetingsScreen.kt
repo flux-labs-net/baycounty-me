@@ -80,6 +80,13 @@ fun MeetingsScreen() {
                 }
             }
         }
+        item {
+            CardList {
+                RouteRow(Route.Dataset("agenda-parties"), "Companies on agendas", "Agenda items that name a company, and whether it gave to the board's members", "list.bullet.rectangle")
+                RowDivider(50.dp)
+                RouteRow(Route.Overlaps, "Where records overlap", "Votes naming donors, bids and more", "link")
+            }
+        }
     }
 }
 

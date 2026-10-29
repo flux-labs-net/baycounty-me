@@ -10,7 +10,7 @@ on:
     branches: [main]
     paths: ["android/**", ".github/workflows/android.yml"]
 env:
-  SCREENS: home,tab:living,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,chambers,events,beaches,parks,roads,development,schools,emergency,hurricaneprep,utilities,restaurants,restaurant,newbusinesses,volunteer,military,budget,pastelections,updates,about,explore,myaddress,myhome,myhome:settings,record:contract,record:vote,record:board,record:nonprofit
+  SCREENS: home,tab:living,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,chambers,events,beaches,parks,roads,development,schools,emergency,hurricaneprep,utilities,restaurants,restaurant,newbusinesses,volunteer,military,publicsafety,overlaps,budget,pastelections,updates,about,explore,myaddress,myhome,myhome:settings,record:contract,record:vote,record:board,record:nonprofit
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -48,6 +48,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: apk-debug
+      - name: Free disk space for the emulator
+        # The emulator's data partition needs about 7.4 GB; a stock runner can come up a few MB short.
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /usr/local/share/boost /usr/share/swift "$AGENT_TOOLSDIRECTORY/CodeQL"
+          df -h /home/runner
       - name: Let the emulator use KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules

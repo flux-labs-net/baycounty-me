@@ -122,6 +122,8 @@ data class NearbyFeed(
 @Serializable
 data class AccountMe(
     val user: User,
+    /** The same email's status on the realtor console's agent list ("active", "pending"), or null: one sign-in opens both. */
+    val realtor: String? = null,
     val home: Home? = null,
     val prefs: Prefs? = null,
     val devices: Int? = null,
