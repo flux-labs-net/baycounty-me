@@ -1,51 +1,65 @@
 [
  {
   "name": "home",
-  "title": "Your county's money, in plain view",
-  "accent": "in plain view",
-  "sub": "Budgets, taxes, contracts and votes for Bay County, the schools and every city",
-  "screen": "home"
+  "screen": "home",
+  "title": "Your county, every day",
+  "accent": "every day",
+  "sub": "Beach flag, alerts, meetings and trash day on one screen"
+ },
+ {
+  "name": "myhome",
+  "screen": "myhome",
+  "title": "What's happening near your home",
+  "accent": "near your home",
+  "sub": "Alerts for your street, pickup day, evacuation zone and who represents you"
+ },
+ {
+  "name": "living",
+  "screen": "tab_living",
+  "title": "Everything about living here",
+  "accent": "living here",
+  "sub": "Beaches, parks, schools, restaurants, jobs and storm prep"
+ },
+ {
+  "name": "restaurants",
+  "screen": "restaurants",
+  "title": "Check any restaurant",
+  "accent": "any restaurant",
+  "sub": "State inspection results for every place in the county"
+ },
+ {
+  "name": "restaurant",
+  "screen": "restaurant",
+  "title": "Every visit, plainly explained",
+  "accent": "plainly explained",
+  "sub": "What inspectors found, and whether it was fixed"
+ },
+ {
+  "name": "beaches",
+  "screen": "beaches",
+  "title": "Today at the beach",
+  "accent": "the beach",
+  "sub": "Flags, rip current risk, surf and water quality"
+ },
+ {
+  "name": "events",
+  "screen": "events",
+  "title": "Find something to do",
+  "accent": "something to do",
+  "sub": "Events from every town, the library and the chambers"
  },
  {
   "name": "tax",
+  "screen": "tax",
   "title": "Your tax bill, slice by slice",
   "accent": "slice by slice",
-  "sub": "See what schools, the county, your city and each district take",
-  "screen": "tax"
- },
- {
-  "name": "gov-county",
-  "title": "Every government at a glance",
-  "accent": "at a glance",
-  "sub": "Budget, debt, audits and votes for all nine local governments",
-  "screen": "gov_county"
+  "sub": "See what schools, the county, your city and each district take"
  },
  {
   "name": "meetings",
+  "screen": "tab_meetings",
   "title": "Every meeting, in one place",
   "accent": "in one place",
-  "sub": "Agendas for every board, and one tap to your calendar",
-  "screen": "tab_meetings"
- },
- {
-  "name": "contracts",
-  "title": "Follow every contract",
-  "accent": "every contract",
-  "sub": "Who wins them, what they're worth and who approved them",
-  "screen": "contracts"
- },
- {
-  "name": "person",
-  "title": "Know who's in charge",
-  "accent": "who's in charge",
-  "sub": "Officials' terms, pay and votes, since 2016",
-  "screen": "person"
- },
- {
-  "name": "donors",
-  "title": "See who funds campaigns",
-  "accent": "funds campaigns",
-  "sub": "Campaign money by candidate, and donors who hold contracts",
-  "screen": "donors"
+  "sub": "Agendas for every board, and one tap to your calendar"
  }
 ]

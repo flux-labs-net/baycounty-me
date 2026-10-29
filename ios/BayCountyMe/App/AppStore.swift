@@ -10,7 +10,16 @@ final class AppStore {
     /// Today, Living here, Money, Who decides and Search: the site's menu sections (Meetings sit under Who decides).
     enum Tab: Hashable { case home, living, money, decides, search }
 
-    let client = BayCountyClient(seedBundle: .main)
+    let client = BayCountyClient(baseURL: AppStore.apiBase, seedBundle: .main)
+
+    /// Debug builds only: `-apiBase <url>` points the app at the store screenshot server (store/demo_server.py),
+    /// which swaps in made-up restaurants and a sample beach day. Release builds always read baycounty.me.
+    nonisolated static var apiBase: URL {
+        #if DEBUG
+        if let s = UserDefaults.standard.string(forKey: "apiBase"), let url = URL(string: s) { return url }
+        #endif
+        return BayCountyClient.site
+    }
     let gis = GISClient()
 
     var tab: Tab = .home

@@ -8,34 +8,44 @@ BayCounty.me
 
 ## Short description (80 characters max)
 
-Bay County budgets, taxes, contracts, votes and meetings, with sources.
+Alerts near your home, beaches, restaurants, taxes, budgets and votes, sourced.
 
 ## Full description (4,000 characters max)
 
-BayCounty.me puts Bay County, Florida public records in plain view: budgets, property taxes, contracts, votes, campaign money and meetings, for the county, the school district and every city. Every figure comes from a public record and links to its source.
+BayCounty.me is an independent, free app that puts Bay County, Florida public records in one place, in plain language. It covers all nine local governments: Bay County, Bay District Schools, Panama City, Panama City Beach, Lynn Haven, Callaway, Springfield, Parker and Mexico Beach.
 
-WHAT YOU CAN DO
+MY HOME
 
-• Look up your address and see every government that taxes it, your officials and what's planned nearby.
-• Work out your property tax bill slice by slice: schools, the county, your city, fire and special districts.
-• See the next public meetings across Bay County, read the agenda items and add a meeting to your calendar.
-• Compare Bay County, Panama City, Lynn Haven, Callaway, Springfield, Parker, Mexico Beach, Panama City Beach and the school district side by side.
-• Follow the money: spending, contracts, the companies that get them, debt, audits and CRA (redevelopment) spending.
-• See who's in charge, with photos of current officials, how they voted and who held each seat since 2016.
-• Check campaign money for local races, totaled by candidate, and which donors also hold government contracts.
-• Search people, companies, contracts and votes from one box.
+• Save your home to see what's happening nearby: meetings, road and building projects, public notices and events.
+• Get phone alerts for emergencies and boil-water notices that reach your address.
 
-PLAIN AND SOURCED
+LIVING HERE
 
-Spent, committed and budgeted money are kept apart, so plans are never counted as payments. Totals count each dollar once. Data goes back to 2016 and updates as governments publish new records, without an app update.
+• Look up any address for its tax bill, schools, trash day, officials and nearby projects.
+• Restaurant inspections, new businesses, beaches, parks, events, government jobs, emergency alerts and hurricane prep.
 
-INDEPENDENT
+YOUR MONEY
 
-BayCounty.me is an independent public records project by Flux Labs in Panama City, Florida. It is not made by or for any government agency. Data comes from public records published by Bay County, its cities, the Bay District Schools, the Supervisor of Elections and the State of Florida.
+• Budgets by year, tax rates and fees, contracts and vendors, CRA and sales tax spending, and Hurricane Michael recovery.
+• An accountability console that follows major projects from approval to final cost.
 
-PRIVATE
+WHO DECIDES
 
-No account, no ads, no tracking. If you choose "Use my location", it is used on your phone once to find your address and is never sent to us. A saved home address stays on your phone.
+• Every elected official and department leader, their pay, how they voted and their campaign gifts.
+• The business and nonprofit ties between people, companies and governments.
+
+ELECTIONS AND GETTING INVOLVED
+
+• Your ballot, where and when to vote, and results since 2016.
+• Meetings with agendas and minutes, one tap to your calendar, public notices and records requests.
+
+WHERE IT COMES FROM
+
+Every figure comes from a public record: budgets, audits, meeting agendas and minutes, campaign finance reports, state business filings, map layers and state inspection data. Each one links to its source, and records go back to 2016. New records are added every day, without an app update.
+
+INDEPENDENT AND PRIVATE
+
+BayCounty.me is built and run by Flux Labs in Panama City. It is not run by, and does not speak for, any government, and isn't paid for by any government, candidate or campaign. No ads and no tracking. An account is optional: sign in with a code sent to your email to save your home and get alerts, and delete it in the app at any time. "Use my location" is used once on your phone and never sent to us.
 
 ## Category
 
@@ -46,12 +56,13 @@ Education (or News & Magazines)
 - Email: hello@fluxlabs.net
 - Website: https://baycounty.me
 - Privacy policy: https://baycounty.me/privacy
+- Delete account URL (Data safety asks for one): https://baycounty.me/account (sign in, then Delete account)
 
 ## Graphics
 
 - App icon: `icon-512.png` (512 × 512)
 - Feature graphic: `feature-graphic.png` (1024 × 500)
-- Phone screenshots: `screenshots/` (1080 × 1920 each, a caption over the live app, made with `ios/scripts/store_screenshots.js` from the Android workflow's `screens-emulator` shots). Upload in order; Play shows the first three most.
+- Phone screenshots: `screenshots/` (8 shots, 1080 × 1920, a caption over the app). They're taken with made-up demo data by `.github/workflows/store-screenshots.yml` (restaurants, inspections and the beach day are invented; no real person or business is named) and framed with `ios/scripts/store_screenshots.js`. Upload in order; Play shows the first three most.
 
 ## Production release notes (500 characters max)
 
