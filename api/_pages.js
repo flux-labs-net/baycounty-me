@@ -57,7 +57,7 @@ const PAGES = {
   '/public-money/budget-compare': {datasets: ['budget-years', 'government-years'], endpoints: ['/budget-compare']},
   '/public-money/checkbook': {datasets: ['checkbook-payments'], endpoints: ['/checkbook']},
   '/public-money/budget-tracker': {datasets: ['budget-actuals'], endpoints: ['/budget-actual']},
-  '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026']},
+  '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026', 'election-dates']},
   '/elections/past': {datasets: ['campaign-history', 'campaign-contributions-history', 'campaign-results']},
   '/elections/results': {datasets: ['elections', 'election-results']},
   '/elections/voting': {datasets: ['election-dates', 'voting-locations', 'candidates-2026']},

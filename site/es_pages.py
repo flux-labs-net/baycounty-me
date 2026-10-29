@@ -584,6 +584,17 @@ def es_elections_page():
         page = re.sub(a, b, page)
     page = re.sub(r'; and (\d+) other descriptions</small>', r'; y \1 descripciones más</small>', page)
     page = re.sub(r'(?<=<span class="muted small">hasta )(\d{4})-(\d{2})-(\d{2})', lambda m: 'el ' + iso_es(m), page)
+    # the next-election card: weekday and month names in its dated lines
+    WD = dict(zip(('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), ('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo')))
+    MO = dict(zip(('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'), MONTHS))
+    page = re.sub(r'<span>Election Day is (\w+), (\w+) (\d+)</span>', lambda m: f'<span>El Día de Elecciones es el {WD[m[1]]} {m[3]} de {MO[m[2]]}</span>', page)
+    page = re.sub(r'Early voting is open through (\w+), (\w+) (\d+), 10 a\.m\. to 6 p\.m\., at any early voting site\.',
+                  lambda m: f'La votación anticipada está abierta hasta el {WD[m[1]]} {m[3]} de {MO[m[2]]}, de 10 a.m. a 6 p.m., en cualquier sitio de votación anticipada.', page)
+    page = re.sub(r'Early voting runs (\w+) (\d+) to (\w+) (\d+), 10 a\.m\. to 6 p\.m\., at any early voting site\.',
+                  lambda m: f'La votación anticipada va del {m[2]} de {MO[m[1]]} al {m[4]} de {MO[m[3]]}, de 10 a.m. a 6 p.m., en cualquier sitio de votación anticipada.', page)
+    page = re.sub(r'(<div class="el-day"[^>]*>\s*<span class="ui-date" aria-hidden="true"><span class="mo">)(\w+)(</span><span class="d">\d+</span><span class="wd">)(\w+)(</span>)',
+                  lambda m: m[1] + {k[:3].upper(): v[:3].upper() for k, v in MO.items()}.get(m[2], m[2]) + m[3] + {k[:3]: v[:3] for k, v in WD.items()}.get(m[4], m[4]) + m[5], page)
+    page = re.sub(r'<span class="el-asof">Informes de campaña revisados el (\d{4})-(\d{2})-(\d{2})</span>', lambda m: '<span class="el-asof">Informes de campaña revisados el ' + iso_es(m) + '</span>', page)
     page = re.sub(r'<span>Campaign reports checked (\d{4})-(\d{2})-(\d{2})</span>', lambda m: '<span>Informes de campaña revisados el ' + iso_es(m) + '</span>', page)
     for en, es in sorted(T['office'].items(), key=lambda kv: -len(kv[0])):
         page = page.replace(f'<h3>{html.escape(en)}</h3>', f'<h3>{html.escape(es)}</h3>').replace(f'<b>{html.escape(en)}</b>', f'<b>{html.escape(es)}</b>')

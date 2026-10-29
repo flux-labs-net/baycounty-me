@@ -209,44 +209,76 @@
    "<span class=\"eyebrow\">Participe · Elecciones 2026</span><h1>Quiénes son candidatos en 2026</h1>"
   ],
   [
-   "<p class=\"lede\">Every local race on Bay County ballots this year: the candidates, what they say they'll do in their own words, links to their campaigns, and where their campaign money comes from. BayCounty.me doesn't endorse or rate candidates.</p>",
-   "<p class=\"lede\">Cada contienda local en las boletas del Condado de Bay este año: los candidatos, lo que dicen que harán, enlaces a sus campañas y de dónde viene el dinero de su campaña. BayCounty.me no apoya ni califica a ningún candidato.</p>"
+   "<p class=\"lede\">Every local race on Bay County ballots this year: the candidates, their plans in their own words, and their campaign money. BayCounty.me doesn't endorse or rate candidates.</p>",
+   "<p class=\"lede\">Cada contienda local en las boletas del Condado de Bay este año: los candidatos, sus propuestas en sus propias palabras y el dinero de su campaña. BayCounty.me no apoya ni califica a ningún candidato.</p>"
   ],
   [
    "rel=\"noopener\">Supervisor of Elections ↗</a>",
    "rel=\"noopener\">Supervisor de Elecciones (en inglés) ↗</a>"
   ],
   [
-   "<span class=\"eyebrow\">On the Nov. 3 ballot</span>",
-   "<span class=\"eyebrow\">En la boleta del 3 de noviembre</span>"
+   "<span>races on the ballot</span>",
+   "<span>contiendas en la boleta</span>"
   ],
   [
-   "<span class=\"s\">local races · ",
-   "<span class=\"s\">contiendas locales · "
+   "<span>candidates</span></div>",
+   "<span>candidatos</span></div>"
   ],
   [
-   " candidates</span>",
-   " candidatos</span>"
+   "<span>raised so far</span>",
+   "<span>recaudado hasta ahora</span>"
   ],
   [
-   "<span class=\"eyebrow\">Raised so far</span>",
-   "<span class=\"eyebrow\">Recaudado hasta ahora</span>"
+   "<span>already decided</span>",
+   "<span>ya decididas</span>"
   ],
   [
-   "<span class=\"s\">by candidates in those races</span>",
-   "<span class=\"s\">por los candidatos de esas contiendas</span>"
+   "aria-label=\"2026 races at a glance\"",
+   "aria-label=\"Las contiendas de 2026 de un vistazo\""
   ],
   [
-   "<span class=\"eyebrow\">Already decided</span>",
-   "<span class=\"eyebrow\">Ya decididas</span>"
+   "<span class=\"eyebrow\">2026 General Election</span>",
+   "<span class=\"eyebrow\">Elección General de 2026</span>"
   ],
   [
-   "<span class=\"s\">won in the primary, unopposed or earlier in 2026</span>",
-   "<span class=\"s\">ganadas en la primaria, sin oposición o antes en 2026</span>"
+   "Polls are open 7 a.m. to 7 p.m. at your own precinct. Bring a photo ID with your signature.",
+   "Los centros de votación abren de 7 a.m. a 7 p.m. en su propio precinto. Traiga una identificación con foto y firma."
   ],
   [
-   "<div class=\"callout\">To check your registration, find your polling place or see your sample ballot, use the <a href=\"https://www.bayvotesfl.gov/\" target=\"_blank\" rel=\"noopener\">Bay County Supervisor of Elections</a> or <a href=\"https://vote.gov\" target=\"_blank\" rel=\"noopener\">vote.gov</a>. <a href=\"/my-address\">My Address</a> shows your County Commission and School Board districts.</div>",
-   "<div class=\"callout\">Para revisar su inscripción, buscar dónde votar o ver su boleta de muestra, use el sitio del <a href=\"https://www.bayvotesfl.gov/\" target=\"_blank\" rel=\"noopener\">Supervisor de Elecciones del Condado de Bay (Bay County Supervisor of Elections)</a> o <a href=\"https://vote.gov/es/\" target=\"_blank\" rel=\"noopener\">vote.gov en español</a>. <a href=\"/es/mi-direccion\">Mi dirección</a> le dice sus distritos de la Comisión del Condado y de la Junta Escolar.</div>"
+   "<a href=\"/elections/voting#early\">Early voting sites</a><a href=\"/elections/voting#dates\">Key dates</a><a href=\"/elections/results\" data-el-res>Results</a><a href=\"/elections/past\">Past elections</a>",
+   "<a href=\"/elections/voting#early\" hreflang=\"en\">Sitios de votación anticipada</a><a href=\"/elections/voting#dates\" hreflang=\"en\">Fechas clave</a><a href=\"/elections/results\" hreflang=\"en\" data-el-res>Resultados</a><a href=\"/elections/past\" hreflang=\"en\">Elecciones pasadas</a>"
+  ],
+  [
+   "aria-label=\"Your ballot by address\"",
+   "aria-label=\"Su boleta por dirección\""
+  ],
+  [
+   "<b>What's on your ballot?</b><span class=\"small muted\">The local races at your address, and the closest places to vote</span>",
+   "<b>¿Qué hay en su boleta?</b><span class=\"small muted\">Las contiendas locales en su dirección y los lugares más cercanos para votar (en inglés)</span>"
+  ],
+  [
+   "placeholder=\"House number and street\"",
+   "placeholder=\"Número de casa y calle\""
+  ],
+  [
+   "<button type=\"submit\" class=\"ui-btn\">Look up</button>",
+   "<button type=\"submit\" class=\"ui-btn\">Buscar</button>"
+  ],
+  [
+   "Registration and sample ballots: <a href=\"https://www.bayvotesfl.gov/\" target=\"_blank\" rel=\"noopener\">Supervisor of Elections</a>",
+   "Inscripción y boletas de muestra: <a href=\"https://www.bayvotesfl.gov/\" target=\"_blank\" rel=\"noopener\">Supervisor de Elecciones (en inglés)</a>"
+  ],
+  [
+   "Early voting is over. On Election Day, vote at your own precinct.",
+   "La votación anticipada terminó. El Día de Elecciones, vote en su propio precinto."
+  ],
+  [
+   "Export PDF</button>",
+   "Exportar PDF</button>"
+  ],
+  [
+   "<span class=\"el-asof\">Campaign reports checked ",
+   "<span class=\"el-asof\">Informes de campaña revisados el "
   ],
   [
    "<a href=\"#active\">On the ballot</a>",
@@ -533,6 +565,22 @@
   [
    "(?<=[>\\s])Elected unopposed(?= ·|</p>|</span>)",
    "Elegido sin oposición"
+  ],
+  [
+   "<b data-el-when>In (\\d+) days</b>",
+   "<b data-el-when>En \\1 días</b>"
+  ],
+  [
+   "<b data-el-when>Tomorrow</b>",
+   "<b data-el-when>Mañana</b>"
+  ],
+  [
+   "<b data-el-when>Today</b>",
+   "<b data-el-when>Hoy</b>"
+  ],
+  [
+   "<b data-el-when>Results</b>",
+   "<b data-el-when>Resultados</b>"
   ]
  ]
 }

@@ -273,6 +273,9 @@ VOTING_JS = r"""
   }
   $('evGo').addEventListener('click', find);
   inp.addEventListener('keydown', ev => { if (ev.key === 'Enter') { ev.preventDefault(); find(); } });
+  // from the ballot box on /elections: ?addr= fills the box and looks it up
+  const a0 = new URLSearchParams(location.search).get('addr');
+  if (a0) { inp.value = a0.slice(0, 120); inp.closest('section').scrollIntoView(); find(); }
 })();
 """
 
