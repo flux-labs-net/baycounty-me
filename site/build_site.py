@@ -243,7 +243,7 @@ MENU_JS = '''(() => {
 
 
 # Shared helpers (window.BCM): URL state for data-param controls (?gov= etc.) and announce. Tables use tables.js.
-DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read() + open(os.path.join(ROOT, 'ui.js')).read()
+DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read() + open(os.path.join(ROOT, 'ui.js')).read() + open(os.path.join(ROOT, 'share.js')).read()  # share.js: Share / copy on pages and records
 # name casing shared with the API (api/_names.js): window.BCNames and BC.bizCase / BC.personCase / BC.nameCase
 NAMES_JS = open(os.path.join(ROOT, '..', 'api', '_names.js')).read() + '\nwindow.BC = Object.assign(window.BC || {}, window.BCNames);\n'
 SEARCH_JS = open(os.path.join(ROOT, 'search.js')).read()  # header search dialog + the engine the /search page uses
@@ -374,9 +374,10 @@ def _layout(title, desc, path, body, extra_head=''):
     t, d = _h.escape(pt, quote=True), _h.escape(pd, quote=True)
     md = _h.escape(meta_desc(pd), quote=True)
     es = path.startswith('/es')
-    og_path = '/restaurants' if path.startswith('/restaurants/') else path
-    ver = OG_VER.get(og_path, '')
-    img = f'{DOMAIN}/og/{_slug(og_path) if og_path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
+    ver = OG_VER.get(path, '')
+    img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
+    if path.startswith('/restaurants/'):  # each restaurant's card is drawn on request from its latest inspection (api/og.js)
+        img = f'{DOMAIN}/api/og?p={path}'
     robots = '<meta name="robots" content="noindex, follow">\n' if path in ('/404', '/profile') else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
     ld = '' if path == '/404' else jsonld(path, pt, pd, PAGE_LABELS, modified=last_updated(es_updated_key(path)), out_dir=OUT,
                                            kind=page_kind(path), about=page_about(path))
@@ -915,7 +916,7 @@ def main():
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
-    OG_VER.update(build_og(OUT, [x for x in PAGES if x[0] != '/profile' and not x[0].startswith('/restaurants/')], MENU))  # /profile is a client-side shell: it uses the home card; each restaurant uses the /restaurants card
+    OG_VER.update(build_og(OUT, [x for x in PAGES if x[0] != '/profile' and not x[0].startswith('/restaurants/')], MENU))  # /profile and each restaurant get their cards on request (api/og.js, api/meta.js)
     PAGE_LABELS.update(_labels())
     from gov_detail import write_savings_data
     write_savings_data(OUT)  # savings ideas on each government's page

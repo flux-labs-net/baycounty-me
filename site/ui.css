@@ -530,3 +530,33 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 .lt-f dt{color:var(--muted);font-size:.84rem}
 .lt-f dd{margin:0;font-weight:500}
 @media (max-width:520px){.lt-facts>div{flex:1 1 100%}.lt-f{grid-template-columns:minmax(0,1fr);gap:0}.lt-f dd{margin-bottom:6px}}
+/* Share and copy (site/share.js): the page's Share button, the share button on each record, its menu and the toast */
+.bc-shp-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bc-shp-row{margin-top:14px;display:flex;gap:8px}
+.bc-shp-row .ui-btn{min-height:40px;border:0;cursor:pointer;font-family:inherit}
+.ui-pf-act .bc-shp{border:0;cursor:pointer;font-family:inherit}
+.bc-shp svg{flex:none}
+table.bc-sh-t td.bc-sh-c,table.bc-sh-t th.bc-sh-c{position:relative;padding-right:34px}
+.bc-sh{position:absolute;right:4px;top:50%;translate:0 -50%;display:inline-grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer;opacity:0;transition:opacity .15s ease-out,background-color .15s ease-out,color .15s ease-out}
+.bc-sh::after{content:"";position:absolute;inset:-8px}
+tr:hover .bc-sh,.bc-sh-it:hover > .bc-sh,.bc-sh:focus-visible,.bc-sh[aria-expanded="true"]{opacity:1}
+.bc-sh:hover,.bc-sh[aria-expanded="true"]{background:var(--sunken);color:var(--blue)}
+.bc-sh:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.bc-sh-it{position:relative;padding-right:44px !important}
+.bc-sh-it > .bc-sh{top:10px;right:6px;translate:none}
+@media (hover:none){.bc-sh{opacity:.75}}
+@media (max-width:640px){
+  table.stk.bc-sh-t td.bc-sh-c,table.stk.bc-sh-t th.bc-sh-c{padding-right:36px !important}
+  table.stk .bc-sh{top:0;translate:none;opacity:.75}
+}
+.bc-shm{position:fixed;z-index:200;width:min(300px,calc(100vw - 16px));padding:6px;border-radius:14px;background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 12px 32px -8px rgba(15,25,45,.28);animation:bc-in .14s ease-out}
+.bc-shm button{display:flex;align-items:center;gap:10px;width:100%;min-height:42px;padding:0 12px;border:0;border-radius:9px;background:transparent;color:inherit;font:500 .9rem var(--f-body);text-align:left;cursor:pointer}
+.bc-shm button:hover,.bc-shm button:focus-visible{background:var(--sunken);outline:0}
+.bc-shm button svg{color:var(--blue);flex:none}
+.bc-shm-pv{margin:6px 6px 4px;padding:8px 10px;border-radius:9px;background:var(--sunken);color:var(--muted);font:400 .74rem/1.45 var(--f-body);white-space:pre-line;overflow-wrap:anywhere;max-height:9.5em;overflow:hidden}
+.bc-toast{position:fixed;z-index:210;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));translate:-50% 12px;padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--bg);font:500 .88rem var(--f-body);opacity:0;pointer-events:none;transition:opacity .18s ease-out,translate .18s ease-out}
+.bc-toast.on{opacity:1;translate:-50% 0}
+tr.bc-hit > *,.bc-hit{background:color-mix(in srgb,var(--amber) 22%,transparent) !important;transition:background-color .6s ease-out}
+@keyframes bc-in{from{opacity:0;translate:0 -4px}}
+@media (prefers-reduced-motion:reduce){.bc-shm{animation:none}.bc-toast{transition:none}}
+@media print{.bc-sh,.bc-shp,.bc-shp-row{display:none !important}.bc-shp-pair{display:block}}

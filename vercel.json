@@ -19,6 +19,13 @@
     },
     "api/weekly.js": {
       "maxDuration": 60
+    },
+    "api/og.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/_og/**"
+    },
+    "api/meta.js": {
+      "maxDuration": 30
     }
   },
   "crons": [
@@ -2528,6 +2535,17 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/profile/:kind/:id",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*(facebookexternalhit|Facebot|Twitterbot|Slackbot|LinkedInBot|Discordbot|WhatsApp|TelegramBot|SkypeUriPreview|Pinterest|redditbot|Embedly|Iframely|vkShare|Mastodon|Bluesky|Cardyb|Applebot|Google-PageRenderer|MicrosoftPreview|Snapchat|Viber|KakaoTalk).*"
+        }
+      ],
+      "destination": "/api/meta?p=/profile/:kind/:id"
+    },
     {
       "source": "/profile/:kind/:id",
       "destination": "/profile"

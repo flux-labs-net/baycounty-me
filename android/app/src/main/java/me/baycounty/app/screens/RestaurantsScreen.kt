@@ -35,6 +35,7 @@ import me.baycounty.app.Route
 import me.baycounty.app.ui.*
 import me.baycounty.kit.BayCountyClient
 import me.baycounty.kit.Format
+import me.baycounty.kit.RecordShare
 import me.baycounty.kit.Restaurants
 import me.baycounty.kit.Row as DataRow
 import java.time.LocalDate
@@ -167,7 +168,14 @@ fun RestaurantDetailScreen(license: String) {
     val r = store.rows["restaurants"]?.firstOrNull { it.string("license_number") == license }
     val visits = store.restaurantVisits[license]
 
-    Screen(r?.string("business_name") ?: "Restaurant", onRefresh = { store.loadRestaurantVisits(license, force = true) }, spacing = 16) {
+    Screen(r?.string("business_name") ?: "Restaurant", onRefresh = { store.loadRestaurantVisits(license, force = true) }, spacing = 16,
+        actions = {
+            if (r != null) ShareMenuButton(r.string("business_name") ?: "Restaurant", BayCountyClient.SITE + Restaurants.pagePath(r)) {
+                RecordShare.page(r.string("business_name") ?: "Restaurant",
+                                 listOf(listOfNotNull(r.string("kind"), r.string("address"), r.string("city")).joinToString(" · "), Restaurants.summary(r)),
+                                 Restaurants.pagePath(r))
+            }
+        }) {
         if (r == null) {
             item { store.errors["restaurants"]?.let { Unavailable("Couldn't load this restaurant", it) } ?: Loading() }
             return@Screen

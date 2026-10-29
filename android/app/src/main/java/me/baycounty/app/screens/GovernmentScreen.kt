@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
+import me.baycounty.kit.BayCountyClient
+import me.baycounty.kit.RecordShare
 import me.baycounty.kit.BudgetCompare
 import me.baycounty.kit.DatasetSpec
 import me.baycounty.kit.Dates
@@ -45,7 +47,12 @@ fun GovernmentScreen(govID: String) {
         return
     }
     fun rows(id: String) = store.rows[id] ?: emptyList()
-    Screen(g.name, onRefresh = { for (d in govDatasets) store.load(d, force = true) }) {
+    val shareURL = g.pageURL ?: "${BayCountyClient.SITE}/governments/${g.slug}"
+    Screen(g.name, onRefresh = { for (d in govDatasets) store.load(d, force = true) }, actions = {
+        ShareMenuButton(g.name, shareURL) {
+            RecordShare.page(g.name, listOf("Budget, taxes, debt, votes and who's in charge"), shareURL.removePrefix(BayCountyClient.SITE))
+        }
+    }) {
         item {
             PageHero("Governments", g.name, g.population?.let { "${Format.number(it)} residents (2025 estimate)" }, badge = { GovBadge(govID, 48.dp) })
         }

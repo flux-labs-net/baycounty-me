@@ -2,6 +2,7 @@ package me.baycounty.app.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -43,6 +44,7 @@ import me.baycounty.kit.Dates
 import me.baycounty.kit.Format
 import me.baycounty.kit.Governments
 import me.baycounty.kit.Period
+import me.baycounty.kit.RecordShare
 import me.baycounty.kit.VoteSummary
 import me.baycounty.kit.newestKey
 import me.baycounty.kit.Row as DataRow
@@ -79,6 +81,7 @@ fun DatasetScreen(datasetID: String, preset: Map<String, String>) {
     var modeName by rememberSaveable { mutableStateOf(DMode.LIST.name) }
     var groupID by rememberSaveable { mutableStateOf<String?>(null) }
     var collapsed by rememberSaveable { mutableStateOf(listOf<String>()) }
+    var shareFor by remember { mutableStateOf<Int?>(null) }  // the record whose Copy / Share menu is open
     var bucket by rememberSaveable { mutableStateOf<String?>(null) }
     var tableSort by rememberSaveable { mutableStateOf("DATE:false") }
     var voteFilter by rememberSaveable { mutableStateOf(VoteFilter.ALL) }
@@ -186,7 +189,10 @@ fun DatasetScreen(datasetID: String, preset: Map<String, String>) {
                         }
                     }
                     if (open) cardItems(m.votes, key = { "v${it.id}" }) { v ->
-                        Box(Modifier.clickable { nav.push(Route.Record(datasetID, v.id)) }.padding(horizontal = 14.dp, vertical = 10.dp)) { VoteRow(v, summaries[v.id] ?: VoteSummary(v)) }
+                        Box {
+                            Box(Modifier.combinedClickable(onLongClick = { shareFor = v.id }) { nav.push(Route.Record(datasetID, v.id)) }.padding(horizontal = 14.dp, vertical = 10.dp)) { VoteRow(v, summaries[v.id] ?: VoteSummary(v)) }
+                            ShareDropdown(shareFor == v.id, { shareFor = null }, spec.title(v), { RecordShare.text(datasetID, v, info?.columns.orEmpty(), info?.title) }, RecordShare.url(datasetID, v))
+                        }
                     }
                 }
                 if (shown.isEmpty()) item { EmptyState(q, period) { periodLabel = "" } }
@@ -207,7 +213,11 @@ fun DatasetScreen(datasetID: String, preset: Map<String, String>) {
                         }
                     } else item { Spacer(Modifier.height(8.dp)) }
                     if (open) cardItems(g.rows, key = { "r${it.id}" }) { r ->
-                        CompactRecordRow(spec, r, maxAmount, hide) { nav.push(Route.Record(datasetID, r.id)) }
+                        // long-press a record for Copy text, Copy link and Share
+                        Box {
+                            CompactRecordRow(spec, r, maxAmount, hide, onLongClick = { shareFor = r.id }) { nav.push(Route.Record(datasetID, r.id)) }
+                            ShareDropdown(shareFor == r.id, { shareFor = null }, spec.title(r), { RecordShare.text(datasetID, r, info?.columns.orEmpty(), info?.title) }, RecordShare.url(datasetID, r))
+                        }
                     }
                 }
                 if (rows.isEmpty()) item { EmptyState(q, period) { periodLabel = "" } }

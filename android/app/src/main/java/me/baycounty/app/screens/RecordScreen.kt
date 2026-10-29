@@ -45,6 +45,7 @@ import me.baycounty.kit.Format
 import me.baycounty.kit.Period
 import me.baycounty.kit.RecordLinks
 import me.baycounty.kit.RecordProfile
+import me.baycounty.kit.RecordShare
 import me.baycounty.kit.VoteSummary
 import me.baycounty.kit.objectValue
 import me.baycounty.kit.stringValue
@@ -96,15 +97,11 @@ fun RecordScreen(datasetID: String, rowID: Int) {
         if (RecordLinks.voteIDs(row).isNotEmpty() && datasetID != "votes") more += "votes"
         for (id in (ids + more).sorted()) store.load(id)
     }
-    val source = DatasetSpec.sourceURL(row)
+    val info = store.info(datasetID)
     Screen(
         title,
         actions = {
-            if (source != null) ToolbarIcon("square.and.arrow.up", "Share") {
-                val text = listOfNotNull(spec.title(row), spec.amount(row)?.let { Format.money(it) }).joinToString(" · ") + "\n" + source
-                val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_SUBJECT, spec.title(row)).putExtra(Intent.EXTRA_TEXT, text)
-                context.startActivity(Intent.createChooser(send, null).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
-            }
+            ShareMenuButton(spec.title(row), RecordShare.url(datasetID, row)) { RecordShare.text(datasetID, row, info?.columns.orEmpty(), info?.title) }
         },
         spacing = 16,
     ) {

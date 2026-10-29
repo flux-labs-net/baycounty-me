@@ -23,7 +23,8 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "calendar.badge.plus" -> Icons.Outlined.EditCalendar
     "magnifyingglass" -> Icons.Outlined.Search
     "percent" -> Icons.Outlined.Percent
-    "doc.plaintext", "doc", "doc.text", "doc.on.doc" -> Icons.Outlined.Description
+    "doc.plaintext", "doc", "doc.text" -> Icons.Outlined.Description
+    "doc.on.doc" -> Icons.Outlined.ContentCopy
     "doc.text.magnifyingglass" -> Icons.Outlined.FindInPage
     "doc.questionmark", "questionmark.circle.fill" -> Icons.Outlined.HelpOutline
     "doc.badge.plus" -> Icons.Outlined.NoteAdd

@@ -33,6 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
+import me.baycounty.kit.BayCountyClient
+import me.baycounty.kit.RecordShare
 import me.baycounty.kit.DatasetSpec
 import me.baycounty.kit.Dates
 import me.baycounty.kit.DonorContracts
@@ -138,7 +140,12 @@ fun VendorScreen(vendorID: String) {
     }
     val recs = RecordLinks.recordsForVendor(vendorID, store.rows)
     val votes = RecordLinks.votesForVendor(vendorID, store.rows)
-    Screen(v?.name ?: "Company", spacing = 22) {
+    val shareURL = v?.pageURL ?: "${BayCountyClient.SITE}/profile/vendor/$vendorID"
+    Screen(v?.name ?: "Company", spacing = 22, actions = {
+        ShareMenuButton(v?.name ?: "Company", shareURL) {
+            RecordShare.page(v?.name ?: "Company", listOf(subtitle), shareURL.removePrefix(BayCountyClient.SITE))
+        }
+    }) {
         item { PageHero("Company", v?.name ?: "Company", subtitle, "building", Tone.BLUE) }
         val deals = recs.filter { it.first in listOf("contracts", "change-orders", "emergency-purchases") }.flatMap { it.second }
         if (deals.isNotEmpty()) item {
