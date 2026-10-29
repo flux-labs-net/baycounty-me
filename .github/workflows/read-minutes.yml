@@ -42,7 +42,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   minutes:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 300
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -55,7 +55,7 @@ jobs:
         id: gate
         run: |
           if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ vars.MINUTES_PAUSED }}" = "1" ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; echo "Paused (MINUTES_PAUSED=1)"; fi
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
         if: steps.gate.outputs.skip != 'true'
       - uses: actions/setup-python@v5
         if: steps.gate.outputs.skip != 'true'

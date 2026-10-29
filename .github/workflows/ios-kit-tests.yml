@@ -6,9 +6,9 @@ on:
     paths: ["ios/**", "site/public/downloads/**", "site/public/data/app/**", "site/public/data/accountability.json", ".github/workflows/ios-kit-tests.yml"]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     steps:
-      - uses: actions/checkout@v4
+      - uses: useblacksmith/checkout@v1
       - uses: swift-actions/setup-swift@v2
         with:
           swift-version: "6.1"
