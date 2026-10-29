@@ -161,7 +161,7 @@ final class AppStore {
 
     /// Datasets in Explore, grouped the way the website's menu groups them.
     var exploreSections: [(section: DatasetSpec.Section, datasets: [DatasetInfo])] {
-        let shown = (catalog?.datasets ?? []).filter { !DatasetSpec.ownScreens.contains($0.id) }
+        let shown = (catalog?.datasets ?? []).filter { !DatasetSpec.ownScreens.contains($0.id) && $0.rows != 0 }  // empty datasets wait until they have rows
         return DatasetSpec.Section.allCases.compactMap { section in
             let ds = shown.filter { DatasetSpec.for($0.id).section == section }
             return ds.isEmpty ? nil : (section, ds)

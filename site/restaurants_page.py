@@ -256,7 +256,13 @@ def about(path, _c={}):
 def restaurant_pages():
     """One page per license: /restaurants/<name>-<license> (page_url in the restaurants dataset)."""
     R, I, by = _by_license()
-    return [(r['page_url'], f'{r["business_name"]}: restaurant inspections',
+    from collections import Counter
+    same = Counter(r['business_name'] for r in R if r.get('page_url'))
+    def name(r):  # chains share a name: add the street (or town) so each page has its own title
+        if same[r['business_name']] < 2: return r['business_name']
+        at = r.get('address') or r.get('city')
+        return f'{r["business_name"]}, {at}' if at else r['business_name']
+    return [(r['page_url'], f'{name(r)}: restaurant inspections',
              f'{r["business_name"]}{", " + r["city"] if r.get("city") else ""}: every Florida food safety inspection since 2016, the latest result, violations, warnings and emergency closures.',
              (lambda r=r: restaurant_page(r, by.get(r['license_number'], []))))
             for r in R if r.get('page_url')]

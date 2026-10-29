@@ -79,7 +79,7 @@ def _datasets(out_dir):
                 'creator': {'@id': ORG['@id']}, 'spatialCoverage': PLACE, 'dateModified': d.get('updated'),
                 'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'text/csv', 'contentUrl': DOMAIN + x['csv']},
                                  {'@type': 'DataDownload', 'encodingFormat': 'application/json', 'contentUrl': DOMAIN + x['json']}],
-            } for x in d.get('datasets', []) if x.get('csv') and x.get('json')]}
+            } for x in d.get('datasets', []) if x.get('csv') and x.get('json') and x.get('rows')]}
 
 
 def jsonld(path, title, desc, labels, modified=None, out_dir=None, kind=None, about=None):

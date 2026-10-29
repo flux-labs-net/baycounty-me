@@ -74,7 +74,7 @@ struct AboutView: View {
     var body: some View {
         List {
             Section {
-                Text("BayCounty.me puts Bay County, Florida public records in plain view: budgets, taxes, contracts, votes, campaign money and meetings. Every figure comes from a public record with a linked source. Nothing is estimated.")
+                Text("BayCounty.me is an independent, free website and app that puts Bay County, Florida public records in one place, in plain language: all nine local governments, their budgets, taxes, contracts, votes, campaign money and meetings, plus what's happening near your address. Every figure links to its public record, back to 2016. It is not run by any government.")
                     .font(.subheadline)
             }
             Section("What the labels mean") {
@@ -82,6 +82,10 @@ struct AboutView: View {
                 label("Committed", "Awarded, not fully paid.")
                 label("Budgeted / Proposed", "Plans, not proof of payment.")
                 label("Not in totals", "Totals count each dollar once. Parts of a listed total, possible duplicates and non-CRA money stay in the list but are left out.")
+            }
+            Section("Who runs it") {
+                Text("Built and run by Flux Labs, a managed IT company in Panama City. We live and work here, and we built this so public records are easy to read without a records request. No ads, no tracking, and no money from any government, candidate or campaign.")
+                    .font(.subheadline)
             }
             Section("Data") {
                 if let c = store.catalog {

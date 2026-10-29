@@ -575,7 +575,7 @@
           "amount": 19475016
         }
       ],
-      "notes": "From the 'Adopted Budget Report, Fiscal Year 2026'. Fund totals are the 'Adopted FY2026' figures from each fund's summary page. The debt service funds show 'Grand Total' on their expense pages. All 19 funds sum exactly to the All Funds Summary total of $153,837,293, which includes interfund transfers (about $136.5M excluding transfers, per budgets.json). General Fund departments were grouped by function by the researcher (same grouping as data/tax/budgets.json) and sum to $67,703,379. The General Fund also gives a $1.84M grant to the CRA, inside 'Economic environment'. Revenues by source come from the All Funds Summary."
+      "notes": "From the 'Adopted Budget Report, Fiscal Year 2026'. Fund totals are the 'Adopted FY2026' figures from each fund's summary page. The debt service funds show 'Grand Total' on their expense pages. All 19 funds sum exactly to the All Funds Summary total of $153,837,293, which includes interfund transfers (about $136.5M without transfers). General Fund departments were grouped by function by the researcher (same grouping as data/tax/budgets.json) and sum to $67,703,379. The General Fund also gives a $1.84M grant to the CRA, inside 'Economic environment'. Revenues by source come from the All Funds Summary."
     },
     {
       "gov": "pcb",

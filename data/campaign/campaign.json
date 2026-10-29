@@ -1537,7 +1537,7 @@
     "business": 2000.0,
     "pac": 500.0
    },
-   "note": "Not listed in fees_pay_officials.json seats; included as the SOE shows him elected to District 1 in 2024.",
+   "note": "Added from the Supervisor of Elections, which shows him elected to District 1 in 2024.",
    "contributors": [
     {
      "name": "Watford Engineering, Inc",
@@ -1861,7 +1861,7 @@
     "individual": 12530.0,
     "business": 3850.0
    },
-   "note": "Not listed in fees_pay_officials.json seats; included as the SOE shows him elected to District 4 in 2024.",
+   "note": "Added from the Supervisor of Elections, which shows him elected to District 4 in 2024.",
    "contributors": [
     {
      "name": "Fiddler's Point Oyster Co, LLC",
@@ -6420,13 +6420,13 @@
   }
  ],
  "gaps": [
-  "Corey Langford (Lynn Haven commissioner): no campaign account found in the Bay County SOE system for any election from 2022 through the 2027 municipal cycle. Repo vote records show Judy Tinder voting as a commissioner through Sep 2026, so he may have been appointed; not verified.",
+  "Corey Langford (Lynn Haven commissioner): no campaign account found in the Bay County SOE system for any election from 2022 through the 2027 municipal cycle. Recorded votes show Judy Tinder voting as a commissioner through Sep 2026, so he may have been appointed; not verified.",
   "Mark Rega (Parker council member): no campaign account found in the Bay County SOE system for 2022-2027 elections. Parker Seat 4 was won by Stacie Galbreath in 2023, so he may have been appointed; not verified.",
-  "Mexico Beach Group 4 is marked not elected/vacant in fees_pay_officials.json and was not included (SOE shows Carrie Ruscoe elected to Group 4 in Apr 2026: $100 monetary, $25 in-kind).",
+  "Mexico Beach Group 4 is listed as vacant in the officials list and was not included (SOE shows Carrie Ruscoe elected to Group 4 in Apr 2026: $100 monetary, $25 in-kind).",
   "School Board District 2: Ginger Littleton (2026 winner, term begins Nov 2026) is not yet the officeholder and was not included; SOE shows $22,360 monetary and $500 in-kind as of the latest report.",
-  "School Board Districts 1 and 4 (Jerry L. Register, Winston Chester) are not in fees_pay_officials.json seats but were included from SOE 2024 results; District 3 and 5 holders are null in that file and were taken from the SOE (Christopher Moore, Steve Moss).",
+  "School Board Districts 1, 3, 4 and 5 (Jerry L. Register, Christopher Moore, Winston Chester, Steve Moss) are missing from the officials list and were added from the Supervisor of Elections.",
   "Races still in progress (Christopher Moore, Mary Coburn, Bobby J. Birdsell) reflect only reports filed as of 2026-10-21.",
-  "Contract data comes only from data/contracts/contracts.json, which covers Bay County BOCC and the seven cities FY2023-FY2026. It does not cover Bay District Schools or the constitutional officers' own purchasing, so contributor matches for school board and constitutional-officer campaigns are matched only against county/city vendors. Lynn Haven check-register vendor names are truncated at 15 characters in the source.",
+  "Contract data covers Bay County BOCC and the seven cities FY2023-FY2026. It does not cover Bay District Schools or the constitutional officers' own purchasing, so contributor matches for school board and constitutional-officer campaigns are matched only against county/city vendors. Lynn Haven check-register vendor names are truncated at 15 characters in the source.",
   "Contributors filed as individuals who own businesses, and contributions from company owners or employees, are not matched to vendors (individuals are not named in this dataset).",
   "Possible matches left out as unclear: \"Halls Contracting\" (Ford) vs vendor \"Hall Contracting & Construction, Inc.\"; \"ESCS LLC\" (Ford) vs \"ECSC, LLC\"; \"RJ Gorman Construction\" (Ford), which could be RJ Gorman Marine Construction, LLC or RJ Gorman Contracting, LLC; \"Emerald Coast Civil Constructi\" (Crosby) vs \"Emerald Coast Site Construction\".",
   "www.bayvotes.gov could not be reached through this environment's network proxy; the SOE's current site is www.bayvotesfl.gov, which was reachable."

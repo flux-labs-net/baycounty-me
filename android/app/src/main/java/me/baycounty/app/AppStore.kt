@@ -208,7 +208,7 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
     /** Datasets in Explore, grouped the way the website's menu groups them. */
     val exploreSections: List<Pair<DatasetSpec.Section, List<DatasetInfo>>>
         get() {
-            val shown = (catalog?.datasets ?: emptyList()).filter { it.id !in DatasetSpec.ownScreens }
+            val shown = (catalog?.datasets ?: emptyList()).filter { it.id !in DatasetSpec.ownScreens && it.rows != 0 }  // empty datasets wait until they have rows
             return DatasetSpec.Section.entries.mapNotNull { s ->
                 val ds = shown.filter { DatasetSpec.forId(it.id).section == s }
                 if (ds.isEmpty()) null else s to ds
