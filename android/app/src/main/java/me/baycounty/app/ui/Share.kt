@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 
 /*
  * Copy and Share for one record or page (RecordShare in the kit, the same text as the website's Share button):
- * copy the text summary, copy the link, or open the share sheet with the summary and the link.
+ * copy the link, or open the share sheet with the link.
  */
 
 fun copyToClipboard(context: Context, label: String, text: String) {
@@ -36,20 +36,18 @@ fun openShareSheet(context: Context, subject: String, text: String) {
     context.startActivity(Intent.createChooser(send, null).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 }
 
-/** The menu itself: Copy text, Copy link, Share. */
+/** The menu itself: Copy link and Share. Share sends the link (the app it goes to draws the preview card from it);
+ *  a record with no link shares its text instead. */
 @Composable
 fun ShareDropdown(expanded: Boolean, onDismiss: () -> Unit, subject: String, text: () -> String, url: String?) {
     val context = LocalContext.current
     DropdownMenu(expanded = expanded, onDismissRequest = onDismiss, containerColor = Brand.surface) {
-        DropdownMenuItem(text = { Text("Copy text", style = T.body, color = Brand.text) },
-            leadingIcon = { Icon(icon("doc.on.doc"), null, tint = Brand.navy) },
-            onClick = { onDismiss(); copyToClipboard(context, subject, text()) })
         if (url != null) DropdownMenuItem(text = { Text("Copy link", style = T.body, color = Brand.text) },
             leadingIcon = { Icon(icon("link"), null, tint = Brand.navy) },
             onClick = { onDismiss(); copyToClipboard(context, subject, url) })
         DropdownMenuItem(text = { Text("Share…", style = T.body, color = Brand.text) },
             leadingIcon = { Icon(icon("square.and.arrow.up"), null, tint = Brand.navy) },
-            onClick = { onDismiss(); openShareSheet(context, subject, text()) })
+            onClick = { onDismiss(); openShareSheet(context, subject, url ?: text()) })
     }
 }
 
@@ -58,7 +56,7 @@ fun ShareDropdown(expanded: Boolean, onDismiss: () -> Unit, subject: String, tex
 fun ShareMenuButton(subject: String, url: String?, text: () -> String) {
     var open by remember { mutableStateOf(false) }
     Box {
-        IconButton(onClick = { open = true }) { Icon(icon("square.and.arrow.up"), "Share or copy", tint = Brand.navy) }
+        IconButton(onClick = { open = true }) { Icon(icon("square.and.arrow.up"), "Share", tint = Brand.navy) }
         ShareDropdown(open, { open = false }, subject, text, url)
     }
 }

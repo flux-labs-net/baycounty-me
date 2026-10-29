@@ -505,27 +505,23 @@ struct ShareMenu: View {
         } label: {
             Image(systemName: "square.and.arrow.up")
         }
-        .accessibilityLabel("Share or copy")
+        .accessibilityLabel("Share")
     }
 }
 
-/// The three actions, for a toolbar menu or a row's long-press menu.
+/// Copy link and Share, for a toolbar menu or a row's long-press menu. Share sends the link (titled with the record's
+/// name) so Messages and others draw its preview card; a record with no link shares its text instead.
 struct ShareActions: View {
     let text: String
     let url: URL?
 
     var body: some View {
-        Button {
-            UIPasteboard.general.string = text
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-        } label: { Label("Copy text", systemImage: "doc.on.doc") }
         if let url {
             Button {
                 UIPasteboard.general.url = url
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
             } label: { Label("Copy link", systemImage: "link") }
-            // the link goes as the item so Messages and others draw its preview card; the summary rides along as the message
-            ShareLink(item: url, message: Text(text.replacingOccurrences(of: "\n" + url.absoluteString, with: ""))) {
+            ShareLink(item: url, subject: Text(text.components(separatedBy: "\n").first ?? "")) {
                 Label("Share…", systemImage: "square.and.arrow.up")
             }
         } else {
@@ -535,7 +531,7 @@ struct ShareActions: View {
 }
 
 extension View {
-    /// Long-press a list row for Copy text, Copy link and Share.
+    /// Long-press a list row for Copy link and Share.
     func shareContextMenu(text: @autoclosure @escaping () -> String, url: @autoclosure @escaping () -> URL?) -> some View {
         contextMenu { ShareActions(text: text(), url: url()) }
     }

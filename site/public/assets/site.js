@@ -638,11 +638,11 @@ window.BC = Object.assign(window.BC || {}, {longText, longTextFacts: facts, long
 })();
 /* Share and copy (bundled into /assets/site.js, window.BC.share).
 
-   Page:    a "Share" button in the page header. It copies the page's title, summary and link, or opens the phone's
-            share sheet. A record page can give its own text with <div hidden data-share-text="..."></div>.
+   Page:    a "Share" button in the page header: Copy link, or the phone's share sheet with the page's link (the app
+            it goes to draws the preview card from the link).
    Records: every row of a data table, and every item of a list marked data-share-items (or data-tt-list), gets a
-            small share button. It copies a clean text summary of the record (each column heading with its value) and a
-            link straight to it: the record's own page when the row has data-share-url, else this page with
+            small share button with the same two actions for a link straight to it: the record's own page when the
+            row has data-share-url, else this page with
             #r-<key>, where <key> comes from the row's text. Opening that link scrolls to the record and marks it, even
             when the year picker or a filter had hidden it.
    Opt out: <table data-share="off">, or data-share="off" on any element around it. Tables without column headings
@@ -650,12 +650,11 @@ window.BC = Object.assign(window.BC || {}, {longText, longTextFacts: facts, long
 (() => {
 const ES = (document.documentElement.lang || '').startsWith('es');
 const L = ES
-  ? {share: 'Compartir', copy: 'Copiar texto', link: 'Copiar enlace', sheet: 'Compartir…', copied: 'Copiado', linkCopied: 'Enlace copiado', rec: 'Compartir o copiar este registro', page: 'Compartir esta página', from: 'De', on: 'en BayCounty.me', fail: 'No se pudo copiar'}
-  : {share: 'Share', copy: 'Copy text', link: 'Copy link', sheet: 'Share…', copied: 'Copied', linkCopied: 'Link copied', rec: 'Share or copy this record', page: 'Share this page', from: 'From', on: 'on BayCounty.me', fail: 'Couldn’t copy'};
+  ? {share: 'Compartir', link: 'Copiar enlace', sheet: 'Compartir…', copied: 'Copiado', linkCopied: 'Enlace copiado', rec: 'Compartir este registro', page: 'Compartir esta página', from: 'De', on: 'en BayCounty.me', fail: 'No se pudo copiar'}
+  : {share: 'Share', link: 'Copy link', sheet: 'Share…', copied: 'Copied', linkCopied: 'Link copied', rec: 'Share this record', page: 'Share this page', from: 'From', on: 'on BayCounty.me', fail: 'Couldn’t copy'};
 const OFF = /^\/(admin|finance|account|realtor)(\/|$)/;
 const clean = s => String(s ?? '').replace(/[ \t ]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{2,}/g, '\n').trim();
 const ICON = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7.5 7.5 12 3l4.5 4.5"/><path d="M5 12v6.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V12"/></svg>';
-const I_COPY = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4.5A1.5 1.5 0 0 1 3 13.5v-9A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5V5"/></svg>';
 const I_LINK = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg>';
 const canShare = () => typeof navigator.share === 'function';
 const meta = p => (document.querySelector(`meta[property="${p}"]`) || {}).content || '';
@@ -812,19 +811,18 @@ function openMenu(btn, rec) {
     window.addEventListener('scroll', () => { if (menu && !menu.hidden && menuFor) place(menuFor); }, {passive: true});
   }
   closeMenu();
-  const full = `${rec.text}\n${rec.url}`;
-  menu.innerHTML = `<button type="button" role="menuitem" data-a="copy">${I_COPY}<span>${L.copy}</span></button>`
-    + `<button type="button" role="menuitem" data-a="link">${I_LINK}<span>${L.link}</span></button>`
+  menu.innerHTML = `<button type="button" role="menuitem" data-a="link">${I_LINK}<span>${L.link}</span></button>`
     + (canShare() ? `<button type="button" role="menuitem" data-a="share">${ICON}<span>${L.sheet}</span></button>` : '')
     + `<p class="bc-shm-pv"></p>`;
-  menu.querySelector('.bc-shm-pv').textContent = full.length > 260 ? full.slice(0, 257).trimEnd() + '…' : full;
+  menu.querySelector('.bc-shm-pv').textContent = rec.url;
   menu.onclick = async e => {
     const b = e.target.closest('button[data-a]'); if (!b) return;
     const a = b.dataset.a;
     closeMenu(true);
-    if (a === 'share') { try { await navigator.share({title: rec.title, text: rec.text, url: rec.url}); } catch (err) {} return; }
-    const ok = await copy(a === 'link' ? rec.url : full);
-    toast(ok ? (a === 'link' ? L.linkCopied : L.copied) : L.fail);
+    // just the link (with its title): the app it goes to draws the preview card from the link
+    if (a === 'share') { try { await navigator.share({title: rec.title, url: rec.url}); } catch (err) {} return; }
+    const ok = await copy(rec.url);
+    toast(ok ? L.linkCopied : L.fail);
     try { window.va && window.va('event', {name: 'share', data: {how: a, kind: btn.classList.contains('bc-shp') ? 'page' : 'record', path: location.pathname}}); } catch (err) {}
   };
   menu.hidden = false; menuFor = btn; btn.setAttribute('aria-expanded', 'true');
