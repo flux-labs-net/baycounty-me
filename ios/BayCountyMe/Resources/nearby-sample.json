@@ -20,7 +20,12 @@
     "provider": "City of Lynn Haven"
    }
   ],
-  "beach": null,
+  "beach": {
+   "flag": "Green",
+   "rip_current_risk": "Low",
+   "water_temperature": "78 degrees",
+   "miles_to_beach": 9.4
+  },
   "alerts": 2
  },
  "governments": [
@@ -275,7 +280,32 @@
   {
    "id": "food",
    "title": "Restaurant inspections in your ZIP",
-   "items": [],
+   "items": [
+    {
+     "kind": "food",
+     "title": "Sea Turtle Social",
+     "detail": "Met inspection standards \u00b7 Restaurant with seating",
+     "date": "2026-10-27",
+     "level": "ok",
+     "url": "https://baycounty.me/restaurants"
+    },
+    {
+     "kind": "food",
+     "title": "Coquina Coffee Bar",
+     "detail": "Follow-up visit: fixed \u00b7 Restaurant with seating",
+     "date": "2026-10-24",
+     "level": "ok",
+     "url": "https://baycounty.me/restaurants"
+    },
+    {
+     "kind": "food",
+     "title": "Boardwalk Bagels",
+     "detail": "Met inspection standards \u00b7 Restaurant with seating",
+     "date": "2026-10-21",
+     "level": "ok",
+     "url": "https://baycounty.me/restaurants"
+    }
+   ],
    "empty": "No inspections in your ZIP in the last two weeks."
   },
   {

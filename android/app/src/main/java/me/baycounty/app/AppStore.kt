@@ -51,10 +51,16 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
     private val app = context.applicationContext ?: context
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     val client = client ?: BayCountyClient(
+        baseURL = apiBase,
         cacheDirectory = File(app.cacheDir, "BayCountyMe"),
         seed = { name -> runCatching { app.assets.open("seed/$name").use { it.readBytes() } }.getOrNull() },
     )
     val gis = GISClient()
+
+    companion object {
+        /** Debug builds only: `--es apiBase <url>` points the app at the store screenshot server (store/demo_server.py). */
+        var apiBase: String = BayCountyClient.SITE
+    }
     private val prefs: SharedPreferences = app.getSharedPreferences("baycounty", Context.MODE_PRIVATE)
 
     var catalog by mutableStateOf<Catalog?>(null); private set

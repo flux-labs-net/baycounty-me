@@ -118,7 +118,7 @@ object Account {
     }
 
     private val DEMO_ME = """
-        {"user":{"email":"resident@example.com","first_name":"Sam"},
+        {"user":{"email":"resident@example.com"},
          "home":{"label":"Home","address":"825 Ohio Ave","city":"Lynn Haven","zip":"32444","lat":30.2449,"lon":-85.6483,"gov_id":"lh","zone":"D"},
          "prefs":{"weekly_email":true,"alert_email":["evacuation","water"],"push_topics":["weather","evacuation","shelters","water","agenda"],"radius_mi":1,"topics":["meetings","events","projects","notices","food","business"]},
          "devices":1,

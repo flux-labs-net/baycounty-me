@@ -33,6 +33,8 @@ import me.baycounty.app.ui.*
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Store screenshots (debug builds only): `--es apiBase http://10.0.2.2:8765` reads made-up demo data instead of the live site.
+        if (BuildConfig.DEBUG) intent?.getStringExtra("apiBase")?.let { AppStore.apiBase = it }
         val store = (application as? BayCountyApp)?.store ?: AppStore(this)
         // For automated screenshots (see .github/workflows/android.yml): `--es screen <name>` and `--ez dark true`.
         // A tapped notification carries its link: emergency notices open the Emergencies screen, others the page.
