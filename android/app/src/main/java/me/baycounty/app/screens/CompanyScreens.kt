@@ -277,7 +277,7 @@ fun MoneyMapScreen() {
                                 Text(listOfNotNull(mm.donor(v.d)?.n, Dates.parse(v.date)?.let { Dates.display(it, false) }, v.tally, v.amount?.let(Format::compactMoney)).joinToString(" · "),
                                     style = T.caption, color = Brand.secondary)
                                 for (m in v.roll.filter { it.gift != null }) {
-                                    val w = m.`when`?.let { if (it == "before") ", given after the vote" else ", given before the vote" } ?: ""
+                                    val w = m.giftWhen(v.date).let { if (it.isEmpty()) "" else " $it" }
                                     Text("${m.n} voted ${m.vote ?: "—"} · got ${Format.money(m.gift ?: 0.0)} from the donor$w", style = T.caption2, color = Brand.text)
                                 }
                             }
