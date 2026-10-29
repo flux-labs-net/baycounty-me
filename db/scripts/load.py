@@ -111,6 +111,24 @@ ALERT_DATASETS = {
     'meetings': ('board', 'start', 'title'),
     'candidates-2026': ('race_id', 'candidate'),
 }
+# Only records dated in the last ALERT_MAX_AGE_DAYS become alert events. A backfill (e.g. votes read from years of
+# minutes) adds thousands of old records that aren't news to anyone watching a rule. Undated records always count.
+ALERT_MAX_AGE_DAYS = 60
+ALERT_DATE_FIELDS = ('date', 'start')
+
+
+def recent(r, days=ALERT_MAX_AGE_DAYS, today=None):
+    """True unless the record has a date field older than `days` (an unreadable date counts as recent)."""
+    import datetime
+    for k in ALERT_DATE_FIELDS:
+        m = re.match(r'(\d{4})-(\d{2})-(\d{2})', str(r.get(k) or ''))
+        if m:
+            try:
+                d = datetime.date(*map(int, m.groups()))
+            except ValueError:
+                return True
+            return d >= (today or datetime.date.today()) - datetime.timedelta(days=days)
+    return True
 
 
 def identity(values):
@@ -211,7 +229,7 @@ def load_dataset(conn, d, aliases, sha):
         # dataset's first load (everything would look new) and when the migration isn't applied.
         events = 0
         if old and old_ids and added and has_table(cur, 'alerts.events'):
-            fresh = [(h, g, r) for h, g, r in added if identity(adapt(r.get(k), cols[k]) for k in keys) not in old_ids]
+            fresh = [(h, g, r) for h, g, r in added if identity(adapt(r.get(k), cols[k]) for k in keys) not in old_ids and recent(r)]
             if fresh:
                 cur.executemany('insert into alerts.events (dataset, record_hash, government_key, record, ingest_run_id) values (%s,%s,%s,%s,%s)',
                                 [(d['id'], h, g, Jsonb(r), run) for h, g, r in fresh])
