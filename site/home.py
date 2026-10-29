@@ -118,13 +118,13 @@ def _bars(rows, colors):
                    for k, (n, v) in enumerate(rows[:5]))
 
 
-DOOR_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'), 'Who decides': ('county', 'blue'),
+DOOR_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'), 'Your government': ('county', 'blue'),
              'Elections': ('vote', 'salmon'), 'Get involved': ('megaphone', 'teal')}
 # the links each homepage door shows first; the rest of its menu section opens under "All N"
 DOOR_PICKS = {'Living here': ['/my-address', '/utilities', '/schools', '/beaches', '/emergency', '/events'],
               'Your money': ['/public-money/tax-dollars', '/public-money/budget-compare', '/public-money/contracts',
                              '/public-money/accountability', '/public-money/votes'],
-              'Who decides': ['/people', '/governments', '/connections', '/connections/campaign-gifts', '/elections/results'],
+              'Your government': ['/people', '/governments', '/connections', '/connections/campaign-gifts', '/elections/results'],
               'Elections': ['/elections', '/elections/voting', '/elections/results', '/elections/past'],
               'Get involved': ['/meetings', '/notices', '/volunteer', '/records-request', '/alerts']}
 

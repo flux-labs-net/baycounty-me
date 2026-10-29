@@ -1,7 +1,7 @@
 """The site menu: one list that the header, the page picker on the corrections form, link previews and the
 site-menu dataset (database + /api/v1/datasets/site-menu) all read.
 
-Five sections named for what people come for (Living here, Your money, Who decides, Elections in season, Get
+Five sections named for what people come for (Living here, Your money, Your government, Elections in season, Get
 involved), each with a 'start here' page, plus 'About & data' for the footer. Government names come from place.json, so another place gets its own menu
 from its own config.
 """
@@ -21,7 +21,7 @@ def _i(label, href, desc=''):
 
 
 # Elections get their own menu section from summer to the end of the month after the general election; the rest of the
-# year the election pages sit in "Who decides" (Jeremy picked menu option A, 2026-10-28).
+# year the election pages sit in "Your government" (Jeremy picked menu option A, 2026-10-28).
 ELECTION_DAY = date(2026, 11, 3)
 
 
@@ -91,7 +91,7 @@ def menu(today=None):
                  _i('How they voted', '/public-money/votes', 'Every recorded vote on money decisions'),
              ]},
          ]},
-        {'label': 'Who decides', 'question': 'Governments and the people in them',
+        {'label': 'Your government', 'question': 'Who runs things, and their ties',
          'start': _i(OFFICIALS['label'], OFFICIALS['href'], OFFICIALS['desc']),
          'groups': [
              {'group': 'Governments', 'items': [

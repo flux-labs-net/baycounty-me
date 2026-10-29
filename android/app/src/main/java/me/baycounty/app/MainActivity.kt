@@ -87,7 +87,7 @@ private val tabs = listOf(
     TabItem(Tab.HOME, "Today", "house"),
     TabItem(Tab.LIVING, "Living here", "mappin.and.ellipse"),
     TabItem(Tab.MONEY, "Money", "dollarsign.circle"),
-    TabItem(Tab.DECIDES, "Who decides", "building.columns"),
+    TabItem(Tab.DECIDES, "Government", "building.columns"),
     TabItem(Tab.SEARCH, "Search", "magnifyingglass"),
 )
 

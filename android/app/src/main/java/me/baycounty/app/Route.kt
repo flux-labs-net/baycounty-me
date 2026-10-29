@@ -51,7 +51,7 @@ sealed class Route {
     object Meetings : Route()
 }
 
-/** Today, Living here, Money, Who decides and Search: the site's menu sections (Meetings sit under Who decides). */
+/** Today, Living here, Money, Government and Search: the site's menu sections (Meetings sit under Government). */
 enum class Tab { HOME, LIVING, MONEY, DECIDES, SEARCH }
 
 /** One back stack per tab, like a NavigationStack in each iOS tab. */

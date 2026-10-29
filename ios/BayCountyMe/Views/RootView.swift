@@ -17,7 +17,7 @@ struct RootView: View {
                 .tabItem { Label("Money", systemImage: "dollarsign.circle") }
                 .tag(AppStore.Tab.money)
             GovernmentsView()
-                .tabItem { Label("Who decides", systemImage: "building.columns") }
+                .tabItem { Label("Government", systemImage: "building.columns") }
                 .tag(AppStore.Tab.decides)
             NavigationStack {
                 SearchView().withRoutes()

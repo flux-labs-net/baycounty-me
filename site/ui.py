@@ -101,7 +101,7 @@ def icon_for(text, i=0):
 
 
 # the six menu sections: their icon and tone, for the kicker above a page title
-SECTION_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'), 'Who decides': ('county', 'blue'),
+SECTION_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'), 'Your government': ('county', 'blue'),
                 'Elections': ('vote', 'salmon'), 'Get involved': ('megaphone', 'teal'), 'About & data': ('info', 'blue')}
 # each page's badge icon (its tone comes from its menu section)
 PAGE_ICON = {
@@ -128,10 +128,10 @@ def _section_of(path):
             hrefs = ([m['start']['href']] if m.get('start') else []) + [it['href'] for g in m.get('groups', []) for it in g['items']]
             for h in hrefs:
                 _SECTION_OF.setdefault(h, m['label'])
-        _SECTION_OF.update({'/people': 'Who decides', '/profile': 'Who decides', '/search': 'About & data', '/privacy': 'About & data'})
+        _SECTION_OF.update({'/people': 'Your government', '/profile': 'Your government', '/search': 'About & data', '/privacy': 'About & data'})
     if path in _SECTION_OF:
         return _SECTION_OF[path]
-    for pre, lab in (('/people/', 'Who decides'), ('/public-money/vendors/', 'Your money'), ('/governments/', 'Who decides')):
+    for pre, lab in (('/people/', 'Your government'), ('/public-money/vendors/', 'Your money'), ('/governments/', 'Your government')):
         if path.startswith(pre):
             return lab
     return None

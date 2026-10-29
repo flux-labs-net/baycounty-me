@@ -47,13 +47,13 @@ enum class GovMetric(val short: String, val title: String, val caption: String?)
         govs.mapNotNull { g -> value(g)?.let { BarItem(g.govID, g.name, it) } }.sortedByDescending { it.value }
 }
 
-/** The Who decides tab: officials, meetings, votes and connections, then compare and open every government. */
+/** The Government tab: officials, meetings, votes and connections, then compare and open every government. */
 @Composable
 fun PlacesScreen() {
     val store = LocalStore.current
     val nav = LocalNav.current
     var metric by rememberSaveable { mutableStateOf(GovMetric.PER_RESIDENT) }
-    Screen("Who decides", onRefresh = { store.loadGovernments() }, spacing = 24) {
+    Screen("Government", onRefresh = { store.loadGovernments() }, spacing = 24) {
         item {
             CardList {
                 RouteRow(Route.People, "Officials, leaders and candidates", symbol = "person.3")
