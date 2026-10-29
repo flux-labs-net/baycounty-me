@@ -260,6 +260,11 @@ private struct FeedContent: View {
                 }
                 RowDivider(inset: 50)
                 RouteRow(route: .myAddress, title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
+                // Same account as the realtor console: agents get a way in from here, like the site's My home.
+                if AccountManager.shared.me?.realtor == "active" {
+                    RowDivider(inset: 50)
+                    WebRow(title: "Realtor console", detail: "Branded address reports for your clients", symbol: "briefcase", url: URL(string: "https://baycounty.me/realtor"))
+                }
             }
         }
         if let n = feed.note { Text(n).font(.footnote).foregroundStyle(.secondary) }

@@ -7,7 +7,7 @@ import java.util.Locale
 /** Public schools (/schools), from the schools, school-calendar and school-enrollment datasets (plus school-grades and
  *  school-spending once the state's files are in). Mirrors the Swift `Schools` and site/schools_page.py. */
 object Schools {
-    val datasets = listOf("schools", "school-calendar", "school-enrollment", "school-grades", "school-spending")
+    val datasets = listOf("schools", "school-calendar", "school-enrollment", "school-grades", "school-spending", "school-grade-state", "school-bell-times")
     val levelOrder = listOf("Elementary", "Middle", "High", "Combined", "Other")
 
     enum class Filter(val label: String) { ALL("All"), ELEMENTARY("Elementary"), MIDDLE("Middle"), HIGH("High"), COMBINED("K-8 and K-12"), CHARTER("Charter") }

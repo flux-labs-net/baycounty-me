@@ -81,6 +81,10 @@ fun ChambersScreen() {
                 CardList {
                     RouteRow(Route.Dataset("nonprofits"), "All nonprofits", symbol = "heart.text.square")
                     RowDivider(50.dp)
+                    RouteRow(Route.Dataset("chamber-overlaps"), "Board members who are officials, donors or vendors", symbol = "person.2")
+                    RowDivider(50.dp)
+                    RouteRow(Route.Overlaps, "Where records overlap", symbol = "link")
+                    RowDivider(50.dp)
                     WebRow("Chambers on BayCounty.me", "${BayCountyClient.SITE}/chambers", "Board members' businesses and public money", symbol = "safari")
                 }
                 FreshnessNote("chamber-events")

@@ -69,7 +69,7 @@ data class MapDot(val id: String, val title: String, val lat: Double, val lng: D
 
 /** Dots of several kinds on an OpenStreetMap map of the county (the iOS PointsMap). */
 @Composable
-fun PointsMap(points: List<MapDot>, modifier: Modifier = Modifier, onSelect: ((MapDot) -> Unit)? = null) {
+fun PointsMap(points: List<MapDot>, modifier: Modifier = Modifier, zones: List<me.baycounty.kit.SchoolDetails.Zone> = emptyList(), onSelect: ((MapDot) -> Unit)? = null) {
     if (LocalInspectionMode.current) {
         Box(modifier.clip(RoundedCornerShape(14.dp)).background(Brand.sunken), contentAlignment = Alignment.Center) { Text("Map", style = T.caption, color = Brand.secondary) }
         return
@@ -86,8 +86,20 @@ fun PointsMap(points: List<MapDot>, modifier: Modifier = Modifier, onSelect: ((M
         }
     }
     DisposableEffect(map) { map.onResume(); onDispose { map.onPause(); map.onDetach() } }
+    val zoneStroke = Brand.blue.toArgb()
     AndroidView({ map }, modifier.clip(RoundedCornerShape(14.dp))) { m ->
         m.overlays.clear()
+        // Outlines drawn under the dots (school attendance zones).
+        for (z in zones) for (ring in z.rings) {
+            m.overlays.add(org.osmdroid.views.overlay.Polygon(m).apply {
+                setPoints(ring.map { GeoPoint(it.first, it.second) })
+                fillPaint.color = (zoneStroke and 0x00FFFFFF) or 0x1A000000
+                outlinePaint.color = (zoneStroke and 0x00FFFFFF) or 0xB3000000.toInt()
+                outlinePaint.strokeWidth = 3f
+                title = z.school
+                setOnClickListener { _, _, _ -> false }
+            })
+        }
         for (p in points) {
             m.overlays.add(Marker(m).apply {
                 position = GeoPoint(p.lat, p.lng)

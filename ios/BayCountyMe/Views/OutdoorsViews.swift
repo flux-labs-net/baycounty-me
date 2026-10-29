@@ -14,12 +14,21 @@ struct MapPoint: Identifiable {
 /// Beach accesses, sampling sites, parks, ramps and trailheads as dots on a map of the county.
 struct PointsMap: View {
     let points: [MapPoint]
+    /// Outlines drawn under the dots (school attendance zones).
+    var zones: [Schools.Zone] = []
     var onSelect: ((MapPoint) -> Void)? = nil
 
     var body: some View {
         Map(initialPosition: .region(MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 30.15, longitude: -85.68),
             span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.7)))) {
+            ForEach(zones) { z in
+                ForEach(z.rings.indices, id: \.self) { i in
+                    MapPolygon(coordinates: z.rings[i].map { CLLocationCoordinate2D(latitude: $0.lat, longitude: $0.lon) })
+                        .foregroundStyle(Brand.blue.opacity(0.10))
+                        .stroke(Brand.blue.opacity(0.7), lineWidth: 1)
+                }
+            }
             ForEach(points) { p in
                 Annotation(p.title, coordinate: p.coordinate) {
                     Button { onSelect?(p) } label: {

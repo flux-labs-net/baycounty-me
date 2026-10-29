@@ -99,7 +99,9 @@ suspend fun preload(store: AppStore, route: Route?) {
         Route.Events -> store.load("community-events")
         Route.Beaches -> store.load(me.baycounty.kit.Outdoors.beachDatasets)
         Route.Parks -> store.load(me.baycounty.kit.Outdoors.parkDatasets)
-        Route.Schools -> store.load(me.baycounty.kit.Schools.datasets)
+        Route.Schools -> store.load(me.baycounty.kit.Schools.datasets + me.baycounty.kit.SchoolDetails.ZONES)
+        Route.PublicSafety -> store.load(me.baycounty.kit.PublicSafety.datasets)
+        Route.Overlaps -> store.load(me.baycounty.kit.Overlaps.datasets)
         Route.Emergency -> store.load(me.baycounty.kit.Emergency.datasets)
         Route.HurricanePrep -> store.load(me.baycounty.kit.Emergency.prepDatasets)
         // The lookup is live in the app; a snapshot uses the saved /api/v1/utilities answer for the same address.

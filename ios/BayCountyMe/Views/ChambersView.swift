@@ -41,6 +41,10 @@ struct ChambersView: View {
                 CardList {
                     RouteRow(route: .dataset("nonprofits"), title: "All nonprofits", symbol: "heart.text.square")
                     RowDivider(inset: 50)
+                    RouteRow(route: .dataset("chamber-overlaps"), title: "Board members who are officials, donors or vendors", symbol: "person.2")
+                    RowDivider(inset: 50)
+                    RouteRow(route: .overlaps, title: "Where records overlap", symbol: "link")
+                    RowDivider(inset: 50)
                     WebRow(title: "Chambers on BayCounty.me", detail: "Board members' businesses and public money", symbol: "safari",
                            url: URL(string: "https://baycounty.me/chambers"))
                 }
