@@ -386,8 +386,38 @@ data class MoneyMap(
         val outcome: String? = null, val tally: String? = null, val consent: Boolean? = null, val url: String? = null,
         val roll: List<Member> = emptyList(),
     ) {
-        @Serializable data class Member(val n: String = "", val vote: String? = null, val o: Int? = null, val gift: Double? = null, val `when`: String? = null)
+        /** `when` is the vote's side of the gift (kept for older data); `timing` is the gift's side of the vote: before, after, before and after. */
+        @Serializable data class Member(
+            val n: String = "", val vote: String? = null, val o: Int? = null, val gift: Double? = null, val `when`: String? = null,
+            val timing: String? = null, val gift_dates: List<String>? = null,
+        ) {
+            /** "on Mar 4, 2024, 834 days before the vote", from the gift dates and the vote date. */
+            fun giftWhen(voteDate: String): String = MoneyMap.giftWhen(gift_dates, voteDate)
+        }
         val id: String get() = "$d|$date|${h ?: ""}"
+    }
+
+    companion object {
+        /**
+         * Days between gifts and a vote, said plainly (same wording as the site's money_map.gift_when_text):
+         * "on Mar 4, 2024, 834 days before the vote", or "on Mar 4, 2024 (834 days before the vote) and Jan 5, 2026 (12 days after)".
+         */
+        fun giftWhen(dates: List<String>?, voteDate: String): String {
+            val day = { s: String -> runCatching { LocalDate.parse(s.take(10)) }.getOrNull() }
+            val v = day(voteDate) ?: return ""
+            val ds = (dates ?: emptyList()).mapNotNull(day).distinct().sorted()
+            if (ds.isEmpty()) return ""
+            fun gap(d: LocalDate, short: Boolean): String {
+                val n = v.toEpochDay() - d.toEpochDay()
+                if (n == 0L) return "the same day as the vote"
+                val a = kotlin.math.abs(n)
+                return "${Format.number(a.toDouble())} day${if (a == 1L) "" else "s"} ${if (n > 0) "before" else "after"}${if (short) "" else " the vote"}"
+            }
+            fun shown(d: LocalDate) = Dates.display(d.atStartOfDay(Dates.chicago).toInstant(), false)
+            if (ds.size == 1) return "on ${shown(ds[0])}, ${gap(ds[0], false)}"
+            val parts = ds.mapIndexed { i, d -> "${shown(d)} (${gap(d, i > 0)})" }
+            return "on " + parts.dropLast(1).joinToString(", ") + " and " + parts.last()
+        }
     }
 
     fun donor(id: Int): Donor? = donors.firstOrNull { it.id == id }
