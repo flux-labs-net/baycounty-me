@@ -1,7 +1,7 @@
 import SwiftUI
 import BayCountyKit
 
-/// Every upcoming meeting, opened from Who decides and from Today (Route.meetings).
+/// Every upcoming meeting, opened from Government and from Today (Route.meetings).
 struct MeetingsView: View {
     var body: some View { NavigationStack { MeetingsList().withRoutes() } }
 }

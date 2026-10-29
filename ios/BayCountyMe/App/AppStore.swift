@@ -7,7 +7,7 @@ import BayCountyKit
 @MainActor
 @Observable
 final class AppStore {
-    /// Today, Living here, Money, Who decides and Search: the site's menu sections (Meetings sit under Who decides).
+    /// Today, Living here, Money, Government and Search: the site's menu sections (Meetings sit under Government).
     enum Tab: Hashable { case home, living, money, decides, search }
 
     let client = BayCountyClient(baseURL: AppStore.apiBase, seedBundle: .main)

@@ -7653,7 +7653,7 @@
       "Living here",
       "Mi dirección",
       "Participe",
-      "Who decides",
+      "Your government",
       "Your money"
      ]
     },
@@ -7666,11 +7666,11 @@
      "type": "string",
      "values": [
       "Day-to-day in the county",
-      "Governments and the people in them",
       "Nov 3: who's running and where to vote",
       "Show up, ask, help",
       "Sources, downloads and help",
-      "What you pay, where it goes"
+      "What you pay, where it goes",
+      "Who runs things, and their ties"
      ]
     },
     {

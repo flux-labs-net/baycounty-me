@@ -636,7 +636,7 @@ def about_page():
   <ul>
     <li><b><a href="/my-address">Living here</a>.</b> Look up any address for its tax bill, schools, trash day, officials and nearby projects. Restaurant inspections, new businesses, road and building projects, beaches, parks, events, government jobs, emergency alerts and hurricane prep.</li>
     <li><b><a href="/public-money/tax-dollars">Your money</a>.</b> Budgets by year, tax rates and fees, contracts and vendors, CRA and sales tax spending, Hurricane Michael recovery, and an <a href="/public-money/accountability">accountability console</a> that follows major projects from approval to final cost.</li>
-    <li><b><a href="/people">Who decides</a>.</b> Every elected official and department leader, their pay, <a href="/public-money/votes">how they voted</a>, <a href="/connections/campaign-gifts">campaign gifts</a>, and the business and nonprofit ties between people, companies and governments.</li>
+    <li><b><a href="/people">Your government</a>.</b> Every elected official and department leader, their pay, <a href="/public-money/votes">how they voted</a>, <a href="/connections/campaign-gifts">campaign gifts</a>, and the business and nonprofit ties between people, companies and governments.</li>
     <li><b><a href="/elections">Elections</a>.</b> Your ballot, where and when to vote, and results since 2016.</li>
     <li><b><a href="/meetings">Get involved</a>.</b> Meetings with their agendas and minutes, public notices, records requests, email alerts, and an <a href="/ask">Ask page</a> that answers questions from the records on the site.</li>
   </ul>
