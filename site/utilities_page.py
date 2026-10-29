@@ -41,6 +41,38 @@ CSS = r"""
 .ut-tbl small{display:block;color:var(--muted);font-size:.78rem;line-height:1.35;margin-top:2px}
 .ut-out-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 @media (max-width:760px){.ut-search{padding:16px}}
+/* every city at a glance: day first, then provider and its phone; phones never wrap; one card per city on phones */
+table.tx-table.ut-glance{min-width:0;table-layout:fixed}
+table.tx-table.ut-glance thead th:first-child{width:17%}
+table.tx-table.ut-glance tbody th{font-weight:600;font-size:.95rem;white-space:normal}
+table.tx-table.ut-glance td{padding:12px}
+table.tx-table.ut-glance td::after{display:none}
+.ut-glance .ut-d{font-weight:600;font-size:.95rem;line-height:1.35}
+.ut-glance .ut-z{font-size:.86rem;line-height:1.4;color:var(--muted)}
+.ut-glance .ut-z b{color:var(--ink)}
+.ut-glance .ut-z b{font-weight:600}
+.ut-glance .ut-z span{color:var(--muted)}
+.ut-glance .ut-p{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin-top:4px;font-size:.84rem;color:var(--muted)}
+.ut-glance .ut-p>a:not(.ut-ph){color:var(--muted)}
+.ut-glance td>.ut-p:first-child{margin-top:2px}
+.ut-ph{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink)!important;text-decoration:none;font-weight:500}
+.ut-ph::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:4px;vertical-align:-1px;background:currentColor;opacity:.55;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z'/%3E%3C/svg%3E") center/contain no-repeat}
+.ut-ph:hover{text-decoration:underline}
+.ut-tag{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:.7rem;font-weight:500;line-height:1.5;vertical-align:1px;white-space:nowrap;
+  color:var(--teal);background:color-mix(in srgb,var(--teal) 14%,transparent);text-decoration:none}
+.ut-key{margin:-4px 0 10px}.ut-key .ut-tag{margin:0 6px 0 0}
+@media (max-width:760px){
+  :root .ut-gwrap,:root .ui .ut-gwrap{overflow:visible;border:0;background:none;box-shadow:none;padding:0}
+  table.tx-table.ut-glance,table.tx-table.ut-glance tbody{display:block}
+  table.tx-table.ut-glance thead{display:none}
+  table.tx-table.ut-glance tr{display:grid;grid-template-columns:1fr;gap:0;margin:0 0 12px;padding:14px 16px 8px;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow)}
+  table.tx-table.ut-glance tbody th,table.tx-table.ut-glance td{display:block;padding:10px 0;border-bottom:1px solid var(--line)!important}
+  table.tx-table.ut-glance tbody th{padding-top:0;font-size:1.1rem}
+  table.tx-table.ut-glance tr td:last-child{border-bottom:0!important}
+  table.tx-table.ut-glance td::before{content:attr(data-label);display:block;margin-bottom:2px;font-size:.72rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+}
 """
 
 JS = r"""
@@ -181,16 +213,75 @@ if (qa) gis({where: `ADDRESS = '${sq(qa.toUpperCase())}'`, resultRecordCount: '1
 """
 
 
-def _tel(p):
-    return f'<a href="tel:{e("".join(c for c in p if c.isdigit() or c == "+"))}">{e(p)}</a>' if p else ''
+_DAY = {'Monday': 'Mon', 'Tuesday': 'Tue', 'Wednesday': 'Wed', 'Thursday': 'Thu', 'Friday': 'Fri', 'Saturday': 'Sat', 'Sunday': 'Sun'}
+_BYADDR = ' <a class="ut-tag" href="#utQ">by address</a>'
+
+
+def _phone(p):
+    """'850-871-1033', '(850) 871-4104 ext. 1132' -> '(850) 871-1033' style, so every number reads the same."""
+    import re
+    m = re.match(r'\D*(\d{3})\D*(\d{3})\D*(\d{4})(.*)$', p or '')
+    if not m:
+        return p
+    ext = re.sub(r'\D', '', m.group(4))
+    return f'({m.group(1)}) {m.group(2)}-{m.group(3)}' + (f' ext. {ext}' if ext else '')
+
+
+def _tel(p, cls=''):
+    if not p:
+        return ''
+    digits = ''.join(c for c in _phone(p).split(' ext.')[0] if c.isdigit())
+    c = f' class="{cls}"' if cls else ''
+    return f'<a{c} href="tel:+1{e(digits)}">{e(_phone(p))}</a>'
 
 
 def _ext(u, t):
     return f'<a href="{e(u)}" rel="noopener" target="_blank">{e(t)}</a>' if u else ''
 
 
-def _prov(r):
-    return link(r['entity_id'], r.get('entity_name') or r['provider']) if r.get('entity_id') else e(r['provider'])
+def _prov(r, text=None):
+    text = text or r.get('entity_name') or r['provider']
+    return link(r['entity_id'], text) if r.get('entity_id') else e(text)
+
+
+def _short(r):
+    """A short provider name for the at-a-glance table: 'City of Lynn Haven Sanitation' -> 'City Sanitation',
+    'Waste Pro (under contract with ...)' -> 'Waste Pro'. Empty when the name only says there is no service."""
+    import re
+    n = r.get('entity_name') or r['provider']
+    if n.startswith('No '):
+        return ''
+    n = re.sub(r'\s*\(.*\)$', '', n)
+    if n.startswith('A private hauler'):
+        return 'Private hauler'
+    city = f"City of {r['area_name']} "
+    return 'City ' + n[len(city):] if n.startswith(city) else n
+
+
+def _days(area, svc, T, ps):
+    """(main, [sub lines], by_address) for one service in one area: short, consistent pickup days."""
+    sd = lambda s: ' & '.join(_DAY.get(d.strip(), d.strip()) for d in s.split(','))
+    rs = [r for r in T if r['area'] == area and r['service'] == svc]
+    if not rs:
+        return ('No pickup', [], False) if ps and all(p['provider'].startswith('No ') for p in ps) else ('No set day' if ps else '', [], False)
+    if rs[0].get('lookup_layer'):
+        sets = list(dict.fromkeys(x['pickup_days'] for x in rs if x.get('pickup_days')))
+        if all(',' not in d for d in sets) and len(sets) >= 4:
+            return 'Mon–Fri', [], True
+        return ' or '.join(sd(d) for d in sets), [], len(sets) > 1
+    if any(x.get('pickup_days') for x in rs):
+        withd = [x for x in rs if x.get('pickup_days')]
+        if len(withd) == 1 and not withd[0].get('zone'):
+            return sd(withd[0]['pickup_days']), [], False
+        return '', [f'<b>{e(sd(x["pickup_days"]))}</b> <span title="{e(x.get("zone_area") or "")}">{e(x["zone"].lower() if x.get("zone") else "")}</span>' for x in withd], False
+    rule = rs[0].get('rule') or ''
+    if 'hauler sets the day' in rule:
+        return 'Set by your hauler', [], False
+    if rule.startswith('Call '):
+        return 'Call for your day', [], False
+    head, _, rest = rule.partition(';')
+    rest = rest.strip().rstrip('.')
+    return head.strip().rstrip('.'), ([e(rest[:1].upper() + rest[1:])] if rest else []), False
 
 
 def utilities_page(out_dir):
@@ -205,27 +296,19 @@ def utilities_page(out_dir):
             areas.setdefault(r['area'], r['area_name'])
     order = [a for a in areas if a != 'county'] + (['county'] if 'county' in areas else [])
 
-    def cell(area, svc):
+    def svc_cell(area, svc):
         ps = [r for r in P if r['area'] == area and r['service'] == svc]
-        if not ps:
-            return '<span class="muted">—</span>'
-        return '<br>'.join(_prov(r) + (f'<small>{e(r["coverage"])}</small>' if r.get('coverage') and r['coverage'] not in ('all', 'most', 'some') else '') for r in ps)
-
-    def days(area, svc):
-        rs = [r for r in T if r['area'] == area and r['service'] == svc]
-        if not rs:
-            return '<span class="muted">—</span>'
-        r0 = rs[0]
-        if r0.get('lookup_layer'):
-            ds = sorted({x['pickup_days'] for x in rs if x.get('pickup_days')})
-            return f'By route: {e(" or ".join(ds) if len(ds) <= 3 else "Monday to Friday")}<small>Search your address above for your day</small>'
-        if any(x.get('pickup_days') for x in rs):
-            return '<br>'.join(f'{e(x["pickup_days"])}' + (f'<small>{e(x["zone"])}{": " + e(x["zone_area"]) if x.get("zone_area") else ""}</small>' if x.get('zone') else '') for x in rs if x.get('pickup_days'))
-        return e(r0.get('rule') or '')
+        main, sub, by_addr = _days(area, svc, T, ps) if svc != 'water' else ('', [], False)
+        out = f'<div class="ut-d">{e(main)}{_BYADDR if by_addr else ""}</div>' if main else ''
+        out += ''.join(f'<div class="ut-z">{x}</div>' for x in sub)
+        for r in ps:
+            nm = _short(r)
+            if nm or r.get('phone'):
+                out += f'<div class="ut-p">{(_prov(r, nm) if nm else "")}{_tel(r.get("phone"), "ut-ph")}</div>'
+        return out or '<span class="muted">—</span>'
 
     glance = ''.join(f'''<tr><th scope="row">{link("gov:" + a, areas[a]) if a != "county" else link("gov:county", areas[a])}</th>
-      <td>{cell(a, "water")}</td><td>{cell(a, "garbage")}<small>{days(a, "garbage")}</small></td><td>{cell(a, "yard_waste")}<small>{days(a, "yard_waste")}</small></td>
-      <td>{"<br>".join(_tel(ph) for ph in dict.fromkeys(r["phone"] for r in P if r["area"] == a and r["service"] in ("water", "garbage") and r.get("phone")))}</td></tr>''' for a in order)
+      <td data-label="Garbage">{svc_cell(a, "garbage")}</td><td data-label="Yard waste">{svc_cell(a, "yard_waste")}</td><td data-label="Water and sewer">{svc_cell(a, "water")}</td></tr>''' for a in order)
 
     # outages: electric and gas lines for the whole county, plus each city's water line
     outage = ''.join(f'''<div class="ut-card"><span class="eyebrow">{e(r["service_label"])}</span><b>{_prov(r)}</b>
@@ -274,8 +357,9 @@ def utilities_page(out_dir):
 
   <div class="kpis">{kpis}</div>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="glance" data-tile="By city">Every city at a glance</h2><span class="muted">Water, garbage and yard waste</span></div>
-    <div class="tablewrap"><table class="tx-table ut-tbl"><thead><tr><th>Where you live</th><th>Water and sewer</th><th>Garbage</th><th>Yard waste</th><th>Phone</th></tr></thead><tbody>{glance}</tbody></table></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="glance" data-tile="By city">Every city at a glance</h2><span class="muted">Garbage, yard waste and water</span></div>
+    <p class="ut-key muted small"><a class="ut-tag" href="#utQ">by address</a> The day depends on your street: search your address above to get yours.</p>
+    <div class="tablewrap ut-gwrap"><table class="tx-table ut-tbl ut-glance" data-tt="off"><thead><tr><th scope="col">Where you live</th><th scope="col">Garbage</th><th scope="col">Yard waste</th><th scope="col">Water and sewer</th></tr></thead><tbody>{glance}</tbody></table></div>
     <p class="note">Where a city doesn't collect garbage, homes hire a licensed private hauler; the county keeps <a href="https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25" rel="noopener" target="_blank">the list of haulers</a>. Curbside recycling stopped across the county after Hurricane Michael.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="outages" data-tile="Outages">Power and gas outages</h2><span class="muted">Countywide</span></div>
