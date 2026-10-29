@@ -59,6 +59,11 @@ struct MeetingsList: View {
                             }
                         }
                     }
+                    CardList {
+                        RouteRow(route: .dataset("agenda-parties"), title: "Companies on agendas", detail: "Agenda items that name a company, and whether it gave to the board's members", symbol: "list.bullet.rectangle")
+                        RowDivider(inset: 50)
+                        RouteRow(route: .overlaps, title: "Where records overlap", detail: "Votes naming donors, bids and more", symbol: "link")
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 24)

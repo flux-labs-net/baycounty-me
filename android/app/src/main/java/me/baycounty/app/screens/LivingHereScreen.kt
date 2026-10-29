@@ -82,6 +82,8 @@ fun LivingHereScreen() {
                     RowDivider(50.dp)
                     RouteRow(Route.HurricanePrep, "Hurricane prep", "Sandbags, generators, disaster help", symbol = "hurricane")
                     RowDivider(50.dp)
+                    RouteRow(Route.PublicSafety, "Police, fire & Sheriff", "Who covers your town, crimes reported, budgets", symbol = "shield.lefthalf.filled")
+                    RowDivider(50.dp)
                     RouteRow(Route.Dataset("development-projects"), "Building and development", "New homes and projects in review", symbol = "building.2")
                     RowDivider(50.dp)
                     RouteRow(Route.Dataset("road-contracts"), "Road projects", "State road work and costs", symbol = "road.lanes")

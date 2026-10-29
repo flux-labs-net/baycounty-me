@@ -1591,7 +1591,7 @@
   {
    "id": "bed-tax-collections",
    "title": "Tourist tax collections",
-   "description": "Bed tax collected by zone and fiscal year.",
+   "description": "Bed tax collected by zone and fiscal year. A partial year (the current one) also gives prior_year_same_period: what was collected over the same months a year earlier, from the same Clerk report.",
    "rows": 33,
    "columns": [
     {
@@ -1624,6 +1624,10 @@
      "values": [
       "fiscal year to date through July 2026 (10 months)"
      ]
+    },
+    {
+     "name": "prior_year_same_period",
+     "type": "number"
     },
     {
      "name": "basis",
@@ -10297,7 +10301,7 @@
    "id": "development-projects",
    "title": "Development projects",
    "description": "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.",
-   "rows": 246,
+   "rows": 245,
    "columns": [
     {
      "name": "place_id",
@@ -10422,7 +10426,7 @@
      "name": "fetched",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-29"
      ]
     },
     {
@@ -10513,7 +10517,7 @@
       "2023",
       "2024",
       "2025",
-      "Jan to Aug 2026"
+      "Jan to Sep 2026"
      ]
     },
     {
@@ -10594,7 +10598,7 @@
       "https://www2.census.gov/econ/bps/County/co2023a.txt",
       "https://www2.census.gov/econ/bps/County/co2024a.txt",
       "https://www2.census.gov/econ/bps/County/co2025a.txt",
-      "https://www2.census.gov/econ/bps/County/co2608y.txt",
+      "https://www2.census.gov/econ/bps/County/co2609y.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2016a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2017a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2018a.txt",
@@ -10605,7 +10609,7 @@
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2023a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2024a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2025a.txt",
-      "https://www2.census.gov/econ/bps/Place/South%20Region/so2608y.txt"
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2609y.txt"
      ]
     },
     {
@@ -16834,6 +16838,160 @@
    "api": "/api/v1/datasets/crime-counts"
   },
   {
+   "id": "crime-monthly",
+   "title": "Crimes reported by police agency, by month",
+   "description": "Offenses each police agency in the county reported to the FBI each month since January 2025, when Florida agencies moved to monthly incident reports (NIBRS), from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and the eight main offenses, with offenses cleared. This is where this year's numbers come from before the year is over: the page compares this year so far with the same months last year, leaving out the current month and the two before it, which agencies are still adding to. A month that is missing has not been sent yet. Counts only; no person is named.",
+   "rows": 1040,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string",
+     "values": [
+      "bcso",
+      "lhpd",
+      "parkerpd",
+      "pcpd",
+      "sppd"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County Sheriff's Office",
+      "Lynn Haven Police Department",
+      "Panama City Police Department",
+      "Parker Police Department",
+      "Springfield Police Department"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030500",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "month",
+     "type": "number"
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10"
+     ]
+    },
+    {
+     "name": "offense_code",
+     "type": "string",
+     "values": [
+      "ARS",
+      "ASS",
+      "BUR",
+      "HOM",
+      "LAR",
+      "MVT",
+      "P",
+      "ROB",
+      "RPE",
+      "V"
+     ]
+    },
+    {
+     "name": "offense",
+     "type": "string",
+     "values": [
+      "Aggravated assault",
+      "Arson",
+      "Burglary",
+      "Larceny-theft",
+      "Motor vehicle theft",
+      "Murder",
+      "Property crime",
+      "Rape",
+      "Robbery",
+      "Violent crime"
+     ]
+    },
+    {
+     "name": "offense_group",
+     "type": "string",
+     "values": [
+      "property",
+      "violent"
+     ]
+    },
+    {
+     "name": "total_row",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "count",
+     "type": "number"
+    },
+    {
+     "name": "cleared",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+     ]
+    }
+   ],
+   "json": "/downloads/crime-monthly.json",
+   "csv": "/downloads/crime-monthly.csv",
+   "api": "/api/v1/datasets/crime-monthly"
+  },
+  {
    "id": "police-staffing",
    "title": "Police staffing",
    "description": "Sworn officers and civilian employees at each police agency in the county on October 31 each year since 2016, as the agency reported them to the FBI (Crime Data Explorer police employee data), with employees per 1,000 residents covered. The Sheriff's reported civilian staff went from 71 in 2022 to 271 in 2023; the FBI data does not say why.",
@@ -16928,6 +17086,161 @@
    "json": "/downloads/police-staffing.json",
    "csv": "/downloads/police-staffing.csv",
    "api": "/api/v1/datasets/police-staffing"
+  },
+  {
+   "id": "data-freshness",
+   "title": "How current each figure is",
+   "description": "One row per headline figure on the site: the newest period we have (latest_period, read from the data itself so it moves as refreshes bring in more), whether that is this year, this year so far, the newest the source has published, or newer data that needs a by-hand download (status), when the next period is usually published (next_due, the source's usual schedule as checked on checked_on, not a promise), how we get it, and the source.",
+   "rows": 14,
+   "columns": [
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "Budgets",
+      "Growth",
+      "Living here",
+      "People",
+      "Public safety",
+      "Sales tax",
+      "Schools",
+      "Tourist tax"
+     ]
+    },
+    {
+     "name": "figure",
+     "type": "string"
+    },
+    {
+     "name": "page",
+     "type": "string",
+     "values": [
+      "/development",
+      "/governments",
+      "/new-businesses",
+      "/public-money/accountability",
+      "/public-money/budget-compare",
+      "/public-money/sales-tax-projects",
+      "/public-money/tourist-tax",
+      "/public-safety#staff",
+      "/public-safety#ytd",
+      "/restaurants",
+      "/schools"
+     ]
+    },
+    {
+     "name": "latest_period",
+     "type": "string",
+     "values": [
+      "2024-25 school year",
+      "2025-26 school year",
+      "April 1, 2025 estimate",
+      "FY2024",
+      "FY2025 for most governments; FY2024 for Bay County, City of Panama City",
+      "FY2026 through July 2026 (10 months)",
+      "FY2027 (Oct 1, 2026 to Sept 30, 2027)",
+      "Jan to Jul 2026 for every agency; some through Oct",
+      "Jan to Sep 2026",
+      "Oct 31, 2025",
+      "State FY2025 (July 2024 to June 2025)",
+      "Updated every day"
+     ]
+    },
+    {
+     "name": "latest_year",
+     "type": "number"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Current",
+      "Newer data needs a by-hand download",
+      "Newest published",
+      "Year so far"
+     ]
+    },
+    {
+     "name": "next_due",
+     "type": "string",
+     "values": [
+      "2025-26 counts are on fldoe.org now; the federal directory adds them about a year later",
+      "2025-26 figures, usually posted the next spring",
+      "2026-27 grades, usually July 2027",
+      "April 1, 2026 estimates, usually published in December 2026",
+      "Each month about four weeks after it ends",
+      "Every day",
+      "FY2025, once the state compiles the reports governments filed by June 2026",
+      "FY2026 audits are due by June 30, 2027; the late FY2025 audits as soon as they are filed",
+      "FY2028 budgets are adopted in September 2027",
+      "More months each week as the FBI posts them, usually one to two months behind",
+      "State FY2026 (to June 2026), when the state updates its yearly file",
+      "The Clerk posts each month about four to six weeks after it ends; September closes the fiscal year",
+      "The Oct 31, 2026 count, published by the FBI in the fall of 2027"
+     ]
+    },
+    {
+     "name": "how_we_get_it",
+     "type": "string",
+     "values": [
+      "Automatic (federal directory); the state file needs a by-hand download",
+      "Automatic, daily",
+      "Automatic, weekly",
+      "By-hand download",
+      "Read by hand from each audit",
+      "Read by hand from each budget book",
+      "Read by hand from the Clerk's monthly report",
+      "State bulk file, by hand",
+      "State file, by hand",
+      "State workbook, by hand"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bebr.ufl.edu/florida-estimates-of-population-2025/",
+      "https://cde.ucr.cjis.gov/",
+      "https://dos.fl.gov/sunbiz/",
+      "https://edr.state.fl.us/Content/local-government/data/data-a-to-z/discstxco.xlsx",
+      "https://edr.state.fl.us/Content/local-government/data/revenues-expenditures/index.cfm",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090",
+      "https://flauditor.gov/pages/municipalities_efiles.html",
+      "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf",
+      "https://www.census.gov/construction/bps/",
+      "https://www.fldoe.org/accountability/accountability-reporting/school-grades/",
+      "https://www.fldoe.org/finance/fl-edu-finance-program-fefp/essa.stml",
+      "https://www2.myfloridalicense.com/hotels-restaurants/"
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string",
+     "values": [
+      "Florida moved to monthly reports in 2025, so this year is compared with the same months last year. The latest months are left out of that comparison while agencies finish them.",
+      "Police and fire department lines on /public-safety still use FY2026, the newest year with department lines for every government.",
+      "The state's education site blocks automated downloads, so the newer state count has to be saved by hand."
+     ]
+    },
+    {
+     "name": "checked_on",
+     "type": "string",
+     "values": [
+      "2026-10-29"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/data-freshness.json",
+   "csv": "/downloads/data-freshness.csv",
+   "api": "/api/v1/datasets/data-freshness"
   },
   {
    "id": "volunteer-needs",

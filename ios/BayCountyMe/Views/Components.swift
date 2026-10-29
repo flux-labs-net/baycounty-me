@@ -72,6 +72,8 @@ enum Route: Hashable {
     case restaurant(String)
     case myHome
     case meetings
+    case publicSafety
+    case overlaps
 
     /// The screen's name in the anonymous usage counts (AppUsage): the case name, plus the list or government for
     /// those two, and the list a record came from. Never a person, address, search or record id.
@@ -137,6 +139,8 @@ extension View {
                 case .restaurants: RestaurantsView()
                 case .restaurant(let lic): RestaurantDetailView(license: lic)
                 case .myHome: MyHomeView()
+                case .publicSafety: PublicSafetyView()
+                case .overlaps: OverlapsView()
                 }
             }
             .pageBackground()

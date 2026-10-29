@@ -10,6 +10,11 @@ from data_sources import GOVS, TOPICS, AUTO_DAILY, AUTO_WEEKLY, AUTO_30, LIVE, B
 AUTO = {AUTO_DAILY, AUTO_WEEKLY, AUTO_30}
 
 CSS = '''
+.ds-fresh td{vertical-align:top}.ds-fresh .sub{display:block;color:var(--muted);font-size:.8rem;margin-top:2px;line-height:1.35}
+.ds-st{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.78rem;font-weight:600;line-height:1.3;white-space:nowrap}
+.ds-st-ok{background:var(--tint-teal);color:var(--teal)}.ds-st-so{background:var(--tint-blue);color:var(--blue)}
+.ds-st-wait{background:color-mix(in srgb,var(--muted) 14%,transparent);color:var(--muted)}.ds-st-hand{background:var(--tint-amber);color:var(--gold)}
+@media (max-width:640px){.ds-st{white-space:normal}}
 .ds-mx{border-collapse:separate;border-spacing:0;font-size:.84rem;min-width:860px;width:100%}
 .ds-mx th,.ds-mx td{padding:8px 6px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
 .ds-mx thead th{font-weight:600;font-size:.74rem;line-height:1.2;color:var(--muted);vertical-align:bottom}
@@ -83,6 +88,16 @@ def data_sources_page(out_dir=None):
         f'<p class="ds-go">{len([r for r in R if r["topic_id"] == tid])} sources · <a href="{page}">See the page</a></p></article>'
         for tid, label, page, how, checks in TOPICS)
 
+    from freshness import rows as fresh_rows, CHECKED_ON
+    FR = fresh_rows()
+    tag = {'Current': 'ok', 'Year so far': 'so', 'Newest published': 'wait', 'Newer data needs a by-hand download': 'hand'}
+    fresh_tr = ''.join(
+        f'<tr><td><a href="{e(r["page"])}">{e(r["figure"])}</a><span class="sub">{e(r["topic"])}</span></td><td>{e(r["latest_period"])}</td>'
+        f'<td><span class="ds-st ds-st-{tag.get(r["status"], "wait")}">{e(r["status"])}</span></td><td>{e(r["next_due"])}'
+        + (f'<span class="sub">{e(r["notes"])}</span>' if r['notes'] else '') + '</td></tr>'
+        for r in FR)
+    n_now = sum(1 for r in FR if r['status'] in ('Current', 'Year so far'))
+
     site_tr = ''.join(
         f'<tr><td><a href="{e(w["source_url"])}" target="_blank" rel="noopener">{e(w["website"])}</a></td><td>{e(w["topic"])}</td><td class="num">{w["documents_cited"]:,}</td></tr>'
         for w in W)
@@ -100,6 +115,12 @@ def data_sources_page(out_dir=None):
       <div class="kpi"><span class="eyebrow">Websites cited</span><span class="v">{sites}</span><span class="s">{docs:,} documents and pages linked</span></div>
     </div>
     <p>Data is still being loaded and checked, so some totals are not final and may change (<a href="#progress">see how far we’ve got</a>). Found something wrong or missing? <a href="/about#contact">Send a correction</a>.</p>
+  </section>
+
+  <section class="tx-sec"><div class="sec-hd"><h2 id="current" data-tile="How current">How current each figure is</h2><span class="muted">{n_now} of {len(FR)} are this year or this year so far</span></div>
+    <p>Many public numbers come out months or a year after the period they cover. This shows the newest period we have for each headline figure, and when the next one is usually published. Where a full 2026 figure isn't out yet, the page shows this year so far against the same months last year.</p>
+    <div class="tablewrap"><table class="tx-table ds-fresh" data-tt="off"><thead><tr><th scope="col">Figure</th><th scope="col">Newest we have</th><th scope="col">Status</th><th scope="col">Next one</th></tr></thead><tbody>{fresh_tr}</tbody></table></div>
+    <p class="note">The newest period is read from the data each time the site is built. The usual release schedules were checked on {CHECKED_ON}; agencies sometimes publish late. Data: <a href="/api/v1/datasets/data-freshness">data-freshness</a>.</p>
   </section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="progress" data-tile="Loaded so far">What we’ve loaded so far</h2><span class="muted">Live: every vote in every board’s minutes since 2016</span></div>

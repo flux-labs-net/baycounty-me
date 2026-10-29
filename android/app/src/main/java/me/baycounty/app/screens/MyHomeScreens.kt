@@ -265,6 +265,11 @@ private fun androidx.compose.foundation.lazy.LazyListScope.feedContent(f: Nearby
                     RowDivider(50.dp)
                 }
                 RouteRow(Route.MyAddress, "Full address report", "Taxes, flood zone, schools and who represents you", "doc.text.magnifyingglass")
+                // Same account as the realtor console: agents get a way in from here, like the site's My home.
+                if (Account.me?.realtor == "active") {
+                    RowDivider(50.dp)
+                    WebRow("Realtor console", "${me.baycounty.kit.BayCountyClient.SITE}/realtor", "Branded address reports for your clients", "briefcase")
+                }
             }
         }
     }

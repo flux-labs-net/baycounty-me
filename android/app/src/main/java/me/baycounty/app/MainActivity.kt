@@ -187,6 +187,8 @@ fun RouteScreen(route: Route) {
         Route.MyHome -> MyHomeScreen()
         Route.AccountSettings -> AccountSettingsScreen()
         Route.Meetings -> MeetingsScreen()
+        Route.PublicSafety -> PublicSafetyScreen()
+        Route.Overlaps -> OverlapsScreen()
         is Route.BudgetCompare -> BudgetCompareScreen(route.govID)
         is Route.TaxCalculator -> TaxCalculatorScreen(route)
         is Route.GovBudget -> GovBudgetScreen(route.id)
@@ -214,6 +216,7 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
         "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "events" to Route.Events, "beaches" to Route.Beaches, "parks" to Route.Parks, "schools" to Route.Schools, "emergency" to Route.Emergency, "hurricaneprep" to Route.HurricanePrep, "utilities" to Route.Utilities(UTILITIES_SAMPLE), "volunteer" to Route.Volunteer, "military" to Route.Military, "myhome" to Route.MyHome, "pastelections" to Route.Dataset("campaign-history"),
         "roads" to Route.Dataset("road-contracts"), "development" to Route.Dataset("development-projects"),
         "restaurants" to Route.Restaurants, "restaurant" to Route.Restaurant("1305433"), "newbusinesses" to Route.Dataset("new-businesses"),
+        "publicsafety" to Route.PublicSafety, "overlaps" to Route.Overlaps,
     )
     simple[arg]?.let { nav.replace(it); return }
     if (arg == "myhome:settings") { nav.replace(Route.MyHome); nav.push(Route.AccountSettings); return }

@@ -154,6 +154,63 @@ CITY = lambda g: 'county' if g == 'constitutional' else g if g in KEYS else ''
 GOV_OF_OFFICE = [('panama city beach', 'pcb'), ('panama city', 'pc'), ('lynn haven', 'lh'), ('callaway', 'cw'), ('springfield', 'sp'), ('parker', 'parker'), ('mexico beach', 'mb')]
 
 
+def _now_strip(today=None):
+    """The next election at a glance (election-dates dataset): the date, early voting and polls, and a box that
+    looks up the local races on your ballot by address (/elections/voting does the lookup). The script keeps the
+    countdown right between daily builds; after Election Day it points to the results."""
+    import datetime as dt
+    from page_datasets import election_dates
+    today = today or dt.date.today()
+    rows = election_dates()
+    days = [r for r in rows if r.get('kind') == 'election_day' and r.get('date')]
+    # the next Election Day, or the one that just passed (results week)
+    nxt = min((r for r in days if dt.date.fromisoformat(r['date']) >= today - dt.timedelta(days=10)), key=lambda r: r['date'], default=None)
+    if not nxt:
+        return ''
+    ed = dt.date.fromisoformat(nxt['date'])
+    ev = next((r for r in rows if r.get('kind') == 'early_voting' and r.get('election') == nxt.get('election')), None)
+    e0 = dt.date.fromisoformat(ev['date']) if ev else None
+    e1 = dt.date.fromisoformat(ev['end_date']) if ev and ev.get('end_date') else e0
+    md = lambda d: d.strftime('%A, %B %-d')
+    n = (ed - today).days
+    if n > 1:
+        when = f'In {n} days'
+    elif n == 1:
+        when = 'Tomorrow'
+    elif n == 0:
+        when = 'Today'
+    else:
+        when = 'Results'
+    if e0 and today < e0:
+        early = f'Early voting runs {e0.strftime("%B %-d")} to {e1.strftime("%B %-d")}, 10 a.m. to 6 p.m., at any early voting site.'
+    elif e0 and today <= e1:
+        early = f'Early voting is open through {md(e1)}, 10 a.m. to 6 p.m., at any early voting site.'
+    else:
+        early = 'Early voting is over. On Election Day, vote at your own precinct.'
+    polls = 'Polls are open 7 a.m. to 7 p.m. at your own precinct. Bring a photo ID with your signature.'
+    tile = (f'<span class="ui-date" aria-hidden="true"><span class="mo">{ed.strftime("%b").upper()}</span><span class="d">{ed.day}</span>'
+            f'<span class="wd">{ed.strftime("%a")}</span></span>')
+    name = e(nxt.get('election') or 'Election')
+    return f'''<div class="el-day" data-eday="{ed}" data-ev0="{e0 or ''}" data-ev1="{e1 or ''}">
+      {tile}<div class="el-day-h"><span class="eyebrow">{name}</span>
+        <p class="el-when"><b data-el-when>{when}</b> <span>Election Day is {md(ed)}</span></p></div>
+        <div class="el-day-b"><p class="small" data-el-early>{e(early)}</p><p class="small" data-el-polls>{polls}</p>
+        <p class="small el-day-a"><a href="/elections/voting#early">Early voting sites</a><a href="/elections/voting#dates">Key dates</a><a href="/elections/results" data-el-res>Results</a><a href="/elections/past">Past elections</a></p></div></div>
+    <form class="el-find" action="/elections/voting" method="get" role="search" aria-label="Your ballot by address">
+      <label for="elAddr"><b>What's on your ballot?</b><span class="small muted">The local races at your address, and the closest places to vote</span></label>
+      <span class="el-find-row"><input id="elAddr" name="addr" type="text" autocomplete="street-address" placeholder="House number and street" required><button type="submit" class="ui-btn">Look up</button></span>
+      <span class="small muted">Registration and sample ballots: <a href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections</a></span>
+    </form>
+    <script>(() => {{ if (document.documentElement.lang.startsWith('es')) return; const el = document.currentScript.previousElementSibling.previousElementSibling, d = s => s ? new Date(s + 'T00:00') : null;
+      const t = new Date(); t.setHours(0, 0, 0, 0); const ed = d(el.dataset.eday), e0 = d(el.dataset.ev0), e1 = d(el.dataset.ev1), n = Math.round((ed - t) / 864e5);
+      const md = x => x.toLocaleDateString('en-US', {{weekday: 'long', month: 'long', day: 'numeric'}}), q = s => el.querySelector(s);
+      q('[data-el-when]').textContent = n > 1 ? `In ${{n}} days` : n === 1 ? 'Tomorrow' : n === 0 ? 'Today' : 'Results';
+      if (e0) q('[data-el-early]').textContent = t < e0 ? `Early voting runs ${{e0.toLocaleDateString('en-US', {{month: 'long', day: 'numeric'}})}} to ${{e1.toLocaleDateString('en-US', {{month: 'long', day: 'numeric'}})}}, 10 a.m. to 6 p.m., at any early voting site.`
+        : t <= e1 ? `Early voting is open through ${{md(e1)}}, 10 a.m. to 6 p.m., at any early voting site.` : 'Early voting is over. On Election Day, vote at your own precinct.';
+      if (n < 0) {{ el.classList.add('done'); q('[data-el-early]').textContent = 'Polls have closed. Unofficial results come in on election night; the official count follows about ten days later.'; q('[data-el-polls]').hidden = true; q('.el-when span').textContent = `Election Day was ${{md(ed)}}`; }}
+    }})();</script>'''
+
+
 def elections_page():
     C, F = load()
     if not C:
@@ -238,18 +295,22 @@ def elections_page():
         pick = lambda rs, k: [r for r in rs if CITY(r.get('gov')) == k]
         return by_city({'': fn(active, decided), **{k: fn(pick(active, k), pick(decided, k)) for k in gk}})
     gaps = ''.join(f'<li>{e(g)}</li>' for g in (C.get('gaps') or []) + (F.get('gaps') or []))
+    now = _now_strip()
     return f'''<div class="page tax el">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · 2026 elections</span><h1>Who's running in 2026</h1>
-    <p class="lede">Every local race on Bay County ballots this year: the candidates, what they say they'll do in their own words, links to their campaigns, and where their campaign money comes from. BayCounty.me doesn't endorse or rate candidates.</p></div>
-    <div class="stamp"><a class="pill" href="/elections/voting">Where and when to vote</a><a class="pill" href="/elections/past">Past elections</a><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Campaign reports checked {e(F.get("as_of") or C.get("as_of"))}</span></div></header>
-  {city_bar(gk, hide=True, note='Bay County includes county offices; special districts always show')}
-  <div class="kpis">
-    <div class="kpi"><span class="eyebrow">On the Nov. 3 ballot</span><span class="v"{per(lambda a, d: len(a))}>{len(active)}</span><span class="s">local races · <span{per(lambda a, d: sum(len(r.get('candidates') or []) for r in a))}>{ncand}</span> candidates</span></div>
-    <div class="kpi"><span class="eyebrow">Raised so far</span><span class="v"{per(lambda a, d: f"${raised_in(a)/1e3:,.0f}K" if raised_in(a) else "$0")}>${raised/1e3:,.0f}K</span><span class="s">by candidates in those races</span></div>
-    <div class="kpi"><span class="eyebrow">Already decided</span><span class="v"{per(lambda a, d: len(d))}>{len(decided)}</span><span class="s">won in the primary, unopposed or earlier in 2026</span></div>
+    <p class="lede">Every local race on Bay County ballots this year: the candidates, their plans in their own words, and their campaign money. BayCounty.me doesn't endorse or rate candidates.</p></div>
+    <div class="stamp"><a class="pill" href="/elections/voting">Where and when to vote</a><a class="pill" href="/elections/results">Results</a><a class="pill" href="/elections/past">Past elections</a><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a></div></header>
+  <div class="el-top">
+    {now}
+    <div class="el-stats" role="group" aria-label="2026 races at a glance">
+      <div><b{per(lambda a, d: len(a))}>{len(active)}</b><span>races on the ballot</span></div>
+      <div><b{per(lambda a, d: sum(len(r.get('candidates') or []) for r in a))}>{ncand}</b><span>candidates</span></div>
+      <div><b{per(lambda a, d: f"${raised_in(a)/1e3:,.0f}K" if raised_in(a) else "$0")}>${raised/1e3:,.0f}K</b><span>raised so far</span></div>
+      <div><b{per(lambda a, d: len(d))}>{len(decided)}</b><span>already decided</span></div>
+    </div>
   </div>
-  <div class="callout">To check your registration, find your polling place or see your sample ballot, use the <a href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Bay County Supervisor of Elections</a> or <a href="https://vote.gov" target="_blank" rel="noopener">vote.gov</a>. <a href="/my-address">My Address</a> shows your County Commission and School Board districts.</div>
-  <nav class="jump" aria-label="On this page"><a href="#active">On the ballot</a>{'<a href="#next">April 2027</a>' if upcoming else ''}<a href="#decided">Already decided</a><a href="#how">How we did this</a></nav>
+  {city_bar(gk, hide=True, note='Bay County includes county offices; special districts always show', extra='<button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button>')}
+  <nav class="jump" aria-label="On this page"><a href="#active">On the ballot</a>{'<a href="#next">April 2027</a>' if upcoming else ''}<a href="#decided">Already decided</a><a href="#how">How we did this</a><span class="el-asof">Campaign reports checked {e(F.get("as_of") or C.get("as_of"))}</span></nav>
   <section class="tx-sec" id="active" data-city-empty="No {{city}} races on the November ballot."><div class="sec-hd"><h2>On the November 3 ballot</h2><span class="muted">Candidates in alphabetical order</span></div>{act or '<p class="muted">No local races found on the ballot.</p>'}</section>
   {up_html}
   <section class="tx-sec el-past" id="decided" data-city-empty="No {{city}} races decided yet in 2026."><div class="sec-hd"><h2>Already decided in 2026</h2><span class="muted">Shown separately: these campaigns are over</span></div>{dec or '<p class="muted">None.</p>'}</section>

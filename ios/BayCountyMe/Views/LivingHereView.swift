@@ -58,6 +58,8 @@ struct LivingHereView: View {
                             RowDivider(inset: 50)
                             RouteRow(route: .hurricanePrep, title: "Hurricane prep", detail: "Sandbags, generators, disaster help", symbol: "hurricane")
                             RowDivider(inset: 50)
+                            RouteRow(route: .publicSafety, title: "Police, fire & Sheriff", detail: "Who covers your town, crimes reported, budgets", symbol: "shield.lefthalf.filled")
+                            RowDivider(inset: 50)
                             RouteRow(route: .dataset("development-projects"), title: "Building and development", detail: "New homes and projects in review", symbol: "building.2")
                             RowDivider(inset: 50)
                             RouteRow(route: .dataset("road-contracts"), title: "Road projects", detail: "State road work and costs", symbol: "road.lanes")

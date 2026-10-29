@@ -51,6 +51,8 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "fork.knife" -> Icons.Outlined.Restaurant
     "hand.raised" -> Icons.Outlined.VolunteerActivism
     "shield" -> Icons.Outlined.Shield
+    "flame" -> Icons.Outlined.LocalFireDepartment
+    "chart.xyaxis.line" -> Icons.AutoMirrored.Outlined.ShowChart
     "newspaper" -> Icons.Outlined.Newspaper
     "sun.max" -> Icons.Outlined.WbSunny
     "repeat" -> Icons.Outlined.Repeat

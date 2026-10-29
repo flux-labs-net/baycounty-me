@@ -136,6 +136,8 @@ public struct AccountMe: Decodable, Sendable {
         public let alertEmail: [String: String]
     }
     public let user: User
+    /// The same email's status on the realtor console's agent list ("active", "pending"), or nil: one sign-in opens both.
+    public let realtor: String?
     public let home: Home?
     public let prefs: Prefs?
     public let devices: Int?

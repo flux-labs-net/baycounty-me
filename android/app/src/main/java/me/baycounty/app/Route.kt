@@ -49,6 +49,8 @@ sealed class Route {
     object AccountSettings : Route()
     data class GovBudget(val id: String) : Route()
     object Meetings : Route()
+    object PublicSafety : Route()
+    object Overlaps : Route()
 }
 
 /** Today, Living here, Money, Government and Search: the site's menu sections (Meetings sit under Government). */
