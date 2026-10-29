@@ -13,6 +13,7 @@ import json
 
 from entity_links import gov as gov_link
 from ui import ico
+import longtext
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 KIND = {'evacuation': ('Evacuation order', 'flag', 'salmon'), 'weather': ('Weather', 'storm', 'blue'), 'shelter': ('Shelter open', 'home', 'teal'),
@@ -52,7 +53,7 @@ CSS = r"""
 .em-n p{margin:0;font-size:.88rem;line-height:1.5;overflow-wrap:anywhere}
 .em-n small{color:var(--muted);font-size:.8rem}
 .em-n details summary{cursor:pointer;font-size:.84rem;color:var(--blue)}
-.em-n details p{margin-top:6px;white-space:pre-line}
+.em-n details .lt-body{margin-top:6px}.em-n .lt-body p{margin:0 0 .6em}
 .em-n .em-upd{font-weight:600;color:var(--ink)}.em-n details p.em-ver{font-size:.8rem;color:var(--muted);white-space:normal}
 .em-n[hidden],.em-sh[hidden]{display:none!important}
 .em-empty{padding:18px;border-radius:18px;background:var(--sunken);color:var(--muted);font-size:.92rem}
@@ -112,7 +113,7 @@ JS = r"""
     return `<article class="em-n" id="n-${esc(n.notice_id)}" data-k="${esc(n.kind)}" data-sev="${esc(n.severity)}">
       <span class="k"><span class="ico i-${k[1]}" aria-hidden="true"></span>${esc(n.kind === 'weather' && n.event ? n.event : k[0])}${n.zones ? ' · Zone' + (n.zones.includes(',') ? 's ' : ' ') + esc(n.zones) : ''}</span>
       <h3>${esc(n.title)}</h3>${n.area ? `<p>${esc(n.area.length > 220 ? n.area.slice(0, 217) + '…' : n.area)}</p>` : ''}
-      ${more ? `<details><summary>Details</summary><p>${esc(more.length > 1600 ? more.slice(0, 1597) + '…' : more)}</p>${earlier(n)}</details>` : ''}
+      ${more ? `<details><summary>Details</summary><div class="lt-body">${window.BC && BC.longTextBody ? BC.longTextBody(more) : `<p>${esc(more)}</p>`}</div>${earlier(n)}</details>` : ''}
       <small>${src}${times ? ' · ' + times : ''}${n.url ? ` · <a href="${esc(n.url)}" target="_blank" rel="noopener">Source</a>` : ''}</small></article>`;
   }
   function filter() {
@@ -225,7 +226,7 @@ def _notice(n):
     more = '\n\n'.join(x for x in [n.get('summary') if n.get('summary') != n['title'] else '', n.get('instruction') or ''] if x)
     return (f'<article class="em-n" id="n-{e(n["notice_id"])}" data-k="{e(n["kind"])}" data-sev="{e(n["severity"])}">'
             f'<span class="k">{ico(icon)}{e(n["event"] if n["kind"] == "weather" and n.get("event") else lab)}</span><h3>{e(n["title"])}</h3>'
-            + (f'<details><summary>Details</summary><p>{e(more[:1600])}</p>{_earlier(n)}</details>' if more else '')
+            + (f'<details><summary>Details</summary><div class="lt-body">{longtext.html(more)}</div>{_earlier(n)}</details>' if more else '')
             + f'<small>{src} · {_posted(n)}' + (f' · <a href="{e(n["url"])}" target="_blank" rel="noopener">Source</a>' if n.get('url') else '') + '</small></article>')
 
 

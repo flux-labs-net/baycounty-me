@@ -504,3 +504,29 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
   .ui.ui-pfp .ui-k .s{grid-area:s;font-size:.76rem;line-height:1.35;color:var(--muted)}
 }
 @media print{.ui-pf-act{display:none}}
+/* Long ingested text (BC.longText in ui.js, longtext.html in longtext.py) */
+.lt{margin-top:10px;min-width:0;max-width:72ch}
+.lt-facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.lt-facts>div{min-width:0;padding:8px 12px;border-radius:12px;background:var(--sunken)}
+.lt-facts dt{font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.lt-facts dd{margin:2px 0 0;font-size:.86rem;font-weight:500;overflow-wrap:anywhere;line-height:1.45}
+.lt-lede{margin:0;font-size:.9rem;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.lt:has(.lt-more[open]) .lt-lede{display:none}
+.lt-more{margin-top:6px}
+.lt-more summary{cursor:pointer;font-size:.84rem;font-weight:500;color:var(--blue);min-height:32px;display:flex;align-items:center;gap:6px;list-style:none}
+.lt-more summary::-webkit-details-marker{display:none}
+.lt-more summary::before{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);margin-right:2px;transition:transform .15s}
+.lt-more[open] summary::before{transform:rotate(45deg)}
+.lt-more summary small{color:var(--muted);font-weight:400}
+.lt-more summary .c,.lt-more[open] summary .o{display:none}.lt-more[open] summary .c{display:inline}
+.lt-body{font-size:.9rem;line-height:1.6;overflow-wrap:anywhere}
+.lt-body p{margin:0 0 .8em}
+.lt-body p:last-child{margin-bottom:0}
+.lt-body .lt-h{font-size:.74rem;font-weight:600;letter-spacing:.06em;color:var(--muted);margin-bottom:.6em}
+.lt-body .lt-lab{font-weight:600}
+.lt-body a,.lt-facts a{color:var(--blue);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+.lt-f{margin:0 0 .8em;display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;padding:10px 14px;border-radius:12px;background:var(--sunken)}
+.lt-f>div{display:contents}
+.lt-f dt{color:var(--muted);font-size:.84rem}
+.lt-f dd{margin:0;font-weight:500}
+@media (max-width:520px){.lt-facts>div{flex:1 1 100%}.lt-f{grid-template-columns:minmax(0,1fr);gap:0}.lt-f dd{margin-bottom:6px}}
