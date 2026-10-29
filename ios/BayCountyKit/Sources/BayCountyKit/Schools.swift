@@ -3,7 +3,7 @@ import Foundation
 /// Public schools (/schools), from the schools, school-calendar and school-enrollment datasets (plus school-grades and
 /// school-spending once the state's files are in). The same order, filters and "coming up" rule as site/schools_page.py.
 public enum Schools {
-    public static let datasets = ["schools", "school-calendar", "school-enrollment", "school-grades", "school-spending"]
+    public static let datasets = ["schools", "school-calendar", "school-enrollment", "school-grades", "school-spending", "school-grade-state", "school-bell-times"]
     public static let levelOrder = ["Elementary", "Middle", "High", "Combined", "Other"]
 
     public enum Filter: String, Sendable, CaseIterable {

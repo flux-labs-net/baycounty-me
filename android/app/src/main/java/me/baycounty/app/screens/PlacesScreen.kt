@@ -64,6 +64,8 @@ fun PlacesScreen() {
                 RowDivider(50.dp)
                 RouteRow(Route.DonorContracts, "Campaign gifts and contracts", symbol = "point.3.connected.trianglepath.dotted")
                 RowDivider(50.dp)
+                RouteRow(Route.Overlaps, "Where records overlap", "Votes naming donors, agendas, bids and more", symbol = "link")
+                RowDivider(50.dp)
                 RouteRow(Route.Dataset("candidates-2026"), "Elections", "Who's running, where to vote, results", symbol = "checkmark.seal")
             }
         }

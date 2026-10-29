@@ -95,6 +95,8 @@ struct GovernmentsView: View {
             RowDivider(inset: 50)
             RouteRow(route: .donorContracts, title: "Campaign gifts and contracts", symbol: "point.3.connected.trianglepath.dotted")
             RowDivider(inset: 50)
+            RouteRow(route: .overlaps, title: "Where records overlap", detail: "Votes naming donors, agendas, bids and more", symbol: "link")
+            RowDivider(inset: 50)
             RouteRow(route: .dataset("candidates-2026"), title: "Elections", detail: "Who's running, where to vote, results", symbol: "checkmark.rectangle.stack")
         }
     }
