@@ -109,7 +109,25 @@ CSS = r"""
 .sc-spark circle{fill:var(--blue)}
 .sc-mx td,.sc-mx th{text-align:center;padding:6px 4px}
 .sc-mx td:first-child,.sc-mx th:first-child{text-align:left;min-width:180px;position:sticky;left:0;z-index:1;background:var(--surface)}
-@media (max-width:640px){.sc-mx td:first-child,.sc-mx th:first-child{min-width:132px;max-width:132px;font-size:.8rem}}
+:root .tablewrap.sc-mxw{overflow-x:auto}
+.sc-mx .ys{display:none}
+@media (max-width:640px){
+  :root .sc-mx{width:100%;min-width:0 !important;table-layout:fixed}
+  :root .sc-mx td,:root .sc-mx th{vertical-align:top !important}
+  :root .sc-mx td:first-child{padding-top:11px !important}
+  .sc-mx .old{display:none}
+  .sc-mx td:first-child,.sc-mx th:first-child{min-width:0;width:38%;font-size:.82rem;line-height:1.3;position:static}
+  .sc-mx td:first-child a{text-decoration:none}
+  :root .sc-mx th{font-size:.72rem !important;padding:8px 1px !important;white-space:nowrap}
+  .sc-mx .yl{display:none}.sc-mx .ys{display:inline}
+  .sc-mx td:not(:first-child){line-height:1}
+  :root .sc-mx td.na{line-height:26px}
+  .sc-mx td>.sc-g{vertical-align:middle;display:inline-flex;line-height:1}
+  :root .sc-mx th:first-child{padding-left:12px !important}
+  .sc-mx td{padding:7px 2px}
+  .sc-mx td:first-child,.sc-mx th:first-child{padding-left:12px}
+  .sc-mx .sc-g.sm{min-width:26px;height:26px;padding:0 4px;font-size:.85rem}
+}
 .sc-mx td.na{color:var(--muted);font-size:.78rem}
 .sc-bars{display:flex;flex-direction:column;gap:6px}
 .sc-bar{display:grid;grid-template-columns:minmax(150px,240px) 1fr 80px;gap:10px;align-items:center;font-size:.85rem}
@@ -523,9 +541,10 @@ def schools_page(out_dir):
     if grade_years:
         show_years = [y for y in range(max(grade_years[0], 2016), latest_gy + 1)]
         mx_rows = ''
+        _old = lambda y: ' class="old"' if y < latest_gy - 4 else ''   # phones show the last five years
         for s in sorted((s for s in S if s['school_id'] in grades_by), key=lambda s: (s['status'] != 'Open', s['name'])):
             gh = grades_by[s['school_id']]
-            cells = ''.join(f'<td>{_g(gh[y]["grade"], True)}</td>' if y in gh else '<td class="na">·</td>' for y in show_years)
+            cells = ''.join((f'<td{_old(y)}>{_g(gh[y]["grade"], True)}</td>' if y in gh else f'<td class="na{" old" if _old(y) else ""}" aria-label="No grade">–</td>') for y in show_years)
             mx_rows += f'<tr><td><a href="#s-{e(s["school_id"])}">{e(s["name"])}</a>{" <span class=muted>(closed)</span>" if s["status"] != "Open" else ""}</td>{cells}</tr>'
         bay = {}
         for g in G:
@@ -539,8 +558,8 @@ def schools_page(out_dir):
             mix = (f'<p>In {latest_gy - 1}-{str(latest_gy)[2:]}, <b>{pa:.0f}%</b> of {e(PLACE["name"])}\'s graded public schools earned an A, compared with <b>{fa:.0f}%</b> of schools statewide. '
                    'Open a school under Every school to see the test scores behind its grade next to the Florida average.</p>'
                    f'<div class="sc-mixes">{_mix(bay, e(PLACE["name"]) + f" <small>{sum(bay.values())} schools</small>")}{_mix(flc, f"Florida <small>{sum(flc.values()):,} schools</small>")}</div>')
-        grades_html = mix + (f'<div class="tablewrap"><table class="tx-table sc-mx" data-tt="off" data-stack="off"><thead><tr><th>School</th>{"".join(f"<th>{y - 1}-{str(y)[2:]}</th>" for y in show_years)}</tr></thead><tbody>{mx_rows}</tbody></table></div>'
-                       '<p class="note">No school grades were given for 2019-20, when state testing was canceled. For 2020-21, only schools that asked got a grade. 2022-23 grades were an informational baseline after the state changed its tests. A dot means no grade that year (the school was new, closed, or isn\'t graded, like virtual and alternative programs).</p>')
+        grades_html = mix + (f'<div class="tablewrap sc-mxw"><table class="tx-table sc-mx" data-tt="off" data-stack="off"><thead><tr><th>School</th>{"".join(f"<th{_old(y)}><span class=yl>{y - 1}-{str(y)[2:]}</span><span class=ys>{str(y - 1)[2:]}-{str(y)[2:]}</span></th>" for y in show_years)}</tr></thead><tbody>{mx_rows}</tbody></table></div>'
+                       '<p class="note">No school grades were given for 2019-20, when state testing was canceled. For 2020-21, only schools that asked got a grade. 2022-23 grades were an informational baseline after the state changed its tests. A dash means no grade that year (the school was new, closed, or isn\'t graded, like virtual and alternative programs). On a phone, the table shows the last five years.</p>')
     else:
         grades_html = ('<div class="sc-pend">The Florida Department of Education publishes every school\'s grade each July. Its website turns away the automated readers this site uses, '
                        'so the grade files are being added by hand. Until then, each school\'s grades are on the state\'s <a href="https://edudata.fldoe.org/" rel="noopener" target="_blank">Know Your Schools</a> report cards.</div>')
