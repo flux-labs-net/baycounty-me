@@ -1,0 +1,2873 @@
+{
+ "page_url": "https://www.fldoe.org/finance/fl-edu-finance-program-fefp/essa.stml",
+ "files": [
+  {
+   "year": 2018,
+   "source_url": "https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx",
+   "label": "2017-18 School per-pupil expenditures",
+   "schools": 48
+  },
+  {
+   "year": 2019,
+   "source_url": "https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx",
+   "label": "2018-19 School per-pupil expenditures",
+   "schools": 45
+  },
+  {
+   "year": 2020,
+   "source_url": "https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx",
+   "label": "2019-20 School per-pupil expenditures",
+   "schools": 41
+  },
+  {
+   "year": 2021,
+   "source_url": "https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx",
+   "label": "2020-21 School per-pupil expenditures",
+   "schools": 42
+  },
+  {
+   "year": 2022,
+   "source_url": "https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx",
+   "label": "2021-22 School per-pupil expenditures",
+   "schools": 42
+  },
+  {
+   "year": 2023,
+   "source_url": "https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx",
+   "label": "2022-23 School per-pupil expenditures",
+   "schools": 45
+  },
+  {
+   "year": 2024,
+   "source_url": "https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx",
+   "label": "2023-24 School per-pupil expenditures",
+   "schools": 44
+  },
+  {
+   "year": 2025,
+   "source_url": "https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx",
+   "label": "2024-25 School per-pupil expenditures",
+   "schools": 45
+  }
+ ],
+ "rows": [
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2018,
+   "federal_ppe": 453.0,
+   "state_local_ppe": 6801.0,
+   "total_ppe": 7254.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 448.0,
+   "state_local_ppe": 6922.0,
+   "total_ppe": 7370.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 546.0,
+   "state_local_ppe": 6959.0,
+   "total_ppe": 7505.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 1918.0,
+   "state_local_ppe": 9394.0,
+   "total_ppe": 11312.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 937.0,
+   "state_local_ppe": 6733.0,
+   "total_ppe": 7670.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2018,
+   "federal_ppe": 928.0,
+   "state_local_ppe": 8708.0,
+   "total_ppe": 9636.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 2219.0,
+   "state_local_ppe": 9368.0,
+   "total_ppe": 11587.0
+  },
+  {
+   "school_number": "03-0141",
+   "school_name_raw": "EVERITT MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 871.0,
+   "state_local_ppe": 7058.0,
+   "total_ppe": 7929.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 735.0,
+   "state_local_ppe": 7276.0,
+   "total_ppe": 8011.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 727.0,
+   "state_local_ppe": 8100.0,
+   "total_ppe": 8827.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 294.0,
+   "state_local_ppe": 7902.0,
+   "total_ppe": 8196.0
+  },
+  {
+   "school_number": "03-0191",
+   "school_name_raw": "OAKLAND TERRACE SCHOOL FOR THE VISUAL AND PERFORMING ARTS",
+   "year": 2018,
+   "federal_ppe": 1434.0,
+   "state_local_ppe": 9778.0,
+   "total_ppe": 11212.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 177.0,
+   "state_local_ppe": 7036.0,
+   "total_ppe": 7213.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 1111.0,
+   "state_local_ppe": 7576.0,
+   "total_ppe": 8687.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 596.0,
+   "state_local_ppe": 8101.0,
+   "total_ppe": 8697.0
+  },
+  {
+   "school_number": "03-0231",
+   "school_name_raw": "SPRINGFIELD ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 2652.0,
+   "state_local_ppe": 10391.0,
+   "total_ppe": 13043.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL",
+   "year": 2018,
+   "federal_ppe": 2489.0,
+   "state_local_ppe": 26308.0,
+   "total_ppe": 28797.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 1059.0,
+   "state_local_ppe": 7375.0,
+   "total_ppe": 8434.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 807.0,
+   "state_local_ppe": 8150.0,
+   "total_ppe": 8957.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2018,
+   "federal_ppe": 3199.0,
+   "state_local_ppe": 27284.0,
+   "total_ppe": 30483.0
+  },
+  {
+   "school_number": "03-0291",
+   "school_name_raw": "OSCAR PATTERSON ELEMENTARY MAGNET",
+   "year": 2018,
+   "federal_ppe": 1886.0,
+   "state_local_ppe": 10116.0,
+   "total_ppe": 12002.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 157.0,
+   "state_local_ppe": 5826.0,
+   "total_ppe": 5983.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2018,
+   "federal_ppe": 321.0,
+   "state_local_ppe": 6879.0,
+   "total_ppe": 7200.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 553.0,
+   "state_local_ppe": 7787.0,
+   "total_ppe": 8340.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 734.0,
+   "state_local_ppe": 7068.0,
+   "total_ppe": 7802.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2018,
+   "federal_ppe": 170.0,
+   "state_local_ppe": 5620.0,
+   "total_ppe": 5790.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 173.0,
+   "state_local_ppe": 6618.0,
+   "total_ppe": 6791.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 503.0,
+   "state_local_ppe": 7615.0,
+   "total_ppe": 8118.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 239.0,
+   "state_local_ppe": 7067.0,
+   "total_ppe": 7306.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2018,
+   "federal_ppe": 3934.0,
+   "state_local_ppe": 25792.0,
+   "total_ppe": 29726.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2018,
+   "federal_ppe": 645.0,
+   "state_local_ppe": 7355.0,
+   "total_ppe": 8000.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2018,
+   "federal_ppe": 231.0,
+   "state_local_ppe": 6011.0,
+   "total_ppe": 6242.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2018,
+   "federal_ppe": 434.0,
+   "state_local_ppe": 7319.0,
+   "total_ppe": 7753.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2018,
+   "federal_ppe": 1736.0,
+   "state_local_ppe": 20372.0,
+   "total_ppe": 22108.0
+  },
+  {
+   "school_number": "03-0591",
+   "school_name_raw": "C C WASHINGTON ACADEMY",
+   "year": 2018,
+   "federal_ppe": 1051.0,
+   "state_local_ppe": 15572.0,
+   "total_ppe": 16623.0
+  },
+  {
+   "school_number": "03-0604",
+   "school_name_raw": "PANAMA CITY MARINE INSTITUTE",
+   "year": 2018,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6735.0,
+   "total_ppe": 6735.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2018,
+   "federal_ppe": 26.0,
+   "state_local_ppe": 6025.0,
+   "total_ppe": 6051.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 29.0,
+   "state_local_ppe": 5581.0,
+   "total_ppe": 5610.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2018,
+   "federal_ppe": 28.0,
+   "state_local_ppe": 5265.0,
+   "total_ppe": 5293.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2018,
+   "federal_ppe": 27.0,
+   "state_local_ppe": 5333.0,
+   "total_ppe": 5360.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 26.0,
+   "state_local_ppe": 6269.0,
+   "total_ppe": 6295.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2018,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6255.0,
+   "total_ppe": 6255.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2018,
+   "federal_ppe": 1063.0,
+   "state_local_ppe": 5440.0,
+   "total_ppe": 6503.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2018,
+   "federal_ppe": 1094.0,
+   "state_local_ppe": 7428.0,
+   "total_ppe": 8522.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2018,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 7290.0,
+   "total_ppe": 7290.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2018,
+   "federal_ppe": 24.0,
+   "state_local_ppe": 6878.0,
+   "total_ppe": 6902.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2018,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 4742.0,
+   "total_ppe": 4742.0
+  },
+  {
+   "school_number": "03-7006",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION (COURSE OFFERINGS)",
+   "year": 2018,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 3543.0,
+   "total_ppe": 3543.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2019,
+   "federal_ppe": 394.0,
+   "state_local_ppe": 10090.0,
+   "total_ppe": 10484.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 458.0,
+   "state_local_ppe": 10279.0,
+   "total_ppe": 10738.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 603.0,
+   "state_local_ppe": 8945.0,
+   "total_ppe": 9548.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 2174.0,
+   "state_local_ppe": 12436.0,
+   "total_ppe": 14610.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 754.0,
+   "state_local_ppe": 10031.0,
+   "total_ppe": 10784.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2019,
+   "federal_ppe": 1128.0,
+   "state_local_ppe": 12084.0,
+   "total_ppe": 13212.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 2587.0,
+   "state_local_ppe": 14080.0,
+   "total_ppe": 16667.0
+  },
+  {
+   "school_number": "03-0141",
+   "school_name_raw": "EVERITT MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 773.0,
+   "state_local_ppe": 10182.0,
+   "total_ppe": 10956.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 774.0,
+   "state_local_ppe": 12335.0,
+   "total_ppe": 13109.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 932.0,
+   "state_local_ppe": 11993.0,
+   "total_ppe": 12926.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 293.0,
+   "state_local_ppe": 11939.0,
+   "total_ppe": 12232.0
+  },
+  {
+   "school_number": "03-0191",
+   "school_name_raw": "OAKLAND TERRACE SCHOOL FOR THE VISUAL AND PERFORMING ARTS",
+   "year": 2019,
+   "federal_ppe": 1923.0,
+   "state_local_ppe": 13480.0,
+   "total_ppe": 15402.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 148.0,
+   "state_local_ppe": 9034.0,
+   "total_ppe": 9183.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 1101.0,
+   "state_local_ppe": 10912.0,
+   "total_ppe": 12014.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 706.0,
+   "state_local_ppe": 12715.0,
+   "total_ppe": 13421.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL",
+   "year": 2019,
+   "federal_ppe": 2731.0,
+   "state_local_ppe": 34548.0,
+   "total_ppe": 37279.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 1258.0,
+   "state_local_ppe": 10859.0,
+   "total_ppe": 12117.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 588.0,
+   "state_local_ppe": 9996.0,
+   "total_ppe": 10585.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2019,
+   "federal_ppe": 3401.0,
+   "state_local_ppe": 35605.0,
+   "total_ppe": 39006.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 90.0,
+   "state_local_ppe": 8717.0,
+   "total_ppe": 8807.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2019,
+   "federal_ppe": 460.0,
+   "state_local_ppe": 10097.0,
+   "total_ppe": 10557.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 563.0,
+   "state_local_ppe": 11731.0,
+   "total_ppe": 12294.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 742.0,
+   "state_local_ppe": 11164.0,
+   "total_ppe": 11905.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2019,
+   "federal_ppe": 258.0,
+   "state_local_ppe": 8043.0,
+   "total_ppe": 8302.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 131.0,
+   "state_local_ppe": 10258.0,
+   "total_ppe": 10389.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 642.0,
+   "state_local_ppe": 10353.0,
+   "total_ppe": 10995.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 222.0,
+   "state_local_ppe": 8988.0,
+   "total_ppe": 9209.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2019,
+   "federal_ppe": 2842.0,
+   "state_local_ppe": 32802.0,
+   "total_ppe": 35644.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2019,
+   "federal_ppe": 717.0,
+   "state_local_ppe": 9182.0,
+   "total_ppe": 9899.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2019,
+   "federal_ppe": 272.0,
+   "state_local_ppe": 7732.0,
+   "total_ppe": 8004.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2019,
+   "federal_ppe": 412.0,
+   "state_local_ppe": 8994.0,
+   "total_ppe": 9405.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2019,
+   "federal_ppe": 1338.0,
+   "state_local_ppe": 23344.0,
+   "total_ppe": 24681.0
+  },
+  {
+   "school_number": "03-0591",
+   "school_name_raw": "C C WASHINGTON ACADEMY",
+   "year": 2019,
+   "federal_ppe": 912.0,
+   "state_local_ppe": 17764.0,
+   "total_ppe": 18677.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2019,
+   "federal_ppe": 35.0,
+   "state_local_ppe": 6258.0,
+   "total_ppe": 6293.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 37.0,
+   "state_local_ppe": 5711.0,
+   "total_ppe": 5748.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2019,
+   "federal_ppe": 30.0,
+   "state_local_ppe": 5314.0,
+   "total_ppe": 5344.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2019,
+   "federal_ppe": 30.0,
+   "state_local_ppe": 5566.0,
+   "total_ppe": 5596.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 40.0,
+   "state_local_ppe": 6299.0,
+   "total_ppe": 6339.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2019,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 50030.0,
+   "total_ppe": 50030.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2019,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6403.0,
+   "total_ppe": 6403.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2019,
+   "federal_ppe": 1682.0,
+   "state_local_ppe": 6288.0,
+   "total_ppe": 7970.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2019,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6956.0,
+   "total_ppe": 6956.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2019,
+   "federal_ppe": 37.0,
+   "state_local_ppe": 19571.0,
+   "total_ppe": 19608.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2019,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 4592.0,
+   "total_ppe": 4592.0
+  },
+  {
+   "school_number": "03-7006",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION (COURSE OFFERINGS)",
+   "year": 2019,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6914.0,
+   "total_ppe": 6914.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2020,
+   "federal_ppe": 626.0,
+   "state_local_ppe": 7979.0,
+   "total_ppe": 8606.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2020,
+   "federal_ppe": 839.0,
+   "state_local_ppe": 9376.0,
+   "total_ppe": 10216.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 607.0,
+   "state_local_ppe": 8716.0,
+   "total_ppe": 9323.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1718.0,
+   "state_local_ppe": 9676.0,
+   "total_ppe": 11395.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1950.0,
+   "state_local_ppe": 10297.0,
+   "total_ppe": 12247.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2020,
+   "federal_ppe": 1371.0,
+   "state_local_ppe": 8400.0,
+   "total_ppe": 9771.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1653.0,
+   "state_local_ppe": 11656.0,
+   "total_ppe": 13310.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1908.0,
+   "state_local_ppe": 10590.0,
+   "total_ppe": 12497.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2020,
+   "federal_ppe": 2123.0,
+   "state_local_ppe": 10771.0,
+   "total_ppe": 12893.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 902.0,
+   "state_local_ppe": 9842.0,
+   "total_ppe": 10744.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2020,
+   "federal_ppe": 305.0,
+   "state_local_ppe": 7904.0,
+   "total_ppe": 8209.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1373.0,
+   "state_local_ppe": 8098.0,
+   "total_ppe": 9471.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 778.0,
+   "state_local_ppe": 8681.0,
+   "total_ppe": 9459.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL",
+   "year": 2020,
+   "federal_ppe": 3598.0,
+   "state_local_ppe": 33282.0,
+   "total_ppe": 36880.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1219.0,
+   "state_local_ppe": 9350.0,
+   "total_ppe": 10569.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 704.0,
+   "state_local_ppe": 8755.0,
+   "total_ppe": 9458.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2020,
+   "federal_ppe": 3952.0,
+   "state_local_ppe": 31799.0,
+   "total_ppe": 35752.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2020,
+   "federal_ppe": 624.0,
+   "state_local_ppe": 7555.0,
+   "total_ppe": 8180.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2020,
+   "federal_ppe": 643.0,
+   "state_local_ppe": 8275.0,
+   "total_ppe": 8918.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1194.0,
+   "state_local_ppe": 9546.0,
+   "total_ppe": 10741.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1169.0,
+   "state_local_ppe": 8654.0,
+   "total_ppe": 9823.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2020,
+   "federal_ppe": 276.0,
+   "state_local_ppe": 6617.0,
+   "total_ppe": 6893.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 315.0,
+   "state_local_ppe": 10498.0,
+   "total_ppe": 10813.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 790.0,
+   "state_local_ppe": 8802.0,
+   "total_ppe": 9592.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 412.0,
+   "state_local_ppe": 8972.0,
+   "total_ppe": 9383.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2020,
+   "federal_ppe": 3903.0,
+   "state_local_ppe": 29608.0,
+   "total_ppe": 33511.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2020,
+   "federal_ppe": 865.0,
+   "state_local_ppe": 8217.0,
+   "total_ppe": 9082.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2020,
+   "federal_ppe": 335.0,
+   "state_local_ppe": 6842.0,
+   "total_ppe": 7177.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2020,
+   "federal_ppe": 677.0,
+   "state_local_ppe": 9040.0,
+   "total_ppe": 9718.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2020,
+   "federal_ppe": 1460.0,
+   "state_local_ppe": 15775.0,
+   "total_ppe": 17236.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2020,
+   "federal_ppe": 30.0,
+   "state_local_ppe": 6470.0,
+   "total_ppe": 6500.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2020,
+   "federal_ppe": 28.0,
+   "state_local_ppe": 5658.0,
+   "total_ppe": 5686.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2020,
+   "federal_ppe": 23.0,
+   "state_local_ppe": 5337.0,
+   "total_ppe": 5360.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2020,
+   "federal_ppe": 24.0,
+   "state_local_ppe": 5687.0,
+   "total_ppe": 5711.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 76.0,
+   "state_local_ppe": 6700.0,
+   "total_ppe": 6776.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2020,
+   "federal_ppe": 514.0,
+   "state_local_ppe": 13741.0,
+   "total_ppe": 14255.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2020,
+   "federal_ppe": 281.0,
+   "state_local_ppe": 7302.0,
+   "total_ppe": 7583.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2020,
+   "federal_ppe": 967.0,
+   "state_local_ppe": 6933.0,
+   "total_ppe": 7899.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2020,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 8300.0,
+   "total_ppe": 8300.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2020,
+   "federal_ppe": 673.0,
+   "state_local_ppe": 13798.0,
+   "total_ppe": 14471.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2020,
+   "federal_ppe": 6.0,
+   "state_local_ppe": 13006.0,
+   "total_ppe": 13012.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2021,
+   "federal_ppe": 950.0,
+   "state_local_ppe": 7917.0,
+   "total_ppe": 8867.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1625.0,
+   "state_local_ppe": 9285.0,
+   "total_ppe": 10910.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1663.0,
+   "state_local_ppe": 8235.0,
+   "total_ppe": 9898.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 2399.0,
+   "state_local_ppe": 10614.0,
+   "total_ppe": 13013.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 2255.0,
+   "state_local_ppe": 9387.0,
+   "total_ppe": 11643.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2021,
+   "federal_ppe": 1770.0,
+   "state_local_ppe": 8513.0,
+   "total_ppe": 10283.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 2632.0,
+   "state_local_ppe": 11333.0,
+   "total_ppe": 13965.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 2223.0,
+   "state_local_ppe": 9199.0,
+   "total_ppe": 11422.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2021,
+   "federal_ppe": 2457.0,
+   "state_local_ppe": 10434.0,
+   "total_ppe": 12891.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1135.0,
+   "state_local_ppe": 10548.0,
+   "total_ppe": 11682.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2021,
+   "federal_ppe": 581.0,
+   "state_local_ppe": 8155.0,
+   "total_ppe": 8734.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1809.0,
+   "state_local_ppe": 8645.0,
+   "total_ppe": 10454.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1243.0,
+   "state_local_ppe": 9079.0,
+   "total_ppe": 10321.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL  AT OAKLAND TERRACE",
+   "year": 2021,
+   "federal_ppe": 4949.0,
+   "state_local_ppe": 29979.0,
+   "total_ppe": 34928.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1827.0,
+   "state_local_ppe": 10008.0,
+   "total_ppe": 11837.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1304.0,
+   "state_local_ppe": 9864.0,
+   "total_ppe": 11168.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2021,
+   "federal_ppe": 5233.0,
+   "state_local_ppe": 33329.0,
+   "total_ppe": 38562.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2021,
+   "federal_ppe": 642.0,
+   "state_local_ppe": 8325.0,
+   "total_ppe": 8968.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1351.0,
+   "state_local_ppe": 8801.0,
+   "total_ppe": 10152.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1380.0,
+   "state_local_ppe": 10743.0,
+   "total_ppe": 12122.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1660.0,
+   "state_local_ppe": 8581.0,
+   "total_ppe": 10240.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2021,
+   "federal_ppe": 390.0,
+   "state_local_ppe": 6703.0,
+   "total_ppe": 7093.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ACADEMY",
+   "year": 2021,
+   "federal_ppe": 1023.0,
+   "state_local_ppe": 8862.0,
+   "total_ppe": 9884.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1490.0,
+   "state_local_ppe": 9556.0,
+   "total_ppe": 11047.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 783.0,
+   "state_local_ppe": 9085.0,
+   "total_ppe": 9867.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2021,
+   "federal_ppe": 4444.0,
+   "state_local_ppe": 26010.0,
+   "total_ppe": 30453.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2021,
+   "federal_ppe": 807.0,
+   "state_local_ppe": 8486.0,
+   "total_ppe": 9292.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2021,
+   "federal_ppe": 646.0,
+   "state_local_ppe": 6949.0,
+   "total_ppe": 7594.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2021,
+   "federal_ppe": 947.0,
+   "state_local_ppe": 9338.0,
+   "total_ppe": 10285.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2021,
+   "federal_ppe": 2181.0,
+   "state_local_ppe": 18744.0,
+   "total_ppe": 20927.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2021,
+   "federal_ppe": 333.0,
+   "state_local_ppe": 7035.0,
+   "total_ppe": 7368.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2021,
+   "federal_ppe": 361.0,
+   "state_local_ppe": 5875.0,
+   "total_ppe": 6236.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2021,
+   "federal_ppe": 333.0,
+   "state_local_ppe": 5665.0,
+   "total_ppe": 5998.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2021,
+   "federal_ppe": 278.0,
+   "state_local_ppe": 6131.0,
+   "total_ppe": 6409.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 303.0,
+   "state_local_ppe": 6916.0,
+   "total_ppe": 7219.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2021,
+   "federal_ppe": 1715.0,
+   "state_local_ppe": 10591.0,
+   "total_ppe": 12306.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1358.0,
+   "state_local_ppe": 7467.0,
+   "total_ppe": 8826.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2021,
+   "federal_ppe": 1860.0,
+   "state_local_ppe": 7002.0,
+   "total_ppe": 8862.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2021,
+   "federal_ppe": 2857.0,
+   "state_local_ppe": 7047.0,
+   "total_ppe": 9905.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2021,
+   "federal_ppe": 262.0,
+   "state_local_ppe": 7368.0,
+   "total_ppe": 7630.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2021,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 4131.0,
+   "total_ppe": 4131.0
+  },
+  {
+   "school_number": "03-7023",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION PROGRAM (DISTRICT PROVIDED)",
+   "year": 2021,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 3758.0,
+   "total_ppe": 3758.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1294.0,
+   "state_local_ppe": 7496.0,
+   "total_ppe": 8790.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1529.0,
+   "state_local_ppe": 7716.0,
+   "total_ppe": 9245.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1213.0,
+   "state_local_ppe": 7686.0,
+   "total_ppe": 8898.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 2956.0,
+   "state_local_ppe": 10011.0,
+   "total_ppe": 12966.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 2455.0,
+   "state_local_ppe": 8696.0,
+   "total_ppe": 11151.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2022,
+   "federal_ppe": 2069.0,
+   "state_local_ppe": 7672.0,
+   "total_ppe": 9742.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 2323.0,
+   "state_local_ppe": 10120.0,
+   "total_ppe": 12442.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 2516.0,
+   "state_local_ppe": 7825.0,
+   "total_ppe": 10341.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2022,
+   "federal_ppe": 3019.0,
+   "state_local_ppe": 8940.0,
+   "total_ppe": 11958.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1978.0,
+   "state_local_ppe": 8011.0,
+   "total_ppe": 9989.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2022,
+   "federal_ppe": 789.0,
+   "state_local_ppe": 7336.0,
+   "total_ppe": 8125.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 2048.0,
+   "state_local_ppe": 7566.0,
+   "total_ppe": 9614.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1683.0,
+   "state_local_ppe": 8035.0,
+   "total_ppe": 9719.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL AT OAKLAND TERRACE",
+   "year": 2022,
+   "federal_ppe": 7494.0,
+   "state_local_ppe": 29084.0,
+   "total_ppe": 36576.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 2046.0,
+   "state_local_ppe": 8888.0,
+   "total_ppe": 10933.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1936.0,
+   "state_local_ppe": 8840.0,
+   "total_ppe": 10776.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2022,
+   "federal_ppe": 7056.0,
+   "state_local_ppe": 30625.0,
+   "total_ppe": 37681.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2022,
+   "federal_ppe": 995.0,
+   "state_local_ppe": 7002.0,
+   "total_ppe": 7997.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1439.0,
+   "state_local_ppe": 8450.0,
+   "total_ppe": 9888.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1422.0,
+   "state_local_ppe": 9064.0,
+   "total_ppe": 10486.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1377.0,
+   "state_local_ppe": 7441.0,
+   "total_ppe": 8819.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2022,
+   "federal_ppe": 569.0,
+   "state_local_ppe": 6140.0,
+   "total_ppe": 6709.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ACADEMY",
+   "year": 2022,
+   "federal_ppe": 1274.0,
+   "state_local_ppe": 7713.0,
+   "total_ppe": 8986.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1717.0,
+   "state_local_ppe": 8431.0,
+   "total_ppe": 10148.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1275.0,
+   "state_local_ppe": 8425.0,
+   "total_ppe": 9701.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2022,
+   "federal_ppe": 7080.0,
+   "state_local_ppe": 26616.0,
+   "total_ppe": 33695.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1206.0,
+   "state_local_ppe": 7922.0,
+   "total_ppe": 9127.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2022,
+   "federal_ppe": 710.0,
+   "state_local_ppe": 6651.0,
+   "total_ppe": 7362.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2022,
+   "federal_ppe": 1320.0,
+   "state_local_ppe": 8864.0,
+   "total_ppe": 10183.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2022,
+   "federal_ppe": 6952.0,
+   "state_local_ppe": 18158.0,
+   "total_ppe": 25110.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2022,
+   "federal_ppe": 881.0,
+   "state_local_ppe": 6867.0,
+   "total_ppe": 7749.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2022,
+   "federal_ppe": 991.0,
+   "state_local_ppe": 6055.0,
+   "total_ppe": 7046.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2022,
+   "federal_ppe": 601.0,
+   "state_local_ppe": 6168.0,
+   "total_ppe": 6769.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2022,
+   "federal_ppe": 995.0,
+   "state_local_ppe": 5762.0,
+   "total_ppe": 6757.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 909.0,
+   "state_local_ppe": 7110.0,
+   "total_ppe": 8019.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2022,
+   "federal_ppe": 1893.0,
+   "state_local_ppe": 18092.0,
+   "total_ppe": 19986.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1920.0,
+   "state_local_ppe": 9116.0,
+   "total_ppe": 11036.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2022,
+   "federal_ppe": 1738.0,
+   "state_local_ppe": 7638.0,
+   "total_ppe": 9377.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2022,
+   "federal_ppe": 420.0,
+   "state_local_ppe": 7700.0,
+   "total_ppe": 8120.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2022,
+   "federal_ppe": 1252.0,
+   "state_local_ppe": 7652.0,
+   "total_ppe": 8904.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2022,
+   "federal_ppe": 16.0,
+   "state_local_ppe": 5449.0,
+   "total_ppe": 5464.0
+  },
+  {
+   "school_number": "03-7023",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION PROGRAM (DISTRICT PROVIDED)",
+   "year": 2022,
+   "federal_ppe": 5.0,
+   "state_local_ppe": 3982.0,
+   "total_ppe": 3987.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1519.0,
+   "state_local_ppe": 7542.0,
+   "total_ppe": 9061.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1754.0,
+   "state_local_ppe": 8025.0,
+   "total_ppe": 9779.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1979.0,
+   "state_local_ppe": 8452.0,
+   "total_ppe": 10430.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2469.0,
+   "state_local_ppe": 9623.0,
+   "total_ppe": 12092.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2652.0,
+   "state_local_ppe": 9872.0,
+   "total_ppe": 12525.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2023,
+   "federal_ppe": 3737.0,
+   "state_local_ppe": 8969.0,
+   "total_ppe": 12706.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 3111.0,
+   "state_local_ppe": 10260.0,
+   "total_ppe": 13372.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2760.0,
+   "state_local_ppe": 8891.0,
+   "total_ppe": 11649.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1848.0,
+   "state_local_ppe": 9066.0,
+   "total_ppe": 10915.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1656.0,
+   "state_local_ppe": 8323.0,
+   "total_ppe": 9978.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2023,
+   "federal_ppe": 924.0,
+   "state_local_ppe": 7633.0,
+   "total_ppe": 8557.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 3767.0,
+   "state_local_ppe": 8489.0,
+   "total_ppe": 12256.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1884.0,
+   "state_local_ppe": 8288.0,
+   "total_ppe": 10171.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL AT OAKLAND TERRACE",
+   "year": 2023,
+   "federal_ppe": 10072.0,
+   "state_local_ppe": 37867.0,
+   "total_ppe": 47939.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2758.0,
+   "state_local_ppe": 8559.0,
+   "total_ppe": 11316.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2479.0,
+   "state_local_ppe": 9325.0,
+   "total_ppe": 11804.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2023,
+   "federal_ppe": 6755.0,
+   "state_local_ppe": 29748.0,
+   "total_ppe": 36504.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2023,
+   "federal_ppe": 915.0,
+   "state_local_ppe": 7578.0,
+   "total_ppe": 8492.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2083.0,
+   "state_local_ppe": 8518.0,
+   "total_ppe": 10601.0
+  },
+  {
+   "school_number": "03-0391",
+   "school_name_raw": "OSCAR PATTERSON ACADEMY",
+   "year": 2023,
+   "federal_ppe": 2493.0,
+   "state_local_ppe": 9133.0,
+   "total_ppe": 11626.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1442.0,
+   "state_local_ppe": 8701.0,
+   "total_ppe": 10145.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2035.0,
+   "state_local_ppe": 8204.0,
+   "total_ppe": 10240.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2023,
+   "federal_ppe": 622.0,
+   "state_local_ppe": 6442.0,
+   "total_ppe": 7063.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ACADEMY",
+   "year": 2023,
+   "federal_ppe": 1324.0,
+   "state_local_ppe": 7674.0,
+   "total_ppe": 8998.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1742.0,
+   "state_local_ppe": 8201.0,
+   "total_ppe": 9944.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1557.0,
+   "state_local_ppe": 8797.0,
+   "total_ppe": 10353.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2023,
+   "federal_ppe": 8203.0,
+   "state_local_ppe": 26787.0,
+   "total_ppe": 34990.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1157.0,
+   "state_local_ppe": 8070.0,
+   "total_ppe": 9226.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2023,
+   "federal_ppe": 804.0,
+   "state_local_ppe": 6774.0,
+   "total_ppe": 7579.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2023,
+   "federal_ppe": 1534.0,
+   "state_local_ppe": 9097.0,
+   "total_ppe": 10631.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2023,
+   "federal_ppe": 4722.0,
+   "state_local_ppe": 13927.0,
+   "total_ppe": 18650.0
+  },
+  {
+   "school_number": "03-0611",
+   "school_name_raw": "A. GARY WALSINGHAM ACADEMY",
+   "year": 2023,
+   "federal_ppe": 2620.0,
+   "state_local_ppe": 13739.0,
+   "total_ppe": 16359.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2023,
+   "federal_ppe": 927.0,
+   "state_local_ppe": 7889.0,
+   "total_ppe": 8815.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1094.0,
+   "state_local_ppe": 6487.0,
+   "total_ppe": 7581.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2023,
+   "federal_ppe": 725.0,
+   "state_local_ppe": 6423.0,
+   "total_ppe": 7148.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2023,
+   "federal_ppe": 755.0,
+   "state_local_ppe": 6331.0,
+   "total_ppe": 7085.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 938.0,
+   "state_local_ppe": 7600.0,
+   "total_ppe": 8538.0
+  },
+  {
+   "school_number": "03-0764",
+   "school_name_raw": "AMIKIDS MARITIME ACADEMY",
+   "year": 2023,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6579.0,
+   "total_ppe": 6579.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2023,
+   "federal_ppe": 1324.0,
+   "state_local_ppe": 16483.0,
+   "total_ppe": 17807.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2023,
+   "federal_ppe": 2033.0,
+   "state_local_ppe": 10961.0,
+   "total_ppe": 12994.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2023,
+   "federal_ppe": 1010.0,
+   "state_local_ppe": 8335.0,
+   "total_ppe": 9345.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2023,
+   "federal_ppe": 402.0,
+   "state_local_ppe": 8725.0,
+   "total_ppe": 9126.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2023,
+   "federal_ppe": 1258.0,
+   "state_local_ppe": 8276.0,
+   "total_ppe": 9533.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2023,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 6138.0,
+   "total_ppe": 6139.0
+  },
+  {
+   "school_number": "03-7023",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION PROGRAM (DISTRICT PROVIDED)",
+   "year": 2023,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 4878.0,
+   "total_ppe": 4878.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1187.0,
+   "state_local_ppe": 7950.0,
+   "total_ppe": 9138.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1628.0,
+   "state_local_ppe": 8447.0,
+   "total_ppe": 10076.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1611.0,
+   "state_local_ppe": 8257.0,
+   "total_ppe": 9868.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 2260.0,
+   "state_local_ppe": 10886.0,
+   "total_ppe": 13147.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 2533.0,
+   "state_local_ppe": 10371.0,
+   "total_ppe": 12905.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2024,
+   "federal_ppe": 3591.0,
+   "state_local_ppe": 10834.0,
+   "total_ppe": 14424.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 3067.0,
+   "state_local_ppe": 10069.0,
+   "total_ppe": 13136.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1866.0,
+   "state_local_ppe": 9231.0,
+   "total_ppe": 11096.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1821.0,
+   "state_local_ppe": 9102.0,
+   "total_ppe": 10922.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 2181.0,
+   "state_local_ppe": 10107.0,
+   "total_ppe": 12288.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1059.0,
+   "state_local_ppe": 9139.0,
+   "total_ppe": 10198.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 2935.0,
+   "state_local_ppe": 9592.0,
+   "total_ppe": 12528.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1574.0,
+   "state_local_ppe": 8443.0,
+   "total_ppe": 10017.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL AT OAKLAND TERRACE",
+   "year": 2024,
+   "federal_ppe": 8360.0,
+   "state_local_ppe": 41737.0,
+   "total_ppe": 50098.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 2686.0,
+   "state_local_ppe": 10669.0,
+   "total_ppe": 13355.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1900.0,
+   "state_local_ppe": 9142.0,
+   "total_ppe": 11042.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2024,
+   "federal_ppe": 727.0,
+   "state_local_ppe": 8206.0,
+   "total_ppe": 8934.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2024,
+   "federal_ppe": 2295.0,
+   "state_local_ppe": 9585.0,
+   "total_ppe": 11880.0
+  },
+  {
+   "school_number": "03-0391",
+   "school_name_raw": "OSCAR PATTERSON ACADEMY",
+   "year": 2024,
+   "federal_ppe": 2509.0,
+   "state_local_ppe": 8695.0,
+   "total_ppe": 11204.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1977.0,
+   "state_local_ppe": 9392.0,
+   "total_ppe": 11370.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1713.0,
+   "state_local_ppe": 9365.0,
+   "total_ppe": 11078.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2024,
+   "federal_ppe": 523.0,
+   "state_local_ppe": 6714.0,
+   "total_ppe": 7237.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ACADEMY",
+   "year": 2024,
+   "federal_ppe": 922.0,
+   "state_local_ppe": 9023.0,
+   "total_ppe": 9945.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1700.0,
+   "state_local_ppe": 8544.0,
+   "total_ppe": 10244.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1396.0,
+   "state_local_ppe": 9296.0,
+   "total_ppe": 10692.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2024,
+   "federal_ppe": 6042.0,
+   "state_local_ppe": 34494.0,
+   "total_ppe": 40536.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2024,
+   "federal_ppe": 929.0,
+   "state_local_ppe": 8547.0,
+   "total_ppe": 9475.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2024,
+   "federal_ppe": 649.0,
+   "state_local_ppe": 7163.0,
+   "total_ppe": 7813.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2024,
+   "federal_ppe": 1271.0,
+   "state_local_ppe": 9692.0,
+   "total_ppe": 10964.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2024,
+   "federal_ppe": 4045.0,
+   "state_local_ppe": 15580.0,
+   "total_ppe": 19625.0
+  },
+  {
+   "school_number": "03-0611",
+   "school_name_raw": "A. GARY WALSINGHAM ACADEMY",
+   "year": 2024,
+   "federal_ppe": 2118.0,
+   "state_local_ppe": 11528.0,
+   "total_ppe": 13646.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2024,
+   "federal_ppe": 1171.0,
+   "state_local_ppe": 7977.0,
+   "total_ppe": 9148.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1016.0,
+   "state_local_ppe": 6858.0,
+   "total_ppe": 7874.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2024,
+   "federal_ppe": 616.0,
+   "state_local_ppe": 6896.0,
+   "total_ppe": 7512.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2024,
+   "federal_ppe": 680.0,
+   "state_local_ppe": 6818.0,
+   "total_ppe": 7498.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 761.0,
+   "state_local_ppe": 8212.0,
+   "total_ppe": 8973.0
+  },
+  {
+   "school_number": "03-0764",
+   "school_name_raw": "AMIKIDS MARITIME ACADEMY",
+   "year": 2024,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 8414.0,
+   "total_ppe": 8414.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2024,
+   "federal_ppe": 2207.0,
+   "state_local_ppe": 19748.0,
+   "total_ppe": 21955.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1342.0,
+   "state_local_ppe": 10162.0,
+   "total_ppe": 11503.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2024,
+   "federal_ppe": 1836.0,
+   "state_local_ppe": 8142.0,
+   "total_ppe": 9977.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2024,
+   "federal_ppe": 337.0,
+   "state_local_ppe": 7780.0,
+   "total_ppe": 8117.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2024,
+   "federal_ppe": 429.0,
+   "state_local_ppe": 9915.0,
+   "total_ppe": 10344.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2024,
+   "federal_ppe": 24.0,
+   "state_local_ppe": 7701.0,
+   "total_ppe": 7725.0
+  },
+  {
+   "school_number": "03-7023",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION PROGRAM (DISTRICT PROVIDED)",
+   "year": 2024,
+   "federal_ppe": 30.0,
+   "state_local_ppe": 6191.0,
+   "total_ppe": 6220.0
+  },
+  {
+   "school_number": "03-0061",
+   "school_name_raw": "BAY HIGH SCHOOL",
+   "year": 2025,
+   "federal_ppe": 813.0,
+   "state_local_ppe": 8237.0,
+   "total_ppe": 9050.0
+  },
+  {
+   "school_number": "03-0071",
+   "school_name_raw": "MERRITT BROWN MIDDLE SCHOOL",
+   "year": 2025,
+   "federal_ppe": 899.0,
+   "state_local_ppe": 10062.0,
+   "total_ppe": 10960.0
+  },
+  {
+   "school_number": "03-0081",
+   "school_name_raw": "HUTCHISON BEACH ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1090.0,
+   "state_local_ppe": 9304.0,
+   "total_ppe": 10394.0
+  },
+  {
+   "school_number": "03-0091",
+   "school_name_raw": "CEDAR GROVE ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 2509.0,
+   "state_local_ppe": 13916.0,
+   "total_ppe": 16425.0
+  },
+  {
+   "school_number": "03-0101",
+   "school_name_raw": "CALLAWAY ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1280.0,
+   "state_local_ppe": 9908.0,
+   "total_ppe": 11187.0
+  },
+  {
+   "school_number": "03-0111",
+   "school_name_raw": "MERRIAM CHERRY STREET ELEMENTARY",
+   "year": 2025,
+   "federal_ppe": 1498.0,
+   "state_local_ppe": 12862.0,
+   "total_ppe": 14360.0
+  },
+  {
+   "school_number": "03-0131",
+   "school_name_raw": "LUCILLE MOORE ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1711.0,
+   "state_local_ppe": 11174.0,
+   "total_ppe": 12885.0
+  },
+  {
+   "school_number": "03-0151",
+   "school_name_raw": "HILAND PARK ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1679.0,
+   "state_local_ppe": 9984.0,
+   "total_ppe": 11663.0
+  },
+  {
+   "school_number": "03-0161",
+   "school_name_raw": "JINKS MIDDLE SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1195.0,
+   "state_local_ppe": 9576.0,
+   "total_ppe": 10771.0
+  },
+  {
+   "school_number": "03-0171",
+   "school_name_raw": "LYNN HAVEN ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1533.0,
+   "state_local_ppe": 9823.0,
+   "total_ppe": 11355.0
+  },
+  {
+   "school_number": "03-0201",
+   "school_name_raw": "SURFSIDE MIDDLE SCHOOL",
+   "year": 2025,
+   "federal_ppe": 803.0,
+   "state_local_ppe": 9691.0,
+   "total_ppe": 10494.0
+  },
+  {
+   "school_number": "03-0211",
+   "school_name_raw": "PARKER ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1423.0,
+   "state_local_ppe": 10516.0,
+   "total_ppe": 11939.0
+  },
+  {
+   "school_number": "03-0221",
+   "school_name_raw": "SOUTHPORT ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1286.0,
+   "state_local_ppe": 8914.0,
+   "total_ppe": 10199.0
+  },
+  {
+   "school_number": "03-0241",
+   "school_name_raw": "ST. ANDREW SCHOOL AT OAKLAND TERRACE",
+   "year": 2025,
+   "federal_ppe": 6694.0,
+   "state_local_ppe": 43440.0,
+   "total_ppe": 50135.0
+  },
+  {
+   "school_number": "03-0251",
+   "school_name_raw": "WALLER ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1714.0,
+   "state_local_ppe": 12069.0,
+   "total_ppe": 13783.0
+  },
+  {
+   "school_number": "03-0262",
+   "school_name_raw": "WEST BAY ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1207.0,
+   "state_local_ppe": 10393.0,
+   "total_ppe": 11599.0
+  },
+  {
+   "school_number": "03-0281",
+   "school_name_raw": "MARGARET K. LEWIS IN MILLVILLE",
+   "year": 2025,
+   "federal_ppe": 6965.0,
+   "state_local_ppe": 35211.0,
+   "total_ppe": 42176.0
+  },
+  {
+   "school_number": "03-0331",
+   "school_name_raw": "MOWAT MIDDLE SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1002.0,
+   "state_local_ppe": 8003.0,
+   "total_ppe": 9006.0
+  },
+  {
+   "school_number": "03-0341",
+   "school_name_raw": "RUTHERFORD HIGH SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1091.0,
+   "state_local_ppe": 9828.0,
+   "total_ppe": 10918.0
+  },
+  {
+   "school_number": "03-0391",
+   "school_name_raw": "OSCAR PATTERSON ACADEMY",
+   "year": 2025,
+   "federal_ppe": 1935.0,
+   "state_local_ppe": 11819.0,
+   "total_ppe": 13754.0
+  },
+  {
+   "school_number": "03-0461",
+   "school_name_raw": "DEER POINT ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1558.0,
+   "state_local_ppe": 9301.0,
+   "total_ppe": 10859.0
+  },
+  {
+   "school_number": "03-0471",
+   "school_name_raw": "NORTHSIDE ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1188.0,
+   "state_local_ppe": 9983.0,
+   "total_ppe": 11170.0
+  },
+  {
+   "school_number": "03-0491",
+   "school_name_raw": "A. CRAWFORD MOSLEY HIGH SCHOOL",
+   "year": 2025,
+   "federal_ppe": 340.0,
+   "state_local_ppe": 6825.0,
+   "total_ppe": 7164.0
+  },
+  {
+   "school_number": "03-0501",
+   "school_name_raw": "TYNDALL ACADEMY",
+   "year": 2025,
+   "federal_ppe": 904.0,
+   "state_local_ppe": 10077.0,
+   "total_ppe": 10981.0
+  },
+  {
+   "school_number": "03-0511",
+   "school_name_raw": "TOMMY SMITH ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1204.0,
+   "state_local_ppe": 9249.0,
+   "total_ppe": 10453.0
+  },
+  {
+   "school_number": "03-0521",
+   "school_name_raw": "PATRONIS ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 714.0,
+   "state_local_ppe": 9427.0,
+   "total_ppe": 10141.0
+  },
+  {
+   "school_number": "03-0531",
+   "school_name_raw": "NEW HORIZONS LEARNING CENTER",
+   "year": 2025,
+   "federal_ppe": 4648.0,
+   "state_local_ppe": 31845.0,
+   "total_ppe": 36492.0
+  },
+  {
+   "school_number": "03-0541",
+   "school_name_raw": "DEANE BOZEMAN SCHOOL",
+   "year": 2025,
+   "federal_ppe": 548.0,
+   "state_local_ppe": 8500.0,
+   "total_ppe": 9050.0
+  },
+  {
+   "school_number": "03-0551",
+   "school_name_raw": "J.R. ARNOLD HIGH SCHOOL",
+   "year": 2025,
+   "federal_ppe": 448.0,
+   "state_local_ppe": 7633.0,
+   "total_ppe": 8080.0
+  },
+  {
+   "school_number": "03-0571",
+   "school_name_raw": "BREAKFAST POINT ACADEMY",
+   "year": 2025,
+   "federal_ppe": 792.0,
+   "state_local_ppe": 9422.0,
+   "total_ppe": 10215.0
+  },
+  {
+   "school_number": "03-0581",
+   "school_name_raw": "ROSENWALD HIGH SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1852.0,
+   "state_local_ppe": 16307.0,
+   "total_ppe": 18158.0
+  },
+  {
+   "school_number": "03-0611",
+   "school_name_raw": "A. GARY WALSINGHAM ACADEMY",
+   "year": 2025,
+   "federal_ppe": 882.0,
+   "state_local_ppe": 10725.0,
+   "total_ppe": 11607.0
+  },
+  {
+   "school_number": "03-0701",
+   "school_name_raw": "BAY HAVEN CHARTER ACADEMY",
+   "year": 2025,
+   "federal_ppe": 3683.0,
+   "state_local_ppe": 5382.0,
+   "total_ppe": 9065.0
+  },
+  {
+   "school_number": "03-0711",
+   "school_name_raw": "BAY HAVEN CHARTER MIDDLE SCHOOL",
+   "year": 2025,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 7248.0,
+   "total_ppe": 7248.0
+  },
+  {
+   "school_number": "03-0731",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY MIDDLE SCHOOL",
+   "year": 2025,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 7857.0,
+   "total_ppe": 7857.0
+  },
+  {
+   "school_number": "03-0741",
+   "school_name_raw": "NORTH BAY HAVEN CAREER ACADEMY",
+   "year": 2025,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 7619.0,
+   "total_ppe": 7619.0
+  },
+  {
+   "school_number": "03-0751",
+   "school_name_raw": "NORTH BAY HAVEN CHARTER ACADEMY ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 9222.0,
+   "total_ppe": 9222.0
+  },
+  {
+   "school_number": "03-0764",
+   "school_name_raw": "AMIKIDS MARITIME ACADEMY",
+   "year": 2025,
+   "federal_ppe": 0.0,
+   "state_local_ppe": 30671.0,
+   "total_ppe": 30671.0
+  },
+  {
+   "school_number": "03-0771",
+   "school_name_raw": "PALM BAY PREPARATORY ACADEMY 6-12",
+   "year": 2025,
+   "federal_ppe": 1813.0,
+   "state_local_ppe": 9554.0,
+   "total_ppe": 11366.0
+  },
+  {
+   "school_number": "03-0782",
+   "school_name_raw": "CENTRAL HIGH SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1552.0,
+   "state_local_ppe": 12211.0,
+   "total_ppe": 13762.0
+  },
+  {
+   "school_number": "03-0801",
+   "school_name_raw": "PALM BAY ELEMENTARY SCHOOL",
+   "year": 2025,
+   "federal_ppe": 1746.0,
+   "state_local_ppe": 9072.0,
+   "total_ppe": 10818.0
+  },
+  {
+   "school_number": "03-2701",
+   "school_name_raw": "RISING LEADERS ACADEMY",
+   "year": 2025,
+   "federal_ppe": 50.0,
+   "state_local_ppe": 9155.0,
+   "total_ppe": 9205.0
+  },
+  {
+   "school_number": "03-2711",
+   "school_name_raw": "UNIVERSITY ACADEMY SABL INC",
+   "year": 2025,
+   "federal_ppe": 636.0,
+   "state_local_ppe": 15398.0,
+   "total_ppe": 16034.0
+  },
+  {
+   "school_number": "03-7004",
+   "school_name_raw": "BAY VIRTUAL FRANCHISE",
+   "year": 2025,
+   "federal_ppe": 24.0,
+   "state_local_ppe": 8080.0,
+   "total_ppe": 8104.0
+  },
+  {
+   "school_number": "03-7023",
+   "school_name_raw": "BAY VIRTUAL INSTRUCTION PROGRAM (DISTRICT PROVIDED)",
+   "year": 2025,
+   "federal_ppe": 36.0,
+   "state_local_ppe": 5381.0,
+   "total_ppe": 5417.0
+  }
+ ],
+ "place_id": "fl-bay",
+ "fetched": "2026-10-29T16:40:16Z"
+}
