@@ -43,6 +43,7 @@ object SitePages {
         "/parks" to Coverage.Native("Parks"),
         "/development" to Coverage.Dataset("development-projects"),
         "/roads" to Coverage.Dataset("road-contracts"),
+        "/public-safety" to Coverage.Dataset("safety-agencies"),
         "/schools" to Coverage.Native("Public schools (SchoolsScreen); zoned schools are on My Address"),
         "/utilities" to Coverage.Native("Utilities and trash day (UtilitiesScreen, from /api/v1/utilities)"),
         "/restaurants" to Coverage.Native("Restaurant inspections (RestaurantsScreen): search, latest result and six-visit strip"),

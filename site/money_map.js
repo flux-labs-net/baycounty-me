@@ -3,6 +3,19 @@ const D = __MM__;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const M = n => { const a = Math.abs(n || 0); return a >= 1e6 ? '$' + (n/1e6).toFixed(1) + 'M' : a >= 1e4 ? '$' + Math.round(n/1e3) + 'K' : '$' + Math.round(n || 0).toLocaleString(); };
+// Days between a gift and a vote, said plainly: "on Mar 4, 2024, 834 days before the vote" (same wording as money_map.gift_when_text).
+const dayGap = (g, v, short) => {
+  const n = Math.round((Date.parse(v.slice(0, 10) + 'T12:00:00Z') - Date.parse(g.slice(0, 10) + 'T12:00:00Z')) / 864e5);
+  if (!n) return 'the same day as the vote';
+  return `${Math.abs(n).toLocaleString('en-US')} day${Math.abs(n) === 1 ? '' : 's'} ${n > 0 ? 'before' : 'after'}${short ? '' : ' the vote'}`;
+};
+const giftWhen = (ds, vote) => {
+  ds = [...new Set((ds || []).filter(Boolean))].sort();
+  if (!ds.length || !vote) return '';
+  if (ds.length === 1) return ` on ${fd(ds[0])}, ${dayGap(ds[0], vote)}`;
+  const parts = ds.map((d, i) => `${fd(d)} (${dayGap(d, vote, i > 0)})`);
+  return ` on ${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+};
 const fd = s => s ? new Date(s + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) : '';
 const NS = 'http://www.w3.org/2000/svg';
 const OFF = D.officials, DON = D.donors, GIFTS = D.gifts, CON = D.contracts, GN = D.govs, VOTES = D.votes;
@@ -157,17 +170,17 @@ function votesTable() {
   t.hidden = !VG.length; none.hidden = !!VG.length; if (!VG.length) t.innerHTML = '';
   none.textContent = GOV() ? `No recorded votes by ${BCM.city.label(GOV())} officials on their donors' contracts.` : 'No recorded votes found.';
   if (!VG.length) return;
-  const member = m => {
+  const member = (m, v) => {
     const name = m.gift ? `<b>${esc(m.n)}</b>` : esc(m.n);
     const vote = m.vote === 'yes' ? 'yes' : `<b>${esc(m.vote)}</b>`;
-    const gift = m.gift ? ` <span class="small">got ${M(m.gift)}${m.gift_dates && m.gift_dates.length ? ' on ' + m.gift_dates.map(fd).join(', ') : ''}${m.when === 'after' ? ', before this vote' : m.when === 'before' ? ', after this vote' : ''}</span>` : '';
+    const gift = m.gift ? `<span class="small">, got ${M(m.gift)}${giftWhen(m.gift_dates, v.date)}</span>` : '';
     return `<li>${name}: ${vote}${gift}</li>`;
   };
   t.innerHTML = `<thead><tr><th scope="col">Date</th><th scope="col">Donor</th><th scope="col">Item</th><th scope="col">Roll call</th></tr></thead><tbody>${VG.map(v => `<tr>
     <td>${fd(v.date)}<small>${esc(GN[v.g] || '')}</small></td>
     <th scope="row">${esc(DON[v.d].n)}</th>
     <td class="wrap small">${esc(v.h)}${v.amount ? ' · ' + M(v.amount) : ''}${v.consent ? ' <span class="muted">(consent agenda)</span>' : ''}${v.url ? ` <a class="src" href="${esc(v.url)}" target="_blank" rel="noopener">Minutes</a>` : ''}</td>
-    <td class="wrap small"><span>${esc(v.outcome || '')}${v.tally ? ' ' + esc(v.tally) : ''}</span><ul class="plain mm-roll">${v.roll.map(member).join('')}</ul></td></tr>`).join('')}</tbody>`;
+    <td class="wrap small"><span>${esc(v.outcome || '')}${v.tally ? ' ' + esc(v.tally) : ''}</span><ul class="plain mm-roll">${v.roll.map(m => member(m, v)).join('')}</ul></td></tr>`).join('')}</tbody>`;
 }
 
 function shade(v, max) { if (!v) return ''; const t = Math.pow(v / max, 0.5); return `style="--h:${(12 + t * 78).toFixed(0)}%"${t > 0.55 ? ' data-hi' : ''}`; }

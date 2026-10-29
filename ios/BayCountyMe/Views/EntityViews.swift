@@ -465,7 +465,7 @@ struct MoneyMapView: View {
                     Text([mm.donor(v.d)?.n, Dates.parse(v.date).map { Dates.display($0, hasTime: false) }, v.tally, v.amount.map { Format.compactMoney($0) }]
                         .compactMap { $0 }.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary)
                     ForEach(v.roll.filter { $0.gift != nil }, id: \.self) { m in
-                        Text("\(m.n) voted \(m.vote ?? "—") · got \(Format.money(m.gift ?? 0)) from the donor\(m.when.map { $0 == "before" ? ", given after the vote" : ", given before the vote" } ?? "")")
+                        Text("\(m.n) voted \(m.vote ?? "—") · got \(Format.money(m.gift ?? 0)) from the donor \(m.giftWhen(voteDate: v.date))".trimmingCharacters(in: .whitespaces))
                             .font(.caption2)
                     }
                 }

@@ -1,0 +1,5357 @@
+{
+ "as_of": "2026-10-29",
+ "source_url": "https://cde.ucr.cjis.gov/",
+ "errors": [],
+ "state": {
+  "name": "Florida",
+  "per_100k": {
+   "2016": {
+    "V": 430.3,
+    "P": 2693.7,
+    "HOM": 5.4,
+    "RPE": 36.9,
+    "ROB": 97.9,
+    "ASS": 290.2,
+    "BUR": 486.7,
+    "LAR": 1990.5,
+    "MVT": 209.3,
+    "ARS": 7.1
+   },
+   "2017": {
+    "V": 408.0,
+    "P": 2518.6,
+    "HOM": 5.0,
+    "RPE": 37.8,
+    "ROB": 88.6,
+    "ASS": 276.5,
+    "BUR": 423.3,
+    "LAR": 1884.3,
+    "MVT": 204.5,
+    "ARS": 6.5
+   },
+   "2018": {
+    "V": 385.0,
+    "P": 2287.1,
+    "HOM": 5.2,
+    "RPE": 39.6,
+    "ROB": 79.3,
+    "ASS": 260.8,
+    "BUR": 337.5,
+    "LAR": 1751.0,
+    "MVT": 193.3,
+    "ARS": 5.3
+   },
+   "2019": {
+    "V": 377.9,
+    "P": 2148.3,
+    "HOM": 5.2,
+    "RPE": 39.3,
+    "ROB": 75.5,
+    "ASS": 257.8,
+    "BUR": 294.2,
+    "LAR": 1667.4,
+    "MVT": 181.6,
+    "ARS": 5.0
+   },
+   "2020": {
+    "V": 384.1,
+    "P": 1775.7,
+    "HOM": 6.0,
+    "RPE": 35.4,
+    "ROB": 62.2,
+    "ASS": 280.5,
+    "BUR": 240.4,
+    "LAR": 1353.2,
+    "MVT": 176.0,
+    "ARS": 6.0
+   },
+   "2022": {
+    "V": 322.9,
+    "P": 1447.0,
+    "HOM": 4.9,
+    "RPE": 34.3,
+    "ROB": 44.5,
+    "ASS": 239.1,
+    "BUR": 165.9,
+    "LAR": 1153.1,
+    "MVT": 124.1,
+    "ARS": 3.9
+   },
+   "2023": {
+    "V": 278.1,
+    "P": 1317.6,
+    "HOM": 4.3,
+    "RPE": 29.7,
+    "ROB": 38.1,
+    "ASS": 206.0,
+    "BUR": 146.6,
+    "LAR": 1044.5,
+    "MVT": 122.7,
+    "ARS": 3.9
+   },
+   "2024": {
+    "V": 258.4,
+    "P": 1261.0,
+    "HOM": 3.7,
+    "RPE": 27.2,
+    "ROB": 36.3,
+    "ASS": 191.2,
+    "BUR": 138.6,
+    "LAR": 1015.0,
+    "MVT": 103.9,
+    "ARS": 3.5
+   },
+   "2025": {
+    "V": 247.7,
+    "P": 1073.8,
+    "HOM": 3.0,
+    "RPE": 26.9,
+    "ROB": 33.1,
+    "ASS": 184.7,
+    "BUR": 120.4,
+    "LAR": 884.0,
+    "MVT": 66.2,
+    "ARS": 3.1
+   }
+  }
+ },
+ "agencies": {
+  "FL0030000": {
+   "agency_id": "bcso",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 375,
+      "cleared": 326,
+      "months": 12,
+      "population": 97003
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2439,
+      "cleared": 1233,
+      "months": 12,
+      "population": 97003
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 97003
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 40,
+      "cleared": 32,
+      "months": 12,
+      "population": 97003
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 41,
+      "cleared": 26,
+      "months": 12,
+      "population": 97003
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 290,
+      "cleared": 264,
+      "months": 12,
+      "population": 97003
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 536,
+      "cleared": 277,
+      "months": 12,
+      "population": 97003
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1716,
+      "cleared": 824,
+      "months": 12,
+      "population": 97003
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 181,
+      "cleared": 126,
+      "months": 12,
+      "population": 97003
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 6,
+      "cleared": 6,
+      "months": 12,
+      "population": 97003
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 357,
+      "cleared": 301,
+      "months": 12,
+      "population": 99219
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2420,
+      "cleared": 1279,
+      "months": 12,
+      "population": 99219
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 99219
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 45,
+      "cleared": 41,
+      "months": 12,
+      "population": 99219
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 31,
+      "cleared": 19,
+      "months": 12,
+      "population": 99219
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 277,
+      "cleared": 237,
+      "months": 12,
+      "population": 99219
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 492,
+      "cleared": 265,
+      "months": 12,
+      "population": 99219
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1724,
+      "cleared": 867,
+      "months": 12,
+      "population": 99219
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 200,
+      "cleared": 143,
+      "months": 12,
+      "population": 99219
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 99219
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 327,
+      "cleared": 266,
+      "months": 12,
+      "population": 98710
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2128,
+      "cleared": 949,
+      "months": 12,
+      "population": 98710
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 98710
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 36,
+      "cleared": 27,
+      "months": 12,
+      "population": 98710
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 24,
+      "cleared": 15,
+      "months": 12,
+      "population": 98710
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 265,
+      "cleared": 222,
+      "months": 12,
+      "population": 98710
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 517,
+      "cleared": 232,
+      "months": 12,
+      "population": 98710
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1430,
+      "cleared": 623,
+      "months": 12,
+      "population": 98710
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 177,
+      "cleared": 90,
+      "months": 12,
+      "population": 98710
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 98710
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 360,
+      "cleared": 292,
+      "months": 12,
+      "population": 98363
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2198,
+      "cleared": 917,
+      "months": 12,
+      "population": 98363
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 3,
+      "months": 12,
+      "population": 98363
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 51,
+      "cleared": 35,
+      "months": 12,
+      "population": 98363
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 26,
+      "cleared": 21,
+      "months": 12,
+      "population": 98363
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 279,
+      "cleared": 233,
+      "months": 12,
+      "population": 98363
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 464,
+      "cleared": 208,
+      "months": 12,
+      "population": 98363
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1544,
+      "cleared": 591,
+      "months": 12,
+      "population": 98363
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 184,
+      "cleared": 112,
+      "months": 12,
+      "population": 98363
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 6,
+      "cleared": 6,
+      "months": 12,
+      "population": 98363
+     }
+    },
+    "2020": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 319,
+      "cleared": 282,
+      "months": 12,
+      "population": 92847
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1876,
+      "cleared": 973,
+      "months": 12,
+      "population": 92847
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 92847
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 30,
+      "cleared": 27,
+      "months": 12,
+      "population": 92847
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 22,
+      "cleared": 17,
+      "months": 12,
+      "population": 92847
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 263,
+      "cleared": 234,
+      "months": 12,
+      "population": 92847
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 378,
+      "cleared": 215,
+      "months": 12,
+      "population": 92847
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1310,
+      "cleared": 627,
+      "months": 12,
+      "population": 92847
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 185,
+      "cleared": 128,
+      "months": 12,
+      "population": 92847
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 92847
+     }
+    },
+    "2022": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 304,
+      "cleared": 49,
+      "months": 12,
+      "population": 98478
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1291,
+      "cleared": 885,
+      "months": 12,
+      "population": 98478
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 98478
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 52,
+      "cleared": 47,
+      "months": 12,
+      "population": 98478
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 13,
+      "cleared": 0,
+      "months": 12,
+      "population": 98478
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 237,
+      "cleared": 0,
+      "months": 12,
+      "population": 98478
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 259,
+      "cleared": 184,
+      "months": 12,
+      "population": 98478
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 929,
+      "cleared": 618,
+      "months": 12,
+      "population": 98478
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 96,
+      "cleared": 76,
+      "months": 12,
+      "population": 98478
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 7,
+      "cleared": 7,
+      "months": 12,
+      "population": 98478
+     }
+    },
+    "2023": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 291,
+      "cleared": 29,
+      "months": 12,
+      "population": 100590
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1243,
+      "cleared": 833,
+      "months": 12,
+      "population": 100590
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 100590
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 30,
+      "cleared": 26,
+      "months": 12,
+      "population": 100590
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 11,
+      "cleared": 0,
+      "months": 12,
+      "population": 100590
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 247,
+      "cleared": 0,
+      "months": 12,
+      "population": 100590
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 199,
+      "cleared": 125,
+      "months": 12,
+      "population": 100590
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 944,
+      "cleared": 633,
+      "months": 12,
+      "population": 100590
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 97,
+      "cleared": 72,
+      "months": 12,
+      "population": 100590
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 100590
+     }
+    },
+    "2024": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 246,
+      "cleared": 26,
+      "months": 12,
+      "population": 107874
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1146,
+      "cleared": 780,
+      "months": 12,
+      "population": 107874
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 107874
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 26,
+      "cleared": 24,
+      "months": 12,
+      "population": 107874
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 6,
+      "cleared": 0,
+      "months": 12,
+      "population": 107874
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 212,
+      "cleared": 0,
+      "months": 12,
+      "population": 107874
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 200,
+      "cleared": 134,
+      "months": 12,
+      "population": 107874
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 883,
+      "cleared": 596,
+      "months": 12,
+      "population": 107874
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 63,
+      "cleared": 50,
+      "months": 12,
+      "population": 107874
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 107874
+     }
+    },
+    "2025": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 232,
+      "cleared": 162,
+      "months": 12,
+      "population": 106785
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 859,
+      "cleared": 475,
+      "months": 12,
+      "population": 106785
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 106785
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 30,
+      "cleared": 14,
+      "months": 12,
+      "population": 106785
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 9,
+      "cleared": 5,
+      "months": 12,
+      "population": 106785
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 191,
+      "cleared": 141,
+      "months": 12,
+      "population": 106785
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 123,
+      "cleared": 66,
+      "months": 12,
+      "population": 106785
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 734,
+      "cleared": 407,
+      "months": 12,
+      "population": 106785
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 106785
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 106785
+     }
+    },
+    "2026": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 134,
+      "cleared": 81,
+      "months": 9,
+      "population": 106785
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 612,
+      "cleared": 374,
+      "months": 9,
+      "population": 106785
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 3,
+      "cleared": 2,
+      "months": 9,
+      "population": 106785
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 29,
+      "cleared": 16,
+      "months": 9,
+      "population": 106785
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 11,
+      "cleared": 8,
+      "months": 9,
+      "population": 106785
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 91,
+      "cleared": 55,
+      "months": 9,
+      "population": 106785
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 72,
+      "cleared": 34,
+      "months": 9,
+      "population": 106785
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 538,
+      "cleared": 339,
+      "months": 9,
+      "population": 106785
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 9,
+      "population": 106785
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 2,
+      "cleared": 1,
+      "months": 9,
+      "population": 106785
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 189,
+     "female_officers": 18,
+     "officers": 207,
+     "civilians": 66,
+     "per_1000": 2.81,
+     "population": 97003
+    },
+    "2017": {
+     "male_officers": 188,
+     "female_officers": 22,
+     "officers": 210,
+     "civilians": 65,
+     "per_1000": 2.77,
+     "population": 99219
+    },
+    "2018": {
+     "male_officers": 186,
+     "female_officers": 27,
+     "officers": 213,
+     "civilians": 62,
+     "per_1000": 2.79,
+     "population": 98710
+    },
+    "2019": {
+     "male_officers": 181,
+     "female_officers": 27,
+     "officers": 208,
+     "civilians": 65,
+     "per_1000": 2.78,
+     "population": 98363
+    },
+    "2020": {
+     "male_officers": 193,
+     "female_officers": 31,
+     "officers": 224,
+     "civilians": 66,
+     "per_1000": 3.12,
+     "population": 92847
+    },
+    "2021": {
+     "male_officers": 185,
+     "female_officers": 30,
+     "officers": 215,
+     "civilians": 63,
+     "per_1000": 3.1,
+     "population": 89659
+    },
+    "2022": {
+     "male_officers": 196,
+     "female_officers": 34,
+     "officers": 230,
+     "civilians": 71,
+     "per_1000": 3.06,
+     "population": 98478
+    },
+    "2023": {
+     "male_officers": 198,
+     "female_officers": 35,
+     "officers": 233,
+     "civilians": 271,
+     "per_1000": 5.01,
+     "population": 100590
+    },
+    "2024": {
+     "male_officers": 209,
+     "female_officers": 35,
+     "officers": 244,
+     "civilians": 277,
+     "per_1000": 4.83,
+     "population": 107874
+    },
+    "2025": {
+     "male_officers": 216,
+     "female_officers": 36,
+     "officers": 252,
+     "civilians": 289,
+     "per_1000": 5.07,
+     "population": 106785
+    }
+   }
+  },
+  "FL0030100": {
+   "agency_id": "pcpd",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 276,
+      "cleared": 236,
+      "months": 12,
+      "population": 38847
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2108,
+      "cleared": 2101,
+      "months": 12,
+      "population": 38847
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 3,
+      "cleared": 2,
+      "months": 12,
+      "population": 38847
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 17,
+      "cleared": 5,
+      "months": 12,
+      "population": 38847
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 50,
+      "cleared": 54,
+      "months": 12,
+      "population": 38847
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 206,
+      "cleared": 175,
+      "months": 12,
+      "population": 38847
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 330,
+      "cleared": 453,
+      "months": 12,
+      "population": 38847
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1587,
+      "cleared": 1489,
+      "months": 12,
+      "population": 38847
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 181,
+      "cleared": 155,
+      "months": 12,
+      "population": 38847
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 10,
+      "cleared": 4,
+      "months": 12,
+      "population": 38847
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 332,
+      "cleared": 261,
+      "months": 12,
+      "population": 38135
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2357,
+      "cleared": 2776,
+      "months": 12,
+      "population": 38135
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 5,
+      "cleared": 5,
+      "months": 12,
+      "population": 38135
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 4,
+      "cleared": 7,
+      "months": 12,
+      "population": 38135
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 53,
+      "cleared": 65,
+      "months": 12,
+      "population": 38135
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 270,
+      "cleared": 184,
+      "months": 12,
+      "population": 38135
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 395,
+      "cleared": 637,
+      "months": 12,
+      "population": 38135
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1752,
+      "cleared": 1935,
+      "months": 12,
+      "population": 38135
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 205,
+      "cleared": 199,
+      "months": 12,
+      "population": 38135
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 5,
+      "cleared": 5,
+      "months": 12,
+      "population": 38135
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 234,
+      "cleared": 190,
+      "months": 12,
+      "population": 37318
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 2153,
+      "cleared": 1925,
+      "months": 12,
+      "population": 37318
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 1,
+      "months": 12,
+      "population": 37318
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 4,
+      "cleared": 2,
+      "months": 12,
+      "population": 37318
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 45,
+      "cleared": 50,
+      "months": 12,
+      "population": 37318
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 183,
+      "cleared": 137,
+      "months": 12,
+      "population": 37318
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 423,
+      "cleared": 412,
+      "months": 12,
+      "population": 37318
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1467,
+      "cleared": 1328,
+      "months": 12,
+      "population": 37318
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 260,
+      "cleared": 181,
+      "months": 12,
+      "population": 37318
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 3,
+      "cleared": 4,
+      "months": 12,
+      "population": 37318
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 228,
+      "cleared": 175,
+      "months": 12,
+      "population": 37199
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1921,
+      "cleared": 1837,
+      "months": 12,
+      "population": 37199
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 3,
+      "months": 12,
+      "population": 37199
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 3,
+      "months": 12,
+      "population": 37199
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 42,
+      "cleared": 35,
+      "months": 12,
+      "population": 37199
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 179,
+      "cleared": 134,
+      "months": 12,
+      "population": 37199
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 384,
+      "cleared": 411,
+      "months": 12,
+      "population": 37199
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1308,
+      "cleared": 1233,
+      "months": 12,
+      "population": 37199
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 222,
+      "cleared": 186,
+      "months": 12,
+      "population": 37199
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 7,
+      "cleared": 7,
+      "months": 12,
+      "population": 37199
+     }
+    },
+    "2020": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 303,
+      "cleared": 215,
+      "months": 12,
+      "population": 34672
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1459,
+      "cleared": 449,
+      "months": 12,
+      "population": 34672
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 3,
+      "months": 12,
+      "population": 34672
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 38,
+      "cleared": 26,
+      "months": 12,
+      "population": 34672
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 29,
+      "cleared": 17,
+      "months": 12,
+      "population": 34672
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 232,
+      "cleared": 169,
+      "months": 12,
+      "population": 34672
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 252,
+      "cleared": 74,
+      "months": 12,
+      "population": 34672
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 1059,
+      "cleared": 310,
+      "months": 12,
+      "population": 34672
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 142,
+      "cleared": 59,
+      "months": 12,
+      "population": 34672
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 6,
+      "cleared": 6,
+      "months": 12,
+      "population": 34672
+     }
+    },
+    "2022": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 240,
+      "cleared": 31,
+      "months": 12,
+      "population": 35384
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1032,
+      "cleared": 437,
+      "months": 12,
+      "population": 35384
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 35384
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 43,
+      "cleared": 30,
+      "months": 12,
+      "population": 35384
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 17,
+      "cleared": 0,
+      "months": 12,
+      "population": 35384
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 179,
+      "cleared": 0,
+      "months": 12,
+      "population": 35384
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 168,
+      "cleared": 79,
+      "months": 12,
+      "population": 35384
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 783,
+      "cleared": 301,
+      "months": 12,
+      "population": 35384
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 78,
+      "cleared": 54,
+      "months": 12,
+      "population": 35384
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 35384
+     }
+    },
+    "2023": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 262,
+      "cleared": 42,
+      "months": 12,
+      "population": 35684
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 924,
+      "cleared": 398,
+      "months": 12,
+      "population": 35684
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 35684
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 52,
+      "cleared": 39,
+      "months": 12,
+      "population": 35684
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 18,
+      "cleared": 0,
+      "months": 12,
+      "population": 35684
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 189,
+      "cleared": 0,
+      "months": 12,
+      "population": 35684
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 151,
+      "cleared": 76,
+      "months": 12,
+      "population": 35684
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 692,
+      "cleared": 272,
+      "months": 12,
+      "population": 35684
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 77,
+      "cleared": 46,
+      "months": 12,
+      "population": 35684
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 35684
+     }
+    },
+    "2024": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 238,
+      "cleared": 22,
+      "months": 12,
+      "population": 36646
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 803,
+      "cleared": 352,
+      "months": 12,
+      "population": 36646
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 36646
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 21,
+      "cleared": 19,
+      "months": 12,
+      "population": 36646
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 9,
+      "cleared": 0,
+      "months": 12,
+      "population": 36646
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 205,
+      "cleared": 0,
+      "months": 12,
+      "population": 36646
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 147,
+      "cleared": 72,
+      "months": 12,
+      "population": 36646
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 616,
+      "cleared": 253,
+      "months": 12,
+      "population": 36646
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 39,
+      "cleared": 26,
+      "months": 12,
+      "population": 36646
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 36646
+     }
+    },
+    "2025": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 117,
+      "cleared": 94,
+      "months": 12,
+      "population": 38146
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 502,
+      "cleared": 279,
+      "months": 12,
+      "population": 38146
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 38146
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 15,
+      "cleared": 5,
+      "months": 12,
+      "population": 38146
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 13,
+      "cleared": 11,
+      "months": 12,
+      "population": 38146
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 85,
+      "cleared": 74,
+      "months": 12,
+      "population": 38146
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 76,
+      "cleared": 40,
+      "months": 12,
+      "population": 38146
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 425,
+      "cleared": 238,
+      "months": 12,
+      "population": 38146
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 38146
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 38146
+     }
+    },
+    "2026": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 121,
+      "cleared": 97,
+      "months": 10,
+      "population": 38146
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 324,
+      "cleared": 202,
+      "months": 10,
+      "population": 38146
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 4,
+      "cleared": 3,
+      "months": 10,
+      "population": 38146
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 13,
+      "cleared": 6,
+      "months": 10,
+      "population": 38146
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 5,
+      "cleared": 6,
+      "months": 10,
+      "population": 38146
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 99,
+      "cleared": 82,
+      "months": 10,
+      "population": 38146
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 56,
+      "cleared": 32,
+      "months": 10,
+      "population": 38146
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 267,
+      "cleared": 169,
+      "months": 10,
+      "population": 38146
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 10,
+      "population": 38146
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 10,
+      "population": 38146
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 80,
+     "female_officers": 15,
+     "officers": 95,
+     "civilians": 36,
+     "per_1000": 3.37,
+     "population": 38847
+    },
+    "2018": {
+     "male_officers": 85,
+     "female_officers": 17,
+     "officers": 102,
+     "civilians": 40,
+     "per_1000": 3.81,
+     "population": 37318
+    },
+    "2019": {
+     "male_officers": 77,
+     "female_officers": 12,
+     "officers": 89,
+     "civilians": 30,
+     "per_1000": 3.2,
+     "population": 37199
+    },
+    "2020": {
+     "male_officers": 74,
+     "female_officers": 11,
+     "officers": 85,
+     "civilians": 35,
+     "per_1000": 3.46,
+     "population": 34672
+    },
+    "2021": {
+     "male_officers": 69,
+     "female_officers": 15,
+     "officers": 84,
+     "civilians": 37,
+     "per_1000": 3.6,
+     "population": 33651
+    },
+    "2022": {
+     "male_officers": 73,
+     "female_officers": 15,
+     "officers": 88,
+     "civilians": 39,
+     "per_1000": 3.59,
+     "population": 35384
+    },
+    "2023": {
+     "male_officers": 76,
+     "female_officers": 22,
+     "officers": 98,
+     "civilians": 38,
+     "per_1000": 3.81,
+     "population": 35684
+    },
+    "2024": {
+     "male_officers": 77,
+     "female_officers": 21,
+     "officers": 98,
+     "civilians": 46,
+     "per_1000": 3.93,
+     "population": 36646
+    },
+    "2025": {
+     "male_officers": 80,
+     "female_officers": 19,
+     "officers": 99,
+     "civilians": 47,
+     "per_1000": 3.83,
+     "population": 38146
+    }
+   }
+  },
+  "FL0030600": {
+   "agency_id": "pcbpd",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 118,
+      "cleared": 86,
+      "months": 12,
+      "population": 12844
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 1118,
+      "cleared": 539,
+      "months": 12,
+      "population": 12844
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 12844
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 19,
+      "cleared": 16,
+      "months": 12,
+      "population": 12844
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 25,
+      "cleared": 12,
+      "months": 12,
+      "population": 12844
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 73,
+      "cleared": 58,
+      "months": 12,
+      "population": 12844
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 113,
+      "cleared": 47,
+      "months": 12,
+      "population": 12844
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 993,
+      "cleared": 483,
+      "months": 12,
+      "population": 12844
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 10,
+      "cleared": 9,
+      "months": 12,
+      "population": 12844
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 2,
+      "cleared": 0,
+      "months": 12,
+      "population": 12844
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 109,
+      "cleared": 96,
+      "months": 12,
+      "population": 12987
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 941,
+      "cleared": 492,
+      "months": 12,
+      "population": 12987
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 4,
+      "months": 12,
+      "population": 12987
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 12,
+      "cleared": 12,
+      "months": 12,
+      "population": 12987
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 13,
+      "cleared": 13,
+      "months": 12,
+      "population": 12987
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 83,
+      "cleared": 67,
+      "months": 12,
+      "population": 12987
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 122,
+      "cleared": 74,
+      "months": 12,
+      "population": 12987
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 811,
+      "cleared": 416,
+      "months": 12,
+      "population": 12987
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 5,
+      "cleared": 0,
+      "months": 12,
+      "population": 12987
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 3,
+      "cleared": 2,
+      "months": 12,
+      "population": 12987
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 110,
+      "cleared": 89,
+      "months": 12,
+      "population": 12935
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 961,
+      "cleared": 664,
+      "months": 12,
+      "population": 12935
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 1,
+      "months": 12,
+      "population": 12935
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 20,
+      "cleared": 18,
+      "months": 12,
+      "population": 12935
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 21,
+      "cleared": 14,
+      "months": 12,
+      "population": 12935
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 67,
+      "cleared": 56,
+      "months": 12,
+      "population": 12935
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 90,
+      "cleared": 70,
+      "months": 12,
+      "population": 12935
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 866,
+      "cleared": 592,
+      "months": 12,
+      "population": 12935
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 4,
+      "cleared": 1,
+      "months": 12,
+      "population": 12935
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 12935
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 133,
+      "cleared": 97,
+      "months": 12,
+      "population": 13266
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 842,
+      "cleared": 478,
+      "months": 12,
+      "population": 13266
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 0,
+      "months": 12,
+      "population": 13266
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 20,
+      "cleared": 11,
+      "months": 12,
+      "population": 13266
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 16,
+      "cleared": 14,
+      "months": 12,
+      "population": 13266
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 95,
+      "cleared": 72,
+      "months": 12,
+      "population": 13266
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 90,
+      "cleared": 59,
+      "months": 12,
+      "population": 13266
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 748,
+      "cleared": 417,
+      "months": 12,
+      "population": 13266
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 4,
+      "cleared": 2,
+      "months": 12,
+      "population": 13266
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 13266
+     }
+    },
+    "2020": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 131,
+      "cleared": 93,
+      "months": 12,
+      "population": 12703
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 756,
+      "cleared": 389,
+      "months": 12,
+      "population": 12703
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 12703
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 12,
+      "cleared": 6,
+      "months": 12,
+      "population": 12703
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 10,
+      "cleared": 5,
+      "months": 12,
+      "population": 12703
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 107,
+      "cleared": 80,
+      "months": 12,
+      "population": 12703
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 56,
+      "cleared": 47,
+      "months": 12,
+      "population": 12703
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 689,
+      "cleared": 337,
+      "months": 12,
+      "population": 12703
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 11,
+      "cleared": 5,
+      "months": 12,
+      "population": 12703
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 12703
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 51,
+     "female_officers": 7,
+     "officers": 58,
+     "civilians": 19,
+     "per_1000": 6,
+     "population": 12844
+    },
+    "2017": {
+     "male_officers": 52,
+     "female_officers": 7,
+     "officers": 59,
+     "civilians": 19,
+     "per_1000": 6.01,
+     "population": 12987
+    },
+    "2018": {
+     "male_officers": 56,
+     "female_officers": 8,
+     "officers": 64,
+     "civilians": 18,
+     "per_1000": 6.34,
+     "population": 12935
+    },
+    "2019": {
+     "male_officers": 63,
+     "female_officers": 7,
+     "officers": 70,
+     "civilians": 17,
+     "per_1000": 6.56,
+     "population": 13266
+    },
+    "2020": {
+     "male_officers": 59,
+     "female_officers": 8,
+     "officers": 67,
+     "civilians": 20,
+     "per_1000": 6.85,
+     "population": 12703
+    },
+    "2021": {
+     "male_officers": 65,
+     "female_officers": 9,
+     "officers": 74,
+     "civilians": 17,
+     "per_1000": 7.33,
+     "population": 12415
+    },
+    "2022": {
+     "male_officers": 64,
+     "female_officers": 12,
+     "officers": 76,
+     "civilians": 21,
+     "per_1000": 5.21,
+     "population": 18629
+    },
+    "2023": {
+     "male_officers": 64,
+     "female_officers": 11,
+     "officers": 75,
+     "civilians": 23,
+     "per_1000": 5,
+     "population": 19596
+    },
+    "2024": {
+     "male_officers": 67,
+     "female_officers": 12,
+     "officers": 79,
+     "civilians": 20,
+     "per_1000": 4.98,
+     "population": 19875
+    },
+    "2025": {
+     "male_officers": 72,
+     "female_officers": 10,
+     "officers": 82,
+     "civilians": 21,
+     "per_1000": 5.03,
+     "population": 20480
+    }
+   }
+  },
+  "FL0030700": {
+   "agency_id": "lhpd",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 53,
+      "cleared": 42,
+      "months": 12,
+      "population": 20496
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 439,
+      "cleared": 162,
+      "months": 12,
+      "population": 20496
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 20496
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 4,
+      "cleared": 3,
+      "months": 12,
+      "population": 20496
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 8,
+      "cleared": 3,
+      "months": 12,
+      "population": 20496
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 41,
+      "cleared": 36,
+      "months": 12,
+      "population": 20496
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 55,
+      "cleared": 15,
+      "months": 12,
+      "population": 20496
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 361,
+      "cleared": 135,
+      "months": 12,
+      "population": 20496
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 23,
+      "cleared": 12,
+      "months": 12,
+      "population": 20496
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 20496
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 40,
+      "cleared": 35,
+      "months": 12,
+      "population": 21262
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 459,
+      "cleared": 158,
+      "months": 12,
+      "population": 21262
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 21262
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 5,
+      "months": 12,
+      "population": 21262
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 21262
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 34,
+      "cleared": 30,
+      "months": 12,
+      "population": 21262
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 66,
+      "cleared": 21,
+      "months": 12,
+      "population": 21262
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 360,
+      "cleared": 118,
+      "months": 12,
+      "population": 21262
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 32,
+      "cleared": 18,
+      "months": 12,
+      "population": 21262
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 21262
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 28,
+      "cleared": 17,
+      "months": 12,
+      "population": 21285
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 202,
+      "cleared": 77,
+      "months": 12,
+      "population": 21285
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 21285
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 4,
+      "months": 12,
+      "population": 21285
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 21285
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 22,
+      "cleared": 12,
+      "months": 12,
+      "population": 21285
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 39,
+      "cleared": 11,
+      "months": 12,
+      "population": 21285
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 150,
+      "cleared": 58,
+      "months": 12,
+      "population": 21285
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 13,
+      "cleared": 8,
+      "months": 12,
+      "population": 21285
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 21285
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 29,
+      "cleared": 24,
+      "months": 12,
+      "population": 21859
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 310,
+      "cleared": 155,
+      "months": 12,
+      "population": 21859
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 21859
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 4,
+      "months": 12,
+      "population": 21859
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 4,
+      "cleared": 1,
+      "months": 12,
+      "population": 21859
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 20,
+      "cleared": 19,
+      "months": 12,
+      "population": 21859
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 38,
+      "cleared": 22,
+      "months": 12,
+      "population": 21859
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 250,
+      "cleared": 117,
+      "months": 12,
+      "population": 21859
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 22,
+      "cleared": 16,
+      "months": 12,
+      "population": 21859
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 21859
+     }
+    },
+    "2020": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 22,
+      "cleared": 20,
+      "months": 12,
+      "population": 20733
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 194,
+      "cleared": 102,
+      "months": 12,
+      "population": 20733
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 20733
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 7,
+      "cleared": 6,
+      "months": 12,
+      "population": 20733
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 2,
+      "cleared": 1,
+      "months": 12,
+      "population": 20733
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 13,
+      "cleared": 13,
+      "months": 12,
+      "population": 20733
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 20,
+      "cleared": 9,
+      "months": 12,
+      "population": 20733
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 164,
+      "cleared": 85,
+      "months": 12,
+      "population": 20733
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 9,
+      "cleared": 7,
+      "months": 12,
+      "population": 20733
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 20733
+     }
+    },
+    "2023": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 27,
+      "cleared": 4,
+      "months": 12,
+      "population": 20777
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 158,
+      "cleared": 117,
+      "months": 12,
+      "population": 20777
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 20777
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 4,
+      "months": 12,
+      "population": 20777
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 20777
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 22,
+      "cleared": 0,
+      "months": 12,
+      "population": 20777
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 15,
+      "cleared": 11,
+      "months": 12,
+      "population": 20777
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 134,
+      "cleared": 98,
+      "months": 12,
+      "population": 20777
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 9,
+      "cleared": 8,
+      "months": 12,
+      "population": 20777
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 20777
+     }
+    },
+    "2024": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 30,
+      "cleared": 4,
+      "months": 12,
+      "population": 21152
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 136,
+      "cleared": 95,
+      "months": 12,
+      "population": 21152
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 21152
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 21152
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 3,
+      "cleared": 0,
+      "months": 12,
+      "population": 21152
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 22,
+      "cleared": 0,
+      "months": 12,
+      "population": 21152
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 18,
+      "cleared": 11,
+      "months": 12,
+      "population": 21152
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 112,
+      "cleared": 80,
+      "months": 12,
+      "population": 21152
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 6,
+      "cleared": 4,
+      "months": 12,
+      "population": 21152
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 21152
+     }
+    },
+    "2025": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 16,
+      "cleared": 9,
+      "months": 12,
+      "population": 22866
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 158,
+      "cleared": 95,
+      "months": 12,
+      "population": 22866
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 22866
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 1,
+      "months": 12,
+      "population": 22866
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 22866
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 11,
+      "cleared": 8,
+      "months": 12,
+      "population": 22866
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 18,
+      "cleared": 6,
+      "months": 12,
+      "population": 22866
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 140,
+      "cleared": 89,
+      "months": 12,
+      "population": 22866
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 22866
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 22866
+     }
+    },
+    "2026": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 11,
+      "cleared": 10,
+      "months": 6,
+      "population": 22866
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 48,
+      "cleared": 36,
+      "months": 6,
+      "population": 22866
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 6,
+      "population": 22866
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 1,
+      "cleared": 2,
+      "months": 6,
+      "population": 22866
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 6,
+      "population": 22866
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 9,
+      "cleared": 7,
+      "months": 6,
+      "population": 22866
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 8,
+      "cleared": 6,
+      "months": 6,
+      "population": 22866
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 40,
+      "cleared": 30,
+      "months": 6,
+      "population": 22866
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 6,
+      "population": 22866
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 6,
+      "population": 22866
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 21,
+     "female_officers": 5,
+     "officers": 26,
+     "civilians": 10,
+     "per_1000": 1.76,
+     "population": 20496
+    },
+    "2017": {
+     "male_officers": 23,
+     "female_officers": 3,
+     "officers": 26,
+     "civilians": 10,
+     "per_1000": 1.69,
+     "population": 21262
+    },
+    "2018": {
+     "male_officers": 30,
+     "female_officers": 3,
+     "officers": 33,
+     "civilians": 10,
+     "per_1000": 2.02,
+     "population": 21285
+    },
+    "2020": {
+     "male_officers": 34,
+     "female_officers": 3,
+     "officers": 37,
+     "civilians": 13,
+     "per_1000": 2.41,
+     "population": 20733
+    },
+    "2021": {
+     "male_officers": 35,
+     "female_officers": 2,
+     "officers": 37,
+     "civilians": 11,
+     "per_1000": 2.35,
+     "population": 20390
+    },
+    "2022": {
+     "male_officers": 34,
+     "female_officers": 4,
+     "officers": 38,
+     "civilians": 10,
+     "per_1000": 2.48,
+     "population": 19377
+    },
+    "2025": {
+     "male_officers": 23,
+     "female_officers": 4,
+     "officers": 27,
+     "civilians": 10,
+     "per_1000": 1.62,
+     "population": 22866
+    }
+   }
+  },
+  "FL0030500": {
+   "agency_id": "sppd",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 49,
+      "cleared": 44,
+      "months": 12,
+      "population": 9550
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 273,
+      "cleared": 112,
+      "months": 12,
+      "population": 9550
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 9550
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 5,
+      "months": 12,
+      "population": 9550
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 6,
+      "cleared": 5,
+      "months": 12,
+      "population": 9550
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 38,
+      "cleared": 34,
+      "months": 12,
+      "population": 9550
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 54,
+      "cleared": 22,
+      "months": 12,
+      "population": 9550
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 197,
+      "cleared": 66,
+      "months": 12,
+      "population": 9550
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 22,
+      "cleared": 24,
+      "months": 12,
+      "population": 9550
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 9550
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 31,
+      "cleared": 30,
+      "months": 12,
+      "population": 9593
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 370,
+      "cleared": 92,
+      "months": 12,
+      "population": 9593
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 9593
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 5,
+      "months": 12,
+      "population": 9593
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 9593
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 23,
+      "cleared": 22,
+      "months": 12,
+      "population": 9593
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 62,
+      "cleared": 22,
+      "months": 12,
+      "population": 9593
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 274,
+      "cleared": 52,
+      "months": 12,
+      "population": 9593
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 34,
+      "cleared": 18,
+      "months": 12,
+      "population": 9593
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 9593
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 37,
+      "cleared": 30,
+      "months": 12,
+      "population": 9514
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 284,
+      "cleared": 40,
+      "months": 12,
+      "population": 9514
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 9514
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 9514
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 6,
+      "cleared": 4,
+      "months": 12,
+      "population": 9514
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 27,
+      "cleared": 22,
+      "months": 12,
+      "population": 9514
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 70,
+      "cleared": 10,
+      "months": 12,
+      "population": 9514
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 182,
+      "cleared": 21,
+      "months": 12,
+      "population": 9514
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 31,
+      "cleared": 8,
+      "months": 12,
+      "population": 9514
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 9514
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 51,
+      "cleared": 18,
+      "months": 12,
+      "population": 9517
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 310,
+      "cleared": 50,
+      "months": 12,
+      "population": 9517
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 9517
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 1,
+      "months": 12,
+      "population": 9517
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 13,
+      "cleared": 3,
+      "months": 12,
+      "population": 9517
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 33,
+      "cleared": 14,
+      "months": 12,
+      "population": 9517
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 87,
+      "cleared": 18,
+      "months": 12,
+      "population": 9517
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 192,
+      "cleared": 27,
+      "months": 12,
+      "population": 9517
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 30,
+      "cleared": 4,
+      "months": 12,
+      "population": 9517
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 9517
+     }
+    },
+    "2020": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 57,
+      "cleared": 38,
+      "months": 12,
+      "population": 8542
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 248,
+      "cleared": 59,
+      "months": 12,
+      "population": 8542
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 8542
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 2,
+      "months": 12,
+      "population": 8542
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 4,
+      "cleared": 4,
+      "months": 12,
+      "population": 8542
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 47,
+      "cleared": 32,
+      "months": 12,
+      "population": 8542
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 48,
+      "cleared": 19,
+      "months": 12,
+      "population": 8542
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 179,
+      "cleared": 33,
+      "months": 12,
+      "population": 8542
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 21,
+      "cleared": 7,
+      "months": 12,
+      "population": 8542
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8542
+     }
+    },
+    "2022": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 60,
+      "cleared": 7,
+      "months": 12,
+      "population": 8044
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 204,
+      "cleared": 74,
+      "months": 12,
+      "population": 8044
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8044
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 14,
+      "cleared": 7,
+      "months": 12,
+      "population": 8044
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 4,
+      "cleared": 0,
+      "months": 12,
+      "population": 8044
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 42,
+      "cleared": 0,
+      "months": 12,
+      "population": 8044
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 42,
+      "cleared": 20,
+      "months": 12,
+      "population": 8044
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 149,
+      "cleared": 47,
+      "months": 12,
+      "population": 8044
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 11,
+      "cleared": 5,
+      "months": 12,
+      "population": 8044
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 8044
+     }
+    },
+    "2023": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 54,
+      "cleared": 4,
+      "months": 12,
+      "population": 8216
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 202,
+      "cleared": 56,
+      "months": 12,
+      "population": 8216
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 8216
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 6,
+      "cleared": 4,
+      "months": 12,
+      "population": 8216
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 5,
+      "cleared": 0,
+      "months": 12,
+      "population": 8216
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 42,
+      "cleared": 0,
+      "months": 12,
+      "population": 8216
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 32,
+      "cleared": 6,
+      "months": 12,
+      "population": 8216
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 156,
+      "cleared": 46,
+      "months": 12,
+      "population": 8216
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 14,
+      "cleared": 4,
+      "months": 12,
+      "population": 8216
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8216
+     }
+    },
+    "2024": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 67,
+      "cleared": 10,
+      "months": 12,
+      "population": 8330
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 181,
+      "cleared": 67,
+      "months": 12,
+      "population": 8330
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8330
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 12,
+      "cleared": 10,
+      "months": 12,
+      "population": 8330
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 4,
+      "cleared": 0,
+      "months": 12,
+      "population": 8330
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 51,
+      "cleared": 0,
+      "months": 12,
+      "population": 8330
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 47,
+      "cleared": 12,
+      "months": 12,
+      "population": 8330
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 125,
+      "cleared": 49,
+      "months": 12,
+      "population": 8330
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 9,
+      "cleared": 6,
+      "months": 12,
+      "population": 8330
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8330
+     }
+    },
+    "2025": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 39,
+      "cleared": 25,
+      "months": 12,
+      "population": 8614
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 112,
+      "cleared": 50,
+      "months": 12,
+      "population": 8614
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 3,
+      "cleared": 2,
+      "months": 12,
+      "population": 8614
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8614
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 3,
+      "cleared": 2,
+      "months": 12,
+      "population": 8614
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 33,
+      "cleared": 21,
+      "months": 12,
+      "population": 8614
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 23,
+      "cleared": 16,
+      "months": 12,
+      "population": 8614
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 89,
+      "cleared": 34,
+      "months": 12,
+      "population": 8614
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8614
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 8614
+     }
+    },
+    "2026": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 35,
+      "cleared": 21,
+      "months": 9,
+      "population": 8614
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 97,
+      "cleared": 40,
+      "months": 9,
+      "population": 8614
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 9,
+      "population": 8614
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 2,
+      "cleared": 1,
+      "months": 9,
+      "population": 8614
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 7,
+      "cleared": 5,
+      "months": 9,
+      "population": 8614
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 24,
+      "cleared": 13,
+      "months": 9,
+      "population": 8614
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 29,
+      "cleared": 12,
+      "months": 9,
+      "population": 8614
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 68,
+      "cleared": 28,
+      "months": 9,
+      "population": 8614
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 9,
+      "population": 8614
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 9,
+      "population": 8614
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 16,
+     "female_officers": 3,
+     "officers": 19,
+     "civilians": 5,
+     "per_1000": 2.51,
+     "population": 9550
+    },
+    "2017": {
+     "male_officers": 16,
+     "female_officers": 2,
+     "officers": 18,
+     "civilians": 5,
+     "per_1000": 2.4,
+     "population": 9593
+    },
+    "2020": {
+     "male_officers": 18,
+     "female_officers": 6,
+     "officers": 24,
+     "civilians": 4,
+     "per_1000": 3.28,
+     "population": 8542
+    },
+    "2021": {
+     "male_officers": 17,
+     "female_officers": 5,
+     "officers": 22,
+     "civilians": 5,
+     "per_1000": 3.31,
+     "population": 8169
+    },
+    "2022": {
+     "male_officers": 18,
+     "female_officers": 6,
+     "officers": 24,
+     "civilians": 5,
+     "per_1000": 3.61,
+     "population": 8044
+    },
+    "2024": {
+     "male_officers": 18,
+     "female_officers": 6,
+     "officers": 24,
+     "civilians": 5,
+     "per_1000": 3.48,
+     "population": 8330
+    },
+    "2025": {
+     "male_officers": 17,
+     "female_officers": 6,
+     "officers": 23,
+     "civilians": 4,
+     "per_1000": 3.13,
+     "population": 8614
+    }
+   }
+  },
+  "FL0032600": {
+   "agency_id": "parkerpd",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 21,
+      "cleared": 22,
+      "months": 12,
+      "population": 4661
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 156,
+      "cleared": 141,
+      "months": 12,
+      "population": 4661
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 1,
+      "cleared": 2,
+      "months": 12,
+      "population": 4661
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 4661
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 4661
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 16,
+      "cleared": 16,
+      "months": 12,
+      "population": 4661
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 31,
+      "cleared": 26,
+      "months": 12,
+      "population": 4661
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 115,
+      "cleared": 105,
+      "months": 12,
+      "population": 4661
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 9,
+      "cleared": 9,
+      "months": 12,
+      "population": 4661
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 4661
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 25,
+      "cleared": 24,
+      "months": 12,
+      "population": 4667
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 145,
+      "cleared": 159,
+      "months": 12,
+      "population": 4667
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4667
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 9,
+      "cleared": 9,
+      "months": 12,
+      "population": 4667
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 4667
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 13,
+      "cleared": 12,
+      "months": 12,
+      "population": 4667
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 36,
+      "cleared": 54,
+      "months": 12,
+      "population": 4667
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 99,
+      "cleared": 97,
+      "months": 12,
+      "population": 4667
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 10,
+      "cleared": 8,
+      "months": 12,
+      "population": 4667
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4667
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 15,
+      "cleared": 12,
+      "months": 12,
+      "population": 4614
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 146,
+      "cleared": 88,
+      "months": 12,
+      "population": 4614
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4614
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 4614
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 2,
+      "cleared": 2,
+      "months": 12,
+      "population": 4614
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 11,
+      "cleared": 8,
+      "months": 12,
+      "population": 4614
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 32,
+      "cleared": 23,
+      "months": 12,
+      "population": 4614
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 103,
+      "cleared": 54,
+      "months": 12,
+      "population": 4614
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 10,
+      "cleared": 10,
+      "months": 12,
+      "population": 4614
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 4614
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 21,
+      "cleared": 17,
+      "months": 12,
+      "population": 4616
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 100,
+      "cleared": 23,
+      "months": 12,
+      "population": 4616
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4616
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 5,
+      "cleared": 4,
+      "months": 12,
+      "population": 4616
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 2,
+      "cleared": 3,
+      "months": 12,
+      "population": 4616
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 14,
+      "cleared": 10,
+      "months": 12,
+      "population": 4616
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 25,
+      "cleared": 6,
+      "months": 12,
+      "population": 4616
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 68,
+      "cleared": 13,
+      "months": 12,
+      "population": 4616
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 7,
+      "cleared": 4,
+      "months": 12,
+      "population": 4616
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4616
+     }
+    },
+    "2020": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 9,
+      "cleared": 9,
+      "months": 12,
+      "population": 4241
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 69,
+      "cleared": 29,
+      "months": 12,
+      "population": 4241
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4241
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 4241
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4241
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 8,
+      "cleared": 8,
+      "months": 12,
+      "population": 4241
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 16,
+      "cleared": 17,
+      "months": 12,
+      "population": 4241
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 41,
+      "cleared": 6,
+      "months": 12,
+      "population": 4241
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 12,
+      "cleared": 6,
+      "months": 12,
+      "population": 4241
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4241
+     }
+    },
+    "2022": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 14,
+      "cleared": 1,
+      "months": 12,
+      "population": 5096
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 83,
+      "cleared": 68,
+      "months": 12,
+      "population": 5096
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 5096
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 5096
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 5096
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 13,
+      "cleared": 0,
+      "months": 12,
+      "population": 5096
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 15,
+      "cleared": 15,
+      "months": 12,
+      "population": 5096
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 66,
+      "cleared": 52,
+      "months": 12,
+      "population": 5096
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 5096
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 5096
+     }
+    },
+    "2023": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 10,
+      "cleared": 0,
+      "months": 12,
+      "population": 4890
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 142,
+      "cleared": 130,
+      "months": 12,
+      "population": 4890
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4890
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4890
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 4890
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 9,
+      "cleared": 0,
+      "months": 12,
+      "population": 4890
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 12,
+      "cleared": 12,
+      "months": 12,
+      "population": 4890
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 128,
+      "cleared": 117,
+      "months": 12,
+      "population": 4890
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 2,
+      "cleared": 1,
+      "months": 12,
+      "population": 4890
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4890
+     }
+    },
+    "2024": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 17,
+      "cleared": 1,
+      "months": 12,
+      "population": 4876
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 95,
+      "cleared": 23,
+      "months": 12,
+      "population": 4876
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4876
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 3,
+      "cleared": 1,
+      "months": 12,
+      "population": 4876
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4876
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 14,
+      "cleared": 0,
+      "months": 12,
+      "population": 4876
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 9,
+      "cleared": 5,
+      "months": 12,
+      "population": 4876
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 83,
+      "cleared": 17,
+      "months": 12,
+      "population": 4876
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 3,
+      "cleared": 1,
+      "months": 12,
+      "population": 4876
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 4876
+     }
+    },
+    "2025": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 8,
+      "cleared": 5,
+      "months": 12,
+      "population": 5036
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 62,
+      "cleared": 22,
+      "months": 12,
+      "population": 5036
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 5036
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 5036
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 5036
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 7,
+      "cleared": 5,
+      "months": 12,
+      "population": 5036
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 3,
+      "cleared": 3,
+      "months": 12,
+      "population": 5036
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 58,
+      "cleared": 18,
+      "months": 12,
+      "population": 5036
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 5036
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 5036
+     }
+    },
+    "2026": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 8,
+      "cleared": 8,
+      "months": 10,
+      "population": 5036
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 42,
+      "cleared": 10,
+      "months": 10,
+      "population": 5036
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 10,
+      "population": 5036
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 10,
+      "population": 5036
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 10,
+      "population": 5036
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 8,
+      "cleared": 8,
+      "months": 10,
+      "population": 5036
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 1,
+      "cleared": 0,
+      "months": 10,
+      "population": 5036
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 41,
+      "cleared": 10,
+      "months": 10,
+      "population": 5036
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 10,
+      "population": 5036
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 10,
+      "population": 5036
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 8,
+     "female_officers": 1,
+     "officers": 9,
+     "civilians": 1,
+     "per_1000": 2.15,
+     "population": 4661
+    },
+    "2017": {
+     "male_officers": 8,
+     "female_officers": 1,
+     "officers": 9,
+     "civilians": 1,
+     "per_1000": 2.14,
+     "population": 4667
+    },
+    "2019": {
+     "male_officers": 9,
+     "female_officers": 1,
+     "officers": 10,
+     "civilians": 1,
+     "per_1000": 2.38,
+     "population": 4616
+    },
+    "2020": {
+     "male_officers": 10,
+     "female_officers": 0,
+     "officers": 10,
+     "civilians": 1,
+     "per_1000": 2.59,
+     "population": 4241
+    },
+    "2021": {
+     "male_officers": 8,
+     "female_officers": 1,
+     "officers": 9,
+     "civilians": 1,
+     "per_1000": 2.45,
+     "population": 4089
+    },
+    "2022": {
+     "male_officers": 7,
+     "female_officers": 1,
+     "officers": 8,
+     "civilians": 1,
+     "per_1000": 1.77,
+     "population": 5096
+    },
+    "2023": {
+     "male_officers": 6,
+     "female_officers": 1,
+     "officers": 7,
+     "civilians": 1,
+     "per_1000": 1.64,
+     "population": 4890
+    },
+    "2024": {
+     "male_officers": 6,
+     "female_officers": 2,
+     "officers": 8,
+     "civilians": 1,
+     "per_1000": 1.85,
+     "population": 4876
+    },
+    "2025": {
+     "male_officers": 8,
+     "female_officers": 1,
+     "officers": 9,
+     "civilians": 9,
+     "per_1000": 3.57,
+     "population": 5036
+    }
+   }
+  },
+  "FL0030400": {
+   "agency_id": "mb-police",
+   "offenses": {
+    "2016": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 5,
+      "cleared": 2,
+      "months": 12,
+      "population": 1187
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 46,
+      "cleared": 7,
+      "months": 12,
+      "population": 1187
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1187
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1187
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 1187
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 4,
+      "cleared": 1,
+      "months": 12,
+      "population": 1187
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 8,
+      "cleared": 0,
+      "months": 12,
+      "population": 1187
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 37,
+      "cleared": 7,
+      "months": 12,
+      "population": 1187
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 1187
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1187
+     }
+    },
+    "2017": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 5,
+      "cleared": 1,
+      "months": 12,
+      "population": 1211
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 74,
+      "cleared": 8,
+      "months": 12,
+      "population": 1211
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1211
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1211
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1211
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 5,
+      "cleared": 1,
+      "months": 12,
+      "population": 1211
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 17,
+      "cleared": 1,
+      "months": 12,
+      "population": 1211
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 56,
+      "cleared": 7,
+      "months": 12,
+      "population": 1211
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 1,
+      "cleared": 0,
+      "months": 12,
+      "population": 1211
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1211
+     }
+    },
+    "2018": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 4,
+      "cleared": 2,
+      "months": 12,
+      "population": 1217
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 29,
+      "cleared": 2,
+      "months": 12,
+      "population": 1217
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1217
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 1217
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1217
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 3,
+      "cleared": 1,
+      "months": 12,
+      "population": 1217
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 2,
+      "cleared": 0,
+      "months": 12,
+      "population": 1217
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 24,
+      "cleared": 1,
+      "months": 12,
+      "population": 1217
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 2,
+      "cleared": 0,
+      "months": 12,
+      "population": 1217
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 1,
+      "cleared": 1,
+      "months": 12,
+      "population": 1217
+     }
+    },
+    "2019": {
+     "V": {
+      "label": "Violent crime",
+      "group": "violent",
+      "count": 4,
+      "cleared": 1,
+      "months": 12,
+      "population": 1243
+     },
+     "P": {
+      "label": "Property crime",
+      "group": "property",
+      "count": 29,
+      "cleared": 5,
+      "months": 12,
+      "population": 1243
+     },
+     "HOM": {
+      "label": "Murder",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1243
+     },
+     "RPE": {
+      "label": "Rape",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1243
+     },
+     "ROB": {
+      "label": "Robbery",
+      "group": "violent",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1243
+     },
+     "ASS": {
+      "label": "Aggravated assault",
+      "group": "violent",
+      "count": 4,
+      "cleared": 1,
+      "months": 12,
+      "population": 1243
+     },
+     "BUR": {
+      "label": "Burglary",
+      "group": "property",
+      "count": 8,
+      "cleared": 2,
+      "months": 12,
+      "population": 1243
+     },
+     "LAR": {
+      "label": "Larceny-theft",
+      "group": "property",
+      "count": 19,
+      "cleared": 2,
+      "months": 12,
+      "population": 1243
+     },
+     "MVT": {
+      "label": "Motor vehicle theft",
+      "group": "property",
+      "count": 2,
+      "cleared": 1,
+      "months": 12,
+      "population": 1243
+     },
+     "ARS": {
+      "label": "Arson",
+      "group": "property",
+      "count": 0,
+      "cleared": 0,
+      "months": 12,
+      "population": 1243
+     }
+    }
+   },
+   "staffing": {
+    "2016": {
+     "male_officers": 7,
+     "female_officers": 0,
+     "officers": 7,
+     "civilians": 1,
+     "per_1000": 6.74,
+     "population": 1187
+    },
+    "2018": {
+     "male_officers": 6,
+     "female_officers": 2,
+     "officers": 8,
+     "civilians": 0,
+     "per_1000": 6.57,
+     "population": 1217
+    }
+   }
+  }
+ }
+}

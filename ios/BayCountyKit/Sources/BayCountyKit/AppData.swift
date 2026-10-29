@@ -455,7 +455,13 @@ public struct MoneyMap: Codable, Sendable {
             public let vote: String?
             public let o: Int?
             public let gift: Double?
+            /// The vote's side of the gift ("after" = voted after the gift). Kept for older data; use `timing` and `gift_dates`.
             public let when: String?
+            /// The gift's side of the vote: "before", "after" or "before and after".
+            public let timing: String?
+            public let gift_dates: [String]?
+            /// "on Mar 4, 2024, 834 days before the vote", from the gift dates and the vote date.
+            public func giftWhen(voteDate: String) -> String { MoneyMap.giftWhen(gift_dates, voteDate: voteDate) }
         }
         public let d: Int
         public let g: String
@@ -476,6 +482,36 @@ public struct MoneyMap: Codable, Sendable {
     public let vgroups: [VoteGroup]
     public let govs: [String: String]?
     public let as_of: String?
+
+    /// Days between gifts and a vote, said plainly (same wording as the site's money_map.gift_when_text):
+    /// "on Mar 4, 2024, 834 days before the vote", or "on Mar 4, 2024 (834 days before the vote) and Jan 5, 2026 (12 days after)".
+    public static func giftWhen(_ dates: [String]?, voteDate: String) -> String {
+        let ds = Array(Set((dates ?? []).map { String($0.prefix(10)) }.filter { dayNumber($0) != nil })).sorted()
+        guard !ds.isEmpty, let v = dayNumber(voteDate) else { return "" }
+        func gap(_ d: String, short: Bool) -> String {
+            let n = v - (dayNumber(d) ?? v)
+            if n == 0 { return "the same day as the vote" }
+            let days = "\(Format.number(Double(abs(n)))) day\(abs(n) == 1 ? "" : "s")"
+            return "\(days) \(n > 0 ? "before" : "after")\(short ? "" : " the vote")"
+        }
+        func shown(_ d: String) -> String { Dates.parse(d).map { Dates.display($0, hasTime: false) } ?? d }
+        if ds.count == 1 { return "on \(shown(ds[0])), \(gap(ds[0], short: false))" }
+        let parts = ds.enumerated().map { i, d in "\(shown(d)) (\(gap(d, short: i > 0)))" }
+        return "on " + parts.dropLast().joined(separator: ", ") + " and " + parts[parts.count - 1]
+    }
+
+    /// Days since 1970-01-01 for a "yyyy-MM-dd" day, counted on the calendar (no time zones).
+    static func dayNumber(_ s: String) -> Int? {
+        let p = s.prefix(10).split(separator: "-").compactMap { Int($0) }
+        guard p.count == 3 else { return nil }
+        // days from civil (Howard Hinnant's algorithm)
+        let y = p[1] <= 2 ? p[0] - 1 : p[0], m = p[1], d = p[2]
+        let era = (y >= 0 ? y : y - 399) / 400
+        let yoe = y - era * 400
+        let doy = (153 * (m > 2 ? m - 3 : m + 9) + 2) / 5 + d - 1
+        let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy
+        return era * 146097 + doe - 719468
+    }
 
     public func donor(_ id: Int) -> Donor? { donors.first { $0.id == id } }
     public func official(_ id: Int) -> Official? { officials.first { $0.id == id } }
