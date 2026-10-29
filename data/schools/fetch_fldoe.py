@@ -201,8 +201,8 @@ def parse_spending(blob, district, label='', year=None):
         has_sub = any(nxt) and not any(num(c) is not None for c in rows[i + 1][:4] if c is not None)
         start = i + (2 if has_sub else 1)
         col = {c: j for j, c in enumerate(cells)}
-        di = next((j for c, j in col.items() if 'district' in c and ('number' in c or c.endswith('no') or c == 'district' or 'id' in c)), None)
-        si = next((j for c, j in col.items() if 'school' in c and ('number' in c or c.endswith('no') or 'id' in c)), None)
+        di = next((j for c, j in col.items() if 'district' in c and ('number' in c or 'code' in c or c.endswith('no') or c == 'district' or 'id' in c)), None)
+        si = next((j for c, j in col.items() if 'school' in c and ('number' in c or 'code' in c or c.endswith('no') or 'id' in c)), None)
         if di is None or si is None:
             continue
         ni = next((j for c, j in col.items() if 'school' in c and 'name' in c), None)
