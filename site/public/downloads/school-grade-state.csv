@@ -1,0 +1,11 @@
+state,year,school_year,school_type,schools_graded,grade_a,grade_b,grade_c,grade_d,grade_f,grade_i,grade3_ela_achievement,ela_achievement,ela_gains,ela_gains_low25,math_achievement,math_gains,math_gains_low25,science_achievement,social_studies_achievement,middle_acceleration,graduation_rate,college_career_acceleration,percent_of_points,percent_tested,pct_economically_disadvantaged,source_url,gov_id
+FL,2025,2024-25,All,3465,1531,931,921,61,9,12,58.9,58.7,59.9,58.7,60.9,60.0,56.1,58.7,75.6,74.5,94.0,69.6,61.3,98.8,72.4,https://www.fldoe.org/file/18534/SchoolGrades25.xlsx,schools
+FL,2025,2024-25,Combination,594,323,124,123,13,2,9,61.5,62.2,61.7,59.6,62.5,60.7,58.8,58.2,78.3,73.5,93.3,64.6,64.4,98.9,59.7,https://www.fldoe.org/file/18534/SchoolGrades25.xlsx,schools
+FL,2025,2024-25,Elementary,1799,718,485,545,43,6,2,58.3,57.5,59.9,59.4,62.7,62.4,54.3,56.7,100.0,,,,59.0,99.3,78.7,https://www.fldoe.org/file/18534/SchoolGrades25.xlsx,schools
+FL,2025,2024-25,High,512,252,169,89,0,1,1,,60.1,58.7,58.9,50.9,48.6,52.8,72.7,75.5,,94.2,71.1,64.7,97.6,63.1,https://www.fldoe.org/file/18534/SchoolGrades25.xlsx,schools
+FL,2025,2024-25,Middle,560,238,153,164,5,0,0,,57.4,59.1,55.5,62.3,61.6,61.9,53.0,72.7,75.6,,,62.1,98.3,73.9,https://www.fldoe.org/file/18534/SchoolGrades25.xlsx,schools
+FL,2026,2025-26,All,3463,1741,884,794,24,6,14,61.3,61.9,62.0,59.6,63.3,60.6,55.0,61.9,78.3,79.0,96.0,74.4,63.2,98.8,69.3,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+FL,2026,2025-26,Combination,602,333,106,144,6,2,11,64.0,65.0,63.1,59.9,64.5,61.2,57.8,60.8,81.0,77.8,95.9,69.7,66.3,98.9,58.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+FL,2026,2025-26,Elementary,1790,871,485,414,15,4,1,60.6,60.7,62.8,61.0,65.5,63.8,53.8,60.5,100.0,,,,61.2,99.3,75.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+FL,2026,2025-26,High,510,251,132,124,1,0,2,,63.0,59.9,59.0,52.1,46.7,48.8,74.7,77.0,,96.1,75.9,65.9,97.5,58.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+FL,2026,2025-26,Middle,561,286,161,112,2,0,0,,61.0,60.4,55.5,64.7,62.1,61.1,56.0,76.5,80.2,,,64.2,98.2,69.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools

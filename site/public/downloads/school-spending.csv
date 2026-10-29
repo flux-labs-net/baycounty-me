@@ -1,1 +1,353 @@
 place_id,school_id,school,year,school_year,federal_per_student,state_local_per_student,total_per_student,enrollment,estimated_total,source_url,gov_id
+fl-bay,03-0061,Bay High School,2018,2017-18,453.0,6801.0,7254.0,1199,8697546,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2018,2017-18,448.0,6922.0,7370.0,761,5608570,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2018,2017-18,546.0,6959.0,7505.0,589,4420445,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2018,2017-18,1918.0,9394.0,11312.0,469,5305328,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2018,2017-18,937.0,6733.0,7670.0,539,4134130,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2018,2017-18,928.0,8708.0,9636.0,333,3208788,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2018,2017-18,2219.0,9368.0,11587.0,480,5561760,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0141,Everitt Middle School,2018,2017-18,871.0,7058.0,7929.0,726,5756454,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2018,2017-18,735.0,7276.0,8011.0,776,6216536,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2018,2017-18,727.0,8100.0,8827.0,588,5190276,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2018,2017-18,294.0,7902.0,8196.0,709,5810964,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0191,Oakland Terrace School for the Visual and Performing Arts,2018,2017-18,1434.0,9778.0,11212.0,345,3868140,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2018,2017-18,177.0,7036.0,7213.0,809,5835317,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2018,2017-18,1111.0,7576.0,8687.0,524,4551988,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2018,2017-18,596.0,8101.0,8697.0,397,3452709,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0231,Springfield Elementary School,2018,2017-18,2652.0,10391.0,13043.0,429,5595447,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2018,2017-18,2489.0,26308.0,28797.0,120,3455640,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2018,2017-18,1059.0,7375.0,8434.0,487,4107358,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2018,2017-18,807.0,8150.0,8957.0,304,2722928,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2018,2017-18,3199.0,27284.0,30483.0,158,4816314,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0291,Oscar Patterson Elementary Magnet,2018,2017-18,1886.0,10116.0,12002.0,253,3036506,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2018,2017-18,157.0,5826.0,5983.0,1095,6551385,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2018,2017-18,321.0,6879.0,7200.0,1014,7300800,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2018,2017-18,553.0,7787.0,8340.0,770,6421800,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2018,2017-18,734.0,7068.0,7802.0,651,5079102,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2018,2017-18,170.0,5620.0,5790.0,1863,10786770,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2018,2017-18,173.0,6618.0,6791.0,778,5283398,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2018,2017-18,503.0,7615.0,8118.0,660,5357880,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2018,2017-18,239.0,7067.0,7306.0,728,5318768,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2018,2017-18,3934.0,25792.0,29726.0,145,4310270,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2018,2017-18,645.0,7355.0,8000.0,1254,10032000,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2018,2017-18,231.0,6011.0,6242.0,1755,10954710,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2018,2017-18,434.0,7319.0,7753.0,1096,8497288,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2018,2017-18,1736.0,20372.0,22108.0,160,3537280,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0591,C C Washington Academy,2018,2017-18,1051.0,15572.0,16623.0,71,1180233,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0604,Panama City Marine Institute,2018,2017-18,0.0,6735.0,6735.0,71,478185,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2018,2017-18,26.0,6025.0,6051.0,767,4641117,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2018,2017-18,29.0,5581.0,5610.0,462,2591820,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2018,2017-18,28.0,5265.0,5293.0,526,2784118,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2018,2017-18,27.0,5333.0,5360.0,759,4068240,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2018,2017-18,26.0,6269.0,6295.0,696,4381320,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2018,2017-18,0.0,6255.0,6255.0,322,2014110,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0782,Central High School,2018,2017-18,1063.0,5440.0,6503.0,174,1131522,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2018,2017-18,1094.0,7428.0,8522.0,302,2573644,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2018,2017-18,0.0,7290.0,7290.0,187,1363230,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2018,2017-18,24.0,6878.0,6902.0,575,3968650,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2018,2017-18,0.0,4742.0,4742.0,80,379360,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-7006,Bay Virtual Instruction (Course Offerings),2018,2017-18,0.0,3543.0,3543.0,16,56688,https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0061,Bay High School,2019,2018-19,394.0,10090.0,10484.0,1223,12821932,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2019,2018-19,458.0,10279.0,10738.0,762,8182356,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2019,2018-19,603.0,8945.0,9548.0,619,5910212,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2019,2018-19,2174.0,12436.0,14610.0,506,7392660,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2019,2018-19,754.0,10031.0,10784.0,557,6006688,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2019,2018-19,1128.0,12084.0,13212.0,330,4359960,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2019,2018-19,2587.0,14080.0,16667.0,449,7483483,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0141,Everitt Middle School,2019,2018-19,773.0,10182.0,10956.0,689,7548684,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2019,2018-19,774.0,12335.0,13109.0,736,9648224,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2019,2018-19,932.0,11993.0,12926.0,558,7212708,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2019,2018-19,293.0,11939.0,12232.0,697,8525704,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0191,Oakland Terrace School for the Visual and Performing Arts,2019,2018-19,1923.0,13480.0,15402.0,328,5051856,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2019,2018-19,148.0,9034.0,9183.0,755,6933165,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2019,2018-19,1101.0,10912.0,12014.0,547,6571658,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2019,2018-19,706.0,12715.0,13421.0,422,5663662,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2019,2018-19,2731.0,34548.0,37279.0,115,4287085,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2019,2018-19,1258.0,10859.0,12117.0,486,5888862,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2019,2018-19,588.0,9996.0,10585.0,315,3334275,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2019,2018-19,3401.0,35605.0,39006.0,156,6084936,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2019,2018-19,90.0,8717.0,8807.0,1097,9661279,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2019,2018-19,460.0,10097.0,10557.0,1004,10599228,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2019,2018-19,563.0,11731.0,12294.0,736,9048384,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2019,2018-19,742.0,11164.0,11905.0,601,7154905,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2019,2018-19,258.0,8043.0,8302.0,1802,14960204,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2019,2018-19,131.0,10258.0,10389.0,737,7656693,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2019,2018-19,642.0,10353.0,10995.0,678,7454610,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2019,2018-19,222.0,8988.0,9209.0,742,6833078,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2019,2018-19,2842.0,32802.0,35644.0,141,5025804,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2019,2018-19,717.0,9182.0,9899.0,1265,12522235,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2019,2018-19,272.0,7732.0,8004.0,1674,13398696,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2019,2018-19,412.0,8994.0,9405.0,1143,10749915,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2019,2018-19,1338.0,23344.0,24681.0,174,4294494,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0591,C C Washington Academy,2019,2018-19,912.0,17764.0,18677.0,91,1699607,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2019,2018-19,35.0,6258.0,6293.0,768,4833024,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2019,2018-19,37.0,5711.0,5748.0,464,2667072,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2019,2018-19,30.0,5314.0,5344.0,524,2800256,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2019,2018-19,30.0,5566.0,5596.0,847,4739812,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2019,2018-19,40.0,6299.0,6339.0,696,4411944,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2019,2018-19,0.0,50030.0,50030.0,355,17760650,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0782,Central High School,2019,2018-19,0.0,6403.0,6403.0,198,1267794,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2019,2018-19,1682.0,6288.0,7970.0,375,2988750,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2019,2018-19,0.0,6956.0,6956.0,207,1439892,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2019,2018-19,37.0,19571.0,19608.0,652,12784416,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2019,2018-19,0.0,4592.0,4592.0,62,284704,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-7006,Bay Virtual Instruction (Course Offerings),2019,2018-19,0.0,6914.0,6914.0,16,110624,https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0061,Bay High School,2020,2019-20,626.0,7979.0,8606.0,1059,9113754,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2020,2019-20,839.0,9376.0,10216.0,636,6497376,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2020,2019-20,607.0,8716.0,9323.0,634,5910782,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2020,2019-20,1718.0,9676.0,11395.0,622,7087690,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2020,2019-20,1950.0,10297.0,12247.0,394,4825318,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2020,2019-20,1371.0,8400.0,9771.0,464,4533744,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2020,2019-20,1653.0,11656.0,13310.0,488,6495280,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2020,2019-20,1908.0,10590.0,12497.0,512,6398464,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2020,2019-20,2123.0,10771.0,12893.0,402,5182986,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2020,2019-20,902.0,9842.0,10744.0,580,6231520,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2020,2019-20,305.0,7904.0,8209.0,796,6534364,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2020,2019-20,1373.0,8098.0,9471.0,617,5843607,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2020,2019-20,778.0,8681.0,9459.0,439,4152501,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2020,2019-20,3598.0,33282.0,36880.0,99,3651120,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2020,2019-20,1219.0,9350.0,10569.0,419,4428411,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2020,2019-20,704.0,8755.0,9458.0,356,3367048,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2020,2019-20,3952.0,31799.0,35752.0,152,5434304,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2020,2019-20,624.0,7555.0,8180.0,832,6805760,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2020,2019-20,643.0,8275.0,8918.0,1391,12404938,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2020,2019-20,1194.0,9546.0,10741.0,647,6949427,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2020,2019-20,1169.0,8654.0,9823.0,569,5589287,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2020,2019-20,276.0,6617.0,6893.0,1816,12517688,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2020,2019-20,315.0,10498.0,10813.0,255,2757315,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2020,2019-20,790.0,8802.0,9592.0,590,5659280,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2020,2019-20,412.0,8972.0,9383.0,683,6408589,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2020,2019-20,3903.0,29608.0,33511.0,110,3686210,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2020,2019-20,865.0,8217.0,9082.0,1363,12378766,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2020,2019-20,335.0,6842.0,7177.0,1640,11770280,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2020,2019-20,677.0,9040.0,9718.0,1161,11282598,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2020,2019-20,1460.0,15775.0,17236.0,269,4636484,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2020,2019-20,30.0,6470.0,6500.0,838,5447000,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2020,2019-20,28.0,5658.0,5686.0,416,2365376,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2020,2019-20,23.0,5337.0,5360.0,526,2819360,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2020,2019-20,24.0,5687.0,5711.0,855,4882905,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2020,2019-20,76.0,6700.0,6776.0,697,4722872,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2020,2019-20,514.0,13741.0,14255.0,274,3905870,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0782,Central High School,2020,2019-20,281.0,7302.0,7583.0,157,1190531,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2020,2019-20,967.0,6933.0,7899.0,306,2417094,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2020,2019-20,0.0,8300.0,8300.0,220,1826000,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2020,2019-20,673.0,13798.0,14471.0,669,9681099,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2020,2019-20,6.0,13006.0,13012.0,46,598552,https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx,schools
+fl-bay,03-0061,Bay High School,2021,2020-21,950.0,7917.0,8867.0,1039,9212813,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2021,2020-21,1625.0,9285.0,10910.0,621,6775110,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2021,2020-21,1663.0,8235.0,9898.0,631,6245638,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2021,2020-21,2399.0,10614.0,13013.0,601,7820813,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2021,2020-21,2255.0,9387.0,11643.0,384,4470912,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2021,2020-21,1770.0,8513.0,10283.0,444,4565652,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2021,2020-21,2632.0,11333.0,13965.0,455,6354075,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2021,2020-21,2223.0,9199.0,11422.0,494,5642468,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2021,2020-21,2457.0,10434.0,12891.0,413,5323983,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2021,2020-21,1135.0,10548.0,11682.0,541,6319962,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2021,2020-21,581.0,8155.0,8734.0,762,6655308,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2021,2020-21,1809.0,8645.0,10454.0,604,6314216,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2021,2020-21,1243.0,9079.0,10321.0,440,4541240,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2021,2020-21,4949.0,29979.0,34928.0,109,3807152,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2021,2020-21,1827.0,10008.0,11837.0,372,4403364,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2021,2020-21,1304.0,9864.0,11168.0,309,3450912,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2021,2020-21,5233.0,33329.0,38562.0,167,6439854,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2021,2020-21,642.0,8325.0,8968.0,777,6968136,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2021,2020-21,1351.0,8801.0,10152.0,1379,13999608,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2021,2020-21,1380.0,10743.0,12122.0,562,6812564,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2021,2020-21,1660.0,8581.0,10240.0,561,5744640,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2021,2020-21,390.0,6703.0,7093.0,1784,12653912,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2021,2020-21,1023.0,8862.0,9884.0,388,3834992,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2021,2020-21,1490.0,9556.0,11047.0,519,5733393,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2021,2020-21,783.0,9085.0,9867.0,650,6413550,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2021,2020-21,4444.0,26010.0,30453.0,117,3563001,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2021,2020-21,807.0,8486.0,9292.0,1410,13101720,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2021,2020-21,646.0,6949.0,7594.0,1563,11869422,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2021,2020-21,947.0,9338.0,10285.0,1048,10778680,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2021,2020-21,2181.0,18744.0,20927.0,227,4750429,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2021,2020-21,333.0,7035.0,7368.0,803,5916504,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2021,2020-21,361.0,5875.0,6236.0,453,2824908,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2021,2020-21,333.0,5665.0,5998.0,508,3046984,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2021,2020-21,278.0,6131.0,6409.0,883,5659147,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2021,2020-21,303.0,6916.0,7219.0,693,5002767,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2021,2020-21,1715.0,10591.0,12306.0,259,3187254,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0782,Central High School,2021,2020-21,1358.0,7467.0,8826.0,126,1112076,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2021,2020-21,1860.0,7002.0,8862.0,303,2685186,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2021,2020-21,2857.0,7047.0,9905.0,254,2515870,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2021,2020-21,262.0,7368.0,7630.0,672,5127360,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2021,2020-21,0.0,4131.0,4131.0,403,1664793,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2021,2020-21,0.0,3758.0,3758.0,455,1709890,https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx,schools
+fl-bay,03-0061,Bay High School,2022,2021-22,1294.0,7496.0,8790.0,1112,9774480,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2022,2021-22,1529.0,7716.0,9245.0,677,6258865,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2022,2021-22,1213.0,7686.0,8898.0,656,5837088,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2022,2021-22,2956.0,10011.0,12966.0,569,7377654,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2022,2021-22,2455.0,8696.0,11151.0,469,5229819,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2022,2021-22,2069.0,7672.0,9742.0,470,4578740,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2022,2021-22,2323.0,10120.0,12442.0,474,5897508,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2022,2021-22,2516.0,7825.0,10341.0,578,5977098,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2022,2021-22,3019.0,8940.0,11958.0,504,6026832,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2022,2021-22,1978.0,8011.0,9989.0,645,6442905,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2022,2021-22,789.0,7336.0,8125.0,791,6426875,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2022,2021-22,2048.0,7566.0,9614.0,703,6758642,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2022,2021-22,1683.0,8035.0,9719.0,479,4655401,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2022,2021-22,7494.0,29084.0,36576.0,114,4169664,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2022,2021-22,2046.0,8888.0,10933.0,387,4231071,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2022,2021-22,1936.0,8840.0,10776.0,308,3319008,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2022,2021-22,7056.0,30625.0,37681.0,166,6255046,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2022,2021-22,995.0,7002.0,7997.0,841,6725477,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2022,2021-22,1439.0,8450.0,9888.0,1393,13773984,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2022,2021-22,1422.0,9064.0,10486.0,623,6532778,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2022,2021-22,1377.0,7441.0,8819.0,631,5564789,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2022,2021-22,569.0,6140.0,6709.0,1925,12914825,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2022,2021-22,1274.0,7713.0,8986.0,562,5050132,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2022,2021-22,1717.0,8431.0,10148.0,573,5814804,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2022,2021-22,1275.0,8425.0,9701.0,627,6082527,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2022,2021-22,7080.0,26616.0,33695.0,112,3773840,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2022,2021-22,1206.0,7922.0,9127.0,1509,13772643,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2022,2021-22,710.0,6651.0,7362.0,1504,11072448,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2022,2021-22,1320.0,8864.0,10183.0,1037,10559771,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2022,2021-22,6952.0,18158.0,25110.0,249,6252390,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2022,2021-22,881.0,6867.0,7749.0,786,6090714,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2022,2021-22,991.0,6055.0,7046.0,438,3086148,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2022,2021-22,601.0,6168.0,6769.0,525,3553725,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2022,2021-22,995.0,5762.0,6757.0,906,6121842,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2022,2021-22,909.0,7110.0,8019.0,697,5589243,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2022,2021-22,1893.0,18092.0,19986.0,207,4137102,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0782,Central High School,2022,2021-22,1920.0,9116.0,11036.0,89,982204,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2022,2021-22,1738.0,7638.0,9377.0,281,2634937,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2022,2021-22,420.0,7700.0,8120.0,279,2265480,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2022,2021-22,1252.0,7652.0,8904.0,679,6045816,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2022,2021-22,16.0,5449.0,5464.0,139,759496,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2022,2021-22,5.0,3982.0,3987.0,171,681777,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0061,Bay High School,2023,2022-23,1519.0,7542.0,9061.0,1255,11371555,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2023,2022-23,1754.0,8025.0,9779.0,701,6855079,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2023,2022-23,1979.0,8452.0,10430.0,621,6477030,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2023,2022-23,2469.0,9623.0,12092.0,562,6795704,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2023,2022-23,2652.0,9872.0,12525.0,511,6400275,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2023,2022-23,3737.0,8969.0,12706.0,362,4599572,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2023,2022-23,3111.0,10260.0,13372.0,503,6726116,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2023,2022-23,2760.0,8891.0,11649.0,643,7490307,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2023,2022-23,1848.0,9066.0,10915.0,570,6221550,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2023,2022-23,1656.0,8323.0,9978.0,699,6974622,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2023,2022-23,924.0,7633.0,8557.0,843,7213551,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2023,2022-23,3767.0,8489.0,12256.0,496,6078976,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2023,2022-23,1884.0,8288.0,10171.0,506,5146526,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2023,2022-23,10072.0,37867.0,47939.0,94,4506266,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2023,2022-23,2758.0,8559.0,11316.0,439,4967724,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2023,2022-23,2479.0,9325.0,11804.0,313,3694652,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2023,2022-23,6755.0,29748.0,36504.0,182,6643728,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2023,2022-23,915.0,7578.0,8492.0,868,7371056,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2023,2022-23,2083.0,8518.0,10601.0,1337,14173537,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0391,Oscar Patterson Academy,2023,2022-23,2493.0,9133.0,11626.0,250,2906500,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2023,2022-23,1442.0,8701.0,10145.0,705,7152225,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2023,2022-23,2035.0,8204.0,10240.0,598,6123520,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2023,2022-23,622.0,6442.0,7063.0,1901,13426763,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2023,2022-23,1324.0,7674.0,8998.0,800,7198400,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2023,2022-23,1742.0,8201.0,9944.0,639,6354216,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2023,2022-23,1557.0,8797.0,10353.0,648,6708744,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2023,2022-23,8203.0,26787.0,34990.0,107,3743930,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2023,2022-23,1157.0,8070.0,9226.0,1619,14936894,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2023,2022-23,804.0,6774.0,7579.0,1617,12255243,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2023,2022-23,1534.0,9097.0,10631.0,1058,11247598,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2023,2022-23,4722.0,13927.0,18650.0,345,6434250,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2023,2022-23,2620.0,13739.0,16359.0,343,5611137,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2023,2022-23,927.0,7889.0,8815.0,765,6743475,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2023,2022-23,1094.0,6487.0,7581.0,433,3282573,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2023,2022-23,725.0,6423.0,7148.0,524,3745552,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2023,2022-23,755.0,6331.0,7085.0,897,6355245,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2023,2022-23,938.0,7600.0,8538.0,695,5933910,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2023,2022-23,0.0,6579.0,6579.0,22,144738,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2023,2022-23,1324.0,16483.0,17807.0,195,3472365,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0782,Central High School,2023,2022-23,2033.0,10961.0,12994.0,93,1208442,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2023,2022-23,1010.0,8335.0,9345.0,316,2953020,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2023,2022-23,402.0,8725.0,9126.0,301,2746926,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2023,2022-23,1258.0,8276.0,9533.0,688,6558704,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2023,2022-23,0.0,6138.0,6139.0,66,405174,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2023,2022-23,0.0,4878.0,4878.0,117,570726,https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0061,Bay High School,2024,2023-24,1187.0,7950.0,9138.0,1298,11861124,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2024,2023-24,1628.0,8447.0,10076.0,680,6851680,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2024,2023-24,1611.0,8257.0,9868.0,585,5772780,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2024,2023-24,2260.0,10886.0,13147.0,554,7283438,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2024,2023-24,2533.0,10371.0,12905.0,537,6929985,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2024,2023-24,3591.0,10834.0,14424.0,381,5495544,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2024,2023-24,3067.0,10069.0,13136.0,524,6883264,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2024,2023-24,1866.0,9231.0,11096.0,676,7500896,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2024,2023-24,1821.0,9102.0,10922.0,583,6367526,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2024,2023-24,2181.0,10107.0,12288.0,676,8306688,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2024,2023-24,1059.0,9139.0,10198.0,825,8413350,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2024,2023-24,2935.0,9592.0,12528.0,502,6289056,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2024,2023-24,1574.0,8443.0,10017.0,503,5038551,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2024,2023-24,8360.0,41737.0,50098.0,68,3406664,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2024,2023-24,2686.0,10669.0,13355.0,420,5609100,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2024,2023-24,1900.0,9142.0,11042.0,357,3941994,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2024,2023-24,727.0,8206.0,8934.0,818,7308012,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2024,2023-24,2295.0,9585.0,11880.0,1423,16905240,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0391,Oscar Patterson Academy,2024,2023-24,2509.0,8695.0,11204.0,322,3607688,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2024,2023-24,1977.0,9392.0,11370.0,707,8038590,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2024,2023-24,1713.0,9365.0,11078.0,561,6214758,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2024,2023-24,523.0,6714.0,7237.0,1838,13301606,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2024,2023-24,922.0,9023.0,9945.0,908,9030060,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2024,2023-24,1700.0,8544.0,10244.0,731,7488364,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2024,2023-24,1396.0,9296.0,10692.0,634,6778728,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2024,2023-24,6042.0,34494.0,40536.0,91,3688776,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2024,2023-24,929.0,8547.0,9475.0,1648,15614800,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2024,2023-24,649.0,7163.0,7813.0,1637,12789881,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2024,2023-24,1271.0,9692.0,10964.0,1044,11446416,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2024,2023-24,4045.0,15580.0,19625.0,324,6358500,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2024,2023-24,2118.0,11528.0,13646.0,423,5772258,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2024,2023-24,1171.0,7977.0,9148.0,765,6998220,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2024,2023-24,1016.0,6858.0,7874.0,432,3401568,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2024,2023-24,616.0,6896.0,7512.0,525,3943800,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2024,2023-24,680.0,6818.0,7498.0,882,6613236,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2024,2023-24,761.0,8212.0,8973.0,694,6227262,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2024,2023-24,0.0,8414.0,8414.0,88,740432,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2024,2023-24,2207.0,19748.0,21955.0,201,4412955,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0782,Central High School,2024,2023-24,1342.0,10162.0,11503.0,106,1219318,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2024,2023-24,1836.0,8142.0,9977.0,317,3162709,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2024,2023-24,337.0,7780.0,8117.0,309,2508153,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2024,2023-24,429.0,9915.0,10344.0,707,7313208,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2024,2023-24,24.0,7701.0,7725.0,26,200850,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2024,2023-24,30.0,6191.0,6220.0,91,566020,https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx,schools
+fl-bay,03-0061,Bay High School,2025,2024-25,813.0,8237.0,9050.0,1289,11665450,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2025,2024-25,899.0,10062.0,10960.0,634,6948640,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2025,2024-25,1090.0,9304.0,10394.0,573,5955762,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2025,2024-25,2509.0,13916.0,16425.0,495,8130375,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2025,2024-25,1280.0,9908.0,11187.0,622,6958314,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2025,2024-25,1498.0,12862.0,14360.0,343,4925480,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2025,2024-25,1711.0,11174.0,12885.0,543,6996555,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2025,2024-25,1679.0,9984.0,11663.0,684,7977492,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2025,2024-25,1195.0,9576.0,10771.0,541,5827111,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2025,2024-25,1533.0,9823.0,11355.0,688,7812240,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2025,2024-25,803.0,9691.0,10494.0,755,7922970,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2025,2024-25,1423.0,10516.0,11939.0,510,6088890,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2025,2024-25,1286.0,8914.0,10199.0,531,5415669,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0241,St. Andrew School at Oakland Terrace,2025,2024-25,6694.0,43440.0,50135.0,55,2757425,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2025,2024-25,1714.0,12069.0,13783.0,423,5830209,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2025,2024-25,1207.0,10393.0,11599.0,362,4198838,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0281,Margaret K. Lewis in Millville,2025,2024-25,6965.0,35211.0,42176.0,170,7169920,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2025,2024-25,1002.0,8003.0,9006.0,803,7231818,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2025,2024-25,1091.0,9828.0,10918.0,1394,15219692,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0391,Oscar Patterson Academy,2025,2024-25,1935.0,11819.0,13754.0,394,5419076,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2025,2024-25,1558.0,9301.0,10859.0,735,7981365,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2025,2024-25,1188.0,9983.0,11170.0,569,6355730,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2025,2024-25,340.0,6825.0,7164.0,1864,13353696,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2025,2024-25,904.0,10077.0,10981.0,883,9696223,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2025,2024-25,1204.0,9249.0,10453.0,677,7076681,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2025,2024-25,714.0,9427.0,10141.0,589,5973049,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0531,New Horizons Learning Center,2025,2024-25,4648.0,31845.0,36492.0,93,3393756,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2025,2024-25,548.0,8500.0,9050.0,1690,15294500,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2025,2024-25,448.0,7633.0,8080.0,1629,13162320,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2025,2024-25,792.0,9422.0,10215.0,1089,11124135,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0581,Rosenwald High School,2025,2024-25,1852.0,16307.0,18158.0,351,6373458,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2025,2024-25,882.0,10725.0,11607.0,470,5455290,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2025,2024-25,3683.0,5382.0,9065.0,766,6943790,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2025,2024-25,0.0,7248.0,7248.0,429,3109392,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2025,2024-25,0.0,7857.0,7857.0,526,4132782,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2025,2024-25,0.0,7619.0,7619.0,865,6590435,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2025,2024-25,0.0,9222.0,9222.0,696,6418512,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2025,2024-25,0.0,30671.0,30671.0,26,797446,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2025,2024-25,1813.0,9554.0,11366.0,203,2307298,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0782,Central High School,2025,2024-25,1552.0,12211.0,13762.0,99,1362438,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2025,2024-25,1746.0,9072.0,10818.0,321,3472578,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2025,2024-25,50.0,9155.0,9205.0,311,2862755,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2025,2024-25,636.0,15398.0,16034.0,711,11400174,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2025,2024-25,24.0,8080.0,8104.0,25,202600,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2025,2024-25,36.0,5381.0,5417.0,14,75838,https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx,schools
