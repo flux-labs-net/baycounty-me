@@ -312,7 +312,9 @@
     "partial": true,
     "period": "fiscal year to date through July 2026 (10 months)",
     "basis": "cash collections incl. penalties & interest",
-    "source_url": "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf"
+    "source_url": "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf",
+    "prior_year_same_period": 30404440,
+    "prior_year_period": "fiscal year to date through July 2025 (10 months), from the same report"
    },
    {
     "fy": 2026,
@@ -321,7 +323,9 @@
     "partial": true,
     "period": "fiscal year to date through July 2026 (10 months)",
     "basis": "cash collections incl. penalties & interest",
-    "source_url": "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf"
+    "source_url": "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf",
+    "prior_year_same_period": 1521108,
+    "prior_year_period": "fiscal year to date through July 2025 (10 months), from the same report"
    },
    {
     "fy": 2026,
@@ -330,7 +334,9 @@
     "partial": true,
     "period": "fiscal year to date through July 2026 (10 months)",
     "basis": "cash collections incl. penalties & interest",
-    "source_url": "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf"
+    "source_url": "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf",
+    "prior_year_same_period": 1016133,
+    "prior_year_period": "fiscal year to date through July 2025 (10 months), from the same report"
    }
   ],
   "collections_taxes_only_detail": [

@@ -15,7 +15,8 @@ FBI's Uniform Crime Reporting program. Agencies are the ones in data/safety/<cou
 Florida agencies sent the FBI one yearly summary (filed under December) until 2024 and moved to monthly incident
 reports (NIBRS, through FDLE's FIBRS) in 2025, so 2025 counts are not directly comparable with earlier years. Nothing
 was reported to the FBI by Florida agencies for 2021, so a year with no violent or property crime at all is dropped as
-not reported. The current year is kept with the number of months reported so far. Years before 2016 are not read (data/entities/cutoff.py).
+not reported. The current year is kept with the number of months reported so far, and from 2025 each month's count is kept too
+(by_month, January first), so the year so far can be compared with the same months of the year before. Years before 2016 are not read (data/entities/cutoff.py).
 """
 import argparse, datetime as dt, json, os, sys, time, urllib.request
 
@@ -26,6 +27,7 @@ import cutoff  # noqa: E402
 API = 'https://cde.ucr.cjis.gov/LATEST'
 UA = 'Mozilla/5.0 (compatible; BayCounty.me public data reader; +https://baycounty.me/about)'
 STATE_NAME = 'Florida'
+MONTHLY_FROM = 2025  # first year Florida agencies sent monthly incident reports (NIBRS)
 OFFENSES = [('V', 'Violent crime', 'violent'), ('P', 'Property crime', 'property'),
             ('HOM', 'Murder', 'violent'), ('RPE', 'Rape', 'violent'), ('ROB', 'Robbery', 'violent'), ('ASS', 'Aggravated assault', 'violent'),
             ('BUR', 'Burglary', 'property'), ('LAR', 'Larceny-theft', 'property'), ('MVT', 'Motor vehicle theft', 'property'), ('ARS', 'Arson', 'property')]
@@ -74,6 +76,9 @@ def offenses(ori, first, last, state):
         for y, v in yrs.items():
             p = (pop.get(pkey) or {}).get(f'12-{y}') if pkey else None
             rows.setdefault(y, {})[code] = {'label': label, 'group': group, 'count': v['count'], 'cleared': cl[y]['count'], 'months': v['months'], 'population': p}
+            if int(y) >= MONTHLY_FROM:  # monthly incident reports: keep each month so a partial year can be compared with the same months a year earlier
+                rows[y][code]['by_month'] = [(act.get(key) or {}).get(f'{m:02d}-{y}') for m in range(1, 13)]
+                rows[y][code]['cleared_by_month'] = [(act.get(clr) or {}).get(f'{m:02d}-{y}') for m in range(1, 13)]
         time.sleep(.3)
     return rows
 

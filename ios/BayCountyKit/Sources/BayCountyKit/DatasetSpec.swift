@@ -194,6 +194,8 @@ public struct DatasetSpec: Sendable {
                                  amount: ["budget_amount"], badge: "service", filters: ["government", "service"], page: "public-safety"),
         "crime-counts": .init(.accountability, "chart.bar", title: ["agency"], subtitle: ["offense", "year"], detail: "reporting",
                               badge: "year", filters: ["agency", "offense", "year"], page: "public-safety"),
+        "crime-monthly": .init(.accountability, "calendar", title: ["agency"], subtitle: ["offense", "period"],
+                               badge: "period", filters: ["agency", "offense", "year"], page: "public-safety"),
         "police-staffing": .init(.accountability, "person.3", title: ["agency"], subtitle: ["year"],
                                  badge: "year", filters: ["agency", "year"], page: "public-safety"),
         "chambers": .init(.accountability, "storefront", title: ["name"], subtitle: ["serves"], detail: "about",
@@ -309,6 +311,8 @@ public struct DatasetSpec: Sendable {
                            filters: ["section", "lang"]),
         "data-sources": .init(.more, "doc.text.magnifyingglass", title: ["source_name"], subtitle: ["government", "topic"], detail: "what_we_take",
                               badge: "method", filters: ["topic", "government", "method"], page: "data-sources"),
+        "data-freshness": .init(.more, "clock", title: ["figure"], subtitle: ["topic", "latest_period"], detail: "next_due",
+                                badge: "status", filters: ["topic", "status"], page: "data-sources"),
         "data-source-sites": .init(.more, "globe", title: ["website"], subtitle: ["topic"], detail: "topic",
                                    filters: ["topic"], page: "data-sources"),
         // how much of each government's records since 2016 are on file, per portion (budgets, audits, ...); status is complete / partial / missing

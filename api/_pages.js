@@ -42,7 +42,7 @@ const PAGES = {
   '/volunteer': {datasets: ['volunteer-needs', 'volunteer-orgs', 'nonprofits']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits', 'person-photos', 'chamber-overlaps']},
   '/military': {datasets: ['military-installations', 'military-news', 'federal-contracts', 'federal-contract-years']},
-  '/public-safety': {datasets: ['safety-agencies', 'crime-counts', 'police-staffing']},
+  '/public-safety': {datasets: ['safety-agencies', 'crime-counts', 'crime-monthly', 'police-staffing']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations', 'person-photos'], endpoints: ['/overlaps']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links'], endpoints: ['/overlaps']},
   // overlaps between datasets (site/correlations.py); the hand-confirmed and checkbook joins are live (api/_overlaps.js)
@@ -72,7 +72,7 @@ const PAGES = {
   '/search': {endpoints: ['/search']},
   '/ask': {none: 'a chatbot: answers come from the MCP tools (api/mcp.js) over the same datasets and endpoints, through /api/chat'},
   '/about': {none: 'about the site'},
-  '/data-sources': {datasets: ['data-sources', 'data-source-sites'], endpoints: ['/import-progress']},
+  '/data-sources': {datasets: ['data-sources', 'data-source-sites', 'data-freshness'], endpoints: ['/import-progress']},
   '/privacy': {none: 'privacy policy'},
   '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts', 'money-map-gifts', 'money-map-contracts', 'money-map-votes']},
   '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'entity-profiles', 'entity-connections'],

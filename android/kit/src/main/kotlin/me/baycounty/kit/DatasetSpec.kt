@@ -242,6 +242,8 @@ data class DatasetSpec(
                                          amount = listOf("budget_amount"), badge = "service", filters = listOf("government", "service"), page = "public-safety"),
         "crime-counts" to DatasetSpec(Section.ACCOUNTABILITY, "chart.bar", title = listOf("agency"), subtitle = listOf("offense", "year"), detail = "reporting",
                                       badge = "year", filters = listOf("agency", "offense", "year"), page = "public-safety"),
+        "crime-monthly" to DatasetSpec(Section.ACCOUNTABILITY, "calendar", title = listOf("agency"), subtitle = listOf("offense", "period"),
+                                       badge = "period", filters = listOf("agency", "offense", "year"), page = "public-safety"),
         "police-staffing" to DatasetSpec(Section.ACCOUNTABILITY, "person.3", title = listOf("agency"), subtitle = listOf("year"),
                                          badge = "year", filters = listOf("agency", "year"), page = "public-safety"),
         "chambers" to DatasetSpec(Section.ACCOUNTABILITY, "storefront", title = listOf("name"), subtitle = listOf("serves"), detail = "about",
@@ -332,6 +334,8 @@ data class DatasetSpec(
                            filters = listOf("section", "lang")),
         "data-sources" to DatasetSpec(Section.MORE, "doc.text.magnifyingglass", title = listOf("source_name"), subtitle = listOf("government", "topic"), detail = "what_we_take",
                               badge = "method", filters = listOf("topic", "government", "method"), page = "data-sources"),
+        "data-freshness" to DatasetSpec(Section.MORE, "clock", title = listOf("figure"), subtitle = listOf("topic", "latest_period"), detail = "next_due",
+                                        badge = "status", filters = listOf("topic", "status"), page = "data-sources"),
         "data-source-sites" to DatasetSpec(Section.MORE, "globe", title = listOf("website"), subtitle = listOf("topic"), detail = "topic",
                                    filters = listOf("topic"), page = "data-sources"),
         // how much of each government's records since 2016 are on file, per portion; status is complete / partial / missing

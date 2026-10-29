@@ -19,6 +19,8 @@ CSS = r"""
 .ps-tbl td.nr{color:var(--muted)}
 .ps-tbl th.part,.ps-tbl td.part{font-style:italic}
 .ps-off[hidden]{display:none}
+.ps-ytd tr.tot td{border-top:2px solid var(--line)}
+@media (max-width:760px){.ps-ytd td,.ps-ytd th{padding-left:6px;padding-right:6px;font-size:.84rem}}
 .ps-chips{margin-bottom:10px}
 .ps-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .ps-card{padding:20px;border-radius:22px;background:var(--surface);box-shadow:var(--ui-shadow);min-width:0}
@@ -48,8 +50,8 @@ def _num(n):
 
 
 def safety_page(out_dir):
-    from safety_data import safety_agencies, crime_counts, police_staffing
-    A, C, S = safety_agencies(), crime_counts(), police_staffing()
+    from safety_data import safety_agencies, crime_counts, police_staffing, crime_monthly, year_to_date
+    A, C, S, M = safety_agencies(), crime_counts(), police_staffing(), crime_monthly()
     if not A:
         return '<div class="page"><h1>Police, fire and the Sheriff</h1><p>No public safety agencies on file for this place yet.</p></div>'
 
@@ -131,11 +133,37 @@ def safety_page(out_dir):
         s_rows += f'<tr><td>{e(name)}<span class="sub">{gov(g)}</span></td>{tds}</tr>'
     officers = sum(r['officers'] or 0 for r in A if r['service'] == 'police' and r['officers'])
 
+    # --- this year so far (monthly reports) against the same months last year
+    MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    ytdV, ytdP = year_to_date(M, 'V'), year_to_date(M, 'P')
+    ytd_html, ytd_kpi = '', None
+    if ytdV and ytdP:
+        span = lambda t: f'Jan to {MON[t["through_month"] - 1][:3]}'
+        ytd_kpi = (f'Violent crimes, {span(ytdV)} {ytdV["year"]}', _num(ytdV['now']),
+                   f'{pct(ytdV["now"], ytdV["before"])} from the same months of {ytdV["year"] - 1}; {_num(ytdP["now"])} property crimes ({pct(ytdP["now"], ytdP["before"])})')
+        bp = {r['agency_id']: r for r in ytdP['rows']}
+        trs = ''
+        for r in sorted(ytdV['rows'], key=lambda r: -r['now']):
+            p_ = bp.get(r['agency_id']) or {}
+            g = next((x[2] for x in agencies if x[0] == r['agency_id']), None)
+            trs += (f'<tr><td>{e(r["agency"])}<span class="sub">{gov(g) if g else ""}</span></td>'
+                    f'<td class="n">{_num(r["now"])}</td><td class="n hide-sm">{_num(r["before"])}</td><td class="n">{pct(r["now"], r["before"]) or "—"}</td>'
+                    f'<td class="n">{_num(p_.get("now"))}</td><td class="n hide-sm">{_num(p_.get("before"))}</td><td class="n">{pct(p_.get("now") or 0, p_.get("before") or 0) or "—"}</td></tr>')
+        trs += (f'<tr class="tot"><td><b>All of these agencies</b></td><td class="n"><b>{_num(ytdV["now"])}</b></td><td class="n hide-sm">{_num(ytdV["before"])}</td><td class="n"><b>{pct(ytdV["now"], ytdV["before"])}</b></td>'
+                f'<td class="n"><b>{_num(ytdP["now"])}</b></td><td class="n hide-sm">{_num(ytdP["before"])}</td><td class="n"><b>{pct(ytdP["now"], ytdP["before"])}</b></td></tr>')
+        lo = [x for x in ytdV['left_out']]
+        lo_txt = (' Left out because they have not sent every month yet: ' + '; '.join(
+            f'{e(x["agency"])} (through {MON[x["through_month"] - 1]})' if x['through_month'] else f'{e(x["agency"])} (nothing yet this year)' for x in lo) + '.') if lo else ''
+        y0, y1 = ytdV['year'] - 1, ytdV['year']
+        ytd_html = f'''<section class="tx-sec"><div class="sec-hd"><h2 id="ytd" data-tile="This year so far">This year so far</h2><span class="muted">{span(ytdV)} {y1} against {span(ytdV)} {y0}, from each agency's monthly reports</span></div>
+    <div class="tablewrap"><table class="tx-table ps-tbl ps-ytd" data-tt="off"><thead><tr><th>Agency</th><th class="n">Violent {y1}</th><th class="n hide-sm">Violent {y0}</th><th class="n">Change</th><th class="n">Property {y1}</th><th class="n hide-sm">Property {y0}</th><th class="n">Change</th></tr></thead><tbody>{trs}</tbody></table></div>
+    <p class="note">Both years use the same monthly incident reports, so these can be compared directly. The window leaves out the current month and the two before it, which agencies are still adding to; it moves forward as the FBI posts more. Small agencies swing a lot from year to year on a handful of crimes.{lo_txt}</p></section>'''
+
     k = lambda lab, v, s: f'<div class="kpi"><span class="eyebrow">{lab}</span><span class="v">{v}</span><span class="s">{s}</span></div>'
     kpis = (k(f'Police budgets, {e(fy)}', _money(police_total), f'Including {_money(contracts)} cities pay the Sheriff by contract') +
             k(f'Fire budgets, {e(fy)}', _money(fire_total), f'{sum(1 for r in A if r["service"] == "fire")} fire departments') +
-            k('Sworn officers', _num(officers), 'Latest count each agency gave the FBI') +
-            k(f'Violent crimes reported, {ky}', _num(v_ky), f'{pct(v_ky, v_first)} since {first_full}, same agencies; {_num(p_ky)} property crimes'))
+            k('Sworn officers', _num(officers), f'Count on Oct 31, {max((r["staffing_year"] or 0) for r in A)}; the 2026 count comes out next fall') +
+            (k(*ytd_kpi) if ytd_kpi else k(f'Violent crimes reported, {ky}', _num(v_ky), f'{pct(v_ky, v_first)} since {first_full}, same agencies; {_num(p_ky)} property crimes')))
 
     state = (__import__('safety_data')._files()[2].get('state') or {}).get('per_100k') or {}
     trend_agencies = [a for a in agencies if a[0] != 'mb-police'] + [a for a in agencies if a[0] == 'mb-police']
@@ -145,7 +173,7 @@ def safety_page(out_dir):
     towns_html = ch.town_cards(A, C, S, state, order)
     cost_html = ch.per_resident(A, order)
 
-    data = ' · '.join(f'<a href="/api/v1/datasets/{d}">{d}</a> (<a href="/downloads/{d}.csv">CSV</a>)' for d in ('safety-agencies', 'crime-counts', 'police-staffing'))
+    data = ' · '.join(f'<a href="/api/v1/datasets/{d}">{d}</a> (<a href="/downloads/{d}.csv">CSV</a>)' for d in ('safety-agencies', 'crime-counts', 'crime-monthly', 'police-staffing'))
     return f'''<style>{CSS}{ch.CSS}</style>
 <div class="page tax ps">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Living here · Police, fire and the Sheriff</span><h1>Police, fire and the Sheriff</h1>
@@ -157,10 +185,12 @@ def safety_page(out_dir):
     <li><b>Five cities have their own police.</b> Panama City, Panama City Beach, Lynn Haven, Springfield and Parker run police departments paid from their city budgets.</li>
     <li><b>Every city has a fire department.</b> Bay County Fire Rescue covers the unincorporated areas, paid by a fire fee on tax bills there.</li></ol></div></section>
 
+  {ytd_html}
+
   <section class="tx-sec"><div class="sec-hd"><h2 id="town" data-tile="Your town">Your town</h2><span class="muted">Pick where you live</span></div>
     {towns_html}</section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="trend" data-tile="Crime over time">Crime over time</h2><span class="muted">Crimes reported per 1,000 people, full years only</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="trend" data-tile="Crime over time">Crime over time</h2><span class="muted">Crimes reported per 1,000 people, full years only. Violent crime {pct(v_ky, v_first)} from {first_full} to {ky}, same agencies</span></div>
     <div class="chips" id="psTrendPick" role="group" aria-label="Kind of crime">{trend_pick}</div>
     <p class="ps-key"><span><i></i>The agency</span><span><i class="ref"></i>Florida</span><span><i class="new"></i>New reporting system ({ch.NEW_SYSTEM} on)</span></p>
     {trend_html}
@@ -195,7 +225,7 @@ def safety_page(out_dir):
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">
-      <li><b>Crimes and staffing</b> come from the <a href="https://cde.ucr.cjis.gov/" rel="noopener" target="_blank">FBI Crime Data Explorer</a>, which publishes what each agency reports to the FBI's Uniform Crime Reporting program. Checked every week.</li>
+      <li><b>Crimes and staffing</b> come from the <a href="https://cde.ucr.cjis.gov/" rel="noopener" target="_blank">FBI Crime Data Explorer</a>, which publishes what each agency reports to the FBI's Uniform Crime Reporting program. Checked every week. This year's numbers come from each agency's monthly reports, which the FBI posts a month or two behind.</li>
       <li><b>Who covers each town</b> is checked by hand. Budgets come from each government's adopted {e(fy)} budget (see <a href="/public-money/budget-compare">Budgets by year</a>).</li>
       <li><b>Not here yet:</b> fire and rescue call counts and response times. Florida's fire reporting system does not publish them by department; they can be asked for as a public record.</li>
       <li><b>Data:</b> {data}.</li>
