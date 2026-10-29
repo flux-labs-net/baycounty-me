@@ -62,7 +62,7 @@ Education (or News & Magazines)
 
 - App icon: `icon-512.png` (512 × 512)
 - Feature graphic: `feature-graphic.png` (1024 × 500)
-- Phone screenshots: `screenshots/` (1080 × 1920 each, a caption over the live app, made with `ios/scripts/store_screenshots.js` from the Android workflow's `screens-emulator` shots). Upload in order; Play shows the first three most.
+- Phone screenshots: `screenshots/` (8 shots, 1080 × 1920, a caption over the app). They're taken with made-up demo data by `.github/workflows/store-screenshots.yml` (restaurants, inspections and the beach day are invented; no real person or business is named) and framed with `ios/scripts/store_screenshots.js`. Upload in order; Play shows the first three most.
 
 ## Production release notes (500 characters max)
 

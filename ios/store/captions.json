@@ -4,7 +4,7 @@
   "screen": "home",
   "title": "Your county, every day",
   "accent": "every day",
-  "sub": "Beach flags, notices, meetings and trash day on one screen"
+  "sub": "Beach flag, alerts, meetings and trash day on one screen"
  },
  {
   "name": "myhome",
@@ -25,7 +25,14 @@
   "screen": "restaurants",
   "title": "Check any restaurant",
   "accent": "any restaurant",
-  "sub": "Every state inspection since 2016, for every place in the county"
+  "sub": "State inspection results for every place in the county"
+ },
+ {
+  "name": "restaurant",
+  "screen": "restaurant",
+  "title": "Every visit, plainly explained",
+  "accent": "plainly explained",
+  "sub": "What inspectors found, and whether it was fixed"
  },
  {
   "name": "beaches",
@@ -33,6 +40,13 @@
   "title": "Today at the beach",
   "accent": "the beach",
   "sub": "Flags, rip current risk, surf and water quality"
+ },
+ {
+  "name": "events",
+  "screen": "events",
+  "title": "Find something to do",
+  "accent": "something to do",
+  "sub": "Events from every town, the library and the chambers"
  },
  {
   "name": "tax",
@@ -47,19 +61,5 @@
   "title": "Every meeting, in one place",
   "accent": "in one place",
   "sub": "Agendas for every board, and one tap to your calendar"
- },
- {
-  "name": "person",
-  "screen": "person",
-  "title": "Know who's in charge",
-  "accent": "who's in charge",
-  "sub": "Officials' terms, pay and votes, since 2016"
- },
- {
-  "name": "contracts",
-  "screen": "contracts",
-  "title": "Follow every contract",
-  "accent": "every contract",
-  "sub": "Who wins them, what they're worth and who approved them"
  }
 ]

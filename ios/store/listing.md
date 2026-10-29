@@ -123,3 +123,8 @@ Expected rating: **4+**.
 
 `screenshots/` holds the 6.9" iPhone set (9 shots, 1320 × 2868), which App Store Connect scales down for every
 smaller iPhone. Upload in order; the first three show in search results.
+
+They're taken with made-up demo data (`.github/workflows/store-screenshots.yml` runs the app against
+`store/demo_server.py`): the restaurants, inspections and beach day are invented, and no real person or business is
+named. Events, meetings and tax rates are the live site's. Captions are in `captions.json`; frame new shots with
+`node ios/scripts/store_screenshots.js <spec.json>`.
