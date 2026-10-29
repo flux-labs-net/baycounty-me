@@ -7,9 +7,9 @@ import hashlib
 import os
 
 CSS = r"""
-:root{--bar:#3F6FB0;--ok:#1F7A4D;--warn:#9A5B00;--bad:#B3261E}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}}
-:root[data-theme="dark"]{--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}
+:root{--bar:#3F6FB0;--bar2:#1F8A7F;--ok:#1F7A4D;--warn:#9A5B00;--bad:#B3261E}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bar:#5F92E0;--bar2:#4CC3B5;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}}
+:root[data-theme="dark"]{--bar:#5F92E0;--bar2:#4CC3B5;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}
 body{display:block}
 .cp{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 18px}
@@ -50,6 +50,8 @@ label.f textarea{min-height:70px;resize:vertical}
 .tile b{display:block;font:600 1.35rem var(--f-display);font-variant-numeric:tabular-nums}
 .tile span{color:var(--muted);font-size:.8rem}
 .chart{position:relative}
+#au-tiles{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}#au-lists{align-items:start}#au-lists .au-col{display:grid;gap:12px;align-content:start}@media (max-width:600px){#au-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.au-key{color:var(--muted);display:flex;align-items:center;gap:6px}.au-key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-left:8px}
 .chart svg{display:block;width:100%;height:auto}
 .chart .tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:.8rem;box-shadow:0 6px 20px rgba(0,0,0,.14);white-space:nowrap;display:none}
 .lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
@@ -239,7 +241,7 @@ MENU = [
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
-    ('Accounts', 'teal', 'users', [('realtors', 'Realtor agents', None)]),
+    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
 TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
@@ -522,6 +524,16 @@ def admin_page(out_dir):
         <select class="sel" id="bt-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-apps" class="pane" hidden>
+      <div class="banner"><div><b>How many people use the iOS and Android apps.</b> <span class="small muted">Each phone sends one anonymous check-in a day when the app is opened: the platform, app version, times opened and screens viewed. No device id, account, address or IP address is kept, so a phone counts once a day but can't be followed from day to day. Residents can turn it off in the app's About screen. Website visits are in Vercel Analytics, where links opened from the apps show as <b>ios-app</b> and <b>android-app</b> under UTM source.</span></div></div>
+      <div class="row" style="margin-bottom:12px">
+        <select class="sel" id="au-days" aria-label="Date range"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select>
+      </div>
+      <div class="tiles" id="au-tiles"></div>
+      <div class="card"><div class="row" style="margin-bottom:6px"><b class="grow">Phones using the app each day</b><span class="small au-key"><i style="background:var(--bar)"></i>iPhone <i style="background:var(--bar2)"></i>Android</span></div><div class="chart" id="au-chart"></div></div>
+      <div class="lists" id="au-lists"></div>
     </section>
 
     <section id="tab-realtors" class="pane" hidden>

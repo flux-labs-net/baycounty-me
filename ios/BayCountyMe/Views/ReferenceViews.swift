@@ -70,6 +70,7 @@ struct UpdatesView: View {
 /// What BayCounty.me is, where the information comes from, privacy and corrections.
 struct AboutView: View {
     @Environment(AppStore.self) private var store
+    @AppStorage(AppUsage.enabledKey) private var shareUsage = true
 
     var body: some View {
         List {
@@ -99,12 +100,18 @@ struct AboutView: View {
                 LabeledContent("Version", value: Self.appVersion)
             }
             Section {
+                Toggle("Share anonymous usage counts", isOn: $shareUsage)
+                    .onChange(of: shareUsage) { _, on in store.usage.enabled = on }
+            } footer: {
+                Text("Once a day the app sends how many times it was opened and which screens were viewed, with the app version. Nothing that identifies you or your phone is sent: no name, account, address or device id. It helps us see what residents use.")
+            }
+            Section {
                 WebLink(title: "Send a correction", symbol: "exclamationmark.bubble", url: URL(string: "https://baycounty.me/about#contact"))
                 WebLink(title: "Privacy", symbol: "hand.raised", url: URL(string: "https://baycounty.me/privacy"))
                 WebLink(title: "Sources and method", symbol: "doc.text", url: URL(string: "https://baycounty.me/about"))
                 WebLink(title: "baycounty.me", symbol: "safari", url: URL(string: "https://baycounty.me"))
             } footer: {
-                Text("No analytics or ads. The address saved on My Address stays on your phone. A My home account keeps only your email, home address and first name, to show what's near you, and you can delete it any time.")
+                Text("No ads and no tracking. The address saved on My Address stays on your phone. A My home account keeps only your email, home address and first name, to show what's near you, and you can delete it any time.")
             }
             Section { PoweredByFlux() }.listRowBackground(Color.clear)
         }

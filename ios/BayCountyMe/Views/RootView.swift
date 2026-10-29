@@ -31,6 +31,10 @@ struct RootView: View {
         .sheet(item: $store.presentedTerm) { term in
             TermSheet(term: term)
         }
+        .onChange(of: store.tab, initial: true) { _, t in
+            let names: [AppStore.Tab: String] = [.home: "today", .living: "living", .money: "money", .decides: "decides", .search: "search"]
+            store.usage.viewed("tab/" + (names[t] ?? "today"))
+        }
         // Signed in: the account's saved home is the phone's address too (Today card, tax bill, trash day), so it
         // follows the resident to any phone. Signing out leaves the phone's address as it was.
         .task { if AccountManager.shared.signedIn, AccountManager.shared.me == nil { await AccountManager.shared.refresh() } }

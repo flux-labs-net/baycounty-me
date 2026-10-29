@@ -87,16 +87,17 @@ BayCounty.me is a free, read-only guide to public records for Bay County, Florid
 
 ## App Privacy (the "nutrition label")
 
-The optional My home account means the app now **collects data**. Answer "Yes, we collect data from this app",
-then add these three types. For each: **linked to the user**, **not used for tracking**, purpose **App Functionality** only.
+The optional My home account and the anonymous usage counts mean the app **collects data**. Answer "Yes, we
+collect data from this app", then add these four types. None is **used for tracking**.
 
-| Category | Data type | Why |
-|---|---|---|
-| Contact Info | Email Address | Sign-in code and home emails |
-| Contact Info | Name | The optional first name on the account |
-| Contact Info | Physical Address | The saved home, used to find what's nearby |
+| Category | Data type | Linked to the user? | Purpose | Why |
+|---|---|---|---|---|
+| Contact Info | Email Address | Yes | App Functionality | Sign-in code and home emails |
+| Contact Info | Name | Yes | App Functionality | The optional first name on the account |
+| Contact Info | Physical Address | Yes | App Functionality | The saved home, used to find what's nearby |
+| Usage Data | Product Interaction | **No** | Analytics | Once-a-day anonymous counts: times opened, screens viewed, app version (no device id; can be turned off in About) |
 
-Nothing else: no location (it's used on the phone and not sent), no identifiers, usage data, diagnostics or ads.
+Nothing else: no location (it's used on the phone and not sent), no identifiers, diagnostics or ads.
 This matches `PrivacyInfo.xcprivacy` and https://baycounty.me/privacy. Account deletion is in the app
 (My home > Settings > Delete account), which Apple requires for any app with account sign-up.
 

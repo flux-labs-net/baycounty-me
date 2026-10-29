@@ -18,6 +18,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
+import me.baycounty.kit.AppUsage
 import me.baycounty.kit.AccountabilityConsole
 import me.baycounty.kit.AddressMatch
 import me.baycounty.kit.AddressModel
@@ -62,6 +63,21 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
         var apiBase: String = BayCountyClient.SITE
     }
     private val prefs: SharedPreferences = app.getSharedPreferences("baycounty", Context.MODE_PRIVATE)
+
+    /** Anonymous usage counts: one check-in a day, which the resident can turn off in About. */
+    val usage = AppUsage(object : AppUsage.Store {
+        override fun getString(key: String) = prefs.getString(key, null)
+        override fun putString(key: String, value: String?) { prefs.edit().apply { if (value == null) remove(key) else putString(key, value) }.apply() }
+    }, "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
+    var shareUsage by mutableStateOf(usage.enabled); private set
+    fun updateShareUsage(on: Boolean) { usage.enabled = on; shareUsage = on }
+
+    /** The app came to the front: count it and send today's check-in if one is due. Debug builds (Android Studio runs
+     *  and the screenshot workflows) don't send, so they never show up in the counts. */
+    fun becameActive() {
+        usage.opened()
+        if (!BuildConfig.DEBUG) scope.launch { usage.send() }
+    }
 
     var catalog by mutableStateOf<Catalog?>(null); private set
     var governments by mutableStateOf<List<Government>>(emptyList()); private set

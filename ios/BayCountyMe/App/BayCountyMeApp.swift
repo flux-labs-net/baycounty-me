@@ -4,6 +4,7 @@ import SwiftUI
 struct BayCountyMeApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @State private var store = AppStore()
+    @Environment(\.scenePhase) private var phase
 
     var body: some Scene {
         WindowGroup {
@@ -12,5 +13,6 @@ struct BayCountyMeApp: App {
                 .tint(Brand.navy)
                 .task { await store.loadEssentials() }
         }
+        .onChange(of: phase, initial: true) { _, p in if p == .active { store.becameActive() } }
     }
 }

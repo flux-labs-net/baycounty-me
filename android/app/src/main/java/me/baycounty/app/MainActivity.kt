@@ -51,6 +51,34 @@ class MainActivity : ComponentActivity() {
             BayCountyTheme(dark) { AppRoot(store, screen) }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        // A rotation or theme change restarts the activity; that isn't the app being opened again.
+        if (!restarting) ((application as? BayCountyApp)?.store)?.becameActive()
+        restarting = false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        restarting = isChangingConfigurations
+    }
+
+    private companion object { var restarting = false }
+}
+
+/** The screen's name in the anonymous usage counts (AppUsage), matching the iOS app's: the route's name, plus the list
+ *  or government for those two, and the list a record came from. Never a person, address, search or record id. */
+val Route.usageName: String get() = when (this) {
+    is Route.Dataset -> "dataset/$id"
+    is Route.Record -> "record/$datasetID"
+    is Route.Gov -> "government/$govID"
+    is Route.MeetingDetail -> "meeting"
+    else -> (this::class.simpleName ?: "screen").lowercase()
+}
+
+private val Tab.usageName get() = when (this) {
+    Tab.HOME -> "tab/today"; Tab.LIVING -> "tab/living"; Tab.MONEY -> "tab/money"; Tab.DECIDES -> "tab/decides"; Tab.SEARCH -> "tab/search"
 }
 
 private data class TabItem(val tab: Tab, val label: String, val symbol: String)
@@ -107,6 +135,7 @@ fun AppRoot(store: AppStore, screen: String? = null, nav: Nav = remember { Nav()
                 val stack = nav.stack()
                 val top = stack.lastOrNull()
                 val key = "${nav.tab}/${stack.size}/${top?.hashCode() ?: 0}"
+                LaunchedEffect(key) { store.usage.viewed(top?.usageName ?: nav.tab.usageName) }
                 saver.SaveableStateProvider(key) {
                     if (top == null) TabRoot(nav.tab) else RouteScreen(top)
                 }
