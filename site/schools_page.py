@@ -316,6 +316,22 @@ def _scores(g, prev, st):
             + ('<span>+/− change from the year before</span>' if prev else '') + '</div></div>')
 
 
+def _where(s):
+    """The school's address as a map link and its phone as a tap-to-call link."""
+    import re, urllib.parse
+    addr = ', '.join(x for x in (s.get('address'), s.get('city')) if x)
+    out = []
+    if addr:
+        q = urllib.parse.quote(f"{s['name']}, {addr}, FL {s.get('zip') or ''}".strip())
+        out.append(f'<a href="https://www.google.com/maps/search/?api=1&amp;query={q}" target="_blank" rel="noopener">{e(addr)}</a>')
+    d = re.sub(r'\D', '', s.get('phone') or '')[-10:]
+    if len(d) == 10:
+        out.append(f'<a href="tel:+1{d}" style="white-space:nowrap">({d[:3]}) {d[3:6]}-{d[6:]}</a>')
+    elif s.get('phone'):
+        out.append(e(s['phone']))
+    return ' · '.join(out)
+
+
 def _mix(counts, label):
     n = sum(counts.values()) or 1
     segs = ''.join(f'<i class="g-{c}" style="width:{100 * counts.get(c, 0) / n:.2f}%" title="{c}: {counts.get(c, 0)} ({100 * counts.get(c, 0) / n:.0f}%)">{f"{c} {100 * counts.get(c, 0) / n:.0f}%" if counts.get(c, 0) / n >= .08 else ""}</i>'
@@ -410,7 +426,7 @@ def schools_page(out_dir):
     {_scores(last, gh.get(latest_gy - 1), GS.get((latest_gy, last.get('school_type') or 'All')) or GS.get((latest_gy, 'All'))) if last else ''}
     {f'<div><div class="muted small">Enrollment, {enr[0][0] - 1}-{str(enr[0][0])[2:]} to {enr[-1][0] - 1}-{str(enr[-1][0])[2:]}: {enr[0][1]:,} to {enr[-1][1]:,}</div>{_spark(enr)}</div>' if len(enr) > 1 else ''}
     {op_html}
-    <p style="margin:0">{e(s.get("address") or "")}{", " + e(s["city"]) if s.get("city") else ""} · {e(s.get("phone") or "")}{(" · " + e(zoned)) if zoned else ""}{f" · {s['free_reduced_lunch_pct']:.0f}% of students qualify for free or reduced-price lunch" if s.get("free_reduced_lunch_pct") else ""}</p>
+    <p style="margin:0">{_where(s)}{(" · " + e(zoned)) if zoned else ""}{f" · {s['free_reduced_lunch_pct']:.0f}% of students qualify for free or reduced-price lunch" if s.get("free_reduced_lunch_pct") else ""}</p>
   </div>
 </details>''')
     lv_chips = ''.join(f'<button type="button" class="chip" data-v="{v}" aria-pressed="false">{t}</button>' for v, t in
