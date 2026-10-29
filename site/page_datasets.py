@@ -619,7 +619,8 @@ def _school_files():
     j = lambda n, default: json.load(open(os.path.join(d, n))) if os.path.exists(os.path.join(d, n)) else default
     return {'conf': PLACE.get('schools') or {}, 'place': PLACE_ID, 'dir': j('schools.json', None), 'zones': j('zones.json', {'zones': []}),
             'calendar': j('calendar.json', {'events': []}), 'grades': j('grades.json', {'rows': []}),
-            'spending': j('spending.json', {'rows': [], 'files': []}), 'zone_schools': j('zone_schools.json', {'zones': {}})}
+            'spending': j('spending.json', {'rows': [], 'files': []}), 'zone_schools': j('zone_schools.json', {'zones': {}}),
+            'bell': j('bell_times.json', {'times': [], 'early_release': []})}
 
 
 def _sy(end_year):
@@ -633,7 +634,7 @@ def _school_rows():
     F = _school_files()
     D = F['dir']
     if not D:
-        _SCH['_schools'] = {k: [] for k in ('schools', 'grades', 'spending', 'enrollment', 'calendar', 'zones')}
+        _SCH['_schools'] = {k: [] for k in ('schools', 'grades', 'grade_state', 'spending', 'enrollment', 'calendar', 'zones', 'bell')}
         return _SCH['_schools']
     place = F['place']
     name = {s['school_number']: s['name'] for s in D['schools']}
@@ -652,17 +653,30 @@ def _school_rows():
     enr = {(r['school_id'], r['year']): r['enrollment'] for r in enrollment}
 
     grades = []
-    comp_keys = ['ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
+    comp_keys = ['grade3_ela_achievement', 'ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
                  'social_studies_achievement', 'middle_acceleration', 'graduation_rate', 'college_career_acceleration', 'total_points',
                  'percent_of_points', 'percent_tested', 'pct_economically_disadvantaged']
     for r in sorted(F['grades'].get('rows', []), key=lambda r: (r['school_number'], r['year'])):
         if r['year'] < cutoff.FIRST_YEAR:
             continue
         g = {'place_id': place, 'school_id': r['school_number'], 'school': name.get(r['school_number']), 'year': r['year'], 'school_year': _sy(r['year']),
-             'grade': r['grade'], 'informational_baseline': r['year'] == 2023}
+             'grade': r['grade'], 'informational_baseline': r['year'] == 2023, 'school_type': r.get('school_type')}
         g.update({k: r.get(k) for k in comp_keys})
         g['source_url'] = grade_src
         grades.append(g)
+
+    # statewide averages and grade counts by school type, for each school grades file read (the state's own file)
+    grade_state = []
+    for r in sorted(F['grades'].get('state', []), key=lambda r: (r['year'], r['school_type'])):
+        if r['year'] < cutoff.FIRST_YEAR:
+            continue
+        x = {'state': 'FL', 'year': r['year'], 'school_year': _sy(r['year']), 'school_type': r['school_type'], 'schools_graded': r['schools_graded']}
+        x.update({f'grade_{c}': r.get(f'grade_{c}', 0) for c in 'abcdfi'})
+        x.update({k: r.get(k) for k in comp_keys if k not in ('total_points',)})
+        if r['school_type'] in ('Middle', 'High'):  # third-grade reading only applies to schools with a third grade
+            x['grade3_ela_achievement'] = None
+        x['source_url'] = f"https://www.fldoe.org/file/18534/SchoolGrades{str(r['year'])[2:]}.xlsx"
+        grade_state.append(x)
 
     spending = []
     rows = F['spending'].get('rows', [])
@@ -735,7 +749,15 @@ def _school_rows():
     calendar = [{'place_id': place, 'event_id': e['event_id'], 'title': e['title'], 'kind': e['kind'], 'starts': e['starts'], 'ends': e.get('ends'),
                  'all_day': e['all_day'], 'venue': re.sub(r',?\s*(United States|USA)\s*$', '', e.get('venue') or '').strip(' ,') or None, 'school_year': e.get('school_year'), 'source_url': cal_src}
                 for e in F['calendar'].get('events', [])]
-    _SCH['_schools'] = {'schools': schools, 'grades': grades, 'spending': spending, 'enrollment': enrollment, 'calendar': calendar, 'zones': zones}
+    # start and end times, typed by hand from the district's yearly chart (data/schools/<county>/bell_times.json)
+    B = F['bell']
+    bell = [{'place_id': place, 'school_id': r['school_id'], 'school': name.get(r['school_id']) or r['school'], 'part': r.get('part'),
+             'kind': 'school day', 'start_time': r['start'], 'end_time': r['end'], 'note': r.get('note'), 'group_name': r.get('group'),
+             'school_year': B.get('school_year'), 'source_url': B.get('source_url')} for r in B.get('times', [])]
+    bell += [{'place_id': place, 'school_id': None, 'school': None, 'part': x['level'], 'kind': 'early release', 'start_time': None,
+              'end_time': x['dismissal'], 'note': 'Early release days let out 2.5 hours before the end of the school day', 'group_name': x['level'],
+              'school_year': B.get('school_year'), 'source_url': B.get('source_url')} for x in B.get('early_release', [])]
+    _SCH['_schools'] = {'schools': schools, 'grades': grades, 'grade_state': grade_state, 'bell': bell, 'spending': spending, 'enrollment': enrollment, 'calendar': calendar, 'zones': zones}
     return _SCH['_schools']
 
 
@@ -748,6 +770,14 @@ def schools():
 
 def school_grades():
     return _school_rows()['grades']
+
+
+def school_bell_times():
+    return _school_rows()['bell']
+
+
+def school_grade_state():
+    return _school_rows()['grade_state']
 
 
 def school_spending():
@@ -1847,11 +1877,14 @@ def shared_owner_groups():
 
 # School grades and spending come from fldoe.org files read by hand (data/schools/fetch_fldoe.py); until a file is on
 # hand the datasets are empty, so their columns are listed here to keep the table and the API stable.
-_GRADE_NUM = ['year', 'ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
+_GRADE_NUM = ['year', 'grade3_ela_achievement', 'ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
               'social_studies_achievement', 'middle_acceleration', 'graduation_rate', 'college_career_acceleration', 'total_points',
               'percent_of_points', 'percent_tested', 'pct_economically_disadvantaged']
-DB_ONLY_COLUMNS['school-grades'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school', 'school_year', 'grade')}, 'informational_baseline': 'boolean',
+DB_ONLY_COLUMNS['school-grades'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school', 'school_year', 'grade', 'school_type')}, 'informational_baseline': 'boolean',
                                     **{c: 'number' for c in _GRADE_NUM}, 'source_url': 'string', 'gov_id': 'string'}
+DB_ONLY_COLUMNS['school-grade-state'] = {**{c: 'string' for c in ('state', 'school_year', 'school_type')}, 'year': 'number', 'schools_graded': 'number',
+                                         **{f'grade_{c}': 'number' for c in 'abcdfi'},
+                                         **{c: 'number' for c in _GRADE_NUM if c not in ('year', 'total_points')}, 'source_url': 'string', 'gov_id': 'string'}
 DB_ONLY_COLUMNS['school-spending'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school')}, 'year': 'number', 'school_year': 'string',
                                       **{c: 'number' for c in ('federal_per_student', 'state_local_per_student', 'total_per_student', 'enrollment', 'estimated_total')},
                                       'source_url': 'string', 'gov_id': 'string'}
@@ -2197,7 +2230,9 @@ DATASETS = [
     ('road-contracts', 'State road contracts', "Every Florida Department of Transportation construction and maintenance contract in the county that was under way in 2016 or later: what and where, the contractor, the current contract amount, letting, start, estimated finish and final acceptance dates, and status. status is Under way when FDOT's map shows the contract active. vendor_id links a contractor that local governments also paid. project_id is FDOT's item and segment number, which joins road-work-program.", road_contracts),
     ('road-work-program', 'State road work program', "Projects in the Florida Department of Transportation's current adopted five-year work program in the county, one row per project and phase (planning, project development and environment study, design, right of way, construction, construction inspection): what and where, the kind of work, the fiscal years the phase is funded in (July to June, named for the year it ends) and the project's status. FDOT's map layers don't carry dollar amounts; contract amounts are in road-contracts.", road_work_program),
     ('schools', 'Public schools', "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).", schools),
-    ('school-grades', 'School grades', "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).", school_grades),
+    ('school-grades', 'School grades', "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). school_type is Elementary, Middle, High or Combination. Components (percent of students: third-grade reading (grade3_ela_achievement), English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for each year whose state file was read (the latest two). No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).", school_grades),
+    ('school-grade-state', 'School grades statewide', "Florida-wide school grade results by school type (Elementary, Middle, High, Combination, and All), one row per school type and year, worked out from the Florida Department of Education's statewide school grades file: how many schools got each grade (grade_a to grade_i) and the average of each grade component across the state's schools (simple average of schools, not weighted by students). Used to compare a school with the state.", school_grade_state),
+    ('school-bell-times', 'School start and end times', "When each public school's day starts and ends this school year (24-hour HH:MM), from the district's published start and end times chart, typed in by hand. Some schools have more than one row: different grade bands (part), a zero period, or a shorter Friday (note). Rows with kind 'early release' give the dismissal time by school level on early release days. school_id is empty for programs that aren't in the federal school directory.", school_bell_times),
     ('school-spending', 'Spending per school', "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.", school_spending),
     ('school-enrollment', 'School enrollment by year', "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.", school_enrollment),
     ('school-calendar', 'School district calendar', "The school district's calendar as posted on its website: first and last day, holidays and breaks, no-school days, early release days, end of each grading period, graduations and School Board meetings. kind is first-day, last-day, no-school, break, early-release, grading, graduation, board-meeting or other. starts and ends are local dates (all_day) or local date and time. Refreshed daily; past events of the school year stay on file.", school_calendar),

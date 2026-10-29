@@ -1,1 +1,344 @@
-place_id,school_id,school,school_year,grade,informational_baseline,year,ela_achievement,ela_gains,ela_gains_low25,math_achievement,math_gains,math_gains_low25,science_achievement,social_studies_achievement,middle_acceleration,graduation_rate,college_career_acceleration,total_points,percent_of_points,percent_tested,pct_economically_disadvantaged,source_url,gov_id
+place_id,school_id,school,year,school_year,grade,informational_baseline,school_type,grade3_ela_achievement,ela_achievement,ela_gains,ela_gains_low25,math_achievement,math_gains,math_gains_low25,science_achievement,social_studies_achievement,middle_acceleration,graduation_rate,college_career_acceleration,total_points,percent_of_points,percent_tested,pct_economically_disadvantaged,source_url,gov_id
+fl-bay,03-0061,Bay High School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2025,2024-25,B,False,High,,56.0,58.0,56.0,34.0,41.0,54.0,72.0,68.0,,89.0,51.0,579.0,58.0,98.0,73.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0061,Bay High School,2026,2025-26,C,False,High,,58.0,57.0,52.0,30.0,39.0,44.0,68.0,70.0,,96.0,47.0,561.0,56.0,97.0,69.6,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2025,2024-25,C,False,Middle,,48.0,56.0,61.0,49.0,52.0,62.0,42.0,66.0,65.0,,,501.0,56.0,95.0,87.3,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0071,Merritt Brown Middle School,2026,2025-26,B,False,Middle,,55.0,59.0,54.0,59.0,60.0,61.0,48.0,77.0,68.0,,,541.0,60.0,96.0,78.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2021,2020-21,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2025,2024-25,A,False,Elementary,67.0,71.0,71.0,62.0,67.0,66.0,61.0,76.0,,,,,541.0,68.0,99.0,70.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0081,Hutchison Beach Elementary School,2026,2025-26,A,False,Elementary,67.0,72.0,66.0,59.0,66.0,60.0,37.0,78.0,,,,,505.0,63.0,100.0,64.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2016,2015-16,F,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2018,2017-18,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2022,2021-22,F,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2023,2022-23,F,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2024,2023-24,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2025,2024-25,C,False,Elementary,23.0,34.0,59.0,68.0,32.0,61.0,68.0,35.0,,,,,380.0,48.0,97.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0091,Cedar Grove Elementary School,2026,2025-26,B,False,Elementary,57.0,49.0,58.0,70.0,43.0,56.0,53.0,49.0,,,,,435.0,54.0,99.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2019,2018-19,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2022,2021-22,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2025,2024-25,B,False,Elementary,56.0,54.0,60.0,68.0,62.0,61.0,56.0,52.0,,,,,469.0,59.0,98.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0101,Callaway Elementary School,2026,2025-26,C,False,Elementary,47.0,50.0,52.0,43.0,58.0,66.0,46.0,63.0,,,,,425.0,53.0,98.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2016,2015-16,F,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2022,2021-22,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2023,2022-23,D,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2025,2024-25,B,False,Elementary,57.0,50.0,61.0,64.0,50.0,59.0,58.0,49.0,,,,,448.0,56.0,99.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0111,Merriam Cherry Street Elementary,2026,2025-26,C,False,Elementary,54.0,45.0,43.0,40.0,51.0,41.0,29.0,27.0,,,,,330.0,41.0,96.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2016,2015-16,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2017,2016-17,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2018,2017-18,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2022,2021-22,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2025,2024-25,C,False,Elementary,29.0,38.0,56.0,70.0,44.0,61.0,68.0,42.0,,,,,408.0,51.0,99.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0131,Lucille Moore Elementary School,2026,2025-26,D,False,Elementary,27.0,31.0,43.0,42.0,41.0,42.0,44.0,39.0,,,,,309.0,39.0,100.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2016,2015-16,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2025,2024-25,C,False,Elementary,32.0,43.0,52.0,56.0,43.0,48.0,46.0,43.0,,,,,363.0,45.0,100.0,87.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0151,Hiland Park Elementary School,2026,2025-26,B,False,Elementary,38.0,56.0,72.0,56.0,53.0,65.0,56.0,56.0,,,,,452.0,57.0,98.0,88.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2016,2015-16,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2019,2018-19,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2021,2020-21,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2025,2024-25,C,False,Middle,,40.0,52.0,50.0,35.0,46.0,51.0,30.0,49.0,46.0,,,399.0,44.0,96.0,97.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0161,Jinks Middle School,2026,2025-26,C,False,Middle,,41.0,51.0,50.0,37.0,48.0,54.0,37.0,66.0,41.0,,,425.0,47.0,98.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2025,2024-25,B,False,Elementary,65.0,58.0,54.0,53.0,63.0,63.0,43.0,56.0,,,,,455.0,57.0,99.0,68.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0171,Lynn Haven Elementary School,2026,2025-26,A,False,Elementary,80.0,70.0,72.0,79.0,72.0,72.0,56.0,71.0,,,,,572.0,72.0,98.0,60.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2025,2024-25,A,False,Combination,,63.0,64.0,61.0,69.0,65.0,66.0,63.0,64.0,72.0,,,587.0,65.0,98.0,58.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0201,Surfside Middle School,2026,2025-26,B,False,Combination,,65.0,60.0,51.0,64.0,60.0,52.0,64.0,75.0,77.0,,,568.0,63.0,98.0,53.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2022,2021-22,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2025,2024-25,C,False,Elementary,35.0,44.0,61.0,61.0,46.0,53.0,58.0,58.0,,,,,416.0,52.0,99.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0211,Parker Elementary School,2026,2025-26,C,False,Elementary,42.0,52.0,54.0,52.0,55.0,51.0,54.0,63.0,,,,,423.0,53.0,98.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2021,2020-21,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2025,2024-25,B,False,Elementary,60.0,60.0,56.0,58.0,62.0,55.0,50.0,54.0,,,,,455.0,57.0,99.0,78.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0221,Southport Elementary School,2026,2025-26,C,False,Elementary,49.0,60.0,56.0,49.0,62.0,51.0,29.0,56.0,,,,,412.0,52.0,98.0,75.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2018,2017-18,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2022,2021-22,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2025,2024-25,C,False,Elementary,39.0,47.0,60.0,71.0,51.0,51.0,39.0,56.0,,,,,414.0,52.0,97.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0251,Waller Elementary School,2026,2025-26,B,False,Elementary,51.0,53.0,65.0,69.0,52.0,56.0,40.0,52.0,,,,,438.0,55.0,97.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2021,2020-21,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2025,2024-25,B,False,Elementary,62.0,61.0,59.0,57.0,66.0,62.0,56.0,66.0,,,,,489.0,61.0,99.0,65.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0262,West Bay Elementary School,2026,2025-26,A,False,Elementary,59.0,56.0,58.0,60.0,76.0,85.0,64.0,55.0,,,,,513.0,64.0,97.0,61.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2016,2015-16,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2025,2024-25,C,False,Middle,,55.0,56.0,51.0,56.0,54.0,56.0,44.0,69.0,64.0,,,505.0,56.0,97.0,74.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0331,Mowat Middle School,2026,2025-26,A,False,Middle,,61.0,64.0,59.0,66.0,65.0,70.0,55.0,70.0,76.0,,,586.0,65.0,99.0,68.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2022,2021-22,D,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2025,2024-25,C,False,Combination,,36.0,44.0,58.0,35.0,44.0,49.0,49.0,52.0,42.0,89.0,48.0,546.0,50.0,95.0,93.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0341,Rutherford High School,2026,2025-26,C,False,Combination,,41.0,48.0,43.0,33.0,39.0,42.0,42.0,69.0,68.0,94.0,55.0,574.0,52.0,95.0,92.8,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0391,Oscar Patterson Academy,2024,2023-24,F,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0391,Oscar Patterson Academy,2025,2024-25,B,False,Elementary,25.0,31.0,61.0,87.0,27.0,71.0,100.0,,,,,,402.0,57.0,99.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0391,Oscar Patterson Academy,2026,2025-26,D,False,Elementary,32.0,33.0,41.0,37.0,29.0,43.0,30.0,41.0,,,,,286.0,36.0,99.0,100.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2025,2024-25,C,False,Elementary,58.0,50.0,56.0,69.0,53.0,49.0,50.0,38.0,,,,,423.0,53.0,99.0,72.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0461,Deer Point Elementary School,2026,2025-26,B,False,Elementary,57.0,60.0,60.0,59.0,64.0,65.0,51.0,72.0,,,,,488.0,61.0,100.0,68.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2025,2024-25,C,False,Elementary,58.0,52.0,53.0,46.0,58.0,54.0,41.0,48.0,,,,,410.0,51.0,100.0,84.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0471,Northside Elementary School,2026,2025-26,B,False,Elementary,64.0,60.0,58.0,71.0,61.0,53.0,35.0,59.0,,,,,461.0,58.0,100.0,85.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2016,2015-16,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2021,2020-21,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2025,2024-25,A,False,High,,65.0,61.0,58.0,44.0,40.0,45.0,78.0,78.0,,96.0,80.0,645.0,65.0,98.0,33.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0491,A. Crawford Mosley High School,2026,2025-26,A,False,High,,68.0,63.0,58.0,51.0,50.0,43.0,81.0,71.0,,97.0,77.0,659.0,66.0,98.0,35.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2021,2020-21,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2025,2024-25,A,False,Combination,60.0,65.0,66.0,60.0,71.0,69.0,71.0,69.0,87.0,72.0,,,690.0,69.0,98.0,38.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0501,Tyndall Academy,2026,2025-26,A,False,Combination,58.0,68.0,68.0,70.0,73.0,68.0,64.0,70.0,88.0,82.0,,,709.0,71.0,99.0,37.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2016,2015-16,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2024,2023-24,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2025,2024-25,C,False,Elementary,38.0,44.0,57.0,60.0,40.0,47.0,47.0,53.0,,,,,386.0,48.0,98.0,78.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0511,Tommy Smith Elementary School,2026,2025-26,B,False,Elementary,49.0,56.0,68.0,74.0,51.0,51.0,50.0,58.0,,,,,457.0,57.0,99.0,81.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2025,2024-25,A,False,Elementary,81.0,79.0,65.0,56.0,75.0,65.0,42.0,79.0,,,,,542.0,68.0,100.0,57.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0521,Patronis Elementary School,2026,2025-26,A,False,Elementary,72.0,75.0,60.0,59.0,75.0,62.0,41.0,78.0,,,,,522.0,65.0,100.0,46.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2025,2024-25,A,False,Combination,71.0,62.0,59.0,59.0,61.0,56.0,54.0,68.0,85.0,58.0,99.0,84.0,816.0,68.0,99.0,62.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0541,Deane Bozeman School,2026,2025-26,A,False,Combination,60.0,63.0,60.0,54.0,66.0,61.0,55.0,69.0,85.0,77.0,98.0,85.0,833.0,69.0,99.0,57.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2017,2016-17,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2019,2018-19,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2025,2024-25,B,False,High,,57.0,52.0,43.0,38.0,40.0,46.0,76.0,71.0,,95.0,54.0,572.0,57.0,97.0,34.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0551,J.R. Arnold High School,2026,2025-26,B,False,High,,64.0,56.0,47.0,47.0,41.0,44.0,81.0,75.0,,97.0,53.0,605.0,61.0,97.0,34.6,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2021,2020-21,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2025,2024-25,B,False,Combination,52.0,60.0,58.0,52.0,70.0,66.0,60.0,62.0,81.0,68.0,,,629.0,63.0,99.0,41.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0571,Breakfast Point Academy,2026,2025-26,A,False,Combination,60.0,70.0,72.0,67.0,74.0,69.0,65.0,74.0,88.0,83.0,,,722.0,72.0,99.0,39.1,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2025,2024-25,C,False,Elementary,55.0,54.0,54.0,47.0,56.0,57.0,41.0,51.0,,,,,415.0,52.0,99.0,65.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0611,A. Gary Walsingham Academy,2026,2025-26,C,False,Elementary,64.0,56.0,54.0,67.0,59.0,47.0,11.0,60.0,,,,,418.0,52.0,100.0,67.9,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2022,2021-22,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2025,2024-25,B,False,Elementary,73.0,61.0,54.0,51.0,75.0,55.0,51.0,53.0,,,,,473.0,59.0,100.0,40.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0701,Bay Haven Charter Academy,2026,2025-26,A,False,Elementary,73.0,66.0,62.0,56.0,76.0,56.0,42.0,65.0,,,,,496.0,62.0,99.0,34.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2025,2024-25,A,False,Middle,,76.0,76.0,73.0,86.0,86.0,81.0,59.0,92.0,44.0,,,673.0,75.0,99.0,35.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0711,Bay Haven Charter Middle School,2026,2025-26,A,False,Middle,,75.0,66.0,59.0,84.0,79.0,70.0,58.0,89.0,35.0,,,615.0,68.0,99.0,30.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2016,2015-16,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2025,2024-25,A,False,Middle,,71.0,65.0,58.0,89.0,72.0,77.0,64.0,87.0,57.0,,,640.0,71.0,99.0,30.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0731,North Bay Haven Charter Academy Middle School,2026,2025-26,A,False,Middle,,79.0,71.0,61.0,89.0,77.0,77.0,64.0,80.0,52.0,,,650.0,72.0,99.0,29.8,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2021,2020-21,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2025,2024-25,A,False,High,,68.0,59.0,52.0,94.0,66.0,85.0,89.0,90.0,,100.0,71.0,774.0,77.0,99.0,28.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0741,North Bay Haven Career Academy,2026,2025-26,A,False,High,,71.0,65.0,56.0,89.0,75.0,80.0,88.0,93.0,,98.0,84.0,799.0,80.0,99.0,29.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2016,2015-16,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2025,2024-25,A,False,Elementary,75.0,70.0,59.0,48.0,83.0,67.0,54.0,64.0,,,,,520.0,65.0,100.0,30.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0751,North Bay Haven Charter Academy Elementary School,2026,2025-26,A,False,Elementary,84.0,78.0,71.0,57.0,89.0,71.0,66.0,59.0,,,,,575.0,72.0,99.0,24.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2023,2022-23,B,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2025,2024-25,C,False,High,,54.0,,,,,,,,,,,54.0,54.0,100.0,21.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0764,AMIkids Maritime Academy,2026,2025-26,A,False,High,,60.0,67.0,,68.0,,,,79.0,,,,274.0,69.0,98.0,47.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2016,2015-16,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2017,2016-17,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2018,2017-18,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2022,2021-22,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2025,2024-25,C,False,Combination,,60.0,63.0,58.0,49.0,42.0,45.0,62.0,72.0,39.0,100.0,8.0,598.0,54.0,99.0,86.4,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0771,Palm Bay Preparatory Academy 6-12,2026,2025-26,A,False,Combination,,77.0,73.0,78.0,69.0,75.0,79.0,58.0,91.0,67.0,100.0,14.0,781.0,71.0,99.0,70.2,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2018,2017-18,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2019,2018-19,C,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2023,2022-23,C,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2024,2023-24,B,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2025,2024-25,B,False,Elementary,73.0,58.0,52.0,67.0,53.0,52.0,55.0,31.0,,,,,441.0,55.0,100.0,92.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-0801,Palm Bay Elementary School,2026,2025-26,C,False,Elementary,51.0,61.0,58.0,62.0,60.0,56.0,33.0,40.0,,,,,421.0,53.0,99.0,93.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2021,2020-21,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2025,2024-25,A,False,Combination,47.0,73.0,70.0,77.0,83.0,64.0,57.0,60.0,90.0,91.0,,,712.0,71.0,95.0,57.0,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2701,Rising Leaders Academy,2026,2025-26,A,False,Combination,82.0,78.0,66.0,67.0,76.0,69.0,49.0,77.0,95.0,76.0,,,735.0,74.0,97.0,58.7,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2016,2015-16,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2021,2020-21,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2025,2024-25,A,False,Combination,87.0,86.0,71.0,63.0,95.0,75.0,73.0,86.0,96.0,93.0,,,825.0,83.0,100.0,15.3,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-2711,University Academy SABL Inc.,2026,2025-26,A,False,Combination,90.0,86.0,73.0,71.0,96.0,81.0,85.0,82.0,99.0,94.0,,,857.0,86.0,100.0,9.8,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2017,2016-17,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2018,2017-18,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2019,2018-19,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2022,2021-22,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2023,2022-23,A,True,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2024,2023-24,A,False,,,,,,,,,,,,,,,,,,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2025,2024-25,A,False,Combination,,90.0,40.0,,,,,,,,,,130.0,65.0,100.0,13.6,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7004,Bay Virtual Franchise,2026,2025-26,A,False,Combination,,100.0,80.0,,80.0,,,,,,,,260.0,87.0,100.0,27.3,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools
+fl-bay,03-7023,Bay Virtual Instruction Program (District Provided),2025,2024-25,A,False,High,,,,,,,,,,,100.0,51.0,151.0,76.0,,61.5,https://www.fldoe.org/file/18534/SchoolGrades26.xlsx,schools

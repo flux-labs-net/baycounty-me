@@ -1,11 +1,18 @@
-// Realtor console accounts (/realtor): sign-in by emailed link, a saved branding profile, and report history.
+// Realtor console accounts (/realtor): a saved branding profile and report history for agents.
+//
+// Sign-in is the site's one account sign-in (api/_account.js, the emailed 6-digit code). A realtor is an account whose
+// email is on realtor.agents with status active, so a person signed in anywhere on BayCounty.me opens the console without
+// signing in again, and signing out of either signs out of both. The older console-only cookie (bcm_agent, from the
+// emailed link below) still works; the first time it is seen it is swapped for an account session.
 // Served at /api/realtor?action=... (vercel.json rewrites it to api/manage.js, which hands the request here; that keeps
 // the deployment's function count where it is).
 //
-//   POST login {email}        email a one-time sign-in link (always answers the same, so it can't be used to probe)
-//   GET  verify?t=            a confirm page; only its button (a POST) signs in, because email scanners open links first
-//   POST verify               use the link once, create the account if sign-up is open, set the session cookie
-//   GET  me                   the agent, their branding and their last 25 reports
+//   POST login {email}        (older) email a one-time console sign-in link; the console now uses /api/account
+//   GET  verify?t=            (older) a confirm page; only its button (a POST) signs in, because email scanners open links first
+//   POST verify               (older) use the link once, create the agent if sign-up is open, sign in to the account
+//   GET  me                   the agent, their branding and their last 25 reports. 401 says who is signed in, if anyone,
+//                             and whether that account is an agent (account: {email, agent_status})
+//   POST join                 the signed-in account becomes an agent: active when sign-up is open, else pending
 //   POST brand {…}            save branding (names, contact, colors, logo and photo as small data: URLs)
 //   POST report {address,…}   add a report to the agent's history (the report itself comes from /api/v1/address-report)
 //   POST delete_report {id}   remove one report from history
@@ -83,16 +90,39 @@ const BRAND_COLS = ['agent_name', 'title', 'brokerage', 'license_no', 'phone', '
 /* ---------- data ---------- */
 const signupMode = () => (String(process.env.REALTOR_SIGNUP || 'open').toLowerCase() === 'invite' ? 'invite' : 'open');
 async function agentByEmail(email) { return (await q('select * from realtor.agents where email = $1', [email]))[0] || null; }
-async function session(req) {
-  const t = readToken(cookies(req)[COOKIE]);
-  if (!t || t.kind !== 'agent') return null;
-  const a = (await q('select * from realtor.agents where id = $1', [t.id]))[0];
-  return a && a.status === 'active' ? a : null;
+const A = () => require('./_account');
+// Who is asking: the signed-in account (if any) and the agent row with the same email (if any). The older bcm_agent
+// cookie counts when there is no account session; the handler then swaps it for one (see upgrade()).
+async function who(req) {
+  const user = await A().session(req);
+  let agent = user ? await agentByEmail(user.email) : null, legacy = false;
+  if (!user) {
+    const t = readToken(cookies(req)[COOKIE]);
+    if (t && t.kind === 'agent') { agent = (await q('select * from realtor.agents where id = $1', [t.id]))[0] || null; legacy = !!agent; }
+  }
+  return {user, agent, legacy, active: agent && agent.status === 'active' ? agent : null};
 }
+// Older console cookie, no account session: start one for the agent's email and drop the old cookie, so from here on the
+// realtor is signed in to the whole site with one sign-in.
+async function upgrade(res, w) {
+  const cs = [`${COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`];
+  try {
+    const u = await A().signInUser(w.agent.email);
+    cs.push(...A().sessionCookies(await A().startSession(u.id, 'web')));
+  } catch (e) { return false; } // a paused account: keep the console cookie as it is
+  res.setHeader('Set-Cookie', cs);
+  return true;
+}
+async function session(req) { return (await who(req)).active; }
 async function me(agent) {
   const [brand] = await q(`select ${BRAND_COLS.join(', ')}, updated_at from realtor.brands where agent_id = $1`, [agent.id]);
   const reports = await q('select id, address, city, zip, parcel_id, lat, lon, prepared_for, created_at from realtor.reports where agent_id = $1 order by created_at desc limit 25', [agent.id]);
   return {agent: {email: agent.email, status: agent.status, place_id: agent.place_id, created_at: agent.created_at, reports_run: agent.reports_run}, brand: brand || null, reports};
+}
+// What the console says to a signed-in account that isn't an active agent.
+function joinState(user, agent) {
+  if (!user) return null;
+  return {email: user.email, agent_status: agent ? agent.status : null, signup: signupMode()};
 }
 
 /* ---------- pages ---------- */
@@ -186,13 +216,33 @@ async function handler(req, res) {
       if (!a && (signupMode() === 'open' || admins().includes(t.e))) a = (await q(`insert into realtor.agents (email) values ($1) on conflict (email) do update set email = excluded.email returning *`, [t.e]))[0];
       if (!a || a.status !== 'active') return fail();
       await q('update realtor.agents set last_login_at = now(), login_count = login_count + 1 where id = $1', [a.id]);
-      setCookie(res, makeToken({kind: 'agent', id: a.id, exp: Date.now() + SESSION_DAYS * 864e5}), SESSION_DAYS * 86400);
+      if (!(await upgrade(res, {agent: a}))) setCookie(res, makeToken({kind: 'agent', id: a.id, exp: Date.now() + SESSION_DAYS * 864e5}), SESSION_DAYS * 86400);
       res.setHeader('Location', '/realtor'); return res.status(303).end();
     }
-    if (action === 'logout') { setCookie(res, '', 0); return res.status(200).json({ok: true}); }
+    if (action === 'logout') {
+      // One sign-in, one sign-out: end the account session too, so the console and My home sign out together.
+      const u = await A().session(req);
+      if (u) await q('delete from account.sessions where token_hash = $1', [u.token_hash]);
+      res.setHeader('Set-Cookie', [`${COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`, ...A().sessionCookies('')]);
+      return res.status(200).json({ok: true});
+    }
 
-    const agent = await session(req);
-    if (!agent) return res.status(401).json({error: 'Sign in first.', signup: signupMode()});
+    const w = await who(req);
+    if (action === 'join' && req.method === 'POST') {
+      if (!w.user) return res.status(401).json({error: 'Sign in first.', signup: signupMode()});
+      if (req.headers['x-bcm-agent'] !== '1' || !sameOrigin(req)) throw bad('That request didn’t come from the console.', 403);
+      let a = w.agent;
+      if (!a) {
+        const open = signupMode() === 'open' || admins().includes(w.user.email);
+        a = (await q(`insert into realtor.agents (email, status) values ($1, $2) on conflict (email) do update set email = excluded.email returning *`, [w.user.email, open ? 'active' : 'pending']))[0];
+      }
+      if (a.status !== 'active') return res.status(403).json({error: a.status === 'paused' ? 'Realtor access is paused for this account. Write to hello@baycounty.me.' : 'Thanks. BayCounty.me will turn on the realtor console for this account soon.', account: joinState(w.user, a)});
+      await q('update realtor.agents set last_login_at = now(), login_count = login_count + 1 where id = $1', [a.id]);
+      return res.status(200).json(await me(a));
+    }
+    const agent = w.active;
+    if (!agent) return res.status(401).json({error: 'Sign in first.', signup: signupMode(), account: joinState(w.user, w.agent)});
+    if (w.legacy) await upgrade(res, w);
     if (action === 'me' && req.method === 'GET') return res.status(200).json(await me(agent));
     if (req.method !== 'POST') throw bad('Use POST.', 405);
     if (req.headers['x-bcm-agent'] !== '1' || !sameOrigin(req)) throw bad('That request didn’t come from the console.', 403);
@@ -229,8 +279,9 @@ async function handler(req, res) {
       return res.status(200).json({ok: true});
     }
     if (action === 'delete_account') {
+      // Deletes the realtor profile only; the person stays signed in to their BayCounty.me account.
       await q('delete from realtor.agents where id = $1', [agent.id]);
-      setCookie(res, '', 0);
+      if (w.legacy) setCookie(res, '', 0);
       return res.status(200).json({ok: true});
     }
     throw bad('Unknown action.', 404);
@@ -259,4 +310,4 @@ async function adminSet(b) {
 module.exports = handler;
 module.exports.adminList = adminList;
 module.exports.adminSet = adminSet;
-Object.assign(module.exports, {cleanBrand, image, website, makeToken, readToken, signupMode, reportEmail, COOKIE});
+Object.assign(module.exports, {who, joinState, cleanBrand, image, website, makeToken, readToken, signupMode, reportEmail, COOKIE});

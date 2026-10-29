@@ -100,6 +100,7 @@
 .mh-fine{color:var(--muted);font-size:.82rem;margin:18px 0 0}
 /* signed in */
 .mh-top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin:8px 0 18px}
+.mh-rc{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:.88rem;font-weight:500;color:var(--navy);text-decoration:none}.mh-rc:hover{text-decoration:underline}
 .mh-top h1{font:700 clamp(1.5rem,3vw,2.1rem)/1.15 var(--f-display);letter-spacing:-.02em;margin:4px 0 6px}
 .mh-addr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;color:var(--muted);font-size:.92rem}
 .mh-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--sunken);color:var(--ink);font-size:.8rem;font-weight:500;white-space:nowrap}
@@ -204,6 +205,7 @@
         <span class="mh-eyebrow" id="hello">My home</span>
         <h1 id="homeTitle">Your home</h1>
         <div class="mh-addr" id="homeAddr"></div>
+        <a class="mh-rc" id="rcLink" href="/realtor" hidden>Realtor console <span aria-hidden="true">→</span></a>
       </div>
       <div class="mh-tabs" role="tablist" id="tabs">
         <button class="mh-tab" role="tab" aria-selected="true" aria-controls="pFeed" id="tFeed" type="button">My home</button>

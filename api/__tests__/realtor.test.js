@@ -68,3 +68,20 @@ test('emailed reports are checked: real addresses, at most 5, a real PDF under 3
   assert.throws(() => R.reportEmail({to: 'a@b.co', pdf: Buffer.from('<html>').toString('base64'), address: 'x'}, a), /didn’t come through/);
   assert.throws(() => R.reportEmail({to: 'a@b.co', pdf: Buffer.from('%PDF-' + 'x'.repeat(3.2e6)).toString('base64'), address: 'x'}, a), /too big/);
 });
+
+test('one sign-in: the console uses the account sign-in, and its link can come back to /realtor only', () => {
+  const A = require('../_account');
+  assert.equal(A.nextOf('/realtor'), '/realtor');
+  assert.equal(A.nextOf('https://evil.example/'), '/account');
+  assert.equal(A.nextOf(undefined), '/account');
+  const [main, flag] = A.sessionCookies('tok');
+  assert.match(main, /^bcm_user=tok; Path=\/; HttpOnly; Secure; SameSite=Lax; Max-Age=5184000$/);
+  assert.match(flag, /^bcm_in=1;/);
+  assert.match(A.sessionCookies('')[0], /Max-Age=0$/);
+});
+
+test('a signed-in account that is not an agent is told why and offered the console', () => {
+  assert.equal(R.joinState(null, null), null);
+  assert.deepEqual(R.joinState({email: 'res@sample.example'}, null), {email: 'res@sample.example', agent_status: null, signup: 'open'});
+  assert.equal(R.joinState({email: 'res@sample.example'}, {status: 'pending'}).agent_status, 'pending');
+});

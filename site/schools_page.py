@@ -6,6 +6,7 @@ Built from the schools, school-grades, school-spending, school-enrollment, schoo
 address points and checks them against the school-zones shapes in the browser, the same test /api/v1/schools runs.
 """
 import datetime as dt
+import re
 import html
 
 from entity_links import a as link, build
@@ -64,12 +65,51 @@ CSS = r"""
 .sc-facts dt{font-size:.74rem;color:var(--muted)}
 .sc-facts dd{margin:2px 0 0;font:600 1rem var(--f-body);font-variant-numeric:tabular-nums}
 .sc-hist{display:flex;flex-wrap:wrap;gap:6px}
+.sc-hrs{margin:0;font-size:.88rem}.sc-hrs b{font-weight:600;margin-right:4px}
+.sc-map{height:480px;border-radius:24px;box-shadow:var(--ui-shadow);overflow:hidden;background:var(--sunken);z-index:0;margin-top:10px}
+:root[data-theme="dark"] .sc-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sc-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}}
+.sc-map .leaflet-popup-content{font:.85rem/1.5 var(--f-body);margin:10px 12px}
+.sc-map .leaflet-popup-content > b:first-child{display:block;font-size:.95rem;margin-bottom:2px}
+.sc-zsel{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted)}
+.sc-zsel select{min-height:36px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:0 12px;font:inherit}
+.sc-mkey{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:10px;font-size:.8rem;color:var(--muted)}
+.sc-mkey span{display:inline-flex;align-items:center;gap:6px}
+.sc-mkey i{width:12px;height:12px;border-radius:50%;background:#8a94a3;border:1.5px solid #fff}
+.sc-mkey i.g-A{background:var(--teal)}.sc-mkey i.g-B{background:var(--blue)}.sc-mkey i.g-C{background:var(--amber,#C98A1B)}.sc-mkey i.g-D{background:var(--salmon)}
+.sc-mkey i.ch{background:transparent;border:2.5px solid var(--ink)}
+@media (max-width:760px){.sc-map{height:380px;border-radius:18px}}
+.sc-cps{display:grid;gap:7px}
+.sc-cp{display:grid;grid-template-columns:minmax(0,11.5em) minmax(60px,1fr) 3em 2.6em;align-items:center;gap:8px;font-size:.82rem}
+.sc-cp .lb{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-cp .tr{position:relative;height:10px;border-radius:5px;background:var(--sunken)}
+.sc-cp .tr i{position:absolute;inset:0 auto 0 0;border-radius:5px;background:var(--blue)}
+.sc-cp .tr b{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px}
+.sc-cp .v{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.sc-cp .ch{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.sc-cp .ch.up{color:#15803d}.sc-cp .ch.dn{color:#b91c1c}
+.sc-key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;font-size:.72rem;color:var(--muted)}
+.sc-key span{display:inline-flex;align-items:center;gap:5px}
+.sc-key i{width:14px;height:8px;border-radius:4px;background:var(--blue)}
+.sc-key b{width:2px;height:12px;background:var(--ink)}
+.sc-mixes{display:grid;gap:8px;margin:4px 0 16px}
+.sc-mix{display:grid;grid-template-columns:9.5em 1fr;align-items:center;gap:10px;font-size:.85rem}
+.sc-mix .lb{font-weight:600}.sc-mix .lb small{display:block;font-weight:400;color:var(--muted);font-size:.72rem}
+.sc-mix .tr{display:flex;height:26px;border-radius:8px;overflow:hidden;background:var(--sunken)}
+.sc-mix .tr i.g-A{background:color-mix(in srgb,var(--teal) 30%,transparent);color:var(--teal)}
+.sc-mix .tr i.g-B{background:color-mix(in srgb,var(--blue) 24%,transparent);color:var(--blue)}
+.sc-mix .tr i.g-C{background:color-mix(in srgb,var(--amber,#C98A1B) 28%,transparent);color:var(--amber,#9A6A10)}
+.sc-mix .tr i.g-D,.sc-mix .tr i.g-F{background:color-mix(in srgb,var(--salmon) 30%,transparent);color:var(--salmon)}
+.sc-mix .tr i{display:flex;align-items:center;justify-content:center;font:600 .72rem var(--f-body);font-style:normal;white-space:nowrap;overflow:hidden}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .sc-cp .ch.up{color:#4ade80}:root:not([data-theme=light]) .sc-cp .ch.dn{color:#f87171}}
+:root[data-theme=dark] .sc-cp .ch.up{color:#4ade80}:root[data-theme=dark] .sc-cp .ch.dn{color:#f87171}
 .sc-hist span{display:inline-flex;flex-direction:column;align-items:center;gap:2px;font-size:.68rem;color:var(--muted)}
 .sc-spark{width:100%;height:46px;display:block}
 .sc-spark path{fill:none;stroke:var(--blue);stroke-width:2}
 .sc-spark circle{fill:var(--blue)}
 .sc-mx td,.sc-mx th{text-align:center;padding:6px 4px}
-.sc-mx td:first-child,.sc-mx th:first-child{text-align:left;min-width:180px}
+.sc-mx td:first-child,.sc-mx th:first-child{text-align:left;min-width:180px;position:sticky;left:0;z-index:1;background:var(--surface)}
+@media (max-width:640px){.sc-mx td:first-child,.sc-mx th:first-child{min-width:132px;max-width:132px;font-size:.8rem}}
 .sc-mx td.na{color:var(--muted);font-size:.78rem}
 .sc-bars{display:flex;flex-direction:column;gap:6px}
 .sc-bar{display:grid;grid-template-columns:minmax(150px,240px) 1fr 80px;gap:10px;align-items:center;font-size:.85rem}
@@ -87,7 +127,53 @@ CSS = r"""
 .sc-pend{padding:16px 18px;border-radius:18px;background:var(--sunken);font-size:.9rem;line-height:1.5}
 @media (max-width:760px){.sc-find{grid-template-columns:1fr}.sc-box{padding:16px}.sc-list{grid-template-columns:1fr}
   .sc-z .lv{width:70px}.sc-bar{grid-template-columns:minmax(0,1fr) 90px;grid-template-areas:"n v" "t t";row-gap:4px}.sc-bar a{grid-area:n}.sc-bar .tr{grid-area:t}.sc-bar .v{grid-area:v}
+  .sc-cp{grid-template-columns:minmax(0,9.5em) minmax(50px,1fr) 2.7em 2.3em;gap:6px;font-size:.78rem}.sc-mix{grid-template-columns:6.5em 1fr}
   .sc-enr small{font-size:.62rem}.sc-enr b{font-size:.62rem}.sc-facts dd{font-size:.92rem}}
+"""
+
+LEAFLET = ('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">'
+           '<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>')
+
+MAP_JS = r"""
+window.addEventListener('load', () => {
+  const el = document.getElementById('scMap'); if (!el || !window.L) return;
+  const S = __SCHOOLS__;
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const col = g => ({A: css('--teal') || '#1a8f7a', B: css('--blue') || '#2b5fb4', C: css('--amber') || '#C98A1B', D: css('--salmon') || '#d65a4a', F: css('--salmon') || '#d65a4a'})[g] || '#8a94a3';
+  const m = L.map(el, {scrollWheelZoom: false});
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(m);
+  const pts = [], all = [];
+  for (const [id, s] of Object.entries(S)) {
+    if (s.lat == null || s.lon == null || s.ty === 'Virtual' || /virtual/i.test(s.name)) continue;
+    const mk = L.circleMarker([s.lat, s.lon], {radius: 8, color: s.ch ? css('--ink') || '#111' : '#fff', weight: s.ch ? 2.5 : 1.5, fillColor: col(s.gr), fillOpacity: .95});
+    const dir = `https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lon}`;
+    mk.bindPopup(`<b>${esc(s.name)}</b>${s.gr ? `State grade <b class="g">${esc(s.gr)}</b> (${s.gy - 1}-${String(s.gy).slice(2)})<br>` : ''}${esc(s.lv)}${s.g ? ' · grades ' + esc(s.g) : ''}${s.ch ? ' · charter' : ''}${s.n ? ` · ${Number(s.n).toLocaleString()} students` : ''}`
+      + (s.hrs ? `<br>School day: ${esc(s.hrs)}` : '') + `<br><a href="#s-${esc(id)}" data-open="${esc(id)}">Details</a> · <a href="${dir}" target="_blank" rel="noopener">Directions</a>`);
+    mk.addTo(m); pts.push({mk, s}); all.push([s.lat, s.lon]);
+  }
+  if (all.length) m.fitBounds(all, {padding: [24, 24]});
+  el.addEventListener('click', ev => { const a = ev.target.closest('[data-open]'); if (!a) return; const d = document.getElementById('s-' + a.dataset.open); if (d) d.open = true; });
+  const lvBox = document.getElementById('scMapLv');
+  lvBox.addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    lvBox.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    const v = b.dataset.v;
+    for (const {mk, s} of pts) {
+      const on = !v || (v === 'charter' ? s.ch : s.lv === v || (s.lv === 'Combined' && v !== 'charter'));
+      on ? mk.addTo(m) : mk.remove();
+    }
+  });
+  let zl = null, zones = null;
+  document.getElementById('scMapZ').addEventListener('change', async ev => {
+    const v = ev.target.value; if (zl) { zl.remove(); zl = null; } if (!v) return;
+    try { zones = zones || await (await fetch('/downloads/school-zones.json')).json(); } catch (e) { return; }
+    const line = css('--blue') || '#2b5fb4';
+    zl = L.layerGroup(zones.filter(z => z.level === v && !z.mou_area).map(z => L.geoJSON(JSON.parse(z.geometry), {style: {color: line, weight: 1.5, fillColor: line, fillOpacity: .07}})
+      .bindTooltip(esc(z.school || z.zone_name), {sticky: true}))).addTo(m);
+    pts.forEach(({mk}) => mk.bringToFront && mk.bringToFront());
+  });
+});
 """
 
 JS = r"""
@@ -250,9 +336,98 @@ def _spark(points):
             f'{points[0][1]:,} to {points[-1][1]:,}"><path d="{d}" vector-effect="non-scaling-stroke"/><circle cx="{xy[-1][0]:.1f}" cy="{xy[-1][1]:.1f}" r="3"/></svg>')
 
 
+COMPONENTS = [('grade3_ela_achievement', '3rd-grade reading', 'Third graders scoring on grade level or above in reading'),
+              ('ela_achievement', 'Reading', 'Students scoring on grade level or above in English language arts'),
+              ('ela_gains', 'Reading gains', 'Students who made a year of progress in reading'),
+              ('ela_gains_low25', 'Reading, lowest 25%', 'Progress among the school\'s lowest-scoring quarter of readers'),
+              ('math_achievement', 'Math', 'Students scoring on grade level or above in math'),
+              ('math_gains', 'Math gains', 'Students who made a year of progress in math'),
+              ('math_gains_low25', 'Math, lowest 25%', 'Progress among the school\'s lowest-scoring quarter in math'),
+              ('science_achievement', 'Science', 'Students passing the state science test'),
+              ('social_studies_achievement', 'Social studies', 'Students passing the civics or U.S. History exam'),
+              ('middle_acceleration', 'Advanced courses', 'Middle schoolers passing high school courses or industry certifications'),
+              ('graduation_rate', 'Graduation rate', 'Students graduating within four years (from the year before)'),
+              ('college_career_acceleration', 'College credit', 'Graduates who passed AP, IB, dual enrollment or an industry certification (from the year before)')]
+
+
+def _scores(g, prev, st):
+    """The parts of one school's grade: a bar per component with a mark for the state average of that school type."""
+    rows = ''
+    for key, label, tip in COMPONENTS:
+        v = g.get(key)
+        if v is None:
+            continue
+        sv = (st or {}).get(key)
+        pv = (prev or {}).get(key)
+        ch = ''
+        if pv is not None:
+            d = round(v - pv)
+            ch = f'<span class="ch {"up" if d > 0 else "dn" if d < 0 else ""}" title="Change from the year before">{"+" if d > 0 else ""}{d}</span>' if d else '<span class="ch" title="Same as the year before">±0</span>'
+        mark = f'<b class="st" style="left:{min(100, sv):.0f}%" title="Florida average {sv:.0f}%"></b>' if sv is not None else ''
+        rows += (f'<div class="sc-cp" title="{e(tip)}"><span class="lb">{e(label)}</span><span class="tr"><i style="width:{min(100, v):.0f}%"></i>{mark}</span>'
+                 f'<span class="v">{v:.0f}%</span>{ch}</div>')
+    if not rows:
+        return ''
+    pts = g.get('percent_of_points')
+    head = f'Scores behind the {e(g["school_year"])} grade' + (f': {pts:.0f}% of possible points' if pts is not None else '')
+    stl = f'{st["school_type"].lower()} school' if st and st['school_type'] != 'All' else 'school'
+    return (f'<div><div class="muted small" style="margin-bottom:6px">{head}</div><div class="sc-cps">{rows}</div>'
+            f'<div class="sc-key"><span><i></i>This school</span><span><b></b>Florida {e(stl)} average</span>'
+            + ('<span>+/− change from the year before</span>' if prev else '') + '</div></div>')
+
+
+def _t(hhmm):
+    """'13:50' -> '1:50 p.m.'"""
+    if not hhmm:
+        return ''
+    h, m = map(int, hhmm.split(':'))
+    return f"{(h - 1) % 12 + 1}:{m:02d} {'a.m.' if h < 12 else 'p.m.'}"
+
+
+def _hours(rows):
+    """One school's day: '7:30 a.m. to 2:00 p.m.', or one line per grade band."""
+    if not rows:
+        return ''
+    if len(rows) == 1 and not rows[0].get('part'):
+        r = rows[0]
+        return f"{_t(r['start_time'])} to {_t(r['end_time'])}" + (f" ({e(r['note'])})" if r.get('note') else '')
+    return '; '.join(f"{e(r['part'] or '')}: {_t(r['start_time'])} to {_t(r['end_time'])}" + (f" ({e(r['note'])})" if r.get('note') else '') for r in rows)
+
+
+def _where(s):
+    """The school's address as a map link and its phone as a tap-to-call link."""
+    import re, urllib.parse
+    addr = ', '.join(x for x in (s.get('address'), s.get('city')) if x)
+    out = []
+    if addr:
+        q = urllib.parse.quote(f"{s['name']}, {addr}, FL {s.get('zip') or ''}".strip())
+        out.append(f'<a href="https://www.google.com/maps/search/?api=1&amp;query={q}" target="_blank" rel="noopener">{e(addr)}</a>')
+    d = re.sub(r'\D', '', s.get('phone') or '')[-10:]
+    if len(d) == 10:
+        out.append(f'<a href="tel:+1{d}" style="white-space:nowrap">({d[:3]}) {d[3:6]}-{d[6:]}</a>')
+    elif s.get('phone'):
+        out.append(e(s['phone']))
+    return ' · '.join(out)
+
+
+def _mix(counts, label):
+    n = sum(counts.values()) or 1
+    segs = ''.join(f'<i class="g-{c}" style="width:{100 * counts.get(c, 0) / n:.2f}%" title="{c}: {counts.get(c, 0)} ({100 * counts.get(c, 0) / n:.0f}%)">{f"{c} {100 * counts.get(c, 0) / n:.0f}%" if counts.get(c, 0) / n >= .08 else ""}</i>'
+                   for c in 'ABCDF')
+    return f'<div class="sc-mix"><span class="lb">{label}</span><span class="tr">{segs}</span></div>'
+
+
 def schools_page(out_dir):
-    from page_datasets import schools, school_grades, school_spending, school_enrollment, school_calendar, school_zones
+    from page_datasets import schools, school_grades, school_grade_state, school_bell_times, school_spending, school_enrollment, school_calendar, school_zones
     S, G, SP, EN, CAL, Z = schools(), school_grades(), school_spending(), school_enrollment(), school_calendar(), school_zones()
+    GS = {(r['year'], r['school_type']): r for r in school_grade_state()}
+    BT = school_bell_times()
+    bell_by = {}
+    for r in BT:
+        if r['kind'] == 'school day' and r['school_id']:
+            bell_by.setdefault(r['school_id'], []).append(r)
+    early = [r for r in BT if r['kind'] == 'early release']
+    bell_year = next((r['school_year'] for r in BT), '')
     conf = PLACE.get('schools') or {}
     if not S:
         return '<div class="page"><h1>Public schools</h1><p>No school data for this place yet.</p></div>'
@@ -333,9 +508,11 @@ def schools_page(out_dir):
   <div class="bd">
     <dl class="sc-facts">{"".join(f"<div><dt>{e(a)}</dt><dd>{e(b)}</dd></div>" for a, b in facts)}</dl>
     {f'<div><div class="muted small" style="margin-bottom:4px">State grades</div><div class="sc-hist">{hist}</div></div>' if hist else ''}
+    {_scores(last, gh.get(latest_gy - 1), GS.get((latest_gy, last.get('school_type') or 'All')) or GS.get((latest_gy, 'All'))) if last else ''}
     {f'<div><div class="muted small">Enrollment, {enr[0][0] - 1}-{str(enr[0][0])[2:]} to {enr[-1][0] - 1}-{str(enr[-1][0])[2:]}: {enr[0][1]:,} to {enr[-1][1]:,}</div>{_spark(enr)}</div>' if len(enr) > 1 else ''}
     {op_html}
-    <p style="margin:0">{e(s.get("address") or "")}{", " + e(s["city"]) if s.get("city") else ""} · {e(s.get("phone") or "")}{(" · " + e(zoned)) if zoned else ""}{f" · {s['free_reduced_lunch_pct']:.0f}% of students qualify for free or reduced-price lunch" if s.get("free_reduced_lunch_pct") else ""}</p>
+    {f'<p class="sc-hrs"><b>School day {e(bell_year)}</b> {_hours(bell_by[sid])}</p>' if bell_by.get(sid) else ''}
+    <p style="margin:0">{_where(s)}{(" · " + e(zoned)) if zoned else ""}{f" · {s['free_reduced_lunch_pct']:.0f}% of students qualify for free or reduced-price lunch" if s.get("free_reduced_lunch_pct") else ""}</p>
   </div>
 </details>''')
     lv_chips = ''.join(f'<button type="button" class="chip" data-v="{v}" aria-pressed="false">{t}</button>' for v, t in
@@ -350,7 +527,19 @@ def schools_page(out_dir):
             gh = grades_by[s['school_id']]
             cells = ''.join(f'<td>{_g(gh[y]["grade"], True)}</td>' if y in gh else '<td class="na">·</td>' for y in show_years)
             mx_rows += f'<tr><td><a href="#s-{e(s["school_id"])}">{e(s["name"])}</a>{" <span class=muted>(closed)</span>" if s["status"] != "Open" else ""}</td>{cells}</tr>'
-        grades_html = (f'<div class="tablewrap"><table class="tx-table sc-mx" data-tt="off"><thead><tr><th>School</th>{"".join(f"<th>{y - 1}-{str(y)[2:]}</th>" for y in show_years)}</tr></thead><tbody>{mx_rows}</tbody></table></div>'
+        bay = {}
+        for g in G:
+            if g['year'] == latest_gy and g['grade'] in 'ABCDF':
+                bay[g['grade']] = bay.get(g['grade'], 0) + 1
+        fl = GS.get((latest_gy, 'All'))
+        mix = ''
+        if fl:
+            flc = {c.upper(): fl[f'grade_{c}'] for c in 'abcdf'}
+            pa, fa = 100 * bay.get('A', 0) / max(1, sum(bay.values())), 100 * flc['A'] / max(1, sum(flc.values()))
+            mix = (f'<p>In {latest_gy - 1}-{str(latest_gy)[2:]}, <b>{pa:.0f}%</b> of {e(PLACE["name"])}\'s graded public schools earned an A, compared with <b>{fa:.0f}%</b> of schools statewide. '
+                   'Open a school under Every school to see the test scores behind its grade next to the Florida average.</p>'
+                   f'<div class="sc-mixes">{_mix(bay, e(PLACE["name"]) + f" <small>{sum(bay.values())} schools</small>")}{_mix(flc, f"Florida <small>{sum(flc.values()):,} schools</small>")}</div>')
+        grades_html = mix + (f'<div class="tablewrap"><table class="tx-table sc-mx" data-tt="off" data-stack="off"><thead><tr><th>School</th>{"".join(f"<th>{y - 1}-{str(y)[2:]}</th>" for y in show_years)}</tr></thead><tbody>{mx_rows}</tbody></table></div>'
                        '<p class="note">No school grades were given for 2019-20, when state testing was canceled. For 2020-21, only schools that asked got a grade. 2022-23 grades were an informational baseline after the state changed its tests. A dot means no grade that year (the school was new, closed, or isn\'t graded, like virtual and alternative programs).</p>')
     else:
         grades_html = ('<div class="sc-pend">The Florida Department of Education publishes every school\'s grade each July. Its website turns away the automated readers this site uses, '
@@ -389,10 +578,14 @@ def schools_page(out_dir):
     board_html = ''.join(f'<li><b>{e(_when(c))}</b> · {e(c["title"])}{(" · " + e(_venue(c))) if c.get("venue") else ""}</li>' for c in board)
     zone_date = max((z['last_edited'] or '' for z in Z), default='')
 
-    js_s = {s['school_id']: {'name': s['name'], 'g': s.get('grades'), 'n': s.get('enrollment'), 'gr': s.get('latest_grade'), 'gy': s.get('latest_grade_year')} for s in open_s}
+    js_s = {s['school_id']: {'name': s['name'], 'g': s.get('grades'), 'n': s.get('enrollment'), 'gr': s.get('latest_grade'), 'gy': s.get('latest_grade_year'),
+                             'lat': s.get('latitude'), 'lon': s.get('longitude'), 'lv': s['level'], 'ch': bool(s['charter']), 'ty': s['school_type'],
+                             'city': s.get('city'), 'hrs': re.sub('<[^>]+>', '', _hours(bell_by.get(s['school_id'], [])))} for s in open_s}
+    early_html = (f'<p class="note">Early release days ({e(bell_year)}): ' + ', '.join(f"{e(r['part'].lower())} let out at {_t(r['end_time'])}" for r in early) +
+                  f'. Times are from the district\'s <a href="{e(BT[0]["source_url"])}" rel="noopener" target="_blank">start and end times chart</a>.</p>') if early else ''
     import json
     js = JS.replace('__SCHOOLS__', json.dumps(js_s, separators=(',', ':')))
-    return f'''<style>{CSS}</style>
+    return f'''<style>{CSS}</style>{LEAFLET}
 <div class="page tax sc">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Governments · {e(district)}</span><h1>Public schools</h1>
     <p class="lede">Find the schools zoned for your address, see what's coming up on the school calendar, and compare every public school in {e(PLACE["name"])}: grades, students, spending and how each has changed since 2016.</p></div>
@@ -407,6 +600,13 @@ def schools_page(out_dir):
       <div class="sc-box"><h3>Zoned schools</h3><div class="sc-res" id="scOut" hidden></div><p class="muted small" id="scHint">Pick an address to see its elementary, middle and high school.</p></div>
     </div></section>
 
+  <section class="tx-sec"><div class="sec-hd"><h2 id="map" data-tile="Map">Map of every school</h2><span class="muted">Colored by the latest state grade</span></div>
+    <div class="sc-ctl"><div class="chips" id="scMapLv" role="group" aria-label="Kind of school"><button type="button" class="chip" data-v="" aria-pressed="true">All</button><button type="button" class="chip" data-v="Elementary" aria-pressed="false">Elementary</button><button type="button" class="chip" data-v="Middle" aria-pressed="false">Middle</button><button type="button" class="chip" data-v="High" aria-pressed="false">High</button><button type="button" class="chip" data-v="charter" aria-pressed="false">Charter</button></div>
+      <label class="sc-zsel">Zones <select id="scMapZ" aria-label="Show attendance zones"><option value="">Off</option><option value="Elementary">Elementary</option><option value="Middle">Middle</option><option value="High">High</option></select></label></div>
+    <div class="sc-map" id="scMap" role="img" aria-label="Map of {len(open_s)} public schools in {e(PLACE["name"])}, colored by state grade"></div>
+    <div class="sc-mkey"><span><i class="g-A"></i>A</span><span><i class="g-B"></i>B</span><span><i class="g-C"></i>C</span><span><i class="g-D"></i>D or F</span><span><i></i>No grade</span><span><i class="ch"></i>Ring = charter</span></div>
+    <p class="note">Tap a dot for the school's grade, hours and details. Turn on zones to see which area each school serves. Virtual programs and schools without an address on file aren't shown.</p></section>
+
   <section class="tx-sec"><div class="sec-hd"><h2 id="calendar" data-tile="Calendar">School calendar</h2><span class="muted">From the <a href="{e(conf.get("calendar_page") or "#")}" rel="noopener" target="_blank">district's calendar</a>, checked daily</span></div>
     <div class="sc-ctl"><div class="chips" id="scCalK" role="group" aria-label="Kind of date"><button type="button" class="chip" data-v="" aria-pressed="true">Everything</button><button type="button" class="chip" data-v="off" aria-pressed="false">Days off</button><button type="button" class="chip" data-v="milestones" aria-pressed="false">Grading and graduation</button><button type="button" class="chip" data-v="board-meeting" aria-pressed="false">School Board</button></div></div>
     <div class="sc-cal" id="scCal">{"".join(cal_cards) or '<p class="muted">No upcoming dates posted.</p>'}</div>
@@ -416,7 +616,7 @@ def schools_page(out_dir):
     <div class="sc-ctl"><div class="chips" id="scLv" role="group" aria-label="Kind of school"><button type="button" class="chip" data-v="" aria-pressed="true">All</button>{lv_chips}</div><input type="search" id="scQ" placeholder="Find a school or city" aria-label="Find a school"></div>
     <div class="sc-list" id="scSchools">{"".join(cards)}</div>
     <p class="note" id="scNone" hidden>No school matches.</p>
-    <p class="note">The letter is the school's latest Florida school grade. Students and teachers are from the {e(year_label)} federal school directory; "per teacher" divides students by full-time teachers.</p></section>
+    <p class="note">The letter is the school's latest Florida school grade. Students and teachers are from the {e(year_label)} federal school directory; "per teacher" divides students by full-time teachers.</p>{early_html}</section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="grades" data-tile="Grades">School grades since 2016</h2><span class="muted">Florida Department of Education</span></div>
     {grades_html}</section>
@@ -447,4 +647,4 @@ def schools_page(out_dir):
     </ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script>{js}</script>'''
+<script>{js}</script><script>{MAP_JS.replace('__SCHOOLS__', json.dumps(js_s, separators=(',', ':')))}</script>'''
