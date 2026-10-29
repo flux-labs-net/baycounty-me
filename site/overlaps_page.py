@@ -31,6 +31,7 @@ CSS = r"""
 .ov-live[aria-busy="true"]{opacity:.6}
 .ov-empty{color:var(--muted);font-size:.92rem;margin:8px 0}
 .ov-cut tr.ov-more{display:none!important}
+.ov-sec[hidden]{display:none!important}
 .ov-showall{margin:10px 0 0;cursor:pointer}
 .ov-here{padding-top:0}
 .ov-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
@@ -108,7 +109,9 @@ def _donor_votes(dv):
         items = ''.join(f'<li>{e(v["date"])}: {e(v["headline"] or "")} <span class="ov-tag">{e(v["member_vote"])}</span>'
                         f'{"<span class=ov-tag>consent agenda</span>" if v.get("consent_agenda") else ""} {_src(v.get("source_url"))}</li>' for v in vs[:40])
         more = f'<li>…and {len(vs) - 40} more in the dataset</li>' if len(vs) > 40 else ''
-        rows.append(f'<tr><td>{_ent(mid, r["member"])}<span class="sub">{e(r["board"] or "")}</span></td>'
+        import ids
+        gov = (ids.gov(r['gov_id']) or {}).get('short', r['gov_id'] or '')
+        rows.append(f'<tr><td>{_ent(mid, r["member"])}<span class="sub">{e(r["board"] or "")}</span></td><td class="hide-sm">{e(gov)}</td>'
                     f'<td>{_ent(cid, r["company"])}<span class="sub">Gave: {who}</span></td>'
                     f'<td class="n">{_money(gift)}<span class="sub">{e({"before": "before the votes", "after": "after the votes", "both": "before and after"}.get(timing, ""))}</span></td>'
                     f'<td class="n">{len(vs)}<span class="sub">{e(", ".join(f"{n} {k}" for k, n in sorted(tally.items(), key=lambda kv: -kv[1])))}</span></td>'
@@ -160,7 +163,7 @@ def s_donor_votes():
     rows, n_pairs = _donor_votes(D['DV'])
     n = len({r['vote_id'] for r in D['DV']})
     return _sec('donor-votes', "Votes naming a member's donor", f'{n:,} votes, {n_pairs} official and company pairs since 2016',
-                _table([('Official', ''), ('Company', ''), ('Gifts', 'n'), ('Votes', 'n'), ('When', '')], rows, '3:desc'),
+                _table([('Official', ''), ('Government', 'hide-sm'), ('Company', ''), ('Gifts', 'n'), ('Votes', 'n'), ('When', '')], rows, '4:desc'),
                 "A vote counts when the minutes name the company in the motion the official voted on, and the company (or a person who runs it) gave to "
                 "that official's campaign since 2016. Most of these passed unanimously, many on a consent agenda." + NOT_A_FINDING +
                 " Data: <a href='/api/v1/datasets/donor-votes'>donor-votes</a>, every vote naming a company or group: <a href='/api/v1/datasets/vote-mentions'>vote-mentions</a>.")
@@ -178,6 +181,7 @@ def s_own_np():
 
 def s_agenda():
     ap = [r for r in _data()['AP'] if r['entity_id'] and r['entity_kind'] != 'gov']
+    ap.sort(key=lambda r: (not r['gave_to_members'], r['meeting_date'] and -int(r['meeting_date'].replace('-', ''))))  # gave to the board first, newest first
     n_gave = len({r['entity_id'] for r in ap if r['gave_to_members']})
     rows = [f'<tr><td>{e(r["meeting_date"])}<span class="sub">{e(r["board"] or "")}</span></td><td>{e(r["title"] or "")}'
             f'{HOT("rezoning or land use") if r["rezoning"] else ""}</td>'
@@ -185,8 +189,9 @@ def s_agenda():
             f'<td class="n">{_money(r["gave_to_members"]) if r["gave_to_members"] else "—"}{_to(r)}</td>'
             f'<td class="hide-sm">{_src(r["source_url"], "agenda")}</td></tr>' for r in ap]
     return _sec('agenda', 'Companies and organizations on agendas', f'{len(ap)} linked to a profile; {n_gave} gave to a member of that board',
-                _table([('Meeting', ''), ('Item', ''), ('Named', ''), ('Gave to members', 'n'), ('', 'hide-sm')], rows),
-                "Names read from the agenda packets and matched to a company, nonprofit or registered business. Rezoning and land-use items are tagged. "
+                _table([('Meeting', ''), ('Item', ''), ('Named', ''), ('Gave to members', 'n'), ('', 'hide-sm')], rows, '3:desc'),
+                "Companies that gave to a member of that board are listed first. "
+                "Names are read from the agenda packets and matched to a company, nonprofit or registered business. Rezoning and land-use items are tagged. "
                 "Data: <a href='/api/v1/datasets/agenda-parties'>agenda-parties</a>.")
 
 
@@ -202,8 +207,13 @@ def s_bids():
                           for r in steps) or '<span class="muted">No vote or award on file yet</span>'
         rows.append(f'<tr><td>{e(n["reference"] or "")}<span class="sub">{e(n["agency"] or "")}</span></td><td>{e(n["notice_title"] or "")}</td>'
                     f'<td>{e(n["published"])}<span class="sub">due {e(n["due_date"] or "—")}</span></td><td>{after}</td></tr>')
-    return _sec('bids', 'Bids from notice to award', 'Followed by bid number to votes and contracts',
-                _table([('Bid', ''), ('What', ''), ('Posted', ''), ('What followed', '')], rows),
+    followed = sum(1 for rs in by.values() if any(r['stage'] != 'notice' for r in rs))
+    table = _table([('Bid', ''), ('What', ''), ('Posted', ''), ('What followed', '')], rows)
+    if not followed:
+        table = (f'<p>None of the {len(by)} bids we are following has a vote or contract on file yet. Each one is checked against the minutes and contract '
+                 f'records every day.</p><details class="ov-every"><summary>The {len(by)} bids</summary>{table}</details>')
+    return _sec('bids', 'Bids from notice to award', f'{followed} of {len(by)} have a vote or award on file',
+                table,
                 "Each bid notice matched by its bid number to votes and contract records at the same government. The notice site keeps 30 days, so this grows "
                 "as notices are archived. Data: <a href='/api/v1/datasets/bid-trail'>bid-trail</a>.")
 
@@ -220,50 +230,63 @@ def s_split():
 
 
 def s_shared():
-    so = defaultdict(list)
+    groups = defaultdict(list)
     for r in _data()['SO']:
-        so[r['group_id']].append(r)
+        groups[r['group_id']].append(r)
+    merged = {}
+    for rs in groups.values():  # two officers of the same companies make one row
+        k = (rs[0]['gov_id'], tuple(sorted(r['company_id'] for r in rs)))
+        m = merged.setdefault(k, {'rs': rs, 'officers': [], 'address': True})
+        m['officers'].append(rs[0]['officer'])
+        m['address'] &= rs[0]['match'] == 'same name and address'
     import ids
-    rows = [f'<tr><td>{e(rs[0]["officer"])}<span class="sub">{e(rs[0]["match"])}</span></td><td>{link("gov:" + rs[0]["gov_id"], (ids.gov(rs[0]["gov_id"]) or {}).get("short", rs[0]["gov_id"]))}</td>'
-            f'<td>{"<br>".join(_ent(r["company_id"], r["company"]) + " " + _money(r["paid_by_this_government"]) for r in rs)}</td></tr>' for rs in so.values()]
-    return _sec('shared-vendors', 'Companies paid by one government that share an officer', f'{len(so)} groups',
+    rows = [f'<tr><td>{e(" and ".join(m["officers"]))}{"<span class=sub>same address on each filing</span>" if m["address"] else ""}</td>'
+            f'<td>{link("gov:" + k[0], (ids.gov(k[0]) or {}).get("short", k[0]))}</td>'
+            f'<td>{"<br>".join(_ent(r["company_id"], r["company"]) + " " + _money(r["paid_by_this_government"]) for r in m["rs"])}</td></tr>' for k, m in merged.items()]
+    return _sec('shared-vendors', 'Companies paid by one government that share an officer', f'{len(merged)} groups',
                 _table([('Shared officer', ''), ('Paid by', ''), ('Companies and what that government paid', '')], rows),
                 'From state corporate filings: companies that list the same person as an officer or manager, both paid by the same government. Registered '
-                "agents are left out. Related companies often share officers. Data: <a href='/api/v1/datasets/shared-owner-vendors'>shared-owner-vendors</a>.")
+                "agents are left out, and a person is matched by name. Related companies often share officers. Data: <a href='/api/v1/datasets/shared-owner-vendors'>shared-owner-vendors</a>.")
 
 
-def s_development():
-    rows = [f'<tr><td>{e(r["project"])}<span class="sub">{e(r["description"] or "")}</span></td><td>{_ent(r["company_id"], r["company"])}</td>'
-            f'<td>{e(r["status"] or "")}<span class="sub">{e(r["approved_date"] or r["applied_date"] or "")}</span></td>'
-            f'<td class="n">{_money(r["gave_to_members"]) if r["gave_to_members"] else "—"}</td></tr>' for r in _data()['DC']]
-    return _sec('developers', 'Projects named after a registered business', 'The business behind a project, where the name says',
-                _table([('Project', ''), ('Business', ''), ('Status', ''), ('Gave to officials', 'n')], rows),
-                "The planning maps don't list owners or developers, so a project is matched only when its name is exactly the name of one active Bay County "
-                "business filing. Data: <a href='/api/v1/datasets/development-companies'>development-companies</a>.")
-
-
-def s_chambers():
+def chamber_rows(extra=()):
+    """Rows for the chambers page's board-business table: every board member who is an official, whose company local
+    governments paid or gave to campaigns, or who gave as a business owner; extra = (person html, org html, note) rows."""
     rows = [f'<tr><td>{_ent(r["person_id"], r["person"]) if r["person_id"] else e(r["person"])}<span class="sub">{e(r["title"] or "")}, {e(r["chamber"])}</span></td>'
             f'<td>{_ent(r["organization_id"], r["organization"]) if r["organization_id"] else e(r["organization"] or "")}'
             f'{HOT("elected or appointed official") if r["is_official"] else ""}</td>'
             f'<td class="n">{_money(r["organization_paid_by_governments"]) if r["organization_paid_by_governments"] else "—"}</td>'
             f'<td class="n">{_money((r["organization_gave_to_campaigns"] or 0) + (r["person_gave_to_campaigns"] or 0)) if (r["organization_gave_to_campaigns"] or r["person_gave_to_campaigns"]) else "—"}'
-            f'{_to(r)}</td></tr>' for r in _data()['CH']]
-    return _sec('chamber-overlaps', 'Board members who are officials, donors or vendors', 'Where the chamber boards meet public money and campaigns',
-                _table([('Person', ''), ('Organization', ''), ('Paid by local governments', 'n'), ('Gave to campaigns', 'n')], rows),
-                "A board member's own gifts count only when they run the company the chamber lists them with. Data: <a href='/api/v1/datasets/chamber-overlaps'>chamber-overlaps</a>.")
+            f'{_to(r)}</td></tr>' for r in sorted(_data()['CH'], key=lambda r: -((r['organization_paid_by_governments'] or 0) + (r['organization_gave_to_campaigns'] or 0) + (r['person_gave_to_campaigns'] or 0)))]
+    rows += [f'<tr><td>{p_}</td><td>{o}<span class="sub">{note}</span></td><td class="n">—</td><td class="n">—</td></tr>' for p_, o, note in extra]
+    return _table([('Person', ''), ('Organization', ''), ('Paid by local governments', 'n'), ('Gave to campaigns', 'n')], rows, '2:desc', empty='None found.')
 
 
-def s_emergency():
-    EP = _data()['EP']
-    rows = [f'<tr><td>{e(r["date"] or "")}<span class="sub">{e(r["government"] or "")}</span></td><td>{_ent(r["vendor_id"], r["vendor"]) if r["vendor_id"] else e(r["vendor"])}'
-            f'<span class="sub">{e((r["purpose"] or "")[:140])}</span></td><td class="n">{_money(r["amount"])}</td>'
-            f'<td class="n">{_money(r["gave_to_officials_here"]) if r["gave_to_officials_here"] else "—"}{_to(r)}</td>'
-            f'<td class="hide-sm">{_src(r["source_url"], "record")}</td></tr>' for r in EP]
-    n_gave = sum(1 for r in EP if r['gave_to_officials_here'])
-    return _sec('emergency-donors', 'Emergency purchases from campaign donors', f'{n_gave} of {len(EP)} from a company that gave to officials there',
-                _table([('Date', ''), ('Company and purpose', ''), ('Amount', 'n'), ('Gave to officials here', 'n'), ('', 'hide-sm')], rows),
-                "Data: <a href='/api/v1/datasets/emergency-purchase-donors'>emergency-purchase-donors</a>.")
+def chamber_keys():
+    return {(r['person'], r['organization']) for r in _data()['CH']}
+
+
+def emergency_gift(date, amount):
+    """'Gave $X to officials here' tag for one emergency purchase on the contracts page, or ''."""
+    if '_EM' not in _D:
+        _D['_EM'] = {(r['date'], round(r['amount'] or 0)): r for r in _data()['EP'] if r['gave_to_officials_here']}
+    r = _D['_EM'].get((date, round(amount or 0)))
+    if not r:
+        return ''
+    names = (r.get('gave_to') or '').split('; ')
+    to = ', '.join(names[:3]) + (f' and {len(names) - 3} more' if len(names) > 3 else '')
+    return f' <span class="ov-tag hot">company gave {_money(r["gave_to_officials_here"])}</span> to {e(to)}, officials of this government.'
+
+
+def development_business(project_id):
+    """'Business: <link>' for a development project card, when the project is named after one business filing."""
+    if '_DEV' not in _D:
+        _D['_DEV'] = {r['project_id']: r for r in _data()['DC']}
+    r = _D['_DEV'].get(project_id)
+    if not r:
+        return ''
+    gave = f' · gave {_money(r["gave_to_members"])} to officials' if r.get('gave_to_members') else ''
+    return f'<span>Business <b>{_ent(r["company_id"], r["company"])}</b>{gave}</span>'
 
 
 def _races():
@@ -330,10 +353,9 @@ HOME = {
     '/meetings': [s_agenda],
     '/notices': [s_bids],
     '/connections/campaign-gifts': [s_checkbook],
-    '/public-money/contracts': [s_emergency, s_split],
+    '/public-money/contracts': [s_split],
     '/connections/shared-owners': [s_shared],
-    '/development': [s_development],
-    '/chambers': [s_chambers],
+    '/chambers': [],  # tags and the board-business table are in chambers_page
     '/elections/past': [s_money_votes],
     '/schools': [s_schools],
 }
@@ -343,7 +365,7 @@ LIVE = {s_own_biz, s_own_np, s_checkbook, s_split, s_schools}
 def for_page(path):
     """The overlap sections for one page, added below its own content by build_site."""
     fns = HOME.get(path)
-    if not fns:
+    if fns is None:
         return ''
     return (f'<style>{CSS}</style><div class="page tax ov ov-here">{"".join(f() for f in fns)}</div>'
             '<link rel="stylesheet" href="/assets/tax.css"><script src="/assets/overlaps.js" defer></script>')
@@ -388,17 +410,17 @@ def overlaps_page(out_dir):
     def card(title, stat, items, path, anchor, page_name, live=False):
         li = ''.join(f'<li>{x}</li>' for x in items)
         return (f'<article class="ov-card"><h3>{e(title)}</h3><p class="ov-stat">{stat}</p>'
-                f'{f"<ul>{li}</ul>" if li else ""}{"<p class=muted>Read live from hand-checked matches and government files.</p>" if live else ""}'
-                f'<a class="ov-go" href="{path}#ov-{anchor}">On {e(page_name)} →</a></article>')
+                f'{f"<ul>{li}</ul>" if li else ""}{"<p class=muted>Read live. It shows on that page once a match is on file.</p>" if live else ""}'
+                f'<a class="ov-go" href="{path}#{anchor if anchor in ("em", "business", "projects") else "ov-" + anchor}">On {e(page_name)} →</a></article>')
 
     cards = ''.join([
         card("Votes naming a member's donor", f'{n_dv:,} votes · {n_pairs} official and company pairs', top_dv, '/public-money/votes', 'donor-votes', 'How they voted'),
         card('Companies on agendas', f'{len(ap)} agenda items name a company or group', top_ap, '/meetings', 'agenda', 'Public meetings'),
         card('Bids from notice to award', f'{len({r["notice_id"] for r in BT})} bids followed by number', top_bt, '/notices', 'bids', 'Public notices'),
-        card('Emergency purchases from donors', f'{n_ep_gave} of {len(EP)} bought from a company that gave', top_ep, '/public-money/contracts', 'emergency-donors', 'Who gets the contracts'),
+        card('Emergency purchases from donors', f'{n_ep_gave} of {len(EP)} bought from a company that gave', top_ep, '/public-money/contracts', 'em', 'Who gets the contracts'),
         card('Shared officers among vendors', f'{len(so)} groups paid by one government', top_so, '/connections/shared-owners', 'shared-vendors', 'Shared owners'),
-        card('Chamber boards', f'{len(CH)} board members who are officials, donors or vendors', top_ch, '/chambers', 'chamber-overlaps', 'Chambers of commerce'),
-        card('Developers behind projects', f'{len(DC)} projects named after a business', top_dc, '/development', 'developers', 'Building and development'),
+        card('Chamber boards', f'{len(CH)} board members who are officials, donors or vendors', top_ch, '/chambers', 'business', 'Chambers of commerce'),
+        card('Developers behind projects', f'{len(DC)} projects named after a business', top_dc, '/development', 'projects', 'Building and development'),
         card('Money raised and votes won', f'The top fundraiser won {top_won} of {len(contested)} contested races',
              [f'{len(contested) - top_won} races went to a candidate who raised less', 'Every candidate on one chart: share of money against share of the vote'], '/elections/past', 'money-votes', 'Past elections'),
         card("Votes on an official's own business", 'Hand-checked matches', [], '/connections/business-ties', 'own-business', "Officials' businesses", True),

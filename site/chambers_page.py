@@ -228,14 +228,11 @@ def chambers_page(out_dir):
         boards.append(f'<div class="ch-board"><h3 class="ch-grp" style="font-size:1.05rem;color:var(--ink)">{e(c["name"])} <span class="muted" style="font-weight:400;font-size:.86rem">as listed on <a href="{e(c["board_url"])}" rel="noopener" target="_blank">its website</a>, {e(c["as_of"])}</span></h3>{"".join(parts)}</div>')
 
     # --- where boards meet local government business
-    prof = {}
-    for x in G.links.values():
-        if x['relation'] in ('paid',) and x['amount']:
-            prof[x['to_id']] = prof.get(x['to_id'], 0) + x['amount']
     biz = [r for r in board if (r.get('organization_entity_id') or '').startswith(('vendor:', 'business:')) and r['organization_entity_id'] in G.ents]
-    biz_rows = ''.join(f'<tr><td>{_name(r)}<br><span class="muted" style="font-size:.8rem">{e(r["chamber"])} · {e(r["title"])}</span></td><td>{_org(r)}</td>'
-                       f'<td class="n">{_money(prof.get(r["organization_entity_id"])) if prof.get(r["organization_entity_id"]) else "<span class=muted>Sunbiz filing</span>"}</td></tr>'
-                       for r in sorted(biz, key=lambda r: -(prof.get(r['organization_entity_id']) or 0)))
+    from overlaps_page import chamber_rows, chamber_keys
+    have = chamber_keys()
+    biz_table = chamber_rows([(f'{_name(r)}<span class="sub">{e(r["title"])}, {e(r["chamber"])}</span>', _org(r), 'Sunbiz filing under the same name' if r['organization_entity_id'].startswith('business:') else 'No local payments or gifts on file')
+                              for r in biz if (r['person_name'], r.get('organization')) not in have])
     gov_rows = [r for r in board if (r.get('organization_entity_id') or '').startswith('gov:') or r['person_entity_id'].startswith('person:')]
 
     # --- public money
@@ -286,9 +283,9 @@ def chambers_page(out_dir):
     <p>Each name links to a profile with every other board, business and public record it appears in. A person is matched to another local filing only by the same first and last name; a public official is named as one only where the chamber lists their government post.</p>
     {"".join(boards)}</section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="business" data-tile="Business ties">Board members' businesses</h2><span class="muted">Organizations on the boards that local governments paid, or that have a Sunbiz filing under the same name</span></div>
-    <div class="tablewrap"><table class="tx-table ch-tbl"><thead><tr><th>Board member</th><th>Organization</th><th class="n">Paid by local governments</th></tr></thead><tbody>{biz_rows or '<tr><td colspan="3" class="muted">None found.</td></tr>'}</tbody></table></div>
-    <p class="note">"Paid" adds every payment record on the site for that company, across all governments and years since 2016; follow the company's link for each contract and vote. {len(gov_rows)} board seats are held by people representing a local government or public agency.</p></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="business" data-tile="Business ties">Board members' businesses, public money and campaign gifts</h2><span class="muted">Board members who are officials, whose organization local governments paid or that gave to campaigns, or with a Sunbiz filing under the same name</span></div>
+    {biz_table}
+    <p class="note">"Paid" adds every payment by a local government on the site for that company since 2016 (federal contracts are not counted); follow the company's link for each contract and vote. A board member's own gifts count only when they run the company the chamber lists them with. {len(gov_rows)} board seats are held by people representing a local government or public agency. Data: <a href="/api/v1/datasets/chamber-overlaps">chamber-overlaps</a>.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="money" data-tile="Money">Revenue, and what governments paid them</h2></div>
     <div class="tablewrap"><table class="tx-table ch-tbl"><thead><tr><th>Organization</th><th>Latest IRS filing</th><th class="n">Revenue</th><th class="n">Expenses</th><th class="n">Assets</th><th class="n">Employees</th></tr></thead><tbody>{fin_rows}</tbody></table></div>
