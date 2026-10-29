@@ -2268,6 +2268,8 @@ DATASETS = [
 
 from safety_data import DATASETS as _SAFETY  # noqa: E402  /public-safety (site/safety_data.py)
 DATASETS += _SAFETY
+from freshness import DATASETS as _FRESH  # noqa: E402  how current each figure is (/data-sources#current)
+DATASETS += _FRESH
 from volunteer_data import DATASETS as _VOLUNTEER  # noqa: E402  /volunteer (site/volunteer_data.py)
 DATASETS += _VOLUNTEER
 from correlations import DATASETS as _OVERLAPS, COLUMNS as _OVERLAP_COLUMNS  # noqa: E402  /connections/overlaps (site/correlations.py)

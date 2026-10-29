@@ -1,6 +1,6 @@
 {
  "place_id": "fl-bay",
- "fetched": "2026-10-27",
+ "fetched": "2026-10-29",
  "layers": [
   {
    "id": "county-do",
@@ -8,7 +8,7 @@
    "label": "Bay County development orders (unincorporated county)",
    "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
    "page": "https://www.baycountyfl.gov/157/Planning-Zoning",
-   "rows": 200
+   "rows": 199
   },
   {
    "id": "pcb-dev",
@@ -273,12 +273,12 @@
    "gov_id": "county",
    "name": "Cobrand C-Store at Navy Blvd & Patronis Dr",
    "case_number": "PLDO20260170",
-   "description": "29,500 sq. ft. Gas Station, Restuarant, and Retail Center",
+   "description": "6,600 sq. ft. Gas Station",
    "size": "7.1 acres",
    "location": "1318 & 1694 Navy Boulevard",
-   "status": "Under review",
+   "status": "Approved",
    "applied_date": "2026-06-24",
-   "approved_date": null,
+   "approved_date": "2026-10-27",
    "permit_date": null,
    "occupancy_date": null,
    "plans_url": null,
@@ -3229,25 +3229,6 @@
    "plans_url": null,
    "lat": 30.31425,
    "lng": -85.856737,
-   "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18"
-  },
-  {
-   "project_id": "county-do:PZ 23-163",
-   "layer": "county-do",
-   "gov_id": "county",
-   "name": "Hwy 231 Carwash",
-   "case_number": "PZ 23-163",
-   "description": "6,440 sq. ft. Car Wash Facility",
-   "size": "3.1 acres",
-   "location": "4403 Highway 231",
-   "status": "Approved",
-   "applied_date": "2023-07-13",
-   "approved_date": "2023-09-28",
-   "permit_date": null,
-   "occupancy_date": null,
-   "plans_url": null,
-   "lat": 30.227387,
-   "lng": -85.588763,
    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18"
   },
   {

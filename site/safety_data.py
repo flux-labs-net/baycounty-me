@@ -99,6 +99,55 @@ def crime_counts():
     return out
 
 
+def crime_monthly():
+    """Each month's count from 2025 on, when Florida agencies moved to monthly incident reports (NIBRS). A blank month
+    means the agency has not sent it yet."""
+    out = []
+    for place, r, fbi in _agency_rows():
+        for y, offs in sorted(fbi['offenses'].items()):
+            for code, v in offs.items():
+                for m, n in enumerate(v.get('by_month') or [], 1):
+                    if n is None:
+                        continue
+                    out.append({'place_id': place, 'agency_id': r['agency_id'], 'agency': r.get('fbi_agency') or r['agency'], 'fbi_ori': r['fbi_ori'],
+                                'gov_id': r['gov'], 'year': int(y), 'month': m, 'period': f'{y}-{m:02d}', 'offense_code': code, 'offense': v['label'],
+                                'offense_group': v['group'], 'total_row': code in ('V', 'P'), 'count': n,
+                                'cleared': (v.get('cleared_by_month') or [None] * 12)[m - 1], 'source_url': FBI_URL})
+    return out
+
+
+LAG_MONTHS = 2  # full months left out before the current one: agencies keep adding to their latest months
+
+
+def year_to_date(M, code, today=None):
+    """This year so far against the same months last year, from crime-monthly rows.
+
+    The window runs from January and leaves out the current month and the LAG_MONTHS before it. An agency counts only when it has sent every month
+    of the window in both years. Returns None before the window has a month in it."""
+    import datetime as dt
+    today = today or dt.date.today()
+    y, last = today.year, today.month - 1 - LAG_MONTHS
+    if last < 1:
+        return None
+    cell = {(r['agency_id'], r['year'], r['month']): r for r in M if r['offense_code'] == code}
+    names = {r['agency_id']: r['agency'] for r in M}
+    rows, left_out = [], []
+    for a in names:
+        now = [cell.get((a, y, m)) for m in range(1, last + 1)]
+        before = [cell.get((a, y - 1, m)) for m in range(1, last + 1)]
+        if not any(now) and not any(before):
+            continue
+        if all(now) and all(before):
+            rows.append({'agency_id': a, 'agency': names[a], 'now': sum(r['count'] for r in now), 'before': sum(r['count'] for r in before)})
+        else:
+            got = max((m for m in range(1, 13) if cell.get((a, y, m))), default=0)
+            left_out.append({'agency_id': a, 'agency': names[a], 'through_month': got})
+    if not rows:
+        return None
+    return {'year': y, 'through_month': last, 'rows': rows, 'left_out': left_out,
+            'now': sum(r['now'] for r in rows), 'before': sum(r['before'] for r in rows)}
+
+
 def police_staffing():
     out = []
     for place, r, fbi in _agency_rows():
@@ -113,5 +162,6 @@ def police_staffing():
 DATASETS = [
     ('safety-agencies', 'Police and fire departments', "Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), cost_per_resident (the budget over residents: the city's population; the whole county for the Sheriff, who runs the jail for everyone; the unincorporated county for county fire), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.", safety_agencies),
     ('crime-counts', 'Crimes reported by police agency', "Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed), the population the agency covers, and the statewide rate for the same offense and year (florida_per_1000; blank for 2021, when only half of Florida reported). A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.", crime_counts),
+    ('crime-monthly', 'Crimes reported by police agency, by month', "Offenses each police agency in the county reported to the FBI each month since January 2025, when Florida agencies moved to monthly incident reports (NIBRS), from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and the eight main offenses, with offenses cleared. This is where this year's numbers come from before the year is over: the page compares this year so far with the same months last year, leaving out the current month and the two before it, which agencies are still adding to. A month that is missing has not been sent yet. Counts only; no person is named.", crime_monthly),
     ('police-staffing', 'Police staffing', "Sworn officers and civilian employees at each police agency in the county on October 31 each year since 2016, as the agency reported them to the FBI (Crime Data Explorer police employee data), with employees per 1,000 residents covered. The Sheriff's reported civilian staff went from 71 in 2022 to 271 in 2023; the FBI data does not say why.", police_staffing),
 ]

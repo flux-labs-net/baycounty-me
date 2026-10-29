@@ -68,6 +68,22 @@ def bedtax_page(out_dir):
     ZK = {gkey(z): z for z in ZN}  # pcb, pc, mb: the three tax zones
     zk = ['county'] + [k for k in ('pc', 'pcb', 'mb') if k in ZK]
     zone = lambda k, fn, dflt: by_city({'': dflt, **{kk: fn(ZK[kk]) for kk in ZK}})
+    # this fiscal year so far, against the same months a year earlier (same Clerk report)
+    ytd = {c['district']: c for c in b['collections'] if c['fy'] == partial and c.get('prior_year_same_period')} if partial else {}
+    if ytd and len(ytd) == len(ZN):
+        now, before = sum(c['amount'] for c in ytd.values()), sum(c['prior_year_same_period'] for c in ytd.values())
+        thru = re.search(r'through (\w+)', next(iter(ytd.values()))['period']).group(1)
+        chg = lambda a_, b_: f'{(a_ - b_) / b_:+.0%}'
+        z_val = lambda z: money(ytd[z]['amount'])
+        z_sub = lambda z: f'{e(z)} zone, Oct to {thru}: {chg(ytd[z]["amount"], ytd[z]["prior_year_same_period"])} from a year earlier'
+        all_sub = f'Oct to {thru}, {chg(now, before)} from the same months a year earlier. FY2025 full year: {money(fy25)}'
+        ytd_kpi = (f'<div class="kpi"><span class="eyebrow">Collected, FY{partial} so far</span>'
+                   f'<span class="v"{zone(0, z_val, money(now))}>{money(now)}</span><span class="s"{zone(0, z_sub, all_sub)}>{all_sub}</span></div>')
+    else:
+        z_val = lambda z: money(col[2025][z])
+        z_sub = lambda z: f'{e(z)} zone'
+        ytd_kpi = (f'<div class="kpi"><span class="eyebrow">Collected, FY2025</span><span class="v"{zone(0, z_val, money(fy25))}>{money(fy25)}</span>'
+                   f'<span class="s"{zone(0, z_sub, "All three zones")}>All three zones</span></div>')
     return f'''<div class="page tax bt">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Tourist Tax</span><h1>The bed tax: what visitors pay and where it goes</h1>
     <p class="lede">Visitors who rent a hotel room, condo or house for six months or less pay a 5% tourist development tax on top of sales tax. It brings in tens of millions a year, almost all from Panama City Beach, and state law limits what it can be spent on.</p></div>{PDF}</header>
@@ -81,7 +97,7 @@ def bedtax_page(out_dir):
     <ul class="plain">{rates}</ul><p class="muted small">State law would allow a 6th cent. Bay County doesn't levy it; the County Commission declined to add it in 2023.</p></div>
     <svg class="ex-fig" id="tdcMap" viewBox="0 0 400 260" role="img" aria-label="Map of the three tourist tax zones"></svg></section>
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Collected, FY2025</span><span class="v"{zone(0, lambda z: money(col[2025][z]), money(fy25))}>{money(fy25)}</span><span class="s"{zone(0, lambda z: f"{e(z)} zone", "All three zones")}>All three zones</span></div>
+    {ytd_kpi}
     <div class="kpi"><span class="eyebrow"{zone(0, lambda z: f"Share of all collections", "From the PCB zone")}>From the PCB zone</span><span class="v"{zone(0, lambda z: f"{col[2025][z] / fy25:.0%}" if col[2025][z] / fy25 >= .01 else f"{col[2025][z] / fy25:.1%}", f"{pcb_share:.0%}")}>{pcb_share:.0%}</span><span class="s"{zone(0, lambda z: f"of {money(fy25)}, FY2025", money(col[2025]["Panama City Beach"]))}>{money(col[2025]["Panama City Beach"])}</span></div>
     <div class="kpi"{data_g("county", "pcb")}><span class="eyebrow">Visit PCB budget, FY2026</span><span class="v">{money(data["total26"])}</span><span class="s">Including money carried over</span></div>
     <div class="kpi"{data_g("county", "pcb")}><span class="eyebrow">Beach nourishment reserves</span><span class="v">{money(next((x["amount"] for x in b["spending"] if "reserves" in x["category"] and x["fy"] == 2026), None))}</span><span class="s">Budgeted reserves, FY2026 (Fund 127)</span></div>

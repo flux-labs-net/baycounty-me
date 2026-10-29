@@ -782,7 +782,35 @@
       "count": 232,
       "cleared": 162,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       11,
+       16,
+       16,
+       32,
+       31,
+       22,
+       23,
+       21,
+       26,
+       14,
+       13,
+       7
+      ],
+      "cleared_by_month": [
+       9,
+       9,
+       11,
+       26,
+       18,
+       14,
+       13,
+       14,
+       20,
+       12,
+       9,
+       7
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -790,7 +818,35 @@
       "count": 859,
       "cleared": 475,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       65,
+       63,
+       70,
+       61,
+       103,
+       66,
+       82,
+       77,
+       68,
+       64,
+       87,
+       53
+      ],
+      "cleared_by_month": [
+       26,
+       31,
+       36,
+       37,
+       74,
+       37,
+       44,
+       47,
+       31,
+       27,
+       57,
+       28
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -798,7 +854,35 @@
       "count": 2,
       "cleared": 2,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       2,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -806,7 +890,35 @@
       "count": 30,
       "cleared": 14,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       5,
+       2,
+       2,
+       4,
+       1,
+       5,
+       2,
+       5,
+       2,
+       1,
+       1
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       1,
+       3,
+       0,
+       1,
+       1,
+       0,
+       2,
+       4,
+       1,
+       1
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -814,7 +926,35 @@
       "count": 9,
       "cleared": 5,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       1,
+       1,
+       1,
+       2,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       2
+      ],
+      "cleared_by_month": [
+       1,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       2
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -822,7 +962,35 @@
       "count": 191,
       "cleared": 141,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       10,
+       10,
+       13,
+       27,
+       25,
+       20,
+       18,
+       19,
+       21,
+       12,
+       12,
+       4
+      ],
+      "cleared_by_month": [
+       8,
+       9,
+       10,
+       22,
+       15,
+       13,
+       12,
+       14,
+       18,
+       8,
+       8,
+       4
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -830,7 +998,35 @@
       "count": 123,
       "cleared": 66,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       14,
+       12,
+       6,
+       6,
+       15,
+       10,
+       5,
+       14,
+       7,
+       6,
+       15,
+       13
+      ],
+      "cleared_by_month": [
+       7,
+       7,
+       3,
+       3,
+       12,
+       5,
+       1,
+       6,
+       4,
+       6,
+       8,
+       4
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -838,7 +1034,35 @@
       "count": 734,
       "cleared": 407,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       51,
+       51,
+       64,
+       55,
+       88,
+       56,
+       76,
+       63,
+       60,
+       58,
+       72,
+       40
+      ],
+      "cleared_by_month": [
+       19,
+       24,
+       33,
+       34,
+       62,
+       32,
+       43,
+       41,
+       26,
+       21,
+       48,
+       24
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -846,7 +1070,35 @@
       "count": 1,
       "cleared": 1,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -854,7 +1106,35 @@
       "count": 1,
       "cleared": 1,
       "months": 12,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
      }
     },
     "2026": {
@@ -864,7 +1144,35 @@
       "count": 134,
       "cleared": 81,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       15,
+       10,
+       19,
+       16,
+       18,
+       12,
+       28,
+       11,
+       5,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       4,
+       9,
+       13,
+       7,
+       11,
+       12,
+       13,
+       9,
+       3,
+       null,
+       null,
+       null
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -872,7 +1180,35 @@
       "count": 612,
       "cleared": 374,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       76,
+       72,
+       63,
+       72,
+       90,
+       71,
+       83,
+       74,
+       11,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       51,
+       44,
+       39,
+       32,
+       49,
+       39,
+       61,
+       45,
+       14,
+       null,
+       null,
+       null
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -880,7 +1216,35 @@
       "count": 3,
       "cleared": 2,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       0,
+       2,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       1,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -888,7 +1252,35 @@
       "count": 29,
       "cleared": 16,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       3,
+       4,
+       5,
+       3,
+       3,
+       0,
+       8,
+       3,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       5,
+       4,
+       2,
+       1,
+       1,
+       0,
+       3,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -896,7 +1288,35 @@
       "count": 11,
       "cleared": 8,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       1,
+       2,
+       1,
+       1,
+       0,
+       1,
+       2,
+       2,
+       1,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       2,
+       1,
+       1,
+       0,
+       1,
+       1,
+       0,
+       1,
+       null,
+       null,
+       null
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -904,7 +1324,35 @@
       "count": 91,
       "cleared": 55,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       11,
+       4,
+       11,
+       11,
+       15,
+       11,
+       18,
+       6,
+       4,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       3,
+       2,
+       7,
+       4,
+       9,
+       10,
+       12,
+       6,
+       2,
+       null,
+       null,
+       null
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -912,7 +1360,35 @@
       "count": 72,
       "cleared": 34,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       2,
+       10,
+       12,
+       10,
+       10,
+       6,
+       12,
+       9,
+       1,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       2,
+       9,
+       5,
+       7,
+       0,
+       5,
+       4,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -920,7 +1396,35 @@
       "count": 538,
       "cleared": 339,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       74,
+       61,
+       51,
+       61,
+       80,
+       65,
+       71,
+       65,
+       10,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       49,
+       42,
+       30,
+       26,
+       42,
+       39,
+       56,
+       41,
+       14,
+       null,
+       null,
+       null
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -928,7 +1432,35 @@
       "count": 0,
       "cleared": 0,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -936,7 +1468,35 @@
       "count": 2,
       "cleared": 1,
       "months": 9,
-      "population": 106785
+      "population": 106785,
+      "by_month": [
+       0,
+       1,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      }
     }
    },
@@ -1689,7 +2249,35 @@
       "count": 117,
       "cleared": 94,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       9,
+       10,
+       14,
+       6,
+       17,
+       9,
+       8,
+       12,
+       6,
+       6,
+       7,
+       13
+      ],
+      "cleared_by_month": [
+       8,
+       7,
+       7,
+       5,
+       17,
+       8,
+       7,
+       8,
+       6,
+       4,
+       7,
+       10
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -1697,7 +2285,35 @@
       "count": 502,
       "cleared": 279,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       29,
+       35,
+       38,
+       34,
+       56,
+       47,
+       30,
+       48,
+       43,
+       44,
+       35,
+       63
+      ],
+      "cleared_by_month": [
+       18,
+       18,
+       18,
+       15,
+       32,
+       32,
+       25,
+       28,
+       19,
+       25,
+       17,
+       32
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -1705,7 +2321,35 @@
       "count": 4,
       "cleared": 4,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       1,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       1,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -1713,7 +2357,35 @@
       "count": 15,
       "cleared": 5,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       2,
+       0,
+       2,
+       0,
+       0,
+       1,
+       1,
+       0,
+       3,
+       2,
+       1,
+       3
+      ],
+      "cleared_by_month": [
+       1,
+       0,
+       0,
+       0,
+       2,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       1
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -1721,7 +2393,35 @@
       "count": 13,
       "cleared": 11,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       1,
+       0,
+       3,
+       1,
+       2,
+       1,
+       3,
+       0,
+       0,
+       0,
+       2
+      ],
+      "cleared_by_month": [
+       0,
+       1,
+       0,
+       2,
+       2,
+       2,
+       1,
+       2,
+       0,
+       0,
+       0,
+       1
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -1729,7 +2429,35 @@
       "count": 85,
       "cleared": 74,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       7,
+       8,
+       12,
+       3,
+       15,
+       5,
+       6,
+       9,
+       3,
+       4,
+       5,
+       8
+      ],
+      "cleared_by_month": [
+       7,
+       5,
+       7,
+       3,
+       12,
+       5,
+       6,
+       6,
+       6,
+       3,
+       6,
+       8
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -1737,7 +2465,35 @@
       "count": 76,
       "cleared": 40,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       2,
+       6,
+       8,
+       7,
+       6,
+       5,
+       5,
+       4,
+       5,
+       5,
+       10,
+       13
+      ],
+      "cleared_by_month": [
+       1,
+       5,
+       3,
+       3,
+       4,
+       4,
+       3,
+       3,
+       3,
+       2,
+       2,
+       7
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -1745,7 +2501,35 @@
       "count": 425,
       "cleared": 238,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       26,
+       29,
+       30,
+       27,
+       50,
+       42,
+       25,
+       44,
+       38,
+       39,
+       25,
+       50
+      ],
+      "cleared_by_month": [
+       16,
+       13,
+       15,
+       12,
+       28,
+       28,
+       22,
+       25,
+       16,
+       23,
+       15,
+       25
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -1753,7 +2537,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -1761,7 +2573,35 @@
       "count": 1,
       "cleared": 1,
       "months": 12,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      }
     },
     "2026": {
@@ -1771,7 +2611,35 @@
       "count": 121,
       "cleared": 97,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       15,
+       14,
+       7,
+       14,
+       18,
+       14,
+       10,
+       18,
+       10,
+       1,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       13,
+       12,
+       7,
+       6,
+       16,
+       14,
+       10,
+       11,
+       7,
+       1,
+       null,
+       null
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -1779,7 +2647,35 @@
       "count": 324,
       "cleared": 202,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       53,
+       24,
+       34,
+       32,
+       44,
+       32,
+       34,
+       30,
+       38,
+       3,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       33,
+       15,
+       20,
+       19,
+       26,
+       22,
+       27,
+       18,
+       20,
+       2,
+       null,
+       null
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -1787,7 +2683,35 @@
       "count": 4,
       "cleared": 3,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2,
+       1,
+       0,
+       1,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       2,
+       1,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -1795,7 +2719,35 @@
       "count": 13,
       "cleared": 6,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       1,
+       1,
+       4,
+       3,
+       0,
+       1,
+       1,
+       2,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       1,
+       0,
+       2,
+       1,
+       0,
+       1,
+       1,
+       0,
+       null,
+       null
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -1803,7 +2755,35 @@
       "count": 5,
       "cleared": 6,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       1,
+       0,
+       0,
+       1,
+       1,
+       2,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       0,
+       1,
+       0,
+       2,
+       1,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -1811,7 +2791,35 @@
       "count": 99,
       "cleared": 82,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       14,
+       13,
+       6,
+       9,
+       14,
+       10,
+       8,
+       17,
+       7,
+       1,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       11,
+       12,
+       6,
+       5,
+       14,
+       9,
+       8,
+       10,
+       6,
+       1,
+       null,
+       null
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -1819,7 +2827,35 @@
       "count": 56,
       "cleared": 32,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       10,
+       6,
+       6,
+       4,
+       9,
+       4,
+       7,
+       3,
+       6,
+       1,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       5,
+       5,
+       2,
+       5,
+       3,
+       2,
+       7,
+       1,
+       2,
+       0,
+       null,
+       null
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -1827,7 +2863,35 @@
       "count": 267,
       "cleared": 169,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       43,
+       18,
+       28,
+       28,
+       34,
+       28,
+       27,
+       27,
+       32,
+       2,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       28,
+       10,
+       18,
+       14,
+       22,
+       20,
+       20,
+       17,
+       18,
+       2,
+       null,
+       null
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -1835,7 +2899,35 @@
       "count": 0,
       "cleared": 0,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -1843,7 +2935,35 @@
       "count": 1,
       "cleared": 1,
       "months": 10,
-      "population": 38146
+      "population": 38146,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      }
     }
    },
@@ -3003,7 +4123,35 @@
       "count": 16,
       "cleared": 9,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       2,
+       1,
+       3,
+       0,
+       3,
+       2,
+       0,
+       1,
+       3,
+       1,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       2,
+       1,
+       0,
+       0,
+       3,
+       0,
+       0,
+       1,
+       2,
+       0,
+       0,
+       0
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -3011,7 +4159,35 @@
       "count": 158,
       "cleared": 95,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       12,
+       16,
+       17,
+       8,
+       20,
+       15,
+       12,
+       6,
+       11,
+       15,
+       12,
+       14
+      ],
+      "cleared_by_month": [
+       7,
+       9,
+       8,
+       3,
+       13,
+       8,
+       13,
+       5,
+       6,
+       11,
+       6,
+       6
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -3019,7 +4195,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -3027,7 +4231,35 @@
       "count": 5,
       "cleared": 1,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       1,
+       0,
+       0,
+       0,
+       2,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -3035,7 +4267,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -3043,7 +4303,35 @@
       "count": 11,
       "cleared": 8,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       2,
+       0,
+       3,
+       0,
+       3,
+       0,
+       0,
+       1,
+       2,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       0,
+       0,
+       3,
+       0,
+       0,
+       1,
+       2,
+       0,
+       0,
+       0
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -3051,7 +4339,35 @@
       "count": 18,
       "cleared": 6,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       1,
+       2,
+       3,
+       2,
+       4,
+       1,
+       1,
+       1,
+       1,
+       2,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       2,
+       1,
+       0,
+       1,
+       0,
+       1,
+       0,
+       0,
+       1,
+       0,
+       0
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -3059,7 +4375,35 @@
       "count": 140,
       "cleared": 89,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       11,
+       14,
+       14,
+       6,
+       16,
+       14,
+       11,
+       5,
+       10,
+       13,
+       12,
+       14
+      ],
+      "cleared_by_month": [
+       7,
+       7,
+       7,
+       3,
+       12,
+       8,
+       12,
+       5,
+       6,
+       10,
+       6,
+       6
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -3067,7 +4411,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -3075,7 +4447,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      }
     },
     "2026": {
@@ -3085,7 +4485,35 @@
       "count": 11,
       "cleared": 10,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       3,
+       2,
+       2,
+       3,
+       1,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       2,
+       2,
+       4,
+       1,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -3093,7 +4521,35 @@
       "count": 48,
       "cleared": 36,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       11,
+       8,
+       5,
+       14,
+       7,
+       3,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       9,
+       8,
+       6,
+       6,
+       4,
+       3,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -3101,7 +4557,35 @@
       "count": 0,
       "cleared": 0,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -3109,7 +4593,35 @@
       "count": 1,
       "cleared": 2,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -3117,7 +4629,35 @@
       "count": 1,
       "cleared": 1,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -3125,7 +4665,35 @@
       "count": 9,
       "cleared": 7,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       3,
+       1,
+       2,
+       2,
+       1,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       1,
+       1,
+       3,
+       1,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -3133,7 +4701,35 @@
       "count": 8,
       "cleared": 6,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       2,
+       1,
+       1,
+       3,
+       1,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       1,
+       1,
+       3,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -3141,7 +4737,35 @@
       "count": 40,
       "cleared": 30,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       9,
+       7,
+       4,
+       11,
+       6,
+       3,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       8,
+       7,
+       5,
+       3,
+       4,
+       3,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -3149,7 +4773,35 @@
       "count": 0,
       "cleared": 0,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -3157,7 +4809,35 @@
       "count": 0,
       "cleared": 0,
       "months": 6,
-      "population": 22866
+      "population": 22866,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null,
+       null,
+       null,
+       null
+      ]
      }
     }
    },
@@ -3886,7 +5566,35 @@
       "count": 39,
       "cleared": 25,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       3,
+       6,
+       5,
+       1,
+       4,
+       2,
+       4,
+       3,
+       4,
+       0,
+       6,
+       1
+      ],
+      "cleared_by_month": [
+       2,
+       4,
+       3,
+       1,
+       4,
+       1,
+       3,
+       1,
+       4,
+       0,
+       2,
+       0
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -3894,7 +5602,35 @@
       "count": 112,
       "cleared": 50,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       3,
+       10,
+       11,
+       9,
+       11,
+       12,
+       8,
+       9,
+       8,
+       16,
+       5,
+       10
+      ],
+      "cleared_by_month": [
+       2,
+       3,
+       4,
+       1,
+       7,
+       7,
+       3,
+       6,
+       6,
+       7,
+       1,
+       3
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -3902,7 +5638,35 @@
       "count": 3,
       "cleared": 2,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       2,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -3910,7 +5674,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -3918,7 +5710,35 @@
       "count": 3,
       "cleared": 2,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       1,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -3926,7 +5746,35 @@
       "count": 33,
       "cleared": 21,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       3,
+       6,
+       4,
+       0,
+       3,
+       2,
+       4,
+       3,
+       4,
+       0,
+       3,
+       1
+      ],
+      "cleared_by_month": [
+       2,
+       4,
+       3,
+       0,
+       2,
+       1,
+       3,
+       1,
+       4,
+       0,
+       1,
+       0
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -3934,7 +5782,35 @@
       "count": 23,
       "cleared": 16,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       2,
+       0,
+       5,
+       1,
+       0,
+       1,
+       3,
+       7,
+       2,
+       2
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       1,
+       0,
+       2,
+       2,
+       0,
+       1,
+       3,
+       4,
+       1,
+       2
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -3942,7 +5818,35 @@
       "count": 89,
       "cleared": 34,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       3,
+       10,
+       9,
+       9,
+       6,
+       11,
+       8,
+       8,
+       5,
+       9,
+       3,
+       8
+      ],
+      "cleared_by_month": [
+       2,
+       3,
+       3,
+       1,
+       5,
+       5,
+       3,
+       5,
+       3,
+       3,
+       0,
+       1
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -3950,7 +5854,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -3958,7 +5890,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      }
     },
     "2026": {
@@ -3968,7 +5928,35 @@
       "count": 35,
       "cleared": 21,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       4,
+       3,
+       4,
+       4,
+       2,
+       2,
+       6,
+       6,
+       4,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       3,
+       0,
+       4,
+       2,
+       2,
+       2,
+       3,
+       2,
+       3,
+       null,
+       null,
+       null
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -3976,7 +5964,35 @@
       "count": 97,
       "cleared": 40,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       11,
+       6,
+       15,
+       10,
+       13,
+       12,
+       10,
+       14,
+       6,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       1,
+       5,
+       5,
+       5,
+       4,
+       7,
+       8,
+       3,
+       null,
+       null,
+       null
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -3984,7 +6000,35 @@
       "count": 2,
       "cleared": 2,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       1,
+       0,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       1,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -3992,7 +6036,35 @@
       "count": 2,
       "cleared": 1,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -4000,7 +6072,35 @@
       "count": 7,
       "cleared": 5,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       2,
+       0,
+       1,
+       1,
+       0,
+       0,
+       2,
+       1,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       1,
+       1,
+       0,
+       0,
+       1,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -4008,7 +6108,35 @@
       "count": 24,
       "cleared": 13,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       2,
+       2,
+       3,
+       2,
+       2,
+       2,
+       3,
+       4,
+       4,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       0,
+       2,
+       0,
+       2,
+       2,
+       1,
+       2,
+       3,
+       null,
+       null,
+       null
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -4016,7 +6144,35 @@
       "count": 29,
       "cleared": 12,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       2,
+       1,
+       4,
+       4,
+       1,
+       4,
+       2,
+       7,
+       4,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       3,
+       1,
+       0,
+       1,
+       1,
+       4,
+       2,
+       null,
+       null,
+       null
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -4024,7 +6180,35 @@
       "count": 68,
       "cleared": 28,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       9,
+       5,
+       11,
+       6,
+       12,
+       8,
+       8,
+       7,
+       2,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       1,
+       2,
+       4,
+       5,
+       3,
+       6,
+       4,
+       1,
+       null,
+       null,
+       null
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -4032,7 +6216,35 @@
       "count": 0,
       "cleared": 0,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -4040,7 +6252,35 @@
       "count": 0,
       "cleared": 0,
       "months": 9,
-      "population": 8614
+      "population": 8614,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null,
+       null
+      ]
      }
     }
    },
@@ -4769,7 +7009,35 @@
       "count": 8,
       "cleared": 5,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       2,
+       0,
+       0,
+       2,
+       0,
+       2,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       2,
+       0,
+       1,
+       1,
+       0,
+       0
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -4777,7 +7045,35 @@
       "count": 62,
       "cleared": 22,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       5,
+       5,
+       6,
+       2,
+       9,
+       4,
+       4,
+       2,
+       4,
+       4,
+       11,
+       6
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       0,
+       0,
+       8,
+       1,
+       1,
+       1,
+       3,
+       1,
+       4,
+       1
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -4785,7 +7081,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -4793,7 +7117,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -4801,7 +7153,35 @@
       "count": 1,
       "cleared": 0,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -4809,7 +7189,35 @@
       "count": 7,
       "cleared": 5,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       1,
+       0,
+       0,
+       2,
+       0,
+       2,
+       0,
+       1,
+       1,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       2,
+       0,
+       1,
+       1,
+       0,
+       0
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -4817,7 +7225,35 @@
       "count": 3,
       "cleared": 3,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       2,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       2,
+       1,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -4825,7 +7261,35 @@
       "count": 58,
       "cleared": 18,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       5,
+       5,
+       6,
+       2,
+       7,
+       3,
+       4,
+       2,
+       3,
+       4,
+       11,
+       6
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       0,
+       0,
+       6,
+       0,
+       1,
+       1,
+       2,
+       1,
+       4,
+       1
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -4833,7 +7297,35 @@
       "count": 0,
       "cleared": 0,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -4841,7 +7333,35 @@
       "count": 1,
       "cleared": 1,
       "months": 12,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0
+      ]
      }
     },
     "2026": {
@@ -4851,7 +7371,35 @@
       "count": 8,
       "cleared": 8,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       2,
+       0,
+       0,
+       1,
+       2,
+       0,
+       2,
+       1,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       0,
+       1,
+       2,
+       0,
+       2,
+       1,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "P": {
       "label": "Property crime",
@@ -4859,7 +7407,35 @@
       "count": 42,
       "cleared": 10,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       4,
+       1,
+       4,
+       3,
+       2,
+       4,
+       9,
+       10,
+       4,
+       1,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       0,
+       1,
+       1,
+       1,
+       0,
+       3,
+       1,
+       2,
+       0,
+       null,
+       null
+      ]
      },
      "HOM": {
       "label": "Murder",
@@ -4867,7 +7443,35 @@
       "count": 0,
       "cleared": 0,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "RPE": {
       "label": "Rape",
@@ -4875,7 +7479,35 @@
       "count": 0,
       "cleared": 0,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "ROB": {
       "label": "Robbery",
@@ -4883,7 +7515,35 @@
       "count": 0,
       "cleared": 0,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "ASS": {
       "label": "Aggravated assault",
@@ -4891,7 +7551,35 @@
       "count": 8,
       "cleared": 8,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       2,
+       0,
+       0,
+       1,
+       2,
+       0,
+       2,
+       1,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       2,
+       0,
+       0,
+       1,
+       2,
+       0,
+       2,
+       1,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "BUR": {
       "label": "Burglary",
@@ -4899,7 +7587,35 @@
       "count": 1,
       "cleared": 0,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       1,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "LAR": {
       "label": "Larceny-theft",
@@ -4907,7 +7623,35 @@
       "count": 41,
       "cleared": 10,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       4,
+       1,
+       4,
+       3,
+       2,
+       4,
+       8,
+       10,
+       4,
+       1,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       1,
+       0,
+       1,
+       1,
+       1,
+       0,
+       3,
+       1,
+       2,
+       0,
+       null,
+       null
+      ]
      },
      "MVT": {
       "label": "Motor vehicle theft",
@@ -4915,7 +7659,35 @@
       "count": 0,
       "cleared": 0,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      },
      "ARS": {
       "label": "Arson",
@@ -4923,7 +7695,35 @@
       "count": 0,
       "cleared": 0,
       "months": 10,
-      "population": 5036
+      "population": 5036,
+      "by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ],
+      "cleared_by_month": [
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       0,
+       null,
+       null
+      ]
      }
     }
    },
