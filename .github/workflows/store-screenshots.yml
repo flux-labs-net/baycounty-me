@@ -53,9 +53,9 @@ jobs:
           name: store-ios
           path: ios/shots
 
-  android:
+  android-apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -66,6 +66,21 @@ jobs:
       - name: Debug APK
         working-directory: android
         run: ./gradlew :app:assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: store-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+  # A separate machine for the emulator, like android.yml: it doesn't boot next to the Gradle daemons.
+  android:
+    needs: android-apk
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: store-apk
       - name: Start the demo data server
         run: |
           nohup python3 store/demo_server.py --port 8765 > demo-server.log 2>&1 &
@@ -84,7 +99,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           # The emulator reaches this machine at 10.0.2.2.
-          script: API_BASE=http://10.0.2.2:8765 SHOTS="home tab:living restaurants restaurant beaches events tax tab:meetings" DARK_SHOTS="" bash android/scripts/emulator_shots.sh android/app/build/outputs/apk/debug/app-debug.apk store-shots
+          script: API_BASE=http://10.0.2.2:8765 SHOTS="home tab:living restaurants restaurant beaches events tax tab:meetings" DARK_SHOTS="" bash android/scripts/emulator_shots.sh app-debug.apk store-shots
       - run: cat demo-server.log | tail -80
         if: always()
       - uses: actions/upload-artifact@v4
