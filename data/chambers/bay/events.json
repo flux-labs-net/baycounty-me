@@ -1,7 +1,7 @@
 {
- "as_of": "2026-10-28",
+ "as_of": "2026-10-29",
  "fetched": {
-  "pcb-chamber": "2026-10-28T22:28:52+00:00",
+  "pcb-chamber": "2026-10-29T11:28:37+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27622",
-   "title": "Heroes Breakfast",
-   "starts": "2026-10-28T08:00:00",
-   "ends": "2026-10-28T10:00:00",
-   "all_day": false,
-   "venue": "PeoplesSouth Bank",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/heroes-breakfast/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27606",

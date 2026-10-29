@@ -1,6 +1,6 @@
 {
  "_about": "Written by data/emergency/fetch_emergency.js from Bay County's Emergency Shelters page. lat/lng from the county's address points; evacuation_zone from its zone map.",
- "checked": "2026-10-28",
+ "checked": "2026-10-29",
  "source_url": "https://www.baycountyfl.gov/766/Emergency-Shelters",
  "shelters": [
   {

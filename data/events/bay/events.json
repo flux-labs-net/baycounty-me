@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-10-28",
- "fetched": "2026-10-28T17:28:53-0500",
+ "as_of": "2026-10-29",
+ "fetched": "2026-10-29T06:28:37-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -51,74 +51,6 @@
  ],
  "errors": {},
  "events": [
-  {
-   "event_id": "pcb-chamber:27622",
-   "source_id": "pcb-chamber",
-   "source": "Panama City Beach Chamber",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Heroes Breakfast",
-   "starts": "2026-10-28T08:00:00",
-   "ends": "2026-10-28T10:00:00",
-   "all_day": false,
-   "venue": "PeoplesSouth Bank",
-   "category": "Community",
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/heroes-breakfast/",
-   "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false
-  },
-  {
-   "event_id": "library:23188:2026-10-28",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Teen Game Night (Ages 13 – 18)",
-   "starts": "2026-10-28T16:30:00",
-   "ends": "2026-10-28T18:30:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/teen-game-night-ages-13-18-2/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
-   "event_id": "lynn-haven:1317:2026-10-28",
-   "source_id": "lynn-haven",
-   "source": "City of Lynn Haven",
-   "gov": "lh",
-   "town": "Lynn Haven",
-   "title": "Charter Review Meeting",
-   "starts": "2026-10-28T17:30:00",
-   "ends": "2026-10-28T23:59:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1317",
-   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:6707:2026-10-28",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "PC Art Club",
-   "starts": "2026-10-28T18:00:00",
-   "ends": "2026-10-28T21:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6707",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
   {
    "event_id": "panama-city:6517:2026-10-29",
    "source_id": "panama-city",
@@ -460,23 +392,6 @@
    "recurring": true
   },
   {
-   "event_id": "panama-city:7568:2026-11-02",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "VOICES - Veteran Outreach",
-   "starts": "2026-11-02T17:00:00",
-   "ends": "2026-11-02T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7568",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
    "event_id": "panama-city:7510:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
@@ -490,6 +405,23 @@
    "category": "Community",
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7510",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7568:2026-11-02",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "VOICES - Veteran Outreach",
+   "starts": "2026-11-02T17:00:00",
+   "ends": "2026-11-02T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7568",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": false
   },
@@ -763,7 +695,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6708",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "panama-city:6518:2026-11-05",
@@ -882,7 +814,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7723",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:23550:2026-11-06",
@@ -1582,6 +1514,23 @@
    "recurring": false
   },
   {
+   "event_id": "panama-city:6519:2026-11-12",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "PC Senior Living",
+   "starts": "2026-11-12T09:00:00",
+   "ends": "2026-11-12T13:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6519",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:23737:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1633,6 +1582,23 @@
    "recurring": true
   },
   {
+   "event_id": "panama-city:7151:2026-11-12",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Help Me Grow - Playgroups",
+   "starts": "2026-11-12T10:30:00",
+   "ends": "2026-11-12T11:30:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7151",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "library:23231:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1665,6 +1631,57 @@
    "url": "https://www.nwrls.com/event/library-advisory-council-meeting-6/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": false
+  },
+  {
+   "event_id": "panama-city:7432:2026-11-12",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Dream Builders at MLK",
+   "starts": "2026-11-12T15:00:00",
+   "ends": "2026-11-12T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7432",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7534:2026-11-12",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Sunset Yoga",
+   "starts": "2026-11-12T18:00:00",
+   "ends": "2026-11-12T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7534",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7724:2026-11-12",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Sandy Steppers - Dance Class",
+   "starts": "2026-11-12T18:30:00",
+   "ends": "2026-11-12T22:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7724",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:26491",

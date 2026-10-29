@@ -8551,7 +8551,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 59,
+   "rows": 58,
    "columns": [
     {
      "name": "place_id",
@@ -8653,7 +8653,39 @@
     },
     {
      "name": "venue",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Aaron Bessant Park",
+      "Anchorage Children’s Home",
+      "Bay Point Golf Club",
+      "Captain Anderson’s Event Center",
+      "Dave & Buster’s",
+      "Dolly Parton’s Pirates Voyage Dinner & Show",
+      "Edgewater Beach & Golf Resort",
+      "Embassy Suites Panama City Beach, VUE55 (Rooftop)",
+      "Frank Brown Park",
+      "Frank Brown Park Recreation Center",
+      "Gulf Coast State College",
+      "Gulf Coast State College, Student Union East",
+      "Hammerhead Fred’s",
+      "Historic St. Andrews",
+      "LaCo",
+      "McGuire’s Irish Pub",
+      "McKenize Park",
+      "National Peanut Festival",
+      "PCB Wheel",
+      "Panama City Beach Senior Center",
+      "Panama City Marina",
+      "Panama Country Club",
+      "Pier Park",
+      "St. Andrews Baptist Church",
+      "Start/Finish Line located at Pier Park",
+      "SweetBay Community",
+      "The Barn at The Wicked Wheel",
+      "The Sapp House",
+      "Webinar",
+      "ZooWorld"
+     ]
     },
     {
      "name": "city",
@@ -8732,7 +8764,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 186,
+   "rows": 187,
    "columns": [
     {
      "name": "place_id",
@@ -9427,7 +9459,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-10-28T15:35:00+00:00"
+      "2026-10-29T07:53:00+00:00"
      ]
     },
     {
@@ -9435,10 +9467,10 @@
      "type": "string",
      "values": [
       "Friday",
-      "Rest Of Today",
+      "Monday",
       "Saturday",
       "Sunday",
-      "Thursday"
+      "Today"
      ]
     },
     {
@@ -9475,7 +9507,8 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "1 foot or less"
+      "1 foot or less",
+      "around 1 foot"
      ]
     },
     {
@@ -9496,7 +9529,7 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly sunny",
+      "Partly sunny",
       "Sunny"
      ]
     },
@@ -9504,7 +9537,6 @@
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "Around 80",
       "In the lower 80s"
      ]
     },
@@ -9512,24 +9544,23 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "Northeast winds 15 to 20 mph",
-      "Northeast winds around 15 mph"
+      "Northeast winds 10 to 15 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:53 AM",
-      "7:54 AM"
+      "7:54 AM",
+      "7:55 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "6:59 PM",
-      "7:00 PM"
+      "6:58 PM",
+      "6:59 PM"
      ]
     },
     {
@@ -9537,13 +9568,13 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Mostly cloudy. Showers likely and a chance of thunderstorms. Highs in the upper 70s. East winds around 20 mph.",
-      "High rip current risk*. Partly sunny. Highs in the upper 70s. East winds around 15 mph.",
+      "High rip current risk*. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph.",
+      "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 15 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Surf height 1 foot or less. Mostly sunny. Highs around 80. East winds around 15 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. A slight chance of showers. Highs in the upper 70s. East winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Northeasterly offshore winds through Friday should maintain a moderate rip current risk. An onshore component has developed, so a high risk upgrade cannot be ruled out the next couple of days. After contacting local beach officials, Franklin County beaches are now under a Rip Current Statement for a high risk for rip currents. Looking ahead to this weekend, a southeasterly component of swell develops, which may lead to a high risk across much of the gulf beaches.",
+      "Northeasterly offshore winds through Friday will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9567,7 +9598,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/fd163354-6a2e-4e1a-af1b-ef3134c08607",
+      "https://api.weather.gov/products/9e6d46da-df7a-48bb-bda7-4b8df3125aee",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -11867,7 +11898,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-28"
+      "2026-10-29"
      ]
     },
     {
@@ -12257,7 +12288,7 @@
      "values": [
       "2026-10-27T20:41:53.613Z",
       "2026-10-28T14:45:01.081378+00:00",
-      "2026-10-28T22:29:30.597Z"
+      "2026-10-29T11:29:50.403Z"
      ]
     },
     {
@@ -13294,7 +13325,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 65,
+   "rows": 67,
    "columns": [
     {
      "name": "place_id",
@@ -13332,7 +13363,8 @@
       "2026-10-25",
       "2026-10-26",
       "2026-10-27",
-      "2026-10-28"
+      "2026-10-28",
+      "2026-10-29"
      ]
     },
     {
@@ -13467,14 +13499,16 @@
      "type": "string",
      "values": [
       "pn:592cfc86f14e",
-      "pn:9c26a1d21bf3"
+      "pn:9c26a1d21bf3",
+      "pn:e13e7f99f672"
      ]
     },
     {
      "name": "first_posted",
      "type": "string",
      "values": [
-      "2026-10-08"
+      "2026-10-08",
+      "2026-10-19"
      ]
     },
     {
@@ -13575,7 +13609,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 104,
+   "rows": 118,
    "columns": [
     {
      "name": "place_id",
@@ -13645,6 +13679,7 @@
       "Licensed",
       "Part time",
       "Part-Time",
+      "Safety officers",
       "Substitutes",
       "Support"
      ]
@@ -13669,7 +13704,10 @@
      "name": "posted",
      "type": "string",
      "values": [
+      "2026-06-13",
+      "2026-06-18",
       "2026-07-13",
+      "2026-07-17",
       "2026-08-03",
       "2026-08-06",
       "2026-08-10",
@@ -13691,7 +13729,6 @@
       "2026-10-17",
       "2026-10-19",
       "2026-10-20",
-      "2026-10-21",
       "2026-10-22",
       "2026-10-23",
       "2026-10-26",
@@ -13707,6 +13744,7 @@
       "2026-10-30",
       "2026-11-02",
       "2026-11-03",
+      "2026-11-04",
       "2026-11-06",
       "2027-04-30"
      ]
@@ -13724,7 +13762,8 @@
      "type": "string",
      "values": [
       "2026-10-27",
-      "2026-10-28"
+      "2026-10-28",
+      "2026-10-29"
      ]
     },
     {
@@ -13818,7 +13857,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-28"
+      "2026-10-29"
      ]
     }
    ],
@@ -14919,7 +14958,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17183,
+   "rows": 17190,
    "columns": [
     {
      "name": "place_id",
@@ -15190,7 +15229,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 26,
+   "rows": 23,
    "columns": [
     {
      "name": "place_id",
@@ -15243,19 +15282,16 @@
       "Dream Builders at MLK",
       "Escape the Library (Ages 13+) (Registration Required)",
       "Fall Festival",
-      "Heroes Breakfast",
       "Line Dancing",
       "Marshall Brothers",
       "Mexico Beach: 3rd LDC Workshop",
       "Mexico Beach: Special Meeting and 4th LDC Workshop",
-      "PC Art Club",
       "PC Senior Living",
       "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
       "Sail Into School (Ages 3 – 5)",
       "Sansom Equipment Company, Inc.",
       "Sea Needles",
       "Sunset Yoga",
-      "Teen Game Night (Ages 13 – 18)",
       "Ten-8 Fire & Safety, LLC",
       "Toys for Kids Halloween Bash 2026",
       "Young Professionals Coffee, Conversations & Headshots",
@@ -15277,7 +15313,6 @@
      "values": [
       "2026-10-20",
       "2026-10-22",
-      "2026-10-28",
       "2026-10-29",
       "2026-10-30",
       "2026-10-31"
@@ -15287,9 +15322,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-10-28T08:00:00",
-      "2026-10-28T16:30:00",
-      "2026-10-28T18:00:00",
       "2026-10-29T09:00:00",
       "2026-10-29T09:00:00-05:00",
       "2026-10-29T10:00:00",
@@ -15313,9 +15345,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-10-28T10:00:00",
-      "2026-10-28T18:30:00",
-      "2026-10-28T21:00:00",
       "2026-10-29T10:30:00",
       "2026-10-29T11:00:00",
       "2026-10-29T13:00:00",
@@ -15385,7 +15414,6 @@
       "Hammerhead Fred’s",
       "Panama City Beach Public Library",
       "Parker Park",
-      "PeoplesSouth Bank",
       "The Sapp House",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "ZooWorld"
@@ -16326,7 +16354,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-10-28"
+      "2026-10-29"
      ]
     },
     {
