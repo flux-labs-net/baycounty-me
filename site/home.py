@@ -134,7 +134,8 @@ def _doors():
     from site_menu import menu, links
     from ui import ico
     out = []
-    for m in menu():
+    # the election-season card goes last: it's shorter than the others (no "All N" footer)
+    for m in sorted(menu(), key=lambda m: bool(m.get('season'))):
         if m.get('footer'):
             continue
         ls = links(m)
@@ -143,8 +144,8 @@ def _doors():
         icon, tone = DOOR_LOOK.get(m['label'], ('grid', 'blue'))
         li = lambda l: f'<li><a href="{l["href"]}">{html.escape(l["label"])}</a></li>'
         more = (f'<details class="h-more"><summary>All {len(ls)}</summary><ul>{"".join(li(l) for l in rest)}</ul></details>' if rest else '')
-        out.append(f'<div class="h-door{" season" if m.get("season") else ""}">{ico(icon, tone)}<h3>{html.escape(m["label"])}</h3>'
-                   f'<p>{html.escape(m["question"])}</p><ul>{"".join(li(l) for l in picks)}</ul>{more}</div>')
+        out.append(f'<div class="h-door{" season" if m.get("season") else ""}"><div class="h-door-hd">{ico(icon, tone)}'
+                   f'<div><h3>{html.escape(m["label"])}</h3><p>{html.escape(m["question"])}</p></div></div><ul>{"".join(li(l) for l in picks)}</ul>{more}</div>')
     return ''.join(out)
 
 
