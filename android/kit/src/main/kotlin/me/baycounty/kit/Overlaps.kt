@@ -31,7 +31,7 @@ object Overlaps {
         val (contested, won) = races(rows["campaign-results"].orEmpty())
         return Headline(dv.mapNotNull { it.string("vote_id") }.toSet().size, dv.map { "${it.string("member_id")}|${it.string("company_id")}" }.toSet().size,
             vm.mapNotNull { it.string("vote_id") }.toSet().size, vm.mapNotNull { it.string("entity_id") }.toSet().size, contested, won,
-            ep.count { it.bool("gave_to_officials_here") == true }, ep.size)
+            ep.count { (it.number("gave_to_officials_here") ?: 0.0) > 0 }, ep.size)
     }
 
     private fun top(d: Map<String, Set<String>>, n: Int = 3) = d.entries.sortedByDescending { it.value.size }.take(n).map { it.key to it.value.size }
@@ -53,7 +53,7 @@ object Overlaps {
         for (r in bt) r.string("notice_id")?.let { if (it !in notices) notices[it] = r.string("notice_title") ?: r.string("reference") ?: "" }
         val groups = so.groupBy { it.string("group_id") ?: "" }.values.sortedByDescending { g -> g.mapNotNull { it.number("paid_by_this_government") }.sum() }
         val chamberWeight = { r: Row -> (r.number("organization_paid_by_governments") ?: 0.0) + (r.number("organization_gave_to_campaigns") ?: 0.0) }
-        val gave = ep.filter { it.bool("gave_to_officials_here") == true }.sortedByDescending { it.number("amount") ?: 0.0 }
+        val gave = ep.filter { (it.number("gave_to_officials_here") ?: 0.0) > 0 }.sortedByDescending { it.number("amount") ?: 0.0 }
         return listOf(
             Card("Votes naming a member's donor", "${Format.number(h.donorVotes)} votes · ${h.pairs} official and company pairs",
                 top(pairs).map { "${it.first}: ${it.second} votes" }, "donor-votes", "link"),

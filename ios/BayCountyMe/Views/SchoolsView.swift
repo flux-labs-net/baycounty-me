@@ -43,7 +43,7 @@ struct SchoolsView: View {
                 CardList {
                     RouteRow(route: .myAddress, title: "Which schools serve your address", detail: "Your zoned elementary, middle and high school", symbol: "mappin.and.ellipse")
                 }
-                mapSection
+                mapSection.id("chart")
                 calendarSection
                 schoolsSection
                 gradesSection

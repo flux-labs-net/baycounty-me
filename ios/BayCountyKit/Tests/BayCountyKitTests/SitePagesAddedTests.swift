@@ -68,6 +68,7 @@ final class SitePagesAddedTests: XCTestCase {
         let h = Overlaps.headline(all)
         XCTAssertEqual(h.donorVotes, 318); XCTAssertEqual(h.pairs, 116)
         XCTAssertEqual(h.contested, 68); XCTAssertEqual(h.topWon, 51)
+        XCTAssertEqual(h.emergencyFromDonors, 6); XCTAssertEqual(h.emergency, 12)
         let cards = Overlaps.cards(all)
         XCTAssertEqual(cards.count, 8)
         XCTAssertTrue(cards.allSatisfy { Overlaps.datasets.contains($0.dataset) })

@@ -29,6 +29,7 @@ struct OverlapsView: View {
                 PageSection(title: "Every overlap", symbol: "square.grid.2x2", tone: .teal, caption: "The top few of each; tap for the full list") {
                     VStack(spacing: 10) { ForEach(Overlaps.cards(all)) { card($0) } }
                 }
+                .id("chart")
                 liveSection
             }
             Text("Names in votes and agendas are matched to profiles by name. Gifts come from campaign reports filed with the Supervisor of Elections since 2016. Officials, candidates and people who run a registered business are named; individual donors never are.")

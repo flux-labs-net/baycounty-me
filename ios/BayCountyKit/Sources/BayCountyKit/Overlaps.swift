@@ -40,7 +40,7 @@ public enum Overlaps {
         return Headline(donorVotes: Set(dv.compactMap { $0.string("vote_id") }).count, pairs: pairs,
                         mentionVotes: Set(vm.compactMap { $0.string("vote_id") }).count, mentionEntities: Set(vm.compactMap { $0.string("entity_id") }).count,
                         contested: r.contested, topWon: r.topWon,
-                        emergencyFromDonors: ep.filter { $0.bool("gave_to_officials_here") == true }.count, emergency: ep.count)
+                        emergencyFromDonors: ep.filter { ($0.number("gave_to_officials_here") ?? 0) > 0 }.count, emergency: ep.count)
     }
 
     /// Keys of a dictionary of sets, biggest set first.
@@ -64,7 +64,7 @@ public enum Overlaps {
         for r in so { groups[r.string("group_id") ?? "", default: []].append(r) }
         let topGroups = groups.values.sorted { a, b in a.compactMap { $0.number("paid_by_this_government") }.reduce(0, +) > b.compactMap { $0.number("paid_by_this_government") }.reduce(0, +) }
         let chamberWeight = { (r: Row) in (r.number("organization_paid_by_governments") ?? 0) + (r.number("organization_gave_to_campaigns") ?? 0) }
-        let gave = ep.filter { $0.bool("gave_to_officials_here") == true }.sorted { ($0.number("amount") ?? 0) > ($1.number("amount") ?? 0) }
+        let gave = ep.filter { ($0.number("gave_to_officials_here") ?? 0) > 0 }.sorted { ($0.number("amount") ?? 0) > ($1.number("amount") ?? 0) }
 
         return [
             Card(title: "Votes naming a member's donor", stat: "\(Format.number(Double(h.donorVotes))) votes · \(h.pairs) official and company pairs",

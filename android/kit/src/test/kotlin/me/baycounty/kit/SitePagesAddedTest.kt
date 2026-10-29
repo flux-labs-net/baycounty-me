@@ -57,6 +57,7 @@ class SitePagesAddedTest {
         val all = Overlaps.datasets.associateWith { Repo.rows(it) }
         val h = Overlaps.headline(all)
         assertEquals(318, h.donorVotes); assertEquals(116, h.pairs); assertEquals(68, h.contested); assertEquals(51, h.topWon)
+        assertEquals(6, h.emergencyFromDonors); assertEquals(12, h.emergency)
         val cards = Overlaps.cards(all)
         assertEquals(8, cards.size)
         val live = Overlaps.decodeLive("""{"data":{"split_purchases":{"rows":[{"payee":"Acme","payments":2,"threshold":5000,"total":9800,"government":"Lynn Haven"}],"error":null}}}""".toByteArray())

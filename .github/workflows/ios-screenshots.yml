@@ -42,7 +42,7 @@ jobs:
           # Each chart, scrolled into view, in light and dark mode.
           for mode in light dark; do
             xcrun simctl ui "$DEV" appearance "$mode"
-            for s in craincrement cra budget vendor person tax contracts; do
+            for s in craincrement cra budget vendor person tax contracts schools publicsafety overlaps; do
               xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
               xcrun simctl launch "$DEV" me.baycounty.app -screen "$s" -scrollTo chart
               sleep 16
