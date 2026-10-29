@@ -8,13 +8,13 @@ struct RootView: View {
         @Bindable var store = store
         TabView(selection: $store.tab) {
             HomeView()
-                .tabItem { Label("Today", systemImage: "house") }
+                .tabItem { Label("Today", systemImage: "sun.max") }
                 .tag(AppStore.Tab.home)
             LivingHereView()
-                .tabItem { Label("Living here", systemImage: "mappin.and.ellipse") }
+                .tabItem { Label("Living here", systemImage: "house") }
                 .tag(AppStore.Tab.living)
             MoneyView()
-                .tabItem { Label("Money", systemImage: "dollarsign.circle") }
+                .tabItem { Label("Your money", systemImage: "wallet.bifold") }
                 .tag(AppStore.Tab.money)
             GovernmentsView()
                 .tabItem { Label("Government", systemImage: "building.columns") }

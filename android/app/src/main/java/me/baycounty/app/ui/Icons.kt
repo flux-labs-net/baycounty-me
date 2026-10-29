@@ -19,6 +19,7 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "map" -> Icons.Outlined.Map
     "square.and.arrow.up" -> Icons.Outlined.Share
     "dollarsign.circle", "dollarsign.arrow.circlepath" -> Icons.Outlined.Paid
+    "wallet.bifold", "wallet.pass" -> Icons.Outlined.AccountBalanceWallet
     "calendar", "calendar.badge.clock" -> Icons.Outlined.CalendarMonth
     "calendar.badge.plus" -> Icons.Outlined.EditCalendar
     "magnifyingglass" -> Icons.Outlined.Search

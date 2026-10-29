@@ -20,8 +20,8 @@ final class MoneyTabTests: XCTestCase {
     func testEachCardOpensItsOwnScreen() {
         let app = XCUIApplication()
         app.launch()
-        app.tabBars.buttons["Money"].tap()
-        XCTAssertTrue(app.navigationBars["Money"].waitForExistence(timeout: 5))
+        app.tabBars.buttons["Your money"].tap()
+        XCTAssertTrue(app.navigationBars["Your money"].waitForExistence(timeout: 5))
         for c in cards {
             let card = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", c.card)).firstMatch
             // Slow swipes so a card isn't flung past the top; if one still is, come back down for it.
@@ -34,7 +34,7 @@ final class MoneyTabTests: XCTestCase {
             XCTAssertTrue(app.navigationBars[c.title].waitForExistence(timeout: 8),
                           "\(c.card) should open \(c.title); nav bars: \(app.navigationBars.allElementsBoundByIndex.map(\.identifier))")
             app.navigationBars.buttons.element(boundBy: 0).tap()
-            XCTAssertTrue(app.navigationBars["Money"].waitForExistence(timeout: 5), "Back from \(c.title) should land on Money")
+            XCTAssertTrue(app.navigationBars["Your money"].waitForExistence(timeout: 5), "Back from \(c.title) should land on Your money")
         }
     }
 }

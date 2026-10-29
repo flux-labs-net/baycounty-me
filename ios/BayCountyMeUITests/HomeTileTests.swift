@@ -42,6 +42,6 @@ final class HomeTileTests: XCTestCase {
     func testFiveTabs() {
         let app = XCUIApplication()
         app.launch()
-        for t in ["Today", "Living here", "Money", "Government", "Search"] { XCTAssertTrue(app.tabBars.buttons[t].waitForExistence(timeout: 5), "Tab \(t)") }
+        for t in ["Today", "Living here", "Your money", "Government", "Search"] { XCTAssertTrue(app.tabBars.buttons[t].waitForExistence(timeout: 5), "Tab \(t)") }
     }
 }
