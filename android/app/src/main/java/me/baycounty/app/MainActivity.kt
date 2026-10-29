@@ -84,9 +84,9 @@ private val Tab.usageName get() = when (this) {
 private data class TabItem(val tab: Tab, val label: String, val symbol: String)
 
 private val tabs = listOf(
-    TabItem(Tab.HOME, "Today", "house"),
-    TabItem(Tab.LIVING, "Living here", "mappin.and.ellipse"),
-    TabItem(Tab.MONEY, "Money", "dollarsign.circle"),
+    TabItem(Tab.HOME, "Today", "sun.max"),
+    TabItem(Tab.LIVING, "Living here", "house"),
+    TabItem(Tab.MONEY, "Your money", "wallet.bifold"),
     TabItem(Tab.DECIDES, "Government", "building.columns"),
     TabItem(Tab.SEARCH, "Search", "magnifyingglass"),
 )

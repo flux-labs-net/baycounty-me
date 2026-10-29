@@ -131,7 +131,7 @@ struct MoneyView: View {
                 }
             }
             .background(Brand.canvas)
-            .navigationTitle("Money")
+            .navigationTitle("Your money")
             .refreshable { await store.loadGovernments() }
             .task { await store.loadAmendment3() }
             .withRoutes()

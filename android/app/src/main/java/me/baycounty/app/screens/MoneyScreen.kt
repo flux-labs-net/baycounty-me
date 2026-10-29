@@ -117,7 +117,7 @@ fun MoneyScreen() {
         }
     }
 
-    Screen("Money", onRefresh = { store.loadGovernments() }, listState = listState, spacing = 22) {
+    Screen("Your money", onRefresh = { store.loadGovernments() }, listState = listState, spacing = 22) {
         item { LevyCard() }
         item {
             ChipRow(MoneySection.entries.map { it to it.title }, picked) { s ->
