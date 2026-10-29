@@ -96,13 +96,28 @@ COMPONENTS = [  # output key, words that must all appear in the header
     ('ela_achievement', ['english', 'achievement']), ('ela_gains', ['english', 'learning gains']),
     ('ela_gains_low25', ['english', 'lowest']), ('math_achievement', ['math', 'achievement']),
     ('math_gains', ['math', 'learning gains']), ('math_gains_low25', ['math', 'lowest']),
-    ('science_achievement', ['science']), ('social_studies_achievement', ['social studies']),
+    ('grade3_ela_achievement', ['grade 3 english']), ('science_achievement', ['science']), ('social_studies_achievement', ['social studies']),
     ('middle_acceleration', ['middle school acceleration']), ('graduation_rate', ['graduation']),
     ('college_career_acceleration', ['college and career']),
     ('total_points', ['total points']), ('percent_of_points', ['percent of total possible']),
     ('percent_tested', ['percent tested']), ('pct_minority', ['minority']),
     ('pct_economically_disadvantaged', ['economically disadvantaged']),
 ]
+
+
+SCHOOL_TYPE = {'01': 'Elementary', '02': 'Middle', '03': 'High', '04': 'Combination'}
+
+
+def merge_grades(parsed):
+    """Several School Grades files -> one set of rows: grades from the newest file, each year's components from that year's file."""
+    parsed = sorted(parsed, key=lambda p: p[0])
+    fy, rows, _ = parsed[-1]
+    comp = {(r['school_number'], r['year']): r for _, rs, _ in parsed for r in rs if r['year'] == r['file_year']}
+    seen = {(r['school_number'], r['year']) for r in rows}
+    out = [comp.get((r['school_number'], r['year']), r) | {'grade': r['grade'], 'file_year': fy} for r in rows]
+    out += [r | {'file_year': fy} for k, r in comp.items() if k not in seen]  # a school dropped from the newest file
+    state = [s for _, _, ss in parsed for s in ss]
+    return fy, sorted(out, key=lambda r: (r['school_number'], r['year'])), state
 
 
 def parse_grades(blob, district, label=''):
@@ -125,16 +140,31 @@ def parse_grades(blob, district, label=''):
         file_year = max(gcols)
         comp = {}
         for key, words in COMPONENTS:
-            j = next((j for c, j in col.items() if all(w in c for w in words) and not re.search(r'grade\D*\d{4}', c)), None)
+            j = next((j for c, j in col.items() if all(w in c for w in words) and not re.search(r'grade\D*\d{4}', c)
+                      and (key == 'grade3_ela_achievement' or not c.startswith('grade 3'))), None)
             if j is not None:
                 comp[key] = j
         flag = lambda words: next((j for c, j in col.items() if all(w in c for w in words)), None)
         ci, ti, ai = flag(['charter']), flag(['title i']), flag(['alternative'])
+        sti = flag(['school type'])
         out = []
+        state = {}  # statewide summary for the file's own year, by school type
         for r in rows[i + 1:]:
-            if len(r) <= max(di, si) or text(r[di]) is None:
+            if len(r) <= max(di, si) or text(r[di]) is None or num(r[di]) is None:
                 continue
-            if num(r[di]) is None or int(num(r[di])) != int(district):
+            fg = text(r[gcols[file_year]]) if gcols[file_year] < len(r) else None
+            if fg and fg not in ('-', 'N/A', 'NA'):
+                stype = SCHOOL_TYPE.get(text(r[sti]) if sti is not None else None, 'Other')
+                for t in (stype, 'All'):
+                    b = state.setdefault(t, {'schools': 0, 'grades': {}, 'sums': {}, 'counts': {}})
+                    b['schools'] += 1
+                    b['grades'][fg.upper()] = b['grades'].get(fg.upper(), 0) + 1
+                    for k, jj in comp.items():
+                        v = num(r[jj]) if jj < len(r) else None
+                        if v is not None and k not in ('total_points',):
+                            b['sums'][k] = b['sums'].get(k, 0) + v
+                            b['counts'][k] = b['counts'].get(k, 0) + 1
+            if int(num(r[di])) != int(district):
                 continue
             sn = school_no(r[di], r[si])
             for y, j in sorted(gcols.items()):
@@ -151,9 +181,15 @@ def parse_grades(blob, district, label=''):
                     row['charter'] = text(r[ci]) if ci is not None and ci < len(r) else None
                     row['title_i'] = text(r[ti]) if ti is not None and ti < len(r) else None
                     row['alternative_ese'] = text(r[ai]) if ai is not None and ai < len(r) else None
+                    row['school_type'] = SCHOOL_TYPE.get(text(r[sti]) if sti is not None and sti < len(r) else None)
                 out.append(row)
         print(f'  grades {label} sheet {name!r}: years {sorted(gcols)}, components {sorted(comp)}, {len(out)} rows for district {district}')
-        return file_year, out
+        summary = []
+        for t, b in sorted(state.items()):
+            row = {'year': file_year, 'school_type': t, 'schools_graded': b['schools'], **{f'grade_{g.lower()}': b['grades'].get(g, 0) for g in 'ABCDFI'}}
+            row.update({k: round(b['sums'][k] / b['counts'][k], 1) for k in b['sums']})
+            summary.append(row)
+        return file_year, out, summary
     raise ValueError(f'no School Grades table found in {label}')
 
 
@@ -167,9 +203,10 @@ def fetch_grades(district):
             cands.append((2000 + int(m.group(1)), u))
     if not cands:
         raise RuntimeError('no SchoolGradesYY spreadsheet linked from the school grades page')
-    year, url = max(cands)
-    fy, rows = parse_grades(fetch(url), district, url)
-    return {'file_year': fy, 'source_url': url, 'page_url': GRADES_PAGE, 'rows': rows}
+    cands.sort()
+    parsed = [parse_grades(fetch(u), district, u) for _, u in cands[-2:]]  # newest file has every grade; the one before adds last year's components
+    fy, rows, state = merge_grades(parsed)
+    return {'file_year': fy, 'source_url': cands[-1][1], 'page_url': GRADES_PAGE, 'rows': rows, 'state': state}
 
 
 # --- spending (ESSA per-pupil expenditures) ---------------------------------------------------------------------------
@@ -268,11 +305,11 @@ def main():
     errors = 0
 
     if a.file:
+        parsed = []
         for f in a.file:
             blob = open(f, 'rb').read()
             try:
-                fy, rows = parse_grades(blob, district, f)
-                save(gpath, {'place_id': a.place, 'fetched': now, 'file_year': fy, 'source_url': GRADES_PAGE, 'page_url': GRADES_PAGE, 'rows': rows})
+                parsed.append(parse_grades(blob, district, f) + (f,))
             except ValueError:
                 have = load(spath) or {'files': [], 'rows': []}
                 y = a.year or year_of(f, '')
@@ -281,6 +318,13 @@ def main():
                 have['files'] = [x for x in have['files'] if x['year'] != y] + [{'year': y, 'source_url': ESSA_PAGE, 'label': os.path.basename(f), 'schools': len(got)}]
                 have.update({'place_id': a.place, 'fetched': now, 'page_url': ESSA_PAGE})
                 save(spath, have)
+        if parsed:
+            fy, rows, state = merge_grades([p[:3] for p in parsed])
+            newest = max(parsed, key=lambda p: p[0])[3]
+            m = re.search(r'SchoolGrades\d{2}\.xlsx?', os.path.basename(newest), re.I)
+            src = f'https://www.fldoe.org/file/18534/{m.group(0)}' if m else GRADES_PAGE
+            save(gpath, {'place_id': a.place, 'fetched': now, 'file_year': fy, 'source_url': src, 'page_url': GRADES_PAGE, 'rows': rows, 'state': state})
+            print(f'grades: {len(rows)} school-years through {fy}, {len(state)} statewide summary rows')
         return 0
 
     only = set(a.only.split(','))

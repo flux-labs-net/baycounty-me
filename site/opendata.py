@@ -24,7 +24,7 @@ GOV_COLS = {'beach-access': ['run_by'], 'beach-parking': [], 'beach-water-sites'
             'shared-owner-vendors': ['gov_id'], 'chamber-overlaps': [], 'emergency-purchase-donors': ['gov_id'], 'campaign-results': ['gov_id']}
 # county bed tax in every zone; the county-wide tax roll; the school datasets are all the school district's
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county',
-             'schools': 'schools', 'school-grades': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
+             'schools': 'schools', 'school-grades': 'schools', 'school-grade-state': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
@@ -135,7 +135,7 @@ FIRST_YEAR_COL = {'votes': 'date', 'member-votes': 'date', 'contracts': 'date', 
                   'business-donor-sunbiz': 'last_date', 'over-limit-gifts': 'last_date', 'owner-gifts': 'last_date',
                   'checkbook-payments': 'fiscal_year', 'budget-actuals': 'fiscal_year', 'cra-tax-increment': 'fiscal_year',
                   'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year', 'beach-water-samples': 'date',
-                  'school-grades': 'year', 'school-spending': 'year', 'school-enrollment': 'year', 'school-calendar': 'starts', 'emergency-notices': 'issued', 'disaster-declarations': 'declared', 'rebuild-money': 'year',
+                  'school-grades': 'year', 'school-grade-state': 'year', 'school-spending': 'year', 'school-enrollment': 'year', 'school-calendar': 'starts', 'emergency-notices': 'issued', 'disaster-declarations': 'declared', 'rebuild-money': 'year',
                   'elections': 'date', 'election-results': 'election_date', 'election-dates': 'date', 'public-notices': 'published',
                   'restaurant-inspections': 'date', 'new-businesses': 'filed_date',
                   'military-news': 'published', 'federal-contracts': 'last_action_date', 'federal-contract-years': 'year',

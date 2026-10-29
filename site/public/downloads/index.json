@@ -11157,15 +11157,26 @@
     },
     {
      "name": "latest_grade",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ]
     },
     {
      "name": "latest_grade_year",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "prior_grade",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C"
+     ]
     },
     {
      "name": "grades_on_record",
@@ -11173,11 +11184,11 @@
     },
     {
      "name": "latest_per_student",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "latest_spending_year",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "zoned_levels",
@@ -11224,12 +11235,15 @@
   {
    "id": "school-grades",
    "title": "School grades",
-   "description": "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).",
-   "rows": 0,
+   "description": "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). school_type is Elementary, Middle, High or Combination. Components (percent of students: third-grade reading (grade3_ela_achievement), English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for each year whose state file was read (the latest two). No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).",
+   "rows": 343,
    "columns": [
     {
      "name": "place_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
     },
     {
      "name": "school_id",
@@ -11240,19 +11254,56 @@
      "type": "string"
     },
     {
+     "name": "year",
+     "type": "number"
+    },
+    {
      "name": "school_year",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2015-16",
+      "2016-17",
+      "2017-18",
+      "2018-19",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
+      "2024-25",
+      "2025-26"
+     ]
     },
     {
      "name": "grade",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "F"
+     ]
     },
     {
      "name": "informational_baseline",
-     "type": "boolean"
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
     },
     {
-     "name": "year",
+     "name": "school_type",
+     "type": "string",
+     "values": [
+      "Combination",
+      "Elementary",
+      "High",
+      "Middle"
+     ]
+    },
+    {
+     "name": "grade3_ela_achievement",
      "type": "number"
     },
     {
@@ -11317,11 +11368,17 @@
     },
     {
      "name": "source_url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://www.fldoe.org/file/18534/SchoolGrades26.xlsx"
+     ]
     },
     {
      "name": "gov_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "schools"
+     ]
     }
    ],
    "json": "/downloads/school-grades.json",
@@ -11329,14 +11386,161 @@
    "api": "/api/v1/datasets/school-grades"
   },
   {
+   "id": "school-grade-state",
+   "title": "School grades statewide",
+   "description": "Florida-wide school grade results by school type (Elementary, Middle, High, Combination, and All), one row per school type and year, worked out from the Florida Department of Education's statewide school grades file: how many schools got each grade (grade_a to grade_i) and the average of each grade component across the state's schools (simple average of schools, not weighted by students). Used to compare a school with the state.",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "state",
+     "type": "string",
+     "values": [
+      "FL"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2024-25",
+      "2025-26"
+     ]
+    },
+    {
+     "name": "school_type",
+     "type": "string",
+     "values": [
+      "All",
+      "Combination",
+      "Elementary",
+      "High",
+      "Middle"
+     ]
+    },
+    {
+     "name": "schools_graded",
+     "type": "number"
+    },
+    {
+     "name": "grade_a",
+     "type": "number"
+    },
+    {
+     "name": "grade_b",
+     "type": "number"
+    },
+    {
+     "name": "grade_c",
+     "type": "number"
+    },
+    {
+     "name": "grade_d",
+     "type": "number"
+    },
+    {
+     "name": "grade_f",
+     "type": "number"
+    },
+    {
+     "name": "grade_i",
+     "type": "number"
+    },
+    {
+     "name": "grade3_ela_achievement",
+     "type": "number"
+    },
+    {
+     "name": "ela_achievement",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "math_achievement",
+     "type": "number"
+    },
+    {
+     "name": "math_gains",
+     "type": "number"
+    },
+    {
+     "name": "math_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "science_achievement",
+     "type": "number"
+    },
+    {
+     "name": "social_studies_achievement",
+     "type": "number"
+    },
+    {
+     "name": "middle_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "graduation_rate",
+     "type": "number"
+    },
+    {
+     "name": "college_career_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "percent_of_points",
+     "type": "number"
+    },
+    {
+     "name": "percent_tested",
+     "type": "number"
+    },
+    {
+     "name": "pct_economically_disadvantaged",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.fldoe.org/file/18534/SchoolGrades25.xlsx",
+      "https://www.fldoe.org/file/18534/SchoolGrades26.xlsx"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-grade-state.json",
+   "csv": "/downloads/school-grade-state.csv",
+   "api": "/api/v1/datasets/school-grade-state"
+  },
+  {
    "id": "school-spending",
    "title": "Spending per school",
    "description": "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.",
-   "rows": 0,
+   "rows": 352,
    "columns": [
     {
      "name": "place_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
     },
     {
      "name": "school_id",
@@ -11352,7 +11556,17 @@
     },
     {
      "name": "school_year",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2017-18",
+      "2018-19",
+      "2019-20",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
+      "2024-25"
+     ]
     },
     {
      "name": "federal_per_student",
@@ -11376,11 +11590,24 @@
     },
     {
      "name": "source_url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx",
+      "https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx",
+      "https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx"
+     ]
     },
     {
      "name": "gov_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "schools"
+     ]
     }
    ],
    "json": "/downloads/school-spending.json",

@@ -34,7 +34,7 @@ const PAGES = {
   '/parks': {datasets: ['parks', 'boat-ramps', 'trails', 'recreation-departments']},
   '/development': {datasets: ['housing-permits', 'development-projects', 'development-companies']},
   '/roads': {datasets: ['road-contracts', 'road-work-program', 'sales-tax-projects', 'entity-profiles']},
-  '/schools': {datasets: ['schools', 'school-grades', 'school-spending', 'school-enrollment', 'school-calendar', 'school-zones', 'meetings'], endpoints: ['/schools', '/overlaps']},
+  '/schools': {datasets: ['schools', 'school-grades', 'school-grade-state', 'school-spending', 'school-enrollment', 'school-calendar', 'school-zones', 'meetings'], endpoints: ['/schools', '/overlaps']},
   '/utilities': {datasets: ['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'], endpoints: ['/utilities']},
   '/restaurants': {datasets: ['restaurants', 'restaurant-inspections']},
   '/new-businesses': {datasets: ['new-businesses', 'restaurants']},

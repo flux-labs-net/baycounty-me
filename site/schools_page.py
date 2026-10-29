@@ -64,12 +64,37 @@ CSS = r"""
 .sc-facts dt{font-size:.74rem;color:var(--muted)}
 .sc-facts dd{margin:2px 0 0;font:600 1rem var(--f-body);font-variant-numeric:tabular-nums}
 .sc-hist{display:flex;flex-wrap:wrap;gap:6px}
+.sc-cps{display:grid;gap:7px}
+.sc-cp{display:grid;grid-template-columns:minmax(0,11.5em) minmax(60px,1fr) 3em 2.6em;align-items:center;gap:8px;font-size:.82rem}
+.sc-cp .lb{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-cp .tr{position:relative;height:10px;border-radius:5px;background:var(--sunken)}
+.sc-cp .tr i{position:absolute;inset:0 auto 0 0;border-radius:5px;background:var(--blue)}
+.sc-cp .tr b{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--ink);border-radius:1px}
+.sc-cp .v{font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.sc-cp .ch{font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.sc-cp .ch.up{color:#15803d}.sc-cp .ch.dn{color:#b91c1c}
+.sc-key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;font-size:.72rem;color:var(--muted)}
+.sc-key span{display:inline-flex;align-items:center;gap:5px}
+.sc-key i{width:14px;height:8px;border-radius:4px;background:var(--blue)}
+.sc-key b{width:2px;height:12px;background:var(--ink)}
+.sc-mixes{display:grid;gap:8px;margin:4px 0 16px}
+.sc-mix{display:grid;grid-template-columns:9.5em 1fr;align-items:center;gap:10px;font-size:.85rem}
+.sc-mix .lb{font-weight:600}.sc-mix .lb small{display:block;font-weight:400;color:var(--muted);font-size:.72rem}
+.sc-mix .tr{display:flex;height:26px;border-radius:8px;overflow:hidden;background:var(--sunken)}
+.sc-mix .tr i.g-A{background:color-mix(in srgb,var(--teal) 30%,transparent);color:var(--teal)}
+.sc-mix .tr i.g-B{background:color-mix(in srgb,var(--blue) 24%,transparent);color:var(--blue)}
+.sc-mix .tr i.g-C{background:color-mix(in srgb,var(--amber,#C98A1B) 28%,transparent);color:var(--amber,#9A6A10)}
+.sc-mix .tr i.g-D,.sc-mix .tr i.g-F{background:color-mix(in srgb,var(--salmon) 30%,transparent);color:var(--salmon)}
+.sc-mix .tr i{display:flex;align-items:center;justify-content:center;font:600 .72rem var(--f-body);font-style:normal;white-space:nowrap;overflow:hidden}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .sc-cp .ch.up{color:#4ade80}:root:not([data-theme=light]) .sc-cp .ch.dn{color:#f87171}}
+:root[data-theme=dark] .sc-cp .ch.up{color:#4ade80}:root[data-theme=dark] .sc-cp .ch.dn{color:#f87171}
 .sc-hist span{display:inline-flex;flex-direction:column;align-items:center;gap:2px;font-size:.68rem;color:var(--muted)}
 .sc-spark{width:100%;height:46px;display:block}
 .sc-spark path{fill:none;stroke:var(--blue);stroke-width:2}
 .sc-spark circle{fill:var(--blue)}
 .sc-mx td,.sc-mx th{text-align:center;padding:6px 4px}
-.sc-mx td:first-child,.sc-mx th:first-child{text-align:left;min-width:180px}
+.sc-mx td:first-child,.sc-mx th:first-child{text-align:left;min-width:180px;position:sticky;left:0;z-index:1;background:var(--surface)}
+@media (max-width:640px){.sc-mx td:first-child,.sc-mx th:first-child{min-width:132px;max-width:132px;font-size:.8rem}}
 .sc-mx td.na{color:var(--muted);font-size:.78rem}
 .sc-bars{display:flex;flex-direction:column;gap:6px}
 .sc-bar{display:grid;grid-template-columns:minmax(150px,240px) 1fr 80px;gap:10px;align-items:center;font-size:.85rem}
@@ -87,6 +112,7 @@ CSS = r"""
 .sc-pend{padding:16px 18px;border-radius:18px;background:var(--sunken);font-size:.9rem;line-height:1.5}
 @media (max-width:760px){.sc-find{grid-template-columns:1fr}.sc-box{padding:16px}.sc-list{grid-template-columns:1fr}
   .sc-z .lv{width:70px}.sc-bar{grid-template-columns:minmax(0,1fr) 90px;grid-template-areas:"n v" "t t";row-gap:4px}.sc-bar a{grid-area:n}.sc-bar .tr{grid-area:t}.sc-bar .v{grid-area:v}
+  .sc-cp{grid-template-columns:minmax(0,9.5em) minmax(50px,1fr) 2.7em 2.3em;gap:6px;font-size:.78rem}.sc-mix{grid-template-columns:6.5em 1fr}
   .sc-enr small{font-size:.62rem}.sc-enr b{font-size:.62rem}.sc-facts dd{font-size:.92rem}}
 """
 
@@ -250,9 +276,57 @@ def _spark(points):
             f'{points[0][1]:,} to {points[-1][1]:,}"><path d="{d}" vector-effect="non-scaling-stroke"/><circle cx="{xy[-1][0]:.1f}" cy="{xy[-1][1]:.1f}" r="3"/></svg>')
 
 
+COMPONENTS = [('grade3_ela_achievement', '3rd-grade reading', 'Third graders scoring on grade level or above in reading'),
+              ('ela_achievement', 'Reading', 'Students scoring on grade level or above in English language arts'),
+              ('ela_gains', 'Reading gains', 'Students who made a year of progress in reading'),
+              ('ela_gains_low25', 'Reading, lowest 25%', 'Progress among the school\'s lowest-scoring quarter of readers'),
+              ('math_achievement', 'Math', 'Students scoring on grade level or above in math'),
+              ('math_gains', 'Math gains', 'Students who made a year of progress in math'),
+              ('math_gains_low25', 'Math, lowest 25%', 'Progress among the school\'s lowest-scoring quarter in math'),
+              ('science_achievement', 'Science', 'Students passing the state science test'),
+              ('social_studies_achievement', 'Social studies', 'Students passing the civics or U.S. History exam'),
+              ('middle_acceleration', 'Advanced courses', 'Middle schoolers passing high school courses or industry certifications'),
+              ('graduation_rate', 'Graduation rate', 'Students graduating within four years (from the year before)'),
+              ('college_career_acceleration', 'College credit', 'Graduates who passed AP, IB, dual enrollment or an industry certification (from the year before)')]
+
+
+def _scores(g, prev, st):
+    """The parts of one school's grade: a bar per component with a mark for the state average of that school type."""
+    rows = ''
+    for key, label, tip in COMPONENTS:
+        v = g.get(key)
+        if v is None:
+            continue
+        sv = (st or {}).get(key)
+        pv = (prev or {}).get(key)
+        ch = ''
+        if pv is not None:
+            d = round(v - pv)
+            ch = f'<span class="ch {"up" if d > 0 else "dn" if d < 0 else ""}" title="Change from the year before">{"+" if d > 0 else ""}{d}</span>' if d else '<span class="ch" title="Same as the year before">±0</span>'
+        mark = f'<b class="st" style="left:{min(100, sv):.0f}%" title="Florida average {sv:.0f}%"></b>' if sv is not None else ''
+        rows += (f'<div class="sc-cp" title="{e(tip)}"><span class="lb">{e(label)}</span><span class="tr"><i style="width:{min(100, v):.0f}%"></i>{mark}</span>'
+                 f'<span class="v">{v:.0f}%</span>{ch}</div>')
+    if not rows:
+        return ''
+    pts = g.get('percent_of_points')
+    head = f'Scores behind the {e(g["school_year"])} grade' + (f': {pts:.0f}% of possible points' if pts is not None else '')
+    stl = f'{st["school_type"].lower()} school' if st and st['school_type'] != 'All' else 'school'
+    return (f'<div><div class="muted small" style="margin-bottom:6px">{head}</div><div class="sc-cps">{rows}</div>'
+            f'<div class="sc-key"><span><i></i>This school</span><span><b></b>Florida {e(stl)} average</span>'
+            + ('<span>+/− change from the year before</span>' if prev else '') + '</div></div>')
+
+
+def _mix(counts, label):
+    n = sum(counts.values()) or 1
+    segs = ''.join(f'<i class="g-{c}" style="width:{100 * counts.get(c, 0) / n:.2f}%" title="{c}: {counts.get(c, 0)} ({100 * counts.get(c, 0) / n:.0f}%)">{f"{c} {100 * counts.get(c, 0) / n:.0f}%" if counts.get(c, 0) / n >= .08 else ""}</i>'
+                   for c in 'ABCDF')
+    return f'<div class="sc-mix"><span class="lb">{label}</span><span class="tr">{segs}</span></div>'
+
+
 def schools_page(out_dir):
-    from page_datasets import schools, school_grades, school_spending, school_enrollment, school_calendar, school_zones
+    from page_datasets import schools, school_grades, school_grade_state, school_spending, school_enrollment, school_calendar, school_zones
     S, G, SP, EN, CAL, Z = schools(), school_grades(), school_spending(), school_enrollment(), school_calendar(), school_zones()
+    GS = {(r['year'], r['school_type']): r for r in school_grade_state()}
     conf = PLACE.get('schools') or {}
     if not S:
         return '<div class="page"><h1>Public schools</h1><p>No school data for this place yet.</p></div>'
@@ -333,6 +407,7 @@ def schools_page(out_dir):
   <div class="bd">
     <dl class="sc-facts">{"".join(f"<div><dt>{e(a)}</dt><dd>{e(b)}</dd></div>" for a, b in facts)}</dl>
     {f'<div><div class="muted small" style="margin-bottom:4px">State grades</div><div class="sc-hist">{hist}</div></div>' if hist else ''}
+    {_scores(last, gh.get(latest_gy - 1), GS.get((latest_gy, last.get('school_type') or 'All')) or GS.get((latest_gy, 'All'))) if last else ''}
     {f'<div><div class="muted small">Enrollment, {enr[0][0] - 1}-{str(enr[0][0])[2:]} to {enr[-1][0] - 1}-{str(enr[-1][0])[2:]}: {enr[0][1]:,} to {enr[-1][1]:,}</div>{_spark(enr)}</div>' if len(enr) > 1 else ''}
     {op_html}
     <p style="margin:0">{e(s.get("address") or "")}{", " + e(s["city"]) if s.get("city") else ""} · {e(s.get("phone") or "")}{(" · " + e(zoned)) if zoned else ""}{f" · {s['free_reduced_lunch_pct']:.0f}% of students qualify for free or reduced-price lunch" if s.get("free_reduced_lunch_pct") else ""}</p>
@@ -350,7 +425,19 @@ def schools_page(out_dir):
             gh = grades_by[s['school_id']]
             cells = ''.join(f'<td>{_g(gh[y]["grade"], True)}</td>' if y in gh else '<td class="na">·</td>' for y in show_years)
             mx_rows += f'<tr><td><a href="#s-{e(s["school_id"])}">{e(s["name"])}</a>{" <span class=muted>(closed)</span>" if s["status"] != "Open" else ""}</td>{cells}</tr>'
-        grades_html = (f'<div class="tablewrap"><table class="tx-table sc-mx" data-tt="off"><thead><tr><th>School</th>{"".join(f"<th>{y - 1}-{str(y)[2:]}</th>" for y in show_years)}</tr></thead><tbody>{mx_rows}</tbody></table></div>'
+        bay = {}
+        for g in G:
+            if g['year'] == latest_gy and g['grade'] in 'ABCDF':
+                bay[g['grade']] = bay.get(g['grade'], 0) + 1
+        fl = GS.get((latest_gy, 'All'))
+        mix = ''
+        if fl:
+            flc = {c.upper(): fl[f'grade_{c}'] for c in 'abcdf'}
+            pa, fa = 100 * bay.get('A', 0) / max(1, sum(bay.values())), 100 * flc['A'] / max(1, sum(flc.values()))
+            mix = (f'<p>In {latest_gy - 1}-{str(latest_gy)[2:]}, <b>{pa:.0f}%</b> of {e(PLACE["name"])}\'s graded public schools earned an A, compared with <b>{fa:.0f}%</b> of schools statewide. '
+                   'Open a school under Every school to see the test scores behind its grade next to the Florida average.</p>'
+                   f'<div class="sc-mixes">{_mix(bay, e(PLACE["name"]) + f" <small>{sum(bay.values())} schools</small>")}{_mix(flc, f"Florida <small>{sum(flc.values()):,} schools</small>")}</div>')
+        grades_html = mix + (f'<div class="tablewrap"><table class="tx-table sc-mx" data-tt="off" data-stack="off"><thead><tr><th>School</th>{"".join(f"<th>{y - 1}-{str(y)[2:]}</th>" for y in show_years)}</tr></thead><tbody>{mx_rows}</tbody></table></div>'
                        '<p class="note">No school grades were given for 2019-20, when state testing was canceled. For 2020-21, only schools that asked got a grade. 2022-23 grades were an informational baseline after the state changed its tests. A dot means no grade that year (the school was new, closed, or isn\'t graded, like virtual and alternative programs).</p>')
     else:
         grades_html = ('<div class="sc-pend">The Florida Department of Education publishes every school\'s grade each July. Its website turns away the automated readers this site uses, '
