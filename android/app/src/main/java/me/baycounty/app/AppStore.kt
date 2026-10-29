@@ -69,8 +69,8 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
         override fun getString(key: String) = prefs.getString(key, null)
         override fun putString(key: String, value: String?) { prefs.edit().apply { if (value == null) remove(key) else putString(key, value) }.apply() }
     }, "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
-    var shareUsage by mutableStateOf(usage.enabled)
-    fun setShareUsage(on: Boolean) { usage.enabled = on; shareUsage = on }
+    var shareUsage by mutableStateOf(usage.enabled); private set
+    fun updateShareUsage(on: Boolean) { usage.enabled = on; shareUsage = on }
 
     /** The app came to the front: count it and send today's check-in if one is due. Debug builds (Android Studio runs
      *  and the screenshot workflows) don't send, so they never show up in the counts. */

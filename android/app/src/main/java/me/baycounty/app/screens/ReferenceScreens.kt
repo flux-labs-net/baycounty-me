@@ -165,7 +165,7 @@ fun AboutScreen() {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 EyebrowHeader("App")
                 CardList { FactRow("Version", "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})") }
-                ToggleRow("Share anonymous usage counts", store.shareUsage) { store.setShareUsage(it) }
+                ToggleRow("Share anonymous usage counts", store.shareUsage) { store.updateShareUsage(it) }
                 Text(
                     "Once a day the app sends how many times it was opened and which screens were viewed, with the app version. Nothing that identifies you or your phone is sent: no name, account, address or device id. It helps us see what residents use.",
                     style = T.caption, color = Brand.secondary, modifier = Modifier.padding(horizontal = 4.dp),
