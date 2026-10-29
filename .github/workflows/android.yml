@@ -48,6 +48,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: apk-debug
+      - name: Free disk space for the emulator
+        # The emulator's data partition needs about 7.4 GB; a stock runner can come up a few MB short.
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /usr/local/share/boost /usr/share/swift "$AGENT_TOOLSDIRECTORY/CodeQL"
+          df -h /home/runner
       - name: Let the emulator use KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
