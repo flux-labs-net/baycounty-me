@@ -15,6 +15,7 @@ import html, json, os, shutil
 from collections import Counter, defaultdict
 
 import entity_graph as EG
+from money_map import gift_when_text
 from entity_links import a as link, gov as gov_link
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -180,7 +181,7 @@ def person_page(pid):
     <p class="note">People who gave as individuals and whose name and street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz. Addresses are not shown. A gift from a business owner is a fact in the records, not a sign that the business wanted anything.</p></section>'''
     # votes on donors' contracts
     if mm:
-        rows = ''.join(f'<li><b>{e(r["vote_date"])}</b>: voted {e(r["vote"])} on {e(r["item"])}{" · " + money(r["amount"]) if r.get("amount") else ""} ({e(r["outcome"])} {e(r["tally"])}{", consent agenda" if r.get("consent_agenda") else ""}). {link_name_vendor(r["donor"])} gave {money(r["gift_amount"])} {e(r["gift_before_or_after_vote"])} the vote. <a class="src" href="{e(r["source_url"])}" target="_blank" rel="noopener">Minutes</a></li>' for r in sorted(mm, key=lambda r: r['vote_date'], reverse=True))
+        rows = ''.join(f'<li><b>{e(r["vote_date"])}</b>: voted {e(r["vote"])} on {e(r["item"])}{" · " + money(r["amount"]) if r.get("amount") else ""} ({e(r["outcome"])} {e(r["tally"])}{", consent agenda" if r.get("consent_agenda") else ""}). {link_name_vendor(r["donor"])} gave {money(r["gift_amount"])} to {e(r["official"])}’s campaign{(" " + e(gift_when_text(r.get("gift_dates"), r["vote_date"]))) if r.get("gift_dates") else ""}. <a class="src" href="{e(r["source_url"])}" target="_blank" rel="noopener">Minutes</a></li>' for r in sorted(mm, key=lambda r: r['vote_date'], reverse=True))
         vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="donor-votes" data-tile="Donor votes">Votes on contracts with their own donors</h2><span class="muted">From the Money map</span></div><ul class="plain mm-list">{rows}</ul><p class="note">{e(NOTE)}</p></section>'
     # votes on companies' contracts
     if voted:
