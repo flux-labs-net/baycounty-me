@@ -21,6 +21,24 @@ final class AppStore {
         return BayCountyClient.site
     }
     let gis = GISClient()
+    /// Anonymous usage counts: one check-in a day, which the resident can turn off in About.
+    let usage = AppUsage(version: AppStore.appVersion)
+
+    /// "1.0 (7)": marketing version and build number.
+    nonisolated static var appVersion: String {
+        let info = Bundle.main.infoDictionary
+        return "\(info?["CFBundleShortVersionString"] as? String ?? "?") (\(info?["CFBundleVersion"] as? String ?? "?"))"
+    }
+
+    /// The app came to the front: count it and send today's check-in if one is due. Debug builds (Xcode runs and the
+    /// screenshot workflows) don't send, so they never show up in the counts.
+    func becameActive() {
+        usage.opened()
+        #if !DEBUG
+        let usage = usage
+        Task.detached { await usage.send() }
+        #endif
+    }
 
     var tab: Tab = .home
     /// A page the app is showing in the in-app browser.
@@ -181,7 +199,7 @@ final class AppStore {
     func open(_ url: URL?) {
         guard let url else { return }
         if ExternalLinks.opensOutsideApp(url) { UIApplication.shared.open(url); return }
-        presentedPage = PresentedPage(url: url)
+        presentedPage = PresentedPage(url: AppLinks.tagged(url))
     }
     func openSite(_ path: String) { open(URL(string: "https://baycounty.me" + (path.hasPrefix("/") ? path : "/" + path))) }
     func explain(_ termID: String) { presentedTerm = term(termID) }

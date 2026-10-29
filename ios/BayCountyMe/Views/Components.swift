@@ -72,9 +72,29 @@ enum Route: Hashable {
     case restaurant(String)
     case myHome
     case meetings
+
+    /// The screen's name in the anonymous usage counts (AppUsage): the case name, plus the list or government for
+    /// those two, and the list a record came from. Never a person, address, search or record id.
+    var usageName: String {
+        switch self {
+        case .dataset(let id, _): return "dataset/" + id
+        case .record(let id, _): return "record/" + id
+        case .government(let g): return "government/" + g
+        default: return String(String(describing: self).prefix { $0 != "(" }).lowercased()
+        }
+    }
+}
+
+/// Counts a screen view for the anonymous usage counts when the screen appears.
+private struct TrackScreen: ViewModifier {
+    @Environment(AppStore.self) private var store
+    let name: String
+    func body(content: Content) -> some View { content.onAppear { store.usage.viewed(name) } }
 }
 
 extension View {
+    func trackScreen(_ name: String) -> some View { modifier(TrackScreen(name: name)) }
+
     func withRoutes() -> some View {
         navigationDestination(for: Route.self) { route in
             Group {
@@ -120,6 +140,7 @@ extension View {
                 }
             }
             .pageBackground()
+            .trackScreen(route.usageName)
         }
     }
 }

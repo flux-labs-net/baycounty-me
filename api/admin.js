@@ -243,6 +243,7 @@ async function route(req, res, action, me) {
       return r;
     }
     case 'realtors': return require('./_realtor').adminList();
+    case 'app_usage': return require('./_app_usage').report(Q.days);
     case 'realtor_set': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_realtor').adminSet(body);

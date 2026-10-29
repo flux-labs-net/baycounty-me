@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -1326,6 +1326,77 @@
   ['#nm-kind', '#nm-status', '#nm-reason'].forEach(s => $(s).addEventListener('change', loadNames));
   let nmTimer;
   $('#nm-q').addEventListener('input', () => { clearTimeout(nmTimer); nmTimer = setTimeout(loadNames, 300); });
+
+  // ---------- app usage (appusage.*, api/_app_usage.js) ----------
+  const AU_NAME = {'tab/today': 'Today tab', 'tab/living': 'Living here tab', 'tab/money': 'Money tab', 'tab/decides': 'Who decides tab', 'tab/search': 'Search tab',
+    myaddress: 'My Address', myhome: 'My home', accountsettings: 'My home settings', address: 'Address report', hurricaneprep: 'Hurricane prep',
+    craincrement: 'CRA tax increment', cra: 'CRA spending', moneymap: 'Money map', donorcontracts: 'Donors with contracts', budgetcompare: 'Budget years',
+    taxcalculator: 'Tax calculator', amendment3: 'Amendment 3', accountabilityproject: 'Accountability project', govbudget: 'Government budget',
+    person: 'Person profile', vendor: 'Company profile', meeting: 'Meeting', restaurant: 'Restaurant'};
+  const AU_GOV = {county: 'Bay County', schools: 'Bay District Schools', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+  const auName = s => AU_NAME[s] || (s.startsWith('dataset/') ? 'List: ' + s.slice(8).replace(/-/g, ' ')
+    : s.startsWith('record/') ? 'Record from ' + s.slice(7).replace(/-/g, ' ')
+    : s.startsWith('government/') ? (AU_GOV[s.slice(11)] || s.slice(11)) : s.replace(/[-_]/g, ' ').replace(/^./, c => c.toUpperCase()));
+  $('#au-days').addEventListener('change', loadApps);
+  async function loadApps() {
+    let r;
+    try { r = await api('app_usage', {params: {days: $('#au-days').value}}); }
+    catch (e) { $('#au-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load app usage.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const by = p => r.totals.find(t => t.platform === p) || {checkins: 0, new_users: 0, opens: 0, today: 0};
+    const ios = by('ios'), and = by('android'), split = (a, b) => `<div class="small muted">iPhone ${fmt(a)} · Android ${fmt(b)}</div>`;
+    const month = new Date().toLocaleDateString('en-CA', {timeZone: 'America/Chicago'}).slice(0, 7);
+    const mo = p => (r.months.find(m => m.month === month && m.platform === p) || {}).users || 0;
+    const avg = v => Math.round(v / r.days);
+    const tiles = [
+      [fmt(ios.today + and.today), 'Phones today', split(ios.today, and.today)],
+      [fmt(avg(ios.checkins + and.checkins)), 'Average phones a day', split(avg(ios.checkins), avg(and.checkins))],
+      [fmt(r.week.ios + r.week.android), 'Phones this week', split(r.week.ios, r.week.android)],
+      [fmt(mo('ios') + mo('android')), 'Phones this month', split(mo('ios'), mo('android'))],
+      [fmt(ios.new_users + and.new_users), 'New installs', split(ios.new_users, and.new_users)],
+      [fmt(ios.opens + and.opens), 'Times opened', split(ios.opens, and.opens)],
+      [fmt((r.push_ios || 0) + (r.push_android || 0)), 'Phones with alerts on', split(r.push_ios || 0, r.push_android || 0)],
+      [fmt(r.accounts || 0), 'My home accounts', `<div class="small muted">${fmt(r.new_accounts || 0)} new in this range</div>`]];
+    $('#au-tiles').innerHTML = tiles.map(([v, l, x]) => `<div class="tile"><b>${v}</b><span>${l}</span>${x}</div>`).join('');
+    auChart(r.daily);
+    const list = (title, rows, empty) => {
+      const max = Math.max(1, ...rows.map(x => x.n));
+      return `<div class="card list"><h3>${title}</h3>${rows.length ? rows.map(x => `<div class="li"><span class="lbl" title="${esc(x.label)}">${esc(x.label)}</span><span class="n">${fmt(x.n)}</span><span class="track"><i style="width:${(x.n / max * 100).toFixed(1)}%"></i></span></div>`).join('') : `<p class="muted small">${empty}</p>`}</div>`;
+    };
+    const mlabel = m => new Date(m + '-15T12:00:00').toLocaleDateString('en-US', {month: 'long', year: 'numeric'});
+    const months = [...new Set(r.months.map(m => m.month))].reverse().map(m => ({label: mlabel(m), n: r.months.filter(x => x.month === m).reduce((a, x) => a + x.users, 0)}));
+    $('#au-lists').innerHTML = list('Most viewed screens', r.screens.map(x => ({label: auName(x.screen), n: x.views})), 'No screens reported in this range.')
+      + '<div class="au-col">' + list('Phones each month', months, 'No check-ins yet.')
+      + list('App versions this week', r.versions.map(v => ({label: (v.platform === 'ios' ? 'iPhone ' : 'Android ') + (v.app_version || 'unknown'), n: v.users})), 'No check-ins this week.') + '</div>';
+  }
+  function auChart(daily) {
+    const el = $('#au-chart'), W = 1000, H = 220, P = {l: 44, r: 8, t: 10, b: 26};
+    const tot = d => d.ios + d.android, max = Math.max(1, ...daily.map(tot));
+    const nice = (() => { const p = Math.pow(10, Math.floor(Math.log10(max))); return Math.max(4, Math.ceil(max / p) * p); })();
+    const n = daily.length, bw = (W - P.l - P.r) / n, gap = Math.min(2, bw * 0.2), y = v => P.t + (H - P.t - P.b) * (1 - v / nice);
+    const every = Math.ceil(n / 8), day = (d, o) => new Date(d.day + 'T12:00:00').toLocaleDateString('en-US', o);
+    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Phones using the app each day">`;
+    s += [0, nice / 2, nice].map(v => `<line x1="${P.l}" x2="${W - P.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)" stroke-width="1"/><text x="${P.l - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="var(--muted)">${fmt(v)}</text>`).join('');
+    daily.forEach((d, i) => {
+      const x = P.l + i * bw + gap / 2, w = Math.max(1, bw - gap);
+      if (d.ios) s += `<rect x="${x}" y="${y(d.ios)}" width="${w}" height="${H - P.b - y(d.ios)}" fill="var(--bar)"/>`;
+      if (d.android) s += `<rect x="${x}" y="${y(tot(d))}" width="${w}" height="${y(d.ios) - y(tot(d))}" fill="var(--bar2)"/>`;
+      s += `<rect class="hit" data-i="${i}" x="${P.l + i * bw}" y="${P.t}" width="${bw}" height="${H - P.t - P.b}" fill="transparent"/>`;
+      if (i % every === 0 || (i === n - 1 && (n - 1) % every >= every / 2)) s += `<text x="${x + w / 2}" y="${H - 8}" text-anchor="middle" font-size="11" fill="var(--muted)">${day(d, {month: 'short', day: 'numeric'})}</text>`;
+    });
+    el.innerHTML = s + `</svg><div class="tip" role="status"></div>`;
+    const tip = el.querySelector('.tip');
+    el.querySelectorAll('.hit').forEach(r => {
+      r.addEventListener('mouseenter', () => {
+        const d = daily[r.dataset.i];
+        tip.innerHTML = `<b>${day(d, {weekday: 'short', month: 'short', day: 'numeric'})}</b><br>${fmt(tot(d))} phones (iPhone ${fmt(d.ios)}, Android ${fmt(d.android)})${d.new_users ? `<br>${fmt(d.new_users)} new` : ''}`;
+        tip.style.display = 'block';
+        const bb = r.getBoundingClientRect(), cb = el.getBoundingClientRect();
+        tip.style.left = Math.min(cb.width - tip.offsetWidth, Math.max(0, bb.left - cb.left + bb.width / 2 - tip.offsetWidth / 2)) + 'px';
+        tip.style.top = '0px';
+      });
+      r.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+    });
+  }
 
   // ---------- realtor agents (realtor.agents, api/_realtor.js) ----------
   const RA_ST = {active: 'Active', pending: 'Pending', paused: 'Paused'};

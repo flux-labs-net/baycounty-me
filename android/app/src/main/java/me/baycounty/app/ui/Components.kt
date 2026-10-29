@@ -72,6 +72,7 @@ import me.baycounty.app.AppStore
 import me.baycounty.app.Nav
 import me.baycounty.app.R
 import me.baycounty.app.Route
+import me.baycounty.kit.AppLinks
 import me.baycounty.kit.BayCountyClient
 import me.baycounty.kit.ChartTicks
 import me.baycounty.kit.DatasetSpec
@@ -98,8 +99,9 @@ fun openURL(context: Context, url: String?, toolbar: Int? = null) {
     }
     val b = CustomTabsIntent.Builder().setShowTitle(true)
     toolbar?.let { b.setDefaultColorSchemeParams(CustomTabColorSchemeParams.Builder().setToolbarColor(it).build()) }
-    runCatching { b.build().launchUrl(context, uri) }.onFailure {
-        runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+    val page = Uri.parse(AppLinks.tagged(url))  // BayCounty.me pages show as app traffic in the site's analytics
+    runCatching { b.build().launchUrl(context, page) }.onFailure {
+        runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, page).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
     }
 }
 
