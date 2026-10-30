@@ -122,10 +122,12 @@ private fun RightNow(utilities: UtilityLookup?) {
                         TodayBrief.Target.UTILITIES -> Route.Utilities(store.home)
                     }
                     val tone = when (c.tone) { "teal" -> Tone.TEAL; "amber" -> Tone.AMBER; "salmon" -> Tone.SALMON; else -> Tone.BLUE }
-                    val box = { x: Modifier -> x.card(16.dp).clickable { nav.push(route) }.padding(14.dp).semantics(mergeDescendants = true) {} }
-                    if (pair.size == 1) {
+                    val wide = pair.size == 1
+                    val box = Modifier.weight(1f).fillMaxHeight().then(if (wide) Modifier else Modifier.heightIn(min = 128.dp))
+                        .card(16.dp).clickable { nav.push(route) }.padding(14.dp).semantics(mergeDescendants = true) {}
+                    if (wide) {
                         // The odd card out: full width, icon beside the text.
-                        Row(box(Modifier.weight(1f).fillMaxHeight()), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        Row(box, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             ToneIcon(c.symbol, tone, 34.dp)
                             Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                                 Text(c.title, style = T.subheadBold, color = Brand.text)
@@ -133,7 +135,7 @@ private fun RightNow(utilities: UtilityLookup?) {
                             }
                         }
                     } else {
-                        Column(box(Modifier.weight(1f).fillMaxHeight().heightIn(min = 128.dp)), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Column(box, verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             ToneIcon(c.symbol, tone, 34.dp)
                             Text(c.title, style = T.subheadBold, color = Brand.text)
                             Text(c.detail, style = T.caption, color = Brand.secondary)
