@@ -6,6 +6,7 @@ import BayCountyKit
 struct AlertsView: View {
     @Environment(StaffStore.self) private var store
     @State private var sending = Launch.screen == "send"
+    @State private var openFirst = Launch.demo && Launch.screen == "alert"
 
     var body: some View {
         Group {
@@ -31,6 +32,7 @@ struct AlertsView: View {
                     }
                 }
                 .navigationDestination(for: StaffAlert.self) { AlertDetailView(alert: $0) }
+                .navigationDestination(isPresented: $openFirst) { if let a = store.alerts.first { AlertDetailView(alert: a) } }
                 .refreshable { await store.refresh() }
             }
         }

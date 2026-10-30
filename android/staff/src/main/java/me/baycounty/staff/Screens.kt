@@ -182,11 +182,12 @@ private data class Tab(val key: String, val label: String, val icon: ImageVector
 @Composable
 fun StaffRoot(model: StaffModel, screen: String?) {
     var tab by remember {
-        mutableStateOf(when (screen) { "alerts", "send" -> "alerts"; "notices", "notice" -> "notices"; "flags", "flag" -> "flags"; "more" -> "more"; else -> "home" })
+        mutableStateOf(when (screen) { "alerts", "send", "alert" -> "alerts"; "notices", "notice" -> "notices"; "flags", "flag" -> "flags"; "more" -> "more"; else -> "home" })
     }
     var page by remember {
         mutableStateOf<Page?>(when (screen) {
             "send" -> Page.SendAlert
+            "alert" -> model.alerts.firstOrNull()?.let { Page.Alert(it) }
             "notice" -> Page.Notice(null)
             "flag" -> model.flags.firstOrNull { it.status == "open" }?.let { Page.Flag(it) }
             "records" -> Page.Records
