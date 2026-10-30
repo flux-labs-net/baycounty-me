@@ -124,16 +124,16 @@ private struct WorkspacePicker: View {
                 }
                 ForEach(me.workspaces) { w in
                     Button { Task { await store.open(w.id) } } label: {
-                        if w.id == store.workspaceId { Label(w.name, systemImage: "checkmark") } else { Text(w.name) }
+                        if w.id == store.workspaceId { Label(Staff.short(w.name), systemImage: "checkmark") } else { Text(Staff.short(w.name)) }
                     }
                 }
             } label: {
                 HStack(spacing: 4) {
-                    Text(store.workspace?.name ?? "All governments").font(.subheadline.weight(.semibold)).lineLimit(1)
+                    Text(Staff.short(store.workspace?.name) ?? "All governments").font(.subheadline.weight(.semibold)).lineLimit(1)
                     Image(systemName: "chevron.down").font(.caption2.weight(.bold))
                 }
             }
-            .accessibilityLabel("Government: \(store.workspace?.name ?? "All governments")")
+            .accessibilityLabel("Government: \(Staff.short(store.workspace?.name) ?? "All governments")")
         }
     }
 }
@@ -149,7 +149,7 @@ struct PickGovernment: View {
                 ForEach(store.me?.workspaces ?? []) { w in
                     Button { Task { await store.open(w.id) } } label: {
                         HStack {
-                            Text(w.name).font(.body.weight(.semibold)).foregroundStyle(.primary)
+                            Text(Staff.short(w.name)).font(.body.weight(.semibold)).foregroundStyle(.primary)
                                 .multilineTextAlignment(.leading).frame(maxWidth: .infinity, alignment: .leading)
                             Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(.tertiary)
                         }

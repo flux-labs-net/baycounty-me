@@ -176,7 +176,7 @@ private struct FlagRow: View {
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 6) {
                 Chip(text: f.statusLabel, color: flagColor(f))
-                if showGov, let g = f.govName { Text(g).font(.caption).foregroundStyle(.secondary) }
+                if showGov, let g = Staff.short(f.govName) { Text(g).font(.caption).foregroundStyle(.secondary) }
             }
             Text(f.subject).font(.body.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
             if let s = f.shownValue, let c = f.correctValue {
@@ -206,7 +206,7 @@ struct FlagDetailView: View {
                     Text(flag.subject).font(.title3.weight(.bold))
                 }
                 .padding(.vertical, 4)
-                if let g = flag.govName { LabeledContent("Government", value: g) }
+                if let g = Staff.short(flag.govName) { LabeledContent("Government", value: g) }
                 LabeledContent("From", value: flag.email)
                 LabeledContent("Sent", value: Staff.when(flag.createdAt))
                 if let s = flag.shownValue { LabeledContent("Site shows", value: s) }

@@ -69,6 +69,9 @@ object Staff {
     )
 
     /** "Oct 30, 8:05 AM" in Bay County time; plain dates as "Nov 12, 2026". */
+    /** Government names as staff say them: "City of Panama City" -> "Panama City". Other names stay whole. */
+    fun short(name: String): String = name.removePrefix("City of ")
+
     fun whenOf(s: String?): String {
         if (s.isNullOrEmpty()) return ""
         return try {

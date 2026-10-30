@@ -135,7 +135,7 @@ private struct GovRow: View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 // Button labels center wrapped text; long names (Clerk of Court and Comptroller) stay left.
-                Text(w.name).font(.body.weight(.semibold)).foregroundStyle(.primary).multilineTextAlignment(.leading)
+                Text(Staff.short(w.name)).font(.body.weight(.semibold)).foregroundStyle(.primary).multilineTextAlignment(.leading)
                 Text(detail).font(.footnote).foregroundStyle(.secondary).lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -191,7 +191,7 @@ struct WorkspaceHomeView: View {
             .padding(16)
         }
         .background(Brand.canvas)
-        .navigationTitle(store.workspace?.name ?? "Home")
+        .navigationTitle(Staff.short(store.workspace?.name) ?? "Home")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { WorkspaceMenu() }
         .refreshable { await store.refresh() }
@@ -238,7 +238,7 @@ struct ActivityList: View {
                         if i > 0 { Divider().padding(.leading, 14) }
                         VStack(alignment: .leading, spacing: 3) {
                             Text(a.sentence).font(.subheadline).fixedSize(horizontal: false, vertical: true)
-                            Text([showGov ? a.govName : nil, Staff.when(a.at)].compactMap { $0 }.joined(separator: " · "))
+                            Text([showGov ? Staff.short(a.govName) : nil, Staff.when(a.at)].compactMap { $0 }.joined(separator: " · "))
                                 .font(.caption).foregroundStyle(.secondary)
                         }
                         .padding(.horizontal, 14).padding(.vertical, 10)
@@ -271,10 +271,10 @@ struct MoreView: View {
             }
             Section("Signed in") {
                 LabeledContent("Email", value: store.me?.email ?? "")
-                LabeledContent("Access", value: store.isOwner ? "Site owner (every government)" : (store.workspace.map { "\($0.roleLabel), \($0.name)" } ?? ""))
+                LabeledContent("Access", value: store.isOwner ? "Site owner (every government)" : (store.workspace.map { "\($0.roleLabel), \(Staff.short($0.name))" } ?? ""))
             }
             if let me = store.me, !me.admin, me.workspaces.count > 1 {
-                Section("Your governments") { ForEach(me.workspaces) { w in LabeledContent(w.name, value: w.roleLabel) } }
+                Section("Your governments") { ForEach(me.workspaces) { w in LabeledContent(Staff.short(w.name), value: w.roleLabel) } }
             }
             Section {
                 Label("Face ID or your passcode after 5 minutes away", systemImage: "faceid")
