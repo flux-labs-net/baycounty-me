@@ -5,8 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -50,7 +52,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** The Today tab: a greeting, what's going on right now (beach flag, notices, next meeting, trash day), your address,
+/** The Today tab: a greeting, what's going on right now (trash pickup on pickup day, beach flag, notices, next meeting), your address,
  *  this weekend's events, what's coming up at city hall, then your tax bill and the big numbers. */
 @Composable
 fun HomeScreen() {
@@ -76,7 +78,7 @@ fun HomeScreen() {
     ) {
         item { Greeting(utilities) }
         item { BallotBanner() }
-        item { RightNow(TodayBrief.trashDays(utilities)) }
+        item { RightNow(utilities) }
         item { AddressCard() }
         item { WeekendSection() }
         item { CityHallSection() }
@@ -102,27 +104,45 @@ private fun Greeting(utilities: UtilityLookup?) {
     }
 }
 
-/** Beach flag, active notices, next meeting and trash day, two by two. Same cards as the site's home page. */
+/** Trash pickup (only on pickup day, or the evening before), beach flag, active notices and next meeting, two by two;
+ *  an odd card out spans the row. Same cards as the site's home page. */
 @Composable
-private fun RightNow(trashDays: String?) {
+private fun RightNow(utilities: UtilityLookup?) {
     val store = LocalStore.current
     val nav = LocalNav.current
-    val cards = TodayBrief.cards(store.rows["beach-conditions"] ?: emptyList(), store.rows["emergency-notices"] ?: emptyList(), store.meetings, trashDays)
-    Grid2(cards) { c, m ->
-        val route = when (c.target) {
-            TodayBrief.Target.BEACHES -> Route.Beaches
-            TodayBrief.Target.EMERGENCY -> Route.Emergency
-            TodayBrief.Target.MEETINGS -> Route.Meetings
-            TodayBrief.Target.UTILITIES -> Route.Utilities(store.home)
-        }
-        val tone = when (c.tone) { "teal" -> Tone.TEAL; "amber" -> Tone.AMBER; "salmon" -> Tone.SALMON; else -> Tone.BLUE }
-        Column(
-            m.heightIn(min = 128.dp).card(16.dp).clickable { nav.push(route) }.padding(14.dp).semantics(mergeDescendants = true) {},
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            ToneIcon(c.symbol, tone, 34.dp)
-            Text(c.title, style = T.subheadBold, color = Brand.text)
-            Text(c.detail, style = T.caption, color = Brand.secondary)
+    val cards = TodayBrief.cards(store.rows["beach-conditions"] ?: emptyList(), store.rows["emergency-notices"] ?: emptyList(), store.meetings, utilities)
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        for (pair in cards.chunked(2)) {
+            Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                for (c in pair) {
+                    val route = when (c.target) {
+                        TodayBrief.Target.BEACHES -> Route.Beaches
+                        TodayBrief.Target.EMERGENCY -> Route.Emergency
+                        TodayBrief.Target.MEETINGS -> Route.Meetings
+                        TodayBrief.Target.UTILITIES -> Route.Utilities(store.home)
+                    }
+                    val tone = when (c.tone) { "teal" -> Tone.TEAL; "amber" -> Tone.AMBER; "salmon" -> Tone.SALMON; else -> Tone.BLUE }
+                    val wide = pair.size == 1
+                    val box = Modifier.weight(1f).fillMaxHeight().then(if (wide) Modifier else Modifier.heightIn(min = 128.dp))
+                        .card(16.dp).clickable { nav.push(route) }.padding(14.dp).semantics(mergeDescendants = true) {}
+                    if (wide) {
+                        // The odd card out: full width, icon beside the text.
+                        Row(box, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            ToneIcon(c.symbol, tone, 34.dp)
+                            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                Text(c.title, style = T.subheadBold, color = Brand.text)
+                                Text(c.detail, style = T.caption, color = Brand.secondary)
+                            }
+                        }
+                    } else {
+                        Column(box, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            ToneIcon(c.symbol, tone, 34.dp)
+                            Text(c.title, style = T.subheadBold, color = Brand.text)
+                            Text(c.detail, style = T.caption, color = Brand.secondary)
+                        }
+                    }
+                }
+            }
         }
     }
 }

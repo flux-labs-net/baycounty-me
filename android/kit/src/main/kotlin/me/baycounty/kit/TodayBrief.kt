@@ -7,8 +7,8 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** The top of the app's Today tab: a greeting, four "right now" cards (beach flag, active notices, next meeting,
- *  trash day) and this weekend's events. Same rules and wording as the site's home page (site/home.py `_today`).
+/** The top of the app's Today tab: a greeting, the "right now" cards (trash pickup only around pickup day, beach
+ *  flag, active notices, next meeting) and this weekend's events. Same rules and wording as the site's home page (site/home.py `_today`).
  *  Mirrors the Swift `TodayBrief`. */
 object TodayBrief {
     enum class Target { BEACHES, EMERGENCY, MEETINGS, UTILITIES }
@@ -30,10 +30,10 @@ object TodayBrief {
         return d.format(DateTimeFormatter.ofPattern("EEEE, MMM d", Locale.US))
     }
 
-    /** The four cards. `beach` is the beach-conditions dataset, `notices` emergency-notices, `trashDays` the garbage
-     *  pickup days at the saved home when they were looked up. */
-    fun cards(beach: List<Row>, notices: List<Row>, meetings: List<Meeting>, trashDays: String?, now: Instant = Instant.now()): List<Card> =
-        listOf(beachCard(beach), noticesCard(notices), meetingCard(meetings, now), trashCard(trashDays))
+    /** The "right now" cards. `beach` is the beach-conditions dataset, `notices` emergency-notices, `utilities` the
+     *  saved home's utilities lookup. The trash card leads, and only on pickup day (or the evening before). */
+    fun cards(beach: List<Row>, notices: List<Row>, meetings: List<Meeting>, utilities: UtilityLookup?, now: Instant = Instant.now()): List<Card> =
+        listOfNotNull(trashCard(utilities, now), beachCard(beach), noticesCard(notices), meetingCard(meetings, now))
 
     fun beachCard(rows: List<Row>): Card {
         val now = Outdoors.forecast(rows).firstOrNull()
@@ -66,12 +66,46 @@ object TodayBrief {
         return Card("meeting", "calendar", "blue", "Next meeting · $day", m.boardName, Target.MEETINGS)
     }
 
-    fun trashCard(days: String?): Card =
-        if (!days.isNullOrEmpty()) Card("trash", "trash", "teal", "Trash day: $days", "At your home", Target.UTILITIES)
-        else Card("trash", "trash", "teal", "Trash day", "Your pickup day and who provides water and power", Target.UTILITIES)
+    /** The trash card for the saved home, or null: shown on garbage pickup day, and from 4 p.m. the day before
+     *  ("put it out tonight"). A holiday with no pickup says so instead. Same rules as the site's home.js `BCTrashCard`. */
+    fun trashCard(lookup: UtilityLookup?, now: Instant = Instant.now()): Card? =
+        lookup?.let { trashCard(trashDays(it), it.holidays, now) }
+
+    fun trashCard(days: String?, holidays: List<UtilityLookup.Holiday>, now: Instant): Card? {
+        if (days.isNullOrEmpty()) return null
+        val local = now.atZone(central)
+        val today = local.toLocalDate()
+        fun runs(d: LocalDate) = Regex("\\b${weekdays[d.dayOfWeek.value % 7]}\\b", RegexOption.IGNORE_CASE).containsMatchIn(days)
+        fun card(d: LocalDate, word: String, detail: String): Card {
+            val h = holidays.firstOrNull { Regex("^(no pickup|moved)", RegexOption.IGNORE_CASE).containsMatchIn(it.garbage ?: "") && isOn(it.whenObserved, d) }
+                ?: return Card("trash", "trash", "teal", "Trash pickup $word", detail, Target.UTILITIES)
+            // "No pickup; in 2025 Thursday's route moved to Saturday, December 27": a note about another year is left off.
+            val note = (h.garbage ?: "").replace(Regex("^no pickup[;,.]?\\s*", RegexOption.IGNORE_CASE), "")
+            val rest = if (Regex("\\b20\\d\\d\\b").findAll(note).any { it.value.toInt() != d.year }) "" else note
+            return Card("trash", "trash", "teal", "No trash pickup $word",
+                if (rest.isEmpty()) h.holiday else "${h.holiday} · ${rest.replaceFirstChar { it.uppercase() }}", Target.UTILITIES)
+        }
+        if (runs(today)) return card(today, "today", "At your home")
+        if (local.hour >= 16 && runs(today.plusDays(1))) return card(today.plusDays(1), "tomorrow", "Put it out tonight")
+        return null
+    }
+
+    private val weekdays = listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+    private val months = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+
+    /** Whether a holiday's "when" falls on the day: "January 1", "4th Thursday in November", "Last Monday in May". */
+    fun isOn(whenText: String?, d: LocalDate): Boolean {
+        val parts = (whenText ?: "").split(" ")
+        val month = d.monthValue - 1
+        if (parts.size == 2) { val n = parts[1].toIntOrNull() ?: return false; return months.indexOf(parts[0]) == month && n == d.dayOfMonth }
+        if (parts.size != 4 || parts[2].lowercase() != "in" || months.indexOf(parts[3]) != month || weekdays.indexOf(parts[1]) != d.dayOfWeek.value % 7) return false
+        if (parts[0].lowercase() == "last") return d.dayOfMonth + 7 > d.lengthOfMonth()
+        val n = parts[0].takeWhile { it.isDigit() }.toIntOrNull() ?: return false
+        return (d.dayOfMonth + 6) / 7 == n
+    }
 
     /** Garbage pickup days from a utilities lookup ("Friday"), or null. */
-    fun trashDays(lookup: UtilityLookup?): String? = lookup?.pickup?.firstOrNull { it.service == "garbage" }?.days
+    fun trashDays(lookup: UtilityLookup?): String? = lookup?.pickup?.firstOrNull { it.service == "garbage" && !it.days.isNullOrEmpty() }?.days
 
     /** The weekend the Today tab shows: today through Sunday on Friday, Saturday and Sunday, else the coming Friday
      *  through Sunday. Both yyyy-MM-dd. */

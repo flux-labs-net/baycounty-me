@@ -149,7 +149,8 @@ def _doors():
 
 
 def _today():
-    """Live cards: today's beach flag, active alerts, the next public meeting, and trash day (by address)."""
+    """Live cards: today's beach flag, active alerts and the next public meeting. A signed-in resident's trash card
+    (#hTrash) stays hidden unless their saved home's pickup is today, or tomorrow once it's evening (home.js)."""
     from datetime import datetime
     from page_datasets import beach_conditions, emergency_notices
     from govs import _load
@@ -183,8 +184,9 @@ def _today():
         meet = card('/meetings', 'calendar', 'blue', 'Next meeting · ' + when, html.escape(boards.get(m0['board'], {}).get('name') or m0['board']))
     else:
         meet = card('/meetings', 'calendar', 'blue', 'Meetings', 'When every board meets, with agendas')
-    trash = card('/utilities', 'drop', 'teal', 'Trash day', 'Your pickup day and who provides water, power and internet')
-    return beach + alerts + meet + trash
+    trash = (f'<a class="h-td" id="hTrash" href="/utilities" hidden>{ico('trash', 'teal')}<span><b id="hTrashT"></b>'
+             f'<span id="hTrashS"></span></span></a>')
+    return trash + beach + alerts + meet
 
 
 def home_page():

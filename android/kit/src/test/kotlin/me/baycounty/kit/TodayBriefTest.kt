@@ -34,9 +34,43 @@ class TodayBriefTest {
         assertEquals("No active alerts", TodayBrief.noticesCard(emptyList()).title)
     }
 
-    @Test fun trashCard() {
-        assertEquals("Trash day: Friday", TodayBrief.trashCard("Friday").title)
-        assertEquals("Trash day", TodayBrief.trashCard(null).title)
+    /** The trash card shows only on pickup day, or from 4 p.m. the day before. Same cases as the site's BCTrashCard. */
+    @Test fun trashCardOnlyAroundPickupDay() {
+        val at = { m: Int, d: Int, h: Int -> java.time.ZonedDateTime.of(2026, m, d, h, 0, 0, 0, java.time.ZoneId.of("America/Chicago")).toInstant() }
+        val holidays = listOf(
+            UtilityLookup.Holiday(holiday = "Thanksgiving Day", whenObserved = "4th Thursday in November", garbage = "Moved to the Saturday after"),
+            UtilityLookup.Holiday(holiday = "Memorial Day", whenObserved = "Last Monday in May", garbage = "No pickup"),
+            UtilityLookup.Holiday(holiday = "Labor Day", whenObserved = "1st Monday in September", garbage = "Normal"),
+            UtilityLookup.Holiday(holiday = "Christmas Day", whenObserved = "December 25", garbage = "No pickup; in 2025 Thursday's route moved to Saturday, December 27"),
+            UtilityLookup.Holiday(holiday = "New Year's Day", whenObserved = "January 1", garbage = "No pickup; in 2026 Thursday's route moved to Saturday, January 3"),
+        )
+        val card = { m: Int, d: Int, h: Int -> TodayBrief.trashCard("Monday, Thursday", holidays, at(m, d, h)) }
+        assertEquals("Trash pickup today", card(10, 29, 9)?.title)       // Thursday
+        assertEquals("At your home", card(10, 29, 9)?.detail)
+        assertEquals(null, card(10, 30, 9))                               // Friday
+        assertEquals(null, card(11, 1, 14))                               // Sunday afternoon
+        assertEquals("Trash pickup tomorrow", card(11, 1, 17)?.title)    // Sunday evening
+        assertEquals("Put it out tonight", card(11, 1, 17)?.detail)
+        assertEquals("No trash pickup today", card(11, 26, 8)?.title)    // Thanksgiving
+        assertEquals("Thanksgiving Day · Moved to the Saturday after", card(11, 26, 8)?.detail)
+        assertEquals("No trash pickup tomorrow", card(11, 25, 18)?.title)
+        assertEquals("Memorial Day", card(5, 25, 8)?.detail)             // last Monday in May
+        assertEquals("Trash pickup today", card(5, 18, 8)?.title)        // not the last Monday
+        assertEquals("Trash pickup today", card(9, 7, 8)?.title)         // Labor Day pickup is normal
+        assertEquals("Christmas Day", TodayBrief.trashCard("Friday", holidays, at(12, 25, 8))?.detail)   // the 2025 note is left off
+        assertEquals("New Year's Day · In 2026 Thursday's route moved to Saturday, January 3",
+            TodayBrief.trashCard("Thursday", holidays, java.time.ZonedDateTime.of(2026, 1, 1, 8, 0, 0, 0, java.time.ZoneId.of("America/Chicago")).toInstant())?.detail)
+        assertEquals(null, TodayBrief.trashCard(null, emptyList(), at(10, 29, 9)))
+        assertEquals(null, TodayBrief.trashCard(null))
+    }
+
+    @Test fun cardsLeadWithTrashOnlyOnPickupDay() {
+        val home = UtilityLookup.decode(java.io.File(Repo.fixtures, "utilities-lynn-haven.json").readText())   // garbage on Friday
+        val fri = java.time.ZonedDateTime.of(2026, 10, 30, 8, 0, 0, 0, java.time.ZoneId.of("America/Chicago")).toInstant()
+        val wed = java.time.ZonedDateTime.of(2026, 10, 28, 8, 0, 0, 0, java.time.ZoneId.of("America/Chicago")).toInstant()
+        assertEquals(listOf("trash", "beach", "notices", "meeting"), TodayBrief.cards(emptyList(), emptyList(), emptyList(), home, fri).map { it.id })
+        assertEquals(listOf("beach", "notices", "meeting"), TodayBrief.cards(emptyList(), emptyList(), emptyList(), home, wed).map { it.id })
+        assertEquals(3, TodayBrief.cards(emptyList(), emptyList(), emptyList(), null, fri).size)
     }
 
     @Test fun weekendWindow() {

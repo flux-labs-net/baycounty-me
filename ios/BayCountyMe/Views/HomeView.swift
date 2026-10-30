@@ -1,7 +1,7 @@
 import SwiftUI
 import BayCountyKit
 
-/// The Today tab: a greeting, what's going on right now (beach flag, notices, next meeting, trash day), your address,
+/// The Today tab: a greeting, what's going on right now (trash pickup on pickup day, beach flag, notices, next meeting), your address,
 /// this weekend's events, what's coming up at city hall, then your tax bill and the big numbers.
 struct HomeView: View {
     @Environment(AppStore.self) private var store
@@ -96,14 +96,21 @@ struct HomeView: View {
 
     // MARK: Right now
 
-    /// Beach flag, active notices, next meeting and trash day, two by two. Same cards as the site's home page.
+    /// Trash pickup (only on pickup day, or the evening before), beach flag, active notices and next meeting, two by
+    /// two; an odd card out spans the row. Same cards as the site's home page.
     private var rightNow: some View {
         let cards = TodayBrief.cards(beach: store.rows["beach-conditions"] ?? [], notices: store.rows["emergency-notices"] ?? [],
-                                     meetings: store.meetings, trashDays: TodayBrief.trashDays(utilities))
-        return LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
-            ForEach(cards) { c in
-                NavigationLink(value: route(c.target)) { RightNowCard(card: c) }
-                    .buttonStyle(PressScale())
+                                     meetings: store.meetings, utilities: utilities)
+        let rows = stride(from: 0, to: cards.count, by: 2).map { Array(cards[$0..<min($0 + 2, cards.count)]) }
+        return VStack(spacing: 10) {
+            ForEach(rows, id: \.self) { pair in
+                HStack(spacing: 10) {
+                    ForEach(pair) { c in
+                        NavigationLink(value: route(c.target)) { RightNowCard(card: c, wide: pair.count == 1) }
+                            .buttonStyle(PressScale())
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .accessibilityIdentifier("rightNow")
