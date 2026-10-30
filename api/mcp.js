@@ -135,8 +135,16 @@ const TOOLS = [
   {name: 'emergency_now', title: 'Emergencies and alerts now',
    description: 'What is happening now in Bay County: active National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and storm updates from the county and cities, checked every 5 minutes, most serious first. Always tell people to follow instructions from emergency officials.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
-     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm'], description: 'Only this kind of notice'},
+     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm', 'safety'], description: 'Only this kind of notice'},
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25}}},
+   annotations: {readOnlyHint: true}},
+  {name: 'emergency_timeline', title: 'Recent emergency alerts',
+   description: 'Every emergency alert in Bay County over the last days (up to 90), newest first: weather warnings, evacuation orders, public safety alerts (FEMA IPAWS), shelter openings, boil-water notices, road closures. Each has when it started and ended and how many people BayCounty.me sent it to by push, email and text. Use it for questions like "were there any boil-water notices in Lynn Haven this month?".',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     days: {type: 'integer', minimum: 1, maximum: 90, default: 30},
+     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm', 'safety'], description: 'Only this kind of notice'},
+     gov: {type: 'string', enum: ['county', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb'], description: 'One government, plus the countywide alerts that reach it'},
+     limit: {type: 'integer', minimum: 1, maximum: 200, default: 50}}},
    annotations: {readOnlyHint: true}},
   {name: 'evacuation_zone', title: 'Evacuation zone for an address',
    description: 'The hurricane evacuation zone (A to D, or none) for a Bay County street address or point, what it means, whether an evacuation order covers it now, and the nearest county shelters.',
@@ -383,6 +391,12 @@ async function call(req, name, a = {}) {
       notices: notices.map(n => ({kind: n.kind, title: n.title, event: n.event, severity: n.severity, zones: n.zones, area: n.area, source: n.source, issued: n.issued, ends: n.ends, instruction: n.instruction, url: n.url, page: n.page})),
       zones_ordered: d.zones.filter(z => z.ordered).map(z => z.zone), page: d.links.page, note: d.note};
   }
+  if (name === 'emergency_timeline') {
+    const d = await require('./_emergency_feed').timeline(req, await load(req, '/downloads/index.json'), {days: a.days, kind: a.kind, gov: a.gov});
+    const items = d.items.slice(0, Math.min(a.limit || 50, 200));
+    req._rows = items.length;
+    return {days: d.days, total: d.total, counts: d.counts, reached: d.reached, items, page: 'https://baycounty.me/emergency#timeline', note: d.note};
+  }
   if (name === 'evacuation_zone') {
     if (!a.address && (a.lat == null || a.lng == null)) throw new Error('address, or lat and lng, is required');
     return require('./_emergency_feed').zoneLookup(req, await load(req, '/downloads/index.json'), {address: a.address, lat: a.lat, lng: a.lng});
@@ -426,7 +440,7 @@ async function handle0(req, msg) {
     const v = VERSIONS.includes(params.protocolVersion) ? params.protocolVersion : VERSIONS[0];
     return ok(id, {protocolVersion: v, capabilities: {tools: {listChanged: false}, resources: {listChanged: false, subscribe: false}},
       serverInfo: {name: 'baycounty-me', title: 'BayCounty.me', version: '1.0.0', websiteUrl: SITE},
-      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile, official_correspondence, emergency_now and evacuation_zone answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
+      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile, official_correspondence, emergency_now, emergency_timeline and evacuation_zone answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
   }
   if (method === 'ping') return ok(id, {});
   if (method === 'tools/list') return ok(id, {tools: TOOLS});

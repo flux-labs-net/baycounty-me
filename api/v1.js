@@ -22,6 +22,7 @@
 //   GET /api/v1/import-progress         how far the minutes backfill has got, per board and year (api/_progress.js)
 //   GET /api/v1/schools?address=|lat=&lon=  the elementary, middle and high school zoned for a place (api/_schools.js)
 //   GET /api/v1/emergency               live weather alerts, evacuation orders, shelters, boil-water notices, road closures (api/_emergency_feed.js)
+//   GET /api/v1/emergency-timeline?days=&kind=&gov=  every alert of the last days: started, ended, people reached (api/_emergency_feed.js)
 //   GET /api/v1/evacuation-zone?address= (or ?lat=&lng=)  the hurricane evacuation zone for a Bay County address
 //   GET /api/v1/utilities?lat=&lon=     water, sewer, power, gas, trash provider and pickup days at an address (api/_utilities.js)
 //   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
@@ -210,8 +211,13 @@ function openapi(catalog) {
           400: {description: 'A bad location or an address with no house number'}, 404: {description: 'No matching address'}}}},
       '/emergency': {get: {operationId: 'emergencyNow', summary: 'What is happening now: National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and water outages for Bay County',
         description: 'Live notices, checked every 5 minutes from the National Weather Service, the county and city alert centers and news, FL511 and the county shelter page; most serious first. headline is one sentence for the whole county. counts has the number of live notices per kind (evacuation, weather, shelter, boil-water, road, utility, storm). shelters lists every county shelter with its latest posted status. zones lists evacuation zones A to D and whether an order names each. A notice its source posted twice (re-posted with an update) is one notice: the newest version, with first_posted (when the first version was posted) and versions (every version, newest first). Past notices: the emergency-notices dataset.',
-        parameters: [p('kind', 'Only one kind of notice: evacuation, weather, shelter, boil-water, road, utility, storm', {type: 'string'})],
+        parameters: [p('kind', 'Only one kind of notice: evacuation, weather, shelter, boil-water, road, utility, storm, safety', {type: 'string'})],
         responses: {200: {description: '{place, checked_at, data_source, headline, counts, shelters_open, notices: [{notice_id, kind, source, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, status, full_closure, roadway, url, page}], shelters: [{shelter_id, name, address, type, group, status, status_as_of, lat, lng, evacuation_zone}], zones: [{zone, where_it_is, when_ordered, plain, ordered}], sources_ok, source_errors, links, note}'}}}},
+      '/emergency-timeline': {get: {operationId: 'emergencyTimeline', summary: 'Every emergency alert of the last days (up to 90): when each started and ended, and how many phones and inboxes it was sent to',
+        description: 'The alert history behind the timeline on /emergency: weather warnings, evacuation orders, public safety alerts from FEMA IPAWS, shelter openings, boil-water notices, road closures and outages, newest first. reach counts how many people each channel (push, email, sms) sent it to; counts only, nobody is named. gov keeps one government\'s notices plus the countywide ones that reach it (weather, IPAWS, shelters).',
+        parameters: [p('days', 'How many days back, 1 to 90 (default 30)', {type: 'integer'}), p('kind', 'One kind: evacuation, weather, shelter, boil-water, road, utility, storm, safety', {type: 'string'}),
+          p('gov', 'One government: county, pc, pcb, lh, cw, sp, parker, mb', {type: 'string'})],
+        responses: {200: {description: '{place, days, kind, gov, total, counts, labels, governments, reached, items: [{notice_id, kind, label, title, event, severity, source, source_type, gov_id, zones, area, started, ended, active, status, reach: {push, email, sms}, people, url, page}], note}'}}}},
       '/evacuation-zone': {get: {operationId: 'evacuationZone', summary: 'The hurricane evacuation zone (A to D, or none) for a Bay County street address or map point, any evacuation order now in effect for it, and the three nearest shelters',
         description: 'The address is matched to Bay County\'s address points (house number and street; city and ZIP are ignored), then to the county\'s evacuation zone map.',
         parameters: [p('address', 'Street address, e.g. 825 Ohio Ave'), p('lat', 'Latitude (instead of address)', {type: 'number'}), p('lng', 'Longitude', {type: 'number'})],
@@ -426,6 +432,12 @@ module.exports = async (req, res) => {
       const r = await F.liveFeed(req, catalog, {place: 'fl-bay'});
       if (req.query.kind) r.notices = r.notices.filter(n => n.kind === String(req.query.kind));
       info.rows = r.notices.length;
+      return res.status(200).json(r);
+    }
+    if (parts[0] === 'emergency-timeline') {
+      res.locals.lastModified = null;
+      const r = await require('./_emergency_feed').timeline(req, catalog, req.query, {place: 'fl-bay'});
+      info.rows = r.items.length;
       return res.status(200).json(r);
     }
     if (parts[0] === 'evacuation-zone') {
