@@ -89,10 +89,11 @@ final class AppStore {
     }
 
     init() {
-        if let d = UserDefaults.standard.data(forKey: "home") { home = try? JSONDecoder().decode(AddressMatch.self, from: d) }
+        let saved = UserDefaults.standard.data(forKey: "home").flatMap { try? JSONDecoder().decode(AddressMatch.self, from: $0) }
+        home = saved
         tenure = UserDefaults.standard.string(forKey: "tenure").flatMap(HomeTiles.Tenure.init(rawValue:))
         // Screenshot runs (-screen) and residents who already saved a home before this screen existed skip it.
-        setupSeen = UserDefaults.standard.bool(forKey: "setupSeen") || ProcessInfo.processInfo.arguments.contains("-screen") || home != nil
+        setupSeen = UserDefaults.standard.bool(forKey: "setupSeen") || ProcessInfo.processInfo.arguments.contains("-screen") || saved != nil
         // Screenshots: `-tenure own|rent|unset` draws the Home tab for that answer without saving it.
         let a = ProcessInfo.processInfo.arguments
         if let i = a.firstIndex(of: "-tenure"), i + 1 < a.count { tenure = HomeTiles.Tenure(rawValue: a[i + 1]) }
