@@ -1923,6 +1923,22 @@ def checkbook_payments():
     return []
 
 
+# Records each government sends from the government workspace (Send records, migration 0092): written to the database
+# when staff publish, never by the site build.
+BOARD_APPOINTMENT_COLUMNS = ['government', 'board', 'seat', 'person', 'appointed_by', 'term_start', 'term_end', 'notes', 'source_url', 'source_title', 'gov_id']
+DB_ONLY_COLUMNS['board-appointments'] = {c: 'string' for c in BOARD_APPOINTMENT_COLUMNS}
+FEE_CHANGE_COLUMNS = ['government', 'fee', 'category', 'old_amount', 'new_amount', 'unit', 'effective_date', 'adopted_by', 'source_url', 'source_title', 'gov_id']
+DB_ONLY_COLUMNS['fee-changes'] = {c: ('number' if c in ('old_amount', 'new_amount') else 'string') for c in FEE_CHANGE_COLUMNS}
+
+
+def board_appointments():
+    return []
+
+
+def fee_changes():
+    return []
+
+
 def budget_actuals():
     return []
 
@@ -2212,6 +2228,8 @@ DATASETS = [
     ('data-source-sites', 'Websites our records cite', "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.", data_source_sites),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),
     ('checkbook-payments', 'Checkbook: every payment', "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.", checkbook_payments),
+    ('board-appointments', 'Board appointments', "Who sits on each advisory board, committee and authority a Bay County government appoints, as the government sends it from its BayCounty.me workspace: the board, the seat, the member's name, who appointed them, and the term (term_start, term_end; blank term_end = no end date given). Appointees are named because a public appointment is public record; no addresses, phone numbers or emails. source_title says which government sent it and when.", board_appointments),
+    ('fee-changes', 'Fee and rate changes', "New and changed fees and utility rates, as each government sends them from its BayCounty.me workspace: the fee, a category (utility, trash, permit, parks, impact, license, other), old_amount (blank for a new fee), new_amount, the unit (per month, per 1,000 gallons, each), effective_date and the ordinance or resolution that adopted it. source_title says which government sent it and when.", fee_changes),
     ('budget-actuals', 'Budget vs. actual, month by month', "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).", budget_actuals),
     ('cra-agencies', 'CRAs: tax increment by agency', "One row per Community Redevelopment Agency that collects tax increment in Bay County: when it was created, its base year, the FY2025 increment and how much of it Bay County and the city paid, the total on record, its sunset date and what that date rests on, and the increment still to come under a 3%, 6% or 9% growth scenario. sunset_assumed is true where the CRA's plan was not found.", cra_agencies),
     ('cra-tax-increment', 'CRAs: tax increment by year', "Property tax paid to each CRA by fiscal year, split between Bay County and the city by millage. scenario history: basis reported (from CRA reports, audits and budgets) or filled gap (between two reported years). scenario low, mid, high: FY2026 to the CRA's sunset, from adopted budgets where they exist, then 3%, 6% or 9% growth a year (Front Beach Road capped at $30M). Schools and the water management district are exempt and pay nothing.", cra_tax_increment),

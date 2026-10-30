@@ -41,3 +41,13 @@ test('only mail to hello@ counts as correspondence', () => {
   assert.ok(forInbox({to: ['BayCounty.me <hello@baycounty.me>']}));
   assert.ok(!forInbox({to: ['ingest@baycounty.me']}));
 });
+
+test('public mail hides residents’ details but keeps government addresses', () => {
+  const {redact, shownAddress} = require('../_redact');
+  const gov = new Set(['cityoflynnhaven.com', 'baycounty.me']);
+  const s = redact('Call 850-555-0142 or (850) 555-0199 ext 12, write jo@gmail.com, cc clerk@cityoflynnhaven.com. Lives at 1204 N Magnolia Ave Apt 3. SSN 123-45-6789. Budget is $1,250,000 for FY2026.', {govDomains: gov, phrases: ['Jo Smith']});
+  assert.equal(s, 'Call [phone hidden] or [phone hidden], write [email hidden], cc clerk@cityoflynnhaven.com. Lives at [address hidden]. SSN [number hidden]. Budget is $1,250,000 for FY2026.');
+  assert.equal(redact('Jo Smith asked.', {phrases: ['jo smith']}), '[name hidden] asked.');
+  assert.equal(shownAddress('Finance@CityOfLynnHaven.com', gov), 'finance@cityoflynnhaven.com');
+  assert.equal(shownAddress('a@gmail.com', gov), null);
+});

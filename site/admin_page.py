@@ -237,11 +237,11 @@ MENU = [
     ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
                                   ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'), ('names', 'Name matches', None),
                                   ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting'),
-                                  ('govflags', 'Staff data flags', 'govflags')]),
+                                  ('filereview', 'Sent files to check', 'filereview'), ('govflags', 'Staff data flags', 'govflags')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
-                                     ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
+                                     ('sent', 'Sent mail', None), ('intake', 'Email intake log', None), ('emails', 'Email templates', None)]),
     ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None), ('govstaff', 'Government staff', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
@@ -445,6 +445,21 @@ def admin_page(out_dir):
       <p class="muted small" id="se-foot"></p>
     </section>
 
+    <section id="tab-intake" class="pane" hidden>
+      <p class="muted small" style="margin:0 0 12px">Every email that reached a government’s address at ingest.baycounty.me: when it was sent, received, signed and logged, who it was from, whether it was accepted and why, and each file’s SHA-256 with what happened to it next. Rows are locked: they can’t be edited or deleted. Refused and dropped emails keep only the envelope; nothing inside them is opened.</p>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:0 0 12px">
+        <label class="small">From <input class="sel" type="date" id="ir-from"></label>
+        <label class="small">To <input class="sel" type="date" id="ir-to"></label>
+        <select class="sel" id="ir-ws" aria-label="Government"><option value="">All governments</option></select>
+        <span class="grow"></span>
+        <a class="btn" id="ir-csv" href="#" download>Download CSV</a><a class="btn primary" id="ir-print" href="#" target="_blank" rel="noopener">Printable report</a>
+      </div>
+      <div id="ir-banner"></div>
+      <div class="tiles" id="ir-tiles"></div>
+      <div class="tw"><table class="at" id="ir-table" data-tt="off"><thead><tr><th>Logged</th><th>From</th><th>To</th><th>Decision</th><th>Files</th><th class="md-hide">Events</th></tr></thead><tbody></tbody></table></div>
+      <div class="card" id="ir-detail" hidden style="margin-top:14px"></div>
+    </section>
+
     <section id="tab-emails" class="pane" hidden>
       <div class="em">
         <div>
@@ -556,10 +571,16 @@ def admin_page(out_dir):
         <h2 class="h2 grow" style="margin:0">People</h2>
         <select class="sel" id="gs-gov" aria-label="Government"></select>
         <input class="sel" id="gs-email" type="email" placeholder="name@city.gov" aria-label="Email">
-        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option></select>
+        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="records">Records sender</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option></select>
         <button class="btn" id="gs-add" type="button">Give access</button>
       </div>
       <div class="tw"><table class="at" id="gs-table" data-tt="off"><thead><tr><th>Government</th><th>Email</th><th>Access</th><th>Added by</th><th>Since</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-filereview" class="pane" hidden>
+      <div class="banner"><div><b>Files governments sent that didn’t pass every check.</b> <span class="small muted">We never take a government’s file as the true source. Each one is checked against records we collect ourselves: approvals and votes from agendas and minutes, adopted budgets, the state’s yearly figures, published pay and check-number gaps. Files where everything matched are already public. These have a mismatch, something missing or records we couldn’t confirm. <b>Publish</b> puts the file’s records on the site with what we found; <b>Keep off the site</b> needs a reason. Both are final and go in the audit trail.</span></div></div>
+      <div class="row" style="margin-bottom:12px"><select class="sel" id="fr-status" aria-label="Status"><option value="open">Waiting for you</option><option value="decided">Decided (last 90 days)</option></select></div>
+      <div id="fr-list"><p class="muted">Loading…</p></div>
     </section>
 
     <section id="tab-govflags" class="pane" hidden>

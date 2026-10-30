@@ -804,8 +804,8 @@ PAGES = [
     ('/elections/past', 'Past local elections, 2016 to 2025', 'Every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers, with what each raised and spent and which businesses and groups gave.', past_elections_page),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
-    ('/correspondence', 'Letters to officials',
-     'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
+    ('/correspondence', 'Government mail',
+     'Every email between BayCounty.me and Bay County officials and governments, start to finish: letters, records requests and records sent in, read-only, with residents’ details hidden.', lambda: correspondence_page(OUT)),
     ('/connections/shared-owners', 'Shared-owner campaign gifts',
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/events', 'Events in Bay County',
@@ -938,6 +938,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
     shutil.copy(os.path.join(ROOT, 'events.js'), os.path.join(OUT, 'assets', 'events.js'))
     shutil.copy(os.path.join(ROOT, 'staff_posts.js'), os.path.join(OUT, 'assets', 'staff-posts.js'))  # live staff posts on /notices, /events, /jobs
+    shutil.copy(os.path.join(ROOT, 'records_sent.js'), os.path.join(OUT, 'assets', 'records-sent.js'))  # records governments send (/data-sources, contracts)
     shutil.copy(os.path.join(ROOT, 'area_map.js'), os.path.join(OUT, 'assets', 'area-map.js'))  # maps on staff alerts and notices (/staff, /emergency, /notices)
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)

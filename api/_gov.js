@@ -10,9 +10,12 @@
 const crypto = require('crypto');
 const {session: adminSession, admins} = require('./_session');
 
-const ROLES = {viewer: 1, auditor: 1, publisher: 2, alert_sender: 3, owner: 4};
-const CAN = {read: 1, publish: 2, alert: 3, manage: 4};
-const ROLE_LABEL = {owner: 'Owner', alert_sender: 'Alert sender', publisher: 'Publisher', viewer: 'Viewer', auditor: 'Auditor'};
+// records: a finance or clerk contact who sends records (Send records tab) and reads everything else, nothing more.
+const ROLES = {viewer: 1, auditor: 1, records: 1, publisher: 2, alert_sender: 3, owner: 4};
+const CAN = {read: 1, submit: 2, publish: 2, alert: 3, manage: 4};
+const ROLE_LABEL = {owner: 'Owner', alert_sender: 'Alert sender', publisher: 'Publisher', records: 'Records sender', viewer: 'Viewer', auditor: 'Auditor'};
+// Sending records: the records role, or publisher and up.
+const allowed = (role, need) => (ROLES[role] || 0) >= CAN[need] || (need === 'submit' && role === 'records');
 const COOKIE = 'bcm_gov';
 const SESSION_DAYS = 14;
 const CODE_MINUTES = 10;
@@ -121,8 +124,8 @@ async function requireRole(q, who, ws, need) {
     if (!m) throw bad('You don’t have access to this workspace.', 404);
     role = m.role;
   }
-  if ((ROLES[role] || 0) < CAN[need]) {
-    const want = {publish: 'publisher', alert: 'alert sender', manage: 'owner'}[need] || 'viewer';
+  if (!allowed(role, need)) {
+    const want = {publish: 'publisher', submit: 'records sender', alert: 'alert sender', manage: 'owner'}[need] || 'viewer';
     throw bad(`This needs ${want} access. Ask your workspace owner.`, 403);
   }
   return {role, workspace: w};

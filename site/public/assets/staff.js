@@ -6,15 +6,18 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const when = s => { if (!s) return '—'; const d = new Date(s); return isNaN(d) ? esc(s) : d.toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}); };
   const day = s => { if (!s) return ''; const d = new Date(String(s).length <= 10 ? s + 'T12:00:00' : s); return isNaN(d) ? esc(s) : d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}); };
-  const ROLE = {viewer: 1, auditor: 1, publisher: 2, alert_sender: 3, owner: 4};
+  const ROLE = {viewer: 1, auditor: 1, records: 1, publisher: 2, alert_sender: 3, owner: 4};
   const ACTIONS = {signed_in: 'signed in', notice_posted: 'posted a notice', notice_edited: 'changed a notice', notice_withdrawn: 'withdrew a notice',
     event_posted: 'posted an event', event_edited: 'changed an event', event_withdrawn: 'withdrew an event', job_posted: 'posted a job', job_edited: 'changed a job',
     job_withdrawn: 'withdrew a job', alert_sent: 'sent an alert', alert_drafted: 'saved a countywide alert for a second person to confirm', alert_confirmed: 'confirmed an alert',
     alert_ended: 'ended an alert', alert_cancelled: 'cancelled an alert', data_flagged: 'flagged record data', flag_answered: 'BayCounty.me answered a flag',
-    member_set: 'changed access', member_removed: 'removed access'};
+    member_set: 'changed access', member_removed: 'removed access', records_published: 'published records', records_withdrawn: 'withdrew records', records_confirmed: 'confirmed a file',
+    records_review_published: 'published a file after review', records_review_held: 'kept a file off the site after review', intake_senders_changed: 'changed who may email records in',
+    feed_agreed: 'agreed to a source we read', feed_unagreed: 'took back agreement to a source'};
 
   let me = null, ws = null, wsInfo = null, role = 'viewer';
-  const can = r => (ROLE[role] || 0) >= (ROLE[r] || 9);
+  // submit = send records: the records role, or publisher and up.
+  const can = r => r === 'submit' ? role === 'records' || (ROLE[role] || 0) >= 2 : (ROLE[role] || 0) >= (ROLE[r] || 9);
 
   async function api(action, {method = 'GET', body, params} = {}) {
     const qs = new URLSearchParams({action, ...(ws && !['login', 'verify'].includes(action) ? {workspace: ws} : {}), ...(params || {})});
@@ -54,7 +57,7 @@
 
   // ---------- menu ----------
   const loaders = {home: loadHome, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
-    records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
+    submit: loadSubmit, records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) { nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open); menuBtn.setAttribute('aria-expanded', String(open)); }
   menuBtn.addEventListener('click', () => menu(true));
@@ -253,6 +256,187 @@
     btn.disabled = false;
   }));
 
+  // ---------- send records ----------
+  // A file goes up as base64 (or through a storage link when it's over 3 MB) and comes back as a report saved as
+  // "waiting". Nothing is taken in until someone presses "Yes, this is the right file"; then it's checked against our
+  // own records and either published (everything matched) or held for review. Emailed files arrive as "waiting" too.
+  const money = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const ST = {waiting: ['pending', 'Waiting for your OK'], checking: ['pending', 'Being checked'], in_review: ['held', 'In review'], published: ['fixed', 'Published'],
+    held: ['held', 'Doesn’t add up'], not_published: ['done', 'Not published after review'], withdrawn: ['done', 'Withdrawn']};
+  const CK = {match: 'Matches', mismatch: 'Doesn’t match', missing: 'Missing', unconfirmed: 'Couldn’t confirm'};
+  const findings = c => !c || !c.findings || !c.findings.length ? '' : `<details class="ck"><summary>${c.counts.match || 0} matched · ${(c.counts.mismatch || 0) + (c.counts.missing || 0)} didn’t match or missing · ${c.counts.unconfirmed || 0} couldn’t confirm</summary>
+    <ul>${c.findings.map(x => `<li><span class="status ${x.status === 'unconfirmed' ? 'pending' : 'held'}">${CK[x.status]}</span> <b>${esc(x.check)}</b> ${esc(x.detail || '')}${x.source_url ? ` <a href="${esc(x.source_url)}" target="_blank" rel="noopener noreferrer">source</a>` : ''}</li>`).join('')}</ul></details>`;
+  const openBooks = $('#app').dataset.openBooks === '1';
+  let sub = null, subKind = 'checkbook', pv = null;
+  const toB64 = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = () => no(new Error('The file couldn’t be read.')); r.readAsDataURL(f); });
+  function kindsUi() {
+    $('#sub-kinds').innerHTML = Object.entries(me.record_kinds).map(([k, v]) => `<label><input type="radio" name="sub-kind" value="${k}"${k === subKind ? ' checked' : ''}><span><b>${esc(v.label)}</b>${esc(v.hint)}</span></label>`).join('');
+    $('#sub-opts').hidden = !FINANCE.includes(subKind);
+    $('#sub-asof-l').hidden = subKind !== 'budget';
+  }
+  // Kinds the finance importer reads (they can be checked against a printed total); the rest are lists.
+  const FINANCE = ['checkbook', 'budget'];
+  $('#sub-kinds').addEventListener('change', e => { if (e.target.name === 'sub-kind') { subKind = e.target.value; kindsUi(); } });
+  async function loadSubmit() {
+    if (!$('#sub-kinds').innerHTML) kindsUi();
+    sub = await api('submissions');
+    $('#sub-due').innerHTML = sub.due.map(d => `<div class="${d.current ? 'in' : ''}"><b>${esc(d.label)}</b><span>${esc(d.text)}</span>
+      <span class="status ${d.current ? 'fixed' : 'pending'}" style="align-self:flex-start">${d.current ? 'In' : d.have ? 'Due: latest is ' + day(d.have) : 'Not sent yet'}</span></div>`).join('');
+    $('#sub-inbox').hidden = !sub.address; $('#sub-addr').textContent = sub.address || '';
+    $('#sub-senders').innerHTML = (sub.senders || []).length ? 'Allowed to send: ' + sub.senders.map(a => `<code>${esc(a)}</code>`).join(', ') + (can('owner') ? ' · <a href="#people">Change under People</a>' : '')
+      : 'No one is allowed to email files in yet.' + (can('owner') ? ' Add addresses under People.' : ' Ask an owner here to add your address.');
+    $('#sub-tpl').innerHTML = 'No export handy? Column templates: ' + Object.keys(sub.templates).map(k => `<a href="/api/gov?action=template&workspace=${encodeURIComponent(ws)}&kind=${k}">${esc(me.record_kinds[k].label)}</a>`).join(' · ') + '.';
+    $('#sub-list').innerHTML = sub.files.length ? sub.files.map(f => {
+      const st = ST[f.status] || ['done', f.status];
+      const period = f.period_start && f.period_end && f.period_start !== f.period_end ? `${day(f.period_start)} to ${day(f.period_end)}` : f.period_end ? day(f.period_end) : '';
+      const btns = !can('submit') ? '' : f.status === 'waiting' ? `<button class="btn primary" type="button" data-sub-pub="${f.id}">Review and confirm</button><button class="btn quiet" type="button" data-sub-wd="${f.id}">Discard</button>`
+        : ['published', 'in_review'].includes(f.status) ? `<button class="btn quiet" type="button" data-sub-wd="${f.id}">Withdraw</button>` : '';
+      return `<li><div class="grow"><h3>${esc(f.name)} <span class="status ${st[0]}">${st[1]}</span></h3><div class="meta"><span>${esc(me.record_kinds[f.kind] ? me.record_kinds[f.kind].label : f.kind)}</span>
+        ${period ? `<span>${esc(period)}</span>` : ''}${f.rows != null ? `<span>${Number(f.rows).toLocaleString('en-US')} row${Number(f.rows) === 1 ? '' : 's'}</span>` : ''}<span>${f.via === 'email' ? 'Emailed in by' : 'Sent by'} ${esc(f.sent_by)}, ${when(f.sent_at)}</span>
+        ${f.published_at ? `<span>Published ${when(f.published_at)}${f.published_by ? ' by ' + esc(f.published_by) : ''}</span>` : ''}</div>
+        ${f.status === 'held' ? `<p class="body">The rows don’t add up to the file’s own printed total${f.difference ? ` (off by ${money(f.difference)})` : ''}, so nothing from it is used. Send a corrected file.</p>` : ''}
+        ${f.problem && f.status === 'waiting' ? `<p class="body">${esc(f.problem)}</p>` : ''}
+        ${f.status === 'in_review' ? '<p class="body">Some records didn’t match ours or couldn’t be confirmed, so this waits for review before anything is public. If something is wrong in the file, withdraw it and send a corrected one.</p>' : ''}
+        ${f.status === 'not_published' && f.check && f.check.note ? `<p class="body">Not published: ${esc(f.check.note)}</p>` : ''}
+        ${findings(f.check)}${f.sha256 ? `<div class="meta"><span class="mono" title="SHA-256 of the file as received">SHA-256 ${esc(f.sha256.slice(0, 16))}…</span></div>` : ''}</div><div class="row">${btns}</div></li>`;
+    }).join('') : '<li class="muted small">Nothing sent yet. Your first file shows up here.</li>';
+    const feeds = sub.feeds || [];
+    $('#sub-feeds-w').hidden = !feeds.length;
+    $('#sub-feeds').innerHTML = feeds.map(f => `<li><div class="grow"><h3>${esc(f.name)} ${f.agreed ? '<span class="status fixed">You agreed</span>' : ''}</h3>
+      <div class="meta"><span><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.url.replace(/^https?:\/\//, '').slice(0, 60))}</a></span>${f.how_often ? `<span>${esc(f.how_often)}</span>` : ''}${f.agreed ? `<span>By ${esc(f.agreed_by)}, ${when(f.agreed_at)}</span>` : ''}</div>
+      ${f.takes ? `<p class="body">${esc(f.takes)}</p>` : ''}</div>
+      ${can('submit') ? `<div class="row"><button class="btn${f.agreed ? ' quiet' : ''}" type="button" data-feed="${esc(f.url)}" data-agree="${f.agreed ? '0' : '1'}">${f.agreed ? 'Take back' : 'Yes, this is right'}</button></div>` : ''}</li>`).join('');
+  }
+  $('#sub-feeds').addEventListener('click', async e => {
+    const b = e.target.closest('[data-feed]');
+    if (!b) return;
+    b.disabled = true;
+    try { await api('feed-agree', {method: 'POST', body: {url: b.dataset.feed, agree: b.dataset.agree === '1'}}); await loadSubmit(); } catch (err) { b.disabled = false; b.textContent = err.message; }
+  });
+  const drop = $('#sub-drop'), finput = $('#sub-file');
+  drop.addEventListener('click', () => finput.click());
+  drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finput.click(); } });
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) sendFile(e.dataTransfer.files[0]); });
+  finput.addEventListener('change', () => { if (finput.files[0]) sendFile(finput.files[0]); });
+  async function sendFile(file) {
+    $('#sub-msg').textContent = `Reading ${file.name}…`; $('#sub-pv').hidden = true;
+    const body = {kind: subKind, filename: file.name};
+    if (subKind === 'budget' && $('#sub-asof').value) body.as_of = $('#sub-asof').value;
+    if (FINANCE.includes(subKind) && $('#sub-total').value.trim()) body.printed_total = $('#sub-total').value.trim();
+    try {
+      if (file.size <= 3 * 1024 * 1024) body.content = await toB64(file);
+      else {
+        const u = await api('submit-url', {method: 'POST', body: {filename: file.name}});
+        const r = await fetch(u.url, {method: 'PUT', body: file, headers: {'x-upsert': 'true', 'Content-Type': file.type || 'application/octet-stream'}});
+        if (!r.ok) throw new Error('The file didn’t upload (' + r.status + '). Try again.');
+        body.path = u.path;
+      }
+      showPreview(await api('submit-preview', {method: 'POST', body}));
+      $('#sub-msg').textContent = '';
+    } catch (err) { $('#sub-msg').innerHTML = `<span class="err">${esc(err.message)}</span>`; }
+    finput.value = '';
+    loadSubmit().catch(() => {});
+  }
+  const COLS = {
+    checkbook: [['paid_on', 'Date'], ['doc_no', 'Check'], ['payee', 'Paid to'], ['amount', 'Amount', 1], ['description', 'Description']],
+    budget: [['department', 'Department'], ['account', 'Account'], ['description', 'Description'], ['amended_budget', 'Budget', 1], ['actual_ytd', 'Spent or received', 1]],
+    contracts: [['date', 'Awarded'], ['vendor', 'Vendor'], ['purpose', 'What for'], ['amount', 'Amount', 1], ['method', 'How awarded']],
+    payroll: [['title', 'Job title'], ['department', 'Department'], ['people', 'People'], ['typical', 'Typical pay', 1], ['pay_max', 'Top of range', 1]],
+    appointments: [['board', 'Board'], ['seat', 'Seat'], ['person', 'Member'], ['term_start', 'Term starts'], ['term_end', 'Term ends']],
+    fees: [['fee', 'Fee'], ['old_amount', 'Was', 1], ['new_amount', 'Now', 1], ['unit', 'Per'], ['effective_date', 'Starts']],
+  };
+  const DATES = ['paid_on', 'date', 'term_start', 'term_end', 'effective_date'];
+  function showPreview(p) {
+    pv = p;
+    const cols = COLS[p.kind], period = p.period && (p.period.start || p.period.end) ? [p.period.start, p.period.end].filter(Boolean).map(day).join(' to ') : '';
+    $('#sub-pv-h').textContent = p.ok ? `Is this the right file? ${me.record_kinds[p.kind].label}` : 'This file can’t be taken in yet';
+    $('#sub-pv-rep').innerHTML = p.ok ? reportHtml(p.report) : '';
+    $('#sub-pv-sum').innerHTML = [`<span><b>${Number(p.row_count || 0).toLocaleString('en-US')}</b> ${p.kind === 'payroll' ? 'job titles' : 'rows'}</span>`, p.parsed_total != null && p.kind !== 'payroll' ? `<span>Total <b>${money(p.parsed_total)}</b></span>` : '',
+      period ? `<span>${esc(period)}</span>` : '', p.tie && p.tie.status === 'ties' ? '<span class="status fixed">Adds up to the printed total</span>' : '',
+      p.tie && p.tie.status === 'mismatch' ? `<span class="status held">Off from the printed total by ${money(p.tie.difference)}</span>` : '',
+      p.used_saved_mapping ? '<span class="muted">Columns matched like last time</span>' : ''].filter(Boolean).join('');
+    const notes = [];
+    if (!p.ok) notes.push(`Missing: ${esc((p.missing || []).join('; '))}. Check you chose the right kind of record, or send the report straight from your system.`);
+    if (p.kind === 'checkbook' && p.ok) notes.push('Payments to private people (refunds, reimbursements) are published without their name. Voided checks are left out.');
+    if (p.kind === 'contracts') {
+      if (p.already_on_site) notes.push(`${p.already_on_site} contract${p.already_on_site === 1 ? ' is' : 's are'} already on the site and won’t be added twice.`);
+      if (p.withheld) notes.push(`${p.withheld} with a private person will be listed without the person’s name.`);
+      if (p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
+    }
+    if (p.kind === 'payroll' && p.ok) notes.push(`Employee names are removed: each row is a job title with how many people hold it and their pay${p.names_removed ? ` (${Number(p.names_removed).toLocaleString('en-US')} names taken out)` : ''}. Hourly rates are shown as a yearly amount at 2,080 hours.`);
+    if (['appointments', 'fees'].includes(p.kind) && p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
+    if (p.already_added) notes.push('This exact file was already added before.');
+    if (p.ok && FINANCE.includes(p.kind) && !openBooks) notes.push('Published files show on the public checkbook and budget tracker pages once those pages open; they are on the site’s data downloads and API right away.');
+    $('#sub-pv-note').innerHTML = notes.join(' ');
+    $('#sub-pv-t thead').innerHTML = `<tr>${cols.map(c => `<th>${esc(c[1])}</th>`).join('')}</tr>`;
+    $('#sub-pv-t tbody').innerHTML = (p.sample || []).map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="num"' : ''} title="${esc(r[c[0]] ?? '')}">${esc(c[2] ? (p.kind === 'payroll' && r[c[0]] != null ? '$' + Math.round(r[c[0]]).toLocaleString('en-US') : money(r[c[0]])) : DATES.includes(c[0]) ? (r[c[0]] ? day(r[c[0]]) : '') : r[c[0]] ?? '')}</td>`).join('')}</tr>`).join('')
+      || `<tr><td class="empty" colspan="${cols.length}">No rows to show.</td></tr>`;
+    $('#sub-go').hidden = !p.ok || (p.tie && p.tie.status === 'mismatch');
+    $('#sub-err').textContent = '';
+    $('#sub-pv').hidden = false; $('#sub-pv').scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+  // The confirm report: what the file says, in the shape of the government's own books.
+  const n0 = v => Number(v || 0).toLocaleString('en-US');
+  const ym = k => /^\d{4}-\d{2}$/.test(k) ? new Date(k + '-15T12:00:00Z').toLocaleDateString('en-US', {month: 'short', year: 'numeric', timeZone: 'UTC'}) : k;
+  const grp = (title, list, val = g => money(g.total), key = g => g.key) => !list || !list.length ? '' : `<div><h3>${title}</h3><table class="t"><tbody>${list.map(g => `<tr${g.rest ? ' class="muted"' : ''}><td>${esc(key(g))}</td><td class="num">${val(g)}</td><td class="num muted">${n0(g.rows)}</td></tr>`).join('')}</tbody></table></div>`;
+  function reportHtml(r) {
+    if (!r) return '';
+    const facts = [];
+    if (r.kind === 'checkbook') {
+      facts.push(['Total paid', money(r.total)], ['Payments', n0(r.rows - (r.voided || 0))]);
+      if (r.voided) facts.push(['Voided', n0(r.voided)]);
+      if (r.checks) facts.push(['First check', '#' + r.checks.first], ['Last check', '#' + r.checks.last]);
+      if (r.dates && r.dates.first) facts.push(['Dates', `${day(r.dates.first)} to ${day(r.dates.last)}`]);
+      return `<div class="pvfacts">${facts.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('')}</div><div class="pvgrid">
+        ${grp('By month', r.by_month, undefined, g => ym(g.key))}${grp('Biggest payees', r.top_payees)}${grp('By fund', r.by_fund)}</div>`;
+    }
+    if (r.kind === 'budget') {
+      facts.push(['Original budget', money(r.original)], ['Amended budget', money(r.amended)], ['Spent or received so far', money(r.actual)]);
+      if (r.as_of) facts.push(['As of', day(r.as_of)]);
+      return `<div class="pvfacts">${facts.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('')}</div><div class="pvgrid">
+        ${grp('By department', r.by_department, g => `${money(g.amended || g.original)}<div class="muted small">${money(g.actual)} so far</div>`)}</div>`;
+    }
+    if (r.kind === 'contracts') return `<div class="pvfacts"><div><span>Total awarded</span><b>${money(r.total)}</b></div><div><span>Contracts</span><b>${n0(r.rows)}</b></div></div>
+      <div class="pvgrid">${grp('By month', r.by_month, undefined, g => ym(g.key))}${grp('Biggest vendors', r.top_payees)}</div>`;
+    if (r.kind === 'payroll') return `<div class="pvfacts"><div><span>People</span><b>${n0(r.people)}</b></div><div><span>Yearly pay, all together</span><b>${money(r.total)}</b></div><div><span>Job titles</span><b>${n0(r.rows)}</b></div></div>
+      <div class="pvgrid">${grp('By department', r.by_department)}</div>`;
+    if (r.by_group) return `<div class="pvgrid">${grp(r.kind === 'fees' ? 'By kind of fee' : 'By board', r.by_group, g => n0(g.rows))}</div>`;
+    return '';
+  }
+  async function publishFile(id, btn) {
+    btn.disabled = true;
+    try {
+      const r = await api('submit-confirm', {method: 'POST', body: {id}});
+      if (r.held) throw new Error(r.message);
+      $('#sub-pv').hidden = true; pv = null;
+      if (r.status === 'published') {
+        const p = r.published || {};
+        const msg = `Every check matched our own records. Published ${n0(p.rows)} rows${p.individuals_withheld ? `, ${p.individuals_withheld} without a private person’s name` : ''}.`;
+        $('#sub-msg').innerHTML = esc(msg) + (p.page && (!FINANCE.includes(r.kind) || openBooks) ? ` <a href="${esc(p.page)}" target="_blank" rel="noopener">See it on the site</a>` : '');
+      } else $('#sub-msg').innerHTML = `<b>Thanks, it’s in.</b> ${esc(r.message || '')} You can see what didn’t match under Files sent.`;
+      await loadSubmit();
+    } catch (err) { btn.disabled = false; ($('#sub-pv').hidden ? $('#sub-msg') : $('#sub-err')).textContent = err.message; }
+  }
+  $('#sub-go').addEventListener('click', e => pv && publishFile(pv.id, e.currentTarget));
+  $('#sub-cancel').addEventListener('click', async () => { if (pv) await api('submit-withdraw', {method: 'POST', body: {id: pv.id}}).catch(() => {}); pv = null; $('#sub-pv').hidden = true; loadSubmit(); });
+  $('#sub-list').addEventListener('click', async e => {
+    const p = e.target.closest('[data-sub-pub]'), w = e.target.closest('[data-sub-wd]');
+    if (p) {
+      // An emailed or earlier file: read it again to show the report before anyone confirms it.
+      const id = p.dataset.subPub, f = sub.files.find(x => x.id === id);
+      if (id[0] === 'f') { p.disabled = true; try { showPreview(await api('submit-preview', {method: 'POST', body: {kind: f.kind, upload_id: Number(id.slice(1))}})); } catch (err) { p.textContent = err.message; } p.disabled = false; return; }
+      if (pv && pv.id === id) { $('#sub-pv').hidden = false; $('#sub-pv').scrollIntoView({behavior: 'smooth'}); return; }
+      if (p.dataset.sure !== '1') { p.dataset.sure = '1'; p.textContent = 'Yes, this is the right file'; return; }
+      return publishFile(id, p);
+    }
+    if (!w) return;
+    if (w.dataset.sure !== '1') { w.dataset.sure = '1'; w.textContent = w.textContent === 'Discard' ? 'Discard: sure?' : 'Take it off the site?'; return; }
+    w.disabled = true;
+    try { await api('submit-withdraw', {method: 'POST', body: {id: w.dataset.subWd}}); await loadSubmit(); } catch (err) { w.disabled = false; w.textContent = err.message; }
+  });
+
   // ---------- record data (read only) + flags ----------
   let recRows = [], recCols = [];
   const SKIP = new Set(['id', 'gov_id', 'source_url', 'date_start', 'date_end', 'date_precision']);
@@ -304,6 +488,11 @@
 
   // ---------- people + activity ----------
   async function loadPeople() {
+    if (can('owner')) {
+      const s = await api('intake-senders').catch(() => null);
+      $('#is-w').hidden = !s;
+      if (s) { $('#is-addr').textContent = s.address; $('#is-list').value = (s.senders || []).join('\n'); $('#is-dom').textContent = s.gov_domain ? `Someone writing from @${s.gov_domain} who isn’t listed gets a short reply naming who may send. Mail from anywhere else is turned away unopened.` : 'Mail from anyone not listed is turned away unopened.'; }
+    }
     const j = await api('members');
     $('#pp-t tbody').innerHTML = j.members.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(me.roles[m.role] || m.role)}</td><td>${esc(m.added_by || '')}</td><td>${day(m.created_at)}</td>
       <td>${m.email.toLowerCase() === me.email ? '' : `<button class="btn quiet" type="button" data-rm="${esc(m.email)}">Remove</button>`}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Nobody yet.</td></tr>';
@@ -319,6 +508,11 @@
     if (b.dataset.sure !== '1') { b.dataset.sure = '1'; b.textContent = 'Remove: sure?'; return; }
     await api('members', {method: 'POST', body: {email: b.dataset.rm, role: 'remove'}}).catch(err => { $('#pp-msg').textContent = err.message; });
     loadPeople();
+  });
+  $('#is-save').addEventListener('click', async () => {
+    const senders = $('#is-list').value.split(/[\s,;]+/).filter(Boolean);
+    try { const r = await api('intake-senders', {method: 'POST', body: {senders}}); $('#is-list').value = r.senders.join('\n'); $('#is-msg').textContent = 'Saved.'; }
+    catch (err) { $('#is-msg').textContent = err.message; }
   });
   async function loadActivity() {
     const j = await api('activity');

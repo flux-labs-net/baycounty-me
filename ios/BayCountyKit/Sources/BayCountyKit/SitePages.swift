@@ -49,7 +49,7 @@ public enum SitePages {
         "/military": .native("Military and the bases"),
         "/connections/overlaps": .native("Where records overlap (OverlapsView): the overlap datasets' headline numbers and top rows, and live joins from /api/v1/overlaps"),
         "/connections/business-ties": .web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
-        "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
+        "/correspondence": .web("every email with officials and governments, read live from /api/v1/mail"),
         "/alerts": .web("email alert sign-up; phone alerts are set on the Emergencies screen"),
         "/emergency": .native("Emergencies and alerts (live feed, zone lookup, shelters, phone alerts)"),
         "/hurricane-prep": .native("Hurricane prep (prep steps, rebuild money by ZIP code, declarations)"),

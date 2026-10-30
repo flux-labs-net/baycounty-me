@@ -52,7 +52,7 @@ object SitePages {
         "/military" to Coverage.Native("Military and the bases"),
         "/connections/overlaps" to Coverage.Native("Where records overlap (OverlapsScreen): the overlap datasets' headline numbers and top rows, and live joins from /api/v1/overlaps"),
         "/connections/business-ties" to Coverage.Web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
-        "/correspondence" to Coverage.Web("published letters to officials, read live from /api/v1/correspondence"),
+        "/correspondence" to Coverage.Web("every email with officials and governments, read live from /api/v1/mail"),
         "/alerts" to Coverage.Web("email alert sign-up; phone alerts are set on the Emergencies screen"),
         "/emergency" to Coverage.Native("Emergencies and alerts (live feed, zone lookup, shelters, phone alerts)"),
         "/hurricane-prep" to Coverage.Native("Hurricane prep (prep steps, rebuild money by ZIP code, declarations)"),

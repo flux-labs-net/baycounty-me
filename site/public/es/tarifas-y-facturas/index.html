@@ -185,6 +185,7 @@
       </ol><p><a href="/es/mi-direccion">Busque las tarifas exactas de su parcela →</a></p></details>
     <details class="tbl-toggle"><summary>Lo que no pudimos encontrar <span class="muted">· 8</span></summary><ul class="plain"><li>No encontramos las resoluciones finales con las tarifas aprobadas para los bomberos de Panama City (tarifas comerciales por pie cuadrado), los bomberos, las aguas pluviales y la CRA de Panama City Beach (solo encontramos el aviso de la tarifa máxima), las aguas pluviales de Lynn Haven (tarifa actual por vivienda) ni los bomberos de Springfield (cómo se calcula).</li><li>Varios códigos de cobro no se pudieron unir con un distrito con nombre: SB, PW, WMH, TWIN, ALSL1, BOCA, OERR, PCN. PPCD (probablemente el CDD de Pier Park) y LPWH1 (probablemente el CDD de Lake Powell Residential Golf) son suposiciones.</li><li>No se puede dar la cantidad típica para una casa en los cobros que dependen del valor (bomberos y aguas pluviales de PCB, aguas pluviales de Lynn Haven, bomberos de Springfield) sin saber el uso de cada parcela. El archivo de parcelas NAL del DOR para 2025 no estaba en el portal, así que solo damos el valor del medio de todas las parcelas.</li><li>Parker: no encontramos una tabla publicada de tarifas de agua, alcantarillado y basura, ni el número de empleados.</li><li>Panama City Beach: no encontramos la tarifa de basura para viviendas ni el número de empleados (no se pudo descargar el libro del presupuesto).</li><li>Panama City: la factura de 5,000 galones es provisional, porque la &#x27;factura promedio&#x27; de la ciudad es igual solo a sus cargos base. No encontramos una tarifa de aguas pluviales.</li><li>Lynn Haven: no se pudo descargar el presupuesto del FY2026-27 (que puede traer tarifas desde el 1 de octubre de 2026) porque se cortó la conexión; usamos las tarifas del FY2025-26.</li><li>Callaway: la página de tarifas no dice desde cuándo valen, y el presupuesto del FY2027 cuenta con pequeños aumentos por consumo que quizás todavía no están en la página.</li></ul></details>
   </section>
+  <section class="tx-sec" data-records-sent="fees" hidden></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <style>.fb-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -242,6 +243,7 @@
   set(new URLSearchParams(location.search).get('rent') === '1' ? 'rent' : t);
   btns.forEach(b => b.addEventListener('click', () => set(b.dataset.tenure, true)));
 })();</script>
+<script src="/assets/records-sent.js" defer></script>
 </main>
 <footer class="site-foot"><div class="site-foot-in">
   <div class="foot-brand"><a class="wordmark" href="/"><span>BayCounty<b>.me</b></span></a>

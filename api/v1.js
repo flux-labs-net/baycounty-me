@@ -12,6 +12,8 @@
 //   GET /api/v1/changes?since=&dataset= records added to the database since a time
 //   GET /api/v1/meetings.ics?gov=       calendar of upcoming meetings (one government or all)
 //   GET /api/v1/correspondence?year=    published emails with officials (year=all for every year)
+//   GET /api/v1/mail?folder=&government=&q=&page=   every email with officials and governments, newest first (the /correspondence viewer)
+//   GET /api/v1/mail/{id}               one conversation start to finish (c123 letter or request, e45 records sent in, m67 other mail)
 //   GET /api/v1/pages[?path=]           which datasets and endpoints hold each site page's data
 //   GET /api/v1/entities?q=&kind=       find a company, official, candidate, nonprofit, board member or business
 //   GET /api/v1/entities/{id}           one entity's profile and every documented connection (api/_entities.js)
@@ -28,6 +30,7 @@
 //   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
 //   GET /api/v1/nearby?address=|lat=&lon=&radius_mi=  what's happening near a place: alerts, meetings, events, work nearby (api/_nearby.js)
 //   GET /api/v1/government-posts?gov=&kind=  notices, events and jobs posted by city and county staff (api/_gov.js)
+//   GET /api/v1/records-sent?gov=            which records each government sends us itself, and the contracts staff sent (api/_records.js)
 //   GET /api/v1/overlaps?section=&gov=  live overlaps: officials' businesses and nonprofits in their votes, checkbook donors, split purchases (api/_overlaps.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
@@ -169,6 +172,13 @@ function openapi(catalog) {
         description: 'Each conversation is one letter sent to one or more officials, with every published reply. Unpublished threads are never returned. Defaults to the latest year that has letters.',
         parameters: [p('year', 'A year such as 2026, or all for every year. Default: the latest year with letters'), p('government', 'Only letters to this government, as shown in the governments list of the response')],
         responses: {200: {description: '{year, years, governments, total, conversations: [{subject, sent_at, governments, replies, threads: [{official, seat, government, status, messages: [{direction, text, at}]}]}]}'}}}},
+      '/mail': {get: {operationId: 'mail', summary: 'Every email between BayCounty.me and officials or governments (read-only)',
+        description: 'Letters to officials, public records requests, records governments emailed in (with what happened to each file) and other mail from government addresses. Residents\' email addresses, phone numbers and street addresses are hidden; officials and staff are named. Sign-in codes and links are never included. Newest first, 50 per page.',
+        parameters: [p('folder', 'letters, requests, sent_in or other. Default: all'), p('government', 'One government, as listed in governments'), p('q', 'Words in the subject, names or text'), p('page', 'Page number', {type: 'integer'})],
+        responses: {200: {description: '{folders: [{id, label, count}], total, governments, matched, page, pages, threads: [{id, folder, subject, government, with, started_at, last_at, messages, replies, files, status, hidden_reason, snippet}]}'}}}},
+      '/mail/{id}': {get: {operationId: 'mailThread', summary: 'One email conversation, start to finish',
+        parameters: [{name: 'id', in: 'path', required: true, description: 'Conversation id from /mail, e.g. c12, e3 or m40', schema: {type: 'string'}}],
+        responses: {200: {description: '{id, folder, subject, government, status, participants, items: [{type: message, id, direction, from, to, at, subject, text, quoted, attachments: [{name, size, sha256}], delivery, message_id} | {type: event, at, text, file, hash}], newer, older}'}, 404: {description: 'Unknown conversation'}}}},
       '/pages': {get: {operationId: 'pages', summary: 'Which datasets and endpoints hold the data behind each page on BayCounty.me',
         parameters: [p('page', 'One page path, e.g. /connections. Omit for every page')],
         responses: {200: {description: '{data: [{page, url, datasets: [{id, api}], endpoints, none, note}]}'}, 404: {description: 'Unknown page'}}}},
@@ -195,6 +205,11 @@ function openapi(catalog) {
         parameters: [p('gov', 'Only one government: county, pc, pcb, lh, cw, sp, parker, mb'), p('kind', 'Comma list of notice, event, job (default all)')],
         responses: {200: {description: '{data: {notices: [{id, notice_id, gov_id, title, kind, kind_label, published, event_date, text, pdf_url, geometry, posted_by}], events: [{id, event_id, gov_id, title, starts, ends, venue, category, cost, url, posted_by}], jobs: [{id, job_id, gov_id, title, department, job_type, pay, posted, closes, url, posted_by}]}, note}'},
           400: {description: 'Unknown kind'}}}},
+      '/records-sent': {get: {operationId: 'recordsSent', summary: 'Which records each government sends BayCounty.me directly, how current they are, and the contracts its staff sent',
+        description: 'The scorecard behind "Sent by the governments" on /data-sources. For each government (the county, every city, the School Board and the five constitutional officers): the records its own staff sent from their systems through the BayCounty.me government workspace or its intake email address. Kinds: checkbook (check registers), budget (budget-vs-actual reports), contracts, payroll (pay by job title, never named), appointments (board appointments) and fees (fee or rate changes). status per kind: current (in for the latest period expected: last month for payments, last quarter for budgets, the last month for contracts, this fiscal year for payroll; appointments and fees whenever they change), behind (sent before, not the latest) or not_sent. feeds_agreed = sources we read automatically that the government has said yes to. contracts, appointments, fees and payroll list what staff sent (also rows of the contracts, board-appointments, fee-changes and salary-positions datasets with origin gov). Payments to private individuals and contracts with individuals carry no name; payroll never names employees. Staff names and emails are never included.',
+        parameters: [p('gov', 'Only one government: county, pc, pcb, lh, cw, sp, parker, mb, schools, sheriff, clerk, property_appraiser, tax_collector, soe')],
+        responses: {200: {description: '{data: {governments: [{gov_id, government, sends, feeds_agreed, records: {checkbook|budget|contracts|payroll|appointments|fees: {status, files, rows, latest, last_sent}}}], contracts: [{government, gov_id, vendor, amount, purpose, date, method, source_title, source_url, notes}], appointments: [{government, gov_id, board, seat, person, appointed_by, term_start, term_end}], fees: [{government, gov_id, fee, category, old_amount, new_amount, unit, effective_date, adopted_by}], payroll: [{government, gov_id, fiscal_year, title, department, grade, pay_min, pay_max, actual_salaries, budgeted_fte}]}, note}'},
+          400: {description: 'A bad government id'}}}},
       '/overlaps': {get: {operationId: 'overlaps', summary: 'Live overlaps between records: an official\'s own business or nonprofit named in a vote they cast, checkbook payees that gave to a campaign, and payments just under a purchasing threshold',
         description: 'Joins that use hand-confirmed matches (official-businesses, nonprofit-officials) or rows only the database holds (checkbook-payments, school-grades, school-spending). Sections: official_business_votes (an official\'s registered business named in a motion they voted on, with what their own government paid it), nonprofit_board_money (a nonprofit with an official on its board: payments from that official\'s government and their votes naming it), checkbook_donors (checkbook payees that gave to a local campaign, or whose owners did), split_purchases (two or more payments to one payee within 30 days, each at least 90% of a common threshold: thresholds lists them) and school_spending_grades. Each section is {rows, error}. Individual donors are never named. The other overlaps are datasets: vote-mentions, donor-votes, agenda-parties, development-companies, bid-trail, shared-owner-vendors, chamber-overlaps, emergency-purchase-donors and campaign-results. A row puts two public records side by side; it is not a finding of wrongdoing.',
         parameters: [p('section', 'One section: official_business_votes, nonprofit_board_money, checkbook_donors, split_purchases or school_spending_grades'), p('gov', 'Only one government: county, schools, pc, pcb, lh, cw, sp, parker, mb')],
@@ -421,6 +436,11 @@ module.exports = async (req, res) => {
       try { const r = await require('./_gov').publicPosts(require('./_db').q, req.query); info.rows = Object.values(r.data).reduce((a, x) => a + x.length, 0); return res.status(200).json(r); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
+    if (parts[0] === 'records-sent') {
+      res.locals.lastModified = null;
+      try { const r = await require('./_records').publicSent(require('./_db').q, req.query); info.rows = r.data.governments.length + r.data.contracts.length; return res.status(200).json(r); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
     if (parts[0] === 'overlaps') {
       res.locals.lastModified = null;
       const r = await require('./_overlaps').overlaps(req.query);
@@ -454,6 +474,16 @@ module.exports = async (req, res) => {
     if (parts[0] === 'evacuation-zone') {
       res.locals.lastModified = null;
       const r = await require('./_emergency_feed').zoneLookup(req, catalog, req.query, {place: 'fl-bay'});
+      return res.status(200).json(r);
+    }
+    if (parts[0] === 'mail') {
+      // Every email between BayCounty.me and officials or governments, read-only, residents' details hidden (api/_mail.js).
+      res.locals.lastModified = null;
+      const M = require('./_mail');
+      if (parts[1]) return res.status(200).json(await M.thread(require('./_db').q, String(parts[1]).slice(0, 20)));
+      const r = await M.list(require('./_db').q, {folder: String(req.query.folder || '').slice(0, 20), government: String(req.query.government || '').slice(0, 120),
+        q: String(req.query.q || '').slice(0, 100), page: req.query.page});
+      info.rows = r.threads.length;
       return res.status(200).json(r);
     }
     if (parts[0] === 'correspondence') {

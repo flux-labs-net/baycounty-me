@@ -4,7 +4,7 @@ import BayCountyKit
 
 /// BayCounty.me Staff: the government workspace on a phone, for city and county staff and the site owner.
 /// Launch arguments for screenshots: -demo (made-up data), -asStaff (a city alert sender instead of the owner),
-/// -workspace lh (open one government), -screen overview|home|alerts|send|notices|notice|flags|flag|more|signin|locked.
+/// -workspace lh (open one government), -screen overview|home|alerts|send|notices|notice|flags|flag|more|records|send-file|send-file-preview|signin|locked.
 @main
 struct BayCountyStaffApp: App {
     @State private var store = StaffStore.shared
@@ -113,7 +113,7 @@ struct StaffRoot: View {
         case "alerts", "send": return "alerts"
         case "notices", "notice": return "notices"
         case "flags", "flag": return "flags"
-        case "more": return "more"
+        case "more", "records", "send-file", "send-file-preview": return "more"
         default: return "home"
         }
     }()

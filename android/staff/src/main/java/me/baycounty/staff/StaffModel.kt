@@ -17,6 +17,8 @@ import me.baycounty.kit.StaffOverview
 import me.baycounty.kit.StaffPost
 import me.baycounty.kit.StaffPosts
 import me.baycounty.kit.StaffReach
+import me.baycounty.kit.StaffRecordPreview
+import me.baycounty.kit.StaffSubmissions
 import me.baycounty.kit.StaffWorkspace
 
 /** Everything the staff app shows, from /api/gov. With [demo] (screenshots, store review) it shows made-up answers
@@ -30,6 +32,7 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
     var alerts by mutableStateOf<List<StaffAlert>>(emptyList()); private set
     var notices by mutableStateOf<StaffPosts?>(null); private set
     var flags by mutableStateOf<List<StaffFlag>>(emptyList()); private set
+    var submissions by mutableStateOf<StaffSubmissions?>(null); private set
     var loading by mutableStateOf(false); private set
     var error by mutableStateOf<String?>(null)
     var workspaceId by mutableStateOf<String?>(null)
@@ -45,7 +48,7 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
 
     init {
         if (demo != null) {
-            overview = demo.overview; home = demo.home; alerts = demo.alerts.alerts; notices = demo.notices
+            overview = demo.overview; home = demo.home; alerts = demo.alerts.alerts; notices = demo.notices; submissions = demo.submissions
             if (asStaff) {
                 me = demo.me.copy(email = "utilities@example.gov", admin = false,
                     workspaces = listOf(StaffWorkspace("lh", "City of Lynn Haven", false, "alert_sender")))
@@ -75,7 +78,7 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
     suspend fun signOut() {
         if (demo == null) client.logout()
         tokens.save(null); token = null
-        me = null; overview = null; home = null; alerts = emptyList(); notices = null; flags = emptyList(); workspaceId = null
+        me = null; overview = null; home = null; alerts = emptyList(); notices = null; flags = emptyList(); submissions = null; workspaceId = null
     }
 
     private fun pickDefault() {
@@ -104,10 +107,11 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
         if (ws != null) {
             val h = async { client.home(ws) }; val a = async { client.alerts(ws) }; val n = async { client.notices(ws) }; val f = async { client.flags(ws) }
             home = h.await(); alerts = a.await().alerts; notices = n.await(); flags = f.await().flags
+            submissions = if (can("submit")) runCatching { client.submissions(ws) }.getOrNull() else null
         } else if (isOwner) {
             val o = async { client.overview() }; val f = async { client.reviewFlags("all") }
             overview = o.await(); flags = f.await().flags
-            home = null; alerts = emptyList(); notices = null
+            home = null; alerts = emptyList(); notices = null; submissions = null
         }
     }
 
@@ -139,6 +143,21 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
         if (demo != null) return null
         return try { client.answerFlag(f.id, status, reply); loadCurrent(); null } catch (e: Exception) { e.message }
     }
+
+    /** Reads a file and saves it as waiting; nothing is public until [publishRecords]. Throws with the reason it can't be read. */
+    suspend fun previewRecords(kind: String, filename: String, content: ByteArray): StaffRecordPreview {
+        val ws = workspaceId ?: throw IllegalStateException("Pick a government first.")
+        if (content.size > Staff.MAX_INLINE_BYTES) throw IllegalStateException("That file is over 3 MB. Send it from the web workspace or by email instead.")
+        if (demo != null) return demoPreview(kind)
+        val p = client.previewRecords(ws, kind, filename, content)
+        submissions = runCatching { client.submissions(ws) }.getOrNull()
+        return p
+    }
+    /** The made-up preview screenshots show. */
+    fun demoPreview(kind: String) = StaffRecordPreview("c9", kind, ok = true, label = "Contracts awarded", rowCount = 6, parsedTotal = 1284310.5, skipped = 1,
+        alreadyOnSite = 2, withheld = 0, period = StaffRecordPreview.Period("2026-10-02", "2026-10-27"))
+    suspend fun publishRecords(id: String) = act { client.publishRecords(it, id) }
+    suspend fun withdrawRecords(id: String) = act { client.withdrawRecords(it, id) }
 
     /** Runs one change in the open workspace; null when it worked, otherwise why not. */
     private suspend fun act(f: suspend (String) -> Unit): String? {

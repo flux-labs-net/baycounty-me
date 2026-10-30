@@ -184,6 +184,7 @@
       </ol><p><a href="/my-address/">Look up the exact fees on your parcel →</a></p></details>
     <details class="tbl-toggle"><summary>What we couldn't find <span class="muted">· 8</span></summary><ul class="plain"><li>Final adopted rate resolutions not located for Panama City fire (commercial per-square-foot rates), Panama City Beach fire/stormwater/CRA (only the maximum-rate notice found), Lynn Haven stormwater (current per-unit rate), and Springfield fire (rate method).</li><li>Several levy codes could not be matched to a named district: SB, PW, WMH, TWIN, ALSL1, BOCA, OERR, PCN; PPCD (probably Pier Park CDD) and LPWH1 (probably Lake Powell Residential Golf CDD) are inferred.</li><li>Typical single-family amounts for value-based assessments (PCB fire/stormwater, Lynn Haven stormwater, Springfield fire) can&#x27;t be stated without parcel-level property-use data. The DOR NAL parcel file for 2025 wasn&#x27;t available from the portal, so only all-parcel medians are given.</li><li>Parker: no published water/sewer/garbage rate schedule found, and no FTE count.</li><li>Panama City Beach: no residential garbage rate and no employee count (the budget book couldn&#x27;t be downloaded).</li><li>Panama City: the 5,000-gallon bill is provisional, because the city&#x27;s &#x27;average bill&#x27; equals its base charges alone. No stormwater fee found.</li><li>Lynn Haven: the FY2026-27 budget (which may carry rates effective Oct 1, 2026) could not be downloaded because the connection was reset; FY2025-26 rates are used.</li><li>Callaway: the rates page shows no effective date, and the FY2027 budget assumes small consumption increases that may not be on the page yet.</li></ul></details>
   </section>
+  <section class="tx-sec" data-records-sent="fees" hidden></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <style>.fb-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
@@ -241,6 +242,7 @@
   set(new URLSearchParams(location.search).get('rent') === '1' ? 'rent' : t);
   btns.forEach(b => b.addEventListener('click', () => set(b.dataset.tenure, true)));
 })();</script>
+<script src="/assets/records-sent.js" defer></script>
 </main>
 <footer class="site-foot"><div class="site-foot-in">
   <div class="foot-brand"><a class="wordmark" href="/"><span>BayCounty<b>.me</b></span></a>
