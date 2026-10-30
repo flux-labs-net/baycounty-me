@@ -190,12 +190,30 @@ function renderSettings() {
   $('firstName').value = ME.user.first_name || '';
   $('radius').value = String(p.radius_mi || 1);
   $('weekly').checked = !!p.weekly_email;
-  checks('alertEmail', c.alert_email || {}, p.alert_email || []);
   checks('topics', c.topics || {}, p.topics || []);
-  checks('pushTopics', c.push_topics || {}, p.push_topics || []);
+  renderAlerts(p, c);
   $('devices').textContent = ME.devices ? `${ME.devices} phone${ME.devices === 1 ? ' is' : 's are'} signed in.` : 'No phones signed in yet.';
   $('testRow').hidden = !ME.devices;
 }
+// Emergency alerts: areas (chips) and a type × channel table.
+function renderAlerts(p, c) {
+  const areas = p.alert_areas || [], A = c.areas || {};
+  $('alertAreas').innerHTML = Object.entries(A).map(([k, v]) => `<label><input type="checkbox" value="${esc(k)}"${areas.includes(k) ? ' checked' : ''}>${esc(v)}</label>`).join('');
+  $('areaNote').textContent = ME.home ? `Your home's city and evacuation zone always count${ME.home.zone ? ` (Zone ${ME.home.zone})` : ''}. Add any other areas you care about, like where family lives or where you work.`
+    : 'Pick the parts of the county you want notices for. Save a home to get evacuation orders for your zone only.';
+  const push = p.push_topics || [], mail = p.alert_email || [];
+  $('alertTypes').innerHTML = (c.alert_types || []).map(t => `<tr><td>${esc(t.label)}${t.urgency === 'urgent' ? '<span class="urg">Urgent</span>' : ''}<small>${esc(t.detail)}</small></td>
+    <td>${t.channels.includes('push') ? `<input type="checkbox" data-ch="push" value="${esc(t.key)}" aria-label="${esc(t.label)} by phone"${push.includes(t.key) ? ' checked' : ''}>` : ''}</td>
+    <td>${t.channels.includes('email') ? `<input type="checkbox" data-ch="email" value="${esc(t.key)}" aria-label="${esc(t.label)} by email"${mail.includes(t.key) ? ' checked' : ''}>` : ''}</td></tr>`).join('');
+  $('quiet').checked = !!p.quiet_hours;
+}
+// "All of Bay County" and single areas are exclusive.
+$('alertAreas').addEventListener('change', e => {
+  const all = $('alertAreas').querySelector('input[value=all]');
+  if (e.target === all && all.checked) $('alertAreas').querySelectorAll('input:not([value=all])').forEach(i => { i.checked = false; });
+  else if (e.target !== all && e.target.checked && all) all.checked = false;
+});
+const chan = ch => [...$('alertTypes').querySelectorAll(`input[data-ch=${ch}]:checked`)].map(i => i.value);
 $('testPush').addEventListener('click', async () => {
   $('testPush').disabled = true; msg('testMsg', 'Sending…');
   try {
@@ -208,7 +226,8 @@ $('saveSet').addEventListener('click', async () => {
   $('saveSet').disabled = true; msg('setMsg', 'Saving…');
   try {
     if (($('firstName').value.trim() || null) !== (ME.user.first_name || null)) ME = await api('profile', {first_name: $('firstName').value});
-    ME = await api('prefs', {weekly_email: $('weekly').checked, alert_email: checked('alertEmail'), topics: checked('topics'), push_topics: checked('pushTopics'), radius_mi: Number($('radius').value)});
+    ME = await api('prefs', {weekly_email: $('weekly').checked, alert_email: chan('email'), topics: checked('topics'), push_topics: chan('push'), radius_mi: Number($('radius').value),
+      alert_areas: checked('alertAreas'), quiet_hours: $('quiet').checked});
     renderTop(); renderSettings(); msg('setMsg', 'Saved.', 'ok'); if (ME.home) FEED = null;
   } catch (e) { msg('setMsg', e.message, 'err'); }
   $('saveSet').disabled = false;
@@ -236,7 +255,7 @@ $('tSet').addEventListener('click', () => tabTo('set'));
 /* ---------- start ---------- */
 (async () => {
   const qs = new URLSearchParams(location.search);
-  try { ME = await api('me'); enter(); if (qs.get('tab') === 'settings') tabTo('set'); }
+  try { ME = await api('me'); enter(); if (qs.get('tab') === 'settings' || location.hash === '#alerts') { tabTo('set'); if (location.hash === '#alerts') $('alerts').scrollIntoView(); } }
   catch (e) {
     show('out');
     if (qs.get('signin') === 'expired') msg('startMsg', 'That sign-in link has expired or was already used. Send a new code.', 'err');

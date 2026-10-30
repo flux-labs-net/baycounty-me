@@ -250,16 +250,19 @@ function homeWeeklyEmail(f, {home, name, manage}) {
 // One emergency notice that reaches a saved home (an evacuation order for its zone, a boil-water notice in its city,
 // a weather warning), sent right away when the account turned that topic on for email.
 function homeAlertEmail(n, {home, manage}) {
-  const LABEL = {evacuation: 'Evacuation order', water: 'Boil-water notice', weather: n.event || 'Weather alert', shelters: 'Shelter open', roads: 'Road closed'};
+  const LABEL = {evacuation: 'Evacuation order', water: 'Boil-water notice', weather: n.event || 'Weather alert', shelters: 'Shelter open', roads: 'Road closed',
+    safety: 'Public safety alert', outages: 'Outage', general: 'Update'};
   const head = LABEL[n.topic] || 'Alert';
-  const subject = `${head}${n.topic === 'evacuation' && home.zone ? ` for Zone ${home.zone}` : ''}: ${clip(n.title || '', 70)}`;
+  const subject = `${head}${n.topic === 'evacuation' && home && home.zone ? ` for Zone ${home.zone}` : ''}: ${clip(n.title || '', 70)}`;
   const url = `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`;
-  const body = ui.p(`This affects your saved home at <b>${esc(home.address)}</b>${home.zone ? ` (evacuation Zone ${esc(home.zone)})` : ''}.`) +
+  const where = home ? `This affects your saved home at <b>${esc(home.address)}</b>${home.zone ? ` (evacuation Zone ${esc(home.zone)})` : ''}.` : 'This is for an area you follow in Bay County.';
+  const body = ui.p(where) +
     ui.item({title: esc(n.title || head), url, meta: esc([n.source, n.issued ? itemWhen(n.issued) : null].filter(Boolean).join(' · ')), text: esc(clip(n.summary || n.instruction || '', 400))}) +
-    ui.button(url, 'See the details') + ui.note('Always follow instructions from emergency officials. BayCounty.me passes notices along from the National Weather Service, Bay County and the cities.');
-  const footer = `You’re getting this because you asked for emergency emails about your home in your BayCounty.me account. ${ui.footLink(manage, 'Change or stop these emails')}<br><br>${ui.ABOUT}`;
-  return {subject, text: `${head}\n\n${n.title || ''}\n${n.summary || ''}\n\nThis affects your saved home at ${home.address}.\n${url}\n\nChange or stop these emails: ${manage}`,
-    html: ui.layout({title: subject, preheader: clip(n.summary || n.title || '', 120), kicker: 'Alert for your home', hero: {tone: 'salmon', icon: 'alert', eyebrow: esc(head), title: esc(clip(n.title || head, 90))}, body, footer})};
+    ui.button(url, 'See the details') + ui.note('Always follow instructions from emergency officials. BayCounty.me passes notices along from the National Weather Service, FEMA\'s emergency alert system, Bay County and the cities.');
+  const footer = `You’re getting this because you asked for emergency alerts by email in your BayCounty.me account. ${ui.footLink(manage, 'Change or stop these emails')}<br><br>${ui.ABOUT}`;
+  const plainWhere = home ? `This affects your saved home at ${home.address}.` : 'This is for an area you follow in Bay County.';
+  return {subject, text: `${head}\n\n${n.title || ''}\n${n.summary || ''}\n\n${plainWhere}\n${url}\n\nChange or stop these emails: ${manage}`,
+    html: ui.layout({title: subject, preheader: clip(n.summary || n.title || '', 120), kicker: home ? 'Alert for your home' : 'Bay County alert', hero: {tone: 'salmon', icon: 'alert', eyebrow: esc(head), title: esc(clip(n.title || head, 90))}, body, footer})};
 }
 
 module.exports = {accountCodeEmail, homeWeeklyEmail, homeAlertEmail, confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};
