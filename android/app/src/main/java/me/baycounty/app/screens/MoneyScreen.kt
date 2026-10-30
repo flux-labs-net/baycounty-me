@@ -72,7 +72,7 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("Audit findings", "magnifyingglass", "What outside auditors flagged", Route.Dataset("audit-findings")),
     ),
     MoneySection.CONNECTIONS to listOf(
-        MoneyItem("Network", "point.3.filled.connected.trianglepath.dotted", "Who every government paid, and who gave to officials", site = "/connections"),
+        MoneyItem("Connections", "point.3.filled.connected.trianglepath.dotted", "Who was paid, who gave, and how they voted", site = "/connections"),
         MoneyItem("Campaign gifts", "chart.bar", "What each official raised, and from whom", Route.Dataset("campaign-finance")),
         MoneyItem("Donors with contracts", "link", "Businesses that gave and also hold contracts", Route.DonorContracts),
         MoneyItem("Money map", "point.3.connected.trianglepath.dotted", "Donors, officials and votes on their contracts", Route.MoneyMap),

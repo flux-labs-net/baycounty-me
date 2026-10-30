@@ -1,219 +1,312 @@
 /* Connections (/connections). Data is built by site/connections.py and inlined below.
-   Views: force-directed network (d3), payee table, business gifts to officials. Covers every government and agency
-   with payment records; a CRA is one payer among the rest. */
+   One page, four parts: a money flow (governments -> businesses -> campaigns), a ranked list of businesses that were
+   paid and gave, a story panel for any picked name (who paid it, who it gave to, how those officials voted, with a
+   one-name connections map and a gift-and-vote timeline), and tables of every record. */
 (function () {
 const D = __CN__;
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const money = v => v == null ? 'Amount not stated' : v >= 1e6 ? '$' + (v / 1e6).toFixed(v >= 1e7 ? 1 : 2) + 'M' : v >= 1e3 ? '$' + Math.round(v / 1e3).toLocaleString() + 'K' : '$' + Math.round(v).toLocaleString();
+const money = v => v == null ? 'Amount not stated' : v >= 1e6 ? '$' + (v / 1e6).toFixed(v >= 1e7 ? 1 : 2) + 'M' : v >= 1e3 ? '$' + (v >= 1e4 ? Math.round(v / 1e3) : (v / 1e3).toFixed(1).replace(/\.0$/, '')) + 'K' : '$' + Math.round(v).toLocaleString();
 const full = v => v == null ? '—' : '$' + Math.round(v).toLocaleString();
 const url = i => i == null ? null : D.urls[i];
-const KIND = { biz: 'Business or nonprofit', gov: 'Public body, fund or bondholders', prop: 'Property owner', unnamed: 'Payee not named', grants: 'Grant recipients, not named', official: 'Elected official', candidate: '2026 candidate', payer: 'Government or agency' };
+const plural = (n, w, ws) => `${n.toLocaleString()} ${n === 1 ? w : (ws || w + 's')}`;
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const day = s => { const m = /^(\d{4})-(\d\d)-(\d\d)/.exec(s || ''); return m ? `${MON[+m[2] - 1]} ${+m[3]}, ${m[1]}` : (s || ''); };
+const KIND = { biz: 'Business or nonprofit', gov: 'Public body, fund or bondholders', prop: 'Property owner', unnamed: 'Payee not named', grants: 'Grant recipients, not named', official: 'Elected official', candidate: 'Candidate', payer: 'Government or agency' };
 const PKIND = { gov: 'Government', cra: 'Redevelopment agency (CRA)', tourism: 'Tourism agency' };
-const COL = { payer: 'var(--navy)', biz: 'var(--blue)', gov: 'var(--muted)', prop: 'var(--amber)', unnamed: 'var(--surface)', grants: 'var(--surface)', official: 'var(--salmon)', candidate: 'var(--salmon)' };
-const TOP = 40;  // payees shown by dollars in the "key payees" view, besides every donor and linked payee
-const st = { pay: new Set(Object.keys(D.payers)), types: new Set(Object.keys(D.types)), scope: 'focus', focus: new Set(), don: 'payees', sel: null, view: 'trail', city: '' };
+const st = { pay: new Set(Object.keys(D.payers)), types: new Set(Object.keys(D.types)), don: 'payees', sel: null, pv: 'story', view: 'payees', city: '', sort: 'paid', more: false, picked: false };
 const candLbl = o => o.yr ? `${o.yr} candidate` : '2026 candidate';
 const ent = id => id.startsWith('m:') ? { n: (D.off[id] || {}).n || id.slice(2), k: (D.off[id] || {}).cand ? 'candidate' : 'official' }
   : id.startsWith('p:') ? { n: D.payers[id.slice(2)].n, k: 'payer' } : D.ents[id] || (id.startsWith('d:') ? { n: id.slice(2), k: 'biz' } : { n: id, k: 'biz' });
 const payerName = p => D.payers[p] ? D.payers[p].n : p;
 const visible = () => D.recs.filter(r => st.pay.has(r.p) && st.types.has(r.t));
-const gaveSet = new Set(D.don.filter(d => d.e).map(d => d.e));
-const linked = new Set(D.rel.flatMap(x => [x.a, x.b]));
 const offShown = o => !st.city || o.g === st.city;
-const donShown = () => st.don === 'off' ? [] : D.don.filter(d => (st.don === 'payees' ? !!d.e : true) && offShown(D.off[d.o] || {}));
+const amt = r => r.x ? 0 : (r.a || 0);  // x: already inside a larger CRA project total
+const offLabel = o => o ? (o.off || '') + (o.cand ? ` (${candLbl(o)})` : '') : '';
+const isDonor = d => d.e && offShown(D.off[d.o] || {});
+const bcHref = id => window.BC ? BC.href(id) : null;
+function personHref(oid) { const o = D.off[oid]; return o && o.pid ? `/people/${o.pid}` : null; }
 
-function chip(label, pressed, onclick, id) {
-  const b = document.createElement('button'); b.type = 'button'; b.className = 'cn-chip'; b.textContent = label; if (id) b.id = id;
-  b.setAttribute('aria-pressed', pressed); b.onclick = () => onclick(b); return b;
-}
-function radio(groupId, opts, cur, set) {
-  const g = $(groupId);
-  opts.forEach(([k, l]) => g.appendChild(chip(l, cur === k, b => { set(k); g.querySelectorAll('.cn-chip').forEach(x => x.setAttribute('aria-pressed', x === b)); }, groupId + '-' + k)));
-}
-/* Only the filters that change the current view are shown: "Payees" (how many to draw) is for the network,
-   "Gifts" for the network and the gifts table, where "Hide" means nothing. */
-function filterGroups() {
-  $('cnScope').hidden = st.view !== 'network';
-  $('cnDon').hidden = st.view !== 'network' && st.view !== 'gifts';
-  const hide = $('cnDon-off'); if (hide) hide.hidden = st.view !== 'network';
-  if (st.view === 'gifts' && st.don === 'off') setDon('all');
-}
-function setDon(k) { st.don = k; document.querySelectorAll('#cnDon .cn-chip').forEach(x => x.setAttribute('aria-pressed', x.id === 'cnDon-' + k)); }
-function controls() {
-  document.querySelectorAll('[data-payer]').forEach(b => b.onclick = () => { const k = b.dataset.payer; st.pay.has(k) ? st.pay.delete(k) : st.pay.add(k); b.setAttribute('aria-pressed', st.pay.has(k)); render(); });
-  Object.entries(D.types).forEach(([k, l]) => $('cnTypes').appendChild(chip(l, st.types.has(k), b => { st.types.has(k) ? st.types.delete(k) : st.types.add(k); b.setAttribute('aria-pressed', st.types.has(k)); render(); })));
-  radio('cnScope', [['focus', 'Start from a name'], ['key', 'Donors and top payees'], ['all', 'Every payee']], st.scope, k => { st.scope = k; render(); });
-  radio('cnDon', [['payees', 'Donors who were paid'], ['all', 'All business donors'], ['off', 'Hide']], st.don, k => { st.don = k; render(); });
-  document.querySelectorAll('.cn-tab').forEach(b => b.onclick = () => setView(b.dataset.v));
-}
-
-/* The government picker at the top narrows the payers to one city's government, its CRA and nothing else
-   (Bay County also keeps the tourism agencies, which the county runs). Clearing it turns every payer back on. */
-function cityToPayers(k) {
-  st.city = k || '';
-  st.pay = new Set(Object.keys(D.payers).filter(p => !k || D.payers[p].g === k));
-  document.querySelectorAll('[data-payer]').forEach(b => b.setAttribute('aria-pressed', st.pay.has(b.dataset.payer)));
-}
-
-function payeeTotals(rows) {
+/* ---------- shared numbers ---------- */
+function paidMap(rows) {  // payee -> payer -> dollars
   const m = new Map();
-  rows.forEach(r => { const o = m.get(r.e) || { e: r.e, tot: 0, n: 0, p: new Set(), t: new Set(), unk: 0 }; o.tot += r.x ? 0 : (r.a || 0); o.n++; o.p.add(r.p); o.t.add(r.t); if (r.a == null) o.unk++; m.set(r.e, o); });
+  rows.forEach(r => { const x = m.get(r.e) || new Map(); x.set(r.p, (x.get(r.p) || 0) + amt(r)); m.set(r.e, x); });
   return m;
 }
-function shownPayees(rows) {
-  const m = payeeTotals(rows);
-  if (st.scope === 'all') return new Set(m.keys());
-  const keep = new Set([...m.values()].sort((a, b) => b.tot - a.tot).slice(0, TOP).map(o => o.e));
-  m.forEach((o, e) => { if (gaveSet.has(e) || linked.has(e)) keep.add(e); });
-  if (st.sel && m.has(st.sel)) keep.add(st.sel);
-  return keep;
+const sum = m => [...m.values()].reduce((a, v) => a + v, 0);
+function giftsOf(e) { return D.don.filter(d => d.e === e && offShown(D.off[d.o] || {})); }
+function votesFor(e) { return D.votes.filter(v => v.c === e && (!st.city || offShown(D.off[v.m] || { g: '' }))); }
+const voteKey = v => v.d + '|' + v.h;
+function groupVotes(vs) {  // one row per motion, with the members who had a gift
+  const g = new Map();
+  vs.forEach(v => { const k = voteKey(v) + '|' + v.cn; const o = g.get(k) || { ...v, who: [] }; o.who.push(v); g.set(k, o); });
+  return [...g.values()].sort((a, b) => b.d.localeCompare(a.d));
 }
 
+/* ---------- KPIs ---------- */
 function kpis(rows) {
-  const m = payeeTotals(rows), named = [...m.keys()].filter(e => /^[vb]:/.test(e));
+  const m = paidMap(rows), named = [...m.keys()].filter(e => /^[vb]:/.test(e));
   const gifts = D.don.filter(d => offShown(D.off[d.o] || {}));
   const paidGifts = gifts.filter(d => d.e && m.has(d.e));
-  // businesses paid in these filters that gave to an official in them: the same set the money trail draws
-  const paidDon = [...new Set(paidGifts.map(d => d.e))];
+  const paidDon = new Set(paidGifts.map(d => d.e));
+  const vs = D.votes.filter(v => v.c && paidDon.has(v.c));
   $('cnKpis').innerHTML = [
-    ['Named payees', named.length.toLocaleString(), `paid by ${new Set(rows.map(r => r.p)).size} governments and agencies in the current filters`],
-    ['Paid and gave', paidDon.length, 'businesses paid in these records that gave to a campaign'],
-    ['Their gifts', money(paidGifts.reduce((a, d) => a + d.a, 0)), `${paidGifts.length} donor and official pair${paidGifts.length === 1 ? '' : 's'}`],
-    ['All business gifts', money(gifts.reduce((a, d) => a + d.a, 0)), `to ${new Set(gifts.map(d => d.o)).size} officials and candidates in the gift records`],
+    ['Named payees', named.length.toLocaleString(), `paid by ${new Set(rows.map(r => r.p)).size} governments and agencies`],
+    ['Paid and gave', paidDon.size, 'businesses paid in these records that gave to a campaign'],
+    ['Their gifts', money(paidGifts.reduce((a, d) => a + d.a, 0)), `${plural(paidGifts.length, 'business and official pair')}`],
+    ['Votes on their work', new Set(vs.map(voteKey)).size.toLocaleString(), 'motions naming one of them, voted on by someone it gave to'],
   ].map(([l, v, s]) => `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>`).join('');
 }
 
-let sim, hl, graphZoom;
-function focusNode(id) {
-  const svg = d3.select('#cnGraph'), n = svg.selectAll('.cn-node').filter(d => d.id === id);
-  if (!n || n.empty() || !graphZoom) return;
-  const d = n.datum(), r = svg.node().getBoundingClientRect(), vb = svg.node().viewBox.baseVal, sx = vb.width / r.width;
-  const phone = innerWidth < 700, cx = phone ? vb.width / 2 : (vb.width - 380 * sx) / 2, cy = phone ? vb.height * 0.25 : vb.height / 2;
-  const t = d3.zoomTransform(svg.node()), k = Math.max(t.k, 1.2);
-  svg.transition().duration(400).call(graphZoom.transform, d3.zoomIdentity.translate(cx - d.x * k, cy - d.y * k).scale(k));
+/* ---------- the ranked list (paid and gave) ---------- */
+function listData(rows) {
+  const pm = paidMap(rows), out = new Map();
+  D.don.forEach(d => {
+    if (!isDonor(d) || !pm.has(d.e)) return;
+    const o = out.get(d.e) || { e: d.e, paid: sum(pm.get(d.e)), govs: pm.get(d.e).size, gave: 0, offs: new Set() };
+    o.gave += d.a; o.offs.add(d.o); out.set(d.e, o);
+  });
+  out.forEach(o => { o.votes = new Set(votesFor(o.e).map(voteKey)).size; });
+  return [...out.values()];
 }
-function graphBtn(f) { const svg = d3.select('#cnGraph'); if (!graphZoom) return; if (f === 0) svg.transition().duration(250).call(graphZoom.transform, d3.zoomIdentity); else svg.transition().duration(250).call(graphZoom.scaleBy, f); }
-function graph(rows) {
-  const svg = d3.select('#cnGraph'), W = svg.node().clientWidth || 800, H = svg.node().clientHeight || 620;
-  svg.attr('viewBox', `0 0 ${W} ${H}`).selectAll('*').remove();
-  if (sim) sim.stop();
-  const keep = st.scope === 'focus' ? new Set(rows.map(r => r.e)) : shownPayees(rows);
-  const nodes = new Map(), links = new Map();
-  const add = (id, o) => { if (!nodes.has(id)) nodes.set(id, { id, total: 0, ...o }); return nodes.get(id); };
-  rows.forEach(r => {
-    if (!keep.has(r.e)) return;
-    add('p:' + r.p, { n: payerName(r.p), k: 'payer' });
-    const e = ent(r.e); add(r.e, { n: e.n, k: e.k }).total += r.x ? 0 : (r.a || 0);
-    const key = 'p:' + r.p + '|' + r.e, l = links.get(key) || { source: 'p:' + r.p, target: r.e, type: 'paid', amt: 0 };
-    l.amt += r.x ? 0 : (r.a || 0); links.set(key, l);
-  });
-  D.rel.forEach(x => {
-    const sub = id => D.ents[id] && D.ents[id].sub;
-    if ((nodes.has(x.a) || sub(x.a)) && (nodes.has(x.b) || sub(x.b)) && (nodes.has(x.a) || nodes.has(x.b))) {
-      [x.a, x.b].forEach(id => { if (!nodes.has(id)) add(id, { n: ent(id).n, k: 'biz' }); });
-      links.set(x.a + '~' + x.b, { source: x.a, target: x.b, type: 'rel' });
-    }
-  });
-  donShown().forEach(d => {
-    if (d.e && !nodes.has(d.e) && st.don === 'payees') return;  // a paid donor whose payments are filtered out
-    const o = add(d.o, { n: ent(d.o).n, k: ent(d.o).k });
-    const donor = d.e || 'd:' + d.dn;
-    if (!nodes.has(donor)) add(donor, { n: d.e ? ent(d.e).n : d.dn, k: 'biz' });
-    const key = donor + '>' + o.id, l = links.get(key) || { source: donor, target: o.id, type: 'don', amt: 0 }; l.amt += d.a; links.set(key, l);
-    ((D.off[d.o] || {}).gp || []).forEach(p => { if (nodes.has('p:' + p)) links.set(o.id + '@' + p, { source: o.id, target: 'p:' + p, type: 'board' }); });
-  });
-  let N = [...nodes.values()], L = [...links.values()];
-  if (st.scope === 'focus') {
-    if (!st.focus.size) { graphPrompt(svg, W, H); hl = null; return; }
-    // the picked names and their direct connections; a government or agency brings its donors, linked payees and largest payees
-    const keepN = new Set(st.focus), nbr = new Map();
-    L.forEach(l => [[l.source, l.target], [l.target, l.source]].forEach(([a, b]) => { if (st.focus.has(a)) { if (!nbr.has(a)) nbr.set(a, []); nbr.get(a).push([b, l]); } }));
-    nbr.forEach((list, a) => {
-      if (a.startsWith('p:') && list.length > 18) {
-        const key = list.filter(([b, l]) => l.type !== 'paid' || gaveSet.has(b) || linked.has(b));
-        const big = list.filter(([, l]) => l.type === 'paid').sort((x, y) => y[1].amt - x[1].amt).slice(0, 12);
-        list = [...new Set([...key, ...big])];
-      }
-      list.forEach(([b]) => keepN.add(b));
-    });
-    N = N.filter(n => keepN.has(n.id));
-    L = L.filter(l => keepN.has(l.source) && keepN.has(l.target) && (st.focus.has(l.source) || st.focus.has(l.target) || l.type !== 'paid'));
-  }
-  if (!N.length) { svg.append('text').attr('x', 20).attr('y', 30).attr('fill', 'var(--muted)').attr('font-size', 13).text('Nothing matches these filters.'); hl = null; return; }
-  const rS = d3.scaleSqrt().domain([0, d3.max(N.filter(n => n.k !== 'payer'), d => d.total) || 1]).range([4, 22]);
-  const wS = d3.scaleSqrt().domain([0, d3.max(L.filter(l => l.type === 'paid'), d => d.amt) || 1]).range([0.8, 7]);
-  N.forEach(n => n.r = n.k === 'payer' ? 17 : n.k === 'official' || n.k === 'candidate' ? ((D.off[n.id] || {}).ph ? 12 : 8) : Math.max(5, rS(n.total)));
-  const connected = new Set(L.filter(l => l.type !== 'paid').flatMap(l => [l.source, l.target]));  // labelled when the graph is small
-  N.forEach(d => { d.lbl = d.k === 'payer' ? d.n : (d.r > 13 || N.length < 60 || (N.length < 90 && (connected.has(d.id) || d.k === 'official'))) ? (d.n.length > 30 ? d.n.slice(0, 29) + '…' : d.n) : ''; });
-  const g = svg.append('g');
-  // labels keep the same on-screen size at every zoom level
-  graphZoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', e => {
-    const k = e.transform.k; g.attr('transform', e.transform);
-    g.selectAll('.cn-node text').style('font-size', d => (d.k === 'payer' ? 12 : 10.5) / k + 'px').style('stroke-width', 3 / k + 'px').attr('dy', d => d.r + 11 / k);
-  });
-  svg.call(graphZoom);
-  const link = g.append('g').selectAll('line').data(L).join('line')
-    .attr('stroke', d => d.type === 'rel' ? 'var(--amber)' : d.type === 'paid' ? 'var(--faint)' : d.type === 'board' ? 'var(--navy)' : 'var(--salmon)')
-    .attr('stroke-opacity', d => d.type === 'paid' ? 0.5 : d.type === 'board' ? 0.5 : 0.95)
-    .attr('stroke-width', d => d.type === 'paid' ? wS(d.amt) : d.type === 'don' ? 2 : 1.5)
-    .attr('stroke-dasharray', d => d.type === 'rel' ? '5 4' : d.type === 'board' ? '2 3' : null);
-  const node = g.append('g').selectAll('g').data(N).join('g').attr('class', 'cn-node')
-    .call(d3.drag().on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.2).restart(); d.fx = d.x; d.fy = d.y; })
-      .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; }).on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
-  node.append('circle').attr('r', d => d.r).attr('fill', d => COL[d.k] || COL.biz)
-    .attr('stroke', d => d.k === 'unnamed' || d.k === 'grants' ? 'var(--faint)' : d.k === 'payer' ? 'var(--ink)' : 'var(--surface)')
-    .attr('stroke-width', d => d.k === 'unnamed' || d.k === 'grants' ? 1.5 : d.k === 'payer' ? 2 : 1.2)
-    .attr('stroke-dasharray', d => d.k === 'grants' || d.k === 'candidate' ? '3 2' : null)
-    .classed('cn-focus', d => st.focus.has(d.id))
-    .attr('tabindex', 0).attr('role', 'button').attr('aria-label', d => d.n)
-    .on('click', (e, d) => select(d.id)).on('keydown', (e, d) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(d.id); } })
-    .on('mousemove', (e, d) => tip(e, `<b>${esc(d.n)}</b><br>${d.k === 'payer' ? PKIND[D.payers[d.id.slice(2)].k] : KIND[d.k]}${d.total ? ' · ' + money(d.total) + ' in records' : ''}`, 'cnTip')).on('mouseleave', () => hideTip('cnTip'));
-  // an official's or candidate's published photo inside their circle (clicks still reach the circle underneath)
-  node.filter(d => (D.off[d.id] || {}).ph).each(function (d, i) {
-    const n = d3.select(this), k = 'cnph' + i + '-' + Math.random().toString(36).slice(2, 7), r = Math.max(d.r - 1.2, 1);
-    n.append('clipPath').attr('id', k).append('circle').attr('r', r);
-    n.append('image').attr('href', D.off[d.id].ph).attr('x', -r).attr('y', -r).attr('width', 2 * r).attr('height', 2 * r)
-      .attr('clip-path', `url(#${k})`).attr('preserveAspectRatio', 'xMidYMid slice').style('pointer-events', 'none');
-  });
-  node.append('text').attr('dy', d => d.r + 12).attr('text-anchor', 'middle')
-    .text(d => d.lbl)
-    .attr('class', d => d.k === 'payer' ? 'cn-pl' : null);
-  sim = d3.forceSimulation(N)
-    .force('link', d3.forceLink(L).id(d => d.id).distance(d => (N.length < 60 ? 1.7 : 1) * (d.type === 'rel' ? 60 : d.type === 'board' ? 90 : 95)).strength(d => d.type === 'paid' ? 0.5 : d.type === 'board' ? 0.15 : 0.8))
-    .force('charge', d3.forceManyBody().strength(d => d.k === 'payer' ? -700 : N.length < 60 ? -260 : -90))
-    .force('collide', d3.forceCollide(d => d.r + 4))
-    .force('x', d3.forceX(W / 2).strength(0.05)).force('y', d3.forceY(H / 2).strength(0.07))
-    .on('tick', () => { link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y); node.attr('transform', d => `translate(${d.x},${d.y})`); });
-  for (let i = 0; i < 260; i++) sim.tick();
-  {  // start with the whole network in view
-    // labels keep their on-screen size, so their width in graph units depends on the zoom: settle it in a few passes
-    const side = st.sel && (fsOn ? innerWidth >= 700 : innerWidth >= 1100) ? 380 * (W / (svg.node().getBoundingClientRect().width || W)) : 0;  // the details panel covers the right side
-    const Wf = W - side;
-    let k = 1, bx0, bx1, by0, by1;
-    for (let i = 0; i < 4; i++) {
-      const half = n => Math.max(n.r, n.lbl.length * (n.k === 'payer' ? 3.9 : 3.3) / k);
-      bx0 = Math.min(...N.map(n => n.x - half(n))) - 10; bx1 = Math.max(...N.map(n => n.x + half(n))) + 10;
-      by0 = Math.min(...N.map(n => n.y - n.r)) - 10; by1 = Math.max(...N.map(n => n.y + n.r + (n.lbl ? 16 / k : 0))) + 10;
-      k = Math.min(1.4, Wf / (bx1 - bx0), H / (by1 - by0));
-    }
-    svg.call(graphZoom.transform, d3.zoomIdentity.translate(Wf / 2 - k * (bx0 + bx1) / 2, H / 2 - k * (by0 + by1) / 2).scale(k));
-  }
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) sim.stop(); else sim.alpha(0.05).restart();
-  hl = () => {
-    const s = st.sel;
-    if (!s) { node.classed('dim', false); link.classed('dim', false); return; }
-    const nb = new Set([s]); L.forEach(l => { if (l.source.id === s) nb.add(l.target.id); if (l.target.id === s) nb.add(l.source.id); });
-    node.classed('dim', d => !nb.has(d.id)); link.classed('dim', l => l.source.id !== s && l.target.id !== s);
-  };
-  hl();
+function list(rows) {
+  const L = listData(rows);
+  const by = { paid: (a, b) => b.paid - a.paid, gave: (a, b) => b.gave - a.gave || b.paid - a.paid, votes: (a, b) => b.votes - a.votes || b.paid - a.paid }[st.sort];
+  L.sort(by);
+  const cut = 10, shown = st.more ? L : L.slice(0, cut);
+  $('cnListNote').textContent = L.length ? `${plural(L.length, 'business was', 'businesses were')} paid by a local government and gave to a campaign. Tap one to see its story.` : 'No business in these records was both paid and a campaign donor.';
+  $('cnList').innerHTML = shown.map((o, i) => `<li><button type="button" class="cn-ri" data-sel="${esc(o.e)}"${st.sel === o.e ? ' aria-current="true"' : ''}><span class="cn-n">${i + 1}</span><span class="cn-rb"><b>${esc(ent(o.e).n)}</b><span class="cn-mini"><span>${money(o.paid)} paid · ${plural(o.govs, 'govt')}</span><span class="g">${full(o.gave)} to ${plural(o.offs.size, 'campaign')}</span>${o.votes ? `<span class="v">${plural(o.votes, 'vote')}</span>` : ''}</span></span></button></li>`).join('');
+  $('cnList').querySelectorAll('[data-sel]').forEach(b => b.onclick = () => select(b.dataset.sel, true));
+  const more = $('cnMore'); more.hidden = L.length <= cut; more.textContent = st.more ? 'Show fewer' : `Show all ${L.length}`;
+  more.onclick = () => { st.more = !st.more; list(visible()); };
+  return L;
 }
 
-function graphPrompt(svg, W, H) {
-  const g = svg.append('g').attr('class', 'cn-prompt');
-  g.append('text').attr('x', W / 2).attr('y', H / 2 - 14).attr('text-anchor', 'middle').text('Search for a business, official or government above,');
-  g.append('text').attr('x', W / 2).attr('y', H / 2 + 10).attr('text-anchor', 'middle').text('or tap a name in Money trail or Payees. Tap any circle to expand it.');
+/* ---------- money flow (Sankey) ---------- */
+let flowHl = () => {};
+function flow(rows) {
+  const svg = d3.select('#cnFlow'); svg.selectAll('*').remove();
+  const avail = svg.node().parentElement.clientWidth || 900, phone = avail < 640;
+  const L = listData(rows).sort((a, b) => b.paid - a.paid), NB = phone ? 8 : 12, NO = phone ? 9 : 14;
+  const biz = L.slice(0, NB).map(o => o.e);
+  $('cnFlowCount').textContent = L.length ? (L.length > NB ? `Top ${NB} of ${L.length} businesses by dollars paid` : `${plural(L.length, 'business', 'businesses')}`) : '';
+  if (!biz.length) { svg.attr('viewBox', '0 0 600 60').attr('height', 60); svg.append('text').attr('x', 12).attr('y', 34).attr('class', 'cn-empty').text('No business in these records was both paid and a campaign donor.'); flowHl = () => {}; return; }
+  const pm = paidMap(rows);
+  const pay = new Map(biz.map(b => [b, pm.get(b)]));
+  const gift = new Map(biz.map(b => [b, new Map()]));
+  D.don.forEach(d => { if (isDonor(d) && gift.has(d.e)) gift.get(d.e).set(d.o, (gift.get(d.e).get(d.o) || 0) + d.a); });
+  // officials: the largest recipients; the rest share one "other campaigns" node
+  const offTot = new Map(); gift.forEach(m => m.forEach((v, o) => offTot.set(o, (offTot.get(o) || 0) + v)));
+  const offs = [...offTot.keys()].sort((a, b) => offTot.get(b) - offTot.get(a));
+  const keepO = new Set(offs.slice(0, NO)), OTHER = 'm:*';
+  if (offs.length > NO) gift.forEach(m => { let x = 0; [...m.keys()].forEach(o => { if (!keepO.has(o)) { x += m.get(o); m.delete(o); } }); if (x) m.set(OTHER, x); });
+  const order = Object.keys(D.payers), pays = order.filter(p => biz.some(b => pay.get(b).has(p)));
+  const main = b => order.indexOf([...pay.get(b).entries()].sort((a, c) => c[1] - a[1])[0][0]);
+  biz.sort((a, b) => main(a) - main(b) || pay.get(b).size - pay.get(a).size);
+  const bi = new Map(biz.map((b, i) => [b, i])), mean = xs => xs.reduce((a, x) => a + x, 0) / xs.length;
+  const pays2 = pays.sort((a, b) => mean(biz.filter(x => pay.get(x).has(a)).map(x => bi.get(x))) - mean(biz.filter(x => pay.get(x).has(b)).map(x => bi.get(x))));
+  const offL = [...new Set(biz.flatMap(b => [...gift.get(b).keys()]))].sort((a, b) => a === OTHER ? 1 : b === OTHER ? -1 : mean(biz.filter(x => gift.get(x).has(a)).map(x => bi.get(x))) - mean(biz.filter(x => gift.get(x).has(b)).map(x => bi.get(x))));
+  // geometry: payments and gifts get their own scale so both sides fill the same height
+  const W = phone ? avail : Math.max(720, avail), top = 30, gap = phone ? 6 : 8, minRow = phone ? 26 : 22;
+  const body = Math.max(phone ? 300 : 380, biz.length * (minRow + gap));
+  const totP = biz.reduce((a, b) => a + sum(pay.get(b)), 0) || 1, totG = biz.reduce((a, b) => a + sum(gift.get(b)), 0) || 1;
+  const kP = body * 0.72 / totP, kG = body * 0.72 / totG;
+  const nw = phone ? 6 : 10;
+  const x0 = phone ? 76 : Math.min(190, W * 0.2), x1 = phone ? W * 0.43 : W * 0.44, x2 = phone ? W - 92 : W - Math.min(200, W * 0.22);
+  const col = (ids, hOf) => { let y = top; const m = new Map(); ids.forEach(id => { const h = Math.max(2, hOf(id)); const row = Math.max(h, minRow); m.set(id, { y: y + (row - h) / 2, h }); y += row + gap; }); return [m, y]; };
+  const [PY, yP] = col(pays2, p => biz.reduce((a, b) => a + (pay.get(b).get(p) || 0), 0) * kP);
+  const [BY, yB] = col(biz, b => Math.max(sum(pay.get(b)) * kP, sum(gift.get(b)) * kG));
+  const [OY, yO] = col(offL, o => biz.reduce((a, b) => a + (gift.get(b).get(o) || 0), 0) * kG);
+  const H = Math.max(yP, yB, yO) + 6;
+  const center = (m, yEnd) => { const off = (H - yEnd) / 2; m.forEach(v => { v.y += off; }); };
+  center(PY, yP); center(BY, yB); center(OY, yO);
+  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H);
+  const hd = svg.append('g').attr('class', 'cn-th');
+  [[x0 + nw / 2, phone ? 'middle' : 'middle', 'Paid by'], [x1 + nw / 2, 'middle', 'Business'], [x2 + nw / 2, 'middle', 'Gave to']].forEach(([x, a, t]) => hd.append('text').attr('x', x).attr('y', 14).attr('text-anchor', a).text(t));
+  // bands
+  const bands = [], outP = new Map(), inB = new Map(), outB = new Map(), inO = new Map();
+  const take = (m, id, h) => { const o = m.get(id) || 0; m.set(id, o + h); return o; };
+  biz.forEach(b => pays2.filter(p => pay.get(b).has(p)).forEach(p => { const v = pay.get(b).get(p), h = Math.max(1, v * kP); bands.push({ a: 'p:' + p, b, v, h, ya: PY.get(p).y + take(outP, p, h), yb: BY.get(b).y + take(inB, b, h), xa: x0 + nw, xb: x1, k: 'pay' }); }));
+  biz.forEach(b => offL.filter(o => gift.get(b).has(o)).forEach(o => { const v = gift.get(b).get(o), h = Math.max(1, v * kG); bands.push({ a: b, b: o, v, h, ya: BY.get(b).y + take(outB, b, h), yb: OY.get(o).y + take(inO, o, h), xa: x1 + nw, xb: x2, k: 'gift' }); }));
+  const band = d => { const m = (d.xa + d.xb) / 2; return `M${d.xa},${d.ya}C${m},${d.ya} ${m},${d.yb} ${d.xb},${d.yb}L${d.xb},${d.yb + d.h}C${m},${d.yb + d.h} ${m},${d.ya + d.h} ${d.xa},${d.ya + d.h}Z`; };
+  const nm = id => id === OTHER ? 'Other campaigns' : id.startsWith('p:') ? payerName(id.slice(2)) : ent(id).n;
+  const bk = svg.append('g').selectAll('path').data(bands).join('path').attr('class', d => 'cn-band ' + d.k).attr('d', band)
+    .on('mousemove', (e, d) => tip(e, d.k === 'pay' ? `${esc(nm(d.a))} paid ${esc(nm(d.b))} ${full(d.v)} in records` : `${esc(nm(d.a))} gave ${esc(nm(d.b))} ${full(d.v)}`))
+    .on('mouseleave', hideTip).on('click', (e, d) => select(d.k === 'pay' ? d.b : d.a, true));
+  // nodes and labels
+  const fit = (t, px) => { const n = Math.max(6, Math.floor(px / (phone ? 5.9 : 6.6))); return t.length > n ? t.slice(0, n - 1).trimEnd() + '…' : t; };
+  const node = (id, x, v, cls, lx, anchor, room) => {
+    const g = svg.append('g').attr('class', 'cn-nd ' + cls).attr('data-id', id);
+    if (id !== OTHER) g.attr('tabindex', 0).attr('role', 'button').attr('aria-label', nm(id)).on('click', () => select(id, true)).on('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(id, true); } });
+    g.append('rect').attr('x', x).attr('y', v.y).attr('width', nw).attr('height', v.h).attr('rx', 2);
+    const t = g.append('text').attr('x', lx).attr('y', v.y + v.h / 2).attr('dy', '0.35em').attr('text-anchor', anchor).text(fit(nm(id), room));
+    t.append('title').text(nm(id));
+  };
+  pays2.forEach(p => node('p:' + p, x0, PY.get(p), 'pay', x0 - 6, 'end', x0 - 8));
+  biz.forEach(b => node(b, x1, BY.get(b), 'biz', x1 + nw + 6, 'start', (x2 - x1) * (phone ? 0.62 : 0.5)));
+  offL.forEach(o => node(o, x2, OY.get(o), o === OTHER ? 'off other' : 'off', x2 + nw + 6, 'start', W - x2 - nw - 8));
+  flowHl = () => {
+    const s = st.picked ? st.sel : null, ids = new Set([...PY.keys()].map(p => 'p:' + p).concat(biz, offL));
+    if (!s || !ids.has(s)) { bk.classed('dim', false).classed('on', false); svg.selectAll('.cn-nd').classed('dim', false).classed('on', false); return; }
+    const bs = new Set(biz.includes(s) ? [s] : bands.filter(d => d.a === s || d.b === s).map(d => d.a === s ? d.b : d.a));
+    const keep = new Set(bands.filter(d => biz.includes(s) ? (d.a === s || d.b === s) : (d.a === s || d.b === s || (bs.has(d.a) && d.k === (s.startsWith('p:') ? 'gift' : 'pay')) || (bs.has(d.b) && d.k === (s.startsWith('p:') ? 'gift' : 'pay')))));
+    const on = new Set([s, ...[...keep].flatMap(d => [d.a, d.b])]);
+    bk.classed('dim', d => !keep.has(d)).classed('on', d => keep.has(d));
+    svg.selectAll('.cn-nd').classed('dim', function () { return !on.has(this.dataset.id); }).classed('on', function () { return this.dataset.id === s; });
+  };
+  flowHl();
 }
+function tip(e, h) { const t = $('cnTip'), b = t.parentElement.getBoundingClientRect(); t.innerHTML = h; t.hidden = false; let lx = e.clientX - b.left + 12; if (lx > b.width - 250) lx = e.clientX - b.left - 252; t.style.left = Math.max(4, lx) + 'px'; t.style.top = (e.clientY - b.top + 12) + 'px'; }
+function hideTip() { $('cnTip').hidden = true; }
+
+/* ---------- the story panel ---------- */
+const bars = (items, cls) => { const max = Math.max(...items.map(x => x.v), 1); return `<div class="cn-bars">${items.map(x => `<div class="cn-bar1 ${cls || ''}">${x.id ? `<button type="button" class="cn-link" data-sel="${esc(x.id)}">${esc(x.n)}</button>` : `<span>${esc(x.n)}</span>`}<span class="t"><i style="width:${Math.max(2, x.v / max * 100).toFixed(1)}%"></i></span><em>${money(x.v)}</em></div>`).join('')}</div>`; };
+const fold = (label, html) => html ? `<details class="cn-fold"><summary>${label}</summary>${html}</details>` : '';
+const step = (n, title, body) => `<section class="cn-step"><h3><span class="cn-sn">${n}</span>${title}</h3>${body}</section>`;
+const facts = fs => `<div class="cn-facts">${fs.map(([v, s]) => `<div><b>${v}</b><span>${s}</span></div>`).join('')}</div>`;
+const vpill = v => `<span class="cn-vp ${v === 'yes' ? 'yes' : 'other'}">${v === 'yes' ? 'Yes' : v === 'abstain' ? 'Abstained' : v === 'absent' ? 'Absent' : esc(v)}</span>`;
+const srcA = (u, t) => u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t || 'Source'}</a>` : '';
+const timing = v => !v.gf ? '' : v.gl && v.gl > v.d ? (v.gf > v.d ? 'gift came after this vote' : 'gifts before and after this vote') : 'gift came before this vote';
+function offBtn(oid, name) { return oid && D.off[oid] ? `<button type="button" class="cn-link" data-sel="${esc(oid)}">${esc(name || D.off[oid].n)}</button>` : esc(name); }
+function voteRows(groups, showCompany) {
+  return groups.map(g => `<div class="cn-vote"><div class="cn-vd">${esc(day(g.d))}</div><div><b>${esc(g.h)}</b>${g.a ? ` · ${money(g.a)}` : ''}${showCompany ? ` · ${g.c ? `<button type="button" class="cn-link" data-sel="${esc(g.c)}">${esc(g.cn)}</button>` : esc(g.cn)}` : ''}
+    <div class="cn-who">${g.who.map(v => `${vpill(v.v)} ${offBtn(v.m, v.mn)}`).join(' ')}</div>
+    <div class="cn-meta">${g.g && window.BCM && BCM.city ? `<span>${esc(BCM.city.label(g.g) || '')}</span>` : ''}${g.ca ? '<span>Consent agenda</span>' : ''}${g.who.some(v => v.ow) ? '<span>Gift from the company\'s owner</span>' : ''}<span>${esc(timing(g.who[0]))}</span>${srcA(g.u, 'Minutes')}</div></div></div>`).join('');
+}
+function timeline(e, oid) {
+  const ev = [];
+  D.don.filter(d => d.e === e && d.o === oid).forEach(d => {
+    const [a, b] = (d.date || '').split(' to ');
+    if (a) ev.push({ d: a, k: 'gift', t: d.n > 1 ? `First of ${d.n} gifts, ${full(d.a)} in all` : `${full(d.a)} campaign gift`, u: url(d.u) });
+    if (b) ev.push({ d: b, k: 'gift', t: 'Latest gift', u: url(d.u) });
+  });
+  D.votes.filter(v => v.c === e && v.m === oid).forEach(v => ev.push({ d: v.d, k: 'vote', t: `${v.v === 'yes' ? 'Voted yes' : v.v === 'abstain' ? 'Abstained' : 'Absent'}: ${v.h}${v.a ? ` (${money(v.a)})` : ''}${v.ca ? ' · consent agenda' : ''}`, u: v.u }));
+  if (!ev.some(x => x.k === 'vote')) return '';
+  ev.sort((a, b) => a.d.localeCompare(b.d));
+  return `<ol class="cn-tl">${ev.map(x => `<li class="${x.k}"><span class="cn-td">${esc(day(x.d))}</span><span>${esc(x.t)}${x.u ? ` · ${srcA(x.u, x.k === 'vote' ? 'Minutes' : 'Report')}` : ''}</span></li>`).join('')}</ol><p class="cn-note">Dot: gift. Square: vote. "Consent agenda" means the item passed in one vote with other routine items.</p>`;
+}
+function recList(rs) {
+  return `<div class="cn-recs">${rs.map(r => `<div class="cn-rec"><span>${esc(r.w || D.types[r.t])}</span><span class="num">${full(r.a)}</span><span class="cn-meta"><span class="cn-pill">${esc(D.types[r.t])}</span>${r.s ? `<span>${esc(r.s)}</span>` : ''}<span>${esc(r.when)}</span><span>${esc(payerName(r.p))}</span>${r.x ? '<span>inside a project total</span>' : ''}${srcA(url(r.u))}</span></div>`).join('')}</div>`;
+}
+function profileHref(id, e) {
+  if (e.vp) return `/public-money/vendors/${e.vp}`;
+  const k = id.slice(0, 2), key = id.slice(2);
+  const pid = e.np && k !== 'v:' ? 'nonprofit:' + e.np : k === 'v:' ? 'vendor:' + key : (k === 'b:' || k === 's:') ? 'business:' + key : null;
+  return pid ? bcHref(pid) : null;
+}
+
+function storyBiz(id) {
+  const e = ent(id), rows = visible().filter(r => r.e === id), pm = paidMap(rows).get(id) || new Map();
+  const gifts = giftsOf(id).sort((a, b) => (D.off[a.o] || {}).cand - (D.off[b.o] || {}).cand || b.a - a.a);
+  const vg = groupVotes(votesFor(id)), href = profileHref(id, e);
+  const now = gifts.filter(d => !(D.off[d.o] || {}).cand).length;
+  const head = `<div class="cn-ph"><span class="eyebrow">${KIND[e.k] || ''}</span><h2 data-nolink>${esc(e.n)}</h2>${href ? `<a href="${esc(href)}">Full profile</a>` : ''}</div>` +
+    facts([[money(sum(pm)), `in ${plural(rows.length, 'record')} from ${plural(pm.size, 'government')}`], ...(e.k === 'biz' ? [[full(gifts.reduce((a, d) => a + d.a, 0)), `to ${plural(gifts.length, 'campaign')} since 2016`], [vg.length, 'votes by people it gave to']] : [])]);
+  const paidItems = [...pm.entries()].sort((a, b) => b[1] - a[1]).map(([p, v]) => ({ n: payerName(p), v, id: 'p:' + p }));
+  const s1 = step(1, 'Who paid it', paidItems.length ? bars(paidItems.slice(0, 6)) + (paidItems.length > 6 ? `<p class="cn-note">And ${paidItems.length - 6} more.</p>` : '') + `<p class="cn-note">An award and the payments on it can both appear, so totals can count the same money twice.</p>` + fold(`See all ${plural(rows.length, 'record')}`, recList(rows)) : '<p class="cn-note">No payments in the records chosen.</p>');
+  const giftRow = d => { const o = D.off[d.o] || {}, tl = timeline(id, d.o); return `<div class="cn-gift"><div class="cn-gr">${offBtn(d.o)}<span class="cn-note">${esc(offLabel(o))}</span><span class="num">${full(d.a)}</span></div>${tl ? `<details class="cn-tlw"><summary>Gifts and votes over time</summary>${tl}</details>` : ''}</div>`; };
+  const s2 = e.k !== 'biz' ? '' : step(2, 'Who it gave to', gifts.length ? gifts.slice(0, 6).map(giftRow).join('') + (gifts.length > 6 ? fold(`Show all ${gifts.length}`, gifts.slice(6).map(giftRow).join('')) : '') + `<p class="cn-note">${plural(now, 'official')} in office now, ${plural(gifts.length - now, 'past or 2026 campaign')}.</p>` : '<p class="cn-note">No campaign gifts on file.</p>');
+  const s3 = e.k !== 'biz' ? '' : step(3, 'How they voted on its work', vg.length ? voteRows(vg.slice(0, 4)) + (vg.length > 4 ? fold(`Show all ${vg.length} votes`, voteRows(vg.slice(4))) : '') : '<p class="cn-note">No votes in the minutes name this business alongside a member it gave to.</p>');
+  const rel = D.rel.filter(x => x.a === id || x.b === id).map(x => { const o = x.a === id ? x.b : x.a; return `<div><button type="button" class="cn-link" data-sel="${esc(o)}">${esc(ent(o).n)}</button><div class="cn-note">${esc(x.t)} ${srcA(x.u)}</div></div>`; });
+  return head + s1 + s2 + s3 + (rel.length ? `<section class="cn-step"><h3>Connected payees</h3><div class="cn-rel">${rel.join('')}</div></section>` : '');
+}
+function storyOff(id) {
+  const o = D.off[id] || {}, ds = D.don.filter(d => d.o === id).sort((a, b) => b.a - a.a), pm = paidMap(visible());
+  const paidDs = ds.filter(d => d.e && pm.has(d.e)), vs = D.votes.filter(v => v.m === id), vg = groupVotes(vs);
+  const head = `<div class="cn-ph"><span class="eyebrow">${o.cand ? candLbl(o) : 'Elected official'}</span><h2 data-nolink>${esc(o.n)}</h2><span class="cn-note">${esc(o.off)}</span>${personHref(id) ? `<a href="${esc(personHref(id))}">Full profile</a>` : ''}</div>` +
+    facts([[full(ds.reduce((a, d) => a + d.a, 0)), `from ${plural(ds.length, 'business or group', 'businesses and groups')}`], [paidDs.length, 'of them paid by a local government'], [vg.length, 'votes on their work']]);
+  const row = d => `<div class="cn-gr">${d.e ? `<button type="button" class="cn-link" data-sel="${esc(d.e)}">${esc(ent(d.e).n)}</button>` : `<span>${esc(d.dn)}</span>`}<span class="cn-note">${d.e && pm.has(d.e) ? 'paid by a government' : ''}</span><span class="num">${full(d.a)}</span></div>`;
+  const s1 = step(1, 'Who gave', ds.length ? ds.slice(0, 8).map(row).join('') + fold(ds.length > 8 ? `Show all ${ds.length}` : '', ds.slice(8).map(row).join('')) + '<p class="cn-note">Businesses, PACs and committees only. Gifts from individual people are never named here.</p>' : '<p class="cn-note">No business gifts on file.</p>');
+  const items = paidDs.map(d => ({ n: ent(d.e).n, id: d.e, v: sum(pm.get(d.e)) })).sort((a, b) => b.v - a.v);
+  const s2 = step(2, 'What those businesses were paid', items.length ? bars(items.slice(0, 8)) + (items.length > 8 ? `<p class="cn-note">And ${items.length - 8} more.</p>` : '') : '<p class="cn-note">None of the businesses that gave were paid in the records chosen.</p>');
+  const one = g => g.who.filter(v => v.m === id);
+  const s3 = step(3, 'How they voted on those businesses', vg.length ? voteRows(vg.slice(0, 5).map(g => ({ ...g, who: one(g) })), true) + (vg.length > 5 ? fold(`Show all ${vg.length} votes`, voteRows(vg.slice(5).map(g => ({ ...g, who: one(g) })), true)) : '') : '<p class="cn-note">No votes in the minutes name a business that gave to them.</p>');
+  const boards = (o.gp || []).length ? `<p class="cn-note">Sits on: ${o.gp.map(k => `<button type="button" class="cn-link" data-sel="p:${esc(k)}">${esc(payerName(k))}</button>`).join(', ')}</p>` : '';
+  return head + boards + s1 + s2 + s3;
+}
+function storyPayer(id) {
+  const k = id.slice(2), P = D.payers[k], rows = visible().filter(r => r.p === k), pm = paidMap(rows);
+  const offs = Object.entries(D.off).filter(([, o]) => (o.gp || []).includes(k));
+  const items = [...pm.entries()].map(([e, m]) => ({ n: ent(e).n, id: /^[vbs]:|^o:|^g:/.test(e) ? e : null, v: sum(m) })).sort((a, b) => b.v - a.v);
+  const donors = [...pm.keys()].filter(e => giftsOf(e).length).sort((a, b) => sum(pm.get(b)) - sum(pm.get(a)));
+  const gp = k.startsWith('g:') ? bcHref('gov:' + k.slice(2)) : null;
+  const head = `<div class="cn-ph"><span class="eyebrow">${PKIND[P.k]}</span><h2 data-nolink>${esc(P.n)}</h2>${gp ? `<a href="${esc(gp)}">Full profile</a>` : ''}</div>` +
+    facts([[plural(rows.length, 'record'), 'in the records chosen'], [items.length, 'payees'], [donors.length, 'payees that gave to a campaign']]);
+  const s1 = step(1, 'Its biggest payees', items.length ? bars(items.slice(0, 8)) + '<p class="cn-note">An award and the payments on it can both appear, so totals can count the same money twice.</p>' : '<p class="cn-note">No payments in the records chosen.</p>');
+  const drow = e => { const gs = giftsOf(e); return `<div class="cn-gift"><div class="cn-gr"><button type="button" class="cn-link" data-sel="${esc(e)}">${esc(ent(e).n)}</button><span></span><span class="num">${money(sum(pm.get(e)))}</span></div><div class="cn-note">Gave ${full(gs.reduce((a, d) => a + d.a, 0))} to ${gs.slice(0, 4).map(d => offBtn(d.o)).join(', ')}${gs.length > 4 ? ` and ${gs.length - 4} more` : ''}</div></div>`; };
+  const s2 = step(2, 'Payees that gave to campaigns', donors.length ? donors.slice(0, 6).map(drow).join('') + fold(donors.length > 6 ? `Show all ${donors.length}` : '', donors.slice(6).map(drow).join('')) : '<p class="cn-note">None of its payees gave to a campaign.</p>');
+  const s3 = offs.length ? step(3, 'Who sits on its board', offs.map(([oid, o]) => { const n = new Set(D.votes.filter(v => v.m === oid).map(voteKey)).size; return `<div class="cn-gr">${offBtn(oid)}<span class="cn-note">${esc(o.off)}</span><span class="num">${n ? plural(n, 'vote') : ''}</span></div>`; }).join('') + '<p class="cn-note">Votes: motions naming a business that gave to that member.</p>') : '';
+  return head + s1 + s2 + s3;
+}
+
+/* ---------- connections map: one name in the middle, one step out ---------- */
+function neighbors(id) {
+  const pm = paidMap(visible());
+  if (id.startsWith('m:')) {
+    const o = D.off[id] || {};
+    return { L: D.don.filter(d => d.o === id).map(d => ({ id: d.e || null, n: d.e ? ent(d.e).n : d.dn, v: d.a, k: 'gift' })), R: (o.gp || []).map(p => ({ id: 'p:' + p, n: payerName(p), v: 1, k: 'board' })), lt: 'Gave to them', rt: 'Boards they sit on' };
+  }
+  if (id.startsWith('p:')) {
+    const k = id.slice(2), m = paidMap(visible().filter(r => r.p === k));
+    return { L: Object.entries(D.off).filter(([, o]) => (o.gp || []).includes(k)).map(([oid, o]) => ({ id: oid, n: o.n, v: 1, k: 'board' })), R: [...m.entries()].map(([e, x]) => ({ id: e, n: ent(e).n, v: sum(x), k: 'pay' })), lt: 'Board', rt: 'Paid' };
+  }
+  const p = pm.get(id) || new Map();
+  return { L: [...p.entries()].map(([k, v]) => ({ id: 'p:' + k, n: payerName(k), v, k: 'pay' })), R: giftsOf(id).map(d => ({ id: d.o, n: (D.off[d.o] || {}).n, v: d.a, k: 'gift' })),
+    B: D.rel.filter(x => x.a === id || x.b === id).map(x => { const o = x.a === id ? x.b : x.a; return { id: o, n: ent(o).n, v: 1, k: 'rel' }; }), lt: 'Paid it', rt: 'It gave to' };
+}
+function mapView(id) {
+  const nb = neighbors(id), cap = 12;
+  const side = a => { a.sort((x, y) => y.v - x.v); return [a.slice(0, cap), Math.max(0, a.length - cap)]; };
+  const [Ls, Lx] = side(nb.L), [Rs, Rx] = side(nb.R), Bs = (nb.B || []).slice(0, 4);
+  const W = 400, n = Math.max(Ls.length, Rs.length, 3), H = Math.max(300, n * 30 + 80 + (Bs.length ? 50 : 0)), cx = W / 2, cy = (H - (Bs.length ? 50 : 0)) / 2 + 6;
+  const rx = 100, ry = Math.min(cy - 34, n * 15 + 10);
+  const pos = (arr, left) => arr.map((d, i) => { const t = arr.length === 1 ? 0 : (i / (arr.length - 1) - 0.5) * 2; const a = t * 1.15; return { ...d, x: cx + (left ? -1 : 1) * rx * Math.cos(a), y: cy + ry * Math.sin(a) * 1.0 }; });
+  const P = [...pos(Ls, true).map(d => ({ ...d, s: 'L' })), ...pos(Rs, false).map(d => ({ ...d, s: 'R' })), ...Bs.map((d, i) => ({ ...d, s: 'B', x: cx + (i - (Bs.length - 1) / 2) * 90, y: H - 34 }))];
+  const vmax = k => Math.max(1, ...P.filter(d => d.k === k).map(d => d.v));
+  const sw = d => d.k === 'board' || d.k === 'rel' ? 1.5 : 1.5 + 6 * Math.sqrt(d.v / vmax(d.k));
+  const col = { pay: 'var(--cn-pay)', gift: 'var(--salmon)', board: 'var(--muted)', rel: 'var(--amber)' };
+  const dot = { pay: 'var(--navy)', gift: 'var(--salmon)', board: 'var(--navy)', rel: 'var(--amber)' };
+  const nmc = d => d.id && d.id.startsWith('m:') ? 'var(--salmon)' : d.id && d.id.startsWith('p:') ? 'var(--navy)' : 'var(--blue)';
+  const fit = (t, k) => t && t.length > k ? t.slice(0, k - 1).trimEnd() + '…' : (t || '');
+  const lines = P.map(d => `<path d="M${cx},${cy} Q${(cx + d.x) / 2},${d.s === 'B' ? cy + 10 : (cy + d.y) / 2} ${d.x.toFixed(1)},${d.y.toFixed(1)}" fill="none" stroke="${col[d.k]}" stroke-width="${sw(d).toFixed(1)}" stroke-linecap="round"${d.k === 'rel' ? ' stroke-dasharray="4 4"' : ''} opacity=".7"/>`).join('');
+  const nodes = P.map(d => { const lx = d.s === 'L' ? d.x - 11 : d.s === 'R' ? d.x + 11 : d.x, ly = d.s === 'B' ? d.y + 20 : d.y, an = d.s === 'L' ? 'end' : d.s === 'R' ? 'start' : 'middle';
+    return `<g class="cn-mn${d.id ? '' : ' nolink'}"${d.id ? ` data-sel="${esc(d.id)}" tabindex="0" role="button" aria-label="${esc(d.n)}"` : ''}><circle cx="${d.x.toFixed(1)}" cy="${d.y.toFixed(1)}" r="7" fill="${d.id ? nmc(d) : 'var(--surface)'}" stroke="${d.id ? 'none' : 'var(--faint)'}"/><text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" dy="0.35em" text-anchor="${an}">${esc(fit(d.n, d.s === 'B' ? 14 : 15))}<title>${esc(d.n)}${d.k === 'pay' || d.k === 'gift' ? ' · ' + full(d.v) : ''}</title></text></g>`; }).join('');
+  const nm = ent(id).n, words = nm.split(' '), l1 = [], l2 = [];
+  words.forEach(w => ((l1.join(' ') + ' ' + w).trim().length <= 11 && !l2.length ? l1 : l2).push(w));
+  const c = `<circle cx="${cx}" cy="${cy}" r="40" fill="var(--navy-fill)"/><text class="cn-mc" x="${cx}" y="${cy - (l2.length ? 7 : 0)}" dy="0.35em" text-anchor="middle">${esc(fit(l1.join(' '), 12))}</text>${l2.length ? `<text class="cn-mc" x="${cx}" y="${cy + 8}" dy="0.35em" text-anchor="middle">${esc(fit(l2.join(' '), 11))}</text>` : ''}`;
+  const hd = `<text class="cn-mh" x="8" y="14">${esc(nb.lt)}${Lx ? ` · +${Lx} more` : ''}</text><text class="cn-mh" x="${W - 8}" y="14" text-anchor="end">${esc(nb.rt)}${Rx ? ` · +${Rx} more` : ''}</text>`;
+  const empty = !P.length ? `<text class="cn-mh" x="${cx}" y="${cy + 56}" text-anchor="middle">No connections in the records chosen.</text>` : '';
+  return `<svg class="cn-map" viewBox="0 0 ${W} ${H}" role="img" aria-label="Connections of ${esc(nm)}">${hd}${lines}${c}${nodes}${empty}</svg>
+    <p class="cn-note">Navy: governments. Blue: businesses. Red: officials and candidates. Line width shows dollars; dashed lines are a shared project, address or subcontract. Tap any dot to put it in the middle.</p>`;
+}
+
+function profile() {
+  const p = $('cnProfile'), id = st.sel;
+  if (!id) { p.innerHTML = '<p class="cn-note">Pick a name in the list, the money flow or the search box to see its story.</p>'; return; }
+  const kind = id.startsWith('m:') ? 'off' : id.startsWith('p:') ? 'payer' : 'biz';
+  const body = st.pv === 'map' ? mapView(id) : kind === 'off' ? storyOff(id) : kind === 'payer' ? storyPayer(id) : storyBiz(id);
+  const mapHead = st.pv === 'map' ? `<div class="cn-ph"><span class="eyebrow">Connections map</span><h2 data-nolink>${esc(ent(id).n)}</h2></div>` : '';
+  p.innerHTML = `<div class="cn-pv" role="group" aria-label="Show"><button type="button" class="cn-chip" data-pv="story" aria-pressed="${st.pv === 'story'}">Story</button><button type="button" class="cn-chip" data-pv="map" aria-pressed="${st.pv === 'map'}">Connections map</button></div>${mapHead}${body}
+    <div hidden data-share-text="${esc(shareText(id))}"></div>`;
+  p.querySelectorAll('[data-sel]').forEach(b => { b.onclick = () => select(b.dataset.sel, false); b.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(b.dataset.sel, false); } }; });
+  p.querySelectorAll('[data-pv]').forEach(b => b.onclick = () => { st.pv = b.dataset.pv; profile(); });
+}
+function shareText(id) {
+  if (id.startsWith('m:') || id.startsWith('p:')) return `${ent(id).n} on BayCounty.me Connections: who was paid, who gave and how they voted`;
+  const g = giftsOf(id), pm = paidMap(visible()).get(id);
+  return `${ent(id).n}: ${pm ? money(sum(pm)) + ' in public records' : 'no payments'}${g.length ? `, gave ${full(g.reduce((a, d) => a + d.a, 0))} to ${plural(g.length, 'campaign')}` : ''}`;
+}
+
+function select(id, scroll, auto) {
+  st.sel = id; if (!auto) st.picked = true;
+  try { const q = new URLSearchParams(location.search); id ? q.set('name', id) : q.delete('name'); history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash); } catch (e) {}
+  profile(); flowHl();
+  $('cnList').querySelectorAll('[data-sel]').forEach(b => b.toggleAttribute('aria-current', b.dataset.sel === id));
+  const p = $('cnProfile');
+  if (id && !auto && (scroll || innerWidth <= 900)) { const r = p.getBoundingClientRect(); if (r.top < 0 || r.top > innerHeight * 0.6 || innerWidth <= 900) p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+
+/* ---------- search ---------- */
 function searchBox() {
   const opts = new Map();
   Object.entries(D.payers).forEach(([k, p]) => opts.set(p.n, 'p:' + k));
@@ -222,233 +315,77 @@ function searchBox() {
   Object.entries(D.ents).forEach(([k, e]) => { if (has.has(k) && /^[vb]:/.test(k)) opts.set(e.n, k); });
   $('cnFind').innerHTML = [...opts.keys()].sort().map(n => `<option value="${esc(n)}">`).join('');
   const names = [...opts.keys()], low = names.map(n => n.toLowerCase());
-  // an exact pick from the list, else the same name in any case, else the first name that starts with or contains the text
   const find = q => {
     if (opts.has(q)) return opts.get(q);
     const t = q.toLowerCase(); if (t.length < 2) return null;
     let i = low.indexOf(t); if (i < 0) i = low.findIndex(n => n.startsWith(t)); if (i < 0) i = low.findIndex(n => n.includes(t));
     return i < 0 ? null : opts.get(names[i]);
   };
-  const go = () => {
-    const id = find($('cnQ').value.trim()); if (!id) return; $('cnQ').value = '';
-    if (st.scope !== 'focus') { st.scope = 'focus'; document.querySelectorAll('#cnScope .cn-chip').forEach(x => x.setAttribute('aria-pressed', x.id === 'cnScope-focus')); }
-    if (st.view !== 'network') setView('network');
-    select(id);
-  };
-  $('cnQ').addEventListener('change', go);
-  $('cnQ').addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
-  $('cnClear').onclick = () => { st.focus.clear(); select(null); if (st.view === 'network') graph(visible()); };
+  const go = () => { const v = $('cnQ').value.trim(); if (!v) return; const id = find(v); $('cnMiss').hidden = !!id; if (!id) return; $('cnQ').value = ''; select(id, true); };
+  $('cnSearch').addEventListener('submit', e => { e.preventDefault(); go(); });
+  $('cnQ').addEventListener('change', () => { if (opts.has($('cnQ').value)) go(); });
 }
 
-/* Money trail: who paid a business (left), the business (middle), and the officials it gave to (right).
-   Only businesses that were both paid in the current filters and gave to a campaign. */
-let trailHl = () => {};
-function trail(rows) {
-  const svg = d3.select('#cnTrail'); svg.selectAll('*').remove();
-  const paid = new Map();  // business -> payer -> dollars in records
-  rows.forEach(r => { if (!gaveSet.has(r.e)) return; const m = paid.get(r.e) || new Map(); m.set(r.p, (m.get(r.p) || 0) + (r.x ? 0 : (r.a || 0))); paid.set(r.e, m); });
-  const gifts = new Map();  // business -> official -> dollars
-  D.don.forEach(d => { if (!d.e || !paid.has(d.e) || !offShown(D.off[d.o] || {})) return; const m = gifts.get(d.e) || new Map(); m.set(d.o, (m.get(d.o) || 0) + d.a); gifts.set(d.e, m); });
-  const biz = [...gifts.keys()];
-  $('cnTrailCount').textContent = `${biz.length} businesses paid and gave · tap a name for its records`;
-  if (!biz.length) { svg.attr('viewBox', '0 0 800 80').attr('width', 800).attr('height', 80); svg.append('text').attr('x', 20).attr('y', 40).attr('class', 'cn-tl').text('No business in these filters was both paid and a campaign donor.'); trailHl = () => {}; return; }
-  const payerOrder = Object.keys(D.payers);
-  const pays = payerOrder.filter(p => biz.some(b => paid.get(b).has(p)));
-  // businesses sit next to the government that paid them most; payers and officials next to their businesses
-  const main = b => payerOrder.indexOf([...paid.get(b).entries()].sort((a, c) => c[1] - a[1])[0][0]);
-  biz.sort((a, b) => main(a) - main(b) || ent(a).n.localeCompare(ent(b).n));
-  const bi = new Map(biz.map((b, i) => [b, i]));
-  const mean = xs => xs.reduce((a, x) => a + x, 0) / xs.length;
-  const offs = [...new Set(biz.flatMap(b => [...gifts.get(b).keys()]))];
-  const ob = new Map(offs.map(o => [o, mean(biz.filter(b => gifts.get(b).has(o)).map(b => bi.get(b)))]));
-  offs.sort((a, b) => ob.get(a) - ob.get(b));
-  const pb = new Map(pays.map(p => [p, mean(biz.filter(b => paid.get(b).has(p)).map(b => bi.get(b)))]));
-  pays.sort((a, b) => pb.get(a) - pb.get(b));
-  // phones get two columns (business, official) with who paid it written under each business
-  const avail = svg.node().parentElement.clientWidth || 900, phone = avail < 640;
-  const W = phone ? avail : Math.max(760, avail), row = phone ? 40 : 30, top = 40;
-  const H = top + Math.max(biz.length, offs.length, phone ? 0 : pays.length) * row + 16;
-  svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H);
-  const colW = phone ? W * 0.44 : Math.min(250, W * 0.26), xL = colW, xM0 = phone ? 0 : W / 2 - colW / 2, xM1 = phone ? W * 0.45 : W / 2 + colW / 2, xR = phone ? W * 0.64 : W - colW;
-  const fit = (t, w) => { const n = Math.max(8, Math.floor(w / 6.8)); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
-  const yOf = (n, i) => top + (H - top - 16) * (i + 0.5) / n;
-  const Y = new Map();
-  pays.forEach((p, i) => Y.set('p:' + p, yOf(pays.length, i)));
-  biz.forEach((b, i) => Y.set(b, yOf(biz.length, i)));
-  offs.forEach((o, i) => Y.set(o, yOf(offs.length, i)));
-  const hd = svg.append('g').attr('class', 'cn-th');
-  (phone ? [[12, 'start', 'Business paid, and a donor'], [xR, 'start', 'Gave to']] : [[xL, 'end', 'Paid by'], [W / 2, 'middle', 'Business paid, and a donor'], [xR, 'start', 'Gave to']]).forEach(([x, a, t]) => hd.append('text').attr('x', x).attr('y', 18).attr('text-anchor', a).text(t));
-  const L = [], maxP = d3.max(biz.flatMap(b => [...paid.get(b).values()])) || 1, maxG = d3.max(biz.flatMap(b => [...gifts.get(b).values()])) || 1;
-  const wP = d3.scaleSqrt().domain([0, maxP]).range([1, 9]), wG = d3.scaleSqrt().domain([0, maxG]).range([1.2, 7]);
-  biz.forEach(b => {
-    if (!phone) paid.get(b).forEach((v, p) => L.push({ a: 'p:' + p, b, x0: xL + 8, x1: xM0 - 6, w: wP(v), c: 'var(--faint)', t: `${esc(payerName(p))} paid ${esc(ent(b).n)} ${money(v)} in records` }));
-    gifts.get(b).forEach((v, o) => L.push({ a: b, b: o, x0: xM1 + 6, x1: xR - 8, w: wG(v), c: 'var(--salmon)', t: `${esc(ent(b).n)} gave ${esc(ent(o).n)} ${full(v)}` }));
-  });
-  const path = l => { const y0 = Y.get(l.a), y1 = Y.get(l.b), m = (l.x0 + l.x1) / 2; return `M${l.x0},${y0}C${m},${y0} ${m},${y1} ${l.x1},${y1}`; };
-  const lk = svg.append('g').attr('fill', 'none').selectAll('path').data(L).join('path').attr('d', path).attr('stroke', d => d.c).attr('stroke-width', d => d.w).attr('stroke-opacity', 0.55)
-    .on('mousemove', (e, d) => tip(e, d.t, 'cnTip3')).on('mouseleave', () => hideTip('cnTip3'));
-  const label = (id, x, anchor, txt, cls, sub) => {
-    const g = svg.append('g').attr('class', 'cn-tn ' + cls).attr('data-id', id).attr('tabindex', 0).attr('role', 'button').attr('aria-label', txt)
-      .on('click', () => select(id)).on('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(id); } });
-    const w = anchor === 'middle' ? colW - 24 : phone ? (anchor === 'start' && x > 20 ? W - x - 4 : colW - 22) : colW - 10;
-    g.append('text').attr('x', x).attr('y', Y.get(id) - (sub ? 7 : 0)).attr('dy', '0.35em').attr('text-anchor', anchor).text(fit(txt, w)).append('title').text(txt);
-    if (sub) g.append('text').attr('class', 'cn-ts').attr('x', x).attr('y', Y.get(id) + 9).attr('dy', '0.35em').attr('text-anchor', anchor).text(fit(sub, w));
-  };
-  if (!phone) pays.forEach(p => label('p:' + p, xL, 'end', payerName(p), 'cn-tp'));
-  biz.forEach(b => phone ? label(b, 12, 'start', ent(b).n, 'cn-tb', 'Paid by ' + [...paid.get(b).keys()].map(payerName).join(', ')) : label(b, W / 2, 'middle', ent(b).n, 'cn-tb'));
-  offs.forEach(o => { const O = D.off[o] || {}; label(o, xR, 'start', O.n + (O.cand ? ' (candidate)' : ''), 'cn-to'); });
-  svg.append('g').selectAll('circle').data([...(phone ? [] : pays.map(p => ['p:' + p, xL + 5, 'var(--navy)'])), ...biz.flatMap(b => phone ? [[b, xM1 + 3, 'var(--blue)']] : [[b, xM0 - 3, 'var(--blue)'], [b, xM1 + 3, 'var(--blue)']]), ...offs.map(o => [o, xR - 5, 'var(--salmon)'])])
-    .join('circle').attr('cx', d => d[1]).attr('cy', d => Y.get(d[0])).attr('r', 3.5).attr('fill', d => d[2]);
-  trailHl = () => {
-    const s = st.sel;
-    if (!s || !Y.has(s)) { lk.classed('dim', false); svg.selectAll('.cn-tn').classed('dim', false).classed('on', false); return; }
-    // a business: its own lines. A payer or official: the businesses it touches, with their lines on the other side too.
-    const isBiz = bi.has(s);
-    const bs = new Set(isBiz ? [s] : L.filter(l => l.a === s || l.b === s).map(l => l.a === s ? l.b : l.a));
-    const keep = new Set(L.filter(l => (bs.has(l.a) || bs.has(l.b)) && (isBiz || l.a === s || l.b === s || (s.startsWith('p:') ? l.b.startsWith('m:') : l.a.startsWith('p:')))));
-    const on = new Set([s, ...[...keep].flatMap(l => [l.a, l.b])]);
-    lk.classed('dim', l => !keep.has(l));
-    svg.selectAll('.cn-tn').classed('dim', function () { return !on.has(this.dataset.id); }).classed('on', function () { return this.dataset.id === s; });
-  };
-  trailHl();
+/* ---------- tables of every record ---------- */
+function chip(label, pressed, onclick, id) {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'cn-chip'; b.textContent = label; if (id) b.id = id;
+  b.setAttribute('aria-pressed', pressed); b.onclick = () => onclick(b); return b;
 }
-
+function controls() {
+  Object.entries(D.types).forEach(([k, l]) => $('cnTypes').appendChild(chip(l, st.types.has(k), b => { st.types.has(k) ? st.types.delete(k) : st.types.add(k); b.setAttribute('aria-pressed', st.types.has(k)); render(); })));
+  [['payees', 'Donors who were paid'], ['all', 'All business donors']].forEach(([k, l]) => $('cnDon').appendChild(chip(l, st.don === k, b => { st.don = k; $('cnDon').querySelectorAll('.cn-chip').forEach(x => x.setAttribute('aria-pressed', x === b)); donTable(visible()); }, 'cnDon-' + k)));
+  document.querySelectorAll('.cn-tab').forEach(b => b.onclick = () => setView(b.dataset.v));
+  document.querySelectorAll('[data-sort]').forEach(b => b.onclick = () => { st.sort = b.dataset.sort; document.querySelectorAll('[data-sort]').forEach(x => x.setAttribute('aria-pressed', x === b)); list(visible()); });
+}
+function cityToPayers(k) {
+  st.city = k || '';
+  st.pay = new Set(Object.keys(D.payers).filter(p => !k || D.payers[p].g === k));
+}
 function payees(rows) {
-  const list = [...payeeTotals(rows).values()].sort((a, b) => b.tot - a.tot);
-  $('cnPayCount').textContent = `${list.length} payees · tap a row for its records`;
+  const m = new Map();
+  rows.forEach(r => { const o = m.get(r.e) || { e: r.e, tot: 0, n: 0, p: new Set(), t: new Set(), unk: 0 }; o.tot += amt(r); o.n++; o.p.add(r.p); o.t.add(r.t); if (r.a == null) o.unk++; m.set(r.e, o); });
+  const gave = new Set(D.don.filter(d => d.e).map(d => d.e));
+  const L = [...m.values()].sort((a, b) => b.tot - a.tot);
+  $('cnPayCount').textContent = `${plural(L.length, 'payee')} · tap a row for its story`;
   $('cnPay').innerHTML = `<thead><tr><th>Payee</th><th>Type</th><th>Paid by</th><th>Records</th><th class="num">Count</th><th class="num">Dollars in records</th></tr></thead><tbody>` +
-    list.map(o => { const e = ent(o.e); return `<tr class="cn-row" data-tt-role="row" tabindex="0" data-e="${esc(o.e)}"><td><b>${esc(e.n)}</b>${gaveSet.has(o.e) ? ' <span class="cn-flag red">gave</span>' : ''}</td><td>${KIND[e.k]}</td><td>${[...o.p].map(payerName).map(esc).join(', ')}</td><td>${[...o.t].map(t => esc(D.types[t])).join(', ')}</td><td class="num">${o.n}${o.unk ? ` <span class="cn-flag">${o.unk} no $</span>` : ''}</td><td class="num">${full(o.tot)}</td></tr>`; }).join('') + '</tbody>';
-  $('cnPay').querySelectorAll('tr.cn-row').forEach(t => { t.onclick = () => select(t.dataset.e); t.onkeydown = e => { if (e.key === 'Enter') select(t.dataset.e); }; });
+    L.map(o => { const e = ent(o.e); return `<tr class="cn-row" data-tt-role="row" tabindex="0" data-e="${esc(o.e)}"><td><b>${esc(e.n)}</b>${gave.has(o.e) ? ' <span class="cn-flag red">gave</span>' : ''}</td><td>${KIND[e.k]}</td><td>${[...o.p].map(payerName).map(esc).join(', ')}</td><td>${[...o.t].map(t => esc(D.types[t])).join(', ')}</td><td class="num">${o.n}${o.unk ? ` <span class="cn-flag">${o.unk} no $</span>` : ''}</td><td class="num">${full(o.tot)}</td></tr>`; }).join('') + '</tbody>';
+  $('cnPay').querySelectorAll('tr.cn-row').forEach(t => { t.onclick = () => select(t.dataset.e, true); t.onkeydown = e => { if (e.key === 'Enter') select(t.dataset.e, true); }; });
 }
-
 function donTable(vis) {
   const paidNow = new Set(vis.map(r => r.e));
   const rows = D.don.filter(d => offShown(D.off[d.o] || {}) && (st.don !== 'payees' || (d.e && paidNow.has(d.e))));
-  $('cnDonCount').textContent = `${rows.length} donor and official pairs · ${money(rows.reduce((a, d) => a + d.a, 0))}` + (st.don === 'payees' ? ' · donors paid in the current filters; pick "All business donors" for every gift' : '');
+  $('cnDonCount').textContent = `${plural(rows.length, 'donor and official pair')} · ${money(rows.reduce((a, d) => a + d.a, 0))}`;
   $('cnDonT').innerHTML = `<thead><tr><th>Business or group</th><th>Official</th><th>Office</th><th class="num">Amount</th><th>Date</th><th>Also paid by a government</th></tr></thead><tbody>` +
-    rows.map((d, i) => { const o = D.off[d.o] || {}; return `<tr data-tt-role="row"><td>${esc(d.dn)}${d.ty === 'pac' || d.ty === 'committee' ? ` <span class="cn-flag">${d.ty.toUpperCase() === 'PAC' ? 'PAC' : 'committee'}</span>` : ''}</td><td><button type="button" class="cn-link" data-off="${i}">${esc(o.n)}</button>${o.cand ? ` <span class="cn-flag">${candLbl(o)}</span>` : ''}</td><td>${esc(o.off)}</td><td class="num">${full(d.a)}${d.n > 1 ? ` <span class="cn-flag">${d.n} gifts</span>` : ''}</td><td class="num">${esc(d.date)}</td><td>${d.e ? `<button type="button" class="cn-link" data-ent="${esc(d.e)}">${esc(ent(d.e).n)}</button>${d.cf === 'likely' ? ' <span class="cn-flag">likely</span>' : ''}` : '—'}</td></tr>`; }).join('') + '</tbody>';
-  $('cnDonT').querySelectorAll('[data-ent]').forEach(b => b.onclick = () => { setView('network'); select(b.dataset.ent); });
-  $('cnDonT').querySelectorAll('[data-off]').forEach(b => b.onclick = () => {
-    const d = rows[+b.dataset.off];
-    if (st.don === 'off' || (st.don === 'payees' && !d.e)) setDon('all');
-    setView('network'); select(d.o);
-  });
+    rows.map(d => { const o = D.off[d.o] || {}; return `<tr data-tt-role="row"><td>${esc(d.dn)}${d.ty === 'pac' || d.ty === 'committee' ? ` <span class="cn-flag">${d.ty === 'pac' ? 'PAC' : 'committee'}</span>` : ''}</td><td><button type="button" class="cn-link" data-sel="${esc(d.o)}">${esc(o.n)}</button>${o.cand ? ` <span class="cn-flag">${candLbl(o)}</span>` : ''}</td><td>${esc(o.off)}</td><td class="num">${full(d.a)}${d.n > 1 ? ` <span class="cn-flag">${d.n} gifts</span>` : ''}</td><td class="num">${esc(d.date)}</td><td>${d.e ? `<button type="button" class="cn-link" data-sel="${esc(d.e)}">${esc(ent(d.e).n)}</button>${d.cf === 'likely' ? ' <span class="cn-flag">likely</span>' : ''}` : '—'}</td></tr>`; }).join('') + '</tbody>';
+  $('cnDonT').querySelectorAll('[data-sel]').forEach(b => b.onclick = () => select(b.dataset.sel, true));
 }
-
-// the entity's profile (site/entity_graph.py ids): companies, businesses and nonprofits without a vendor page
-function profileLink(id, e) {
-  if (!window.BC) return '';
-  const k = id.slice(0, 2), key = id.slice(2);
-  const pid = e.np && k !== 'v:' ? 'nonprofit:' + e.np : k === 'v:' ? 'vendor:' + key : (k === 'b:' || k === 's:') ? 'business:' + key : null;
-  return pid ? `<p><a href="${esc(BC.href(pid))}">Profile: every connection in the records</a></p>` : '';
-}
-const src = u => u ? ` · <a href="${esc(u)}" target="_blank" rel="noopener">Source</a>` : '';
-function recList(rs) {
-  return `<div class="cn-recs">${rs.map(r => `<div class="cn-rec"><span>${esc(r.w || D.types[r.t])}</span><span class="num">${full(r.a)}</span><span class="cn-meta"><span class="cn-pill">${esc(D.types[r.t])}</span>${r.s ? `<span>${esc(r.s)}</span>` : ''}<span>${esc(r.when)}</span><span>${esc(payerName(r.p))}</span>${r.x ? '<span class="cn-flag">inside a project total</span>' : ''}${url(r.u) ? `<a href="${esc(url(r.u))}" target="_blank" rel="noopener">Source</a>` : ''}</span></div>`).join('')}</div>`;
-}
-function byType(rs) {
-  const m = {}; rs.forEach(r => { m[r.t] = (m[r.t] || 0) + (r.x ? 0 : (r.a || 0)); });  // x: already inside a project total
-  return Object.keys(D.types).filter(t => t in m).map(t => `<div class="cn-rec"><span>${esc(D.types[t])}</span><span class="num">${full(m[t])}</span></div>`).join('');
-}
-function profile() {
-  const p = $('cnProfile'), id = st.sel;
-  const close = '<button type="button" class="cn-x" data-clear aria-label="Close details">×</button>', clear = '<button type="button" class="cn-btn" data-clear>Clear selection</button>';
-  if (!id) {
-    const starts = [...gaveSet].filter(e => D.ents[e]).slice(0, 5);
-    p.innerHTML = `<h3 class="eyebrow">Start here</h3><p>Tap any circle or table row to see its full record. These businesses were paid by a local government and also gave to a campaign:</p>
-      <div class="cn-starts">${starts.map(k => `<button type="button" class="cn-link" data-sel="${k}">${esc(ent(k).n)}</button>`).join('')}</div>
-      <p class="cn-note">A line is a documented connection, not evidence of wrongdoing. Contracts are usually bid, and spending is approved by the full board.</p>`;
-  } else if (id.startsWith('p:')) {
-    const k = id.slice(2), P = D.payers[k], rows = visible().filter(r => r.p === k), named = new Set(rows.filter(r => /^[vb]:/.test(r.e)).map(r => r.e));
-    const offs = Object.entries(D.off).filter(([, o]) => (o.gp || []).includes(k));
-    const gp = window.BC && k.startsWith('g:') ? BC.href('gov:' + k.slice(2)) : null;
-    p.innerHTML = `${close}<div><span class="eyebrow">${PKIND[P.k]}</span><h2>${esc(P.n)}</h2>${gp ? `<p><a href="${esc(gp)}">Profile: officials, budget and every payee</a></p>` : ''}</div>
-      <div><span class="cn-note">${rows.length} records in the current filters, ${named.size} named payees. Contract awards and check register payments can describe the same money, so the types are not added together.</span></div>
-      <div class="cn-recs">${byType(rows)}</div>
-      ${offs.length ? `<div class="cn-rel"><h3 class="eyebrow">Elected board</h3>${offs.map(([oid, o]) => `<div><button type="button" class="cn-link" data-sel="${esc(oid)}">${esc(o.n)}</button> <span class="cn-note">${esc(o.off)}</span></div>`).join('')}</div>` : ''}
-      ${P.k === 'cra' ? '<p><a href="/public-money/cra-spending">Open the full CRA ledger</a></p>' : P.k === 'tourism' ? '<p><a href="/public-money/tourist-tax#paid">Every tourism agency payment</a></p>' : '<p><a href="/public-money/contracts">Contracts and awards</a></p>'}${clear}`;
-  } else if (id.startsWith('m:')) {
-    const o = D.off[id] || {}, ds = D.don.filter(d => d.o === id);
-    p.innerHTML = `${close}<div><span class="eyebrow">${o.cand ? candLbl(o) : 'Elected official'}</span><h2>${esc(o.n)}</h2><p class="cn-note">${esc(o.off)}</p>${o.pid ? `<p><a href="/people/${esc(o.pid)}">Full profile: votes, campaign money and connections</a></p>` : ''}</div>
-      <div><div class="cn-big">${money(ds.reduce((a, d) => a + d.a, 0))}</div><span class="cn-note">from businesses, PACs and committees. Gifts from individual people are never named.</span></div>
-      ${(o.gp || []).length ? `<p class="cn-note">Sits on: ${o.gp.map(k => `<button type="button" class="cn-link" data-sel="p:${esc(k)}">${esc(payerName(k))}</button>`).join(', ')}</p>` : ''}
-      <div class="cn-recs">${ds.map(d => `<div class="cn-rec"><span>${d.e ? `<button type="button" class="cn-link" data-sel="${esc(d.e)}">${esc(d.dn)}</button> <span class="cn-flag red">paid by a government</span>` : esc(d.dn)}</span><span class="num">${full(d.a)}</span><span class="cn-meta">${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Campaign report</a>` : ''}</span></div>`).join('')}</div>${clear}`;
-  } else {
-    const e = ent(id), all = D.recs.filter(r => r.e === id), shown = all.filter(r => st.pay.has(r.p) && st.types.has(r.t));
-    const rel = D.rel.filter(x => x.a === id || x.b === id).map(x => { const o = x.a === id ? x.b : x.a; return `<div><button type="button" class="cn-link" data-sel="${esc(o)}">${esc(ent(o).n)}</button><div class="cn-note">${esc(x.t)}${src(x.u)}</div></div>`; });
-    const dons = D.don.filter(d => d.e === id || 'd:' + d.dn === id);
-    const by = [...new Set(all.map(r => payerName(r.p)))];
-    p.innerHTML = `${close}<div><span class="eyebrow">${KIND[e.k] || ''}</span><h2>${esc(e.n)}</h2>${by.length ? `<p class="cn-note">Paid by ${esc(by.join(' · '))}</p>` : ''}${e.vp ? `<p><a href="/public-money/vendors/${esc(e.vp)}">Vendor profile: every contract, payment and vote</a></p>` : profileLink(id, e)}${e.np ? `<p><a href="/connections/nonprofits?id=${encodeURIComponent(e.np)}#npList">Nonprofit details: IRS filings, grants and board</a></p>` : ''}</div>
-      ${all.length ? `<div><span class="cn-note">${all.length} record${all.length === 1 ? '' : 's'}${shown.length < all.length ? `, ${shown.length} in the current filters` : ''}. An award and the payments on it can both appear, so the types are not added together.</span><div class="cn-recs">${byType(all)}</div></div>` : ''}
-      ${rel.length ? `<div class="cn-rel"><h3 class="eyebrow">Connected payees</h3>${rel.join('')}</div>` : ''}
-      ${e.k === 'biz' ? `<div class="cn-rel"><h3 class="eyebrow">Campaign gifts</h3>${dons.length ? dons.map(d => { const o = D.off[d.o] || {}; return `<div>${full(d.a)} to <button type="button" class="cn-link" data-sel="${esc(d.o)}">${esc(o.n)}</button>, ${esc(o.off)}${o.cand ? ` (${candLbl(o)})` : ''} · ${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Report</a>` : ''}${d.cf === 'likely' ? ' <span class="cn-flag">likely match</span>' : ''}</div>`; }).join('') : '<div class="cn-note">None in the campaign data.</div>'}</div>` : ''}
-      ${all.length ? `<div><h3 class="eyebrow">Records</h3>${recList(all)}</div>` : ''}${clear}`;
-  }
-  p.querySelectorAll('[data-sel]').forEach(b => b.onclick = () => select(b.dataset.sel));
-  p.querySelectorAll('[data-clear]').forEach(c => c.onclick = () => select(null));
-}
-
-function tip(e, h, id) { const t = $(id), b = t.parentElement.getBoundingClientRect(); t.innerHTML = h; t.hidden = false; let lx = e.clientX - b.left + 12; if (lx > b.width - 250) lx = e.clientX - b.left - 252; t.style.left = Math.max(4, lx) + 'px'; t.style.top = (e.clientY - b.top + 12) + 'px'; }
-function hideTip(id) { $(id).hidden = true; }
-
-function select(id) {
-  st.sel = id; document.querySelector('.cn-main').classList.toggle('has-sel', !!id); profile(); panelTop();
-  if (st.view === 'network') {
-    // a payee outside the "key payees" set joins the graph when picked
-    if (id && st.scope === 'focus') { if (!st.focus.has(id)) { st.focus.add(id); graph(visible()); } }
-    else if (id && D.ents[id] && !d3.select('#cnGraph').selectAll('.cn-node').filter(d => d.id === id).size()) graph(visible());
-    if (hl) hl();
-    if (fsOn && id) focusNode(id);
-  }
-  if (st.view === 'trail') trailHl();
-  if (id && !fsOn && (innerWidth <= 900 || (st.view === 'network' && innerWidth < 1100))) $('cnProfile').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-/* On a wide screen the details float over the network: start them at the top of the graph, below its header and legend. */
-function panelTop() {
-  const p = $('cnProfile'), m = document.querySelector('.cn-main');
-  if (st.view === 'network' && !fsOn && st.sel && innerWidth >= 1100) {
-    const g = $('cnGraph').getBoundingClientRect();
-    p.style.top = (g.top - m.getBoundingClientRect().top + 12) + 'px'; p.style.maxHeight = (g.height - 24) + 'px';
-  } else { p.style.top = ''; p.style.maxHeight = ''; }
-}
-let fsOn = false;
-function setFull(on) {
-  const m = document.querySelector('.cn-main');
-  fsOn = on; m.classList.toggle('fs', on); document.documentElement.classList.toggle('cn-locked', on);
-  document.querySelectorAll('.cn-fs').forEach(b => { b.textContent = on ? 'Exit full screen' : 'Full screen'; b.setAttribute('aria-pressed', on); });
-  try {
-    if (on && m.requestFullscreen && !document.fullscreenElement) m.requestFullscreen().catch(() => {});
-    if (!on && document.fullscreenElement) document.exitFullscreen().catch(() => {});
-  } catch (e) {}
-  requestAnimationFrame(() => { if (st.view === 'network') graph(visible()); });
-}
-const VIEWS = ['trail', 'network', 'payees', 'gifts', 'donors'];
+const VIEWS = ['payees', 'gifts', 'donors'];
 function setView(v) {
-  if (fsOn && v !== 'network') setFull(false);
   st.view = v;
-  document.querySelector('.cn-main').classList.toggle('wide', v === 'network' || v === 'donors');
   VIEWS.forEach(k => { $('v-' + k).hidden = k !== v; $('t-' + k).setAttribute('aria-selected', k === v); });
-  filterGroups();
-  if (location.hash.slice(1) !== v) history.replaceState(null, '', location.pathname + location.search + '#' + v);
-  render();
+  $('cnDon').hidden = v !== 'gifts';
+  tables(visible());
 }
+function tables(rows) { if (st.view === 'payees') payees(rows); else if (st.view === 'gifts') donTable(rows); else if (window.MM) MM.render(); }
+
 function render() {
   const rows = visible(); kpis(rows);
-  if (st.view === 'trail') trail(rows); else if (st.view === 'network') graph(rows); else if (st.view === 'payees') payees(rows); else if (st.view === 'donors') { if (window.MM) MM.render(); } else donTable(rows);
-  profile(); panelTop();
+  const L = list(rows);
+  if (!st.sel && L.length) st.sel = L[0].e;  // open on the top business so the story is never empty
+  flow(rows); tables(rows); select(st.sel, false, true);
 }
 
 function start() {
-  controls();
-  searchBox();
-  document.querySelectorAll('.cn-fs').forEach(b => b.onclick = () => setFull(!fsOn));
-  addEventListener('keydown', e => { if (e.key === 'Escape' && fsOn) { if (st.sel) select(null); else setFull(false); } });
-  document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && fsOn) setFull(false); });
-  [['cnGin', 1.5], ['cnGout', 1 / 1.5], ['cnGreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => graphBtn(f); });
-  BCM.city.on((k, d) => { cityToPayers(k); if (d.why !== 'now') { if (st.sel && !st.sel.startsWith('m:') && !st.sel.startsWith('p:') && !visible().some(r => r.e === st.sel)) st.sel = null; render(); } });
-  const h = location.hash.slice(1);
-  setView(VIEWS.includes(h) ? h : h === 'donations' ? 'gifts' : ['map', 'votes', 'heat1'].includes(h) ? 'donors' : 'trail');  // #map etc.: links to the old money map page
-  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (st.view === 'network') graph(visible()); else if (st.view === 'trail') trail(visible()); }, 250); });
+  controls(); searchBox();
+  const q = new URLSearchParams(location.search).get('name');
+  if (q && (D.ents[q] || D.off[q] || (q.startsWith('p:') && D.payers[q.slice(2)]))) { st.sel = q; st.picked = true; }
+  BCM.city.on((k, d) => { cityToPayers(k); if (d.why !== 'now') render(); });
+  // old links: #payees, #gifts and #donors open that table; #map and friends were the money map
+  const h = location.hash.slice(1), v = VIEWS.includes(h) ? h : h === 'donations' ? 'gifts' : ['map', 'votes', 'heat1'].includes(h) ? 'donors' : 'payees';
+  setView(v); render();
+  if (h && h !== 'payees' && v !== 'payees') $('records').scrollIntoView();
+  else if (q && st.sel === q) select(q, true);
+  let rt, w0 = innerWidth; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (innerWidth !== w0) { w0 = innerWidth; flow(visible()); } }, 250); });
 }
 if (window.d3) start(); else addEventListener('load', start);
 })();

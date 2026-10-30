@@ -74,7 +74,7 @@ const PAGES = {
   '/about': {none: 'about the site'},
   '/data-sources': {datasets: ['data-sources', 'data-source-sites', 'data-freshness'], endpoints: ['/import-progress']},
   '/privacy': {none: 'privacy policy'},
-  '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts', 'money-map-gifts', 'money-map-contracts', 'money-map-votes']},
+  '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts', 'money-map-gifts', 'money-map-contracts', 'money-map-votes', 'donor-votes']},
   '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'entity-profiles', 'entity-connections'],
     endpoints: ['/entities/{id}']},
   '/people': {datasets: ['entity-profiles', 'people-directory', 'owner-gifts', 'officials-pay', 'salary-leaders', 'officeholder-terms', 'official-photos', 'person-photos'], endpoints: ['/entities']},

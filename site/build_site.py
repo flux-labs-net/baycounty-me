@@ -862,7 +862,7 @@ if open_books_page.PUBLIC:  # checkbook and budget tracker, hidden until registe
         ('/public-money/checkbook', 'Checkbook', "Every payment a Bay County government makes, from its own check register: who got paid, how much, when and from which fund. Search any company, or see the money month by month.", lambda: checkbook_page(OUT)),
         ('/public-money/budget-tracker', 'Budget tracker', "How each department of a Bay County government is spending against its budget this year, from the government's own monthly budget report: spent, committed, and whether it's ahead of the calendar.", lambda: budget_tracker_page(OUT)),
     ]
-PAGES += [('/connections', 'Connections: who governments paid, and who gave to officials', 'Who every Bay County government and agency paid, how those payees connect, and which businesses gave to the officials who approve the spending.', lambda: connections_page(OUT))]
+PAGES += [('/connections', 'Connections: who was paid, who gave, and how they voted', 'Follow public money from each Bay County government to the businesses it paid, the campaigns those businesses gave to, and how those officials voted on their work.', lambda: connections_page(OUT))]
 PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
 from people_pages import pages as people_page_list, copy_assets as copy_profile_assets  # noqa: E402
 from entity_links import link_names, write_names as write_entity_names, entity_js  # noqa: E402
