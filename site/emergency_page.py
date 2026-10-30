@@ -130,6 +130,7 @@ JS = r"""
     return `<article class="em-n" id="n-${esc(n.notice_id)}" data-k="${esc(n.kind)}" data-sev="${esc(n.severity)}">
       <span class="k"><span class="ico i-${k[1]}" aria-hidden="true"></span>${esc(n.kind === 'weather' && n.event ? n.event : k[0])}${n.zones ? ' · Zone' + (n.zones.includes(',') ? 's ' : ' ') + esc(n.zones) : ''}</span>
       <h3>${esc(n.title)}</h3>${n.area ? `<p>${esc(n.area.length > 220 ? n.area.slice(0, 217) + '…' : n.area)}</p>` : ''}
+      ${n.geometry ? `<div class="em-geo" data-geo-for="${esc(n.notice_id)}" role="img" aria-label="Map of where this applies"></div>` : ''}
       ${more ? `<details><summary>Details</summary><div class="lt-body">${window.BC && BC.longTextBody ? BC.longTextBody(more) : `<p>${esc(more)}</p>`}</div>${earlier(n)}</details>` : ''}
       <small>${src}${times ? ' · ' + times : ''}${n.url ? ` · <a href="${esc(n.url)}" target="_blank" rel="noopener">Source</a>` : ''}</small></article>`;
   }
@@ -153,6 +154,8 @@ JS = r"""
     set('kWeather', d.counts.weather); set('kEvac', d.counts.evacuation); set('kShelter', d.shelters_open); set('kWater', d.counts['boil-water']); set('kRoad', d.counts.road);
     $('kEvac').classList.toggle('hot', d.counts.evacuation > 0);
     $('emList').innerHTML = d.notices.map(card).join('');
+    // Maps drawn by government staff (where a boil-water notice or closure applies).
+    if (window.BCMap) d.notices.filter(n => n.geometry).forEach(n => { const el = document.querySelector(`[data-geo-for="${CSS.escape(n.notice_id)}"]`); if (el) BCMap.view(el, n.geometry).catch(() => el.remove()); });
     filter();
     const st2 = new Map(d.shelters.map(s => [s.shelter_id, s]));
     document.querySelectorAll('.em-sh[data-id]').forEach(el => { const s = st2.get(el.dataset.id); if (!s) return; const p = el.querySelector('.em-pill'); p.textContent = s.status; p.classList.toggle('open', s.status === 'open'); });
@@ -473,4 +476,6 @@ def emergency_page(out_dir):
 <script type="application/json" id="emKinds">{json.dumps({k: [v[0], v[1]] for k, v in KIND.items()})}</script>
 <script type="application/json" id="emZoneColors">{json.dumps(zc)}</script>
 <link rel="stylesheet" href="/assets/tax.css">
+<style>.em-geo{{margin:10px 0 4px}}</style>
+<script src="/assets/area-map.js"></script>
 <script>{JS}</script>'''

@@ -1,6 +1,6 @@
 // End-to-end tests for /api/gov (the government workspace) against a real Postgres: migration 0088 plus small
 // stand-ins for the public tables staff post into. Runs when FINANCE_TEST_DATABASE_URL is set (CI has a Postgres
-// service); skipped otherwise. The rule under test above all: staff never change record data, only flag it.
+// service); skipped otherwise. Also 0090 (maps on alerts and notices). The rule under test above all: staff never change record data, only flag it.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('fs');
@@ -40,6 +40,7 @@ create table job_openings (id bigint generated always as identity primary key, p
   created_at timestamptz default now(), updated_at timestamptz default now(), unique (origin, record_hash));
 create table budget_years (id bigint generated always as identity primary key, gov_id text, fiscal_year integer, name text, amount numeric, source_url text,
   government_key text, origin text not null default 'manual', record_hash text not null, created_at timestamptz default now(), updated_at timestamptz default now());
+create table emergency_live (notice_id text primary key);
 insert into public_notices (place_id, notice_id, published, gov_id, title, text, origin, record_hash) values ('fl-bay', 'pn:1', '2026-10-01', 'lh', 'From the notice site', 'Read from records', 'site_build', 'h1');
 insert into budget_years (gov_id, fiscal_year, name, amount, source_url, origin, record_hash) values ('lh', 2026, 'General Fund', 21500000, 'https://example.gov/budget.pdf', 'site_build', 'b1');
 `;
@@ -53,6 +54,7 @@ test.before(async () => {
   await q('drop schema if exists govtest cascade');
   await pool.query(STUBS);
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0088_gov_workspace.sql'), 'utf8'));
+  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0090_area_maps.sql'), 'utf8'));
   await q(`insert into gov.members (workspace_id, email, role) values ('lh', 'clerk@lh.test', 'publisher'), ('lh', 'chief@lh.test', 'alert_sender'),
     ('lh', 'mayor@lh.test', 'viewer'), ('lh', 'manager@lh.test', 'owner'), ('county', 'em1@county.test', 'alert_sender'), ('county', 'em2@county.test', 'alert_sender')`);
   G = require('../_gov');
@@ -184,4 +186,44 @@ test('record data is read-only: staff flag it and BayCounty.me answers', opts, a
   assert.equal(mine.body.flags[0].status, 'fixed');
   assert.match(mine.body.flags[0].reply, /amended/);
   assert.equal((await get('records', {dataset: 'payroll'})).status, 400);
+});
+
+test('maps: pins, lines and areas are checked, kept on alerts and notices, and reach the live feed', async () => {
+  const G2 = require('../_gov');
+  const fc = (...features) => ({type: 'FeatureCollection', features});
+  const pin = (x, y, r) => ({type: 'Feature', properties: r ? {radius_m: r} : {}, geometry: {type: 'Point', coordinates: [x, y]}});
+  assert.equal(G2.areaShape(''), null);
+  assert.equal(G2.areaShape(fc()), null);
+  const out = JSON.parse(G2.areaShape(JSON.stringify(fc(pin(-85.6602349, 30.1588, 76),
+    {type: 'Feature', geometry: {type: 'LineString', coordinates: [[-85.66, 30.16], [-85.65, 30.17]]}},
+    {type: 'Feature', geometry: {type: 'Polygon', coordinates: [[[-85.6, 30.2], [-85.59, 30.2], [-85.59, 30.21]]]}}))));
+  assert.deepEqual(out.features[0], {type: 'Feature', properties: {radius_m: 76}, geometry: {type: 'Point', coordinates: [-85.660235, 30.1588]}});
+  assert.equal(out.features[2].geometry.coordinates[0].length, 4, 'an area is closed');
+  assert.throws(() => G2.areaShape(fc(pin(-80.1, 25.8))), /in Bay County/);
+  assert.throws(() => G2.areaShape(fc({type: 'Feature', geometry: {type: 'LineString', coordinates: [[-85.66, 30.16]]}})), /between 2/);
+  assert.throws(() => G2.areaShape(fc({type: 'Feature', geometry: {type: 'MultiPoint', coordinates: []}})), /pins, lines and areas/);
+  assert.throws(() => G2.areaShape('{not json'), /could not be read/);
+  assert.equal(JSON.parse(G2.areaShape(fc(pin(-85.66, 30.16, 99999)))).features[0].properties.radius_m, 8000);
+});
+
+test('maps: a staff alert and a staff notice keep their map', opts, async () => {
+  const map = JSON.stringify({type: 'FeatureCollection', features: [{type: 'Feature', properties: {radius_m: 150}, geometry: {type: 'Point', coordinates: [-85.66, 30.24]}}]});
+  as = who('chief@lh.test');
+  const a = await post('alert', {kind: 'boil-water', title: 'Boil water on Ohio Ave', message: 'A main broke.', geometry: map});
+  assert.equal(a.status, 200, JSON.stringify(a.body));
+  const live = await G.liveNotices(q, 'fl-bay');
+  const n = live.find(x => x.title === 'Boil water on Ohio Ave');
+  assert.equal(JSON.parse(n.geometry).features[0].properties.radius_m, 150);
+  const badMap = await post('alert', {kind: 'road', title: 'x', message: 'y', geometry: '{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[-81,28]}}]}'});
+  assert.equal(badMap.status, 400);
+  as = who('clerk@lh.test');
+  const p = await post('post', {kind: 'notice', title: 'Water main work on 5th St', text: 'Crews replace a pipe.', geometry: map});
+  assert.equal(p.status, 200, JSON.stringify(p.body));
+  const pub = await G.publicPosts(q, {kind: 'notice'});
+  const row = pub.data.notices.find(r => r.title === 'Water main work on 5th St');
+  assert.ok(row.geometry && JSON.parse(row.geometry).features.length === 1);
+  // Editing without a map clears it.
+  await post('post', {kind: 'notice', id: p.body.id, title: 'Water main work on 5th St', text: 'Done.', geometry: ''});
+  const [r2] = await q('select geometry from public_notices where id = $1', [p.body.id]);
+  assert.equal(r2.geometry, null);
 });

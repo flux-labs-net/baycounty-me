@@ -287,6 +287,8 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
 .modal h2{font:600 1.05rem var(--f-display);margin:0}
 .kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:.84rem;margin:0}
 .kv dt{color:var(--muted)} .kv dd{margin:0;overflow-wrap:anywhere}
+.mapfld{display:flex;flex-direction:column;gap:8px}
+.mapfld>span{font-size:.86rem;font-weight:600}
 </style>
 </head>
 <body>
@@ -351,6 +353,8 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
           <label class="f full">Headline<input name="title" required maxlength="140" placeholder="Boil-water notice for Highway 77 north of 23rd Street"></label>
           <label class="f full">What is happening<textarea name="message" required rows="4" maxlength="900"></textarea></label>
           <label class="f full">What people should do (optional)<textarea name="instruction" rows="2" maxlength="900" placeholder="Boil tap water for one minute before drinking or cooking."></textarea></label>
+          <div class="f full mapfld"><span>Map of where it applies (optional)</span><input type="hidden" name="geometry">
+          <div class="row"><button class="btn" type="button" data-map-open>Add a map</button><span class="small muted" data-map-sum></span></div><div data-map-box hidden></div></div>
           <label class="f">Ends on its own after<select name="hours"><option value="6">6 hours</option><option value="12">12 hours</option><option value="24" selected>1 day</option><option value="48">2 days</option><option value="72">3 days</option><option value="168">1 week</option></select></label>
           <label class="chk full" id="al-cw-l" hidden><input type="checkbox" name="countywide" id="al-cw"><span><b>Send to all of Bay County.</b> A second alert sender has to confirm a countywide alert before it goes out.</span></label>
           <div class="full reach" id="al-reach"></div>
@@ -373,11 +377,13 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
       <form class="panel form" id="f-notice" data-kind="notice" hidden style="margin-bottom:16px">
         <input type="hidden" name="id">
         <label class="f full">Title<input name="title" required maxlength="200"></label>
-        <label class="f">Kind<select name="kind"><option value="meeting">Public meeting</option><option value="hearing">Public hearing or ordinance</option><option value="bid">Bid or proposal request</option><option value="other">Other notice</option></select></label>
+        <label class="f">Kind<select name="kind"><option value="meeting">Public meeting</option><option value="hearing">Public hearing or ordinance</option><option value="bid">Bid or proposal request</option><option value="utility">Water, sewer or utility work</option><option value="road">Road or street work</option><option value="other">Other notice</option></select></label>
         <label class="f">Meeting, hearing or due date<input type="date" name="event_date"></label>
         <label class="f">Published<input type="date" name="published"></label>
         <label class="f">Link to the document (optional)<input type="url" name="pdf_url" placeholder="https://"></label>
         <label class="f full">Notice text<textarea name="text" required rows="8"></textarea></label>
+        <div class="f full mapfld"><span>Map of where it applies (optional)</span><input type="hidden" name="geometry">
+        <div class="row"><button class="btn" type="button" data-map-open>Add a map</button><span class="small muted" data-map-sum></span></div><div data-map-box hidden></div></div>
         <div class="full row"><button class="btn primary" type="submit">Save and post</button><button class="btn quiet" type="button" data-cancel>Cancel</button><span class="small err" role="alert"></span></div>
       </form>
       <h2 class="h2">Posted from this workspace</h2>
@@ -469,6 +475,7 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
   <label class="f">Anything else (optional)<textarea name="note" rows="3" maxlength="2000"></textarea></label>
   <div class="row"><button class="btn primary" type="submit" value="send">Send flag</button><button class="btn quiet" type="button" id="flag-cancel">Cancel</button><span class="small err" role="alert"></span></div>
 </form></dialog>
+<script src="/assets/area-map.js" defer></script>
 <script src="/assets/staff.js" defer></script>
 </body>
 </html>

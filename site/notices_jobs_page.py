@@ -180,6 +180,7 @@ def notices_page():
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="njData">{_js_data(data)}</script>
 <script>{NOTICE_JS}{LIST_JS}</script>
+<script src="/assets/area-map.js" defer></script>
 <script src="/assets/staff-posts.js" defer></script>'''
 
 

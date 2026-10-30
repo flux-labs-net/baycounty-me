@@ -33,11 +33,13 @@ async function claim(place) {
 }
 
 async function store(place, notices, ok) {
-  const rows = notices.map(n => ({...Object.fromEntries(COLS.map(c => [c, n[c] ?? null])), push_topic: E.pushTopic(n), active: n.status === 'active'}));
+  // The map shape (staff alerts) is written only when a notice has one, so a run before migration 0090 still stores.
+  const cols = notices.some(n => n.geometry) ? [...COLS, 'geometry'] : COLS;
+  const rows = notices.map(n => ({...Object.fromEntries(cols.map(c => [c, n[c] ?? null])), push_topic: E.pushTopic(n), active: n.status === 'active'}));
   if (rows.length) {
-    await db.q(`insert into emergency_live (${COLS.join(', ')}, push_topic, active)
-      select ${COLS.join(', ')}, push_topic, active from json_populate_recordset(null::emergency_live, $1::json)
-      on conflict (notice_id) do update set ${[...COLS.filter(c => c !== 'notice_id'), 'push_topic', 'active'].map(c => `${c} = excluded.${c}`).join(', ')}, last_seen = now()`,
+    await db.q(`insert into emergency_live (${cols.join(', ')}, push_topic, active)
+      select ${cols.join(', ')}, push_topic, active from json_populate_recordset(null::emergency_live, $1::json)
+      on conflict (notice_id) do update set ${[...cols.filter(c => c !== 'notice_id'), 'push_topic', 'active'].map(c => `${c} = excluded.${c}`).join(', ')}, last_seen = now()`,
     [JSON.stringify(rows)]);
   }
   // End notices that their source no longer lists (only for sources that answered this time).

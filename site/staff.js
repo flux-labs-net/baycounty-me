@@ -120,6 +120,31 @@
       : '<li class="muted small">Nothing yet.</li>';
   }
 
+  // ---------- map field (alerts and notices) ----------
+  // The map editor loads only when someone presses "Add a map". The drawing lives in the form's hidden geometry field.
+  async function mapOpen(fld) {
+    const box = fld.querySelector('[data-map-box]'), input = fld.querySelector('input[name=geometry]');
+    box.hidden = false; fld.querySelector('[data-map-open]').hidden = true;
+    if (!fld._ed) fld._ed = await window.BCMap.editor(box, input);
+    else fld._ed.refresh();
+  }
+  function mapSet(form, value) {
+    const fld = form.querySelector('.mapfld'); if (!fld) return;
+    const input = fld.querySelector('input[name=geometry]');
+    input.value = value || '';
+    if (fld._ed) fld._ed.set(value || '');
+    const has = window.BCMap && window.BCMap.parse(value);
+    if (has) mapOpen(fld);
+    else { fld.querySelector('[data-map-box]').hidden = true; fld.querySelector('[data-map-open]').hidden = false; }
+    mapSum(fld);
+  }
+  function mapSum(fld) {
+    const g = window.BCMap && window.BCMap.parse(fld.querySelector('input[name=geometry]').value);
+    fld.querySelector('[data-map-sum]').textContent = g ? 'On the map: ' + window.BCMap.describe(g) : '';
+  }
+  document.addEventListener('click', e => { const b = e.target.closest('[data-map-open]'); if (b) mapOpen(b.closest('.mapfld')); });
+  document.addEventListener('change', e => { if (e.target.name === 'geometry') mapSum(e.target.closest('.mapfld')); });
+
   // ---------- alerts ----------
   const fAlert = $('#f-alert');
   async function showReach() {
@@ -141,6 +166,7 @@
     const cw = $('#al-cw').checked;
     $('#al-confirm-h').textContent = cw ? 'Save this countywide alert for a second person to confirm?' : `Send this alert to ${wsInfo.name} now?`;
     $('#al-confirm-p').innerHTML = `“${esc(fAlert.elements.title.value)}”` + (r && r.topic ? ` will reach about ${r.phones ?? 0} phones and ${r.emails ?? 0} inboxes, and show on the public alert timeline.` : ' will show on the public alert timeline.') +
+      (window.BCMap.parse(fAlert.elements.geometry.value) ? ' The map you drew shows with it.' : '') +
       (cw ? ' Nothing goes out until another alert sender confirms it.' : ' It can’t be unsent, but you can end it at any time.');
     $('#al-confirm').hidden = false; $('#al-send').focus();
   });
@@ -150,7 +176,7 @@
     const f = Object.fromEntries(new FormData(fAlert));
     try {
       const r = await api('alert', {method: 'POST', body: {...f, countywide: $('#al-cw').checked}});
-      fAlert.reset(); $('#al-confirm').hidden = true;
+      fAlert.reset(); mapSet(fAlert, ''); $('#al-confirm').hidden = true;
       fAlert.querySelector('.err').textContent = r.message + (r.delivery && r.delivery.error ? ' ' + r.delivery.error : '');
       await loadAlerts();
     } catch (err) { fAlert.querySelector('.err').textContent = err.message; }
@@ -167,7 +193,7 @@
         (a.live || a.status === 'pending' ? `<button class="btn" type="button" data-end="${a.id}">${a.status === 'pending' ? 'Cancel' : 'End now'}</button>` : '');
       return `<li><div class="grow"><h3>${esc(a.title)} ${st}</h3><div class="meta"><span>${esc(me.alert_kinds[a.kind] || a.kind)}</span><span>${a.countywide ? 'All of Bay County' : esc(wsInfo.name)}</span>
         <span>By ${esc(a.created_by)}${a.confirmed_by ? `, confirmed by ${esc(a.confirmed_by)}` : ''}</span><span>${a.sent_at ? 'Sent ' + when(a.sent_at) : 'Saved ' + when(a.created_at)}</span>
-        ${a.live && a.ends_at ? `<span>Ends ${when(a.ends_at)}</span>` : ''}${a.ended_at ? `<span>${a.status === 'cancelled' ? 'Cancelled' : 'Ended'} ${when(a.ended_at)} by ${esc(a.ended_by)}</span>` : ''}</div>
+        ${a.geometry ? '<span>Has a map</span>' : ''}${a.live && a.ends_at ? `<span>Ends ${when(a.ends_at)}</span>` : ''}${a.ended_at ? `<span>${a.status === 'cancelled' ? 'Cancelled' : 'Ended'} ${when(a.ended_at)} by ${esc(a.ended_by)}</span>` : ''}</div>
         <p class="body">${esc(a.message)}${a.instruction ? '\n\n' + esc(a.instruction) : ''}</p></div><div class="row">${btns}</div></li>`;
     }).join('') : '<li class="muted small">No alerts sent from this workspace yet.</li>';
   }
@@ -182,7 +208,7 @@
   // ---------- notices, events, jobs ----------
   const posts = {notice: [], event: [], job: []};
   const LINE = {
-    notice: r => ({h: r.title, meta: [r.kind_label, r.published && 'Published ' + day(r.published), r.event_date && 'Date: ' + day(r.event_date)], body: r.text}),
+    notice: r => ({h: r.title, meta: [r.kind_label, r.published && 'Published ' + day(r.published), r.event_date && 'Date: ' + day(r.event_date), r.geometry && 'Has a map'], body: r.text}),
     event: r => ({h: r.title, meta: [day(r.starts) + (String(r.starts || '').length > 10 ? ', ' + new Date(r.starts).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : ''), r.venue, r.category, r.cost]}),
     job: r => ({h: r.title, meta: [r.department, r.job_type, r.pay, r.posted && 'Posted ' + day(r.posted), r.closes && 'Closes ' + day(r.closes)]}),
   };
@@ -202,6 +228,7 @@
   function openForm(kind, row) {
     const f = $('#f-' + kind); f.reset(); f.hidden = false; f.querySelector('.err').textContent = '';
     if (row) for (const el of f.elements) if (el.name && row[el.name] != null) el.value = el.type === 'datetime-local' ? localInput(row[el.name]) : el.type === 'date' ? String(row[el.name]).slice(0, 10) : row[el.name];
+    mapSet(f, row && row.geometry);
     f.querySelector('input:not([type=hidden]),textarea').focus();
   }
   document.addEventListener('click', async e => {

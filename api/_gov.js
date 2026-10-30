@@ -30,6 +30,43 @@ const day = v => { const s = String(v || '').slice(0, 10); return /^\d{4}-\d{2}-
 const stamp = v => { const s = String(v || '').slice(0, 16); return /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2})?$/.test(s) && !isNaN(Date.parse(s.length === 10 ? s : s + ':00Z')) ? s : null; };
 const link = v => { const s = txt(v, 500); if (!s) return null; if (!/^https:\/\/[^\s<>"]+$/i.test(s)) throw bad('Links must start with https://'); return s; };
 
+// A map of where an alert or notice applies: pins with a radius, street or pipe lines, and drawn areas, as a GeoJSON
+// FeatureCollection. Points must be in or near Bay County. Returns compact JSON text, or null for no map.
+const BOX = {w: -86.2, e: -84.9, s: 29.6, n: 30.7};
+const SHAPES = {Point: 'pin', LineString: 'line', Polygon: 'area'};
+function areaShape(v) {
+  if (v == null || v === '') return null;
+  let g = v;
+  if (typeof g === 'string') { if (g.length > 200000) throw bad('That map is too detailed. Use fewer points.'); try { g = JSON.parse(g); } catch (e) { throw bad('The map could not be read. Clear it and draw it again.'); } }
+  if (!g || g.type !== 'FeatureCollection' || !Array.isArray(g.features)) throw bad('The map could not be read. Clear it and draw it again.');
+  if (!g.features.length) return null;
+  if (g.features.length > 20) throw bad('A map can hold up to 20 pins, lines and areas.');
+  const pt = c => {
+    if (!Array.isArray(c) || c.length < 2) throw bad('The map could not be read. Clear it and draw it again.');
+    const [x, y] = c.map(Number);
+    if (!(x >= BOX.w && x <= BOX.e && y >= BOX.s && y <= BOX.n)) throw bad('Every point on the map has to be in Bay County.');
+    return [Math.round(x * 1e6) / 1e6, Math.round(y * 1e6) / 1e6];
+  };
+  const features = g.features.map(f => {
+    const geo = f && f.geometry, kind = geo && SHAPES[geo.type];
+    if (!kind) throw bad('Maps can have pins, lines and areas only.');
+    if (kind === 'pin') {
+      const r = Math.round(Number(f.properties && f.properties.radius_m) || 0);
+      return {type: 'Feature', properties: r ? {radius_m: Math.min(Math.max(r, 25), 8000)} : {}, geometry: {type: 'Point', coordinates: pt(geo.coordinates)}};
+    }
+    if (kind === 'line') {
+      const c = (geo.coordinates || []).map(pt);
+      if (c.length < 2 || c.length > 500) throw bad('A line needs between 2 and 500 points.');
+      return {type: 'Feature', properties: {}, geometry: {type: 'LineString', coordinates: c}};
+    }
+    const ring = ((geo.coordinates || [])[0] || []).map(pt);
+    if (ring.length >= 3 && (ring[0][0] !== ring[ring.length - 1][0] || ring[0][1] !== ring[ring.length - 1][1])) ring.push(ring[0]);
+    if (ring.length < 4 || ring.length > 501) throw bad('An area needs at least 3 corners (and no more than 500).');
+    return {type: 'Feature', properties: {}, geometry: {type: 'Polygon', coordinates: [ring]}};
+  });
+  return JSON.stringify({type: 'FeatureCollection', features});
+}
+
 function cookieValue(req, name) {
   for (const part of String((req.headers || {}).cookie || '').split(';')) {
     const [k, ...v] = part.trim().split('=');
@@ -163,7 +200,7 @@ async function logout(q, res, who) {
 
 /* ---------- posts: notices, events, jobs ---------- */
 // Each kind is a public table the site already shows. fields: what staff fill in; row(): the table's columns.
-const NOTICE_KINDS = {meeting: 'Public meeting', hearing: 'Public hearing or ordinance', bid: 'Bid or proposal request', other: 'Other notice'};
+const NOTICE_KINDS = {meeting: 'Public meeting', hearing: 'Public hearing or ordinance', bid: 'Bid or proposal request', utility: 'Water, sewer or utility work', road: 'Road or street work', other: 'Other notice'};
 const JOB_TYPES = ['Full time', 'Part time', 'Seasonal', 'Temporary', 'Volunteer'];
 const POSTS = {
   notice: {table: 'public_notices', id: 'notice_id', order: 'published desc nulls last', dateCol: 'published',
@@ -173,10 +210,10 @@ const POSTS = {
       if (!title) throw bad('Give the notice a title.');
       if (!text) throw bad('Paste the notice text.');
       return {kind, kind_label: NOTICE_KINDS[kind], title, text, event_date: day(b.event_date), published: day(b.published) || new Date().toISOString().slice(0, 10),
-        pdf_url: link(b.pdf_url), notice_type: 'Posted by government staff'};
+        pdf_url: link(b.pdf_url), notice_type: 'Posted by government staff', geometry: areaShape(b.geometry)};
     },
     row: (c, w) => ({...c, agency: w.name, source_url: c.pdf_url || null}),
-    show: ['title', 'kind_label', 'published', 'event_date', 'text', 'pdf_url']},
+    show: ['title', 'kind', 'kind_label', 'published', 'event_date', 'text', 'pdf_url', 'geometry']},
   event: {table: 'community_events', id: 'event_id', order: 'starts desc nulls last', dateCol: 'starts',
     clean: b => {
       const title = txt(b.title, 200), starts = stamp(b.starts);
@@ -247,7 +284,7 @@ const ALERT_KINDS = {
   safety: 'Public safety (police, fire, hazmat)', general: 'General update (closures, sandbags, debris)',
 };
 const SEVERITIES = ['extreme', 'severe', 'moderate', 'minor', 'info'];
-const ALERT_COLS = `id, workspace_id, kind, title, message, instruction, severity, countywide, status, created_by, created_at, confirmed_by, sent_at, ends_at, ended_by, ended_at`;
+const ALERT_COLS = `id, workspace_id, kind, title, message, instruction, severity, countywide, geometry, status, created_by, created_at, confirmed_by, sent_at, ends_at, ended_by, ended_at`;
 
 // Countywide alerts need a second person (another alert sender or owner of a countywide workspace, or a BayCounty.me
 // admin). Alerts for one city go out at once.
@@ -261,10 +298,11 @@ async function createAlert(q, w, b, email, {admin = false} = {}) {
   if (countywide && !w.countywide) throw bad('This workspace can only send alerts to its own city.', 403);
   const hours = Math.min(Math.max(Number(b.hours) || 24, 1), 24 * 14);
   const needsConfirm = countywide && !admin;
-  const [a] = await q(`insert into gov.alerts (workspace_id, place_id, kind, title, message, instruction, severity, countywide, status, created_by, sent_at, ends_at)
-      values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, now() + make_interval(hours => $12)) returning ${ALERT_COLS}`,
+  const geometry = areaShape(b.geometry);
+  const [a] = await q(`insert into gov.alerts (workspace_id, place_id, kind, title, message, instruction, severity, countywide, status, created_by, sent_at, ends_at, geometry)
+      values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, now() + make_interval(hours => $12), $13) returning ${ALERT_COLS}`,
   [w.id, w.place_id, kind, title, message, txt(b.instruction, 900), SEVERITIES.includes(b.severity) ? b.severity : 'severe', countywide,
-    needsConfirm ? 'pending' : 'sent', email, needsConfirm ? null : new Date().toISOString(), hours]);
+    needsConfirm ? 'pending' : 'sent', email, needsConfirm ? null : new Date().toISOString(), hours, geometry]);
   await log(q, w.id, email, needsConfirm ? 'alert_drafted' : 'alert_sent', {id: a.id, title, countywide});
   return a;
 }
@@ -314,6 +352,7 @@ async function liveNotices(q, place) {
     area: a.countywide ? COUNTYWIDE : (a.gov_name || null), zones: [], issued: new Date(a.sent_at).toISOString(), starts: new Date(a.sent_at).toISOString(),
     ends: a.ends_at ? new Date(a.ends_at).toISOString() : null, updated: new Date(a.sent_at).toISOString(), status: 'active',
     full_closure: a.kind === 'road' ? true : null, roadway: null, url: 'https://baycounty.me/emergency', source_url: 'https://baycounty.me/emergency',
+    geometry: a.geometry || null,
   }));
 }
 
@@ -406,5 +445,5 @@ async function setMember(q, ws, b, by) {
 
 module.exports = {ROLES, CAN, ROLE_LABEL, COOKIE, COUNTYWIDE, NOTICE_KINDS, JOB_TYPES, ALERT_KINDS, RECORDS, POSTS, TOPIC_OF,
   caller, workspacesFor, requireRole, log, startLogin, finishLogin, logout, codeEmail,
-  listPosts, savePost, withdrawPost, createAlert, confirmAlert, endAlert, reach, liveNotices, records, addFlag, publicPosts,
+  areaShape, listPosts, savePost, withdrawPost, createAlert, confirmAlert, endAlert, reach, liveNotices, records, addFlag, publicPosts,
   adminOverview, adminFlags, adminFlagReview, setMember};

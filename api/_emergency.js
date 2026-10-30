@@ -75,7 +75,7 @@ function notice(o) {
     severity: o.severity || 'info', event: o.event || null, area: clip(o.area, 400) || null, zones: (o.zones || []).join(', ') || null,
     issued: o.issued || null, starts: o.starts || null, ends: o.ends || null, updated: o.updated || null,
     status: o.status || 'active', full_closure: o.full_closure ?? null, roadway: o.roadway || null,
-    url: o.url || null, source_url: o.source_url || o.url || null,
+    url: o.url || null, source_url: o.source_url || o.url || null, geometry: o.geometry || null,
   };
 }
 
