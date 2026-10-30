@@ -16,6 +16,7 @@ const COUNTS = {
             and started_at > now() - interval '60 days' order by dataset, id desc) x where status = 'failed'`,
   agendas: `select count(*)::int n from agendas.errors where resolved_at is null and at > now() - interval '14 days'`,
   minutes: `select count(*)::int n from agendas.motions where review_status = 'unreviewed' and (check_status = 'flagged' or sampled)`,
+  govflags: `select count(*)::int n from gov.flags where status = 'open'`,
 };
 
 // q: the query function (db.q), passed in so tests can fake it.

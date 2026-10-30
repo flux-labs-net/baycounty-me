@@ -50,6 +50,8 @@ function govsFor(loc) { return ['county', 'schools', ...(loc.gov_id && loc.gov_i
 function alerts(notices, loc) {
   const govs = new Set(['county', loc.gov_id || 'county']);
   return (notices || []).filter(n => n.status == null || n.status === 'active').filter(n => {
+    // Staff alerts (government workspace): a city's alert reaches homes in that city; the county's, or a countywide one, every home.
+    if (n.source_type === 'staff') return n.area === 'All of Bay County' || !n.gov_id || govs.has(n.gov_id);
     if (n.kind === 'evacuation') return !n.zones || (loc.zone && String(n.zones).split(/,\s*/).includes(loc.zone));
     if (n.kind === 'weather') return true;
     if (n.kind === 'shelter') return true;

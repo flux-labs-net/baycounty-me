@@ -26,6 +26,7 @@
 //   GET /api/v1/utilities?lat=&lon=     water, sewer, power, gas, trash provider and pickup days at an address (api/_utilities.js)
 //   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
 //   GET /api/v1/nearby?address=|lat=&lon=&radius_mi=  what's happening near a place: alerts, meetings, events, work nearby (api/_nearby.js)
+//   GET /api/v1/government-posts?gov=&kind=  notices, events and jobs posted by city and county staff (api/_gov.js)
 //   GET /api/v1/overlaps?section=&gov=  live overlaps: officials' businesses and nonprofits in their votes, checkbook donors, split purchases (api/_overlaps.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
@@ -188,6 +189,11 @@ function openapi(catalog) {
         parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('year', 'Fiscal year, e.g. 2019 (the year it ends)', {type: 'integer'}), p('date', 'A date (YYYY-MM-DD) instead of a year')],
         responses: {200: {description: '{data: {gov_id, government, body, place_id, fiscal_year, from, to, seats: [{seat, appointed, holders: [{person_name, person_id, vacant, confirmed, start_date, end_date, start_approx, end_approx, how, part_of_period, note, source_title, source_url}]}], note}} or, without gov, {data: [{gov_id, government, body, seats, unconfirmed}]}'},
           400: {description: 'A bad year or date'}, 404: {description: 'Unknown government'}}}},
+      '/government-posts': {get: {operationId: 'governmentPosts', summary: 'Public notices, events and job openings posted directly by city and county staff',
+        description: 'Posts made in the BayCounty.me government workspace by a government\'s own staff: notices (published in the last 30 days or about a date ahead), upcoming events, and open jobs. They are also rows of the public-notices, community-events and job-openings datasets with origin gov. posted_by is the government\'s name. Record data read from public sources is never edited by staff.',
+        parameters: [p('gov', 'Only one government: county, pc, pcb, lh, cw, sp, parker, mb'), p('kind', 'Comma list of notice, event, job (default all)')],
+        responses: {200: {description: '{data: {notices: [{id, notice_id, gov_id, title, kind_label, published, event_date, text, pdf_url, posted_by}], events: [{id, event_id, gov_id, title, starts, ends, venue, category, cost, url, posted_by}], jobs: [{id, job_id, gov_id, title, department, job_type, pay, posted, closes, url, posted_by}]}, note}'},
+          400: {description: 'Unknown kind'}}}},
       '/overlaps': {get: {operationId: 'overlaps', summary: 'Live overlaps between records: an official\'s own business or nonprofit named in a vote they cast, checkbook payees that gave to a campaign, and payments just under a purchasing threshold',
         description: 'Joins that use hand-confirmed matches (official-businesses, nonprofit-officials) or rows only the database holds (checkbook-payments, school-grades, school-spending). Sections: official_business_votes (an official\'s registered business named in a motion they voted on, with what their own government paid it), nonprofit_board_money (a nonprofit with an official on its board: payments from that official\'s government and their votes naming it), checkbook_donors (checkbook payees that gave to a local campaign, or whose owners did), split_purchases (two or more payments to one payee within 30 days, each at least 90% of a common threshold: thresholds lists them) and school_spending_grades. Each section is {rows, error}. Individual donors are never named. The other overlaps are datasets: vote-mentions, donor-votes, agenda-parties, development-companies, bid-trail, shared-owner-vendors, chamber-overlaps, emergency-purchase-donors and campaign-results. A row puts two public records side by side; it is not a finding of wrongdoing.',
         parameters: [p('section', 'One section: official_business_votes, nonprofit_board_money, checkbook_donors, split_purchases or school_spending_grades'), p('gov', 'Only one government: county, schools, pc, pcb, lh, cw, sp, parker, mb')],
@@ -402,6 +408,11 @@ module.exports = async (req, res) => {
       if (!req.query.lat && !req.query.lon && !req.query.address) return res.status(200).json({note: 'Add ?lat=&lon= (or ?address=825 Ohio Ave) for one address. Every provider, route and rate is in the utility-providers, trash-pickup, trash-holidays and utility-rates datasets.'});
       const D = await utilityData(req, catalog);
       try { const r = await U.lookup(D, req.query); info.rows = r.services.length + r.pickup.length; return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
+    if (parts[0] === 'government-posts') {
+      res.locals.lastModified = null;
+      try { const r = await require('./_gov').publicPosts(require('./_db').q, req.query); info.rows = Object.values(r.data).reduce((a, x) => a + x.length, 0); return res.status(200).json(r); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
     if (parts[0] === 'overlaps') {

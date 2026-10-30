@@ -334,11 +334,22 @@ async function settle(fns, names) {
   return out;
 }
 
+// Alerts sent by city and county staff from the government workspace (/staff, gov.alerts; see api/_gov.js). Every
+// live one on every check, so an alert ended there ends here. No database (the daily archive script): none.
+async function staffAlerts(place = 'fl-bay') {
+  const db = require('./_db');
+  if (!db.hasDb()) return {notices: [], ok: [], errors: []};
+  const rows = await require('./_gov').liveNotices(db.q, place);
+  return {notices: rows.map(notice), ok: ['staff'], errors: []};
+}
+
 // Every live source for a place. Shelter rows come back too, so the caller can store their status.
 async function readAll(place = 'fl-bay', now = Date.now()) {
-  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place)]);
+  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place), staffAlerts(place)]);
   const out = {notices: [], errors: [], ok: [], shelters: null};
-  const [w, ac, nf, rd, sh, sp] = parts;
+  const [w, ac, nf, rd, sh, sp, st] = parts;
+  if (st.status === 'fulfilled') { out.notices.push(...st.value.notices); out.ok.push(...st.value.ok); }
+  else out.errors.push({source: 'staff', error: String(st.reason.message || st.reason)});
   if (w.status === 'fulfilled') { out.notices.push(...w.value); out.ok.push('nws'); } else out.errors.push({source: 'nws', error: String(w.reason.message || w.reason)});
   for (const p of [ac, nf, rd, sp]) if (p.status === 'fulfilled') { out.notices.push(...p.value.notices); out.ok.push(...p.value.ok); out.errors.push(...p.value.errors); }
   if (sh.status === 'fulfilled') { out.shelters = sh.value; out.notices.push(...shelterNotices(sh.value, place)); out.ok.push('shelters'); }
@@ -355,8 +366,11 @@ async function readAll(place = 'fl-bay', now = Date.now()) {
 }
 
 // Which notices go out as a phone notification, and to which topic. Road closures only when a road is fully closed.
+// Staff alerts from the government workspace ride on the topics residents already chose (api/_gov.js TOPIC_OF).
+const STAFF_TOPIC = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'evacuation'};
 function pushTopic(n) {
   if (n.status !== 'active') return null;
+  if (n.source_type === 'staff') return STAFF_TOPIC[n.kind] || null;
   if (n.kind === 'evacuation') return 'evacuation';
   if (n.kind === 'shelter') return 'shelters';
   if (n.kind === 'boil-water') return 'water';
@@ -372,5 +386,5 @@ const SEV_RANK = {extreme: 0, severe: 1, moderate: 2, minor: 3, info: 4};
 const byUrgency = (a, b) => (SEV_RANK[a.severity] ?? 5) - (SEV_RANK[b.severity] ?? 5) || String(b.updated || b.issued || '').localeCompare(String(a.updated || a.issued || ''));
 
 module.exports = {SOURCES, placeConfig, plain, decode, clip, classify, zonesIn, parseRss, rssNotices, nwsNotice, nws, nwsRecent, alertCenters, newsFeeds,
-  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, readAll, pushTopic, TOPICS, DEFAULT_TOPICS,
+  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, readAll, staffAlerts, pushTopic, TOPICS, DEFAULT_TOPICS,
   byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice};

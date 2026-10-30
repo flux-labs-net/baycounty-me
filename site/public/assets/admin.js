@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, govstaff: loadGovStaff, govflags: loadGovFlags, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -95,6 +95,7 @@
     ['ties', 'teal', 'Review', 'Business ties', 'Officials matched by name to Sunbiz officers.', 'Open queue'],
     ['minutes', 'teal', 'Review', 'Votes from minutes', 'Motions read from minutes that failed a check, plus spot checks.', 'Open queue'],
     ['accounting', 'teal', 'Review', 'Accounting files', 'Check-register rows waiting for approve or reject.', 'Open queue'],
+    ['govflags', 'teal', 'Review', 'Staff data flags', 'Record data city or county staff say is wrong.', 'Open queue'],
     ['replies', 'blue', 'Outreach', 'Replies to handle', 'Conversations with a reply, plus emails that matched no conversation.', 'Read replies', 'correspondence'],
     ['records', 'blue', 'Outreach', 'Unsent records requests', 'Drafts waiting for you to press Send.', 'Open drafts'],
     ['syncs', 'amber', 'Problems', 'Datasets failing now', 'Datasets whose latest load failed.', 'See data health', 'ingestion'],
@@ -1422,6 +1423,50 @@
   $('#ra-add').addEventListener('click', async () => {
     const v = $('#ra-email').value.trim(); if (!v) return;
     try { await api('realtor_set', {method: 'POST', body: {email: v, status: 'active'}}); $('#ra-email').value = ''; loadRealtors(); } catch (err) { alert(err.message); }
+  });
+
+  // ---------- government workspace staff + their data flags (schema gov, api/_gov.js) ----------
+  let gsRoles = {};
+  async function loadGovStaff() {
+    let r;
+    try { r = await api('gov_staff'); }
+    catch (e) { $('#gs-ws tbody').innerHTML = `<tr><td colspan="4" class="empty">${esc(e.message)}</td></tr>`; return; }
+    gsRoles = r.roles;
+    const names = Object.fromEntries(r.workspaces.map(w => [w.id, w.name]));
+    $('#gs-ws tbody').innerHTML = r.workspaces.map(w => `<tr><td><b>${esc(w.name)}</b>${w.countywide ? ' <span class="small muted">countywide alerts</span>' : ''}</td><td>${fmt(w.members)}</td><td>${fmt(w.live_alerts)}</td><td class="small">${when(w.last_activity)}</td></tr>`).join('');
+    const g = $('#gs-gov'), cur = g.value;
+    g.innerHTML = r.workspaces.map(w => `<option value="${esc(w.id)}">${esc(w.name)}</option>`).join(''); if (cur) g.value = cur;
+    $('#gs-table tbody').innerHTML = r.members.map(m => `<tr><td>${esc(names[m.workspace_id] || m.workspace_id)}</td><td>${esc(m.email)}</td>
+      <td><select class="sel" data-gs="${esc(m.workspace_id)}|${esc(m.email)}" aria-label="Access">${Object.entries(gsRoles).map(([k, v]) => `<option value="${k}"${k === m.role ? ' selected' : ''}>${v}</option>`).join('')}<option value="remove">Remove</option></select></td>
+      <td class="small">${esc(m.added_by || '')}</td><td class="small">${when(m.created_at)}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Nobody has access yet. Add a city’s first owner above.</td></tr>';
+  }
+  $('#gs-table').addEventListener('change', async e => {
+    const s = e.target.closest('[data-gs]'); if (!s) return;
+    const [workspace, email] = s.dataset.gs.split('|'); s.disabled = true;
+    try { await api('gov_member', {method: 'POST', body: {workspace, email, role: s.value}}); } catch (err) { alert(err.message); }
+    loadGovStaff();
+  });
+  $('#gs-add').addEventListener('click', async () => {
+    const email = $('#gs-email').value.trim(); if (!email) return;
+    try { await api('gov_member', {method: 'POST', body: {workspace: $('#gs-gov').value, email, role: $('#gs-role').value}}); $('#gs-email').value = ''; loadGovStaff(); } catch (err) { alert(err.message); }
+  });
+  async function loadGovFlags() {
+    let r;
+    try { r = await api('gov_flags', {params: {status: $('#gf-status').value}}); }
+    catch (e) { $('#gf-table tbody').innerHTML = `<tr><td colspan="4" class="empty">${esc(e.message)}</td></tr>`; return; }
+    $('#gf-table tbody').innerHTML = r.flags.map(f => `<tr><td><b>${esc(f.gov_name)}</b><div class="small muted">${esc(f.email)}</div><div class="small muted">${when(f.created_at)}</div></td>
+      <td>${esc(f.dataset)}${f.record_label ? `<div class="small muted">${esc(f.record_label)}</div>` : ''}${f.field ? `<div class="small">Field: ${esc(f.field)}</div>` : ''}</td>
+      <td class="small">${f.shown_value ? `Shown: ${esc(f.shown_value)}<br>` : ''}${f.correct_value ? `Should be: <b>${esc(f.correct_value)}</b>` : ''}${f.note ? `<div class="muted">${esc(f.note)}</div>` : ''}
+        ${f.evidence_url ? `<div><a href="${esc(f.evidence_url)}" target="_blank" rel="noopener noreferrer">Their source</a></div>` : ''}</td>
+      <td>${f.status === 'open' ? `<input class="sel" data-gf-reply="${f.id}" placeholder="Reply (shown to them)" style="width:100%;box-sizing:border-box"><div class="row" style="gap:6px;margin-top:6px"><button class="btn" type="button" data-gf="${f.id}|fixed">Fixed</button><button class="btn" type="button" data-gf="${f.id}|not_changed">Not changed</button></div>`
+        : `<span class="small">${f.status === 'fixed' ? 'Fixed' : 'Not changed'}${f.reply ? ': ' + esc(f.reply) : ''}</span>`}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No flags here.</td></tr>';
+  }
+  $('#gf-status').addEventListener('change', loadGovFlags);
+  $('#gf-table').addEventListener('click', async e => {
+    const b = e.target.closest('[data-gf]'); if (!b) return;
+    const [id, status] = b.dataset.gf.split('|'), reply = ($(`[data-gf-reply="${id}"]`) || {}).value || '';
+    b.disabled = true;
+    try { await api('gov_flag_review', {method: 'POST', body: {id: Number(id), status, reply}}); loadGovFlags(); } catch (err) { b.disabled = false; alert(err.message); }
   });
 
   // ---------- votes from minutes (agendas.motions, api/_minutes.js) ----------

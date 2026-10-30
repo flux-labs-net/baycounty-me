@@ -242,6 +242,19 @@ async function route(req, res, action, me) {
       await audit(me.e, action, null, {status: body.status, n: r.updated, motions: r.rows.map(x => x.id)});
       return r;
     }
+    case 'gov_staff': return require('./_gov').adminOverview(q);
+    case 'gov_flags': return require('./_gov').adminFlags(q, String(Q.status || 'open'));
+    case 'gov_member': case 'gov_flag_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const G = require('./_gov');
+      if (action === 'gov_member') {
+        const [w] = await q('select id from gov.workspaces where id = $1', [String(body.workspace || '')]);
+        if (!w) throw Object.assign(new Error('Pick a government.'), {status: 400});
+      }
+      const r = action === 'gov_member' ? await G.setMember(q, String(body.workspace), body, me.e) : await G.adminFlagReview(q, body, me.e);
+      await audit(me.e, action, null, {workspace: body.workspace, email: body.email, role: body.role, id: body.id, status: body.status});
+      return r;
+    }
     case 'realtors': return require('./_realtor').adminList();
     case 'app_usage': return require('./_app_usage').report(Q.days);
     case 'realtor_set': {

@@ -49,9 +49,14 @@ async function store(place, notices, ok) {
 }
 
 // Signed-in phones that want this notice (only phones tied to an account get alerts): the topic is on, and the notice's government is one they follow (or they follow all).
+// A staff alert for one city goes to phones following that city; a countywide one (or one from the county) to all.
+function govFilter(n) {
+  if (n.source_type === 'staff') return n.area === require('./_gov').COUNTYWIDE || n.gov_id === 'county' ? null : n.gov_id;
+  return n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null;
+}
 async function devicesFor(place, topic, n) {
   return db.q(`select token, platform from push.devices where place_id = $1 and disabled_at is null and user_id is not null and $2 = any(topics)
-      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, topic, n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null]);
+      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, topic, govFilter(n)]);
 }
 
 // repeats: notice_id -> the other notice_ids of the same post (api/_dupes.js); a repeat of a post already sent is not sent again.
@@ -118,4 +123,4 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   return {place, checked_at: new Date().toISOString(), ms: Date.now() - t0, notices: r.notices.length, active, ended, pushed, agenda, errors: r.errors, sources_ok: r.ok};
 }
 
-module.exports = {run, sourceKey, store, pushNew, claim};
+module.exports = {run, sourceKey, store, pushNew, claim, govFilter};
