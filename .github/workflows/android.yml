@@ -29,6 +29,19 @@ jobs:
         run: ./gradlew :kit:test :app:assembleDebug
       - name: Render every screen, light and dark
         run: ./gradlew :app:testDebugUnitTest --tests 'me.baycounty.app.ScreensTest' -Dscreens="$SCREENS" -Dfullres="$PWD/shots"
+      - name: Staff app (BayCounty.me Staff), debug APK and every screen, light and dark
+        run: |
+          ./gradlew :staff:assembleDebug
+          ./gradlew :staff:testDebugUnitTest -Dfullres="$PWD/staff-shots"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: staff-screens
+          path: android/staff-shots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: staff-apk-debug
+          path: android/staff/build/outputs/apk/debug/staff-debug.apk
       - uses: actions/upload-artifact@v4
         with:
           name: apk-debug

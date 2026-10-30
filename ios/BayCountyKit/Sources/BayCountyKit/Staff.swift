@@ -1,0 +1,326 @@
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+/// The staff app (BayCounty.me Staff): city and county staff, and the site owner, working in the government
+/// workspace (/staff on the site) from a phone. Everything goes through /api/gov (api/gov.js). The rules are the
+/// workspace's: staff post notices and send alerts for their own government; record data is read-only and can only
+/// be flagged; the site owner (a BayCounty.me admin) is owner of every workspace and also sees the all-governments view.
+public enum Staff {
+    /// Roles from strongest to weakest, as the server ranks them (api/_gov.js ROLES).
+    public static let rank: [String: Int] = ["viewer": 1, "auditor": 1, "publisher": 2, "alert_sender": 3, "owner": 4]
+    public static let roleLabel: [String: String] = ["owner": "Owner", "alert_sender": "Alert sender", "publisher": "Publisher", "viewer": "Viewer", "auditor": "Auditor"]
+    public static func can(_ role: String, _ need: String) -> Bool { (rank[role] ?? 0) >= (rank[need] ?? 9) }
+
+    /// Alert kinds in the order the form lists them (labels come from the server's `me` answer).
+    public static let alertOrder = ["evacuation", "shelter", "boil-water", "road", "safety", "general"]
+    public static let severities: [(key: String, label: String)] = [("extreme", "Extreme"), ("severe", "Severe"), ("moderate", "Moderate"), ("minor", "Minor"), ("info", "Information")]
+    public static let noticeOrder = ["meeting", "hearing", "bid", "utility", "road", "other"]
+    public static let hourChoices = [6, 12, 24, 48, 72, 168]
+    public static func hoursLabel(_ h: Int) -> String { h % 24 == 0 ? (h == 24 ? "1 day" : h == 168 ? "1 week" : "\(h / 24) days") : "\(h) hours" }
+
+    /// The workspace log's action names in words (same wording as site/staff.js).
+    public static let actions: [String: String] = [
+        "signed_in": "signed in", "notice_posted": "posted a notice", "notice_edited": "changed a notice", "notice_withdrawn": "withdrew a notice",
+        "event_posted": "posted an event", "event_edited": "changed an event", "event_withdrawn": "withdrew an event", "job_posted": "posted a job",
+        "job_edited": "changed a job", "job_withdrawn": "withdrew a job", "alert_sent": "sent an alert",
+        "alert_drafted": "saved a countywide alert for a second person to confirm", "alert_confirmed": "confirmed an alert",
+        "alert_ended": "ended an alert", "alert_cancelled": "cancelled an alert", "data_flagged": "flagged record data",
+        "flag_answered": "BayCounty.me answered a flag", "member_set": "changed access", "member_removed": "removed access",
+    ]
+
+    public static func decoder() -> JSONDecoder { let d = JSONDecoder(); d.keyDecodingStrategy = .convertFromSnakeCase; return d }
+
+    /// "Nov 1, 9:05 AM" in Bay County time, for server timestamps; plain dates ("2026-11-01") as "Nov 1, 2026".
+    public static func when(_ s: String?) -> String {
+        guard let s, !s.isEmpty else { return "" }
+        let f = DateFormatter(); f.locale = Locale(identifier: "en_US_POSIX"); f.timeZone = TimeZone(identifier: "America/Chicago")
+        if s.count == 10, let d = ISO8601DateFormatter.day.date(from: s) { f.timeZone = TimeZone(identifier: "UTC"); f.dateFormat = "MMM d, yyyy"; return f.string(from: d) }
+        guard let d = parse(s) else { return s }
+        f.dateFormat = "MMM d, h:mm a"
+        return f.string(from: d)
+    }
+    static func parse(_ s: String) -> Date? {
+        let a = ISO8601DateFormatter(); a.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let d = a.date(from: s) { return d }
+        a.formatOptions = [.withInternetDateTime]
+        return a.date(from: s)
+    }
+}
+
+extension ISO8601DateFormatter {
+    static let day: ISO8601DateFormatter = { let f = ISO8601DateFormatter(); f.formatOptions = [.withFullDate]; return f }()
+}
+
+public struct StaffWorkspace: Decodable, Hashable, Sendable, Identifiable {
+    public let id: String
+    public let name: String
+    public let countywide: Bool?
+    public let role: String
+    public var roleLabel: String { Staff.roleLabel[role] ?? role.capitalized }
+    public func can(_ need: String) -> Bool { Staff.can(role, need) }
+}
+
+/// GET ?action=me: who is signed in and what they can open.
+public struct StaffMe: Decodable, Sendable {
+    public let email: String
+    public let admin: Bool
+    public let workspaces: [StaffWorkspace]
+    public let alertKinds: [String: String]?
+    public let noticeKinds: [String: String]?
+    /// Only in the answer to a sign-in from the app.
+    public let token: String?
+    public static func decode(_ data: Data) throws -> StaffMe { try Staff.decoder().decode(StaffMe.self, from: data) }
+}
+
+public struct StaffActivity: Decodable, Hashable, Sendable, Identifiable {
+    public let email: String
+    public let action: String
+    public let detail: JSONValue?
+    public let at: String
+    public let govName: String?
+    public var id: String { email + action + at }
+    /// "clerk@example.gov posted a notice: Budget hearing".
+    public var sentence: String {
+        var s = "\(email) \(Staff.actions[action] ?? action.replacingOccurrences(of: "_", with: " "))"
+        if case .object(let o)? = detail, case .string(let t)? = o["title"], !t.isEmpty { s += ": " + t }
+        return s
+    }
+}
+
+/// GET ?action=home: one workspace's counts and latest activity.
+public struct StaffHome: Decodable, Sendable {
+    public struct Counts: Decodable, Sendable {
+        public let notices: Int
+        public let events: Int
+        public let jobs: Int
+        public let liveAlerts: Int
+        public let waitingAlerts: Int
+        public let openFlags: Int
+        public let members: Int
+    }
+    public let role: String
+    public let counts: Counts
+    public let activity: [StaffActivity]
+    public static func decode(_ data: Data) throws -> StaffHome { try Staff.decoder().decode(StaffHome.self, from: data) }
+}
+
+public struct StaffAlert: Decodable, Hashable, Sendable, Identifiable {
+    public let id: Int
+    public let kind: String
+    public let title: String
+    public let message: String
+    public let instruction: String?
+    public let severity: String?
+    public let countywide: Bool
+    public let status: String
+    public let createdBy: String
+    public let createdAt: String
+    public let confirmedBy: String?
+    public let sentAt: String?
+    public let endsAt: String?
+    public let live: Bool?
+    public let geometry: String?
+
+    public var isLive: Bool { live ?? (status == "sent") }
+    public var isWaiting: Bool { status == "pending" }
+    /// The status chip: Live, Waiting for a second person, Ended, Cancelled, Expired.
+    public var statusLabel: String {
+        if isWaiting { return "Needs a second person" }
+        if isLive { return "Live" }
+        switch status { case "ended": return "Ended"; case "cancelled": return "Cancelled"; case "sent": return "Expired"; default: return status.capitalized }
+    }
+    /// Who else can confirm a waiting alert: anyone with alert rights but the person who wrote it.
+    public func canConfirm(as email: String) -> Bool { isWaiting && createdBy.lowercased() != email.lowercased() }
+}
+
+public struct StaffAlerts: Decodable, Sendable {
+    public let countywide: Bool?
+    public let alerts: [StaffAlert]
+    public static func decode(_ data: Data) throws -> StaffAlerts { try Staff.decoder().decode(StaffAlerts.self, from: data) }
+}
+
+/// GET ?action=reach: how many phones and inboxes an alert would reach now.
+public struct StaffReach: Decodable, Sendable, Equatable {
+    public let topic: String?
+    public let phones: Int?
+    public let emails: Int?
+    public let note: String?
+    public init(topic: String?, phones: Int?, emails: Int?, note: String?) { self.topic = topic; self.phones = phones; self.emails = emails; self.note = note }
+    public var sentence: String {
+        if let note, topic == nil { return note }
+        func n(_ v: Int?, _ one: String, _ many: String) -> String { guard let v else { return "some " + many }; return "\(v.formatted()) " + (v == 1 ? one : many) }
+        return "Reaches \(n(phones, "phone", "phones")) and \(n(emails, "inbox", "inboxes")) now, plus the public alert timeline."
+    }
+}
+
+public struct StaffPost: Decodable, Hashable, Sendable, Identifiable {
+    public let id: Int
+    public let title: String
+    public let kind: String?
+    public let kindLabel: String?
+    public let published: String?
+    public let eventDate: String?
+    public let text: String?
+    public let pdfUrl: String?
+    public let geometry: String?
+    public let editable: Bool
+}
+
+public struct StaffPosts: Decodable, Sendable {
+    public let kind: String
+    public let posts: [StaffPost]
+    public let fromRecords: [StaffPost]
+    public static func decode(_ data: Data) throws -> StaffPosts { try Staff.decoder().decode(StaffPosts.self, from: data) }
+}
+
+public struct StaffFlag: Decodable, Hashable, Sendable, Identifiable {
+    public let id: Int
+    public let email: String
+    public let dataset: String
+    public let recordLabel: String?
+    public let field: String?
+    public let shownValue: String?
+    public let correctValue: String?
+    public let evidenceUrl: String?
+    public let note: String?
+    public let status: String
+    public let reply: String?
+    public let createdAt: String
+    public let govName: String?
+    public let workspaceId: String?
+    public var statusLabel: String { ["open": "Open", "fixed": "Fixed", "not_changed": "Not changed"][status] ?? status }
+    /// "Budget by year · General Fund · amount".
+    public var subject: String {
+        [StaffFlag.datasetLabel[dataset] ?? dataset, recordLabel, field].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
+    }
+    public static let datasetLabel: [String: String] = [
+        "budget-years": "Budget by year", "officeholder-terms": "Who held each seat", "people-directory": "Officials and staff",
+        "utility-rates": "Utility rates", "trash-pickup": "Trash and recycling pickup", "parks": "Parks", "development-projects": "Development projects",
+        "public-notices": "Public notices", "job-openings": "Job openings", "community-events": "Events", "other": "Other",
+    ]
+}
+
+public struct StaffFlags: Decodable, Sendable {
+    public let flags: [StaffFlag]
+    public static func decode(_ data: Data) throws -> StaffFlags { try Staff.decoder().decode(StaffFlags.self, from: data) }
+}
+
+/// GET ?action=overview (site owner only): every government at a glance.
+public struct StaffOverview: Decodable, Sendable {
+    public struct Totals: Decodable, Sendable {
+        public let workspaces: Int
+        public let members: Int
+        public let liveAlerts: Int
+        public let waitingAlerts: Int
+        public let openFlags: Int
+        public let notices: Int
+    }
+    public struct Row: Decodable, Hashable, Sendable, Identifiable {
+        public let id: String
+        public let name: String
+        public let countywide: Bool?
+        public let members: Int
+        public let lastActivity: String?
+        public let liveAlerts: Int
+        public let waitingAlerts: Int
+        public let openFlags: Int
+        public let notices: Int
+        /// What needs the owner first: waiting alerts, then open flags.
+        public var needsAttention: Bool { waitingAlerts > 0 || openFlags > 0 }
+    }
+    public let totals: Totals
+    public let workspaces: [Row]
+    public let activity: [StaffActivity]
+    public static func decode(_ data: Data) throws -> StaffOverview { try Staff.decoder().decode(StaffOverview.self, from: data) }
+}
+
+/// Made-up answers for screenshots and App Review (no real staff, no real alerts): `staff-demo.json`.
+public struct StaffDemo: Decodable, Sendable {
+    public let me: StaffMe
+    public let overview: StaffOverview
+    public let home: StaffHome
+    public let alerts: StaffAlerts
+    public let notices: StaffPosts
+    public let flags: StaffFlags
+    public static func decode(_ data: Data) throws -> StaffDemo { try Staff.decoder().decode(StaffDemo.self, from: data) }
+}
+
+/// Talks to /api/gov with the session token the staff app keeps in the Keychain.
+public final class StaffClient: @unchecked Sendable {
+    public enum StaffError: LocalizedError {
+        case server(String, Int)
+        case signedOut
+        public var errorDescription: String? {
+            switch self { case .server(let m, _): return m; case .signedOut: return "Your session ended. Sign in again." }
+        }
+    }
+    private let session: URLSession
+    private let base: URL
+    public var token: String?
+
+    public init(token: String?, session: URLSession = .shared, base: URL = BayCountyClient.site) {
+        self.token = token; self.session = session; self.base = base
+    }
+
+    public static func request(base: URL = BayCountyClient.site, action: String, query: [String: String] = [:], token: String?, body: [String: Any]?) -> URLRequest {
+        var c = URLComponents(url: base.appendingPathComponent("api/gov"), resolvingAgainstBaseURL: false)!
+        c.queryItems = [URLQueryItem(name: "action", value: action)] + query.sorted { $0.key < $1.key }.map { URLQueryItem(name: $0.key, value: $0.value) }
+        var r = URLRequest(url: c.url!, timeoutInterval: 30)
+        if let token { r.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization") }
+        if let body {
+            r.httpMethod = "POST"
+            r.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            r.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [.sortedKeys])
+        }
+        return r
+    }
+
+    private func call(_ action: String, query: [String: String] = [:], _ body: [String: Any]? = nil) async throws -> Data {
+        let (data, resp) = try await session.data(for: Self.request(base: base, action: action, query: query, token: token, body: body))
+        let code = (resp as? HTTPURLResponse)?.statusCode ?? 0
+        if code == 401 { throw StaffError.signedOut }
+        guard code == 200 else {
+            let msg = (try? JSONSerialization.jsonObject(with: data) as? [String: Any])?["error"] as? String
+            throw StaffError.server(msg ?? "Something went wrong. Try again.", code)
+        }
+        return data
+    }
+    private func message(_ d: Data) -> String { ((try? JSONSerialization.jsonObject(with: d) as? [String: Any])?["message"] as? String) ?? "Done." }
+
+    public func login(email: String) async throws -> String { message(try await call("login", ["email": email])) }
+    public func verify(email: String, code: String) async throws -> StaffMe {
+        let me = try StaffMe.decode(try await call("verify", ["email": email, "code": code, "client": "app"]))
+        token = me.token
+        return me
+    }
+    public func me() async throws -> StaffMe { try StaffMe.decode(try await call("me")) }
+    public func logout() async { _ = try? await call("logout", [:]); token = nil }
+
+    public func overview() async throws -> StaffOverview { try StaffOverview.decode(try await call("overview")) }
+    public func home(_ ws: String) async throws -> StaffHome { try StaffHome.decode(try await call("home", query: ["workspace": ws])) }
+    public func alerts(_ ws: String) async throws -> StaffAlerts { try StaffAlerts.decode(try await call("alerts", query: ["workspace": ws])) }
+    public func reach(_ ws: String, kind: String, countywide: Bool) async throws -> StaffReach {
+        try Staff.decoder().decode(StaffReach.self, from: try await call("reach", query: ["workspace": ws, "kind": kind] .merging(countywide ? ["countywide": "1"] : [:]) { a, _ in a }))
+    }
+    /// Sends (or, countywide, saves for a second person). Returns the server's message.
+    public func sendAlert(_ ws: String, kind: String, title: String, message msg: String, instruction: String, severity: String, countywide: Bool, hours: Int) async throws -> String {
+        message(try await call("alert", ["workspace": ws, "kind": kind, "title": title, "message": msg, "instruction": instruction, "severity": severity, "countywide": countywide, "hours": hours]))
+    }
+    public func confirmAlert(_ ws: String, id: Int) async throws { _ = try await call("alert-confirm", ["workspace": ws, "id": id]) }
+    public func endAlert(_ ws: String, id: Int) async throws { _ = try await call("alert-end", ["workspace": ws, "id": id]) }
+    public func notices(_ ws: String) async throws -> StaffPosts { try StaffPosts.decode(try await call("posts", query: ["workspace": ws, "kind": "notice"])) }
+    public func saveNotice(_ ws: String, id: Int?, kind: String, title: String, text: String, eventDate: String?) async throws {
+        // `kind` names the post kind for the server; the notice type travels as notice_kind.
+        var b: [String: Any] = ["workspace": ws, "kind": "notice", "notice_kind": kind, "title": title, "text": text]
+        if let id { b["id"] = id }
+        if let eventDate, !eventDate.isEmpty { b["event_date"] = eventDate }
+        _ = try await call("post", b)
+    }
+    public func withdrawNotice(_ ws: String, id: Int) async throws { _ = try await call("withdraw", ["workspace": ws, "kind": "notice", "id": id]) }
+    public func flags(_ ws: String) async throws -> StaffFlags { try StaffFlags.decode(try await call("flags", query: ["workspace": ws])) }
+    /// Site owner only: flags from every government.
+    public func reviewFlags(status: String = "open") async throws -> StaffFlags { try StaffFlags.decode(try await call("review-flags", query: ["status": status])) }
+    public func answerFlag(id: Int, status: String, reply: String) async throws { _ = try await call("review-flag", ["id": id, "status": status, "reply": reply]) }
+}

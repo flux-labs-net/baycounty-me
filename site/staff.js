@@ -248,7 +248,7 @@
     const kind = f.dataset.kind, btn = f.querySelector('button[type=submit]'); btn.disabled = true; f.querySelector('.err').textContent = '';
     const data = Object.fromEntries(new FormData(f));
     if (!data.id) delete data.id;
-    try { await api('post', {method: 'POST', body: {...data, kind}}); f.hidden = true; await loadPosts(kind); }
+    try { await api('post', {method: 'POST', body: {...data, ...(kind === 'notice' ? {notice_kind: data.kind} : {}), kind}}); f.hidden = true; await loadPosts(kind); }
     catch (err) { f.querySelector('.err').textContent = err.message; }
     btn.disabled = false;
   }));
