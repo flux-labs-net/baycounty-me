@@ -98,6 +98,22 @@ CSS = r"""
 .mh-checks label{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:.92rem;cursor:pointer}
 .mh-checks input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--navy);flex:none}
 .mh-checks small{display:block;color:var(--muted);font-size:.8rem}
+.mh-areas{border:0;padding:0;margin:0 0 16px}
+.mh-areas legend{font-weight:600;font-size:.92rem;padding:0;margin-bottom:4px}
+.mh-areas .mh-fine{margin:0 0 8px}
+.mh-chips{display:flex;flex-wrap:wrap;gap:8px}
+.mh-chips label{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:999px;font-size:.88rem;cursor:pointer;background:var(--surface)}
+.mh-chips label:has(input:checked){border-color:var(--navy);background:color-mix(in srgb,var(--navy) 10%,var(--surface));font-weight:600}
+.mh-chips input{width:16px;height:16px;margin:0;accent-color:var(--navy)}
+.mh-matrix-wrap{overflow-x:auto;margin:0 0 12px}
+.mh-matrix{width:100%;border-collapse:collapse;font-size:.92rem}
+.mh-matrix th,.mh-matrix td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.mh-matrix thead th{font-size:.76rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:600}
+.mh-matrix th:not(:first-child),.mh-matrix td:not(:first-child){width:72px;text-align:center}
+@media (max-width:520px){.mh-matrix th:not(:first-child),.mh-matrix td:not(:first-child){width:54px;padding:10px 4px}}
+.mh-matrix td small{display:block;color:var(--muted);font-size:.8rem;font-weight:400}
+.mh-matrix .urg{display:inline-block;margin-left:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--sev, #c0392b)}
+.mh-matrix input{width:20px;height:20px;accent-color:var(--navy)}
 .mh-apps{display:flex;gap:8px;flex-wrap:wrap}
 .mh-danger{border-top:1px solid var(--line);margin-top:6px;padding-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .mh-danger p{margin:0;color:var(--muted);font-size:.86rem}
@@ -203,8 +219,7 @@ def account_page(out_dir):
           <div class="mh-checks">
             <label><input type="checkbox" id="weekly"><span>Monday email about my home<small>Meetings, events and what’s new near you this week</small></span></label>
           </div>
-          <p class="mh-fine" style="margin:0 0 4px">Email me right away when one of these affects my home:</p>
-          <div class="mh-checks" id="alertEmail"></div>
+          <p class="mh-fine" style="margin:0">Emergency alert emails are set under Emergency alerts below.</p>
         </div>
         <div class="mh-card">
           <h2>{ico('grid', 'amber')}Show on My home</h2>
@@ -212,10 +227,18 @@ def account_page(out_dir):
         </div>
         <div class="mh-card">
           <h2>{ico('bell', 'salmon')}Phone notifications</h2>
-          <p>Sign in to the BayCounty.me app with the same email. Your phone then follows your home: evacuation orders for your zone, boil-water notices, weather warnings and agenda items near you.</p>
-          <div class="mh-checks" id="pushTopics"></div>
+          <p>Sign in to the BayCounty.me app with the same email. Your phones then get the alerts you pick below.</p>
           <p class="mh-fine" id="devices" style="margin:0"></p>
           <div class="mh-row" id="testRow" hidden><button class="mh-btn ghost sm" id="testPush" type="button">Send a test alert to my phones</button><p class="mh-msg" id="testMsg" role="status" aria-live="polite"></p></div>
+        </div>
+        <div class="mh-card mh-alerts" id="alerts" style="grid-column:1/-1">
+          <h2>{ico('megaphone', 'salmon')}Emergency alerts</h2>
+          <p>Bay County alerts from the National Weather Service, FEMA's emergency alert system, the county and the cities, checked every 5 minutes.</p>
+          <fieldset class="mh-areas"><legend>Areas</legend>
+            <p class="mh-fine" id="areaNote"></p>
+            <div class="mh-chips" id="alertAreas" data-share="off"></div></fieldset>
+          <div class="mh-matrix-wrap"><table class="mh-matrix" data-tt="off" data-share="off" data-stack="off"><thead><tr><th scope="col">Alert</th><th scope="col">Phone</th><th scope="col">Email</th></tr></thead><tbody id="alertTypes"></tbody></table></div>
+          <div class="mh-checks" style="margin-bottom:0"><label><input type="checkbox" id="quiet"><span>Quiet overnight<small>From 10 PM to 7 AM, standard alerts arrive on your phone without a sound. Evacuation orders, serious public safety alerts and extreme weather still sound.</small></span></label></div>
         </div>
         <div class="mh-card" style="grid-column:1/-1">
           <div class="mh-row" style="justify-content:space-between;align-items:center"><p class="mh-msg" id="setMsg" role="status" aria-live="polite"></p>

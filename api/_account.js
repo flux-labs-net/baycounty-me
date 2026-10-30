@@ -33,8 +33,9 @@ const SITE = 'https://baycounty.me';
 const COOKIE = 'bcm_user', FLAG = 'bcm_in';
 const SESSION_DAYS = {web: 60, ios: 365, android: 365};
 const CODE_MIN = 15, CODE_TRIES = 5;
-const PUSH_TOPICS = ['weather', 'evacuation', 'shelters', 'water', 'roads', 'agenda'];
-const ALERT_EMAIL = ['evacuation', 'water', 'weather', 'shelters', 'safety'];
+const EM = require('./_emergency');
+const PUSH_TOPICS = EM.ALERT_TYPES.filter(t => t.channels.includes('push')).map(t => t.key);
+const ALERT_EMAIL = EM.ALERT_TYPES.filter(t => t.channels.includes('email')).map(t => t.key);
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status, expose: true});
 const key = () => process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY;
 
@@ -76,12 +77,14 @@ function cleanPrefs(b, cur = {}) {
   if (b.alert_email !== undefined) out.alert_email = pickList(b.alert_email, ALERT_EMAIL);
   if (b.push_topics !== undefined) out.push_topics = pickList(b.push_topics, PUSH_TOPICS);
   if (b.topics !== undefined) out.topics = pickList(b.topics, N.ALL_TOPICS);
+  if (b.alert_areas !== undefined) { const a = pickList(b.alert_areas, Object.keys(EM.AREAS)); out.alert_areas = a.includes('all') ? ['all'] : a; }
+  if (b.quiet_hours !== undefined) out.quiet_hours = b.quiet_hours === true || b.quiet_hours === 'true' || b.quiet_hours === 1 || b.quiet_hours === '1' || b.quiet_hours === 'on';
   if (b.radius_mi !== undefined) { const r = Number(b.radius_mi); if (!N.RADII.includes(r)) throw bad('Pick one of the distances on the list.'); out.radius_mi = r; }
   return {...cur, ...out};
 }
 
 /* ---------- data ---------- */
-const PREF_COLS = ['weekly_email', 'alert_email', 'push_topics', 'radius_mi', 'topics'];
+const PREF_COLS = ['weekly_email', 'alert_email', 'push_topics', 'radius_mi', 'topics', 'alert_areas', 'quiet_hours'];
 const HOME_COLS = ['label', 'address', 'city', 'zip', 'parcel_id', 'lat', 'lon', 'gov_id', 'zone', 'updated_at'];
 async function session(req) {
   const auth = String(req.headers.authorization || '');
@@ -112,13 +115,17 @@ async function me(u) {
   const realtor = await q('select status from realtor.agents where email = $1', [u.email]).then(r => (r[0] ? r[0].status : null), () => null);
   return {user: {email: u.email, first_name: u.first_name, created_at: u.created_at, place_id: u.place_id}, realtor,
     home: home ? {...home, lat: +home.lat, lon: +home.lon} : null, prefs: prefs ? {...prefs, radius_mi: +prefs.radius_mi} : null, devices,
-    choices: {topics: N.TOPICS, radius_mi: N.RADII, push_topics: require('./_emergency').TOPICS, alert_email: Object.fromEntries(ALERT_EMAIL.map(k => [k, require('./_emergency').TOPICS[k]]))}};
+    choices: {topics: N.TOPICS, radius_mi: N.RADII, push_topics: Object.fromEntries(PUSH_TOPICS.map(k => [k, EM.TOPICS[k]])), alert_email: Object.fromEntries(ALERT_EMAIL.map(k => [k, EM.TOPICS[k]])),
+      alert_types: EM.ALERT_TYPES, areas: EM.AREAS}};
 }
-// Signed-in phones follow the account: its home point (rounded to about 100 m, as /api/push stores it), zone and choices.
+// Signed-in phones follow the account: its home point (rounded to about 100 m, as /api/push stores it), zone, choices,
+// quiet hours and the governments whose local notices it gets (govs: empty = every government; see E.reaches).
 async function syncDevices(userId) {
-  await q(`update push.devices d set topics = p.push_topics, radius_mi = p.radius_mi,
+  await q(`update push.devices d set topics = p.push_topics, radius_mi = p.radius_mi, quiet = p.quiet_hours,
       lat = round(h.lat::numeric, 3), lng = round(h.lon::numeric, 3), zone = h.zone,
-      govs = case when h.gov_id is null then '{}'::text[] else array['county', h.gov_id] end
+      govs = case when 'all' = any(p.alert_areas) then '{}'::text[]
+        when cardinality(p.alert_areas) = 0 and h.gov_id is null then '{}'::text[]
+        else array(select distinct g from unnest(array['county'] || p.alert_areas || coalesce(array[h.gov_id], '{}'::text[])) g where g is not null) end
     from account.prefs p left join account.homes h on h.user_id = p.user_id
     where d.user_id = $1 and p.user_id = $1`, [userId]);
 }
@@ -286,10 +293,10 @@ async function handler(req, res) {
     if (action === 'prefs') {
       const [cur] = await q(`select ${PREF_COLS.join(', ')} from account.prefs where user_id = $1`, [u.id]);
       const p = cleanPrefs(b, cur || {});
-      await q(`insert into account.prefs (user_id, weekly_email, alert_email, push_topics, radius_mi, topics, updated_at) values ($1, $2, $3, $4, $5, $6, now())
+      await q(`insert into account.prefs (user_id, weekly_email, alert_email, push_topics, radius_mi, topics, alert_areas, quiet_hours, updated_at) values ($1, $2, $3, $4, $5, $6, $7, $8, now())
           on conflict (user_id) do update set weekly_email = excluded.weekly_email, alert_email = excluded.alert_email, push_topics = excluded.push_topics,
-            radius_mi = excluded.radius_mi, topics = excluded.topics, updated_at = now()`,
-      [u.id, p.weekly_email ?? true, p.alert_email || [], p.push_topics || [], p.radius_mi || 1, p.topics || N.ALL_TOPICS]);
+            radius_mi = excluded.radius_mi, topics = excluded.topics, alert_areas = excluded.alert_areas, quiet_hours = excluded.quiet_hours, updated_at = now()`,
+      [u.id, p.weekly_email ?? true, p.alert_email || [], p.push_topics || [], p.radius_mi || 1, p.topics || N.ALL_TOPICS, p.alert_areas || [], !!p.quiet_hours]);
       await syncDevices(u.id);
       return res.status(200).json(await me(u));
     }
@@ -365,19 +372,21 @@ async function weeklyRun(req, {only = null, now = new Date(), dry = false, budge
   return out;
 }
 
-// An emergency notice was just pushed (api/_emergency_run.js): email the accounts whose home it reaches and who asked
-// for that topic by email. Same matching as the My home alerts list.
+// An emergency notice was just pushed (api/_emergency_run.js): email the accounts that asked for that topic by email
+// and whose areas or saved home it reaches (E.reaches). Accounts with no home get it when they follow its area.
 async function emailNotice(place, n, topic) {
-  if (!hasDb() || !ALERT_EMAIL.includes(topic)) return {sent: 0};
-  const rows = await q(`select u.id, u.email, h.address, h.zone, h.gov_id, h.label from account.users u join account.homes h on h.user_id = u.id join account.prefs p on p.user_id = u.id
-      where u.status = 'active' and h.place_id = $1 and p.alert_email && $2::text[]`, [place, require('./_emergency').topicsFor(topic)]);
+  if (!hasDb() || !ALERT_EMAIL.includes(topic)) return {sent: 0, people: 0};
+  const rows = await q(`select u.id, u.email, h.address, h.zone, h.gov_id, h.label, p.alert_areas from account.users u join account.prefs p on p.user_id = u.id
+      left join account.homes h on h.user_id = u.id
+      where u.status = 'active' and coalesce(h.place_id, u.place_id, 'fl-bay') = $1 and p.alert_email && $2::text[]`, [place, EM.topicsFor(topic)]);
   let sent = 0, people = 0;
   for (const r of rows) {
-    if (!N.assemble({notices: [{...n, status: 'active'}]}, {lat: 30.2, lon: -85.6, gov_id: r.gov_id, zone: r.zone}, {topics: []}).sections[0].items.length) continue;
+    const home = r.address ? {gov_id: r.gov_id, zone: r.zone} : null;
+    if (!EM.reaches({...n, status: 'active'}, {areas: r.alert_areas || [], home})) continue;
     const claimed = await q(`insert into account.sends (user_id, kind, dedupe_key) values ($1, 'alert', $2) on conflict do nothing returning id`, [r.id, n.notice_id]);
     if (!claimed.length) continue;
     people++;
-    const m = require('./_emails').homeAlertEmail({...n, topic}, {home: r, manage: manageUrl(r.id)});
+    const m = require('./_emails').homeAlertEmail({...n, topic}, {home: r.address ? r : null, manage: manageUrl(r.id)});
     const s = await resend('/emails', 'POST', {from: FROM, to: [r.email], subject: m.subject, html: m.html, text: m.text,
       headers: {'List-Unsubscribe': `<${manageUrl(r.id)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'}}, key()).catch(() => ({ok: false}));
     if (s.ok) sent++;

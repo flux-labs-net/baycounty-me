@@ -159,6 +159,10 @@ data class AccountMe(
         @SerialName("push_topics") val pushTopics: List<String> = emptyList(),
         @SerialName("radius_mi") val radiusMi: Double = 1.0,
         val topics: List<String> = emptyList(),
+        /** Areas whose local alerts reach this person ("all", "county" or a city id); empty = the home's area. */
+        @SerialName("alert_areas") val alertAreas: List<String> = emptyList(),
+        /** Overnight alerts without sound, except evacuations and the most severe warnings. */
+        @SerialName("quiet_hours") val quietHours: Boolean = false,
     )
     @Serializable
     data class Choices(
@@ -166,13 +170,18 @@ data class AccountMe(
         @SerialName("radius_mi") val radiusMi: List<Double> = emptyList(),
         @SerialName("push_topics") val pushTopics: Map<String, String> = emptyMap(),
         @SerialName("alert_email") val alertEmail: Map<String, String> = emptyMap(),
+        val areas: Map<String, String> = emptyMap(),
     )
 
     companion object {
         fun decode(json: String): AccountMe = BCJson.decodeFromString(serializer(), json)
         val topicOrder = listOf("meetings", "events", "projects", "notices", "food", "business")
-        val pushOrder = listOf("weather", "evacuation", "shelters", "water", "roads", "agenda")
-        val alertEmailOrder = listOf("evacuation", "water", "weather", "shelters")
+        val pushOrder = listOf("evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general", "agenda")
+        val alertEmailOrder = listOf("evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general")
+        val areaOrder = listOf("all", "county", "pc", "pcb", "lh", "cw", "sp", "parker", "mb")
+        /** "All of Bay County" is on its own: picking it clears the cities, picking a city clears it. */
+        fun pickArea(list: List<String>, k: String, on: Boolean): List<String> =
+            if (!on) list - k else if (k == "all") listOf("all") else list.filter { it != "all" && it != k } + k
         val radii = listOf(0.25, 0.5, 1.0, 2.0, 5.0)
         fun radiusLabel(r: Double): String = when (r) {
             0.25 -> "A quarter mile"; 0.5 -> "Half a mile"; 1.0 -> "1 mile"; else -> "${r.toInt()} miles"
@@ -237,6 +246,8 @@ class AccountClient(var token: String?, val platform: String = "android", privat
         putJsonArray("push_topics") { p.pushTopics.forEach { add(it) } }
         put("radius_mi", p.radiusMi)
         putJsonArray("topics") { p.topics.forEach { add(it) } }
+        putJsonArray("alert_areas") { p.alertAreas.forEach { add(it) } }
+        put("quiet_hours", p.quietHours)
     }))
     suspend fun saveFirstName(name: String): AccountMe = AccountMe.decode(call("profile", buildJsonObject { put("first_name", name) }))
     suspend fun linkDevice(pushToken: String, appVersion: String?) {

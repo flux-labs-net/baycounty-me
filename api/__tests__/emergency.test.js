@@ -203,3 +203,29 @@ test('the alert timeline sums reach per notice, filters by government and sorts 
   assert.deepEqual(F.buildTimeline(notices, reach, {gov: 'lh'}).items.map(i => i.notice_id), ['b', 'a'], 'Lynn Haven plus countywide');
   assert.deepEqual(F.buildTimeline(notices, reach, {kind: 'road'}).items.map(i => i.notice_id), ['c']);
 });
+
+test('alert areas: who a notice reaches', () => {
+  const lhBoil = {kind: 'boil-water', gov_id: 'lh', status: 'active'};
+  const evacA = {kind: 'evacuation', zones: 'A', status: 'active'};
+  const home = {gov_id: 'pc', zone: 'B'};
+  assert.equal(E.reaches(lhBoil, {home}), false, 'a Panama City home does not get Lynn Haven boil notices');
+  assert.equal(E.reaches(lhBoil, {areas: ['lh'], home}), true, 'unless it follows Lynn Haven');
+  assert.equal(E.reaches(lhBoil, {areas: ['all'], home}), true);
+  assert.equal(E.reaches(lhBoil, {}), true, 'no home and no areas: everything');
+  assert.equal(E.reaches({...lhBoil, gov_id: 'county'}, {areas: ['pcb']}), true, 'county notices always come');
+  assert.equal(E.reaches(evacA, {home}), false, 'zone B home, zone A order');
+  assert.equal(E.reaches(evacA, {home: {zone: 'A'}}), true);
+  assert.equal(E.reaches(evacA, {areas: ['pc']}), true, 'no home: every order');
+  assert.equal(E.reaches({kind: 'weather', status: 'active'}, {areas: ['mb'], home}), true);
+  assert.equal(E.pushTopic({kind: 'utility', status: 'active'}), 'outages');
+  assert.equal(E.pushTopic({kind: 'storm', status: 'active'}), 'general');
+  assert.ok(E.isUrgent({severity: 'moderate'}, 'evacuation'));
+  assert.ok(!E.isUrgent({severity: 'moderate'}, 'water'));
+  assert.ok(E.isUrgent({severity: 'severe'}, 'safety'));
+  assert.equal(E.quietNow(Date.parse('2026-10-30T04:00:00Z')), true, '11 PM Central');
+  assert.equal(E.quietNow(Date.parse('2026-10-30T17:00:00Z')), false, 'noon Central');
+  const quiet = JSON.parse(P.apnsPayload({title: 't', body: 'b', topic: 'water', notice_id: 'x', quiet: true}));
+  assert.equal(quiet.aps.sound, undefined);
+  assert.equal(quiet.aps['interruption-level'], 'passive');
+  assert.equal(JSON.parse(P.apnsPayload({title: 't', body: 'b', topic: 'water', notice_id: 'x'})).aps.sound, 'default');
+});

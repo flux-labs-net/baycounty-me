@@ -392,6 +392,16 @@ fun AccountSettingsScreen() {
                 }
             }
             item {
+                PageSection("Alert areas", "map", Tone.SALMON, "Boil-water notices, road closures and outages for the places you pick. Evacuation orders and weather warnings always reach you.") {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        AccountMe.areaOrder.filter { c.areas[it] != null }.forEach { k ->
+                            ToggleRow(c.areas.getValue(k), k in p.alertAreas) { on -> prefs = p.copy(alertAreas = AccountMe.pickArea(p.alertAreas, k, on)) }
+                        }
+                        ToggleRow("Quiet overnight (10 pm to 7 am, no sound except evacuations and severe warnings)", p.quietHours) { prefs = p.copy(quietHours = it) }
+                    }
+                }
+            }
+            item {
                 PageSection("Near my home", "mappin.and.ellipse", Tone.TEAL) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         FieldMenu("Distance", AccountMe.radiusLabel(p.radiusMi), AccountMe.radii.map { it to AccountMe.radiusLabel(it) }, Modifier.fillMaxWidth(), p.radiusMi) {
@@ -404,7 +414,7 @@ fun AccountSettingsScreen() {
                 }
             }
             item {
-                PageSection("Email", "envelope", Tone.AMBER, "Emergency emails go out only when a notice reaches your home.") {
+                PageSection("Email", "envelope", Tone.AMBER, "Emergency emails go out when a notice reaches your home or an area you picked.") {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         ToggleRow("Monday email: your week near home", p.weeklyEmail) { prefs = p.copy(weeklyEmail = it) }
                         AccountMe.alertEmailOrder.filter { c.alertEmail[it] != null }.forEach { k ->

@@ -380,6 +380,14 @@ struct AccountSettingsView: View {
                             ? "For your home and the distance below. These follow your account on every phone you're signed in on."
                             : "Evacuation orders, weather warnings, boil-water notices and agenda items near your home."))
                     }
+                    Section {
+                        ForEach(AccountMe.areaOrder.filter { c.areas?[$0] != nil }, id: \.self) { k in
+                            Toggle(c.areas![k]!, isOn: area(p.alertAreas, k))
+                        }
+                        Toggle("Quiet overnight", isOn: Binding(get: { p.quietHours.wrappedValue ?? false }, set: { p.quietHours.wrappedValue = $0 }))
+                    } header: { Text("Alert areas") } footer: {
+                        Text("Boil-water notices, road closures and outages for the places you pick. Evacuation orders and weather warnings always reach you. Quiet overnight sends alerts from 10 pm to 7 am without sound, except evacuations and the most severe warnings.")
+                    }
                     Section("Near my home") {
                         Picker("Distance", selection: p.radiusMi) {
                             ForEach(AccountMe.radii, id: \.self) { Text(AccountMe.radiusLabel($0)).tag($0) }
@@ -393,7 +401,7 @@ struct AccountSettingsView: View {
                         ForEach(AccountMe.alertEmailOrder.filter { c.alertEmail[$0] != nil }, id: \.self) { k in
                             Toggle(c.alertEmail[k]!, isOn: member(p.alertEmail, k))
                         }
-                    } header: { Text("Email") } footer: { Text("Emergency emails go out only when a notice reaches your home.") }
+                    } header: { Text("Email") } footer: { Text("Emergency emails go out when a notice reaches your home or an area you picked.") }
                 }
                 Section {
                     Button("Sign out") { Task { await account.signOut(); dismiss() } }
@@ -411,6 +419,16 @@ struct AccountSettingsView: View {
             } message: { Text("Your email, home and choices are removed. This can't be undone.") }
             .onAppear { prefs = account.me?.prefs; name = account.me?.user.firstName ?? "" }
         }
+    }
+
+    /// "All of Bay County" is on its own: picking it clears the cities, picking a city clears it.
+    private func area(_ list: Binding<[String]?>, _ k: String) -> Binding<Bool> {
+        Binding(get: { (list.wrappedValue ?? []).contains(k) },
+                set: { on in
+                    var a = list.wrappedValue ?? []
+                    if on { a = k == "all" ? ["all"] : a.filter { $0 != "all" } + [k] } else { a.removeAll { $0 == k } }
+                    list.wrappedValue = a
+                })
     }
 
     private func member(_ list: Binding<[String]>, _ k: String) -> Binding<Bool> {
