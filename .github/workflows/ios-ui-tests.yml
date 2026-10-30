@@ -20,6 +20,8 @@ jobs:
           if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
           else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
       - run: brew install xcodegen
+      - name: Make sure Xcode has the watchOS platform (the iPhone app carries the watch app)
+        run: ios/scripts/ensure_watchos.sh
       - name: Run the UI tests
         working-directory: ios
         run: |

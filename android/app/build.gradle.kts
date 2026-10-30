@@ -74,6 +74,8 @@ dependencies {
     implementation("androidx.browser:browser:1.8.0")
     implementation("org.osmdroid:osmdroid-android:6.1.20")
     implementation("com.google.firebase:firebase-messaging:24.1.0")
+    // Sends the saved home's map point to the Wear OS app (WatchSync).
+    implementation("com.google.android.gms:play-services-wearable:19.0.0")
     testImplementation("junit:junit:4.13.2")
 }
 

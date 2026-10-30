@@ -10,5 +10,7 @@ class BayCountyApp : Application() {
         super.onCreate()
         Push.setUp(this)
         Account.load(this)
+        // The watch app gets the saved home on every launch, in case it was installed after the home was saved.
+        WatchSync.send(this, store.home)
     }
 }
