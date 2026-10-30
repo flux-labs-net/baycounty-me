@@ -208,7 +208,8 @@ def _now_strip(today=None):
       if (e0) q('[data-el-early]').textContent = t < e0 ? `Early voting runs ${{e0.toLocaleDateString('en-US', {{month: 'long', day: 'numeric'}})}} to ${{e1.toLocaleDateString('en-US', {{month: 'long', day: 'numeric'}})}}, 10 a.m. to 6 p.m., at any early voting site.`
         : t <= e1 ? `Early voting is open through ${{md(e1)}}, 10 a.m. to 6 p.m., at any early voting site.` : 'Early voting is over. On Election Day, vote at your own precinct.';
       if (n < 0) {{ el.classList.add('done'); q('[data-el-early]').textContent = 'Polls have closed. Unofficial results come in on election night; the official count follows about ten days later.'; q('[data-el-polls]').hidden = true; q('.el-when span').textContent = `Election Day was ${{md(ed)}}`; }}
-    }})();</script>'''
+    }})();</script>
+    <script>document.addEventListener('DOMContentLoaded', () => {{ if (window.BCUseHome) BCUseHome(document.getElementById('elAddr'), null, document.querySelector('.el-find-row')); }}); /* signed in: the box starts on the saved home */</script>'''
 
 
 def elections_page():

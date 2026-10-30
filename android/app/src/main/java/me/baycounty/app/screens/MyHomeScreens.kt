@@ -264,7 +264,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.feedContent(f: Nearby
                     RouteRow(Route.Gov(g.govId), g.name, symbol = "building.columns")
                     RowDivider(50.dp)
                 }
-                RouteRow(Route.MyAddress, "Full address report", "Taxes, flood zone, schools and who represents you", "doc.text.magnifyingglass")
+                RouteRow(Account.me?.home?.addressMatch?.let { Route.Address(it) } ?: Route.MyAddress, "Full address report", "Taxes, flood zone, schools and who represents you", "doc.text.magnifyingglass")
                 // Same account as the realtor console: agents get a way in from here, like the site's My home.
                 if (Account.me?.realtor == "active") {
                     RowDivider(50.dp)

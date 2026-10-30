@@ -209,6 +209,32 @@ MENU_JS = '''(() => {
     if (h.lat != null && h.lon != null) { p.set('lat', (+h.lat).toFixed(6)); p.set('lon', (+h.lon).toFixed(6)); }
     return '/my-address/#' + p;
   };
+  // The signed-in person's saved home ({address, city, zip, lat, lon, zone, ...}), or null when signed out or none is
+  // saved. Fetched once per page. Every address lookup (trash day, evacuation zone, schools, ballot, the address
+  // report) starts from it instead of asking for an address.
+  let homeP = null;
+  window.BCHome = () => homeP || (homeP = !/(?:^|; )bcm_in=1/.test(document.cookie) ? Promise.resolve(null)
+    : fetch('/api/account?action=me', {credentials: 'same-origin'}).then(r => r.ok ? r.json() : null)
+      .then(m => (m && m.home && m.home.address ? m.home : null), () => null));
+  // A saved home's street and unit as people type them ("825 Ohio Ave #2"), without the ZIP.
+  window.BCHomeStreet = h => String(h.address || '').replace(/\\s+\\d{5}(-\\d{4})?$/, '').trim().toLowerCase()
+    .replace(/\\b([a-z])/g, c => c.toUpperCase()).replace(/\\b(Ne|Nw|Se|Sw|Us|Cr|Sr)\\b/g, c => c.toUpperCase());
+  // Fill an address box with the saved home and run the page's lookup with it (run(home)). Does nothing when signed
+  // out, with no saved home, or once the person has typed in the box. A short line after `after` (default: the box)
+  // says it's their home; typing another address looks that one up instead, and the saved home stays as it is.
+  window.BCUseHome = async (input, run, after) => {
+    const h = input ? await window.BCHome() : null;
+    if (!h || input.value.trim()) return null;
+    input.value = window.BCHomeStreet(h);
+    const es = document.documentElement.lang.startsWith('es'), p = document.createElement('p');
+    p.className = 'bc-home-note';
+    p.innerHTML = es ? 'Esta es su casa guardada. Escriba otra dirección para buscar otro lugar, o <a href="/account">cambie su casa</a>.'
+      : 'This is your saved home. Type another address to look somewhere else, or <a href="/account">change your home</a>.';
+    (after || input).insertAdjacentElement('afterend', p);
+    input.addEventListener('input', () => { p.hidden = true; }, {once: true});
+    if (run) run(h);
+    return h;
+  };
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';

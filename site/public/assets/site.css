@@ -488,6 +488,7 @@ label[hidden],.vf[hidden],.sc-f[hidden]{display:none!important}
 .h-addr button:hover{background:color-mix(in srgb,var(--navy) 85%,var(--ink))}
 .h-addr-note{margin:-6px 0 0;font-size:.86rem;color:var(--muted);max-width:60ch}
 /* Signed in with a saved home (home.js): the home replaces the address box. */
+.bc-home-note{margin:6px 0 0;font-size:.86rem;color:var(--muted)}.bc-home-note[hidden]{display:none}.bc-home-note a{color:var(--blue)}
 .h-mine{display:flex;flex-direction:column;gap:10px;max-width:620px}
 .h-mine[hidden],.h-addr[hidden],.h-addr-note[hidden],.h-mine-more button[hidden]{display:none}
 .h-mine-main{display:flex;align-items:center;gap:14px;padding:12px 12px 12px 14px;border:2px solid var(--blue);border-radius:16px;background:var(--surface);color:var(--ink);text-decoration:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--blue) 10%,transparent)}

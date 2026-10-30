@@ -259,7 +259,8 @@ private struct FeedContent: View {
                     if i < feed.governments.count - 1 { RowDivider(inset: 50) }
                 }
                 RowDivider(inset: 50)
-                RouteRow(route: .myAddress, title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
+                RouteRow(route: AccountManager.shared.me?.home.map { .address($0.addressMatch) } ?? store.home.map { .address($0) } ?? .myAddress,
+                         title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
                 // Same account as the realtor console: agents get a way in from here, like the site's My home.
                 if AccountManager.shared.me?.realtor == "active" {
                     RowDivider(inset: 50)

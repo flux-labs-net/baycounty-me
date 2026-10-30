@@ -139,6 +139,11 @@ fun MyAddressScreen() {
     }
 
     Screen("My Address", spacing = 18) {
+        // The saved home (the account's, when signed in) comes first; the search is for any other address.
+        val home = store.home
+        if (home != null && query.isEmpty() && results.isEmpty()) item {
+            FormSection("Your home") { CardList { RouteRow(Route.Address(home), home.display, "Tax estimate, representatives, schools, flood zone", symbol = "house.fill") } }
+        }
         item { FilterField(query, "e.g. 825 Ohio Ave") { query = it } }
         item {
             FormSection(null, "Lookups go straight to Bay County's public map server. BayCounty.me doesn't store what you search, and your location is only used once, to find the nearest address.") {
@@ -174,10 +179,6 @@ fun MyAddressScreen() {
                     }
                 }
             }
-        }
-        val home = store.home
-        if (home != null && query.isEmpty() && results.isEmpty()) item {
-            FormSection("Saved") { CardList { RouteRow(Route.Address(home), home.display, symbol = "house.fill") } }
         }
     }
 }

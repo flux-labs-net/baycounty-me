@@ -325,12 +325,12 @@
       <p>${esc(r.what_to_do)}</p>${orders ? `<p><b>Orders in effect now</b></p><ul>${orders}</ul>` : '<p class="muted">No evacuation order is in effect right now.</p>'}
       ${sh ? `<p><b>Nearest county shelters</b> (open only when the county opens them)</p><ul>${sh}</ul>` : ''}`;
   }
-  async function lookup(params) {
+  async function lookup(params, keep) {
     out.innerHTML = '<p class="muted">Looking up…</p>';
     try {
       const r = await fetch('/api/v1/evacuation-zone?' + new URLSearchParams(params)).then(x => x.json());
       out.innerHTML = r.error ? `<p>${esc(r.error)}</p>` : zoneHtml(r);
-      if (params.address) { try { localStorage.setItem('bc.emAddr', params.address); } catch (e) {} const u = new URL(location.href); u.searchParams.set('a', params.address); history.replaceState(null, '', u); }
+      if (params.address && !keep) { try { localStorage.setItem('bc.emAddr', params.address); } catch (e) {} const u = new URL(location.href); u.searchParams.set('a', params.address); history.replaceState(null, '', u); }
     } catch (e) { out.innerHTML = "<p>Couldn't look that up. Try again, or use the county's map below.</p>"; }
   }
   $('emZoneForm').addEventListener('submit', ev => { ev.preventDefault(); const a = $('emAddr').value.trim(); if (a) lookup({address: a}); });
@@ -339,9 +339,13 @@
     out.innerHTML = '<p class="muted">Finding you…</p>';
     navigator.geolocation.getCurrentPosition(p => lookup({lat: p.coords.latitude.toFixed(5), lng: p.coords.longitude.toFixed(5)}), () => { out.innerHTML = '<p>Location was not shared. Type your address instead.</p>'; }, {timeout: 10000});
   });
-  let start = new URLSearchParams(location.search).get('a');
-  if (!start) { try { start = localStorage.getItem('bc.emAddr'); } catch (e) {} }
-  if (start) { $('emAddr').value = start; lookup({address: start}); }
+  // A link with ?a= first, then the signed-in person's saved home, then the last address looked up on this browser.
+  const lastAddr = () => { try { return localStorage.getItem('bc.emAddr'); } catch (e) { return null; } };
+  const startAt = a => { $('emAddr').value = a; lookup({address: a}); };
+  const start = new URLSearchParams(location.search).get('a');
+  if (start) startAt(start);
+  else new Promise(r => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', r, {once: true}) : r()).then(() => window.BCUseHome ? BCUseHome($('emAddr'), h => lookup({address: $('emAddr').value}, true), $('emZoneForm')) : null)  // site.js (deferred) has run
+    .then(h => { if (!h && !$('emAddr').value.trim()) { const a = lastAddr(); if (a) startAt(a); } });
   // ---- alert timeline (live from /api/v1/emergency-timeline)
   const TL = $('emTl');
   if (TL) {
