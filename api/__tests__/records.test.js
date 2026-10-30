@@ -224,6 +224,15 @@ test('email intake log: one locked row per email with its timestamps, files and 
   const html = IR.toHtml(rep);
   assert.match(html, /Audit trail checked/);
   assert.ok(!html.includes('Free money'), 'nothing from a dropped email');
+  // The public mail viewer shows the accepted email with its file fingerprint; the dropped one never appears.
+  const M = require('../_mail');
+  const l = await M.list(q, {folder: 'sent_in'});
+  assert.deepEqual(l.threads.map(t => t.subject), ['September checks']);
+  const t = await M.thread(q, l.threads[0].id);
+  assert.equal(t.items[0].from.address, 'finance@cityofparker.com');
+  assert.equal(t.items[0].attachments[0].sha256, 'cd'.repeat(32));
+  assert.equal(t.items[0].text, 'Attached.');
+  await assert.rejects(M.thread(q, 'e' + r2.id), /Unknown/);
 });
 
 test('roles: viewers see the tab but cannot send; the records role can', opts, async () => {

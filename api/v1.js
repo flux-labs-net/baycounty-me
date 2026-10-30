@@ -12,6 +12,8 @@
 //   GET /api/v1/changes?since=&dataset= records added to the database since a time
 //   GET /api/v1/meetings.ics?gov=       calendar of upcoming meetings (one government or all)
 //   GET /api/v1/correspondence?year=    published emails with officials (year=all for every year)
+//   GET /api/v1/mail?folder=&government=&q=&page=   every email with officials and governments, newest first (the /correspondence viewer)
+//   GET /api/v1/mail/{id}               one conversation start to finish (c123 letter or request, e45 records sent in, m67 other mail)
 //   GET /api/v1/pages[?path=]           which datasets and endpoints hold each site page's data
 //   GET /api/v1/entities?q=&kind=       find a company, official, candidate, nonprofit, board member or business
 //   GET /api/v1/entities/{id}           one entity's profile and every documented connection (api/_entities.js)
@@ -170,6 +172,13 @@ function openapi(catalog) {
         description: 'Each conversation is one letter sent to one or more officials, with every published reply. Unpublished threads are never returned. Defaults to the latest year that has letters.',
         parameters: [p('year', 'A year such as 2026, or all for every year. Default: the latest year with letters'), p('government', 'Only letters to this government, as shown in the governments list of the response')],
         responses: {200: {description: '{year, years, governments, total, conversations: [{subject, sent_at, governments, replies, threads: [{official, seat, government, status, messages: [{direction, text, at}]}]}]}'}}}},
+      '/mail': {get: {operationId: 'mail', summary: 'Every email between BayCounty.me and officials or governments (read-only)',
+        description: 'Letters to officials, public records requests, records governments emailed in (with what happened to each file) and other mail from government addresses. Residents\' email addresses, phone numbers and street addresses are hidden; officials and staff are named. Sign-in codes and links are never included. Newest first, 50 per page.',
+        parameters: [p('folder', 'letters, requests, sent_in or other. Default: all'), p('government', 'One government, as listed in governments'), p('q', 'Words in the subject, names or text'), p('page', 'Page number', {type: 'integer'})],
+        responses: {200: {description: '{folders: [{id, label, count}], total, governments, matched, page, pages, threads: [{id, folder, subject, government, with, started_at, last_at, messages, replies, files, status, hidden_reason, snippet}]}'}}}},
+      '/mail/{id}': {get: {operationId: 'mailThread', summary: 'One email conversation, start to finish',
+        parameters: [{name: 'id', in: 'path', required: true, description: 'Conversation id from /mail, e.g. c12, e3 or m40', schema: {type: 'string'}}],
+        responses: {200: {description: '{id, folder, subject, government, status, participants, items: [{type: message, id, direction, from, to, at, subject, text, quoted, attachments: [{name, size, sha256}], delivery, message_id} | {type: event, at, text, file, hash}], newer, older}'}, 404: {description: 'Unknown conversation'}}}},
       '/pages': {get: {operationId: 'pages', summary: 'Which datasets and endpoints hold the data behind each page on BayCounty.me',
         parameters: [p('page', 'One page path, e.g. /connections. Omit for every page')],
         responses: {200: {description: '{data: [{page, url, datasets: [{id, api}], endpoints, none, note}]}'}, 404: {description: 'Unknown page'}}}},
@@ -465,6 +474,16 @@ module.exports = async (req, res) => {
     if (parts[0] === 'evacuation-zone') {
       res.locals.lastModified = null;
       const r = await require('./_emergency_feed').zoneLookup(req, catalog, req.query, {place: 'fl-bay'});
+      return res.status(200).json(r);
+    }
+    if (parts[0] === 'mail') {
+      // Every email between BayCounty.me and officials or governments, read-only, residents' details hidden (api/_mail.js).
+      res.locals.lastModified = null;
+      const M = require('./_mail');
+      if (parts[1]) return res.status(200).json(await M.thread(require('./_db').q, String(parts[1]).slice(0, 20)));
+      const r = await M.list(require('./_db').q, {folder: String(req.query.folder || '').slice(0, 20), government: String(req.query.government || '').slice(0, 120),
+        q: String(req.query.q || '').slice(0, 100), page: req.query.page});
+      info.rows = r.threads.length;
       return res.status(200).json(r);
     }
     if (parts[0] === 'correspondence') {

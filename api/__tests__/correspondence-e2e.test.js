@@ -35,6 +35,7 @@ test.before(async () => {
   await q('drop schema if exists corr cascade');
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0020_correspondence.sql'), 'utf8'));
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0046_records_requests.sql'), 'utf8'));
+  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0094_public_mail.sql'), 'utf8'));
   await q(`insert into corr.contacts (government, seat, name, email, origin) values
     ('City of Lynn Haven', 'Mayor', 'Pat Mayor', 'mayor@lh.test', 'manual'),
     ('City of Lynn Haven', 'Commissioner Seat 1', 'Chris One (vice mayor)', 'one@lh.test', 'manual'),
@@ -63,7 +64,7 @@ test('a send goes to each official separately, never cc or bcc, and skips seats 
   assert.match(sent.find(s => s.to[0] === 'one@lh.test').text, /^Dear Chris One,/);
   const threads = await q('select * from corr.threads order by id');
   assert.equal(threads.length, 2);
-  assert.ok(threads.every(t => t.batch_id === out.batch_id && !t.published && t.status === 'awaiting'));
+  assert.ok(threads.every(t => t.batch_id === out.batch_id && t.published && t.status === 'awaiting'));
 });
 
 test('a test send goes only to the admin and stores nothing', opts, async () => {
@@ -109,16 +110,17 @@ test('a follow-up threads under the earlier messages', opts, async () => {
   assert.match(s.headers['Message-ID'], new RegExp(`bcm-${one.token.toLowerCase()}-2@`));
 });
 
-test('the public feed shows only published threads, without email addresses', opts, async () => {
-  assert.equal((await C.publicFeed({})).conversations.length, 0);
-  const [mayor] = await q(`select * from corr.threads where email = 'mayor@lh.test'`);
-  await C.publish({id: mayor.id, published: true}, 'jeremy@fluxlabs.net');
-  let f = await C.publicFeed({});
+test('the public feed shows every conversation (public by default), without email addresses', opts, async () => {
+  let f = await C.publicFeed({year: 'all'});
   assert.equal(f.conversations.length, 1);
-  assert.equal(f.conversations[0].threads.length, 1);
-  assert.equal(f.conversations[0].replies, 1);
+  assert.equal(f.conversations[0].threads.length, 2);
+  assert.equal(f.conversations[0].replies, 2);
   assert.ok(!JSON.stringify(f).includes('@lh.test'));
   assert.ok(!JSON.stringify(f).includes('On Thu, Oct 22'), 'quoted history is trimmed');
+  const [mayor] = await q(`select * from corr.threads where email = 'mayor@lh.test'`);
+  await C.publish({id: mayor.id, published: false, reason: 'Testing a take-down'}, 'jeremy@fluxlabs.net');
+  f = await C.publicFeed({year: 'all'});
+  assert.equal(f.conversations[0].threads.length, 1, 'a conversation taken down leaves the feed');
   await C.publish({batch: mayor.batch_id, published: true}, 'jeremy@fluxlabs.net');
   f = await C.publicFeed({year: 'all'});
   assert.equal(f.conversations[0].threads.length, 2);
@@ -171,4 +173,44 @@ test('records request drafts seed from the file, keep edits, and send only on re
   const again = await R.send({id: pcb.id}, 'jeremy@fluxlabs.net').catch(e => e);
   assert.equal(again.message, 'This request was already sent.');
   assert.equal(R.greetName('Public Records, City Clerk’s Office'), 'Records Custodian');
+});
+
+// Public mail viewer (migration 0094, api/_mail.js): every conversation with officials is public, read-only, start to
+// finish; residents' addresses, phones and street addresses are hidden; taking one down needs a reason.
+test('public mail: every conversation is public by default, residents hidden, take-down needs a reason', opts, async () => {
+  const M = require('../_mail');
+  const all = await q('select count(*) filter (where published)::int pub, count(*)::int n from corr.threads');
+  assert.equal(all[0].pub, all[0].n, 'migration 0094 makes every conversation public');
+  const [mayor] = await q(`select * from corr.threads where email = 'mayor@lh.test'`);
+  // A resident's details inside an official's reply, and mail from a city address that matched nothing.
+  await q(`insert into corr.messages (thread_id, direction, from_addr, to_addr, subject, body_text, message_id, status, at)
+    values ($1, 'in', 'mayor@lh.test', 'hello@baycounty.me', 'RE: Bank reconciliations', 'Ms. Dana Reyes at 1204 Magnolia Ave asked too; reach her at dana.r@gmail.com or 850-555-0142. Our clerk is clerk@lh.test.', '<r9@lh.test>', 'received', now())`, [mayor.id]);
+  await q(`insert into corr.contacts (government, seat, name, email, origin) values ('City of Lynn Haven', 'City Clerk', 'Lee Clerk', 'clerk@lh.test', 'manual') on conflict do nothing`);
+  await q(`insert into corr.messages (thread_id, direction, from_addr, to_addr, subject, body_text, status) values (null, 'in', 'Lee Clerk <clerk@lh.test>', 'hello@baycounty.me', 'Agenda posted', 'The agenda is up.', 'received'),
+    (null, 'in', 'someone@example.com', 'hello@baycounty.me', 'Hello', 'Hi', 'received')`);
+  await C.redactSet({thread_key: 'c' + mayor.id, phrase: 'Dana Reyes'}, 'jeremy@fluxlabs.net');
+  const l = await M.list(q, {});
+  assert.ok(l.threads.length >= 3);
+  assert.equal(l.folders.find(f => f.id === 'other').count, 1, 'only government mail that matched nothing is shown, not strangers');
+  assert.ok(!JSON.stringify(l).includes('example.com'));
+  const t = await M.thread(q, 'c' + mayor.id);
+  assert.equal(t.items[0].from.name, 'BayCounty.me');
+  assert.equal(t.items[0].type, 'message');
+  const last = t.items[t.items.length - 1];
+  assert.match(last.text, /\[name hidden\] at \[address hidden\]/);
+  assert.match(last.text, /\[email hidden\] or \[phone hidden\]/);
+  assert.match(last.text, /clerk@lh\.test/, 'government addresses stay');
+  assert.ok(!JSON.stringify(t).includes('mayor@lh.test'), 'officials are shown by name and seat, not address');
+  assert.ok('newer' in t && 'older' in t);
+  // Taking a conversation down needs a reason; it stays listed with the reason and no messages.
+  await assert.rejects(C.publish({id: mayor.id, published: false}, 'jeremy@fluxlabs.net'), /Say why/);
+  await C.publish({id: mayor.id, published: false, reason: 'Contains a resident’s medical information'}, 'jeremy@fluxlabs.net');
+  const down = await M.thread(q, 'c' + mayor.id);
+  assert.equal(down.items.length, 0);
+  assert.equal(down.hidden_reason, 'Contains a resident’s medical information');
+  assert.ok((await M.list(q, {})).threads.some(x => x.id === 'c' + mayor.id && x.hidden_reason));
+  await C.publish({id: mayor.id, published: true}, 'jeremy@fluxlabs.net');
+  await assert.rejects(M.thread(q, 'x1'), /Unknown/);
+  const [stranger] = await q(`select id from corr.messages where from_addr = 'someone@example.com'`);
+  await assert.rejects(M.thread(q, 'm' + stranger.id), /Unknown/, 'mail from outside a government is never shown');
 });

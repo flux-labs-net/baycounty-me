@@ -67,11 +67,16 @@ async function mayReply(d: any, sender: string) {
   return data !== true;
 }
 
-async function notifyNotAuthorized(sender: string, source: any) {
+function noticeText(source: any) {
   const list = (source.authorized ?? []) as string[];
   const who = list.length ? list.map((a) => `  • ${a}`).join("\n") : "  (no one yet)";
   const text = `We didn't accept the email you sent to ${source.to}.\n\nOnly these addresses can send records for ${source.entity_name}:\n${who}\n\n` +
     `To be added, ask an owner of ${source.entity_name}'s BayCounty.me workspace. Nothing from your email was opened or kept.\n\nBayCounty.me`;
+  return text;
+}
+
+async function notifyNotAuthorized(sender: string, source: any) {
+  const text = noticeText(source);
   await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
@@ -166,7 +171,7 @@ Deno.serve(async (req) => {
     const reason = source.status === "same_domain" ? "not on the allowed list (government domain)" : "outside sender";
     await audit("intake_refused", ws, { reason });
     await finish({ decision: source.status === "same_domain" ? "refused" : "dropped", reason, intake_address: source.to, source_id: source.source_id,
-      workspace_id: ws, notice_sent: noticed });
+      workspace_id: ws, notice_sent: noticed, notice_text: noticed ? noticeText(source) : null });
     return json({ dropped: "sender not allowed" });
   }
 

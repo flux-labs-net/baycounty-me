@@ -27,7 +27,7 @@ const PAGES = {
   '/open-data': {endpoints: ['/datasets', '/status']},
   '/developers': {endpoints: ['/openapi.json'], none: 'API documentation'},
   '/records-request': {none: 'a form that writes a records request'},
-  '/correspondence': {endpoints: ['/correspondence']},
+  '/correspondence': {endpoints: ['/mail', '/mail/{id}', '/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts', 'shared-owner-vendors']},
   '/events': {datasets: ['community-events'], endpoints: ['/government-posts']},
   '/beaches': {datasets: ['beach-conditions', 'beach-water-sites', 'beach-water-samples', 'beach-access', 'beach-parking']},

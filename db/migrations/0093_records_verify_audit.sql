@@ -269,6 +269,7 @@ create table if not exists gov.intake_emails (
   reason text,
   auth_results text,
   notice_sent boolean not null default false,
+  notice_text text,                                 -- the "who may send" reply we sent, word for word
   attachments jsonb not null default '[]',          -- [{name, size, content_type, sha256, raw_id, duplicate, error, stored_at}]
   payload_sha256 text not null                      -- SHA-256 of the signed webhook body exactly as received
 );
@@ -329,7 +330,7 @@ returns void language sql security definer set search_path = '' as $$
     source_id = (p->>'source_id')::uuid, workspace_id = p->>'workspace_id',
     subject = case when p->>'decision' = 'accepted' then left(p->>'subject', 300) end,
     body_text = case when p->>'decision' = 'accepted' then left(p->>'body_text', 50000) end,
-    auth_results = left(p->>'auth_results', 2000), notice_sent = coalesce((p->>'notice_sent')::boolean, false),
+    auth_results = left(p->>'auth_results', 2000), notice_sent = coalesce((p->>'notice_sent')::boolean, false), notice_text = p->>'notice_text',
     attachments = coalesce(p->'attachments', '[]'), finished_at = clock_timestamp()
   where id = p_id and finished_at is null
 $$;

@@ -596,7 +596,7 @@
     const box = $('#ir-detail'); box.hidden = false;
     const t = v => v ? `${new Date(v).toLocaleString()} <span class="muted mono small">${esc(new Date(v).toISOString())}</span>` : '–';
     box.innerHTML = `<h3 style="font:600 .95rem var(--f-display);margin:0 0 8px">${esc(e.subject || (e.decision === 'accepted' ? '(no subject)' : '(not opened)'))}</h3>
-      <dl class="kv">${[['From', esc(e.sender)], ['To', esc((e.recipients || []).join(', '))], ['Decision', esc((irDecision[e.decision] || e.decision) + (e.reason ? ': ' + e.reason : ''))],
+      <dl class="kv" style="display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0 0 10px;font-size:.88rem">${[['From', esc(e.sender)], ['To', esc((e.recipients || []).join(', '))], ['Decision', esc((irDecision[e.decision] || e.decision) + (e.reason ? ': ' + e.reason : ''))],
         ['Sent', t(e.sent_at)], ['Received', t(e.received_at)], ['Webhook', t(e.webhook_at)], ['Logged', t(e.logged_at)], ['Finished', t(e.finished_at)],
         ['Message-ID', `<span class="mono small">${esc(e.message_id || '–')}</span>`], ['Body SHA-256', `<span class="mono small">${esc(e.payload_sha256)}</span>`]]
         .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
@@ -929,20 +929,34 @@
         <label class="toggle small"><input type="checkbox" id="th-pub"${t.published ? ' checked' : ''}> Public</label>
         <select class="sel" id="th-status" aria-label="Status">${Object.entries(crLabel).map(([k, v]) => `<option value="${k}"${k === t.status ? ' selected' : ''}>${v}</option>`).join('')}</select>
         <button class="btn" type="button" id="th-close">Close</button></div>
-      ${t.batch_id ? `<p class="small muted" style="margin:0 0 10px">Part of a send to several officials. <button class="linkish" type="button" id="th-pub-batch">Publish every conversation from that send</button></p>` : ''}
+      ${t.batch_id ? `<p class="small muted" style="margin:0 0 10px">Part of a send to several officials. <button class="linkish" type="button" id="th-pub-batch">Put every conversation from that send back up</button></p>` : ''}
       ${d.messages.map(m => `<div class="th-msg ${m.direction}"><header><b>${m.direction === 'out' ? 'BayCounty.me' : esc(m.from_addr)}</b><span>${m.direction === 'out' ? 'to ' + esc(m.to_addr) : 'replied'}</span><span>${esc(stamp(m.at))}</span>
         ${m.direction === 'out' ? `<span class="pill ${esc(m.status)}">${esc(dLabel(m.status))}</span>` : (m.matched_by ? `<span class="small">matched by ${esc(m.matched_by)}</span>` : '')}
         ${(m.attachments || []).length ? `<span>📎 ${esc(m.attachments.map(a => a.filename).join(', '))}</span>` : ''}</header>
         <div class="body">${esc(m.shown.text || '(no text)')}</div>
         ${m.shown.quoted ? `<details class="ag" style="margin-top:6px"><summary class="small">Show quoted text</summary><pre>${esc(m.body_text)}</pre></details>` : ''}</div>`).join('')}
+      <div class="card" style="margin:10px 0;padding:10px 12px"><div class="small" style="margin-bottom:6px"><b>Public page.</b> This conversation is on <a href="/correspondence#c${id}" target="_blank" rel="noopener">/correspondence</a>${t.published ? '' : ' (taken down: ' + esc(t.hidden_reason || '') + ')'}. Residents’ email addresses, phone numbers and street addresses are hidden automatically. Hide a name or other words:</div>
+        <div class="row" style="gap:6px;flex-wrap:wrap"><input class="sel grow" id="th-hide" maxlength="200" placeholder="e.g. a resident’s name" aria-label="Words to hide"><label class="small"><input type="checkbox" id="th-hide-all"> everywhere</label><button class="btn" type="button" id="th-hide-add">Hide</button></div>
+        <div id="th-hide-list" style="margin-top:6px"></div></div>
       <label class="f" style="margin-top:6px">Reply to ${esc(cleanName(t.official_name))}<textarea id="th-reply" placeholder="Sent as a reply in the same email thread"></textarea></label>
       <div class="row" style="margin-top:8px"><button class="btn primary" type="button" id="th-send">Send reply</button><span class="small" id="th-msg" role="status"></span></div>`;
     $('#th-close').addEventListener('click', () => { box.hidden = true; crOpen = null; });
     $('#th-pub').addEventListener('change', async e => {
-      try { await api('corr_publish', {method: 'POST', body: {id, published: e.target.checked}}); loadCorr(); } catch (err) { e.target.checked = !e.target.checked; alert(err.message); }
+      let reason = '';
+      if (!e.target.checked) { reason = prompt('Why does this conversation come down? The reason is shown on the public page in its place.') || ''; if (!reason.trim()) { e.target.checked = true; return; } }
+      try { await api('corr_publish', {method: 'POST', body: {id, published: e.target.checked, reason}}); loadCorr(); } catch (err) { e.target.checked = !e.target.checked; alert(err.message); }
     });
+    const loadHide = async () => {
+      const r = await api('corr_redactions', {params: {thread_key: 'c' + id}}).catch(() => ({redactions: []}));
+      $('#th-hide-list').innerHTML = r.redactions.map(x => `<span class="pill">${esc(x.phrase)}${x.thread_key ? '' : ' (everywhere)'} <button class="linkish" type="button" data-unhide="${x.id}" aria-label="Remove">×</button></span>`).join(' ') || '<span class="muted small">Nothing hidden by hand.</span>';
+    };
+    loadHide();
+    $('#th-hide-add').addEventListener('click', async () => {
+      try { await api('corr_redact', {method: 'POST', body: {thread_key: $('#th-hide-all').checked ? null : 'c' + id, phrase: $('#th-hide').value}}); $('#th-hide').value = ''; loadHide(); } catch (err) { alert(err.message); }
+    });
+    $('#th-hide-list').addEventListener('click', async ev => { const b = ev.target.closest('[data-unhide]'); if (!b) return; await api('corr_redact', {method: 'POST', body: {remove: b.dataset.unhide}}); loadHide(); });
     const pb = $('#th-pub-batch');
-    if (pb) pb.addEventListener('click', async () => { if (!confirm('Publish every conversation from this send?')) return; await api('corr_publish', {method: 'POST', body: {batch: t.batch_id, published: true}}); loadCorr(); });
+    if (pb) pb.addEventListener('click', async () => { if (!confirm('Put every conversation from this send back on the public page?')) return; await api('corr_publish', {method: 'POST', body: {batch: t.batch_id, published: true}}); loadCorr(); });
     $('#th-status').addEventListener('change', async e => { await api('corr_status', {method: 'POST', body: {id, status: e.target.value}}); loadCorr(); });
     $('#th-send').addEventListener('click', async () => {
       const b = $('#th-send'); b.disabled = true; $('#th-msg').textContent = 'Sending…';

@@ -113,7 +113,7 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 200, default: 50, description: 'Rows per section'}}},
    annotations: {readOnlyHint: true}},
   {name: 'official_correspondence', title: 'Letters to officials',
-   description: 'Published emails BayCounty.me sent to local officials, and their replies, grouped by letter. Only threads approved for publication are returned.',
+   description: 'Emails BayCounty.me sent to local officials, and their replies, grouped by letter. Every conversation is public unless taken down with a reason. For every email with governments (records requests, records sent in, other government mail), read /api/v1/mail.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
      year: {type: 'string', description: 'A year such as 2026, or "all". Omit for the latest year with letters.'},
      government: {type: 'string', description: 'Only letters to this government (as listed in the governments field of a previous result)'},

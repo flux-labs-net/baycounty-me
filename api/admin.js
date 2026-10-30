@@ -302,14 +302,15 @@ async function route(req, res, action, me) {
       return r;
     }
     case 'corr_contacts': return require('./_correspondence').contacts();
-    case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': {
+    case 'corr_redactions': return require('./_correspondence').redactions({thread_key: String(Q.thread_key || '')});
+    case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': case 'corr_redact': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const C = require('./_correspondence');
       const fn = {corr_contact: C.saveContact, corr_seed: C.seed, corr_send: C.send, corr_reply: C.reply, corr_publish: C.publish,
-        corr_status: C.setStatus, corr_assign: C.assign, corr_dismiss: C.dismiss}[action];
+        corr_status: C.setStatus, corr_assign: C.assign, corr_dismiss: C.dismiss, corr_redact: C.redactSet}[action];
       const r = await fn(body, me.e);
       await audit(me.e, action, null, action === 'corr_send' ? {subject: body.subject, recipients: (body.ids || []).length, test: !!body.test, batch: r.batch_id || null}
-        : {id: body.id || body.thread_id || body.message_id || body.batch || null}).catch(() => {});
+        : {id: body.id || body.thread_id || body.message_id || body.batch || body.thread_key || null, reason: body.reason || undefined, phrase: body.phrase ? 'set' : undefined}).catch(() => {});
       return r;
     }
     case 'corr_threads': return require('./_correspondence').threads({status: String(Q.status || '').slice(0, 20), government: String(Q.government || '').slice(0, 120),
