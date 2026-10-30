@@ -4,6 +4,11 @@ on:
   workflow_dispatch:
   pull_request:
     paths: ["ios/BayCountyMe/**", "ios/BayCountyMeUITests/**", "ios/project.yml", ".github/workflows/ios-ui-tests.yml"]
+# One Mac runs every iOS job one at a time, so a new push to a pull request cancels that PR's older run
+# instead of queuing behind it. Runs on main are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   ui-tests:
     runs-on: [self-hosted, macOS]
