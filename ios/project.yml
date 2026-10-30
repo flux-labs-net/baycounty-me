@@ -50,6 +50,35 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1"
+  # BayCounty.me Staff: the government workspace for city and county staff and the site owner (api/gov.js).
+  # Separate from the resident app so residents never download staff screens. Shares BayCountyKit.
+  BayCountyStaff:
+    type: application
+    platform: iOS
+    sources:
+      - path: BayCountyStaff
+    dependencies:
+      - package: BayCountyKit
+    info:
+      path: BayCountyStaff/Info.plist
+      properties:
+        CFBundleDisplayName: BC Staff
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen:
+          UIColorName: Canvas
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSFaceIDUsageDescription: "BayCounty.me Staff locks after 5 minutes away, because it can send alerts to residents' phones. Face ID unlocks it."
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: me.baycounty.staff
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1"
   BayCountyMeUITests:
     type: bundle.ui-testing
     platform: iOS
@@ -73,3 +102,9 @@ schemes:
       targets:
         - package: BayCountyKit/BayCountyKitTests
         - BayCountyMeUITests
+  BayCountyStaff:
+    build:
+      targets:
+        BayCountyStaff: all
+    run:
+      config: Debug
