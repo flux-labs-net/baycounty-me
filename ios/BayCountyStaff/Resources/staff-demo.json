@@ -4,6 +4,7 @@
     "admin": true,
     "workspaces": [
       {"id": "county", "name": "Bay County", "countywide": true, "role": "owner"},
+      {"id": "clerk", "name": "Bay County Clerk of Court and Comptroller", "countywide": false, "role": "owner"},
       {"id": "cw", "name": "City of Callaway", "countywide": false, "role": "owner"},
       {"id": "lh", "name": "City of Lynn Haven", "countywide": false, "role": "owner"},
       {"id": "mb", "name": "City of Mexico Beach", "countywide": false, "role": "owner"},
@@ -16,9 +17,10 @@
     "notice_kinds": {"meeting": "Public meeting", "hearing": "Public hearing or ordinance", "bid": "Bid or proposal request", "utility": "Water, sewer or utility work", "road": "Road or street work", "other": "Other notice"}
   },
   "overview": {
-    "totals": {"workspaces": 8, "members": 14, "live_alerts": 2, "waiting_alerts": 1, "open_flags": 3, "notices": 9},
+    "totals": {"workspaces": 9, "members": 14, "live_alerts": 2, "waiting_alerts": 1, "open_flags": 3, "notices": 9},
     "workspaces": [
       {"id": "county", "name": "Bay County", "countywide": true, "members": 4, "last_activity": "2026-10-30T14:12:00Z", "live_alerts": 0, "waiting_alerts": 1, "open_flags": 1, "notices": 2},
+      {"id": "clerk", "name": "Bay County Clerk of Court and Comptroller", "countywide": false, "members": 0, "last_activity": null, "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0},
       {"id": "cw", "name": "City of Callaway", "countywide": false, "members": 1, "last_activity": "2026-10-27T15:40:00Z", "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0},
       {"id": "lh", "name": "City of Lynn Haven", "countywide": false, "members": 4, "last_activity": "2026-10-30T13:05:00Z", "live_alerts": 1, "waiting_alerts": 0, "open_flags": 1, "notices": 4},
       {"id": "mb", "name": "City of Mexico Beach", "countywide": false, "members": 1, "last_activity": null, "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0},
