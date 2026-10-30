@@ -3,6 +3,7 @@ options:
   bundleIdPrefix: me.baycounty
   deploymentTarget:
     iOS: "17.0"
+    watchOS: "10.0"
   createIntermediateGroups: true
 settings:
   base:
@@ -22,6 +23,8 @@ targets:
       - path: BayCountyMe
     dependencies:
       - package: BayCountyKit
+      # The Apple Watch app ships inside the iPhone app (Embed Watch Content).
+      - target: BayCountyWatch
     entitlements:
       # Phone alerts (Emergencies screen). Apple's push service needs the Push Notifications capability on the
       # me.baycounty.app identifier; automatic signing adds it. The server sends with APNS_* keys (api/_push.js).
@@ -50,6 +53,65 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         TARGETED_DEVICE_FAMILY: "1"
+  # BayCounty.me for Apple Watch: alerts, the saved home's trash day, beach flag and next meeting, plus watch face
+  # complications. Installed with the iPhone app; the phone sends it only the saved home's map point (WatchSync).
+  BayCountyWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: BayCountyWatch
+      - path: BayCountyWatchShared
+    dependencies:
+      - package: BayCountyKit
+      - target: BayCountyWatchComplications
+    entitlements:
+      # The complications read the saved home from the shared app group.
+      path: BayCountyWatch/BayCountyWatch.entitlements
+      properties:
+        com.apple.security.application-groups: [group.me.baycounty.app]
+    info:
+      path: BayCountyWatch/Info.plist
+      properties:
+        CFBundleDisplayName: BayCounty.me
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        WKApplication: true
+        WKCompanionAppBundleIdentifier: me.baycounty.app
+        # It works on its own too (alerts over the watch's Wi-Fi or cellular); the phone only adds the saved home.
+        WKRunsIndependentlyOfCompanionApp: true
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: me.baycounty.app.watchkitapp
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "4"
+  BayCountyWatchComplications:
+    type: app-extension
+    platform: watchOS
+    sources:
+      - path: BayCountyWatchComplications
+      - path: BayCountyWatchShared
+    dependencies:
+      - package: BayCountyKit
+      - sdk: WidgetKit.framework
+      - sdk: SwiftUI.framework
+    entitlements:
+      path: BayCountyWatchComplications/BayCountyWatchComplications.entitlements
+      properties:
+        com.apple.security.application-groups: [group.me.baycounty.app]
+    info:
+      path: BayCountyWatchComplications/Info.plist
+      properties:
+        CFBundleDisplayName: BayCounty.me
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: me.baycounty.app.watchkitapp.complications
+        TARGETED_DEVICE_FAMILY: "4"
   # BayCounty.me Staff: the government workspace for city and county staff and the site owner (api/gov.js).
   # Separate from the resident app so residents never download staff screens. Shares BayCountyKit.
   BayCountyStaff:
@@ -103,6 +165,12 @@ schemes:
       targets:
         - package: BayCountyKit/BayCountyKitTests
         - BayCountyMeUITests
+  BayCountyWatch:
+    build:
+      targets:
+        BayCountyWatch: all
+    run:
+      config: Debug
   BayCountyStaff:
     build:
       targets:

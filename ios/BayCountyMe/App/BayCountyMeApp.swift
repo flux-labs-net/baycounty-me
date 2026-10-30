@@ -11,7 +11,10 @@ struct BayCountyMeApp: App {
             RootView()
                 .environment(store)
                 .tint(Brand.navy)
-                .task { await store.loadEssentials() }
+                .task {
+                    WatchSync.shared.start(home: store.home)
+                    await store.loadEssentials()
+                }
         }
         .onChange(of: phase, initial: true) { _, p in if p == .active { store.becameActive() } }
     }

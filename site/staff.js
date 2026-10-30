@@ -86,6 +86,8 @@
     let j;
     try { j = await api('me'); } catch (e) { if (e.message !== 'Signed out') showSignin(); return; }
     me = j;
+    // Staff say "Panama City", not "City of Panama City".
+    for (const w of j.workspaces) w.name = String(w.name || '').replace(/^City of /, '');
     if (!j.workspaces.length) { showSignin(); $('#signin-msg').textContent = 'You’re signed in, but no government has given you access yet.'; return; }
     const saved = (() => { try { return localStorage.getItem('gov-ws'); } catch (e) { return null; } })();
     wsInfo = j.workspaces.find(x => x.id === saved) || j.workspaces[0];

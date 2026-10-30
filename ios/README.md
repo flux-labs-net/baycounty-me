@@ -44,6 +44,15 @@ CRA Spending has its own screen with the map, paid-out vs committed/budgeted tot
 
 Budget compare and CRA tax increment have native screens. Their numbers come from BayCountyKit ports of the site's own rules (`BudgetCompare` from api/_budget.js, `Officeholders` from api/_officials.js, `CRAIncrement` from site/cra_increment.js), and `ApiParityTests` checks them against the API's answers (fixtures from `node ios/scripts/make_fixtures.js`). Government screens follow the site's government page: who's in charge by fiscal year, the money, debt, audit findings, savings ideas and the CRA. Ask, Compare, Connections and the forms open the website page in the in-app browser. `SitePages.swift` lists how the app covers every site page.
 
+## Apple Watch
+
+`BayCountyWatch` ships inside the iPhone app. One screen: active alerts first (tap for the list and each notice), then the saved home's trash day (the Today card's rule: pickup day, or from 4 p.m. the day before; otherwise "Next pickup Friday"), the beach flag and the next meeting of the home's own government. `BayCountyWatchComplications` adds watch face complications: the alert count (round), alerts plus trash day (rectangle) and a line under the time (inline). Both read the same rules from BayCountyKit (`WatchBrief`, tested in `WatchBriefTests`, mirrored in Android's `WatchBrief.kt`).
+
+- The iPhone app (`App/WatchSync.swift`) sends the watch only the saved home's map point. The watch looks up the city and trash day itself from `/api/v1/utilities` and reads alerts from `/api/v1/emergency`, so it also works with no home saved (county-wide) and away from the phone.
+- Phone alerts already reach the wrist: watchOS shows the iPhone's notifications on the watch when the phone is locked.
+- The two watch targets share the `group.me.baycounty.app` app group (Xcode's automatic signing adds it).
+- Builds need Xcode's watchOS platform: `ios/scripts/ensure_watchos.sh` downloads it once. `ios/scripts/watch_screenshots.sh` takes screenshots from a made-up demo day (`-demo`, `-demo-clear`, `-screen alerts`, `-screen faces`); the iOS app build workflow uploads them as `watch-screens`.
+
 ## Data
 
 - Datasets: `https://baycounty.me/downloads/<id>.json` (catalog at `/downloads/index.json`). Static, CDN-served, no rate limit, identical to what the site shows.
@@ -60,9 +69,12 @@ ios/
   BayCountyKit/               Swift package: models, client, formatting (Foundation only)
     Tests/                    tests against site/public/downloads, plus an opt-in live test
   BayCountyMe/
-    App/                      entry point, AppStore (app state)
+    App/                      entry point, AppStore (app state), WatchSync (saved home to the watch)
     Views/                    Home, Governments, Meetings, Explore, Dataset, Record, CRA, Search, shared components
     Resources/                asset catalog (site palette, app icon, Flux Labs logo), seed data
+  BayCountyWatch/             Apple Watch app (brief, alert list, phone link)
+  BayCountyWatchComplications/ watch face complications (WidgetKit)
+  BayCountyWatchShared/       loading and colors shared by the two watch targets
   scripts/sync_seed.sh        refresh the bundled seed
 ```
 
