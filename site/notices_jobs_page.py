@@ -161,6 +161,7 @@ def notices_page():
     <p class="lede">Bids, public hearings and meetings that Bay County, the School Board, the cities and other public agencies are required to announce, in one searchable list. Each links to the government that posted it.</p></div>
     <div class="stamp"><a class="pill" href="/meetings">Meeting calendar →</a><span>Read {e(_short(_d(info.get("as_of") or today)))}</span></div></header>
   <div class="kpis">{kpis}</div>
+  <section class="tx-sec" data-staff-posts="notice" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="notices" data-tile="Notices">Every notice, newest first</h2><span class="muted" id="njCount"></span></div>
     <div class="nj-ctl"><label class="sr-only" for="njQ">Search notices</label><input id="njQ" type="search" placeholder="Search: a road, a business, a word like rezoning">
       {_gov_select(rows, govs, "Government")}
@@ -178,7 +179,9 @@ def notices_page():
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="njData">{_js_data(data)}</script>
-<script>{NOTICE_JS}{LIST_JS}</script>'''
+<script>{NOTICE_JS}{LIST_JS}</script>
+<script src="/assets/area-map.js" defer></script>
+<script src="/assets/staff-posts.js" defer></script>'''
 
 
 def jobs_page():
@@ -216,6 +219,7 @@ def jobs_page():
     <p class="lede">Open jobs at Bay County, Bay District Schools, the cities and the airport, from each employer's own job board, in one list. Apply on the employer's site.</p></div>
     <div class="stamp"><a class="pill" href="/notices">Public notices →</a><span>Read {e(_short(_d(info.get("as_of") or today.isoformat())))}</span></div></header>
   <div class="kpis">{kpis}</div>
+  <section class="tx-sec" data-staff-posts="job" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="jobs" data-tile="Openings">Open jobs, newest first</h2><span class="muted" id="njCount"></span></div>
     <div class="nj-ctl"><label class="sr-only" for="njQ">Search jobs</label><input id="njQ" type="search" placeholder="Search: teacher, paramedic, mechanic, a department">
       {_gov_select(rows, govs, "Employer")}
@@ -234,4 +238,5 @@ def jobs_page():
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="njData">{_js_data(data)}</script>
-<script>{JOB_JS}{LIST_JS}</script>'''
+<script>{JOB_JS}{LIST_JS}</script>
+<script src="/assets/staff-posts.js" defer></script>'''

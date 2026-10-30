@@ -6,7 +6,7 @@ const {datasetRows, rest} = require('./_data');
 const SITE = 'https://baycounty.me';
 const STALE_MS = 10 * 60e3;
 
-const LIVE_COLS = 'notice_id,kind,source,source_type,gov_id,title,summary,instruction,severity,event,area,zones,issued,starts,ends,updated,status,full_closure,roadway,url,source_url,first_seen,last_seen';
+const LIVE_COLS = 'notice_id,kind,source,source_type,gov_id,title,summary,instruction,severity,event,area,zones,issued,starts,ends,updated,status,full_closure,roadway,url,source_url,geometry,first_seen,last_seen';
 const KIND_LABEL = {evacuation: 'Evacuation orders', weather: 'Weather alerts', shelter: 'Shelters open', 'boil-water': 'Boil-water notices', road: 'Road closures', utility: 'Water and utility outages', storm: 'Storm updates', safety: 'Public safety alerts'};
 
 async function meta(req, catalog, id) {

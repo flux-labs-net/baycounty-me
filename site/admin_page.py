@@ -236,12 +236,13 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 MENU = [
     ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
                                   ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'), ('names', 'Name matches', None),
-                                  ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting')]),
+                                  ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting'),
+                                  ('govflags', 'Staff data flags', 'govflags')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
-    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None)]),
+    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None), ('govstaff', 'Government staff', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
 TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
@@ -293,6 +294,7 @@ def shell_html():
       {''.join(groups)}
       <div class="an-foot">
         <a href="/finance" target="_blank" rel="noopener"><span>Finance workspace</span>{_svg('out', 14)}</a>
+        <a href="/staff" target="_blank" rel="noopener"><span>Government workspace</span>{_svg('out', 14)}</a>
         <a href="/" target="_blank" rel="noopener"><span>Public site</span>{_svg('out', 14)}</a>
         <div class="an-who"><span id="who"></span><button class="linkish" id="signout" type="button">Sign out</button></div>
       </div>
@@ -545,6 +547,25 @@ def admin_page(out_dir):
         <button class="btn" id="ra-add" type="button">Add agent</button>
       </div>
       <div class="tw"><table class="at" id="ra-table" data-tt="off"><thead><tr><th>Agent</th><th>Brokerage</th><th>Joined</th><th>Last sign-in</th><th>Reports</th><th>Emailed</th><th>Access</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-govstaff" class="pane" hidden>
+      <div class="banner"><div><b>Who can sign in to the government workspace.</b> <span class="small muted">City and county staff sign in at <a href="/staff" target="_blank" rel="noopener">/staff</a> with an emailed code. Viewers see everything and change nothing; publishers post notices, events and jobs; alert senders also send emergency alerts; owners also manage their own staff list. Nobody there can edit record data, only flag it (Staff data flags). Countywide alerts need a second person.</span></div></div>
+      <div class="tw"><table class="at" id="gs-ws" data-tt="off"><thead><tr><th>Government</th><th>People</th><th>Live alerts</th><th>Last activity</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">People</h2>
+        <select class="sel" id="gs-gov" aria-label="Government"></select>
+        <input class="sel" id="gs-email" type="email" placeholder="name@city.gov" aria-label="Email">
+        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option></select>
+        <button class="btn" id="gs-add" type="button">Give access</button>
+      </div>
+      <div class="tw"><table class="at" id="gs-table" data-tt="off"><thead><tr><th>Government</th><th>Email</th><th>Access</th><th>Added by</th><th>Since</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-govflags" class="pane" hidden>
+      <div class="banner"><div><b>Record data staff say is wrong.</b> <span class="small muted">Staff can’t edit numbers that came from public records. When one looks wrong they flag it here with the right value and a source. Check the source, fix the record or the reader, then mark it <b>Fixed</b>, or <b>Not changed</b> with a reason. Your reply shows in their workspace.</span></div></div>
+      <div class="row" style="margin-bottom:12px"><select class="sel" id="gf-status" aria-label="Status"><option value="open">Open</option><option value="fixed">Fixed</option><option value="not_changed">Not changed</option><option value="all">All</option></select></div>
+      <div class="tw"><table class="at" id="gf-table" data-tt="off" data-fit="off"><thead><tr><th>Government</th><th>Record</th><th>What they say</th><th style="width:30%">Answer</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-names" class="pane" hidden>

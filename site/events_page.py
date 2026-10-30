@@ -123,6 +123,7 @@ def events_page(out_dir=None):
     <p class="lede">What's happening around the county, from the county and city calendars, the library system, the visitor bureaus and the chambers. One list, every town, updated every morning.</p></div>
     <div class="stamp"><a class="pill" href="/meetings">Public meetings →</a><span>Next two months, from public calendars</span></div></header>
   <div class="kpis">{kpis}</div>
+  <section class="tx-sec" data-staff-posts="event" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="calendar" data-tile="Calendar">Coming up</h2><span class="muted" id="evCount">{len(upcoming)} events</span></div>
     <div class="ev-ctl">
       {_chips('evTown', 'Town', towns(rs), 'Every town')}
@@ -144,4 +145,5 @@ def events_page(out_dir=None):
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="evData">{data_json(rs)}</script>
-<script src="/assets/events.js" defer></script>'''
+<script src="/assets/events.js" defer></script>
+<script src="/assets/staff-posts.js" defer></script>'''

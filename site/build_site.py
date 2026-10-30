@@ -911,6 +911,8 @@ def main():
     shutil.copy(os.path.join(ROOT, 'gov.css'), os.path.join(OUT, 'assets', 'gov.css'))
     shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
     shutil.copy(os.path.join(ROOT, 'events.js'), os.path.join(OUT, 'assets', 'events.js'))
+    shutil.copy(os.path.join(ROOT, 'staff_posts.js'), os.path.join(OUT, 'assets', 'staff-posts.js'))  # live staff posts on /notices, /events, /jobs
+    shutil.copy(os.path.join(ROOT, 'area_map.js'), os.path.join(OUT, 'assets', 'area-map.js'))  # maps on staff alerts and notices (/staff, /emergency, /notices)
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))
@@ -937,6 +939,8 @@ def main():
     print('possible repeated posts for review:', write_review())
     from finance_page import finance_page
     finance_page(OUT)
+    from staff_page import staff_page
+    staff_page(OUT)  # government workspace for city and county staff (api/gov.js)
     from seo import write_robots_and_sitemap
     print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES if p != '/profile'], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
     for dp, _, fs in os.walk(OUT):

@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Government workspace · BayCounty.me</title>
+<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+:root{--urgent:#B3261E;--review:#9A5B00;--info:#5A6372;--ok:#1F7A4D;--pace:#161B24;--bar:#3F6FB0;--bar-over:#B3261E}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--urgent:#FF8C82;--review:#F2B661;--info:#A1AABA;--ok:#5BC98E;--pace:#E7ECF3;--bar:#7FA6DA;--bar-over:#FF8C82}}
+:root[data-theme="dark"]{--urgent:#FF8C82;--review:#F2B661;--info:#A1AABA;--ok:#5BC98E;--pace:#E7ECF3;--bar:#7FA6DA;--bar-over:#FF8C82}
+body{display:block}
+[hidden]{display:none!important}
+.fw{max-width:1320px;margin:0 auto;padding:18px 16px 72px}
+/* layout + menu, the same as /admin: side menu from 960px, top bar and full-screen menu below */
+.fw-shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:32px;align-items:start}
+.fw-main{min-width:0}
+.fw-h{font:600 1.45rem var(--f-display);letter-spacing:-.015em;margin:4px 0 16px}
+.an{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 10px}
+.an-head{display:flex;align-items:center;gap:10px;padding:0 6px 12px}
+.an-logo{width:32px;height:32px;flex-shrink:0;border-radius:9px;background:var(--navy);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font:600 .78rem var(--f-body)}
+.an-brand{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+.an-brand b{font-size:.9rem} .an-brand span{font-size:.76rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-btn{width:44px;height:44px;flex-shrink:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.an-x,.an-top{display:none}
+.an-ws{display:flex;flex-direction:column;gap:2px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.an-ws span{font:600 .66rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.an-ws b{font:500 .88rem var(--f-body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-ws select{width:100%;margin-top:2px}
+.an a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:8px;color:var(--ink);text-decoration:none;font:400 .88rem var(--f-body)}
+.an a span{flex:1;min-width:0}
+.an a:hover{background:var(--sunken)}
+.an a[aria-current="page"]{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--navy);font-weight:600}
+.an-home{font-weight:500!important}
+.an-total{font:600 .72rem var(--f-body);font-style:normal;background:var(--urgent);color:var(--surface);border-radius:999px;padding:1px 8px;font-variant-numeric:tabular-nums}
+.an-n{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.an-n.on{background:var(--gold)}
+.an-g{display:flex;flex-direction:column;gap:2px}
+.an-h{display:flex;align-items:center;gap:8px;font:600 .68rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 10px 3px}
+.an-teal svg{color:var(--teal)} .an-blue svg{color:var(--blue)} .an-amber svg{color:var(--gold)} .an-gray svg{color:var(--muted)}
+.an-items{display:flex;flex-direction:column;gap:2px}
+.an-items a{padding-left:32px}
+.an-foot{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.an-foot svg{color:var(--muted)}
+.an-foot .theme-btn{margin:6px 10px 0;align-self:flex-start}
+.an-who{display:flex;flex-direction:column;gap:0;padding:8px 10px 2px;font-size:.78rem;color:var(--muted)}
+.an-who b{font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-who .btn{min-height:28px;padding:0 6px;font-size:.78rem;margin-right:-6px}
+@media (max-width:959px){
+  .fw{padding-top:0}
+  .an-top{display:flex;position:sticky;top:0;z-index:30;align-items:center;gap:10px;margin:0 -16px 14px;padding:8px 8px 8px 16px;min-height:60px;box-sizing:border-box;background:var(--surface);border-bottom:1px solid var(--line)}
+  .an-cur{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+  .an-cur span{font-size:.72rem;color:var(--muted)} .an-cur b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fw-shell{display:block}
+  .an{display:none;position:fixed;inset:0;z-index:60;max-height:none;border:0;border-radius:0;padding:12px 16px 24px;background:var(--bg)}
+  .an.open{display:flex}
+  .an-x{display:inline-flex}
+  .an a{min-height:44px}
+  .an a.an-home,.an a.an-home[aria-current="page"],.an a.an-home:hover{background:var(--navy);color:var(--surface);border-radius:12px;margin-bottom:4px}
+  .an-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .an-items a{padding:0 12px;border:1px solid var(--line);background:var(--surface);font-size:.84rem;line-height:1.2}
+  .an-h{padding:12px 2px 6px}
+  .fw-h{font-size:1.25rem;margin:0 0 12px}
+  body.an-lock{overflow:hidden}
+}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .88rem var(--f-body);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--blue)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0E131B}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E131B}}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.quiet{border-color:transparent;background:none;color:var(--muted)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:.84rem} .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lead{font:400 1.12rem/1.55 var(--f-display);margin:4px 0 22px;max-width:62ch}
+.lead b{font-weight:600}
+.h2{font:600 1rem var(--f-display);margin:30px 0 4px}
+.sub{color:var(--muted);font-size:.86rem;margin:0 0 12px;max-width:70ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grow{flex:1;min-width:0}
+/* Pace chart */
+.pace{position:relative;padding-top:26px;--nm:200px;--am:8.5em}
+.pace-rule{position:absolute;top:0;bottom:0;width:0;border-left:2px solid var(--pace);pointer-events:none;z-index:1;left:calc(var(--nm) + 14px + (100% - var(--nm) - var(--am) - 28px) * var(--el))}
+.pace-rule span{position:absolute;top:0;left:6px;white-space:nowrap;font:500 .78rem var(--f-body);color:var(--ink);background:var(--surface);padding:0 4px}
+.pace-rule.flip span{left:auto;right:6px}
+.dept{display:grid;grid-template-columns:var(--nm) minmax(0,1fr) var(--am);gap:4px 14px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.dept:first-of-type{border-top:0}
+.dept .nm{font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dept .track{position:relative;height:14px;background:var(--sunken);border-radius:3px}
+.dept .used{position:absolute;left:0;top:0;bottom:0;background:var(--bar);border-radius:3px}
+.dept .enc{position:absolute;top:0;bottom:0;background:var(--bar);opacity:.35}
+.dept.ahead .used,.dept.ahead .enc{background:var(--bar-over)}
+.dept .amt{font-size:.82rem;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.dept .amt b{color:var(--ink);font-weight:500}
+.dept.ahead .amt b{color:var(--urgent)}
+@media (max-width:620px){.dept{grid-template-columns:minmax(0,1fr) auto}.dept .track{grid-column:1/-1;grid-row:2}}
+.dept .mark{display:none;position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--pace);border-radius:1px}
+@media (max-width:620px){.pace{padding-top:0}.pace-rule{display:none}.dept .mark{display:block}}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--bar)}
+.legend i.e{opacity:.35} .legend i.r{background:none;border-left:2px solid var(--pace);width:0;height:12px;border-radius:0}
+/* Flags */
+.sev{display:inline-flex;align-items:center;gap:6px;font:500 .8rem var(--f-body);white-space:nowrap}
+.sev::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.sev.urgent{color:var(--urgent)} .sev.review{color:var(--review)} .sev.info{color:var(--info)}
+.flags{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.flags li{border-top:1px solid var(--line)} .flags li:first-child{border-top:0}
+.flags button{display:grid;grid-template-columns:7.5em minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:inherit;padding:12px 14px;cursor:pointer}
+.flags button:hover{background:var(--sunken)}
+.flags .t{font-size:.92rem}
+.flags .m{grid-column:2/-1;font-size:.8rem;color:var(--muted)}
+.flags .d{font-variant-numeric:tabular-nums;font-size:.9rem}
+@media (max-width:620px){.flags button{grid-template-columns:minmax(0,1fr) auto}.flags .sev{grid-column:1/-1}.flags .m{grid-column:1/-1}}
+.st{font-size:.76rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sel,label.f input,label.f select,label.f textarea{font:400 .9rem var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+label.f{display:flex;flex-direction:column;gap:5px;font:500 .82rem var(--f-body);color:var(--muted)}
+label.f textarea{min-height:80px;resize:vertical}
+/* Tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.t{width:100%;border-collapse:collapse;font-size:.86rem}
+.t th{text-align:left;font:500 .8rem var(--f-body);color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.t td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.t tr:last-child td{border-bottom:0}
+.vendors{list-style:none;margin:0;padding:0}
+.vendors li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;font-size:.86rem;margin-bottom:10px}
+.vendors .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vendors .bar{grid-column:1/-1;height:5px;background:var(--sunken);border-radius:3px}
+.vendors .bar i{display:block;height:100%;background:var(--bar);border-radius:3px}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font:400 11px var(--f-body);fill:var(--muted)}
+/* Detail drawer */
+dialog.drawer{margin:0 0 0 auto;height:100vh;max-height:100vh;width:min(720px,100vw);border:0;border-left:1px solid var(--line);padding:0;background:var(--surface);color:var(--ink)}
+dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
+.dr{display:flex;flex-direction:column;height:100%}
+.dr-h{display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dr-h h2{font:600 1.05rem/1.4 var(--f-display);margin:6px 0 0}
+.dr-b{padding:18px 20px;overflow:auto;flex:1}
+.dr-b p{line-height:1.55;max-width:70ch}
+.notes{list-style:none;margin:0 0 14px;padding:0;border-left:2px solid var(--line)}
+.notes li{padding:0 0 12px 14px;font-size:.86rem}
+.notes .by{color:var(--muted);font-size:.78rem}
+.rv-box{margin-top:18px;display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 .84rem var(--f-body);cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.readonly{font-size:.84rem;color:var(--muted);border-left:3px solid var(--line);padding:4px 0 4px 12px}
+/* Upload */
+.drop{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center;text-align:center;border:2px dashed var(--line);border-radius:14px;padding:36px 16px;background:var(--surface);cursor:pointer}
+.drop.over{border-color:var(--blue);background:var(--sunken)}
+.drop b{font:600 1rem var(--f-display)}
+.tie{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:10px;border:1px solid var(--line);border-left-width:4px;background:var(--surface);margin:14px 0}
+.tie.ties{border-left-color:var(--ok)} .tie.mismatch{border-left-color:var(--urgent)} .tie.no_total{border-left-color:var(--review)}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:12px 0}
+.err{color:var(--urgent);font-size:.86rem}
+.ok{color:var(--ok)}
+.empty{padding:32px 16px;text-align:center;color:var(--muted)}
+/* Sign in */
+.signin{max-width:400px;margin:12vh auto 0}
+.signin h1{font:600 1.35rem var(--f-display);margin:0 0 6px}
+.signin p{line-height:1.5}
+.code{font:500 1.6rem var(--f-data);letter-spacing:.35em;text-align:center}
+/* Board packet: matches the branded sample reports (Monthly finance summary). On screen it is a page preview;
+   printed it is the whole page. Always light, whatever the site theme, because it is a paper document: every color
+   the packet uses is redefined here. Brand colors come from the site tokens (navy, gold); names come from the place
+   config (see BRAND in finance_page.py). */
+.packet{--bg:#FFFFFF;--surface:#FFFFFF;--sunken:#EEF2F7;--ink:#161B24;--muted:#5A6372;--faint:#8A93A1;--line:#E1E6ED;
+  --navy:#1E3A76;--gold:#E8A33D;--tint-amber:#FDF5E6;--tint-blue:#F4F8FC;
+  --urgent:#B3261E;--review:#9A5B00;--info:#5A6372;--pace:#161B24;--bar:#3F6FB0;--bar-over:#B3261E;
+  background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:44px 48px;max-width:860px;margin:0 auto;color-scheme:light;
+  font:400 .9rem/1.5 var(--f-body)}
+.pk-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:12px;border-bottom:2px solid var(--navy);margin-bottom:18px}
+.pk-kicker{font:600 .82rem var(--f-display);color:var(--navy);margin:0 0 2px}
+.packet h1{font:700 1.65rem/1.2 var(--f-display);margin:0;letter-spacing:-.01em}
+.pk-meta{text-align:right;color:var(--muted);font-size:.8rem;line-height:1.55;white-space:nowrap}
+.pk-note{background:var(--tint-amber);border:1px solid #EDCB8B;border-radius:6px;padding:9px 12px;font-size:.78rem;color:#6B4A0F;margin:0 0 18px}
+.pk-note b{font-weight:600}
+.packet .pk-lead{font:400 1.04rem/1.55 var(--f-display);color:var(--ink);margin:0 0 18px;max-width:none}
+.packet .pk-lead b{font-weight:600}
+.packet .h2{font:600 1rem var(--f-display);margin:22px 0 2px}
+.packet .sub{color:var(--muted);font-size:.8rem;margin:0 0 10px;max-width:none}
+.packet .panel{border:0;padding:0;background:none}
+.packet .pace{--nm:196px;--am:9.5em}
+.packet .dept{padding:1.5px 0}
+.packet .dept .nm{font-size:.78rem}
+.packet .dept .track{height:8px;background:var(--sunken)}
+.packet .dept .amt{font-size:.78rem}
+.packet .dept .amt b{font-weight:600}
+.packet .pace-rule{border-left-width:1px}
+.packet .pace-rule span{background:#fff;font-size:.74rem}
+.packet .legend{font-size:.7rem;gap:6px 12px;margin-top:8px}
+.packet .legend i.o{background:var(--bar-over)}
+.packet table.t{font-size:.8rem}
+.packet .t th{font-size:.74rem;padding:7px 8px;border-bottom:1px solid #C9D2DE}
+.packet .t td{padding:6px 8px;vertical-align:middle}
+.packet .t tr:last-child td{border-bottom:1px solid var(--line)}
+.packet .sev{font-size:.78rem}
+.pill{display:inline-block;font-size:.72rem;color:var(--ink);border:1px solid #B9C3D0;border-radius:999px;padding:0 8px;white-space:nowrap;line-height:1.6}
+.pk-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:4px}
+.pk-cols .sev.ok{color:var(--info)}
+.pk-find{background:var(--tint-blue);border-left:3px solid var(--navy);padding:10px 12px;font-size:.8rem;margin:0 0 10px}
+.pk-find b{font-weight:600}
+.pk-find+.pk-find{margin-top:8px}
+.packet .pk-small{font-size:.78rem;color:var(--muted);margin:0}
+.packet .foot{margin-top:26px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:.72rem}
+.packet .foot a{color:inherit}
+@media (max-width:620px){
+  .packet{padding:22px 16px;border-radius:10px}
+  .pk-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .pk-meta{text-align:left;white-space:normal}
+  .packet h1{font-size:1.3rem}
+  .packet .pk-lead{font-size:1rem}
+  .pk-cols{grid-template-columns:1fr}
+  /* Needs-attention table: one stacked item per row so nothing runs off a phone screen. */
+  .packet table.t.na,.packet table.t.na tbody{display:block}
+  .packet table.t.na thead{display:none}
+  .packet table.t.na tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .packet table.t.na td{border:0;padding:0}
+  .packet table.t.na td:nth-child(1){grid-column:1;grid-row:1}
+  .packet table.t.na td:nth-child(4){grid-column:2;grid-row:1;text-align:right}
+  .packet table.t.na td:nth-child(2){grid-column:1/-1;grid-row:2}
+  .packet table.t.na td:nth-child(3){grid-column:1/-1;grid-row:3;text-align:left;color:var(--muted);font-size:.84rem}
+  .packet table.t.na td:nth-child(3)::before{content:"At stake: "}
+  .packet table.t.na td[colspan]{grid-column:1/-1}
+}
+@media print{
+  @page{size:letter;margin:14mm 14mm 16mm}
+  html,body{background:#fff!important}
+  .an,.an-top,.fw-h,.no-print,dialog{display:none!important}
+  .fw{padding:0;max-width:none}
+  .fw-shell{display:block}
+  section[data-panel]:not(#p-packet){display:none!important}
+  .packet{border:0;padding:0;max-width:none;font-size:10pt}
+  .packet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pk-keep,.dept,.t tr,.pk-find{break-inside:avoid}
+  .packet .h2{break-after:avoid}
+  .packet .legend{break-before:avoid;flex-wrap:nowrap;white-space:nowrap}
+  /* Short cells stay on one line; only the finding text may wrap. Tighter padding gives it the room. */
+  .packet table.t{font-size:8.6pt}
+  .packet .t th,.packet .t td{padding:5px 6px;white-space:nowrap}
+  .packet table.t.na td:nth-child(2){white-space:normal;width:100%}
+  .packet .t thead{display:table-header-group}
+  .packet .foot{display:none}
+}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin:0 0 22px}
+.tile{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-align:left;color:var(--ink);font:inherit;cursor:pointer}
+.tile:hover{border-color:var(--blue)}
+.tile b{font:600 1.5rem var(--f-display);font-variant-numeric:tabular-nums}
+.tile span{font-size:.84rem;color:var(--muted)}
+.tile.hot{border-left:4px solid var(--urgent)}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px}
+.form .full{grid-column:1/-1}
+@media (max-width:700px){.form{grid-template-columns:1fr}}
+label.f input,label.f select,label.f textarea{width:100%;box-sizing:border-box}
+label.chk{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;line-height:1.4}
+label.chk input{width:18px;height:18px;margin-top:2px}
+.reach{display:flex;gap:18px;flex-wrap:wrap;padding:12px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:.9rem}
+.reach b{font-variant-numeric:tabular-nums}
+.confirm{border:2px solid var(--urgent);border-radius:12px;padding:14px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.confirm h3{margin:0;font:600 1rem var(--f-display)}
+.status{font-size:.76rem;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.status.live{background:color-mix(in srgb,var(--urgent) 16%,transparent);color:var(--urgent)}
+.status.pending{background:color-mix(in srgb,var(--review) 18%,transparent);color:var(--review)}
+.status.done{background:var(--sunken);color:var(--muted)}
+.status.open{background:color-mix(in srgb,var(--review) 18%,transparent);color:var(--review)}
+.status.fixed{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.items li{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:12px 14px;display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.items .grow h3{margin:0;font:600 .95rem var(--f-body);overflow-wrap:anywhere}
+.items .meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.8rem;color:var(--muted);margin-top:4px}
+.items .body{font-size:.86rem;line-height:1.5;margin:6px 0 0;white-space:pre-line;overflow-wrap:anywhere}
+.lock{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:10px;border:1px solid var(--line);border-left:4px solid var(--blue);background:var(--surface);font-size:.88rem;line-height:1.5;margin:0 0 14px}
+.lock svg{flex-shrink:0;color:var(--blue);margin-top:2px}
+.rec td{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rec td.act{max-width:none}
+dialog.modal{border:1px solid var(--line);border-radius:14px;padding:0;width:min(560px,calc(100vw - 32px));background:var(--surface);color:var(--ink)}
+dialog.modal::backdrop{background:rgba(10,14,20,.45)}
+.modal form{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.modal h2{font:600 1.05rem var(--f-display);margin:0}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;font-size:.84rem;margin:0}
+.kv dt{color:var(--muted)} .kv dd{margin:0;overflow-wrap:anywhere}
+.mapfld{display:flex;flex-direction:column;gap:8px}
+.mapfld>span{font-size:.86rem;font-weight:600}
+</style>
+</head>
+<body>
+<div class="fw">
+  <section id="signin" class="signin" hidden>
+    <div class="row" style="justify-content:flex-end;margin-bottom:24px"><button type="button" class="theme-btn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button></div>
+    <h1>Government workspace</h1>
+    <p class="muted small">For city and county staff with access: send emergency alerts, post notices, events and jobs, and flag data on BayCounty.me. We’ll email you a 6-digit code.</p>
+    <form id="email-form" class="row" style="margin-top:14px">
+      <label class="f grow"><span>Work email</span><input type="email" name="email" required autocomplete="email" placeholder="you@cityoflynnhaven.com"></label>
+      <button class="btn primary" type="submit" style="align-self:flex-end">Email me a code</button>
+    </form>
+    <form id="code-form" hidden style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
+      <p class="small" id="code-sent"></p>
+      <label class="f"><span>6-digit code</span><input class="code" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]*" maxlength="7" required></label>
+      <div class="row"><button class="btn primary" type="submit">Sign in</button><button class="btn quiet" type="button" id="code-back">Use a different email</button></div>
+    </form>
+    <p id="signin-msg" class="small" role="status" style="margin-top:12px"></p>
+    <p class="small muted" style="margin-top:28px">No access yet? Your workspace owner can add you, or write to <a href="mailto:hello@https://baycounty.me">hello@https://baycounty.me</a>.</p>
+  </section>
+
+  <div id="app" hidden>
+    <header class="an-top">
+      <span class="an-logo" aria-hidden="true">BC</span>
+      <div class="an-cur"><span id="an-ws-cur">Workspace</span><b id="an-cur">Home</b></div>
+      <button class="an-btn" id="an-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="an-nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </header>
+    <div class="fw-shell">
+    <nav class="an" id="an-nav" aria-label="Workspace">
+      <div class="an-head">
+        <span class="an-logo" aria-hidden="true">BC</span>
+        <div class="an-brand"><b>BayCounty.me</b><span>Government workspace</span></div>
+        <button class="an-btn an-x" id="an-close" type="button" aria-label="Close menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="an-ws"><span>Government</span><b id="ws-name"></b><select class="sel" id="ws-pick" aria-label="Government" hidden></select></div>
+      <a href="#home" data-tab="home" class="an-home"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg><span>Home</span><i class="an-total" id="live-count" hidden></i></a>
+      <div class="an-g"><div class="an-h an-teal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 004 0"/></svg>Emergency</div><div class="an-items"><a href="#alerts" data-tab="alerts"><span>Alerts</span><i class="an-n"></i></a></div></div><div class="an-g"><div class="an-h an-blue"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>Post</div><div class="an-items"><a href="#notices" data-tab="notices"><span>Public notices</span><i class="an-n"></i></a><a href="#events" data-tab="events"><span>Events</span><i class="an-n"></i></a><a href="#jobs" data-tab="jobs"><span>Jobs</span><i class="an-n"></i></a></div></div><div class="an-g"><div class="an-h an-amber"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>Your data</div><div class="an-items"><a href="#records" data-tab="records"><span>Record data</span><i class="an-n"></i></a><a href="#flags" data-tab="flags"><span>Flags you sent</span><i class="an-n"></i></a></div></div><div class="an-g"><div class="an-h an-gray"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 010 7M18 14.8c2 .7 3.2 2.5 3.5 5.2"/></svg>Access</div><div class="an-items"><a href="#people" data-tab="people" data-min="owner" hidden><span>People</span><i class="an-n"></i></a><a href="#activity" data-tab="activity" data-min="owner" hidden><span>Activity log</span><i class="an-n"></i></a></div></div>
+      <div class="an-foot">
+        <a href="/emergency" target="_blank" rel="noopener"><span>Public alert timeline</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg></a>
+        <a href="/" target="_blank" rel="noopener"><span>Public site</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg></a>
+        <button type="button" class="theme-btn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
+        <div class="an-who"><b id="who"></b><div class="row"><span id="who-role" class="grow"></span><button class="btn quiet" id="signout" type="button">Sign out</button></div></div>
+      </div>
+    </nav>
+    <main class="fw-main">
+    <h1 class="fw-h" id="fw-h">Home</h1>
+
+    <section id="p-home" data-panel>
+      <p class="lead" id="home-lead"></p>
+      <div class="tiles" id="home-tiles"></div>
+      <h2 class="h2">Latest activity</h2>
+      <p class="sub">Everything anyone does here is logged with who and when.</p>
+      <ul class="items" id="home-activity"></ul>
+    </section>
+
+    <section id="p-alerts" data-panel hidden>
+      <p class="sub">An alert goes to residents who asked for that kind of alert on their phone or by email, and shows on the public alert timeline at /emergency. It is labeled with your government’s name.</p>
+      <div data-can="alert_sender">
+        <form class="panel form" id="f-alert">
+          <label class="f">What kind of alert<select name="kind" id="al-kind"></select></label>
+          <label class="f">How serious<select name="severity"><option value="extreme">Extreme: act now</option><option value="severe" selected>Severe</option><option value="moderate">Moderate</option><option value="minor">Minor</option><option value="info">For information</option></select></label>
+          <label class="f full">Headline<input name="title" required maxlength="140" placeholder="Boil-water notice for Highway 77 north of 23rd Street"></label>
+          <label class="f full">What is happening<textarea name="message" required rows="4" maxlength="900"></textarea></label>
+          <label class="f full">What people should do (optional)<textarea name="instruction" rows="2" maxlength="900" placeholder="Boil tap water for one minute before drinking or cooking."></textarea></label>
+          <div class="f full mapfld"><span>Map of where it applies (optional)</span><input type="hidden" name="geometry">
+          <div class="row"><button class="btn" type="button" data-map-open>Add a map</button><span class="small muted" data-map-sum></span></div><div data-map-box hidden></div></div>
+          <label class="f">Ends on its own after<select name="hours"><option value="6">6 hours</option><option value="12">12 hours</option><option value="24" selected>1 day</option><option value="48">2 days</option><option value="72">3 days</option><option value="168">1 week</option></select></label>
+          <label class="chk full" id="al-cw-l" hidden><input type="checkbox" name="countywide" id="al-cw"><span><b>Send to all of Bay County.</b> A second alert sender has to confirm a countywide alert before it goes out.</span></label>
+          <div class="full reach" id="al-reach"></div>
+          <div class="full row"><button class="btn primary" type="submit">Review and send</button><span class="small err" role="alert"></span></div>
+          <div class="full confirm" id="al-confirm" hidden>
+            <h3 id="al-confirm-h"></h3>
+            <p class="small" id="al-confirm-p" style="margin:0"></p>
+            <div class="row"><button class="btn primary" type="button" id="al-send">Send it</button><button class="btn quiet" type="button" id="al-back">Go back and edit</button></div>
+          </div>
+        </form>
+      </div>
+      <p class="readonly" data-cant="alert_sender" hidden>Only alert senders and owners can send alerts. You can see what has been sent.</p>
+      <h2 class="h2">Alerts from this workspace</h2>
+      <ul class="items" id="l-alerts"></ul>
+    </section>
+
+    <section id="p-notices" data-panel hidden>
+      <p class="sub">Legal notices, hearings, bid openings and meetings. A notice shows on the public notices page as soon as you save it, labeled as posted by your staff.</p>
+      <div class="row" style="margin-bottom:12px" data-can="publisher"><button class="btn primary" type="button" data-new="notice">Add a notice</button></div>
+      <form class="panel form" id="f-notice" data-kind="notice" hidden style="margin-bottom:16px">
+        <input type="hidden" name="id">
+        <label class="f full">Title<input name="title" required maxlength="200"></label>
+        <label class="f">Kind<select name="kind"><option value="meeting">Public meeting</option><option value="hearing">Public hearing or ordinance</option><option value="bid">Bid or proposal request</option><option value="utility">Water, sewer or utility work</option><option value="road">Road or street work</option><option value="other">Other notice</option></select></label>
+        <label class="f">Meeting, hearing or due date<input type="date" name="event_date"></label>
+        <label class="f">Published<input type="date" name="published"></label>
+        <label class="f">Link to the document (optional)<input type="url" name="pdf_url" placeholder="https://"></label>
+        <label class="f full">Notice text<textarea name="text" required rows="8"></textarea></label>
+        <div class="f full mapfld"><span>Map of where it applies (optional)</span><input type="hidden" name="geometry">
+        <div class="row"><button class="btn" type="button" data-map-open>Add a map</button><span class="small muted" data-map-sum></span></div><div data-map-box hidden></div></div>
+        <div class="full row"><button class="btn primary" type="submit">Save and post</button><button class="btn quiet" type="button" data-cancel>Cancel</button><span class="small err" role="alert"></span></div>
+      </form>
+      <h2 class="h2">Posted from this workspace</h2>
+      <ul class="items" id="l-notice"></ul>
+      <details style="margin-top:22px"><summary class="small" style="cursor:pointer">Already on the site from your records (read only)</summary>
+        <p class="small muted">Read from your own website, calendar or the notice site. These can’t be edited here; use Record data to flag a mistake.</p>
+        <ul class="items" id="r-notice"></ul></details>
+    </section>
+
+    <section id="p-events" data-panel hidden>
+      <p class="sub">Events and closures for the community calendar. They show on the events page as soon as you save them.</p>
+      <div class="row" style="margin-bottom:12px" data-can="publisher"><button class="btn primary" type="button" data-new="event">Add an event</button></div>
+      <form class="panel form" id="f-event" data-kind="event" hidden style="margin-bottom:16px">
+        <input type="hidden" name="id">
+        <label class="f full">Event name<input name="title" required maxlength="200"></label>
+        <label class="f">Starts<input type="datetime-local" name="starts" required></label>
+        <label class="f">Ends (optional)<input type="datetime-local" name="ends"></label>
+        <label class="f">Where<input name="venue" maxlength="200"></label>
+        <label class="f">Kind<select name="category"><option value="Community">Community event</option><option value="Public meeting">Public meeting</option></select></label>
+        <label class="f">Cost (optional)<input name="cost" maxlength="80" placeholder="Free"></label>
+        <label class="f">More information (optional)<input type="url" name="url" placeholder="https://"></label>
+        <div class="full row"><button class="btn primary" type="submit">Save and post</button><button class="btn quiet" type="button" data-cancel>Cancel</button><span class="small err" role="alert"></span></div>
+      </form>
+      <h2 class="h2">Posted from this workspace</h2>
+      <ul class="items" id="l-event"></ul>
+      <details style="margin-top:22px"><summary class="small" style="cursor:pointer">Already on the site from your records (read only)</summary>
+        <p class="small muted">Read from your own website, calendar or the notice site. These can’t be edited here; use Record data to flag a mistake.</p>
+        <ul class="items" id="r-event"></ul></details>
+    </section>
+
+    <section id="p-jobs" data-panel hidden>
+      <p class="sub">Job openings. They show on the government jobs page as soon as you save them, with your link to apply.</p>
+      <div class="row" style="margin-bottom:12px" data-can="publisher"><button class="btn primary" type="button" data-new="job">Add a job</button></div>
+      <form class="panel form" id="f-job" data-kind="job" hidden style="margin-bottom:16px">
+        <input type="hidden" name="id">
+        <label class="f full">Job title<input name="title" required maxlength="200"></label>
+        <label class="f">Department<input name="department" maxlength="200"></label>
+        <label class="f">Type<select name="job_type"><option value="">Not stated</option><option>Full time</option><option>Part time</option><option>Seasonal</option><option>Temporary</option><option>Volunteer</option></select></label>
+        <label class="f">Pay (optional)<input name="pay" maxlength="120" placeholder="$18.50 an hour"></label>
+        <label class="f">Link to apply<input type="url" name="url" required placeholder="https://"></label>
+        <label class="f">Posted<input type="date" name="posted"></label>
+        <label class="f">Closes (optional)<input type="date" name="closes"></label>
+        <div class="full row"><button class="btn primary" type="submit">Save and post</button><button class="btn quiet" type="button" data-cancel>Cancel</button><span class="small err" role="alert"></span></div>
+      </form>
+      <h2 class="h2">Posted from this workspace</h2>
+      <ul class="items" id="l-job"></ul>
+      <details style="margin-top:22px"><summary class="small" style="cursor:pointer">Already on the site from your records (read only)</summary>
+        <p class="small muted">Read from your own website, calendar or the notice site. These can’t be edited here; use Record data to flag a mistake.</p>
+        <ul class="items" id="r-job"></ul></details>
+    </section>
+
+    <section id="p-records" data-panel hidden>
+      <div class="lock"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg><div><b>Record data can’t be edited here.</b> It comes from public records (budgets, minutes, rate sheets, the notice website, your job board and calendar). If a number or name is wrong, flag it with the right value and where it comes from. We check it against the source and fix it there, so the record and the site agree.</div></div>
+      <div class="filters"><select class="sel" id="rec-pick" aria-label="Data"></select><span class="small muted" id="rec-count" style="align-self:center"></span></div>
+      <div class="tw"><table class="t rec" id="rec-t"><thead></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="p-flags" data-panel hidden>
+      <p class="sub">Flags you sent about record data, and our answers. A flag doesn’t change anything by itself: we check the source first.</p>
+      <ul class="items" id="l-flags"></ul>
+    </section>
+
+    <section id="p-people" data-panel hidden>
+      <p class="sub">Who can sign in to this workspace. Viewers see everything and change nothing. Publishers post notices, events and jobs. Alert senders also send emergency alerts. Owners also manage this list. Auditors read everything, including the activity log.</p>
+      <form id="pp-form" class="panel row" style="align-items:flex-end;margin-bottom:12px">
+        <label class="f grow">Work email<input type="email" name="email" required placeholder="name@cityoflynnhaven.com"></label>
+        <label class="f">Access<select name="role"><option value="viewer">Viewer</option><option value="publisher">Publisher</option><option value="alert_sender">Alert sender</option><option value="owner">Owner</option><option value="auditor">Auditor (read only)</option></select></label>
+        <button class="btn primary" type="submit">Give access</button>
+      </form>
+      <p class="small" id="pp-msg" role="status"></p>
+      <div class="tw"><table class="t" id="pp-t"><thead><tr><th>Email</th><th>Access</th><th>Added by</th><th>Since</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="p-activity" data-panel hidden>
+      <p class="sub">Every sign-in, post, alert, flag and access change in this workspace, newest first.</p>
+      <div class="tw"><table class="t" id="act-t"><thead><tr><th>When</th><th>Who</th><th>What</th></tr></thead><tbody></tbody></table></div>
+    </section>
+    </main>
+    </div>
+  </div>
+</div>
+
+<dialog class="modal" id="flag-dlg" aria-labelledby="flag-h"><form method="dialog" id="flag-form">
+  <h2 id="flag-h">Flag this record</h2>
+  <dl class="kv" id="flag-rec"></dl>
+  <label class="f">Which value is wrong<select name="field" id="flag-field"></select></label>
+  <label class="f">What it should be<input name="correct_value" maxlength="500"></label>
+  <label class="f">Where that comes from (link, optional)<input type="url" name="evidence_url" placeholder="https://"></label>
+  <label class="f">Anything else (optional)<textarea name="note" rows="3" maxlength="2000"></textarea></label>
+  <div class="row"><button class="btn primary" type="submit" value="send">Send flag</button><button class="btn quiet" type="button" id="flag-cancel">Cancel</button><span class="small err" role="alert"></span></div>
+</form></dialog>
+<script src="/assets/area-map.js" defer></script>
+<script src="/assets/staff.js" defer></script>
+</body>
+</html>

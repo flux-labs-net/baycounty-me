@@ -33,11 +33,13 @@ async function claim(place) {
 }
 
 async function store(place, notices, ok) {
-  const rows = notices.map(n => ({...Object.fromEntries(COLS.map(c => [c, n[c] ?? null])), push_topic: E.pushTopic(n), active: n.status === 'active'}));
+  // The map shape (staff alerts) is written only when a notice has one, so a run before migration 0090 still stores.
+  const cols = notices.some(n => n.geometry) ? [...COLS, 'geometry'] : COLS;
+  const rows = notices.map(n => ({...Object.fromEntries(cols.map(c => [c, n[c] ?? null])), push_topic: E.pushTopic(n), active: n.status === 'active'}));
   if (rows.length) {
-    await db.q(`insert into emergency_live (${COLS.join(', ')}, push_topic, active)
-      select ${COLS.join(', ')}, push_topic, active from json_populate_recordset(null::emergency_live, $1::json)
-      on conflict (notice_id) do update set ${[...COLS.filter(c => c !== 'notice_id'), 'push_topic', 'active'].map(c => `${c} = excluded.${c}`).join(', ')}, last_seen = now()`,
+    await db.q(`insert into emergency_live (${cols.join(', ')}, push_topic, active)
+      select ${cols.join(', ')}, push_topic, active from json_populate_recordset(null::emergency_live, $1::json)
+      on conflict (notice_id) do update set ${[...cols.filter(c => c !== 'notice_id'), 'push_topic', 'active'].map(c => `${c} = excluded.${c}`).join(', ')}, last_seen = now()`,
     [JSON.stringify(rows)]);
   }
   // End notices that their source no longer lists (only for sources that answered this time).
@@ -49,9 +51,14 @@ async function store(place, notices, ok) {
 }
 
 // Signed-in phones that want this notice (only phones tied to an account get alerts): the topic is on, and the notice's government is one they follow (or they follow all).
+// A staff alert for one city goes to phones following that city; a countywide one (or one from the county) to all.
+function govFilter(n) {
+  if (n.source_type === 'staff') return n.area === require('./_gov').COUNTYWIDE || n.gov_id === 'county' ? null : n.gov_id;
+  return E.LOCAL_KINDS.includes(n.kind) ? n.gov_id : null;
+}
 async function devicesFor(place, topic, n) {
   return db.q(`select token, platform, quiet from push.devices where place_id = $1 and disabled_at is null and user_id is not null and topics && $2::text[]
-      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, E.topicsFor(topic), E.LOCAL_KINDS.includes(n.kind) ? n.gov_id : null]);
+      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, E.topicsFor(topic), govFilter(n)]);
 }
 
 // How many people a notice reached per channel, for the alert timeline (emergency_reach, counts only).
@@ -140,4 +147,4 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   return {place, checked_at: new Date().toISOString(), ms: Date.now() - t0, notices: r.notices.length, active, ended, pushed, agenda, errors: r.errors, sources_ok: r.ok};
 }
 
-module.exports = {run, sourceKey, store, pushNew, claim, reach};
+module.exports = {run, sourceKey, store, pushNew, claim, reach, govFilter};
