@@ -6,10 +6,14 @@ on:
     paths: ["ios/BayCountyMe/**", "ios/BayCountyStaff/**", ".github/workflows/ios-screenshots.yml"]
 jobs:
   screenshots:
-    runs-on: [self-hosted, studio]
+    runs-on: [self-hosted, macOS]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      - name: Use the full Xcode, not the Command Line Tools
+        run: |
+          if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
+          else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
       - run: brew install xcodegen
       - name: Build for the simulator
         working-directory: ios
