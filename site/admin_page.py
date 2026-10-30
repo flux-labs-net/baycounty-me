@@ -565,13 +565,14 @@ def admin_page(out_dir):
     </section>
 
     <section id="tab-govstaff" class="pane" hidden>
-      <div class="banner"><div><b>Who can sign in to the government workspace.</b> <span class="small muted">City and county staff sign in at <a href="/staff" target="_blank" rel="noopener">/staff</a> with an emailed code. Viewers see everything and change nothing; publishers post notices, events and jobs; alert senders also send emergency alerts; owners also manage their own staff list. Nobody there can edit record data, only flag it (Staff data flags). Countywide alerts need a second person.</span></div></div>
+      <div class="banner"><div><b>Who can sign in to the government workspace.</b> <span class="small muted">City and county staff sign in at <a href="/staff" target="_blank" rel="noopener">/staff</a> with an emailed code. Viewers see everything and change nothing; publishers post notices, events and jobs; alert senders also send emergency alerts; owners also manage their own staff list. Elected officials (commissioners and council members) get a board dashboard of their agendas, their votes and the numbers, with PDF reports, tied to their seat. Nobody there can edit record data, only flag it (Staff data flags). Countywide alerts need a second person.</span></div></div>
       <div class="tw"><table class="at" id="gs-ws" data-tt="off"><thead><tr><th>Government</th><th>People</th><th>Live alerts</th><th>Last activity</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
         <h2 class="h2 grow" style="margin:0">People</h2>
         <select class="sel" id="gs-gov" aria-label="Government"></select>
         <input class="sel" id="gs-email" type="email" placeholder="name@city.gov" aria-label="Email">
-        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="records">Records sender</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option></select>
+        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="records">Records sender</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option><option value="official">Elected official</option></select>
+        <select class="sel" id="gs-person" aria-label="Which official" hidden></select>
         <button class="btn" id="gs-add" type="button">Give access</button>
       </div>
       <div class="tw"><table class="at" id="gs-table" data-tt="off"><thead><tr><th>Government</th><th>Email</th><th>Access</th><th>Added by</th><th>Since</th></tr></thead><tbody></tbody></table></div>

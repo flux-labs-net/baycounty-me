@@ -32,8 +32,8 @@ import java.util.Locale
 /** The staff app (BayCounty.me Staff): the government workspace (/staff) on a phone, through /api/gov (api/gov.js).
  *  Mirrors ios/BayCountyKit Staff.swift; the same demo answers (staff-demo.json) and tests. */
 object Staff {
-    val rank = mapOf("viewer" to 1, "auditor" to 1, "records" to 1, "publisher" to 2, "alert_sender" to 3, "owner" to 4)
-    val roleLabel = mapOf("owner" to "Owner", "alert_sender" to "Alert sender", "publisher" to "Publisher", "records" to "Records sender", "viewer" to "Viewer", "auditor" to "Auditor")
+    val rank = mapOf("viewer" to 1, "auditor" to 1, "records" to 1, "official" to 1, "publisher" to 2, "alert_sender" to 3, "owner" to 4)
+    val roleLabel = mapOf("owner" to "Owner", "alert_sender" to "Alert sender", "publisher" to "Publisher", "records" to "Records sender", "viewer" to "Viewer", "auditor" to "Auditor", "official" to "Elected official")
     /** [need] is a role, or "submit" (send records): the records sender role, or publisher and up (api/_gov.js allowed). */
     fun can(role: String, need: String) =
         if (need == "submit") role == "records" || (rank[role] ?: 0) >= 2 else (rank[role] ?: 0) >= (rank[need] ?: 9)
@@ -79,7 +79,10 @@ object Staff {
 }
 
 @Serializable
-data class StaffWorkspace(val id: String, val name: String, val countywide: Boolean? = null, val role: String) {
+data class StaffWorkspace(val id: String, val name: String, val countywide: Boolean? = null, val role: String,
+                          @SerialName("person_id") val personId: String? = null) {
+    /** An elected commissioner or council member: opens on their board dashboard. */
+    val isOfficial get() = role == "official"
     val roleLabel get() = Staff.roleLabel[role] ?: role
     fun can(need: String) = Staff.can(role, need)
 }
@@ -249,10 +252,76 @@ data class StaffRecordPreview(
     }
 }
 
+/** GET ?action=official: an elected official's board dashboard (api/_official.js). All public record, read only. */
+@Serializable
+data class StaffBoard(
+    val official: Seat? = null, val board: List<Seat> = emptyList(), val government: String = "",
+    val meetings: Meetings = Meetings(), val votes: Votes? = null, val numbers: Numbers? = null,
+) {
+    @Serializable
+    data class Seat(@SerialName("person_id") val personId: String, val name: String, val seat: String, val body: String? = null, val since: String? = null)
+    @Serializable
+    data class Meetings(val upcoming: List<Meeting> = emptyList(), val recent: List<Meeting> = emptyList())
+    @Serializable
+    data class Meeting(
+        @SerialName("board_name") val boardName: String, val title: String, val date: String, val start: String? = null, val location: String? = null,
+        @SerialName("agenda_url") val agendaUrl: String? = null, @SerialName("packet_url") val packetUrl: String? = null,
+        @SerialName("minutes_url") val minutesUrl: String? = null, val status: String? = null, val items: List<Item> = emptyList(),
+        @SerialName("money_items") val moneyItems: Int = 0,
+    ) {
+        val statusLabel: String? get() = when { status == "cancelled" -> "Cancelled"; status == "expected" -> "Agenda not posted yet"; agendaUrl != null -> "Agenda posted"; else -> null }
+    }
+    @Serializable
+    data class Item(val title: String, val amount: String? = null)
+    @Serializable
+    data class Votes(val count: Count = Count(), @SerialName("present_rate") val presentRate: Double? = null, val recent: List<Vote> = emptyList(),
+                     val first: String? = null, val last: String? = null)
+    @Serializable
+    data class Count(val votes: Int = 0, val yes: Int = 0, val no: Int = 0, val absent: Int = 0, val abstain: Int = 0, val split: Int = 0,
+                     @SerialName("on_losing_side") val onLosingSide: Int = 0)
+    @Serializable
+    data class Vote(
+        val date: String? = null, val vote: String, val headline: String? = null, val outcome: String? = null, val tally: String? = null,
+        val split: Boolean = false, @SerialName("on_losing_side") val onLosingSide: Boolean = false, val amount: Double? = null,
+        @SerialName("source_url") val sourceUrl: String? = null,
+    ) {
+        val voteLabel get() = mapOf("yes" to "Yes", "no" to "No", "absent" to "Absent", "abstain" to "Abstained")[vote] ?: "Not recorded"
+        /** "Passed 3-2", leaving out tallies the minutes didn't give. */
+        val result: String get() = listOfNotNull(outcome?.replaceFirstChar { it.uppercase() }, tally?.takeIf { Regex("""^\d+\s*-\s*\d+$""").matches(it) }).joinToString(" ")
+    }
+    @Serializable
+    data class Numbers(val budget: Budget? = null, val contracts: Contracts = Contracts())
+    @Serializable
+    data class Budget(val history: List<Year> = emptyList())
+    @Serializable
+    data class Year(@SerialName("fiscal_year") val fiscalYear: Int, val total: Double? = null, @SerialName("general_fund") val generalFund: Double? = null)
+    @Serializable
+    data class Contracts(val count: Int = 0, val total: Double = 0.0, val rows: List<Contract> = emptyList())
+    @Serializable
+    data class Contract(val date: String? = null, val vendor: String, val amount: Double? = null, val purpose: String? = null)
+
+    val latestBudget get() = numbers?.budget?.history?.lastOrNull()
+    val nextMeeting get() = meetings.upcoming.firstOrNull { it.status != "cancelled" }
+
+    companion object {
+        /** "$789.1M", "$84K", "$950". */
+        fun money(v: Double?): String {
+            if (v == null) return "—"
+            val a = kotlin.math.abs(v)
+            return when {
+                a >= 1e9 -> "$" + String.format(Locale.US, "%.2fB", v / 1e9)
+                a >= 1e6 -> "$" + String.format(Locale.US, "%.1fM", v / 1e6)
+                a >= 1e4 -> "$" + Math.round(v / 1e3) + "K"
+                else -> "$" + NumberFormat.getIntegerInstance(Locale.US).format(Math.round(v))
+            }
+        }
+    }
+}
+
 /** Made-up answers for screenshots and store review: staff-demo.json (same file as the iOS app's). */
 @Serializable
 data class StaffDemo(val me: StaffMe, val overview: StaffOverview, val home: StaffHome, val alerts: StaffAlerts, val notices: StaffPosts, val flags: StaffFlags,
-                     val submissions: StaffSubmissions? = null) {
+                     val submissions: StaffSubmissions? = null, val board: StaffBoard? = null) {
     companion object { fun decode(json: String): StaffDemo = BCJson.decodeFromString(serializer(), json) }
 }
 
@@ -323,6 +392,9 @@ class StaffClient(var token: String?, private val baseURL: String = BayCountyCli
         })
     }
     suspend fun withdrawNotice(ws: String, id: Int) { call("withdraw", body = buildJsonObject { put("workspace", ws); put("kind", "notice"); put("id", id) }) }
+    /** The board dashboard; [person] picks a board member (an official's own seat by default). */
+    suspend fun board(ws: String, person: String? = null): StaffBoard =
+        decode(call("official", mapOf("workspace" to ws) + (if (person != null) mapOf("person" to person) else emptyMap())))
     suspend fun flags(ws: String): StaffFlags = decode(call("flags", mapOf("workspace" to ws)))
     suspend fun reviewFlags(status: String = "open"): StaffFlags = decode(call("review-flags", mapOf("status" to status)))
     suspend fun answerFlag(id: Int, status: String, reply: String) { call("review-flag", body = buildJsonObject { put("id", id); put("status", status); put("reply", reply) }) }

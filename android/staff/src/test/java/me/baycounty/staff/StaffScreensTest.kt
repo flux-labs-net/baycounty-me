@@ -15,7 +15,7 @@ import java.io.File
 /** Renders the staff app's screens on the JVM from its made-up demo data (staff-demo.json), in light and dark.
  *  -Dfullres=DIR writes each PNG at full size; CI uploads them. */
 @RunWith(Parameterized::class)
-class StaffScreensTest(@Suppress("unused") private val label: String, private val screen: String, private val asStaff: Boolean, private val dark: Boolean) {
+class StaffScreensTest(@Suppress("unused") private val label: String, private val screen: String, private val who: String, private val dark: Boolean) {
     companion object {
         private val shots = listOf(
             "owner-overview" to ("overview" to false), "owner-flags" to ("flags" to false), "owner-flag" to ("flag" to false),
@@ -23,11 +23,14 @@ class StaffScreensTest(@Suppress("unused") private val label: String, private va
             "city-notices" to ("notices" to true), "city-notice" to ("notice" to true), "more" to ("more" to false),
             "city-records" to ("records" to true), "city-send-file" to ("send-file" to true), "city-send-file-preview" to ("send-file-preview" to true),
             "signin" to ("signin" to false), "signin-code" to ("signin-code" to false), "locked" to ("locked" to false),
+            "official-board" to ("board" to null), "official-votes" to ("votes" to null), "official-more" to ("more" to null),
         )
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
         fun params(): List<Array<Any>> = shots.flatMap { (name, s) ->
-            listOf(arrayOf<Any>("${name}_light", s.first, s.second, false), arrayOf<Any>("${name}_dark", s.first, s.second, true))
+            // who: "staff" (a city alert sender), "owner" (the site owner) or "official" (an elected commissioner; second is null)
+            val who = when (s.second) { true -> "staff"; false -> "owner"; null -> "official" }
+            listOf(arrayOf<Any>("${name}_light", s.first, who, false), arrayOf<Any>("${name}_dark", s.first, who, true))
         }
     }
 
@@ -40,7 +43,7 @@ class StaffScreensTest(@Suppress("unused") private val label: String, private va
     @Test
     fun render() {
         val demo = StaffDemo.decode(File(System.getProperty("user.dir"), "src/main/assets/staff-demo.json").readText())
-        val model = StaffModel(NoTokens, demo, asStaff = asStaff)
+        val model = StaffModel(NoTokens, demo, asStaff = who == "staff", asOfficial = who == "official")
         paparazzi.snapshot { StaffTheme(dark) { StaffApp(model, screen = screen, locked = false, onUnlock = {}) } }
     }
 }

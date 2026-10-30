@@ -139,7 +139,7 @@ test.before(async () => {
   await pool.query(STUBS);
   for (const f of ['0015_finance.sql', '0016_finance_signin.sql', '0048_finance_publish.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   // 0023 needs the whole ingest schema; the one column 0091 reads is stubbed above.
-  for (const f of ['0088_gov_workspace.sql', '0090_area_maps.sql', '0091_records_submission.sql', '0092_records_phase2.sql', '0093_records_verify_audit.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
+  for (const f of ['0088_gov_workspace.sql', '0090_area_maps.sql', '0091_records_submission.sql', '0092_records_phase2.sql', '0093_records_verify_audit.sql', '0096_official_dashboard.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   await q(`insert into gov.members (workspace_id, email, role) values ('parker', 'finance@parker.test', 'records'), ('parker', 'mayor@parker.test', 'viewer'),
     ('parker', 'clerk@parker.test', 'publisher'), ('parker', 'owner@parker.test', 'owner')`);
   const {createHandler} = require('../gov');

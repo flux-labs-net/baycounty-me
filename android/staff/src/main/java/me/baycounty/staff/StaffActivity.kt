@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 
 /** BayCounty.me Staff. Locks behind the fingerprint, face or screen lock after 5 minutes away, because it can send
- *  alerts to every phone in a city. Extras for screenshots: demo=true, asStaff=true, screen=overview|alerts|send|... */
+ *  alerts to every phone in a city. Extras for screenshots: demo=true, asStaff=true, asOfficial=true, screen=board|votes|overview|alerts|send|... */
 class StaffActivity : FragmentActivity() {
     private lateinit var model: StaffModel
     private var locked by mutableStateOf(false)
@@ -26,7 +26,8 @@ class StaffActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val demo = intent.getStringExtra("demo") == "true"
-        model = if (demo) StaffModel(NoTokens, StaffModel.demoFrom(this), asStaff = intent.getStringExtra("asStaff") == "true")
+        model = if (demo) StaffModel(NoTokens, StaffModel.demoFrom(this), asStaff = intent.getStringExtra("asStaff") == "true",
+                asOfficial = intent.getStringExtra("asOfficial") == "true")
                 else StaffModel(PrefsTokenStore(this))
         locked = !demo && model.signedIn
         val screen = intent.getStringExtra("screen")

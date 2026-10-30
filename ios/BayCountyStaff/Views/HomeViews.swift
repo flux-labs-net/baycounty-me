@@ -278,8 +278,13 @@ struct MoreView: View {
             }
             Section {
                 Label("Face ID or your passcode after 5 minutes away", systemImage: "faceid")
-                Label("Countywide alerts need a second person to confirm", systemImage: "person.2")
-                Label("Every action is logged for your workspace owner", systemImage: "list.bullet.rectangle")
+                if store.isOfficial {
+                    Label("Read only: public records can be flagged, never changed", systemImage: "lock")
+                    Label("Every report you download is logged", systemImage: "list.bullet.rectangle")
+                } else {
+                    Label("Countywide alerts need a second person to confirm", systemImage: "person.2")
+                    Label("Every action is logged for your workspace owner", systemImage: "list.bullet.rectangle")
+                }
             } header: { Text("Safety") }
             Section {
                 Link(destination: URL(string: "https://baycounty.me/staff")!) { Label("Open the full workspace on the web", systemImage: "safari") }

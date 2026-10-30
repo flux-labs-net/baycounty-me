@@ -126,6 +126,8 @@ jobs:
             shot "city-send-file_$mode" -asStaff -screen send-file
             shot "city-send-file-preview_$mode" -asStaff -screen send-file-preview
             shot "more_$mode" -screen more
+            shot "official-board_$mode" -asOfficial -screen board
+            shot "official-votes_$mode" -asOfficial -screen votes
           done
           xcrun simctl ui "$DEV" appearance light
           shot signin -screen signin

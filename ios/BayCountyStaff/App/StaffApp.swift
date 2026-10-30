@@ -4,6 +4,7 @@ import BayCountyKit
 
 /// BayCounty.me Staff: the government workspace on a phone, for city and county staff and the site owner.
 /// Launch arguments for screenshots: -demo (made-up data), -asStaff (a city alert sender instead of the owner),
+/// -asOfficial (an elected commissioner: board dashboard; -screen board|votes),
 /// -workspace lh (open one government), -screen overview|home|alerts|send|notices|notice|flags|flag|more|records|send-file|send-file-preview|signin|signin-code|locked.
 @main
 struct BayCountyStaffApp: App {
@@ -116,11 +117,32 @@ struct StaffRoot: View {
         case "notices", "notice": return "notices"
         case "flags", "flag": return "flags"
         case "more", "records", "send-file", "send-file-preview": return "more"
-        default: return "home"
+        case "board": return "board"
+        case "votes": return "votes"
+        default: return ProcessInfo.processInfo.arguments.contains("-asOfficial") ? "board" : "home"
         }
     }()
 
     var body: some View {
+        if store.isOfficial { officialTabs } else { staffTabs }
+    }
+
+    /// An elected official sees their board dashboard and votes; staff see the workspace.
+    private var officialTabs: some View {
+        TabView(selection: $tab) {
+            NavigationStack { BoardView() }
+                .tabItem { Label("Board", systemImage: "building.columns") }.tag("board")
+            NavigationStack { VotesView() }
+                .tabItem { Label("Votes", systemImage: "checkmark.seal") }.tag("votes")
+            NavigationStack { FlagsView() }
+                .tabItem { Label("Flags", systemImage: "flag") }.tag("flags")
+            NavigationStack { MoreView() }
+                .tabItem { Label("More", systemImage: "ellipsis.circle") }.tag("more")
+        }
+        .onAppear { if tab == "home" { tab = "board" } }
+    }
+
+    private var staffTabs: some View {
         TabView(selection: $tab) {
             NavigationStack { store.workspaceId == nil && store.isOwner ? AnyView(OverviewView()) : AnyView(WorkspaceHomeView()) }
                 .tabItem { Label(store.workspaceId == nil && store.isOwner ? "Overview" : "Home", systemImage: "square.grid.2x2") }.tag("home")

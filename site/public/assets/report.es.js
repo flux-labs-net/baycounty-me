@@ -461,7 +461,7 @@ async function compose(orientation) {
   const root = document.querySelector('main .page') || document.querySelector('main .wrap') || document.querySelector('main');
   const h1 = root.querySelector('h1'), title = window.BCReportTitle ? window.BCReportTitle() : h1 ? textOf(h1) : document.title;
   const header = h1 ? h1.closest('header') || h1.parentElement : null;
-  const eyebrow = header?.querySelector('.eyebrow') ? textOf(header.querySelector('.eyebrow')) : 'BayCounty.me';
+  const eyebrow = window.BCReportEyebrow ? window.BCReportEyebrow() : header?.querySelector('.eyebrow') ? textOf(header.querySelector('.eyebrow')) : 'BayCounty.me';
   const lede = header?.querySelector('.lede') ? textOf(header.querySelector('.lede')) : '';
   const meta = document.getElementById('printMeta');
   const sub = window.BCReportMeta ? window.BCReportMeta() : (meta && meta.textContent.trim() ? meta.textContent.trim() : '');

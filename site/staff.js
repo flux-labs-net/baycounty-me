@@ -15,7 +15,9 @@
     records_review_published: 'published a file after review', records_review_held: 'kept a file off the site after review', intake_senders_changed: 'changed who may email records in',
     feed_agreed: 'agreed to a source we read', feed_unagreed: 'took back agreement to a source'};
 
-  let me = null, ws = null, wsInfo = null, role = 'viewer';
+  let me = null, ws = null, wsInfo = null, role = 'viewer', HOME = 'home';
+  // Elected officials see their board dashboard and their record data; nothing staff post or send.
+  const STAFF_ONLY = ['home', 'alerts', 'notices', 'events', 'jobs', 'submit'];
   // submit = send records: the records role, or publisher and up.
   const can = r => r === 'submit' ? role === 'records' || (ROLE[role] || 0) >= 2 : (ROLE[role] || 0) >= (ROLE[r] || 9);
 
@@ -56,7 +58,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.reload(); });
 
   // ---------- menu ----------
-  const loaders = {home: loadHome, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
+  const loaders = {home: loadHome, board: loadBoard, agendas: loadAgendas, votes: loadVotes, numbers: loadNumbers, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
     submit: loadSubmit, records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) { nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open); menuBtn.setAttribute('aria-expanded', String(open)); }
@@ -64,9 +66,9 @@
   $('#an-close').addEventListener('click', () => menu(false));
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) menu(false); });
   function tab(name, push = true) {
-    if (!loaders[name]) name = 'home';
+    if (!loaders[name]) name = HOME;
     const link = nav.querySelector(`[data-tab="${name}"]`);
-    if (!link || link.hidden) name = 'home';
+    if (!link || link.hidden) name = HOME;
     nav.querySelectorAll('[data-tab]').forEach(a => a.dataset.tab === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
     $$('[data-panel]').forEach(p => { p.hidden = p.id !== 'p-' + name; });
     const title = nav.querySelector(`[data-tab="${name}"] span`).textContent;
@@ -98,6 +100,10 @@
     $('#who').textContent = j.email; $('#who').title = j.email;
     $('#who-role').textContent = (j.roles[role] || role) + (j.admin ? ' (BayCounty.me)' : '');
     nav.querySelectorAll('[data-min]').forEach(a => { a.hidden = !can(a.dataset.min) && !(a.dataset.tab === 'activity' && role === 'auditor'); });
+    if (role === 'official') {
+      HOME = 'board';
+      STAFF_ONLY.forEach(t => { const a = nav.querySelector(`[data-tab="${t}"]`); if (a) a.hidden = true; });
+    }
     nav.querySelectorAll('.an-g').forEach(g => { g.hidden = !g.querySelector('a[data-tab]:not([hidden])'); });
     $$('[data-can]').forEach(el => { el.hidden = !can(el.dataset.can); });
     $$('[data-cant]').forEach(el => { el.hidden = can(el.dataset.cant); });
@@ -105,7 +111,7 @@
     $('#al-cw-l').hidden = !wsInfo.countywide;
     $('#rec-pick').innerHTML = Object.entries(j.records).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
     $('#signin').hidden = true; $('#app').hidden = false;
-    tab(location.hash.slice(1) || 'home', false);
+    tab(location.hash.slice(1) || HOME, false);
   }
 
   // ---------- home ----------
@@ -122,6 +128,152 @@
     $('#home-activity').innerHTML = h.activity.length ? h.activity.map(a => `<li><div class="grow"><h3>${actLine(a)}</h3><div class="meta">${when(a.at)}</div></div></li>`).join('')
       : '<li class="muted small">Nothing yet.</li>';
   }
+
+
+  // ---------- board dashboard (elected officials; staff see it too) ----------
+  // One read of /api/gov?action=official per board member; every tab draws from it. All public record, read only.
+  const cash = v => v == null || isNaN(v) ? '—' : (Math.abs(v) >= 1e9 ? '$' + (v / 1e9).toFixed(2) + 'B' : Math.abs(v) >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : Math.abs(v) >= 1e4 ? '$' + Math.round(v / 1e3) + 'K' : '$' + Math.round(v).toLocaleString('en-US'));
+  const dollars = v => v == null || isNaN(v) ? '—' : '$' + Math.round(v).toLocaleString('en-US');
+  const pctOf = v => v == null ? '—' : Math.round(v * 100) + '%';
+  const cnt = v => v == null ? '—' : Number(v).toLocaleString('en-US');
+  const href = (kind, key) => kind === 'person' ? `/people/${encodeURIComponent(key)}` : `/profile/${kind}/${encodeURIComponent(key)}`;
+  const nameLink = (kind, key, text) => key ? `<a href="${href(kind, key)}" target="_blank" rel="noopener">${esc(text)}</a>` : esc(text);
+  const kpi = (label, v, sub) => `<div class="kpi"><span class="eyebrow">${esc(label)}</span><span class="v">${v}</span>${sub ? `<span class="s">${sub}</span>` : ''}</div>`;
+  const VOTE_LBL = {yes: 'Yes', no: 'No', absent: 'Absent', abstain: 'Abstained', other: 'Not recorded'};
+  const voteTag = v => `<span class="tag ${v === 'yes' ? 'yes' : v === 'no' ? 'no' : ''}">${VOTE_LBL[v] || esc(v)}</span>`;
+  const mtgTime = m => { const d = new Date(m.start && m.start.length > 10 ? m.start : (m.date || '') + 'T12:00:00'); if (isNaN(d)) return esc(m.date);
+    return d.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'}) + (m.start && m.start.length > 10 ? ', ' + d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : ''); };
+  let ob = null, obFor = undefined, obBusy = null;
+  async function board() {
+    const want = $('#ob-pick').value || '';
+    if (ob && obFor === want) return ob;
+    if (obBusy && obFor === want) return obBusy;
+    obFor = want;
+    obBusy = api('official', {params: want ? {person: want} : {}}).then(j => { ob = j; obBusy = null; pickers(j); return j; });
+    return obBusy;
+  }
+  function pickers(j) {
+    const sel = $('#ob-pick');
+    if (!sel.options.length && j.board.length) {
+      sel.innerHTML = j.board.map(b => `<option value="${esc(b.person_id)}">${esc(b.name)} · ${esc(b.seat)}</option>`).join('');
+      if (j.official) sel.value = j.official.person_id;
+    }
+    // Officials open on their own seat; they can still look at a colleague's record (it is all public).
+    $('#ob-pick-l').hidden = !j.board.length;
+    $('#ob-pick-l span').textContent = role === 'official' ? 'Showing' : 'Board member';
+  }
+  $('#ob-pick').addEventListener('change', () => { ob = null; tab(location.hash.slice(1) || HOME, false); });
+  const who = j => j.official ? `<div class="ob-who"><span class="av" aria-hidden="true" data-report="skip">${esc(j.official.name.split(/\s+/).map(w => w[0]).slice(0, 2).join(''))}</span><div>
+      <h2>${nameLink('person', j.official.person_id, j.official.name)}</h2><p>${esc(j.official.seat)} · ${esc(j.official.body)}, ${esc(j.government)}${j.official.since ? ` · since ${day(j.official.since)}` : ''}${j.official.former ? ' · former member' : ''}</p></div></div>`
+    : `<p class="readonly">No seat on record is tied to this account yet. Ask BayCounty.me to link your seat.</p>`;
+  const voteRow = v => `<tr><td class="nw">${day(v.date)}</td><td>${voteTag(v.vote)}${v.on_losing_side ? ' <span title="On the losing side">•</span>' : ''}</td>
+    <td class="long">${v.source_url ? `<a href="${esc(v.source_url)}" target="_blank" rel="noopener">${esc(v.headline || 'Motion')}</a>` : esc(v.headline || 'Motion')}${v.amount ? ` <b>${dollars(v.amount)}</b>` : ''}</td>
+    <td class="nw">${esc(v.outcome ? v.outcome[0].toUpperCase() + v.outcome.slice(1) : '')}${/^\d+\s*-\s*\d+$/.test(v.tally || '') ? ' ' + esc(v.tally) : ''}</td></tr>`;
+  const mtgCard = (m, items = 40) => `<li><div class="when">${mtgTime(m)}</div>
+    <div class="meta"><span>${esc(m.board_name)}</span><span>${esc(m.title)}</span>${m.location ? `<span>${esc(m.location)}</span>` : ''}${m.status === 'cancelled' ? '<span class="tag no">Cancelled</span>' : m.status === 'expected' ? '<span class="tag">Expected (agenda not posted yet)</span>' : m.agenda_url ? '<span class="tag soon">Agenda posted</span>' : ''}</div>
+    ${m.agenda_url || m.packet_url ? `<div class="links">${m.agenda_url ? `<a class="btn quiet" href="${esc(m.agenda_url)}" target="_blank" rel="noopener">Agenda</a>` : ''}${m.packet_url ? `<a class="btn quiet" href="${esc(m.packet_url)}" target="_blank" rel="noopener">Full packet</a>` : ''}</div>` : ''}
+    ${m.items.length ? `<ol>${m.items.slice(0, items).map(i => `<li>${esc(i.title)}${i.amount ? ` <b>${esc(i.amount)}</b>` : ''}</li>`).join('')}</ol>${m.items.length > items ? `<p class="ob-note">And ${m.items.length - items} more items on the agenda.</p>` : ''}` : `<p class="ob-note">${m.agenda_url ? 'The items haven’t been read from this agenda yet. Open the agenda for the list.' : 'No agenda posted yet.'}</p>`}</li>`;
+  const empty = (cols, text) => `<tr><td colspan="${cols}" class="empty">${text}</td></tr>`;
+
+  async function loadBoard() {
+    const j = await board();
+    $('#ob-who').innerHTML = who(j);
+    const vt = j.votes, up = j.meetings.upcoming, next = up.find(m => m.status !== 'cancelled');
+    $('#ob-kpis').innerHTML = kpi('Next meeting', next ? new Date(next.date + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) : 'None set', next ? esc(next.board_name) : '') +
+      kpi('Meetings, next 90 days', cnt(up.length), `${cnt(up.reduce((s, m) => s + m.items.length, 0))} agenda items`) +
+      (vt ? kpi('Votes on record', cnt(vt.count.votes), vt.first ? `since ${day(vt.first)}` : '') + kpi('Present for', vt.present_rate == null ? '—' : vt.present_rate + '%', `${cnt(vt.count.absent)} absent`) +
+        kpi('Split votes', cnt(vt.count.split), `${cnt(vt.count.on_losing_side)} on the losing side`) : '') +
+      (j.numbers && j.numbers.budget && j.numbers.budget.history.length ? (h => kpi(`FY${h.fiscal_year} budget`, cash(h.total ?? h.general_fund), h.general_fund ? `General Fund ${cash(h.general_fund)}` : ''))(j.numbers.budget.history[j.numbers.budget.history.length - 1]) : '');
+    $('#ob-next').innerHTML = up.slice(0, 3).map(m => mtgCard(m, 8)).join('') || '<li class="muted small">No meetings on the calendar for the next 90 days.</li>';
+    $('#ob-last tbody').innerHTML = vt ? vt.recent.slice(0, 10).map(voteRow).join('') || empty(4, 'No votes on record.') : empty(4, 'Pick a board member.');
+    $('#ob-board tbody').innerHTML = j.board.map(b => `<tr><td class="nw">${esc(b.seat)}</td><td>${nameLink('person', b.person_id, b.name)}</td><td class="nw">${day(b.since)}</td></tr>`).join('') || empty(3, 'No seats on record.');
+  }
+
+  async function loadAgendas() {
+    const j = await board(), up = j.meetings.upcoming, past = j.meetings.recent;
+    const items = up.reduce((s, m) => s + m.items.length, 0), mi = up.reduce((s, m) => s + m.money_items, 0), mt = up.reduce((s, m) => s + m.money_total, 0);
+    $('#ag-kpis').innerHTML = kpi('Meetings, next 90 days', cnt(up.length), `${cnt(up.filter(m => m.agenda_url).length)} with an agenda posted`) + kpi('Agenda items', cnt(items), '') +
+      kpi('Items with a dollar amount', cnt(mi), mt ? cash(mt) + ' in all' : '');
+    $('#ag-next').innerHTML = up.map(m => mtgCard(m)).join('') || '<li class="muted small">No meetings on the calendar for the next 90 days.</li>';
+    $('#ag-past tbody').innerHTML = past.map(m => `<tr><td class="nw">${day(m.date)}</td><td class="nw">${esc(m.board_name)}</td><td>${esc(m.title)}</td>
+      <td class="nw">${[m.agenda_url && `<a href="${esc(m.agenda_url)}" target="_blank" rel="noopener">Agenda</a>`, m.packet_url && `<a href="${esc(m.packet_url)}" target="_blank" rel="noopener">Packet</a>`, m.minutes_url && `<a href="${esc(m.minutes_url)}" target="_blank" rel="noopener">Minutes</a>`].filter(Boolean).join(' · ') || '—'}</td></tr>`).join('') || empty(4, 'None on record.');
+  }
+
+  async function loadVotes() {
+    const j = await board(), vt = j.votes;
+    if (!vt) { $('#vt-kpis').innerHTML = ''; ['#vt-years', '#vt-split', '#vt-all'].forEach(t => { $(t + ' tbody').innerHTML = empty(6, 'Pick a board member.'); }); return; }
+    const c = vt.count;
+    $('#vt-sub').textContent = `${j.official ? j.official.name + '’s' : 'The'} recorded votes on the ${j.government} ${j.official ? j.official.body : 'board'}, from the official minutes and hand-checked money votes.`;
+    $('#vt-kpis').innerHTML = kpi('Votes on record', cnt(c.votes), vt.first ? `${day(vt.first)} to ${day(vt.last)}` : '') + kpi('Yes', cnt(c.yes), c.votes ? pctOf(c.yes / c.votes) + ' of votes' : '') +
+      kpi('No', cnt(c.no), c.votes ? pctOf(c.no / c.votes) + ' of votes' : '') + kpi('Absent or abstained', cnt(c.absent + c.abstain), vt.present_rate == null ? '' : `present for ${vt.present_rate}%`) +
+      kpi('Split votes', cnt(c.split), `${cnt(c.on_losing_side)} on the losing side`);
+    $('#vt-years tbody').innerHTML = vt.by_year.map(y => `<tr><td>${y.year}</td><td class="num">${cnt(y.votes)}</td><td class="num">${cnt(y.yes)}</td><td class="num">${cnt(y.no)}</td><td class="num">${cnt(y.absent)}</td><td class="num">${cnt(y.abstain)}</td></tr>`).join('') || empty(6, 'No votes on record.');
+    $('#vt-split tbody').innerHTML = vt.split_votes.map(voteRow).join('') || empty(4, 'No split votes on record.');
+    const years = [...new Set(vt.recent.map(v => String(v.date).slice(0, 4)))];
+    $('#vt-year').innerHTML = '<option value="">Every year</option>' + years.map(y => `<option>${y}</option>`).join('');
+    drawVotes();
+  }
+  function drawVotes() {
+    if (!ob || !ob.votes) return;
+    const q = $('#vt-q').value.trim().toLowerCase(), y = $('#vt-year').value, v = $('#vt-vote').value;
+    const rows = ob.votes.recent.filter(r => (!q || String(r.headline).toLowerCase().includes(q)) && (!y || String(r.date).startsWith(y)) && (!v || r.vote === v));
+    $('#vt-count').textContent = `${cnt(rows.length)} vote${rows.length === 1 ? '' : 's'}${ob.votes.count.votes > ob.votes.recent.length ? ` (latest ${cnt(ob.votes.recent.length)} of ${cnt(ob.votes.count.votes)})` : ''}`;
+    $('#vt-all tbody').innerHTML = rows.map(voteRow).join('') || empty(4, 'No votes match.');
+  }
+  ['#vt-q', '#vt-year', '#vt-vote'].forEach(s => $(s).addEventListener(s === '#vt-q' ? 'input' : 'change', drawVotes));
+
+  async function loadNumbers() {
+    const j = await board(), nb = j.numbers || {}, bud = nb.budget, bva = nb.budget_actual, book = nb.checkbook, ct = nb.contracts || {rows: []};
+    const last = bud && bud.history.length ? bud.history[bud.history.length - 1] : null, prev = bud && bud.history.length > 1 ? bud.history[bud.history.length - 2] : null;
+    const chg = last && prev && last.total && prev.total ? (last.total - prev.total) / prev.total : null;
+    $('#nb-kpis').innerHTML = (last ? kpi(`FY${last.fiscal_year} adopted budget`, cash(last.total ?? last.general_fund), chg == null ? '' : `${chg >= 0 ? '+' : '−'}${Math.abs(Math.round(chg * 1000) / 10)}% from FY${prev.fiscal_year}`) : kpi('Adopted budget', 'Not on file', '')) +
+      (bva ? kpi(`Spent, FY${bva.fiscal_year}`, pctOf(bva.totals.used), `of ${cash(bva.totals.budget)} as of ${day(bva.as_of)}`) : '') +
+      (book ? kpi(`Checkbook, FY${book.fiscal_year}`, cash(book.total), `${cnt(book.payments)} payments to ${cnt(book.payees)} payees`) : '') +
+      kpi('Contracts, last 12 months', cash(ct.total), `${cnt(ct.count)} approved`);
+    $('#nb-budget').innerHTML = bud ? `<h2 class="h2">Budget by year</h2><div class="tw"><table class="t"><thead><tr><th>Fiscal year</th><th class="num">Adopted budget</th><th class="num">General Fund</th><th class="num">Change</th></tr></thead><tbody>
+      ${[...bud.history].reverse().map((h, i, a) => { const p = a[i + 1]; const c = p && h.total && p.total ? (h.total - p.total) / p.total : null;
+        return `<tr><td>FY${h.fiscal_year}</td><td class="num">${dollars(h.total)}</td><td class="num">${dollars(h.general_fund)}</td><td class="num">${c == null ? '—' : (c >= 0 ? '+' : '−') + Math.abs(Math.round(c * 1000) / 10) + '%'}</td></tr>`; }).join('')}</tbody></table></div>
+      ${bud.compare && bud.compare.departments.length ? `<h3 class="h3" style="margin:18px 0 6px">${esc(bud.compare.label || 'General Fund departments')}, FY${bud.compare.from} to FY${bud.compare.to}</h3>
+      <div class="tw"><table class="t"><thead><tr><th>${bud.compare.by === 'fund' ? 'Fund' : 'Department'}</th><th class="num">FY${bud.compare.from}</th><th class="num">FY${bud.compare.to}</th><th class="num">Change</th></tr></thead><tbody>
+      ${bud.compare.departments.map(d => `<tr><td>${esc(d.name)}</td><td class="num">${dollars(d.from)}</td><td class="num">${dollars(d.to)}</td><td class="num">${d.change >= 0 ? '+' : '−'}${dollars(Math.abs(d.change)).slice(0)}</td></tr>`).join('')}</tbody></table></div>
+      ${(bud.compare.notes || []).map(x => `<p class="ob-note">${esc(x)}</p>`).join('')}` : ''}` : '<h2 class="h2">Budget by year</h2><p class="readonly">No adopted budget on file for this government yet.</p>';
+    $('#nb-bva').innerHTML = bva ? `<h2 class="h2">Spending against the FY${bva.fiscal_year} budget</h2><p class="sub">From the government’s own budget-vs-actual report as of ${day(bva.as_of)}, when ${pctOf(bva.elapsed)} of the year had gone by. Spent includes open purchase orders.${bva.over_budget.length ? ` Over budget: ${esc(bva.over_budget.join(', '))}.` : ''}</p>
+      <div class="tw"><table class="t"><thead><tr><th>Department</th><th class="num">Budget</th><th class="num">Spent</th><th class="num">Used</th></tr></thead><tbody>
+      ${bva.departments.slice(0, 25).map(d => `<tr><td>${esc(d.name)}</td><td class="num">${dollars(d.budget)}</td><td class="num">${dollars(d.spent)}</td><td class="num">${pctOf(d.used)}</td></tr>`).join('')}
+      <tr><td><b>Total</b></td><td class="num"><b>${dollars(bva.totals.budget)}</b></td><td class="num"><b>${dollars(bva.totals.spent)}</b></td><td class="num"><b>${pctOf(bva.totals.used)}</b></td></tr></tbody></table></div>` : '';
+    $('#nb-book').innerHTML = book ? `<h2 class="h2">Checkbook, FY${book.fiscal_year}</h2><p class="sub">${cnt(book.payments)} payments from ${day(book.from)} to ${day(book.through)}, from the government’s own check register. Payments to private people are counted but not named.</p>
+      <div class="tw"><table class="t"><thead><tr><th>Payee</th><th class="num">Payments</th><th class="num">Total</th></tr></thead><tbody>
+      ${book.top_payees.map(p => `<tr><td>${p.payee_entity_id ? `<a href="/profile/vendor/${encodeURIComponent(p.payee_entity_id.replace(/^vendor:/, ''))}" target="_blank" rel="noopener">${esc(p.payee)}</a>` : esc(p.payee)}</td><td class="num">${cnt(p.payments)}</td><td class="num">${dollars(p.total)}</td></tr>`).join('')}</tbody></table></div>` : '';
+    $('#nb-contracts').innerHTML = `<h2 class="h2">Contracts approved since ${day(ct.from)}</h2>` + (ct.rows.length ? `<div class="tw"><table class="t"><thead><tr><th>Date</th><th>Vendor</th><th class="num">Amount</th><th>For</th></tr></thead><tbody>
+      ${ct.rows.map(c => `<tr><td class="nw">${day(c.date)}</td><td class="nw">${nameLink('vendor', c.vendor_id, c.vendor)}</td><td class="num">${dollars(c.amount)}</td><td class="long">${c.source_url ? `<a href="${esc(c.source_url)}" target="_blank" rel="noopener">${esc(c.purpose || 'Contract')}</a>` : esc(c.purpose || '')}</td></tr>`).join('')}</tbody></table></div>` : '<p class="readonly">No contracts on record for the last 12 months.</p>');
+  }
+
+  // ---------- PDF reports (site/report.js) ----------
+  // A report button prints its own tab; the full briefing prints the overview, agendas, votes and numbers together.
+  // Each download is written to the activity log.
+  const REPORT = {briefing: ['board', 'agendas', 'votes', 'numbers'], agendas: ['agendas'], votes: ['votes'], numbers: ['numbers']};
+  const REPORT_TITLE = {briefing: 'Board briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
+  let shown = [];
+  window.addEventListener('click', e => {
+    const b = e.target.closest('[data-ob-report]'); if (!b) return;
+    const r = b.dataset.obReport, panels = REPORT[r];
+    window.BCReportTitle = () => `${REPORT_TITLE[r]}: ${ob && ob.official && r !== 'agendas' && r !== 'numbers' ? ob.official.name : wsInfo.name}`;
+    window.BCReportEyebrow = () => `${wsInfo.name} · Board dashboard`;
+    window.BCReportMeta = () => [ob && ob.official ? `${ob.official.name}, ${ob.official.seat}, ${ob.official.body}` : '', wsInfo.name,
+      r === 'votes' && ($('#vt-q').value || $('#vt-year').value || $('#vt-vote').value) ? 'Filtered: ' + [$('#vt-q').value && `“${$('#vt-q').value}”`, $('#vt-year').value, $('#vt-vote').value && VOTE_LBL[$('#vt-vote').value]].filter(Boolean).join(', ') : ''].filter(Boolean).join(' · ');
+    window.BCReportBefore = async () => {
+      await Promise.all(panels.map(p => loaders[p]()));
+      shown = panels.map(p => $('#p-' + p)).filter(el => el.hidden);
+      shown.forEach(el => { el.hidden = false; });
+      $$('[data-panel]').forEach(el => { if (!panels.includes(el.id.slice(2))) el.dataset.report = 'skip'; });
+      if (r === 'briefing') $$('[data-brief-skip]').forEach(x => { x.dataset.report = 'skip'; });
+    };
+    window.BCReportAfter = () => {
+      shown.forEach(el => { el.hidden = true; }); shown = [];
+      $$('[data-panel], [data-brief-skip]').forEach(el => { delete el.dataset.report; });
+      api('report-log', {method: 'POST', body: {report: r, person: ob && ob.official ? ob.official.person_id : undefined}}).catch(() => {});
+    };
+  }, true);
 
   // ---------- map field (alerts and notices) ----------
   // The map editor loads only when someone presses "Add a map". The drawing lives in the form's hidden geometry field.
@@ -494,13 +646,16 @@
       if (s) { $('#is-addr').textContent = s.address; $('#is-list').value = (s.senders || []).join('\n'); $('#is-dom').textContent = s.gov_domain ? `Someone writing from @${s.gov_domain} who isn’t listed gets a short reply naming who may send. Mail from anywhere else is turned away unopened.` : 'Mail from anyone not listed is turned away unopened.'; }
     }
     const j = await api('members');
-    $('#pp-t tbody').innerHTML = j.members.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(me.roles[m.role] || m.role)}</td><td>${esc(m.added_by || '')}</td><td>${day(m.created_at)}</td>
+    $('#pp-person').innerHTML = (j.officials || []).map(o => `<option value="${esc(o.person_id)}">${esc(o.person_name)} (${esc(o.seat)})</option>`).join('');
+    $('#pp-t tbody').innerHTML = j.members.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(me.roles[m.role] || m.role)}${m.person_name ? `: ${esc(m.person_name)}` : ''}</td><td>${esc(m.added_by || '')}</td><td>${day(m.created_at)}</td>
       <td>${m.email.toLowerCase() === me.email ? '' : `<button class="btn quiet" type="button" data-rm="${esc(m.email)}">Remove</button>`}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Nobody yet.</td></tr>';
   }
+  $('#pp-form').role.addEventListener('change', e => { $('#pp-person-l').hidden = e.target.value !== 'official'; });
   $('#pp-form').addEventListener('submit', async e => {
     e.preventDefault();
     const f = Object.fromEntries(new FormData(e.target));
-    try { await api('members', {method: 'POST', body: f}); e.target.reset(); $('#pp-msg').textContent = `${f.email} can now sign in.`; await loadPeople(); }
+    if (f.role !== 'official') delete f.person_id;
+    try { await api('members', {method: 'POST', body: f}); e.target.reset(); $('#pp-person-l').hidden = true; $('#pp-msg').textContent = `${f.email} can now sign in.`; await loadPeople(); }
     catch (err) { $('#pp-msg').textContent = err.message; }
   });
   $('#pp-t').addEventListener('click', async e => {

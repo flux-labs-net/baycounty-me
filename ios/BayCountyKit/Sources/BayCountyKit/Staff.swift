@@ -9,8 +9,8 @@ import FoundationNetworking
 /// be flagged; the site owner (a BayCounty.me admin) is owner of every workspace and also sees the all-governments view.
 public enum Staff {
     /// Roles from strongest to weakest, as the server ranks them (api/_gov.js ROLES).
-    public static let rank: [String: Int] = ["viewer": 1, "auditor": 1, "records": 1, "publisher": 2, "alert_sender": 3, "owner": 4]
-    public static let roleLabel: [String: String] = ["owner": "Owner", "alert_sender": "Alert sender", "publisher": "Publisher", "records": "Records sender", "viewer": "Viewer", "auditor": "Auditor"]
+    public static let rank: [String: Int] = ["viewer": 1, "auditor": 1, "records": 1, "official": 1, "publisher": 2, "alert_sender": 3, "owner": 4]
+    public static let roleLabel: [String: String] = ["owner": "Owner", "alert_sender": "Alert sender", "publisher": "Publisher", "records": "Records sender", "viewer": "Viewer", "auditor": "Auditor", "official": "Elected official"]
     /// `need` is a role, or "submit" (send records): the records sender role, or publisher and up (api/_gov.js allowed).
     public static func can(_ role: String, _ need: String) -> Bool {
         if need == "submit" { return role == "records" || (rank[role] ?? 0) >= 2 }
@@ -90,6 +90,10 @@ public struct StaffWorkspace: Decodable, Hashable, Sendable, Identifiable {
     public let name: String
     public let countywide: Bool?
     public let role: String
+    /// An elected official's seat on record (officeholder-terms person_id); nil for staff.
+    public let personId: String?
+    /// An elected commissioner or council member: opens on their board dashboard.
+    public var isOfficial: Bool { role == "official" }
     public var roleLabel: String { Staff.roleLabel[role] ?? role.capitalized }
     public func can(_ need: String) -> Bool { Staff.can(role, need) }
 }
@@ -341,6 +345,61 @@ public struct StaffRecordPreview: Decodable, Sendable {
     public static func decode(_ data: Data) throws -> StaffRecordPreview { try Staff.decoder().decode(StaffRecordPreview.self, from: data) }
 }
 
+/// GET ?action=official: an elected official's board dashboard (api/_official.js). All public record, read only.
+public struct StaffBoard: Decodable, Sendable {
+    public struct Seat: Decodable, Sendable, Hashable { public let personId: String; public let name: String; public let seat: String; public let body: String?; public let since: String? }
+    public struct Item: Decodable, Sendable, Hashable { public let title: String; public let amount: String? }
+    public struct Meeting: Decodable, Sendable, Hashable {
+        public let boardName: String; public let title: String; public let date: String; public let start: String?; public let location: String?
+        public let agendaUrl: String?; public let packetUrl: String?; public let minutesUrl: String?; public let status: String?
+        public let items: [Item]; public let moneyItems: Int
+        public var statusLabel: String? {
+            if status == "cancelled" { return "Cancelled" }
+            if status == "expected" { return "Agenda not posted yet" }
+            return agendaUrl != nil ? "Agenda posted" : nil
+        }
+    }
+    public struct Meetings: Decodable, Sendable { public let upcoming: [Meeting]; public let recent: [Meeting] }
+    public struct Count: Decodable, Sendable { public let votes, yes, no, absent, abstain, split, onLosingSide: Int }
+    public struct Vote: Decodable, Sendable, Hashable {
+        public let date: String?; public let vote: String; public let headline: String?; public let outcome: String?; public let tally: String?
+        public let split: Bool; public let onLosingSide: Bool; public let amount: Double?; public let sourceUrl: String?
+        public var voteLabel: String { ["yes": "Yes", "no": "No", "absent": "Absent", "abstain": "Abstained"][vote] ?? "Not recorded" }
+        /// "Passed 3-2", leaving out tallies the minutes didn't give.
+        public var result: String {
+            let t = tally.flatMap { $0.range(of: #"^\d+\s*-\s*\d+$"#, options: .regularExpression) != nil ? $0 : nil }
+            return [outcome.map { $0.prefix(1).uppercased() + $0.dropFirst() }, t].compactMap { $0 }.joined(separator: " ")
+        }
+    }
+    public struct Votes: Decodable, Sendable { public let count: Count; public let presentRate: Double?; public let recent: [Vote]; public let first: String?; public let last: String? }
+    public struct Year: Decodable, Sendable, Hashable { public let fiscalYear: Int; public let total: Double?; public let generalFund: Double? }
+    public struct Budget: Decodable, Sendable { public let history: [Year] }
+    public struct Contract: Decodable, Sendable, Hashable { public let date: String?; public let vendor: String; public let amount: Double?; public let purpose: String? }
+    public struct Contracts: Decodable, Sendable { public let count: Int; public let total: Double; public let rows: [Contract] }
+    public struct Numbers: Decodable, Sendable { public let budget: Budget?; public let contracts: Contracts? }
+
+    public let official: Seat?
+    public let board: [Seat]
+    public let government: String
+    public let meetings: Meetings
+    public let votes: Votes?
+    public let numbers: Numbers?
+
+    public var latestBudget: Year? { numbers?.budget?.history.last }
+    public var nextMeeting: Meeting? { meetings.upcoming.first { $0.status != "cancelled" } }
+    /// "$789.1M", "$84K", "$950".
+    public static func money(_ v: Double?) -> String {
+        guard let v else { return "—" }
+        let a = abs(v)
+        if a >= 1e9 { return "$" + String(format: "%.2fB", v / 1e9) }
+        if a >= 1e6 { return "$" + String(format: "%.1fM", v / 1e6) }
+        if a >= 1e4 { return "$\(Int((v / 1e3).rounded()))K" }
+        let f = NumberFormatter(); f.numberStyle = .decimal; f.locale = Locale(identifier: "en_US")
+        return "$" + (f.string(from: NSNumber(value: v.rounded())) ?? "\(Int(v))")
+    }
+    public static func decode(_ data: Data) throws -> StaffBoard { try Staff.decoder().decode(StaffBoard.self, from: data) }
+}
+
 /// Made-up answers for screenshots and App Review (no real staff, no real alerts): `staff-demo.json`.
 public struct StaffDemo: Decodable, Sendable {
     public let me: StaffMe
@@ -350,6 +409,7 @@ public struct StaffDemo: Decodable, Sendable {
     public let notices: StaffPosts
     public let flags: StaffFlags
     public let submissions: StaffSubmissions?
+    public let board: StaffBoard?
     public static func decode(_ data: Data) throws -> StaffDemo { try Staff.decoder().decode(StaffDemo.self, from: data) }
 }
 
@@ -430,6 +490,10 @@ public final class StaffClient: @unchecked Sendable {
         _ = try await call("post", b)
     }
     public func withdrawNotice(_ ws: String, id: Int) async throws { _ = try await call("withdraw", ["workspace": ws, "kind": "notice", "id": id]) }
+    /// The board dashboard; `person` picks a board member (an official's own seat by default).
+    public func board(_ ws: String, person: String? = nil) async throws -> StaffBoard {
+        try StaffBoard.decode(try await call("official", query: ["workspace": ws].merging(person.map { ["person": $0] } ?? [:]) { a, _ in a }))
+    }
     public func flags(_ ws: String) async throws -> StaffFlags { try StaffFlags.decode(try await call("flags", query: ["workspace": ws])) }
     /// Site owner only: flags from every government.
     public func reviewFlags(status: String = "open") async throws -> StaffFlags { try StaffFlags.decode(try await call("review-flags", query: ["status": status])) }

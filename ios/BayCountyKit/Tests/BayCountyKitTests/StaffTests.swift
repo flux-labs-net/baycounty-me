@@ -39,6 +39,28 @@ final class StaffTests: XCTestCase {
         XCTAssertEqual(Staff.roleLabel["records"], "Records sender")
     }
 
+    func testOfficialsReadTheirBoardDashboard() throws {
+        XCTAssertFalse(Staff.can("official", "publisher"))
+        XCTAssertFalse(Staff.can("official", "submit"))
+        XCTAssertTrue(Staff.can("official", "viewer"))
+        XCTAssertEqual(Staff.roleLabel["official"], "Elected official")
+        let b = try XCTUnwrap(try demo().board)
+        XCTAssertEqual(b.official?.personId, "pat-rivera")
+        XCTAssertEqual(b.board.count, 5)
+        XCTAssertEqual(b.nextMeeting?.statusLabel, "Agenda posted")
+        XCTAssertEqual(b.nextMeeting?.moneyItems, 3)
+        XCTAssertEqual(b.votes?.count.onLosingSide, 5)
+        XCTAssertEqual(b.votes?.recent[1].result, "Passed 3-2")
+        let odd = try Staff.decoder().decode(StaffBoard.Vote.self, from: Data(#"{"vote":"unknown","tally":"not found","outcome":"passed","split":false,"on_losing_side":false}"#.utf8))
+        XCTAssertEqual(odd.voteLabel, "Not recorded")
+        XCTAssertEqual(odd.result, "Passed")
+        XCTAssertEqual(StaffBoard.money(b.latestBudget?.total), "$66.0M")
+        XCTAssertEqual(StaffBoard.money(84200), "$84K")
+        let ws = try Staff.decoder().decode(StaffWorkspace.self, from: Data(#"{"id":"lh","name":"City of Lynn Haven","role":"official","person_id":"pat-rivera"}"#.utf8))
+        XCTAssertTrue(ws.isOfficial)
+        XCTAssertEqual(ws.personId, "pat-rivera")
+    }
+
     func testDecodesSentRecords() throws {
         let s = try XCTUnwrap(try demo().submissions)
         XCTAssertEqual(s.address, "lynnhaven@ingest.baycounty.me")
