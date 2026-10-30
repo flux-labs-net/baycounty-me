@@ -6,7 +6,7 @@ on:
     paths: ["ios/BayCountyMe/**"]
 jobs:
   screenshots:
-    runs-on: blacksmith-6vcpu-macos-15
+    runs-on: [self-hosted, macOS, macpro]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +21,9 @@ jobs:
         working-directory: ios
         run: |
           DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
+          xcrun simctl shutdown all || true  # the Mac Pro keeps simulators between runs
           xcrun simctl boot "$DEV"; xcrun simctl bootstatus "$DEV" -b
+          xcrun simctl ui "$DEV" appearance light
           xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 || true
           APP=$(find build/Build/Products -name "BayCountyMe.app" -maxdepth 3 | head -1)
           xcrun simctl install "$DEV" "$APP"
@@ -49,6 +51,9 @@ jobs:
               xcrun simctl io "$DEV" screenshot "shots/chart_${s}_${mode}.png"
             done
           done
+      - name: Shut down the simulator
+        if: always()
+        run: xcrun simctl shutdown all || true
       - uses: actions/upload-artifact@v4
         with:
           name: screenshots
