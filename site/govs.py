@@ -156,11 +156,11 @@ def profile(key):
         out['pay'] = sorted(({'title': p['title'], 'name': p.get('name'), 'annual': p.get('annual'), 'year': p.get('year'), 'source_url': p.get('source_url')} for p in pay if p.get('annual')), key=lambda p: -p['annual'])[:5]
     # utility bill
     if g['util']:
-        from fees_page import BILL_PARTS
-        for prov, parts in BILL_PARTS.items():
-            if prov == g['util']:
-                out['utility_bill'] = {'provider': prov, 'water_sewer': parts['ws'], 'garbage': parts['garbage'], 'other': parts['other'],
-                                       'total': round(parts['ws'] + (parts['garbage'] or 0) + (parts['other'] or 0), 2)}
+        for u in D['fees'].get('utility_rates', []):  # the bill split from the Fees & bills research
+            parts = u.get('bill_parts')
+            if parts and u['provider'].startswith(g['util']) and not u['provider'][len(g['util']):].startswith(' Beach'):
+                out['utility_bill'] = {'provider': g['util'], 'water_sewer': parts['water_sewer'], 'garbage': parts['garbage'], 'other': parts['other'],
+                                       'total': round(parts['water_sewer'] + (parts['garbage'] or 0) + (parts['other'] or 0), 2)}
                 break
     # optional datasets from research
     if D.get('meetings'):
