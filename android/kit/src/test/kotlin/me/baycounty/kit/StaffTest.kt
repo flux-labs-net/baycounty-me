@@ -65,4 +65,11 @@ class StaffTest {
         assertEquals("Nov 12, 2026", Staff.whenOf("2026-11-12"))
         assertEquals("2 days", Staff.hoursLabel(48))
     }
+
+    @Test fun readsBigintIdsSentAsStrings() {
+        val posts = BCJson.decodeFromString(StaffPosts.serializer(), """{"kind":"notice","posts":[],"from_records":[{"id":"1","notice_id":"pn:1","title":"From the notice site","kind":null,"published":"2026-10-01","editable":false}]}""")
+        assertEquals(1, posts.fromRecords.first().id)
+        val alerts = BCJson.decodeFromString(StaffAlerts.serializer(), """{"alerts":[{"id":"42","kind":"road","title":"Hwy 390","message":"Closed","countywide":false,"status":"sent","created_by":"a@example.gov","created_at":"2026-10-30T12:00:00Z"}]}""")
+        assertEquals(42, alerts.alerts.first().id)
+    }
 }
