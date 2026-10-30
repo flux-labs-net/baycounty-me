@@ -2,6 +2,7 @@ package me.baycounty.staff
 
 import android.net.Uri
 import android.provider.OpenableColumns
+import androidx.activity.compose.LocalActivityResultRegistryOwner
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
@@ -168,7 +169,9 @@ fun SendFileScreen(model: StaffModel, demoPreview: Boolean, onBack: () -> Unit) 
             } catch (e: Exception) { err = e.message } finally { busy = false }
         }
     }
-    val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(::read) }
+    // No result registry outside an Activity (JVM screenshot tests): show the screen without a working picker.
+    val picker = if (LocalActivityResultRegistryOwner.current != null)
+        rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri -> uri?.let(::read) } else null
 
     Sub("Send a file", onBack) {
         val p = preview
@@ -220,7 +223,7 @@ fun SendFileScreen(model: StaffModel, demoPreview: Boolean, onBack: () -> Unit) 
                     Text(Staff.recordKinds.first { it.first == kind }.third, style = T.footnote, color = Brand.secondary, modifier = Modifier.padding(top = 8.dp))
                 }
                 PrimaryButton(if (busy) "Reading ${fileName ?: "the file"}…" else "Choose a file", enabled = !busy) {
-                    picker.launch(arrayOf("text/csv", "text/comma-separated-values", "text/plain", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"))
+                    picker?.launch(arrayOf("text/csv", "text/comma-separated-values", "text/plain", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"))
                 }
                 Text("Excel or CSV, up to 3 MB. Nothing is published until you check it.", style = T.footnote, color = Brand.secondary)
             }
