@@ -18,7 +18,7 @@
 //   GET  ?action=flags&workspace=lh              flags sent from this workspace and our answers
 //   GET  ?action=activity&workspace=lh           who did what (owners and auditors)
 //   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role | "remove", person_id? (role official)}   (owners)
-// Elected officials (role official, migration 0096; api/_official.js). Read-only, like everything else here:
+// Elected officials (role official, migration 0097; api/_official.js). Read-only, like everything else here:
 //   GET  ?action=official&workspace=lh[&person=jane-doe][&only=agendas|votes|numbers]   the dashboard: the official's seat
 //        and board, upcoming meetings and agenda items, their voting record, and the budget, spending, checkbook and
 //        contracts. An official sees their own seat unless they pick a colleague; staff pick any member of the board.

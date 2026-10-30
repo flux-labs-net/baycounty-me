@@ -1,4 +1,4 @@
-// Elected officials' dashboard in the government workspace (/staff, migration 0096). A commissioner or council member
+// Elected officials' dashboard in the government workspace (/staff, migration 0097). A commissioner or council member
 // signs in like staff and sees, for their own government: upcoming meetings and what is on each agenda, their own
 // voting record, and the numbers (budget by year, spending against the budget, the checkbook, recent contracts).
 // Everything here is public record read from the site's own tables; nothing can be changed. Used by api/gov.js

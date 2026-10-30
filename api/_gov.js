@@ -11,7 +11,7 @@ const crypto = require('crypto');
 const {session: adminSession, admins} = require('./_session');
 
 // records: a finance or clerk contact who sends records (Send records tab) and reads everything else, nothing more.
-// official: an elected commissioner or council member (migration 0096). Reads only, like a viewer, and opens on their
+// official: an elected commissioner or council member (migration 0097). Reads only, like a viewer, and opens on their
 // own dashboard (api/_official.js): agendas, their votes and the numbers. Tied to their seat by person_id.
 const ROLES = {viewer: 1, auditor: 1, records: 1, official: 1, publisher: 2, alert_sender: 3, owner: 4};
 const CAN = {read: 1, submit: 2, publish: 2, alert: 3, manage: 4};
