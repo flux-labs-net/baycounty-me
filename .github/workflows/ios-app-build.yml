@@ -7,7 +7,7 @@ on:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
 jobs:
   build:
-    runs-on: blacksmith-6vcpu-macos-15
+    runs-on: [self-hosted, studio]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
