@@ -23,6 +23,14 @@ The numbers come from `:kit`, a Kotlin port of BayCountyKit (`ios/BayCountyKit`)
 
 App rules, the same as iOS: no data before 2016, chip rows that wrap instead of scrolling sideways, phone content that fits the screen, dark mode, icon-only toolbar buttons with the county mark top left, Poppins at weight 700, navy `#1E3A76` and salmon `#E5564A`, charts with at most six axis labels.
 
+## Wear OS
+
+`:wear` is the watch app: one screen with active alerts first (tap for the list and each notice), then the saved home's trash day, the beach flag and the next meeting, plus a watch face complication (`AlertsComplication`: alert count as short text, alerts and trash day as long text). The rules are `WatchBrief` in `:kit`, the same as the Apple Watch app.
+
+- It has the phone app's package name (`me.baycounty`) and signing key, which Wear OS needs to link the two. The phone app (`WatchSync.kt`) sends only the saved home's map point over the Wearable Data Layer; the watch looks up the city and trash day from `/api/v1/utilities` and alerts from `/api/v1/emergency`, so it also works standalone (county-wide, over the watch's own Wi-Fi or LTE).
+- Phone alerts already show on the watch: Wear OS mirrors the phone's notifications.
+- Screens render on the JVM: `./gradlew :wear:testDebugUnitTest -Dfullres=$PWD/wear-shots` (made-up demo day, round, square and a tall square that shows the whole list). The Android workflow uploads them as `wear-screens`, with the `wear-apk-debug` APK.
+
 ## Data
 
 - Datasets: `https://baycounty.me/downloads/<id>.json` (catalog at `/downloads/index.json`), app files from `/data/app`, search from `/api/v1/search`.
@@ -92,7 +100,8 @@ On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on ev
 2. In GitHub, Actions > **Android release** > Run workflow. It runs the kit tests and builds a signed `app-release.aab`, with a new version code (the run number plus 100). Bump `versionName` in `app/build.gradle.kts` when the release is worth a new version number.
 3. Download the `app-release-aab` artifact from the run.
 4. Play Console > Testing > **Internal testing** > Create new release. The first time, accept **Play App Signing** (Google keeps the app signing key; ours is only the upload key). Upload the .aab, add release notes, roll out, and add testers by email to try it from the Play Store.
-5. When it looks right, **Promote release** to Production. The first production review usually takes a few days; updates are often faster.
+5. **Wear OS** (first time): Play Console > Test and release > Advanced settings > Form factors > add **Wear OS**, then upload the watch screenshots (from the `wear-screens` artifact, round). Each release, upload the `wear-release-aab` artifact on the **Wear OS** track the same way (its version code is the phone's plus 100000, as Play needs).
+6. When it looks right, **Promote release** to Production. The first production review usually takes a few days; updates are often faster.
 
 ## Changing it
 

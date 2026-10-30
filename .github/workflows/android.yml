@@ -33,6 +33,19 @@ jobs:
         run: |
           ./gradlew :staff:assembleDebug
           ./gradlew :staff:testDebugUnitTest -Dfullres="$PWD/staff-shots"
+      - name: Wear OS app, debug APK and its screens (made-up demo day)
+        run: |
+          ./gradlew :wear:assembleDebug
+          ./gradlew :wear:testDebugUnitTest -Dfullres="$PWD/wear-shots"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wear-screens
+          path: android/wear-shots
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wear-apk-debug
+          path: android/wear/build/outputs/apk/debug/wear-debug.apk
       - uses: actions/upload-artifact@v4
         if: always()
         with:

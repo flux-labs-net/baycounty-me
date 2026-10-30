@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "BayCountyMe"
-include(":kit", ":app", ":staff")
+include(":kit", ":app", ":staff", ":wear")
