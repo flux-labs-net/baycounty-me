@@ -108,7 +108,8 @@ create table public_notices (id bigint generated always as identity primary key,
 create table emergency_live (notice_id text primary key);
 create schema ingest;
 create table ingest.sources (id uuid primary key default gen_random_uuid(), entity_name text not null, entity_type text not null, erp_system text not null,
-  intake_method text not null, inbound_address text unique, allowed_senders text[] not null default '{}', active boolean not null default true, created_at timestamptz not null default now());
+  intake_method text not null, inbound_address text unique, allowed_senders text[] not null default '{}', active boolean not null default true, auto_normalize boolean not null default false,
+  created_at timestamptz not null default now());
 alter table ingest.sources add column finance_workspace_id text;
 insert into ingest.sources (entity_name, entity_type, erp_system, intake_method, inbound_address) values ('City of Lynn Haven', 'city', 'other', 'email', 'lynnhaven@ingest.baycounty.me');
 alter table ingest.sources add constraint sources_entity_type_check check (entity_type in ('city','county','cra'));
@@ -119,6 +120,8 @@ create table salary_positions (id bigint generated always as identity primary ke
   department text, category text, grade text, pay_min numeric, pay_mid numeric, pay_max numeric, pay_basis text, hourly_min numeric, hourly_max numeric,
   actual_salaries jsonb, budgeted_fte numeric, "union" text, source_url text, notes text, government_key text references governments(key),
   origin text not null default 'manual', record_hash text not null, unique (origin, record_hash));
+create table votes (date date, headline text, summary text, amount numeric, agenda_item text, source_url text, government_key text);
+insert into votes values ('2026-10-14', 'Award ITB 26-09 to Panhandle Paving LLC', 'Resurface 5th Street', 84500, '7.a', 'https://cityofparker.com/minutes/2026-10-14.pdf', 'parker');
 create table data_sources (source_name text, source_url text, method text, refresh text, what_we_take text, page text, gov_id text);
 insert into data_sources values ('Parker City Council agendas', 'https://cityofparker.com/agendas', 'Automatic, daily', 'Daily', 'Agendas and packets', '/meetings', 'parker'),
   ('Parker budget book', 'https://cityofparker.com/budget.pdf', 'Downloaded and read by hand', 'Yearly', 'Budget', '/governments/parker', 'parker');
@@ -136,9 +139,9 @@ test.before(async () => {
   await pool.query(STUBS);
   for (const f of ['0015_finance.sql', '0016_finance_signin.sql', '0048_finance_publish.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   // 0023 needs the whole ingest schema; the one column 0091 reads is stubbed above.
-  for (const f of ['0088_gov_workspace.sql', '0090_area_maps.sql', '0091_records_submission.sql', '0092_records_phase2.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
+  for (const f of ['0088_gov_workspace.sql', '0090_area_maps.sql', '0091_records_submission.sql', '0092_records_phase2.sql', '0093_records_verify_audit.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   await q(`insert into gov.members (workspace_id, email, role) values ('parker', 'finance@parker.test', 'records'), ('parker', 'mayor@parker.test', 'viewer'),
-    ('parker', 'clerk@parker.test', 'publisher')`);
+    ('parker', 'clerk@parker.test', 'publisher'), ('parker', 'owner@parker.test', 'owner')`);
   const {createHandler} = require('../gov');
   handler = createHandler({q, hasDb: () => true, caller: async () => as, storage, sendEmail: async () => {}, sendNow: async () => ({})});
 });
@@ -153,11 +156,74 @@ test('migration: every government has a finance workspace and an intake address'
   const src = await q('select inbound_address, finance_workspace_id from ingest.sources order by inbound_address');
   assert.ok(src.some(s => s.inbound_address === 'parker@ingest.baycounty.me' && s.finance_workspace_id === 'parker'));
   assert.ok(src.some(s => s.inbound_address === 'lynnhaven@ingest.baycounty.me' && s.finance_workspace_id === 'lh'));
-  const [s] = await q(`select id from ingest.sources where inbound_address = 'parker@ingest.baycounty.me'`);
-  const ok = await q('select public.ingest_sender_is_staff($1, $2) ok', [s.id, 'FINANCE@parker.test']);
-  const no = await q('select public.ingest_sender_is_staff($1, $2) ok', [s.id, 'mayor@parker.test']);
-  assert.equal(ok[0].ok, true, 'a records sender may email files in');
-  assert.equal(no[0].ok, false, 'a viewer may not');
+  const [src0] = await q(`select allowed_senders, gov_domain from ingest.sources where inbound_address = 'parker@ingest.baycounty.me'`);
+  assert.ok(src0.allowed_senders.every(a => !a.startsWith('@')), 'no whole domains on an allowed list');
+  assert.equal(src0.gov_domain, 'cityofparker.com');
+  await assert.rejects(q(`update ingest.sources set allowed_senders = '{"@cityofparker.com"}' where inbound_address = 'parker@ingest.baycounty.me'`), /sources_exact_senders/);
+});
+
+test('email security: only exact allowed addresses; the government domain gets a notice; everyone else is outside', opts, async () => {
+  await q(`update ingest.sources set allowed_senders = '{"finance@cityofparker.com"}' where inbound_address = 'parker@ingest.baycounty.me'`);
+  const chk = async from => (await q('select * from public.ingest_sender_check($1, $2)', ['Parker@ingest.baycounty.me', from]))[0];
+  assert.equal((await chk('FINANCE@cityofparker.com')).status, 'authorized');
+  const same = await chk('mayor@cityofparker.com');
+  assert.equal(same.status, 'same_domain');
+  assert.deepEqual(same.authorized, ['finance@cityofparker.com']);
+  assert.equal((await chk('finance@cityofparker.com.evil.test')).status, 'outside');
+  assert.equal((await chk('someone@gmail.com')).status, 'outside');
+  assert.equal((await q('select * from public.ingest_sender_check($1, $2)', ['nobody@ingest.baycounty.me', 'a@b.com'])).length, 0);
+  assert.equal((await q('select public.ingest_notice_sent_recently($1) r', ['mayor@cityofparker.com']))[0].r, false);
+  await q(`select public.ingest_audit('system', 'intake_notice_sent', 'parker', 'mayor@cityofparker.com', null, '{}')`);
+  assert.equal((await q('select public.ingest_notice_sent_recently($1) r', ['mayor@cityofparker.com']))[0].r, true, 'one notice a day');
+  // An owner keeps the list, exact addresses only, and every change is logged.
+  as = {email: 'clerk@parker.test', via: 'session'};
+  assert.equal((await post('intake-senders', {senders: ['x@cityofparker.com']})).status, 403, 'publishers cannot change who may send');
+  as = {email: 'owner@parker.test', via: 'session'};
+  const bad = await post('intake-senders', {senders: ['@cityofparker.com']});
+  assert.equal(bad.status, 400);
+  const ok = await post('intake-senders', {senders: ['finance@cityofparker.com', 'Clerk@CityOfParker.com']});
+  assert.equal(ok.status, 200, JSON.stringify(ok.body));
+  assert.deepEqual((await get('intake-senders')).body.senders, ['finance@cityofparker.com', 'clerk@cityofparker.com']);
+  const [a] = await q(`select detail from gov.activity where action = 'intake_senders_changed' order by id desc limit 1`);
+  assert.deepEqual(a.detail.added, ['clerk@cityofparker.com']);
+});
+
+test('email intake log: one locked row per email with its timestamps, files and audit events; the report shows it', opts, async () => {
+  const p = {email_id: 'em_1', message_id: '<a1@cityofparker.com>', sent_at: '2026-10-30T13:00:00Z', received_at: '2026-10-30T13:00:05Z',
+    webhook_at: '2026-10-30T13:00:06Z', sender: 'Finance@CityOfParker.com', recipients: ['parker@ingest.baycounty.me'], payload_sha256: 'ab'.repeat(32)};
+  const [first] = await q('select * from public.ingest_email_log($1)', [p]);
+  assert.equal(first.existing, false);
+  const [retry] = await q('select * from public.ingest_email_log($1)', [p]);
+  assert.equal(retry.existing, true, 'a retried webhook is not handled twice');
+  assert.equal(retry.id, first.id);
+  await q('select public.ingest_email_finish($1, $2)', [first.id, {decision: 'accepted', reason: 'on the allowed list and authenticated', intake_address: 'parker@ingest.baycounty.me',
+    workspace_id: 'parker', subject: 'September checks', body_text: 'Attached.', attachments: [{name: 'checks.csv', size: 120, sha256: 'cd'.repeat(32), raw_id: null}]}]);
+  const [e] = await q('select * from gov.intake_emails where id = $1', [first.id]);
+  assert.equal(e.sender, 'finance@cityofparker.com');
+  assert.equal(e.subject, 'September checks');
+  assert.ok(e.finished_at);
+  await assert.rejects(q(`update gov.intake_emails set reason = 'changed' where id = $1`, [first.id]), /locked/);
+  await assert.rejects(q('delete from gov.intake_emails where id = $1', [first.id]), /locked/);
+  // A refused email keeps the envelope only.
+  const [r2] = await q('select * from public.ingest_email_log($1)', [{...p, email_id: 'em_2', sender: 'someone@gmail.com', payload_sha256: 'ef'.repeat(32)}]);
+  await q('select public.ingest_email_finish($1, $2)', [r2.id, {decision: 'dropped', reason: 'outside sender', subject: 'Free money', body_text: 'spam'}]);
+  const [d] = await q('select subject, body_text from gov.intake_emails where id = $1', [r2.id]);
+  assert.equal(d.subject, null);
+  assert.equal(d.body_text, null);
+  const IR = require('../_intake_report');
+  const rep = await IR.report(q, {from: '2020-01-01', to: '2100-01-01'}).catch(() => null)
+    || await IR.report(q, {from: new Date(Date.now() - 864e5).toISOString().slice(0, 10), to: new Date().toISOString().slice(0, 10)});
+  const em = rep.emails.find(x => x.email_id === 'em_1');
+  assert.ok(em, 'the email is in the report');
+  assert.deepEqual(em.events.map(a => a.action), ['email_logged', 'email_finished']);
+  assert.equal(rep.chain.intact, true);
+  assert.equal(rep.counts.accepted, 1);
+  const csv = IR.toCsv(rep);
+  assert.match(csv.split('\r\n')[0], /^email_id,message_id,sent_at,received_at,webhook_at,logged_at/);
+  assert.match(csv, /em_1,<a1@cityofparker\.com>,2026-10-30T13:00:00\.000Z/);
+  const html = IR.toHtml(rep);
+  assert.match(html, /Audit trail checked/);
+  assert.ok(!html.includes('Free money'), 'nothing from a dropped email');
 });
 
 test('roles: viewers see the tab but cannot send; the records role can', opts, async () => {
@@ -183,17 +249,36 @@ test('contracts: preview skips what is already on the site, publish adds rows, w
   assert.equal(p.body.row_count, 2);
   assert.equal(p.body.withheld, 1);
   assert.match(p.body.id, /^c\d+$/);
-  const pub = await post('submit-publish', {id: p.body.id});
+  assert.equal(p.body.report.rows, 2, 'the confirm report covers the rows that will be taken in');
+  assert.equal(p.body.report.total, 486000);
+  assert.deepEqual(p.body.report.by_month.map(m => m.key), ['2026-09']);
+  const conf = await post('submit-confirm', {id: p.body.id});
+  assert.equal(conf.status, 200, JSON.stringify(conf.body));
+  assert.equal(conf.body.status, 'in_review', 'no approval on record for these contracts, so they wait');
+  assert.equal(conf.body.check.status, 'unverified');
+  assert.equal((await q(`select count(*)::int n from contracts where origin = 'gov'`))[0].n, 0, 'nothing public before review');
+  assert.equal((await get('submissions')).body.files.find(f => f.id === p.body.id).status, 'in_review');
+  const twice = await post('submit-confirm', {id: p.body.id});
+  assert.equal(twice.status, 409);
+  // Staff can't publish; only the admin's review can.
+  assert.equal((await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'publish'}})).status, 403);
+  as = {email: 'owner@baycounty.me', admin: true, via: 'session'};
+  const open = await call('review-files');
+  assert.ok(open.body.files.some(f => f.file_id === p.body.id && f.name === 'awards.csv'));
+  const noNote = await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'hold'}});
+  assert.equal(noNote.status, 400, 'holding needs a reason');
+  const pub = await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'publish', note: 'Checked with the clerk'}});
   assert.equal(pub.status, 200, JSON.stringify(pub.body));
-  assert.equal(pub.body.rows, 2);
+  assert.equal(pub.body.published.rows, 2);
+  const again = await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'hold', note: 'changed my mind'}});
+  assert.equal(again.status, 409, 'a decision is final');
+  await assert.rejects(q(`update gov.verifications set decision = 'hold' where file_id = $1`, [p.body.id]), /locked/);
+  as = {email: 'finance@parker.test', via: 'session'};
   const rows = await q(`select vendor, amount::float, government, government_key, source_title from contracts where origin = 'gov' order by amount desc`);
   assert.deepEqual(rows.map(r => r.vendor), ['Gulf Asphalt Co', 'Individual (name withheld)']);
   assert.equal(rows[0].government, 'City of Parker');
   assert.equal(rows[0].government_key, 'parker');
   assert.match(rows[0].source_title, /^Sent by City of Parker on \d{4}-\d{2}-\d{2} \(awards\.csv\)$/);
-  const again = await post('submit-publish', {id: p.body.id});
-  assert.equal(again.body.rows, 2);
-  assert.equal((await q(`select count(*)::int n from contracts where origin = 'gov'`))[0].n, 2, 'publishing twice does not double the rows');
 
   const pub2 = await call('records-sent', {});  // not a gov action
   assert.equal(pub2.status, 404);
@@ -213,7 +298,30 @@ test('contracts: preview skips what is already on the site, publish adds rows, w
   const list = await get('submissions');
   assert.equal(list.body.files[0].status, 'withdrawn');
   const act = await q(`select action from gov.activity where workspace_id = 'parker' order by id`);
-  assert.deepEqual(act.map(a => a.action).filter(a => a.startsWith('records_')), ['records_published', 'records_published', 'records_withdrawn']);
+  assert.deepEqual(act.map(a => a.action).filter(a => a.startsWith('records_')), ['records_confirmed', 'records_review_published', 'records_published', 'records_withdrawn']);
+  // The audit trail holds all of it, chained and locked.
+  const trail = await q(`select action, file_sha256 from gov.audit_log where subject = $1 order by id`, [p.body.id]);
+  assert.ok(trail.some(t => t.action === 'file_checked'));
+  assert.ok(trail.some(t => t.action === 'review_publish'));
+  assert.equal((await q('select count(*)::int n from gov.audit_chain_breaks()'))[0].n, 0);
+  await assert.rejects(q(`update gov.audit_log set actor = 'x' where id = (select min(id) from gov.audit_log)`), /append-only|locked|can/);
+  await assert.rejects(q('delete from gov.audit_log'), /append-only|locked|can/);
+  await assert.rejects(q(`update gov.submissions set sha256 = 'x' where id = $1`, [Number(p.body.id.slice(1))]), /locked/);
+  await assert.rejects(q(`delete from gov.submissions where id = $1`, [Number(p.body.id.slice(1))]), /locked/);
+});
+
+test('a file that matches our own records publishes on its own', opts, async () => {
+  as = {email: 'clerk@parker.test', via: 'session'};
+  const p = await post('submit-preview', {kind: 'contracts', filename: 'oct-awards.csv', content: b64('Vendor,Amount,Award Date,Title\nPanhandle Paving LLC,"84,500",2026-10-20,Resurface 5th Street\n')});
+  assert.equal(p.status, 200, JSON.stringify(p.body));
+  const c = await post('submit-confirm', {id: p.body.id});
+  assert.equal(c.status, 200, JSON.stringify(c.body));
+  assert.equal(c.body.check.status, 'verified', JSON.stringify(c.body.check));
+  assert.equal(c.body.status, 'published');
+  const [v] = await q('select decision, decided_by from gov.verifications where file_id = $1', [p.body.id]);
+  assert.deepEqual(v, {decision: 'publish', decided_by: 'BayCounty.me checks'});
+  assert.equal((await get('submissions')).body.files.find(f => f.id === p.body.id).status, 'published');
+  await post('submit-withdraw', {id: p.body.id});
 });
 
 test('checkbook: a check register goes through the finance importer and publishes with names of individuals withheld', opts, async () => {
@@ -226,8 +334,20 @@ test('checkbook: a check register goes through the finance importer and publishe
   assert.match(p.body.id, /^f\d+$/);
   const waiting = await get('submissions');
   assert.equal(waiting.body.files.find(f => f.id === p.body.id).status, 'waiting');
-  const pub = await post('submit-publish', {id: p.body.id});
-  assert.equal(pub.status, 200, JSON.stringify(pub.body));
+  assert.deepEqual(p.body.report.checks, {first: 5001, last: 5003, count: 3});
+  assert.equal(p.body.report.total, 1555.5);
+  assert.equal(p.body.report.top_payees[0].key, 'Gulf Power Company');
+  assert.equal((await q('select count(*)::int n from finance.disbursements'))[0].n, 0, 'nothing imported before staff confirm');
+  const conf = await post('submit-confirm', {id: p.body.id});
+  assert.equal(conf.status, 200, JSON.stringify(conf.body));
+  assert.equal(conf.body.status, 'in_review', 'a part-year register can’t be fully checked, so it waits');
+  assert.ok(conf.body.check.findings.some(f => f.check === 'Matches the check register we already have'));
+  assert.equal((await q('select count(*)::int n from checkbook_payments'))[0].n, 0);
+  as = {email: 'owner@baycounty.me', admin: true, via: 'session'};
+  const rv = await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'publish', note: 'ok'}});
+  assert.equal(rv.status, 200, JSON.stringify(rv.body));
+  const pub = {body: rv.body.published};
+  as = {email: 'finance@parker.test', via: 'session'};
   assert.equal(pub.body.rows, 3);
   assert.equal(pub.body.individuals_withheld, 1);
   const rows = await q(`select payee, government from checkbook_payments order by paid_on`);
@@ -267,18 +387,18 @@ test('payroll: one row per job title, names removed, pay kept as an unnamed list
   assert.equal(missing.ok, false);
 });
 
-test('appointments and fee changes read from a sheet or one form', () => {
+test('appointments and fee changes read from a sheet', () => {
   const a = LISTS.readList('appointments', [['Board', 'Seat', 'Member', 'Appointed By', 'Term Start', 'Term End'],
     ['Planning Board', 'Seat 1', 'Jordan Rivers', 'City Commission', '2025-01-01', '2028-12-31'], ['Planning Board', 'Seat 2', 'Vacant', '', '', ''],
     ['Library Board', '', 'Pat Lane', 'Mayor', '2012-01-01', '2014-12-31']]);
   assert.equal(a.ok, true);
   assert.deepEqual(a.rows.map(r => r.person), ['Jordan Rivers']);
   assert.deepEqual(a.reasons, {'vacant seat': 1, 'term ended before 2016': 1});
-  const f = LISTS.readForm('fees', {fee: 'Residential water base charge', old_amount: '18.50', new_amount: '$19.75', unit: 'per month', effective: '2026-10-01'});
+  const f = LISTS.readList('fees', [['Fee', 'Old Amount', 'New Amount', 'Unit', 'Effective Date'], ['Residential water base charge', '18.50', '$19.75', 'per month', '2026-10-01'], ['Pavilion rental', '', '', '', '']]);
   assert.equal(f.ok, true);
+  assert.equal(f.rows.length, 1);
   assert.equal(f.rows[0].category, 'utility');
   assert.equal(f.rows[0].new_amount, 19.75);
-  assert.equal(LISTS.readForm('fees', {fee: 'Pavilion rental'}).ok, false);
 });
 
 test('payroll file: preview, publish to salary positions without names, withdraw', opts, async () => {
@@ -290,8 +410,13 @@ test('payroll file: preview, publish to salary positions without names, withdraw
   assert.equal(p.body.row_count, 1);
   assert.equal(p.body.names_removed, 2);
   assert.ok(!JSON.stringify(p.body).includes('Ann Smith'));
-  const pub = await post('submit-publish', {id: p.body.id});
+  assert.equal(p.body.report.people, 2);
+  const pub = await post('submit-confirm', {id: p.body.id});
   assert.equal(pub.status, 200, JSON.stringify(pub.body));
+  assert.equal(pub.body.status, 'in_review');
+  as = {email: 'owner@baycounty.me', admin: true, via: 'session'};
+  assert.equal((await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'publish', note: 'ok'}})).status, 200);
+  as = {email: 'finance@parker.test', via: 'session'};
   const rows = await q(`select employer, employer_id, title, actual_salaries, budgeted_fte, government_key from salary_positions where origin = 'gov'`);
   assert.equal(rows.length, 1);
   assert.deepEqual(rows[0].actual_salaries, [38000, 41000]);
@@ -303,19 +428,26 @@ test('payroll file: preview, publish to salary positions without names, withdraw
   assert.equal((await q(`select count(*)::int n from salary_positions where origin = 'gov'`))[0].n, 0);
 });
 
-test('short forms publish one appointment, fee change or contract at once', opts, async () => {
+test('appointment, fee and contract lists publish from files; there is no typed entry', opts, async () => {
   as = {email: 'clerk@parker.test', via: 'session'};
-  const a = await post('submit-form', {kind: 'appointments', fields: {board: 'Code Enforcement Board', seat: 'Alternate', person: 'Sam Ortiz', appointed_by: 'City Council', term_start: '2026-10-01'}});
-  assert.equal(a.status, 200, JSON.stringify(a.body));
-  assert.equal(a.body.rows, 1);
-  const fee = await post('submit-form', {kind: 'fees', fields: {fee: 'Garbage pickup', old_amount: '21', new_amount: '23.50', unit: 'per month', effective: '2026-11-01'}});
-  assert.equal(fee.status, 200, JSON.stringify(fee.body));
-  const c = await post('submit-form', {kind: 'contracts', fields: {vendor: 'Panhandle Paving LLC', amount: '84,500', award_date: '2026-10-20', title: 'Resurface 5th Street', method: 'ITB'}});
-  assert.equal(c.status, 200, JSON.stringify(c.body));
-  const bad = await post('submit-form', {kind: 'fees', fields: {fee: 'Missing amount'}});
-  assert.equal(bad.status, 400);
-  const payrollForm = await post('submit-form', {kind: 'payroll', fields: {title: 'x'}});
-  assert.equal(payrollForm.status, 400, 'payroll is a file, not a form');
+  const send = async (kind, name, csv) => {
+    const p = await post('submit-preview', {kind, filename: name, content: b64(csv)});
+    assert.equal(p.status, 200, JSON.stringify(p.body));
+    assert.equal(p.body.ok, true, JSON.stringify(p.body.missing));
+    const pub = await post('submit-publish', {id: p.body.id});  // the old name still works for older app builds
+    assert.equal(pub.status, 200, JSON.stringify(pub.body));
+    if (pub.body.status === 'published') return pub.body.published;
+    as = {email: 'owner@baycounty.me', admin: true, via: 'session'};
+    const r = await call('review-file', {method: 'POST', body: {file_id: p.body.id, decision: 'publish', note: 'ok'}});
+    as = {email: 'clerk@parker.test', via: 'session'};
+    assert.equal(r.status, 200, JSON.stringify(r.body));
+    return r.body.published;
+  };
+  assert.equal((await send('appointments', 'boards.csv', 'Board,Seat,Member,Appointed By,Term Start\nCode Enforcement Board,Alternate,Sam Ortiz,City Council,2026-10-01\n')).rows, 1);
+  await send('fees', 'fees.csv', 'Fee,Old Amount,New Amount,Unit,Effective Date\nGarbage pickup,21,23.50,per month,2026-11-01\n');
+  await send('contracts', 'contracts.csv', 'Vendor,Amount,Award Date,Title,Method\nPanhandle Paving LLC,"84,500",2026-10-20,Resurface 5th Street,ITB\n');
+  const typed = await post('submit-form', {kind: 'fees', fields: {fee: 'x', new_amount: '1'}});
+  assert.ok(typed.status >= 400, 'typed entry is gone');
   assert.equal((await q(`select person from board_appointments where gov_id = 'parker'`))[0].person, 'Sam Ortiz');
   assert.equal((await q(`select category from fee_changes where gov_id = 'parker'`))[0].category, 'trash');
   const R = require('../_records');
@@ -348,8 +480,9 @@ test('feeds: a government sees what we read automatically and can agree to it', 
 test('migration 0092 adds the School Board and the five county officers with intake addresses', opts, async () => {
   const ws = (await q(`select id from gov.workspaces order by id`)).map(r => r.id);
   for (const id of ['schools', 'sheriff', 'clerk', 'property_appraiser', 'tax_collector', 'soe']) assert.ok(ws.includes(id), id);
-  const src = await q(`select inbound_address, finance_workspace_id, allowed_senders from ingest.sources where finance_workspace_id = 'schools'`);
+  const src = await q(`select inbound_address, finance_workspace_id, allowed_senders, gov_domain from ingest.sources where finance_workspace_id = 'schools'`);
   assert.equal(src[0].inbound_address, 'schools@ingest.baycounty.me');
-  assert.deepEqual(src[0].allowed_senders, ['@bay.k12.fl.us']);
+  assert.deepEqual(src[0].allowed_senders, []);
+  assert.equal(src[0].gov_domain, 'bay.k12.fl.us');
   assert.equal((await q(`select count(*)::int n from finance.workspaces where id in ('sheriff', 'soe')`))[0].n, 2);
 });

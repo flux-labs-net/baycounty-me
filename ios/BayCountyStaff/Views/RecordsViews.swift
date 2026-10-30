@@ -43,7 +43,7 @@ struct RecordsView: View {
                                             Button(f.canPublish ? "Discard" : "Withdraw", role: .destructive) { confirm = f }
                                         }
                                         if store.can("submit") && f.canPublish {
-                                            Button("Publish") { run { await store.publishRecords(id: f.id) } }.tint(Brand.navyFill)
+                                            Button("Confirm") { run { await store.publishRecords(id: f.id) } }.tint(Brand.navyFill)
                                         }
                                     }
                             }
@@ -105,7 +105,7 @@ private struct FileRow: View {
         .padding(.vertical, 3)
     }
     private var color: Color {
-        switch f.status { case "published": return Brand.good; case "waiting", "held": return Brand.amber; default: return .secondary }
+        switch f.status { case "published": return Brand.good; case "waiting", "held", "in_review", "checking": return Brand.amber; default: return .secondary }
     }
 }
 
@@ -171,7 +171,7 @@ struct SendFileView: View {
         ForEach(p.warnings ?? [], id: \.self) { Text($0).font(.footnote).foregroundStyle(Brand.amber) }
         Section {
             if p.ok {
-                Button { publish(p) } label: { Text(busy ? "Publishing…" : "Publish").frame(maxWidth: .infinity) }
+                Button { publish(p) } label: { Text(busy ? "Sending…" : "Yes, this is the right file").frame(maxWidth: .infinity) }
                     .buttonStyle(PrimaryButton()).disabled(busy)
                     .listRowInsets(EdgeInsets()).listRowBackground(Color.clear)
             }

@@ -58,6 +58,15 @@ label.chk input{width:18px;height:18px;margin-top:2px}
 .inbox code{font:500 .9rem var(--f-mono);background:var(--sunken);padding:2px 6px;border-radius:6px;overflow-wrap:anywhere}
 .pvsum{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.9rem;margin:0 0 12px}
 .pvsum b{font-variant-numeric:tabular-nums}
+.pvfacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 0 12px}
+.pvfacts div{border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.pvfacts span{font-size:.78rem;color:var(--muted)}.pvfacts b{font-variant-numeric:tabular-nums;font-size:1rem}
+.pvgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.pvgrid h3{font:600 .86rem var(--f-display);margin:0 0 4px}
+.pvgrid .t td{padding:4px 6px;font-size:.84rem}.pvgrid .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ck{margin-top:8px;font-size:.86rem}.ck summary{cursor:pointer;color:var(--muted)}
+.ck ul{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:6px}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:.78rem}
 .status.held{background:color-mix(in srgb,var(--urgent) 16%,transparent);color:var(--urgent)}
 dialog.modal{border:1px solid var(--line);border-radius:14px;padding:0;width:min(560px,calc(100vw - 32px));background:var(--surface);color:var(--ink)}
 dialog.modal::backdrop{background:rgba(10,14,20,.45)}
@@ -246,7 +255,7 @@ def staff_page(out_dir):
 {post_panel('job', 'a job', JOB_FIELDS, 'Job openings. They show on the government jobs page as soon as you save them, with your link to apply.')}
 
     <section id="p-submit" data-panel hidden>
-      <p class="sub">Send the files your own systems already make: the check register, the budget-vs-actual report, contracts, a payroll or position list, board appointments, fee changes. We read them, you check a preview, and they go on {place.SITE} with the same privacy rules as everything else: payments to private people are listed without their name, and payroll never names employees. Nothing you send changes numbers already on the site.</p>
+      <p class="sub">Send the files your own systems already make: the check register, the budget-vs-actual report, contracts, a payroll or position list, board appointments, fee changes. It takes two steps. First you see a report of what the file says (totals by month and department, the biggest payees, the first and last check number) and confirm it’s the right file; nothing is taken in before that. Then we check it against records we collect on our own (approvals in your agendas and minutes, the adopted budget, the state’s yearly figures, published pay). If everything matches it goes on {place.SITE}; if anything doesn’t, it waits for review and you’ll see what didn’t match. The same privacy rules apply as everywhere else: payments to private people are listed without their name, and payroll never names employees. Nothing you send changes numbers already on the site.</p>
       <h2 class="h2">What we’d expect by now</h2>
       <div class="due" id="sub-due"></div>
       <div data-can="submit">
@@ -257,19 +266,19 @@ def staff_page(out_dir):
           <div class="row" id="sub-opts" hidden><label class="f" id="sub-asof-l">Report “as of” date (if it isn’t in the title)<input type="date" id="sub-asof"></label><label class="f">Printed total (optional, to check the rows add up)<input id="sub-total" inputmode="decimal" placeholder="1,234,567.89"></label></div>
           <p class="small" id="sub-msg" role="status"></p>
         </form>
-        <details class="panel" id="sub-one" hidden style="margin-top:14px"><summary><b id="sub-one-h">Or fill in just one</b> <span class="small muted">No file needed</span></summary>
-          <form id="sub-one-f" style="display:flex;flex-direction:column;gap:12px;margin-top:12px"><div class="form" id="sub-one-fields"></div>
-            <div class="row"><button class="btn primary" type="submit">Publish on {place.SITE}</button><span class="small err" role="alert"></span></div></form></details>
         <div class="panel" id="sub-pv" hidden style="margin-top:14px">
-          <h2 class="h2" id="sub-pv-h" style="margin-top:0">Check the preview</h2>
+          <h2 class="h2" id="sub-pv-h" style="margin-top:0">Is this the right file?</h2>
           <div class="pvsum" id="sub-pv-sum"></div>
           <p class="small" id="sub-pv-note"></p>
+          <div class="pvrep" id="sub-pv-rep"></div>
+          <h3 class="h3" style="margin:14px 0 6px">First rows</h3>
           <div class="tw"><table class="t rec" id="sub-pv-t"><thead></thead><tbody></tbody></table></div>
-          <div class="row" style="margin-top:12px"><button class="btn primary" type="button" id="sub-go">Publish on {place.SITE}</button><button class="btn quiet" type="button" id="sub-cancel">Cancel</button><span class="small err" role="alert" id="sub-err"></span></div>
+          <p class="small muted" style="margin:12px 0 0">Nothing has been taken in yet. If these numbers don’t look like your books, press Cancel and send the right file.</p>
+          <div class="row" style="margin-top:10px"><button class="btn primary" type="button" id="sub-go">Yes, this is the right file</button><button class="btn quiet" type="button" id="sub-cancel">Cancel</button><span class="small err" role="alert" id="sub-err"></span></div>
         </div>
       </div>
       <p class="readonly" data-cant="submit" hidden>Only records senders, publishers and owners can send records. You can see what has been sent.</p>
-      <div class="inbox" id="sub-inbox" hidden>{_svg('mail')}<div><b>Or email it.</b> Send the file from your work address to <code id="sub-addr"></code>. It shows up below as “Emailed in” for someone here to check and publish. Same files, same rules.</div></div>
+      <div class="inbox" id="sub-inbox" hidden>{_svg('mail')}<div><b>Or email it.</b> Send the file from your work address to <code id="sub-addr"></code>. Only the addresses listed here can send; mail from anyone else is turned away unopened. It shows up below as “Emailed in” for someone here to confirm. Same files, same rules.<div class="small" id="sub-senders" style="margin-top:6px"></div></div></div>
       <p class="small muted" id="sub-tpl"></p>
       <h2 class="h2">Files sent</h2>
       <ul class="items" id="sub-list"></ul>
@@ -300,6 +309,12 @@ def staff_page(out_dir):
       </form>
       <p class="small" id="pp-msg" role="status"></p>
       <div class="tw"><table class="t" id="pp-t"><thead><tr><th>Email</th><th>Access</th><th>Added by</th><th>Since</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="panel" id="is-w" hidden style="margin-top:16px">
+        <h2 class="h2" style="margin-top:0">Who may email records in</h2>
+        <p class="small">Files sent to <code id="is-addr"></code> are accepted only from these exact addresses, one per line. A whole domain isn’t allowed. <span id="is-dom"></span></p>
+        <textarea id="is-list" rows="4" style="width:100%;box-sizing:border-box;font:inherit" aria-label="Allowed addresses" placeholder="finance@cityoflynnhaven.com"></textarea>
+        <div class="row" style="margin-top:8px"><button class="btn primary" type="button" id="is-save">Save</button><span class="small" id="is-msg" role="status"></span></div>
+      </div>
     </section>
 
     <section id="p-activity" data-panel hidden>

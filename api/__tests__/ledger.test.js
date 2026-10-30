@@ -11,12 +11,12 @@ const L = require('../_ledger');
 
 const A = '11111111-1111-4111-8111-111111111111', B = '22222222-2222-4222-8222-222222222222';
 
-test('allowed senders: addresses and @domains, lowercased and deduped', () => {
-  assert.deepEqual(L.cleanSenders('JMcSpadden@Springfield.FL.gov, @springfield.fl.gov; jmcspadden@springfield.fl.gov'),
-    ['jmcspadden@springfield.fl.gov', '@springfield.fl.gov']);
+test('allowed senders: exact addresses only, lowercased and deduped; a whole domain is refused', () => {
+  assert.deepEqual(L.cleanSenders('JMcSpadden@Springfield.FL.gov; jmcspadden@springfield.fl.gov, clerk@springfield.fl.gov'),
+    ['jmcspadden@springfield.fl.gov', 'clerk@springfield.fl.gov']);
   assert.deepEqual(L.cleanSenders(''), []);
-  assert.throws(() => L.cleanSenders('not an email'), /isn’t an email/);
-  assert.throws(() => L.cleanSenders('@nodot'), /isn’t an email/);
+  assert.throws(() => L.cleanSenders('not an email'), /isn’t a full email/);
+  assert.throws(() => L.cleanSenders('@springfield.fl.gov'), /not a whole domain/);
 });
 
 test('row ids must be uuids', () => {

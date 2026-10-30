@@ -91,7 +91,7 @@ const LISTS = {
 
   appointments: {
     label: 'Board appointments', every: 'change', table: 'board_appointments', dataset: 'board-appointments',
-    hint: 'Who sits on each advisory board or authority you appoint: board, member and term at least. Excel or CSV, or fill in one below.',
+    hint: 'Who sits on each advisory board or authority you appoint: board, member and term at least. Excel or CSV.',
     template: ['Board', 'Seat', 'Member', 'Appointed By', 'Term Start', 'Term End', 'Notes'],
     fields: {
       board: ['board', 'board name', 'committee', 'commission', 'authority', 'council', 'advisory board'],
@@ -123,7 +123,7 @@ const LISTS = {
 
   fees: {
     label: 'Fee or rate changes', every: 'change', table: 'fee_changes', dataset: 'fee-changes',
-    hint: 'A new or changed fee or utility rate: what it is, the new amount and when it starts. Excel or CSV, or fill in one below.',
+    hint: 'A new or changed fee or utility rate: what it is, the new amount and when it starts. Excel or CSV.',
     template: ['Fee', 'Category', 'Old Amount', 'New Amount', 'Unit', 'Effective Date', 'Adopted By', 'Document Link'],
     fields: {
       fee: ['fee', 'fee name', 'rate', 'rate name', 'item', 'service', 'description', 'charge'],
@@ -181,17 +181,6 @@ function readList(kind, grid) {
 }
 
 // Pure: one short form (an object of field -> value) -> the same result as a one-row file.
-function readForm(kind, fields) {
-  const spec = LISTS[kind];
-  const f = fields || {};
-  const missing = spec.required.filter(a => !a.some(k => clean(f[k]))).map(a => a.map(k => k.replace(/_/g, ' ')).join(' or '));
-  if (missing.length) return {ok: false, missing, rows: [], skipped: 0, reasons: {}};
-  const got = spec.row(k => f[k]);
-  if (got === null || typeof got === 'string') return {ok: false, missing: [typeof got === 'string' ? got : 'the required fields'], rows: [], skipped: 0, reasons: {}};
-  const rows = spec.finish ? spec.finish([got]) : [got];
-  return {ok: true, missing: [], rows, skipped: 0, reasons: {}};
-}
-
 // Pure: a submission's rows -> rows for the kind's public table.
 function listRows(kind, sub, ws) {
   const spec = LISTS[kind];
@@ -202,4 +191,4 @@ function listRows(kind, sub, ws) {
   });
 }
 
-module.exports = {LISTS, FEE_CATEGORIES, readList, readForm, listRows, feeCategory, fiscalYearOf};
+module.exports = {LISTS, FEE_CATEGORIES, readList, listRows, feeCategory, fiscalYearOf};

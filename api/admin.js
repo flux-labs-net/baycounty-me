@@ -171,6 +171,21 @@ async function route(req, res, action, me) {
     case 'summary': return require('./_summary').summary();
     case 'ingestion': return require('./_health').report();
     // ---------- accounting-system files (ingest schema) ----------
+    // ---------- email intake log (records sent by email) ----------
+    case 'intake_report': {
+      const IR = require('./_intake_report');
+      const r = await IR.report(q, {from: String(Q.from || ''), to: String(Q.to || ''), workspace: String(Q.workspace || '').slice(0, 60)});
+      const fmt = String(Q.format || 'json');
+      if (fmt === 'json') return r;
+      await audit(me.e, 'intake_report', null, {from: r.from, to: r.to, workspace: r.workspace, format: fmt, emails: r.emails.length}).catch(() => {});
+      const name = `intake-report-${r.from}-to-${r.to}`;
+      if (fmt === 'csv') {
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8'); res.setHeader('Content-Disposition', `attachment; filename="${name}.csv"`);
+        res.status(200).send(IR.toCsv(r)); return undefined;
+      }
+      res.setHeader('Content-Type', 'text/html; charset=utf-8'); res.setHeader('Content-Disposition', `inline; filename="${name}.html"`);
+      res.status(200).send(IR.toHtml(r)); return undefined;
+    }
     case 'ledger': return require('./_ledger').report({status: String(Q.status || 'pending'), source: String(Q.source || ''), raw: String(Q.raw || '')});
     case 'ledger_normalize': case 'ledger_approve': case 'ledger_reject': case 'ledger_source': case 'ledger_finance': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
@@ -244,6 +259,15 @@ async function route(req, res, action, me) {
     }
     case 'gov_staff': return require('./_gov').adminOverview(q);
     case 'gov_flags': return require('./_gov').adminFlags(q, String(Q.status || 'open'));
+    // ---------- sent files that didn't pass every check (records submission, step two) ----------
+    case 'file_reviews': return require('./_records').reviewList(q, {status: String(Q.status || 'open')});
+    case 'file_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const deps = {q, storage: require('./_finance/storage'), ingest: require('./finance').ingest, publisher: require('./_finance/publish'), log: require('./_gov').log};
+      const r = await require('./_records').review(deps, body, me.e);
+      await audit(me.e, action, null, {file: body.file_id, decision: body.decision, note: body.note || null});
+      return r;
+    }
     case 'gov_member': case 'gov_flag_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const G = require('./_gov');
@@ -372,7 +396,9 @@ module.exports = async (req, res) => {
   if (!me) return res.status(401).json({error: 'Sign in first.'});
   if (req.method === 'POST' && req.headers['x-bcm-admin'] !== '1') return res.status(403).json({error: 'Missing admin header.'});
   try {
-    return res.status(200).json(await route(req, res, action, me));
+    const out = await route(req, res, action, me);
+    if (out === undefined && res.headersSent) return undefined;  // already sent (a CSV or report page)
+    return res.status(200).json(out);
   } catch (e) {
     if (!e.status) console.error('admin', action, e);
     return res.status(e.status || 500).json({error: e.status ? e.message : 'Something went wrong.'});

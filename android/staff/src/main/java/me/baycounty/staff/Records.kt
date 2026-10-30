@@ -129,14 +129,14 @@ private fun FileRow(f: StaffRecordFile, canAct: Boolean, onPublish: () -> Unit, 
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(f.name, style = T.bodyBold, color = Brand.text, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
             Spacer(Modifier.width(8.dp))
-            Chip(f.statusLabel, when (f.status) { "published" -> Brand.good; "waiting", "held" -> Brand.amber; else -> Brand.secondary })
+            Chip(f.statusLabel, when (f.status) { "published" -> Brand.good; "waiting", "held", "in_review", "checking" -> Brand.amber; else -> Brand.secondary })
         }
         Text(f.detail, style = T.caption, color = Brand.secondary)
         Text(listOfNotNull(if (f.via == "email") "Emailed" else "Sent", f.sentBy?.let { "by $it" }, f.sentAt?.let { Staff.whenOf(it) }).joinToString(" "),
             style = T.caption, color = Brand.secondary)
         if (f.status == "held") f.problem?.let { Text(it, style = T.caption, color = Brand.salmon) }
         if (canAct && (f.canPublish || f.canWithdraw)) Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-            if (f.canPublish) TextButton(onPublish) { Text("Publish", color = Brand.navy) }
+            if (f.canPublish) TextButton(onPublish) { Text("Confirm", color = Brand.navy) }
             if (f.canWithdraw) TextButton(onWithdraw) { Text(if (f.canPublish) "Discard" else "Withdraw", color = Brand.salmon) }
         }
     }
@@ -200,7 +200,7 @@ fun SendFileScreen(model: StaffModel, demoPreview: Boolean, onBack: () -> Unit) 
                         color = if (p.ok) Brand.secondary else Brand.salmon, modifier = Modifier.padding(top = 8.dp))
                     p.warnings.orEmpty().forEach { Text(it, style = T.footnote, color = Brand.amber, modifier = Modifier.padding(top = 4.dp)) }
                 }
-                if (p.ok) PrimaryButton(if (busy) "Publishing…" else "Publish", enabled = !busy) {
+                if (p.ok) PrimaryButton(if (busy) "Sending…" else "Yes, this is the right file", enabled = !busy) {
                     busy = true
                     scope.launch {
                         err = model.publishRecords(p.id); busy = false

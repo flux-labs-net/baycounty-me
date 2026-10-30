@@ -40,10 +40,10 @@ from (values ('schools@ingest.baycounty.me', 'schools'), ('sheriff@ingest.baycou
              ('elections@ingest.baycounty.me', 'soe')) m(addr, ws)
 where s.inbound_address = m.addr and s.finance_workspace_id is null;
 
--- The district's own email domain (from its published records address). The officers' domains are added in /admin
--- once confirmed; until then only their workspace members can email files in.
-update ingest.sources set allowed_senders = array['@bay.k12.fl.us']
-where inbound_address = 'schools@ingest.baycounty.me' and coalesce(cardinality(allowed_senders), 0) = 0;
+-- The district's own email domain, used only to tell a district employee who may send (migration 0093).
+
+update ingest.sources set gov_domain = 'bay.k12.fl.us'
+where inbound_address = 'schools@ingest.baycounty.me' and gov_domain is null;
 
 -- 2. More kinds of record.
 alter table gov.submissions drop constraint if exists submissions_kind_check;

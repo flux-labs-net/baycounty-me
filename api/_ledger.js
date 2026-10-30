@@ -11,7 +11,8 @@ const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 function cleanSenders(v) {
   const list = (Array.isArray(v) ? v : String(v ?? '').split(/[\s,;]+/)).map(s => String(s).trim().toLowerCase()).filter(Boolean);
   for (const s of list) {
-    if (!/^([a-z0-9._%+'-]+)?@[a-z0-9.-]+\.[a-z]{2,}$/.test(s)) throw bad(`“${s}” isn’t an email address or @domain.`);
+    // Exact addresses only: a whole domain can't send records (migration 0093).
+    if (!/^[a-z0-9._%+'-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(s)) throw bad(`“${s}” isn’t a full email address. Only exact addresses can send records, not a whole domain.`);
   }
   if (list.length > 50) throw bad('Up to 50 allowed senders per source.');
   return [...new Set(list)];

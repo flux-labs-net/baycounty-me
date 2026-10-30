@@ -43,7 +43,8 @@ public enum Staff {
         "alert_drafted": "saved a countywide alert for a second person to confirm", "alert_confirmed": "confirmed an alert",
         "alert_ended": "ended an alert", "alert_cancelled": "cancelled an alert", "data_flagged": "flagged record data",
         "flag_answered": "BayCounty.me answered a flag", "member_set": "changed access", "member_removed": "removed access",
-        "records_published": "published records", "records_withdrawn": "withdrew records",
+        "records_published": "published records", "records_withdrawn": "withdrew records", "records_confirmed": "confirmed a file",
+        "records_review_published": "published a file after review", "records_review_held": "kept a file off the site after review", "intake_senders_changed": "changed who may email records in",
         "feed_agreed": "agreed to a source we read", "feed_unagreed": "took back agreement to a source",
     ]
 
@@ -286,10 +287,10 @@ public struct StaffRecordFile: Decodable, Hashable, Sendable, Identifiable {
     public let publishedAt: String?
     /// Waiting, Published, Held for a check, Not public, Withdrawn.
     public var statusLabel: String {
-        ["waiting": "Waiting for you", "published": "Published", "held": "Held for a check", "not_public": "Not public yet", "withdrawn": "Withdrawn"][status] ?? status.capitalized
+        ["waiting": "Waiting for your OK", "checking": "Being checked", "in_review": "In review", "published": "Published", "held": "Doesn’t add up", "not_published": "Not published after review", "withdrawn": "Withdrawn"][status] ?? status.capitalized
     }
     public var canPublish: Bool { status == "waiting" }
-    public var canWithdraw: Bool { status == "waiting" || status == "published" || status == "not_public" }
+    public var canWithdraw: Bool { status == "waiting" || status == "published" || status == "in_review" }
     /// "Contracts awarded · 14 rows · through Sep 30, 2026".
     public var detail: String {
         var parts = [Staff.recordKindLabel(kind)]
@@ -425,6 +426,6 @@ public final class StaffClient: @unchecked Sendable {
         if let printedTotal { b["printed_total"] = printedTotal }
         return try StaffRecordPreview.decode(try await call("submit-preview", b))
     }
-    public func publishRecords(_ ws: String, id: String) async throws -> String { message(try await call("submit-publish", ["workspace": ws, "id": id])) }
+    public func publishRecords(_ ws: String, id: String) async throws -> String { message(try await call("submit-confirm", ["workspace": ws, "id": id])) }
     public func withdrawRecords(_ ws: String, id: String) async throws { _ = try await call("submit-withdraw", ["workspace": ws, "id": id]) }
 }

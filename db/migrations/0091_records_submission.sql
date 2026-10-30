@@ -24,9 +24,8 @@ select w.id, w.id, w.name, coalesce((select settings from finance.workspaces whe
 from gov.workspaces w
 on conflict (id) do nothing;
 
--- 3. An intake address for every government. Files emailed there by the government's own workspace members (or by
--- an address on the source's allowed list) land in its finance workspace as unreviewed imports, shown under
--- "Send records" for staff to check and publish.
+-- 3. An intake address for every government. Files emailed there from an address on the source's allowed list land
+-- in its finance workspace and are checked like any other sent file (migration 0093).
 insert into ingest.sources (entity_name, entity_type, erp_system, intake_method, inbound_address) values
   ('Bay County', 'county', 'other', 'email', 'baycounty@ingest.baycounty.me'),
   ('City of Panama City Beach', 'city', 'other', 'email', 'panamacitybeach@ingest.baycounty.me'),
@@ -41,30 +40,16 @@ from (values ('baycounty@ingest.baycounty.me', 'county'), ('panamacitybeach@inge
              ('springfield@ingest.baycounty.me', 'sp'), ('lynnhaven@ingest.baycounty.me', 'lh')) m(addr, ws)
 where s.inbound_address = m.addr and s.finance_workspace_id is null;
 
--- Mail from the government's own published email domain is accepted too (only where no allowed list was set in
--- /admin). Accepting a file never publishes it: it waits until someone signed in checks it and presses Publish.
--- Domains are the ones in the clerks' published addresses (data/civic/scripts/records_requests.py). Panama City Beach
--- and Springfield publish none, so only their workspace members can email files in until /admin adds one.
-update ingest.sources s set allowed_senders = array[m.dom]
-from (values ('baycounty@ingest.baycounty.me', '@baycountyfl.gov'), ('panamacity@ingest.baycounty.me', '@panamacity.gov'),
-             ('lynnhaven@ingest.baycounty.me', '@cityoflynnhaven.com'), ('callaway@ingest.baycounty.me', '@cityofcallaway.com'),
-             ('parker@ingest.baycounty.me', '@cityofparker.com'), ('mexicobeach@ingest.baycounty.me', '@mexicobeachfl.gov')) m(addr, dom)
-where s.inbound_address = m.addr and coalesce(cardinality(s.allowed_senders), 0) = 0;
-
--- The ingest-email edge function asks this before accepting a file from a sender who isn't on the source's allowed
--- list: anyone in that government's workspace who may send records counts.
-create or replace function public.ingest_sender_is_staff(p_source_id uuid, p_sender text)
-returns boolean language sql stable security definer set search_path = '' as $$
-  select exists (
-    select 1 from ingest.sources s join gov.members m on m.workspace_id = s.finance_workspace_id
-    where s.id = p_source_id and lower(m.email) = lower(p_sender) and m.role in ('owner', 'alert_sender', 'publisher', 'records'));
-$$;
-revoke all on function public.ingest_sender_is_staff(uuid, text) from public;
-do $$ begin
-  if exists (select 1 from pg_roles where rolname = 'service_role') then
-    grant execute on function public.ingest_sender_is_staff(uuid, text) to service_role;
-  end if;
-end $$;
+-- The government's own published email domain. It does NOT let anyone send files: only the exact addresses on
+-- allowed_senders can (migration 0093). Someone writing from this domain who isn't on the list gets a short reply
+-- saying who can send; mail from anywhere else is dropped unread. Domains are the ones in the clerks' published
+-- addresses (data/civic/scripts/records_requests.py); Panama City Beach and Springfield publish none.
+alter table ingest.sources add column if not exists gov_domain text;
+update ingest.sources s set gov_domain = m.dom
+from (values ('baycounty@ingest.baycounty.me', 'baycountyfl.gov'), ('panamacity@ingest.baycounty.me', 'panamacity.gov'),
+             ('lynnhaven@ingest.baycounty.me', 'cityoflynnhaven.com'), ('callaway@ingest.baycounty.me', 'cityofcallaway.com'),
+             ('parker@ingest.baycounty.me', 'cityofparker.com'), ('mexicobeach@ingest.baycounty.me', 'mexicobeachfl.gov')) m(addr, dom)
+where s.inbound_address = m.addr and s.gov_domain is null;
 
 -- 4. Contract lists sent by staff. rows holds each contract as it will be published (vendor names of private
 -- individuals already withheld), so the preview staff confirm is exactly what goes public.

@@ -38,6 +38,8 @@ const body = req => {
 //   shape?, mapping? {field: "Column name"}, printed_total?, as_of?, fiscal_year?, account?, source_system?}
 // Preview (commit false) returns the detected shape, the column mapping, the first 15 parsed rows and the tie-out.
 // Commit stores the rows and re-runs the rules; a file that doesn't tie is held (no rows used) and flagged.
+const {confirmReport} = require('./_records_report');
+
 async function ingest(deps, ws, b, who) {
   const {q} = deps;
   const w = await store.workspace(q, ws);
@@ -84,7 +86,8 @@ async function ingest(deps, ws, b, who) {
     fields_available: p.available, used_saved_mapping: p.usedSavedMapping, ok: p.ok, missing: p.missing, row_count: p.records.length,
     parsed_total: p.parsedTotal ?? null, printed_total: p.printedTotal ?? null, tie: p.tie || null, warnings: p.warnings || [],
     period: {start: p.periodStart || null, end: p.periodEnd || null}, fiscal_year: p.fiscalYear || null, sample: p.records.slice(0, 15),
-    already_added: dup ? {upload_id: dup.id, on: dup.uploaded_at} : null};
+    already_added: dup ? {upload_id: dup.id, on: dup.uploaded_at} : null,
+    report: ['disbursements', 'budget'].includes(p.shape) ? confirmReport(p.shape, p.records) : null};
 
   if (!b.commit || !p.ok) {
     const id = await store.saveUpload(q, ws, {...fields, status: 'preview'}, b.upload_id ? Number(b.upload_id) : null);

@@ -23,14 +23,18 @@
 //   GET  ?action=template&workspace=lh&kind=contracts   a CSV with the template's column names
 //   POST ?action=submit-url     {workspace, filename}   a one-time link to PUT a big file into storage
 //   POST ?action=submit-preview {workspace, kind, filename, content (base64) | path, as_of?, printed_total?, mapping?}   read it, save it as waiting
-//   POST ?action=submit-publish {workspace, id}  publish a file that was previewed (or emailed in)
+//   POST ?action=submit-confirm {workspace, id}  "yes, this is the right file" for one that was previewed (or emailed in). It's
+//        imported, then checked against our own records: if every check matches it publishes, otherwise it waits for review.
+//        (submit-publish is the old name, kept for older app builds; it does the same thing.)
 //   POST ?action=submit-withdraw {workspace, id} take a file's records off the public pages
-//   POST ?action=submit-form    {workspace, kind, fields}  one contract, appointment or fee change, published straight away
 //   POST ?action=feed-agree     {workspace, url, agree}    say yes (or no) to a source we read automatically for this government
+//   GET  ?action=intake-senders&workspace=lh  /  POST {workspace, senders: [exact addresses]}   who may email files in (owners change it)
 // BayCounty.me admins only (the site owner, in the staff app or with the admin cookie):
 //   GET  ?action=overview                        every workspace with live/waiting alerts, open flags, members; recent activity
 //   GET  ?action=review-flags&status=open        flags from every workspace (open | fixed | not_changed | all)
 //   POST ?action=review-flag {id, status, reply?}   answer a flag (fixed | not_changed | open)
+//   GET  ?action=review-files&status=open        sent files that didn't pass every check (open | decided)
+//   POST ?action=review-file {file_id, decision: publish | hold, note}   publish a held file or keep it off the site (final)
 const db = require('./_db');
 const G = require('./_gov');
 const R = require('./_records');
@@ -45,9 +49,9 @@ const body = req => {
 
 const NEED = {home: 'read', posts: 'read', post: 'publish', withdraw: 'publish', alerts: 'read', reach: 'alert', alert: 'alert',
   'alert-confirm': 'alert', 'alert-end': 'alert', records: 'read', flag: 'read', flags: 'read', activity: 'read', members: 'read',
-  submissions: 'read', template: 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-withdraw': 'submit',
-  'submit-form': 'submit', 'feed-agree': 'submit'};
-const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-withdraw', 'submit-form', 'feed-agree']);
+  submissions: 'read', template: 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-confirm': 'submit',
+  'submit-withdraw': 'submit', 'feed-agree': 'submit', 'intake-senders': 'read'};
+const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-confirm', 'submit-withdraw', 'feed-agree']);
 
 async function route(deps, req, res, action) {
   const {q} = deps, Q = req.query || {}, b = body(req);
@@ -65,18 +69,20 @@ async function route(deps, req, res, action) {
     return {email: who.email, admin: Boolean(who.admin), workspaces: await G.workspacesFor(q, who), roles: G.ROLE_LABEL,
       alert_kinds: G.ALERT_KINDS, notice_kinds: G.NOTICE_KINDS, job_types: G.JOB_TYPES, records: G.RECORDS, record_kinds: R.KINDS};
   }
-  if (action === 'overview' || action === 'review-flags' || action === 'review-flag') {
+  if (action === 'overview' || action === 'review-flags' || action === 'review-flag' || action === 'review-files' || action === 'review-file') {
     if (!who) throw bad('Sign in first.', 401);
     if (who.csrf) throw bad('Missing X-BCM-Gov header.', 403);
     if (!who.admin) throw bad('Only the BayCounty.me owner can see every government.', 403);
     if (action === 'overview') return G.ownerOverview(q);
     if (action === 'review-flags') return G.adminFlags(q, String(Q.status || 'open'));
+    if (action === 'review-files') return R.reviewList(q, {status: String(Q.status || 'open')});
     if (req.method !== 'POST') throw bad('Use POST.', 405);
+    if (action === 'review-file') return R.review(recordDeps(deps), b, who.email);
     return G.adminFlagReview(q, b, who.email);
   }
-  const need = action === 'members' && req.method !== 'GET' ? 'manage' : NEED[action];
+  const need = (action === 'members' || action === 'intake-senders') && req.method !== 'GET' ? 'manage' : NEED[action];
   if (!need) throw bad('Unknown action.', 404);
-  if ((POSTS.has(action) || (action === 'members' && req.method !== 'GET')) && req.method !== 'POST') throw bad('Use POST.', 405);
+  if (POSTS.has(action) && req.method !== 'POST') throw bad('Use POST.', 405);
   const {role, workspace: w} = await G.requireRole(q, who, String(b.workspace || Q.workspace || ''), need);
   const email = who.email;
 
@@ -131,9 +137,12 @@ async function route(deps, req, res, action) {
     }
     case 'submit-url': return R.uploadUrl(recordDeps(deps), w, b);
     case 'submit-preview': return R.preview(recordDeps(deps), w, b, who);
-    case 'submit-publish': return R.publish(recordDeps(deps), w, b, who);
+    case 'submit-publish': case 'submit-confirm': return R.confirm(recordDeps(deps), w, b, who);
+    case 'intake-senders': {
+      if (req.method === 'GET') return R.intakeSenders(q, w);
+      return R.setIntakeSenders(recordDeps(deps), w, b, who);
+    }
     case 'submit-withdraw': return R.withdraw(recordDeps(deps), w, b, who);
-    case 'submit-form': return R.submitForm(recordDeps(deps), w, b, who);
     case 'feed-agree': return R.feedAgree(recordDeps(deps), w, b, who);
     case 'members': {
       if (req.method === 'GET') return {members: await q('select email, role, added_by, created_at from gov.members where workspace_id = $1 order by role, email', [w.id])};

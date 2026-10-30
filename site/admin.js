@@ -50,8 +50,8 @@
   // Old #hashes from before the menu was regrouped still land somewhere sensible.
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
-    accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, govstaff: loadGovStaff, govflags: loadGovFlags, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, intake: loadIntake, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, govstaff: loadGovStaff, govflags: loadGovFlags, filereview: loadFileReview, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -96,6 +96,7 @@
     ['minutes', 'teal', 'Review', 'Votes from minutes', 'Motions read from minutes that failed a check, plus spot checks.', 'Open queue'],
     ['accounting', 'teal', 'Review', 'Accounting files', 'Check-register rows waiting for approve or reject.', 'Open queue'],
     ['govflags', 'teal', 'Review', 'Staff data flags', 'Record data city or county staff say is wrong.', 'Open queue'],
+    ['filereview', 'teal', 'Review', 'Sent files to check', 'Files a government sent that didn’t match our own records or couldn’t be confirmed.', 'Open queue'],
     ['replies', 'blue', 'Outreach', 'Replies to handle', 'Conversations with a reply, plus emails that matched no conversation.', 'Read replies', 'correspondence'],
     ['records', 'blue', 'Outreach', 'Unsent records requests', 'Drafts waiting for you to press Send.', 'Open drafts'],
     ['syncs', 'amber', 'Problems', 'Datasets failing now', 'Datasets whose latest load failed.', 'See data health', 'ingestion'],
@@ -399,7 +400,7 @@
     $('#ac-sources tbody').innerHTML = r.sources.map(s => `<tr data-src="${esc(s.id)}"><td>${esc(s.entity_name)}${s.active ? '' : ' <span class="pill revoked">Off</span>'}${s.has_map ? '' : '<div class="small" style="color:var(--warn)">No column map yet</div>'}</td>
       <td class="small">${esc(ERP[s.erp_system] || s.erp_system)}</td><td class="mono small">${esc(s.inbound_address || '')}</td>
       <td class="small">${s.finance_workspace ? esc(s.finance_workspace) : '<span class="muted">Not linked</span>'}</td>
-      <td><div class="ac-snd"><input value="${esc((s.allowed_senders || []).join(', '))}" placeholder="name@city.gov, @city.gov" aria-label="Allowed senders for ${esc(s.entity_name)}"><button class="btn" type="button" data-save-snd>Save</button></div></td>
+      <td><div class="ac-snd"><input value="${esc((s.allowed_senders || []).join(', '))}" placeholder="clerk@city.gov, finance@city.gov" aria-label="Allowed senders for ${esc(s.entity_name)}"><button class="btn" type="button" data-save-snd>Save</button></div></td>
       <td class="num">${fmt(s.files)}</td><td class="small">${when(s.last_file)}</td><td class="num">${fmt(s.pending)}</td>
       <td><label class="sw"><input type="checkbox" data-auto ${s.auto_normalize ? 'checked' : ''}> ${s.auto_normalize ? 'On' : 'Off'}</label></td></tr>`).join('') || '<tr><td colspan="9" class="empty">No sources yet.</td></tr>';
     $('#ac-files tbody').innerHTML = r.files.map(f => `<tr${f.id === LG.raw ? ' class="sel-row"' : ''}><td class="small" style="white-space:nowrap">${when(f.received_at)}</td><td class="small">${esc(f.entity_name)}</td>
@@ -559,6 +560,51 @@
     try { await api('agenda_run', {method: 'POST', body: {mode: 'both'}}); b.textContent = 'Started'; setTimeout(() => { b.textContent = 'Run now'; b.disabled = false; loadAgendas(); }, 60000); }
     catch (err) { alert(err.message); b.disabled = false; }
   });
+
+  // ---------- email intake log ----------
+  let IR = null;
+  const irDecision = {accepted: 'Accepted', refused: 'Refused', dropped: 'Dropped', unauthenticated: 'Not authenticated', failed: 'Failed', received: 'Not finished'};
+  const irParams = () => ({from: $('#ir-from').value, to: $('#ir-to').value, workspace: $('#ir-ws').value});
+  function irLinks() {
+    const qs = f => '/api/admin?' + new URLSearchParams({action: 'intake_report', format: f, ...irParams()}).toString();
+    $('#ir-csv').href = qs('csv'); $('#ir-print').href = qs('html');
+  }
+  async function loadIntake() {
+    if (!$('#ir-to').value) { const d = new Date(); $('#ir-to').value = d.toISOString().slice(0, 10); $('#ir-from').value = new Date(d - 30 * 864e5).toISOString().slice(0, 10); }
+    irLinks();
+    try { IR = await api('intake_report', {params: irParams()}); }
+    catch (e) { $('#ir-banner').innerHTML = `<div class="banner bad"><div><b>Couldn’t load the intake log.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const ch = IR.chain;
+    $('#ir-banner').innerHTML = ch.intact
+      ? `<div class="banner good"><div><b>Audit trail intact</b> <span class="small muted">All ${fmt(ch.events)} events link up. Latest #${ch.last_id || 0}.</span></div></div>`
+      : `<div class="banner bad"><div><b>Audit trail broken</b> <span class="small muted">at ${ch.breaks.map(b => '#' + b.id).join(', ')}. Something changed a row outside the app.</span></div></div>`;
+    const c = IR.counts;
+    $('#ir-tiles').innerHTML = [[IR.emails.length, 'Emails'], [c.accepted || 0, 'Accepted'], [(c.refused || 0) + (c.unauthenticated || 0), 'Refused'], [c.dropped || 0, 'Dropped'],
+      [IR.emails.reduce((n, e) => n + (e.attachments || []).filter(f => f.sha256).length, 0), 'Files stored']]
+      .map(([v, l]) => `<div class="tile"><b>${fmt(v)}</b><span>${l}</span></div>`).join('');
+    const ws = $('#ir-ws'), cur = ws.value;
+    const known = [...new Set(IR.emails.map(e => e.workspace_id).filter(Boolean).concat(cur ? [cur] : []))].sort();
+    ws.innerHTML = '<option value="">All governments</option>' + known.map(w => `<option value="${esc(w)}">${esc(w)}</option>`).join(''); ws.value = cur;
+    $('#ir-table tbody').innerHTML = IR.emails.slice().reverse().map(e => `<tr class="click" data-ir="${e.id}"><td class="small">${when(e.logged_at)}</td>
+      <td class="small">${esc(e.sender)}</td><td class="small">${esc((e.recipients || []).join(', '))}</td>
+      <td><span class="pill ${e.decision === 'accepted' ? 'delivered' : 'bounced'}">${esc(irDecision[e.decision] || e.decision)}</span></td>
+      <td class="small">${(e.attachments || []).length || '–'}</td><td class="small md-hide">${(e.events || []).length}</td></tr>`).join('')
+      || '<tr><td colspan="6" class="empty">No email reached an intake address in this window.</td></tr>';
+  }
+  function showIntake(id) {
+    const e = IR && IR.emails.find(x => String(x.id) === String(id)); if (!e) return;
+    const box = $('#ir-detail'); box.hidden = false;
+    const t = v => v ? `${new Date(v).toLocaleString()} <span class="muted mono small">${esc(new Date(v).toISOString())}</span>` : '–';
+    box.innerHTML = `<h3 style="font:600 .95rem var(--f-display);margin:0 0 8px">${esc(e.subject || (e.decision === 'accepted' ? '(no subject)' : '(not opened)'))}</h3>
+      <dl class="kv">${[['From', esc(e.sender)], ['To', esc((e.recipients || []).join(', '))], ['Decision', esc((irDecision[e.decision] || e.decision) + (e.reason ? ': ' + e.reason : ''))],
+        ['Sent', t(e.sent_at)], ['Received', t(e.received_at)], ['Webhook', t(e.webhook_at)], ['Logged', t(e.logged_at)], ['Finished', t(e.finished_at)],
+        ['Message-ID', `<span class="mono small">${esc(e.message_id || '–')}</span>`], ['Body SHA-256', `<span class="mono small">${esc(e.payload_sha256)}</span>`]]
+        .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+      ${(e.attachments || []).map(f => `<div class="small"><b>${esc(f.name)}</b> <span class="mono muted">${esc(f.sha256 || f.skipped || '')}</span></div>`).join('')}
+      ${(e.events || []).length ? `<h4 class="small" style="margin:10px 0 4px">Audit trail</h4>` + e.events.map(a => `<div class="small">#${a.id} · ${when(a.at)} · ${esc(a.actor)} · ${esc(a.action.replace(/_/g, ' '))} <span class="mono muted">${esc(String(a.hash).slice(0, 12))}…</span></div>`).join('') : ''}`;
+  }
+  ['#ir-from', '#ir-to', '#ir-ws'].forEach(s => $(s).addEventListener('change', loadIntake));
+  $('#ir-table').addEventListener('click', ev => { const r = ev.target.closest('[data-ir]'); if (r) showIntake(r.dataset.ir); });
 
   // ---------- sent mail ----------
   let SE = null, seTimer = null;
@@ -1462,6 +1508,40 @@
         : `<span class="small">${f.status === 'fixed' ? 'Fixed' : 'Not changed'}${f.reply ? ': ' + esc(f.reply) : ''}</span>`}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No flags here.</td></tr>';
   }
   $('#gf-status').addEventListener('change', loadGovFlags);
+
+  // ---------- sent files to check ----------
+  const FR_KIND = {checkbook: 'Checkbook', budget: 'Budget vs. actual', contracts: 'Contracts', payroll: 'Pay by job title', appointments: 'Board appointments', fees: 'Fee changes'};
+  const FR_ST = {match: 'Matches', mismatch: 'Doesn’t match', missing: 'Missing', unconfirmed: 'Couldn’t confirm'};
+  const FR_TONE = {match: 'delivered', mismatch: 'bounced', missing: 'bounced', unconfirmed: 'delivery_delayed'};
+  async function loadFileReview() {
+    let r;
+    try { r = await api('file_reviews', {params: {status: $('#fr-status').value}}); }
+    catch (e) { $('#fr-list').innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
+    const open = $('#fr-status').value === 'open';
+    $('#fr-list').innerHTML = r.files.map(f => {
+      const c = f.counts || {}, problems = (f.checks || []).filter(x => x.status !== 'match'), ok = (f.checks || []).filter(x => x.status === 'match');
+      const line = x => `<li><span class="pill ${FR_TONE[x.status]}">${FR_ST[x.status]}</span> <b>${esc(x.check)}</b> <span class="small">${esc(x.detail || '')}</span>${x.source_url ? ` <a class="small" href="${esc(x.source_url)}" target="_blank" rel="noopener noreferrer">our source</a>` : ''}</li>`;
+      return `<div class="card" style="margin-bottom:14px"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:baseline">
+          <h3 class="grow" style="font:600 1rem var(--f-display);margin:0">${esc(f.government)} · ${esc(FR_KIND[f.kind] || f.kind)}</h3>
+          <span class="small muted">${esc(f.name || '')} · ${f.rows || 0} rows${f.period_start ? ` · ${esc(f.period_start)} to ${esc(f.period_end || '')}` : ''}</span></div>
+        <div class="small muted" style="margin:4px 0 10px">Sent by ${esc(String(f.sent_by || '').replace(/^email:\s*/, ''))} ${when(f.sent_at)} · checked ${when(f.checked_at)} · SHA-256 <span class="mono">${esc(String(f.sha256 || '').slice(0, 16))}…</span></div>
+        <div class="tiles" style="margin-bottom:10px">${[['match', c.match], ['mismatch', c.mismatch], ['missing', c.missing], ['unconfirmed', c.unconfirmed]].map(([k, n]) => `<div class="tile"><b>${n || 0}</b><span>${FR_ST[k]}</span></div>`).join('')}</div>
+        <ul class="plain" style="display:flex;flex-direction:column;gap:6px;margin:0 0 10px">${problems.map(line).join('')}</ul>
+        ${ok.length ? `<details><summary class="small">${ok.length} check${ok.length === 1 ? '' : 's'} matched</summary><ul class="plain" style="display:flex;flex-direction:column;gap:6px;margin-top:8px">${ok.map(line).join('')}</ul></details>` : ''}
+        ${open ? `<div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap"><input class="sel grow" data-fr-note="${esc(f.file_id)}" maxlength="1000" placeholder="Note (required to keep it off the site)" aria-label="Note">
+          <button class="btn" type="button" data-fr="${esc(f.file_id)}|hold">Keep off the site</button><button class="btn primary" type="button" data-fr="${esc(f.file_id)}|publish">Publish</button></div>`
+          : `<p class="small" style="margin:10px 0 0"><b>${f.decision === 'publish' ? 'Published' : 'Kept off the site'}</b> by ${esc(f.decided_by)} ${when(f.decided_at)}${f.note ? ': ' + esc(f.note) : ''}</p>`}
+      </div>`;
+    }).join('') || `<p class="empty">${open ? 'Nothing waiting. Every file sent so far either passed every check or has been decided.' : 'No decisions in the last 90 days.'}</p>`;
+  }
+  $('#fr-status').addEventListener('change', loadFileReview);
+  $('#fr-list').addEventListener('click', async e => {
+    const b = e.target.closest('[data-fr]'); if (!b) return;
+    const [file_id, decision] = b.dataset.fr.split('|'), note = ($(`[data-fr-note="${file_id}"]`) || {}).value || '';
+    if (decision === 'publish' && !confirm('Publish this file’s records on the site? This can’t be undone here (the government can withdraw it).')) return;
+    b.disabled = true;
+    try { await api('file_review', {method: 'POST', body: {file_id, decision, note}}); loadFileReview(); } catch (err) { b.disabled = false; alert(err.message); }
+  });
   $('#gf-table').addEventListener('click', async e => {
     const b = e.target.closest('[data-gf]'); if (!b) return;
     const [id, status] = b.dataset.gf.split('|'), reply = ($(`[data-gf-reply="${id}"]`) || {}).value || '';

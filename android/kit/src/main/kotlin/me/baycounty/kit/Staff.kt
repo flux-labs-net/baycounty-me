@@ -55,7 +55,8 @@ object Staff {
         "alert_drafted" to "saved a countywide alert for a second person to confirm", "alert_confirmed" to "confirmed an alert",
         "alert_ended" to "ended an alert", "alert_cancelled" to "cancelled an alert", "data_flagged" to "flagged record data",
         "flag_answered" to "BayCounty.me answered a flag", "member_set" to "changed access", "member_removed" to "removed access",
-        "records_published" to "published records", "records_withdrawn" to "withdrew records",
+        "records_published" to "published records", "records_withdrawn" to "withdrew records", "records_confirmed" to "confirmed a file",
+        "records_review_published" to "published a file after review", "records_review_held" to "kept a file off the site after review", "intake_senders_changed" to "changed who may email records in",
         "feed_agreed" to "agreed to a source we read", "feed_unagreed" to "took back agreement to a source",
     )
 
@@ -209,10 +210,10 @@ data class StaffRecordFile(
     @SerialName("period_start") val periodStart: String? = null, @SerialName("period_end") val periodEnd: String? = null,
     val rows: Int? = null, val problem: String? = null, @SerialName("published_at") val publishedAt: String? = null,
 ) {
-    val statusLabel get() = mapOf("waiting" to "Waiting for you", "published" to "Published", "held" to "Held for a check",
-        "not_public" to "Not public yet", "withdrawn" to "Withdrawn")[status] ?: status
+    val statusLabel get() = mapOf("waiting" to "Waiting for your OK", "checking" to "Being checked", "in_review" to "In review", "published" to "Published",
+        "held" to "Doesn’t add up", "not_published" to "Not published after review", "withdrawn" to "Withdrawn")[status] ?: status
     val canPublish get() = status == "waiting"
-    val canWithdraw get() = status == "waiting" || status == "published" || status == "not_public"
+    val canWithdraw get() = status == "waiting" || status == "published" || status == "in_review"
     /** "Contracts awarded · 14 rows · through Sep 30, 2026". */
     val detail: String get() = listOfNotNull(
         Staff.recordKindLabel(kind),
@@ -325,6 +326,6 @@ class StaffClient(var token: String?, private val baseURL: String = BayCountyCli
             if (!asOf.isNullOrEmpty()) put("as_of", asOf)
             if (printedTotal != null) put("printed_total", printedTotal)
         }))
-    suspend fun publishRecords(ws: String, id: String): String = message(call("submit-publish", body = buildJsonObject { put("workspace", ws); put("id", id) }))
+    suspend fun publishRecords(ws: String, id: String): String = message(call("submit-confirm", body = buildJsonObject { put("workspace", ws); put("id", id) }))
     suspend fun withdrawRecords(ws: String, id: String) { call("submit-withdraw", body = buildJsonObject { put("workspace", ws); put("id", id) }) }
 }

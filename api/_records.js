@@ -1,14 +1,19 @@
 // Records submission (Send records, in the government workspace /staff): a government's own staff send the files
-// their systems already make, we read them, staff check a preview, and the records are published. Used by
-// api/gov.js (staff actions) and api/v1.js (/records-sent, the public scorecard). Tables: migration 0091.
+// their systems already make and we take them in two steps. Used by api/gov.js (staff and admin actions) and api/v1.js
+// (/records-sent, the public scorecard). Tables: migrations 0091-0093.
+//  1. Confirm: staff see a report of what the file says (totals by month and department, biggest payees, first and
+//     last check number) and press "Yes, this is the right file". Until then nothing is imported, so a wrong file
+//     never needs cleaning up. Staff can't publish.
+//  2. Check: we never take the file's word for it. api/_records_verify.js checks it against records we collect on our
+//     own (approvals and votes, adopted budgets, the state's yearly figures, published pay, check-number gaps). A file
+//     that passes every check publishes on its own; anything else waits for the BayCounty.me admin (review-file).
 //
 // Kinds of record:
 //  * checkbook: a check register or payments export -> the finance importer (shape 'disbursements') -> checkbook_payments
 //  * budget:    a budget-vs-actual report           -> the finance importer (shape 'budget')        -> budget_actuals
 //  * contracts: a list of contracts awarded          -> read here, kept in gov.submissions            -> contracts (origin 'gov')
 //  * payroll, appointments, fees (Phase 2)           -> api/_record_lists.js, gov.submissions         -> salary_positions,
-//    board_appointments, fee_changes (origin 'gov'). Contracts, appointments and fees can also be sent one at a time
-//    from a short form (submit-form), which publishes straight away.
+//    board_appointments, fee_changes (origin 'gov'). Files only: nothing is typed in by hand.
 // Each government also sees the sources we already read for it automatically (data_sources) and can agree to them
 // (gov.feed_agreements), so a scraper becomes a feed the government knows about.
 // The finance importer already detects columns, saves the mapping for next month, ties rows to the file's printed
@@ -22,6 +27,8 @@ const {sha256, safeName} = require('./_finance/pipeline');
 const {isOrganization} = require('./_finance/publish');
 const cutoff = require('./_cutoff');
 const L = require('./_record_lists');
+const V = require('./_records_verify');
+const {confirmReport} = require('./_records_report');
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const MAX_INLINE = 3 * 1024 * 1024;
@@ -31,9 +38,9 @@ const KINDS = {
     hint: 'The check register or payments report from your accounting system, for one or more whole months. Excel or CSV.'},
   budget: {label: 'Budget vs. actual', shape: 'budget', every: 'quarter',
     hint: 'The budget-vs-actual (or revenue and expenditure) report, as of a month end. Excel or CSV.'},
-  contracts: {label: 'Contracts awarded', every: 'month', form: true,
+  contracts: {label: 'Contracts awarded', every: 'month',
     hint: 'A list of contracts, purchase orders over your bid limit or awards approved: vendor, amount and award date at least. Excel or CSV.'},
-  ...Object.fromEntries(Object.entries(L.LISTS).map(([k, v]) => [k, {label: v.label, every: v.every, hint: v.hint, form: k !== 'payroll'}])),
+  ...Object.fromEntries(Object.entries(L.LISTS).map(([k, v]) => [k, {label: v.label, every: v.every, hint: v.hint}])),
 };
 // Kinds kept in gov.submissions (everything the finance importer doesn't read).
 const SUB_KINDS = ['contracts', ...Object.keys(L.LISTS)];
@@ -161,24 +168,40 @@ async function latestByKind(q, wsId) {
   return out;
 }
 
-const fileStatus = u => (u.status === 'held' ? 'held' : u.status === 'preview' ? 'waiting' : u.published_at ? 'published' : 'not_public');
+// What staff see for each file: waiting (for their OK), held (doesn't add up to its own total), checking, in_review
+// (a check didn't pass; the admin decides), published, not_published (the admin held it after review), withdrawn.
+function fileStatus(base, v) {
+  if (base === 'preview') return 'waiting';
+  if (base === 'held_total') return 'held';
+  if (base === 'published' || base === 'withdrawn') return base;
+  if (!v) return 'checking';
+  return v.decision === 'hold' ? 'not_published' : v.decision === 'publish' ? 'published' : 'in_review';
+}
+const verdict = v => (v ? {status: v.status, counts: v.counts, checked_at: v.checked_at, decision: v.decision, decided_at: v.decided_at, note: v.note,
+  findings: (v.checks || []).filter(c => c.status !== 'match').slice(0, 40), matched: (v.checks || []).filter(c => c.status === 'match').length} : null);
 
 // Everything the Send records tab shows.
 async function overview(q, ws, today = new Date()) {
   const files = await q(`select id, shape, original_name, status, uploaded_by, uploaded_at, period_start::text period_start, period_end::text period_end,
-      row_count, tie_status, tie_difference, error, published_at, published_by from finance.uploads
+      row_count, tie_status, tie_difference, error, published_at, published_by, sha256 from finance.uploads
       where workspace_id = $1 and shape in ('disbursements', 'budget') and status in ('preview', 'committed', 'held') order by uploaded_at desc limit 60`, [ws.id]);
-  const subs = await q(`select id, kind, original_name, status, submitted_by, submitted_at, period_start::text period_start, period_end::text period_end,
-      row_count, skipped, published_at, published_by, withdrawn_at from gov.submissions where workspace_id = $1 order by submitted_at desc limit 60`, [ws.id]);
+  const subs = await q(`select id, kind, original_name, status, submitted_by, submitted_at, sent_by, sent_at, period_start::text period_start, period_end::text period_end,
+      row_count, skipped, published_at, published_by, withdrawn_at, sha256 from gov.submissions where workspace_id = $1 order by submitted_at desc limit 60`, [ws.id]);
+  const checks = new Map((await q('select * from gov.verifications where workspace_id = $1', [ws.id]).catch(() => [])).map(v => [v.file_id, v]));
   const list = [
-    ...files.map(u => ({id: 'f' + u.id, kind: SHAPE_KIND[u.shape], name: u.original_name, status: fileStatus(u), via: /^email:/.test(u.uploaded_by || '') ? 'email' : 'upload',
-      sent_by: String(u.uploaded_by || '').replace(/^email:\s*/, ''), sent_at: u.uploaded_at, period_start: u.period_start, period_end: u.period_end, rows: u.row_count,
-      tie: u.tie_status, difference: u.tie_difference, problem: u.error, published_at: u.published_at, published_by: u.published_by})),
-    ...subs.map(s => ({id: 'c' + s.id, kind: s.kind, name: s.original_name, status: s.status === 'preview' ? 'waiting' : s.status, via: 'upload', sent_by: s.submitted_by,
-      sent_at: s.submitted_at, period_start: s.period_start, period_end: s.period_end, rows: s.row_count, skipped: s.skipped, published_at: s.published_at, published_by: s.published_by})),
+    ...files.map(u => { const v = checks.get('f' + u.id); return {id: 'f' + u.id, kind: SHAPE_KIND[u.shape], name: u.original_name, sha256: u.sha256,
+      status: fileStatus(u.status === 'held' ? 'held_total' : u.status === 'preview' ? 'preview' : u.published_at ? 'published' : 'confirmed', v),
+      via: /^email:/.test(u.uploaded_by || '') ? 'email' : 'upload', sent_by: String(u.uploaded_by || '').replace(/^email:\s*/, ''), sent_at: u.uploaded_at,
+      period_start: u.period_start, period_end: u.period_end, rows: u.row_count, tie: u.tie_status, difference: u.tie_difference, problem: u.error,
+      published_at: u.published_at, published_by: u.published_by, check: verdict(v)}; }),
+    ...subs.map(s => { const v = checks.get('c' + s.id); return {id: 'c' + s.id, kind: s.kind, name: s.original_name, sha256: s.sha256,
+      status: fileStatus(s.status === 'preview' ? 'preview' : s.status === 'published' || s.status === 'withdrawn' ? s.status : 'confirmed', v),
+      via: 'upload', sent_by: s.submitted_by, sent_at: s.submitted_at, confirmed_by: s.sent_by, confirmed_at: s.sent_at, period_start: s.period_start,
+      period_end: s.period_end, rows: s.row_count, skipped: s.skipped, published_at: s.published_at, published_by: s.published_by, check: verdict(v)}; }),
   ].sort((a, b) => new Date(b.sent_at) - new Date(a.sent_at));
-  return {address: await inboundAddress(q, ws.id), kinds: KINDS, templates: TEMPLATES, due: dueList(await latestByKind(q, ws.id), today), files: list,
-    feeds: await feeds(q, ws)};
+  const [src] = await q('select allowed_senders, gov_domain from ingest.sources where finance_workspace_id = $1 and active order by created_at limit 1', [ws.id]).catch(() => []);
+  return {address: await inboundAddress(q, ws.id), senders: src ? src.allowed_senders || [] : [], gov_domain: src ? src.gov_domain || null : null,
+    kinds: KINDS, templates: TEMPLATES, due: dueList(await latestByKind(q, ws.id), today), files: list, feeds: await feeds(q, ws)};
 }
 
 /* ---------- feeds we already read (data_sources) and the government's OK for each ---------- */
@@ -242,7 +265,7 @@ async function preview(deps, ws, b, who) {
       printed_total: b.printed_total, as_of: b.as_of, fiscal_year: b.fiscal_year, commit: false, source_system: b.source_system}, {email: who.email});
     return {id: 'f' + r.upload_id, kind, ok: r.ok, missing: r.missing, label: r.label, headers: r.headers, mapping: r.mapping, row_count: r.row_count,
       parsed_total: r.parsed_total, printed_total: r.printed_total, tie: r.tie, warnings: r.warnings, period: r.period, fiscal_year: r.fiscal_year, sample: r.sample,
-      used_saved_mapping: r.used_saved_mapping, already_added: r.already_added};
+      used_saved_mapping: r.used_saved_mapping, already_added: r.already_added, report: r.report || null};
   }
   const {buffer, path: given, filename} = await readBuffer(deps, ws, b);
   const grid = await readGrid(filename, buffer);
@@ -261,7 +284,7 @@ async function preview(deps, ws, b, who) {
   return {id: 'c' + s.id, kind, ok: c.ok && rows.length > 0, missing: c.ok ? (rows.length ? [] : ['at least one new contract (every row was skipped or is already on the site)']) : c.missing,
     label: KINDS.contracts.label, headers: c.headers, mapping: c.mapping, row_count: rows.length, skipped: c.skipped, reasons: c.reasons, already_on_site: dupes.size,
     withheld: rows.filter(r => r.vendor_kind === 'individual').length, period: {start: dates[0] || null, end: dates[dates.length - 1] || null},
-    parsed_total: Math.round(rows.reduce((a, r) => a + r.amount, 0) * 100) / 100, sample: rows.slice(0, 15)};
+    parsed_total: Math.round(rows.reduce((a, r) => a + r.amount, 0) * 100) / 100, sample: rows.slice(0, 15), report: confirmReport('contracts', rows)};
 }
 
 // Saves a list kind (payroll, appointments, fees) as waiting and returns its preview.
@@ -278,28 +301,9 @@ async function previewList(deps, ws, kind, r, file, who) {
     label: spec.label, headers: r.headers, mapping: r.mapping, row_count: r.rows.length, skipped: r.skipped, reasons: r.reasons,
     names_removed: kind === 'payroll' ? r.rows.reduce((a, x) => a + x.names_removed, 0) : undefined,
     period: {start: dates[0] || null, end: dates[dates.length - 1] || null}, parsed_total: spec.total ? Math.round(spec.total(r.rows)) : null,
+    report: confirmReport(kind, r.rows),
     sample: r.rows.slice(0, 15).map(x => (kind === 'payroll' ? {...x, salaries: undefined, people: x.salaries.length,
       typical: x.salaries.length ? x.salaries[Math.floor(x.salaries.length / 2)] : null} : x))};
-}
-
-// One record from a short form (contracts, appointments, fees): saved and published in one step, like posting a notice.
-async function submitForm(deps, ws, b, who) {
-  const kind = String(b.kind || '');
-  if (!KINDS[kind] || !KINDS[kind].form) throw bad('Choose a contract, an appointment or a fee change.');
-  const f = b.fields || {};
-  let r;
-  if (kind === 'contracts') {
-    r = readContracts([['Vendor', 'Amount', 'Award Date', 'Title', 'Method', 'Start Date', 'End Date', 'Approving Meeting', 'Document Link'],
-      [f.vendor, f.amount, f.award_date, f.title, f.method, f.start, f.end, f.meeting, f.link]]);
-    if (r.ok && !r.rows.length) r = {...r, ok: false, missing: [Object.keys(r.reasons)[0] || 'vendor, amount and award date']};
-  } else r = L.readForm(kind, f);
-  if (!r.ok) throw bad(`Missing: ${r.missing.join('; ')}.`);
-  const title = kind === 'contracts' ? r.rows[0].vendor : kind === 'appointments' ? `${r.rows[0].person}, ${r.rows[0].board}` : r.rows[0].fee;
-  const d = r.rows[0].date || r.rows[0].term_start || r.rows[0].effective_date || null;
-  const [s] = await deps.q(`insert into gov.submissions (workspace_id, kind, original_name, sha256, bytes, submitted_by, row_count, skipped, rows, period_start, period_end)
-      values ($1, $2, $3, $4, 0, $5, 1, 0, $6, $7, $7) returning id`,
-    [ws.id, kind, `Form: ${String(title).slice(0, 120)}`, crypto.randomBytes(16).toString('hex'), who.email, JSON.stringify(r.rows), d]);
-  return publish(deps, ws, {id: 'c' + s.id}, who);
 }
 
 async function q_dupes(q, ws, rows) {
@@ -310,29 +314,93 @@ async function q_dupes(q, ws, rows) {
   return out;
 }
 
-// Confirms a previewed file and publishes it.
-async function publish(deps, ws, b, who) {
+// Step one: staff say this is the right file. A finance file is imported (and must add up to its own printed total);
+// a list is marked received. Nothing is public yet. Then step two runs straight away.
+async function confirm(deps, ws, b, who) {
   const {type, id} = parseId(b.id);
   const {q} = deps;
+  const [done] = await q('select file_id from gov.verifications where file_id = $1', [type + id]);
+  if (done) throw bad('This file was already confirmed and checked.', 409);
   if (type === 'f') {
     const [u] = await q('select id, status, shape from finance.uploads where id = $1 and workspace_id = $2', [id, ws.id]);
     if (!u || !SHAPE_KIND[u.shape]) throw bad('File not found.', 404);
+    if (u.status === 'held') throw bad('This file doesn’t add up to its own printed total, so it can’t be taken in. Send a corrected file.');
     if (u.status === 'preview') {
       const r = await deps.ingest(deps, ws.id, {upload_id: id, commit: true, shape: u.shape, printed_total: b.printed_total, as_of: b.as_of, fiscal_year: b.fiscal_year, mapping: b.mapping},
         {email: who.email});
       if (!r.committed) {
         if (r.held) return {ok: false, held: true, message: r.message};
-        throw bad(r.missing && r.missing.length ? `This file can’t be published yet. Missing: ${r.missing.join('; ')}.` : 'This file can’t be published yet.');
+        throw bad(r.missing && r.missing.length ? `This file can’t be taken in yet. Missing: ${r.missing.join('; ')}.` : 'This file can’t be taken in yet.');
       }
-    } else if (u.status === 'held') throw bad('This file doesn’t add up to its own printed total, so it can’t be published. Send a corrected file.');
+    } else if (u.status !== 'committed') throw bad('This file was replaced or withdrawn. Send it again.');
+    await deps.log(q, ws.id, who.email, 'records_confirmed', {kind: SHAPE_KIND[u.shape], file: id});
+  } else {
+    const [s] = await q('select id, kind, status, row_count from gov.submissions where id = $1 and workspace_id = $2', [id, ws.id]);
+    if (!s) throw bad('File not found.', 404);
+    if (s.status === 'withdrawn') throw bad('This file was withdrawn. Send it again.');
+    if (s.status !== 'preview') throw bad('This file was already confirmed.', 409);
+    if (!s.row_count) throw bad('There’s nothing new in this file.');
+    await q(`update gov.submissions set status = 'received', sent_at = now(), sent_by = $3 where id = $1 and workspace_id = $2`, [s.id, ws.id, who.email]);
+    await deps.log(q, ws.id, who.email, 'records_confirmed', {kind: s.kind, file: s.id});
+  }
+  return check(deps, ws, type + id);
+}
+
+// A confirmed file as the checker reads it: {kind, sha256, rows, period_start, period_end, fiscal_year}.
+async function loadFile(q, ws, fileId) {
+  const {type, id} = parseId(fileId);
+  if (type === 'f') {
+    const [u] = await q('select id, shape, sha256, period_start::text period_start, period_end::text period_end from finance.uploads where id = $1 and workspace_id = $2', [id, ws.id]);
+    if (!u) throw bad('File not found.', 404);
+    const kind = SHAPE_KIND[u.shape];
+    const rows = kind === 'checkbook'
+      ? await q(`select paid_on::text paid_on, doc_no, method, payee, amount::float8 amount, invoice_no, fund, account, description, is_void from finance.disbursements where upload_id = $1 order by source_row`, [id])
+      : await q(`select fiscal_year, as_of::text as_of, fund, department, account, description, original_budget::float8 original_budget, amended_budget::float8 amended_budget,
+          actual_ytd::float8 actual_ytd, encumbered::float8 encumbered from finance.budget_lines where upload_id = $1 order by source_row`, [id]);
+    const fy = kind === 'budget' ? Math.max(0, ...rows.map(r => Number(r.fiscal_year) || 0)) || null : null;
+    return {kind, sha256: u.sha256, rows, period_start: u.period_start, period_end: u.period_end, fiscal_year: fy};
+  }
+  const [s] = await q('select id, kind, sha256, rows, period_start::text period_start, period_end::text period_end from gov.submissions where id = $1 and workspace_id = $2', [id, ws.id]);
+  if (!s) throw bad('File not found.', 404);
+  return {kind: s.kind, sha256: s.sha256, rows: s.rows || [], period_start: s.period_start, period_end: s.period_end, fiscal_year: null};
+}
+
+const CHECKER = 'BayCounty.me checks';
+
+// Step two: check the file against our own records and keep the result. Verified files publish; the rest are held.
+async function check(deps, ws, fileId) {
+  const {q} = deps;
+  const f = await loadFile(q, ws, fileId);
+  const v = await V.verifyFile(q, ws, f);
+  await q(`insert into gov.verifications (file_id, workspace_id, kind, file_sha256, status, checks, counts) values ($1, $2, $3, $4, $5, $6, $7)
+      on conflict (file_id) do nothing`, [fileId, ws.id, f.kind, f.sha256, v.status, JSON.stringify(v.checks), JSON.stringify(v.counts)]);
+  const out = {ok: true, id: fileId, kind: f.kind, check: {status: v.status, counts: v.counts, findings: v.checks.filter(c => c.status !== 'match').slice(0, 40),
+    matched: v.checks.filter(c => c.status === 'match').length}};
+  if (v.status === 'verified') {
+    await q(`update gov.verifications set decision = 'publish', decided_by = $2, decided_at = now(), note = 'Every check matched' where file_id = $1 and decision is null`, [fileId, CHECKER]);
+    const p = await release(deps, ws, fileId, {email: CHECKER});
+    return {...out, status: 'published', published: p, message: `Every check matched our own records. Published ${p.rows} row${p.rows === 1 ? '' : 's'}.`};
+  }
+  if (fileId[0] === 'c') await q(`update gov.submissions set status = 'held' where id = $1 and workspace_id = $2 and status = 'received'`, [Number(fileId.slice(1)), ws.id]);
+  return {...out, status: 'in_review',
+    message: v.status === 'discrepancies' ? 'Some numbers didn’t match our own records, so this file waits for review before anything is public.'
+      : 'We couldn’t confirm every record against our own sources yet, so this file waits for review before anything is public.'};
+}
+
+// Puts a confirmed and checked file's records on the public pages. Only check() (verified) and review() call it.
+async function release(deps, ws, fileId, who) {
+  const {type, id} = parseId(fileId);
+  const {q} = deps;
+  if (type === 'f') {
+    const [u] = await q('select id, status, shape from finance.uploads where id = $1 and workspace_id = $2', [id, ws.id]);
+    if (!u || u.status !== 'committed') throw bad('This file isn’t ready to publish.', 409);
     const p = await deps.publisher.publish(q, ws.id, id, who.email);
     await deps.log(q, ws.id, who.email, 'records_published', {kind: SHAPE_KIND[u.shape], file: id, rows: p.rows});
     return {...p, kind: SHAPE_KIND[u.shape]};
   }
   const [s] = await q('select * from gov.submissions where id = $1 and workspace_id = $2', [id, ws.id]);
   if (!s) throw bad('File not found.', 404);
-  if (s.status === 'withdrawn') throw bad('This file was withdrawn. Send it again to publish it.');
-  if (!s.rows.length) throw bad('There’s nothing new to publish in this file.');
+  if (!['received', 'held'].includes(s.status)) throw bad('This file isn’t ready to publish.', 409);
   const t = TARGET[s.kind];
   const rows = t.rows(s, ws);
   await q(`delete from ${t.table} where origin = 'gov' and record_hash like $1`, [`gov:${s.id}:%`]);
@@ -350,6 +418,62 @@ async function publish(deps, ws, b, who) {
   return {ok: true, kind: s.kind, table: t.table, rows: rows.length, page: t.page,
     individuals_withheld: s.kind === 'contracts' ? s.rows.filter(r => r.vendor_kind === 'individual').length : 0,
     names_removed: s.kind === 'payroll' ? s.rows.reduce((a, r) => a + (r.names_removed || 0), 0) : 0};
+}
+
+/* ---------- who may email files in ---------- */
+// Exact addresses only (migration 0093). A government owner keeps the list; every change goes in the activity log.
+async function intakeSenders(q, ws) {
+  const [s] = await q('select inbound_address, allowed_senders, gov_domain from ingest.sources where finance_workspace_id = $1 and active order by created_at limit 1', [ws.id]);
+  if (!s) throw bad('This government has no intake address yet.', 404);
+  return {address: s.inbound_address, senders: s.allowed_senders || [], gov_domain: s.gov_domain || null};
+}
+
+async function setIntakeSenders(deps, ws, b, who) {
+  const {cleanSenders} = require('./_ledger');
+  const list = cleanSenders(b.senders);
+  const [s] = await deps.q('select id, allowed_senders from ingest.sources where finance_workspace_id = $1 and active order by created_at limit 1', [ws.id]);
+  if (!s) throw bad('This government has no intake address yet.', 404);
+  await deps.q('update ingest.sources set allowed_senders = $2 where id = $1', [s.id, list]);
+  const before = new Set(s.allowed_senders || []), after = new Set(list);
+  await deps.log(deps.q, ws.id, who.email, 'intake_senders_changed', {added: list.filter(a => !before.has(a)), removed: [...before].filter(a => !after.has(a))});
+  return {ok: true, senders: list};
+}
+
+/* ---------- admin review of files that didn't pass every check ---------- */
+const fileName = async (q, fileId) => {
+  const {type, id} = parseId(fileId);
+  const [r] = type === 'f'
+    ? await q(`select original_name name, uploaded_by sent_by, uploaded_at sent_at, period_start::text period_start, period_end::text period_end, row_count rows, storage_path from finance.uploads where id = $1`, [id])
+    : await q(`select original_name name, coalesce(sent_by, submitted_by) sent_by, coalesce(sent_at, submitted_at) sent_at, period_start::text period_start, period_end::text period_end, row_count rows, storage_path from gov.submissions where id = $1`, [id]);
+  return r || {};
+};
+
+async function reviewList(q, {status = 'open'} = {}) {
+  const rows = await q(`select v.*, w.name government from gov.verifications v join gov.workspaces w on w.id = v.workspace_id
+      where ${status === 'open' ? 'v.decision is null' : 'v.decided_at > now() - interval \'90 days\''} order by v.checked_at desc limit 200`);
+  const out = [];
+  for (const v of rows) out.push({file_id: v.file_id, workspace_id: v.workspace_id, government: v.government, kind: v.kind, sha256: v.file_sha256, status: v.status,
+    counts: v.counts, checks: v.checks, checked_at: v.checked_at, decision: v.decision, decided_by: v.decided_by, decided_at: v.decided_at, note: v.note, ...(await fileName(q, v.file_id))});
+  return {files: out};
+}
+
+// The admin publishes a held file (findings and all) or keeps it off the site. A decision is final (migration 0093).
+async function review(deps, b, admin) {
+  const fileId = String(b.file_id || '');
+  parseId(fileId);
+  const decision = String(b.decision || '');
+  if (!['publish', 'hold'].includes(decision)) throw bad('Choose publish or hold.');
+  const note = String(b.note || '').trim().slice(0, 1000);
+  if (decision === 'hold' && note.length < 3) throw bad('Add a note saying why this file stays off the site.');
+  const {q} = deps;
+  const [v] = await q('select v.*, w.name from gov.verifications v join gov.workspaces w on w.id = v.workspace_id where v.file_id = $1', [fileId]);
+  if (!v) throw bad('File not found.', 404);
+  if (v.decision) throw bad(`This file was already ${v.decision === 'publish' ? 'published' : 'held'} on ${new Date(v.decided_at).toISOString().slice(0, 10)}.`, 409);
+  const ws = {id: v.workspace_id, name: v.name};
+  await q('update gov.verifications set decision = $2, decided_by = $3, decided_at = now(), note = $4 where file_id = $1 and decision is null', [fileId, decision, admin, note || null]);
+  await deps.log(q, ws.id, admin, decision === 'publish' ? 'records_review_published' : 'records_review_held', {file: fileId, kind: v.kind, note});
+  if (decision === 'hold') return {ok: true, decision};
+  return {ok: true, decision, published: await release(deps, ws, fileId, {email: admin})};
 }
 
 // Where each gov.submissions kind is published.
@@ -428,5 +552,6 @@ function templateCsv(kind) {
   return TEMPLATES[kind].join(',') + '\n';
 }
 
-module.exports = {KINDS, SUB_KINDS, TEMPLATES, CONTRACT_FIELDS, readContracts, contractRows, dueList, overview, preview, publish, withdraw, submitForm, feeds, feedAgree,
+module.exports = {KINDS, SUB_KINDS, TEMPLATES, CONTRACT_FIELDS, readContracts, contractRows, dueList, overview, preview, confirm, check, release, review, reviewList,
+  loadFile, intakeSenders, setIntakeSenders, withdraw, feeds, feedAgree,
   uploadUrl, publicSent, templateCsv, parseId, normHeader};
