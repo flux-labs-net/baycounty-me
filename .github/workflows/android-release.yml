@@ -1,13 +1,39 @@
 name: Android release
-# Builds the signed app bundle (.aab) to upload to the Play Console. Run it by hand from the Actions tab.
+# Builds the signed app bundle (.aab) and sends it to Google Play. Two ways to run it:
+#   - By hand: Actions > Android release > Run workflow, pick the Play track (or "none" to only build the .aab).
+#   - A version tag: pushing a tag like v1.2.0 builds it and sends it to Internal testing, with versionName 1.2.0.
+#     The same tag also starts the iOS release (TestFlight).
 # Needs the repository secrets in android/README.md. The version code is this workflow's run number plus 100,
-# so every bundle has a new one, as Play requires.
+# so every bundle has a new one, as Play requires. Nothing here runs on an ordinary push.
 on:
   workflow_dispatch:
+    inputs:
+      track:
+        description: Play track to send it to ("none" only builds the .aab)
+        type: choice
+        default: internal
+        options: [internal, alpha, beta, production, none]
+      status:
+        description: Release status on Play ("draft" waits for you to roll it out in the Play Console)
+        type: choice
+        default: completed
+        options: [completed, draft]
+      notes:
+        description: What's new (optional, shown to testers and on the listing)
+        type: string
+        required: false
+  push:
+    tags: ['v*']
+concurrency:
+  group: android-release
+  cancel-in-progress: false
 jobs:
   bundle:
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 30
+    env:
+      TRACK: ${{ inputs.track || 'internal' }}
+      STATUS: ${{ inputs.status || 'completed' }}
     defaults:
       run:
         working-directory: android
@@ -18,6 +44,14 @@ jobs:
           distribution: temurin
           java-version: '21'
       - uses: gradle/actions/setup-gradle@v4
+      - name: Version
+        run: |
+          code=$((${{ github.run_number }} + 100))
+          name=""
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then name="${GITHUB_REF_NAME#v}"; fi
+          echo "BCM_VERSION_CODE=$code" >> "$GITHUB_ENV"
+          echo "BCM_VERSION_NAME=$name" >> "$GITHUB_ENV"
+          echo "Version code $code, version name ${name:-from build.gradle.kts}, track $TRACK ($STATUS)" >> "$GITHUB_STEP_SUMMARY"
       - name: Restore the upload key
         env:
           KEYSTORE_BASE64: ${{ secrets.BCM_KEYSTORE_BASE64 }}
@@ -36,10 +70,39 @@ jobs:
           FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
           FCM_SENDER_ID: ${{ secrets.FCM_SENDER_ID }}
         run: |
-          export BCM_VERSION_CODE=$((${{ github.run_number }} + 100))
           ./gradlew :kit:test :app:bundleRelease
           rm -f "$BCM_KEYSTORE"
       - uses: actions/upload-artifact@v4
         with:
           name: app-release-aab
           path: android/app/build/outputs/bundle/release/app-release.aab
+      - name: Release notes
+        if: env.TRACK != 'none'
+        env:
+          NOTES: ${{ inputs.notes }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/whatsnew"
+          if [ -n "$NOTES" ]; then
+            printf '%s\n' "$NOTES" | head -c 500 > "$RUNNER_TEMP/whatsnew/whatsnew-en-US"
+            echo "WHATSNEW=$RUNNER_TEMP/whatsnew" >> "$GITHUB_ENV"
+          fi
+      - name: Check the Play key
+        if: env.TRACK != 'none'
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -z "$PLAY_JSON" ]; then echo "The PLAY_SERVICE_ACCOUNT_JSON secret is missing. See android/README.md (Releasing from GitHub)."; exit 1; fi
+      - name: Send to Google Play
+        if: env.TRACK != 'none'
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: me.baycounty
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: ${{ env.TRACK }}
+          status: ${{ env.STATUS }}
+          releaseName: ${{ env.BCM_VERSION_CODE }}
+          whatsNewDirectory: ${{ env.WHATSNEW }}
+      - name: Summary
+        if: env.TRACK != 'none'
+        run: echo "Sent version code $BCM_VERSION_CODE to the Play **$TRACK** track ($STATUS)." >> "$GITHUB_STEP_SUMMARY"
