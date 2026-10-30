@@ -291,15 +291,15 @@ async function endAlert(q, w, id, email) {
 }
 
 // How many residents an alert could reach right now, by channel (phones with the topic on, accounts with alert email on).
-const TOPIC_OF = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'evacuation', general: null};
+const TOPIC_OF = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'safety', general: null};
 async function reach(q, w, kind, countywide) {
   const topic = TOPIC_OF[kind];
   if (!topic) return {topic: null, phones: 0, emails: 0, note: 'General updates show on the alert timeline; phone and email sending for them arrives with the general topic.'};
   const gov = countywide ? null : w.id;
-  const [p] = await q(`select count(*)::int n from push.devices where place_id = $1 and disabled_at is null and user_id is not null and $2 = any(topics)
-      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [w.place_id, topic, gov]).catch(() => [{n: null}]);
+  const [p] = await q(`select count(*)::int n from push.devices where place_id = $1 and disabled_at is null and user_id is not null and topics && $2::text[]
+      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [w.place_id, require('./_emergency').topicsFor(topic), gov]).catch(() => [{n: null}]);
   const [e] = await q(`select count(distinct u.id)::int n from account.users u join account.homes h on h.user_id = u.id join account.prefs p on p.user_id = u.id
-      where u.status = 'active' and h.place_id = $1 and $2 = any(p.alert_email) and ($3::text is null or h.gov_id = $3)`, [w.place_id, topic, gov]).catch(() => [{n: null}]);
+      where u.status = 'active' and h.place_id = $1 and p.alert_email && $2::text[] and ($3::text is null or h.gov_id = $3)`, [w.place_id, require('./_emergency').topicsFor(topic), gov]).catch(() => [{n: null}]);
   return {topic, phones: p.n, emails: e.n};
 }
 

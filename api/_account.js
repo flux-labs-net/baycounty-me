@@ -34,7 +34,7 @@ const COOKIE = 'bcm_user', FLAG = 'bcm_in';
 const SESSION_DAYS = {web: 60, ios: 365, android: 365};
 const CODE_MIN = 15, CODE_TRIES = 5;
 const PUSH_TOPICS = ['weather', 'evacuation', 'shelters', 'water', 'roads', 'agenda'];
-const ALERT_EMAIL = ['evacuation', 'water', 'weather', 'shelters'];
+const ALERT_EMAIL = ['evacuation', 'water', 'weather', 'shelters', 'safety'];
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status, expose: true});
 const key = () => process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY;
 
@@ -370,18 +370,19 @@ async function weeklyRun(req, {only = null, now = new Date(), dry = false, budge
 async function emailNotice(place, n, topic) {
   if (!hasDb() || !ALERT_EMAIL.includes(topic)) return {sent: 0};
   const rows = await q(`select u.id, u.email, h.address, h.zone, h.gov_id, h.label from account.users u join account.homes h on h.user_id = u.id join account.prefs p on p.user_id = u.id
-      where u.status = 'active' and h.place_id = $1 and $2 = any(p.alert_email)`, [place, topic]);
-  let sent = 0;
+      where u.status = 'active' and h.place_id = $1 and p.alert_email && $2::text[]`, [place, require('./_emergency').topicsFor(topic)]);
+  let sent = 0, people = 0;
   for (const r of rows) {
     if (!N.assemble({notices: [{...n, status: 'active'}]}, {lat: 30.2, lon: -85.6, gov_id: r.gov_id, zone: r.zone}, {topics: []}).sections[0].items.length) continue;
     const claimed = await q(`insert into account.sends (user_id, kind, dedupe_key) values ($1, 'alert', $2) on conflict do nothing returning id`, [r.id, n.notice_id]);
     if (!claimed.length) continue;
+    people++;
     const m = require('./_emails').homeAlertEmail({...n, topic}, {home: r, manage: manageUrl(r.id)});
     const s = await resend('/emails', 'POST', {from: FROM, to: [r.email], subject: m.subject, html: m.html, text: m.text,
       headers: {'List-Unsubscribe': `<${manageUrl(r.id)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'}}, key()).catch(() => ({ok: false}));
     if (s.ok) sent++;
   }
-  return {sent};
+  return {sent, people};
 }
 
 /* ---------- admin (counts only) ---------- */

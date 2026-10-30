@@ -8,6 +8,7 @@
       "office_name": "National Weather Service Tallahassee",
       "url": "https://www.weather.gov/tae/"
     },
+    "ipaws": {"_about": "FEMA IPAWS public feeds (Wireless Emergency Alerts and EAS). same = SAME codes for Bay County (012005) and all of Florida (012000).", "state_fips": "12", "same": ["012005", "012000"], "page": "https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system"},
     "alert_centers": [
       {"gov": "county", "name": "Bay County", "url": "https://www.baycountyfl.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.baycountyfl.gov/AlertCenter.aspx"},
       {"gov": "pc", "name": "City of Panama City", "url": "https://www.panamacity.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.panamacity.gov/AlertCenter.aspx"},
