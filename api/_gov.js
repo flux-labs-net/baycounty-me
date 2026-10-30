@@ -354,6 +354,7 @@ async function reach(q, w, kind, countywide) {
 async function liveNotices(q, place) {
   const rows = await q(`select a.*, w.name gov_name from gov.alerts a left join gov.workspaces w on w.id = a.workspace_id
       where a.place_id = $1 and a.status = 'sent' and (a.ends_at is null or a.ends_at > now()) order by a.sent_at desc limit 50`, [place]);
+  rows.forEach(a => { if (a.gov_name) a.gov_name = a.gov_name.replace(/^(City|Town) of /, ''); });
   return rows.map(a => ({
     notice_id: 'staff:' + a.id, place_id: place, kind: a.kind, source: a.gov_name || 'BayCounty.me', source_type: 'staff', gov_id: a.workspace_id || null,
     title: a.title, summary: a.message, instruction: a.instruction, severity: a.severity, event: ALERT_KINDS[a.kind],
