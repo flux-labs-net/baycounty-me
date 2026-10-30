@@ -7,7 +7,7 @@ on:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
 jobs:
   build:
-    runs-on: [self-hosted, studio]
+    runs-on: [self-hosted, macOS]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
