@@ -80,7 +80,7 @@ test.before(async () => {
   await pool.query(STUBS);
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0088_gov_workspace.sql'), 'utf8'));
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0090_area_maps.sql'), 'utf8'));
-  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0096_official_dashboard.sql'), 'utf8'));
+  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0097_official_dashboard.sql'), 'utf8'));
   await q(`insert into gov.members (workspace_id, email, role) values ('lh', 'clerk@lh.test', 'publisher'), ('lh', 'chief@lh.test', 'alert_sender'),
     ('lh', 'mayor@lh.test', 'viewer'), ('lh', 'manager@lh.test', 'owner'), ('county', 'em1@county.test', 'alert_sender'), ('county', 'em2@county.test', 'alert_sender')`);
   G = require('../_gov');
