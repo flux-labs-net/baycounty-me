@@ -36,6 +36,7 @@ test.before(async () => {
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0020_correspondence.sql'), 'utf8'));
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0046_records_requests.sql'), 'utf8'));
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0094_public_mail.sql'), 'utf8'));
+  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0098_stale_records_requests.sql'), 'utf8'));
   await q(`insert into corr.contacts (government, seat, name, email, origin) values
     ('City of Lynn Haven', 'Mayor', 'Pat Mayor', 'mayor@lh.test', 'manual'),
     ('City of Lynn Haven', 'Commissioner Seat 1', 'Chris One (vice mayor)', 'one@lh.test', 'manual'),
@@ -137,7 +138,7 @@ test('contact edits validate addresses and turning someone off keeps them out of
 // Records requests (admin "Records requests" tab, migration 0046): drafts from data/civic/records_requests.json.
 test('records request drafts seed from the file, keep edits, and send only on request', opts, async () => {
   const R = require('../_records_requests');
-  const {requests} = await R.list();
+  const requests = (await R.list()).requests.filter(r => r.kind === 'budget');   // stale-data drafts: stale-requests.test.js
   const file = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/civic/records_requests.json'), 'utf8')).requests;
   assert.equal(requests.length, file.length);
   assert.ok(requests.every(r => r.status === 'draft' && !r.thread_id));

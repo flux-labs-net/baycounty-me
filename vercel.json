@@ -18,7 +18,10 @@
     },
     "api/admin.js": {
       "maxDuration": 60,
-      "includeFiles": "{data/civic/official_contacts.json,data/entities/vendor_review.json,data/dupes/review.json,data/dupes/decisions.json}"
+      "includeFiles": "{data/civic/official_contacts.json,data/civic/records_requests.json,data/civic/stale_requests.json,data/entities/vendor_review.json,data/dupes/review.json,data/dupes/decisions.json}"
+    },
+    "api/alerts-run.js": {
+      "includeFiles": "data/civic/stale_requests.json"
     },
     "api/weekly.js": {
       "maxDuration": 60

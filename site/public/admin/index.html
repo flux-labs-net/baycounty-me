@@ -122,6 +122,13 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .pill.awaiting{color:var(--warn)} .pill.replied{color:var(--ok)} .pill.closed{color:var(--muted)} .pill.public{color:var(--blue)}
 .pill.draft{color:var(--muted)} .pill.received{color:var(--ok)}
 .rr-gaps{display:flex;flex-wrap:wrap;gap:4px}
+.rr-k{font:600 .7rem var(--f-data);color:var(--warn);border:1px solid currentColor;border-radius:5px;padding:0 5px;margin-right:2px}
+.pill.dismissed{color:var(--muted)}
+.rr-places{display:flex;flex-direction:column;gap:8px}
+.rr-place{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.rr-age{font:600 .8rem var(--f-data);color:var(--warn);white-space:nowrap}
+.rr-dis{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;background:var(--sunken)}
+.rr-hist summary{cursor:pointer;color:var(--muted)} .rr-hist ol{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
 .rr-gaps span{font:500 .74rem var(--f-data);border:1px solid var(--line);border-radius:6px;padding:1px 6px;background:var(--sunken)}
 .co-p.on{background:var(--sunken)}
 .th-msg{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--bg)}
@@ -459,8 +466,9 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
     </section>
 
     <section id="tab-records" class="pane" hidden>
-      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119) for the budget years the site is missing, one draft per government. Nothing is sent until you press Send on a request. Each goes to one address from hello@baycounty.me, and the reply shows up under Conversations.</p>
+      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119). Two kinds of drafts: the budget years the site is missing, and <b>stale data</b>, drafted automatically each day when an official source’s newest record is older than its usual schedule (for example a beach water sampling site with no new sample in weeks). A gap is drafted once: after a request is sent or dismissed it isn’t drafted again. Nothing is sent until you press Approve and send. Each goes to one address from hello@baycounty.me, the reply shows up under Conversations, and every step is kept in a locked history.</p>
       <div class="tiles" id="rr-tiles"></div>
+      <div class="row" style="gap:8px;margin:0 0 10px"><select class="sel" id="rr-filter" aria-label="Show" style="width:auto"><option value="draft">Waiting for approval</option><option value="sent">Sent</option><option value="dismissed">Dismissed</option><option value="all">All requests</option></select></div>
       <div class="co">
         <div class="co-list" id="rr-list"><p class="empty">Loading…</p></div>
         <div class="card" id="rr-detail" style="display:flex;flex-direction:column;gap:12px"><p class="muted small" style="margin:0">Pick a request on the left.</p></div>
@@ -689,6 +697,6 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
   </div>
 </form></dialog>
 <script src="/assets/progress.js" defer></script>
-<script src="/assets/admin.js?v=be801c7ec9" defer></script>
+<script src="/assets/admin.js?v=9d182c297f" defer></script>
 </body>
 </html>
