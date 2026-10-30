@@ -5,6 +5,11 @@
   const D = JSON.parse(el.textContent), A = D.auth;
   let area = D.area, value = D.value;
   try { const s = JSON.parse(localStorage.getItem('homeBill') || '{}'); if (D.areas.some(a => a.id === s.area)) area = s.area; if (s.value >= 50000 && s.value <= 600000) value = s.value; } catch (e) {}
+  // Signed in with a saved home: the bill starts on the home's city (or unincorporated Bay County).
+  const homeArea = c => c && (c.gov === 'county' ? 'unincorporated' : c.name);
+  let picked = false;
+  const goHome = () => { const h = homeArea(window.BCHomeCity && window.BCHomeCity()); if (!picked && h && D.areas.some(a => a.id === h) && h !== area) { area = h; return true; } return false; };
+  goHome();
   const $ = id => document.getElementById(id);
   const usd = v => '$' + Math.round(v).toLocaleString('en-US');
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -23,9 +28,10 @@
     $('cmpBars').innerHTML = [...D.areas].sort((x, y) => y.t - x.t).map(x => `<li${x.id === area ? ' class="on"' : ''}><button type="button" data-area="${esc(x.id)}" aria-pressed="${x.id === area}"><span class="cb-n">${esc(x.n)}</span><span class="cb-t"><span style="width:${(x.t / max * 100).toFixed(1)}%"></span></span><span class="cb-v">${usd(x.t * value / 1000)}</span></button></li>`).join('');
     try { localStorage.setItem('homeBill', JSON.stringify({area, value})); } catch (e) {}
   }
-  document.addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (b && b.closest('.h-home')) { area = b.dataset.area; draw(); } });
+  document.addEventListener('click', e => { const b = e.target.closest('[data-area]'); if (b && b.closest('.h-home')) { area = b.dataset.area; picked = true; draw(); } });
   range.addEventListener('input', () => { value = +range.value; draw(); });
   draw();
+  if (window.BCHome) window.BCHome().then(() => { if (goHome()) draw(); });
 })();
 
 // Signed in with a saved home (the bcm_in cookie; the home comes from /api/account?action=me): the home takes the
@@ -86,3 +92,23 @@ window.BCTrashCard = (lookup, now = new Date()) => {
   if (p.hour >= 16 && runs(day(1))) return card(day(1), 'tomorrow', 'Put it out tonight');
   return null;
 };
+
+// Signed in with a saved home: the next-meeting card shows the home's own government (its city, or the County
+// Commission outside city limits). With none posted, it says so and shows the next one in the county.
+(() => {
+  const a = document.getElementById('hMeet'); if (!a || !window.BCHome) return;
+  const MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  window.BCHome().then(() => {
+    const c = window.BCHomeCity && window.BCHomeCity(); if (!c) return;
+    let N; try { N = JSON.parse(a.dataset.next); } catch (e) { return; }
+    const p = n => String(n).padStart(2, '0'), d = new Date();
+    const today = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`, now = `${today}T${p(d.getHours())}:${p(d.getMinutes())}`;
+    const ok = m => m[0] >= (m[0].length > 10 ? now : today);
+    const fmt = s => { const [y, m, dd] = s.slice(0, 10).split('-').map(Number), x = new Date(y, m - 1, dd); return `${WD[x.getDay()]} ${MO[m - 1]} ${dd}`; };
+    const b = a.querySelector('b'), sub = b && b.nextElementSibling; if (!sub) return;
+    const mine = (N[c.gov] || []).find(ok);
+    if (mine) { b.textContent = 'Next meeting · ' + fmt(mine[0]); sub.textContent = mine[1]; a.href = '/meetings?gov=' + encodeURIComponent(c.gov); return; }
+    const next = Object.values(N).flat().filter(ok).sort((x, y) => (x[0] < y[0] ? -1 : 1))[0];
+    if (next) { b.textContent = 'Next meeting · ' + fmt(next[0]); sub.textContent = `None posted for ${c.name} yet. Next in the county: ${next[1]}`; }
+  });
+})();

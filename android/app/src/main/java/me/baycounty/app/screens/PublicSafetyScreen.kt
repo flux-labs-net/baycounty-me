@@ -135,7 +135,9 @@ private fun Eyebrow(text: String) = Text(text.uppercase(), style = T.caption2.co
 @Composable
 private fun TownSection(agencies: List<DataRow>, crimes: List<DataRow>, staff: List<DataRow>, picked: String?, onPick: (String) -> Unit) {
     val towns = PublicSafety.towns(agencies)
-    val pick = towns.firstOrNull { it.id == (picked ?: towns.first().id) } ?: towns.first()
+    // Signed in: start on the home's town (its city, or the county outside city limits).
+    val start = picked ?: me.baycounty.app.Account.me?.home?.govKey
+    val pick = towns.firstOrNull { it.id == start } ?: towns.first()
     val crime = PublicSafety.townCrime(pick, crimes)
     PageSection("Your town", "mappin.and.ellipse", Tone.TEAL, "Pick where you live") {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {

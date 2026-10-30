@@ -48,8 +48,16 @@ fun EventsScreen() {
     var oneOff by rememberSaveable { mutableStateOf(false) }
     var query by rememberSaveable { mutableStateOf("") }
     var days by rememberSaveable { mutableIntStateOf(7) }
-    val list = Events.upcoming(rows, today, town.ifEmpty { null }, kind.ifEmpty { null }, oneOff, query)
+    // Signed in: start on the home's town, once; a town the reader picks always wins.
+    var settled by rememberSaveable { mutableStateOf(false) }
+    val homeTown = me.baycounty.app.Account.me?.home?.town
+    LaunchedEffect(homeTown) { if (!settled && homeTown != null) { town = homeTown; settled = true } }
+    val inTown = Events.upcoming(rows, today, town.ifEmpty { null }, kind.ifEmpty { null }, oneOff, query)
+    // A town with nothing that matches says so, then shows the rest of the county.
+    val elsewhere = town.isNotEmpty() && inTown.isEmpty()
+    val list = if (elsewhere) Events.upcoming(rows, today, null, kind.ifEmpty { null }, oneOff, query) else inTown
     val groups = Events.byDay(list, today)
+    val towns = Events.towns(rows).let { t -> if (homeTown != null && homeTown !in t) listOf(homeTown) + t else t }
 
     Screen("Events", onRefresh = { store.load(Events.DATASET, force = true) }, spacing = 18) {
         item {
@@ -73,7 +81,7 @@ fun EventsScreen() {
         }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                ChipRow(listOf("" to "Every town") + Events.towns(rows).map { it to it }, town) { town = it; days = 7 }
+                ChipRow(listOf("" to "Every town") + towns.map { it to it }, town) { town = it; settled = true; days = 7 }
                 ChipRow(listOf("" to "All kinds") + Events.kinds.map { it to it }, kind) { kind = it; days = 7 }
                 OutlinedTextField(
                     query, { query = it }, Modifier.fillMaxWidth(), singleLine = true,
@@ -86,6 +94,7 @@ fun EventsScreen() {
                 }
             }
         }
+        if (elsewhere && groups.isNotEmpty()) item { Text("Nothing coming up in $town. Here's the rest of Bay County.", style = T.subhead.copy(fontWeight = FontWeight.Medium), color = Brand.text) }
         if (groups.isEmpty()) item { Text("No upcoming events match.", style = T.subhead, color = Brand.secondary, modifier = Modifier.fillMaxWidth().card(14.dp).padding(14.dp)) }
         for ((day, rs) in groups.take(days)) {
             item(key = day) {

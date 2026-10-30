@@ -166,8 +166,10 @@
     if (!D) return;
     const t = q.value.trim().toLowerCase(), c = city.value, ty = type.value;
     // [doc, name, type, filed, active, city, zip, profile_url, sunbiz_url, restaurants]
-    const ok = D.b.filter(r => (!t || r[1].toLowerCase().includes(t)) && (!c || r[5] === c) && (!ty || r[2] === ty));
-    box.innerHTML = ok.slice(0, N).map(r => `<tr><td><a href="${esc(r[7])}">${esc(r[1])}</a>${r[9] ? `<small>Restaurant: ${esc(r[9])}</small>` : ''}</td><td>${esc(r[2])}<small>${r[4] ? 'Active' : 'Inactive'}</small></td>
+    const fit = r => (!t || r[1].toLowerCase().includes(t)) && (!ty || r[2] === ty);
+    let ok = D.b.filter(r => (!c || r[5] === c) && fit(r)), note = '';
+    if (c && !ok.length && D.b.some(fit)) { ok = D.b.filter(fit); note = `<tr><td colspan="5"><b>None in ${esc(c)}.</b> <span class="muted">Here's the rest of Bay County:</span></td></tr>`; }
+    box.innerHTML = note + ok.slice(0, N).map(r => `<tr><td><a href="${esc(r[7])}">${esc(r[1])}</a>${r[9] ? `<small>Restaurant: ${esc(r[9])}</small>` : ''}</td><td>${esc(r[2])}<small>${r[4] ? 'Active' : 'Inactive'}</small></td>
       <td>${esc(r[5] || '')} <span class="muted">${esc(r[6] || '')}</span></td><td class="n">${esc(fmt(r[3]))}</td><td><a class="src" href="${esc(r[8])}" target="_blank" rel="noopener">State record</a></td></tr>`).join('')
       || '<tr><td colspan="5" class="muted">No filings match.</td></tr>';
     cnt.textContent = `${ok.length.toLocaleString('en-US')} filing${ok.length === 1 ? '' : 's'} in the last 12 months` + (ok.length > N ? `, showing ${N}` : '');
@@ -175,7 +177,11 @@
   }
   [q, city, type].forEach(x => x.addEventListener(x === q ? 'input' : 'change', () => { N = 25; filter(); }));
   more.addEventListener('click', () => { N += 100; filter(); });
-  fetch('/data/new-businesses-page.json').then(r => r.json()).then(j => { D = j; filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
+  fetch('/data/new-businesses-page.json').then(r => r.json()).then(j => { D = j;
+    // no city picked yet: a signed-in reader starts on their home's city
+    const h = window.BCHomeCity && window.BCHomeCity();
+    if (h && h.town && !city.value && [...city.options].some(o => o.value === h.town)) city.value = h.town;
+    filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
 })();
 </script>
 </main>
