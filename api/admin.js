@@ -258,6 +258,14 @@ async function route(req, res, action, me) {
       return r;
     }
     case 'gov_staff': return require('./_gov').adminOverview(q);
+    // ---------- emergency alerts: every alert with how many it was sent to, and Remove for test posts ----------
+    case 'alerts_sent': return require('./_emergency_feed').timeline(req, null, {days: Q.days, kind: Q.kind, gov: Q.gov}, {place: 'fl-bay', admin: true});
+    case 'alert_remove': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_gov').adminRemoveAlert(q, body, me.e);
+      await audit(me.e, action, null, {notice_id: r.notice_id, removed: r.removed, note: body.note || null});
+      return r;
+    }
     case 'gov_flags': return require('./_gov').adminFlags(q, String(Q.status || 'open'));
     // ---------- sent files that didn't pass every check (records submission, step two) ----------
     case 'file_reviews': return require('./_records').reviewList(q, {status: String(Q.status || 'open')});

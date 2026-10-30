@@ -155,8 +155,8 @@ def _today():
     from page_datasets import beach_conditions, emergency_notices
     from govs import _load
     from ui import ico
-    card = lambda href, icon, tone, title, sub: (f'<a class="h-td" href="{href}">{ico(icon, tone)}<span><b>{title}</b>'
-                                                 f'<span>{sub}</span></span></a>')
+    card = lambda href, icon, tone, title, sub, id='': (f'<a class="h-td" href="{href}"{f" id={chr(34)}{id}{chr(34)}" if id else ""}>{ico(icon, tone)}<span><b>{title}</b>'
+                                                        f'<span>{sub}</span></span></a>')
     fc = sorted((r for r in beach_conditions() if r['kind'] == 'forecast'), key=lambda r: r['sort_order'])
     now = fc[0] if fc else {}
     flag = now.get('flag_color')
@@ -170,9 +170,11 @@ def _today():
             k = kinds.get(n['kind'], 'other')
             by[k] = by.get(k, 0) + 1
         sub = ', '.join(f'{v} {k}' for k, v in sorted(by.items(), key=lambda x: -x[1]))
-        alerts = card('/emergency', 'storm', 'salmon', f'{len(act)} active notice{"s" if len(act) != 1 else ""}', html.escape(sub))
+        alerts = card('/emergency', 'storm', 'salmon', f'{len(act)} active notice{"s" if len(act) != 1 else ""}', html.escape(sub), 'hAlerts')
     else:
-        alerts = card('/emergency', 'storm', 'salmon', 'No active alerts', 'Weather, boil-water and road notices')
+        alerts = card('/emergency', 'storm', 'salmon', 'No active alerts', 'Weather, boil-water and road notices', 'hAlerts')
+    # Filled by home.js from the live feed when a live alert has a map drawn by government staff (where it applies).
+    alerts += '<div class="h-td h-amap" id="hAlertMap" hidden><a id="hAlertMapT" href="/emergency"></a><div id="hAlertMapBox" role="img" aria-label="Map of where this alert applies"></div></div>'
     md = _load().get('meetings') or {'boards': [], 'meetings': []}
     boards = {b['id']: b for b in md.get('boards', [])}
     stamp = datetime.now().strftime('%Y-%m-%dT%H:%M')

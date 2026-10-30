@@ -9,6 +9,8 @@ struct HomeView: View {
     @State private var path: [Route] = []
     @State private var utilities: UtilityLookup?
     @State private var showSetup = false
+    /// Live notices from /api/v1/emergency (the archive dataset is a day old); nil until loaded or when offline.
+    @State private var liveNotices: [Row]?
     @AppStorage("taxDistrict") private var savedDistrict = ""
 
     private var today: String { Events.todayKey() }
@@ -67,6 +69,7 @@ struct HomeView: View {
                 await store.loadAmendment3()
                 await store.load([Events.dataset, "beach-conditions", "emergency-notices"])
                 await openScreenshotRoute()
+                if let r = try? await store.client.get(Emergency.feedPath), let f = try? Emergency.parseFeed(r.data) { liveNotices = f.notices }
             }
             .task(id: store.home?.id) {
                 // The saved home's trash day and city. The address isn't logged by the API and the answer isn't kept on disk.
@@ -94,7 +97,8 @@ struct HomeView: View {
     // MARK: Alert strip
 
     @ViewBuilder private var alertStrip: some View {
-        if let a = HomeTiles.alert(store.rows["emergency-notices"] ?? []) {
+        let notices = liveNotices ?? store.rows["emergency-notices"] ?? []
+        if let a = HomeTiles.alert(notices) {
             NavigationLink(value: Route.emergency) {
                 HStack(spacing: 12) {
                     Image(systemName: "exclamationmark.triangle.fill").font(.title3).foregroundStyle(Brand.amber)
@@ -111,6 +115,19 @@ struct HomeView: View {
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("alertStrip")
+        }
+        // Where a live alert applies, when the government drew it on a map.
+        if let m = AlertArea.firstMapped(notices) {
+            NavigationLink(value: Route.emergency) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(m.notice.string("title") ?? "").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                    if let src = m.notice.string("source") { Text(src).font(.caption).foregroundStyle(.secondary) }
+                    AlertMapView(area: m.area, height: 180).allowsHitTesting(false)
+                }
+                .padding(14).frame(maxWidth: .infinity, alignment: .leading).card(14)
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("alertMap")
         }
     }
 

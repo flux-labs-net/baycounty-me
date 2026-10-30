@@ -127,10 +127,10 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
     }
 
     /** Returns the server's message, or throws with the reason it didn't go. */
-    suspend fun sendAlert(kind: String, title: String, message: String, instruction: String, severity: String, countywide: Boolean, hours: Int): String {
+    suspend fun sendAlert(kind: String, title: String, message: String, instruction: String, severity: String, countywide: Boolean, hours: Int, geometry: String? = null): String {
         val ws = workspaceId ?: throw IllegalStateException("Pick a government first.")
         if (demo != null) return "Sent."
-        val m = client.sendAlert(ws, kind, title, message, instruction, severity, countywide, hours)
+        val m = client.sendAlert(ws, kind, title, message, instruction, severity, countywide, hours, geometry)
         loadCurrent()
         return m
     }

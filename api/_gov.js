@@ -354,6 +354,7 @@ async function reach(q, w, kind, countywide) {
 async function liveNotices(q, place) {
   const rows = await q(`select a.*, w.name gov_name from gov.alerts a left join gov.workspaces w on w.id = a.workspace_id
       where a.place_id = $1 and a.status = 'sent' and (a.ends_at is null or a.ends_at > now()) order by a.sent_at desc limit 50`, [place]);
+  rows.forEach(a => { if (a.gov_name) a.gov_name = a.gov_name.replace(/^(City|Town) of /, ''); });
   return rows.map(a => ({
     notice_id: 'staff:' + a.id, place_id: place, kind: a.kind, source: a.gov_name || 'BayCounty.me', source_type: 'staff', gov_id: a.workspace_id || null,
     title: a.title, summary: a.message, instruction: a.instruction, severity: a.severity, event: ALERT_KINDS[a.kind],
@@ -438,6 +439,29 @@ async function ownerOverview(q) {
     open_flags: sum('open_flags'), notices: sum('notices')}, workspaces, activity};
 }
 
+// An admin takes an alert off every public page (a test post, a mistake): the live feed, the timeline, the apps and the
+// archive. Nothing is deleted: the row keeps who removed it, when and why, and the action is logged. A staff alert is
+// also marked removed in gov.alerts so the next check doesn't put it back. undo puts it back on the timeline.
+async function adminRemoveAlert(q, b, email) {
+  const id = String(b.notice_id || '').slice(0, 300), undo = Boolean(b.undo), note = txt(b.note, 500);
+  if (!id) throw bad('Which alert?');
+  if (!undo && !note) throw bad('Say why it is being removed (kept in the log).');
+  const [n] = await q(undo
+    ? `update emergency_live set removed_at = null, removed_by = null, removed_note = null where notice_id = $1 and removed_at is not null returning notice_id, title, gov_id`
+    : `update emergency_live set removed_at = now(), removed_by = $2, removed_note = $3, active = false where notice_id = $1 and removed_at is null returning notice_id, title, gov_id`,
+    undo ? [id] : [id, email, note]);
+  if (!n) throw bad(undo ? 'That alert isn’t removed.' : 'That alert isn’t on the list, or it was already removed.', 404);
+  const staff = /^staff:(\d+)$/.exec(id);
+  if (staff) {
+    const [a] = await q(undo ? `update gov.alerts set status = 'ended' where id = $1 and status = 'removed' returning id, workspace_id`
+      : `update gov.alerts set status = 'removed', ended_by = coalesce(ended_by, $2), ended_at = coalesce(ended_at, now()) where id = $1 returning id, workspace_id`, [Number(staff[1]), email]);
+    if (a && a.workspace_id) await log(q, a.workspace_id, email, undo ? 'alert_restored' : 'alert_removed', {id: a.id, title: n.title, note: note || null});
+  }
+  // The archive (emergency-notices dataset) drops it at its next daily run; take it off the table now too.
+  if (!undo) await q('delete from emergency_notices where notice_id = $1', [id]).catch(() => {});
+  return {ok: true, notice_id: id, removed: !undo};
+}
+
 async function adminFlags(q, status = 'open') {
   const st = ['open', 'fixed', 'not_changed', 'all'].includes(status) ? status : 'open';
   return {flags: await q(`select f.*, w.name gov_name from gov.flags f join gov.workspaces w on w.id = f.workspace_id
@@ -470,5 +494,5 @@ async function setMember(q, ws, b, by) {
 
 module.exports = {ROLES, CAN, ROLE_LABEL, COOKIE, COUNTYWIDE, NOTICE_KINDS, JOB_TYPES, ALERT_KINDS, RECORDS, POSTS, TOPIC_OF,
   caller, workspacesFor, requireRole, log, startLogin, finishLogin, logout, codeEmail,
-  areaShape, listPosts, savePost, withdrawPost, createAlert, confirmAlert, endAlert, reach, liveNotices, records, addFlag, publicPosts,
+  adminRemoveAlert, areaShape, listPosts, savePost, withdrawPost, createAlert, confirmAlert, endAlert, reach, liveNotices, records, addFlag, publicPosts,
   adminOverview, ownerOverview, adminFlags, adminFlagReview, setMember};

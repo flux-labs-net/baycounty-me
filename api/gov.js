@@ -102,9 +102,11 @@ async function route(deps, req, res, action) {
     case 'posts': return G.listPosts(q, w, String(Q.kind || ''));
     case 'post': return G.savePost(q, w, String(b.kind || ''), b, email);
     case 'withdraw': return G.withdrawPost(q, w, String(b.kind || ''), b.id, email);
-    case 'alerts': return {countywide: w.countywide, alerts: await q(`select id, kind, title, message, instruction, severity, countywide, status, created_by, created_at,
-        confirmed_by, sent_at, ends_at, ended_by, ended_at, (status = 'sent' and (ends_at is null or ends_at > now())) live
-        from gov.alerts where workspace_id = $1 order by created_at desc limit 100`, [w.id])};
+    // sent: how many phones, inboxes and texts it went to (counts only; shown to staff and in /admin, not on public pages).
+    case 'alerts': return {countywide: w.countywide, alerts: await q(`select a.id, a.kind, a.title, a.message, a.instruction, a.severity, a.countywide, a.geometry, a.status, a.created_by, a.created_at,
+        a.confirmed_by, a.sent_at, a.ends_at, a.ended_by, a.ended_at, (a.status = 'sent' and (a.ends_at is null or a.ends_at > now())) live,
+        (select coalesce(jsonb_object_agg(r.channel, r.people), '{}') from emergency_reach r where r.notice_id = 'staff:' || a.id) sent
+        from gov.alerts a where a.workspace_id = $1 order by a.created_at desc limit 100`, [w.id])};
     case 'reach': return G.reach(q, w, String(Q.kind || ''), Q.countywide === '1' && w.countywide);
     case 'alert': {
       const a = await G.createAlert(q, w, b, email, {admin: Boolean(who.admin)});

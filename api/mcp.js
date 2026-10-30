@@ -139,7 +139,7 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25}}},
    annotations: {readOnlyHint: true}},
   {name: 'emergency_timeline', title: 'Recent emergency alerts',
-   description: 'Every emergency alert in Bay County over the last days (up to 90), newest first: weather warnings, evacuation orders, public safety alerts (FEMA IPAWS), shelter openings, boil-water notices, road closures. Each has when it started and ended and how many people BayCounty.me sent it to by push, email and text. Use it for questions like "were there any boil-water notices in Lynn Haven this month?".',
+   description: 'Every emergency alert in Bay County over the last days (up to 90), newest first: weather warnings, evacuation orders, public safety alerts (FEMA IPAWS), shelter openings, boil-water notices, road closures. Each has when it started and ended. Use it for questions like "were there any boil-water notices in Lynn Haven this month?".',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
      days: {type: 'integer', minimum: 1, maximum: 90, default: 30},
      kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm', 'safety'], description: 'Only this kind of notice'},
@@ -395,7 +395,7 @@ async function call(req, name, a = {}) {
     const d = await require('./_emergency_feed').timeline(req, await load(req, '/downloads/index.json'), {days: a.days, kind: a.kind, gov: a.gov});
     const items = d.items.slice(0, Math.min(a.limit || 50, 200));
     req._rows = items.length;
-    return {days: d.days, total: d.total, counts: d.counts, reached: d.reached, items, page: 'https://baycounty.me/emergency#timeline', note: d.note};
+    return {days: d.days, total: d.total, counts: d.counts, items, page: 'https://baycounty.me/emergency#timeline', note: d.note};
   }
   if (name === 'evacuation_zone') {
     if (!a.address && (a.lat == null || a.lng == null)) throw new Error('address, or lat and lng, is required');
