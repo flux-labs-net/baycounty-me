@@ -140,14 +140,23 @@ public struct StaffAlert: Decodable, Hashable, Sendable, Identifiable {
     public let endsAt: String?
     public let live: Bool?
     public let geometry: String?
+    /// How many phones, inboxes and texts it was sent to ({push, email, sms}); staff and admins only.
+    public let sent: [String: Int]?
 
     public var isLive: Bool { live ?? (status == "sent") }
+    /// "2 phones, 1 inbox", or nil before anything went out.
+    public var sentSentence: String? {
+        guard let s = sent else { return nil }
+        func n(_ k: String, _ one: String, _ many: String) -> String? { (s[k] ?? 0) > 0 ? "\(s[k]!) \(s[k] == 1 ? one : many)" : nil }
+        let parts = [n("push", "phone", "phones"), n("email", "inbox", "inboxes"), n("sms", "text", "texts")].compactMap { $0 }
+        return parts.isEmpty ? nil : parts.joined(separator: ", ")
+    }
     public var isWaiting: Bool { status == "pending" }
     /// The status chip: Live, Waiting for a second person, Ended, Cancelled, Expired.
     public var statusLabel: String {
         if isWaiting { return "Needs a second person" }
         if isLive { return "Live" }
-        switch status { case "ended": return "Ended"; case "cancelled": return "Cancelled"; case "sent": return "Expired"; default: return status.capitalized }
+        switch status { case "ended": return "Ended"; case "cancelled": return "Cancelled"; case "removed": return "Removed"; case "sent": return "Expired"; default: return status.capitalized }
     }
     /// Who else can confirm a waiting alert: anyone with alert rights but the person who wrote it.
     public func canConfirm(as email: String) -> Bool { isWaiting && createdBy.lowercased() != email.lowercased() }
@@ -397,8 +406,11 @@ public final class StaffClient: @unchecked Sendable {
         try Staff.decoder().decode(StaffReach.self, from: try await call("reach", query: ["workspace": ws, "kind": kind] .merging(countywide ? ["countywide": "1"] : [:]) { a, _ in a }))
     }
     /// Sends (or, countywide, saves for a second person). Returns the server's message.
-    public func sendAlert(_ ws: String, kind: String, title: String, message msg: String, instruction: String, severity: String, countywide: Bool, hours: Int) async throws -> String {
-        message(try await call("alert", ["workspace": ws, "kind": kind, "title": title, "message": msg, "instruction": instruction, "severity": severity, "countywide": countywide, "hours": hours]))
+    /// geometry: the map of where it applies (AlertArea.pinsGeoJSON), or nil for none.
+    public func sendAlert(_ ws: String, kind: String, title: String, message msg: String, instruction: String, severity: String, countywide: Bool, hours: Int, geometry: String? = nil) async throws -> String {
+        var b: [String: Any] = ["workspace": ws, "kind": kind, "title": title, "message": msg, "instruction": instruction, "severity": severity, "countywide": countywide, "hours": hours]
+        if let geometry { b["geometry"] = geometry }
+        return message(try await call("alert", b))
     }
     public func confirmAlert(_ ws: String, id: Int) async throws { _ = try await call("alert-confirm", ["workspace": ws, "id": id]) }
     public func endAlert(_ ws: String, id: Int) async throws { _ = try await call("alert-end", ["workspace": ws, "id": id]) }

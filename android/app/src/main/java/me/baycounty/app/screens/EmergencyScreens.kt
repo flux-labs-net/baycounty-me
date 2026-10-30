@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
+import me.baycounty.kit.AlertArea
 import me.baycounty.kit.BayCountyClient
 import me.baycounty.kit.Emergency
 import me.baycounty.kit.Format
@@ -209,6 +210,7 @@ private fun NoticeCard(n: DataRow) {
         }
         Text(n.string("title") ?: "", style = T.subheadBold, color = Brand.text)
         n.string("area")?.let { Text(it, style = T.footnote, color = Brand.secondary, maxLines = 3) }
+        AlertArea.parse(n.string("geometry"))?.let { AlertMap(it, Modifier.fillMaxWidth().height(200.dp).padding(vertical = 4.dp)) }
         if (more.isNotEmpty()) {
             Text(if (open) "Hide details" else "Details", style = T.footnote, color = Brand.navy, modifier = Modifier.clickable { open = !open })
             if (open) Text(more, style = T.footnote, color = Brand.text)

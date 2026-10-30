@@ -103,7 +103,9 @@ CSS = r"""
 .em-ti b{display:block;font-size:.94rem;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
 .em-ti small{display:block;color:var(--muted);font-size:.8rem;line-height:1.45;margin-top:2px}
 .em-ti .live{color:var(--sev-extreme);font-weight:700}
-.em-ti .reach{color:var(--ink)}
+.em-ti .em-tmap{margin-top:6px}
+.em-ti .em-tmap summary{cursor:pointer;font-size:.84rem;color:var(--accent,var(--ink));width:max-content}
+.em-ti .em-tmap .em-geo{margin-top:8px}
 .em-ti > div{min-width:0}
 .em-tbl td{vertical-align:top}
 .em-tbl td.d{white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -213,11 +215,11 @@ JS = r"""
       const k = KIND[i.kind] || ['Notice', 'info'];
       const src = i.gov_id ? govA(i.gov_id, i.source) : esc(i.source);
       const end = i.active ? '<span class="live">Still in effect</span>' : i.ended ? `${i.status === 'lifted' ? 'Lifted' : 'Ended'} ${dayKey(i.ended) === dayKey(i.started) ? tm(i.ended) : when(i.ended)}${dur(i.started, i.ended) ? ' (' + dur(i.started, i.ended) + ')' : ''}` : '';
-      const r = i.reach || {}, parts = [r.push && plural(r.push, 'phone'), r.email && plural(r.email, 'inbox').replace('inboxs', 'inboxes'), r.sms && plural(r.sms, 'text')].filter(Boolean);
       const title = i.active ? `<a href="#n-${esc(i.notice_id)}">${esc(i.title)}</a>` : i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a>` : esc(i.title);
       return `<li class="em-ti" id="t-${esc(i.notice_id)}" data-sev="${esc(i.severity)}" data-k="${esc(i.kind)}"><time datetime="${esc(i.started)}">${esc(tm(i.started))}</time><div>
         <span class="k"><span class="ico i-${k[1]}" aria-hidden="true"></span>${esc(i.kind === 'weather' && i.event ? i.event : k[0])}${i.zones ? ' · Zone' + (i.zones.includes(',') ? 's ' : ' ') + esc(i.zones) : ''}</span>
-        <b>${title}</b><small>${[src, end, parts.length ? `<span class="reach">Sent to ${parts.join(', ')}</span>` : ''].filter(Boolean).join(' · ')}</small></div></li>`;
+        <b>${title}</b><small>${[src, end].filter(Boolean).join(' · ')}</small>
+        ${i.geometry ? `<details class="em-tmap"${i.active ? ' open' : ''}><summary>Map of where this applies</summary><div class="em-geo" data-tgeo="${esc(i.notice_id)}" role="img" aria-label="Map of where this applies"></div></details>` : ''}</div></li>`;
     }
     function draw(d) {
       const items = d.items.filter(i => i.started);
@@ -225,7 +227,11 @@ JS = r"""
       for (const i of items) { const k = dayKey(i.started); if (!days.length || days[days.length - 1].k !== k) days.push({k, lab: dayLab(i.started), list: []}); days[days.length - 1].list.push(i); }
       TL.innerHTML = days.length ? days.map(g => `<div class="em-day"><h3>${esc(g.lab)}</h3><ol>${g.list.map(item).join('')}</ol></div>`).join('')
         : '<p class="em-empty">No alerts in this window.</p>';
-      $('emTlSum').textContent = `${plural(d.total, 'alert')} in the last ${d.days} days` + (d.reached ? `, sent ${d.reached.toLocaleString()} times to phones, inboxes and texts.` : '.');
+      $('emTlSum').textContent = `${plural(d.total, 'alert')} in the last ${d.days} days.`;
+      // A staff-drawn map draws when its row is opened (open already for alerts still in effect).
+      const geo = new Map(items.filter(i => i.geometry).map(i => [i.notice_id, i.geometry]));
+      const drawMap = det => { const el = det.querySelector('[data-tgeo]'); if (!el || el.dataset.drawn || !window.BCMap) return; el.dataset.drawn = '1'; BCMap.view(el, geo.get(el.dataset.tgeo)).catch(() => det.remove()); };
+      TL.querySelectorAll('.em-tmap').forEach(det => { if (det.open) drawMap(det); det.addEventListener('toggle', () => det.open && drawMap(det)); });
     }
     const tlLoad = () => {
       const q = new URLSearchParams({days: $('emTlDays').value});
@@ -465,7 +471,7 @@ def emergency_page(out_dir):
       <label class="sr" for="emTlDays">Window</label><select id="emTlDays"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select></div>
     <p class="em-tl-sum" id="emTlSum" aria-live="polite">{len(recent)} alerts in the last 30 days, from the last daily check.</p>
     <div class="em-tl" id="emTl">{timeline}</div>
-    <p class="note">Each alert shows when it started and ended and how many phones, inboxes and texts BayCounty.me sent it to (counts only). Area keeps one government's notices plus the countywide ones (weather, emergency alerts, shelters). The archive started on October 27, 2026. Data: <a href="/api/v1/emergency-timeline">/api/v1/emergency-timeline</a> · every notice: <a href="/api/v1/datasets/emergency-notices">emergency-notices</a> ({", ".join(f"{v} {e(KIND.get(k, (k,))[0].lower())}" for k, v in sorted(by_kind.items(), key=lambda x: -x[1]))}).</p></section>
+    <p class="note">Each alert shows when it started and ended, with the map of where it applies when the government drew one. Area keeps one government's notices plus the countywide ones (weather, emergency alerts, shelters). The archive started on October 27, 2026. Data: <a href="/api/v1/emergency-timeline">/api/v1/emergency-timeline</a> · every notice: <a href="/api/v1/datasets/emergency-notices">emergency-notices</a> ({", ".join(f"{v} {e(KIND.get(k, (k,))[0].lower())}" for k, v in sorted(by_kind.items(), key=lambda x: -x[1]))}).</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">

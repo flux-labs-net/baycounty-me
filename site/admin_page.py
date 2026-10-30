@@ -242,7 +242,8 @@ MENU = [
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('intake', 'Email intake log', None), ('emails', 'Email templates', None)]),
-    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None), ('govstaff', 'Government staff', None)]),
+    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None), ('govstaff', 'Government staff', None),
+                                   ('alertsent', 'Emergency alerts', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
 TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
@@ -575,6 +576,16 @@ def admin_page(out_dir):
         <button class="btn" id="gs-add" type="button">Give access</button>
       </div>
       <div class="tw"><table class="at" id="gs-table" data-tt="off"><thead><tr><th>Government</th><th>Email</th><th>Access</th><th>Added by</th><th>Since</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-alertsent" class="pane" hidden>
+      <div class="banner"><div><b>Every emergency alert and how many it was sent to.</b> <span class="small muted">Phones, inboxes and texts are counts only, shown here and to the government's staff, never on public pages. Remove takes an alert (a test post, a mistake) off /emergency, the home page, the apps and the archive. Nothing is deleted: who removed it, when and why stay on the record, and Put back undoes it.</span></div></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:0 0 8px">
+        <h2 class="h2 grow" style="margin:0">Alerts</h2>
+        <select class="sel" id="as-gov" aria-label="Government"><option value="">Every government</option><option value="county">Bay County</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select>
+        <select class="sel" id="as-days" aria-label="Window"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select>
+      </div>
+      <div class="tw"><table class="at" id="as-table"><thead><tr><th>Started</th><th>Alert</th><th>From</th><th>Status</th><th>Sent to</th><th></th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-filereview" class="pane" hidden>

@@ -57,6 +57,7 @@ targets:
     platform: iOS
     sources:
       - path: BayCountyStaff
+      - path: BayCountyMe/Views/AlertMapView.swift
     dependencies:
       - package: BayCountyKit
     info:

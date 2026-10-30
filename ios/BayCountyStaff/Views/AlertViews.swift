@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 import BayCountyKit
 
 /// This government's alerts: live first, waiting ones a second person can confirm, then past ones.
@@ -79,6 +80,9 @@ struct AlertDetailView: View {
                 }
                 .padding(.vertical, 6)
             }
+            if let map = AlertArea.parse(alert.geometry) {
+                Section("Where it applies") { AlertMapView(area: map).listRowInsets(EdgeInsets()) }
+            }
             Section("Details") {
                 LabeledContent("Kind", value: store.alertKinds[alert.kind] ?? alert.kind)
                 LabeledContent("Reaches", value: alert.countywide ? "All of Bay County" : (store.workspace?.name ?? ""))
@@ -87,6 +91,7 @@ struct AlertDetailView: View {
                 if let c = alert.confirmedBy { LabeledContent("Confirmed by", value: c) }
                 if let s = alert.sentAt { LabeledContent("Sent", value: Staff.when(s)) }
                 if let e = alert.endsAt { LabeledContent(alert.isLive ? "Ends" : "Ended", value: Staff.when(e)) }
+                if let n = alert.sentSentence { LabeledContent("Sent to", value: n) }
             }
             if store.can("alert_sender") && (alert.isLive || alert.isWaiting) {
                 Section {
@@ -136,6 +141,8 @@ struct SendAlertView: View {
     @State private var busy = false
     @State private var error: String?
     @State private var done: String?
+    @State private var pins: [AlertArea.Coord] = []
+    @State private var radius: Double = 76
 
     private var ready: Bool { !title.trimmingCharacters(in: .whitespaces).isEmpty && !message.trimmingCharacters(in: .whitespaces).isEmpty }
 
@@ -164,6 +171,14 @@ struct SendAlertView: View {
                         TextField("What is happening", text: $message, axis: .vertical).lineLimit(3...8)
                         TextField("What people should do (optional)", text: $instruction, axis: .vertical).lineLimit(2...5)
                     } header: { Text("The alert") } footer: { Text("Keep the headline short: it is what shows on a locked phone.") }
+                    Section {
+                        PinDropMap(pins: $pins, radius: radius).frame(height: 260).listRowInsets(EdgeInsets())
+                        Picker("Circle around each pin", selection: $radius) { ForEach(Self.radii) { Text($0.label).tag($0.m) } }
+                        if !pins.isEmpty { Button("Clear the map", role: .destructive) { pins = [] } }
+                    } header: { Text("Map (optional)") } footer: {
+                        Text(pins.isEmpty ? "Tap the map where it applies, like a main break or the street that's closed. Residents see it with the alert. Lines and drawn areas are on the web workspace."
+                             : "\(pins.count) pin\(pins.count == 1 ? "" : "s"). Tap a pin to take it off.")
+                    }
                     Section {
                         Label(reach?.sentence ?? "Checking who this reaches…", systemImage: "person.3")
                             .font(.subheadline)
@@ -194,19 +209,56 @@ struct SendAlertView: View {
                 Button(countywide ? "Save for a second person" : "Send to \(store.workspace?.name ?? "your city")", role: .destructive, action: send)
                 Button("Keep editing", role: .cancel) {}
             } message: {
-                Text("\(title)\n\n\(reach?.sentence ?? "")")
+                Text("\(title)\n\n\(reach?.sentence ?? "")" + (pins.isEmpty ? "" : "\n\nThe map shows with it."))
             }
         }
     }
 
+    /// The circles the web workspace offers (site/area_map.js), in meters.
+    struct Radius: Identifiable { let m: Double; let label: String; var id: Double { m } }
+    static let radii = [Radius(m: 0, label: "No circle"), Radius(m: 30, label: "100 ft"), Radius(m: 76, label: "¼ block (250 ft)"), Radius(m: 152, label: "500 ft"),
+                        Radius(m: 402, label: "¼ mile"), Radius(m: 805, label: "½ mile"), Radius(m: 1609, label: "1 mile")]
+
     private func send() {
         busy = true; error = nil
         Task {
-            switch await store.sendAlert(kind: kind, title: title, message: message, instruction: instruction, severity: severity, countywide: countywide, hours: hours) {
+            switch await store.sendAlert(kind: kind, title: title, message: message, instruction: instruction, severity: severity, countywide: countywide, hours: hours,
+                                         geometry: AlertArea.pinsGeoJSON(pins, radius: radius)) {
             case .success(let m): done = m
             case .failure(let e): error = e.localizedDescription
             }
             busy = false
         }
+    }
+}
+
+/// A map of the city: tap to drop a pin where the alert applies, tap a pin to take it off. Each pin gets the circle picked.
+struct PinDropMap: View {
+    @Binding var pins: [AlertArea.Coord]
+    let radius: Double
+    private static let red = Color(red: 0.82, green: 0.26, blue: 0.26)
+    @State private var position: MapCameraPosition = .region(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 30.2, longitude: -85.66),
+                                                                               span: MKCoordinateSpan(latitudeDelta: 0.18, longitudeDelta: 0.2)))
+    var body: some View {
+        MapReader { proxy in
+            Map(position: $position) {
+                ForEach(Array(pins.enumerated()), id: \.offset) { i, p in
+                    let c = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lng)
+                    if radius > 0 { MapCircle(center: c, radius: radius).foregroundStyle(Self.red.opacity(0.18)).stroke(Self.red, lineWidth: 2) }
+                    Annotation("", coordinate: c) {
+                        Button { pins.remove(at: i) } label: {
+                            Circle().fill(Self.red).frame(width: 18, height: 18).overlay(Circle().stroke(.white, lineWidth: 2))
+                        }
+                        .buttonStyle(.plain).accessibilityLabel("Remove pin \(i + 1)")
+                    }
+                    .annotationTitles(.hidden)
+                }
+            }
+            .mapStyle(.standard(pointsOfInterest: .excludingAll))
+            .onTapGesture { pt in
+                if let c = proxy.convert(pt, from: .local) { pins.append(AlertArea.Coord(lat: c.latitude, lng: c.longitude)) }
+            }
+        }
+        .accessibilityLabel("Map. Tap where the alert applies to drop a pin.")
     }
 }

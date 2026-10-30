@@ -14,9 +14,14 @@ async function meta(req, catalog, id) {
   return m ? (await datasetRows(req, m)).rows : [];
 }
 
+// Alerts an admin removed (a test post) are left out of every public list. Before migration 0095 adds removed_at the
+// filter fails, so the read is tried again without it.
+const NOT_REMOVED = '&removed_at=is.null';
+const liveRest = path => rest(path + NOT_REMOVED).catch(() => rest(path));
+
 async function readLive(place) {
   const [n, s] = await Promise.all([
-    rest(`emergency_live?select=${LIVE_COLS}&place_id=eq.${encodeURIComponent(place)}&active=is.true&order=last_seen.desc&limit=500`),
+    liveRest(`emergency_live?select=${LIVE_COLS}&place_id=eq.${encodeURIComponent(place)}&active=is.true&order=last_seen.desc&limit=500`),
     rest(`emergency_state?select=checked_at,shelters,sources_ok,errors,push_ready&place_id=eq.${encodeURIComponent(place)}`),
   ]);
   return {notices: n.rows, state: s.rows[0] || null};
@@ -75,11 +80,12 @@ async function liveFeed(req, catalog, {place = 'fl-bay', refresh = true} = {}) {
 
 
 // ---------- alert timeline (/api/v1/emergency-timeline, the timeline on /emergency) ----------
-// Every notice that was live in the last `days` days, newest first: when it started and ended, and how many people
-// each channel reached (emergency_reach, counts only). gov keeps one government's notices plus the countywide ones
-// (weather, IPAWS, shelters) that reach it too.
+// Every notice that was live in the last `days` days, newest first: when it started and ended, and the map staff drew
+// for it. gov keeps one government's notices plus the countywide ones (weather, IPAWS, shelters) that reach it too.
+// How many phones, inboxes and texts each one was sent to (emergency_reach) is for /admin only ({admin: true}); the
+// public timeline, API and apps don't show it.
 const GOV_NAMES = {county: 'Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
-function buildTimeline(notices, reach, {days = 30, kind = '', gov = ''} = {}) {
+function buildTimeline(notices, reach, {days = 30, kind = '', gov = '', admin = false} = {}) {
   const per = new Map();
   for (const r of reach) {
     const o = per.get(r.notice_id) || {push: 0, email: 0, sms: 0};
@@ -92,33 +98,45 @@ function buildTimeline(notices, reach, {days = 30, kind = '', gov = ''} = {}) {
       const ids = [...new Set([n.notice_id, ...(n.versions || []).map(v => v.notice_id)])];
       const rr = ids.reduce((a, id) => { const o = per.get(id); if (o) for (const k of Object.keys(a)) a[k] += o[k] || 0; return a; }, {push: 0, email: 0, sms: 0});
       const started = n.first_posted || n.issued || n.first_seen || null;
-      return {notice_id: n.notice_id, kind: n.kind, label: KIND_LABEL[n.kind] || 'Notice', title: n.title, event: n.event || null, severity: n.severity,
-        source: n.source, source_type: n.source_type, gov_id: n.gov_id || null, zones: n.zones || null, area: n.area || null,
+      const item = {notice_id: n.notice_id, kind: n.kind, label: KIND_LABEL[n.kind] || 'Notice', title: n.title, event: n.event || null, severity: n.severity,
+        source: n.source, source_type: n.source_type, gov_id: n.gov_id || null, zones: n.zones || null, area: n.area || null, geometry: n.geometry || null,
         started, ended: n.active ? null : (n.last_seen || null), active: !!n.active, status: n.active ? 'active' : n.status === 'lifted' ? 'lifted' : 'ended',
-        reach: rr, people: rr.push + rr.email + rr.sms, url: n.url || null, page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`};
+        url: n.url || null, page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`};
+      if (admin) Object.assign(item, {reach: rr, people: rr.push + rr.email + rr.sms, removed_at: n.removed_at || null, removed_by: n.removed_by || null, removed_note: n.removed_note || null});
+      return item;
     })
     .sort((a, b) => String(b.started || '').localeCompare(String(a.started || '')));
   const counts = {};
   for (const i of items) counts[i.kind] = (counts[i.kind] || 0) + 1;
-  return {days, kind: kind || null, gov: gov || null, total: items.length, counts, labels: KIND_LABEL, governments: GOV_NAMES,
-    reached: items.reduce((a, i) => a + i.people, 0), items};
+  const out = {days, kind: kind || null, gov: gov || null, total: items.length, counts, labels: KIND_LABEL, governments: GOV_NAMES, items};
+  if (admin) out.reached = items.reduce((a, i) => a + i.people, 0);
+  return out;
 }
 
-async function timeline(req, catalog, q = {}, {place = 'fl-bay'} = {}) {
+// /admin reads with the server connection; dates come back as ISO text like the REST rows.
+async function adminRows(sql, params) {
+  const iso = v => v instanceof Date ? v.toISOString() : v;
+  return (await require('./_db').q(sql, params)).map(r => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, iso(v)])));
+}
+
+async function timeline(req, catalog, q = {}, {place = 'fl-bay', admin = false} = {}) {
   E.placeConfig(place);
   const days = Math.min(90, Math.max(1, parseInt(q.days, 10) || 30));
   const kind = KIND_LABEL[String(q.kind || '')] ? String(q.kind) : '';
   const gov = GOV_NAMES[String(q.gov || '')] ? String(q.gov) : '';
   const since = new Date(Date.now() - days * 864e5).toISOString();
   const P = encodeURIComponent(place);
-  const [n, r] = await Promise.all([
-    rest(`emergency_live?select=${LIVE_COLS},active&place_id=eq.${P}&last_seen=gte.${since}&order=first_seen.desc&limit=2000`),
-    rest(`emergency_reach?select=notice_id,channel,people&place_id=eq.${P}&sent_at=gte.${new Date(Date.now() - (days + 7) * 864e5).toISOString()}&limit=5000`).catch(() => ({rows: []})),
-  ]);
+  const path = `emergency_live?select=${LIVE_COLS},active&place_id=eq.${P}&last_seen=gte.${since}&order=first_seen.desc&limit=2000`;
+  // The send counts (emergency_reach) aren't public: only the server connection reads them, for /admin.
+  const n = admin ? {rows: await adminRows(`select ${LIVE_COLS}, active, removed_at, removed_by, removed_note from emergency_live
+      where place_id = $1 and last_seen >= $2 order by first_seen desc limit 2000`, [place, since])} : await liveRest(path);
+  const r = admin ? {rows: await adminRows('select notice_id, channel, people from emergency_reach where place_id = $1 and sent_at >= $2 limit 5000',
+    [place, new Date(Date.now() - (days + 7) * 864e5).toISOString()]).catch(() => [])} : {rows: []};
   const D = require('./_dupes');
   const notices = D.mergeNotices(n.rows, await D.decisions());
-  return {place, ...buildTimeline(notices, r.rows, {days, kind, gov}),
-    note: 'Every notice live in this window, newest first. people counts phones and inboxes each channel sent it to (counts only). Older notices: the emergency-notices dataset.'};
+  return {place, ...buildTimeline(notices, r.rows, {days, kind, gov, admin}),
+    note: admin ? 'Every notice live in this window, newest first, with how many phones, inboxes and texts it was sent to (counts only) and any removed by an admin.'
+      : 'Every notice live in this window, newest first. geometry is the map government staff drew for it (GeoJSON), when there is one. Older notices: the emergency-notices dataset.'};
 }
 
 const {miles} = require('./_geo');

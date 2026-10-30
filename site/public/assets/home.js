@@ -86,3 +86,29 @@ window.BCTrashCard = (lookup, now = new Date()) => {
   if (p.hour >= 16 && runs(day(1))) return card(day(1), 'tomorrow', 'Put it out tonight');
   return null;
 };
+
+// Live alerts: the alert card follows the live feed (the page is built once a day), and when a live alert has a map
+// drawn by government staff (a boil-water area, a closed street) it shows under the card.
+(async () => {
+  const card = document.getElementById('hAlerts'), mapCard = document.getElementById('hAlertMap');
+  if (!card) return;
+  let d;
+  try { const r = await fetch('/api/v1/emergency'); if (!r.ok) return; d = await r.json(); } catch (e) { return; }
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const n = d.notices || [];
+  const b = card.querySelector('b'), sub = card.querySelector('b + span');
+  if (n.length) {
+    const by = {};
+    n.forEach(x => { by[x.kind] = (by[x.kind] || 0) + 1; });
+    b.textContent = `${n.length} active notice${n.length === 1 ? '' : 's'}`;
+    sub.textContent = Object.entries(by).sort((x, y) => y[1] - x[1]).map(([k, v]) => `${v} ${k}`).join(', ');
+  } else { b.textContent = 'No active alerts'; sub.textContent = 'Weather, boil-water and road notices'; }
+  const m = n.find(x => x.geometry);
+  if (!m || !mapCard) return;
+  const t = document.getElementById('hAlertMapT');
+  t.href = '/emergency#n-' + encodeURIComponent(m.notice_id);
+  t.innerHTML = `${esc(m.title)}<small>${esc([m.source, m.area && m.area !== m.source ? m.area : ''].filter(Boolean).join(' · '))}</small>`;
+  mapCard.hidden = false;
+  const load = () => window.BCMap ? Promise.resolve() : new Promise((ok, no) => { const s = document.createElement('script'); s.src = '/assets/area-map.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); });
+  try { await load(); await window.BCMap.view(document.getElementById('hAlertMapBox'), m.geometry); } catch (e) { mapCard.hidden = true; }
+})();

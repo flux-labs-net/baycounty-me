@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation("androidx.biometric:biometric:1.1.0")
+    implementation("org.osmdroid:osmdroid-android:6.1.20")  // maps on alerts (drop pins where it applies)
     testImplementation("junit:junit:4.13.2")
 }
 

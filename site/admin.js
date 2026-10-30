@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, intake: loadIntake, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, govstaff: loadGovStaff, govflags: loadGovFlags, filereview: loadFileReview, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, govstaff: loadGovStaff, alertsent: loadAlertsSent, govflags: loadGovFlags, filereview: loadFileReview, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -1522,6 +1522,36 @@
         : `<span class="small">${f.status === 'fixed' ? 'Fixed' : 'Not changed'}${f.reply ? ': ' + esc(f.reply) : ''}</span>`}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No flags here.</td></tr>';
   }
   $('#gf-status').addEventListener('change', loadGovFlags);
+
+  // ---------- emergency alerts: send counts (admin only) and Remove for test posts ----------
+  async function loadAlertsSent() {
+    let r;
+    try { r = await api('alerts_sent', {params: {days: $('#as-days').value, gov: $('#as-gov').value}}); }
+    catch (e) { $('#as-table tbody').innerHTML = `<tr><td colspan="6" class="empty">${esc(e.message)}</td></tr>`; return; }
+    const n = (v, one, many) => v ? `${fmt(v)} ${v === 1 ? one : many}` : '';
+    $('#as-table tbody').innerHTML = r.items.map(i => {
+      const sent = [n(i.reach.push, 'phone', 'phones'), n(i.reach.email, 'inbox', 'inboxes'), n(i.reach.sms, 'text', 'texts')].filter(Boolean).join(', ') || '—';
+      const st = i.removed_at ? `<span class="pill bounced">Removed</span><div class="small muted">${esc(i.removed_by || '')} ${when(i.removed_at)}${i.removed_note ? ': ' + esc(i.removed_note) : ''}</div>`
+        : `<span class="pill ${i.active ? 'delivered' : ''}">${i.active ? 'Live' : i.status === 'lifted' ? 'Lifted' : 'Ended'}</span>`;
+      const btn = i.removed_at ? `<button class="btn" type="button" data-as-undo="${esc(i.notice_id)}">Put back</button>` : `<button class="btn" type="button" data-as-rm="${esc(i.notice_id)}">Remove</button>`;
+      return `<tr><td class="small">${when(i.started)}</td><td><b>${esc(i.title)}</b><div class="small muted">${esc(i.label)}${i.geometry ? ' · has a map' : ''}</div></td>
+        <td class="small">${esc(i.source || '')}</td><td>${st}</td><td class="small">${sent}</td><td>${btn}</td></tr>`;
+    }).join('') || '<tr><td colspan="6" class="empty">No alerts in this window.</td></tr>';
+  }
+  ['as-days', 'as-gov'].forEach(id => $('#' + id).addEventListener('change', loadAlertsSent));
+  $('#as-table').addEventListener('click', async e => {
+    const rm = e.target.closest('[data-as-rm]'), un = e.target.closest('[data-as-undo]');
+    if (!rm && !un) return;
+    let body;
+    if (rm) {
+      const note = prompt('Why is this alert coming off the public pages? (kept in the log)', 'Test post');
+      if (!note) return;
+      body = {notice_id: rm.dataset.asRm, note};
+    } else body = {notice_id: un.dataset.asUndo, undo: true};
+    (rm || un).disabled = true;
+    try { await api('alert_remove', {method: 'POST', body}); } catch (err) { alert(err.message); }
+    loadAlertsSent();
+  });
 
   // ---------- sent files to check ----------
   const FR_KIND = {checkbook: 'Checkbook', budget: 'Budget vs. actual', contracts: 'Contracts', payroll: 'Pay by job title', appointments: 'Board appointments', fees: 'Fee changes'};
