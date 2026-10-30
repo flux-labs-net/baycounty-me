@@ -342,13 +342,15 @@
     const j = await api('alerts');
     $('#l-alerts').innerHTML = j.alerts.length ? j.alerts.map(a => {
       const st = a.live ? '<span class="status live">Live</span>' : a.status === 'pending' ? '<span class="status pending">Waiting for a second person</span>'
-        : `<span class="status done">${a.status === 'cancelled' ? 'Cancelled' : 'Ended'}</span>`;
+        : `<span class="status done">${a.status === 'cancelled' ? 'Cancelled' : a.status === 'removed' ? 'Removed' : 'Ended'}</span>`;
+      const s = a.sent || {}, n = (k, one, many) => s[k] ? `${s[k]} ${s[k] === 1 ? one : many}` : '';
+      const sent = [n('push', 'phone', 'phones'), n('email', 'inbox', 'inboxes'), n('sms', 'text', 'texts')].filter(Boolean).join(', ');
       const mine = (a.created_by || '').toLowerCase() === (me.email || '').toLowerCase();
       const btns = !can('alert_sender') ? '' : (a.status === 'pending' && (!mine || me.admin) ? `<button class="btn primary" type="button" data-confirm="${a.id}">Confirm and send</button>` : '') +
         (a.live || a.status === 'pending' ? `<button class="btn" type="button" data-end="${a.id}">${a.status === 'pending' ? 'Cancel' : 'End now'}</button>` : '');
       return `<li><div class="grow"><h3>${esc(a.title)} ${st}</h3><div class="meta"><span>${esc(me.alert_kinds[a.kind] || a.kind)}</span><span>${a.countywide ? 'All of Bay County' : esc(wsInfo.name)}</span>
         <span>By ${esc(a.created_by)}${a.confirmed_by ? `, confirmed by ${esc(a.confirmed_by)}` : ''}</span><span>${a.sent_at ? 'Sent ' + when(a.sent_at) : 'Saved ' + when(a.created_at)}</span>
-        ${a.geometry ? '<span>Has a map</span>' : ''}${a.live && a.ends_at ? `<span>Ends ${when(a.ends_at)}</span>` : ''}${a.ended_at ? `<span>${a.status === 'cancelled' ? 'Cancelled' : 'Ended'} ${when(a.ended_at)} by ${esc(a.ended_by)}</span>` : ''}</div>
+        ${a.geometry ? '<span>Has a map</span>' : ''}${a.live && a.ends_at ? `<span>Ends ${when(a.ends_at)}</span>` : ''}${a.ended_at ? `<span>${a.status === 'cancelled' ? 'Cancelled' : 'Ended'} ${when(a.ended_at)} by ${esc(a.ended_by)}</span>` : ''}${a.status === 'removed' ? '<span>Taken off the public pages by BayCounty.me</span>' : ''}${sent ? `<span>Sent to ${sent}</span>` : ''}</div>
         <p class="body">${esc(a.message)}${a.instruction ? '\n\n' + esc(a.instruction) : ''}</p></div><div class="row">${btns}</div></li>`;
     }).join('') : '<li class="muted small">No alerts sent from this workspace yet.</li>';
   }

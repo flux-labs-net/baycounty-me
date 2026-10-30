@@ -74,6 +74,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import me.baycounty.kit.AlertArea
 import me.baycounty.kit.Staff
 import me.baycounty.kit.StaffAlert
 import me.baycounty.kit.StaffFlag
@@ -192,12 +193,13 @@ private data class Tab(val key: String, val label: String, val icon: ImageVector
 @Composable
 fun StaffRoot(model: StaffModel, screen: String?) {
     var tab by remember {
-        mutableStateOf(when (screen) { "alerts", "send" -> "alerts"; "notices", "notice" -> "notices"; "flags", "flag" -> "flags"; "more" -> "more"; "votes" -> "votes"
+        mutableStateOf(when (screen) { "alerts", "send", "alert" -> "alerts"; "notices", "notice" -> "notices"; "flags", "flag" -> "flags"; "more" -> "more"; "votes" -> "votes"
             else -> if (model.isOfficial) "board" else "home" })
     }
     var page by remember {
         mutableStateOf<Page?>(when (screen) {
             "send" -> Page.SendAlert
+            "alert" -> model.alerts.firstOrNull()?.let { Page.Alert(it) }
             "notice" -> Page.Notice(null)
             "flag" -> model.flags.firstOrNull { it.status == "open" }?.let { Page.Flag(it) }
             "records" -> Page.Records
@@ -419,6 +421,7 @@ fun AlertDetail(model: StaffModel, a: StaffAlert, onBack: () -> Unit) {
                 a.instruction?.takeIf { it.isNotEmpty() }?.let { Text(it, style = T.bodyBold, color = Brand.navy) }
             }
         }
+        AlertArea.parse(a.geometry)?.let { area -> AreaMap(area, Modifier.fillMaxWidth().height(220.dp)) }
         Card {
             Detail("Kind", model.alertKinds[a.kind] ?: a.kind)
             Detail("Reaches", if (a.countywide) "All of Bay County" else model.workspace?.name ?: "")
@@ -427,6 +430,7 @@ fun AlertDetail(model: StaffModel, a: StaffAlert, onBack: () -> Unit) {
             a.confirmedBy?.let { Detail("Confirmed by", it) }
             a.sentAt?.let { Detail("Sent", Staff.whenOf(it)) }
             a.endsAt?.let { Detail(if (a.isLive) "Ends" else "Ended", Staff.whenOf(it)) }
+            a.sentSentence?.let { Detail("Sent to", it) }
         }
         if (model.can("alert_sender") && (a.isLive || a.isWaiting)) Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             if (a.isWaiting) {
@@ -454,6 +458,9 @@ private fun Picker(label: String, value: String, options: List<Pair<String, Stri
     }
 }
 
+/** The circles the web workspace offers (site/area_map.js), in meters. */
+private val RADII = listOf(0.0 to "No circle", 30.0 to "100 ft", 76.0 to "¼ block (250 ft)", 152.0 to "500 ft", 402.0 to "¼ mile", 805.0 to "½ mile", 1609.0 to "1 mile")
+
 @Composable
 fun SendAlertScreen(model: StaffModel, demoFill: Boolean, onBack: () -> Unit) {
     val scope = rememberCoroutineScope()
@@ -469,6 +476,8 @@ fun SendAlertScreen(model: StaffModel, demoFill: Boolean, onBack: () -> Unit) {
     var busy by remember { mutableStateOf(false) }
     var err by remember { mutableStateOf<String?>(null) }
     var done by remember { mutableStateOf<String?>(null) }
+    var pins by remember { mutableStateOf(listOf<AlertArea.Coord>()) }
+    var radius by remember { mutableStateOf(76.0) }
     LaunchedEffect(kind, countywide) { reach = model.reach(kind, countywide) }
     Sub("Send an alert", onBack) {
         done?.let { Card { Column(Modifier.padding(16.dp)) { Text(it, style = T.bodyBold, color = Brand.good); Spacer(Modifier.height(10.dp)); PrimaryButton("Close", onClick = onBack) } }; return@Sub }
@@ -490,6 +499,17 @@ fun SendAlertScreen(model: StaffModel, demoFill: Boolean, onBack: () -> Unit) {
             OutlinedTextField(instruction, { instruction = it }, Modifier.fillMaxWidth(), label = { Text("What people should do (optional)") }, minLines = 2)
             Text("Keep the headline short: it is what shows on a locked phone.", style = T.footnote, color = Brand.secondary)
         }
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Eyebrow("Map (optional)")
+            AreaMap(AlertArea(pins.map { AlertArea.Shape.Pin(it, radius.takeIf { r -> r > 0 }) }), Modifier.fillMaxWidth().height(260.dp),
+                onTap = { pins = pins + it }, onPinTap = { i -> pins = pins.filterIndexed { j, _ -> j != i } })
+            Card {
+                Picker("Circle around each pin", radius.toInt().toString(), RADII.map { it.first.toInt().toString() to it.second }) { radius = it.toDouble() }
+                if (pins.isNotEmpty()) QuietButton("Clear the map", color = Brand.salmon) { pins = emptyList() }
+            }
+            Text(if (pins.isEmpty()) "Tap the map where it applies, like a main break or the street that's closed. Residents see it with the alert. Lines and drawn areas are on the web workspace."
+                 else "${pins.size} pin${if (pins.size == 1) "" else "s"}. Tap a pin to take it off.", style = T.footnote, color = Brand.secondary)
+        }
         Column {
             Eyebrow("Who gets it")
             Card {
@@ -505,12 +525,12 @@ fun SendAlertScreen(model: StaffModel, demoFill: Boolean, onBack: () -> Unit) {
     if (review) AlertDialog(
         onDismissRequest = { review = false },
         title = { Text(if (countywide) "Save this countywide alert?" else "Send this alert now?") },
-        text = { Text("$title\n\n${reach?.sentence ?: ""}") },
+        text = { Text("$title\n\n${reach?.sentence ?: ""}" + if (pins.isEmpty()) "" else "\n\nThe map shows with it.") },
         confirmButton = {
             TextButton({
                 review = false; busy = true
                 scope.launch {
-                    try { done = model.sendAlert(kind, title, message, instruction, severity, countywide, hours) } catch (e: Exception) { err = e.message }
+                    try { done = model.sendAlert(kind, title, message, instruction, severity, countywide, hours, AlertArea.pinsGeoJSON(pins, radius)) } catch (e: Exception) { err = e.message }
                     busy = false
                 }
             }) { Text(if (countywide) "Save for a second person" else "Send to ${model.workspace?.name ?: "your city"}", color = Brand.salmon) }

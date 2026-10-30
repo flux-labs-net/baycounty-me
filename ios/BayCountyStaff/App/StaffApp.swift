@@ -113,7 +113,7 @@ struct StaffRoot: View {
     @Environment(StaffStore.self) private var store
     @State private var tab: String = {
         switch Launch.screen {
-        case "alerts", "send": return "alerts"
+        case "alerts", "send", "alert": return "alerts"
         case "notices", "notice": return "notices"
         case "flags", "flag": return "flags"
         case "more", "records", "send-file", "send-file-preview": return "more"

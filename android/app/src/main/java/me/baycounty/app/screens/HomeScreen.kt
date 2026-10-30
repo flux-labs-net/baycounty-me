@@ -39,7 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
+import me.baycounty.kit.AlertArea
 import me.baycounty.kit.Amendment3Model
+import me.baycounty.kit.Emergency
 import me.baycounty.kit.Dates
 import me.baycounty.kit.Format
 import me.baycounty.kit.HomeTiles
@@ -63,7 +65,12 @@ fun HomeScreen() {
     val home = store.home
     var utilities by remember(home?.id) { mutableStateOf(home?.let { store.utilities[it.id] }) }
     var showSetup by remember { mutableStateOf(false) }
-    LaunchedEffect(Unit) { store.loadTax(); store.loadAmendment3(); store.load(listOf(Events.DATASET, "beach-conditions", "emergency-notices")) }
+    // Live notices from /api/v1/emergency (the archive dataset is a day old); null until loaded or when offline.
+    var liveNotices by remember { mutableStateOf<List<DataRow>?>(null) }
+    LaunchedEffect(Unit) {
+        store.loadTax(); store.loadAmendment3(); store.load(listOf(Events.DATASET, "beach-conditions", "emergency-notices"))
+        liveNotices = runCatching { Emergency.parseFeed(store.client.get(Emergency.FEED_PATH).data).notices }.getOrNull()
+    }
     // The saved home's trash day and city. The address isn't logged by the API and the answer isn't kept on disk.
     LaunchedEffect(home?.id) { utilities = home?.let { runCatching { store.loadUtilities(it) }.getOrNull() } }
     if (showSetup) { HomeSetupScreen { showSetup = false }; return }
@@ -79,7 +86,9 @@ fun HomeScreen() {
         spacing = 20,
     ) {
         item { Greeting(utilities) }
-        HomeTiles.alert(store.rows["emergency-notices"] ?: emptyList())?.let { a -> item { AlertStrip(a) } }
+        val notices = liveNotices ?: store.rows["emergency-notices"] ?: emptyList()
+        HomeTiles.alert(notices)?.let { a -> item { AlertStrip(a) } }
+        AlertArea.firstMapped(notices)?.let { (n, area) -> item { AlertMapCard(n, area) } }
         item { TileGrid(utilities) { showSetup = true } }
         item { AddressCard { showSetup = true } }
         item { WeekendSection() }
@@ -120,6 +129,17 @@ private fun AlertStrip(a: HomeTiles.Alert) {
             Text(a.detail, style = T.caption, color = Brand.secondary)
         }
         Chevron()
+    }
+}
+
+/** Where a live alert applies, when the government drew it on a map; opens Emergencies. */
+@Composable
+private fun AlertMapCard(n: DataRow, area: AlertArea) {
+    val nav = LocalNav.current
+    Column(Modifier.fillMaxWidth().card(14.dp).clickable { nav.push(Route.Emergency) }.padding(14.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(n.string("title") ?: "", style = T.subheadBold, color = Brand.text)
+        n.string("source")?.let { Text(it, style = T.caption, color = Brand.secondary) }
+        AlertMap(area, Modifier.fillMaxWidth().height(180.dp))
     }
 }
 

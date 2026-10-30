@@ -130,14 +130,23 @@ data class StaffAlert(
     @SerialName("created_by") val createdBy: String, @SerialName("created_at") val createdAt: String,
     @SerialName("confirmed_by") val confirmedBy: String? = null, @SerialName("sent_at") val sentAt: String? = null,
     @SerialName("ends_at") val endsAt: String? = null, val live: Boolean? = null, val geometry: String? = null,
+    /** How many phones, inboxes and texts it was sent to ({push, email, sms}); staff and admins only. */
+    val sent: Map<String, Int>? = null,
 ) {
     val isLive get() = live ?: (status == "sent")
+    /** "2 phones, 1 inbox", or null before anything went out. */
+    val sentSentence: String? get() {
+        val s = sent ?: return null
+        fun n(k: String, one: String, many: String) = s[k]?.takeIf { it > 0 }?.let { "$it ${if (it == 1) one else many}" }
+        return listOfNotNull(n("push", "phone", "phones"), n("email", "inbox", "inboxes"), n("sms", "text", "texts")).joinToString(", ").ifEmpty { null }
+    }
     val isWaiting get() = status == "pending"
     val statusLabel: String get() = when {
         isWaiting -> "Needs a second person"
         isLive -> "Live"
         status == "ended" -> "Ended"
         status == "cancelled" -> "Cancelled"
+        status == "removed" -> "Removed"
         status == "sent" -> "Expired"
         else -> status.replaceFirstChar { it.uppercase() }
     }
@@ -375,10 +384,12 @@ class StaffClient(var token: String?, private val baseURL: String = BayCountyCli
     suspend fun alerts(ws: String): StaffAlerts = decode(call("alerts", mapOf("workspace" to ws)))
     suspend fun reach(ws: String, kind: String, countywide: Boolean): StaffReach =
         decode(call("reach", mapOf("workspace" to ws, "kind" to kind) + (if (countywide) mapOf("countywide" to "1") else emptyMap())))
-    suspend fun sendAlert(ws: String, kind: String, title: String, message: String, instruction: String, severity: String, countywide: Boolean, hours: Int): String =
+    /** geometry: the map of where it applies (AlertArea.pinsGeoJSON), or null for none. */
+    suspend fun sendAlert(ws: String, kind: String, title: String, message: String, instruction: String, severity: String, countywide: Boolean, hours: Int, geometry: String? = null): String =
         message(call("alert", body = buildJsonObject {
             put("workspace", ws); put("kind", kind); put("title", title); put("message", message); put("instruction", instruction)
             put("severity", severity); put("countywide", countywide); put("hours", hours)
+            if (geometry != null) put("geometry", geometry)
         }))
     suspend fun confirmAlert(ws: String, id: Int) { call("alert-confirm", body = buildJsonObject { put("workspace", ws); put("id", id) }) }
     suspend fun endAlert(ws: String, id: Int) { call("alert-end", body = buildJsonObject { put("workspace", ws); put("id", id) }) }

@@ -148,11 +148,11 @@ final class StaffStore {
         return try? await client.reach(ws, kind: kind, countywide: countywide)
     }
 
-    func sendAlert(kind: String, title: String, message: String, instruction: String, severity: String, countywide: Bool, hours: Int) async -> Result<String, Error> {
+    func sendAlert(kind: String, title: String, message: String, instruction: String, severity: String, countywide: Bool, hours: Int, geometry: String? = nil) async -> Result<String, Error> {
         guard let ws = workspaceId else { return .failure(StaffClient.StaffError.server("Pick a government first.", 400)) }
         if demo != nil { return .success("Sent.") }
         do {
-            let m = try await client.sendAlert(ws, kind: kind, title: title, message: message, instruction: instruction, severity: severity, countywide: countywide, hours: hours)
+            let m = try await client.sendAlert(ws, kind: kind, title: title, message: message, instruction: instruction, severity: severity, countywide: countywide, hours: hours, geometry: geometry)
             try await loadCurrent()
             return .success(m)
         } catch { return .failure(error) }

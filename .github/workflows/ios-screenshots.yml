@@ -119,6 +119,7 @@ jobs:
             shot "owner-flag_$mode" -screen flag
             shot "city-home_$mode" -asStaff -screen home
             shot "city-alerts_$mode" -asStaff -screen alerts
+            shot "city-alert_$mode" -asStaff -screen alert
             shot "city-send_$mode" -asStaff -screen send
             shot "city-notices_$mode" -asStaff -screen notices
             shot "city-notice_$mode" -asStaff -screen notice
