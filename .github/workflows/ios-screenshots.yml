@@ -61,7 +61,7 @@ jobs:
 
   # BayCounty.me Staff, from its made-up demo data (-demo): the owner's view and a city alert sender's view.
   staff:
-    runs-on: blacksmith-6vcpu-macos-15
+    runs-on: [self-hosted, studio]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -76,7 +76,7 @@ jobs:
         working-directory: ios
         run: |
           DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
-          xcrun simctl boot "$DEV"; xcrun simctl bootstatus "$DEV" -b
+          xcrun simctl boot "$DEV" || true; xcrun simctl bootstatus "$DEV" -b
           xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 || true
           APP=$(find build/Build/Products -name "BayCountyStaff.app" -maxdepth 3 | head -1)
           xcrun simctl install "$DEV" "$APP"
@@ -103,6 +103,7 @@ jobs:
           xcrun simctl ui "$DEV" appearance light
           shot signin -screen signin
           shot locked -screen locked
+          xcrun simctl uninstall "$DEV" me.baycounty.staff || true
       - uses: actions/upload-artifact@v4
         with:
           name: staff-screenshots
