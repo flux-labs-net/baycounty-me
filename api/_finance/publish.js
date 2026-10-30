@@ -183,4 +183,4 @@ async function unpublish(q, ws, uploadId) {
   return {ok: true, removed: n};
 }
 
-module.exports = {publish, unpublish, checkbookRows, budgetRows, isOrganization, entityIndex, orgKey, individualCategory, PUBLISHABLE};
+module.exports = {publish, unpublish, checkbookRows, budgetRows, isOrganization, entityIndex, orgKey, individualCategory, PUBLISHABLE, GOV_NAME};

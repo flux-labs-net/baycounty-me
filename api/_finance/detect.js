@@ -75,8 +75,9 @@ const normHeader = h => String(h ?? '').toLowerCase().replace(/#/g, ' no ').repl
 
 // Best column for each field: an exact synonym match beats a "contains" match; earlier synonyms beat later ones.
 // A column is used for at most one field.
+// shape is a SHAPES key, or a {field: [synonyms]} object (the records workspace's contract lists use their own).
 function mapColumns(headers, shape) {
-  const spec = SHAPES[shape].fields, H = headers.map(normHeader), used = new Set(), mapping = {};
+  const spec = typeof shape === 'string' ? SHAPES[shape].fields : shape, H = headers.map(normHeader), used = new Set(), mapping = {};
   const cands = [];
   for (const [field, syns] of Object.entries(spec)) {
     syns.forEach((s, rank) => H.forEach((h, i) => {

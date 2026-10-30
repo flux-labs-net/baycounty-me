@@ -9,9 +9,21 @@ import FoundationNetworking
 /// be flagged; the site owner (a BayCounty.me admin) is owner of every workspace and also sees the all-governments view.
 public enum Staff {
     /// Roles from strongest to weakest, as the server ranks them (api/_gov.js ROLES).
-    public static let rank: [String: Int] = ["viewer": 1, "auditor": 1, "publisher": 2, "alert_sender": 3, "owner": 4]
-    public static let roleLabel: [String: String] = ["owner": "Owner", "alert_sender": "Alert sender", "publisher": "Publisher", "viewer": "Viewer", "auditor": "Auditor"]
-    public static func can(_ role: String, _ need: String) -> Bool { (rank[role] ?? 0) >= (rank[need] ?? 9) }
+    public static let rank: [String: Int] = ["viewer": 1, "auditor": 1, "records": 1, "publisher": 2, "alert_sender": 3, "owner": 4]
+    public static let roleLabel: [String: String] = ["owner": "Owner", "alert_sender": "Alert sender", "publisher": "Publisher", "records": "Records sender", "viewer": "Viewer", "auditor": "Auditor"]
+    /// `need` is a role, or "submit" (send records): the records sender role, or publisher and up (api/_gov.js allowed).
+    public static func can(_ role: String, _ need: String) -> Bool {
+        if need == "submit" { return role == "records" || (rank[role] ?? 0) >= 2 }
+        return (rank[role] ?? 0) >= (rank[need] ?? 9)
+    }
+
+    /// The kinds of record a government can send, in the order the app lists them (labels match api/_records.js).
+    public static let recordKinds: [(key: String, label: String, hint: String)] = [
+        ("checkbook", "Checkbook (every payment)", "The check register or payments report for one or more whole months."),
+        ("budget", "Budget vs. actual", "The budget-vs-actual report, as of a month end."),
+        ("contracts", "Contracts awarded", "Vendor, amount and award date at least."),
+    ]
+    public static func recordKindLabel(_ k: String) -> String { recordKinds.first { $0.key == k }?.label ?? k.capitalized }
 
     /// Alert kinds in the order the form lists them (labels come from the server's `me` answer).
     public static let alertOrder = ["evacuation", "shelter", "boil-water", "road", "safety", "general"]
@@ -28,6 +40,7 @@ public enum Staff {
         "alert_drafted": "saved a countywide alert for a second person to confirm", "alert_confirmed": "confirmed an alert",
         "alert_ended": "ended an alert", "alert_cancelled": "cancelled an alert", "data_flagged": "flagged record data",
         "flag_answered": "BayCounty.me answered a flag", "member_set": "changed access", "member_removed": "removed access",
+        "records_published": "published records", "records_withdrawn": "withdrew records",
     ]
 
     public static func decoder() -> JSONDecoder { let d = JSONDecoder(); d.keyDecodingStrategy = .convertFromSnakeCase; return d }
@@ -236,6 +249,79 @@ public struct StaffOverview: Decodable, Sendable {
     public static func decode(_ data: Data) throws -> StaffOverview { try Staff.decoder().decode(StaffOverview.self, from: data) }
 }
 
+/// GET ?action=submissions: what's due, the government's intake email address and every file sent.
+public struct StaffSubmissions: Decodable, Sendable {
+    public struct Due: Decodable, Hashable, Sendable, Identifiable {
+        public let kind: String
+        public let label: String
+        public let want: String
+        public let have: String?
+        public let current: Bool
+        public let text: String
+        public var id: String { kind }
+    }
+    public let address: String?
+    public let due: [Due]
+    public let files: [StaffRecordFile]
+    public static func decode(_ data: Data) throws -> StaffSubmissions { try Staff.decoder().decode(StaffSubmissions.self, from: data) }
+}
+
+/// One file a government sent ("f12" from the finance importer, "c3" a contract list).
+public struct StaffRecordFile: Decodable, Hashable, Sendable, Identifiable {
+    public let id: String
+    public let kind: String
+    public let name: String
+    public let status: String
+    public let via: String?
+    public let sentBy: String?
+    public let sentAt: String?
+    public let periodStart: String?
+    public let periodEnd: String?
+    public let rows: Int?
+    public let problem: String?
+    public let publishedAt: String?
+    /// Waiting, Published, Held for a check, Not public, Withdrawn.
+    public var statusLabel: String {
+        ["waiting": "Waiting for you", "published": "Published", "held": "Held for a check", "not_public": "Not public yet", "withdrawn": "Withdrawn"][status] ?? status.capitalized
+    }
+    public var canPublish: Bool { status == "waiting" }
+    public var canWithdraw: Bool { status == "waiting" || status == "published" || status == "not_public" }
+    /// "Contracts awarded · 14 rows · through Sep 30, 2026".
+    public var detail: String {
+        var parts = [Staff.recordKindLabel(kind)]
+        if let rows { parts.append("\(rows.formatted()) row\(rows == 1 ? "" : "s")") }
+        if let periodEnd { parts.append("through " + Staff.when(periodEnd)) }
+        return parts.joined(separator: " · ")
+    }
+}
+
+/// POST ?action=submit-preview: what we read from a file, before anyone publishes it.
+public struct StaffRecordPreview: Decodable, Sendable {
+    public struct Period: Decodable, Sendable { public let start: String?; public let end: String? }
+    public let id: String
+    public let kind: String
+    public let ok: Bool
+    public let missing: [String]?
+    public let label: String?
+    public let rowCount: Int?
+    public let parsedTotal: Double?
+    public let printedTotal: Double?
+    public let skipped: Int?
+    public let alreadyOnSite: Int?
+    public let withheld: Int?
+    public let alreadyAdded: Bool?
+    public let period: Period?
+    public let warnings: [String]?
+    /// "We couldn't find: vendor, amount" when the file can't be read.
+    public var problem: String? {
+        guard !ok else { return nil }
+        if alreadyAdded == true { return "This file was already sent." }
+        let m = (missing ?? []).joined(separator: ", ")
+        return m.isEmpty ? "We couldn't read this file." : "We couldn't find: \(m)."
+    }
+    public static func decode(_ data: Data) throws -> StaffRecordPreview { try Staff.decoder().decode(StaffRecordPreview.self, from: data) }
+}
+
 /// Made-up answers for screenshots and App Review (no real staff, no real alerts): `staff-demo.json`.
 public struct StaffDemo: Decodable, Sendable {
     public let me: StaffMe
@@ -244,6 +330,7 @@ public struct StaffDemo: Decodable, Sendable {
     public let alerts: StaffAlerts
     public let notices: StaffPosts
     public let flags: StaffFlags
+    public let submissions: StaffSubmissions?
     public static func decode(_ data: Data) throws -> StaffDemo { try Staff.decoder().decode(StaffDemo.self, from: data) }
 }
 
@@ -323,4 +410,17 @@ public final class StaffClient: @unchecked Sendable {
     /// Site owner only: flags from every government.
     public func reviewFlags(status: String = "open") async throws -> StaffFlags { try StaffFlags.decode(try await call("review-flags", query: ["status": status])) }
     public func answerFlag(id: Int, status: String, reply: String) async throws { _ = try await call("review-flag", ["id": id, "status": status, "reply": reply]) }
+
+    // Send records (records sender, or publisher and up). Files up to 3 MB go inline; bigger ones are refused by the
+    // server with a note to use the web workspace.
+    public static let maxInlineBytes = 3 * 1024 * 1024
+    public func submissions(_ ws: String) async throws -> StaffSubmissions { try StaffSubmissions.decode(try await call("submissions", query: ["workspace": ws])) }
+    public func previewRecords(_ ws: String, kind: String, filename: String, content: Data, asOf: String? = nil, printedTotal: Double? = nil) async throws -> StaffRecordPreview {
+        var b: [String: Any] = ["workspace": ws, "kind": kind, "filename": filename, "content": content.base64EncodedString()]
+        if let asOf, !asOf.isEmpty { b["as_of"] = asOf }
+        if let printedTotal { b["printed_total"] = printedTotal }
+        return try StaffRecordPreview.decode(try await call("submit-preview", b))
+    }
+    public func publishRecords(_ ws: String, id: String) async throws -> String { message(try await call("submit-publish", ["workspace": ws, "id": id])) }
+    public func withdrawRecords(_ ws: String, id: String) async throws { _ = try await call("submit-withdraw", ["workspace": ws, "id": id]) }
 }

@@ -10,6 +10,7 @@ import shutil
 
 import place
 from finance_page import CSS as FIN_CSS, THEME_BTN, _ICONS as FIN_ICONS
+from site_menu import OPEN_BOOKS_PUBLIC
 
 CSS = FIN_CSS + r"""
 .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin:0 0 22px}
@@ -43,6 +44,21 @@ label.chk input{width:18px;height:18px;margin-top:2px}
 .lock svg{flex-shrink:0;color:var(--blue);margin-top:2px}
 .rec td{max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rec td.act{max-width:none}
+.due{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:0 0 20px}
+.due>div{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:4px;border-left:4px solid var(--review)}
+.due>div.in{border-left-color:var(--ok)}
+.due b{font:600 .95rem var(--f-body)} .due span{font-size:.82rem;color:var(--muted)}
+.kinds{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.kinds label{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);cursor:pointer;font-size:.86rem;line-height:1.4}
+.kinds label:has(input:checked){border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.kinds input{margin-top:3px;width:16px;height:16px;flex-shrink:0}
+.kinds b{display:block;font-size:.92rem;margin-bottom:2px}
+.inbox{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:.88rem;line-height:1.5;margin:16px 0}
+.inbox svg{flex-shrink:0;color:var(--blue);margin-top:2px}
+.inbox code{font:500 .9rem var(--f-mono);background:var(--sunken);padding:2px 6px;border-radius:6px;overflow-wrap:anywhere}
+.pvsum{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.9rem;margin:0 0 12px}
+.pvsum b{font-variant-numeric:tabular-nums}
+.status.held{background:color-mix(in srgb,var(--urgent) 16%,transparent);color:var(--urgent)}
 dialog.modal{border:1px solid var(--line);border-radius:14px;padding:0;width:min(560px,calc(100vw - 32px));background:var(--surface);color:var(--ink)}
 dialog.modal::backdrop{background:rgba(10,14,20,.45)}
 .modal form{padding:18px 20px;display:flex;flex-direction:column;gap:12px}
@@ -56,6 +72,8 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
 ICONS = {**FIN_ICONS,
          'bell': '<path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 004 0"/>',
          'post': '<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+         'upload': '<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 001 1h14a1 1 0 001-1v-3"/>',
+         'mail': '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
          'lock': '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>',
          'users': '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 010 7M18 14.8c2 .7 3.2 2.5 3.5 5.2"/>'}
 
@@ -63,7 +81,7 @@ ICONS = {**FIN_ICONS,
 MENU = [
     ('Emergency', 'teal', 'bell', [('alerts', 'Alerts', None)]),
     ('Post', 'blue', 'post', [('notices', 'Public notices', None), ('events', 'Events', None), ('jobs', 'Jobs', None)]),
-    ('Your data', 'amber', 'lock', [('records', 'Record data', None), ('flags', 'Flags you sent', None)]),
+    ('Your data', 'amber', 'lock', [('submit', 'Send records', None), ('records', 'Record data', None), ('flags', 'Flags you sent', None)]),
     ('Access', 'gray', 'users', [('people', 'People', 'owner'), ('activity', 'Activity log', 'owner')]),
 ]
 
@@ -172,7 +190,7 @@ def staff_page(out_dir):
   <section id="signin" class="signin" hidden>
     <div class="row" style="justify-content:flex-end;margin-bottom:24px">{THEME_BTN}</div>
     <h1>Government workspace</h1>
-    <p class="muted small">For city and county staff with access: send emergency alerts, post notices, events and jobs, and flag data on {place.SITE}. We’ll email you a 6-digit code.</p>
+    <p class="muted small">For city and county staff with access: send emergency alerts, post notices, events and jobs, send your records, and flag data on {place.SITE}. We’ll email you a 6-digit code.</p>
     <form id="email-form" class="row" style="margin-top:14px">
       <label class="f grow"><span>Work email</span><input type="email" name="email" required autocomplete="email" placeholder="you@cityoflynnhaven.com"></label>
       <button class="btn primary" type="submit" style="align-self:flex-end">Email me a code</button>
@@ -186,7 +204,7 @@ def staff_page(out_dir):
     <p class="small muted" style="margin-top:28px">No access yet? Your workspace owner can add you, or write to <a href="mailto:hello@{place.DOMAIN}">hello@{place.DOMAIN}</a>.</p>
   </section>
 
-  <div id="app" hidden>
+  <div id="app" hidden data-open-books="{'1' if OPEN_BOOKS_PUBLIC else ''}">
 {shell}
 
     <section id="p-home" data-panel>
@@ -227,6 +245,33 @@ def staff_page(out_dir):
 {post_panel('event', 'an event', EVENT_FIELDS, 'Events and closures for the community calendar. They show on the events page as soon as you save them.')}
 {post_panel('job', 'a job', JOB_FIELDS, 'Job openings. They show on the government jobs page as soon as you save them, with your link to apply.')}
 
+    <section id="p-submit" data-panel hidden>
+      <p class="sub">Send the files your own systems already make: the check register, the budget-vs-actual report, a list of contracts. We read them, you check a preview, and they go on {place.SITE} with the same privacy rules as everything else: payments to private people are listed without their name. Nothing you send changes numbers already on the site.</p>
+      <h2 class="h2">What we’d expect by now</h2>
+      <div class="due" id="sub-due"></div>
+      <div data-can="submit">
+        <form class="panel" id="sub-form" style="display:flex;flex-direction:column;gap:14px">
+          <div class="kinds" id="sub-kinds" role="radiogroup" aria-label="What are you sending"></div>
+          <div class="drop" id="sub-drop" tabindex="0" role="button" aria-label="Choose a file">{_svg('upload', 28)}<b>Drop the file here, or choose it</b><span class="small muted">Excel (.xlsx) or CSV, as it comes out of your system. No need to change the columns.</span></div>
+          <input type="file" id="sub-file" accept=".csv,.tsv,.txt,.xlsx" hidden>
+          <div class="row" id="sub-opts" hidden><label class="f" id="sub-asof-l">Report “as of” date (if it isn’t in the title)<input type="date" id="sub-asof"></label><label class="f">Printed total (optional, to check the rows add up)<input id="sub-total" inputmode="decimal" placeholder="1,234,567.89"></label></div>
+          <p class="small" id="sub-msg" role="status"></p>
+        </form>
+        <div class="panel" id="sub-pv" hidden style="margin-top:14px">
+          <h2 class="h2" id="sub-pv-h" style="margin-top:0">Check the preview</h2>
+          <div class="pvsum" id="sub-pv-sum"></div>
+          <p class="small" id="sub-pv-note"></p>
+          <div class="tw"><table class="t rec" id="sub-pv-t"><thead></thead><tbody></tbody></table></div>
+          <div class="row" style="margin-top:12px"><button class="btn primary" type="button" id="sub-go">Publish on {place.SITE}</button><button class="btn quiet" type="button" id="sub-cancel">Cancel</button><span class="small err" role="alert" id="sub-err"></span></div>
+        </div>
+      </div>
+      <p class="readonly" data-cant="submit" hidden>Only records senders, publishers and owners can send records. You can see what has been sent.</p>
+      <div class="inbox" id="sub-inbox" hidden>{_svg('mail')}<div><b>Or email it.</b> Send the file from your work address to <code id="sub-addr"></code>. It shows up below as “Emailed in” for someone here to check and publish. Same files, same rules.</div></div>
+      <p class="small muted" id="sub-tpl"></p>
+      <h2 class="h2">Files sent</h2>
+      <ul class="items" id="sub-list"></ul>
+    </section>
+
     <section id="p-records" data-panel hidden>
       {LOCK_NOTE}
       <div class="filters"><select class="sel" id="rec-pick" aria-label="Data"></select><span class="small muted" id="rec-count" style="align-self:center"></span></div>
@@ -239,10 +284,10 @@ def staff_page(out_dir):
     </section>
 
     <section id="p-people" data-panel hidden>
-      <p class="sub">Who can sign in to this workspace. Viewers see everything and change nothing. Publishers post notices, events and jobs. Alert senders also send emergency alerts. Owners also manage this list. Auditors read everything, including the activity log.</p>
+      <p class="sub">Who can sign in to this workspace. Viewers see everything and change nothing. Records senders also send records (your finance or clerk contact). Publishers post notices, events and jobs and send records. Alert senders also send emergency alerts. Owners also manage this list. Auditors read everything, including the activity log.</p>
       <form id="pp-form" class="panel row" style="align-items:flex-end;margin-bottom:12px">
         <label class="f grow">Work email<input type="email" name="email" required placeholder="name@cityoflynnhaven.com"></label>
-        <label class="f">Access<select name="role"><option value="viewer">Viewer</option><option value="publisher">Publisher</option><option value="alert_sender">Alert sender</option><option value="owner">Owner</option><option value="auditor">Auditor (read only)</option></select></label>
+        <label class="f">Access<select name="role"><option value="viewer">Viewer</option><option value="records">Records sender</option><option value="publisher">Publisher</option><option value="alert_sender">Alert sender</option><option value="owner">Owner</option><option value="auditor">Auditor (read only)</option></select></label>
         <button class="btn primary" type="submit">Give access</button>
       </form>
       <p class="small" id="pp-msg" role="status"></p>

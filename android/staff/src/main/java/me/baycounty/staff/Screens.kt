@@ -86,6 +86,8 @@ sealed interface Page {
     data class Alert(val alert: StaffAlert) : Page
     data class Notice(val post: StaffPost?) : Page
     data class Flag(val flag: StaffFlag) : Page
+    data object Records : Page
+    data object SendFile : Page
 }
 
 @Composable
@@ -186,16 +188,20 @@ fun StaffRoot(model: StaffModel, screen: String?) {
             "send" -> Page.SendAlert
             "notice" -> Page.Notice(null)
             "flag" -> model.flags.firstOrNull { it.status == "open" }?.let { Page.Flag(it) }
+            "records" -> Page.Records
+            "send-file", "send-file-preview" -> Page.SendFile
             else -> null
         })
     }
-    BackHandler(enabled = page != null) { page = null }
+    BackHandler(enabled = page != null) { page = if (page == Page.SendFile) Page.Records else null }
     page?.let { p ->
         when (p) {
             Page.SendAlert -> SendAlertScreen(model, demoFill = screen == "send") { page = null }
             is Page.Alert -> AlertDetail(model, p.alert) { page = null }
             is Page.Notice -> NoticeEditor(model, p.post, demoFill = screen == "notice") { page = null }
             is Page.Flag -> FlagDetail(model, p.flag, answering = model.isOwner && model.workspaceId == null) { page = null }
+            Page.Records -> RecordsScreen(model, onSend = { page = Page.SendFile }) { page = null }
+            Page.SendFile -> SendFileScreen(model, demoPreview = screen == "send-file-preview") { page = Page.Records }
         }
         return
     }
@@ -228,11 +234,11 @@ fun StaffRoot(model: StaffModel, screen: String?) {
     ) { pad ->
         Box(Modifier.padding(pad).fillMaxSize()) {
             when (tab) {
-                "home" -> if (all) OverviewScreen(model) else WorkspaceHome(model) { page = Page.SendAlert }
+                "home" -> if (all) OverviewScreen(model) else WorkspaceHome(model, onRecords = { page = Page.Records }) { page = Page.SendAlert }
                 "alerts" -> if (model.workspaceId == null) PickGovernment(model, "alerts") else AlertsScreen(model, { page = Page.SendAlert }) { page = Page.Alert(it) }
                 "notices" -> if (model.workspaceId == null) PickGovernment(model, "notices") else NoticesScreen(model) { page = Page.Notice(it) }
                 "flags" -> FlagsScreen(model, all) { page = Page.Flag(it) }
-                else -> MoreScreen(model)
+                else -> MoreScreen(model) { page = Page.Records }
             }
         }
     }
@@ -258,12 +264,12 @@ private fun WorkspaceMenu(model: StaffModel) {
 }
 
 @Composable
-private fun Screen(content: @Composable () -> Unit) {
+internal fun Screen(content: @Composable () -> Unit) {
     Column(Modifier.fillMaxSize().background(Brand.canvas).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) { content() }
 }
 
 @Composable
-private fun PickGovernment(model: StaffModel, what: String) {
+internal fun PickGovernment(model: StaffModel, what: String) {
     val scope = rememberCoroutineScope()
     Screen {
         Text("Pick a government to see its $what.", style = T.subhead, color = Brand.secondary)
@@ -323,10 +329,11 @@ private fun Activity(title: String, items: List<Pair<String, String>>) {
 }
 
 @Composable
-fun WorkspaceHome(model: StaffModel, onSend: () -> Unit) {
+fun WorkspaceHome(model: StaffModel, onRecords: () -> Unit = {}, onSend: () -> Unit) {
     val h = model.home ?: return Screen { if (model.loading) CircularProgressIndicator(color = Brand.navy); ErrorLine(model.error) }
     Screen {
         if (model.can("alert_sender")) PrimaryButton("Send an alert", color = Brand.salmonFill, icon = Icons.Filled.Warning, onClick = onSend)
+        model.submissions?.takeIf { model.can("submit") }?.let { RecordsDueCard(it, onRecords) }
         TileGrid(listOf(
             { m -> StatTile(h.counts.liveAlerts, "Live alerts", Icons.Filled.Sensors, m, alert = h.counts.liveAlerts > 0) },
             { m -> StatTile(h.counts.waitingAlerts, "Waiting for a second person", Icons.Filled.Groups, m, alert = h.counts.waitingAlerts > 0) },
@@ -370,7 +377,7 @@ private fun AlertRow(model: StaffModel, a: StaffAlert, onClick: () -> Unit) {
 
 /** A screen over the tabs with a back arrow. */
 @Composable
-private fun Sub(title: String, onBack: () -> Unit, content: @Composable () -> Unit) {
+internal fun Sub(title: String, onBack: () -> Unit, content: @Composable () -> Unit) {
     Scaffold(containerColor = Brand.canvas, topBar = {
         TopAppBar(title = { Text(title) }, navigationIcon = { IconButton(onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back") } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = Brand.canvas, titleContentColor = Brand.text))
@@ -615,10 +622,15 @@ fun FlagDetail(model: StaffModel, f: StaffFlag, answering: Boolean, onBack: () -
 }
 
 @Composable
-fun MoreScreen(model: StaffModel) {
+fun MoreScreen(model: StaffModel, onRecords: () -> Unit = {}) {
     val scope = rememberCoroutineScope()
     val uri = LocalUriHandler.current
     Screen {
+        if (model.isOwner || model.can("submit")) Column {
+            Card { RowLink(onRecords, { Text("Send records", style = T.bodyBold, color = Brand.text) }) }
+            Text("Send your check register, budget report or contract list straight from your accounting system.",
+                style = T.footnote, color = Brand.secondary, modifier = Modifier.padding(top = 8.dp))
+        }
         Column {
             Eyebrow("Signed in")
             Card {

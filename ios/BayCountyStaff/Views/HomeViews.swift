@@ -151,6 +151,9 @@ struct WorkspaceHomeView: View {
                         }
                         .buttonStyle(PrimaryButton(color: Brand.salmonFill))
                     }
+                    if let s = store.submissions, store.can("submit") {
+                        RecordsDueCard(s: s)
+                    }
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
                         StatTile(value: h.counts.liveAlerts, label: "Live alerts", symbol: "dot.radiowaves.left.and.right", alert: h.counts.liveAlerts > 0)
                         StatTile(value: h.counts.waitingAlerts, label: "Waiting for a second person", symbol: "person.2", alert: h.counts.waitingAlerts > 0)
@@ -173,6 +176,30 @@ struct WorkspaceHomeView: View {
         .toolbar { WorkspaceMenu() }
         .refreshable { await store.refresh() }
         .sheet(isPresented: $sending) { SendAlertView() }
+    }
+}
+
+/// What records are due from this government, with a way in to send them.
+struct RecordsDueCard: View {
+    let s: StaffSubmissions
+    var body: some View {
+        let late = s.due.filter { !$0.current }
+        let waiting = s.files.filter(\.canPublish).count
+        NavigationLink { RecordsView() } label: {
+            HStack(spacing: 12) {
+                Image(systemName: late.isEmpty && waiting == 0 ? "checkmark.circle.fill" : "tray.and.arrow.up")
+                    .font(.title3).foregroundStyle(late.isEmpty && waiting == 0 ? Brand.good : Brand.amber)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(waiting > 0 ? "\(waiting) file\(waiting == 1 ? "" : "s") waiting to publish" : late.isEmpty ? "Records are up to date" : "Records due: \(late.count)")
+                        .font(.body.weight(.semibold)).foregroundStyle(.primary)
+                    Text(late.isEmpty ? "Thanks for sending them." : late.map(\.text).joined(separator: " · "))
+                        .font(.footnote).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.leading)
+                }
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(.tertiary)
+            }
+            .padding(14).frame(maxWidth: .infinity, alignment: .leading).card()
+        }
     }
 }
 
@@ -207,8 +234,21 @@ struct ActivityList: View {
 /// Account, government, how the app is locked, and sign out.
 struct MoreView: View {
     @Environment(StaffStore.self) private var store
+    @State private var records = ["records", "send-file", "send-file-preview"].contains(Launch.screen ?? "")
     var body: some View {
         List {
+            if store.isOwner || store.can("submit") {
+                Section {
+                    Button { records = true } label: {
+                        HStack {
+                            Label("Send records", systemImage: "square.and.arrow.up")
+                            Spacer()
+                            Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(.tertiary)
+                        }
+                    }
+                    .foregroundStyle(.primary)
+                } footer: { Text("Send your check register, budget report or contract list straight from your accounting system.") }
+            }
             Section("Signed in") {
                 LabeledContent("Email", value: store.me?.email ?? "")
                 LabeledContent("Access", value: store.isOwner ? "Site owner (every government)" : (store.workspace.map { "\($0.roleLabel), \($0.name)" } ?? ""))
@@ -234,5 +274,6 @@ struct MoreView: View {
         .staffPage()
         .navigationTitle("More")
         .toolbar { WorkspaceMenu() }
+        .navigationDestination(isPresented: $records) { RecordsView() }
     }
 }

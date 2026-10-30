@@ -6,15 +6,16 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const when = s => { if (!s) return '—'; const d = new Date(s); return isNaN(d) ? esc(s) : d.toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}); };
   const day = s => { if (!s) return ''; const d = new Date(String(s).length <= 10 ? s + 'T12:00:00' : s); return isNaN(d) ? esc(s) : d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}); };
-  const ROLE = {viewer: 1, auditor: 1, publisher: 2, alert_sender: 3, owner: 4};
+  const ROLE = {viewer: 1, auditor: 1, records: 1, publisher: 2, alert_sender: 3, owner: 4};
   const ACTIONS = {signed_in: 'signed in', notice_posted: 'posted a notice', notice_edited: 'changed a notice', notice_withdrawn: 'withdrew a notice',
     event_posted: 'posted an event', event_edited: 'changed an event', event_withdrawn: 'withdrew an event', job_posted: 'posted a job', job_edited: 'changed a job',
     job_withdrawn: 'withdrew a job', alert_sent: 'sent an alert', alert_drafted: 'saved a countywide alert for a second person to confirm', alert_confirmed: 'confirmed an alert',
     alert_ended: 'ended an alert', alert_cancelled: 'cancelled an alert', data_flagged: 'flagged record data', flag_answered: 'BayCounty.me answered a flag',
-    member_set: 'changed access', member_removed: 'removed access'};
+    member_set: 'changed access', member_removed: 'removed access', records_published: 'published records', records_withdrawn: 'withdrew records'};
 
   let me = null, ws = null, wsInfo = null, role = 'viewer';
-  const can = r => (ROLE[role] || 0) >= (ROLE[r] || 9);
+  // submit = send records: the records role, or publisher and up.
+  const can = r => r === 'submit' ? role === 'records' || (ROLE[role] || 0) >= 2 : (ROLE[role] || 0) >= (ROLE[r] || 9);
 
   async function api(action, {method = 'GET', body, params} = {}) {
     const qs = new URLSearchParams({action, ...(ws && !['login', 'verify'].includes(action) ? {workspace: ws} : {}), ...(params || {})});
@@ -54,7 +55,7 @@
 
   // ---------- menu ----------
   const loaders = {home: loadHome, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
-    records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
+    submit: loadSubmit, records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) { nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open); menuBtn.setAttribute('aria-expanded', String(open)); }
   menuBtn.addEventListener('click', () => menu(true));
@@ -252,6 +253,118 @@
     catch (err) { f.querySelector('.err').textContent = err.message; }
     btn.disabled = false;
   }));
+
+  // ---------- send records ----------
+  // A file goes up as base64 (or through a storage link when it's over 3 MB), comes back as a preview saved as
+  // "waiting", and is published only when someone presses Publish. Emailed files arrive as "waiting" too.
+  const money = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const ST = {waiting: ['pending', 'Waiting for a check'], published: ['fixed', 'Published'], held: ['held', 'Doesn’t add up'], not_public: ['done', 'Not public'], withdrawn: ['done', 'Withdrawn']};
+  const openBooks = $('#app').dataset.openBooks === '1';
+  let sub = null, subKind = 'checkbook', pv = null;
+  const toB64 = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = () => no(new Error('The file couldn’t be read.')); r.readAsDataURL(f); });
+  function kindsUi() {
+    $('#sub-kinds').innerHTML = Object.entries(me.record_kinds).map(([k, v]) => `<label><input type="radio" name="sub-kind" value="${k}"${k === subKind ? ' checked' : ''}><span><b>${esc(v.label)}</b>${esc(v.hint)}</span></label>`).join('');
+    $('#sub-opts').hidden = subKind === 'contracts';
+    $('#sub-asof-l').hidden = subKind !== 'budget';
+  }
+  $('#sub-kinds').addEventListener('change', e => { if (e.target.name === 'sub-kind') { subKind = e.target.value; kindsUi(); } });
+  async function loadSubmit() {
+    if (!$('#sub-kinds').innerHTML) kindsUi();
+    sub = await api('submissions');
+    $('#sub-due').innerHTML = sub.due.map(d => `<div class="${d.current ? 'in' : ''}"><b>${esc(d.label)}</b><span>${esc(d.text)}</span>
+      <span class="status ${d.current ? 'fixed' : 'pending'}" style="align-self:flex-start">${d.current ? 'In' : d.have ? 'Due: latest is ' + day(d.have) : 'Not sent yet'}</span></div>`).join('');
+    $('#sub-inbox').hidden = !sub.address; $('#sub-addr').textContent = sub.address || '';
+    $('#sub-tpl').innerHTML = 'No export handy? Column templates: ' + Object.keys(sub.templates).map(k => `<a href="/api/gov?action=template&workspace=${encodeURIComponent(ws)}&kind=${k}">${esc(me.record_kinds[k].label)}</a>`).join(' · ') + '.';
+    $('#sub-list').innerHTML = sub.files.length ? sub.files.map(f => {
+      const st = ST[f.status] || ['done', f.status];
+      const period = f.period_start && f.period_end && f.period_start !== f.period_end ? `${day(f.period_start)} to ${day(f.period_end)}` : f.period_end ? day(f.period_end) : '';
+      const btns = !can('submit') ? '' : f.status === 'waiting' ? `<button class="btn primary" type="button" data-sub-pub="${f.id}">Publish</button><button class="btn quiet" type="button" data-sub-wd="${f.id}">Discard</button>`
+        : f.status === 'published' ? `<button class="btn quiet" type="button" data-sub-wd="${f.id}">Withdraw</button>` : '';
+      return `<li><div class="grow"><h3>${esc(f.name)} <span class="status ${st[0]}">${st[1]}</span></h3><div class="meta"><span>${esc(me.record_kinds[f.kind] ? me.record_kinds[f.kind].label : f.kind)}</span>
+        ${period ? `<span>${esc(period)}</span>` : ''}${f.rows != null ? `<span>${Number(f.rows).toLocaleString('en-US')} rows</span>` : ''}<span>${f.via === 'email' ? 'Emailed in by' : 'Sent by'} ${esc(f.sent_by)}, ${when(f.sent_at)}</span>
+        ${f.published_at ? `<span>Published ${when(f.published_at)}${f.published_by ? ' by ' + esc(f.published_by) : ''}</span>` : ''}</div>
+        ${f.status === 'held' ? `<p class="body">The rows don’t add up to the file’s own printed total${f.difference ? ` (off by ${money(f.difference)})` : ''}, so nothing from it is used. Send a corrected file.</p>` : ''}
+        ${f.problem && f.status === 'waiting' ? `<p class="body">${esc(f.problem)}</p>` : ''}</div><div class="row">${btns}</div></li>`;
+    }).join('') : '<li class="muted small">Nothing sent yet. Your first file shows up here.</li>';
+  }
+  const drop = $('#sub-drop'), finput = $('#sub-file');
+  drop.addEventListener('click', () => finput.click());
+  drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finput.click(); } });
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) sendFile(e.dataTransfer.files[0]); });
+  finput.addEventListener('change', () => { if (finput.files[0]) sendFile(finput.files[0]); });
+  async function sendFile(file) {
+    $('#sub-msg').textContent = `Reading ${file.name}…`; $('#sub-pv').hidden = true;
+    const body = {kind: subKind, filename: file.name};
+    if (subKind === 'budget' && $('#sub-asof').value) body.as_of = $('#sub-asof').value;
+    if (subKind !== 'contracts' && $('#sub-total').value.trim()) body.printed_total = $('#sub-total').value.trim();
+    try {
+      if (file.size <= 3 * 1024 * 1024) body.content = await toB64(file);
+      else {
+        const u = await api('submit-url', {method: 'POST', body: {filename: file.name}});
+        const r = await fetch(u.url, {method: 'PUT', body: file, headers: {'x-upsert': 'true', 'Content-Type': file.type || 'application/octet-stream'}});
+        if (!r.ok) throw new Error('The file didn’t upload (' + r.status + '). Try again.');
+        body.path = u.path;
+      }
+      showPreview(await api('submit-preview', {method: 'POST', body}));
+      $('#sub-msg').textContent = '';
+    } catch (err) { $('#sub-msg').innerHTML = `<span class="err">${esc(err.message)}</span>`; }
+    finput.value = '';
+    loadSubmit().catch(() => {});
+  }
+  const COLS = {
+    checkbook: [['paid_on', 'Date'], ['doc_no', 'Check'], ['payee', 'Paid to'], ['amount', 'Amount', 1], ['description', 'Description']],
+    budget: [['department', 'Department'], ['account', 'Account'], ['description', 'Description'], ['amended_budget', 'Budget', 1], ['actual_ytd', 'Spent or received', 1]],
+    contracts: [['date', 'Awarded'], ['vendor', 'Vendor'], ['purpose', 'What for'], ['amount', 'Amount', 1], ['method', 'How awarded']],
+  };
+  function showPreview(p) {
+    pv = p;
+    const cols = COLS[p.kind], period = p.period && (p.period.start || p.period.end) ? [p.period.start, p.period.end].filter(Boolean).map(day).join(' to ') : '';
+    $('#sub-pv-h').textContent = p.ok ? `Check the preview: ${me.record_kinds[p.kind].label}` : 'This file can’t be published yet';
+    $('#sub-pv-sum').innerHTML = [`<span><b>${Number(p.row_count || 0).toLocaleString('en-US')}</b> rows</span>`, p.parsed_total != null ? `<span>Total <b>${money(p.parsed_total)}</b></span>` : '',
+      period ? `<span>${esc(period)}</span>` : '', p.tie && p.tie.status === 'ties' ? '<span class="status fixed">Adds up to the printed total</span>' : '',
+      p.tie && p.tie.status === 'mismatch' ? `<span class="status held">Off from the printed total by ${money(p.tie.difference)}</span>` : '',
+      p.used_saved_mapping ? '<span class="muted">Columns matched like last time</span>' : ''].filter(Boolean).join('');
+    const notes = [];
+    if (!p.ok) notes.push(`Missing: ${esc((p.missing || []).join('; '))}. Check you chose the right kind of record, or send the report straight from your system.`);
+    if (p.kind === 'checkbook' && p.ok) notes.push('Payments to private people (refunds, reimbursements) are published without their name. Voided checks are left out.');
+    if (p.kind === 'contracts') {
+      if (p.already_on_site) notes.push(`${p.already_on_site} contract${p.already_on_site === 1 ? ' is' : 's are'} already on the site and won’t be added twice.`);
+      if (p.withheld) notes.push(`${p.withheld} with a private person will be listed without the person’s name.`);
+      if (p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
+    }
+    if (p.already_added) notes.push('This exact file was already added before.');
+    if (p.ok && p.kind !== 'contracts' && !openBooks) notes.push('Published files show on the public checkbook and budget tracker pages once those pages open; they are on the site’s data downloads and API right away.');
+    $('#sub-pv-note').innerHTML = notes.join(' ');
+    $('#sub-pv-t thead').innerHTML = `<tr>${cols.map(c => `<th>${esc(c[1])}</th>`).join('')}</tr>`;
+    $('#sub-pv-t tbody').innerHTML = (p.sample || []).map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="num"' : ''} title="${esc(r[c[0]] ?? '')}">${esc(c[2] ? money(r[c[0]]) : c[0] === 'paid_on' || c[0] === 'date' ? day(r[c[0]]) : r[c[0]] ?? '')}</td>`).join('')}</tr>`).join('')
+      || `<tr><td class="empty" colspan="${cols.length}">No rows to show.</td></tr>`;
+    $('#sub-go').hidden = !p.ok || (p.tie && p.tie.status === 'mismatch');
+    $('#sub-err').textContent = '';
+    $('#sub-pv').hidden = false; $('#sub-pv').scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+  async function publishFile(id, btn) {
+    btn.disabled = true;
+    try {
+      const r = await api('submit-publish', {method: 'POST', body: {id}});
+      if (r.held) throw new Error(r.message);
+      const msg = `Published ${Number(r.rows).toLocaleString('en-US')} rows${r.individuals_withheld ? `, ${r.individuals_withheld} without a private person’s name` : ''}.`;
+      $('#sub-pv').hidden = true; pv = null;
+      $('#sub-msg').innerHTML = esc(msg) + (r.kind === 'contracts' || openBooks ? ` <a href="${esc(r.page)}" target="_blank" rel="noopener">See it on the site</a>` : '');
+      await loadSubmit();
+    } catch (err) { btn.disabled = false; ($('#sub-pv').hidden ? $('#sub-msg') : $('#sub-err')).textContent = err.message; }
+  }
+  $('#sub-go').addEventListener('click', e => pv && publishFile(pv.id, e.currentTarget));
+  $('#sub-cancel').addEventListener('click', async () => { if (pv) await api('submit-withdraw', {method: 'POST', body: {id: pv.id}}).catch(() => {}); pv = null; $('#sub-pv').hidden = true; loadSubmit(); });
+  $('#sub-list').addEventListener('click', async e => {
+    const p = e.target.closest('[data-sub-pub]'), w = e.target.closest('[data-sub-wd]');
+    if (p) return publishFile(p.dataset.subPub, p);
+    if (!w) return;
+    if (w.dataset.sure !== '1') { w.dataset.sure = '1'; w.textContent = w.textContent === 'Discard' ? 'Discard: sure?' : 'Take it off the site?'; return; }
+    w.disabled = true;
+    try { await api('submit-withdraw', {method: 'POST', body: {id: w.dataset.subWd}}); await loadSubmit(); } catch (err) { w.disabled = false; w.textContent = err.message; }
+  });
 
   // ---------- record data (read only) + flags ----------
   let recRows = [], recCols = [];

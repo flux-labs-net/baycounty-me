@@ -35,6 +35,29 @@ class StaffTest {
         assertFalse(Staff.can("nobody", "viewer"))
     }
 
+    @Test fun recordsSendersCanOnlySendRecords() {
+        assertTrue(Staff.can("records", "submit"))
+        assertTrue(Staff.can("publisher", "submit"))
+        assertTrue(Staff.can("owner", "submit"))
+        assertFalse(Staff.can("viewer", "submit"))
+        assertFalse(Staff.can("auditor", "submit"))
+        assertFalse(Staff.can("records", "publisher"))
+        assertEquals("Records sender", Staff.roleLabel["records"])
+    }
+
+    @Test fun decodesSentRecords() {
+        val s = demo.submissions!!
+        assertEquals("lynnhaven@ingest.baycounty.me", s.address)
+        assertEquals(listOf(true, false, false), s.due.map { it.current })
+        assertEquals(listOf("Waiting for you", "Published", "Held for a check"), s.files.map { it.statusLabel })
+        assertEquals("Contracts awarded · 6 rows · through Oct 27, 2026", s.files[0].detail)
+        assertTrue(s.files[0].canPublish)
+        assertTrue(s.files[1].canWithdraw)
+        assertFalse(s.files[2].canWithdraw)
+        val bad = BCJson.decodeFromString(StaffRecordPreview.serializer(), """{"id":"c2","kind":"contracts","ok":false,"missing":["vendor","amount"]}""")
+        assertEquals("We couldn't find: vendor, amount.", bad.problem)
+    }
+
     @Test fun activityReadsAsASentence() {
         assertEquals("utilities@example.gov sent an alert: Boil water: Ohio Ave, 5th to 9th St", demo.home.activity[0].sentence)
         assertEquals("clerk@example.gov signed in", demo.home.activity[3].sentence)

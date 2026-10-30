@@ -556,7 +556,7 @@ def admin_page(out_dir):
         <h2 class="h2 grow" style="margin:0">People</h2>
         <select class="sel" id="gs-gov" aria-label="Government"></select>
         <input class="sel" id="gs-email" type="email" placeholder="name@city.gov" aria-label="Email">
-        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option></select>
+        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="records">Records sender</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option></select>
         <button class="btn" id="gs-add" type="button">Give access</button>
       </div>
       <div class="tw"><table class="at" id="gs-table" data-tt="off"><thead><tr><th>Government</th><th>Email</th><th>Access</th><th>Added by</th><th>Since</th></tr></thead><tbody></tbody></table></div>

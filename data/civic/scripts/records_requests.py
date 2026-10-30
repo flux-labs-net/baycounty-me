@@ -37,6 +37,10 @@ NOTES = {
     'county': 'We already have fund totals for every year; this asks for the department and line-item detail behind them.',
     'schools': 'The district asks for a name, mailing address and phone number in each request; add them to the signature before sending.',
 }
+# Each government's intake address (migration 0091). Files emailed there, or sent from Send records in the BayCounty.me
+# government workspace, come in straight from the government's own system. The School Board has no workspace yet.
+INTAKE = {'county': 'baycounty', 'pc': 'panamacity', 'pcb': 'panamacitybeach', 'lh': 'lynnhaven', 'cw': 'callaway', 'sp': 'springfield',
+          'parker': 'parker', 'mb': 'mexicobeach'}
 FY = lambda y, school: f'FY{y} ({y - 1}-{str(y)[2:]} school year)' if school else f'FY{y} (Oct 1, {y - 1} to Sep 30, {y})'
 
 
@@ -78,6 +82,9 @@ def body(g, need):
     years = [n['fiscal_year'] for n in need]
     lines = '\n'.join(f'- {FY(y, school)}' for y in years)
     unit = 'function, cost center or school/department' if school else 'department and division (cost center)'
+    send = (f'\nTo save a step, you can email the files to {INTAKE[g]}@ingest.baycounty.me, or upload them at https://baycounty.me/staff '
+            '(we can give your finance or clerk staff a free sign-in). Nothing is published until it has been checked, and the same address '
+            'works for future check registers, budget reports and contract lists.\n') if g in INTAKE else ''
     return f'''Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:
 
 {lines}
@@ -91,7 +98,7 @@ For each year, please include:
 5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.
 
 A line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.
-
+{send}
 This is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.
 
 Thank you,

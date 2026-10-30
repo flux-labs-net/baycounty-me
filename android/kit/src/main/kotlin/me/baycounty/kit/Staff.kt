@@ -24,9 +24,20 @@ import java.util.Locale
 /** The staff app (BayCounty.me Staff): the government workspace (/staff) on a phone, through /api/gov (api/gov.js).
  *  Mirrors ios/BayCountyKit Staff.swift; the same demo answers (staff-demo.json) and tests. */
 object Staff {
-    val rank = mapOf("viewer" to 1, "auditor" to 1, "publisher" to 2, "alert_sender" to 3, "owner" to 4)
-    val roleLabel = mapOf("owner" to "Owner", "alert_sender" to "Alert sender", "publisher" to "Publisher", "viewer" to "Viewer", "auditor" to "Auditor")
-    fun can(role: String, need: String) = (rank[role] ?: 0) >= (rank[need] ?: 9)
+    val rank = mapOf("viewer" to 1, "auditor" to 1, "records" to 1, "publisher" to 2, "alert_sender" to 3, "owner" to 4)
+    val roleLabel = mapOf("owner" to "Owner", "alert_sender" to "Alert sender", "publisher" to "Publisher", "records" to "Records sender", "viewer" to "Viewer", "auditor" to "Auditor")
+    /** [need] is a role, or "submit" (send records): the records sender role, or publisher and up (api/_gov.js allowed). */
+    fun can(role: String, need: String) =
+        if (need == "submit") role == "records" || (rank[role] ?: 0) >= 2 else (rank[role] ?: 0) >= (rank[need] ?: 9)
+
+    /** The kinds of record a government can send (labels match api/_records.js): key, label, hint. */
+    val recordKinds = listOf(
+        Triple("checkbook", "Checkbook (every payment)", "The check register or payments report for one or more whole months."),
+        Triple("budget", "Budget vs. actual", "The budget-vs-actual report, as of a month end."),
+        Triple("contracts", "Contracts awarded", "Vendor, amount and award date at least."),
+    )
+    fun recordKindLabel(k: String) = recordKinds.firstOrNull { it.first == k }?.second ?: k.replaceFirstChar { it.uppercase() }
+    const val MAX_INLINE_BYTES = 3 * 1024 * 1024
 
     val alertOrder = listOf("evacuation", "shelter", "boil-water", "road", "safety", "general")
     val severities = listOf("extreme" to "Extreme", "severe" to "Severe", "moderate" to "Moderate", "minor" to "Minor", "info" to "Information")
@@ -41,6 +52,7 @@ object Staff {
         "alert_drafted" to "saved a countywide alert for a second person to confirm", "alert_confirmed" to "confirmed an alert",
         "alert_ended" to "ended an alert", "alert_cancelled" to "cancelled an alert", "data_flagged" to "flagged record data",
         "flag_answered" to "BayCounty.me answered a flag", "member_set" to "changed access", "member_removed" to "removed access",
+        "records_published" to "published records", "records_withdrawn" to "withdrew records",
     )
 
     /** "Oct 30, 8:05 AM" in Bay County time; plain dates as "Nov 12, 2026". */
@@ -178,9 +190,56 @@ data class StaffOverview(val totals: Totals, val workspaces: List<Row> = emptyLi
     }
 }
 
+/** GET ?action=submissions: what's due, the government's intake email address and every file sent. */
+@Serializable
+data class StaffSubmissions(val address: String? = null, val due: List<Due> = emptyList(), val files: List<StaffRecordFile> = emptyList()) {
+    @Serializable
+    data class Due(val kind: String, val label: String, val want: String, val have: String? = null, val current: Boolean = false, val text: String)
+}
+
+/** One file a government sent ("f12" from the finance importer, "c3" a contract list). */
+@Serializable
+data class StaffRecordFile(
+    val id: String, val kind: String, val name: String, val status: String, val via: String? = null,
+    @SerialName("sent_by") val sentBy: String? = null, @SerialName("sent_at") val sentAt: String? = null,
+    @SerialName("period_start") val periodStart: String? = null, @SerialName("period_end") val periodEnd: String? = null,
+    val rows: Int? = null, val problem: String? = null, @SerialName("published_at") val publishedAt: String? = null,
+) {
+    val statusLabel get() = mapOf("waiting" to "Waiting for you", "published" to "Published", "held" to "Held for a check",
+        "not_public" to "Not public yet", "withdrawn" to "Withdrawn")[status] ?: status
+    val canPublish get() = status == "waiting"
+    val canWithdraw get() = status == "waiting" || status == "published" || status == "not_public"
+    /** "Contracts awarded · 14 rows · through Sep 30, 2026". */
+    val detail: String get() = listOfNotNull(
+        Staff.recordKindLabel(kind),
+        rows?.let { NumberFormat.getIntegerInstance(Locale.US).format(it) + if (it == 1) " row" else " rows" },
+        periodEnd?.let { "through " + Staff.whenOf(it) },
+    ).joinToString(" · ")
+}
+
+/** POST ?action=submit-preview: what we read from a file, before anyone publishes it. */
+@Serializable
+data class StaffRecordPreview(
+    val id: String, val kind: String, val ok: Boolean = false, val missing: List<String>? = null, val label: String? = null,
+    @SerialName("row_count") val rowCount: Int? = null, @SerialName("parsed_total") val parsedTotal: Double? = null,
+    @SerialName("printed_total") val printedTotal: Double? = null, val skipped: Int? = null,
+    @SerialName("already_on_site") val alreadyOnSite: Int? = null, val withheld: Int? = null,
+    @SerialName("already_added") val alreadyAdded: Boolean? = null, val period: Period? = null, val warnings: List<String>? = null,
+) {
+    @Serializable
+    data class Period(val start: String? = null, val end: String? = null)
+    val problem: String? get() = when {
+        ok -> null
+        alreadyAdded == true -> "This file was already sent."
+        missing.isNullOrEmpty() -> "We couldn't read this file."
+        else -> "We couldn't find: ${missing.joinToString(", ")}."
+    }
+}
+
 /** Made-up answers for screenshots and store review: staff-demo.json (same file as the iOS app's). */
 @Serializable
-data class StaffDemo(val me: StaffMe, val overview: StaffOverview, val home: StaffHome, val alerts: StaffAlerts, val notices: StaffPosts, val flags: StaffFlags) {
+data class StaffDemo(val me: StaffMe, val overview: StaffOverview, val home: StaffHome, val alerts: StaffAlerts, val notices: StaffPosts, val flags: StaffFlags,
+                     val submissions: StaffSubmissions? = null) {
     companion object { fun decode(json: String): StaffDemo = BCJson.decodeFromString(serializer(), json) }
 }
 
@@ -253,4 +312,15 @@ class StaffClient(var token: String?, private val baseURL: String = BayCountyCli
     suspend fun flags(ws: String): StaffFlags = decode(call("flags", mapOf("workspace" to ws)))
     suspend fun reviewFlags(status: String = "open"): StaffFlags = decode(call("review-flags", mapOf("status" to status)))
     suspend fun answerFlag(id: Int, status: String, reply: String) { call("review-flag", body = buildJsonObject { put("id", id); put("status", status); put("reply", reply) }) }
+
+    // Send records (records sender, or publisher and up). Files up to 3 MB go inline.
+    suspend fun submissions(ws: String): StaffSubmissions = decode(call("submissions", mapOf("workspace" to ws)))
+    suspend fun previewRecords(ws: String, kind: String, filename: String, content: ByteArray, asOf: String? = null, printedTotal: Double? = null): StaffRecordPreview =
+        decode(call("submit-preview", body = buildJsonObject {
+            put("workspace", ws); put("kind", kind); put("filename", filename); put("content", java.util.Base64.getEncoder().encodeToString(content))
+            if (!asOf.isNullOrEmpty()) put("as_of", asOf)
+            if (printedTotal != null) put("printed_total", printedTotal)
+        }))
+    suspend fun publishRecords(ws: String, id: String): String = message(call("submit-publish", body = buildJsonObject { put("workspace", ws); put("id", id) }))
+    suspend fun withdrawRecords(ws: String, id: String) { call("submit-withdraw", body = buildJsonObject { put("workspace", ws); put("id", id) }) }
 }

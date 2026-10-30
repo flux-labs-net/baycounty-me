@@ -29,6 +29,29 @@ final class StaffTests: XCTestCase {
         XCTAssertFalse(Staff.can("nobody", "viewer"))
     }
 
+    func testRecordsSendersCanOnlySendRecords() {
+        XCTAssertTrue(Staff.can("records", "submit"))
+        XCTAssertTrue(Staff.can("publisher", "submit"))
+        XCTAssertTrue(Staff.can("owner", "submit"))
+        XCTAssertFalse(Staff.can("viewer", "submit"))
+        XCTAssertFalse(Staff.can("auditor", "submit"))
+        XCTAssertFalse(Staff.can("records", "publisher"))
+        XCTAssertEqual(Staff.roleLabel["records"], "Records sender")
+    }
+
+    func testDecodesSentRecords() throws {
+        let s = try XCTUnwrap(try demo().submissions)
+        XCTAssertEqual(s.address, "lynnhaven@ingest.baycounty.me")
+        XCTAssertEqual(s.due.map(\.current), [true, false, false])
+        XCTAssertEqual(s.files.map(\.statusLabel), ["Waiting for you", "Published", "Held for a check"])
+        XCTAssertEqual(s.files[0].detail, "Contracts awarded · 6 rows · through Oct 27, 2026")
+        XCTAssertTrue(s.files[0].canPublish)
+        XCTAssertTrue(s.files[1].canWithdraw)
+        XCTAssertFalse(s.files[2].canWithdraw)
+        let bad = try StaffRecordPreview.decode(Data(#"{"id":"c2","kind":"contracts","ok":false,"missing":["vendor","amount"]}"#.utf8))
+        XCTAssertEqual(bad.problem, "We couldn't find: vendor, amount.")
+    }
+
     func testActivityReadsAsASentence() throws {
         let a = try demo().home.activity[0]
         XCTAssertEqual(a.sentence, "utilities@example.gov sent an alert: Boil water: Ohio Ave, 5th to 9th St")

@@ -18,12 +18,20 @@
 //   GET  ?action=flags&workspace=lh              flags sent from this workspace and our answers
 //   GET  ?action=activity&workspace=lh           who did what (owners and auditors)
 //   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role | "remove"}   (owners)
+// Send records (records sender, publisher and up; api/_records.js):
+//   GET  ?action=submissions&workspace=lh        what's due, the intake email address, every file sent and its state
+//   GET  ?action=template&workspace=lh&kind=contracts   a CSV with the template's column names
+//   POST ?action=submit-url     {workspace, filename}   a one-time link to PUT a big file into storage
+//   POST ?action=submit-preview {workspace, kind, filename, content (base64) | path, as_of?, printed_total?, mapping?}   read it, save it as waiting
+//   POST ?action=submit-publish {workspace, id}  publish a file that was previewed (or emailed in)
+//   POST ?action=submit-withdraw {workspace, id} take a file's records off the public pages
 // BayCounty.me admins only (the site owner, in the staff app or with the admin cookie):
 //   GET  ?action=overview                        every workspace with live/waiting alerts, open flags, members; recent activity
 //   GET  ?action=review-flags&status=open        flags from every workspace (open | fixed | not_changed | all)
 //   POST ?action=review-flag {id, status, reply?}   answer a flag (fixed | not_changed | open)
 const db = require('./_db');
 const G = require('./_gov');
+const R = require('./_records');
 const {FROM, resend} = require('./_alerts');
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
@@ -34,8 +42,9 @@ const body = req => {
 };
 
 const NEED = {home: 'read', posts: 'read', post: 'publish', withdraw: 'publish', alerts: 'read', reach: 'alert', alert: 'alert',
-  'alert-confirm': 'alert', 'alert-end': 'alert', records: 'read', flag: 'read', flags: 'read', activity: 'read', members: 'read'};
-const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag']);
+  'alert-confirm': 'alert', 'alert-end': 'alert', records: 'read', flag: 'read', flags: 'read', activity: 'read', members: 'read',
+  submissions: 'read', template: 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-withdraw': 'submit'};
+const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-withdraw']);
 
 async function route(deps, req, res, action) {
   const {q} = deps, Q = req.query || {}, b = body(req);
@@ -51,7 +60,7 @@ async function route(deps, req, res, action) {
   if (action === 'me') {
     if (!who) throw bad('Sign in first.', 401);
     return {email: who.email, admin: Boolean(who.admin), workspaces: await G.workspacesFor(q, who), roles: G.ROLE_LABEL,
-      alert_kinds: G.ALERT_KINDS, notice_kinds: G.NOTICE_KINDS, job_types: G.JOB_TYPES, records: G.RECORDS};
+      alert_kinds: G.ALERT_KINDS, notice_kinds: G.NOTICE_KINDS, job_types: G.JOB_TYPES, records: G.RECORDS, record_kinds: R.KINDS};
   }
   if (action === 'overview' || action === 'review-flags' || action === 'review-flag') {
     if (!who) throw bad('Sign in first.', 401);
@@ -110,12 +119,27 @@ async function route(deps, req, res, action) {
       if (!['owner', 'auditor'].includes(role)) throw bad('Only owners and auditors can see the full activity log.', 403);
       return {activity: await q('select email, action, detail, at from gov.activity where workspace_id = $1 order by at desc limit 300', [w.id])};
     }
+    case 'submissions': return R.overview(q, w);
+    case 'template': {
+      res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+      res.setHeader('Content-Disposition', `attachment; filename="${String(Q.kind).replace(/[^a-z]/g, '')}-template.csv"`);
+      res.status(200).send(R.templateCsv(String(Q.kind || '')));
+      return undefined;
+    }
+    case 'submit-url': return R.uploadUrl(recordDeps(deps), w, b);
+    case 'submit-preview': return R.preview(recordDeps(deps), w, b, who);
+    case 'submit-publish': return R.publish(recordDeps(deps), w, b, who);
+    case 'submit-withdraw': return R.withdraw(recordDeps(deps), w, b, who);
     case 'members': {
       if (req.method === 'GET') return {members: await q('select email, role, added_by, created_at from gov.members where workspace_id = $1 order by role, email', [w.id])};
       return G.setMember(q, w.id, b, email);
     }
   }
 }
+
+// The finance importer and publisher behind Send records. Tests pass their own storage (and may pass the rest).
+const recordDeps = deps => ({q: deps.q, storage: deps.storage || require('./_finance/storage'), ingest: deps.ingest || require('./finance').ingest,
+  publisher: deps.publisher || require('./_finance/publish'), log: G.log});
 
 function createHandler(deps) {
   return async (req, res) => {
@@ -124,7 +148,9 @@ function createHandler(deps) {
     if (!deps.hasDb()) return res.status(500).json({error: 'The government workspace isn’t configured on this deployment.'});
     const action = String((req.query || {}).action || '');
     try {
-      return res.status(200).json(await route(deps, req, res, action));
+      const out = await route(deps, req, res, action);
+      if (out === undefined) return undefined;  // already sent (a CSV template)
+      return res.status(200).json(out);
     } catch (e) {
       const status = e.status || 500;
       if (status >= 500) console.error('gov', action, e);
@@ -155,3 +181,4 @@ async function sendNow(place) {
 
 module.exports = createHandler({q: db.q, hasDb: db.hasDb, caller: G.caller, sendEmail, sendNow});
 module.exports.createHandler = createHandler;
+module.exports.config = {api: {bodyParser: {sizeLimit: '4.5mb'}}};  // Send records: files up to 3 MB come inline as base64
