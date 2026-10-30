@@ -13,6 +13,7 @@ const PREVIEWS = [
   {id: 'confirm_weekly', name: 'Sign-up confirmation: This week in Bay County', when: 'Right after someone signs up on /this-week.'},
   {id: 'digest', name: 'Weekly digest', when: 'Mondays, one per government, to everyone following it. Built from this week’s live data.', usesGov: true},
   {id: 'rule_alert', name: 'Rule alert matches', when: 'Mornings, when new records match someone’s rules. Sample matches, or the latest real email.', sources: true},
+  {id: 'account_welcome', name: 'Welcome to a new account', when: 'Once, right after someone makes an account on /account or in the app. Links to the This week in Bay County sign-up.'},
   {id: 'manage_link', name: 'Manage-your-emails link', when: 'When someone asks for a link on the manage page.'},
   {id: 'admin_signin', name: 'Admin sign-in link', when: 'When an admin signs in to /admin.'},
   {id: 'finance_code', name: 'Finance sign-in code', when: 'When a finance workspace member signs in to /finance.'},
@@ -107,6 +108,7 @@ async function preview(id, {gov, source} = {}) {
       note = 'Sample matches (made-up records) in the real layout.';
       break;
     }
+    case 'account_welcome': m = require('./_emails').accountWelcomeEmail({weekly: fakeConfirm, manage: `${SITE}/api/account?action=emails&t=${DUMMY}`}); break;
     case 'manage_link': m = manageLinkEmail(`${SITE}/alerts/manage?t=${DUMMY}`); break;
     case 'admin_signin': m = adminSignInEmail(`${SITE}/api/admin?action=verify&t=${DUMMY}`); break;
     case 'finance_code': m = require('./_finance/auth').codeEmail('482913'); note = 'Sample code.'; break;

@@ -212,6 +212,22 @@ function accountCodeEmail(code, link, minutes = 15) {
       footer: 'You’re getting this because someone asked to sign in to BayCounty.me with this address.'})};
 }
 
+// Welcome email for a new account (api/_account.js sendWelcome). weekly: the /api/confirm link that joins the countywide
+// weekly email (This week in Bay County); it only shows a Confirm button, so nobody is added without a tap.
+// manage: the signed link to change or stop account emails. name: first name if we have it.
+function accountWelcomeEmail({weekly, manage, name}) {
+  const subject = 'Welcome to BayCounty.me';
+  const body = ui.p(`${name ? `Hi ${esc(name)}, your` : 'Your'} BayCounty.me account is ready. Want the news in your inbox too? Each Monday morning, <b>${WEEKLY_NAME}</b> is one short email with:`) +
+    ui.list([['salmon', 'Events', 'What’s happening around the county that week'], ['blue', 'Meetings', 'Public meetings, with agendas'], ['teal', 'Votes', 'New votes, split votes and failed motions first'], ['amber', 'Contracts', 'New contracts and change orders, biggest first']]) +
+    ui.button(weekly, 'Send me the weekly email') +
+    ui.small('One tap and you’re on the list. The link works for 7 days. Not interested? Do nothing and we won’t send it.', 18) +
+    ui.note(`Save your home address in ${ui.link(`${SITE}/account`, 'My home')} to also get a Monday email about what’s near you and alerts when an emergency affects your street.`);
+  const footer = `You’re getting this because you just made a BayCounty.me account with this address. ${ui.footLink(manage, 'Change or stop account emails')}<br><br>${ui.ABOUT}`;
+  const text = `Your BayCounty.me account is ready.\n\nWant ${WEEKLY_NAME} too? Each Monday morning: events around the county, public meetings with agendas, new votes and new contracts.\n\nSend me the weekly email: ${weekly}\n\nThe link works for 7 days. Not interested? Do nothing and we won't send it.\n\nSave your home address at ${SITE}/account to also get a Monday email about what's near you and alerts when an emergency affects your street.\n\nChange or stop account emails: ${manage}`;
+  return {subject, text, html: ui.layout({title: subject, preheader: `Your account is ready. One tap gets you ${WEEKLY_NAME} every Monday.`, kicker: 'Your account',
+    hero: {tone: 'teal', icon: 'mail', eyebrow: 'Welcome', title: 'You’re all set'}, body, footer})};
+}
+
 // The fuller weekday/time for an item's date ("Tue, Nov 3, 6 PM" or "Tue, Nov 3").
 const itemWhen = d => (!d ? '' : String(d).length > 10 ? local(String(d)).toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: TZ}).replace(':00', '')
   : at(String(d)).toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric', timeZone: TZ}));
@@ -265,4 +281,4 @@ function homeAlertEmail(n, {home, manage}) {
     html: ui.layout({title: subject, preheader: clip(n.summary || n.title || '', 120), kicker: home ? 'Alert for your home' : 'Bay County alert', hero: {tone: 'salmon', icon: 'alert', eyebrow: esc(head), title: esc(clip(n.title || head, 90))}, body, footer})};
 }
 
-module.exports = {accountCodeEmail, homeWeeklyEmail, homeAlertEmail, confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};
+module.exports = {accountCodeEmail, accountWelcomeEmail, homeWeeklyEmail, homeAlertEmail, confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};

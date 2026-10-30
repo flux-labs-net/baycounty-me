@@ -229,8 +229,8 @@ fun StaffRoot(model: StaffModel, screen: String?) {
         Tab("notices", "Notices", Icons.Filled.Description), Tab("flags", "Flags", Icons.Filled.Flag), Tab("more", "More", Icons.Filled.MoreHoriz),
     )
     val title = when (tab) {
-        "home" -> if (all) "All governments" else model.workspace?.name ?: "Home"
-        "board" -> model.workspace?.name ?: "Board"; "votes" -> "Voting record"
+        "home" -> if (all) "All governments" else model.workspace?.name?.let(Staff::short) ?: "Home"
+        "board" -> model.workspace?.name?.let(Staff::short) ?: "Board"; "votes" -> "Voting record"
         "alerts" -> "Alerts"; "notices" -> "Notices"; "flags" -> if (all) "Flags to answer" else "Data flags"; else -> "More"
     }
     Scaffold(
@@ -274,12 +274,12 @@ private fun WorkspaceMenu(model: StaffModel) {
     var open by remember { mutableStateOf(false) }
     Box {
         TextButton({ open = true }) {
-            Text(model.workspace?.name?.removePrefix("City of ") ?: "All", style = T.subhead.copy(fontWeight = FontWeight.SemiBold), color = Brand.navy, maxLines = 1)
+            Text(model.workspace?.name?.let(Staff::short) ?: "All", style = T.subhead.copy(fontWeight = FontWeight.SemiBold), color = Brand.navy, maxLines = 1)
             Icon(Icons.Filled.ArrowDropDown, null, tint = Brand.navy)
         }
         DropdownMenu(open, { open = false }) {
             if (me.admin) DropdownMenuItem({ Text("All governments") }, { open = false; scope.launch { model.open(null) } })
-            me.workspaces.forEach { w -> DropdownMenuItem({ Text(w.name) }, { open = false; scope.launch { model.open(w.id) } }) }
+            me.workspaces.forEach { w -> DropdownMenuItem({ Text(Staff.short(w.name)) }, { open = false; scope.launch { model.open(w.id) } }) }
         }
     }
 }
@@ -295,7 +295,7 @@ internal fun PickGovernment(model: StaffModel, what: String) {
     Screen {
         Text("Pick a government to see its $what.", style = T.subhead, color = Brand.secondary)
         val ws = model.me?.workspaces.orEmpty()
-        Divided(ws.size) { i -> RowLink({ scope.launch { model.open(ws[i].id) } }, { Text(ws[i].name, style = T.bodyBold, color = Brand.text) }) }
+        Divided(ws.size) { i -> RowLink({ scope.launch { model.open(ws[i].id) } }, { Text(Staff.short(ws[i].name), style = T.bodyBold, color = Brand.text) }) }
     }
 }
 
@@ -315,7 +315,7 @@ fun OverviewScreen(model: StaffModel) {
             val rows = o.workspaces.filter { it.needsAttention } + o.workspaces.filter { !it.needsAttention }
             Divided(rows.size) { i -> GovRow(rows[i]) { scope.launch { model.open(rows[i].id) } } }
         }
-        Activity("Latest everywhere", o.activity.map { it.sentence to listOfNotNull(it.govName, Staff.whenOf(it.at)).joinToString(" · ") })
+        Activity("Latest everywhere", o.activity.map { it.sentence to listOfNotNull(it.govName?.let(Staff::short), Staff.whenOf(it.at)).joinToString(" · ") })
         ErrorLine(model.error)
     }
 }
@@ -324,7 +324,7 @@ fun OverviewScreen(model: StaffModel) {
 private fun GovRow(w: StaffOverview.Row, onClick: () -> Unit) {
     val staff = if (w.members == 0) "No staff yet" else "${w.members} staff"
     RowLink(onClick, {
-        Text(w.name, style = T.bodyBold, color = Brand.text)
+        Text(Staff.short(w.name), style = T.bodyBold, color = Brand.text)
         Text(w.lastActivity?.let { "$staff · active ${Staff.whenOf(it)}" } ?: staff, style = T.footnote, color = Brand.secondary, maxLines = 1)
     }) {
         when {
@@ -424,7 +424,7 @@ fun AlertDetail(model: StaffModel, a: StaffAlert, onBack: () -> Unit) {
         AlertArea.parse(a.geometry)?.let { area -> AreaMap(area, Modifier.fillMaxWidth().height(220.dp)) }
         Card {
             Detail("Kind", model.alertKinds[a.kind] ?: a.kind)
-            Detail("Reaches", if (a.countywide) "All of Bay County" else model.workspace?.name ?: "")
+            Detail("Reaches", if (a.countywide) "All of Bay County" else model.workspace?.name?.let(Staff::short) ?: "")
             Detail("Severity", Staff.severities.firstOrNull { it.first == a.severity }?.second ?: "Severe")
             Detail("Written by", a.createdBy)
             a.confirmedBy?.let { Detail("Confirmed by", it) }
@@ -533,7 +533,7 @@ fun SendAlertScreen(model: StaffModel, demoFill: Boolean, onBack: () -> Unit) {
                     try { done = model.sendAlert(kind, title, message, instruction, severity, countywide, hours, AlertArea.pinsGeoJSON(pins, radius)) } catch (e: Exception) { err = e.message }
                     busy = false
                 }
-            }) { Text(if (countywide) "Save for a second person" else "Send to ${model.workspace?.name ?: "your city"}", color = Brand.salmon) }
+            }) { Text(if (countywide) "Save for a second person" else "Send to ${model.workspace?.name?.let(Staff::short) ?: "your city"}", color = Brand.salmon) }
         },
         dismissButton = { TextButton({ review = false }) { Text("Keep editing") } },
     )
@@ -612,7 +612,7 @@ fun FlagsScreen(model: StaffModel, answering: Boolean, onOpen: (StaffFlag) -> Un
             RowLink({ onOpen(f) }, {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Chip(f.statusLabel, flagColor(f))
-                    if (answering && f.govName != null) { Spacer(Modifier.width(6.dp)); Text(f.govName!!, style = T.caption, color = Brand.secondary) }
+                    if (answering && f.govName != null) { Spacer(Modifier.width(6.dp)); Text(Staff.short(f.govName!!), style = T.caption, color = Brand.secondary) }
                 }
                 Spacer(Modifier.height(4.dp))
                 Text(f.subject, style = T.bodyBold, color = Brand.text)
@@ -640,7 +640,7 @@ fun FlagDetail(model: StaffModel, f: StaffFlag, answering: Boolean, onBack: () -
                 Chip(f.statusLabel, flagColor(f))
                 Text(f.subject, style = androidx.compose.material3.MaterialTheme.typography.titleLarge, color = Brand.text)
             }
-            f.govName?.let { Detail("Government", it) }
+            f.govName?.let { Detail("Government", Staff.short(it)) }
             Detail("From", f.email)
             Detail("Sent", Staff.whenOf(f.createdAt))
             f.shownValue?.let { Detail("Site shows", it) }
@@ -674,7 +674,7 @@ fun MoreScreen(model: StaffModel, onRecords: () -> Unit = {}) {
             Eyebrow("Signed in")
             Card {
                 Detail("Email", model.me?.email ?: "")
-                Detail("Access", if (model.isOwner) "Site owner (every government)" else model.workspace?.let { "${it.roleLabel}, ${it.name}" } ?: "")
+                Detail("Access", if (model.isOwner) "Site owner (every government)" else model.workspace?.let { "${it.roleLabel}, ${Staff.short(it.name)}" } ?: "")
             }
         }
         Column {

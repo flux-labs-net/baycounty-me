@@ -26,7 +26,7 @@
 const crypto = require('crypto');
 const {q, hasDb} = require('./_db');
 const {derive, ipOf} = require('./_gate');
-const {FROM, resend, sameOrigin} = require('./_alerts');
+const {FROM, resend, sameOrigin, makeToken: alertToken} = require('./_alerts');
 const N = require('./_nearby');
 
 const SITE = 'https://baycounty.me';
@@ -102,10 +102,27 @@ async function startSession(userId, client) {
   return tok;
 }
 async function signInUser(email) {
-  const [u] = await q(`insert into account.users (email) values ($1) on conflict (email) do update set email = excluded.email returning *`, [email]);
+  // xmax = 0 only on a row this statement inserted, so created is true the first time an address signs in.
+  const [u] = await q(`insert into account.users (email) values ($1) on conflict (email) do update set email = excluded.email returning *, (xmax = 0) as created`, [email]);
   if (u.status !== 'active') throw bad('This account is paused. Write to hello@baycounty.me.', 403);
   await q('insert into account.prefs (user_id) values ($1) on conflict (user_id) do nothing', [u.id]);
   return u;
+}
+// A new account gets one welcome email with a link to join the countywide weekly email (This week in Bay County).
+// The link opens the same Confirm page as the /this-week sign-up, so joining still takes the person's own tap.
+// account.sends keeps it to once per account. Best effort: a failure here never stops a sign-in.
+async function sendWelcome(u) {
+  try {
+    const [claimed] = await q(`insert into account.sends (user_id, kind, dedupe_key) values ($1, 'welcome', 'welcome') on conflict do nothing returning id`, [u.id]);
+    if (!claimed || !key()) return false;
+    const weekly = `${SITE}/api/confirm?t=${alertToken(u.email, ['week'])}`;
+    const m = require('./_emails').accountWelcomeEmail({weekly, manage: manageUrl(u.id), name: u.first_name});
+    const s = await resend('/emails', 'POST', {from: FROM, to: [u.email], subject: m.subject, html: m.html, text: m.text,
+      headers: {'List-Unsubscribe': `<${manageUrl(u.id)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'}}, key());
+    if (!s.ok) { console.error('account welcome', s.status); return false; }
+    await q('update account.sends set resend_id = $2 where id = $1', [claimed.id, s.body && s.body.id]);
+    return true;
+  } catch (e) { console.error('account welcome', e.message); return false; }
 }
 async function me(u) {
   const [home] = await q(`select ${HOME_COLS.join(', ')} from account.homes where user_id = $1`, [u.id]);
@@ -210,6 +227,7 @@ async function handler(req, res) {
       const used = await q('update account.codes set used_at = now() where id = $1 and used_at is null returning id', [c.id]);
       if (!used.length) throw bad('That code was already used. Send a new code.');
       const u = await signInUser(email);
+      if (u.created) await sendWelcome(u);
       const tok = await startSession(u.id, client);
       if (client === 'web') setSession(res, tok, SESSION_DAYS.web);
       return res.status(200).json({ok: true, ...(client === 'web' ? {} : {token: tok}), ...(await me(u))});
@@ -227,6 +245,7 @@ async function handler(req, res) {
       const used = await q('update account.codes set used_at = now() where nonce = $1 and email = $2 and used_at is null and expires_at > now() returning id', [t.n, t.e]);
       if (!used.length) return fail();
       const u = await signInUser(t.e);
+      if (u.created) await sendWelcome(u);
       setSession(res, await startSession(u.id, 'web'), SESSION_DAYS.web);
       res.setHeader('Location', next); return res.status(303).end();
     }
@@ -404,4 +423,4 @@ async function adminSummary() {
 }
 
 module.exports = handler;
-Object.assign(module.exports, {session, signInUser, startSession, sessionCookies, nextOf, SESSION_DAYS, makeToken, readToken, hashCode, hashSession, cleanPrefs, manageUrl, weeklyRun, emailNotice, adminSummary, homeFeed, COOKIE, PUSH_TOPICS, ALERT_EMAIL});
+Object.assign(module.exports, {session, signInUser, sendWelcome, startSession, sessionCookies, nextOf, SESSION_DAYS, makeToken, readToken, hashCode, hashSession, cleanPrefs, manageUrl, weeklyRun, emailNotice, adminSummary, homeFeed, COOKIE, PUSH_TOPICS, ALERT_EMAIL});

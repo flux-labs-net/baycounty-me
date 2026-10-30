@@ -68,7 +68,7 @@ struct BoardView: View {
             .padding(16)
         }
         .background(Brand.canvas)
-        .navigationTitle(store.workspace?.name ?? "Board")
+        .navigationTitle(Staff.short(store.workspace?.name) ?? "Board")
         .navigationBarTitleDisplayMode(.inline)
         .refreshable { await store.refresh() }
     }

@@ -87,7 +87,7 @@ struct AlertDetailView: View {
             }
             Section("Details") {
                 LabeledContent("Kind", value: store.alertKinds[alert.kind] ?? alert.kind)
-                LabeledContent("Reaches", value: alert.countywide ? "All of Bay County" : (store.workspace?.name ?? ""))
+                LabeledContent("Reaches", value: alert.countywide ? "All of Bay County" : Staff.short(store.workspace?.name ?? ""))
                 LabeledContent("Severity", value: Staff.severities.first { $0.key == alert.severity }?.label ?? "Severe")
                 LabeledContent("Written by", value: alert.createdBy)
                 if let c = alert.confirmedBy { LabeledContent("Confirmed by", value: c) }
@@ -208,7 +208,7 @@ struct SendAlertView: View {
             }
             .task(id: "\(kind)|\(countywide)") { reach = await store.reach(kind: kind, countywide: countywide) }
             .confirmationDialog(countywide ? "Save this countywide alert?" : "Send this alert now?", isPresented: $review, titleVisibility: .visible) {
-                Button(countywide ? "Save for a second person" : "Send to \(store.workspace?.name ?? "your city")", role: .destructive, action: send)
+                Button(countywide ? "Save for a second person" : "Send to \(Staff.short(store.workspace?.name) ?? "your city")", role: .destructive, action: send)
                 Button("Keep editing", role: .cancel) {}
             } message: {
                 Text("\(title)\n\n\(reach?.sentence ?? "")" + (pins.isEmpty ? "" : "\n\nThe map shows with it."))

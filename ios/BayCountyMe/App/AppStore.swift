@@ -76,6 +76,7 @@ final class AppStore {
                 if let home { UserDefaults.standard.set(try JSONEncoder().encode(home), forKey: "home") }
                 else { UserDefaults.standard.removeObject(forKey: "home") }
             } catch {}
+            WatchSync.shared.update(home)
         }
     }
 

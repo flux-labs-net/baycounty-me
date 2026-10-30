@@ -120,6 +120,7 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
 
     fun saveHome(m: AddressMatch?) {
         home = m
+        WatchSync.send(app, m)
         prefs.edit().apply {
             if (m == null) remove("home")
             else putString("home", BCJson.encodeToString(SavedHome.serializer(), SavedHome(m.address, m.unit, m.community, m.zip, m.renum, m.point.x, m.point.y)))
