@@ -87,3 +87,50 @@ final class StaffTests: XCTestCase {
         XCTAssertEqual(Staff.hoursLabel(6), "6 hours")
     }
 }
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
+/// Answers /api/gov the way the real server does: verify gives only the token, me gives the account.
+final class StaffServerStub: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+    override func startLoading() {
+        let action = URLComponents(url: request.url!, resolvingAgainstBaseURL: false)?.queryItems?.first { $0.name == "action" }?.value
+        let body: String
+        switch action {
+        case "verify": body = #"{"ok":true,"email":"owner@example.gov","expires_in_days":14,"token":"bcmg_test"}"#
+        case "me":
+            body = request.value(forHTTPHeaderField: "Authorization") == "Bearer bcmg_test"
+                ? #"{"email":"owner@example.gov","admin":true,"workspaces":[{"id":"lh","name":"City of Lynn Haven","countywide":false,"role":"owner"}],"alert_kinds":{},"notice_kinds":{}}"#
+                : #"{"error":"Sign in first."}"#
+        default: body = #"{"error":"unexpected"}"#
+        }
+        let resp = HTTPURLResponse(url: request.url!, statusCode: body.contains("error") ? 401 : 200, httpVersion: nil, headerFields: ["Content-Type": "application/json"])!
+        client?.urlProtocol(self, didReceive: resp, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocol(self, didLoad: Data(body.utf8))
+        client?.urlProtocolDidFinishLoading(self)
+    }
+    override func stopLoading() {}
+}
+
+final class StaffSignInTests: XCTestCase {
+    func testVerifyLoadsTheAccountAfterTheToken() async throws {
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [StaffServerStub.self]
+        let client = StaffClient(token: nil, session: URLSession(configuration: config))
+        let me = try await client.verify(email: "owner@example.gov", code: "123456")
+        XCTAssertEqual(client.token, "bcmg_test")
+        XCTAssertEqual(me.token, "bcmg_test")
+        XCTAssertTrue(me.admin)
+        XCTAssertEqual(me.workspaces.first?.id, "lh")
+    }
+
+    func testReadsBigintIdsSentAsStrings() throws {
+        let posts = try StaffPosts.decode(Data(#"{"kind":"notice","posts":[],"from_records":[{"id":"1","notice_id":"pn:1","title":"From the notice site","kind":null,"published":"2026-10-01","editable":false}]}"#.utf8))
+        XCTAssertEqual(posts.fromRecords.first?.id, 1)
+        let alerts = try StaffAlerts.decode(Data(#"{"alerts":[{"id":"42","kind":"road","title":"Hwy 390","message":"Closed","countywide":false,"status":"sent","created_by":"a@example.gov","created_at":"2026-10-30T12:00:00Z"}]}"#.utf8))
+        XCTAssertEqual(alerts.alerts.first?.id, 42)
+    }
+}

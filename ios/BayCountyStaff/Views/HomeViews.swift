@@ -5,21 +5,30 @@ import BayCountyKit
 /// either way, so the form can't be used to find out who has access.
 struct SignInView: View {
     @Environment(StaffStore.self) private var store
-    @State private var email = ""
+    @State private var email: String
     @State private var code = ""
-    @State private var sent = false
+    @State private var sent: Bool
     @State private var busy = false
+    @State private var resent = false
     @FocusState private var focus: Bool
+
+    /// `codeSentTo` opens on the code step (screenshots).
+    init(codeSentTo: String? = nil) {
+        _email = State(initialValue: codeSentTo ?? "")
+        _sent = State(initialValue: codeSentTo != nil)
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Image("AppMark").resizable().scaledToFit().frame(width: 56, height: 56)
-                    .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous).strokeBorder(Brand.hairline))
-                    .accessibilityHidden(true)
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("BayCounty.me Staff").font(.largeTitle.weight(.bold))
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 14) {
+                        Image("AppMark").resizable().scaledToFit().frame(width: 48, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Brand.hairline))
+                            .accessibilityHidden(true)
+                        Text("BayCounty.me Staff").font(.title.weight(.bold)).minimumScaleFactor(0.8).lineLimit(1)
+                    }
                     Text("For city and county staff. Send alerts, post notices and flag data for your government.")
                         .font(.subheadline).foregroundStyle(.secondary)
                 }
@@ -41,13 +50,17 @@ struct SignInView: View {
                             .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("Done") { focus = false } } }
                         Button(action: verify) { Text(busy ? "Checking…" : "Sign in").frame(maxWidth: .infinity) }
                             .buttonStyle(PrimaryButton()).disabled(busy || code.filter(\.isNumber).count != 6)
-                        Button("Use a different email") { sent = false; code = ""; store.error = nil }.font(.subheadline)
+                        if resent { Text("New code sent. Use the newest email; older codes stop working.").font(.footnote).foregroundStyle(.secondary) }
+                        HStack {
+                            Button("Send a new code", action: resend).disabled(busy)
+                            Spacer()
+                            Button("Use a different email") { sent = false; resent = false; code = ""; store.error = nil }
+                        }
+                        .font(.subheadline)
                     }
                     ErrorLine(text: store.error)
                 }
                 .padding(16).card()
-                Text("Staff never change numbers that came from public records. If something is wrong, flag it and we check it against the source.")
-                    .font(.footnote).foregroundStyle(.secondary)
             }
             .padding(20)
             .padding(.top, 30)
@@ -60,6 +73,11 @@ struct SignInView: View {
         guard !busy else { return }
         busy = true
         Task { sent = await store.login(email: email.trimmingCharacters(in: .whitespaces)); busy = false; if sent { focus = true } }
+    }
+    private func resend() {
+        guard !busy else { return }
+        busy = true; code = ""; store.error = nil
+        Task { resent = await store.login(email: email.trimmingCharacters(in: .whitespaces)); busy = false; focus = true }
     }
     private func verify() {
         busy = true

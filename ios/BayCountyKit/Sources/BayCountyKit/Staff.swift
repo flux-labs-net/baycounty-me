@@ -71,6 +71,20 @@ extension ISO8601DateFormatter {
     static let day: ISO8601DateFormatter = { let f = ISO8601DateFormatter(); f.formatOptions = [.withFullDate]; return f }()
 }
 
+/// Database ids are bigints, which the server sends as strings ("12"); older answers and the demo file use numbers.
+@propertyWrapper
+public struct RecordID: Decodable, Hashable, Sendable {
+    public var wrappedValue: Int
+    public init(wrappedValue: Int) { self.wrappedValue = wrappedValue }
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.singleValueContainer()
+        if let n = try? c.decode(Int.self) { wrappedValue = n; return }
+        let s = try c.decode(String.self)
+        guard let n = Int(s) else { throw DecodingError.dataCorruptedError(in: c, debugDescription: "Not a record id: \(s)") }
+        wrappedValue = n
+    }
+}
+
 public struct StaffWorkspace: Decodable, Hashable, Sendable, Identifiable {
     public let id: String
     public let name: String
@@ -88,7 +102,7 @@ public struct StaffMe: Decodable, Sendable {
     public let alertKinds: [String: String]?
     public let noticeKinds: [String: String]?
     /// Only in the answer to a sign-in from the app.
-    public let token: String?
+    public var token: String?
     public static func decode(_ data: Data) throws -> StaffMe { try Staff.decoder().decode(StaffMe.self, from: data) }
 }
 
@@ -125,7 +139,7 @@ public struct StaffHome: Decodable, Sendable {
 }
 
 public struct StaffAlert: Decodable, Hashable, Sendable, Identifiable {
-    public let id: Int
+    @RecordID public var id: Int
     public let kind: String
     public let title: String
     public let message: String
@@ -183,7 +197,7 @@ public struct StaffReach: Decodable, Sendable, Equatable {
 }
 
 public struct StaffPost: Decodable, Hashable, Sendable, Identifiable {
-    public let id: Int
+    @RecordID public var id: Int
     public let title: String
     public let kind: String?
     public let kindLabel: String?
@@ -203,7 +217,7 @@ public struct StaffPosts: Decodable, Sendable {
 }
 
 public struct StaffFlag: Decodable, Hashable, Sendable, Identifiable {
-    public let id: Int
+    @RecordID public var id: Int
     public let email: String
     public let dataset: String
     public let recordLabel: String?
@@ -392,9 +406,14 @@ public final class StaffClient: @unchecked Sendable {
 
     public func login(email: String) async throws -> String { message(try await call("login", ["email": email])) }
     public func verify(email: String, code: String) async throws -> StaffMe {
-        let me = try StaffMe.decode(try await call("verify", ["email": email, "code": code, "client": "app"]))
-        token = me.token
-        return me
+        // The verify answer carries only the token, so the account (workspaces, admin) comes from `me` right after.
+        struct Signed: Decodable { let token: String? }
+        let signed = try Staff.decoder().decode(Signed.self, from: try await call("verify", ["email": email, "code": code, "client": "app"]))
+        guard let t = signed.token else { throw StaffError.server("Sign-in didn't return a session. Try again.", 500) }
+        token = t
+        var account = try await self.me()
+        account.token = t
+        return account
     }
     public func me() async throws -> StaffMe { try StaffMe.decode(try await call("me")) }
     public func logout() async { _ = try? await call("logout", [:]); token = nil }

@@ -213,9 +213,22 @@ MENU_JS = '''(() => {
   // saved. Fetched once per page. Every address lookup (trash day, evacuation zone, schools, ballot, the address
   // report) starts from it instead of asking for an address.
   let homeP = null;
-  window.BCHome = () => homeP || (homeP = !/(?:^|; )bcm_in=1/.test(document.cookie) ? Promise.resolve(null)
+  const signedIn = /(?:^|; )bcm_in=1/.test(document.cookie), HG = 'bcm-home-gov';
+  const GOVN = {county: 'Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+  const keepCity = h => { try { if (h && GOVN[h.gov_id]) localStorage.setItem(HG, h.gov_id); else localStorage.removeItem(HG); } catch (e) {} return h; };
+  window.BCHome = () => homeP || (homeP = !signedIn ? Promise.resolve(keepCity(null))
     : fetch('/api/account?action=me', {credentials: 'same-origin'}).then(r => r.ok ? r.json() : null)
-      .then(m => (m && m.home && m.home.address ? m.home : null), () => null));
+      .then(m => keepCity(m && m.home && m.home.address ? m.home : null), () => null));
+  // The saved home's city, known before /api/account answers (kept on this browser by BCHome, cleared when signed
+  // out): {gov: 'lh', name: 'Lynn Haven', town: 'Lynn Haven'}. Outside city limits gov is 'county' and town is null
+  // (no one town), so town lists start on the whole county. Pages start on it instead of a default city.
+  window.BCHomeCity = () => {
+    let g = null;
+    try { if (signedIn) g = localStorage.getItem(HG); else localStorage.removeItem(HG); } catch (e) {}
+    return g && GOVN[g] ? {gov: g, name: g === 'county' ? 'unincorporated Bay County' : GOVN[g], town: g === 'county' ? null : GOVN[g]} : null;
+  };
+  // Refresh it once per page; a page that needs the answer waits on BCHome().then(BCHomeCity).
+  window.BCHome();
   // A saved home's street and unit as people type them ("825 Ohio Ave #2"), without the ZIP.
   window.BCHomeStreet = h => String(h.address || '').replace(/\\s+\\d{5}(-\\d{4})?$/, '').trim().toLowerCase()
     .replace(/\\b([a-z])/g, c => c.toUpperCase()).replace(/\\b(Ne|Nw|Se|Sw|Us|Cr|Sr)\\b/g, c => c.toUpperCase());

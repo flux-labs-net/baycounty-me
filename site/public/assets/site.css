@@ -768,7 +768,7 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
 .ev-c.t-navy{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
 .ev-c.t-teal{background:color-mix(in srgb,var(--teal) 16%,transparent);color:var(--teal)}
 .ev-c.t-amber{background:color-mix(in srgb,var(--gold) 22%,transparent);color:var(--ink)}
-.ev-none{color:var(--muted);font-size:.9rem;padding:8px 0;list-style:none}
+.ev-none{color:var(--muted);font-size:.9rem;padding:8px 0;list-style:none}.ev-other{color:var(--ink);font-weight:500}.he-soon .ev-other{grid-column:1/-1;margin:0}
 .h-events .chips{margin-bottom:16px}
 .he-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px;align-items:start}
 .he-more{font-size:.88rem;font-weight:600;text-decoration:none}

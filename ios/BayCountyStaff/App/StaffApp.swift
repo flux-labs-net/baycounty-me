@@ -4,7 +4,7 @@ import BayCountyKit
 
 /// BayCounty.me Staff: the government workspace on a phone, for city and county staff and the site owner.
 /// Launch arguments for screenshots: -demo (made-up data), -asStaff (a city alert sender instead of the owner),
-/// -workspace lh (open one government), -screen overview|home|alerts|send|notices|notice|flags|flag|more|records|send-file|send-file-preview|signin|locked.
+/// -workspace lh (open one government), -screen overview|home|alerts|send|notices|notice|flags|flag|more|records|send-file|send-file-preview|signin|signin-code|locked.
 @main
 struct BayCountyStaffApp: App {
     @State private var store = StaffStore.shared
@@ -16,6 +16,8 @@ struct BayCountyStaffApp: App {
             Group {
                 if !store.signedIn || Launch.screen == "signin" {
                     SignInView()
+                } else if Launch.screen == "signin-code" {
+                    SignInView(codeSentTo: "clerk@example.gov")
                 } else if store.me == nil {
                     LoadingView()
                 } else if lock.locked || Launch.screen == "locked" {

@@ -246,7 +246,11 @@
       document.querySelectorAll(sel).forEach(t => t.hidden = t.dataset[attr] !== b.dataset.v);
       if (id === 'psTown') try { localStorage.setItem('ps-town', b.dataset.v); } catch (_) {} }); };
   pick('psTown', '.ps-town', 'g'); pick('psTrendPick', '.ps-trend,.ps-solved', 'o');
-  try { const t = localStorage.getItem('ps-town'); const b = t && document.querySelector(`#psTown button[data-v="${t}"]`); if (b) b.click(); } catch (_) {}
+  // a signed-in reader starts on their home's town, others on the town they last picked
+  const start = () => { let t = null; try { t = localStorage.getItem('ps-town'); } catch (_) {}
+    const h = window.BCHomeCity && window.BCHomeCity(); if (h) t = h.gov;
+    const b = t && document.querySelector(`#psTown button[data-v="${t}"]`); if (b) b.click(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 </script>
 </main>

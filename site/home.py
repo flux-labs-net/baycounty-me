@@ -186,6 +186,14 @@ def _today():
         meet = card('/meetings', 'calendar', 'blue', 'Next meeting · ' + when, html.escape(boards.get(m0['board'], {}).get('name') or m0['board']))
     else:
         meet = card('/meetings', 'calendar', 'blue', 'Meetings', 'When every board meets, with agendas')
+    # each government's next few meetings, so a signed-in resident's card shows their own government's (home.js)
+    per = {}
+    for m in up:
+        g = boards.get(m['board'], {}).get('gov') or 'county'
+        if len(per.setdefault(g, [])) < 3:
+            per[g].append([m['start'][:16], boards.get(m['board'], {}).get('name') or m['board']])
+    if up:
+        meet = meet.replace('<a class="h-td" href="/meetings">', f'<a class="h-td" href="/meetings" id="hMeet" data-next="{html.escape(json.dumps(per, separators=(",", ":")))}">', 1)
     trash = (f'<a class="h-td" id="hTrash" href="/utilities" hidden>{ico('trash', 'teal')}<span><b id="hTrashT"></b>'
              f'<span id="hTrashS"></span></span></a>')
     return trash + beach + alerts + meet

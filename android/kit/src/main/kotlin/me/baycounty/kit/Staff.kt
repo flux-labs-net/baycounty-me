@@ -2,7 +2,15 @@ package me.baycounty.kit
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
@@ -114,7 +122,7 @@ data class StaffHome(val role: String, val counts: Counts, val activity: List<St
 
 @Serializable
 data class StaffAlert(
-    val id: Int, val kind: String, val title: String, val message: String, val instruction: String? = null, val severity: String? = null,
+    @Serializable(with = RecordId::class) val id: Int, val kind: String, val title: String, val message: String, val instruction: String? = null, val severity: String? = null,
     val countywide: Boolean = false, val status: String,
     @SerialName("created_by") val createdBy: String, @SerialName("created_at") val createdAt: String,
     @SerialName("confirmed_by") val confirmedBy: String? = null, @SerialName("sent_at") val sentAt: String? = null,
@@ -156,7 +164,7 @@ data class StaffReach(val topic: String? = null, val phones: Int? = null, val em
 
 @Serializable
 data class StaffPost(
-    val id: Int, val title: String, val kind: String? = null, @SerialName("kind_label") val kindLabel: String? = null,
+    @Serializable(with = RecordId::class) val id: Int, val title: String, val kind: String? = null, @SerialName("kind_label") val kindLabel: String? = null,
     val published: String? = null, @SerialName("event_date") val eventDate: String? = null, val text: String? = null,
     @SerialName("pdf_url") val pdfUrl: String? = null, val geometry: String? = null, val editable: Boolean = false,
 )
@@ -166,7 +174,7 @@ data class StaffPosts(val kind: String, val posts: List<StaffPost> = emptyList()
 
 @Serializable
 data class StaffFlag(
-    val id: Int, val email: String, val dataset: String,
+    @Serializable(with = RecordId::class) val id: Int, val email: String, val dataset: String,
     @SerialName("record_label") val recordLabel: String? = null, val field: String? = null,
     @SerialName("shown_value") val shownValue: String? = null, @SerialName("correct_value") val correctValue: String? = null,
     @SerialName("evidence_url") val evidenceUrl: String? = null, val note: String? = null, val status: String,
@@ -295,9 +303,10 @@ class StaffClient(var token: String?, private val baseURL: String = BayCountyCli
 
     suspend fun login(email: String): String = message(call("login", body = buildJsonObject { put("email", email) }))
     suspend fun verify(email: String, code: String): StaffMe {
-        val me: StaffMe = decode(call("verify", body = buildJsonObject { put("email", email); put("code", code); put("client", "app") }))
-        token = me.token
-        return me
+        // The verify answer carries only the token, so the account (workspaces, admin) comes from `me` right after.
+        val signed: StaffMe = decode(call("verify", body = buildJsonObject { put("email", email); put("code", code); put("client", "app") }))
+        token = signed.token ?: throw StaffError.Server("Sign-in didn't return a session. Try again.", 500)
+        return me().copy(token = token)
     }
     suspend fun me(): StaffMe = decode(call("me"))
     suspend fun logout() { runCatching { call("logout", body = JsonObject(emptyMap())) }; token = null }
@@ -339,4 +348,14 @@ class StaffClient(var token: String?, private val baseURL: String = BayCountyCli
         }))
     suspend fun publishRecords(ws: String, id: String): String = message(call("submit-confirm", body = buildJsonObject { put("workspace", ws); put("id", id) }))
     suspend fun withdrawRecords(ws: String, id: String) { call("submit-withdraw", body = buildJsonObject { put("workspace", ws); put("id", id) }) }
+}
+
+/** Database ids are bigints, which the server sends as strings ("12"); older answers and the demo file use numbers. */
+object RecordId : KSerializer<Int> {
+    override val descriptor = PrimitiveSerialDescriptor("RecordId", PrimitiveKind.INT)
+    override fun deserialize(decoder: Decoder): Int {
+        val p = (decoder as? JsonDecoder)?.decodeJsonElement()?.jsonPrimitive ?: return decoder.decodeInt()
+        return p.intOrNull ?: p.content.toIntOrNull() ?: throw IllegalArgumentException("Not a record id: ${p.content}")
+    }
+    override fun serialize(encoder: Encoder, value: Int) = encoder.encodeInt(value)
 }
