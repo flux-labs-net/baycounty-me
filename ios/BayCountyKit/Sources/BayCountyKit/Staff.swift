@@ -51,6 +51,12 @@ public enum Staff {
     public static func decoder() -> JSONDecoder { let d = JSONDecoder(); d.keyDecodingStrategy = .convertFromSnakeCase; return d }
 
     /// "Nov 1, 9:05 AM" in Bay County time, for server timestamps; plain dates ("2026-11-01") as "Nov 1, 2026".
+    /// Government names as staff say them: "City of Panama City" -> "Panama City". Other names stay whole.
+    public static func short(_ name: String) -> String {
+        name.hasPrefix("City of ") ? String(name.dropFirst("City of ".count)) : name
+    }
+    public static func short(_ name: String?) -> String? { name.map { short($0) } }
+
     public static func when(_ s: String?) -> String {
         guard let s, !s.isEmpty else { return "" }
         let f = DateFormatter(); f.locale = Locale(identifier: "en_US_POSIX"); f.timeZone = TimeZone(identifier: "America/Chicago")
