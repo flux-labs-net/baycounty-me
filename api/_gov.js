@@ -8,7 +8,7 @@
 //  * Record data (budgets, officials, rates, projects, anything the site read from a public record): read-only.
 //    The only action is a flag (gov.flags), which BayCounty.me checks against the source and answers in /admin.
 const crypto = require('crypto');
-const {session: adminSession} = require('./_session');
+const {session: adminSession, admins} = require('./_session');
 
 const ROLES = {viewer: 1, auditor: 1, publisher: 2, alert_sender: 3, owner: 4};
 const CAN = {read: 1, publish: 2, alert: 3, manage: 4};
@@ -84,7 +84,10 @@ async function caller(req, q) {
   const unsafe = req.method !== 'GET' && req.method !== 'HEAD';
   const fromToken = async tok => {
     const rows = await q(`update gov.sessions set last_seen_at = now() where token_hash = $1 and revoked_at is null and expires_at > now() returning email`, [sha(tok)]);
-    return rows.length ? {email: normEmail(rows[0].email), via: 'session', token: tok} : null;
+    if (!rows.length) return null;
+    const email = normEmail(rows[0].email);
+    // A BayCounty.me admin (ADMIN_EMAILS) signed in with an emailed code, e.g. in the staff app: owner everywhere.
+    return {email, via: 'session', token: tok, ...(admins().includes(email) ? {admin: true} : {})};
   };
   if (/^Bearer\s+bcmg_\S+/i.test(auth)) return fromToken(auth.replace(/^Bearer\s+/i, '').trim());
   const csrf = unsafe && h['x-bcm-gov'] !== '1' && h['x-bcm-admin'] !== '1';
@@ -157,7 +160,7 @@ async function startLogin(q, req, body, sendEmail) {
   const {limited, ipHash} = ipLimited(req);
   if (limited) throw bad('Too many sign-in attempts. Try again in a few minutes.', 429);
   const [m] = await q('select 1 from gov.members where lower(email) = $1 limit 1', [email]);
-  if (!m) return same;
+  if (!m && !admins().includes(email)) return same;
   const [{n}] = await q(`select count(*)::int n from gov.login_codes where lower(email) = $1 and created_at > now() - interval '15 minutes'`, [email]);
   if (n >= 3) return same;
   const code = String(crypto.randomInt(0, 1e6)).padStart(6, '0');
@@ -205,7 +208,9 @@ const JOB_TYPES = ['Full time', 'Part time', 'Seasonal', 'Temporary', 'Volunteer
 const POSTS = {
   notice: {table: 'public_notices', id: 'notice_id', order: 'published desc nulls last', dateCol: 'published',
     clean: b => {
-      const kind = NOTICE_KINDS[b.kind] ? b.kind : 'other';
+      // The request's own `kind` names the post kind ("notice"), so the notice type comes as notice_kind.
+      const nk = b.notice_kind != null ? b.notice_kind : b.kind;
+      const kind = NOTICE_KINDS[nk] ? nk : 'other';
       const title = txt(b.title, 200), text = txt(b.text, 20000);
       if (!title) throw bad('Give the notice a title.');
       if (!text) throw bad('Paste the notice text.');
@@ -413,6 +418,23 @@ async function adminOverview(q) {
   return {workspaces, members, roles: ROLE_LABEL};
 }
 
+// The owner's home in the staff app: every workspace with what needs attention, plus totals.
+async function ownerOverview(q) {
+  const workspaces = await q(`select w.id, w.name, w.countywide,
+      (select count(*)::int from gov.members m where m.workspace_id = w.id) members,
+      (select max(at) from gov.activity a where a.workspace_id = w.id) last_activity,
+      (select count(*)::int from gov.alerts a where a.workspace_id = w.id and a.status = 'sent' and (a.ends_at is null or a.ends_at > now())) live_alerts,
+      (select count(*)::int from gov.alerts a where a.workspace_id = w.id and a.status = 'pending') waiting_alerts,
+      (select count(*)::int from gov.flags f where f.workspace_id = w.id and f.status = 'open') open_flags,
+      (select count(*)::int from public_notices n where n.origin = 'gov' and n.gov_id = w.id) notices
+    from gov.workspaces w order by w.countywide desc, w.name`);
+  const sum = k => workspaces.reduce((n, w) => n + (w[k] || 0), 0);
+  const activity = await q(`select a.workspace_id, w.name gov_name, a.email, a.action, a.detail, a.at from gov.activity a
+      join gov.workspaces w on w.id = a.workspace_id order by a.at desc limit 25`);
+  return {totals: {workspaces: workspaces.length, members: sum('members'), live_alerts: sum('live_alerts'), waiting_alerts: sum('waiting_alerts'),
+    open_flags: sum('open_flags'), notices: sum('notices')}, workspaces, activity};
+}
+
 async function adminFlags(q, status = 'open') {
   const st = ['open', 'fixed', 'not_changed', 'all'].includes(status) ? status : 'open';
   return {flags: await q(`select f.*, w.name gov_name from gov.flags f join gov.workspaces w on w.id = f.workspace_id
@@ -446,4 +468,4 @@ async function setMember(q, ws, b, by) {
 module.exports = {ROLES, CAN, ROLE_LABEL, COOKIE, COUNTYWIDE, NOTICE_KINDS, JOB_TYPES, ALERT_KINDS, RECORDS, POSTS, TOPIC_OF,
   caller, workspacesFor, requireRole, log, startLogin, finishLogin, logout, codeEmail,
   areaShape, listPosts, savePost, withdrawPost, createAlert, confirmAlert, endAlert, reach, liveNotices, records, addFlag, publicPosts,
-  adminOverview, adminFlags, adminFlagReview, setMember};
+  adminOverview, ownerOverview, adminFlags, adminFlagReview, setMember};

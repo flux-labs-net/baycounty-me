@@ -1,0 +1,71 @@
+{
+  "me": {
+    "email": "owner@example.com",
+    "admin": true,
+    "workspaces": [
+      {"id": "county", "name": "Bay County", "countywide": true, "role": "owner"},
+      {"id": "cw", "name": "City of Callaway", "countywide": false, "role": "owner"},
+      {"id": "lh", "name": "City of Lynn Haven", "countywide": false, "role": "owner"},
+      {"id": "mb", "name": "City of Mexico Beach", "countywide": false, "role": "owner"},
+      {"id": "pc", "name": "City of Panama City", "countywide": false, "role": "owner"},
+      {"id": "pcb", "name": "City of Panama City Beach", "countywide": false, "role": "owner"},
+      {"id": "parker", "name": "City of Parker", "countywide": false, "role": "owner"},
+      {"id": "sp", "name": "City of Springfield", "countywide": false, "role": "owner"}
+    ],
+    "alert_kinds": {"evacuation": "Evacuation order", "shelter": "Shelter open", "boil-water": "Boil-water notice", "road": "Road fully closed", "safety": "Public safety (police, fire, hazmat)", "general": "General update (closures, sandbags, debris)"},
+    "notice_kinds": {"meeting": "Public meeting", "hearing": "Public hearing or ordinance", "bid": "Bid or proposal request", "utility": "Water, sewer or utility work", "road": "Road or street work", "other": "Other notice"}
+  },
+  "overview": {
+    "totals": {"workspaces": 8, "members": 14, "live_alerts": 2, "waiting_alerts": 1, "open_flags": 3, "notices": 9},
+    "workspaces": [
+      {"id": "county", "name": "Bay County", "countywide": true, "members": 4, "last_activity": "2026-10-30T14:12:00Z", "live_alerts": 0, "waiting_alerts": 1, "open_flags": 1, "notices": 2},
+      {"id": "cw", "name": "City of Callaway", "countywide": false, "members": 1, "last_activity": "2026-10-27T15:40:00Z", "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0},
+      {"id": "lh", "name": "City of Lynn Haven", "countywide": false, "members": 4, "last_activity": "2026-10-30T13:05:00Z", "live_alerts": 1, "waiting_alerts": 0, "open_flags": 1, "notices": 4},
+      {"id": "mb", "name": "City of Mexico Beach", "countywide": false, "members": 1, "last_activity": null, "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0},
+      {"id": "pc", "name": "City of Panama City", "countywide": false, "members": 2, "last_activity": "2026-10-29T19:22:00Z", "live_alerts": 1, "waiting_alerts": 0, "open_flags": 1, "notices": 2},
+      {"id": "pcb", "name": "City of Panama City Beach", "countywide": false, "members": 1, "last_activity": "2026-10-28T16:00:00Z", "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 1},
+      {"id": "parker", "name": "City of Parker", "countywide": false, "members": 0, "last_activity": null, "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0},
+      {"id": "sp", "name": "City of Springfield", "countywide": false, "members": 1, "last_activity": "2026-10-26T13:30:00Z", "live_alerts": 0, "waiting_alerts": 0, "open_flags": 0, "notices": 0}
+    ],
+    "activity": [
+      {"workspace_id": "county", "gov_name": "Bay County", "email": "em.desk@example.gov", "action": "alert_drafted", "detail": {"title": "Sandbag sites open Saturday"}, "at": "2026-10-30T14:12:00Z"},
+      {"workspace_id": "lh", "gov_name": "City of Lynn Haven", "email": "utilities@example.gov", "action": "alert_sent", "detail": {"title": "Boil water: Ohio Ave, 5th to 9th St"}, "at": "2026-10-30T13:05:00Z"},
+      {"workspace_id": "pc", "gov_name": "City of Panama City", "email": "clerk@example.gov", "action": "notice_posted", "detail": {"title": "Public hearing on the 2027 budget"}, "at": "2026-10-29T19:22:00Z"},
+      {"workspace_id": "lh", "gov_name": "City of Lynn Haven", "email": "finance@example.gov", "action": "data_flagged", "detail": {"dataset": "budget-years"}, "at": "2026-10-29T15:48:00Z"}
+    ]
+  },
+  "home": {
+    "role": "owner",
+    "counts": {"notices": 4, "events": 2, "jobs": 3, "live_alerts": 1, "waiting_alerts": 0, "open_flags": 1, "members": 4},
+    "activity": [
+      {"email": "utilities@example.gov", "action": "alert_sent", "detail": {"title": "Boil water: Ohio Ave, 5th to 9th St"}, "at": "2026-10-30T13:05:00Z"},
+      {"email": "finance@example.gov", "action": "data_flagged", "detail": {"dataset": "budget-years"}, "at": "2026-10-29T15:48:00Z"},
+      {"email": "clerk@example.gov", "action": "notice_posted", "detail": {"title": "Planning board: rezoning on Hwy 77"}, "at": "2026-10-28T20:10:00Z"},
+      {"email": "clerk@example.gov", "action": "signed_in", "detail": {}, "at": "2026-10-28T20:02:00Z"}
+    ]
+  },
+  "alerts": {
+    "countywide": false,
+    "alerts": [
+      {"id": 41, "kind": "boil-water", "title": "Boil water: Ohio Ave, 5th to 9th St", "message": "A water main broke on Ohio Ave. Crews are repairing it now. Pressure may be low.", "instruction": "Boil water for one minute before drinking or cooking until we lift this notice.", "severity": "moderate", "countywide": false, "status": "sent", "created_by": "utilities@example.gov", "created_at": "2026-10-30T13:05:00Z", "confirmed_by": null, "sent_at": "2026-10-30T13:05:00Z", "ends_at": "2026-11-01T13:05:00Z", "live": true, "geometry": null},
+      {"id": 37, "kind": "road", "title": "Hwy 390 closed at the bridge", "message": "Both lanes closed for an inspection.", "instruction": "Use Hwy 77 instead.", "severity": "minor", "countywide": false, "status": "ended", "created_by": "pw@example.gov", "created_at": "2026-10-24T11:00:00Z", "confirmed_by": null, "sent_at": "2026-10-24T11:00:00Z", "ends_at": "2026-10-24T17:00:00Z", "live": false, "geometry": null}
+    ]
+  },
+  "notices": {
+    "kind": "notice",
+    "posts": [
+      {"id": 9001, "title": "Planning board: rezoning on Hwy 77", "kind": "hearing", "kind_label": "Public hearing or ordinance", "published": "2026-10-28", "event_date": "2026-11-12", "text": "The planning board will hear a request to rezone 4.2 acres on Hwy 77 from residential to commercial.", "pdf_url": null, "geometry": null, "editable": true},
+      {"id": 9000, "title": "Water main work on 5th St", "kind": "utility", "kind_label": "Water, sewer or utility work", "published": "2026-10-21", "event_date": null, "text": "Crews will replace a water main on 5th St between Ohio Ave and Virginia Ave.", "pdf_url": null, "geometry": null, "editable": true}
+    ],
+    "from_records": [
+      {"id": 120, "title": "Notice of city commission meeting", "kind": "meeting", "kind_label": "Public meeting", "published": "2026-10-20", "event_date": "2026-11-10", "text": "Regular meeting of the city commission.", "pdf_url": null, "geometry": null, "editable": false}
+    ]
+  },
+  "flags": {
+    "flags": [
+      {"id": 12, "workspace_id": "lh", "gov_name": "City of Lynn Haven", "email": "finance@example.gov", "dataset": "budget-years", "record_label": "General Fund, 2026", "field": "amount", "shown_value": "21,500,000", "correct_value": "21,850,000", "evidence_url": "https://example.gov/budget-2026.pdf", "note": "The amended budget raised the General Fund in March.", "status": "open", "reply": null, "created_at": "2026-10-29T15:48:00Z"},
+      {"id": 9, "workspace_id": "pc", "gov_name": "City of Panama City", "email": "clerk@example.gov", "dataset": "trash-pickup", "record_label": "Zone C", "field": "days", "shown_value": "Tuesday", "correct_value": "Wednesday", "evidence_url": null, "note": null, "status": "open", "reply": null, "created_at": "2026-10-28T13:10:00Z"},
+      {"id": 4, "workspace_id": "county", "gov_name": "Bay County", "email": "em.desk@example.gov", "dataset": "parks", "record_label": "Frank Brown Park", "field": "hours", "shown_value": "6 am to 9 pm", "correct_value": null, "evidence_url": null, "note": "Hours change for winter on Nov 1.", "status": "fixed", "reply": "Updated from the parks page. Thanks.", "created_at": "2026-10-22T16:00:00Z"}
+    ]
+  }
+}

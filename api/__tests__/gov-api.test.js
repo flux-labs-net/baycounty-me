@@ -98,6 +98,8 @@ test('staff post, edit and withdraw their own notices; record rows are never edi
   assert.equal(row.gov_id, 'lh');
   assert.equal(row.government_key, 'lh');
   assert.equal(row.agency, 'City of Lynn Haven');
+  const typed = await post('post', {kind: 'notice', notice_kind: 'hearing', title: 'Rezoning hearing', text: 'Hearing text'});
+  assert.equal((await q('select kind, kind_label from govtest.public_notices where id = $1', [typed.body.id]))[0].kind_label, 'Public hearing or ordinance', 'the notice type is kept');
   const e = await post('post', {kind: 'notice', id: p.body.id, title: 'Public hearing on Ordinance 1201 (moved)', text: 'New date.'});
   assert.equal(e.status, 200);
   const [ingested] = await q(`select id from govtest.public_notices where origin = 'site_build'`);
@@ -237,4 +239,40 @@ test('staff alerts reach their own city, and everyone when countywide; general u
   assert.equal(E.reaches({...city, gov_id: 'county', area: 'All of Bay County'}, {home: {gov_id: 'pc'}}), true);
   assert.equal(E.pushTopic({...city, kind: 'general'}), 'general');
   assert.equal(require('../_emergency_run').govFilter(city), 'lh');
+});
+
+test('staff app: the site owner signs in with a code and sees every government; staff cannot', opts, async () => {
+  const old = process.env.ADMIN_EMAILS;
+  process.env.ADMIN_EMAILS = 'owner@flux.test';
+  try {
+    const real = require('../gov').createHandler({q, hasDb: () => true, caller: G.caller, sendEmail: async (to, m) => { sent.push({to, m}); }, sendNow: async () => ({})});
+    const before = sent.length;
+    await call('login', {method: 'POST', body: {email: 'owner@flux.test'}, caller: real});
+    assert.equal(sent.length, before + 1, 'an admin email gets a code without a workspace membership');
+    const code = sent[sent.length - 1].m.text.match(/\d{6}/)[0];
+    const ok = await call('verify', {method: 'POST', body: {email: 'owner@flux.test', code, client: 'app'}, caller: real});
+    assert.equal(ok.status, 200, JSON.stringify(ok.body));
+    assert.match(ok.body.token, /^bcmg_/, 'the app gets its token in the answer');
+    const authorization = 'Bearer ' + ok.body.token;
+    const me = await call('me', {headers: {authorization}, caller: real});
+    assert.equal(me.body.admin, true);
+    assert.ok(me.body.workspaces.length >= 2 && me.body.workspaces.every(w => w.role === 'owner'));
+    const ov = await call('overview', {headers: {authorization}, caller: real});
+    assert.equal(ov.status, 200, JSON.stringify(ov.body));
+    assert.ok(ov.body.workspaces.some(w => w.id === 'lh'));
+    assert.equal(typeof ov.body.totals.open_flags, 'number');
+    const flags = await call('review-flags', {headers: {authorization}, caller: real});
+    assert.equal(flags.status, 200);
+    // A bearer token needs no X-BCM-Gov header (another site can't set it).
+    const home = await call('home', {query: {workspace: 'county'}, headers: {authorization}, caller: real});
+    assert.equal(home.status, 200);
+
+    as = who('manager@lh.test');
+    assert.equal((await call('overview')).status, 403, 'a city owner only sees their own city');
+    assert.equal((await call('review-flag', {method: 'POST', body: {id: 1, status: 'fixed'}})).status, 403);
+    as = null;
+    assert.equal((await call('overview')).status, 401);
+  } finally {
+    if (old === undefined) delete process.env.ADMIN_EMAILS; else process.env.ADMIN_EMAILS = old;
+  }
 });

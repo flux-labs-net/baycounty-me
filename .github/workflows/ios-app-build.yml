@@ -24,3 +24,11 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO build | tee build.log | grep -E "error:|warning: .*(deprecated|unreachable)|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" build.log
+      - name: Build the staff app (simulator, unsigned)
+        working-directory: ios
+        run: |
+          set -o pipefail
+          xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyStaff \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tee staff.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" staff.log

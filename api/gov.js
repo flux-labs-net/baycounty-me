@@ -18,6 +18,10 @@
 //   GET  ?action=flags&workspace=lh              flags sent from this workspace and our answers
 //   GET  ?action=activity&workspace=lh           who did what (owners and auditors)
 //   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role | "remove"}   (owners)
+// BayCounty.me admins only (the site owner, in the staff app or with the admin cookie):
+//   GET  ?action=overview                        every workspace with live/waiting alerts, open flags, members; recent activity
+//   GET  ?action=review-flags&status=open        flags from every workspace (open | fixed | not_changed | all)
+//   POST ?action=review-flag {id, status, reply?}   answer a flag (fixed | not_changed | open)
 const db = require('./_db');
 const G = require('./_gov');
 const {FROM, resend} = require('./_alerts');
@@ -48,6 +52,15 @@ async function route(deps, req, res, action) {
     if (!who) throw bad('Sign in first.', 401);
     return {email: who.email, admin: Boolean(who.admin), workspaces: await G.workspacesFor(q, who), roles: G.ROLE_LABEL,
       alert_kinds: G.ALERT_KINDS, notice_kinds: G.NOTICE_KINDS, job_types: G.JOB_TYPES, records: G.RECORDS};
+  }
+  if (action === 'overview' || action === 'review-flags' || action === 'review-flag') {
+    if (!who) throw bad('Sign in first.', 401);
+    if (who.csrf) throw bad('Missing X-BCM-Gov header.', 403);
+    if (!who.admin) throw bad('Only the BayCounty.me owner can see every government.', 403);
+    if (action === 'overview') return G.ownerOverview(q);
+    if (action === 'review-flags') return G.adminFlags(q, String(Q.status || 'open'));
+    if (req.method !== 'POST') throw bad('Use POST.', 405);
+    return G.adminFlagReview(q, b, who.email);
   }
   const need = action === 'members' && req.method !== 'GET' ? 'manage' : NEED[action];
   if (!need) throw bad('Unknown action.', 404);
