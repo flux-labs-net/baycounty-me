@@ -182,10 +182,18 @@ private fun WeekendSection() {
     val nav = LocalNav.current
     val rows = store.rows[Events.DATASET] ?: return
     val today = Events.todayKey()
-    val weekend = TodayBrief.weekendEvents(rows, today)
-    val picks = weekend.ifEmpty { Events.featured(rows, today, Events.plusDays(21)).take(4) }
+    fun pick(rs: List<DataRow>): Pair<Boolean, List<DataRow>> {
+        val w = TodayBrief.weekendEvents(rs, today)
+        return if (w.isEmpty()) false to Events.featured(rs, today, Events.plusDays(21)).take(4) else true to w
+    }
+    // Signed in: the home's town first; with nothing listed there, say so and show the rest of the county.
+    val town = me.baycounty.app.Account.me?.home?.town
+    val mine = town?.let { t -> pick(rows.filter { it.string("town") == t }) }
+    val elsewhere = town != null && mine?.second?.isEmpty() == true
+    val (isWeekend, picks) = mine?.takeIf { it.second.isNotEmpty() } ?: pick(rows)
     Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SectionHeader(if (weekend.isEmpty()) "Coming up" else "This weekend", "All events") { nav.push(Route.Events) }
+        SectionHeader((if (isWeekend) "This weekend" else "Coming up") + (if (town != null && !elsewhere) " in $town" else ""), "All events") { nav.push(Route.Events) }
+        if (elsewhere) Text("Nothing listed in $town yet. Here's the rest of Bay County.", style = T.subhead, color = Brand.secondary)
         if (picks.isEmpty()) {
             Text("Nothing listed yet.", style = T.subhead, color = Brand.secondary, modifier = Modifier.fillMaxWidth().card(14.dp).padding(14.dp))
         } else {

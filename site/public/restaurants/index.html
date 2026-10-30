@@ -175,10 +175,13 @@
   function filter() {
     if (!D) return;
     const t = q.value.trim().toLowerCase(), c = city.value, yr = D.year_ago;
-    const ok = D.r.filter(r => (!t || (r[1] + ' ' + (r[13] || '') + ' ' + (r[4] || '')).toLowerCase().includes(t)) && (!c || r[3] === c) &&
+    const fit = r => (!t || (r[1] + ' ' + (r[13] || '') + ' ' + (r[4] || '')).toLowerCase().includes(t)) &&
       (show === 'follow' ? r[5] && (r[7] === 'warning' || r[7] === 'fine' || r[7] === 'closed') : show === 'closed' ? (r[10] || '') >= yr :
-       show === 'new' ? r[5] && (r[9] || '') >= yr : show === 'gone' ? !r[5] : (t ? true : r[5])));
-    box.innerHTML = ok.slice(0, N).map(row).join('') || '<li><span class="rs-r"><span class="muted">Nothing matches. Try another name or street.</span></span></li>';
+       show === 'new' ? r[5] && (r[9] || '') >= yr : show === 'gone' ? !r[5] : (t ? true : r[5]));
+    let ok = D.r.filter(r => (!c || r[3] === c) && fit(r)), note = '';
+    // a city with nothing that matches says so, then shows the rest of the county
+    if (c && !ok.length && D.r.some(fit)) { ok = D.r.filter(fit); note = `<li><span class="rs-r"><span><b>None in ${esc(c)}.</b> <span class="muted">Here's the rest of Bay County:</span></span></span></li>`; }
+    box.innerHTML = note + ok.slice(0, N).map(row).join('') || '<li><span class="rs-r"><span class="muted">Nothing matches. Try another name or street.</span></span></li>';
     cnt.textContent = `${ok.length.toLocaleString('en-US')} place${ok.length === 1 ? '' : 's'}, latest inspected first` + (ok.length > N ? `. Showing ${N}` : '');
     more.hidden = ok.length <= N;
   }
@@ -194,6 +197,10 @@
   }));
   fetch('/data/restaurants-page.json').then(r => r.json()).then(j => {
     D = j;
+    // no city picked yet: a signed-in reader starts on their home's city
+    const h = window.BCHomeCity && window.BCHomeCity();
+    if (h && h.town && !city.value && [...city.options].some(o => o.value === h.town)) city.value = h.town;
+
     const old = location.hash.match(/^#r(\d+)$/);  // old links to one restaurant on this page now go to its own page
     const hit = old && D.r.find(x => x[0] === old[1]);
     if (hit) { location.replace(hit[12]); return; }

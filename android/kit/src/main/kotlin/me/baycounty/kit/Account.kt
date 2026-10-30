@@ -141,6 +141,12 @@ data class AccountMe(
     ) {
         val subtitle: String get() = listOfNotNull(city, zip).filter { it.isNotEmpty() }.joinToString(" ")
 
+        /** The home's city as town lists name it ("Lynn Haven"); null outside city limits, where lists start on the
+         *  whole county. Same rule as window.BCHomeCity on the site. */
+        val town: String? get() = govId?.let { AccountMe.CITY_NAMES[it] }
+        /** The home's local government key (pc, lh, ... or county), for lists filtered by government. */
+        val govKey: String get() = govId?.takeIf { it in AccountMe.CITY_NAMES } ?: "county"
+
         /** The saved home as the phone's address ("825 Ohio Ave #2 32444" → street 825 OHIO AVE, unit 2), so the
          *  Today card, tax bill and trash day use the account's home on any phone the resident signs in on. Same rules
          *  as window.BCHomeLink on the site. */
@@ -175,6 +181,9 @@ data class AccountMe(
 
     companion object {
         fun decode(json: String): AccountMe = BCJson.decodeFromString(serializer(), json)
+        /** City government keys and their names (api/_nearby.js CITY_GOV). */
+        val CITY_NAMES = mapOf("pc" to "Panama City", "pcb" to "Panama City Beach", "lh" to "Lynn Haven", "cw" to "Callaway",
+            "sp" to "Springfield", "parker" to "Parker", "mb" to "Mexico Beach")
         val topicOrder = listOf("meetings", "events", "projects", "notices", "food", "business")
         val pushOrder = listOf("evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general", "agenda")
         val alertEmailOrder = listOf("evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general")

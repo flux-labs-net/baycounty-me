@@ -86,7 +86,9 @@ struct PublicSafetyView: View {
 
     private var townSection: some View {
         let towns = PublicSafety.towns(agencies)
-        let pick = towns.first { $0.id == (town ?? towns.first?.id) } ?? towns[0]
+        // Signed in: start on the home's town (its city, or the county outside city limits).
+        let start = town ?? AccountManager.shared.me?.home?.govKey
+        let pick = towns.first { $0.id == start } ?? towns[0]
         let crime = PublicSafety.townCrime(pick, crimes: crimes)
         return PageSection(title: "Your town", symbol: "mappin.and.ellipse", tone: .teal, caption: "Pick where you live") {
             VStack(alignment: .leading, spacing: 12) {

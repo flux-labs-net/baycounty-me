@@ -69,6 +69,7 @@
 <main id="main">
 <style>
 .nj-ctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:12px}
+.nj-other{margin:0 0 4px;font-size:.92rem;color:var(--muted)}.nj-other b{color:var(--ink);font-weight:600}
 .nj-ctl input[type=search],.nj-ctl select{min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;max-width:100%}
 .nj-ctl input[type=search]{flex:1 1 240px}
 .nj-list{display:flex;flex-direction:column;gap:10px}
@@ -140,20 +141,29 @@ window.NJ = {one: 'notice', many: 'notices', kindOf: r => r.k, text: r => [r.t, 
   let kind = '', open = false; const N = 25;
   const p = new URLSearchParams(location.search);
   if (p.get('q')) qi.value = p.get('q'); if (p.get('gov')) gs.value = p.get('gov');
+  // no government in the link: a signed-in reader starts on their home's (kept out of the link unless they change it)
+  let homeG = '', homeNone = '';
+  const homeStart = () => { const h = !p.has('gov') && window.BCHomeCity && window.BCHomeCity(); if (!h) return;
+    if ([...gs.options].some(o => o.value === h.gov)) gs.value = homeG = h.gov; else homeNone = h.gov === 'county' ? 'Bay County' : h.name; };
   if (p.get('kind')) { kind = p.get('kind'); chips.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === kind)); }
   function show() {
     const q = qi.value.trim().toLowerCase(), g = gs.value;
-    const rows = D.rows.filter(r => (!g || r.g === g || (g === 'other' && !r.g)) && (!kind || C.kindOf(r) === kind) && (!q || C.text(r).toLowerCase().includes(q)));
-    box.innerHTML = rows.slice(0, open ? rows.length : N).map(r => C.card(r, esc, D)).join('') || '<p class="muted">Nothing matches.</p>';
+    const fit = r => (!kind || C.kindOf(r) === kind) && (!q || C.text(r).toLowerCase().includes(q));
+    let rows = D.rows.filter(r => (!g || r.g === g || (g === 'other' && !r.g)) && fit(r)), note = '';
+    // a government with nothing that matches says so, then shows every government's
+    if (!g && homeNone && !q && !kind) note = `<p class="nj-other"><b>None from ${esc(homeNone)} right now.</b> Here are the rest in Bay County:</p>`;
+    if (g && !rows.length && D.rows.some(fit)) { note = `<p class="nj-other"><b>None from ${esc(gs.options[gs.selectedIndex].textContent)} right now.</b> Here are the rest in Bay County:</p>`; rows = D.rows.filter(fit); }
+    box.innerHTML = note + (rows.slice(0, open ? rows.length : N).map(r => C.card(r, esc, D)).join('') || '<p class="muted">Nothing matches.</p>');
     more.hidden = open || rows.length <= N; more.textContent = `Show all ${rows.length}`;
     cnt.textContent = `${rows.length} ${rows.length === 1 ? C.one : C.many}`;
-    const u = new URL(location.href); [['q', q], ['gov', g], ['kind', kind]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u);
+    const u = new URL(location.href); [['q', q], ['gov', g === homeG ? '' : g], ['kind', kind]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u);
   }
-  qi.addEventListener('input', () => { open = false; show(); }); gs.addEventListener('change', () => { open = false; show(); });
+  qi.addEventListener('input', () => { open = false; show(); }); gs.addEventListener('change', () => { open = false; homeNone = ''; show(); });
   chips.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; chips.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); kind = b.dataset.v; open = false; show(); });
   more.addEventListener('click', () => { open = true; show(); });
   // site.js (BC.longText) is deferred: draw once it has run
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show); else show();
+  const go = () => { homeStart(); show(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
 </script>
 <script src="/assets/area-map.js" defer></script>

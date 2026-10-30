@@ -211,12 +211,15 @@ struct HomeView: View {
     /// One-off events this weekend (the coming Friday to Sunday, or the rest of it), or the next few weeks when the
     /// weekend has nothing listed.
     @ViewBuilder private var weekendSection: some View {
-        let rows = store.rows[Events.dataset] ?? []
-        if !rows.isEmpty {
-            let weekend = TodayBrief.weekendEvents(rows, today: today)
-            let picks = weekend.isEmpty ? Array(Events.featured(rows, today: today, until: Events.plusDays(21)).prefix(4)) : weekend
+        let all = store.rows[Events.dataset] ?? []
+        if !all.isEmpty {
+            let w = weekendPicks(all, town: AccountManager.shared.me?.home?.town)
+            let picks = w.rows
             VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: weekend.isEmpty ? "Coming up" : "This weekend", action: "All events") { path.append(.events) }
+                SectionHeader(title: w.title, action: "All events") { path.append(.events) }
+                if let note = w.note {
+                    Text(note).font(.subheadline).foregroundStyle(.secondary)
+                }
                 if picks.isEmpty {
                     Text("Nothing listed yet.").font(.subheadline).foregroundStyle(.secondary)
                         .padding(14).frame(maxWidth: .infinity, alignment: .leading).card(14)
@@ -230,6 +233,23 @@ struct HomeView: View {
                 }
             }
         }
+    }
+
+    /// This weekend's one-off events (else the next three weeks'). Signed in: the home's town first; with nothing
+    /// listed there, a note says so and the rest of the county shows.
+    private func weekendPicks(_ all: [Row], town: String?) -> (title: String, note: String?, rows: [Row]) {
+        func pick(_ rows: [Row]) -> (weekend: Bool, rows: [Row]) {
+            let w = TodayBrief.weekendEvents(rows, today: today)
+            return w.isEmpty ? (false, Array(Events.featured(rows, today: today, until: Events.plusDays(21)).prefix(4))) : (true, w)
+        }
+        if let town {
+            let mine = pick(all.filter { $0.string("town") == town })
+            if !mine.rows.isEmpty { return ((mine.weekend ? "This weekend" : "Coming up") + " in \(town)", nil, mine.rows) }
+            let rest = pick(all)
+            return (rest.weekend ? "This weekend" : "Coming up", "Nothing listed in \(town) yet. Here's the rest of Bay County.", rest.rows)
+        }
+        let rest = pick(all)
+        return (rest.weekend ? "This weekend" : "Coming up", nil, rest.rows)
     }
 
     static let weekday: DateFormatter = { let f = DateFormatter(); f.timeZone = TimeZone(identifier: "America/Chicago"); f.dateFormat = "EEE"; return f }()

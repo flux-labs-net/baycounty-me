@@ -93,6 +93,9 @@ public struct NearbyFeed: Decodable, Sendable {
 
 /// A resident's account (api/_account.js): who they are, their saved home and what they want to hear about.
 public struct AccountMe: Decodable, Sendable {
+    /// City government keys and their names (api/_nearby.js CITY_GOV).
+    public static let cityNames = ["pc": "Panama City", "pcb": "Panama City Beach", "lh": "Lynn Haven", "cw": "Callaway",
+                                   "sp": "Springfield", "parker": "Parker", "mb": "Mexico Beach"]
     public struct User: Decodable, Sendable { public let email: String; public let firstName: String? }
     public struct Home: Decodable, Sendable, Equatable {
         public let label: String?
@@ -105,6 +108,12 @@ public struct AccountMe: Decodable, Sendable {
         public let zone: String?
         public let parcelId: String?
         public var subtitle: String { [city, zip].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " ") }
+
+        /// The home's city as town lists name it ("Lynn Haven"); nil outside city limits, where lists start on the
+        /// whole county. Same rule as window.BCHomeCity on the site.
+        public var town: String? { govId.flatMap { AccountMe.cityNames[$0] } }
+        /// The home's local government key (pc, lh, ... or county), for lists filtered by government.
+        public var govKey: String { if let g = govId, AccountMe.cityNames[g] != nil { return g }; return "county" }
 
         /// The saved home as the phone's address ("825 Ohio Ave #2 32444" → street 825 OHIO AVE, unit 2), so the
         /// Today card, tax bill and trash day use the account's home on any phone the resident signs in on. Same

@@ -14,6 +14,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,6 +44,15 @@ fun MeetingsScreen() {
     val o = rememberOpener()
     var gov by rememberSaveable { mutableStateOf("all") }
     val upcoming = Meeting.upcoming(store.meetings)
+    // Signed in: start on the home's own government (its city, or the County Commission outside city limits), once.
+    var settled by rememberSaveable { mutableStateOf(false) }
+    var homeEmpty by rememberSaveable { mutableStateOf<String?>(null) }
+    val home = me.baycounty.app.Account.me?.home
+    LaunchedEffect(home?.govKey, upcoming.isNotEmpty()) {
+        if (settled || home == null || upcoming.isEmpty()) return@LaunchedEffect
+        settled = true
+        if (upcoming.any { it.govID == home.govKey }) gov = home.govKey else homeEmpty = home.town ?: "the County Commission"
+    }
     val govs = Governments.order.filter { g -> upcoming.any { it.govID == g } }
     val shown = upcoming.filter { gov == "all" || it.govID == gov }
     val days = shown.groupBy { it.start?.let(Dates::dayKey) ?: "" }.toSortedMap()
@@ -56,7 +66,8 @@ fun MeetingsScreen() {
         onRefresh = { store.loadMeetings() },
         spacing = 20,
     ) {
-        if (govs.size > 1) item { ChipRow(listOf("all" to "All") + govs.map { it to shortGov(it) }, gov) { gov = it } }
+        if (govs.size > 1) item { ChipRow(listOf("all" to "All") + govs.map { it to shortGov(it) }, gov) { gov = it; settled = true; homeEmpty = null } }
+        homeEmpty?.let { item { Text("No meetings posted for $it yet. Here's the rest of Bay County.", style = T.subhead, color = Brand.secondary) } }
         item { FreshnessNote("meetings") }
         if (shown.isEmpty()) {
             item {
