@@ -81,16 +81,264 @@
  },
  "html": [
   [
-   "<span class=\"eyebrow\">Public Money · Fees &amp; Bills</span><h1>Fees on your tax bill, and what water and garbage cost</h1>",
-   "<span class=\"eyebrow\">Dinero público · Tarifas y facturas</span><h1>Las tarifas de su factura de impuestos, y lo que cuestan el agua y la basura</h1>"
+   "<span class=\"eyebrow\">Public Money · Fees &amp; Bills</span><h1>What fees and utility bills cost where you live</h1>",
+   "<span class=\"eyebrow\">Dinero público · Tarifas y facturas</span><h1>Lo que cuestan las tarifas y los servicios donde usted vive</h1>"
   ],
   [
-   "<p class=\"lede\">Beyond property tax, your tax bill can carry flat fees for fire service, stormwater and lighting. Your utility bill adds water, sewer and garbage. Here's what each government charges.</p>",
-   "<p class=\"lede\">Además del impuesto a la propiedad, su factura de impuestos puede traer tarifas fijas para bomberos, <span class=\"term\" data-term=\"stormwater\">aguas pluviales</span> (el agua de lluvia que corre por las calles) y alumbrado. Su factura de servicios suma el agua, el alcantarillado y la basura. Aquí está lo que cobra cada gobierno.</p>"
+   "<p class=\"lede\">Pick where you live to see the flat fees on your yearly tax bill and a typical monthly water, sewer and garbage bill.</p>",
+   "<p class=\"lede\">Elija dónde vive para ver las tarifas fijas de su factura anual de impuestos y una factura típica de agua, alcantarillado y basura de un mes.</p>"
   ],
   [
-   "<h2>Taxes vs. fees</h2>",
-   "<h2>Impuestos y tarifas: la diferencia</h2>"
+   "<span>Where you live</span>",
+   "<span>Dónde vive</span>"
+  ],
+  [
+   "aria-label=\"Where you live\"",
+   "aria-label=\"Dónde vive\""
+  ],
+  [
+   "<option value=\"\">Pick where you live</option>",
+   "<option value=\"\">Elija dónde vive</option>"
+  ],
+  [
+   "aria-label=\"Do you own or rent?\"",
+   "aria-label=\"¿Es dueño o alquila?\""
+  ],
+  [
+   "aria-pressed=\"true\">I own my home</button>",
+   "aria-pressed=\"true\">Soy dueño de mi casa</button>"
+  ],
+  [
+   "aria-pressed=\"false\">I rent</button>",
+   "aria-pressed=\"false\">Alquilo</button>"
+  ],
+  [
+   "aria-label=\"Pick where you live\"",
+   "aria-label=\"Elija dónde vive\""
+  ],
+  [
+   "<a class=\"fb-addr\" href=\"/my-address/\">Use my address →</a>",
+   "<a class=\"fb-addr\" href=\"/es/mi-direccion\">Usar mi dirección →</a>"
+  ],
+  [
+   "<p><b>Pick where you live</b> to see the fees on your tax bill and your monthly utility bill. Every area is compared below.</p>",
+   "<p><b>Elija dónde vive</b> para ver las tarifas de su factura de impuestos y su factura mensual de servicios. Abajo se comparan todas las zonas.</p>"
+  ],
+  [
+   "<span class=\"eyebrow\">On your yearly tax bill</span>",
+   "<span class=\"eyebrow\">En su factura anual de impuestos</span>"
+  ],
+  [
+   "<h3>Flat fees for outside city limits</h3>",
+   "<h3>Tarifas fijas fuera de las ciudades</h3>"
+  ],
+  [
+   "<h3>Flat fees for a home in ",
+   "<h3>Tarifas fijas para una casa en "
+  ],
+  [
+   "Fire service<small>A property tax outside city limits (1.38 mills), not a flat fee</small></span><span>tax</span>",
+   "Bomberos<small>Fuera de las ciudades es un impuesto a la propiedad (1.38 milésimas), no una tarifa fija</small></span><span>impuesto</span>"
+  ],
+  [
+   "Fire service<small>No fire fee on the tax bill</small></span><span>none</span>",
+   "Bomberos<small>No hay tarifa de bomberos en la factura de impuestos</small></span><span>ninguna</span>"
+  ],
+  [
+   "<span>Total a year</span>",
+   "<span>Total al año</span>"
+  ],
+  [
+   "The most common bill for a home. The same whatever the home is worth; homestead doesn't lower it.",
+   "El cobro más común para una casa. Es igual sin importar lo que valga la casa; el homestead no lo baja."
+  ],
+  [
+   "<p class=\"fb-fine\">Inside the ",
+   "<p class=\"fb-fine\">Dentro de la zona "
+  ],
+  [
+   " area, add $",
+   ", sume $"
+  ],
+  [
+   "<span class=\"eyebrow\">Your monthly utility bill</span>",
+   "<span class=\"eyebrow\">Su factura mensual de servicios</span>"
+  ],
+  [
+   "<h3>City of Panama City Utilities</h3>",
+   "<h3>Servicios de la Ciudad de Panama City</h3>"
+  ],
+  [
+   "<h3>City of Panama City Beach Utilities</h3>",
+   "<h3>Servicios de la Ciudad de Panama City Beach</h3>"
+  ],
+  [
+   "<h3>City of Lynn Haven Utilities</h3>",
+   "<h3>Servicios de la Ciudad de Lynn Haven</h3>"
+  ],
+  [
+   "<h3>City of Callaway Utility Billing</h3>",
+   "<h3>Ciudad de Callaway, cobro de servicios</h3>"
+  ],
+  [
+   "<h3>City of Springfield Public Works / Utility Billing</h3>",
+   "<h3>Ciudad de Springfield, Obras Públicas y cobro de servicios</h3>"
+  ],
+  [
+   "<h3>City of Mexico Beach</h3>",
+   "<h3>Ciudad de Mexico Beach</h3>"
+  ],
+  [
+   "Garbage<small>Not on this bill: a private hauler or the city bills it</small></span><span>not included</span>",
+   "Basura<small>No está en esta factura: la cobra una empresa privada o la ciudad</small></span><span>no incluida</span>"
+  ],
+  [
+   "Other charges<small>",
+   "Otros cargos<small>"
+  ],
+  [
+   "<span>Total a month</span>",
+   "<span>Total al mes</span>"
+  ],
+  [
+   "At 5,000 gallons on a 3/4-inch meter. ",
+   "Con 5,000 galones y un medidor de 3/4 de pulgada. "
+  ],
+  [
+   "Highest of ",
+   "La más alta de "
+  ],
+  [
+   "Lowest of ",
+   "La más baja de "
+  ],
+  [
+   ". Number ",
+   ". Puesto "
+  ],
+  [
+   " areas. ",
+   " zonas. "
+  ],
+  [
+   "rel=\"noopener\">Rate sheet</a>",
+   "rel=\"noopener\">Hoja de tarifas</a>"
+  ],
+  [
+   "<span>A typical home in unincorporated Bay County pays about",
+   "<span>Una casa típica fuera de las ciudades paga unos"
+  ],
+  [
+   "<span>A renter in unincorporated Bay County pays about",
+   "<span>Un inquilino fuera de las ciudades paga unos"
+  ],
+  [
+   "<span>A typical home in ",
+   "<span>Una casa típica en "
+  ],
+  [
+   "<span>A renter in ",
+   "<span>Un inquilino en "
+  ],
+  [
+   " pays about<small>tax-bill fees plus 12 months of the utility bill</small>",
+   " paga unos<small>tarifas de la factura de impuestos más 12 meses de la factura de servicios</small>"
+  ],
+  [
+   " pays about<small>12 months of the utility bill, if it's in your name</small>",
+   " paga unos<small>12 meses de la factura de servicios, si está a su nombre</small>"
+  ],
+  [
+   "<small> a year</small>",
+   "<small> al año</small>"
+  ],
+  [
+   "Renters don't get a tax bill, but your landlord does: its $",
+   "Los inquilinos no reciben factura de impuestos, pero el dueño sí: sus $"
+  ],
+  [
+   " in yearly fees is usually part of the rent.",
+   " de tarifas al año suelen ir incluidos en el alquiler."
+  ],
+  [
+   ">Outside city limits<",
+   ">Fuera de las ciudades<"
+  ],
+  [
+   ">Outside city limits*<",
+   ">Fuera de las ciudades*<"
+  ],
+  [
+   "<h2 id=\"compare\" data-tile=\"Compare\">How every area compares</h2>",
+   "<h2 id=\"compare\" data-tile=\"Comparar\">Cómo se comparan todas las zonas</h2>"
+  ],
+  [
+   "<span class=\"muted fb-own\">A typical home, a year</span><span class=\"muted fb-rent\">Owners, a year; renters pay the utility part</span>",
+   "<span class=\"muted fb-own\">Una casa típica, al año</span><span class=\"muted fb-rent\">Dueños, al año; los inquilinos pagan la parte de servicios</span>"
+  ],
+  [
+   "<span>Fire fee</span>",
+   "<span>Tarifa de bomberos</span>"
+  ],
+  [
+   "<span>Stormwater fee</span>",
+   "<span>Tarifa de aguas pluviales</span>"
+  ],
+  [
+   "<span>Water and sewer</span>",
+   "<span>Agua y alcantarillado</span>"
+  ],
+  [
+   "<span>Garbage</span>",
+   "<span>Basura</span>"
+  ],
+  [
+   "<span>Other utility charges</span>",
+   "<span>Otros cargos de servicios</span>"
+  ],
+  [
+   "Water and sewer</span><b",
+   "Agua y alcantarillado</span><b"
+  ],
+  [
+   "Garbage</span><b",
+   "Basura</span><b"
+  ],
+  [
+   "<p class=\"note\">Tax-bill fees plus 12 months of water, sewer and garbage at 5,000 gallons a month. * Garbage isn't on this utility bill, so the total leaves it out. Parker's utility rates weren't found online.</p>",
+   "<p class=\"note\">Tarifas de la factura de impuestos más 12 meses de agua, alcantarillado y basura con 5,000 galones al mes. * La basura no está en esta factura de servicios, así que el total no la incluye. No encontramos en internet las tarifas de servicios de Parker.</p>"
+  ],
+  [
+   "<h2 id=\"details\" data-tile=\"Details\">The details</h2>",
+   "<h2 id=\"details\" data-tile=\"Detalles\">Los detalles</h2>"
+  ],
+  [
+   "<summary>Every fee on Bay County tax bills <span class=\"muted\">· ",
+   "<summary>Todas las tarifas en las facturas de impuestos del Condado de Bay <span class=\"muted\">· "
+  ],
+  [
+   " fees, ",
+   " tarifas, "
+  ],
+  [
+   " in all</span></summary>",
+   " en total</span></summary>"
+  ],
+  [
+   "<p class=\"note\">FY2026 bills (2025 tax roll). Unincorporated Bay County's fire service is a property tax (1.38 mills), not a flat fee, so it's on the <a href=\"/public-money/tax-dollars\">tax dollars page</a>. No garbage fee is on any Bay County tax bill. Counts and totals come from the Florida Department of Revenue's parcel-level file for Bay County. ",
+   "<p class=\"note\">Facturas del FY2026 (registro tributario de 2025). El servicio de bomberos del condado fuera de las ciudades es un impuesto a la propiedad (1.38 milésimas), no una tarifa fija, así que está en la página de <a href=\"/es/impuestos\">sus impuestos</a>. Ninguna factura de impuestos del Condado de Bay trae tarifa de basura. Los números y totales vienen del archivo por parcela del Departamento de Ingresos de Florida (Florida Department of Revenue) para el Condado de Bay. "
+  ],
+  [
+   "<summary>How each utility bill is worked out</summary>",
+   "<summary>Cómo se calcula cada factura de servicios</summary>"
+  ],
+  [
+   "<summary>Taxes vs. fees, the simple version</summary>",
+   "<summary>Impuestos y tarifas, en pocas palabras</summary>"
+  ],
+  [
+   "<summary>What we couldn't find <span class=\"muted\">",
+   "<summary>Lo que no pudimos encontrar <span class=\"muted\">"
   ],
   [
    "<li><b>Property tax depends on your home's value.</b> A bigger taxable value means a bigger tax.</li>",
@@ -109,72 +357,12 @@
    "<p><a href=\"/es/mi-direccion\">Busque las tarifas exactas de su parcela →</a></p>"
   ],
   [
-   "<span class=\"eyebrow\">Fees on Bay County tax bills</span>",
-   "<span class=\"eyebrow\">Tarifas en las facturas de impuestos del Condado de Bay</span>"
-  ],
-  [
-   "<span class=\"s\">FY2026 tax roll, all governments</span>",
-   "<span class=\"s\">Registro tributario del FY2026, todos los gobiernos</span>"
-  ],
-  [
-   "<span class=\"eyebrow\">City fire assessments</span>",
-   "<span class=\"eyebrow\">Contribuciones de las ciudades para bomberos</span>"
-  ],
-  [
-   "<span class=\"s\">Panama City, PCB and Springfield</span>",
-   "<span class=\"s\">Panama City, Panama City Beach y Springfield</span>"
-  ],
-  [
-   "<span class=\"eyebrow\">Stormwater fees</span>",
-   "<span class=\"eyebrow\">Tarifas de aguas pluviales</span>"
-  ],
-  [
-   "<span class=\"s\">County and cities</span>",
-   "<span class=\"s\">Condado y ciudades</span>"
-  ],
-  [
-   "<span class=\"eyebrow\">Garbage on the tax bill</span>",
-   "<span class=\"eyebrow\">Basura en la factura de impuestos</span>"
-  ],
-  [
-   "<span class=\"s\">Billed on utility bills instead</span>",
-   "<span class=\"s\">Se cobra en la factura de servicios</span>"
-  ],
-  [
-   "<h2 id=\"tb\">Fees on the tax bill</h2><span class=\"muted\">FY2026 bills (2025 tax roll)</span>",
-   "<h2 id=\"tb\">Tarifas en la factura de impuestos</h2><span class=\"muted\">Facturas del FY2026 (registro tributario de 2025)</span>"
-  ],
-  [
    "<th scope=\"col\">Fee</th><th scope=\"col\">How it's charged</th><th scope=\"col\" class=\"num\">Most common bill</th><th scope=\"col\" class=\"num\">Parcels billed</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Source</th>",
    "<th scope=\"col\">Tarifa</th><th scope=\"col\">Cómo se cobra</th><th scope=\"col\" class=\"num\">Cobro más común</th><th scope=\"col\" class=\"num\">Parcelas con el cobro</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Fuente</th>"
   ],
   [
-   "<p class=\"note\">Unincorporated Bay County's fire service is a property tax (1.38 mills), not a flat fee, so it's on the <a href=\"/public-money/tax-dollars\">tax dollars page</a>. Counts and totals come from the Florida Department of Revenue's parcel-level file for Bay County. ",
-   "<p class=\"note\">El servicio de bomberos del condado fuera de las ciudades es un impuesto a la propiedad (1.38 milésimas), no una tarifa fija, así que está en la página de <a href=\"/es/impuestos\">sus impuestos</a>. Los números y totales vienen del archivo por parcela del Departamento de Ingresos de Florida (Florida Department of Revenue) para el Condado de Bay. "
-  ],
-  [
    "rel=\"noopener\">DOR file</a>",
    "rel=\"noopener\">Archivo del DOR</a>"
-  ],
-  [
-   "<h2 id=\"ub\">A typical monthly utility bill</h2><span class=\"muted\">5,000 gallons of water, 3/4-inch meter</span>",
-   "<h2 id=\"ub\">Una factura de servicios típica de un mes</h2><span class=\"muted\">5,000 galones de agua, medidor de 3/4 de pulgada</span>"
-  ],
-  [
-   "<em> water, sewer, garbage</em>",
-   "<em> agua, alcantarillado, basura</em>"
-  ],
-  [
-   "<em> water, sewer (garbage not included)</em>",
-   "<em> agua, alcantarillado (sin basura)</em>"
-  ],
-  [
-   "<span>Water and sewer</span></li><li><i style=\"background:var(--s2)\"></i><span>Garbage</span></li><li><i style=\"background:var(--s4)\"></i><span>Stormwater, fees and utility taxes</span>",
-   "<span>Agua y alcantarillado</span></li><li><i style=\"background:var(--s2)\"></i><span>Basura</span></li><li><i style=\"background:var(--s4)\"></i><span>Aguas pluviales, cargos e impuestos al servicio</span>"
-  ],
-  [
-   "<summary>How each bill is calculated</summary>",
-   "<summary>Cómo se calcula cada factura</summary>"
   ],
   [
    "<th scope=\"col\">Provider</th><th scope=\"col\" class=\"num\">Water and sewer</th><th scope=\"col\" class=\"num\">Garbage</th><th scope=\"col\" class=\"num\">Other</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Calculation</th>",
@@ -217,32 +405,12 @@
    "<p class=\"note\">Las facturas se calculan con la hoja de tarifas que publica cada proveedor. No encontramos en internet la tarifa de basura de Panama City Beach ni las tarifas de servicios de Parker. El aviso de Panama City da una factura \"promedio\" igual solo a sus cargos base, así que sus cobros por consumo pueden incluir una cantidad que el aviso no explica.</p>"
   ],
   [
-   "<h2 id=\"gaps\">What we couldn't find</h2>",
-   "<h2 id=\"gaps\">Lo que no pudimos encontrar</h2>"
-  ],
-  [
    "aria-label=\"Filter this page\"",
    "aria-label=\"Filtros\""
   ],
   [
-   "aria-label=\"Government\"",
-   "aria-label=\"Gobierno\""
-  ],
-  [
-   "<option value=\"\">All governments</option>",
-   "<option value=\"\">Todos los gobiernos</option>"
-  ],
-  [
    "<option value=\"county\">Bay County</option>",
    "<option value=\"county\">Condado de Bay</option>"
-  ],
-  [
-   "data-city-empty=\"No fees on the tax bill from {city}.\"",
-   "data-city-empty=\"{city} no cobra tarifas en la factura de impuestos.\""
-  ],
-  [
-   "data-city-empty=\"No utility rates found online for {city}.\"",
-   "data-city-empty=\"No encontramos en línea las tarifas de servicios de {city}.\""
   ]
  ]
 }
