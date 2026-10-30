@@ -64,7 +64,7 @@ struct StatTile: View {
                 .background((alert ? Brand.salmon : tint).opacity(0.13), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
             Text(value.formatted()).font(.title2.weight(.bold)).monospacedDigit()
                 .foregroundStyle(alert ? Brand.salmon : .primary)
-            Text(label).font(.footnote).foregroundStyle(.secondary).lineLimit(2).fixedSize(horizontal: false, vertical: true)
+            Text(label).font(.footnote).foregroundStyle(.secondary).lineLimit(2, reservesSpace: true)
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -150,7 +150,7 @@ struct PickGovernment: View {
                     Button { Task { await store.open(w.id) } } label: {
                         HStack {
                             Text(w.name).font(.body.weight(.semibold)).foregroundStyle(.primary)
-                            Spacer()
+                                .multilineTextAlignment(.leading).frame(maxWidth: .infinity, alignment: .leading)
                             Image(systemName: "chevron.right").font(.footnote.weight(.semibold)).foregroundStyle(.tertiary)
                         }
                         .padding(14).frame(minHeight: 48).card(12)

@@ -134,9 +134,11 @@ private struct GovRow: View {
     var body: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
-                Text(w.name).font(.body.weight(.semibold)).foregroundStyle(.primary)
+                // Button labels center wrapped text; long names (Clerk of Court and Comptroller) stay left.
+                Text(w.name).font(.body.weight(.semibold)).foregroundStyle(.primary).multilineTextAlignment(.leading)
                 Text(detail).font(.footnote).foregroundStyle(.secondary).lineLimit(1)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             Spacer(minLength: 8)
             if w.waitingAlerts > 0 { Chip(text: "\(w.waitingAlerts) waiting", color: Brand.amber) }
             else if w.openFlags > 0 { Chip(text: "\(w.openFlags) flag\(w.openFlags == 1 ? "" : "s")", color: Brand.amber) }
