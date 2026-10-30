@@ -21,12 +21,14 @@ struct SignInView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                Image("AppMark").resizable().scaledToFit().frame(width: 56, height: 56)
-                    .clipShape(RoundedRectangle(cornerRadius: 13, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: 13, style: .continuous).strokeBorder(Brand.hairline))
-                    .accessibilityHidden(true)
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("BayCounty.me Staff").font(.largeTitle.weight(.bold))
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 14) {
+                        Image("AppMark").resizable().scaledToFit().frame(width: 48, height: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(Brand.hairline))
+                            .accessibilityHidden(true)
+                        Text("BayCounty.me Staff").font(.title.weight(.bold)).minimumScaleFactor(0.8).lineLimit(1)
+                    }
                     Text("For city and county staff. Send alerts, post notices and flag data for your government.")
                         .font(.subheadline).foregroundStyle(.secondary)
                 }
@@ -59,8 +61,6 @@ struct SignInView: View {
                     ErrorLine(text: store.error)
                 }
                 .padding(16).card()
-                Text("Staff never change numbers that came from public records. If something is wrong, flag it and we check it against the source.")
-                    .font(.footnote).foregroundStyle(.secondary)
             }
             .padding(20)
             .padding(.top, 30)
