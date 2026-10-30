@@ -122,8 +122,6 @@ DOOR_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'),
              'Elections': ('vote', 'salmon'), 'Get involved': ('megaphone', 'teal')}
 # the links each homepage door shows first; the rest of its menu section opens under "All N"
 DOOR_PICKS = {'Living here': ['/my-address', '/utilities', '/schools', '/beaches', '/emergency', '/events'],
-              'Your money': ['/public-money/tax-dollars', '/public-money/budget-compare', '/public-money/contracts',
-                             '/public-money/accountability', '/public-money/votes'],
               'Your government': ['/people', '/governments', '/connections', '/connections/campaign-gifts', '/elections/results'],
               'Elections': ['/elections', '/elections/voting', '/elections/results', '/elections/past'],
               'Get involved': ['/meetings', '/notices', '/volunteer', '/records-request', '/alerts']}
@@ -136,7 +134,8 @@ def _doors():
     out = []
     # the election-season card goes last: it's shorter than the others (no "All N" footer)
     for m in sorted(menu(), key=lambda m: bool(m.get('season'))):
-        if m.get('footer'):
+        # Your money gets its own band further down the page (_money_band), so it has no card here
+        if m.get('footer') or m['label'] == 'Your money':
             continue
         ls = links(m)
         picks = [l for h in DOOR_PICKS.get(m['label'], []) for l in ls if l['href'] == h] or ls[:5]
@@ -250,11 +249,24 @@ def home_page():
     <div class="h-doors">{doors}</div>
   </section>
 
-  <section class="h-hero" aria-labelledby="hmoney">
+  {home_section()}
+
+  <section class="h-row h-row2" aria-label="Governments and updates">
+    <div class="h-card">
+      <div class="h-card-hd"><b>Pick a government</b><a href="/compare">Compare →</a></div>
+      <nav class="gov-chips" aria-label="Governments">{govchips}</nav>
+    </div>
+    <div class="h-card">
+      <div class="h-card-hd"><b>What's new</b><a href="/updates">All updates →</a></div>
+      <ol class="h-news">{news}</ol>
+    </div>
+  </section>
+  <section class="h-money" aria-labelledby="hmoneyband">
+    <div class="h-money-hd">{ico('wallet', 'amber')}<div><h2 id="hmoneyband">Your money</h2><p>What you pay, where it goes, what they owe, and what the auditors found.</p></div></div>
+  <div class="h-hero" aria-labelledby="hmoney">
     <div class="h-intro">
-      <span class="eyebrow">Follow the money · What you pay</span>
-      <h2 id="hmoney" class="h-big">Your money.<br>Their decisions.<br><span class="hl">Follow it.</span></h2>
-      <p class="lede">Start with your tax bill, then follow the spending, the debt and the audits.</p>
+      <h3 id="hmoney" class="h-big">Start with your tax bill.</h3>
+      <p class="lede">Pick where you live and your home's value to see each line of the bill.</p>
       <div class="h-ctl">
         <span class="h-lbl" id="areaLbl">Where you live</span>
         <div class="h-chips" role="group" aria-labelledby="areaLbl">{chips}</div>
@@ -275,10 +287,10 @@ def home_page():
         <div class="h-card-hd"><b>Same home, every area</b><span class="muted">at <span data-val>{_money(val)}</span></span></div>
         <ol class="cmp-bars" id="cmpBars">{ranked}</ol>
       </div>
-  </section>
+  </div>
 
-  <section class="h-follow" aria-labelledby="follow">
-    <div class="h-sec-hd"><div><span class="eyebrow">Follow the money · Where it went</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
+  <div class="h-follow" aria-labelledby="follow">
+    <div class="h-sec-hd"><div><h3 id="follow">Then where it went, and who's checking.</h3></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
       <a class="h-tile t-blue" href="/compare#services">
         <span class="eyebrow">Spending · {bd['fy']}</span>
@@ -296,7 +308,7 @@ def home_page():
         <b class="fig">{s['findings']} findings</b><span class="h-tl">{s['repeats']} repeat audit findings</span><span class="muted">{s['sp_done']:,} of {s['sp_n']:,} sales tax projects done</span>
       </a>
     </div>
-    <nav class="h-links" aria-label="More public money">
+    <nav class="h-links" aria-label="Your money pages">
       <a href="/public-money/contracts">{s['ct_n']} contracts</a>
       <a href="/public-money/votes">How they voted</a>
       <a href="/connections">Connections</a>
@@ -305,19 +317,7 @@ def home_page():
       <a href="/public-money/hurricane-michael">Hurricane Michael {M(s['fema'], 0)}</a>
       {f'<a class="hot" href="/public-money/amendment-3">Amendment 3 · −{M(s["a3"])} FY2029</a>' if election else ''}
     </nav>
-  </section>
-
-  {home_section()}
-
-  <section class="h-row h-row2" aria-label="Governments and updates">
-    <div class="h-card">
-      <div class="h-card-hd"><b>Pick a government</b><a href="/compare">Compare →</a></div>
-      <nav class="gov-chips" aria-label="Governments">{govchips}</nav>
-    </div>
-    <div class="h-card">
-      <div class="h-card-hd"><b>What's new</b><a href="/updates">All updates →</a></div>
-      <ol class="h-news">{news}</ol>
-    </div>
+  </div>
   </section>
 </div>
 <script type="application/json" id="homeData">{data}</script>
