@@ -147,3 +147,59 @@ test('push send reports Apple and Google reasons without crashing', async () => 
   const r = await P.send([], {title: 't', body: 'b', topic: 'test', notice_id: 'test', url: 'https://baycounty.me'});
   assert.deepEqual(r, {delivered: 0, failed: 0, skipped: 0, dead: [], reasons: []});
 });
+
+// A CAP 1.2 alert as IPAWS serves it (trimmed). Bay County shelter-in-place sent through Everbridge.
+const cap = ({sender = 'everbridge@baycountyfl.gov', code = 'SPW', same = '012005', status = 'Actual', msgType = 'Alert', sev = 'Severe'} = {}) => `<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2"><identifier>EVB-12005-0001</identifier><sender>${sender}</sender><sent>2026-10-30T09:15:00-05:00</sent>
+<status>${status}</status><msgType>${msgType}</msgType><scope>Public</scope>
+<info><language>en-US</language><category>Safety</category><event>Shelter in Place Warning</event><urgency>Immediate</urgency><severity>${sev}</severity><certainty>Observed</certainty>
+<eventCode><valueName>SAME</valueName><value>${code}</value></eventCode><effective>2026-10-30T09:15:00-05:00</effective><expires>2026-10-30T12:15:00-05:00</expires>
+<senderName>Bay County Emergency Management</senderName><headline>Shelter in place near Highway 231 &amp; Transmitter Rd</headline>
+<description>A chemical leak was reported near Highway 231.</description><instruction>Stay indoors and close windows.</instruction>
+<area><areaDesc>Bay, FL</areaDesc><geocode><valueName>SAME</valueName><value>${same}</value></geocode></area></info></alert>`;
+
+test('IPAWS alerts for Bay County become notices; tests, NWS and other counties do not', () => {
+  const cfg = E.placeConfig('fl-bay');
+  const p = E.parseCap(cap());
+  assert.equal(p.identifier, 'EVB-12005-0001');
+  assert.equal(p.info[0].eventCode, 'SPW');
+  assert.deepEqual(p.info[0].areas[0].same, ['012005']);
+  const n = E.ipawsNotice(p, 'fl-bay', cfg);
+  assert.equal(n.notice_id, 'ipaws:EVB-12005-0001');
+  assert.equal(n.kind, 'safety');
+  assert.equal(n.gov_id, 'county');
+  assert.equal(n.severity, 'severe');
+  assert.equal(n.title, 'Shelter in place near Highway 231 & Transmitter Rd');
+  assert.equal(n.issued, '2026-10-30T14:15:00.000Z');
+  assert.equal(n.status, 'active');
+  assert.equal(E.pushTopic(n), 'safety');
+  assert.equal(sourceKey(n), 'ipaws');
+  assert.equal(E.ipawsNotice(E.parseCap(cap({code: 'EVI'})), 'fl-bay', cfg).kind, 'evacuation');
+  assert.equal(E.ipawsNotice(E.parseCap(cap({same: '012000'})), 'fl-bay', cfg).kind, 'safety', 'statewide alerts (AMBER) count');
+  assert.equal(E.ipawsNotice(E.parseCap(cap({same: '012133'})), 'fl-bay', cfg), null, 'Washington County only');
+  assert.equal(E.ipawsNotice(E.parseCap(cap({code: 'RWT'})), 'fl-bay', cfg), null, 'weekly test');
+  assert.equal(E.ipawsNotice(E.parseCap(cap({status: 'Exercise'})), 'fl-bay', cfg), null);
+  assert.equal(E.ipawsNotice(E.parseCap(cap({sender: 'w-nws.webmaster@noaa.gov'})), 'fl-bay', cfg), null, 'the NWS reader has these');
+  assert.equal(E.ipawsNotice(E.parseCap(cap({msgType: 'Cancel'})), 'fl-bay', cfg).status, 'lifted');
+});
+
+test('the alert timeline sums reach per notice, filters by government and sorts newest first', () => {
+  const F = require('../_emergency_feed');
+  const notices = [
+    {notice_id: 'a', kind: 'boil-water', title: 'Boil notice', gov_id: 'lh', issued: '2026-10-28T10:00:00Z', active: false, last_seen: '2026-10-29T10:00:00Z', status: 'lifted',
+      versions: [{notice_id: 'a'}, {notice_id: 'a2'}]},
+    {notice_id: 'b', kind: 'weather', title: 'Flood Advisory', gov_id: null, issued: '2026-10-29T10:00:00Z', active: true, status: 'active'},
+    {notice_id: 'c', kind: 'road', title: 'PCB road closed', gov_id: 'pcb', issued: '2026-10-27T10:00:00Z', active: false, last_seen: '2026-10-27T12:00:00Z', status: 'active'},
+  ];
+  const reach = [{notice_id: 'a', channel: 'push', people: 5}, {notice_id: 'a2', channel: 'email', people: 7}, {notice_id: 'b', channel: 'push', people: 3}];
+  const t = F.buildTimeline(notices, reach, {days: 30});
+  assert.deepEqual(t.items.map(i => i.notice_id), ['b', 'a', 'c']);
+  assert.deepEqual(t.items[1].reach, {push: 5, email: 7, sms: 0}, 'reach of earlier versions counts');
+  assert.equal(t.items[1].status, 'lifted');
+  assert.equal(t.items[1].ended, '2026-10-29T10:00:00Z');
+  assert.equal(t.items[0].ended, null);
+  assert.equal(t.items[2].status, 'ended');
+  assert.equal(t.reached, 15);
+  assert.deepEqual(F.buildTimeline(notices, reach, {gov: 'lh'}).items.map(i => i.notice_id), ['b', 'a'], 'Lynn Haven plus countywide');
+  assert.deepEqual(F.buildTimeline(notices, reach, {kind: 'road'}).items.map(i => i.notice_id), ['c']);
+});

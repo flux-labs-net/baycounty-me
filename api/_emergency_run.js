@@ -50,8 +50,20 @@ async function store(place, notices, ok) {
 
 // Signed-in phones that want this notice (only phones tied to an account get alerts): the topic is on, and the notice's government is one they follow (or they follow all).
 async function devicesFor(place, topic, n) {
-  return db.q(`select token, platform from push.devices where place_id = $1 and disabled_at is null and user_id is not null and $2 = any(topics)
-      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, topic, n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null]);
+  return db.q(`select token, platform from push.devices where place_id = $1 and disabled_at is null and user_id is not null and topics && $2::text[]
+      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, E.topicsFor(topic), n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null]);
+}
+
+// How many people a notice reached per channel, for the alert timeline (emergency_reach, counts only).
+async function reach(noticeId, place, rows) {
+  const keep = rows.filter(r => r[1] > 0);
+  if (!keep.length) return;
+  try {
+    await db.q(`insert into emergency_reach (notice_id, channel, place_id, people, delivered)
+        select $1, x.channel, $2, x.people, x.delivered from json_to_recordset($3::json) as x(channel text, people int, delivered int)
+        on conflict (notice_id, channel) do update set people = excluded.people, delivered = excluded.delivered`,
+    [noticeId, place, JSON.stringify(keep.map(([channel, people, delivered]) => ({channel, people, delivered})))]);
+  } catch (e) { console.error('emergency reach', e.message); }
 }
 
 // repeats: notice_id -> the other notice_ids of the same post (api/_dupes.js); a repeat of a post already sent is not sent again.
@@ -82,7 +94,9 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
     if (res.dead.length) await db.q('update push.devices set disabled_at = now() where token = any($1::text[])', [res.dead]);
     if (res.delivered) await db.q('update emergency_live set pushed_at = now() where notice_id = $1', [n.notice_id]);
     // Residents with an account who asked for this topic by email, when the notice reaches their saved home (api/_account.js).
-    try { await require('./_account').emailNotice(place, n, topic); } catch (e) { console.error('account alert email', e.message); }
+    let mail = {sent: 0, people: 0};
+    try { mail = await require('./_account').emailNotice(place, n, topic); } catch (e) { console.error('account alert email', e.message); }
+    await reach(n.notice_id, place, [['push', devices.length, res.delivered], ['email', mail.people || 0, mail.sent || 0]]);
     sent.push({notice_id: n.notice_id, topic, devices: devices.length, delivered: res.delivered});
   }
   return sent;
@@ -118,4 +132,4 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   return {place, checked_at: new Date().toISOString(), ms: Date.now() - t0, notices: r.notices.length, active, ended, pushed, agenda, errors: r.errors, sources_ok: r.ok};
 }
 
-module.exports = {run, sourceKey, store, pushNew, claim};
+module.exports = {run, sourceKey, store, pushNew, claim, reach};

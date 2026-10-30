@@ -7,7 +7,7 @@ const SITE = 'https://baycounty.me';
 const STALE_MS = 10 * 60e3;
 
 const LIVE_COLS = 'notice_id,kind,source,source_type,gov_id,title,summary,instruction,severity,event,area,zones,issued,starts,ends,updated,status,full_closure,roadway,url,source_url,first_seen,last_seen';
-const KIND_LABEL = {evacuation: 'Evacuation orders', weather: 'Weather alerts', shelter: 'Shelters open', 'boil-water': 'Boil-water notices', road: 'Road closures', utility: 'Water and utility outages', storm: 'Storm updates'};
+const KIND_LABEL = {evacuation: 'Evacuation orders', weather: 'Weather alerts', shelter: 'Shelters open', 'boil-water': 'Boil-water notices', road: 'Road closures', utility: 'Water and utility outages', storm: 'Storm updates', safety: 'Public safety alerts'};
 
 async function meta(req, catalog, id) {
   const m = catalog.datasets.find(d => d.id === id);
@@ -68,9 +68,57 @@ async function liveFeed(req, catalog, {place = 'fl-bay', refresh = true} = {}) {
     labels: KIND_LABEL, notices, shelters,
     zones: zoneRows.map(z => ({zone: z.zone, where_it_is: z.where_it_is, when_ordered: z.when_ordered, plain: z.plain, color: z.color, ordered: evac.some(n => (n.zones || '').split(', ').includes(z.zone))})),
     sources_ok: state.sources_ok || [], source_errors: (state.errors || []).map(e => e.source),
-    links: {page: `${SITE}/emergency`, zone_lookup: `${SITE}/api/v1/evacuation-zone?address=`, archive: `${SITE}/api/v1/datasets/emergency-notices`, push_signup: `${SITE}/api/push`},
-    note: 'Notices come from the National Weather Service, Bay County and city alert centers and news, FL511 and the county shelter page, checked every 5 minutes. Always follow instructions from emergency officials.',
+    links: {page: `${SITE}/emergency`, zone_lookup: `${SITE}/api/v1/evacuation-zone?address=`, archive: `${SITE}/api/v1/datasets/emergency-notices`, timeline: `${SITE}/api/v1/emergency-timeline`, push_signup: `${SITE}/api/push`},
+    note: 'Notices come from the National Weather Service, FEMA IPAWS (emergency alerts), Bay County and city alert centers and news, FL511 and the county shelter page, checked every 5 minutes. Always follow instructions from emergency officials.',
   };
+}
+
+
+// ---------- alert timeline (/api/v1/emergency-timeline, the timeline on /emergency) ----------
+// Every notice that was live in the last `days` days, newest first: when it started and ended, and how many people
+// each channel reached (emergency_reach, counts only). gov keeps one government's notices plus the countywide ones
+// (weather, IPAWS, shelters) that reach it too.
+const GOV_NAMES = {county: 'Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+function buildTimeline(notices, reach, {days = 30, kind = '', gov = ''} = {}) {
+  const per = new Map();
+  for (const r of reach) {
+    const o = per.get(r.notice_id) || {push: 0, email: 0, sms: 0};
+    o[r.channel] = (o[r.channel] || 0) + (Number(r.people) || 0);
+    per.set(r.notice_id, o);
+  }
+  const items = notices
+    .filter(n => (!kind || n.kind === kind) && (!gov || !n.gov_id || n.gov_id === gov))
+    .map(n => {
+      const ids = [...new Set([n.notice_id, ...(n.versions || []).map(v => v.notice_id)])];
+      const rr = ids.reduce((a, id) => { const o = per.get(id); if (o) for (const k of Object.keys(a)) a[k] += o[k] || 0; return a; }, {push: 0, email: 0, sms: 0});
+      const started = n.first_posted || n.issued || n.first_seen || null;
+      return {notice_id: n.notice_id, kind: n.kind, label: KIND_LABEL[n.kind] || 'Notice', title: n.title, event: n.event || null, severity: n.severity,
+        source: n.source, source_type: n.source_type, gov_id: n.gov_id || null, zones: n.zones || null, area: n.area || null,
+        started, ended: n.active ? null : (n.last_seen || null), active: !!n.active, status: n.active ? 'active' : n.status === 'lifted' ? 'lifted' : 'ended',
+        reach: rr, people: rr.push + rr.email + rr.sms, url: n.url || null, page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`};
+    })
+    .sort((a, b) => String(b.started || '').localeCompare(String(a.started || '')));
+  const counts = {};
+  for (const i of items) counts[i.kind] = (counts[i.kind] || 0) + 1;
+  return {days, kind: kind || null, gov: gov || null, total: items.length, counts, labels: KIND_LABEL, governments: GOV_NAMES,
+    reached: items.reduce((a, i) => a + i.people, 0), items};
+}
+
+async function timeline(req, catalog, q = {}, {place = 'fl-bay'} = {}) {
+  E.placeConfig(place);
+  const days = Math.min(90, Math.max(1, parseInt(q.days, 10) || 30));
+  const kind = KIND_LABEL[String(q.kind || '')] ? String(q.kind) : '';
+  const gov = GOV_NAMES[String(q.gov || '')] ? String(q.gov) : '';
+  const since = new Date(Date.now() - days * 864e5).toISOString();
+  const P = encodeURIComponent(place);
+  const [n, r] = await Promise.all([
+    rest(`emergency_live?select=${LIVE_COLS},active&place_id=eq.${P}&last_seen=gte.${since}&order=first_seen.desc&limit=2000`),
+    rest(`emergency_reach?select=notice_id,channel,people&place_id=eq.${P}&sent_at=gte.${new Date(Date.now() - (days + 7) * 864e5).toISOString()}&limit=5000`).catch(() => ({rows: []})),
+  ]);
+  const D = require('./_dupes');
+  const notices = D.mergeNotices(n.rows, await D.decisions());
+  return {place, ...buildTimeline(notices, r.rows, {days, kind, gov}),
+    note: 'Every notice live in this window, newest first. people counts phones and inboxes each channel sent it to (counts only). Older notices: the emergency-notices dataset.'};
 }
 
 const {miles} = require('./_geo');
@@ -103,4 +151,4 @@ async function zoneLookup(req, catalog, q, {place = 'fl-bay'} = {}) {
   };
 }
 
-module.exports = {liveFeed, zoneLookup, KIND_LABEL, miles};
+module.exports = {liveFeed, zoneLookup, timeline, buildTimeline, KIND_LABEL, GOV_NAMES, miles};

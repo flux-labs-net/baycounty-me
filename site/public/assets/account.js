@@ -91,7 +91,7 @@ function timeOf(it) {
   const d = at(it.date); if (isNaN(d)) return '';
   return d.toLocaleString('en-US', {weekday: 'short', hour: 'numeric', minute: '2-digit', ...tz(it.date)}).replace(':00', '');
 }
-const TAG = {evacuation: 'Evacuation', weather: 'Weather', 'boil-water': 'Boil water', road: 'Road', shelter: 'Shelter', utility: 'Utility', closed: 'Closed', warning: 'Warning', agenda: 'Agenda', development: 'Development', 'sales-tax': 'Sales tax', meeting: '', event: '', notice: '', inspection: '', business: ''};
+const TAG = {evacuation: 'Evacuation', weather: 'Weather', 'boil-water': 'Boil water', road: 'Road', shelter: 'Shelter', utility: 'Utility', safety: 'Public safety', closed: 'Closed', warning: 'Warning', agenda: 'Agenda', development: 'Development', 'sales-tax': 'Sales tax', meeting: '', event: '', notice: '', inspection: '', business: ''};
 function itemHtml(it) {
   const link = it.entity_id && window.BC && BC.href && BC.href(it.entity_id) ? BC.href(it.entity_id) : it.url;
   const ext = link && /^https?:/.test(link) && !link.startsWith('https://baycounty.me') ? ' target="_blank" rel="noopener"' : '';

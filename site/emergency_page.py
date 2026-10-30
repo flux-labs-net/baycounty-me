@@ -18,7 +18,8 @@ import longtext
 e = lambda s: html.escape(str(s if s is not None else ''))
 KIND = {'evacuation': ('Evacuation order', 'flag', 'salmon'), 'weather': ('Weather', 'storm', 'blue'), 'shelter': ('Shelter open', 'home', 'teal'),
         'boil-water': ('Boil-water notice', 'drop', 'amber'), 'road': ('Road closure', 'pin', 'amber'), 'utility': ('Water or utility', 'drop', 'blue'),
-        'storm': ('Storm update', 'megaphone', 'teal')}
+        'storm': ('Storm update', 'megaphone', 'teal'), 'safety': ('Public safety alert', 'shield', 'salmon')}
+TL_GOVS = [('', 'Everywhere'), ('county', 'Bay County'), ('pc', 'Panama City'), ('pcb', 'Panama City Beach'), ('lh', 'Lynn Haven'), ('cw', 'Callaway'), ('sp', 'Springfield'), ('parker', 'Parker'), ('mb', 'Mexico Beach')]
 TYPE = {'special-needs': 'Special needs', 'general': 'General population', 'mass-care': 'Mass care support', 'recovery': 'After the storm',
         'extreme-weather': 'Overflow and extreme weather', 'pet-friendly': 'Pet friendly', 'other': 'Shelter'}
 
@@ -87,10 +88,26 @@ CSS = r"""
 .em-r b a{color:inherit}
 .em-r .ph{font:600 .95rem var(--f-data);color:var(--blue);text-decoration:none}
 .em-r small{display:block;color:var(--muted);font-size:.82rem;line-height:1.4;margin-top:2px}
+.em-tl-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.em-tl-ctl select{min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:500 .9rem var(--f-body)}
+.em-tl-sum{margin:0;color:var(--muted);font-size:.88rem}
+.em-tl{display:flex;flex-direction:column;gap:18px;padding-left:6px}
+.em-day h3{margin:0 0 8px;font-size:.8rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.em-day ol{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.em-ti{position:relative;display:grid;grid-template-columns:74px minmax(0,1fr);gap:4px 12px;padding:12px 14px;border-radius:16px;background:var(--surface);box-shadow:var(--ui-shadow);scroll-margin-top:90px}
+.em-ti::before{content:"";position:absolute;left:-25px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--sev-info);box-shadow:0 0 0 3px var(--bg, var(--sunken))}
+.em-ti[data-sev=extreme]::before{background:var(--sev-extreme)}.em-ti[data-sev=severe]::before{background:var(--sev-severe)}.em-ti[data-sev=moderate]::before{background:var(--sev-moderate)}.em-ti[data-sev=minor]::before{background:var(--sev-minor)}
+.em-ti time{font:600 .84rem var(--f-data);font-variant-numeric:tabular-nums;color:var(--muted);padding-top:1px}
+.em-ti .k{display:flex;gap:6px;align-items:center;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.em-ti b{display:block;font-size:.94rem;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.em-ti small{display:block;color:var(--muted);font-size:.8rem;line-height:1.45;margin-top:2px}
+.em-ti .live{color:var(--sev-extreme);font-weight:700}
+.em-ti .reach{color:var(--ink)}
+.em-ti > div{min-width:0}
 .em-tbl td{vertical-align:top}
 .em-tbl td.d{white-space:nowrap;font-variant-numeric:tabular-nums}
 @media (max-width:860px){.em-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.em-zone,.em-map{grid-template-columns:1fr}}
-@media (max-width:520px){.em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.em-status{padding:16px}.em-status h2{font-size:1.08rem}.em-list{grid-template-columns:1fr}}
+@media (max-width:520px){.em-ti{grid-template-columns:1fr}.em-tl-ctl select{flex:1 1 140px}.em-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.em-status{padding:16px}.em-status h2{font-size:1.08rem}.em-list{grid-template-columns:1fr}}
 """
 
 JS = r"""
@@ -175,6 +192,43 @@ JS = r"""
   let start = new URLSearchParams(location.search).get('a');
   if (!start) { try { start = localStorage.getItem('bc.emAddr'); } catch (e) {} }
   if (start) { $('emAddr').value = start; lookup({address: start}); }
+  // ---- alert timeline (live from /api/v1/emergency-timeline)
+  const TL = $('emTl');
+  if (TL) {
+    const tz = {timeZone: 'America/Chicago'};
+    const dayKey = s => new Date(s).toLocaleDateString('en-CA', tz);
+    const dayLab = s => new Date(s).toLocaleDateString('en-US', {...tz, weekday: 'short', month: 'short', day: 'numeric'});
+    const tm = s => new Date(s).toLocaleTimeString('en-US', {...tz, hour: 'numeric', minute: '2-digit'});
+    const dur = (a, b) => { const m = Math.round((Date.parse(b) - Date.parse(a)) / 60000); return !(m > 0) ? '' : m < 60 ? m + ' min' : m < 2880 ? Math.round(m / 60) + ' hr' : Math.round(m / 1440) + ' days'; };
+    const plural = (n, w) => `${n.toLocaleString()} ${w}${n === 1 ? '' : 's'}`;
+    function item(i) {
+      const k = KIND[i.kind] || ['Notice', 'info'];
+      const src = i.gov_id ? govA(i.gov_id, i.source) : esc(i.source);
+      const end = i.active ? '<span class="live">Still in effect</span>' : i.ended ? `${i.status === 'lifted' ? 'Lifted' : 'Ended'} ${dayKey(i.ended) === dayKey(i.started) ? tm(i.ended) : when(i.ended)}${dur(i.started, i.ended) ? ' (' + dur(i.started, i.ended) + ')' : ''}` : '';
+      const r = i.reach || {}, parts = [r.push && plural(r.push, 'phone'), r.email && plural(r.email, 'inbox').replace('inboxs', 'inboxes'), r.sms && plural(r.sms, 'text')].filter(Boolean);
+      const title = i.active ? `<a href="#n-${esc(i.notice_id)}">${esc(i.title)}</a>` : i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a>` : esc(i.title);
+      return `<li class="em-ti" id="t-${esc(i.notice_id)}" data-sev="${esc(i.severity)}" data-k="${esc(i.kind)}"><time datetime="${esc(i.started)}">${esc(tm(i.started))}</time><div>
+        <span class="k"><span class="ico i-${k[1]}" aria-hidden="true"></span>${esc(i.kind === 'weather' && i.event ? i.event : k[0])}${i.zones ? ' · Zone' + (i.zones.includes(',') ? 's ' : ' ') + esc(i.zones) : ''}</span>
+        <b>${title}</b><small>${[src, end, parts.length ? `<span class="reach">Sent to ${parts.join(', ')}</span>` : ''].filter(Boolean).join(' · ')}</small></div></li>`;
+    }
+    function draw(d) {
+      const items = d.items.filter(i => i.started);
+      const days = [];
+      for (const i of items) { const k = dayKey(i.started); if (!days.length || days[days.length - 1].k !== k) days.push({k, lab: dayLab(i.started), list: []}); days[days.length - 1].list.push(i); }
+      TL.innerHTML = days.length ? days.map(g => `<div class="em-day"><h3>${esc(g.lab)}</h3><ol>${g.list.map(item).join('')}</ol></div>`).join('')
+        : '<p class="em-empty">No alerts in this window.</p>';
+      $('emTlSum').textContent = `${plural(d.total, 'alert')} in the last ${d.days} days` + (d.reached ? `, sent ${d.reached.toLocaleString()} times to phones, inboxes and texts.` : '.');
+    }
+    const tlLoad = () => {
+      const q = new URLSearchParams({days: $('emTlDays').value});
+      if ($('emTlGov').value) q.set('gov', $('emTlGov').value);
+      if ($('emTlKind').value) q.set('kind', $('emTlKind').value);
+      return fetch('/api/v1/emergency-timeline?' + q).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(draw)
+        .catch(() => { $('emTlSum').textContent = "Couldn't reach the live timeline. This list is from the last daily check."; });
+    };
+    ['emTlDays', 'emTlGov', 'emTlKind'].forEach(id => $(id).addEventListener('change', tlLoad));
+    tlLoad(); setInterval(() => { if (!document.hidden) tlLoad(); }, 5 * 60e3);
+  }
 })();
 """
 
@@ -228,6 +282,41 @@ def _notice(n):
             f'<span class="k">{ico(icon)}{e(n["event"] if n["kind"] == "weather" and n.get("event") else lab)}</span><h3>{e(n["title"])}</h3>'
             + (f'<details><summary>Details</summary><div class="lt-body">{longtext.html(more)}</div>{_earlier(n)}</details>' if more else '')
             + f'<small>{src} · {_posted(n)}' + (f' · <a href="{e(n["url"])}" target="_blank" rel="noopener">Source</a>' if n.get('url') else '') + '</small></article>')
+
+
+def _central(s):
+    try:
+        d = dt.datetime.fromisoformat(str(s).replace('Z', '+00:00'))
+    except ValueError:
+        return None
+    if d.tzinfo:
+        d = d.astimezone(dt.timezone(dt.timedelta(hours=-5 if 3 <= d.month <= 10 else -6)))
+    return d
+
+
+def _timeline(notices):
+    """The archive's notices as the alert timeline: one group per day, newest first (no reach counts; the page script
+    loads the live timeline with them)."""
+    days = []
+    for n in sorted(notices, key=lambda n: str(n.get('issued') or n.get('first_seen') or ''), reverse=True):
+        d = _central(n.get('issued') or n.get('first_seen') or '')
+        if not d:
+            continue
+        lab, icon, _ = KIND.get(n['kind'], ('Notice', 'info', 'blue'))
+        src = gov_link(n['gov_id'], n['source']) if n.get('gov_id') else e(n['source'])
+        end = '<span class="live">Still in effect</span>' if n['status'] == 'active' else ('Lifted' if n['status'] == 'lifted' else 'Ended')
+        title = (f'<a href="#n-{e(n["notice_id"])}">{e(n["title"])}</a>' if n['status'] == 'active' else
+                 f'<a href="{e(n["url"])}" target="_blank" rel="noopener">{e(n["title"])}</a>' if n.get('url') else e(n['title']))
+        li = (f'<li class="em-ti" id="t-{e(n["notice_id"])}" data-sev="{e(n["severity"])}" data-k="{e(n["kind"])}">'
+              f'<time datetime="{e(n.get("issued") or "")}">{d.strftime("%-I:%M %p") if "T" in str(n.get("issued") or n.get("first_seen") or "") else ""}</time><div>'
+              f'<span class="k">{ico(icon)}{e(n["event"] if n["kind"] == "weather" and n.get("event") else lab)}</span><b>{title}</b><small>{src} · {end}</small></div></li>')
+        key = d.strftime('%a, %b %-d')
+        if not days or days[-1][0] != key:
+            days.append((key, []))
+        days[-1][1].append(li)
+    if not days:
+        return '<p class="em-empty">No alerts on file yet.</p>'
+    return ''.join(f'<div class="em-day"><h3>{e(k)}</h3><ol>{"".join(v)}</ol></div>' for k, v in days)
 
 
 def _project(zones, base, shelters, w=640):
@@ -308,12 +397,10 @@ def emergency_page(out_dir):
   {f'<a class="ph" href="tel:{e(r["phone"])}">{e(r["phone"])}</a>' if r.get("phone") else ''}<small>{e(r["about"])}</small></div>''' for r in R if r['group'] == g)
         res.append(f'<h3 class="ch-grp">{e(g)}</h3><div class="em-res">{items}</div>')
 
-    # recent notices (last 90 days of the archive)
-    cut = (dt.date.today() - dt.timedelta(days=90)).isoformat()
-    recent = [n for n in N if str(n.get('issued') or n.get('first_seen') or '')[:10] >= cut][:80]
-    rows = ''.join(f'<tr><td class="d">{_when(n.get("issued") or n.get("first_seen"))}</td><td>{e(KIND.get(n["kind"], ("Notice",))[0])}</td>'
-                   f'<td>{f"<a href=\"{e(n["url"])}\" target=\"_blank\" rel=\"noopener\">{e(n["title"])}</a>" if n.get("url") else e(n["title"])}</td>'
-                   f'<td>{gov_link(n["gov_id"], n["source"]) if n.get("gov_id") else e(n["source"])}</td><td>{e(n["status"])}</td></tr>' for n in recent)
+    # alert timeline: the last 30 days of the archive, grouped by day (the page script swaps in the live one)
+    cut = (dt.date.today() - dt.timedelta(days=30)).isoformat()
+    recent = [n for n in N if str(n.get('issued') or n.get('first_seen') or '')[:10] >= cut][:150]
+    timeline = _timeline(recent)
     by_kind = {}
     for n in N:
         by_kind[n['kind']] = by_kind.get(n['kind'], 0) + 1
@@ -323,7 +410,7 @@ def emergency_page(out_dir):
     return f'''<style>{CSS}</style>
 <div class="page tax em">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Take part · Stay safe</span><h1>Emergencies and alerts</h1>
-    <p class="lede">What is happening now in Bay County: weather warnings, evacuation orders, open shelters, boil-water notices and road closures, gathered from the National Weather Service, the county and the cities every few minutes. Look up your evacuation zone, find every shelter and get alerts on your phone.</p></div>
+    <p class="lede">What is happening now in Bay County: weather warnings, evacuation orders, open shelters, boil-water notices and road closures, gathered from the National Weather Service, FEMA's emergency alert system, the county and the cities every few minutes. Look up your evacuation zone, find every shelter and get alerts on your phone.</p></div>
     <div class="stamp"><a class="pill" href="#zone">Find my zone →</a><a class="pill" href="/hurricane-prep">Hurricane prep →</a><span>In an emergency, call 911. Follow instructions from emergency officials.</span></div></header>
 
   <div class="em-status" id="emStatus" data-sev="{"extreme" if cnt("evacuation") else "moderate" if active else "info"}" aria-live="polite">{ico("bell", "salmon")}
@@ -364,15 +451,19 @@ def emergency_page(out_dir):
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="numbers" data-tile="Numbers">Phone numbers and links</h2></div>{"".join(res)}</section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="recent" data-tile="Recent">Recent notices</h2><span class="muted">The last 90 days</span></div>
-    <details class="tbl-toggle" open><summary>{len(recent)} notices</summary><div class="tablewrap"><table class="tx-table em-tbl"><thead><tr><th>Posted</th><th>Kind</th><th>Notice</th><th>From</th><th>Status</th></tr></thead>
-    <tbody>{rows or '<tr><td colspan="5" class="muted">None yet.</td></tr>'}</tbody></table></div></details>
-    <p class="note">The archive started on October 27, 2026; older notices aren't on file. Every notice: <a href="/api/v1/datasets/emergency-notices">emergency-notices</a> ({", ".join(f"{v} {e(KIND.get(k, (k,))[0].lower())}" for k, v in sorted(by_kind.items(), key=lambda x: -x[1]))}).</p></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="timeline" data-tile="Timeline">Alert timeline</h2><span class="muted">Every alert, newest first</span></div>
+    <div class="em-tl-ctl"><label class="sr" for="emTlGov">Area</label><select id="emTlGov">{"".join(f'<option value="{k}">{v}</option>' for k, v in TL_GOVS)}</select>
+      <label class="sr" for="emTlKind">Kind</label><select id="emTlKind"><option value="">Every kind</option>{"".join(f'<option value="{k}">{e(v[0])}</option>' for k, v in KIND.items())}</select>
+      <label class="sr" for="emTlDays">Window</label><select id="emTlDays"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select></div>
+    <p class="em-tl-sum" id="emTlSum" aria-live="polite">{len(recent)} alerts in the last 30 days, from the last daily check.</p>
+    <div class="em-tl" id="emTl">{timeline}</div>
+    <p class="note">Each alert shows when it started and ended and how many phones, inboxes and texts BayCounty.me sent it to (counts only). Area keeps one government's notices plus the countywide ones (weather, emergency alerts, shelters). The archive started on October 27, 2026. Data: <a href="/api/v1/emergency-timeline">/api/v1/emergency-timeline</a> · every notice: <a href="/api/v1/datasets/emergency-notices">emergency-notices</a> ({", ".join(f"{v} {e(KIND.get(k, (k,))[0].lower())}" for k, v in sorted(by_kind.items(), key=lambda x: -x[1]))}).</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">
       <li><b>Weather alerts</b> are every active watch, warning and advisory the National Weather Service issues for Bay County's land and coastal zones.</li>
       <li><b>Boil-water notices, closures and storm updates</b> come from the alert centers and news posts of Bay County, Panama City, Panama City Beach, Lynn Haven, Callaway, Parker and Mexico Beach, and from Springfield's boil-water notice page. All are checked every 5 minutes.</li>
+      <li><b>Public safety alerts</b> (shelter in place, evacuations, AMBER alerts, hazardous materials) come from FEMA's IPAWS public feed: the same alerts officials send to phones as Wireless Emergency Alerts and to TV and radio. Ones for Bay County or all of Florida are kept; tests and NWS weather messages (already covered) are left out.</li>
       <li><b>State road closures</b> come from FL511, the Florida Department of Transportation's traffic service, for Bay County.</li>
       <li><b>Shelters</b> come from Bay County Emergency Services' shelter page; each address is placed on the map with the county's address points. <b>Zones</b> are the county's evacuation zone map.</li>
       <li>Everything is checked every 5 minutes. BayCounty.me is an independent site: when an order or notice here differs from what emergency officials say, follow the officials.</li>
