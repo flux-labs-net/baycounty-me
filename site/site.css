@@ -401,6 +401,20 @@ label[hidden],.vf[hidden],.sc-f[hidden]{display:none!important}
 /* step 2 */
 .h-sec-hd{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
 .h-sec-hd h2{font-size:clamp(1.6rem,3vw,2rem);font-weight:700;letter-spacing:-.025em;margin-top:6px}
+/* Your money band: all money content in one framed area at the end of the homepage */
+.h-money{display:flex;flex-direction:column;gap:32px;padding:36px;border-radius:28px;background:var(--tint-amber);border:1px solid color-mix(in srgb,var(--gold) 35%,var(--line))}
+.h-money-hd{display:flex;align-items:center;gap:14px}
+.h-money-hd .ui-ti{flex:none;background:var(--surface)}
+.h-money-hd h2{margin:0;font-size:clamp(1.4rem,2.6vw,1.75rem);font-weight:700;letter-spacing:-.02em}
+.h-money-hd p{margin:2px 0 0;color:var(--muted)}
+.h-money .h-big{font-size:clamp(1.6rem,3vw,2.2rem)}
+.h-money .h-sec-hd h3{font-size:clamp(1.4rem,2.6vw,1.75rem);font-weight:700;letter-spacing:-.025em;margin:0}
+.h-money .h-links{gap:8px 22px;margin-top:22px;padding-top:16px;border-top:1px solid color-mix(in srgb,var(--gold) 30%,var(--line))}
+.h-money .h-links a{padding:0;border:0;border-radius:0;background:none;color:var(--ink);font-size:.92rem;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--ink) 30%,transparent);text-underline-offset:3px}
+.h-money .h-links a:hover{color:var(--blue);text-decoration-color:currentColor}
+.h-money .h-links a.hot{background:none;color:var(--accent-ink)}
+@media (max-width:640px){.h-money{padding:22px 12px;gap:24px;border-radius:20px}.h-money-hd,.h-money .h-intro,.h-money .h-sec-hd,.h-money .h-links{padding-inline:4px}}
+@media (max-width:560px){.h-money .h-bill{padding:18px 14px}.h-money .hb-cols,.h-money .hb-lines li,.h-money .hb-total{grid-template-columns:minmax(0,1fr) 56px 84px}.h-money #billTotal{font-size:1.35rem}}
 .h-sec-hd > a{font-weight:600;text-decoration:none}
 .h-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .h-tile{display:flex;flex-direction:column;gap:4px;padding:24px;border-radius:var(--r-lg);color:var(--ink);text-decoration:none;transition:transform .15s,box-shadow .15s}
