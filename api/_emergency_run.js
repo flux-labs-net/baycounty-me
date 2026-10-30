@@ -54,10 +54,10 @@ async function store(place, notices, ok) {
 // A staff alert for one city goes to phones following that city; a countywide one (or one from the county) to all.
 function govFilter(n) {
   if (n.source_type === 'staff') return n.area === require('./_gov').COUNTYWIDE || n.gov_id === 'county' ? null : n.gov_id;
-  return n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null;
+  return E.LOCAL_KINDS.includes(n.kind) ? n.gov_id : null;
 }
 async function devicesFor(place, topic, n) {
-  return db.q(`select token, platform from push.devices where place_id = $1 and disabled_at is null and user_id is not null and topics && $2::text[]
+  return db.q(`select token, platform, quiet from push.devices where place_id = $1 and disabled_at is null and user_id is not null and topics && $2::text[]
       and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, E.topicsFor(topic), govFilter(n)]);
 }
 
@@ -96,7 +96,15 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
       on conflict (notice_id) do nothing returning notice_id`, [n.notice_id, place, topic, dedupe, n.title, suppressed]);
     if (!claimed.length || suppressed) continue;
     const devices = await devicesFor(place, topic, n);
-    const res = devices.length ? await P.send(devices, P.message(n, topic)) : {delivered: 0, failed: 0, skipped: 0, dead: []};
+    // Quiet hours: phones that asked for them get standard alerts silently overnight; urgent ones still sound.
+    const hush = E.quietNow(nowMs) && !E.isUrgent(n, topic);
+    const loud = hush ? devices.filter(d => !d.quiet) : devices, soft = hush ? devices.filter(d => d.quiet) : [];
+    const res = {delivered: 0, failed: 0, skipped: 0, dead: []};
+    for (const [group, quiet] of [[loud, false], [soft, true]]) {
+      if (!group.length) continue;
+      const r = await P.send(group, {...P.message(n, topic), quiet});
+      res.delivered += r.delivered; res.failed += r.failed; res.skipped += r.skipped; res.dead.push(...r.dead);
+    }
     await db.q('update push.sent set devices = $2, delivered = $3, failed = $4 where notice_id = $1', [n.notice_id, devices.length, res.delivered, res.failed]);
     if (res.dead.length) await db.q('update push.devices set disabled_at = now() where token = any($1::text[])', [res.dead]);
     if (res.delivered) await db.q('update emergency_live set pushed_at = now() where notice_id = $1', [n.notice_id]);

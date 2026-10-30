@@ -435,7 +435,7 @@ async function readAll(place = 'fl-bay', now = Date.now()) {
 
 // Which notices go out as a phone notification, and to which topic. Road closures only when a road is fully closed.
 // Staff alerts from the government workspace ride on the topics residents already chose (api/_gov.js TOPIC_OF).
-const STAFF_TOPIC = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'safety'};
+const STAFF_TOPIC = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'safety', general: 'general'};
 function pushTopic(n) {
   if (n.status !== 'active') return null;
   if (n.source_type === 'staff') return STAFF_TOPIC[n.kind] || null;
@@ -445,18 +445,59 @@ function pushTopic(n) {
   if (n.kind === 'weather') return NWS_PUSH.test(n.event || '') ? 'weather' : null;
   if (n.kind === 'road') return n.full_closure ? 'roads' : null;
   if (n.kind === 'safety') return 'safety';
+  if (n.kind === 'utility') return 'outages';
+  if (n.kind === 'storm' || n.kind === 'general') return 'general';
   return null;
 }
-const TOPICS = {weather: 'Weather warnings', evacuation: 'Evacuation orders', shelters: 'Shelter openings', water: 'Boil-water notices', roads: 'Full road closures', safety: 'Public safety alerts (shelter in place, AMBER, hazmat)', agenda: 'Agenda items near my saved place'};
+// The alert types residents pick from (site, apps, /api/account choices), most urgent first. urgent ones always sound,
+// even in quiet hours; channels says where each can be sent.
+const ALERT_TYPES = [
+  {key: 'evacuation', label: 'Evacuation orders', detail: 'For your evacuation zone, from the county and FEMA alerts', urgency: 'urgent', channels: ['push', 'email']},
+  {key: 'weather', label: 'Severe weather warnings', detail: 'Hurricane, tornado, flash flood and storm surge, from the National Weather Service', urgency: 'urgent', channels: ['push', 'email']},
+  {key: 'safety', label: 'Public safety alerts', detail: 'Shelter in place, AMBER alerts, hazardous materials, from FEMA\'s emergency alert system', urgency: 'urgent', channels: ['push', 'email']},
+  {key: 'shelters', label: 'Shelter openings', detail: 'When the county opens a shelter', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'water', label: 'Boil-water notices', detail: 'From the city or county for your areas', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'roads', label: 'Full road closures', detail: 'State roads (FL511) and city closures', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'outages', label: 'Water and power outages', detail: 'Water main breaks, service shut-offs, sewer spills', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'general', label: 'Storm and general updates', detail: 'Sandbags, closures, debris pickup, curfews', urgency: 'info', channels: ['push', 'email']},
+  {key: 'agenda', label: 'Agenda items near my home', detail: 'A public meeting will discuss a place near your home', urgency: 'info', channels: ['push']},
+];
+const TOPICS = Object.fromEntries(ALERT_TYPES.map(t => [t.key, t.label]));
 const DEFAULT_TOPICS = ['weather', 'evacuation', 'shelters', 'water', 'safety'];
-// Who gets a topic: its own switch, and for public-safety alerts (IPAWS) also everyone who asked for evacuation orders,
-// until the apps show the new switch.
+// Who gets a topic: its own switch, and for public-safety alerts (IPAWS) also everyone who asked for evacuation orders
+// (phones on app versions without the public-safety switch still get them).
 const topicsFor = topic => topic === 'safety' ? ['safety', 'evacuation'] : [topic];
+// Areas a resident can follow: all of the county or one government's notices (the county's always come too).
+const AREAS = {all: 'All of Bay County', county: 'Unincorporated Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+// Notices tied to one government's area (a city's boil-water notice); everything else reaches the whole county.
+const LOCAL_KINDS = ['boil-water', 'road', 'utility', 'general', 'storm'];
+// Does a notice reach someone who follows these areas and/or has this saved home ({gov_id, zone})?
+// No areas = follow the home; no home and no areas = everything. Evacuation orders that name zones reach a home only in
+// those zones; people following areas without a home get every order (we can't tell their zone).
+function reaches(n, {areas = [], home = null} = {}) {
+  const all = areas.includes('all') || (!areas.length && !home);
+  // A staff alert from one city reaches that city's followers, whatever its kind; a countywide one (or the county's) reaches everyone.
+  if (n.source_type === 'staff') {
+    if (all || !n.gov_id || n.gov_id === 'county' || n.area === 'All of Bay County') return true;
+    return new Set([...areas, ...(home && home.gov_id ? [home.gov_id] : [])]).has(n.gov_id);
+  }
+  if (n.kind === 'evacuation') return !n.zones || all || !home || String(n.zones).split(/,\s*/).includes(home.zone);
+  if (!LOCAL_KINDS.includes(n.kind) || !n.gov_id || all) return true;
+  const govs = new Set(['county', ...areas, ...(home && home.gov_id ? [home.gov_id] : [])]);
+  return govs.has(n.gov_id);
+}
+// Urgent alerts sound even in quiet hours: evacuation orders, severe or extreme public safety alerts, extreme weather.
+const isUrgent = (n, topic) => topic === 'evacuation' || (topic === 'safety' && ['extreme', 'severe'].includes(n.severity)) || (topic === 'weather' && n.severity === 'extreme');
+// Quiet hours: 10 PM to 7 AM in the place's time zone.
+function quietNow(now = Date.now(), tz = 'America/Chicago') {
+  const h = Number(new Intl.DateTimeFormat('en-US', {timeZone: tz, hour: 'numeric', hourCycle: 'h23'}).format(new Date(now)));
+  return h >= 22 || h < 7;
+}
 
 // Active notices first by how serious they are, then newest.
 const SEV_RANK = {extreme: 0, severe: 1, moderate: 2, minor: 3, info: 4};
 const byUrgency = (a, b) => (SEV_RANK[a.severity] ?? 5) - (SEV_RANK[b.severity] ?? 5) || String(b.updated || b.issued || '').localeCompare(String(a.updated || a.issued || ''));
 
 module.exports = {SOURCES, placeConfig, plain, decode, clip, classify, zonesIn, parseRss, rssNotices, nwsNotice, nws, nwsRecent, alertCenters, newsFeeds,
-  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, parseCap, ipawsNotice, ipaws, readAll, staffAlerts, pushTopic, topicsFor, TOPICS, DEFAULT_TOPICS,
+  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, parseCap, ipawsNotice, ipaws, readAll, staffAlerts, pushTopic, topicsFor, TOPICS, ALERT_TYPES, AREAS, LOCAL_KINDS, reaches, isUrgent, quietNow, DEFAULT_TOPICS,
   byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice};

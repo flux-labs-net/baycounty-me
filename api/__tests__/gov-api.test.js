@@ -227,3 +227,14 @@ test('maps: a staff alert and a staff notice keep their map', opts, async () => 
   const [r2] = await q('select geometry from public_notices where id = $1', [p.body.id]);
   assert.equal(r2.geometry, null);
 });
+
+test('staff alerts reach their own city, and everyone when countywide; general updates push', async () => {
+  const E = require('../_emergency');
+  const city = {source_type: 'staff', kind: 'safety', gov_id: 'lh', area: 'City of Lynn Haven', status: 'active'};
+  assert.equal(E.reaches(city, {home: {gov_id: 'lh'}}), true);
+  assert.equal(E.reaches(city, {home: {gov_id: 'pc'}}), false, 'a Lynn Haven safety alert does not reach a Panama City home');
+  assert.equal(E.reaches(city, {areas: ['all']}), true);
+  assert.equal(E.reaches({...city, gov_id: 'county', area: 'All of Bay County'}, {home: {gov_id: 'pc'}}), true);
+  assert.equal(E.pushTopic({...city, kind: 'general'}), 'general');
+  assert.equal(require('../_emergency_run').govFilter(city), 'lh');
+});

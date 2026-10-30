@@ -27,8 +27,9 @@ function apnsToken(now = Date.now()) {
   return apnsJwt.v;
 }
 function apnsPayload(msg) {
-  return JSON.stringify({aps: {alert: {title: msg.title, body: msg.body}, sound: 'default', 'thread-id': msg.topic,
-    'interruption-level': msg.critical ? 'time-sensitive' : 'active'}, notice_id: msg.notice_id, url: msg.url});
+  // A quiet message (quiet hours) has no sound and doesn't light up the screen; it waits in Notification Center.
+  return JSON.stringify({aps: {alert: {title: msg.title, body: msg.body}, ...(msg.quiet ? {} : {sound: 'default'}), 'thread-id': msg.topic,
+    'interruption-level': msg.quiet ? 'passive' : msg.critical ? 'time-sensitive' : 'active'}, notice_id: msg.notice_id, url: msg.url});
 }
 // One connection to one APNs host; returns [{status, data}] in token order.
 async function apnsPost(host, tokens, msg) {
@@ -97,7 +98,8 @@ async function sendFcm(tokens, msg) {
       headers: {Authorization: `Bearer ${a.token}`, 'Content-Type': 'application/json'},
       body: JSON.stringify({message: {token, notification: {title: msg.title, body: msg.body},
         data: {notice_id: String(msg.notice_id), url: msg.url, topic: msg.topic},
-        android: {priority: 'high', collapse_key: String(msg.notice_id).slice(0, 64), notification: {channel_id: 'emergency', tag: String(msg.notice_id).slice(0, 64)}}}})}).catch(() => null);
+        android: {priority: msg.quiet ? 'normal' : 'high', collapse_key: String(msg.notice_id).slice(0, 64),
+          notification: {channel_id: msg.quiet ? 'emergency_quiet' : 'emergency', tag: String(msg.notice_id).slice(0, 64), ...(msg.quiet ? {default_sound: false, notification_priority: 'PRIORITY_LOW'} : {})}}}})}).catch(() => null);
     if (r && r.ok) return 'ok';
     const j = r ? await r.json().catch(() => ({})) : {};
     const code = JSON.stringify(j.error || {});
@@ -123,10 +125,10 @@ async function send(devices, msg) {
 }
 
 // What a notification says. Short: lock screens cut at about 110 characters.
-const LABEL = {weather: 'Weather', evacuation: 'Evacuation order', shelters: 'Shelter open', water: 'Boil-water notice', roads: 'Road closed', safety: 'Emergency alert'};
+const LABEL = {weather: 'Weather', evacuation: 'Evacuation order', shelters: 'Shelter open', water: 'Boil-water notice', roads: 'Road closed', safety: 'Emergency alert', outages: 'Outage', general: 'Update'};
 function message(n, topic, site = 'https://baycounty.me') {
   const lead = topic === 'weather' ? n.event || 'Weather alert' : LABEL[topic] || 'Alert';
-  const where = n.kind === 'boil-water' || n.kind === 'road' ? (n.source || '').replace(/^City of /, '') : '';
+  const where = ['boil-water', 'road', 'utility', 'general', 'storm'].includes(n.kind) ? (n.source || '').replace(/^City of /, '') : '';
   const zones = n.zones ? ` · Zone${n.zones.includes(',') ? 's' : ''} ${n.zones}` : '';
   const title = `${lead}${where ? ' · ' + where : ''}${zones}`.slice(0, 80);
   let body = n.title || '';
