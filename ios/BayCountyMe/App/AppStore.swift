@@ -7,7 +7,7 @@ import BayCountyKit
 @MainActor
 @Observable
 final class AppStore {
-    /// Today, Living here, Money, Government and Search: the site's menu sections (Meetings sit under Government).
+    /// Home, Around me (the site's Living here), Money, Government and Ask (search and the question box).
     enum Tab: Hashable { case home, living, money, decides, search }
 
     let client = BayCountyClient(baseURL: AppStore.apiBase, seedBundle: .main)
@@ -79,8 +79,24 @@ final class AppStore {
         }
     }
 
+    /// Own or rent, from the setup screen or My home; nil until the resident answers. Kept only on this phone.
+    var tenure: HomeTiles.Tenure? {
+        didSet { UserDefaults.standard.set(tenure?.rawValue, forKey: "tenure") }
+    }
+    /// The setup screen (address, own or rent) shows once, on first launch.
+    var setupSeen: Bool {
+        didSet { UserDefaults.standard.set(setupSeen, forKey: "setupSeen") }
+    }
+
     init() {
-        if let d = UserDefaults.standard.data(forKey: "home") { home = try? JSONDecoder().decode(AddressMatch.self, from: d) }
+        let saved = UserDefaults.standard.data(forKey: "home").flatMap { try? JSONDecoder().decode(AddressMatch.self, from: $0) }
+        home = saved
+        tenure = UserDefaults.standard.string(forKey: "tenure").flatMap(HomeTiles.Tenure.init(rawValue:))
+        // Screenshot runs (-screen) and residents who already saved a home before this screen existed skip it.
+        setupSeen = UserDefaults.standard.bool(forKey: "setupSeen") || ProcessInfo.processInfo.arguments.contains("-screen") || saved != nil
+        // Screenshots: `-tenure own|rent|unset` draws the Home tab for that answer without saving it.
+        let a = ProcessInfo.processInfo.arguments
+        if let i = a.firstIndex(of: "-tenure"), i + 1 < a.count { tenure = HomeTiles.Tenure(rawValue: a[i + 1]) }
     }
 
     /// True when anything on screen came from a saved or bundled copy rather than the live site.

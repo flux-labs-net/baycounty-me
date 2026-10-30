@@ -47,7 +47,7 @@ fun LivingHereScreen() {
         Tile("Jobs", "briefcase", Tone.AMBER, Route.Dataset("job-openings")),
         Tile("Storms and alerts", "exclamationmark.triangle", Tone.SALMON, Route.Emergency),
     )
-    Screen("Living here", spacing = 24) {
+    Screen("Around me", spacing = 24) {
         item {
             Text(home?.let { "What to do and what you need, near ${it.display}." } ?: "What to do and what you need, around Bay County.",
                 style = T.subhead, color = Brand.secondary)

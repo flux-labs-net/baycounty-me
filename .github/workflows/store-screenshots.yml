@@ -47,7 +47,7 @@ jobs:
           mkdir -p shots
           for s in home myhome tab:living restaurants restaurant beaches events tax tab:meetings; do
             xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
-            if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app -apiBase "$API"
+            if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app -apiBase "$API" -setupSeen YES -tenure own
             else xcrun simctl launch "$DEV" me.baycounty.app -apiBase "$API" -screen "$s"; fi
             sleep 15
             xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__').png"

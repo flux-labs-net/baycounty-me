@@ -32,6 +32,7 @@ import me.baycounty.kit.DonorContracts
 import me.baycounty.kit.GISClient
 import me.baycounty.kit.GeoPoint
 import me.baycounty.kit.Glossary
+import me.baycounty.kit.HomeTiles
 import me.baycounty.kit.Government
 import me.baycounty.kit.Meeting
 import me.baycounty.kit.MoneyMap
@@ -130,6 +131,25 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
             AddressMatch(it.address, it.unit, it.community, it.zip, it.renum, GeoPoint(it.x, it.y))
         }
     }
+
+    /** Own or rent, from the setup screen or My home; null until the resident answers. Kept only on this phone. */
+    var tenure by mutableStateOf(HomeTiles.Tenure.of(prefs.getString("tenure", null)))
+        private set
+
+    fun saveTenure(t: HomeTiles.Tenure) { tenure = t; prefs.edit().putString("tenure", t.key).apply() }
+
+    /** Screenshots: draw the Home tab for one answer without saving it. */
+    fun previewTenure(t: HomeTiles.Tenure?) { tenure = t }
+
+    /** The setup screen (address, own or rent) shows once, on first launch. Residents who saved a home before it
+     *  existed skip it. */
+    var setupSeen by mutableStateOf(prefs.getBoolean("setupSeen", false) || prefs.contains("home"))
+        private set
+
+    fun markSetupSeen(save: Boolean = true) { setupSeen = true; if (save) prefs.edit().putBoolean("setupSeen", true).apply() }
+
+    /** Screenshots: show the setup screen again. */
+    fun previewSetup() { setupSeen = false }
 
     /** The tax district last picked in the calculator (Today shows its bill). */
     var savedDistrict by mutableStateOf(prefs.getString("taxDistrict", "") ?: "")

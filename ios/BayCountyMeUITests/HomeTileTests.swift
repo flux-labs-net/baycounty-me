@@ -12,10 +12,11 @@ final class HomeTileTests: XCTestCase {
 
     func testEachLivingHereTileOpensItsOwnScreen() {
         let app = XCUIApplication()
+        app.launchArguments += ["-setupSeen", "YES"]
         app.launch()
-        XCTAssertTrue(app.tabBars.buttons["Living here"].waitForExistence(timeout: 8))
-        app.tabBars.buttons["Living here"].tap()
-        XCTAssertTrue(app.navigationBars["Living here"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.tabBars.buttons["Around me"].waitForExistence(timeout: 8))
+        app.tabBars.buttons["Around me"].tap()
+        XCTAssertTrue(app.navigationBars["Around me"].waitForExistence(timeout: 8))
         for r in rows {
             let button = app.buttons.matching(NSPredicate(format: "label CONTAINS %@", r.row)).firstMatch
             var tries = 0
@@ -26,22 +27,24 @@ final class HomeTileTests: XCTestCase {
                           "\(r.row) should open \(r.title); nav bars: \(app.navigationBars.allElementsBoundByIndex.map(\.identifier))")
             // One back tap returns to Living here, so only one screen was pushed.
             app.navigationBars.buttons.element(boundBy: 0).tap()
-            XCTAssertTrue(app.navigationBars["Living here"].waitForExistence(timeout: 5), "Back from \(r.title) should land on Living here")
+            XCTAssertTrue(app.navigationBars["Around me"].waitForExistence(timeout: 5), "Back from \(r.title) should land on Around me")
         }
     }
 
     func testSearchButtonOpensSearch() {
         let app = XCUIApplication()
+        app.launchArguments += ["-setupSeen", "YES"]
         app.launch()
-        let field = app.navigationBars["Today"].buttons["Search"].firstMatch
+        let field = app.navigationBars["Home"].buttons["Search"].firstMatch
         XCTAssertTrue(field.waitForExistence(timeout: 8))
         field.tap()
-        XCTAssertTrue(app.navigationBars["Search"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.navigationBars["Ask or search"].waitForExistence(timeout: 5))
     }
 
     func testFiveTabs() {
         let app = XCUIApplication()
+        app.launchArguments += ["-setupSeen", "YES"]
         app.launch()
-        for t in ["Today", "Living here", "Your money", "Government", "Search"] { XCTAssertTrue(app.tabBars.buttons[t].waitForExistence(timeout: 5), "Tab \(t)") }
+        for t in ["Home", "Around me", "Money", "Government", "Ask"] { XCTAssertTrue(app.tabBars.buttons[t].waitForExistence(timeout: 5), "Tab \(t)") }
     }
 }

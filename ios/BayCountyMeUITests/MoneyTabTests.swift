@@ -19,8 +19,9 @@ final class MoneyTabTests: XCTestCase {
 
     func testEachCardOpensItsOwnScreen() {
         let app = XCUIApplication()
+        app.launchArguments += ["-setupSeen", "YES"]
         app.launch()
-        app.tabBars.buttons["Your money"].tap()
+        app.tabBars.buttons["Money"].tap()
         XCTAssertTrue(app.navigationBars["Your money"].waitForExistence(timeout: 5))
         for c in cards {
             let card = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", c.card)).firstMatch

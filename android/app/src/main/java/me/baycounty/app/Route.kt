@@ -51,9 +51,10 @@ sealed class Route {
     object Meetings : Route()
     object PublicSafety : Route()
     object Overlaps : Route()
+    data class TaxBill(val districtID: String? = null) : Route()
 }
 
-/** Today, Living here, Money, Government and Search: the site's menu sections (Meetings sit under Government). */
+/** Home, Around me (the site's Living here), Money, Government and Ask (search and the question box). */
 enum class Tab { HOME, LIVING, MONEY, DECIDES, SEARCH }
 
 /** One back stack per tab, like a NavigationStack in each iOS tab. */

@@ -74,6 +74,7 @@ enum Route: Hashable {
     case meetings
     case publicSafety
     case overlaps
+    case taxBill(districtID: String? = nil)
 
     /// The screen's name in the anonymous usage counts (AppUsage): the case name, plus the list or government for
     /// those two, and the list a record came from. Never a person, address, search or record id.
@@ -141,6 +142,7 @@ extension View {
                 case .myHome: MyHomeView()
                 case .publicSafety: PublicSafetyView()
                 case .overlaps: OverlapsView()
+                case .taxBill(let d): TaxBillView(districtID: d)
                 }
             }
             .pageBackground()
