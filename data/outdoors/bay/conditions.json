@@ -1,56 +1,43 @@
 {
- "fetched_at": "2026-10-29T11:29:47+00:00",
- "issued": "2026-10-29T07:53:00+00:00",
- "product_url": "https://api.weather.gov/products/9e6d46da-df7a-48bb-bda7-4b8df3125aee",
+ "fetched_at": "2026-10-30T11:27:37+00:00",
+ "issued": "2026-10-30T10:02:00+00:00",
+ "product_url": "https://api.weather.gov/products/bd200d1e-5d03-474d-9879-69d2c6ab9258",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "Northeasterly offshore winds through Friday will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
+ "outlook": "Northeasterly offshore winds through today will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
  "periods": [
   {
    "period": "Today",
    "rip_current_risk": "Moderate",
-   "surf_height": "1 foot or less",
-   "uv_index": "High",
+   "surf_height": "Around 1 foot",
+   "uv_index": "Moderate",
    "water_temperature": "74 degrees",
-   "weather": "Sunny",
-   "high_temperature": "In the lower 80s",
-   "winds": "Northeast winds 10 to 15 mph",
-   "sunrise": "7:54 AM",
-   "sunset": "6:59 PM",
-   "summary": null
-  },
-  {
-   "period": "Friday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "1 foot or less",
-   "uv_index": null,
-   "water_temperature": null,
    "weather": "Partly sunny",
    "high_temperature": "In the lower 80s",
-   "winds": "Northeast winds 10 to 15 mph",
+   "winds": "East winds 10 to 15 mph",
    "sunrise": "7:55 AM",
    "sunset": "6:58 PM",
    "summary": null
   },
   {
    "period": "Saturday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "around 1 foot",
+   "rip_current_risk": "High",
+   "surf_height": "Around 1 foot",
    "uv_index": null,
    "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. A slight chance of showers. Highs in the upper 70s. East winds around 15 mph."
+   "weather": "Mostly cloudy until 3 PM, then mostly",
+   "high_temperature": "In the lower 80s",
+   "winds": "East winds around 15 mph",
+   "sunrise": "7:56 AM",
+   "sunset": "6:57 PM",
+   "summary": null
   },
   {
    "period": "Sunday",
    "rip_current_risk": "High",
-   "surf_height": null,
+   "surf_height": "around 3 feet",
    "uv_index": null,
    "water_temperature": null,
    "weather": null,
@@ -58,7 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "High rip current risk*. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph."
+   "summary": "High rip current risk*. Surf height around 3 feet. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph."
   },
   {
    "period": "Monday",
@@ -71,7 +58,20 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 15 mph."
+   "summary": "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 20 mph."
+  },
+  {
+   "period": "Tuesday",
+   "rip_current_risk": "Moderate",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the upper 70s. East winds around 15 mph."
   }
  ],
  "alerts": [],

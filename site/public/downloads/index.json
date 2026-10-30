@@ -7528,7 +7528,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 414,
+   "rows": 415,
    "columns": [
     {
      "name": "website",
@@ -8780,7 +8780,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 187,
+   "rows": 189,
    "columns": [
     {
      "name": "place_id",
@@ -9475,18 +9475,18 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-10-29T07:53:00+00:00"
+      "2026-10-30T10:02:00+00:00"
      ]
     },
     {
      "name": "period",
      "type": "string",
      "values": [
-      "Friday",
       "Monday",
       "Saturday",
       "Sunday",
-      "Today"
+      "Today",
+      "Tuesday"
      ]
     },
     {
@@ -9523,15 +9523,15 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "1 foot or less",
-      "around 1 foot"
+      "Around 1 foot",
+      "around 3 feet"
      ]
     },
     {
      "name": "uv_index",
      "type": "string",
      "values": [
-      "High"
+      "Moderate"
      ]
     },
     {
@@ -9545,8 +9545,8 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Partly sunny",
-      "Sunny"
+      "Mostly cloudy until 3 PM, then mostly",
+      "Partly sunny"
      ]
     },
     {
@@ -9560,23 +9560,24 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "Northeast winds 10 to 15 mph"
+      "East winds 10 to 15 mph",
+      "East winds around 15 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:54 AM",
-      "7:55 AM"
+      "7:55 AM",
+      "7:56 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "6:58 PM",
-      "6:59 PM"
+      "6:57 PM",
+      "6:58 PM"
      ]
     },
     {
@@ -9584,13 +9585,13 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph.",
-      "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 15 mph.",
+      "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 20 mph.",
+      "High rip current risk*. Surf height around 3 feet. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. A slight chance of showers. Highs in the upper 70s. East winds around 15 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the upper 70s. East winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Northeasterly offshore winds through Friday will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
+      "Northeasterly offshore winds through today will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9614,7 +9615,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/9e6d46da-df7a-48bb-bda7-4b8df3125aee",
+      "https://api.weather.gov/products/bd200d1e-5d03-474d-9879-69d2c6ab9258",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12280,7 +12281,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-10-30"
      ]
     },
     {
@@ -12429,7 +12430,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 23,
+   "rows": 24,
    "columns": [
     {
      "name": "notice_id",
@@ -12498,7 +12499,7 @@
       "PRECAUTIONARY BOIL WATER NOTICE",
       "PRECAUTIONARY BOIL WATER NOTICE - Scheduled Outage",
       "Precautionary Boil Water Norice",
-      "Precautionary Boil Water Notice for Manistee Drive",
+      "Precautionary Boil Water Notice for Manistee Drive Rescinded",
       "Precautionary Boil Water Notice for Sugar Sands & Sunstop Gas Station",
       "RESCINDED: Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-27",
       "RESCINDED: Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr. Updated on 2026-10-27",
@@ -12507,7 +12508,8 @@
       "Road Closure Notice: Michigan Ave. between W 22nd St. and W 20th Ct.",
       "Sand Available Ahead of Tropical Storm Isaias",
       "Tropical Storm Isaias Updates",
-      "Water Quality Advisory Issued for Carl Gray Park"
+      "Water Quality Advisory Issued for Carl Gray Park",
+      "West Side of Martina T-Dock Closed Friday, October 30, from 12-10 PM Due to Special Event"
      ]
     },
     {
@@ -12518,7 +12520,6 @@
       "As the storms clear, Bay County Emergency Management asks the residents of the county to fill out their residential damage assessment form.",
       "Beginning Monday, Oct. 26, Bay County crews will conduct a single roadside collection pass specifically for unbagged vegetative debris in the hardest-hit areas of unincorporated Bay County.",
       "Beginning Monday, October 5, the following sections will be closed to vehicle traffic: - Florida Avenue: W. 7th Street to W. 8th Street - W. 7th Street: Ohio Avenue to Florida Avenue Detour signs will be in place to help motorists navigate the area",
-      "Due to an install of a new section of water main, 104-181 Manistee Drive is under a Precautionary Boil Water Notice in Panama City Beach.",
       "For local information on Tropical Storm Isaias, please visit www.pcbfl.gov/storm.",
       "For the latest on Hurricane Isaias response and recovery, visit www.pcbfl.gov/storm",
       "Heavy rain is expected this weekend with Tropical Storm Isaias. Bay County has sand available to the public to help you protect your home and property. Find sandbag pickup locations and details below.",
@@ -12531,6 +12532,8 @@
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main.",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main.",
       "The Florida Department of Health in Bay County (DOH-Bay) has issued a water quality advisory for high bacterial levels for the following Panama City location: Carl Gray Park",
+      "The Precautionary Boil Water Notice that was issued for 104-181 Manistee Drive has been rescinded.",
+      "West Side of Martina T-Dock Closed Friday, October 30, from 12-10 PM Due to Special Event",
       "With heavy rain expected, now is a good time to check your evacuation zone. Evacuation zones in Bay County may be different than you think. Look up your address on the Evacuation Zones map on the Bay County website below."
      ]
     },
@@ -12577,13 +12580,14 @@
       "2026-10-14T16:52:00.000Z",
       "2026-10-23T13:42:27.000Z",
       "2026-10-23T14:35:50.000Z",
-      "2026-10-27T22:46:29.000Z",
       "2026-10-28T18:47:00.000Z",
       "2026-10-28T18:48:00.000Z",
       "2026-10-28T18:55:43.000Z",
       "2026-10-28T18:56:07.000Z",
       "2026-10-28T21:03:00.000Z",
-      "2026-10-28T21:10:16.000Z"
+      "2026-10-28T21:10:16.000Z",
+      "2026-10-29T17:30:51.000Z",
+      "2026-10-29T20:49:18.000Z"
      ]
     },
     {
@@ -12628,13 +12632,14 @@
       "2026-10-14T16:52:00.000Z",
       "2026-10-23T13:42:27.000Z",
       "2026-10-23T14:35:50.000Z",
-      "2026-10-27T22:46:29.000Z",
       "2026-10-28T18:47:00.000Z",
       "2026-10-28T18:48:00.000Z",
       "2026-10-28T18:55:43.000Z",
       "2026-10-28T18:56:07.000Z",
       "2026-10-28T21:03:00.000Z",
-      "2026-10-28T21:10:16.000Z"
+      "2026-10-28T21:10:16.000Z",
+      "2026-10-29T17:30:51.000Z",
+      "2026-10-29T20:49:18.000Z"
      ]
     },
     {
@@ -12661,7 +12666,8 @@
       "2026-10-27T20:41:37.771Z",
       "2026-10-28T00:40:09.58179+00:00",
       "2026-10-28T21:06:37.512914+00:00",
-      "2026-10-28T21:10:22.208921+00:00"
+      "2026-10-28T21:10:22.208921+00:00",
+      "2026-10-29T20:50:02.816934+00:00"
      ]
     },
     {
@@ -12670,7 +12676,7 @@
      "values": [
       "2026-10-27T20:41:53.613Z",
       "2026-10-28T14:45:01.081378+00:00",
-      "2026-10-29T11:29:50.403Z"
+      "2026-10-30T11:27:39.080Z"
      ]
     },
     {
@@ -12695,6 +12701,7 @@
       "https://www.panamacity.gov/AlertCenter.aspx?AID=700",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=701",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=702",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=703",
       "https://www.pcbfl.gov/AlertCenter.aspx?AID=23",
       "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
       "https://www.pcbfl.gov/storm"
@@ -13707,7 +13714,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 67,
+   "rows": 71,
    "columns": [
     {
      "name": "place_id",
@@ -13746,7 +13753,8 @@
       "2026-10-26",
       "2026-10-27",
       "2026-10-28",
-      "2026-10-29"
+      "2026-10-29",
+      "2026-10-30"
      ]
     },
     {
@@ -13854,6 +13862,7 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-028.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-108.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/mlwyHIF8RUrB6T3Ot2Df/d59b./cropped-510.pdf",
@@ -13906,9 +13915,12 @@
       "Ordinance 1153",
       "Ordinance 1154",
       "Ordinance 1192R",
+      "Ordinance 1197",
       "Ordinance 1691",
       "Ordinance 3315",
+      "Ordinance 3317",
       "Ordinance 904",
+      "Ordinance 950",
       "Project 414877",
       "Project R2025-14-0005600",
       "RFP PCB26-51",
@@ -13929,6 +13941,7 @@
       "lynne.fasone@pcbfl.gov",
       "mell@mexicobeachfl.gov",
       "planning@baycountyfl.gov",
+      "planning@panamacity.gov",
       "purchasing@cityoflynnhaven.com",
       "purchasing@panamacity.gov",
       "purchasing@pcbfl.gov",
@@ -13954,6 +13967,7 @@
       "(850) 248-8270",
       "(850) 265-2121",
       "(850) 648-5700",
+      "(850) 691-4595; (850) 872-3014; (850) 872-3028",
       "(850) 691-4902",
       "(850) 723-3089",
       "(850) 763-5730",
@@ -13961,6 +13975,7 @@
       "(850) 767-4100",
       "(850) 767-4139",
       "(850) 767-4363",
+      "(850) 871-6000",
       "(850) 872-3020"
      ]
     },
@@ -13972,10 +13987,12 @@
       "https://cityoflynnhaven.com/Bids.aspx",
       "https://drive.google.com/drive/folders/1xcGtgH-2HGNKVYBXkhRnpbUbaTk-DBJC?usp=sharing",
       "https://lynnhavenfl.portal.civicclerk.com/event/1066/files/agenda/1051",
+      "https://lynnhavenfl.v8.civicclerk.com/Meetings/Agenda?id=2112",
       "https://mexicobeachfl.gov/bids/",
       "https://panamacity.bonfirehub.com/portal/?tab=openOpportunities",
       "https://procurement.opengov.com/signup",
       "lynnhavenfl.portal.civicclerk.com",
+      "www.CITYOFCALLAWAY.COM",
       "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/bids.aspx",
       "www.panamacity.gov",
@@ -13991,7 +14008,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 111,
+   "rows": 119,
    "columns": [
     {
      "name": "place_id",
@@ -14114,7 +14131,8 @@
       "2026-10-23",
       "2026-10-26",
       "2026-10-27",
-      "2026-10-28"
+      "2026-10-28",
+      "2026-10-29"
      ]
     },
     {
@@ -14125,6 +14143,7 @@
       "2026-11-02",
       "2026-11-03",
       "2026-11-04",
+      "2026-11-05",
       "2026-11-06",
       "2027-04-30"
      ]
@@ -14143,7 +14162,8 @@
      "values": [
       "2026-10-27",
       "2026-10-28",
-      "2026-10-29"
+      "2026-10-29",
+      "2026-10-30"
      ]
     },
     {
@@ -14237,7 +14257,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-10-30"
      ]
     }
    ],
@@ -15094,7 +15114,7 @@
    "id": "restaurants",
    "title": "Restaurants and food service",
    "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1435,
+   "rows": 1437,
    "columns": [
     {
      "name": "place_id",
@@ -15338,7 +15358,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17190,
+   "rows": 17195,
    "columns": [
     {
      "name": "place_id",
@@ -15609,7 +15629,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 23,
+   "rows": 16,
    "columns": [
     {
      "name": "place_id",
@@ -15652,31 +15672,7 @@
     },
     {
      "name": "title",
-     "type": "string",
-     "values": [
-      "Bay County Fire Rescue Open House",
-      "Boo Bash",
-      "Card Club",
-      "Craft Drop-in: Halloween",
-      "Crafternoon @ The Library",
-      "Dream Builders at MLK",
-      "Escape the Library (Ages 13+) (Registration Required)",
-      "Fall Festival",
-      "Line Dancing",
-      "Marshall Brothers",
-      "Mexico Beach: 3rd LDC Workshop",
-      "Mexico Beach: Special Meeting and 4th LDC Workshop",
-      "PC Senior Living",
-      "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
-      "Sail Into School (Ages 3 – 5)",
-      "Sansom Equipment Company, Inc.",
-      "Sea Needles",
-      "Sunset Yoga",
-      "Ten-8 Fire & Safety, LLC",
-      "Toys for Kids Halloween Bash 2026",
-      "Young Professionals Coffee, Conversations & Headshots",
-      "ZooBoo"
-     ]
+     "type": "string"
     },
     {
      "name": "summary",
@@ -15693,7 +15689,6 @@
      "values": [
       "2026-10-20",
       "2026-10-22",
-      "2026-10-29",
       "2026-10-30",
       "2026-10-31"
      ]
@@ -15702,13 +15697,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-10-29T09:00:00",
-      "2026-10-29T09:00:00-05:00",
-      "2026-10-29T10:00:00",
-      "2026-10-29T10:30:00",
-      "2026-10-29T15:00:00",
-      "2026-10-29T17:30:00",
-      "2026-10-29T18:00:00",
       "2026-10-30T09:00:00",
       "2026-10-30T09:00:00-05:00",
       "2026-10-30T09:30:00",
@@ -15725,12 +15713,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-10-29T10:30:00",
-      "2026-10-29T11:00:00",
-      "2026-10-29T13:00:00",
-      "2026-10-29T17:00:00",
-      "2026-10-29T19:00:00",
-      "2026-10-29T20:00:00",
       "2026-10-30T11:00:00",
       "2026-10-30T12:00:00",
       "2026-10-30T14:00:00",
@@ -15779,7 +15761,6 @@
      "name": "town",
      "type": "string",
      "values": [
-      "Bay County",
       "Mexico Beach",
       "Panama City",
       "Panama City Beach"
@@ -15904,7 +15885,6 @@
      "name": "source",
      "type": "string",
      "values": [
-      "Bay County",
       "City of Panama City",
       "Mexico Beach (visitor events)",
       "Northwest Regional Library System",
@@ -15919,7 +15899,6 @@
       "https://mexicobeachfl.gov/government/council-meetings/",
       "https://pcbeach.org/local-events/",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
-      "https://www.baycountyfl.gov/Calendar.aspx",
       "https://www.mexicobeach.com/events/",
       "https://www.nwrls.com/events",
       "https://www.panamacity.gov/Calendar.aspx"
@@ -17477,7 +17456,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-10-30"
      ]
     },
     {
@@ -19097,7 +19076,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 49,
+   "rows": 48,
    "columns": [
     {
      "name": "board",
@@ -19134,7 +19113,6 @@
       "City Commission Meeting",
       "City Commission Meeting of October 27, 2026.",
       "City Council",
-      "City Council Meeting",
       "Commission Meeting",
       "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
@@ -19188,7 +19166,6 @@
       "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
-      "https://mexicobeachfl.gov/uploads/2026/09/Octerver-27-2026-City-Council-Meeting-Agena.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
@@ -19208,7 +19185,6 @@
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
-      "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
@@ -20574,6 +20550,7 @@
       "2026-08-13",
       "2026-09-10",
       "2026-10-16",
+      "2026-10-29",
       "2026-11-16"
      ]
     },

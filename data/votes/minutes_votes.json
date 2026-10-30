@@ -1,5 +1,5 @@
 {
-"as_of":"2026-10-29",
+"as_of":"2026-10-30",
 "notes":[
 "Every motion read from official minutes by automated text extraction (data/minutes/read_minutes.py), with names matched to officeholder-terms. 'auto-checked' votes passed every automatic check (the named votes add up to the printed tally, every voter held a seat that day, a quorum voted); 'reviewed' votes were flagged and then approved by an admin. Scanned minutes were read with OCR, so check the source page before relying on a single vote.",
 "vote_method: roll_call = each member's vote is printed; unanimous = minutes say unanimous, so every member present is recorded yes; no_dissent_recorded = minutes say the motion carried and name no one voting no."

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29",
+ "as_of": "2026-10-30",
  "county": "bay",
  "method": "Business contributors to current officeholders and 2026 local candidates, matched to the Florida Division of Corporations (Sunbiz) quarterly corporate file filtered to Bay County (any principal, mailing, registered-agent or officer address in the county). exact = same name once punctuation and legal suffixes are removed; vendor_alias = a hand-checked spelling join in data/entities/vendors.json; plural_variant = same name apart from plurals/possessives; truncated_name = the filing cut the name off and only one entity starts with it; reviewed = checked by hand (donor_overrides.json). A dissolved company counts only if it was still filing within 2 years of the gift. A match says the filed name is that registered entity; it says nothing about why a gift was made. Built by data/sunbiz/build_sunbiz.py.",
  "summary": {
