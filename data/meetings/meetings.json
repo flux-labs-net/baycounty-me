@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-29T06:22:35-05:00",
+  "generated": "2026-10-30T06:21:18-05:00",
   "window": {
-    "from": "2026-10-29",
-    "to": "2026-12-28"
+    "from": "2026-10-30",
+    "to": "2026-12-29"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -71,7 +71,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (26 records)",
+        "AgendaCenter": "ok (25 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
@@ -241,7 +241,7 @@
         "Council Meetings page": "ok (82 records)"
       },
       "coverage": {
-        "agenda_feed": 3,
+        "agenda_feed": 2,
         "calendar": 0,
         "expected": 4
       }
@@ -500,18 +500,6 @@
       ]
     },
     {
-      "board": "mb",
-      "title": "City Council Meeting",
-      "start": "2026-10-27T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/09/Octerver-27-2026-City-Council-Meeting-Agena.pdf",
-      "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "past": true
-    },
-    {
       "board": "pc",
       "title": "City Commission Meeting of October 27, 2026.",
       "start": "2026-10-27T16:30:00-05:00",
@@ -622,7 +610,8 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "mb",
