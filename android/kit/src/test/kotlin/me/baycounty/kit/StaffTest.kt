@@ -49,7 +49,7 @@ class StaffTest {
         val s = demo.submissions!!
         assertEquals("lynnhaven@ingest.baycounty.me", s.address)
         assertEquals(listOf(true, false, false), s.due.map { it.current })
-        assertEquals(listOf("Waiting for you", "Published", "Held for a check"), s.files.map { it.statusLabel })
+        assertEquals(listOf("Waiting for your OK", "Published", "Doesn’t add up"), s.files.map { it.statusLabel })
         assertEquals("Contracts awarded · 6 rows · through Oct 27, 2026", s.files[0].detail)
         assertTrue(s.files[0].canPublish)
         assertTrue(s.files[1].canWithdraw)

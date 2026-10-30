@@ -285,7 +285,7 @@ public struct StaffRecordFile: Decodable, Hashable, Sendable, Identifiable {
     public let rows: Int?
     public let problem: String?
     public let publishedAt: String?
-    /// Waiting, Published, Held for a check, Not public, Withdrawn.
+    /// Waiting for your OK, Being checked, In review, Published, Doesn’t add up, Not published after review, Withdrawn.
     public var statusLabel: String {
         ["waiting": "Waiting for your OK", "checking": "Being checked", "in_review": "In review", "published": "Published", "held": "Doesn’t add up", "not_published": "Not published after review", "withdrawn": "Withdrawn"][status] ?? status.capitalized
     }

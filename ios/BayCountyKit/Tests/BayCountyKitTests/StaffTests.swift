@@ -43,7 +43,7 @@ final class StaffTests: XCTestCase {
         let s = try XCTUnwrap(try demo().submissions)
         XCTAssertEqual(s.address, "lynnhaven@ingest.baycounty.me")
         XCTAssertEqual(s.due.map(\.current), [true, false, false])
-        XCTAssertEqual(s.files.map(\.statusLabel), ["Waiting for you", "Published", "Held for a check"])
+        XCTAssertEqual(s.files.map(\.statusLabel), ["Waiting for your OK", "Published", "Doesn’t add up"])
         XCTAssertEqual(s.files[0].detail, "Contracts awarded · 6 rows · through Oct 27, 2026")
         XCTAssertTrue(s.files[0].canPublish)
         XCTAssertTrue(s.files[1].canWithdraw)
