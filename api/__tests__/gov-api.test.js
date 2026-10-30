@@ -38,8 +38,33 @@ create table community_events (id bigint generated always as identity primary ke
 create table job_openings (id bigint generated always as identity primary key, place_id text, job_id text, board text, employer text, title text, department text, job_type text,
   pay text, posted text, closes text, url text, first_seen text, source_url text, gov_id text, government_key text, origin text not null default 'manual', record_hash text not null,
   created_at timestamptz default now(), updated_at timestamptz default now(), unique (origin, record_hash));
-create table budget_years (id bigint generated always as identity primary key, gov_id text, fiscal_year integer, name text, amount numeric, source_url text,
+create table budget_years (id bigint generated always as identity primary key, government text, gov_id text, fiscal_year integer, basis text, section text, line_key text, name text,
+  service text, fund_type text, amount numeric, in_total boolean, status text, source_url text,
   government_key text, origin text not null default 'manual', record_hash text not null, created_at timestamptz default now(), updated_at timestamptz default now());
+create table officeholder_terms (id bigint generated always as identity primary key, gov_id text, body text, seat text, seat_order bigint, person_name text, person_id text,
+  start_date text, end_date text, appointed boolean, vacant boolean, how text, source_url text);
+insert into officeholder_terms (gov_id, body, seat, seat_order, person_name, person_id, start_date, end_date, how) values
+  ('lh', 'City Commission', 'Mayor', 0, 'Pat Mayor', 'pat-mayor', '2022-04-12', null, 'elected'),
+  ('lh', 'City Commission', 'Seat 1', 1, 'Sam Seat', 'sam-seat', '2024-04-09', null, 'elected'),
+  ('lh', 'City Commission', 'Seat 1', 1, 'Old Member', 'old-member', '2018-04-10', '2024-04-09', 'elected');
+create table meetings (id bigint generated always as identity primary key, board text, title text, start text, location text, agenda_url text, packet_url text, minutes_url text,
+  status text, expected boolean, cancelled boolean, items jsonb, agenda_items jsonb);
+insert into meetings (board, title, start, agenda_url, items) values
+  ('lh', 'Regular meeting', to_char(current_date + 5, 'YYYY-MM-DD') || 'T17:00:00-06:00', 'https://lh.test/agenda.pdf', '[{"title": "Award paving bid", "amount": "$84,500.00"}, {"title": "Minutes"}]'),
+  ('lh-cra', 'CRA meeting', to_char(current_date + 12, 'YYYY-MM-DD') || 'T16:00:00-06:00', null, null),
+  ('pc', 'Panama City meeting', to_char(current_date + 5, 'YYYY-MM-DD') || 'T09:00:00-06:00', null, null),
+  ('lh', 'Old meeting', '2020-01-14T17:00:00-06:00', null, null);
+create table member_votes (id bigint generated always as identity primary key, "date" date, board text, member text, vote text, headline text, source_url text,
+  person_id text, vote_id text, government_key text);
+insert into member_votes ("date", board, member, vote, headline, person_id, vote_id, government_key) values
+  ('2026-09-08', 'Lynn Haven City Commission', 'Pat Mayor', 'yes', 'Adopt the FY2027 budget', 'pat-mayor', 'lh:1', 'lh'),
+  ('2026-09-22', 'Lynn Haven City Commission', 'Pat Mayor', 'no', 'Raise the solid waste fee', 'pat-mayor', 'lh:2', 'lh'),
+  ('2026-09-22', 'Lynn Haven City Commission', 'Sam Seat', 'yes', 'Raise the solid waste fee', 'sam-seat', 'lh:2', 'lh');
+create table votes (id bigint generated always as identity primary key, vote_id text, headline text, outcome text, tally text, split boolean, amount numeric, category text, source_url text);
+insert into votes (vote_id, headline, outcome, tally, split) values ('lh:1', 'Adopt the FY2027 budget', 'passed', '5-0', false), ('lh:2', 'Raise the solid waste fee', 'passed', '3-2', true);
+create table contracts (id bigint generated always as identity primary key, "date" date, vendor text, vendor_id text, amount numeric, purpose text, method text, source_url text, government_key text);
+insert into contracts ("date", vendor, vendor_id, amount, purpose, government_key) values (current_date - 30, 'Panhandle Paving LLC', 'panhandle-paving', 84500, 'Resurface 5th Street', 'lh'),
+  (current_date - 30, 'Other City Vendor', null, 1000, 'Not ours', 'pc');
 create table emergency_live (notice_id text primary key);
 insert into public_notices (place_id, notice_id, published, gov_id, title, text, origin, record_hash) values ('fl-bay', 'pn:1', '2026-10-01', 'lh', 'From the notice site', 'Read from records', 'site_build', 'h1');
 insert into budget_years (gov_id, fiscal_year, name, amount, source_url, origin, record_hash) values ('lh', 2026, 'General Fund', 21500000, 'https://example.gov/budget.pdf', 'site_build', 'b1');
@@ -48,13 +73,14 @@ insert into budget_years (gov_id, fiscal_year, name, amount, source_url, origin,
 test.before(async () => {
   if (!URL_) return;
   const {Pool} = require('pg');
-  pool = new Pool({connectionString: URL_, max: 1});
+  pool = new Pool({connectionString: URL_, max: 1, options: '-c search_path=govtest,public'});  // every connection, if one is replaced
   q = async (t, p = []) => (await pool.query(t, p)).rows;
   await q('drop schema if exists gov cascade');
   await q('drop schema if exists govtest cascade');
   await pool.query(STUBS);
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0088_gov_workspace.sql'), 'utf8'));
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0090_area_maps.sql'), 'utf8'));
+  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0096_official_dashboard.sql'), 'utf8'));
   await q(`insert into gov.members (workspace_id, email, role) values ('lh', 'clerk@lh.test', 'publisher'), ('lh', 'chief@lh.test', 'alert_sender'),
     ('lh', 'mayor@lh.test', 'viewer'), ('lh', 'manager@lh.test', 'owner'), ('county', 'em1@county.test', 'alert_sender'), ('county', 'em2@county.test', 'alert_sender')`);
   G = require('../_gov');
@@ -275,4 +301,52 @@ test('staff app: the site owner signs in with a code and sees every government; 
   } finally {
     if (old === undefined) delete process.env.ADMIN_EMAILS; else process.env.ADMIN_EMAILS = old;
   }
+});
+
+test('elected officials: tied to their seat, see their own dashboard, change nothing', opts, async () => {
+  await q(`insert into govtest.budget_years (government, gov_id, fiscal_year, basis, section, line_key, name, amount, status, origin, record_hash) values
+    ('City of Lynn Haven', 'lh', 2025, 'adopted', 'total', 'total', 'Total budget', 60000000, 'adopted', 'site_build', 'b2'),
+    ('City of Lynn Haven', 'lh', 2026, 'adopted', 'total', 'total', 'Total budget', 66000000, 'adopted', 'site_build', 'b3')`);
+  as = who('manager@lh.test');
+  assert.equal((await post('members', {email: 'mayor2@lh.test', role: 'official'})).status, 400, 'an official needs a seat');
+  assert.equal((await post('members', {email: 'mayor2@lh.test', role: 'official', person_id: 'someone-else'})).status, 400, 'only a seat on this government');
+  assert.equal((await post('members', {email: 'mayor2@lh.test', role: 'official', person_id: 'pat-mayor'})).status, 200);
+  const people = await get('members');
+  assert.ok(people.body.officials.some(o => o.person_id === 'sam-seat'), 'the picker lists current seats');
+  assert.ok(!people.body.officials.some(o => o.person_id === 'old-member'), 'not former members');
+  assert.equal(people.body.members.find(m => m.email === 'mayor2@lh.test').person_name, 'Pat Mayor');
+
+  as = who('mayor2@lh.test');
+  const d = await get('official');
+  assert.equal(d.status, 200, JSON.stringify(d.body));
+  assert.equal(d.body.official.person_id, 'pat-mayor', 'opens on their own seat');
+  assert.equal(d.body.own_person_id, 'pat-mayor');
+  assert.deepEqual(d.body.board.map(b => b.person_id), ['pat-mayor', 'sam-seat']);
+  assert.deepEqual(d.body.meetings.upcoming.map(m => m.board), ['lh', 'lh-cra'], 'their own boards only, coming up');
+  assert.equal(d.body.meetings.upcoming[0].money_items, 1);
+  assert.equal(d.body.votes.count.votes, 2);
+  assert.equal(d.body.votes.count.on_losing_side, 1, 'voted no on a split vote that passed');
+  assert.equal(d.body.numbers.contracts.count, 1, 'their government only');
+  assert.equal(d.body.numbers.budget.history.length, 2);
+  const other = await get('official', {person: 'sam-seat'});
+  assert.equal(other.status, 200, JSON.stringify(other.body));
+  assert.equal(other.body.official.person_id, 'sam-seat', 'a colleague’s public record');
+  assert.equal(other.body.votes.count.on_losing_side, 0);
+  assert.equal((await get('official', {person: 'nobody'})).status, 404);
+
+  // Read only: an official posts nothing, sends nothing, manages no one; flags are allowed.
+  assert.equal((await post('post', {kind: 'notice', title: 'x', text: 'y'})).status, 403);
+  assert.equal((await post('alert', {kind: 'general', title: 'x', message: 'y'})).status, 403);
+  assert.equal((await post('members', {email: 'x@lh.test', role: 'viewer'})).status, 403);
+  assert.equal((await post('submit-preview', {kind: 'contracts', filename: 'x.csv', content: ''})).status, 403);
+  assert.equal((await post('flag', {dataset: 'budget-years', correct_value: '66,100,000', note: 'Amended in March'})).status, 200);
+
+  // Each PDF download is logged.
+  assert.equal((await post('report-log', {report: 'votes', person: 'pat-mayor'})).status, 200);
+  assert.equal((await post('report-log', {report: 'nope'})).status, 400);
+  const [log] = await q(`select detail from gov.activity where action = 'report_downloaded' and email = 'mayor2@lh.test'`);
+  assert.equal(log.detail.report, 'votes');
+  const me = await call('me');
+  assert.equal(me.body.workspaces[0].role, 'official');
+  assert.equal(me.body.workspaces[0].person_id, 'pat-mayor');
 });

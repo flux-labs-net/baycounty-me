@@ -8,6 +8,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import me.baycounty.kit.Staff
 import me.baycounty.kit.StaffAlert
+import me.baycounty.kit.StaffBoard
 import me.baycounty.kit.StaffClient
 import me.baycounty.kit.StaffDemo
 import me.baycounty.kit.StaffFlag
@@ -23,7 +24,7 @@ import me.baycounty.kit.StaffWorkspace
 
 /** Everything the staff app shows, from /api/gov. With [demo] (screenshots, store review) it shows made-up answers
  *  from staff-demo.json and never calls the server. Same behavior as the iOS StaffStore. */
-class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, asStaff: Boolean = false) {
+class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, asStaff: Boolean = false, asOfficial: Boolean = false) {
     private val client = StaffClient(if (demo == null) tokens.read() else null)
 
     var me by mutableStateOf<StaffMe?>(null); private set
@@ -33,6 +34,8 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
     var notices by mutableStateOf<StaffPosts?>(null); private set
     var flags by mutableStateOf<List<StaffFlag>>(emptyList()); private set
     var submissions by mutableStateOf<StaffSubmissions?>(null); private set
+    /** The board dashboard, for an elected official (role official). */
+    var board by mutableStateOf<StaffBoard?>(null); private set
     var loading by mutableStateOf(false); private set
     var error by mutableStateOf<String?>(null)
     var workspaceId by mutableStateOf<String?>(null)
@@ -43,13 +46,19 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
     val workspace: StaffWorkspace? get() = me?.workspaces?.firstOrNull { it.id == workspaceId }
     val role get() = workspace?.role ?: if (isOwner) "owner" else "viewer"
     fun can(need: String) = Staff.can(role, need)
+    val isOfficial get() = role == "official"
     val alertKinds get() = me?.alertKinds ?: emptyMap()
     val noticeKinds get() = me?.noticeKinds ?: emptyMap()
 
     init {
         if (demo != null) {
             overview = demo.overview; home = demo.home; alerts = demo.alerts.alerts; notices = demo.notices; submissions = demo.submissions
-            if (asStaff) {
+            if (asOfficial) {
+                // An elected commissioner's view: their board dashboard (made-up names).
+                me = demo.me.copy(email = "privera@example.gov", admin = false,
+                    workspaces = listOf(StaffWorkspace("lh", "City of Lynn Haven", false, "official", "pat-rivera")))
+                workspaceId = "lh"; board = demo.board; flags = emptyList()
+            } else if (asStaff) {
                 me = demo.me.copy(email = "utilities@example.gov", admin = false,
                     workspaces = listOf(StaffWorkspace("lh", "City of Lynn Haven", false, "alert_sender")))
                 workspaceId = "lh"
@@ -78,7 +87,7 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
     suspend fun signOut() {
         if (demo == null) client.logout()
         tokens.save(null); token = null
-        me = null; overview = null; home = null; alerts = emptyList(); notices = null; flags = emptyList(); submissions = null; workspaceId = null
+        me = null; overview = null; home = null; alerts = emptyList(); notices = null; flags = emptyList(); submissions = null; board = null; workspaceId = null
     }
 
     private fun pickDefault() {
@@ -108,6 +117,7 @@ class StaffModel(private val tokens: TokenStore, val demo: StaffDemo? = null, as
             val h = async { client.home(ws) }; val a = async { client.alerts(ws) }; val n = async { client.notices(ws) }; val f = async { client.flags(ws) }
             home = h.await(); alerts = a.await().alerts; notices = n.await(); flags = f.await().flags
             submissions = if (can("submit")) runCatching { client.submissions(ws) }.getOrNull() else null
+            board = if (isOfficial) client.board(ws) else null
         } else if (isOwner) {
             val o = async { client.overview() }; val f = async { client.reviewFlags("all") }
             overview = o.await(); flags = f.await().flags

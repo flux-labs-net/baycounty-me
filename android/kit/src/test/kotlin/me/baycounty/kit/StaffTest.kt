@@ -45,6 +45,28 @@ class StaffTest {
         assertEquals("Records sender", Staff.roleLabel["records"])
     }
 
+    @Test fun officialsReadTheirBoardDashboard() {
+        assertFalse(Staff.can("official", "publisher"))
+        assertFalse(Staff.can("official", "submit"))
+        assertTrue(Staff.can("official", "viewer"))
+        assertEquals("Elected official", Staff.roleLabel["official"])
+        val b = demo.board!!
+        assertEquals("pat-rivera", b.official?.personId)
+        assertEquals(5, b.board.size)
+        assertEquals("Agenda posted", b.nextMeeting?.statusLabel)
+        assertEquals(3, b.nextMeeting?.moneyItems)
+        assertEquals(5, b.votes!!.count.onLosingSide)
+        assertEquals("Passed 3-2", b.votes!!.recent[1].result)
+        assertEquals("Not recorded", BCJson.decodeFromString(StaffBoard.Vote.serializer(), """{"vote":"unknown","tally":"not found","outcome":"passed"}""").voteLabel)
+        assertEquals("Passed", BCJson.decodeFromString(StaffBoard.Vote.serializer(), """{"vote":"yes","tally":"not found","outcome":"passed"}""").result)
+        assertEquals("$66.0M", StaffBoard.money(b.latestBudget?.total))
+        assertEquals("$84K", StaffBoard.money(84200.0))
+        val ws = BCJson.decodeFromString(StaffWorkspace.serializer(), """{"id":"lh","name":"City of Lynn Haven","role":"official","person_id":"pat-rivera"}""")
+        assertTrue(ws.isOfficial)
+        assertEquals("pat-rivera", ws.personId)
+        assertEquals("https://baycounty.me/api/gov?action=official&person=sam-ortiz&workspace=lh", StaffClient("t").request("official", mapOf("workspace" to "lh", "person" to "sam-ortiz")).url)
+    }
+
     @Test fun decodesSentRecords() {
         val s = demo.submissions!!
         assertEquals("lynnhaven@ingest.baycounty.me", s.address)

@@ -11,9 +11,11 @@ const crypto = require('crypto');
 const {session: adminSession, admins} = require('./_session');
 
 // records: a finance or clerk contact who sends records (Send records tab) and reads everything else, nothing more.
-const ROLES = {viewer: 1, auditor: 1, records: 1, publisher: 2, alert_sender: 3, owner: 4};
+// official: an elected commissioner or council member (migration 0096). Reads only, like a viewer, and opens on their
+// own dashboard (api/_official.js): agendas, their votes and the numbers. Tied to their seat by person_id.
+const ROLES = {viewer: 1, auditor: 1, records: 1, official: 1, publisher: 2, alert_sender: 3, owner: 4};
 const CAN = {read: 1, submit: 2, publish: 2, alert: 3, manage: 4};
-const ROLE_LABEL = {owner: 'Owner', alert_sender: 'Alert sender', publisher: 'Publisher', records: 'Records sender', viewer: 'Viewer', auditor: 'Auditor'};
+const ROLE_LABEL = {owner: 'Owner', alert_sender: 'Alert sender', publisher: 'Publisher', records: 'Records sender', viewer: 'Viewer', auditor: 'Auditor', official: 'Elected official'};
 // Sending records: the records role, or publisher and up.
 const allowed = (role, need) => (ROLES[role] || 0) >= CAN[need] || (need === 'submit' && role === 'records');
 const COOKIE = 'bcm_gov';
@@ -106,8 +108,8 @@ async function caller(req, q) {
 
 // The workspaces a caller can open. A BayCounty.me admin sees every one, as owner.
 async function workspacesFor(q, who) {
-  if (who.admin) return (await q('select id, name, modules, countywide from gov.workspaces order by countywide desc, name')).map(w => ({...w, role: 'owner'}));
-  return q(`select w.id, w.name, w.modules, w.countywide, m.role from gov.members m join gov.workspaces w on w.id = m.workspace_id
+  if (who.admin) return (await q('select id, name, modules, countywide from gov.workspaces order by countywide desc, name')).map(w => ({...w, role: 'owner', person_id: null}));
+  return q(`select w.id, w.name, w.modules, w.countywide, m.role, m.person_id from gov.members m join gov.workspaces w on w.id = m.workspace_id
             where lower(m.email) = $1 order by w.countywide desc, w.name`, [who.email]);
 }
 
@@ -118,17 +120,17 @@ async function requireRole(q, who, ws, need) {
   if (!/^[a-z0-9_-]{1,40}$/.test(String(ws || ''))) throw bad('Choose a workspace.');
   const [w] = await q('select id, name, place_id, modules, countywide from gov.workspaces where id = $1', [ws]);
   if (!w) throw bad('There’s no workspace for that government.', 404);
-  let role = 'owner';
+  let role = 'owner', personId = null;
   if (!who.admin) {
-    const [m] = await q('select role from gov.members where workspace_id = $1 and lower(email) = $2', [ws, who.email]);
+    const [m] = await q('select role, person_id from gov.members where workspace_id = $1 and lower(email) = $2', [ws, who.email]);
     if (!m) throw bad('You don’t have access to this workspace.', 404);
-    role = m.role;
+    role = m.role; personId = m.person_id || null;
   }
   if (!allowed(role, need)) {
     const want = {publish: 'publisher', submit: 'records sender', alert: 'alert sender', manage: 'owner'}[need] || 'viewer';
     throw bad(`This needs ${want} access. Ask your workspace owner.`, 403);
   }
-  return {role, workspace: w};
+  return {role, workspace: w, person_id: personId};
 }
 
 const log = (q, ws, email, action, detail = {}) =>
@@ -411,6 +413,16 @@ async function publicPosts(q, query = {}) {
   return {data: out, note: 'Posted by city and county staff in the BayCounty.me government workspace. Rows also appear in the public-notices, community-events and job-openings datasets (origin gov).'};
 }
 
+// An official member's name from their seat on record (SQL, for member lists aliased m).
+const PERSON_NAME = `(select t.person_name from officeholder_terms t where t.person_id = m.person_id and t.gov_id = m.workspace_id limit 1)`;
+
+// Who holds a seat now (officeholder-terms), to pick from when giving an official access. One government, or all.
+async function seatsNow(q, ws = null) {
+  return q(`select gov_id, person_id, person_name, seat, body from officeholder_terms
+      where person_id is not null and not coalesce(vacant, false) and (end_date is null or end_date >= to_char(now(), 'YYYY-MM-DD'))
+        and ($1::text is null or gov_id = $1) order by gov_id, seat_order, person_name`, [ws]).catch(e => { if (e.code === '42P01') return []; throw e; });
+}
+
 /* ---------- admin side (api/admin.js) ---------- */
 async function adminOverview(q) {
   const workspaces = await q(`select w.id, w.name, w.modules, w.countywide,
@@ -418,8 +430,8 @@ async function adminOverview(q) {
       (select max(at) from gov.activity a where a.workspace_id = w.id) last_activity,
       (select count(*)::int from gov.alerts a where a.workspace_id = w.id and a.status = 'sent' and (a.ends_at is null or a.ends_at > now())) live_alerts
     from gov.workspaces w order by w.countywide desc, w.name`);
-  const members = await q('select workspace_id, email, role, added_by, created_at from gov.members order by workspace_id, role, email');
-  return {workspaces, members, roles: ROLE_LABEL};
+  const members = await q(`select m.workspace_id, m.email, m.role, m.person_id, ${PERSON_NAME} person_name, m.added_by, m.created_at from gov.members m order by m.workspace_id, m.role, m.email`);
+  return {workspaces, members, roles: ROLE_LABEL, officials: await seatsNow(q)};
 }
 
 // The owner's home in the staff app: every workspace with what needs attention, plus totals.
@@ -486,13 +498,21 @@ async function setMember(q, ws, b, by) {
     return {ok: true};
   }
   if (!(role in ROLES)) throw bad(`Role must be one of ${Object.keys(ROLES).join(', ')}, or remove.`);
-  await q(`insert into gov.members (workspace_id, email, role, added_by) values ($1, $2, $3, $4)
-           on conflict (workspace_id, email) do update set role = excluded.role`, [ws, email, role, by]);
-  await log(q, ws, by, 'member_set', {email, role});
+  // An official is tied to their seat on record, so their dashboard shows their own votes.
+  let person = null;
+  if (role === 'official') {
+    person = txt(b.person_id, 120);
+    if (!person) throw bad('Pick which official this is.');
+    const [t] = await q('select person_name from officeholder_terms where gov_id = $1 and person_id = $2 limit 1', [ws, person]).catch(() => []);
+    if (!t) throw bad('That person doesn’t hold a seat on this government on record.');
+  }
+  await q(`insert into gov.members (workspace_id, email, role, person_id, added_by) values ($1, $2, $3, $4, $5)
+           on conflict (workspace_id, email) do update set role = excluded.role, person_id = excluded.person_id`, [ws, email, role, person, by]);
+  await log(q, ws, by, 'member_set', {email, role, ...(person ? {person_id: person} : {})});
   return {ok: true};
 }
 
 module.exports = {ROLES, CAN, ROLE_LABEL, COOKIE, COUNTYWIDE, NOTICE_KINDS, JOB_TYPES, ALERT_KINDS, RECORDS, POSTS, TOPIC_OF,
   caller, workspacesFor, requireRole, log, startLogin, finishLogin, logout, codeEmail,
   adminRemoveAlert, areaShape, listPosts, savePost, withdrawPost, createAlert, confirmAlert, endAlert, reach, liveNotices, records, addFlag, publicPosts,
-  adminOverview, ownerOverview, adminFlags, adminFlagReview, setMember};
+  adminOverview, ownerOverview, adminFlags, adminFlagReview, setMember, PERSON_NAME, seatsNow};

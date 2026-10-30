@@ -31,6 +31,7 @@ import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.Fingerprint
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.HowToVote
 import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Sensors
@@ -192,7 +193,8 @@ private data class Tab(val key: String, val label: String, val icon: ImageVector
 @Composable
 fun StaffRoot(model: StaffModel, screen: String?) {
     var tab by remember {
-        mutableStateOf(when (screen) { "alerts", "send", "alert" -> "alerts"; "notices", "notice" -> "notices"; "flags", "flag" -> "flags"; "more" -> "more"; else -> "home" })
+        mutableStateOf(when (screen) { "alerts", "send", "alert" -> "alerts"; "notices", "notice" -> "notices"; "flags", "flag" -> "flags"; "more" -> "more"; "votes" -> "votes"
+            else -> if (model.isOfficial) "board" else "home" })
     }
     var page by remember {
         mutableStateOf<Page?>(when (screen) {
@@ -218,12 +220,17 @@ fun StaffRoot(model: StaffModel, screen: String?) {
         return
     }
     val all = model.isOwner && model.workspaceId == null
-    val tabs = listOf(
+    // An elected official sees their board dashboard and votes; staff see the workspace.
+    val tabs = if (model.isOfficial) listOf(
+        Tab("board", "Board", Icons.Filled.GridView), Tab("votes", "Votes", Icons.Filled.HowToVote),
+        Tab("flags", "Flags", Icons.Filled.Flag), Tab("more", "More", Icons.Filled.MoreHoriz),
+    ) else listOf(
         Tab("home", if (all) "Overview" else "Home", Icons.Filled.GridView), Tab("alerts", "Alerts", Icons.Filled.Warning),
         Tab("notices", "Notices", Icons.Filled.Description), Tab("flags", "Flags", Icons.Filled.Flag), Tab("more", "More", Icons.Filled.MoreHoriz),
     )
     val title = when (tab) {
         "home" -> if (all) "All governments" else model.workspace?.name?.let(Staff::short) ?: "Home"
+        "board" -> model.workspace?.name?.let(Staff::short) ?: "Board"; "votes" -> "Voting record"
         "alerts" -> "Alerts"; "notices" -> "Notices"; "flags" -> if (all) "Flags to answer" else "Data flags"; else -> "More"
     }
     Scaffold(
@@ -246,6 +253,8 @@ fun StaffRoot(model: StaffModel, screen: String?) {
     ) { pad ->
         Box(Modifier.padding(pad).fillMaxSize()) {
             when (tab) {
+                "board" -> BoardScreen(model)
+                "votes" -> VotesScreen(model)
                 "home" -> if (all) OverviewScreen(model) else WorkspaceHome(model, onRecords = { page = Page.Records }) { page = Page.SendAlert }
                 "alerts" -> if (model.workspaceId == null) PickGovernment(model, "alerts") else AlertsScreen(model, { page = Page.SendAlert }) { page = Page.Alert(it) }
                 "notices" -> if (model.workspaceId == null) PickGovernment(model, "notices") else NoticesScreen(model) { page = Page.Notice(it) }
@@ -671,7 +680,8 @@ fun MoreScreen(model: StaffModel, onRecords: () -> Unit = {}) {
         Column {
             Eyebrow("Safety")
             Card {
-                listOf("Fingerprint, face or screen lock after 5 minutes away", "Countywide alerts need a second person to confirm", "Every action is logged for your workspace owner")
+                (if (model.isOfficial) listOf("Fingerprint, face or screen lock after 5 minutes away", "Read only: public records can be flagged, never changed", "Every report you download is logged")
+                 else listOf("Fingerprint, face or screen lock after 5 minutes away", "Countywide alerts need a second person to confirm", "Every action is logged for your workspace owner"))
                     .forEach { Text(it, style = T.subhead, color = Brand.text, modifier = Modifier.padding(horizontal = 14.dp, vertical = 11.dp)) }
             }
         }

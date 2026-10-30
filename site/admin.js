@@ -1487,28 +1487,39 @@
 
   // ---------- government workspace staff + their data flags (schema gov, api/_gov.js) ----------
   let gsRoles = {};
+  // Elected officials are tied to their seat: the person picker lists who holds a seat now on the chosen government.
+  let gsOfficials = [];
+  function gsPeople() {
+    const p = $('#gs-person'), off = $('#gs-role').value === 'official';
+    p.hidden = !off;
+    p.innerHTML = gsOfficials.filter(o => o.gov_id === $('#gs-gov').value).map(o => `<option value="${esc(o.person_id)}">${esc(o.person_name)} (${esc(o.seat)})</option>`).join('') || '<option value="">No seats on record</option>';
+  }
+  $('#gs-role').addEventListener('change', gsPeople);
+  $('#gs-gov').addEventListener('change', gsPeople);
   async function loadGovStaff() {
     let r;
     try { r = await api('gov_staff'); }
     catch (e) { $('#gs-ws tbody').innerHTML = `<tr><td colspan="4" class="empty">${esc(e.message)}</td></tr>`; return; }
-    gsRoles = r.roles;
+    gsRoles = r.roles; gsOfficials = r.officials || [];
+    gsPeople();
     const names = Object.fromEntries(r.workspaces.map(w => [w.id, w.name]));
     $('#gs-ws tbody').innerHTML = r.workspaces.map(w => `<tr><td><b>${esc(w.name)}</b>${w.countywide ? ' <span class="small muted">countywide alerts</span>' : ''}</td><td>${fmt(w.members)}</td><td>${fmt(w.live_alerts)}</td><td class="small">${when(w.last_activity)}</td></tr>`).join('');
     const g = $('#gs-gov'), cur = g.value;
     g.innerHTML = r.workspaces.map(w => `<option value="${esc(w.id)}">${esc(w.name)}</option>`).join(''); if (cur) g.value = cur;
-    $('#gs-table tbody').innerHTML = r.members.map(m => `<tr><td>${esc(names[m.workspace_id] || m.workspace_id)}</td><td>${esc(m.email)}</td>
-      <td><select class="sel" data-gs="${esc(m.workspace_id)}|${esc(m.email)}" aria-label="Access">${Object.entries(gsRoles).map(([k, v]) => `<option value="${k}"${k === m.role ? ' selected' : ''}>${v}</option>`).join('')}<option value="remove">Remove</option></select></td>
+    gsPeople();
+    $('#gs-table tbody').innerHTML = r.members.map(m => `<tr><td>${esc(names[m.workspace_id] || m.workspace_id)}</td><td>${esc(m.email)}${m.person_name ? `<div class="small muted">${esc(m.person_name)}</div>` : ''}</td>
+      <td><select class="sel" data-gs="${esc(m.workspace_id)}|${esc(m.email)}|${esc(m.person_id || '')}" aria-label="Access">${Object.entries(gsRoles).map(([k, v]) => `<option value="${k}"${k === m.role ? ' selected' : ''}>${v}</option>`).join('')}<option value="remove">Remove</option></select></td>
       <td class="small">${esc(m.added_by || '')}</td><td class="small">${when(m.created_at)}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Nobody has access yet. Add a city’s first owner above.</td></tr>';
   }
   $('#gs-table').addEventListener('change', async e => {
     const s = e.target.closest('[data-gs]'); if (!s) return;
-    const [workspace, email] = s.dataset.gs.split('|'); s.disabled = true;
-    try { await api('gov_member', {method: 'POST', body: {workspace, email, role: s.value}}); } catch (err) { alert(err.message); }
+    const [workspace, email, person_id] = s.dataset.gs.split('|'); s.disabled = true;
+    try { await api('gov_member', {method: 'POST', body: {workspace, email, role: s.value, person_id: person_id || undefined}}); } catch (err) { alert(err.message); }
     loadGovStaff();
   });
   $('#gs-add').addEventListener('click', async () => {
     const email = $('#gs-email').value.trim(); if (!email) return;
-    try { await api('gov_member', {method: 'POST', body: {workspace: $('#gs-gov').value, email, role: $('#gs-role').value}}); $('#gs-email').value = ''; loadGovStaff(); } catch (err) { alert(err.message); }
+    try { await api('gov_member', {method: 'POST', body: {workspace: $('#gs-gov').value, email, role: $('#gs-role').value, person_id: $('#gs-role').value === 'official' ? $('#gs-person').value : undefined}}); $('#gs-email').value = ''; loadGovStaff(); } catch (err) { alert(err.message); }
   });
   async function loadGovFlags() {
     let r;

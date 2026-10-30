@@ -17,7 +17,12 @@
 //   POST ?action=flag        {workspace, dataset, record_key?, record_label?, field?, shown_value?, correct_value?, evidence_url?, note?}
 //   GET  ?action=flags&workspace=lh              flags sent from this workspace and our answers
 //   GET  ?action=activity&workspace=lh           who did what (owners and auditors)
-//   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role | "remove"}   (owners)
+//   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role | "remove", person_id? (role official)}   (owners)
+// Elected officials (role official, migration 0096; api/_official.js). Read-only, like everything else here:
+//   GET  ?action=official&workspace=lh[&person=jane-doe][&only=agendas|votes|numbers]   the dashboard: the official's seat
+//        and board, upcoming meetings and agenda items, their voting record, and the budget, spending, checkbook and
+//        contracts. An official sees their own seat unless they pick a colleague; staff pick any member of the board.
+//   POST ?action=report-log  {workspace, report, person?}   records that a PDF report was downloaded (activity log)
 // Send records (records sender, publisher and up; api/_records.js):
 //   GET  ?action=submissions&workspace=lh        what's due, the intake email address, every file sent and its state
 //   GET  ?action=template&workspace=lh&kind=contracts   a CSV with the template's column names
@@ -38,6 +43,7 @@
 const db = require('./_db');
 const G = require('./_gov');
 const R = require('./_records');
+const O = require('./_official');
 const {FROM, resend} = require('./_alerts');
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
@@ -49,9 +55,9 @@ const body = req => {
 
 const NEED = {home: 'read', posts: 'read', post: 'publish', withdraw: 'publish', alerts: 'read', reach: 'alert', alert: 'alert',
   'alert-confirm': 'alert', 'alert-end': 'alert', records: 'read', flag: 'read', flags: 'read', activity: 'read', members: 'read',
-  submissions: 'read', template: 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-confirm': 'submit',
+  submissions: 'read', template: 'read', official: 'read', 'report-log': 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-confirm': 'submit',
   'submit-withdraw': 'submit', 'feed-agree': 'submit', 'intake-senders': 'read'};
-const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-confirm', 'submit-withdraw', 'feed-agree']);
+const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-confirm', 'submit-withdraw', 'feed-agree', 'report-log']);
 
 async function route(deps, req, res, action) {
   const {q} = deps, Q = req.query || {}, b = body(req);
@@ -83,7 +89,7 @@ async function route(deps, req, res, action) {
   const need = (action === 'members' || action === 'intake-senders') && req.method !== 'GET' ? 'manage' : NEED[action];
   if (!need) throw bad('Unknown action.', 404);
   if (POSTS.has(action) && req.method !== 'POST') throw bad('Use POST.', 405);
-  const {role, workspace: w} = await G.requireRole(q, who, String(b.workspace || Q.workspace || ''), need);
+  const {role, workspace: w, person_id: seat} = await G.requireRole(q, who, String(b.workspace || Q.workspace || ''), need);
   const email = who.email;
 
   switch (action) {
@@ -123,6 +129,17 @@ async function route(deps, req, res, action) {
       return {ok: true, alert: a};
     }
     case 'records': return G.records(q, w, String(Q.dataset || ''));
+    case 'official': {
+      const person = /^[a-z0-9-]{1,120}$/.test(String(Q.person || '')) ? String(Q.person) : seat;
+      const only = ['agendas', 'votes', 'numbers'].includes(Q.only) ? Q.only : null;
+      return {role, own_person_id: seat, ...(await O.dashboard(q, w, person, {only}))};
+    }
+    case 'report-log': {
+      const report = String(b.report || '');
+      if (!O.REPORTS[report]) throw bad('Unknown report.');
+      await G.log(q, w.id, email, 'report_downloaded', {report, title: O.REPORTS[report], ...(b.person ? {person_id: String(b.person).slice(0, 120)} : {})});
+      return {ok: true};
+    }
     case 'flag': return G.addFlag(q, w, b, email);
     case 'flags': return {flags: await q(`select id, email, dataset, record_label, field, shown_value, correct_value, evidence_url, note, status, reply, reviewed_at, created_at
         from gov.flags where workspace_id = $1 order by created_at desc limit 200`, [w.id])};
@@ -147,7 +164,7 @@ async function route(deps, req, res, action) {
     case 'submit-withdraw': return R.withdraw(recordDeps(deps), w, b, who);
     case 'feed-agree': return R.feedAgree(recordDeps(deps), w, b, who);
     case 'members': {
-      if (req.method === 'GET') return {members: await q('select email, role, added_by, created_at from gov.members where workspace_id = $1 order by role, email', [w.id])};
+      if (req.method === 'GET') return {officials: await G.seatsNow(q, w.id), members: await q(`select m.email, m.role, m.person_id, ${G.PERSON_NAME} person_name, m.added_by, m.created_at from gov.members m where m.workspace_id = $1 order by m.role, m.email`, [w.id])};
       return G.setMember(q, w.id, b, email);
     }
   }

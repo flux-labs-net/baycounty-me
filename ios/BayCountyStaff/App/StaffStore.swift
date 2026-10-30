@@ -16,6 +16,8 @@ final class StaffStore {
     private(set) var notices: StaffPosts?
     private(set) var flags: [StaffFlag] = []
     private(set) var submissions: StaffSubmissions?
+    /// The board dashboard, for an elected official (role official).
+    private(set) var board: StaffBoard?
     private(set) var loading = false
     var error: String?
     /// The workspace open now. The site owner starts on the all-governments view (nil).
@@ -32,6 +34,7 @@ final class StaffStore {
     var workspace: StaffWorkspace? { me?.workspaces.first { $0.id == workspaceId } }
     var role: String { workspace?.role ?? (isOwner ? "owner" : "viewer") }
     func can(_ need: String) -> Bool { Staff.can(role, need) }
+    var isOfficial: Bool { role == "official" }
     var alertKinds: [String: String] { me?.alertKinds ?? [:] }
     var noticeKinds: [String: String] { me?.noticeKinds ?? [:] }
 
@@ -44,7 +47,13 @@ final class StaffStore {
         sessionToken = client.token
         guard let d else { return }
         overview = d.overview; home = d.home; alerts = d.alerts.alerts; notices = d.notices; submissions = d.submissions
-        if args.contains("-asStaff") {
+        if args.contains("-asOfficial") {
+            // An elected commissioner's view: their board dashboard (made-up names).
+            let json = #"{"email":"privera@example.gov","admin":false,"workspaces":[{"id":"lh","name":"City of Lynn Haven","countywide":false,"role":"official","person_id":"pat-rivera"}]}"#
+            me = try? StaffMe.decode(Data(json.utf8))
+            workspaceId = "lh"
+            board = d.board
+        } else if args.contains("-asStaff") {
             // A city alert sender's view: one workspace, no all-governments view.
             let json = #"{"email":"utilities@example.gov","admin":false,"workspaces":[{"id":"lh","name":"City of Lynn Haven","countywide":false,"role":"alert_sender"}],"alert_kinds":\#(Self.kindsJSON(d.me.alertKinds)),"notice_kinds":\#(Self.kindsJSON(d.me.noticeKinds))}"#
             me = try? StaffMe.decode(Data(json.utf8))
@@ -85,7 +94,7 @@ final class StaffStore {
         if demo == nil { await client.logout() }
         StaffKeychain.clear()
         sessionToken = nil
-        me = nil; overview = nil; home = nil; alerts = []; notices = nil; flags = []; submissions = nil; workspaceId = nil
+        me = nil; overview = nil; home = nil; alerts = []; notices = nil; flags = []; submissions = nil; board = nil; workspaceId = nil
     }
 
     private func pickDefaultWorkspace() {
@@ -117,6 +126,7 @@ final class StaffStore {
             let (hh, aa, nn, ff) = try await (h, a, n, f)
             home = hh; alerts = aa.alerts; notices = nn; flags = ff.flags
             if can("submit") { submissions = try? await client.submissions(ws) } else { submissions = nil }
+            board = isOfficial ? try await client.board(ws) : nil
         } else if isOwner {
             async let o = client.overview(), f = client.reviewFlags(status: "all")
             let (oo, ff) = try await (o, f)
