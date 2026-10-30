@@ -43,4 +43,46 @@
   $('hMineLink').setAttribute('aria-label', `Your home, ${$('hMineAddr').textContent}: tax bill, trash day, schools and more`);
   form.hidden = true; note.hidden = true; box.hidden = false;
   $('hMineOther').addEventListener('click', () => { form.hidden = false; note.hidden = false; $('hMineOther').hidden = true; $('hq').focus(); });
+  // Trash day at the saved home: only shown on pickup day, or from 4 p.m. the day before. Otherwise nothing.
+  if (h.lat && h.lon) {
+    try {
+      const j = await (await fetch(`/api/v1/utilities?lat=${h.lat}&lon=${h.lon}`)).json();
+      const c = window.BCTrashCard(j && j.data);
+      if (c) { $('hTrashT').textContent = c.title; $('hTrashS').textContent = c.detail; $('hTrash').hidden = false; }
+    } catch (e) {}
+  }
 })();
+
+// The trash card for one /api/v1/utilities lookup, or null when pickup isn't today (or tomorrow, after 4 p.m.).
+// Bay County time. A holiday with no garbage pickup says so instead. Same rules as TodayBrief.trashCard in the apps.
+window.BCTrashCard = (lookup, now = new Date()) => {
+  const g = ((lookup && lookup.pickup) || []).find(p => p.service === 'garbage' && p.days);
+  if (!g) return null;
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {timeZone: 'America/Chicago', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', hourCycle: 'h23'})
+    .formatToParts(now).map(x => [x.type, +x.value]));
+  const day = off => new Date(Date.UTC(p.year, p.month - 1, p.day + off));
+  const runs = d => new RegExp(`\\b${DAYS[d.getUTCDay()]}\\b`, 'i').test(g.days);
+  // "January 1", "4th Thursday in November", "Last Monday in May"
+  const isOn = (when, d) => {
+    let m = /^(\w+) (\d{1,2})$/.exec(when || '');
+    if (m) return MONTHS.indexOf(m[1]) === d.getUTCMonth() && +m[2] === d.getUTCDate();
+    m = /^(1st|2nd|3rd|4th|5th|Last) (\w+) in (\w+)$/i.exec(when || '');
+    if (!m || MONTHS.indexOf(m[3]) !== d.getUTCMonth() || DAYS.indexOf(m[2]) !== d.getUTCDay()) return false;
+    const last = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0)).getUTCDate();
+    return /last/i.test(m[1]) ? d.getUTCDate() + 7 > last : Math.ceil(d.getUTCDate() / 7) === parseInt(m[1], 10);
+  };
+  const closed = d => ((lookup.holidays || []).find(x => /^(no pickup|moved)/i.test(x.garbage || '') && isOn(x.when_observed, d)));
+  const card = (d, word, detail) => {
+    const h = closed(d);
+    if (!h) return {title: `Trash pickup ${word}`, detail};
+    // "No pickup; in 2025 Thursday's route moved to Saturday, December 27": a note about another year is left off.
+    let rest = h.garbage.replace(/^no pickup[;,.]?\s*/i, '');
+    if ((rest.match(/\b20\d\d\b/g) || []).some(y => +y !== d.getUTCFullYear())) rest = '';
+    return {title: `No trash pickup ${word}`, detail: rest ? `${h.holiday} · ${rest[0].toUpperCase()}${rest.slice(1)}` : h.holiday};
+  };
+  if (runs(day(0))) return card(day(0), 'today', 'At your home');
+  if (p.hour >= 16 && runs(day(1))) return card(day(1), 'tomorrow', 'Put it out tonight');
+  return null;
+};

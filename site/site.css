@@ -474,6 +474,7 @@ label[hidden],.vf[hidden],.sc-f[hidden]{display:none!important}
 .h-today{display:flex;flex-direction:column;gap:10px;min-width:0}
 .h-today h2{margin:0 0 2px}
 .h-td{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);text-decoration:none;transition:border-color .15s,transform .15s}
+.h-td[hidden]{display:none}
 .h-td:hover{border-color:var(--blue);transform:translateY(-1px)}
 .h-td > span:last-child{display:flex;flex-direction:column;gap:2px;min-width:0}
 .h-td b{font-weight:600;font-size:.98rem}
@@ -500,6 +501,7 @@ label[hidden],.vf[hidden],.sc-f[hidden]{display:none!important}
 @media (max-width:1000px){.h-top{grid-template-columns:minmax(0,1fr)}.h-row2{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.h-today{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.h-today h2{grid-column:1/-1}
   .h-td{flex-direction:column;align-items:flex-start;gap:8px;padding:12px}.h-td b{font-size:.9rem}
+  .h-today:has(#hTrash[hidden]) .h-td:last-child{grid-column:1/-1;flex-direction:row;align-items:center;gap:12px}
   .h-doors{grid-template-columns:minmax(0,1fr)}.h-door:not(:has(.h-more)){grid-row:span 2}.h-addr button{padding:0 16px}}
 @media (max-width:1000px){.h-hero{grid-template-columns:minmax(0,1fr);grid-template-areas:'intro' 'bill' 'cmp'}.h-bill{position:static}.h-tiles,.h-row{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:560px){.h-bill{padding:22px 18px}.cmp-bars button{grid-template-columns:110px minmax(0,1fr) 66px}.hb-cols,.hb-lines li,.hb-total{grid-template-columns:minmax(0,1fr) 64px 84px}}
