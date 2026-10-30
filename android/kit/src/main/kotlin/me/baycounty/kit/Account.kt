@@ -127,6 +127,7 @@ data class AccountMe(
     val home: Home? = null,
     val prefs: Prefs? = null,
     val devices: Int? = null,
+    val sms: Sms? = null,
     val choices: Choices? = null,
     /** Only in the answer to a sign-in from the app: the session token for the Authorization header. */
     val token: String? = null,
@@ -163,7 +164,12 @@ data class AccountMe(
         @SerialName("alert_areas") val alertAreas: List<String> = emptyList(),
         /** Overnight alerts without sound, except evacuations and the most severe warnings. */
         @SerialName("quiet_hours") val quietHours: Boolean = false,
+        /** Alert types that also come by text, once a mobile number is confirmed (added on the website). */
+        @SerialName("alert_sms") val alertSms: List<String> = listOf("evacuation", "weather", "safety"),
     )
+    /** The number for alert texts, masked to its last 4 digits. status: pending, active or stopped. */
+    @Serializable
+    data class Sms(val phone: String = "", val status: String = "")
     @Serializable
     data class Choices(
         val topics: Map<String, String> = emptyMap(),
@@ -171,6 +177,8 @@ data class AccountMe(
         @SerialName("push_topics") val pushTopics: Map<String, String> = emptyMap(),
         @SerialName("alert_email") val alertEmail: Map<String, String> = emptyMap(),
         val areas: Map<String, String> = emptyMap(),
+        @SerialName("alert_sms") val alertSms: Map<String, String> = emptyMap(),
+        @SerialName("sms_ready") val smsReady: Boolean = false,
     )
 
     companion object {
@@ -178,6 +186,7 @@ data class AccountMe(
         val topicOrder = listOf("meetings", "events", "projects", "notices", "food", "business")
         val pushOrder = listOf("evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general", "agenda")
         val alertEmailOrder = listOf("evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general")
+        val smsOrder = listOf("evacuation", "weather", "safety", "shelters", "water")
         val areaOrder = listOf("all", "county", "pc", "pcb", "lh", "cw", "sp", "parker", "mb")
         /** "All of Bay County" is on its own: picking it clears the cities, picking a city clears it. */
         fun pickArea(list: List<String>, k: String, on: Boolean): List<String> =
@@ -248,6 +257,7 @@ class AccountClient(var token: String?, val platform: String = "android", privat
         putJsonArray("topics") { p.topics.forEach { add(it) } }
         putJsonArray("alert_areas") { p.alertAreas.forEach { add(it) } }
         put("quiet_hours", p.quietHours)
+        putJsonArray("alert_sms") { p.alertSms.forEach { add(it) } }
     }))
     suspend fun saveFirstName(name: String): AccountMe = AccountMe.decode(call("profile", buildJsonObject { put("first_name", name) }))
     suspend fun linkDevice(pushToken: String, appVersion: String?) {

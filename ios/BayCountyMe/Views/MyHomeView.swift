@@ -388,6 +388,22 @@ struct AccountSettingsView: View {
                     } header: { Text("Alert areas") } footer: {
                         Text("Boil-water notices, road closures and outages for the places you pick. Evacuation orders and weather warnings always reach you. Quiet overnight sends alerts from 10 pm to 7 am without sound, except evacuations and the most severe warnings.")
                     }
+                    if let me = account.me, me.sms != nil || c.smsReady == true {
+                        Section {
+                            if let sms = me.sms, sms.status == "active" {
+                                ForEach(AccountMe.smsOrder.filter { c.alertSms?[$0] != nil }, id: \.self) { k in
+                                    Toggle(c.alertSms![k]!, isOn: Binding(get: { (p.alertSms.wrappedValue ?? []).contains(k) },
+                                                                          set: { on in var a = p.alertSms.wrappedValue ?? []; if on { if !a.contains(k) { a.append(k) } } else { a.removeAll { $0 == k } }; p.alertSms.wrappedValue = a }))
+                                }
+                            }
+                            Link(me.sms?.status == "active" ? "Change number on baycounty.me" : "Add a mobile number on baycounty.me",
+                                 destination: URL(string: "https://baycounty.me/account#alerts")!)
+                        } header: { Text("Text messages") } footer: {
+                            Text(me.sms?.status == "active" ? "Texts go to \(me.sms!.phone). Text STOP to the alert number to end them."
+                                 : me.sms?.status == "stopped" ? "Texts to \(me.sms!.phone) are stopped. Text START to the alert number to turn them back on."
+                                 : "Urgent alerts by text, even without the app. US mobile numbers only; msg & data rates may apply.")
+                        }
+                    }
                     Section("Near my home") {
                         Picker("Distance", selection: p.radiusMi) {
                             ForEach(AccountMe.radii, id: \.self) { Text(AccountMe.radiusLabel($0)).tag($0) }

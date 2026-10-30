@@ -47,6 +47,7 @@ label.f textarea{min-height:70px;resize:vertical}
 @media (max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
 .tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.bar{height:10px;border-radius:6px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--navy);width:0}.bar i.hot{background:var(--salmon,#c0392b)}
 .tile b{display:block;font:600 1.35rem var(--f-display);font-variant-numeric:tabular-nums}
 .tile span{color:var(--muted);font-size:.8rem}
 .chart{position:relative}
@@ -87,7 +88,7 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .pill.bounced,.pill.complained,.pill.suppressed{color:var(--bad)} .pill.delivery_delayed{color:var(--warn)} .pill.canceled{color:var(--muted)}
 #se-detail iframe{width:100%;height:520px;border:1px solid var(--line);border-radius:8px;background:#fff}
 #se-detail dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 12px;margin:0 0 12px;font-size:.86rem} #se-detail dt{color:var(--muted)} #se-detail dd{margin:0;word-break:break-word}
-.banner.good{border-left-color:var(--ok)} .banner.bad{border-left-color:var(--bad)}
+.banner.good{border-left-color:var(--ok)} .banner.bad{border-left-color:var(--bad)} .banner.warn{border-left-color:var(--amber,#b7791f)}
 .banner ul{margin:6px 0 0;padding-left:18px} .banner li{margin:2px 0}
 .sched{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;font-size:.88rem}
 .sched span:nth-child(even){color:var(--muted);text-align:right;white-space:nowrap}
@@ -241,7 +242,7 @@ MENU = [
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
-    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None)]),
+    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('texts', 'Alert texts', None), ('realtors', 'Realtor agents', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
 TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
@@ -534,6 +535,18 @@ def admin_page(out_dir):
       <div class="tiles" id="au-tiles"></div>
       <div class="card"><div class="row" style="margin-bottom:6px"><b class="grow">Phones using the app each day</b><span class="small au-key"><i style="background:var(--bar)"></i>iPhone <i style="background:var(--bar2)"></i>Android</span></div><div class="chart" id="au-chart"></div></div>
       <div class="lists" id="au-lists"></div>
+    </section>
+
+    <section id="tab-texts" class="pane" hidden>
+      <div class="banner"><div><b>Emergency alert texts.</b> <span class="small muted">Residents confirm a US mobile number with a code in My home, then pick which alerts come by text. Texts go out from the Telnyx toll-free number with each alert, until this month's spend reaches the cap; push and email keep going after that. Spend is Telnyx's price per text when it gives one, otherwise an estimate. Numbers are never shown here.</span></div></div>
+      <div id="tx-setup"></div>
+      <div class="tiles" id="tx-tiles"></div>
+      <div class="card"><div class="row" style="gap:10px;flex-wrap:wrap;align-items:flex-end">
+        <label class="grow"><span class="small muted">Monthly cap (US dollars)</span><br><input class="sel" id="tx-cap" type="number" min="0" max="10000" step="10" inputmode="decimal" style="width:140px"></label>
+        <label class="small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="tx-paused"> Pause all texts</label>
+        <button class="btn" id="tx-save" type="button">Save</button><span class="small muted" id="tx-msg"></span></div>
+        <div class="bar" style="margin-top:12px"><i id="tx-bar"></i></div><div class="small muted" id="tx-barlbl" style="margin-top:6px"></div></div>
+      <div class="lists" id="tx-lists"></div>
     </section>
 
     <section id="tab-realtors" class="pane" hidden>

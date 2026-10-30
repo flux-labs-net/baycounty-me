@@ -443,7 +443,7 @@ def emergency_page(out_dir):
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="get-alerts" data-tile="Get alerts">Get alerts</h2></div>
     <div class="em-get">
-      <a href="/account#alerts" class="em-get-main"><b>{ico("bell")} BayCounty.me alerts</b><small>Pick your areas (the whole county or any city) and the alerts you want: evacuation orders for your zone, severe weather, public safety alerts, shelters, boil-water notices, road closures and outages. By phone and email, free. Sign in with your email to set it up →</small></a>
+      <a href="/account#alerts" class="em-get-main"><b>{ico("bell")} BayCounty.me alerts</b><small>Pick your areas (the whole county or any city) and the alerts you want: evacuation orders for your zone, severe weather, public safety alerts, shelters, boil-water notices, road closures and outages. By app notification, email or text message, free. Sign in with your email to set it up →</small></a>
       <a href="https://www.alertbay.org" target="_blank" rel="noopener"><b>{ico("megaphone")} AlertBay</b><small>Bay County's own Everbridge text, call and email alerts. Its emergency messages also reach BayCounty.me through FEMA's alert system.</small></a>
       <a href="/alerts"><b>{ico("mail")} Email from BayCounty.me</b><small>Weekly updates for the governments you follow, plus alerts for one thing.</small></a>
       <a href="/hurricane-prep"><b>{ico("shield")} Hurricane prep</b><small>Sandbags, generator safety, a kit and a plan, what to do after a storm, and the FEMA money past storms brought each ZIP code.</small></a>

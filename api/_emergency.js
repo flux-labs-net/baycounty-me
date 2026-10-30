@@ -438,11 +438,11 @@ function pushTopic(n) {
 // The alert types residents pick from (site, apps, /api/account choices), most urgent first. urgent ones always sound,
 // even in quiet hours; channels says where each can be sent.
 const ALERT_TYPES = [
-  {key: 'evacuation', label: 'Evacuation orders', detail: 'For your evacuation zone, from the county and FEMA alerts', urgency: 'urgent', channels: ['push', 'email']},
-  {key: 'weather', label: 'Severe weather warnings', detail: 'Hurricane, tornado, flash flood and storm surge, from the National Weather Service', urgency: 'urgent', channels: ['push', 'email']},
-  {key: 'safety', label: 'Public safety alerts', detail: 'Shelter in place, AMBER alerts, hazardous materials, from FEMA\'s emergency alert system', urgency: 'urgent', channels: ['push', 'email']},
-  {key: 'shelters', label: 'Shelter openings', detail: 'When the county opens a shelter', urgency: 'standard', channels: ['push', 'email']},
-  {key: 'water', label: 'Boil-water notices', detail: 'From the city or county for your areas', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'evacuation', label: 'Evacuation orders', detail: 'For your evacuation zone, from the county and FEMA alerts', urgency: 'urgent', channels: ['push', 'email', 'sms']},
+  {key: 'weather', label: 'Severe weather warnings', detail: 'Hurricane, tornado, flash flood and storm surge, from the National Weather Service', urgency: 'urgent', channels: ['push', 'email', 'sms']},
+  {key: 'safety', label: 'Public safety alerts', detail: 'Shelter in place, AMBER alerts, hazardous materials, from FEMA\'s emergency alert system', urgency: 'urgent', channels: ['push', 'email', 'sms']},
+  {key: 'shelters', label: 'Shelter openings', detail: 'When the county opens a shelter', urgency: 'standard', channels: ['push', 'email', 'sms']},
+  {key: 'water', label: 'Boil-water notices', detail: 'From the city or county for your areas', urgency: 'standard', channels: ['push', 'email', 'sms']},
   {key: 'roads', label: 'Full road closures', detail: 'State roads (FL511) and city closures', urgency: 'standard', channels: ['push', 'email']},
   {key: 'outages', label: 'Water and power outages', detail: 'Water main breaks, service shut-offs, sewer spills', urgency: 'standard', channels: ['push', 'email']},
   {key: 'general', label: 'Storm and general updates', detail: 'Sandbags, closures, debris pickup, curfews', urgency: 'info', channels: ['push', 'email']},

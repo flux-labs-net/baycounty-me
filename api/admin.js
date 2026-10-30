@@ -243,6 +243,13 @@ async function route(req, res, action, me) {
       return r;
     }
     case 'realtors': return require('./_realtor').adminList();
+    case 'sms': return require('./_sms').adminReport();
+    case 'sms_settings': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405, expose: true});
+      const r = await require('./_sms').setSettings(body, me.e);
+      await audit(me.e, action, null, {monthly_cap: r.settings.monthly_cap, paused: r.settings.paused});
+      return r;
+    }
     case 'app_usage': return require('./_app_usage').report(Q.days);
     case 'realtor_set': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});

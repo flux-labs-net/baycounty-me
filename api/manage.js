@@ -92,6 +92,7 @@ module.exports = async (req, res) => {
   if (req.query && req.query.app === 'realtor') return require('./_realtor')(req, res);
   // /api/account (vercel.json rewrite): resident accounts, their saved home and notification choices (api/_account.js)
   if (req.query && req.query.app === 'account') return require('./_account')(req, res);
+  if (req.query && req.query.app === 'sms') return require('./_sms').webhook(req, res);
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Referrer-Policy', 'no-referrer');
   res.setHeader('X-Robots-Tag', 'noindex');

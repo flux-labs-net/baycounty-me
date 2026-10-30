@@ -104,7 +104,10 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
     // Residents with an account who asked for this topic by email, when the notice reaches their saved home (api/_account.js).
     let mail = {sent: 0, people: 0};
     try { mail = await require('./_account').emailNotice(place, n, topic); } catch (e) { console.error('account alert email', e.message); }
-    await reach(n.notice_id, place, [['push', devices.length, res.delivered], ['email', mail.people || 0, mail.sent || 0]]);
+    // Confirmed phone numbers that asked for this type by text (api/_sms.js), up to the month's spending cap.
+    let texts = {sent: 0, people: 0};
+    try { texts = await require('./_sms').noticeTexts(place, n, topic, nowMs); } catch (e) { console.error('alert texts', e.message); }
+    await reach(n.notice_id, place, [['push', devices.length, res.delivered], ['email', mail.people || 0, mail.sent || 0], ['sms', texts.people || 0, texts.sent || 0]]);
     sent.push({notice_id: n.notice_id, topic, devices: devices.length, delivered: res.delivered});
   }
   return sent;

@@ -133,6 +133,13 @@ public struct AccountMe: Decodable, Sendable {
         public var alertAreas: [String]?
         /// Overnight (10 pm to 7 am) alerts arrive without sound, except evacuation orders and the most severe warnings.
         public var quietHours: Bool?
+        /// Alert types that also come by text, once a mobile number is confirmed (added on the website).
+        public var alertSms: [String]?
+    }
+    /// The number for alert texts, masked to its last 4 digits. status: pending, active or stopped.
+    public struct Sms: Decodable, Sendable, Equatable {
+        public let phone: String
+        public let status: String
     }
     public struct Choices: Decodable, Sendable {
         public let topics: [String: String]
@@ -140,6 +147,8 @@ public struct AccountMe: Decodable, Sendable {
         public let pushTopics: [String: String]
         public let alertEmail: [String: String]
         public let areas: [String: String]?
+        public let alertSms: [String: String]?
+        public let smsReady: Bool?
     }
     public let user: User
     /// The same email's status on the realtor console's agent list ("active", "pending"), or nil: one sign-in opens both.
@@ -147,6 +156,7 @@ public struct AccountMe: Decodable, Sendable {
     public let home: Home?
     public let prefs: Prefs?
     public let devices: Int?
+    public let sms: Sms?
     public let choices: Choices?
     /// Only in the answer to a sign-in from the app: the session token for the Authorization header.
     public let token: String?
@@ -160,6 +170,7 @@ public struct AccountMe: Decodable, Sendable {
     /// Alert types in the order the site lists them (the server sends the labels).
     public static let pushOrder = ["evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general", "agenda"]
     public static let alertEmailOrder = ["evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general"]
+    public static let smsOrder = ["evacuation", "weather", "safety", "shelters", "water"]
     public static let areaOrder = ["all", "county", "pc", "pcb", "lh", "cw", "sp", "parker", "mb"]
     public static let radii: [Double] = [0.25, 0.5, 1, 2, 5]
     public static func radiusLabel(_ r: Double) -> String {
@@ -231,7 +242,8 @@ public final class AccountClient: @unchecked Sendable {
     public func removeHome() async throws -> AccountMe { try AccountMe.decode(try await call("home_delete", [:])) }
     public func save(prefs p: AccountMe.Prefs) async throws -> AccountMe {
         try AccountMe.decode(try await call("prefs", ["weekly_email": p.weeklyEmail, "alert_email": p.alertEmail, "push_topics": p.pushTopics, "radius_mi": p.radiusMi, "topics": p.topics,
-                                                          "alert_areas": p.alertAreas ?? [], "quiet_hours": p.quietHours ?? false]))
+                                                          "alert_areas": p.alertAreas ?? [], "quiet_hours": p.quietHours ?? false,
+                                                          "alert_sms": p.alertSms ?? ["evacuation", "weather", "safety"]]))
     }
     public func save(firstName: String) async throws -> AccountMe { try AccountMe.decode(try await call("profile", ["first_name": firstName])) }
     public func linkDevice(pushToken: String, appVersion: String?) async throws {

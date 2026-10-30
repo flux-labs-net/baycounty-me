@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, texts: loadTexts, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -1422,6 +1422,34 @@
   $('#ra-add').addEventListener('click', async () => {
     const v = $('#ra-email').value.trim(); if (!v) return;
     try { await api('realtor_set', {method: 'POST', body: {email: v, status: 'active'}}); $('#ra-email').value = ''; loadRealtors(); } catch (err) { alert(err.message); }
+  });
+
+  // ---------- alert texts (api/_sms.js) ----------
+  const txUsd = n => '$' + (Number(n) || 0).toFixed(2);
+  const TX_KIND = {alert: 'Alerts', code: 'Confirm codes', help: 'HELP replies', start: 'START replies', test: 'Tests'};
+  async function loadTexts() {
+    let r;
+    try { r = await api('sms'); }
+    catch (e) { $('#tx-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load alert texts.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const s = r.settings, pct = s.monthly_cap > 0 ? Math.min(100, r.spent / s.monthly_cap * 100) : 100;
+    $('#tx-setup').innerHTML = r.ready ? '' : `<div class="banner warn"><div><b>Texting isn’t turned on yet.</b> <span class="small muted">Add TELNYX_API_KEY and TELNYX_FROM in Vercel, then point the Telnyx messaging profile’s inbound webhook at the URL below.</span>
+      <div class="small" style="margin-top:6px;word-break:break-all"><code>${esc(r.webhook_url)}</code></div></div></div>`;
+    $('#tx-tiles').innerHTML = [[r.ready ? (r.from || 'On') : 'Off', 'Sending number'], [s.paused ? 'Paused' : txUsd(s.monthly_cap), 'Monthly cap'], [txUsd(r.spent), `Spent in ${r.month}`],
+      [fmt(r.texts), 'Texts this month'], [fmt(r.phones.active), 'Numbers confirmed'], [fmt(r.phones.stopped), 'Stopped (STOP)']]
+      .map(([v, l]) => `<div class="tile"><b>${esc(String(v))}</b><span>${l}</span></div>`).join('');
+    $('#tx-cap').value = s.monthly_cap; $('#tx-paused').checked = !!s.paused;
+    $('#tx-bar').style.width = pct.toFixed(1) + '%'; $('#tx-bar').className = pct >= 90 ? 'hot' : '';
+    $('#tx-barlbl').textContent = `${txUsd(r.spent)} of ${txUsd(s.monthly_cap)} this month (${pct.toFixed(0)}%). About ${txUsd(r.part_cost * 2)} for a two-part alert text. ${s.cap_hit_month === r.month ? 'The cap was reached this month, so texts are paused until it goes up or the month ends.' : ''}`;
+    const kinds = r.by_kind.map(k => `<tr><td>${esc(TX_KIND[k.kind] || k.kind)}</td><td class="num">${fmt(k.texts)}</td><td class="num">${fmt(k.parts)}</td><td class="num">${txUsd(k.cost)}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No texts this month.</td></tr>';
+    const months = r.months.map(m => `<tr><td>${esc(m.month)}</td><td class="num">${fmt(m.texts)}</td><td class="num">${txUsd(m.cost)}</td></tr>`).join('') || '<tr><td colspan="3" class="empty">No texts yet.</td></tr>';
+    $('#tx-lists').innerHTML = `<div class="card"><b>This month by kind</b><div class="tw"><table class="at" data-tt="off"><thead><tr><th>Kind</th><th class="num">Texts</th><th class="num">Parts</th><th class="num">Cost</th></tr></thead><tbody>${kinds}</tbody></table></div></div>
+      <div class="card"><b>By month</b><div class="tw"><table class="at" data-tt="off"><thead><tr><th>Month</th><th class="num">Texts</th><th class="num">Cost</th></tr></thead><tbody>${months}</tbody></table></div></div>`;
+  }
+  $('#tx-save').addEventListener('click', async () => {
+    $('#tx-save').disabled = true; $('#tx-msg').textContent = 'Saving…';
+    try { await api('sms_settings', {method: 'POST', body: {monthly_cap: Number($('#tx-cap').value), paused: $('#tx-paused').checked}}); $('#tx-msg').textContent = 'Saved.'; loadTexts(); }
+    catch (e) { $('#tx-msg').textContent = e.message; }
+    $('#tx-save').disabled = false;
   });
 
   // ---------- votes from minutes (agendas.motions, api/_minutes.js) ----------

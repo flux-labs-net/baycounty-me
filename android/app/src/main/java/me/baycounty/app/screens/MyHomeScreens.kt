@@ -401,6 +401,21 @@ fun AccountSettingsScreen() {
                     }
                 }
             }
+            if (me?.sms != null || c.smsReady) item {
+                val sms = me?.sms
+                PageSection("Text messages", "phone", Tone.SALMON, when (sms?.status) {
+                    "active" -> "Texts go to ${sms?.phone}. Text STOP to the alert number to end them."
+                    "stopped" -> "Texts to ${sms?.phone} are stopped. Text START to the alert number to turn them back on."
+                    else -> "Urgent alerts by text, even without the app. US mobile numbers only; msg & data rates may apply."
+                }) {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        if (sms?.status == "active") AccountMe.smsOrder.filter { c.alertSms[it] != null }.forEach { k ->
+                            ToggleRow(c.alertSms.getValue(k), k in p.alertSms) { on -> prefs = p.copy(alertSms = toggle(p.alertSms, k, on)) }
+                        }
+                        CardList { WebRow(if (sms?.status == "active") "Change number on baycounty.me" else "Add a mobile number on baycounty.me", "https://baycounty.me/account#alerts") }
+                    }
+                }
+            }
             item {
                 PageSection("Near my home", "mappin.and.ellipse", Tone.TEAL) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {

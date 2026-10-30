@@ -79,7 +79,7 @@
 .mh-card > p{color:var(--muted);margin:0 0 14px;font-size:.92rem}
 .mh-fld{display:flex;flex-direction:column;gap:6px;min-width:0}
 .mh-fld > span{font-size:.8rem;font-weight:500;color:var(--muted)}
-.mh input[type=text],.mh input[type=email],.mh input[type=search],.mh select{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:400 1rem var(--f-body)}
+.mh input[type=text],.mh input[type=email],.mh input[type=tel],.mh input[type=search],.mh select{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:400 1rem var(--f-body)}
 .mh input.code{font:600 1.5rem var(--f-data,monospace);letter-spacing:.4em;text-align:center}
 .mh input:focus-visible,.mh select:focus-visible,.mh button:focus-visible,.mh a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .mh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:12px;border:0;background:var(--navy);color:var(--on-navy);font:500 .95rem var(--f-body);cursor:pointer;text-decoration:none;white-space:nowrap}
@@ -169,6 +169,12 @@
 .mh-matrix td small{display:block;color:var(--muted);font-size:.8rem;font-weight:400}
 .mh-matrix .urg{display:inline-block;margin-left:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--sev, #c0392b)}
 .mh-matrix input{width:20px;height:20px;accent-color:var(--navy)}
+.mh-matrix input:disabled{opacity:.35}
+.mh-sms{padding:14px 0 4px;margin:0 0 12px;border-top:1px solid var(--line)}
+.mh-sms h3{font-size:1rem;font-weight:600;margin:0 0 4px}
+.mh-sms .mh-fine{margin:0 0 10px}
+.mh-consent{display:flex;gap:10px;align-items:flex-start;margin:12px 0 0;font-size:.84rem;color:var(--muted);line-height:1.45}
+.mh-consent input{width:20px;height:20px;flex:none;margin-top:2px;accent-color:var(--navy)}
 .mh-apps{display:flex;gap:8px;flex-wrap:wrap}
 .mh-danger{border-top:1px solid var(--line);margin-top:6px;padding-top:14px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .mh-danger p{margin:0;color:var(--muted);font-size:.86rem}
@@ -278,8 +284,18 @@
           <fieldset class="mh-areas"><legend>Areas</legend>
             <p class="mh-fine" id="areaNote"></p>
             <div class="mh-chips" id="alertAreas" data-share="off"></div></fieldset>
-          <div class="mh-matrix-wrap"><table class="mh-matrix" data-tt="off" data-share="off" data-stack="off"><thead><tr><th scope="col">Alert</th><th scope="col">Phone</th><th scope="col">Email</th></tr></thead><tbody id="alertTypes"></tbody></table></div>
-          <div class="mh-checks" style="margin-bottom:0"><label><input type="checkbox" id="quiet"><span>Quiet overnight<small>From 10 PM to 7 AM, standard alerts arrive on your phone without a sound. Evacuation orders, serious public safety alerts and extreme weather still sound.</small></span></label></div>
+          <div class="mh-matrix-wrap"><table class="mh-matrix" data-tt="off" data-share="off" data-stack="off"><thead><tr><th scope="col">Alert</th><th scope="col">Phone</th><th scope="col">Email</th><th scope="col" class="mh-tx" hidden>Text</th></tr></thead><tbody id="alertTypes"></tbody></table></div>
+          <div class="mh-sms" id="smsBox" hidden><h3>Text messages</h3>
+            <div id="smsOn" hidden><p class="mh-fine">Alert texts go to <b id="smsPhone"></b>. Pick which alerts come by text in the Text column above. Text STOP to the alert number any time to end them.</p>
+              <button class="mh-btn ghost sm" id="smsOff" type="button">Stop texts and remove my number</button></div>
+            <div id="smsStart" hidden><p class="mh-fine">Get urgent alerts by text, even without the app. US mobile numbers only.</p>
+              <div class="mh-row"><label class="mh-fld"><span>Mobile number</span><input id="smsNum" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="(850) 555-0123"></label>
+                <button class="mh-btn" id="smsSend" type="button">Text me a code</button></div>
+              <label class="mh-consent"><input type="checkbox" id="smsOk"><span>I agree to get emergency alert texts from BayCounty.me at this number. Message frequency varies with emergencies. Msg &amp; data rates may apply. Reply HELP for help, STOP to end. Consent isn’t a condition of anything. <a href="/privacy">Privacy</a></span></label></div>
+            <div id="smsCode" hidden><div class="mh-row"><label class="mh-fld"><span>Code from the text</span><input id="smsCodeIn" class="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="000000"></label>
+                <button class="mh-btn" id="smsConfirm" type="button">Confirm</button><button class="mh-btn link" id="smsBack" type="button">Use a different number</button></div></div>
+            <p class="mh-msg" id="smsMsg" role="status" aria-live="polite"></p></div>
+          <div class="mh-checks" style="margin-bottom:0"><label><input type="checkbox" id="quiet"><span>Quiet overnight<small>From 10 PM to 7 AM, standard alerts arrive on your phone without a sound. Evacuation orders, serious public safety alerts and extreme weather still sound, and other alert texts wait until morning.</small></span></label></div>
         </div>
         <div class="mh-card" style="grid-column:1/-1">
           <div class="mh-row" style="justify-content:space-between;align-items:center"><p class="mh-msg" id="setMsg" role="status" aria-live="polite"></p>

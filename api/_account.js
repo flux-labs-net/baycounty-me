@@ -13,7 +13,10 @@
 //   POST profile {first_name}
 //   POST home {address} | {lat, lon, label}   save the home (looked up in the county's address points)
 //   POST home_delete
-//   POST prefs {weekly_email, alert_email[], push_topics[], radius_mi, topics[]}
+//   POST prefs {weekly_email, alert_email[], push_topics[], alert_sms[], alert_areas[], quiet_hours, radius_mi, topics[]}
+//   POST sms_start {phone, consent: true}  text a 6-digit code to confirm a US mobile number for alert texts (api/_sms.js)
+//   POST sms_verify {code}                the number is confirmed and alert texts start
+//   POST sms_off                          remove the number (texting STOP to the alert number does the same)
 //   GET  feed                             what's happening near the saved home (api/_nearby.js, the same as /api/v1/nearby)
 //   POST device {token, platform, app_version}   this phone gets notifications for the account's home and choices
 //   POST device {token, platform, off: true}      this phone stops getting them
@@ -36,6 +39,8 @@ const CODE_MIN = 15, CODE_TRIES = 5;
 const EM = require('./_emergency');
 const PUSH_TOPICS = EM.ALERT_TYPES.filter(t => t.channels.includes('push')).map(t => t.key);
 const ALERT_EMAIL = EM.ALERT_TYPES.filter(t => t.channels.includes('email')).map(t => t.key);
+const ALERT_SMS = EM.ALERT_TYPES.filter(t => t.channels.includes('sms')).map(t => t.key);
+const SMS = require('./_sms');
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status, expose: true});
 const key = () => process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY;
 
@@ -76,6 +81,7 @@ function cleanPrefs(b, cur = {}) {
   if (b.weekly_email !== undefined) out.weekly_email = b.weekly_email === true || b.weekly_email === 'true' || b.weekly_email === 1 || b.weekly_email === '1' || b.weekly_email === 'on';
   if (b.alert_email !== undefined) out.alert_email = pickList(b.alert_email, ALERT_EMAIL);
   if (b.push_topics !== undefined) out.push_topics = pickList(b.push_topics, PUSH_TOPICS);
+  if (b.alert_sms !== undefined) out.alert_sms = pickList(b.alert_sms, ALERT_SMS);
   if (b.topics !== undefined) out.topics = pickList(b.topics, N.ALL_TOPICS);
   if (b.alert_areas !== undefined) { const a = pickList(b.alert_areas, Object.keys(EM.AREAS)); out.alert_areas = a.includes('all') ? ['all'] : a; }
   if (b.quiet_hours !== undefined) out.quiet_hours = b.quiet_hours === true || b.quiet_hours === 'true' || b.quiet_hours === 1 || b.quiet_hours === '1' || b.quiet_hours === 'on';
@@ -84,7 +90,7 @@ function cleanPrefs(b, cur = {}) {
 }
 
 /* ---------- data ---------- */
-const PREF_COLS = ['weekly_email', 'alert_email', 'push_topics', 'radius_mi', 'topics', 'alert_areas', 'quiet_hours'];
+const PREF_COLS = ['weekly_email', 'alert_email', 'push_topics', 'radius_mi', 'topics', 'alert_areas', 'quiet_hours', 'alert_sms'];
 const HOME_COLS = ['label', 'address', 'city', 'zip', 'parcel_id', 'lat', 'lon', 'gov_id', 'zone', 'updated_at'];
 async function session(req) {
   const auth = String(req.headers.authorization || '');
@@ -113,10 +119,13 @@ async function me(u) {
   const [{devices}] = await q('select count(*)::int as devices from push.devices where user_id = $1 and disabled_at is null', [u.id]);
   // The same email on the realtor console's agent list (api/_realtor.js): one sign-in opens both.
   const realtor = await q('select status from realtor.agents where email = $1', [u.email]).then(r => (r[0] ? r[0].status : null), () => null);
+  // The phone for alert texts, shown back masked (only the last 4 digits).
+  const [sms] = await q('select phone, status, confirmed_at from account.sms where user_id = $1', [u.id]).catch(() => []);
   return {user: {email: u.email, first_name: u.first_name, created_at: u.created_at, place_id: u.place_id}, realtor,
     home: home ? {...home, lat: +home.lat, lon: +home.lon} : null, prefs: prefs ? {...prefs, radius_mi: +prefs.radius_mi} : null, devices,
+    sms: sms ? {phone: SMS.maskPhone(sms.phone), status: sms.status, confirmed_at: sms.confirmed_at} : null,
     choices: {topics: N.TOPICS, radius_mi: N.RADII, push_topics: Object.fromEntries(PUSH_TOPICS.map(k => [k, EM.TOPICS[k]])), alert_email: Object.fromEntries(ALERT_EMAIL.map(k => [k, EM.TOPICS[k]])),
-      alert_types: EM.ALERT_TYPES, areas: EM.AREAS}};
+      alert_types: EM.ALERT_TYPES, areas: EM.AREAS, alert_sms: Object.fromEntries(ALERT_SMS.map(k => [k, EM.TOPICS[k]])), sms_ready: SMS.ready()}};
 }
 // Signed-in phones follow the account: its home point (rounded to about 100 m, as /api/push stores it), zone, choices,
 // quiet hours and the governments whose local notices it gets (govs: empty = every government; see E.reaches).
@@ -293,12 +302,46 @@ async function handler(req, res) {
     if (action === 'prefs') {
       const [cur] = await q(`select ${PREF_COLS.join(', ')} from account.prefs where user_id = $1`, [u.id]);
       const p = cleanPrefs(b, cur || {});
-      await q(`insert into account.prefs (user_id, weekly_email, alert_email, push_topics, radius_mi, topics, alert_areas, quiet_hours, updated_at) values ($1, $2, $3, $4, $5, $6, $7, $8, now())
+      await q(`insert into account.prefs (user_id, weekly_email, alert_email, push_topics, radius_mi, topics, alert_areas, quiet_hours, alert_sms, updated_at) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, now())
           on conflict (user_id) do update set weekly_email = excluded.weekly_email, alert_email = excluded.alert_email, push_topics = excluded.push_topics,
-            radius_mi = excluded.radius_mi, topics = excluded.topics, alert_areas = excluded.alert_areas, quiet_hours = excluded.quiet_hours, updated_at = now()`,
-      [u.id, p.weekly_email ?? true, p.alert_email || [], p.push_topics || [], p.radius_mi || 1, p.topics || N.ALL_TOPICS, p.alert_areas || [], !!p.quiet_hours]);
+            radius_mi = excluded.radius_mi, topics = excluded.topics, alert_areas = excluded.alert_areas, quiet_hours = excluded.quiet_hours, alert_sms = excluded.alert_sms, updated_at = now()`,
+      [u.id, p.weekly_email ?? true, p.alert_email || [], p.push_topics || [], p.radius_mi || 1, p.topics || N.ALL_TOPICS, p.alert_areas || [], !!p.quiet_hours, p.alert_sms || ['evacuation', 'weather', 'safety']]);
       await syncDevices(u.id);
       return res.status(200).json(await me(u));
+    }
+    if (action === 'sms_start') {
+      // Text a 6-digit code to confirm the number. The person ticks a consent box first (sent as consent: true).
+      if (!SMS.ready()) throw bad('Text alerts aren’t turned on yet. Phone and email alerts work now.', 503);
+      if (b.consent !== true && b.consent !== 'true' && b.consent !== 'on') throw bad('Tick the box to agree to get alert texts.');
+      const phone = SMS.normPhone(b.phone);
+      if (!phone) throw bad('Enter a 10-digit US mobile number.');
+      if (limit('sms:' + u.id, 4, 3600e3) || limit('smsip:' + ipOf(req), 8, 3600e3)) throw bad('Too many codes. Try again in an hour.', 429);
+      const [taken] = await q(`select 1 from account.sms where phone = $1 and status = 'active' and user_id <> $2`, [phone, u.id]);
+      if (taken) throw bad('That number already gets BayCounty.me alerts on another account.');
+      const code = newCode();
+      await q(`insert into account.sms (user_id, phone, status, code_hash, code_expires, attempts, consent_at, updated_at) values ($1, $2, 'pending', $3, now() + make_interval(mins => $4), 0, now(), now())
+          on conflict (user_id) do update set phone = excluded.phone, status = 'pending', code_hash = excluded.code_hash, code_expires = excluded.code_expires, attempts = 0,
+            consent_at = now(), confirmed_at = null, stopped_at = null, updated_at = now()`, [u.id, phone, hashCode(phone, code), CODE_MIN]);
+      const r = await SMS.sendTo(u.id, phone, `Your BayCounty.me code is ${code}. It works for ${CODE_MIN} minutes. Msg & data rates may apply. Reply HELP for help, STOP to end.`, 'code');
+      if (!r.ok) { console.error('sms code', r.error); throw bad('We couldn’t text that number. Check it and try again.', 502); }
+      return res.status(200).json({ok: true, message: `We texted a 6-digit code to ${SMS.maskPhone(phone)}.`, ...(await me(u))});
+    }
+    if (action === 'sms_verify') {
+      if (limit('smsv:' + u.id, 10, 600e3)) throw bad('Too many tries. Wait a few minutes and try again.', 429);
+      const code = String(b.code || '').replace(/\D/g, '');
+      if (code.length !== 6) throw bad('Enter the 6-digit code from the text.');
+      const [m] = await q(`update account.sms set attempts = attempts + 1 where user_id = $1 and status = 'pending' and code_expires > now() and attempts < $2
+          returning phone, code_hash`, [u.id, CODE_TRIES]);
+      const want = m && m.code_hash ? Buffer.from(m.code_hash) : null, got = m ? Buffer.from(hashCode(m.phone, code)) : null;
+      if (!m || !want || want.length !== got.length || !crypto.timingSafeEqual(want, got)) throw bad('That code didn’t match, or it has expired. Send a new code.');
+      const [taken] = await q(`select 1 from account.sms where phone = $1 and status = 'active' and user_id <> $2`, [m.phone, u.id]);
+      if (taken) throw bad('That number already gets BayCounty.me alerts on another account.');
+      await q(`update account.sms set status = 'active', code_hash = null, code_expires = null, confirmed_at = now(), updated_at = now() where user_id = $1`, [u.id]);
+      return res.status(200).json({ok: true, message: 'Your number is confirmed. Alert texts are on.', ...(await me(u))});
+    }
+    if (action === 'sms_off') {
+      await q('delete from account.sms where user_id = $1', [u.id]);
+      return res.status(200).json({ok: true, ...(await me(u))});
     }
     if (action === 'test_push') {
       // A test notification to this account's own phones only, so a person can check alerts reach them.
@@ -404,4 +447,4 @@ async function adminSummary() {
 }
 
 module.exports = handler;
-Object.assign(module.exports, {session, signInUser, startSession, sessionCookies, nextOf, SESSION_DAYS, makeToken, readToken, hashCode, hashSession, cleanPrefs, manageUrl, weeklyRun, emailNotice, adminSummary, homeFeed, COOKIE, PUSH_TOPICS, ALERT_EMAIL});
+Object.assign(module.exports, {ALERT_SMS, session, signInUser, startSession, sessionCookies, nextOf, SESSION_DAYS, makeToken, readToken, hashCode, hashSession, cleanPrefs, manageUrl, weeklyRun, emailNotice, adminSummary, homeFeed, COOKIE, PUSH_TOPICS, ALERT_EMAIL});
