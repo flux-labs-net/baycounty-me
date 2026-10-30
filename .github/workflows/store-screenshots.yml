@@ -7,6 +7,11 @@ on:
   workflow_dispatch:
   pull_request:
     paths: ["store/**", ".github/workflows/store-screenshots.yml"]
+# One Mac runs every iOS job one at a time, so a new push to a pull request cancels that PR's older run
+# instead of queuing behind it. Runs on main are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 env:
   API: http://127.0.0.1:8765
 jobs:

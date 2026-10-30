@@ -5,6 +5,11 @@ on:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
   pull_request:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
+# One Mac runs every iOS job one at a time, so a new push to a pull request cancels that PR's older run
+# instead of queuing behind it. Runs on main are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   build:
     runs-on: [self-hosted, macOS]
