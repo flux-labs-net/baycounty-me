@@ -52,7 +52,7 @@ struct MoneyView: View {
     ]
     /// The site's Connections menu.
     private let connections: [Item] = [
-        .init(title: "Network", symbol: "point.3.filled.connected.trianglepath.dotted", detail: "Who every government paid, and who gave to officials", site: "/connections"),
+        .init(title: "Connections", symbol: "point.3.filled.connected.trianglepath.dotted", detail: "Who was paid, who gave, and how they voted", site: "/connections"),
         .init(title: "Campaign gifts", symbol: "chart.bar", detail: "What each official raised, and from whom", route: .dataset("campaign-finance")),
         .init(title: "Donors with contracts", symbol: "link", detail: "Businesses that gave and also hold contracts", route: .donorContracts),
         .init(title: "Money map", symbol: "point.3.connected.trianglepath.dotted", detail: "Donors, officials and votes on their contracts", route: .moneyMap),

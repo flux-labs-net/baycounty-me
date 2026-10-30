@@ -70,7 +70,7 @@ object SitePages {
         "/public-money/accountability" to Coverage.Native("Accountability console"),
         "/public-money/votes" to Coverage.Native("Votes by meeting"),
         "/public-money/vendors" to Coverage.Native("Companies"),
-        "/connections" to Coverage.Web("Connections network graph"),
+        "/connections" to Coverage.Web("Connections: money flow, who gave and how they voted"),
         "/glossary" to Coverage.Native("Glossary"),
         "/updates" to Coverage.Native("What's new"),
         "/search" to Coverage.Native("Search tab"),

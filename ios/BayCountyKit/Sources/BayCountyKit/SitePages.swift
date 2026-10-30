@@ -67,7 +67,7 @@ public enum SitePages {
         "/public-money/accountability": .native("Accountability console"),
         "/public-money/votes": .native("Votes by meeting"),
         "/public-money/vendors": .native("Companies"),
-        "/connections": .web("Connections network graph"),
+        "/connections": .web("Connections: money flow, who gave and how they voted"),
         "/glossary": .native("Glossary"),
         "/updates": .native("What's new"),
         "/search": .native("Search tab"),

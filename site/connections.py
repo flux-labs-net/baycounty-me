@@ -265,66 +265,85 @@ def _gift_type(d):
     return _TYPE_OF.get(d['name'], 'business')
 
 
+def _votes(D):
+    """Votes on motions that name a company that gave to the member's campaign (dataset donor-votes, from
+    site/correlations.py), keyed to this page's ids: c is the payee id ('v:...') and m the official ('m:...')."""
+    try:
+        from overlaps_page import _data
+        rows = _data()['DV']
+    except Exception as ex:  # the page still works without votes
+        print('connections: no donor votes', ex, file=sys.stderr)
+        return []
+    by_pid = {o['pid']: k for k, o in D['off'].items()}
+    out, seen = [], set()
+    for r in rows:
+        cid = r.get('company_id') or ''
+        c = 'v:' + cid.partition(':')[2] if cid.startswith('vendor:') else None
+        k = (r['date'], r.get('member_id'), cid, r.get('headline'))
+        if k in seen:
+            continue
+        seen.add(k)
+        out.append({'d': r['date'], 'm': by_pid.get((r.get('member_id') or '').partition(':')[2]), 'mn': r['member'], 'mu': r.get('member_url'),
+                    'v': r['member_vote'], 'c': c if c in D['ents'] else None, 'cn': r['company'], 'cu': r.get('company_url'),
+                    'h': r.get('headline') or '', 'a': r.get('amount'), 'ca': 1 if r.get('consent_agenda') else 0,
+                    'gf': r.get('gift_first_date'), 'gl': r.get('gift_last_date'), 'ow': 1 if r.get('donor_kind') == 'business owner' else 0,
+                    'g': r.get('gov_id'), 'u': r.get('source_url')})
+    out.sort(key=lambda v: v['d'], reverse=True)
+    return out
+
+
 def connections_page(out_dir):
     from money_map import money_map_section
     D = network_data()
+    D['votes'] = _votes(D)
     js = open(os.path.join(HERE, 'connections.js')).read().replace('__CN__', json.dumps(D, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'connections.js'), 'w').write(js)
     shutil.copy(os.path.join(HERE, 'connections.css'), os.path.join(out_dir, 'assets', 'connections.css'))
     named = {r['e'] for r in D['recs'] if r['e'][0] in 'vb'}
     paid_donors = {d['e'] for d in D['don'] if d['e']}
     cities = list(dict.fromkeys(p['g'] for p in D['payers'].values() if p['g']))
-    kinds = [('gov', 'Governments'), ('cra', 'Redevelopment agencies'), ('tourism', 'Tourism agencies')]
-    chips = ''.join(f'<div class="cn-grp"><span class="cn-lbl">{lbl}</span>' + ''.join(
-        f'<button type="button" class="cn-chip" data-payer="{k}" aria-pressed="true">{v["n"]}</button>' for k, v in D['payers'].items() if v['k'] == kind) + '</div>'
-        for kind, lbl in kinds if any(v['k'] == kind for v in D['payers'].values()))
     n_types = 'contracts, change orders, emergency purchases, check registers, tourism agency payments and CRA ledger'
     return f'''<div class="page tax cn">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Network</span><h1>Who local governments paid, and who gave to the officials in charge</h1>
-    <p class="lede">Every contract, payment and grant on the site, linked to who received it, to other payees on the same project or address, and to business gifts to the officials who approve the spending. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/connections/campaign-gifts">Campaign gifts</a><a class="pill" href="/connections/nonprofits">Nonprofits</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
+  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections</span><h1>Who was paid, who gave, and how they voted</h1>
+    <p class="lede">Follow public money from each local government to the businesses it paid, then to the campaigns those businesses gave to, and to the votes those officials cast on the businesses' work. Tap any name to follow it.</p></div>
+    <div class="stamp"><a class="pill" href="/connections/campaign-gifts">Campaign gifts</a><a class="pill" href="/connections/nonprofits">Nonprofits</a><a class="pill" href="/connections/overlaps">Overlaps</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
   {city_bar(cities, label='Government')}
-  <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What a line means</h2>
-    <ol class="ex-steps"><li><b>A gray line is money from a government or agency.</b> Thicker lines carry more dollars in the records. A contract award and the check register payments on it can describe the same money, so record types are never added together.</li>
-      <li><b>A dashed line is a documented link between two payees:</b> the same project, the same address, or one working as the other's subconsultant. Each one cites its record.</li>
-      <li><b>A red line is a business campaign gift</b>, and a dotted line joins an official to the board they sit on. A city commission also sits as its redevelopment agency's board. Only businesses, PACs and committees are shown, never individual donors, and none of this shows wrongdoing.</li></ol></div></section>
+  <form class="cn-search" id="cnSearch" role="search"><label for="cnQ">Find a business, official or government</label>
+    <div class="cn-sbox"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="m20 20-3.6-3.6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <input id="cnQ" list="cnFind" type="search" placeholder="For example Marshall Brothers, Allan Branch or Lynn Haven" autocomplete="off" enterkeyhint="search"><datalist id="cnFind"></datalist><button type="submit" class="cn-btn">Show</button></div>
+    <p class="cn-note" id="cnMiss" hidden>No match. Try part of the name.</p></form>
   <div class="kpis" id="cnKpis"></div>
-  <div class="cn-bar" role="group" aria-label="Filters">
-    {chips}
-    <div class="cn-grp" id="cnTypes"><span class="cn-lbl">Records</span></div>
-    <div class="cn-grp" id="cnScope"><span class="cn-lbl">Payees</span></div>
-    <div class="cn-grp" id="cnDon"><span class="cn-lbl">Gifts</span></div>
+  <section class="cn-card" id="flow" aria-labelledby="flowH"><div class="cn-vh"><h2 id="flowH">Follow the money</h2><span class="cn-note" id="cnFlowCount"></span></div>
+    <div class="cn-key"><span><i class="k-pay"></i>Paid by a government</span><span><i class="k-gift"></i>Campaign gift</span><span>Band width shows dollars. Payments and gifts use separate scales.</span></div>
+    <div class="cn-wrap"><svg id="cnFlow" role="img" aria-label="Money flow: governments on the left paid the businesses in the middle, which gave to the campaigns on the right"></svg><div class="cn-tip" id="cnTip" hidden></div></div>
+    <p class="cn-note cn-pad">Each business in the middle was paid in the records on the left and gave to the campaigns on the right. Tap a name to open its story below. A gift and a payment together are facts about the records, not evidence of why either happened; most spending is bid and approved by the full board.</p></section>
+  <div class="cn-main" id="follow">
+    <section class="cn-card cn-list" aria-labelledby="listH"><div class="cn-vh"><h2 id="listH">Paid and gave</h2>
+      <div class="cn-sort" role="group" aria-label="Sort by"><button type="button" class="cn-chip" data-sort="paid" aria-pressed="true">Most paid</button><button type="button" class="cn-chip" data-sort="gave" aria-pressed="false">Most given</button><button type="button" class="cn-chip" data-sort="votes" aria-pressed="false">Most votes</button></div></div>
+      <p class="cn-note cn-pad" id="cnListNote"></p>
+      <ol class="cn-rank" id="cnList" data-share-items></ol>
+      <button type="button" class="cn-btn cn-more" id="cnMore" hidden></button></section>
+    <aside class="cn-card cn-profile" id="cnProfile" aria-live="polite"></aside>
   </div>
-  <div class="cn-tabs" role="tablist" aria-label="Views">
-    <button type="button" role="tab" class="cn-tab" id="t-trail" data-v="trail">Money trail</button>
-    <button type="button" role="tab" class="cn-tab" id="t-network" data-v="network">Network</button>
-    <button type="button" role="tab" class="cn-tab" id="t-payees" data-v="payees">Payees</button>
-    <button type="button" role="tab" class="cn-tab" id="t-gifts" data-v="gifts">Campaign gifts</button>
-    <button type="button" role="tab" class="cn-tab" id="t-donors" data-v="donors">Donors and votes</button>
-  </div>
-  <div class="cn-main">
-    <div class="cn-view">
-      <section id="v-trail"><div class="cn-vh"><h2>Paid by a government, and gave to a campaign</h2><span class="cn-note" id="cnTrailCount"></span></div>
-        <div class="cn-wrap cn-scroll"><svg id="cnTrail" role="img" aria-label="Governments that paid each business, and the officials each business gave to"></svg><div class="cn-tip" id="cnTip3" hidden></div></div>
-        <p class="cn-note">Each business in the middle was paid in the records on the left and gave to the campaigns on the right. Gray lines are payments (thicker means more dollars in the records), red lines are campaign gifts. Tap any name to highlight its lines and see its records. A gift and a payment together are facts about the records, not evidence of why either happened.</p></section>
-      <section id="v-network" hidden><div class="cn-vh"><h2>Who the governments paid</h2><label class="cn-find"><span class="sr">Find a name</span><input id="cnQ" list="cnFind" type="search" placeholder="Find a business, official or government" autocomplete="off"><datalist id="cnFind"></datalist></label><button type="button" class="cn-btn" id="cnClear">Clear</button><div class="cn-fsbar"><button type="button" class="cn-btn cn-fs" aria-pressed="false">Full screen</button></div><div class="cn-legend">
-        <span><i style="background:var(--navy)"></i>Government or agency</span><span><i style="background:var(--blue)"></i>Business or nonprofit</span>
-        <span><i style="background:var(--muted)"></i>Public body, fund or bondholders</span><span><i style="background:var(--amber)"></i>Property owner</span>
-        <span><i class="hollow"></i>Not named</span><span><i style="background:var(--salmon)"></i>Official or candidate</span>
-        <span><i class="ln dash"></i>Shared project, address or sub</span><span><i class="ln red"></i>Campaign gift</span></div></div>
-        <div class="cn-wrap"><svg id="cnGraph" role="img" aria-label="Network of local governments, the payees they paid, and business campaign gifts to the officials who oversee them"></svg><div class="cn-zoom"><button type="button" id="cnGin" aria-label="Zoom in">+</button><button type="button" id="cnGout" aria-label="Zoom out">−</button><button type="button" id="cnGreset">Reset</button></div><div class="cn-tip" id="cnTip" hidden></div></div>
-        <p class="cn-note">Drag a circle to move it, drag the background to pan, and scroll, pinch or use the buttons to zoom. The graph starts from one name: search above or tap a name anywhere on the page, then tap any circle to add its connections. "Donors and top payees" shows every payee that gave to a campaign or has a documented link plus the {TOP} largest, and "Every payee" shows all of them.</p></section>
-      <section id="v-payees" hidden><div class="cn-vh"><h2>Every payee, ranked</h2><span class="cn-note" id="cnPayCount"></span></div>
-        <div class="tablewrap"><table class="tx-table" id="cnPay" data-tt-sort="5:desc"></table></div></section>
-      <section id="v-gifts" hidden><div class="cn-vh"><h2>Business gifts to officials and candidates</h2><span class="cn-note" id="cnDonCount"></span></div>
-        <div class="cn-pad"><div class="tablewrap"><table class="tx-table" id="cnDonT" data-tt-sort="3:desc" data-tt-year="off"></table></div>
-        <p class="cn-note">Each row totals one business or group's gifts to one official's most recent campaign, or to a 2026 candidate, from Supervisor of Elections reports, largest first. "Donors who were paid" lists only businesses paid in the records chosen above; "All business donors" lists every gift. "Likely" means the names matched after a hand check rather than exactly. Gifts from individual people are counted on <a href="/connections/campaign-gifts">Campaign gifts</a>, where people who run a registered business are named.</p></div></section>
-      {money_map_section(out_dir)}
+  <section class="cn-card cn-all" id="records" aria-labelledby="recH"><div class="cn-vh"><h2 id="recH">Every record</h2><span class="cn-note">Tables of every payee, every business gift and every vote on a donor's contract</span></div>
+    <div class="cn-bar" role="group" aria-label="Filters">
+      <div class="cn-grp" id="cnTypes"><span class="cn-lbl">Record types (whole page)</span></div>
+      <div class="cn-grp" id="cnDon"><span class="cn-lbl">Gifts table</span></div>
     </div>
-    <aside class="cn-profile" id="cnProfile" aria-live="polite"></aside>
-  </div>
+    <div class="cn-tabs" role="tablist" aria-label="Tables">
+      <button type="button" role="tab" class="cn-tab" id="t-payees" data-v="payees">Payees</button>
+      <button type="button" role="tab" class="cn-tab" id="t-gifts" data-v="gifts">Business gifts</button>
+      <button type="button" role="tab" class="cn-tab" id="t-donors" data-v="donors">Donors and votes</button>
+    </div>
+    <section id="v-payees"><div class="cn-vh"><h3>Every payee, ranked</h3><span class="cn-note" id="cnPayCount"></span></div>
+      <div class="tablewrap"><table class="tx-table" id="cnPay" data-tt-sort="5:desc"></table></div></section>
+    <section id="v-gifts" hidden><div class="cn-vh"><h3>Business gifts to officials and candidates</h3><span class="cn-note" id="cnDonCount"></span></div>
+      <div class="cn-pad"><div class="tablewrap"><table class="tx-table" id="cnDonT" data-tt-sort="3:desc" data-tt-year="off"></table></div>
+      <p class="cn-note">Each row totals one business or group's gifts to one official's most recent campaign, or to a 2026 candidate, from Supervisor of Elections reports, largest first. "Likely" means the names matched after a hand check rather than exactly. Gifts from individual people are counted on <a href="/connections/campaign-gifts">Campaign gifts</a>, where people who run a registered business are named.</p></div></section>
+    {money_map_section(out_dir)}
+  </section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and method</h2></div>
-    <p>Payment records cover {n_types} records, from agendas, check registers, tourism agency payment files and each redevelopment agency's reports; every record links to its source. CRA ledger items that are only proposed or planned stay on the <a href="/public-money/cra-spending">CRA ledger</a>. Payees are matched to the site's vendor list by name. {len(named)} payees are named; grant programs whose recipients aren't named are grouped, and private home addresses are left out. Campaign gifts come from officials' most recent reports and 2026 candidates' reports with the Supervisor of Elections; {len(paid_donors)} businesses both gave to a campaign and were paid in these records. A gift and a payment appearing together is a fact about the records. It says nothing about why either happened, and most spending is approved by the full board.</p></section>
+    <p>Payment records cover {n_types} records, from agendas, check registers, tourism agency payment files and each redevelopment agency's reports; every record links to its source. CRA ledger items that are only proposed or planned stay on the <a href="/public-money/cra-spending">CRA ledger</a>. Payees are matched to the site's vendor list by name. {len(named)} payees are named; grant programs whose recipients aren't named are grouped, and private home addresses are left out. Campaign gifts come from officials' most recent reports, past campaigns since 2016 and 2026 candidates' reports with the Supervisor of Elections; {len(paid_donors)} businesses both gave to a campaign and were paid in these records. Votes come from meeting minutes (dataset <a href="/api/v1/datasets/donor-votes">donor-votes</a>): a vote is listed when the motion names a company that gave to that member's campaign, or whose owner did. A gift and a payment appearing together is a fact about the records. It says nothing about why either happened, and most spending is approved by the full board.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <link rel="stylesheet" href="/assets/connections.css">
