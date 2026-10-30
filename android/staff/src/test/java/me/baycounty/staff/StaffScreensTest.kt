@@ -22,7 +22,7 @@ class StaffScreensTest(@Suppress("unused") private val label: String, private va
             "city-home" to ("home" to true), "city-alerts" to ("alerts" to true), "city-send" to ("send" to true),
             "city-notices" to ("notices" to true), "city-notice" to ("notice" to true), "more" to ("more" to false),
             "city-records" to ("records" to true), "city-send-file" to ("send-file" to true), "city-send-file-preview" to ("send-file-preview" to true),
-            "signin" to ("signin" to false), "locked" to ("locked" to false),
+            "signin" to ("signin" to false), "signin-code" to ("signin-code" to false), "locked" to ("locked" to false),
         )
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
