@@ -276,6 +276,8 @@ VOTING_JS = r"""
   // from the ballot box on /elections: ?addr= fills the box and looks it up
   const a0 = new URLSearchParams(location.search).get('addr');
   if (a0) { inp.value = a0.slice(0, 120); inp.closest('section').scrollIntoView(); find(); }
+  // Signed in: the saved home's ballot and closest places to vote show without typing.
+  else new Promise(r => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', r, {once: true}) : r()).then(() => window.BCUseHome && BCUseHome(inp, h => find(), inp.closest('.eh-find')));  // site.js (deferred) has run
 })();
 """
 

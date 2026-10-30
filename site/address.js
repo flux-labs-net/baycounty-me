@@ -532,7 +532,19 @@ window.BCReportMeta = () => `Address report: ${$('aTitle').textContent} · ${$('
   const a = u.searchParams.get('a'), qq = u.searchParams.get('q');
   const lat = parseFloat(u.searchParams.get('lat')), lon = parseFloat(u.searchParams.get('lon')), hasPt = isFinite(lat) && isFinite(lon);
   if (!a && !hasPt && qq) { inp.value = qq; inp.focus({preventScroll: true}); suggest(); return; }
-  if (!a && !hasPt) { inp.focus({preventScroll: true}); return; }
+  if (!a && !hasPt) {
+    // Signed in with a saved home: open on it (the same keys its links carry), and the box still looks up any other.
+    const home = window.BCHome ? await window.BCHome() : null;
+    if (!home || inp.value.trim()) { inp.focus({preventScroll: true}); return; }
+    new URLSearchParams(window.BCHomeLink(home).split('#')[1]).forEach((v, k) => u.searchParams.set(k, v));
+    await window.BCUseHome(inp, null, inp.closest('.ac'));
+    return restore(u);
+  }
+  return restore(u);
+})();
+async function restore(u) {
+  const a = u.searchParams.get('a');
+  const lat = parseFloat(u.searchParams.get('lat')), lon = parseFloat(u.searchParams.get('lon')), hasPt = isFinite(lat) && isFinite(lon);
   if (a) inp.value = title(a);
   const fields = {outFields: 'ADDRESS,UNIT,CMNTY,ZIP,RENUM', returnGeometry: 'true', outSR: 4326, resultRecordCount: 1};
   try {
@@ -550,5 +562,5 @@ window.BCReportMeta = () => `Address report: ${$('aTitle').textContent} · ${$('
     }
     if (f[0]) load(f[0]); else { $('err').textContent = 'That address wasn\'t found. Try searching again.'; $('err').hidden = false; }
   } catch (e) { $('err').textContent = 'Bay County\'s map server didn\'t answer. Try again in a moment.'; $('err').hidden = false; }
-})();
+}
 })();

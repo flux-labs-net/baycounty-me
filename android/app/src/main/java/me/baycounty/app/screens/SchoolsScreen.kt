@@ -77,7 +77,14 @@ fun SchoolsScreen() {
         }
         item { Kpis(schools, calendar, enrollment, grades, today) }
         item {
-            CardList { RouteRow(Route.MyAddress, "Which schools serve your address", "Your zoned elementary, middle and high school", symbol = "mappin.and.ellipse") }
+            CardList {
+                val home = store.home
+                if (home != null) {
+                    RouteRow(Route.Address(home), "Schools zoned for your home", home.display, symbol = "house")
+                    RowDivider(50.dp)
+                    RouteRow(Route.MyAddress, "Another address", "Zoned schools for any Bay County address", symbol = "magnifyingglass")
+                } else RouteRow(Route.MyAddress, "Which schools serve your address", "Your zoned elementary, middle and high school", symbol = "mappin.and.ellipse")
+            }
         }
         item { MapSection(schools, zoneRows, zoneLevel, onLevel = { zoneLevel = it }) { id -> open = id; filter = Schools.Filter.ALL; query = "" } }
         item { CalendarSection(calendar, bell, today, kind, showAll, onKind = { kind = it; showAll = false }, onMore = { showAll = !showAll }) }

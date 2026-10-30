@@ -93,6 +93,7 @@
         : t <= e1 ? `Early voting is open through ${md(e1)}, 10 a.m. to 6 p.m., at any early voting site.` : 'Early voting is over. On Election Day, vote at your own precinct.';
       if (n < 0) { el.classList.add('done'); q('[data-el-early]').textContent = 'Polls have closed. Unofficial results come in on election night; the official count follows about ten days later.'; q('[data-el-polls]').hidden = true; q('.el-when span').textContent = `Election Day was ${md(ed)}`; }
     })();</script>
+    <script>document.addEventListener('DOMContentLoaded', () => { if (window.BCUseHome) BCUseHome(document.getElementById('elAddr'), null, document.querySelector('.el-find-row')); }); /* signed in: the box starts on the saved home */</script>
     <div class="el-stats" role="group" aria-label="2026 races at a glance">
       <div><b data-by='{&quot;&quot;:&quot;7&quot;,&quot;county&quot;:&quot;0&quot;,&quot;schools&quot;:&quot;1&quot;,&quot;pcb&quot;:&quot;2&quot;,&quot;lh&quot;:&quot;0&quot;,&quot;cw&quot;:&quot;2&quot;,&quot;sp&quot;:&quot;0&quot;,&quot;mb&quot;:&quot;0&quot;}'>7</b><span>races on the ballot</span></div>
       <div><b data-by='{&quot;&quot;:&quot;19&quot;,&quot;county&quot;:&quot;0&quot;,&quot;schools&quot;:&quot;4&quot;,&quot;pcb&quot;:&quot;5&quot;,&quot;lh&quot;:&quot;0&quot;,&quot;cw&quot;:&quot;5&quot;,&quot;sp&quot;:&quot;0&quot;,&quot;mb&quot;:&quot;0&quot;}'>19</b><span>candidates</span></div>
