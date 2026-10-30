@@ -23,8 +23,11 @@ final class StaffStore {
 
     private let client: StaffClient
     let demo: StaffDemo?
+    /// A copy of the client's token that SwiftUI can observe; the client itself isn't observed,
+    /// so without this the sign-in screen never left after a code was accepted.
+    private var sessionToken: String?
 
-    var signedIn: Bool { demo != nil || client.token != nil }
+    var signedIn: Bool { demo != nil || sessionToken != nil }
     var isOwner: Bool { me?.admin == true }
     var workspace: StaffWorkspace? { me?.workspaces.first { $0.id == workspaceId } }
     var role: String { workspace?.role ?? (isOwner ? "owner" : "viewer") }
@@ -38,6 +41,7 @@ final class StaffStore {
             .flatMap { try? Data(contentsOf: $0) }.flatMap { try? StaffDemo.decode($0) } : nil
         demo = d
         client = StaffClient(token: d == nil ? StaffKeychain.read() : nil)
+        sessionToken = client.token
         guard let d else { return }
         overview = d.overview; home = d.home; alerts = d.alerts.alerts; notices = d.notices; submissions = d.submissions
         if args.contains("-asStaff") {
@@ -69,6 +73,7 @@ final class StaffStore {
         do {
             let m = try await client.verify(email: email, code: code)
             if let t = m.token { StaffKeychain.save(t) }
+            sessionToken = client.token
             me = m
             pickDefaultWorkspace()
             await refresh()
@@ -79,6 +84,7 @@ final class StaffStore {
     func signOut() async {
         if demo == nil { await client.logout() }
         StaffKeychain.clear()
+        sessionToken = nil
         me = nil; overview = nil; home = nil; alerts = []; notices = nil; flags = []; submissions = nil; workspaceId = nil
     }
 
@@ -120,7 +126,7 @@ final class StaffStore {
     }
 
     private func handle(_ e: Error) {
-        if case StaffClient.StaffError.signedOut = e { StaffKeychain.clear(); client.token = nil; me = nil }
+        if case StaffClient.StaffError.signedOut = e { StaffKeychain.clear(); client.token = nil; sessionToken = nil; me = nil }
         error = e.localizedDescription
     }
 
