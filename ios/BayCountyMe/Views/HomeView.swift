@@ -141,12 +141,15 @@ struct HomeView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
+        // .contain keeps each tile's own identifier; without it the grid's identifier replaces theirs.
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("homeTiles")
     }
 
     private func tileButton(_ t: HomeTiles.Tile, wide: Bool) -> some View {
         Button { open(t.target) } label: { HomeTileView(tile: t, wide: wide) }
             .buttonStyle(PressScale())
+            .accessibilityIdentifier("tile-" + t.id)
     }
 
     private func open(_ target: HomeTiles.Target) {

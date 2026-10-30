@@ -93,7 +93,10 @@ final class AppStore {
         home = saved
         tenure = UserDefaults.standard.string(forKey: "tenure").flatMap(HomeTiles.Tenure.init(rawValue:))
         // Screenshot runs (-screen) and residents who already saved a home before this screen existed skip it.
-        setupSeen = UserDefaults.standard.bool(forKey: "setupSeen") || ProcessInfo.processInfo.arguments.contains("-screen") || saved != nil
+        // UI tests pass `-setupSeen YES|NO` to decide exactly, whatever an earlier run saved on the simulator.
+        let args = ProcessInfo.processInfo.arguments
+        setupSeen = args.contains("-setupSeen") ? UserDefaults.standard.bool(forKey: "setupSeen")
+            : UserDefaults.standard.bool(forKey: "setupSeen") || args.contains("-screen") || saved != nil
         // Screenshots: `-tenure own|rent|unset` draws the Home tab for that answer without saving it.
         let a = ProcessInfo.processInfo.arguments
         if let i = a.firstIndex(of: "-tenure"), i + 1 < a.count { tenure = HomeTiles.Tenure(rawValue: a[i + 1]) }
