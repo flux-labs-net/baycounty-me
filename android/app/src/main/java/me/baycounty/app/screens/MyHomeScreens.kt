@@ -53,6 +53,7 @@ import me.baycounty.app.Route
 import me.baycounty.app.ui.*
 import me.baycounty.kit.AccountMe
 import me.baycounty.kit.AddressMatch
+import me.baycounty.kit.HomeTiles
 import me.baycounty.kit.NearbyFeed
 import java.time.LocalTime
 
@@ -370,6 +371,12 @@ fun AccountSettingsScreen() {
                             Text("Remove home", style = T.body, color = Brand.salmon, modifier = Modifier.fillMaxWidth().padding(14.dp))
                         }
                     } else HomeSearch { changingHome = false }
+                }
+            }
+            item {
+                val store = LocalStore.current
+                PageSection("This home", "house", Tone.BLUE, "Owners see the tax bill first on Home; renters see utilities and services. Kept on this phone.") {
+                    TenurePicker(store.tenure ?: HomeTiles.Tenure.UNSET) { store.saveTenure(it) }
                 }
             }
         }

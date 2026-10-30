@@ -8,13 +8,13 @@ struct RootView: View {
         @Bindable var store = store
         TabView(selection: $store.tab) {
             HomeView()
-                .tabItem { Label("Today", systemImage: "sun.max") }
+                .tabItem { Label("Home", systemImage: "house") }
                 .tag(AppStore.Tab.home)
             LivingHereView()
-                .tabItem { Label("Living here", systemImage: "house") }
+                .tabItem { Label("Around me", systemImage: "mappin.and.ellipse") }
                 .tag(AppStore.Tab.living)
             MoneyView()
-                .tabItem { Label("Your money", systemImage: "wallet.bifold") }
+                .tabItem { Label("Money", systemImage: "dollarsign.circle") }
                 .tag(AppStore.Tab.money)
             GovernmentsView()
                 .tabItem { Label("Government", systemImage: "building.columns") }
@@ -22,7 +22,7 @@ struct RootView: View {
             NavigationStack {
                 SearchView().withRoutes()
             }
-            .tabItem { Label("Search", systemImage: "magnifyingglass") }
+            .tabItem { Label("Ask", systemImage: "bubble.left.and.text.bubble.right") }
             .tag(AppStore.Tab.search)
         }
         .sheet(item: $store.presentedPage) { page in
@@ -30,6 +30,10 @@ struct RootView: View {
         }
         .sheet(item: $store.presentedTerm) { term in
             TermSheet(term: term)
+        }
+        // First launch: where you live and whether you own or rent, which sets what the Home tab leads with.
+        .fullScreenCover(isPresented: Binding(get: { !store.setupSeen }, set: { if !$0 { store.setupSeen = true } })) {
+            HomeSetupView()
         }
         .onChange(of: store.tab, initial: true) { _, t in
             let names: [AppStore.Tab: String] = [.home: "today", .living: "living", .money: "money", .decides: "decides", .search: "search"]

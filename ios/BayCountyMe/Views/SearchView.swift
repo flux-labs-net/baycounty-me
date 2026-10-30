@@ -23,16 +23,35 @@ struct SearchView: View {
 
     /// The site's Get Involved pages, opened in the in-app browser.
     private let takePart: [(title: String, detail: String, symbol: String, path: String)] = [
-        ("Ask a question", "Plain answers from the site's records", "bubble.left.and.text.bubble.right", "/ask"),
         ("Letters to officials", "What we asked, and what they said", "envelope.open", "/correspondence"),
         ("Request a record", "Write a public records request", "doc.badge.plus", "/records-request"),
         ("Email alerts", "Weekly updates for your government", "bell", "/alerts"),
     ]
 
+    /// The Ask tab leads with the site's question box (/ask): plain answers from the records, with sources.
+    private var askCard: some View {
+        Button { store.openSite("/ask") } label: {
+            HStack(spacing: 14) {
+                Image(systemName: "bubble.left.and.text.bubble.right").font(.title2).foregroundStyle(.white)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Ask in your own words").font(.headline).foregroundStyle(.white)
+                    Text("Plain answers from public records, with sources").font(.caption).foregroundStyle(.white.opacity(0.85))
+                }
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.white.opacity(0.85))
+            }
+            .padding(16)
+            .background(Brand.navyFill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        }
+        .buttonStyle(PressScale())
+        .accessibilityIdentifier("askCard")
+    }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
                 if query.trimmingCharacters(in: .whitespaces).count < 2 {
+                    askCard
                     VStack(alignment: .leading, spacing: 10) {
                         EyebrowHeader(text: "Try")
                         FlowLayout(spacing: 8) {
@@ -101,7 +120,7 @@ struct SearchView: View {
             .padding(.bottom, 24)
         }
         .background(Brand.canvas)
-        .navigationTitle("Search")
+        .navigationTitle("Ask or search")
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Names, projects, streets, terms")
         .overlay { if searching && results.isEmpty { ProgressView() } }
         .task(id: query) { await run() }

@@ -42,6 +42,10 @@ class MainActivity : ComponentActivity() {
         val screen = intent?.getStringExtra("screen") ?: noticeURL?.takeIf { it.contains("/emergency") }?.let { "emergency" }
         if (noticeURL != null && screen == null) openURL(this, noticeURL)
         val forceDark = if (intent?.hasExtra("dark") == true) intent.getBooleanExtra("dark", false) else null
+        // Screenshots: `--ez setupSeen true` skips the first-launch setup, `--es tenure own|rent|unset` draws the Home
+        // tab for that answer without saving it. A `screen` extra skips setup too.
+        if (intent?.getBooleanExtra("setupSeen", false) == true || (screen != null && screen != "setup")) store.markSetupSeen(save = false)
+        intent?.getStringExtra("tenure")?.let { store.previewTenure(me.baycounty.kit.HomeTiles.Tenure.of(it)) }
         setContent {
             val dark = forceDark ?: isSystemInDarkTheme()
             LaunchedEffect(dark) {
@@ -84,11 +88,11 @@ private val Tab.usageName get() = when (this) {
 private data class TabItem(val tab: Tab, val label: String, val symbol: String)
 
 private val tabs = listOf(
-    TabItem(Tab.HOME, "Today", "sun.max"),
-    TabItem(Tab.LIVING, "Living here", "house"),
-    TabItem(Tab.MONEY, "Your money", "wallet.bifold"),
+    TabItem(Tab.HOME, "Home", "house"),
+    TabItem(Tab.LIVING, "Around me", "mappin.and.ellipse"),
+    TabItem(Tab.MONEY, "Money", "dollarsign.circle"),
     TabItem(Tab.DECIDES, "Government", "building.columns"),
-    TabItem(Tab.SEARCH, "Search", "magnifyingglass"),
+    TabItem(Tab.SEARCH, "Ask", "bubble.left.and.text.bubble.right"),
 )
 
 @Composable
@@ -108,6 +112,8 @@ fun AppRoot(store: AppStore, screen: String? = null, nav: Nav = remember { Nav()
         if (store.home?.id != m.id || store.home?.point != m.point) store.saveHome(m)
     }
     CompositionLocalProvider(LocalStore provides store, LocalNav provides nav) {
+        // First launch: where you live and whether you own or rent, which sets what the Home tab leads with.
+        if (!store.setupSeen) { HomeSetupScreen { store.markSetupSeen() }; return@CompositionLocalProvider }
         BackHandler(enabled = nav.stack().isNotEmpty() || nav.tab != Tab.HOME) {
             if (!nav.pop()) nav.tab = Tab.HOME
         }
@@ -189,6 +195,7 @@ fun RouteScreen(route: Route) {
         Route.Meetings -> MeetingsScreen()
         Route.PublicSafety -> PublicSafetyScreen()
         Route.Overlaps -> OverlapsScreen()
+        is Route.TaxBill -> TaxBillScreen(route.districtID)
         is Route.BudgetCompare -> BudgetCompareScreen(route.govID)
         is Route.TaxCalculator -> TaxCalculatorScreen(route)
         is Route.GovBudget -> GovBudgetScreen(route.id)
@@ -216,9 +223,10 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
         "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "events" to Route.Events, "beaches" to Route.Beaches, "parks" to Route.Parks, "schools" to Route.Schools, "emergency" to Route.Emergency, "hurricaneprep" to Route.HurricanePrep, "utilities" to Route.Utilities(UTILITIES_SAMPLE), "volunteer" to Route.Volunteer, "military" to Route.Military, "myhome" to Route.MyHome, "pastelections" to Route.Dataset("campaign-history"),
         "roads" to Route.Dataset("road-contracts"), "development" to Route.Dataset("development-projects"),
         "restaurants" to Route.Restaurants, "restaurant" to Route.Restaurant("1305433"), "newbusinesses" to Route.Dataset("new-businesses"),
-        "publicsafety" to Route.PublicSafety, "overlaps" to Route.Overlaps,
+        "publicsafety" to Route.PublicSafety, "overlaps" to Route.Overlaps, "taxbill" to Route.TaxBill(),
     )
     simple[arg]?.let { nav.replace(it); return }
+    if (arg == "setup") { store.previewSetup(); return }
     if (arg == "myhome:settings") { nav.replace(Route.MyHome); nav.push(Route.AccountSettings); return }
     when {
         arg == "tab:search" -> nav.tab = Tab.SEARCH

@@ -42,6 +42,7 @@ import me.baycounty.app.ui.*
 import me.baycounty.kit.Amendment3Model
 import me.baycounty.kit.Dates
 import me.baycounty.kit.Format
+import me.baycounty.kit.HomeTiles
 import me.baycounty.kit.Meeting
 import me.baycounty.kit.TaxCalculator
 import me.baycounty.kit.Events
@@ -52,38 +53,36 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** The Today tab: a greeting, what's going on right now (trash pickup on pickup day, beach flag, notices, next meeting), your address,
- *  this weekend's events, what's coming up at city hall, then your tax bill and the big numbers. */
+/** The Home tab ("My home dashboard"): a line about your home, an alert strip when notices are active, then tiles that
+ *  each give one answer (HomeTiles). Owners lead with the tax bill, renters with utilities. Each tile opens one short
+ *  screen. Then your address and this weekend's events. Mirrors the iOS HomeView. */
 @Composable
 fun HomeScreen() {
     val store = LocalStore.current
     val nav = LocalNav.current
-    val o = rememberOpener()
     val home = store.home
     var utilities by remember(home?.id) { mutableStateOf(home?.let { store.utilities[it.id] }) }
+    var showSetup by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { store.loadTax(); store.loadAmendment3(); store.load(listOf(Events.DATASET, "beach-conditions", "emergency-notices")) }
-    // The saved home's trash day. The address isn't logged by the API and the answer isn't kept on disk.
+    // The saved home's trash day and city. The address isn't logged by the API and the answer isn't kept on disk.
     LaunchedEffect(home?.id) { utilities = home?.let { runCatching { store.loadUtilities(it) }.getOrNull() } }
+    if (showSetup) { HomeSetupScreen { showSetup = false }; return }
     Screen(
-        "Today",
+        "Home",
         navigationIcon = { BayMarkButton { nav.push(Route.About) } },
         actions = {
             ToolbarIcon("magnifyingglass", "Search") { nav.push(Route.Search) }
-            ToolbarIcon("bubble.left.and.text.bubble.right", "Ask a question") { o.openSite("/ask") }
             ToolbarIcon("person.crop.circle", if (me.baycounty.app.Account.signedIn) "My home" else "Sign in") { nav.push(Route.MyHome) }
             ToolbarIcon("bell", "Emergencies and alerts") { nav.push(Route.Emergency) }
         },
         onRefresh = { store.refreshAll() },
-        spacing = 24,
+        spacing = 20,
     ) {
         item { Greeting(utilities) }
-        item { BallotBanner() }
-        item { RightNow(utilities) }
-        item { AddressCard() }
+        HomeTiles.alert(store.rows["emergency-notices"] ?: emptyList())?.let { a -> item { AlertStrip(a) } }
+        item { TileGrid(utilities) { showSetup = true } }
+        item { AddressCard { showSetup = true } }
         item { WeekendSection() }
-        item { CityHallSection() }
-        item { TaxBillSection() }
-        item { NumbersSection() }
         item {
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 FreshnessNote()
@@ -93,57 +92,85 @@ fun HomeScreen() {
     }
 }
 
-/** "Good morning" over "WEDNESDAY, OCT 28 · LYNN HAVEN": the date, and the saved home's city once it's known. */
+private val LocalTenure @Composable get() = LocalStore.current.tenure ?: HomeTiles.Tenure.UNSET
+
+/** "YOUR HOME · LYNN HAVEN · RENTING" over "Good morning", or "BAY COUNTY" before a home is saved. */
 @Composable
 private fun Greeting(utilities: UtilityLookup?) {
-    val place = utilities?.let { if (it.area == "county") "Bay County" else it.areaName } ?: "Bay County"
-    val date = TodayBrief.dateLine(Events.todayKey())
+    val store = LocalStore.current
+    val place = if (store.home == null) null else utilities?.let { if (it.area == "county") "Bay County" else it.areaName } ?: "Bay County"
     Column(Modifier.semantics(mergeDescendants = true) { heading() }, verticalArrangement = Arrangement.spacedBy(4.dp)) {
-        Text("$date · $place".uppercase(), style = T.caption.copy(fontWeight = FontWeight.SemiBold, letterSpacing = 0.6.sp), color = Brand.secondary)
-        Text(TodayBrief.greeting(TodayBrief.hour()), style = T.bigNumber.copy(fontSize = 30.sp, lineHeight = 36.sp), color = Brand.text)
+        Text(HomeTiles.eyebrow(place, LocalTenure).uppercase(), style = T.caption.copy(fontWeight = FontWeight.SemiBold, letterSpacing = 0.6.sp), color = Brand.secondary)
+        Text(TodayBrief.greeting(TodayBrief.hour()), style = T.bigNumber.copy(fontSize = 30.sp, lineHeight = 36.sp, fontWeight = FontWeight.SemiBold), color = Brand.text)
     }
 }
 
-/** Trash pickup (only on pickup day, or the evening before), beach flag, active notices and next meeting, two by two;
- *  an odd card out spans the row. Same cards as the site's home page. */
+/** Active notices, the most urgent kind first; opens Emergencies. */
 @Composable
-private fun RightNow(utilities: UtilityLookup?) {
+private fun AlertStrip(a: HomeTiles.Alert) {
+    val nav = LocalNav.current
+    Row(
+        Modifier.fillMaxWidth().background(Brand.amber.copy(alpha = 0.16f), RoundedCornerShape(14.dp)).clickable { nav.push(Route.Emergency) }
+            .padding(14.dp).semantics(mergeDescendants = true) {},
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Icon(icon("exclamationmark.triangle"), null, tint = Brand.amber, modifier = Modifier.size(22.dp))
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(a.title, style = T.subheadBold, color = Brand.text)
+            Text(a.detail, style = T.caption, color = Brand.secondary)
+        }
+        Chevron()
+    }
+}
+
+/** Two tiles a row; with an odd count the lead tile spans the first row. */
+@Composable
+private fun TileGrid(utilities: UtilityLookup?, onSetup: () -> Unit) {
     val store = LocalStore.current
     val nav = LocalNav.current
-    val cards = TodayBrief.cards(store.rows["beach-conditions"] ?: emptyList(), store.rows["emergency-notices"] ?: emptyList(), store.meetings, utilities)
+    val o = rememberOpener()
+    val m = store.taxModel
+    val district = m?.let { HomeTiles.taxDistrict(it, utilities, store.savedDistrict) }
+    val taxTotal = if (m != null && district != null) TaxCalculator.estimate(m, district, HomeTiles.SAMPLE_VALUE, true).total else null
+    val election = store.amendment3?.takeIf { it.isBeforeVote() }?.vote
+    val tiles = HomeTiles.tiles(LocalTenure, store.home != null, utilities, taxTotal, store.rows["beach-conditions"] ?: emptyList(), store.meetings, election)
+    fun open(t: HomeTiles.Target) = when (t) {
+        HomeTiles.Target.SETUP -> onSetup()
+        HomeTiles.Target.TAX_BILL -> nav.push(Route.TaxBill(district?.id))
+        HomeTiles.Target.UTILITIES -> nav.push(Route.Utilities(store.home))
+        HomeTiles.Target.BEACHES -> nav.push(Route.Beaches)
+        HomeTiles.Target.MEETINGS -> nav.push(Route.Meetings)
+        HomeTiles.Target.ELECTION -> o.openSite("/elections/voting")
+        HomeTiles.Target.REPRESENTATIVES -> nav.push(store.home?.let { Route.Address(it) } ?: Route.People)
+        HomeTiles.Target.SCHOOLS -> nav.push(Route.Schools)
+    }
+    val lead = if (tiles.size % 2 == 1) tiles.take(1) else emptyList()
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        for (pair in cards.chunked(2)) {
+        for (t in lead) HomeTile(t, Modifier.fillMaxWidth(), wide = true) { open(t.target) }
+        for (pair in tiles.drop(lead.size).chunked(2)) {
             Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                for (c in pair) {
-                    val route = when (c.target) {
-                        TodayBrief.Target.BEACHES -> Route.Beaches
-                        TodayBrief.Target.EMERGENCY -> Route.Emergency
-                        TodayBrief.Target.MEETINGS -> Route.Meetings
-                        TodayBrief.Target.UTILITIES -> Route.Utilities(store.home)
-                    }
-                    val tone = when (c.tone) { "teal" -> Tone.TEAL; "amber" -> Tone.AMBER; "salmon" -> Tone.SALMON; else -> Tone.BLUE }
-                    val wide = pair.size == 1
-                    val box = Modifier.weight(1f).fillMaxHeight().then(if (wide) Modifier else Modifier.heightIn(min = 128.dp))
-                        .card(16.dp).clickable { nav.push(route) }.padding(14.dp).semantics(mergeDescendants = true) {}
-                    if (wide) {
-                        // The odd card out: full width, icon beside the text.
-                        Row(box, verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            ToneIcon(c.symbol, tone, 34.dp)
-                            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                Text(c.title, style = T.subheadBold, color = Brand.text)
-                                Text(c.detail, style = T.caption, color = Brand.secondary)
-                            }
-                        }
-                    } else {
-                        Column(box, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            ToneIcon(c.symbol, tone, 34.dp)
-                            Text(c.title, style = T.subheadBold, color = Brand.text)
-                            Text(c.detail, style = T.caption, color = Brand.secondary)
-                        }
-                    }
-                }
+                for (t in pair) HomeTile(t, Modifier.weight(1f).fillMaxHeight()) { open(t.target) }
+                if (pair.size == 1) Spacer(Modifier.weight(1f))
             }
         }
+    }
+}
+
+/** One tile: a label with its icon, one big answer, and a line under it. The lead tile is navy. */
+@Composable
+private fun HomeTile(t: HomeTiles.Tile, modifier: Modifier, wide: Boolean = false, onClick: () -> Unit) {
+    val tone = when (t.tone) { "teal" -> Brand.good; "amber" -> Brand.amber; "salmon" -> Brand.salmon; else -> Brand.navy }
+    val box = if (t.featured) modifier.background(Brand.navyFill, RoundedCornerShape(16.dp)) else modifier.card(16.dp)
+    Column(
+        box.clickable(onClick = onClick).then(if (wide) Modifier else Modifier.heightIn(min = 118.dp)).padding(14.dp).semantics(mergeDescendants = true) {},
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            Icon(icon(t.symbol), null, tint = if (t.featured) Color.White.copy(alpha = 0.9f) else tone, modifier = Modifier.size(16.dp))
+            Text(t.eyebrow, style = T.caption.copy(fontWeight = FontWeight.SemiBold), color = if (t.featured) Color.White.copy(alpha = 0.9f) else tone)
+        }
+        Text(t.value, style = T.bigNumber.copy(fontSize = 22.sp, lineHeight = 28.sp, fontWeight = FontWeight.SemiBold), color = if (t.featured) Color.White else Brand.text, maxLines = 2)
+        Text(t.detail, style = T.caption, color = if (t.featured) Color.White.copy(alpha = 0.85f) else Brand.secondary)
     }
 }
 
@@ -197,24 +224,6 @@ private fun WeekendEventRow(r: DataRow) {
     }
 }
 
-/** The next three public meetings. */
-@Composable
-private fun CityHallSection() {
-    val store = LocalStore.current
-    val nav = LocalNav.current
-    val next = Meeting.upcoming(store.meetings).take(3)
-    if (next.isEmpty()) return
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SectionHeader("At city hall", "Meetings") { nav.push(Route.Meetings) }
-        CardList {
-            next.forEachIndexed { i, m ->
-                Box(Modifier.clickable { nav.push(Route.MeetingDetail(m.id)) }) { TodayMeetingRow(m, showDay = true) }
-                if (i < next.lastIndex) RowDivider(66.dp)
-            }
-        }
-    }
-}
-
 @Composable
 fun SearchField(onClick: () -> Unit) {
     Row(
@@ -226,33 +235,9 @@ fun SearchField(onClick: () -> Unit) {
     }
 }
 
+/** Everything for the saved home (tax estimate, representatives, schools, flood zone), or a prompt to set one. */
 @Composable
-private fun BallotBanner() {
-    val store = LocalStore.current
-    val nav = LocalNav.current
-    val a3 = store.amendment3 ?: return
-    if (!a3.isBeforeVote()) return
-    val day = a3.vote?.let { Dates.parse(it) } ?: return
-    val year = 1 // FY2029, the year the site leads with
-    Row(
-        Modifier.fillMaxWidth().background(Brand.salmon.copy(alpha = 0.12f), RoundedCornerShape(16.dp)).clickable { nav.push(Route.Amendment3()) }.padding(14.dp),
-        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
-    ) {
-        Column(Modifier.size(46.dp).background(Brand.salmonFill, RoundedCornerShape(12.dp)), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-            Text(Dates.format(day, "MMM").uppercase(), style = T.caption2.copy(fontWeight = FontWeight.Bold), color = Color.White)
-            Text(Dates.format(day, "d"), style = T.number, color = Color.White)
-        }
-        Column(Modifier.weight(1f)) {
-            Text("Amendment 3 is on the ballot", style = T.subheadBold.copy(fontWeight = FontWeight.Bold), color = Brand.text)
-            Text("−${Format.compactMoney(a3.localImpact(year))} to local budgets by ${Amendment3Model.fiscalYears[year]} · needs 60%", style = T.caption, color = Brand.secondary)
-        }
-        Icon(icon("chevron.right"), null, tint = Brand.salmon, modifier = Modifier.size(18.dp))
-    }
-}
-
-/** The saved home address (tax estimate, representatives, schools, flood zone), or a prompt to look one up. */
-@Composable
-private fun AddressCard() {
+private fun AddressCard(onSetup: () -> Unit) {
     val store = LocalStore.current
     val nav = LocalNav.current
     val home = store.home
@@ -267,9 +252,18 @@ private fun AddressCard() {
                 Icon(icon("magnifyingglass"), null, tint = Brand.navy, modifier = Modifier.size(18.dp))
                 Text("Look up another address", style = T.subhead.copy(fontWeight = FontWeight.Medium), color = Brand.navy)
             }
+            RowDivider()
+            Row(
+                Modifier.fillMaxWidth().clickable(onClick = onSetup).padding(horizontal = 14.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Text("Own or rent", style = T.subhead.copy(fontWeight = FontWeight.Medium), color = Brand.text, modifier = Modifier.weight(1f))
+                Text(store.tenure?.takeIf { it != HomeTiles.Tenure.UNSET }?.label ?: "Not set", style = T.subhead, color = Brand.secondary)
+                Chevron()
+            }
         } else {
             AddressCardRow("mappin.and.ellipse", "My Address", "What applies to your address?",
-                "Property tax estimate, who represents you, schools, flood and evacuation zones") { nav.push(Route.MyAddress) }
+                "Trash day, who represents you, schools, flood and evacuation zones", onSetup)
         }
     }
 }
@@ -312,69 +306,6 @@ fun TodayMeetingRow(meeting: Meeting, showDay: Boolean = false) {
             )
         } else if (meeting.isExpected) Badge("Expected", Brand.amber)
         Chevron()
-    }
-}
-
-@Composable
-private fun TaxBillSection() {
-    val store = LocalStore.current
-    val nav = LocalNav.current
-    val m = store.taxModel ?: return
-    val d = m.districts.firstOrNull { it.id == store.savedDistrict } ?: m.districts.firstOrNull() ?: return
-    val value = 250_000.0
-    val e = TaxCalculator.estimate(m, d, value, true)
-    fun name(g: String) = if (g == "city") "City" else m.groupName(g)
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SectionHeader("Your tax bill", "Change") { nav.push(Route.TaxCalculator(d.id)) }
-        Column(
-            Modifier.fillMaxWidth().card(18.dp).clickable { nav.push(Route.TaxCalculator(d.id, value, true)) }.padding(18.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-        ) {
-            Row(verticalAlignment = Alignment.Bottom) {
-                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                    Text("${d.label} · ${Format.compactMoney(value)} home, homestead", style = T.caption, color = Brand.secondary)
-                    Text(buildAnnotatedString {
-                        withStyle(SpanStyle(fontFamily = Poppins, fontWeight = FontWeight.Bold, fontSize = T.bigNumber.fontSize * 1.2f, color = Brand.text)) { append(Format.money(e.total)) }
-                        withStyle(SpanStyle(fontSize = T.subhead.fontSize, color = Brand.secondary)) { append(" / yr") }
-                    })
-                }
-                Text("Every line", style = T.subheadBold, color = Brand.navy)
-            }
-            StackBar(e.byGroup.map { Triple(name(it.group), it.amount, taxColor(it.group)) })
-            for (row in e.byGroup.take(6).chunked(3)) {
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    for (g in row) Column(Modifier.weight(1f)) {
-                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-                            Box(Modifier.size(8.dp).background(taxColor(g.group), RoundedCornerShape(2.dp)))
-                            Text(name(g.group), style = T.caption, color = Brand.secondary, maxLines = 1)
-                        }
-                        Text(Format.money(g.amount), style = T.subheadBold.copy(fontWeight = FontWeight.Bold), color = Brand.text)
-                    }
-                    repeat(3 - row.size) { Spacer(Modifier.weight(1f)) }
-                }
-            }
-        }
-        val home = store.home
-        if (home != null) LinkLine("Exact estimate for ${home.display}", "house.fill") { nav.push(Route.Address(home)) }
-        else LinkLine("Use your address for an exact estimate", "mappin.and.ellipse") { nav.push(Route.MyAddress) }
-    }
-}
-
-@Composable
-private fun NumbersSection() {
-    val g = LocalStore.current.governments
-    if (g.isEmpty()) return
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("By the numbers", style = T.title3, color = Brand.text)
-        data class Tile(val value: String, val label: String, val bars: List<Double>, val color: Color, val route: Route)
-        val tiles = listOf(
-            Tile(Format.compactMoney(g.mapNotNull { it.propertyTaxLevy }.sum()), "Property tax levied", g.mapNotNull { it.propertyTaxLevy }, Brand.navy, Route.TaxCalculator()),
-            Tile(Format.compactMoney(g.mapNotNull { it.femaMichael }.sum()), "FEMA after Michael", g.mapNotNull { it.femaMichael }, Brand.blue, Route.Dataset("fema-michael-projects")),
-            Tile(Format.compactMoney(g.mapNotNull { it.debtTotal }.sum()), "Owed by governments", g.mapNotNull { it.debtTotal }, Brand.salmon, Route.Dataset("debt")),
-            Tile(Format.number(g.mapNotNull { it.auditFindings }.sum()), "Audit findings", g.mapNotNull { it.auditFindings?.toDouble() }, Brand.amber, Route.Dataset("audit-findings")),
-        )
-        Grid2(tiles) { t, mod -> NumberTile(t.value, t.label, t.bars, t.color, t.route, mod) }
-        Text("County, school district and the seven cities.", style = T.caption, color = Brand.secondary)
     }
 }
 

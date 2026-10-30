@@ -1,28 +1,28 @@
 import SwiftUI
 import BayCountyKit
 
-/// The Today tab: a greeting, what's going on right now (trash pickup on pickup day, beach flag, notices, next meeting), your address,
-/// this weekend's events, what's coming up at city hall, then your tax bill and the big numbers.
+/// The Home tab ("My home dashboard"): a line about your home, an alert strip when notices are active, then tiles that
+/// each give one answer (HomeTiles). Owners lead with the tax bill, renters with utilities. Each tile opens one short
+/// screen. Then your address and this weekend's events.
 struct HomeView: View {
     @Environment(AppStore.self) private var store
     @State private var path: [Route] = []
     @State private var utilities: UtilityLookup?
+    @State private var showSetup = false
     @AppStorage("taxDistrict") private var savedDistrict = ""
 
     private var today: String { Events.todayKey() }
+    private var tenure: HomeTiles.Tenure { store.tenure ?? .unset }
 
     var body: some View {
         NavigationStack(path: $path) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 20) {
                     greeting
-                    ballotBanner
-                    rightNow
+                    alertStrip
+                    tileGrid
                     addressCard
                     weekendSection
-                    cityHallSection
-                    taxBillSection
-                    numbersSection
                     VStack(spacing: 6) {
                         FreshnessNote()
                         PoweredByFlux()
@@ -33,7 +33,7 @@ struct HomeView: View {
                 .padding(.bottom, 24)
             }
             .background(Brand.canvas)
-            .navigationTitle("Today")
+            .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -46,10 +46,6 @@ struct HomeView: View {
                         .accessibilityLabel("Search")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { store.openSite("/ask") } label: { Image(systemName: "bubble.left.and.text.bubble.right") }
-                        .accessibilityLabel("Ask a question")
-                }
-                ToolbarItem(placement: .topBarTrailing) {
                     Button { path.append(.myHome) } label: { Image(systemName: AccountManager.shared.signedIn ? "person.crop.circle.fill" : "person.crop.circle") }
                         .accessibilityLabel(AccountManager.shared.signedIn ? "My home" : "Sign in")
                 }
@@ -60,6 +56,7 @@ struct HomeView: View {
             }
             .refreshable { await store.refreshAll() }
             .withRoutes()
+            .sheet(isPresented: $showSetup) { HomeSetupView() }
             .onReceive(NotificationCenter.default.publisher(for: .openNotice)) { note in
                 // A tapped notification: emergency notices open the Emergencies screen, agenda items their agenda.
                 guard let url = note.object as? URL else { return }
@@ -72,7 +69,7 @@ struct HomeView: View {
                 await openScreenshotRoute()
             }
             .task(id: store.home?.id) {
-                // The saved home's trash day. The address isn't logged by the API and the answer isn't kept on disk.
+                // The saved home's trash day and city. The address isn't logged by the API and the answer isn't kept on disk.
                 guard let home = store.home else { utilities = nil; return }
                 utilities = try? await store.client.utilities(at: home.point)
             }
@@ -81,11 +78,11 @@ struct HomeView: View {
 
     // MARK: Greeting
 
-    /// "Good morning" over "WEDNESDAY, OCT 28 · LYNN HAVEN": the date, and the saved home's city once it's known.
+    /// "YOUR HOME · LYNN HAVEN · RENTING" over "Good morning", or "BAY COUNTY" before a home is saved.
     private var greeting: some View {
-        let place = utilities.map { $0.area == "county" ? "Bay County" : $0.areaName } ?? "Bay County"
+        let place = store.home == nil ? nil : (utilities.map { $0.area == "county" ? "Bay County" : $0.areaName } ?? "Bay County")
         return VStack(alignment: .leading, spacing: 4) {
-            Text("\(TodayBrief.dateLine(today)) · \(place)".uppercased())
+            Text(HomeTiles.eyebrow(place: place, tenure: tenure).uppercased())
                 .font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(.secondary)
             Text(TodayBrief.greeting(hour: TodayBrief.hour())).font(.largeTitle.weight(.bold)).foregroundStyle(.primary)
         }
@@ -94,69 +91,80 @@ struct HomeView: View {
         .accessibilityAddTraits(.isHeader)
     }
 
-    // MARK: Right now
+    // MARK: Alert strip
 
-    /// Trash pickup (only on pickup day, or the evening before), beach flag, active notices and next meeting, two by
-    /// two; an odd card out spans the row. Same cards as the site's home page.
-    private var rightNow: some View {
-        let cards = TodayBrief.cards(beach: store.rows["beach-conditions"] ?? [], notices: store.rows["emergency-notices"] ?? [],
-                                     meetings: store.meetings, utilities: utilities)
-        let rows = stride(from: 0, to: cards.count, by: 2).map { Array(cards[$0..<min($0 + 2, cards.count)]) }
-        return VStack(spacing: 10) {
-            ForEach(rows, id: \.self) { pair in
-                HStack(spacing: 10) {
-                    ForEach(pair) { c in
-                        NavigationLink(value: route(c.target)) { RightNowCard(card: c, wide: pair.count == 1) }
-                            .buttonStyle(PressScale())
-                    }
-                }
-                .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .accessibilityIdentifier("rightNow")
-    }
-
-    private func route(_ t: TodayBrief.Target) -> Route {
-        switch t {
-        case .beaches: .beaches
-        case .emergency: .emergency
-        case .meetings: .meetings
-        case .utilities: .utilities(store.home)
-        }
-    }
-
-    // MARK: Ballot
-
-    @ViewBuilder private var ballotBanner: some View {
-        if let a3 = store.amendment3, a3.isBeforeVote(), let vote = a3.vote, let day = Dates.parse(vote) {
-            let year = 1   // FY2029, the year the site leads with
-            NavigationLink(value: Route.amendment3()) {
+    @ViewBuilder private var alertStrip: some View {
+        if let a = HomeTiles.alert(store.rows["emergency-notices"] ?? []) {
+            NavigationLink(value: Route.emergency) {
                 HStack(spacing: 12) {
-                    VStack(spacing: 0) {
-                        Text(Self.month.string(from: day).uppercased()).font(.caption2.weight(.bold))
-                        Text(Self.dayNumber.string(from: day)).font(.title3.weight(.heavy).monospacedDigit())
-                    }
-                    .foregroundStyle(.white)
-                    .frame(width: 46, height: 46)
-                    .background(Brand.salmonFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    Image(systemName: "exclamationmark.triangle.fill").font(.title3).foregroundStyle(Brand.amber)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Amendment 3 is on the ballot").font(.subheadline.weight(.bold)).foregroundStyle(.primary)
-                        Text("−\(Format.compactMoney(a3.localImpact(year))) to local budgets by \(Amendment3Model.fiscalYears[year]) · needs 60%")
-                            .font(.caption).foregroundStyle(.secondary)
+                        Text(a.title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                        Text(a.detail).font(.caption).foregroundStyle(.secondary)
                     }
                     Spacer(minLength: 0)
-                    Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(Brand.salmon)
+                    Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
                 }
                 .padding(14)
-                .background(Brand.salmon.opacity(0.12), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .background(Brand.amber.opacity(0.16), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier("alertStrip")
+        }
+    }
+
+    // MARK: Tiles
+
+    /// The tax estimate for the saved home's district (or the calculator's), at the sample value with homestead.
+    private var taxTotal: Double? {
+        guard let m = store.taxModel, let d = HomeTiles.taxDistrict(model: m, utilities: utilities, saved: savedDistrict) else { return nil }
+        return TaxCalculator.estimate(model: m, district: d, value: HomeTiles.sampleValue, homestead: true).total
+    }
+
+    private var electionDay: String? {
+        guard let a3 = store.amendment3, a3.isBeforeVote() else { return nil }
+        return a3.vote
+    }
+
+    /// Two tiles a row; with an odd count the lead tile spans the first row.
+    private var tileGrid: some View {
+        let tiles = HomeTiles.tiles(tenure: tenure, hasHome: store.home != nil, utilities: utilities, taxTotal: taxTotal,
+                                    beach: store.rows["beach-conditions"] ?? [], meetings: store.meetings, electionDay: electionDay)
+        let lead = tiles.count % 2 == 1 ? [tiles[0]] : []
+        let rest = Array(tiles.dropFirst(lead.count))
+        let pairs = stride(from: 0, to: rest.count, by: 2).map { Array(rest[$0..<min($0 + 2, rest.count)]) }
+        return VStack(spacing: 10) {
+            ForEach(lead) { t in tileButton(t, wide: true) }
+            ForEach(pairs, id: \.self) { pair in
+                HStack(spacing: 10) { ForEach(pair) { t in tileButton(t, wide: false) } }
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier("homeTiles")
+    }
+
+    private func tileButton(_ t: HomeTiles.Tile, wide: Bool) -> some View {
+        Button { open(t.target) } label: { HomeTileView(tile: t, wide: wide) }
+            .buttonStyle(PressScale())
+    }
+
+    private func open(_ target: HomeTiles.Target) {
+        switch target {
+        case .setup: showSetup = true
+        case .taxBill: path.append(.taxBill(districtID: store.taxModel.flatMap { HomeTiles.taxDistrict(model: $0, utilities: utilities, saved: savedDistrict)?.id }))
+        case .utilities: path.append(.utilities(store.home))
+        case .beaches: path.append(.beaches)
+        case .meetings: path.append(.meetings)
+        case .election: store.openSite("/elections/voting")
+        case .representatives: path.append(store.home.map { .address($0) } ?? .people)
+        case .schools: path.append(.schools)
         }
     }
 
     // MARK: My Address
 
-    /// The saved home address (tax estimate, representatives, schools, flood zone), or a prompt to look one up.
+    /// Everything for the saved home (tax estimate, representatives, schools, flood zone), or a prompt to set one.
     private var addressCard: some View {
         CardList {
             if let home = store.home {
@@ -174,10 +182,23 @@ struct HomeView: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
+                Divider().padding(.leading, 14)
+                Button { showSetup = true } label: {
+                    HStack {
+                        Text("Own or rent").font(.subheadline.weight(.medium)).foregroundStyle(.primary)
+                        Spacer()
+                        Text(store.tenure.map { $0 == .unset ? "Not set" : $0.label } ?? "Not set").font(.subheadline).foregroundStyle(.secondary)
+                        Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
+                    }
+                    .padding(.horizontal, 14).padding(.vertical, 12)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("tenureRow")
             } else {
-                NavigationLink(value: Route.myAddress) {
+                Button { showSetup = true } label: {
                     AddressCardRow(symbol: "mappin.and.ellipse", eyebrow: "My Address", title: "What applies to your address?",
-                                   detail: "Property tax estimate, who represents you, schools, flood and evacuation zones")
+                                   detail: "Trash day, who represents you, schools, flood and evacuation zones")
                 }
                 .buttonStyle(.plain)
             }
@@ -211,98 +232,6 @@ struct HomeView: View {
         }
     }
 
-    // MARK: At city hall
-
-    /// The next three public meetings.
-    @ViewBuilder private var cityHallSection: some View {
-        let next = Array(Meeting.upcoming(store.meetings).prefix(3))
-        if !next.isEmpty {
-            VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "At city hall", action: "Meetings") { path.append(.meetings) }
-                CardList {
-                    ForEach(next) { m in
-                        NavigationLink(value: Route.meeting(m.id)) { TodayMeetingRow(meeting: m, showDay: true) }
-                            .buttonStyle(.plain)
-                        if m.id != next.last?.id { Divider().padding(.leading, 66) }
-                    }
-                }
-            }
-        }
-    }
-
-    // MARK: Tax bill
-
-    @ViewBuilder private var taxBillSection: some View {
-        if let m = store.taxModel, let d = m.districts.first(where: { $0.id == savedDistrict }) ?? m.districts.first {
-            let value = 250_000.0
-            let e = TaxCalculator.estimate(model: m, district: d, value: value, homestead: true)
-            let name: (String) -> String = { g in g == "city" ? "City" : m.groupName(g) }
-            VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "Your tax bill", action: "Change") { path.append(.taxCalculator(districtID: d.id)) }
-                NavigationLink(value: Route.taxCalculator(districtID: d.id, value: value, homestead: true)) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack(alignment: .lastTextBaseline) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("\(d.label) · \(Format.compactMoney(value)) home, homestead").font(.caption).foregroundStyle(.secondary)
-                                (Text(Format.money(e.total)).font(.largeTitle.weight(.heavy).monospacedDigit())
-                                 + Text(" / yr").font(.subheadline).foregroundColor(.secondary))
-                            }
-                            Spacer()
-                            Text("Every line").font(.subheadline.weight(.semibold)).foregroundStyle(Brand.navy)
-                        }
-                        StackBar(parts: e.byGroup.map { (name($0.group), $0.amount, TaxColors.color($0.group)) })
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], alignment: .leading, spacing: 8) {
-                            ForEach(e.byGroup.prefix(6)) { g in
-                                VStack(alignment: .leading, spacing: 2) {
-                                    HStack(spacing: 5) {
-                                        RoundedRectangle(cornerRadius: 2).fill(TaxColors.color(g.group)).frame(width: 8, height: 8)
-                                        Text(name(g.group)).lineLimit(1)
-                                    }
-                                    .font(.caption).foregroundStyle(.secondary)
-                                    Text(Format.money(g.amount)).font(.subheadline.weight(.bold).monospacedDigit())
-                                }
-                            }
-                        }
-                    }
-                    .padding(18)
-                    .card(18)
-                }
-                .buttonStyle(.plain)
-                if let home = store.home {
-                    NavigationLink(value: Route.address(home)) {
-                        Label("Exact estimate for \(home.display)", systemImage: "house.fill").font(.subheadline.weight(.medium))
-                    }
-                } else {
-                    NavigationLink(value: Route.myAddress) {
-                        Label("Use your address for an exact estimate", systemImage: "mappin.and.ellipse").font(.subheadline.weight(.medium))
-                    }
-                }
-            }
-        }
-    }
-
-    // MARK: Numbers
-
-    @ViewBuilder private var numbersSection: some View {
-        let g = store.governments
-        if !g.isEmpty {
-            VStack(alignment: .leading, spacing: 12) {
-                Text("By the numbers").font(.title3.weight(.bold))
-                LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
-                    NumberTile(value: Format.compactMoney(g.compactMap(\.propertyTaxLevy).reduce(0, +)), label: "Property tax levied",
-                               bars: g.compactMap(\.propertyTaxLevy), color: Brand.navy, route: .taxCalculator())
-                    NumberTile(value: Format.compactMoney(g.compactMap(\.femaMichael).reduce(0, +)), label: "FEMA after Michael",
-                               bars: g.compactMap(\.femaMichael), color: Brand.blue, route: .dataset("fema-michael-projects"))
-                    NumberTile(value: Format.compactMoney(g.compactMap(\.debtTotal).reduce(0, +)), label: "Owed by governments",
-                               bars: g.compactMap(\.debtTotal), color: Brand.salmon, route: .dataset("debt"))
-                    NumberTile(value: Format.number(Double(g.compactMap(\.auditFindings).reduce(0, +))), label: "Audit findings",
-                               bars: g.compactMap { $0.auditFindings.map(Double.init) }, color: Brand.amber, route: .dataset("audit-findings"))
-                }
-                Text("County, school district and the seven cities.").font(.caption).foregroundStyle(.secondary)
-            }
-        }
-    }
-
     static let weekday: DateFormatter = { let f = DateFormatter(); f.timeZone = TimeZone(identifier: "America/Chicago"); f.dateFormat = "EEE"; return f }()
     static let dayNumber: DateFormatter = { let f = DateFormatter(); f.timeZone = TimeZone(identifier: "America/Chicago"); f.dateFormat = "d"; return f }()
     static let month: DateFormatter = { let f = DateFormatter(); f.timeZone = TimeZone(identifier: "America/Chicago"); f.dateFormat = "MMM"; return f }()
@@ -322,8 +251,9 @@ struct HomeView: View {
             "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "volunteer": .volunteer, "military": .military, "myhome": .myHome, "myhome:settings": .myHome, "pastelections": .dataset("campaign-history"),
             "roads": .dataset("road-contracts"), "development": .dataset("development-projects"),
             "restaurants": .restaurants, "restaurant": .restaurant("1305433"), "newbusinesses": .dataset("new-businesses"),
-            "publicsafety": .publicSafety, "overlaps": .overlaps,
+            "publicsafety": .publicSafety, "overlaps": .overlaps, "taxbill": .taxBill(),
         ]
+        if arg == "setup" { showSetup = true; return }
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { store.tab = .search; return }
         if arg == "tab:meetings" { path = [.meetings]; return }
@@ -381,5 +311,45 @@ private struct AddressCardRow: View {
         }
         .padding(14)
         .contentShape(Rectangle())
+    }
+}
+
+/// One Home tab tile: a label with its icon, one big answer, and a line under it. The lead tile is navy.
+struct HomeTileView: View {
+    let tile: HomeTiles.Tile
+    var wide = false
+
+    private var tone: Color {
+        switch tile.tone { case "teal": Brand.good; case "amber": Brand.amber; case "salmon": Brand.salmon; default: Brand.navy }
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label(tile.eyebrow, systemImage: tile.symbol)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(tile.featured ? AnyShapeStyle(Color.white.opacity(0.9)) : AnyShapeStyle(tone))
+            Text(tile.value)
+                .font(.title2.weight(.semibold)).monospacedDigit()
+                .foregroundStyle(tile.featured ? AnyShapeStyle(Color.white) : AnyShapeStyle(HierarchicalShapeStyle.primary))
+                .lineLimit(2).minimumScaleFactor(0.8)
+            Text(tile.detail)
+                .font(.caption)
+                .foregroundStyle(tile.featured ? AnyShapeStyle(Color.white.opacity(0.85)) : AnyShapeStyle(HierarchicalShapeStyle.secondary))
+                .multilineTextAlignment(.leading)
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, minHeight: wide ? 0 : 118, alignment: .topLeading)
+        .padding(14)
+        .background {
+            if tile.featured {
+                RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Brand.navyFill)
+            } else {
+                RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Brand.surface)
+                    .overlay { RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(Brand.hairline) }
+            }
+        }
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("tile-" + tile.id)
     }
 }
