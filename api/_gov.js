@@ -181,7 +181,7 @@ async function finishLogin(q, req, res, body) {
   if (ipLimited(req).limited) throw bad('Too many sign-in attempts. Try again in a few minutes.', 429);
   const [c] = await q(`select id, code_hash, attempts from gov.login_codes where lower(email) = $1 and used_at is null and expires_at > now()
                        order by created_at desc limit 1`, [email]);
-  if (!c || c.attempts >= MAX_ATTEMPTS) throw fail('That code has expired. Ask for a new one.');
+  if (!c || c.attempts >= MAX_ATTEMPTS) throw fail('That code was already used or has expired. Send a new code.');
   const want = Buffer.from(c.code_hash), got = Buffer.from(codeHash(email, code));
   if (want.length !== got.length || !crypto.timingSafeEqual(want, got)) {
     await q('update gov.login_codes set attempts = attempts + 1 where id = $1', [c.id]);

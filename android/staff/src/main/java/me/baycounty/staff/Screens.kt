@@ -95,6 +95,7 @@ fun StaffApp(model: StaffModel, screen: String?, locked: Boolean, onUnlock: () -
     LaunchedEffect(Unit) { model.refresh() }
     when {
         !model.signedIn || screen == "signin" -> SignInScreen(model)
+        screen == "signin-code" -> SignInScreen(model, codeSentTo = "clerk@example.gov")
         model.me == null -> Loading(model)
         locked || screen == "locked" -> LockScreen(onUnlock)
         else -> StaffRoot(model, screen)
@@ -131,17 +132,22 @@ private fun LockScreen(onUnlock: () -> Unit) {
 }
 
 @Composable
-fun SignInScreen(model: StaffModel) {
+fun SignInScreen(model: StaffModel, codeSentTo: String? = null) {
     val scope = rememberCoroutineScope()
-    var email by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf(codeSentTo ?: "") }
     var code by remember { mutableStateOf("") }
-    var sent by remember { mutableStateOf(false) }
+    var sent by remember { mutableStateOf(codeSentTo != null) }
     var busy by remember { mutableStateOf(false) }
-    Column(Modifier.fillMaxSize().background(Brand.canvas).verticalScroll(rememberScrollState()).imePadding().padding(20.dp).padding(top = 40.dp)) {
-        Image(painterResource(R.drawable.app_mark), null, Modifier.size(56.dp).clip(RoundedCornerShape(13.dp)).border(1.dp, Brand.hairline, RoundedCornerShape(13.dp)))
-        Spacer(Modifier.height(18.dp))
-        Text("BayCounty.me Staff", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium, color = Brand.text)
-        Spacer(Modifier.height(6.dp))
+    var resent by remember { mutableStateOf(false) }
+    // The Flux footer stays pinned to the bottom; everything above it scrolls.
+    Column(Modifier.fillMaxSize().background(Brand.canvas).imePadding()) {
+    Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(20.dp).padding(top = 40.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Image(painterResource(R.drawable.app_mark), null, Modifier.size(48.dp).clip(RoundedCornerShape(12.dp)).border(1.dp, Brand.hairline, RoundedCornerShape(12.dp)))
+            Spacer(Modifier.width(14.dp))
+            Text("BayCounty.me Staff", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium, color = Brand.text)
+        }
+        Spacer(Modifier.height(12.dp))
         Text("For city and county staff. Send alerts, post notices and flag data for your government.", style = T.subhead, color = Brand.secondary)
         Spacer(Modifier.height(18.dp))
         Card {
@@ -163,15 +169,19 @@ fun SignInScreen(model: StaffModel) {
                     PrimaryButton(if (busy) "Checking…" else "Sign in", enabled = !busy && code.length == 6) {
                         busy = true; scope.launch { model.verify(email.trim(), code); busy = false }
                     }
-                    TextButton({ sent = false; code = ""; model.error = null }) { Text("Use a different email") }
+                    if (resent) Text("New code sent. Use the newest email; older codes stop working.", style = T.footnote, color = Brand.secondary,
+                        modifier = Modifier.padding(top = 8.dp))
+                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                        TextButton({ busy = true; code = ""; model.error = null; scope.launch { resent = model.login(email.trim()); busy = false } }, enabled = !busy) {
+                            Text("Send a new code")
+                        }
+                        TextButton({ sent = false; resent = false; code = ""; model.error = null }) { Text("Use a different email") }
+                    }
                 }
                 ErrorLine(model.error)
             }
         }
-        Spacer(Modifier.height(14.dp))
-        Text("Staff never change numbers that came from public records. If something is wrong, flag it and we check it against the source.",
-            style = T.footnote, color = Brand.secondary)
-        Spacer(Modifier.height(24.dp))
+    }
         FluxFooter()
     }
 }

@@ -129,6 +129,7 @@ jobs:
           done
           xcrun simctl ui "$DEV" appearance light
           shot signin -screen signin
+          shot signin-code -screen signin-code
           shot locked -screen locked
           xcrun simctl uninstall "$DEV" me.baycounty.staff || true
       - uses: actions/upload-artifact@v4
