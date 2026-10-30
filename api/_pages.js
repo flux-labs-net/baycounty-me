@@ -21,7 +21,7 @@ const PAGES = {
   '/public-money/hurricane-michael': {datasets: ['fema-michael-projects']},
   '/public-money/tourist-tax': {datasets: ['bed-tax-collections', 'vendor-payments']},
   '/public-money/sales-tax-projects': {datasets: ['sales-tax-projects']},
-  '/public-money/fees-and-bills': {datasets: ['fees-assessments']},
+  '/public-money/fees-and-bills': {datasets: ['fees-assessments', 'utility-rates']},
   '/governments': {datasets: ['government-profiles', 'data-completeness'], endpoints: ['/governments', '/import-progress']},
   '/compare': {datasets: ['government-profiles', 'budget-per-resident', 'debt', 'audit-findings'], endpoints: ['/governments']},
   '/open-data': {endpoints: ['/datasets', '/status']},
