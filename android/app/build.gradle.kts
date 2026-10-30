@@ -16,7 +16,8 @@ android {
         targetSdk = 36
         // Play rejects a versionCode it already has. The release workflow sets BCM_VERSION_CODE to its run number. About shows both.
         versionCode = System.getenv("BCM_VERSION_CODE")?.toIntOrNull() ?: 1
-        versionName = "1.0"
+        // A release tag (v1.2.0) sets BCM_VERSION_NAME; otherwise the number here.
+        versionName = System.getenv("BCM_VERSION_NAME")?.takeIf { it.isNotBlank() } ?: "1.0"
         // Firebase Cloud Messaging for phone alerts, from CI secrets (never the repo). Blank = alerts off in this build.
         for (k in listOf("FCM_APP_ID", "FCM_API_KEY", "FCM_PROJECT_ID", "FCM_SENDER_ID")) {
             buildConfigField("String", k, "\"" + (System.getenv(k) ?: "") + "\"")

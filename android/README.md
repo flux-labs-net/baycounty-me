@@ -86,13 +86,33 @@ On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on ev
    - News app: No. Financial features: None.
 6. **Store listing:** everything is in `android/store/`: the text to paste (`listing.md`), the 512×512 icon, the 1024×500 feature graphic and phone screenshots. To refresh the screenshots, take them from the Android workflow's `screens-emulator` artifact; Play needs the long side at most twice the short side, so trim 1080×2400 shots to 2160 tall or less. Category: Education or News & Magazines; contact email hello@fluxlabs.net; website https://baycounty.me.
 
+### Releasing from GitHub (one time)
+
+The **Android release** workflow sends the bundle straight to Play. It needs a Google service account that may
+release the app:
+
+1. [Google Cloud console](https://console.cloud.google.com) > pick or create a project > APIs & Services > enable the
+   **Google Play Android Developer API**.
+2. IAM & Admin > Service accounts > Create (name it `github-release`, no roles needed) > Keys > Add key > JSON. Keep the file.
+3. Play Console > Users and permissions > Invite new users: the service account's email. Under App permissions add
+   BayCounty.me with **Release apps to testing tracks** (add **Release to production** if you want the workflow to
+   publish to Production too). Send the invite.
+4. In GitHub, add the secret `PLAY_SERVICE_ACCOUNT_JSON` with the whole JSON file as its value.
+
+Play only accepts API uploads after the first bundle was uploaded by hand, which is already done.
+
 ### Each release
 
 1. Refresh the seed: `android/scripts/sync_seed.sh`, commit, merge.
-2. In GitHub, Actions > **Android release** > Run workflow. It runs the kit tests and builds a signed `app-release.aab`, with a new version code (the run number plus 100). Bump `versionName` in `app/build.gradle.kts` when the release is worth a new version number.
-3. Download the `app-release-aab` artifact from the run.
-4. Play Console > Testing > **Internal testing** > Create new release. The first time, accept **Play App Signing** (Google keeps the app signing key; ours is only the upload key). Upload the .aab, add release notes, roll out, and add testers by email to try it from the Play Store.
-5. When it looks right, **Promote release** to Production. The first production review usually takes a few days; updates are often faster.
+2. Either push a version tag (`git tag v1.1.0 && git push origin v1.1.0`), which builds versionName 1.1.0, sends it to
+   **Internal testing** and also starts the iOS release; or run Actions > **Android release** > Run workflow and pick
+   the track (internal, alpha, beta, production, or none to only build). Each run runs the kit tests and builds a
+   signed `app-release.aab` with a new version code (the run number plus 100). Without a tag, versionName comes from
+   `app/build.gradle.kts`.
+3. The .aab is also in the run's `app-release-aab` artifact. If Play answers "Only releases with status draft may be
+   created on draft app", run it again with status **draft** and roll it out in the Play Console.
+4. Testers get it from the Play Store. When it looks right, Play Console > **Promote release** to Production (or run
+   the workflow with track production). The first production review usually takes a few days; updates are often faster.
 
 ## Changing it
 

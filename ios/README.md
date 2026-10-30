@@ -26,9 +26,34 @@ xcodegen                 # always, after every pull: picks up new Swift files an
 open BayCountyMe.xcodeproj
 ```
 
-In Xcode: Product > Clean Build Folder (Shift-Cmd-K), then Run. For TestFlight, bump
-`CURRENT_PROJECT_VERSION` in `project.yml` first (App Store Connect rejects a build number it already has),
-re-run `xcodegen`, then Product > Archive. About > App shows the version and build you're running.
+In Xcode: Product > Clean Build Folder (Shift-Cmd-K), then Run. TestFlight builds normally come from the
+iOS release workflow (below). To archive by hand instead, set `CURRENT_PROJECT_VERSION` in `project.yml` above the
+last build number in App Store Connect (the workflow uses 100 and up), re-run `xcodegen`, then Product > Archive. About > App shows the version and build you're running.
+
+## Releasing from GitHub
+
+The **iOS release** workflow (`.github/workflows/ios-release.yml`) archives a signed App Store build and uploads it to
+App Store Connect, where it appears in TestFlight after processing. Run it from Actions > iOS release > Run workflow,
+or push a version tag (`git tag v1.1.0 && git push origin v1.1.0`), which sets the version to 1.1.0 and also starts
+the Android release. The build number is the run number plus 100, so no more hand bumps. Submitting a build for App
+Store review is still done in App Store Connect. It builds on Blacksmith macOS by default; pick `macpro` to use the
+self-hosted Mac Pro runner.
+
+### Secrets (one time)
+
+Add these in GitHub: Settings > Secrets and variables > Actions.
+
+| Secret | What it is |
+|---|---|
+| `ASC_KEY_ID` | App Store Connect > Users and Access > Integrations > App Store Connect API > Team Keys. Make a key with the **App Manager** role; this is its Key ID. |
+| `ASC_ISSUER_ID` | The Issuer ID shown above the keys on the same page. |
+| `ASC_KEY_P8` | The whole text of the downloaded `AuthKey_XXXX.p8` (it downloads only once). |
+| `IOS_DIST_CERT_P12_BASE64` | An **Apple Distribution** certificate with its private key. In Keychain Access, right-click the certificate > Export as .p12 with a password, then `base64 -i dist.p12 \| pbcopy`. Xcode makes one under Settings > Accounts > Manage Certificates if you don't have it. |
+| `IOS_DIST_CERT_PASSWORD` | The .p12 password. |
+| `IOS_PROFILE_BASE64` | An **App Store Connect** provisioning profile for `me.baycounty.app` that uses that certificate. Create it at developer.apple.com > Certificates, IDs & Profiles > Profiles > + > App Store Connect, download it, then `base64 -i BayCountyMe_AppStore.mobileprovision \| pbcopy`. |
+
+The certificate and profile expire after a year; make new ones and replace the last three secrets. The profile picks
+up the App ID's capabilities (Push Notifications and Time Sensitive Notifications), so make it after those are on.
 
 ## What's in it
 
@@ -84,4 +109,3 @@ In Xcode, ⌘U runs the same tests.
 2. Native versions of the tax calculator and My Address.
 3. Push alerts for new agendas (the site already has email alerts and an agenda watcher).
 4. Spanish, matching the site's `/es` pages.
-5. Automatic build numbers for TestFlight uploads.
