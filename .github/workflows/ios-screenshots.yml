@@ -6,7 +6,7 @@ on:
     paths: ["ios/BayCountyMe/**"]
 jobs:
   screenshots:
-    runs-on: [self-hosted, macOS, macpro]
+    runs-on: [self-hosted, studio]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
