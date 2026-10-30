@@ -344,8 +344,10 @@ def people_index():
     {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')), statuses=(('', 'Current and past'), ('current', 'Current only'), ('past', 'Past only')))}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
   {who_sections()}
+  <section class="tx-sec" data-records-sent="appointments" hidden></section>
+  <section class="tx-sec" data-records-sent="payroll" hidden></section>
 </div>
-{ASSETS}'''
+{ASSETS}<script src="/assets/records-sent.js" defer></script>'''
 
 
 def profile_shell():

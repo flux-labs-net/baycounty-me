@@ -189,10 +189,12 @@ def fees_page():
       </ol><p><a href="/my-address/">Look up the exact fees on your parcel →</a></p></details>
     <details class="tbl-toggle"><summary>What we couldn't find <span class="muted">· {len(gaps)}</span></summary><ul class="plain">{''.join(f'<li>{e(g)}</li>' for g in gaps)}</ul></details>
   </section>
+  <section class="tx-sec" data-records-sent="fees" hidden></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <style>{CSS}{picked}</style>
-<script>{JS}</script>'''
+<script>{JS}</script>
+<script src="/assets/records-sent.js" defer></script>'''
 
 
 CSS = '''.fb-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}

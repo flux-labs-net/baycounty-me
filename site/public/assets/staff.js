@@ -11,7 +11,8 @@
     event_posted: 'posted an event', event_edited: 'changed an event', event_withdrawn: 'withdrew an event', job_posted: 'posted a job', job_edited: 'changed a job',
     job_withdrawn: 'withdrew a job', alert_sent: 'sent an alert', alert_drafted: 'saved a countywide alert for a second person to confirm', alert_confirmed: 'confirmed an alert',
     alert_ended: 'ended an alert', alert_cancelled: 'cancelled an alert', data_flagged: 'flagged record data', flag_answered: 'BayCounty.me answered a flag',
-    member_set: 'changed access', member_removed: 'removed access', records_published: 'published records', records_withdrawn: 'withdrew records'};
+    member_set: 'changed access', member_removed: 'removed access', records_published: 'published records', records_withdrawn: 'withdrew records',
+    feed_agreed: 'agreed to a source we read', feed_unagreed: 'took back agreement to a source'};
 
   let me = null, ws = null, wsInfo = null, role = 'viewer';
   // submit = send records: the records role, or publisher and up.
@@ -264,9 +265,39 @@
   const toB64 = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = () => no(new Error('The file couldn’t be read.')); r.readAsDataURL(f); });
   function kindsUi() {
     $('#sub-kinds').innerHTML = Object.entries(me.record_kinds).map(([k, v]) => `<label><input type="radio" name="sub-kind" value="${k}"${k === subKind ? ' checked' : ''}><span><b>${esc(v.label)}</b>${esc(v.hint)}</span></label>`).join('');
-    $('#sub-opts').hidden = subKind === 'contracts';
+    $('#sub-opts').hidden = !FINANCE.includes(subKind);
     $('#sub-asof-l').hidden = subKind !== 'budget';
+    const form = FORMS[subKind];
+    $('#sub-one').hidden = !form || !(me.record_kinds[subKind] || {}).form;
+    if (form) {
+      $('#sub-one-h').textContent = form.h;
+      $('#sub-one-fields').innerHTML = form.f.map(([n, l, t, req, full]) => `<label class="f${full ? ' full' : ''}">${esc(l)}<input name="${n}"${t ? ` type="${t}"` : ''}${t === 'url' ? ' placeholder="https://"' : ''}${n.includes('amount') ? ' inputmode="decimal" enterkeyhint="done"' : ''}${req ? ' required' : ''} maxlength="300"></label>`).join('');
+      $('#sub-one-f .err').textContent = '';
+    }
   }
+  // Kinds the finance importer reads (they can be checked against a printed total); the rest are lists.
+  const FINANCE = ['checkbook', 'budget'];
+  // Short forms: one contract, appointment or fee without a file. [field, label, input type, required, full width]
+  const FORMS = {
+    contracts: {h: 'Or add one contract', f: [['vendor', 'Vendor', '', 1, 1], ['amount', 'Amount', '', 1], ['award_date', 'Awarded on', 'date', 1], ['title', 'What it’s for', '', 0, 1],
+      ['method', 'How it was awarded (bid, RFP, sole source…)'], ['meeting', 'Approved at (meeting)'], ['start', 'Starts', 'date'], ['end', 'Ends', 'date'], ['link', 'Link to the contract', 'url', 0, 1]]},
+    appointments: {h: 'Or add one appointment', f: [['board', 'Board', '', 1, 1], ['person', 'Member', '', 1], ['seat', 'Seat or position'], ['appointed_by', 'Appointed by'],
+      ['term_start', 'Term starts', 'date'], ['term_end', 'Term ends', 'date'], ['link', 'Link to the resolution or minutes', 'url', 0, 1]]},
+    fees: {h: 'Or add one fee change', f: [['fee', 'Fee or rate', '', 1, 1], ['old_amount', 'Old amount (blank if new)'], ['new_amount', 'New amount', '', 1], ['unit', 'Per (month, permit, 1,000 gallons…)'],
+      ['effective', 'Starts', 'date'], ['adopted_by', 'Adopted by (ordinance or resolution)'], ['link', 'Link to the ordinance or resolution', 'url', 0, 1]]},
+  };
+  $('#sub-one-f').addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = e.currentTarget, btn = f.querySelector('button[type=submit]'), err = f.querySelector('.err');
+    btn.disabled = true; err.textContent = '';
+    try {
+      const r = await api('submit-form', {method: 'POST', body: {kind: subKind, fields: Object.fromEntries(new FormData(f))}});
+      f.reset();
+      $('#sub-msg').innerHTML = `Published on the site. <a href="${esc(r.page)}" target="_blank" rel="noopener">See it</a>`;
+      await loadSubmit();
+    } catch (x) { err.textContent = x.message; }
+    btn.disabled = false;
+  });
   $('#sub-kinds').addEventListener('change', e => { if (e.target.name === 'sub-kind') { subKind = e.target.value; kindsUi(); } });
   async function loadSubmit() {
     if (!$('#sub-kinds').innerHTML) kindsUi();
@@ -281,12 +312,24 @@
       const btns = !can('submit') ? '' : f.status === 'waiting' ? `<button class="btn primary" type="button" data-sub-pub="${f.id}">Publish</button><button class="btn quiet" type="button" data-sub-wd="${f.id}">Discard</button>`
         : f.status === 'published' ? `<button class="btn quiet" type="button" data-sub-wd="${f.id}">Withdraw</button>` : '';
       return `<li><div class="grow"><h3>${esc(f.name)} <span class="status ${st[0]}">${st[1]}</span></h3><div class="meta"><span>${esc(me.record_kinds[f.kind] ? me.record_kinds[f.kind].label : f.kind)}</span>
-        ${period ? `<span>${esc(period)}</span>` : ''}${f.rows != null ? `<span>${Number(f.rows).toLocaleString('en-US')} rows</span>` : ''}<span>${f.via === 'email' ? 'Emailed in by' : 'Sent by'} ${esc(f.sent_by)}, ${when(f.sent_at)}</span>
+        ${period ? `<span>${esc(period)}</span>` : ''}${f.rows != null ? `<span>${Number(f.rows).toLocaleString('en-US')} row${Number(f.rows) === 1 ? '' : 's'}</span>` : ''}<span>${f.via === 'email' ? 'Emailed in by' : 'Sent by'} ${esc(f.sent_by)}, ${when(f.sent_at)}</span>
         ${f.published_at ? `<span>Published ${when(f.published_at)}${f.published_by ? ' by ' + esc(f.published_by) : ''}</span>` : ''}</div>
         ${f.status === 'held' ? `<p class="body">The rows don’t add up to the file’s own printed total${f.difference ? ` (off by ${money(f.difference)})` : ''}, so nothing from it is used. Send a corrected file.</p>` : ''}
         ${f.problem && f.status === 'waiting' ? `<p class="body">${esc(f.problem)}</p>` : ''}</div><div class="row">${btns}</div></li>`;
     }).join('') : '<li class="muted small">Nothing sent yet. Your first file shows up here.</li>';
+    const feeds = sub.feeds || [];
+    $('#sub-feeds-w').hidden = !feeds.length;
+    $('#sub-feeds').innerHTML = feeds.map(f => `<li><div class="grow"><h3>${esc(f.name)} ${f.agreed ? '<span class="status fixed">You agreed</span>' : ''}</h3>
+      <div class="meta"><span><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.url.replace(/^https?:\/\//, '').slice(0, 60))}</a></span>${f.how_often ? `<span>${esc(f.how_often)}</span>` : ''}${f.agreed ? `<span>By ${esc(f.agreed_by)}, ${when(f.agreed_at)}</span>` : ''}</div>
+      ${f.takes ? `<p class="body">${esc(f.takes)}</p>` : ''}</div>
+      ${can('submit') ? `<div class="row"><button class="btn${f.agreed ? ' quiet' : ''}" type="button" data-feed="${esc(f.url)}" data-agree="${f.agreed ? '0' : '1'}">${f.agreed ? 'Take back' : 'Yes, this is right'}</button></div>` : ''}</li>`).join('');
   }
+  $('#sub-feeds').addEventListener('click', async e => {
+    const b = e.target.closest('[data-feed]');
+    if (!b) return;
+    b.disabled = true;
+    try { await api('feed-agree', {method: 'POST', body: {url: b.dataset.feed, agree: b.dataset.agree === '1'}}); await loadSubmit(); } catch (err) { b.disabled = false; b.textContent = err.message; }
+  });
   const drop = $('#sub-drop'), finput = $('#sub-file');
   drop.addEventListener('click', () => finput.click());
   drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finput.click(); } });
@@ -298,7 +341,7 @@
     $('#sub-msg').textContent = `Reading ${file.name}…`; $('#sub-pv').hidden = true;
     const body = {kind: subKind, filename: file.name};
     if (subKind === 'budget' && $('#sub-asof').value) body.as_of = $('#sub-asof').value;
-    if (subKind !== 'contracts' && $('#sub-total').value.trim()) body.printed_total = $('#sub-total').value.trim();
+    if (FINANCE.includes(subKind) && $('#sub-total').value.trim()) body.printed_total = $('#sub-total').value.trim();
     try {
       if (file.size <= 3 * 1024 * 1024) body.content = await toB64(file);
       else {
@@ -317,12 +360,16 @@
     checkbook: [['paid_on', 'Date'], ['doc_no', 'Check'], ['payee', 'Paid to'], ['amount', 'Amount', 1], ['description', 'Description']],
     budget: [['department', 'Department'], ['account', 'Account'], ['description', 'Description'], ['amended_budget', 'Budget', 1], ['actual_ytd', 'Spent or received', 1]],
     contracts: [['date', 'Awarded'], ['vendor', 'Vendor'], ['purpose', 'What for'], ['amount', 'Amount', 1], ['method', 'How awarded']],
+    payroll: [['title', 'Job title'], ['department', 'Department'], ['people', 'People'], ['typical', 'Typical pay', 1], ['pay_max', 'Top of range', 1]],
+    appointments: [['board', 'Board'], ['seat', 'Seat'], ['person', 'Member'], ['term_start', 'Term starts'], ['term_end', 'Term ends']],
+    fees: [['fee', 'Fee'], ['old_amount', 'Was', 1], ['new_amount', 'Now', 1], ['unit', 'Per'], ['effective_date', 'Starts']],
   };
+  const DATES = ['paid_on', 'date', 'term_start', 'term_end', 'effective_date'];
   function showPreview(p) {
     pv = p;
     const cols = COLS[p.kind], period = p.period && (p.period.start || p.period.end) ? [p.period.start, p.period.end].filter(Boolean).map(day).join(' to ') : '';
     $('#sub-pv-h').textContent = p.ok ? `Check the preview: ${me.record_kinds[p.kind].label}` : 'This file can’t be published yet';
-    $('#sub-pv-sum').innerHTML = [`<span><b>${Number(p.row_count || 0).toLocaleString('en-US')}</b> rows</span>`, p.parsed_total != null ? `<span>Total <b>${money(p.parsed_total)}</b></span>` : '',
+    $('#sub-pv-sum').innerHTML = [`<span><b>${Number(p.row_count || 0).toLocaleString('en-US')}</b> ${p.kind === 'payroll' ? 'job titles' : 'rows'}</span>`, p.parsed_total != null && p.kind !== 'payroll' ? `<span>Total <b>${money(p.parsed_total)}</b></span>` : '',
       period ? `<span>${esc(period)}</span>` : '', p.tie && p.tie.status === 'ties' ? '<span class="status fixed">Adds up to the printed total</span>' : '',
       p.tie && p.tie.status === 'mismatch' ? `<span class="status held">Off from the printed total by ${money(p.tie.difference)}</span>` : '',
       p.used_saved_mapping ? '<span class="muted">Columns matched like last time</span>' : ''].filter(Boolean).join('');
@@ -334,11 +381,13 @@
       if (p.withheld) notes.push(`${p.withheld} with a private person will be listed without the person’s name.`);
       if (p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
     }
+    if (p.kind === 'payroll' && p.ok) notes.push(`Employee names are removed: each row is a job title with how many people hold it and their pay${p.names_removed ? ` (${Number(p.names_removed).toLocaleString('en-US')} names taken out)` : ''}. Hourly rates are shown as a yearly amount at 2,080 hours.`);
+    if (['appointments', 'fees'].includes(p.kind) && p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
     if (p.already_added) notes.push('This exact file was already added before.');
-    if (p.ok && p.kind !== 'contracts' && !openBooks) notes.push('Published files show on the public checkbook and budget tracker pages once those pages open; they are on the site’s data downloads and API right away.');
+    if (p.ok && FINANCE.includes(p.kind) && !openBooks) notes.push('Published files show on the public checkbook and budget tracker pages once those pages open; they are on the site’s data downloads and API right away.');
     $('#sub-pv-note').innerHTML = notes.join(' ');
     $('#sub-pv-t thead').innerHTML = `<tr>${cols.map(c => `<th>${esc(c[1])}</th>`).join('')}</tr>`;
-    $('#sub-pv-t tbody').innerHTML = (p.sample || []).map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="num"' : ''} title="${esc(r[c[0]] ?? '')}">${esc(c[2] ? money(r[c[0]]) : c[0] === 'paid_on' || c[0] === 'date' ? day(r[c[0]]) : r[c[0]] ?? '')}</td>`).join('')}</tr>`).join('')
+    $('#sub-pv-t tbody').innerHTML = (p.sample || []).map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="num"' : ''} title="${esc(r[c[0]] ?? '')}">${esc(c[2] ? (p.kind === 'payroll' && r[c[0]] != null ? '$' + Math.round(r[c[0]]).toLocaleString('en-US') : money(r[c[0]])) : DATES.includes(c[0]) ? (r[c[0]] ? day(r[c[0]]) : '') : r[c[0]] ?? '')}</td>`).join('')}</tr>`).join('')
       || `<tr><td class="empty" colspan="${cols.length}">No rows to show.</td></tr>`;
     $('#sub-go').hidden = !p.ok || (p.tie && p.tie.status === 'mismatch');
     $('#sub-err').textContent = '';
@@ -351,7 +400,7 @@
       if (r.held) throw new Error(r.message);
       const msg = `Published ${Number(r.rows).toLocaleString('en-US')} rows${r.individuals_withheld ? `, ${r.individuals_withheld} without a private person’s name` : ''}.`;
       $('#sub-pv').hidden = true; pv = null;
-      $('#sub-msg').innerHTML = esc(msg) + (r.kind === 'contracts' || openBooks ? ` <a href="${esc(r.page)}" target="_blank" rel="noopener">See it on the site</a>` : '');
+      $('#sub-msg').innerHTML = esc(msg) + (!FINANCE.includes(r.kind) || openBooks ? ` <a href="${esc(r.page)}" target="_blank" rel="noopener">See it on the site</a>` : '');
       await loadSubmit();
     } catch (err) { btn.disabled = false; ($('#sub-pv').hidden ? $('#sub-msg') : $('#sub-err')).textContent = err.message; }
   }

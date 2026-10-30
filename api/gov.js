@@ -25,6 +25,8 @@
 //   POST ?action=submit-preview {workspace, kind, filename, content (base64) | path, as_of?, printed_total?, mapping?}   read it, save it as waiting
 //   POST ?action=submit-publish {workspace, id}  publish a file that was previewed (or emailed in)
 //   POST ?action=submit-withdraw {workspace, id} take a file's records off the public pages
+//   POST ?action=submit-form    {workspace, kind, fields}  one contract, appointment or fee change, published straight away
+//   POST ?action=feed-agree     {workspace, url, agree}    say yes (or no) to a source we read automatically for this government
 // BayCounty.me admins only (the site owner, in the staff app or with the admin cookie):
 //   GET  ?action=overview                        every workspace with live/waiting alerts, open flags, members; recent activity
 //   GET  ?action=review-flags&status=open        flags from every workspace (open | fixed | not_changed | all)
@@ -43,8 +45,9 @@ const body = req => {
 
 const NEED = {home: 'read', posts: 'read', post: 'publish', withdraw: 'publish', alerts: 'read', reach: 'alert', alert: 'alert',
   'alert-confirm': 'alert', 'alert-end': 'alert', records: 'read', flag: 'read', flags: 'read', activity: 'read', members: 'read',
-  submissions: 'read', template: 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-withdraw': 'submit'};
-const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-withdraw']);
+  submissions: 'read', template: 'read', 'submit-url': 'submit', 'submit-preview': 'submit', 'submit-publish': 'submit', 'submit-withdraw': 'submit',
+  'submit-form': 'submit', 'feed-agree': 'submit'};
+const POSTS = new Set(['post', 'withdraw', 'alert', 'alert-confirm', 'alert-end', 'flag', 'submit-url', 'submit-preview', 'submit-publish', 'submit-withdraw', 'submit-form', 'feed-agree']);
 
 async function route(deps, req, res, action) {
   const {q} = deps, Q = req.query || {}, b = body(req);
@@ -130,6 +133,8 @@ async function route(deps, req, res, action) {
     case 'submit-preview': return R.preview(recordDeps(deps), w, b, who);
     case 'submit-publish': return R.publish(recordDeps(deps), w, b, who);
     case 'submit-withdraw': return R.withdraw(recordDeps(deps), w, b, who);
+    case 'submit-form': return R.submitForm(recordDeps(deps), w, b, who);
+    case 'feed-agree': return R.feedAgree(recordDeps(deps), w, b, who);
     case 'members': {
       if (req.method === 'GET') return {members: await q('select email, role, added_by, created_at from gov.members where workspace_id = $1 order by role, email', [w.id])};
       return G.setMember(q, w.id, b, email);

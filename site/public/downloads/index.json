@@ -7813,6 +7813,116 @@
    "api": "/api/v1/datasets/checkbook-payments"
   },
   {
+   "id": "board-appointments",
+   "title": "Board appointments",
+   "description": "Who sits on each advisory board, committee and authority a Bay County government appoints, as the government sends it from its BayCounty.me workspace: the board, the seat, the member's name, who appointed them, and the term (term_start, term_end; blank term_end = no end date given). Appointees are named because a public appointment is public record; no addresses, phone numbers or emails. source_title says which government sent it and when.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "board",
+     "type": "string"
+    },
+    {
+     "name": "seat",
+     "type": "string"
+    },
+    {
+     "name": "person",
+     "type": "string"
+    },
+    {
+     "name": "appointed_by",
+     "type": "string"
+    },
+    {
+     "name": "term_start",
+     "type": "string"
+    },
+    {
+     "name": "term_end",
+     "type": "string"
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/board-appointments.json",
+   "csv": "/downloads/board-appointments.csv",
+   "api": "/api/v1/datasets/board-appointments"
+  },
+  {
+   "id": "fee-changes",
+   "title": "Fee and rate changes",
+   "description": "New and changed fees and utility rates, as each government sends them from its BayCounty.me workspace: the fee, a category (utility, trash, permit, parks, impact, license, other), old_amount (blank for a new fee), new_amount, the unit (per month, per 1,000 gallons, each), effective_date and the ordinance or resolution that adopted it. source_title says which government sent it and when.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "fee",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string"
+    },
+    {
+     "name": "old_amount",
+     "type": "number"
+    },
+    {
+     "name": "new_amount",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string"
+    },
+    {
+     "name": "effective_date",
+     "type": "string"
+    },
+    {
+     "name": "adopted_by",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/fee-changes.json",
+   "csv": "/downloads/fee-changes.csv",
+   "api": "/api/v1/datasets/fee-changes"
+  },
+  {
    "id": "budget-actuals",
    "title": "Budget vs. actual, month by month",
    "description": "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).",

@@ -57,10 +57,12 @@ test('contract rows carry the government, who sent them and a per-file record ha
 test('what is due: last month for payments, last quarter for budgets, the last month for contracts', () => {
   const today = new Date('2026-10-30T12:00:00Z');
   const none = dueList({}, today);
-  assert.deepEqual(none.map(d => [d.kind, d.want, d.current]), [['checkbook', '2026-09-30', false], ['budget', '2026-09-30', false], ['contracts', '2026-09-29', false]]);
+  assert.deepEqual(none.map(d => [d.kind, d.want, d.current]), [['checkbook', '2026-09-30', false], ['budget', '2026-09-30', false], ['contracts', '2026-09-29', false],
+    ['payroll', '2026-10-01', false]]);
+  assert.equal(none[3].text, 'Pay by job title for FY2027');
   assert.equal(none[0].text, 'Payments through September 2026');
   const some = dueList({checkbook: '2026-09-30', budget: '2026-06-30', contracts: '2026-10-15'}, today);
-  assert.deepEqual(some.map(d => d.current), [true, false, true]);
+  assert.deepEqual(some.map(d => d.current), [true, false, true, false]);
   assert.equal(dueList({}, new Date('2026-01-05T00:00:00Z'))[1].want, '2025-12-31');
 });
 
@@ -109,6 +111,17 @@ create table ingest.sources (id uuid primary key default gen_random_uuid(), enti
   intake_method text not null, inbound_address text unique, allowed_senders text[] not null default '{}', active boolean not null default true, created_at timestamptz not null default now());
 alter table ingest.sources add column finance_workspace_id text;
 insert into ingest.sources (entity_name, entity_type, erp_system, intake_method, inbound_address) values ('City of Lynn Haven', 'city', 'other', 'email', 'lynnhaven@ingest.baycounty.me');
+alter table ingest.sources add constraint sources_entity_type_check check (entity_type in ('city','county','cra'));
+create table datasets (id text primary key, table_name text, title text, description text, updated_at timestamptz);
+create table ingest_runs (id bigint primary key);
+create function touch_updated_at() returns trigger language plpgsql as $f$ begin new.updated_at = now(); return new; end $f$;
+create table salary_positions (id bigint generated always as identity primary key, employer text, employer_id text, government text, fiscal_year text, title text,
+  department text, category text, grade text, pay_min numeric, pay_mid numeric, pay_max numeric, pay_basis text, hourly_min numeric, hourly_max numeric,
+  actual_salaries jsonb, budgeted_fte numeric, "union" text, source_url text, notes text, government_key text references governments(key),
+  origin text not null default 'manual', record_hash text not null, unique (origin, record_hash));
+create table data_sources (source_name text, source_url text, method text, refresh text, what_we_take text, page text, gov_id text);
+insert into data_sources values ('Parker City Council agendas', 'https://cityofparker.com/agendas', 'Automatic, daily', 'Daily', 'Agendas and packets', '/meetings', 'parker'),
+  ('Parker budget book', 'https://cityofparker.com/budget.pdf', 'Downloaded and read by hand', 'Yearly', 'Budget', '/governments/parker', 'parker');
 `;
 
 test.before(async () => {
@@ -123,7 +136,7 @@ test.before(async () => {
   await pool.query(STUBS);
   for (const f of ['0015_finance.sql', '0016_finance_signin.sql', '0048_finance_publish.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   // 0023 needs the whole ingest schema; the one column 0091 reads is stubbed above.
-  for (const f of ['0088_gov_workspace.sql', '0090_area_maps.sql', '0091_records_submission.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
+  for (const f of ['0088_gov_workspace.sql', '0090_area_maps.sql', '0091_records_submission.sql', '0092_records_phase2.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   await q(`insert into gov.members (workspace_id, email, role) values ('parker', 'finance@parker.test', 'records'), ('parker', 'mayor@parker.test', 'viewer'),
     ('parker', 'clerk@parker.test', 'publisher')`);
   const {createHandler} = require('../gov');
@@ -152,7 +165,7 @@ test('roles: viewers see the tab but cannot send; the records role can', opts, a
   const seen = await get('submissions');
   assert.equal(seen.status, 200);
   assert.equal(seen.body.address, 'parker@ingest.baycounty.me');
-  assert.equal(seen.body.due.length, 3);
+  assert.equal(seen.body.due.length, 4);
   const r = await post('submit-preview', {kind: 'contracts', filename: 'a.csv', content: b64('Vendor,Amount,Award Date\nAcme Paving Inc,100,2026-10-01\n')});
   assert.equal(r.status, 403);
   as = {email: 'finance@parker.test', via: 'session'};
@@ -233,4 +246,110 @@ test('a CSV template downloads with its column names', opts, async () => {
   const t = await get('template', {kind: 'contracts'});
   assert.equal(t.status, 200);
   assert.match(t.body, /^Title,Vendor,Amount,Award Date/);
+});
+
+/* ---------- Phase 2: payroll, appointments, fee changes, short forms, feeds ---------- */
+const LISTS = require('../_record_lists');
+
+test('payroll: one row per job title, names removed, pay kept as an unnamed list', () => {
+  const grid = [['Employee Name', 'Job Title', 'Department', 'Annual Salary', 'Hourly Rate'],
+    ['Smith, Ann', 'Police Officer', 'Police', '52,000', ''], ['Doe, Bob', 'Police Officer', 'Police', '', '26.00'],
+    ['Lee, Cy', 'City Clerk', 'Administration', '71000', ''], ['', 'Total', '', '175000', '']];
+  const r = LISTS.readList('payroll', grid);
+  assert.equal(r.ok, true, JSON.stringify(r.missing));
+  assert.equal(r.rows.length, 2);
+  const po = r.rows.find(x => x.title === 'Police Officer');
+  assert.deepEqual(po.salaries, [52000, 54080]);
+  assert.equal(po.names_removed, 2);
+  assert.equal(po.budgeted_fte, 2);
+  assert.ok(!JSON.stringify(r.rows).includes('Smith'), 'no employee names in what gets published');
+  const missing = LISTS.readList('payroll', [['Name', 'Department'], ['Ann', 'Police']]);
+  assert.equal(missing.ok, false);
+});
+
+test('appointments and fee changes read from a sheet or one form', () => {
+  const a = LISTS.readList('appointments', [['Board', 'Seat', 'Member', 'Appointed By', 'Term Start', 'Term End'],
+    ['Planning Board', 'Seat 1', 'Jordan Rivers', 'City Commission', '2025-01-01', '2028-12-31'], ['Planning Board', 'Seat 2', 'Vacant', '', '', ''],
+    ['Library Board', '', 'Pat Lane', 'Mayor', '2012-01-01', '2014-12-31']]);
+  assert.equal(a.ok, true);
+  assert.deepEqual(a.rows.map(r => r.person), ['Jordan Rivers']);
+  assert.deepEqual(a.reasons, {'vacant seat': 1, 'term ended before 2016': 1});
+  const f = LISTS.readForm('fees', {fee: 'Residential water base charge', old_amount: '18.50', new_amount: '$19.75', unit: 'per month', effective: '2026-10-01'});
+  assert.equal(f.ok, true);
+  assert.equal(f.rows[0].category, 'utility');
+  assert.equal(f.rows[0].new_amount, 19.75);
+  assert.equal(LISTS.readForm('fees', {fee: 'Pavilion rental'}).ok, false);
+});
+
+test('payroll file: preview, publish to salary positions without names, withdraw', opts, async () => {
+  as = {email: 'finance@parker.test', via: 'session'};
+  const csv = 'Name,Position,Department,Annual Salary\nAnn Smith,Public Works Laborer,Public Works,38000\nBob Doe,Public Works Laborer,Public Works,41000\n';
+  const p = await post('submit-preview', {kind: 'payroll', filename: 'payroll.csv', content: b64(csv)});
+  assert.equal(p.status, 200, JSON.stringify(p.body));
+  assert.equal(p.body.ok, true, JSON.stringify(p.body.missing));
+  assert.equal(p.body.row_count, 1);
+  assert.equal(p.body.names_removed, 2);
+  assert.ok(!JSON.stringify(p.body).includes('Ann Smith'));
+  const pub = await post('submit-publish', {id: p.body.id});
+  assert.equal(pub.status, 200, JSON.stringify(pub.body));
+  const rows = await q(`select employer, employer_id, title, actual_salaries, budgeted_fte, government_key from salary_positions where origin = 'gov'`);
+  assert.equal(rows.length, 1);
+  assert.deepEqual(rows[0].actual_salaries, [38000, 41000]);
+  assert.equal(Number(rows[0].budgeted_fte), 2);
+  assert.equal(rows[0].government_key, 'parker');
+  const due = (await get('submissions')).body.due.find(d => d.kind === 'payroll');
+  assert.equal(due.current, true);
+  await post('submit-withdraw', {id: p.body.id});
+  assert.equal((await q(`select count(*)::int n from salary_positions where origin = 'gov'`))[0].n, 0);
+});
+
+test('short forms publish one appointment, fee change or contract at once', opts, async () => {
+  as = {email: 'clerk@parker.test', via: 'session'};
+  const a = await post('submit-form', {kind: 'appointments', fields: {board: 'Code Enforcement Board', seat: 'Alternate', person: 'Sam Ortiz', appointed_by: 'City Council', term_start: '2026-10-01'}});
+  assert.equal(a.status, 200, JSON.stringify(a.body));
+  assert.equal(a.body.rows, 1);
+  const fee = await post('submit-form', {kind: 'fees', fields: {fee: 'Garbage pickup', old_amount: '21', new_amount: '23.50', unit: 'per month', effective: '2026-11-01'}});
+  assert.equal(fee.status, 200, JSON.stringify(fee.body));
+  const c = await post('submit-form', {kind: 'contracts', fields: {vendor: 'Panhandle Paving LLC', amount: '84,500', award_date: '2026-10-20', title: 'Resurface 5th Street', method: 'ITB'}});
+  assert.equal(c.status, 200, JSON.stringify(c.body));
+  const bad = await post('submit-form', {kind: 'fees', fields: {fee: 'Missing amount'}});
+  assert.equal(bad.status, 400);
+  const payrollForm = await post('submit-form', {kind: 'payroll', fields: {title: 'x'}});
+  assert.equal(payrollForm.status, 400, 'payroll is a file, not a form');
+  assert.equal((await q(`select person from board_appointments where gov_id = 'parker'`))[0].person, 'Sam Ortiz');
+  assert.equal((await q(`select category from fee_changes where gov_id = 'parker'`))[0].category, 'trash');
+  const R = require('../_records');
+  const sent = await R.publicSent(q, {gov: 'parker'}, new Date('2026-10-30T12:00:00Z'));
+  assert.equal(sent.data.appointments.length, 1);
+  assert.equal(sent.data.fees[0].new_amount, 23.5);
+  const parker = sent.data.governments[0];
+  assert.equal(parker.records.appointments.status, 'current');
+  assert.equal(parker.records.fees.status, 'current');
+  assert.ok(sent.data.contracts.some(x => x.vendor === 'Panhandle Paving LLC'));
+});
+
+test('feeds: a government sees what we read automatically and can agree to it', opts, async () => {
+  as = {email: 'clerk@parker.test', via: 'session'};
+  const s = await get('submissions');
+  assert.deepEqual(s.body.feeds.map(f => f.url), ['https://cityofparker.com/agendas'], 'only automatic sources');
+  assert.equal(s.body.feeds[0].agreed, false);
+  const ok = await post('feed-agree', {url: 'https://cityofparker.com/agendas'});
+  assert.equal(ok.status, 200, JSON.stringify(ok.body));
+  assert.equal((await get('submissions')).body.feeds[0].agreed, true);
+  const other = await post('feed-agree', {url: 'https://example.com/not-ours'});
+  assert.equal(other.status, 404);
+  as = {email: 'mayor@parker.test', via: 'session'};
+  assert.equal((await post('feed-agree', {url: 'https://cityofparker.com/agendas', agree: false})).status, 403, 'viewers cannot change agreements');
+  const R = require('../_records');
+  const sent = await R.publicSent(q, {gov: 'parker'});
+  assert.equal(sent.data.governments[0].feeds_agreed, 1);
+});
+
+test('migration 0092 adds the School Board and the five county officers with intake addresses', opts, async () => {
+  const ws = (await q(`select id from gov.workspaces order by id`)).map(r => r.id);
+  for (const id of ['schools', 'sheriff', 'clerk', 'property_appraiser', 'tax_collector', 'soe']) assert.ok(ws.includes(id), id);
+  const src = await q(`select inbound_address, finance_workspace_id, allowed_senders from ingest.sources where finance_workspace_id = 'schools'`);
+  assert.equal(src[0].inbound_address, 'schools@ingest.baycounty.me');
+  assert.deepEqual(src[0].allowed_senders, ['@bay.k12.fl.us']);
+  assert.equal((await q(`select count(*)::int n from finance.workspaces where id in ('sheriff', 'soe')`))[0].n, 2);
 });

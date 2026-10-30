@@ -451,7 +451,7 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
     </section>
 
     <section id="p-submit" data-panel hidden>
-      <p class="sub">Send the files your own systems already make: the check register, the budget-vs-actual report, a list of contracts. We read them, you check a preview, and they go on BayCounty.me with the same privacy rules as everything else: payments to private people are listed without their name. Nothing you send changes numbers already on the site.</p>
+      <p class="sub">Send the files your own systems already make: the check register, the budget-vs-actual report, contracts, a payroll or position list, board appointments, fee changes. We read them, you check a preview, and they go on BayCounty.me with the same privacy rules as everything else: payments to private people are listed without their name, and payroll never names employees. Nothing you send changes numbers already on the site.</p>
       <h2 class="h2">What we’d expect by now</h2>
       <div class="due" id="sub-due"></div>
       <div data-can="submit">
@@ -462,6 +462,9 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
           <div class="row" id="sub-opts" hidden><label class="f" id="sub-asof-l">Report “as of” date (if it isn’t in the title)<input type="date" id="sub-asof"></label><label class="f">Printed total (optional, to check the rows add up)<input id="sub-total" inputmode="decimal" placeholder="1,234,567.89"></label></div>
           <p class="small" id="sub-msg" role="status"></p>
         </form>
+        <details class="panel" id="sub-one" hidden style="margin-top:14px"><summary><b id="sub-one-h">Or fill in just one</b> <span class="small muted">No file needed</span></summary>
+          <form id="sub-one-f" style="display:flex;flex-direction:column;gap:12px;margin-top:12px"><div class="form" id="sub-one-fields"></div>
+            <div class="row"><button class="btn primary" type="submit">Publish on BayCounty.me</button><span class="small err" role="alert"></span></div></form></details>
         <div class="panel" id="sub-pv" hidden style="margin-top:14px">
           <h2 class="h2" id="sub-pv-h" style="margin-top:0">Check the preview</h2>
           <div class="pvsum" id="sub-pv-sum"></div>
@@ -475,6 +478,11 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
       <p class="small muted" id="sub-tpl"></p>
       <h2 class="h2">Files sent</h2>
       <ul class="items" id="sub-list"></ul>
+      <div id="sub-feeds-w" hidden>
+        <h2 class="h2">Sources we already read</h2>
+        <p class="small muted">We read these pages of yours automatically. Saying yes tells the public you agree they are the right place to get these records; it doesn’t change what we read. You can take it back any time.</p>
+        <ul class="items" id="sub-feeds"></ul>
+      </div>
     </section>
 
     <section id="p-records" data-panel hidden>

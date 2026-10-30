@@ -35,6 +35,9 @@ object Staff {
         Triple("checkbook", "Checkbook (every payment)", "The check register or payments report for one or more whole months."),
         Triple("budget", "Budget vs. actual", "The budget-vs-actual report, as of a month end."),
         Triple("contracts", "Contracts awarded", "Vendor, amount and award date at least."),
+        Triple("payroll", "Payroll (job titles and pay)", "A payroll or position list: job title and pay. Names are removed before anything is published."),
+        Triple("appointments", "Board appointments", "Who sits on each board you appoint: board, member and term."),
+        Triple("fees", "Fee or rate changes", "A new or changed fee: what it is, the new amount and when it starts."),
     )
     fun recordKindLabel(k: String) = recordKinds.firstOrNull { it.first == k }?.second ?: k.replaceFirstChar { it.uppercase() }
     const val MAX_INLINE_BYTES = 3 * 1024 * 1024
@@ -53,6 +56,7 @@ object Staff {
         "alert_ended" to "ended an alert", "alert_cancelled" to "cancelled an alert", "data_flagged" to "flagged record data",
         "flag_answered" to "BayCounty.me answered a flag", "member_set" to "changed access", "member_removed" to "removed access",
         "records_published" to "published records", "records_withdrawn" to "withdrew records",
+        "feed_agreed" to "agreed to a source we read", "feed_unagreed" to "took back agreement to a source",
     )
 
     /** "Oct 30, 8:05 AM" in Bay County time; plain dates as "Nov 12, 2026". */

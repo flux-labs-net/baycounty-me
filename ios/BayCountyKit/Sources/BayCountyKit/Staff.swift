@@ -22,6 +22,9 @@ public enum Staff {
         ("checkbook", "Checkbook (every payment)", "The check register or payments report for one or more whole months."),
         ("budget", "Budget vs. actual", "The budget-vs-actual report, as of a month end."),
         ("contracts", "Contracts awarded", "Vendor, amount and award date at least."),
+        ("payroll", "Payroll (job titles and pay)", "A payroll or position list: job title and pay. Names are removed before anything is published."),
+        ("appointments", "Board appointments", "Who sits on each board you appoint: board, member and term."),
+        ("fees", "Fee or rate changes", "A new or changed fee: what it is, the new amount and when it starts."),
     ]
     public static func recordKindLabel(_ k: String) -> String { recordKinds.first { $0.key == k }?.label ?? k.capitalized }
 
@@ -41,6 +44,7 @@ public enum Staff {
         "alert_ended": "ended an alert", "alert_cancelled": "cancelled an alert", "data_flagged": "flagged record data",
         "flag_answered": "BayCounty.me answered a flag", "member_set": "changed access", "member_removed": "removed access",
         "records_published": "published records", "records_withdrawn": "withdrew records",
+        "feed_agreed": "agreed to a source we read", "feed_unagreed": "took back agreement to a source",
     ]
 
     public static func decoder() -> JSONDecoder { let d = JSONDecoder(); d.keyDecodingStrategy = .convertFromSnakeCase; return d }
