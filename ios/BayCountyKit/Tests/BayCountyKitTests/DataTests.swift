@@ -150,6 +150,18 @@ final class LinkTests: XCTestCase {
         XCTAssertTrue(votes.allSatisfy { $0.string("vote_id") != nil })
     }
 
+    func testContractDollarsAddUpForOneOfficial() throws {
+        let all = try rows(RecordLinks.personDatasets)
+        let recs = Dictionary(uniqueKeysWithValues: RecordLinks.records(forPerson: "daniel-raffield", in: all).map { ($0.dataset, $0.rows) })
+        let c = try XCTUnwrap(RecordLinks.contractDollars(recs["contract-dollar-totals"] ?? []))
+        let mine = recs["member-contract-dollars"] ?? []
+        let yes = mine.filter { $0.string("vote") == "yes" && $0.string("outcome") == "passed" }
+        XCTAssertEqual(c.yesVotes, yes.count)
+        XCTAssertEqual(c.yes, (yes.reduce(0) { $0 + ($1.number("amount") ?? 0) } * 100).rounded() / 100, accuracy: 0.01)
+        XCTAssertGreaterThan(c.yes, 0)
+        XCTAssertNil(RecordLinks.contractDollars([]))
+    }
+
     func testPersonLinksFindVotesAndPay() throws {
         let all = try rows(RecordLinks.personDatasets)
         let recs = RecordLinks.records(forPerson: "clair-pease", in: all)

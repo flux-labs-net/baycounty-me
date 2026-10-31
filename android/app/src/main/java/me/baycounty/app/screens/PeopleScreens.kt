@@ -235,6 +235,41 @@ fun PersonScreen(personID: String) {
                 }
             }
         }
+        // The dollars in the contract votes they cast (site/vote_dollars.py): yes on items that passed, no, and the votes behind them.
+        val cd = RecordLinks.contractDollars(byDS["contract-dollar-totals"] ?: emptyList())
+        if (cd != null) item {
+            val rows = byDS["member-contract-dollars"] ?: emptyList()
+            val latest = rows.sortedByDescending { it.string("date") ?: "" }.take(10)
+            val span = listOfNotNull(cd.first, cd.last).mapNotNull { d -> Dates.parse(d)?.let { Dates.display(it, false) } }.joinToString(" to ")
+            fun votes(n: Int) = "$n vote${if (n == 1) "" else "s"}"
+            PageSection("Contract dollars they voted on", "dollarsign.square", Tone.TEAL, caption = "Contract and purchase votes with one clear dollar figure in the minutes, since 2016.") {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Column(Modifier.fillMaxWidth().card(14.dp).padding(14.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text("Voted yes, and it passed", style = T.caption, color = Brand.secondary)
+                        Text(Format.money(cd.yes), style = T.bigNumber, color = Brand.text)
+                        Text(votes(cd.yesVotes) + if (span.isEmpty()) "" else " · $span", style = T.caption, color = Brand.secondary)
+                        Text("Voted no: ${Format.money(cd.no)} (${votes(cd.noVotes)})", style = T.subhead, color = Brand.text, modifier = Modifier.padding(top = 6.dp))
+                        if (cd.yesFailedVotes > 0) Text("Voted yes, but it failed: ${Format.money(cd.yesFailed)} (${votes(cd.yesFailedVotes)})", style = T.subhead, color = Brand.text)
+                        Text("Not totaled: ${cd.consent} consent agendas (many items in one vote) and ${cd.notCounted} votes without one clear dollar figure or that aren\u2019t new spending. So this is a floor.",
+                            style = T.caption, color = Brand.secondary, modifier = Modifier.padding(top = 6.dp))
+                    }
+                    if (latest.isNotEmpty()) CardList {
+                        latest.forEachIndexed { i, r ->
+                            Row(Modifier.fillMaxWidth().clickable { nav.push(Route.Record("member-contract-dollars", r.id)) }.padding(horizontal = 14.dp, vertical = 10.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                                    Text(r.string("headline") ?: "Vote", style = T.subhead, color = Brand.text, maxLines = 2)
+                                    Text(listOfNotNull(r.string("date")?.let { Dates.parse(it) }?.let { Dates.display(it, false) }, Format.money(r.number("amount"))).joinToString(" · "),
+                                        style = T.caption, color = Brand.secondary)
+                                }
+                                VoteMark(voteChoice(r.string("vote")))
+                            }
+                            if (i < latest.lastIndex) RowDivider()
+                        }
+                        if (rows.size > latest.size) { RowDivider(); RouteRow(Route.Dataset("member-contract-dollars", mapOf("person_id" to personID)), "All ${rows.size} votes behind these totals") }
+                    }
+                }
+            }
+        }
         val mv = byDS["member-votes"] ?: emptyList()
         if (mv.isNotEmpty()) item {
             val t = RecordLinks.tally(mv)

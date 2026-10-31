@@ -2297,3 +2297,5 @@ DATASETS += _VOLUNTEER
 from correlations import DATASETS as _OVERLAPS, COLUMNS as _OVERLAP_COLUMNS  # noqa: E402  /connections/overlaps (site/correlations.py)
 DATASETS += _OVERLAPS
 DB_ONLY_COLUMNS.update(_OVERLAP_COLUMNS)
+from vote_dollars import DATASETS as _VOTE_DOLLARS  # noqa: E402  contract dollars behind officials' votes (site/vote_dollars.py)
+DATASETS += _VOTE_DOLLARS

@@ -120,12 +120,14 @@ def person_page(pid):
     tally = Counter(str(r.get('vote')).lower() for r in mv)
     raised = next((r['total_raised'] for r in cand if r.get('total_raised')), None) or next((r['total_raised'] for r in fin if r.get('total_raised')), None) or next((r['total_raised'] for r in hist if r.get('total_raised')), None)
     sal = next((r.get('annual') or r.get('salary') for r in pay if (r.get('annual') or r.get('salary'))), None)
+    cd_kpi, cd_sec = contract_dollars(pid, x['name'])
     kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'votes on file') if mv else '',
                   kpi('Campaign raised', money(raised), 'most recent campaign on file') if raised else '',
                   kpi('From businesses and groups', money(sum(l['amount'] or 0 for l, _ in gifts)), f'{len(gifts)} donors named on this page') if gifts else '',
                   kpi('From business owners', money(sum(l['amount'] or 0 for l, _ in owner_gifts)), f'{len(owner_gifts)} people who run a business, named') if owner_gifts else '',
+                  cd_kpi,
                   kpi('Pay', money(sal), 'annual, latest on file') if sal else ''])
-    secs = vsecs = ''  # vote sections go right under the connections graph
+    secs, vsecs = '', cd_sec  # vote sections go right under the connections graph, contract dollars first
     # roles
     roles = []
     for g in govs:
@@ -209,6 +211,76 @@ def person_page(pid):
     <li>Person id <code>{e(pid)}</code> in the <a href="/open-data">downloads</a> (column person_id) and the <a href="/developers">API</a> (entity <code>{e(eid)}</code>).</li></ul></section>
 </div>
 {ASSETS}'''
+
+
+def _dt(d):
+    """2025-03-04 -> Mar 4, 2025."""
+    import datetime
+    try:
+        x = datetime.date.fromisoformat(str(d)[:10])
+    except ValueError:
+        return e(d)
+    return f'{x:%b} {x.day}, {x.year}'
+
+
+def _usd(n):
+    if n is None:
+        return '—'
+    return f'${n:,.2f}' if round(n, 2) != round(n) else f'${n:,.0f}'
+
+
+def contract_dollars(pid, name):
+    """(kpi tile, section) for the dollars in the contract votes this official took part in (site/vote_dollars.py):
+    yes on items that passed, yes on items that failed, and no, each with its vote count, then every vote behind them."""
+    tots = [t for t in EG._ds('contract-dollar-totals') if t.get('person_id') == pid and t.get('contract_votes')]
+    if not tots:
+        return '', ''
+    rows = sorted(_by_person('member-contract-dollars').get(pid, []), key=lambda r: (r.get('date') or '', r.get('vote_id') or ''), reverse=True)
+    first = lambda f: sum(t[f] or 0 for t in tots)
+    yes, yv, yf, yfv, no, nv = first('yes_total'), first('yes_votes'), first('yes_failed_total'), first('yes_failed_votes'), first('no_total'), first('no_votes')
+    dates = sorted(d for t in tots for d in (t.get('first_date'), t.get('last_date')) if d)
+    span = f'{_dt(dates[0])} to {_dt(dates[-1])}' if dates else ''
+    boards = sorted({r.get('board') for r in rows if r.get('board')})
+    govs = ' and '.join(gov_link(t['gov_id']) for t in tots if t.get('gov_id'))
+    plural = lambda n, w: f'{n:,} {w}{"" if n == 1 else "s"}'
+    kpi = (f'<div class="kpi"><span class="eyebrow">Voted yes on contracts</span><span class="v">{money(yes)}</span>'
+           f'<span class="s">{e(plural(yv, "approved item"))}{", " + e(span) if span else ""}</span></div>') if (yv or nv) else ''
+    stat = lambda lbl, amt, n, sub, tone: (f'<div class="cd-stat t-{tone}"><span class="cd-l">{e(lbl)}</span><b>{_usd(amt)}</b>'
+                                           f'<span class="small muted">{e(plural(n, "vote"))}{" · " + e(sub) if sub else ""}</span></div>')
+    stats = stat('Voted yes, and it passed', yes, yv, 'approved', 'teal') + (stat('Voted yes, but it failed', yf, yfv, 'not approved', 'amber') if yfv else '') + stat('Voted no', no, nv, 'passed or failed', 'salmon')
+    last = e(name.split()[-1])
+    no_part = (f' {last} voted no on {_usd(no)} ({e(plural(nv, "vote"))}).' if nv else f' {last} did not vote no on any contract with a dollar figure.')
+    lede = (f'<p class="lede cd-lede">{e(name)} voted yes on <b>{_usd(yes)}</b> in contracts and purchases that {govs} approved '
+            f'({e(plural(yv, "vote"))}{", " + e(span) if span else ""}).{no_part}</p>'
+            if (yv or nv) else f'<p class="lede cd-lede">None of {e(name)}\u2019s contract votes on file has one clear dollar figure yet, so there is no total.</p>')
+    vote_tone = lambda v: 'teal' if v == 'yes' else 'salmon' if v == 'no' else 'blue'
+    tr = ''
+    for r in rows:
+        v = str(r.get('vote') or '')
+        note = ' <small class="muted">up to</small>' if r.get('up_to') else ''
+        note += ' <small class="muted">a year</small>' if r.get('per_year') else ''
+        out = (r.get('outcome') or '').lower()
+        page = f'Minutes, p. {r["source_page"]}' if r.get('source_page') else 'Source'
+        tr += (f'<tr><td class="small nowrap">{_dt(r.get("date"))}</td><td class="wrap">{e(r.get("headline"))}<small class="muted cd-sub">{e(r.get("board"))} · {e(r.get("kind"))}'
+               f'{" · " + e(r.get("tally")) if r.get("tally") else ""}{" · failed" if out == "failed" else ""}</small></td>'
+               f'<td><span class="ui-pill t-{vote_tone(v)}">{e(v[:1].upper() + v[1:]) or "?"}</span></td><td class="num">{_usd(r.get("amount"))}{note}</td>'
+               f'<td>{src(r.get("source_url"), page)}</td></tr>')
+    left = {k: sum(t.get(k) or 0 for t in tots) for k in ('not_counted_consent', 'not_counted_no_amount', 'not_counted_unclear', 'not_counted_not_spending', 'not_counted_repeat')}
+    why = {'not_counted_consent': ('consent agenda', 'many items pass in one vote, and the minutes do not give each item\u2019s cost'),
+           'not_counted_no_amount': ('vote', 'no dollar figure in the record of the vote'),
+           'not_counted_unclear': ('vote', 'more than one figure (a bid plus contingency, a range), or a postponed or unclear motion'),
+           'not_counted_not_spending': ('vote', 'not new spending: a credit, sale, lease, fee, payment on work already approved, grant received or rate'),
+           'not_counted_repeat': ('repeat vote', 'an item already counted on a later vote')}
+    left_h = ''.join(f'<li>{e(plural(n, why[k][0]))}: {e(why[k][1])}</li>' for k, n in left.items() if n)
+    allv = sum(t['contract_votes'] for t in tots)
+    sec = f"""<section class="tx-sec cd-sec"><div class="sec-hd"><h2 id="contract-dollars" data-tile="Contract dollars">Contract dollars {e(name)} voted on</h2><span class="muted">{e(", ".join(boards)) or "Recorded votes"}</span></div>
+    {lede}
+    <div class="cd-stats">{stats}</div>
+    {f'<details class="cd-more"><summary>The {len(rows):,} votes behind these totals</summary><div class="tablewrap"><table class="tx-table vd-table cd-table" data-share-items><thead><tr><th scope="col">Date</th><th scope="col">What was approved</th><th scope="col">Vote</th><th scope="col" class="num">Amount</th><th scope="col">Source</th></tr></thead><tbody>{tr}</tbody></table></div></details>' if rows else ''}
+    <div class="note cd-note"><p><b>What is counted.</b> Every recorded vote {e(name)} cast on a contract award, purchase, task order, change order or renewal since 2016 that names one clear dollar figure. The figure comes from the record of the vote itself (or from a contract record tied to it), never a guess. Yes counts only items that passed; voted no counts items they voted against, whether they passed or not. “Up to” marks a not-to-exceed ceiling and “a year” one year’s price. An item voted on twice is counted once.</p>
+    {f'<p><b>Not in the totals</b>, from {allv:,} contract and consent agenda votes on file:</p><ul>{left_h}</ul>' if left_h else ''}
+    <p>So the totals are a floor, not everything the board spent while {e(name)} served. Votes are from the minutes on file (<a href="/data-sources">which years we have</a>); a vote is a fact in the record and does not show why anyone voted as they did. Every vote, counted or not, is in the <a href="/api/v1/datasets/contract-vote-dollars">contract-vote-dollars</a> dataset.</p></div></section>"""
+    return kpi, sec
 
 
 def vote_card(r):

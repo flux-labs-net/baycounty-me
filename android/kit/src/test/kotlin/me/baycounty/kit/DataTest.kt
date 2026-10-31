@@ -100,6 +100,16 @@ class DataTest {
         assertTrue(votes.all { it.string("vote_id") != null })
     }
 
+    @Test fun contractDollarsAddUpForOneOfficial() {
+        val recs = RecordLinks.recordsForPerson("daniel-raffield", rows(RecordLinks.personDatasets)).toMap()
+        val c = RecordLinks.contractDollars(recs["contract-dollar-totals"] ?: emptyList())!!
+        val yes = (recs["member-contract-dollars"] ?: emptyList()).filter { it.string("vote") == "yes" && it.string("outcome") == "passed" }
+        assertEquals(yes.size, c.yesVotes)
+        assertEquals(Math.round(yes.sumOf { it.number("amount") ?: 0.0 } * 100) / 100.0, c.yes, 0.01)
+        assertTrue(c.yes > 0)
+        assertNull(RecordLinks.contractDollars(emptyList()))
+    }
+
     @Test fun personLinksFindVotesAndPay() {
         val all = rows(RecordLinks.personDatasets)
         val recs = RecordLinks.recordsForPerson("clair-pease", all).toMap()

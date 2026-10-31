@@ -32,6 +32,8 @@ jobs:
       - run: npm test
       - name: Screenshot picker picks the right app screens
         run: python3 -m unittest discover -s .github/scripts
+      - name: Contract dollars behind officials' votes (site/vote_dollars.py rules)
+        run: python3 -m unittest discover -s site -p 'test_*.py'
   migrations:
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 10

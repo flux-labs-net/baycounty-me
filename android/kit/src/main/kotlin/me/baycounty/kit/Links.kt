@@ -11,6 +11,7 @@ object RecordLinks {
     val personDatasets = listOf(
         "officials-pay", "salary-leaders", "campaign-finance", "candidates-2026", "member-votes", "votes",
         "officeholder-terms", "campaign-history", "business-donor-sunbiz", "owner-gifts",
+        "contract-dollar-totals", "member-contract-dollars",
     )
 
     fun vendorIDs(row: Row): List<String> {
@@ -70,6 +71,27 @@ object RecordLinks {
 
     data class Tally(val yes: Int = 0, val no: Int = 0, val other: Int = 0) {
         val total: Int get() = yes + no + other
+    }
+
+    /** The dollars in the contract votes one official cast (dataset contract-dollar-totals, one row per government):
+     *  yes on items that passed, yes on items that failed, no, the votes behind each, and what is left out. */
+    data class ContractDollars(
+        val yes: Double, val yesFailed: Double, val no: Double, val yesVotes: Int, val yesFailedVotes: Int, val noVotes: Int,
+        val contractVotes: Int, val consent: Int, val notCounted: Int, val first: String?, val last: String?,
+    )
+
+    fun contractDollars(totals: List<Row>): ContractDollars? {
+        if (totals.isEmpty()) return null
+        fun sum(k: String) = totals.sumOf { it.number(k) ?: 0.0 }
+        fun cents(v: Double) = Math.round(v * 100) / 100.0
+        val c = ContractDollars(
+            yes = cents(sum("yes_total")), yesFailed = cents(sum("yes_failed_total")), no = cents(sum("no_total")),
+            yesVotes = sum("yes_votes").toInt(), yesFailedVotes = sum("yes_failed_votes").toInt(), noVotes = sum("no_votes").toInt(),
+            contractVotes = sum("contract_votes").toInt(), consent = sum("not_counted_consent").toInt(),
+            notCounted = (sum("not_counted_no_amount") + sum("not_counted_unclear") + sum("not_counted_not_spending")).toInt(),
+            first = totals.mapNotNull { it.string("first_date") }.minOrNull(), last = totals.mapNotNull { it.string("last_date") }.maxOrNull(),
+        )
+        return if (c.contractVotes > 0) c else null
     }
 
     fun tally(memberVotes: List<Row>): Tally {

@@ -92,7 +92,7 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25}}},
    annotations: {readOnlyHint: true}},
   {name: 'member_voting_record', title: 'Board member voting record',
-   description: 'How one elected board member voted on recorded money votes: totals (yes/no/absent), the votes where they were in the minority, and the latest votes, each with a source link.',
+   description: 'How one elected board member voted on recorded money votes: totals (yes/no/absent), the votes where they were in the minority, the latest votes, each with a source link, and contract_dollars: the dollars in contract and purchase votes they voted yes on that passed, yes on that failed, and no on, with the vote counts behind each (only votes with one clear dollar figure; consent agendas and votes without a figure are counted separately, not totaled).',
    inputSchema: {type: 'object', required: ['member'], additionalProperties: false, properties: {
      member: {type: 'string', description: 'Member name, e.g. "Clair Pease" (case-insensitive; partial names work if they match one member)'},
      since: {type: 'string', description: 'Only votes on or after this date (YYYY-MM-DD)'},
@@ -246,8 +246,23 @@ async function call(req, name, a = {}) {
     const lim = Math.min(Math.max(a.limit || 25, 1), 200);
     const pick = r => ({date: r.date, board: r.board, vote: r.vote, headline: r.headline, source_url: r.source_url});
     req._rows = Math.min(mine.length, lim);
+    // contract dollars behind their votes (site/vote_dollars.py, dataset contract-dollar-totals)
+    let dollars = null;
+    if (c.datasets.some(d => d.id === 'contract-dollar-totals')) {
+      const pid = mine.find(r => r.person_id)?.person_id;
+      const tots = (await rowsOf(req, c, 'contract-dollar-totals')).filter(t => (pid && t.person_id === pid) || t.member === who[0]);
+      if (tots.length) {
+        const sum = f => Math.round(tots.reduce((s, t) => s + (Number(t[f]) || 0), 0) * 100) / 100;
+        dollars = {voted_yes_passed: sum('yes_total'), yes_votes: sum('yes_votes'), voted_yes_failed: sum('yes_failed_total'), yes_failed_votes: sum('yes_failed_votes'),
+          voted_no: sum('no_total'), no_votes: sum('no_votes'), contract_votes_on_file: sum('contract_votes'), consent_agendas_not_totaled: sum('not_counted_consent'),
+          without_one_clear_figure: sum('not_counted_no_amount') + sum('not_counted_unclear'), not_new_spending: sum('not_counted_not_spending'),
+          first_date: tots.map(t => t.first_date).filter(Boolean).sort()[0] || null, last_date: tots.map(t => t.last_date).filter(Boolean).sort().pop() || null,
+          votes: `${SITE}/api/v1/datasets/member-contract-dollars?member=${encodeURIComponent(who[0])}&sort=-date`,
+          note: 'Only contract and purchase votes with one clear dollar figure in the record of the vote are totaled, so this is a floor. Each vote and its source is in member-contract-dollars.'};
+      }
+    }
     return {member: who[0], boards: [...new Set(mine.map(r => r.board))], votes: mine.length, tally, in_minority: minority.length,
-      minority_votes: minority.slice(0, lim).map(pick), latest: mine.slice(0, lim).map(pick),
+      minority_votes: minority.slice(0, lim).map(pick), latest: mine.slice(0, lim).map(pick), contract_dollars: dollars,
       note: 'Recorded money votes compiled by BayCounty.me, not every vote the board took. Cite each source_url.'};
   }
   if (name === 'vendor_profile') {
