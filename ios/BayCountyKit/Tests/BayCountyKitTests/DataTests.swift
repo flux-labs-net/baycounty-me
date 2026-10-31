@@ -31,6 +31,19 @@ final class DataTests: XCTestCase {
         XCTAssertNotNil(r["f"])
     }
 
+    /// A government's "Every record" list names only datasets with rows for it, and leaves none of those out.
+    func testGovernmentRecordsListOnlyDatasetsWithRows() throws {
+        let cat = try catalog()
+        for gov in ["county", "sp", "mb"] {
+            let listed = Set(cat.records(for: gov).map(\.id))
+            XCTAssertFalse(listed.isEmpty, gov)
+            for d in cat.datasets where d.column("gov_id") != nil && !DatasetSpec.ownScreens.contains(d.id) {
+                let has = try Row.decodeList(load("\(d.id).json")).contains { $0.string("gov_id") == gov }
+                XCTAssertEqual(listed.contains(d.id), has, "\(gov) \(d.id)")
+            }
+        }
+    }
+
     func testEveryPublishedDatasetDecodesAndReads() throws {
         let cat = try catalog()
         XCTAssertGreaterThan(cat.datasets.count, 20)

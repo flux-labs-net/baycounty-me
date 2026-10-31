@@ -11,6 +11,7 @@ struct GovernmentDetailView: View {
     @State private var year: Int?
     @State private var allFindings = false
     @State private var allBonds = false
+    @State private var allRecords = false
 
     /// Datasets this screen reads, besides the government profiles.
     private static let datasets = ["officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies"]
@@ -25,9 +26,9 @@ struct GovernmentDetailView: View {
 
     private func rows(_ id: String) -> [Row] { store.rows[id] ?? [] }
 
-    /// Datasets that carry a gov_id column, so they can be filtered to this government.
+    /// Datasets that have rows for this government (empty ones are left off).
     private var related: [DatasetInfo] {
-        (store.catalog?.datasets ?? []).filter { !DatasetSpec.ownScreens.contains($0.id) && $0.column("gov_id") != nil }
+        store.catalog?.records(for: govID) ?? []
     }
 
     var body: some View {
@@ -413,11 +414,18 @@ struct GovernmentDetailView: View {
     // MARK: Records
 
     private func recordsSection(_ g: Government) -> some View {
-        PageSection(title: "Every record", symbol: "tray.full", tone: .blue, caption: "Each dataset, filtered to \(g.name).") {
+        // only datasets with rows for this government; the first few, then the rest behind "All N"
+        let shown = allRecords ? related : Array(related.prefix(6))
+        return PageSection(title: "Every record", symbol: "tray.full", tone: .blue, caption: "\(related.count) datasets with records for \(g.name).") {
             CardList {
-                ForEach(related) { d in
+                ForEach(shown) { d in
                     RouteRow(route: .dataset(d.id, filters: ["gov_id": govID]), title: d.title, symbol: DatasetSpec.for(d.id).symbol)
-                    if d.id != related.last?.id { RowDivider(inset: 50) }
+                    if d.id != shown.last?.id { RowDivider(inset: 50) }
+                }
+                if related.count > 6 {
+                    RowDivider()
+                    Button(allRecords ? "Show fewer" : "All \(related.count) datasets") { allRecords.toggle() }
+                        .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
                 }
             }
             WebLink(title: "Full profile on BayCounty.me", url: g.pageURL).font(.subheadline)

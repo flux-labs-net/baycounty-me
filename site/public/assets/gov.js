@@ -96,6 +96,8 @@ function fill(id, {sub, kpis, body, link, empty}) {
   $('[data-gx-link]', sec).innerHTML = link || '';
   $$('.gx-more', sec).forEach(b => b.onclick = () => { $$('tr[data-more]', sec).forEach(t => t.hidden = false); b.remove(); });
 }
+// sections with nothing on file for the year picked: left out of the page and its menu until another year is picked (see trimMenu)
+const EMPTY = new Set();
 const gone = id => { const s = document.getElementById(id); if (s) s.remove(); $$(`.ui-tiles a[href="#${id}"], .ui-mini a[href="#${id}"]`).forEach(a => a.remove()); };
 
 /* ---------- renderers ---------- */
@@ -125,6 +127,7 @@ function contracts() {
   const rs = S.contracts.filter(inYear).sort((a, b) => (b.a || 0) - (a.a || 0)), tot = rs.reduce((s, r) => s + (r.a || 0), 0);
   const comp = rs.filter(r => /^competitive/i.test(r.m || '')).length;
   const ck = contractCheck();
+  if (!rs.length && !S.check.some(inYear)) EMPTY.add('contracts');
   fill('contracts', {
     sub: `${plural(rs.length, 'contract')} ${ck.size || 'over the list size'} approved in ${ylabel()}`,
     kpis: rs.length ? kpi('Awarded', money(tot), plural(rs.length, 'contract')) + kpi('Competitively bid', rs.length ? Math.round(comp / rs.length * 100) + '%' : '—', `${comp} of ${rs.length}`)
@@ -142,6 +145,7 @@ function cra() {
   const spent = counted.filter(p => /^(Spent|Committed)$/.test(p.status)).reduce((s, p) => s + p.amount, 0);
   const planned = counted.filter(p => p.status === 'Budgeted').reduce((s, p) => s + p.amount, 0);
   const top = rs.slice().sort((a, b) => (b.count - a.count) || (b.amount || 0) - (a.amount || 0));
+  if (!rs.length) EMPTY.add('cra');
   fill('cra', {
     sub: `${esc(G.craName)} · ${plural(rs.length, 'record')} in ${ylabel()}`,
     kpis: rs.length ? kpi('Spent or committed', money(spent), 'Payments and awards, each dollar once') + kpi('Budgeted', money(planned), 'Plans, not yet confirmed as paid') + kpi('Records', rs.length, `${new Set(rs.map(p => p.district)).size} district${new Set(rs.map(p => p.district)).size === 1 ? '' : 's'}`) : '',
@@ -158,6 +162,7 @@ const PJNOTE = 'Tracked projects are ones with a hand-reviewed history from budg
 function projects() {
   const a = S.projects.filter(inYear), t = S.salestax.filter(inYear), f = S.fema.filter(inYear);
   if (!S.projects.length && !S.salestax.length && !S.fema.length) return gone('projects');
+  if (!a.length && !t.length && !f.length) EMPTY.add('projects');
   const parts = [];
   if (S.projects.length) {
     const flagged = a.filter(p => (p.flags || []).length);
@@ -182,6 +187,7 @@ function projects() {
 function votes() {
   if (!S.votes.length) return gone('votes');
   const rs = S.votes.filter(inYear).sort((a, b) => (b.d || '').localeCompare(a.d || '')), sp = rs.filter(v => v.x);
+  if (!rs.length) EMPTY.add('votes');
   const card = v => `<li class="fd vt"><span class="vt-meta muted">${esc(v.dn)} · ${esc(VT.cat[v.c] || v.c)}${v.a ? ' · ' + usd(v.a) : ''} · ${esc(v.t)} ${esc(v.o || '')}</span><div class="vt-h">${esc(v.h)}</div>${Object.keys(v.m).length ? `<p class="small">Voted no: ${esc(Object.entries(v.m).filter(([, x]) => x === 'no').map(([n]) => n).join(', ') || 'none recorded')}</p>` : ''}${v.u ? `<a class="src" href="${esc(v.u)}" target="_blank" rel="noopener">${esc(v.ul || 'Minutes')}</a>` : ''}</li>`;
   fill('votes', {
     sub: `${plural(rs.length, 'vote')} recorded in ${ylabel()}`,
@@ -344,6 +350,7 @@ function moneySec() {
   const rev = rs.filter(r => r.basis === 'actual' && r.section === 'revenue' && r.in_total !== false);
   const spent = rs.filter(r => r.basis === 'actual' && r.section === 'spending' && r.in_total !== false);
   const st = (tot || gf || {}).status;
+  if (!tot && !gf && !rev.length && !spent.length && !deps.length && !funds.length) EMPTY.add('money');
   sub.innerHTML = tot || gf ? `FY${fy} ${esc(st && st !== 'adopted' ? st : 'adopted')} budget${tot ? ' ' + money(tot.amount) : ''}${gf ? ' · general fund ' + money(gf.amount) : ''}` : `FY${fy}`;
   const out = [];
   if (!tot && !gf) out.push(`<p class="gx-yr">${gap('adopted budget', fy, yrsWith(BY, r => r.basis === 'adopted' && r.section === 'total'), 'budget')}</p>`);
@@ -397,6 +404,8 @@ function auditSec() {
   lis.forEach(l => l.hidden = +l.dataset.auFy !== fy);
   $$('.au-gov', auBox).forEach(d => { d.hidden = !$$('li[data-au-fy]', d).some(l => !l.hidden); if (!d.hidden) d.open = true; });
   reps.forEach(d => { const t = d.dataset.date; d.hidden = !t || t.slice(0, 7) < fyFrom(fy).slice(0, 7) || t.slice(0, 7) > fyTo(fy).slice(0, 7); });
+  const due = new Date(Date.UTC(+fyTo(fy).slice(0, 4), +fyTo(fy).slice(5, 7) + 9, 1)).toISOString().slice(0, 10);
+  if (!on.length && due <= today) EMPTY.add('audits');
   const n = on.reduce((t, l) => t + $$('.fd', l).length, 0);
   if (sub) sub.textContent = on.length ? `${plural(n, 'finding')} in FY${fy}` : `No FY${fy} audit on file`;
   if (line) { line.hidden = on.length > 0; if (!on.length) line.innerHTML = gap('audit', fy, lis.map(l => +l.dataset.auFy), 'audit'); }
@@ -413,6 +422,7 @@ function meetSec() {
   const by = new Map();
   S.votes.filter(v => v.ys.includes(y)).forEach(v => { const k = v.d + '|' + v.b; const m = by.get(k) || by.set(k, {d: v.d, dn: v.dn, board: (v.ut || '').replace(/ minutes.*$/i, '') || 'Meeting', u: v.u, ul: v.ul, n: 0, x: 0}).get(k); m.n++; if (v.x) m.x++; if (!m.u && v.u) { m.u = v.u; m.ul = v.ul; } });
   const ms = [...by.values()].sort((a, b) => b.d.localeCompare(a.d));
+  if (!ms.length) EMPTY.add('meet');
   h.textContent = `Meetings in ${y}`;
   sub.textContent = ms.length ? `${plural(ms.length, 'meeting')} with votes in the minutes` : '';
   up.hidden = true; yrBox.hidden = false;
@@ -441,23 +451,46 @@ function glance() {
   const ct = money(c.reduce((s, x) => s + (x.a || 0), 0)), cr = money(r.reduce((s, x) => s + (x.amount || 0), 0)), splits = v.filter(x => x.x).length;
   const ck = S.check.filter(inYear), ckGap = ck.filter(r => r.status === 'after_review' || r.status === 'missing').length;
   const ckSub = plural(c.length, 'large contract') + (ckGap ? ` · ${ckGap} still to add` : ck.length ? ` · ${ck.length} votes in minutes` : '');
-  if (S.contracts.length) t.push(['#contracts', 'Contracts awarded', ct, ckSub, 'file', 'blue']);
-  if (G.cra) t.push(['#cra', 'CRA spent or committed', cr, plural(ra.length, 'CRA record'), 'columns', 'teal']);
-  if (S.votes.length) t.push(['#votes', 'Votes recorded', v.length.toLocaleString('en-US'), `${splits} split`, 'vote', 'amber']);
-  if (S.projects.length || S.salestax.length) t.push(['#projects', 'Projects tracked', pr.toLocaleString('en-US'), S.salestax.length ? 'reviewed, change orders, sales tax' : 'reviewed or with change orders', 'crane', 'salmon']);
+  if (S.contracts.length && !EMPTY.has('contracts')) t.push(['#contracts', 'Contracts awarded', ct, ckSub, 'file', 'blue']);
+  if (G.cra && !EMPTY.has('cra')) t.push(['#cra', 'CRA spent or committed', cr, plural(ra.length, 'CRA record'), 'columns', 'teal']);
+  if (S.votes.length && !EMPTY.has('votes')) t.push(['#votes', 'Votes recorded', v.length.toLocaleString('en-US'), `${splits} split`, 'vote', 'amber']);
+  if ((S.projects.length || S.salestax.length) && !EMPTY.has('projects')) t.push(['#projects', 'Projects tracked', pr.toLocaleString('en-US'), S.salestax.length ? 'reviewed, change orders, sales tax' : 'reviewed or with change orders', 'crane', 'salmon']);
   $('#gxGlanceH').textContent = ysel.value === 'all' ? 'Across every year on record' : `In ${ysel.value}`;
   box.innerHTML = t.map(([h, l, v2, s, n, tn]) => `<a class="kpi gx-k" href="${h}">${ico(n, tn)}<span class="eyebrow">${l}</span><span class="v">${v2}</span><span class="s">${s}</span></a>`).join('');
   // the one-line previews in the section tiles follow the year too
   const tip = (id, txt) => { const el = $(`.ui-tiles [data-jump="${id}"] small`); if (el) el.textContent = txt; };
-  if (S.contracts.length) tip('contracts', `${ct} · ${plural(c.length, 'large contract')}`);
+  if (S.contracts.length) tip('contracts', c.length || !ck.length ? `${ct} · ${plural(c.length, 'large contract')}` : `${plural(ck.length, 'contract vote')} in the minutes`);
   if (G.cra) tip('cra', `${cr} spent`);
   if (S.votes.length) tip('votes', `${plural(v.length, 'vote')} · ${splits} split`);
   if (S.projects.length || S.salestax.length) tip('projects', `${pr.toLocaleString('en-US')} tracked`);
   box.closest('section').hidden = !t.length;
 }
 
+/* ---------- the section menu: only sections with something on file for the year ----------
+   A section with nothing for the year picked is left out of the page and the menu, and one line under the menu
+   names what was left out, with a way back to every year. "All years" shows every section that has any records. */
+const tilesBox = $('.ui-tiles'), offNote = (() => {
+  if (!tilesBox) return null;
+  const p = document.createElement('p'); p.className = 'gx-off small muted'; p.hidden = true; p.setAttribute('data-report', 'skip');
+  tilesBox.after(p); return p;
+})();
+function trimMenu() {
+  const off = [];
+  $$('.ui-tiles a[data-jump]').forEach(a => {
+    const id = a.dataset.jump, empty = EMPTY.has(id), h = document.getElementById(id), sec = h && h.closest('section');
+    a.style.display = empty ? 'none' : '';
+    $$(`.ui-mini a[href="#${id}"]`).forEach(m => m.style.display = empty ? 'none' : '');
+    if (sec) sec.style.display = empty ? 'none' : '';
+    if (empty) off.push($('b', a)?.textContent || id);
+  });
+  if (!offNote) return;
+  offNote.hidden = !off.length;
+  offNote.innerHTML = off.length ? `Nothing on file for ${esc(ylabel())} yet: ${esc(off.join(', '))}. <button type="button" class="linkbtn" data-allyears>See all years</button>` : '';
+}
+
 function render() {
-  topCards(); officials(); moneySec(); rateSec(); contracts(); cra(); projects(); votes(); meetSec(); debtSec(); auditSec(); connSec(); glance();
+  EMPTY.clear();
+  topCards(); officials(); moneySec(); rateSec(); contracts(); cra(); projects(); votes(); meetSec(); debtSec(); auditSec(); connSec(); glance(); trimMenu();
   BCM.urlState.set({year: ysel.value});
 }
 ysel.addEventListener('change', () => { pickedYear = true; render(); });

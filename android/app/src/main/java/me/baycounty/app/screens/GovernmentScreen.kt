@@ -330,14 +330,18 @@ private fun CraSection(govID: String, rows: List<DataRow>) {
 private fun RecordsSection(g: Government) {
     val store = LocalStore.current
     val o = rememberOpener()
-    val related = (store.catalog?.datasets ?: emptyList()).filter { it.id !in DatasetSpec.ownScreens && it.column("gov_id") != null }
-    PageSection("Every record", "tray.full", Tone.BLUE, "Each dataset, filtered to ${g.name}.") {
+    val related = store.catalog?.records(g.govID) ?: emptyList()
+    // only datasets with rows for this government; the first few, then the rest behind "All N"
+    var all by rememberSaveable(g.govID) { mutableStateOf(false) }
+    val shown = if (all) related else related.take(6)
+    PageSection("Every record", "tray.full", Tone.BLUE, "${related.size} datasets with records for ${g.name}.") {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             CardList {
-                related.forEachIndexed { i, d ->
+                shown.forEachIndexed { i, d ->
                     RouteRow(Route.Dataset(d.id, mapOf("gov_id" to g.govID)), d.title, symbol = DatasetSpec.forId(d.id).symbol)
-                    if (i < related.lastIndex) RowDivider(50.dp)
+                    if (i < shown.lastIndex) RowDivider(50.dp)
                 }
+                if (related.size > 6) { RowDivider(); ShowMoreRow(all, "All ${related.size} datasets") { all = !all } }
             }
             g.pageURL?.let { url -> LinkLine("Full profile on BayCounty.me", "safari") { o.open(url) } }
         }

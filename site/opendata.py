@@ -464,7 +464,8 @@ def write_downloads(out_dir):
         def col(k):
             c = {'name': k, 'type': typ(k)}
             vals = {r.get(k) for r in rows if isinstance(r.get(k), (str, bool)) and r.get(k) != ''}
-            if c['type'] in ('string', 'boolean') and 0 < len(vals) <= 30 and len(rows) > len(vals):
+            # gov_id always lists the governments that have rows, so the apps can leave a dataset off a government it has nothing for
+            if c['type'] in ('string', 'boolean') and 0 < len(vals) and (k == 'gov_id' or (len(vals) <= 30 and len(rows) > len(vals))):
                 c['values'] = sorted(vals, key=str)
             return c
         catalog.append({'id': did, 'title': title, 'description': desc, 'rows': len(rows), 'columns': [col(k) for k in keys],
