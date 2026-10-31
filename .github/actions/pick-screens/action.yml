@@ -7,17 +7,39 @@ inputs:
     description: A manual run's screens input ("all", "none" or names). Leave empty on pull requests and pushes.
     default: ""
 outputs:
-  ios: {description: iOS screens, light, space-separated, value: "${{ steps.pick.outputs.ios }}"}
-  ios_dark: {description: iOS screens, dark, value: "${{ steps.pick.outputs.ios_dark }}"}
-  ios_charts: {description: iOS screens whose chart is scrolled into view, value: "${{ steps.pick.outputs.ios_charts }}"}
-  android: {description: Android JVM (Paparazzi) screens, comma-separated, value: "${{ steps.pick.outputs.android }}"}
-  android_emu: {description: Android emulator screens, light, value: "${{ steps.pick.outputs.android_emu }}"}
-  android_emu_dark: {description: Android emulator screens, dark, value: "${{ steps.pick.outputs.android_emu_dark }}"}
-  any_ios: {description: true when there is an iOS screen to take, value: "${{ steps.pick.outputs.any_ios }}"}
-  any_android: {description: true when there is an Android screen to take, value: "${{ steps.pick.outputs.any_android }}"}
-  any_android_emu: {description: true when there is an emulator screen to take, value: "${{ steps.pick.outputs.any_android_emu }}"}
-  staff: {description: true when the staff app's screens are wanted, value: "${{ steps.pick.outputs.staff }}"}
-  watch: {description: true when the watch apps' screens are wanted, value: "${{ steps.pick.outputs.watch }}"}
+  ios:
+    description: "iOS screens, light, space-separated"
+    value: "${{ steps.pick.outputs.ios }}"
+  ios_dark:
+    description: "iOS screens, dark"
+    value: "${{ steps.pick.outputs.ios_dark }}"
+  ios_charts:
+    description: "iOS screens whose chart is scrolled into view"
+    value: "${{ steps.pick.outputs.ios_charts }}"
+  android:
+    description: "Android JVM (Paparazzi) screens, comma-separated"
+    value: "${{ steps.pick.outputs.android }}"
+  android_emu:
+    description: "Android emulator screens, light"
+    value: "${{ steps.pick.outputs.android_emu }}"
+  android_emu_dark:
+    description: "Android emulator screens, dark"
+    value: "${{ steps.pick.outputs.android_emu_dark }}"
+  any_ios:
+    description: "true when there is an iOS screen to take"
+    value: "${{ steps.pick.outputs.any_ios }}"
+  any_android:
+    description: "true when there is an Android screen to take"
+    value: "${{ steps.pick.outputs.any_android }}"
+  any_android_emu:
+    description: "true when there is an emulator screen to take"
+    value: "${{ steps.pick.outputs.any_android_emu }}"
+  staff:
+    description: "true when the staff app's screens are wanted"
+    value: "${{ steps.pick.outputs.staff }}"
+  watch:
+    description: "true when the watch apps' screens are wanted"
+    value: "${{ steps.pick.outputs.watch }}"
 runs:
   using: composite
   steps:
