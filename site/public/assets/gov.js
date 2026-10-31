@@ -30,8 +30,15 @@ const termsFor = async () => {
   const f = await get('/downloads/officeholder-terms.json');
   return (Array.isArray(f) ? f : []).filter(r => r.gov_id === K);
 };
-const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor()]);
+// every budget line for each fiscal year (budget-years): adopted funds and departments, audited revenue and spending
+const budgetFor = async () => {
+  const api = await get(`/api/v1/datasets/budget-years?gov_id=${encodeURIComponent(K)}&limit=1000`);
+  if (api && Array.isArray(api.data)) return api.data;
+  const f = await get('/downloads/budget-years.json');
+  return Array.isArray(f) ? f.filter(r => r.gov_id === K) : null;
+};
+const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr, BYr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor(), budgetFor()]);
 const OH = (OHr || []).slice().sort((a, b) => a.seat_order - b.seat_order || a.term_order - b.term_order);
 const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
@@ -164,12 +171,18 @@ const topKpi = (l, v, s = '', no = false) => { const [n, t] = KPI_ICON[l] || ['g
   return `<div class="kpi ui-k${no ? ' kpi-none' : ''}"><span class="kh">${ico(n, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>`; };
 const topBox = $('#gxTop'), keep = topBox ? $$('[data-static]', topBox).map(x => x.outerHTML).join('') : '';
 const curFY = (() => { const d = new Date(), st = G.fyStart || 10; return d.getMonth() + 1 >= st ? d.getFullYear() + 1 : d.getFullYear(); })();
+// the fiscal year the top cards and the other fiscal-year sections (budget, tax rate, debt, audits) show.
+// They open on the current fiscal year; the picker's own default is the newest year with dated records (a calendar year),
+// so only a choice the visitor makes (or ?year= in the link) moves them. "All years" shows the current fiscal year.
+const GYby = Object.fromEntries(GY.map(r => [r.fiscal_year, r]));
+function pickFY() {
+  let fy = ysel.value === 'all' || !(pickedYear || new URLSearchParams(location.search).get('year')) ? curFY : +ysel.value;
+  if (ysel.value === 'all' && !GYby[fy] && GY.length) fy = GY[GY.length - 1].fiscal_year;
+  return fy;
+}
 function topCards() {
   if (!topBox || !GY.length) return;
-  const by = Object.fromEntries(GY.map(r => [r.fiscal_year, r]));
-  // the cards open on the current fiscal year; the picker's own default is the newest year with dated records (a calendar year), so only a choice the visitor makes (or ?year= in the link) moves them
-  let fy = ysel.value === 'all' || !(pickedYear || new URLSearchParams(location.search).get('year')) ? curFY : +ysel.value;
-  if (ysel.value === 'all' && !by[fy]) fy = GY[GY.length - 1].fiscal_year;
+  const by = GYby, fy = pickFY();
   const r = by[fy] || {}, prev = by[fy - 1] || {}, has = k => GY.some(x => x[k] != null), schools = K === 'schools';
   const none = (l, why) => topKpi(l, 'No data', why, true);
   const kpi = topKpi;
@@ -247,6 +260,145 @@ function officials() {
     + `<a href="/open-data#officeholder-terms">Every term, with its source</a>`;
 }
 
+/* ---------- the sections drawn at build for today, redrawn here for the year picked ----------
+   Budget, tax rate, debt and audits follow the fiscal year of the top cards; meetings and connections follow the
+   calendar year, like contracts and votes. A year with no record says so, names the nearest years we have and why. */
+const BY = Array.isArray(BYr) ? BYr : null;
+const today = new Date().toISOString().slice(0, 10);
+// a fiscal year's first and last day (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun)
+const fyFrom = y => `${y - 1}-${pad2(G.fyStart || 10)}-01`, fyTo = y => new Date(Date.UTC(y, (G.fyStart || 10) - 1, 0)).toISOString().slice(0, 10);
+const fyBtn = y => `<button type="button" class="linkbtn" data-fy="${y}">FY${y}</button>`;
+const poss = n => /s$/.test(n) ? n + "'" : n + "'s";
+const ask = `<a href="/records-request?gov=${K}">Ask ${esc(G.short)} for it</a>`;
+// "No FY2019 audit on file. Nearest we have: FY2023. Why …" (kind: 'audit' for audited figures, 'budget' for adopted ones)
+function gap(what, y, have, kind) {
+  have = [...new Set(have)].sort((a, b) => a - b);
+  const before = have.filter(x => x < y).pop(), after = have.find(x => x > y);
+  const near = before && after ? `Nearest we have: ${fyBtn(before)} and ${fyBtn(after)}.` : before ? `Latest we have: ${fyBtn(before)}.` : after ? `Earliest we have: ${fyBtn(after)}.` : '';
+  let why;
+  if (!have.length) why = `We have no ${what} for ${esc(G.short)} in any year yet. ${ask}.`;
+  else if (kind === 'audit' && fyTo(y) >= today) why = `FY${y} runs to ${nice(fyTo(y))}; audited figures come only after the year ends.`;
+  else if (kind === 'audit' && y > have[have.length - 1]) why = `Florida gives governments nine months after the year ends to file the audit with the state, and the FY${y} one isn't on file here yet.`;
+  // the state Auditor General posts the last five years of audits; older ones only the government has
+  else if (kind === 'audit' && y < have[0] && y > have[have.length - 1] - 5) why = `We haven't read it in yet; it is among the last five years of audits the state Auditor General posts online.`;
+  else if (kind === 'audit' && y < have[0]) why = `The state Auditor General posts only the last five years of audits; older ones have to come from ${esc(G.short)}. ${ask}.`;
+  else if (kind === 'budget' && fyFrom(y) > today) why = `FY${y} hasn't started; ${esc(G.short)} adopts each budget in September.`;
+  else if (kind === 'budget' && y < (have[0] || 9999)) why = `Not in ${esc(poss(G.short))} budget documents online or the state audit reports we have. ${ask}.`;
+  else why = `Not in the records we have found yet. ${ask}.`;
+  return `<span class="gx-gap"><b>No FY${y} ${what} on file.</b> ${near} ${why}</span>`;
+}
+const yrsWith = (rs, f) => [...new Set(rs.filter(f).map(r => r.fiscal_year))];
+const bars = (items, color = 'var(--s1)', max = 10) => {
+  let xs = items.filter(x => x.amount > 0).sort((a, b) => b.amount - a.amount);
+  if (!xs.length) return '';
+  // a long list keeps its largest lines and adds up the rest in one bar
+  if (xs.length > max + 1) { const rest = xs.slice(max); xs = [...xs.slice(0, max), {name: `${rest.length} more`, amount: rest.reduce((t, x) => t + x.amount, 0)}]; }
+  const mx = xs[0].amount;
+  return '<div class="hbars">' + xs.map(x => `<div class="hb"><span class="hb-n">${esc(x.name)}</span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(.5, x.amount / mx * 100).toFixed(1)}%;background:${color}"></span></span><span class="hb-v">${money(x.amount)}</span></div>`).join('') + '</div>';
+};
+
+// Money in, money out: the build draws the budget it has in full (G.budgetFY); any other year comes from budget-years
+const moneyBox = $('#money')?.closest('section');
+const money0 = moneyBox && {sub: $('[data-money-sub]', moneyBox)?.innerHTML, body: $('[data-money-body]', moneyBox)?.innerHTML, src: $('[data-money-src]', moneyBox)?.innerHTML};
+function moneySec() {
+  if (!moneyBox || !money0.body) return;
+  const fy = pickFY(), sub = $('[data-money-sub]', moneyBox), body = $('[data-money-body]', moneyBox), srcBox = $('[data-money-src]', moneyBox);
+  if (fy === G.budgetFY || !BY) { sub.innerHTML = money0.sub; body.innerHTML = money0.body; srcBox.innerHTML = money0.src; return; }
+  const rs = BY.filter(r => r.fiscal_year === fy);
+  const line = k => rs.find(r => r.basis === 'adopted' && r.line_key === k);
+  const tot = line('total'), gf = line('general_fund');
+  const funds = rs.filter(r => r.section === 'fund'), deps = rs.filter(r => r.section === 'department');
+  const rev = rs.filter(r => r.basis === 'actual' && r.section === 'revenue' && r.in_total !== false);
+  const spent = rs.filter(r => r.basis === 'actual' && r.section === 'spending' && r.in_total !== false);
+  const st = (tot || gf || {}).status;
+  sub.innerHTML = tot || gf ? `FY${fy} ${esc(st && st !== 'adopted' ? st : 'adopted')} budget${tot ? ' ' + money(tot.amount) : ''}${gf ? ' · general fund ' + money(gf.amount) : ''}` : `FY${fy}`;
+  const out = [];
+  if (!tot && !gf) out.push(`<p class="gx-yr">${gap('adopted budget', fy, yrsWith(BY, r => r.basis === 'adopted' && r.section === 'total'), 'budget')}</p>`);
+  const left = rev.length ? `<h3 class="h4">Where the money came from</h3><p class="small muted">Audited, all funds, FY${fy}</p>${bars(rev.map(r => ({name: r.name, amount: r.amount})), 'var(--s3)')}`
+    : `<h3 class="h4">Where the money came from</h3><p class="small">${gap('audited revenue', fy, yrsWith(BY, r => r.basis === 'actual' && r.section === 'revenue'), 'audit')}</p>`;
+  const right = deps.length ? `<h3 class="h4">What the general fund pays for</h3><p class="small muted">Adopted FY${fy} budget, by department</p>${bars(deps.map(r => ({name: r.name, amount: r.amount})))}`
+    : spent.length ? `<h3 class="h4">What it spent the money on</h3><p class="small muted">Audited, all funds, FY${fy}, by service (the FY${fy} budget isn't broken out by department here)</p>${bars(spent.map(r => ({name: r.name, amount: r.amount})))}`
+    : `<h3 class="h4">What the general fund pays for</h3><p class="small">${gap('budget by department', fy, yrsWith(BY, r => r.section === 'department' || (r.basis === 'actual' && r.section === 'spending')), 'budget')}</p>`;
+  out.push(`<div class="two"><div>${left}</div><div>${right}</div></div>`);
+  if (funds.length) out.push(`<details class="tbl-toggle be-full"><summary>The whole FY${fy} budget, fund by fund</summary>${bars(funds.map(r => ({name: r.name, amount: r.amount})))}
+    <p class="note small">Funds are separate accounts: money raised for one purpose can only be spent on it. When one fund pays another, both show it, so totals count some money twice.</p></details>`);
+  body.innerHTML = out.join('');
+  // one link per kind of record: the adopted budget and the audited figures
+  const srcs = new Map();
+  rs.filter(r => r.source_url).forEach(r => { const t = r.basis === 'actual' ? `FY${fy} audited figures` : `FY${fy} budget`; if (!srcs.has(t)) srcs.set(t, r.source_url); });
+  srcBox.innerHTML = [...srcs].map(([t, u]) => `<a class="src" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(' · ') || `FY${fy}`;
+}
+
+// Property tax rate: the year's rate in words, its bar marked
+const rateBox = $('#rate')?.closest('section');
+function rateSec() {
+  if (!rateBox) return;
+  const line = $('[data-rate-yr]', rateBox); $$('.hb[data-ty]', rateBox).forEach(b => b.classList.remove('on'));
+  if (ysel.value === 'all' || !line) { if (line) line.hidden = true; return; }
+  const fy = pickFY(), r = GYby[fy] || {}, ty = r.tax_year || fy - 1;
+  line.hidden = false;
+  if (r.millage == null) { line.innerHTML = gap('tax rate', fy, GY.filter(x => x.millage != null).map(x => x.fiscal_year), 'budget'); return; }
+  const bar = $(`.hb[data-ty="${ty}"]`, rateBox); if (bar) bar.classList.add('on');
+  line.innerHTML = !r.millage ? `<b>FY${fy}: no city property tax.</b>`
+    : `<b>FY${fy}: ${+r.millage} mills</b>, set in tax year ${ty} ($${Math.round(r.millage * 100).toLocaleString('en-US')} per $100,000 of taxable value)${bar ? '; its bar is marked below' : ''}.`;
+}
+
+// Debt: the audited total at the end of the year picked; the detail below stays the latest audit and says so
+const debtBox = $('#debt')?.closest('section');
+function debtSec() {
+  const line = debtBox && $('[data-debt-yr]', debtBox); if (!line) return;
+  if (ysel.value === 'all') { line.hidden = true; return; }
+  const fy = pickFY(), r = GYby[fy] || {}, ys = GY.filter(x => x.debt_total).map(x => x.fiscal_year), last = ys[ys.length - 1];
+  const rest = last && last !== fy ? ` The details below are from the FY${last} audit, the latest we have.` : '';
+  line.hidden = false;
+  line.innerHTML = r.debt_total ? `<b>End of FY${fy}: ${money(r.debt_total)} owed</b>, from that year's audit.${src(r.debt_source_url)}${rest}` : gap('audited debt total', fy, ys, 'audit') + rest;
+}
+
+// Audits: only the year picked (its report, opinion and findings); "All years" shows every one
+const auBox = $('#audits')?.closest('section'), au0 = auBox && $('[data-au-sub]', auBox)?.textContent;
+function auditSec() {
+  if (!auBox) return;
+  const line = $('[data-au-yr]', auBox), sub = $('[data-au-sub]', auBox), lis = $$('li[data-au-fy]', auBox), reps = $$('details[data-date]', auBox);
+  if (ysel.value === 'all') { lis.forEach(l => l.hidden = false); reps.forEach(d => d.hidden = false); $$('.au-gov', auBox).forEach(d => d.hidden = false); if (line) line.hidden = true; if (sub) sub.textContent = au0; return; }
+  const fy = pickFY(), on = lis.filter(l => +l.dataset.auFy === fy);
+  lis.forEach(l => l.hidden = +l.dataset.auFy !== fy);
+  $$('.au-gov', auBox).forEach(d => { d.hidden = !$$('li[data-au-fy]', d).some(l => !l.hidden); if (!d.hidden) d.open = true; });
+  reps.forEach(d => { const t = d.dataset.date; d.hidden = !t || t.slice(0, 7) < fyFrom(fy).slice(0, 7) || t.slice(0, 7) > fyTo(fy).slice(0, 7); });
+  const n = on.reduce((t, l) => t + $$('.fd', l).length, 0);
+  if (sub) sub.textContent = on.length ? `${plural(n, 'finding')} in FY${fy}` : `No FY${fy} audit on file`;
+  if (line) { line.hidden = on.length > 0; if (!on.length) line.innerHTML = gap('audit', fy, lis.map(l => +l.dataset.auFy), 'audit'); }
+}
+
+// Meetings: upcoming ones for this year or "All years"; for a past year, the meetings held that year, from the minutes we read
+const meetBox = $('#meet')?.closest('section');
+const meet0 = meetBox && {h: $('[data-meet-h]', meetBox).textContent, sub: $('[data-meet-sub]', meetBox).textContent};
+function meetSec() {
+  if (!meetBox) return;
+  const up = $('[data-meet-up]', meetBox), yrBox = $('[data-meet-yr]', meetBox), h = $('[data-meet-h]', meetBox), sub = $('[data-meet-sub]', meetBox);
+  const y = +ysel.value;
+  if (ysel.value === 'all' || y >= new Date().getFullYear()) { up.hidden = false; yrBox.hidden = true; h.textContent = meet0.h; sub.textContent = meet0.sub; return; }
+  const by = new Map();
+  S.votes.filter(v => v.ys.includes(y)).forEach(v => { const k = v.d + '|' + v.b; const m = by.get(k) || by.set(k, {d: v.d, dn: v.dn, board: (v.ut || '').replace(/ minutes.*$/i, '') || 'Meeting', u: v.u, ul: v.ul, n: 0, x: 0}).get(k); m.n++; if (v.x) m.x++; if (!m.u && v.u) { m.u = v.u; m.ul = v.ul; } });
+  const ms = [...by.values()].sort((a, b) => b.d.localeCompare(a.d));
+  h.textContent = `Meetings in ${y}`;
+  sub.textContent = ms.length ? `${plural(ms.length, 'meeting')} with votes in the minutes` : '';
+  up.hidden = true; yrBox.hidden = false;
+  yrBox.innerHTML = ms.length ? table(['Date', 'Board', 'Votes', 'Minutes'], ms.map(m => `<td class="nowrap">${esc(m.dn || nice(m.d))}</td><td class="wrap">${esc(m.board)}</td><td class="num">${m.n}${m.x ? ` <span class="muted small">(${m.x} split)</span>` : ''}</td><td>${m.u ? `<a class="src" href="${esc(m.u)}" target="_blank" rel="noopener">${esc(m.ul || 'Minutes')}</a>` : ''}</td>`), 10)
+    + `<p class="small"><a href="${dash('/public-money/votes', `&g=${K}`)}#all">Every vote from these meetings</a></p>`
+    : `<p class="muted"><b>No meeting minutes from ${y} read yet.</b> We are reading every board's minutes back to 2016; <a href="/data-sources#progress">see how far along each one is</a>.</p>`;
+  $$('.gx-more', yrBox).forEach(b => b.onclick = () => { $$('tr[data-more]', yrBox).forEach(t => t.hidden = false); b.remove(); });
+}
+
+// Connections: tell the network and list (profile.js) which calendar year to show
+const connBox = $('#pf'), conn0 = connBox && $('.sec-hd .muted', connBox)?.textContent;
+function connSec() {
+  if (!connBox) return;
+  const y = ysel.value === 'all' ? null : +ysel.value;
+  window.BCYEAR = y;
+  dispatchEvent(new CustomEvent('bc:year', {detail: y}));
+  const s = $('.sec-hd .muted', connBox); if (s) s.textContent = y ? `Payments, campaign gifts, votes and service on record in ${y}` : conn0;
+}
+
 /* ---------- "this year" strip at the top ---------- */
 function glance() {
   const box = $('#gxGlance'); if (!box) return;
@@ -270,14 +422,15 @@ function glance() {
 }
 
 function render() {
-  topCards(); officials(); contracts(); cra(); projects(); votes(); glance();
+  topCards(); officials(); moneySec(); rateSec(); contracts(); cra(); projects(); votes(); meetSec(); debtSec(); auditSec(); connSec(); glance();
   BCM.urlState.set({year: ysel.value});
 }
 ysel.addEventListener('change', () => { pickedYear = true; render(); });
 document.addEventListener('click', e => {
   if (e.target.closest('[data-allyears]')) { ysel.value = 'all'; render(); }
   const f = e.target.closest('[data-fy]');
-  if (f && [...ysel.options].some(o => o.value === f.dataset.fy)) { ysel.value = f.dataset.fy; render(); }
+  // a year named in a "no data" note moves the whole page to it, cards included
+  if (f && [...ysel.options].some(o => o.value === f.dataset.fy)) { e.preventDefault(); pickedYear = true; ysel.value = f.dataset.fy; render(); }
 });
 render();
 
