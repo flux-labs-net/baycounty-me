@@ -464,7 +464,7 @@ enum class PeopleEra(val label: String) {
 enum class PeopleKind(val key: String, val label: String) {
     EVERYONE("everyone", "Everyone"),
     ELECTED("elected", "Elected"),
-    CANDIDATE("candidate", "2026 candidates"),
+    CANDIDATE("candidate", "Candidates"),
     STAFF("staff", "Department leaders"),
     PAST("past", "Past candidates");
 

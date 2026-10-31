@@ -1,6 +1,6 @@
 (() => {
 const D = __TAX__;
-const L = D.years.length - 1;
+const L = D.years.length - 1, LV = D.levyYear;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const GN = Object.fromEntries(D.groups);
@@ -103,19 +103,19 @@ if (['v', 'd', 'h'].some(k => P0.has(k))) { saveUrl(readVal()); if (!location.ha
 (() => {
   const tot = D.bars.reduce((a, b) => a + b.v, 0), max = D.bars[0].v, el = $('allBars');
   el.innerHTML = D.bars.map((b, i) => `<div class="hb" tabindex="0" data-tip="${i}"><span class="hb-n"><i class="dot" style="background:${col(b.g)}"></i>${esc(b.n)}</span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(.4, b.v / max * 100)}%;background:${col(b.g)}"></span></span><span class="hb-v">${big(b.v)} <em>${pct(b.v / tot)}</em></span></div>`).join('');
-  bindTips(el, i => { const b = D.bars[i]; return `<b>${esc(b.n)}</b><br>${usd(b.v)} levied in ${D.fy[L]}<br>${pct(b.v / tot)} of all property tax`; });
+  bindTips(el, i => { const b = D.bars[i]; return `<b>${esc(b.n)}</b><br>${usd(b.v)} levied in ${D.fy[LV]}<br>${pct(b.v / tot)} of all property tax`; });
 })();
 
 /* ---------- six-year levy trend (stacked) ---------- */
 (() => {
-  const gs = D.groups.map(([g]) => g);
-  const tots = D.years.map((_, i) => gs.reduce((a, g) => a + (D.levy[g][i] || 0), 0)), max = Math.max(...tots);
+  const gs = D.groups.map(([g]) => g), YL = D.years.slice(0, LV + 1);
+  const tots = YL.map((_, i) => gs.reduce((a, g) => a + (D.levy[g][i] || 0), 0)), max = Math.max(...tots);
   const el = $('levyTrend');
-  el.innerHTML = D.years.map((_, i) => `<div class="vb" tabindex="0" data-tip="${i}"><span class="vb-v">${big(tots[i])}</span><span class="vb-stack" style="height:${tots[i] / max * 100}%">${gs.slice().reverse().map(g => D.levy[g][i] ? `<span style="flex:${D.levy[g][i]} 1 0;background:${col(g)}"></span>` : '').join('')}</span><span class="vb-x">${D.fy[i]}</span></div>`).join('');
+  el.innerHTML = YL.map((_, i) => `<div class="vb" tabindex="0" data-tip="${i}"><span class="vb-v">${big(tots[i])}</span><span class="vb-stack" style="height:${tots[i] / max * 100}%">${gs.slice().reverse().map(g => D.levy[g][i] ? `<span style="flex:${D.levy[g][i]} 1 0;background:${col(g)}"></span>` : '').join('')}</span><span class="vb-x">${D.fy[i]}</span></div>`).join('');
   bindTips(el, i => `<b>${D.fy[i]}</b> · ${big(tots[i])} levied` + gs.map(g => `<span class="tt-row"><i style="background:${col(g)}"></i>${esc(g === 'city' ? 'Cities' : GN[g])} <b>${big(D.levy[g][i])}</b></span>`).join(''));
-  $('levyLeg').innerHTML = gs.map(g => `<li><i style="background:${col(g)}"></i><span>${esc(g === 'city' ? 'Cities' : GN[g])}</span><b>${big(D.levy[g][L])}</b></li>`).join('');
-  $('levyTable').innerHTML = `<thead><tr><th scope="col">Who receives it</th>${D.fy.map(f => `<th scope="col" class="num">${f}</th>`).join('')}</tr></thead><tbody>` +
-    gs.map(g => `<tr><th scope="row"><i class="dot" style="background:${col(g)}"></i>${esc(g === 'city' ? 'Cities' : GN[g])}</th>${D.levy[g].map(v => `<td class="num">${big(v)}</td>`).join('')}</tr>`).join('') +
+  $('levyLeg').innerHTML = gs.map(g => `<li><i style="background:${col(g)}"></i><span>${esc(g === 'city' ? 'Cities' : GN[g])}</span><b>${big(D.levy[g][LV])}</b></li>`).join('');
+  $('levyTable').innerHTML = `<thead><tr><th scope="col">Who receives it</th>${D.fy.slice(0, LV + 1).map(f => `<th scope="col" class="num">${f}</th>`).join('')}</tr></thead><tbody>` +
+    gs.map(g => `<tr><th scope="row"><i class="dot" style="background:${col(g)}"></i>${esc(g === 'city' ? 'Cities' : GN[g])}</th>${D.levy[g].slice(0, LV + 1).map(v => `<td class="num">${big(v)}</td>`).join('')}</tr>`).join('') +
     `</tbody><tfoot><tr><th scope="row">Total</th>${tots.map(v => `<td class="num">${big(v)}</td>`).join('')}</tr></tfoot>`;
   $('rateTable').innerHTML = `<thead><tr><th scope="col">Area</th>${D.fy.map(f => `<th scope="col" class="num">${f}</th>`).join('')}</tr></thead><tbody>` +
     D.districts.map(d => `<tr><th scope="row">${esc(d.label)}</th>${d.total.map((m, i) => `<td class="num${i && m > d.total[i - 1] + 1e-6 ? ' up' : i && m < d.total[i - 1] - 1e-6 ? ' down' : ''}">${mills4(m)}</td>`).join('')}</tr>`).join('') + '</tbody>';

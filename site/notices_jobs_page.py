@@ -203,7 +203,7 @@ def jobs_page():
         return '<div class="page"><h1>Government jobs</h1><p>No job boards on file for this place yet.</p></div>'
     govs = _govs()
     today = dt.date.today()
-    week = (today - dt.timedelta(days=7)).isoformat()
+    week = (today - dt.timedelta(days=6)).isoformat()  # today and the six days before: seven days
 
     def ty(r):
         t = (r.get('job_type') or '').lower()
@@ -211,8 +211,8 @@ def jobs_page():
     rows = sorted(rows, key=lambda r: (r.get('posted') or '0000', r['title']), reverse=True)
     data = {'gh': _gov_hrefs(), 'rows': [{'t': r['title'], 'e': r['employer'], 'g': r['gov_id'], 'dp': r['department'], 'jt': r['job_type'], 'ty': ty(r), 'pay': r['pay'],
                       'po': r['posted'], 'cl': r['closes'], 'u': r['url']} for r in rows]}
-    new = sum(1 for r in rows if (r.get('posted') or r.get('first_seen') or '') >= week)
-    closing = sum(1 for r in rows if r.get('closes') and r['closes'] <= (today + dt.timedelta(days=7)).isoformat())
+    new = sum(1 for r in rows if (r.get('posted') or '') >= week)  # only a posted date counts: a board's first scrape day says nothing about when a job went up
+    closing = sum(1 for r in rows if r.get('closes') and today.isoformat() <= r['closes'] <= (today + dt.timedelta(days=6)).isoformat())
     read = [b for b in boards if b['read']]
     board_cards = ''.join(
         f'<div class="nj-board"><b>{gov_link(b["gov_id"], b["employer"]) if b["gov_id"] else e(b["employer"])}</b>'
@@ -220,7 +220,7 @@ def jobs_page():
         f'<small><a href="{e(b["url"])}" target="_blank" rel="noopener">{"All openings and how to apply" if b["read"] else "Its job page"}</a></small></div>' for b in boards)
     kpis = (_kpi('Open jobs', len(rows), f'At {len({r["employer"] for r in rows})} public employers') +
             _kpi('New this week', new, 'Posted in the last 7 days') +
-            _kpi('Closing soon', closing, 'Closing date in the next 7 days') +
+            _kpi('Closing soon', closing, 'Closing in the next 7 days') +
             _kpi('Job boards read', f'{len(read)} of {len(boards)}', 'The rest link to the employer'))
     chips = '<button type="button" class="chip" data-v="full" aria-pressed="false">Full time</button><button type="button" class="chip" data-v="part" aria-pressed="false">Part time, temporary or substitute</button>'
     return f'''<style>{CSS}</style>

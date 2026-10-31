@@ -120,7 +120,7 @@ def person_page(pid):
     tally = Counter(str(r.get('vote')).lower() for r in mv)
     raised = next((r['total_raised'] for r in cand if r.get('total_raised')), None) or next((r['total_raised'] for r in fin if r.get('total_raised')), None) or next((r['total_raised'] for r in hist if r.get('total_raised')), None)
     sal = next((r.get('annual') or r.get('salary') for r in pay if (r.get('annual') or r.get('salary'))), None)
-    kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'money votes on file') if mv else '',
+    kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'votes on file') if mv else '',
                   kpi('Campaign raised', money(raised), 'most recent campaign on file') if raised else '',
                   kpi('From businesses and groups', money(sum(l['amount'] or 0 for l, _ in gifts)), f'{len(gifts)} donors named on this page') if gifts else '',
                   kpi('From business owners', money(sum(l['amount'] or 0 for l, _ in owner_gifts)), f'{len(owner_gifts)} people who run a business, named') if owner_gifts else '',
@@ -190,7 +190,7 @@ def person_page(pid):
     # recent votes
     if mv:
         rv = ''.join(vote_card(r) for r in mv[:12])
-        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} money votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
     if pay:
         pr = ''.join(f'<li>{e(r.get("title"))}{", " + e(r.get("employer") or r.get("government")) if (r.get("employer") or r.get("government")) else ""}: {money(r.get("annual") or r.get("salary"))} ({e(r.get("year") or r.get("fiscal_year") or r.get("as_of") or "")}) <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>' for r in pay)
         secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="pay">Pay</h2><span class="muted">Elected officials and department leaders only</span></div><ul class="plain">{pr}</ul></section>'
@@ -227,9 +227,13 @@ def link_name_vendor(name):
 def _kinds(p):
     """elected / candidate / staff, from where each role came from (a person can be several)."""
     ks = []
+    ballot = EG.on_ballot_ids()
     for r in p.get('roles') or []:
         src, role = r.get('source'), (r.get('role') or '').lower()
         if src == 'candidates_2026' or role.startswith('2026 candidate'):
+            # a 2026 filer is a candidate only while on the Nov 3 ballot; withdrawn, defeated and already-elected filers are not
+            ks.append('candidate' if p.get('id') in ballot else 'past')
+        elif role.startswith('2027 candidate'):
             ks.append('candidate')
         elif src in ('votes', 'officials-pay', 'campaign') and not role.startswith('former'):
             ks.append('elected')
@@ -237,6 +241,17 @@ def _kinds(p):
             ks.append('staff')
         elif src == 'campaign_history':
             ks.append('past')
+    # who holds a seat or job today comes from the entity graph's label (officeholder terms), not from every record that names
+    # them: a vote record, pay row or old campaign filing also exists for former officials and appointed managers
+    label = (EG.build().ents.get('person:' + p.get('id', '')) or {}).get('label')
+    if label == 'Elected official':
+        ks = [k for k in ks if k != 'staff'] + ['elected']
+    elif label == 'Department leader':
+        ks = [k for k in ks if k != 'elected'] + ['staff']
+    elif label in ('Former official', 'Past candidate'):
+        ks = [k for k in ks if k not in ('elected', 'staff')] + ['past']
+    elif label == 'Candidate':
+        ks = [k for k in ks if k != 'elected']
     if 'elected' in ks:
         ks = [k for k in ks if k != 'staff']  # an official's pay row is not a staff job
     if 'past' in ks and ({'elected', 'candidate'} & set(ks)):
@@ -315,6 +330,7 @@ def people_index():
     from ui import dir_card, directory, ico, avatar, tone_of, photo_of
     G = EG.build()
     cards, kinds, govs = [], Counter(), {}
+    elected_govs = set()  # the boards and offices the current elected officials sit on
     total_links = 0
     order = directory_order()
     gname = lambda g: (G.ents.get('gov:' + g) or {}).get('name') or 'Other offices'
@@ -326,6 +342,8 @@ def people_index():
         ks = _kinds(p)
         kinds.update(ks)
         gids = [g for g in (p.get('gov_ids') or []) if g]
+        if 'elected' in ks:
+            elected_govs.update(gids)
         for g in gids:
             if 'gov:' + g in G.ents:
                 govs[g] = G.ents['gov:' + g]['name']
@@ -343,7 +361,7 @@ def people_index():
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
     <p class="lede">One page for each elected official, department leader and local candidate since 2016 in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to. Below: the five countywide officers and what top officials are paid.</p></div>
     <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
-  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "On the Nov 3 ballot", on_ballot, f'Candidates in {races} local race{"s" if races != 1 else ""}')}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
+  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(elected_govs)} boards and offices")}{k("flag", "salmon", "On the Nov 3 ballot", on_ballot, f'Candidates in {races} local race{"s" if races != 1 else ""}')}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Links in the records", f"{total_links:,}", "Companies, donors, boards and votes, counted once per link")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
     {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')), statuses=(('', 'Current and past'), ('current', 'Current only'), ('past', 'Past only')))}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>

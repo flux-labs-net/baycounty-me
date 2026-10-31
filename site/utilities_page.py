@@ -333,13 +333,15 @@ def utilities_page(out_dir):
     bill_rows = ''.join(f'<tr><th scope="row">{link("gov:" + r["area"], r["area_name"])}</th><td>{e(r["provider"])}<small>{e(r.get("notes") or "")}</small></td>'
                         f'<td class="n">${r["amount"]:,.2f}</td></tr>' for r in bills)
 
+    # the tile is the water-and-sewer line of each area: the rows above also hold whole bills with garbage, and small add-ons ($3 stormwater)
+    ws = sorted((r for r in bills if (r.get('charge') or '').endswith('water and sewer') and r['amount']), key=lambda r: r['amount'])
     n_prov = len({r['provider'] for r in P if r.get('entity_id')})
     n_map = len({r['area'] for r in T if r.get('lookup_layer')})
     k = lambda lab, v, s: f'<div class="kpi"><span class="eyebrow">{lab}</span><span class="v">{v}</span><span class="s">{s}</span></div>'
     kpis = (k('Areas', len(order), 'Seven cities and the unincorporated county') +
             k('Providers', n_prov, 'Cities, utilities and haulers, each with a profile') +
             k('Pickup maps', n_map, 'Cities whose route maps give your day by address') +
-            (k('Typical water bill', f'${bills[0]["amount"]:.0f}–${bills[-1]["amount"]:.0f}', 'Water and sewer at 5,000 gallons a month') if bills else ''))
+            (k('Typical water bill', f'${ws[0]["amount"]:.0f}–${ws[-1]["amount"]:.0f}', f'Water and sewer only, at 5,000 gallons a month, across {len(ws)} areas') if ws else ''))
     as_of = P[0].get('as_of') or ''
 
     return f'''<link rel="stylesheet" href="/assets/utilities.css">

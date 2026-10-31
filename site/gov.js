@@ -47,6 +47,7 @@ S.votes = (VT?.votes || []).filter(v => v.g === K).map(v => ({...v, ys: [yr(v.d)
 
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
+let pickedYear = false;
 const allYs = [...Object.values(S).flatMap(rs => rs.flatMap(r => r.ys)), ...GY.map(r => r.fiscal_year)];
 // every fiscal year the officeholder terms cover is pickable too, so each year back to the site's first year (2016) shows who was in office
 const ohYs = OH.length ? Array.from({length: new Date().getFullYear() - TT.FIRST_YEAR + 1}, (_, i) => TT.FIRST_YEAR + i) : [];
@@ -166,7 +167,8 @@ const curFY = (() => { const d = new Date(), st = G.fyStart || 10; return d.getM
 function topCards() {
   if (!topBox || !GY.length) return;
   const by = Object.fromEntries(GY.map(r => [r.fiscal_year, r]));
-  let fy = ysel.value === 'all' ? curFY : +ysel.value;
+  // the cards open on the current fiscal year; the picker's own default is the newest year with dated records (a calendar year), so only a choice the visitor makes (or ?year= in the link) moves them
+  let fy = ysel.value === 'all' || !(pickedYear || new URLSearchParams(location.search).get('year')) ? curFY : +ysel.value;
   if (ysel.value === 'all' && !by[fy]) fy = GY[GY.length - 1].fiscal_year;
   const r = by[fy] || {}, prev = by[fy - 1] || {}, has = k => GY.some(x => x[k] != null), schools = K === 'schools';
   const none = (l, why) => topKpi(l, 'No data', why, true);
@@ -176,7 +178,8 @@ function topCards() {
   if (r.budget_total) {
     const bits = [`FY${fy} · ${esc(r.budget_status || 'adopted')}`];
     if (r.budget_per_resident) bits.push(`${usd(r.budget_per_resident)} per resident`);
-    if (prev.budget_total) { const ch = (r.budget_total / prev.budget_total - 1) * 100; bits.push(`${ch >= 0 ? 'up' : 'down'} ${Math.abs(ch).toFixed(0)}% from FY${fy - 1}`); }
+    // no change is shown when the two years are not the same kind of total (a draft, or one with and one without interfund transfers)
+    if (prev.budget_total && !/draft|tentative/i.test(prev.budget_status || '') && !!r.budget_excludes_transfers === !!prev.budget_excludes_transfers) { const ch = (r.budget_total / prev.budget_total - 1) * 100; bits.push(`${ch >= 0 ? 'up' : 'down'} ${Math.abs(ch).toFixed(0)}% from FY${fy - 1}`); }
     out.push(kpi('Budget', money(r.budget_total), bits.join(' · ') + src(r.budget_source_url)));
   } else if (r.actual_spending) out.push(kpi('Spent (audited)', money(r.actual_spending), `FY${fy} actual spending; no adopted budget on file` + src(r.actuals_source_url)));
   else if (has('budget_total') || has('actual_spending')) out.push(none('Budget', `No FY${fy} budget on file`));
@@ -186,7 +189,9 @@ function topCards() {
       : kpi(l, `${+m} mills`, `$${Math.round(m * 100).toLocaleString('en-US')} per $100,000 of taxable value${r.tax_year ? ' · tax year ' + r.tax_year : ''}`));
   }
   if (has('debt_total')) out.push(r.debt_total ? kpi('Debt', money(r.debt_total), `${r.population && !schools ? usd(r.debt_total / r.population) + ' per resident · ' : ''}audited, end of FY${fy}` + src(r.debt_source_url))
-    : none('Debt', `Audited total on file for ${GY.filter(x => x.debt_total).map(x => `<button type="button" class="linkbtn" data-fy="${x.fiscal_year}">FY${x.fiscal_year}</button>`).join(', ')} only`));
+    : (() => { const l = GY.filter(x => x.debt_total && x.fiscal_year < fy).sort((a, b) => b.fiscal_year - a.fiscal_year)[0];
+        return l ? kpi('Debt', money(l.debt_total), `${l.population && !schools ? usd(l.debt_total / l.population) + ' per resident · ' : ''}latest audit, end of FY${l.fiscal_year}` + src(l.debt_source_url))
+          : none('Debt', `Audited total on file for ${GY.filter(x => x.debt_total).map(x => `<button type="button" class="linkbtn" data-fy="${x.fiscal_year}">FY${x.fiscal_year}</button>`).join(', ')} only`); })());
   if (has('employees_fte')) out.push(r.employees_fte ? kpi('Employees', (+r.employees_fte).toLocaleString('en-US'), `FY${fy} budget, staff positions`) : none('Employees', `No FY${fy} count on file`));
   topBox.innerHTML = out.join('') + keep;
   $('#gxTopH').textContent = `Fiscal year ${fy}${r.period ? ' · ' + r.period : ''}`;
@@ -268,7 +273,7 @@ function render() {
   topCards(); officials(); contracts(); cra(); projects(); votes(); glance();
   BCM.urlState.set({year: ysel.value});
 }
-ysel.addEventListener('change', render);
+ysel.addEventListener('change', () => { pickedYear = true; render(); });
 document.addEventListener('click', e => {
   if (e.target.closest('[data-allyears]')) { ysel.value = 'all'; render(); }
   const f = e.target.closest('[data-fy]');

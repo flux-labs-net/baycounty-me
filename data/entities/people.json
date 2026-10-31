@@ -2272,6 +2272,11 @@
      "source": "finance_2026"
     },
     {
+     "role": "2027 candidate: Lynn Haven Mayor (recall election)",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    },
+    {
      "role": "2026 candidate: City of Lynn Haven Mayor (partial term)",
      "gov_id": "lh",
      "source": "candidates_2026"
@@ -3849,7 +3854,7 @@
    ],
    "roles": [
     {
-     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "role": "2027 candidate: Lynn Haven Commissioner Seat 2",
      "gov_id": "lh",
      "source": "finance_2026"
     },
@@ -4105,7 +4110,7 @@
    ],
    "roles": [
     {
-     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "role": "2027 candidate: Lynn Haven Commissioner Seat 2",
      "gov_id": "lh",
      "source": "finance_2026"
     },
@@ -4962,7 +4967,7 @@
    ],
    "roles": [
     {
-     "role": "2026 candidate: Lynn Haven Mayor (recall election)",
+     "role": "2027 candidate: Lynn Haven Mayor (recall election)",
      "gov_id": "lh",
      "source": "finance_2026"
     },
@@ -5212,7 +5217,7 @@
      "source": "votes"
     },
     {
-     "role": "2026 candidate: Lynn Haven Commissioner Seat 1",
+     "role": "2027 candidate: Lynn Haven Commissioner Seat 1",
      "gov_id": "lh",
      "source": "finance_2026"
     },
@@ -6784,7 +6789,7 @@
    ],
    "roles": [
     {
-     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "role": "2027 candidate: Lynn Haven Commissioner Seat 2",
      "gov_id": "lh",
      "source": "finance_2026"
     }

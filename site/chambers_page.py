@@ -179,7 +179,7 @@ def chambers_page(out_dir):
   <dl class="ch-facts">
     <div><dt>Revenue{f", {c['latest_return_year']}" if c.get("latest_return_year") else ""}</dt><dd>{_money(c.get("revenue"))}</dd></div>
     <div><dt>Staff on its IRS filing</dt><dd>{e(c.get("employees") or "—")}</dd></div>
-    <div><dt>Board seats</dt><dd>{n_board}</dd></div>
+    <div><dt>Board and committee members</dt><dd>{n_board}</dd></div>
   </dl>
   <div class="ch-acts">{"".join(f'<a class="ui-btn" href="{e(u)}" rel="noopener" target="_blank">{ico(i)}{t}</a>' for i, t, u in acts if u)}</div>
 </article>''')
@@ -248,7 +248,7 @@ def chambers_page(out_dir):
 
     k = lambda lab, v, s: f'<div class="kpi"><span class="eyebrow">{lab}</span><span class="v">{v}</span><span class="s">{s}</span></div>'
     kpis = (k('Chambers', len(C), ' and '.join(e(c['short_name']) for c in C)) +
-            k('Board seats', n_board, f'Plus {sum(1 for r in L if r["role_group"] == "Staff")} staff. {sum(1 for r in board if r["person_match"])} also show up on other local filings') +
+            k('Board and committee members', n_board, f'Executive, voting, ex officio and honorary members, plus {sum(1 for r in L if r["role_group"] == "Staff")} staff. {sum(1 for r in board if r["person_match"])} share a name with someone on another local filing') +
             k('Coming up', len(events), f'{n_ch_events} chamber events, the rest community events they list') +
             k('Paid by tourism agencies', _money(total_pay), 'Event fees and sponsorships, FY2024 to FY2026'))
 

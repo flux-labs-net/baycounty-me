@@ -104,7 +104,7 @@
     const multiN = new Set(S.multi.map(r => r.person_id)).size;
     const cards = [
       {id: 'gov', n: num(paid.length), t: 'Paid with public money', s: big(paid.reduce((a, x) => a + gov(x), 0)) + ' in government payment records'},
-      {id: 'donor', n: num(don.length), t: 'Board ties to campaign money', s: 'Board members run businesses that gave ' + big(S.people.reduce((a, p) => a + p.gifts, 0)) + ' to local campaigns'},
+      {id: 'donor', n: num(don.length), t: 'Board ties to campaign money', s: 'Board members run businesses that gave (each business counted once) ' + big([...new Map([...S.donorBiz.values()].flat().map(b => [b.doc_number, Number(b.campaign_gifts_total || 0)])).values()].reduce((a, b) => a + b, 0)) + ' to local campaigns'},
       {id: 'multi', n: num(multiN), t: 'People on several boards', s: 'Names on two or more current boards'}];
     if (S.offRows.length) cards.push({id: 'off', n: num(new Set(S.offRows.map(r => r.official_id)).size), t: 'Officials on boards', s: 'Checked by hand against officials and candidates'});
     $('#npCards').innerHTML = cards.map(c => `<button type="button" class="np-card" data-card="${c.id}" aria-pressed="false">${ICON[c.id] || ''}<b>${c.n}</b><strong>${esc(c.t)}</strong><span>${esc(c.s)}</span></button>`).join('');

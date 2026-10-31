@@ -936,7 +936,7 @@
    "id": "property-tax-rates",
    "title": "Property tax rates",
    "description": "Millage, rolled-back rate and levy for every taxing authority, by tax year.",
-   "rows": 90,
+   "rows": 105,
    "columns": [
     {
      "name": "authority_id",
@@ -3692,7 +3692,7 @@
      "type": "string",
      "values": [
       "5 mills on a home taxed at $200,000 is $1,000 a year.",
-      "FY2026 runs from October 1, 2025 to September 30, 2026.",
+      "FY2027 runs from October 1, 2026 to September 30, 2027.",
       "For Amendment 3, it estimated the loss for every county, city and special district.",
       "If a district was worth $100 million when it started and is worth $150 million now, the taxes on the $50 million difference go to the CRA.",
       "In 2025, a homestead assessed at $200,000 was taxed on $149,278 by the city and county and on $175,000 by the school board.",
@@ -6662,6 +6662,7 @@
       "Government",
       "Nonprofit",
       "Nonprofit board member",
+      "Official or candidate",
       "Past candidate"
      ]
     },
@@ -6742,7 +6743,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22683,
+   "rows": 22670,
    "columns": [
     {
      "name": "link_id",
@@ -17637,7 +17638,7 @@
    "id": "volunteer-orgs",
    "title": "Nonprofits that use volunteers",
    "description": "Local nonprofits that reported volunteers on their latest IRS Form 990 (Part I line 6, the organization's own estimate, which can cover more than this county) or that have a volunteer need open now: what each does, a plain cause, website, volunteers and employees reported, revenue, and open needs. Homeowner associations, chambers and private foundations are left out unless they post a need.",
-   "rows": 79,
+   "rows": 76,
    "columns": [
     {
      "name": "place_id",

@@ -210,7 +210,7 @@ def military_page(out_dir):
 
     k = lambda lab, v, s: f'<div class="kpi"><span class="eyebrow">{lab}</span><span class="v">{v}</span><span class="s">{s}</span></div>'
     kpis = (k('Bases', len(I), ' and '.join(e(b['short_name']) for b in I)) +
-            k('News stories', len(stories), f'Latest {e(_date(latest))}' if latest else 'From the units on each base') +
+            k('News stories on file', len(stories), f'Since 2018; latest {e(_date(latest))}' if latest else 'From the units on each base') +
             k('Federal contracts', _money(total), f'To {n_co} Bay County companies, {first_y} to {last_y}') +
             k('From the Defense Department', f'{round(100 * defense / total) if total else 0}%', f'{_money(defense)}; most of the rest is Coast Guard'))
 

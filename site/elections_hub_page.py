@@ -187,7 +187,7 @@ def results_page():
     trows = ''.join(f'<tr><td>{e(_short(_d(x["date"])))}</td><td><a href="?e={x["election_id"]}#results">{e(x["name"])}</a></td><td>{e(KIND.get(x["kind"], x["kind"]))}</td>'
                     f'<td class="n">{_num(x["ballots_cast"])}</td><td class="n">{_num(x["registered_voters"])}</td><td class="n">{"" if x["turnout_pct"] is None else str(x["turnout_pct"]) + "%"}</td></tr>'
                     for x in els if x['status'] != 'canceled')
-    kpis = (_kpi('Elections', len(E), 'Since 2016, each with every contest') +
+    kpis = (_kpi('Elections', sum(1 for x in E if x['status'] != 'canceled'), 'Held since 2016, each with every contest') +
             _kpi('Local contests', local_n, 'City, county, School Board and special district races and questions') +
             _kpi('Last general turnout', f"{last_gen['turnout_pct']}%" if last_gen else '—', f"{_num(last_gen['ballots_cast'])} ballots, {_short(_d(last_gen['date']))}" if last_gen else '') +
             _kpi('All contests', len({(r['election_id'], r['contest_id']) for r in R}), 'Including state, federal and judges'))
@@ -341,7 +341,7 @@ def voting_page():
     prows = ''.join(f'<tr><td class="n">{e(s["precinct"])}</td><td><a href="{e(s["url"])}" target="_blank" rel="noopener">{e(s["name"])}</a></td><td>{e(s["address"])}, {e(s["city"] or "")} {e(s["zip"] or "")}</td></tr>' for s in polls)
     kpis = (_kpi('Next election', eday.strftime('%b %-d') if eday else '—', e(ev.get('election') or '')) +
             _kpi('Days to go', days if days is not None and days >= 0 else '—', 'Polls open 7 a.m. to 7 p.m.') +
-            _kpi('Early voting sites', len(early_sites), 'Vote at any of them') +
+            _kpi('Early voting sites', len(early_sites), 'Early voting has ended; vote at your Election Day precinct' if s1 and today > s1 else 'Vote at any of them') +
             _kpi('Precincts', len(polls), 'Each with its own Election Day polling place'))
     return f'''<style>{CSS}</style>
 <div class="page tax eh">

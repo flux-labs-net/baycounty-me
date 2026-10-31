@@ -87,17 +87,12 @@ struct MoneyView: View {
 
     /// Running totals shown beside a row, from the government profiles and the Amendment 3 model.
     private func value(_ item: Item) -> String? {
-        let g = store.governments
         switch item.title {
         case "Amendment 3":
             guard let a3 = store.amendment3 else { return nil }
             let v = a3.localImpact(1)
             return v > 0 ? "−" + Format.compactMoney(v) : nil
-        case "Hurricane Michael": return total(g.compactMap(\.femaMichael))
-        case "Debt": return total(g.compactMap(\.debtTotal))
-        case "Audit findings":
-            let n = g.compactMap(\.auditFindings).reduce(0, +)
-            return n > 0 ? "\(n)" : nil
+        // Hurricane Michael, Debt and Audit findings carry no running total: summing governments mixed audit years and scopes the web pages do not show
         default: return nil
         }
     }
@@ -140,7 +135,6 @@ struct MoneyView: View {
 
     /// Property tax levied this year across every government, split by who levies it.
     @ViewBuilder private var levyCard: some View {
-        let g = store.governments
         let county = g.filter { $0.kind == "county" }.compactMap(\.propertyTaxLevy).reduce(0, +)
         let schools = g.filter { $0.kind == "schools" }.compactMap(\.propertyTaxLevy).reduce(0, +)
         let cities = g.filter { $0.kind == "city" }.compactMap(\.propertyTaxLevy).reduce(0, +)
@@ -153,7 +147,7 @@ struct MoneyView: View {
             ]
             NavigationLink(value: Route.taxCalculator()) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Property tax levied this year").font(.footnote).foregroundStyle(.white.opacity(0.8))
+                    Text("Property tax levied, FY2026 (county, schools, cities)").font(.footnote).foregroundStyle(.white.opacity(0.8))
                     Text(Format.compactMoney(total)).font(.largeTitle.weight(.heavy).monospacedDigit()).foregroundStyle(.white)
                     StackBar(parts: parts)
                     HStack(spacing: 14) {

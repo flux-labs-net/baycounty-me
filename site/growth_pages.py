@@ -249,8 +249,8 @@ def development_page(out_dir):
         kpis += _kpi(f'New homes permitted, {last["year"]}', f'{last["total_units"]:,}', chg + (f'. {share}% outside the cities' if share is not None else ''))
     if ytd:
         kpis += _kpi(f'{ytd["period"]}', f'{ytd["total_units"]:,}', f'New homes permitted so far, worth {_money(ytd["total_value"])} on the permits')
-    kpis += _kpi('Projects under review', len(review), 'Development orders the county is reviewing now')
-    kpis += _kpi('Approved since ' + str(dt.date.today().year - 1), len(approved_recent), 'Site plans and subdivisions cleared to build')
+    kpis += _kpi('Projects under review', len(review), 'Development orders the county (unincorporated areas) is reviewing now')
+    kpis += _kpi('Approved since ' + str(dt.date.today().year - 1), len(approved_recent), 'Site plans and subdivisions the county cleared to build (unincorporated areas)')
 
     # development cards + map
     govs = []
@@ -379,7 +379,7 @@ def roads_page(out_dir):
     kpis = (_kpi('State road work under way', len(now), f'{_money(sum(r["amount"] or 0 for r in now))} in FDOT contracts') +
             _kpi('In the state\'s five-year plan', len(projects), 'FDOT projects funded from FY' + str(min((w['first_fiscal_year'] for w in W if w['first_fiscal_year']), default='')) + ' on') +
             _kpi('County and city road jobs', len(s_now) + len(s_next), f'In progress or next, paid for by the half-cent sales tax') +
-            _kpi('State contracts since 2016', len(C), f'{_money(sum(r["amount"] or 0 for r in C))} in all'))
+            _kpi('State contracts active since 2016', len(C), f'{_money(sum(r["amount"] or 0 for r in C))} in all, including work let earlier that ran past 2016'))
 
     # contracts under way: cards + map
     cards, pts = [], []

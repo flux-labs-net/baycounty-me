@@ -16,16 +16,17 @@ def M(n, d=1):
 
 def stats():
     from tax_page import build_data
-    td = build_data(); lv = {g: v[-1] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
+    td = build_data(); lv = {g: v[td['levyYear']] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
     cra = _j('merged.json')['payments']
-    cra_spent = sum(p['amount'] for p in cra if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed'))
+    cra_done = [p for p in cra if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed')]  # planned and budgeted records are not counted
+    cra_spent = sum(p['amount'] for p in cra_done)
     mi = _j('michael', 'michael.json'); pa = mi['fema_pa']['bay_totals']
     da = _j('debt_audit', 'debt_audit.json')
     debt = sum(x['total_debt'] for x in da['debt'] if x['total_debt'])
-    findings = sum(len(a['findings']) for a in da['audits'])
     latest = {}
     for a in da['audits']:
         latest.setdefault(a['government'], a)
+    findings = sum(len(a['findings']) for a in latest.values())  # latest audit of each entity, the same scope as the repeats
     repeats = sum(1 for a in latest.values() for f in a['findings'] if f.get('repeat'))
     ts = _j('tourism', 'tourism_surtax.json')
     bt25 = sum(c['amount'] for c in ts['bed_tax']['collections'] if c['fy'] == 2025)
@@ -35,7 +36,7 @@ def stats():
     ct = _j('contracts', 'contracts.json'); ct_n = sum(1 for c in ct['contracts'] if c.get('amount'))
     rec = _j('amendment3', 'rec_bay.json')
     a3 = -sum(r['impact']['FY2029'] for r in rec['bay'])
-    return dict(lv_tot=lv_tot, school_share=lv['school'] / lv_tot, ngovs=len(td['govs']), cra_spent=cra_spent, cra_n=len(cra),
+    return dict(lv_tot=lv_tot, school_share=lv['school'] / lv_tot, ngovs=len(td['govs']), cra_spent=cra_spent, cra_n=len(cra_done),
                 fema=pa['federal_obligated'], fema_n=pa['projects'], ia=mi['fema_ia']['bay_total_approved_ihp_owners_plus_renters'],
                 debt=debt, findings=findings, repeats=repeats, bt25=bt25, pcb_share=pcb25 / bt25, sp_n=len(sp), sp_done=done, a3=a3, ct_n=ct_n)
 
@@ -48,8 +49,8 @@ def topics(s):
         ('/public-money/hurricane-michael', 'Hurricane Michael', 'Where the recovery money went', 'Every FEMA rebuilding project, aid to households, Rebuild Florida awards and debris costs.', M(s['fema'], 0), f'FEMA rebuilding money, {s["fema_n"]} projects'),
         ('/public-money/sales-tax-projects', 'Sales Tax Projects', 'Promised vs built', 'Every half-cent sales tax project on the county map, with its status, plus the school half-cent.', f'{s["sp_done"]:,} of {s["sp_n"]:,}', 'projects marked completed'),
         ('/public-money/tourist-tax', 'Tourist Tax', 'What visitors pay, and where it goes', 'Ten years of bed tax collections, how the pennies are split and what Visit PCB spends.', M(s['bt25']), f'collected in FY2025, {s["pcb_share"]:.0%} from the PCB zone'),
-        ('/compare', 'Debt', 'What local governments owe', 'Debt per resident for every government, side by side; each government\'s page lists its bonds and loans.', M(s['debt']), 'owed across Bay County governments'),
-        ('/governments', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English on each government\'s page, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
+        ('/compare', 'Debt', 'What local governments owe', 'Debt per resident for every government, side by side; each government\'s page lists its bonds and loans.', M(s['debt']), 'owed, latest audit of each (FY2024 or FY2025)'),
+        ('/governments', 'Audit Findings', 'What the auditors found', 'Up to three years of audit findings in plain English on each government\'s page, including problems that keep coming back.', f'{s["findings"]}', f'findings in the latest audits, {s["repeats"]} of them repeats'),
         ('/public-money/fees-and-bills', 'Fees & Bills', 'Fees on your tax bill, and water and garbage', 'Fire, stormwater and other flat fees, plus a typical monthly utility bill in each city.', '$28.1M', 'in flat fees on FY2026 tax bills'),
         ('/people', 'Officials', 'Officials and pay', 'Every official and candidate, the five county officers, and what top officials are paid.', '5', 'independently elected county officers'),
         ('/public-money/contracts', 'Contracts', 'Who gets the contracts', 'Major contracts since 2022: winners, how they were awarded, change orders and who the county paid most.', str(s['ct_n']), 'contracts tracked'),
@@ -104,7 +105,15 @@ def budget_data():
                 svc[k] = svc.get(k, 0) + v['amount']
     names = dict(SERVICES)
     fy = d['governments'][0]['fiscal_year'].split(' ')[0]
+    # the headline total is the adopted FY2027 budget of each government as it published it (Panama City's leaves out interfund
+    # transfers; the county's and Parker's final-hearing figures await posted minutes); governments with no total are named, not guessed
+    from page_datasets import government_years
+    y27 = {r['gov_id']: r for r in government_years() if r['fiscal_year'] == 2027}
+    have = [g for g in GOVS if (y27.get(g['key']) or {}).get('budget_total')]
+    missing = [g['short'] for g in GOVS if g not in have]
+    pending = [g['short'] for g in have if 'final hearing' in (y27[g['key']].get('budget_status') or '')]  # hearing held, minutes not posted yet
     return {'fy': fy, 'total': sum(g['total'] for g in d['governments']), 'n': len(d['governments']),
+            'total27': sum(y27[g['key']]['budget_total'] for g in have), 'n27': len(have), 'n_all': len(GOVS), 'missing27': missing, 'pending27': pending,
             'services': sorted(((names[k], v) for k, v in svc.items()), key=lambda r: -r[1])}
 
 
@@ -305,19 +314,19 @@ def home_page():
     <div class="h-sec-hd"><div><h3 id="follow">Then where it went, and who's checking.</h3></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
       <a class="h-tile t-blue" href="/compare#services">
-        <span class="eyebrow">Spending · {bd['fy']}</span>
+        <span class="eyebrow">Spending · FY2027</span>
         <span class="mini" aria-hidden="true">{budget_bars}</span>
-        <b class="fig">{M(bd['total'])}</b><span class="h-tl">Budgeted this year</span><span class="muted">{bd['n']} governments · biggest everyday costs: {html.escape(top2)}</span>
+        <b class="fig">{M(bd['total27'])}</b><span class="h-tl">Adopted FY2027 budgets, {bd['n27']} of {bd['n_all']} governments</span><span class="muted">{html.escape(', '.join(bd['missing27']) + ' has no published total. ' if bd['missing27'] else '')}{html.escape(', '.join(bd['pending27']) + ': final hearing held, minutes not posted yet. ' if bd['pending27'] else '')}Everyday costs in the bars are FY2026: {html.escape(top2)}</span>
       </a>
       <a class="h-tile t-salmon" href="/compare#m-debt">
         <span class="eyebrow">Debt</span>
         <span class="mini" aria-hidden="true">{debt_bars}</span>
-        <b class="fig">{M(s['debt'])}</b><span class="h-tl">Owed by local governments</span><span class="muted">County, cities, schools and authorities</span>
+        <b class="fig">{M(s['debt'])}</b><span class="h-tl">Owed, latest audits</span><span class="muted">County, cities, schools and authorities</span>
       </a>
       <a class="h-tile t-amber" href="/compare#m-findings">
         <span class="eyebrow">Accountability</span>
         <span class="prog" aria-hidden="true"><span class="p-a"><i style="width:{(s['findings'] - s['repeats']) / s['findings'] * 100:.0f}%"></i></span><span class="p-b"><i style="width:{s['sp_done'] / s['sp_n'] * 100:.0f}%"></i></span></span>
-        <b class="fig">{s['findings']} findings</b><span class="h-tl">{s['repeats']} repeat audit findings</span><span class="muted">{s['sp_done']:,} of {s['sp_n']:,} sales tax projects done</span>
+        <b class="fig">{s['findings']} findings</b><span class="h-tl">{s['repeats']} repeats, latest audits</span><span class="muted">{s['sp_done']:,} of {s['sp_n']:,} sales tax projects done</span>
       </a>
     </div>
     <nav class="h-links" aria-label="Your money pages">
