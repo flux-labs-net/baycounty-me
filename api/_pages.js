@@ -64,7 +64,7 @@ const PAGES = {
   '/notices': {datasets: ['public-notices', 'bid-trail'], endpoints: ['/government-posts']},
   '/jobs': {datasets: ['job-openings', 'job-boards'], endpoints: ['/government-posts']},
   '/public-money/exemptions': {datasets: ['property-tax-exemptions']},
-  '/public-money/contracts': {datasets: ['contracts', 'change-orders', 'emergency-purchases', 'emergency-purchase-donors'], endpoints: ['/overlaps', '/records-sent']},
+  '/public-money/contracts': {datasets: ['contracts', 'change-orders', 'emergency-purchases', 'emergency-purchase-donors', 'contract-minutes-check'], endpoints: ['/overlaps', '/records-sent']},
   '/public-money/accountability': {datasets: ['accountability-projects', 'accountability-events']},
   '/public-money/votes': {datasets: ['votes', 'member-votes', 'donor-votes', 'vote-mentions']},
   '/glossary': {datasets: ['glossary-terms']},
@@ -88,7 +88,7 @@ const PAGES = {
 // a government's page carries the dashboards' records for that government (gov.js narrows them by city and year), and its
 // whole budget, debt, audits and savings ideas (site/gov_detail.py), which used to be dashboards of their own
 const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
-  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms', 'official-photos', 'person-photos', 'data-completeness'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials', '/import-progress']},
+  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms', 'official-photos', 'person-photos', 'data-completeness', 'contract-minutes-check'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials', '/import-progress']},
   // each official's and candidate's profile (site/people_pages.py)
   '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'campaign-history', 'candidates-2026', 'officials-pay', 'salary-leaders',
     'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms', 'official-photos', 'person-photos',

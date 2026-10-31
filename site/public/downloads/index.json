@@ -305,6 +305,7 @@
      "values": [
       "agenda_item+amount",
       "item_number+agenda_item+amount",
+      "item_number+amount",
       "vendor_name",
       "vendor_name+agenda_item",
       "vendor_name+agenda_item+amount",
@@ -428,7 +429,7 @@
    "id": "contracts",
    "title": "Contracts",
    "description": "Major contracts approved since October 2022: vendor, amount, purpose, how awarded.",
-   "rows": 339,
+   "rows": 391,
    "columns": [
     {
      "name": "government",
@@ -490,6 +491,7 @@
      "values": [
       "agenda_item+amount",
       "item_number+agenda_item+amount",
+      "item_number+amount",
       "vendor_name",
       "vendor_name+agenda_item",
       "vendor_name+agenda_item+amount",
@@ -531,13 +533,14 @@
    "id": "change-orders",
    "title": "Change orders",
    "description": "Contract change orders with original and new totals.",
-   "rows": 51,
+   "rows": 55,
    "columns": [
     {
      "name": "government",
      "type": "string",
      "values": [
       "Bay County BOCC",
+      "City of Callaway",
       "City of Lynn Haven",
       "City of Mexico Beach",
       "City of Panama City",
@@ -601,6 +604,7 @@
      "name": "vendor_id",
      "type": "string",
      "values": [
+      "american-sand",
       "anderson-columbia",
       "barge",
       "bcl",
@@ -636,6 +640,7 @@
      "type": "string",
      "values": [
       "county",
+      "cw",
       "lh",
       "mb",
       "pc",
@@ -2072,7 +2077,7 @@
    "id": "accountability-projects",
    "title": "Accountability: projects",
    "description": "One row per project on the Accountability console: stage, first and latest figures, cost growth, questions raised by the published rules, records still missing and the agency reply.",
-   "rows": 93,
+   "rows": 97,
    "columns": [
     {
      "name": "project_id",
@@ -2101,6 +2106,7 @@
      "values": [
       "Bay County",
       "Bay County (half-cent infrastructure sales tax)",
+      "Callaway",
       "Callaway CRA",
       "Lynn Haven",
       "Lynn Haven CRA",
@@ -2206,8 +2212,10 @@
       "The original contract amount and every change order (with amounts and reasons) for the Bay County contract with Behar Peteranecz: Youngstown-Fountain Community Center design",
       "The original contract amount and every change order (with amounts and reasons) for the Bay County contract with Culpepper Construction: New Juvenile Justice Courthouse Addition",
       "The original contract amount and every change order (with amounts and reasons) for the Bay County contract with MRD Associates, Inc.: East Pass feasibility study",
+      "The original contract amount and every change order (with amounts and reasons) for the Callaway contract with American Sand & Asphalt Paving: Cherry Street resurfacing",
       "The original contract amount and every change order (with amounts and reasons) for the Lynn Haven contract with BGN Contractors (Gage Golden Construction): Sports Complex rebuild, pickleball courts",
       "The original contract amount and every change order (with amounts and reasons) for the Lynn Haven contract with Tetra Tech, Inc.: Hurricane Michael FEMA public assistance consulting (Task Order 1-2018-FRS)",
+      "The original contract amount and every change order (with amounts and reasons) for the Mexico Beach contract with Gulf Coast Utility Contractors: Stormwater repairs Phase II",
       "The original contract amount and every change order (with amounts and reasons) for the Panama City contract with CBC Construction: CDBG-DR Project Restore Area A2 (PC24-006)",
       "The original contract amount and every change order (with amounts and reasons) for the Panama City contract with Gulf Coast Utility Contractors: SRF Area F1",
       "The original contract amount and every change order (with amounts and reasons) for the Panama City contract with Hagerty Consulting: Hurricane Michael recovery consulting, contract",
@@ -2252,7 +2260,7 @@
    "id": "accountability-events",
    "title": "Accountability: project timelines",
    "description": "Every dated event in each project timeline: budgets, approvals, awards, change orders, votes, payments and completion, with sources.",
-   "rows": 243,
+   "rows": 250,
    "columns": [
     {
      "name": "project_id",
@@ -2354,7 +2362,7 @@
    "id": "connections-payees",
    "title": "Connections: payees",
    "description": "Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.",
-   "rows": 639,
+   "rows": 656,
    "columns": [
     {
      "name": "entity_id",
@@ -2455,7 +2463,7 @@
    "id": "connections-payments",
    "title": "Connections: payment records",
    "description": "One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.",
-   "rows": 1126,
+   "rows": 1182,
    "columns": [
     {
      "name": "record_id",
@@ -6625,7 +6633,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16682,
+   "rows": 16698,
    "columns": [
     {
      "name": "entity_id",
@@ -6743,7 +6751,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22670,
+   "rows": 22740,
    "columns": [
     {
      "name": "link_id",
@@ -7529,7 +7537,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 416,
+   "rows": 419,
    "columns": [
     {
      "name": "website",
@@ -17779,7 +17787,7 @@
    "id": "vote-mentions",
    "title": "Votes that name a company or organization",
    "description": "One row per recorded vote and each company, nonprofit or registered business its motion names, matched by name from the minutes (hand-researched votes and every vote read from minutes since 2016): the vote, the organization and its profile (entity_id), the words that matched, the roll call (roll_call, 'Name: vote' pairs) and the members' profile ids (member_ids). A match means the minutes name the organization in that motion; consent agendas name many items in one vote.",
-   "rows": 1355,
+   "rows": 1365,
    "columns": [
     {
      "name": "place_id",
@@ -18575,7 +18583,7 @@
    "id": "shared-owner-vendors",
    "title": "Companies paid by one government that share an officer",
    "description": "Companies paid by the same local government that list the same person (same name and Sunbiz address) as an officer or manager, one row per company, government and shared person. Registered agents are left out. Sharing an officer is common among related companies and is not a finding of wrongdoing.",
-   "rows": 12,
+   "rows": 14,
    "columns": [
     {
      "name": "place_id",
@@ -18593,6 +18601,7 @@
       "destination_pc:joseph-f-chapman-iv",
       "destination_pc:william-p-thompson",
       "pc:john-w-lewis",
+      "sp:john-w-lewis",
       "visit_pcb:kevin-obos"
      ]
     },
@@ -18603,6 +18612,7 @@
       "county",
       "destination_pc",
       "pc",
+      "sp",
       "visit_pcb"
      ]
     },
@@ -19732,6 +19742,166 @@
    "json": "/downloads/contract-dollar-totals.json",
    "csv": "/downloads/contract-dollar-totals.csv",
    "api": "/api/v1/datasets/contract-dollar-totals"
+  },
+  {
+   "id": "contract-minutes-check",
+   "title": "Contract votes checked against the contract list",
+   "description": "Every passed contract vote read from the minutes since October 2022 (consent agendas and votes that approve no spending, such as mutual aid, interlocal agreements, terminations and rejected bids, left out), checked against the contracts dataset. status: in_list (tied to a contract, change order or emergency purchase there, contract_record_ids), under_threshold (the vote's one clear figure is below list_threshold, the smallest award the list collects for that government), after_review (the meeting is after list_reviewed_through, the last meeting date read into the list), no_amount (the minutes give no single clear dollar figure), or missing (at or above the threshold, before the review date, and not in the list). amount is the vote's one clear figure from contract-vote-dollars. checked_note explains a vote looked at by hand (for example, the minutes don't name the seller). Rules: site/contract_coverage.py.",
+   "rows": 707,
+   "columns": [
+    {
+     "name": "vote_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Callaway City Commission",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "headline",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "amendment",
+      "change order",
+      "consent agenda",
+      "contract award",
+      "contract or agreement",
+      "purchase",
+      "renewal or extension",
+      "task order"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "up_to",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "in_list",
+      "missing",
+      "no_amount",
+      "under_threshold"
+     ]
+    },
+    {
+     "name": "checked_note",
+     "type": "string",
+     "values": [
+      "A deposit toward a $400,000 fire truck; the minutes name no seller.",
+      "Bought off the Florida Sheriffs contract; the minutes name no dealer.",
+      "Dunlap & Shipman legal services, $275,000 a year (Resolution 2026-08-576).",
+      "From the Lynn Haven agenda packet: Dewberry Engineers post-design services, $95,250 (Resolution 2026-04-547).",
+      "From the Lynn Haven agenda packet: EPSS Supply & Fabrication, $52,250 (Resolution 2026-02-518).",
+      "From the Lynn Haven agenda packet: Gro Pro, LLC, up to $49,939.50 a year for four years (Resolution 2026-05-556).",
+      "From the Lynn Haven agenda packet: Gulf Coast Utility Contractors, $64,649 (Resolution 2026-04-548).",
+      "From the Lynn Haven agenda packet: Hawkins, Inc., not to exceed $85,000 (Resolution 2026-04-537).",
+      "From the Lynn Haven agenda packet: Univar Solutions, not to exceed $55,000 (Resolution 2026-05-557).",
+      "From the Lynn Haven agenda packet: a monthly price ($17.99 a vehicle for 34 vehicles, $611.66 a month), not a contract total.",
+      "From the Lynn Haven agenda packet: a price of $1.75 a gallon with no total (Resolution 2026-09-580).",
+      "From the Lynn Haven agenda packet: fire dispatch equipment from three sellers, $43,557.42 in all (Resolution 2026-08-577).",
+      "From the Lynn Haven agenda packet: the city's 50% share of three Raftelis rate-study task orders, not to exceed $62,500 (Resolution 2026-01-517).",
+      "From the Lynn Haven agenda packet: two Ford Police Interceptor Utility vehicles, $92,776 (Resolution 2026-07-560).",
+      "In the list as the full $472,739 Metric Engineering contract; this vote approved its CDBG-DR portion.",
+      "Insurance premiums for several policies; the minutes name no carrier.",
+      "Paid with CDBG money; the minutes name the maker (Rosenbauer) but not the seller.",
+      "The $256,500 in the minutes is the budget amendment; the task order amount is not stated.",
+      "The $408,000 in the minutes is the budget amendment; the task order amount is not stated.",
+      "The Stingray Chevrolet truck purchase, $134,561.37 (Resolution 2026-05-553).",
+      "The amended and restated Dunlap & Shipman agreement approved 2026-08-11 ($275,000 a year).",
+      "The minutes do not name the seller or contractor; the agenda packet is needed to add it.",
+      "The piggyback contract with Asphalt Paving Systems is $243,015 (striping quote $54,660); $319,975 is the budget amendment.",
+      "The same sidewalk project awarded to BCL Civil Contractors for $540,733.50 on 2026-08-25."
+     ]
+    },
+    {
+     "name": "in_contract_list",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "contract_record_ids",
+     "type": "string"
+    },
+    {
+     "name": "list_threshold",
+     "type": "number"
+    },
+    {
+     "name": "list_reviewed_through",
+     "type": "string",
+     "values": [
+      "2026-09-08",
+      "2026-09-22",
+      "2026-10-06",
+      "2026-10-14",
+      "2026-10-20",
+      "2026-10-22",
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/contract-minutes-check.json",
+   "csv": "/downloads/contract-minutes-check.csv",
+   "api": "/api/v1/datasets/contract-minutes-check"
   },
   {
    "id": "meetings",

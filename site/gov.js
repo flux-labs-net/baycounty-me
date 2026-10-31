@@ -37,8 +37,15 @@ const budgetFor = async () => {
   const f = await get('/downloads/budget-years.json');
   return Array.isArray(f) ? f.filter(r => r.gov_id === K) : null;
 };
-const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr, BYr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor(), budgetFor()]);
+// every contract vote in the minutes, checked against the contract list (contract-minutes-check), the same way
+const checkFor = async () => {
+  const api = await get(`/api/v1/datasets/contract-minutes-check?gov_id=${encodeURIComponent(K)}&limit=5000`);
+  if (api && Array.isArray(api.data)) return api.data;
+  const f = await get('/downloads/contract-minutes-check.json');
+  return Array.isArray(f) ? f.filter(r => r.gov_id === K) : [];
+};
+const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr, BYr, CKr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor(), budgetFor(), checkFor()]);
 const OH = (OHr || []).slice().sort((a, b) => a.seat_order - b.seat_order || a.term_order - b.term_order);
 const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
@@ -51,6 +58,7 @@ S.projects = (AC?.projects || []).filter(p => p.gk === K).map(p => ({...p, ys: s
 S.salestax = (ST || []).filter(p => has(p.g)).map(p => ({...p, ys: [...new Set([...Object.keys(p.sfy || {}).map(Number), ...TT.yearsIn(p.y)])]}));
 S.fema = (FM?.rows || []).filter(r => has(r.a)).map(r => ({...r, ys: [yr(r.d1)].filter(Boolean)}));
 S.votes = (VT?.votes || []).filter(v => v.g === K).map(v => ({...v, ys: [yr(v.d)].filter(Boolean)}));
+S.check = (CKr || []).map(r => ({...r, ys: [yr(r.date)].filter(Boolean)}));
 
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
@@ -91,16 +99,39 @@ function fill(id, {sub, kpis, body, link, empty}) {
 const gone = id => { const s = document.getElementById(id); if (s) s.remove(); $$(`.ui-tiles a[href="#${id}"], .ui-mini a[href="#${id}"]`).forEach(a => a.remove()); };
 
 /* ---------- renderers ---------- */
+// what the contract list covers, and every contract vote in the picked year's minutes that isn't in it
+const CKS = {under_threshold: 'Under the list size', no_amount: 'No clear amount in the minutes', after_review: 'Not read in yet', missing: 'Not in the list yet'};
+const short = n => n >= 1e6 ? '$' + +(n / 1e6).toFixed(1) + ' million' : '$' + Math.round(n / 1e3) + ',000';
+function contractCheck() {
+  const all = S.check, rs = all.filter(inYear);
+  if (!all.length) return {line: '', body: '', size: ''};
+  const th = all[0].list_threshold, thru = all[0].list_reviewed_through, size = th ? `of about ${short(th)} or more` : '';
+  const n = k => rs.filter(r => r.status === k).length, out = rs.filter(r => r.status !== 'in_list');
+  const parts = [[n('in_list'), 'in this list'], [n('under_threshold'), th ? `under ${short(th)}` : 'small'], [n('no_amount'), 'give no clear dollar amount'],
+    [n('after_review'), `came after ${nice(thru)} and aren't read in yet`], [n('missing'), "aren't in the list yet"]].filter(p => p[0]);
+  const gapN = n('after_review') + n('missing');
+  const line = `<p class="small gx-check${gapN ? ' warn' : ''}"><b>What this list covers.</b> Awards ${size}, read by hand from ${esc(G.short)}'s agendas, packets and minutes through ${esc(nice(thru))}.`
+    + (rs.length ? ` The minutes record ${plural(rs.length, 'contract vote')} in ${ylabel()}: ${parts.map(([c, t]) => `${c} ${t}`).join(', ')}.` : '')
+    + (gapN ? ` <b>${plural(gapN, 'vote')} still to add, so the total here is low.</b>` : '') + '</p>';
+  const lab = r => r.status === 'under_threshold' && r.amount ? 'Under the list size' : CKS[r.status] || r.status;
+  const body = out.length ? `<details class="gx-checklist"><summary>Every other contract vote in ${ylabel()} (${out.length})</summary>`
+    + table(['Approved', 'What the minutes say', 'Amount', 'Why it isn\'t above'], out.sort((a, b) => b.date.localeCompare(a.date)).map(r =>
+      `<td class="small nowrap">${esc(nice(r.date))}${src(r.source_url)}</td><td class="wrap small">${esc(r.headline)}</td><td class="num">${r.amount ? usd(r.amount) + (r.up_to ? ' max' : '') : '—'}</td><td class="wrap small">${esc(lab(r))}${r.checked_note ? `<br><span class="muted">${esc(r.checked_note)}</span>` : ''}</td>`), 25)
+    + `<p class="small muted">From the contract-minutes-check dataset (<a href="/api/v1/datasets/contract-minutes-check?gov_id=${K}">API</a>). Consent agendas and votes that approve no spending (mutual aid, interlocal agreements, rejected bids) are left out.</p></details>` : '';
+  return {line, body, size, gapN};
+}
 function contracts() {
   if (!S.contracts.length) return gone('contracts');
   const rs = S.contracts.filter(inYear).sort((a, b) => (b.a || 0) - (a.a || 0)), tot = rs.reduce((s, r) => s + (r.a || 0), 0);
   const comp = rs.filter(r => /^competitive/i.test(r.m || '')).length;
+  const ck = contractCheck();
   fill('contracts', {
-    sub: `${plural(rs.length, 'major contract')} approved in ${ylabel()}`,
+    sub: `${plural(rs.length, 'contract')} ${ck.size || 'over the list size'} approved in ${ylabel()}`,
     kpis: rs.length ? kpi('Awarded', money(tot), plural(rs.length, 'contract')) + kpi('Competitively bid', rs.length ? Math.round(comp / rs.length * 100) + '%' : '—', `${comp} of ${rs.length}`)
       + kpi('Largest', money(rs[0].a), esc(rs[0].v)) : '',
-    body: table(['Company', 'For', 'Amount', 'How awarded', 'Approved'], rs.map(r =>
-      `<td class="wrap"><a href="${esc(r.e && window.BC ? BC.href(r.e) : '/public-money/contracts?company=' + encodeURIComponent(r.id) + '#company')}">${esc(r.v)}</a></td><td class="wrap small">${esc(r.p)}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small nowrap">${esc(nice(r.d))}${src(r.u)}</td>`)),
+    body: ck.line + (rs.length ? table(['Company', 'For', 'Amount', 'How awarded', 'Approved'], rs.map(r =>
+      `<td class="wrap"><a href="${esc(r.e && window.BC ? BC.href(r.e) : '/public-money/contracts?company=' + encodeURIComponent(r.id) + '#company')}">${esc(r.v)}</a></td><td class="wrap small">${esc(r.p)}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small nowrap">${esc(nice(r.d))}${src(r.u)}</td>`))
+      : `<p class="muted gx-none">No contracts ${ck.size || ''} recorded for ${esc(G.short)} in ${ylabel()}. <button type="button" class="linkbtn" data-allyears>See all years</button></p>`) + ck.body,
     empty: `No major contracts recorded for ${esc(G.short)} in ${ylabel()}.`,
     link: `<a href="${dash('/public-money/contracts')}#all">All ${esc(G.short)} contracts, change orders and payments</a>`,
   });
@@ -122,6 +153,8 @@ function cra() {
 }
 const STL = {closed: 'Closed out', complete: 'Complete', completed: 'Completed', under_construction: 'Under construction', under_contract: 'Under contract', budgeted: 'Budgeted', planned: 'Planned', in_progress: 'In progress', not_started: 'Not started', unknown: 'Status unknown'};
 const stl = s => STL[s] || String(s || '').replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
+// what "tracked" means, so a short list isn't read as everything the government built
+const PJNOTE = 'Tracked projects are ones with a hand-reviewed history from budget to close-out, or a contract in our list that has had change orders; every other award is under Contracts.';
 function projects() {
   const a = S.projects.filter(inYear), t = S.salestax.filter(inYear), f = S.fema.filter(inYear);
   if (!S.projects.length && !S.salestax.length && !S.fema.length) return gone('projects');
@@ -130,7 +163,7 @@ function projects() {
     const flagged = a.filter(p => (p.flags || []).length);
     parts.push(`<h3 class="h4">Big projects, budget to close-out</h3>` + (a.length ? `<div class="gx-cards">${a.sort((x, y) => (y.flags || []).length - (x.flags || []).length || (y.money || 0) - (x.money || 0)).slice(0, 6).map(p =>
       `<a class="gx-card" href="/public-money/accountability?gov=${K}&p=${encodeURIComponent(p.id)}"><span class="eyebrow">${esc(stl(p.status))}</span><b>${esc(p.n)}</b><span class="muted small">${money(p.money)}${p.growth ? ` · ${p.growth > 0 ? '+' : ''}${p.growth}% since award` : ''}</span>${(p.flags || []).length ? `<span class="badge warn">${plural(p.flags.length, 'question')}</span>` : ''}</a>`).join('')}</div>
-      <p class="small muted">${plural(a.length, 'project')} in ${ylabel()}, ${flagged.length} with an open question. <a href="${dash('/public-money/accountability')}">See every project</a></p>` : `<p class="muted small">No tracked projects active in ${ylabel()}.</p>`));
+      <p class="small muted">${plural(a.length, 'project')} in ${ylabel()}, ${flagged.length} with an open question. ${PJNOTE} <a href="${dash('/public-money/accountability')}">See every project</a></p>` : `<p class="muted small">No tracked projects active in ${ylabel()}. ${PJNOTE}</p>`));
   }
   if (S.salestax.length) {
     const n = s => t.filter(p => p.s === s).length;
@@ -406,18 +439,20 @@ function glance() {
   const pr = S.projects.filter(inYear).length + S.salestax.filter(inYear).length;
   const t = [];
   const ct = money(c.reduce((s, x) => s + (x.a || 0), 0)), cr = money(r.reduce((s, x) => s + (x.amount || 0), 0)), splits = v.filter(x => x.x).length;
-  if (S.contracts.length) t.push(['#contracts', 'Contracts awarded', ct, plural(c.length, 'contract'), 'file', 'blue']);
+  const ck = S.check.filter(inYear), ckGap = ck.filter(r => r.status === 'after_review' || r.status === 'missing').length;
+  const ckSub = plural(c.length, 'large contract') + (ckGap ? ` · ${ckGap} still to add` : ck.length ? ` · ${ck.length} votes in minutes` : '');
+  if (S.contracts.length) t.push(['#contracts', 'Contracts awarded', ct, ckSub, 'file', 'blue']);
   if (G.cra) t.push(['#cra', 'CRA spent or committed', cr, plural(ra.length, 'CRA record'), 'columns', 'teal']);
   if (S.votes.length) t.push(['#votes', 'Votes recorded', v.length.toLocaleString('en-US'), `${splits} split`, 'vote', 'amber']);
-  if (S.projects.length || S.salestax.length) t.push(['#projects', 'Projects active', pr.toLocaleString('en-US'), 'tracked and sales tax', 'crane', 'salmon']);
+  if (S.projects.length || S.salestax.length) t.push(['#projects', 'Projects tracked', pr.toLocaleString('en-US'), S.salestax.length ? 'reviewed, change orders, sales tax' : 'reviewed or with change orders', 'crane', 'salmon']);
   $('#gxGlanceH').textContent = ysel.value === 'all' ? 'Across every year on record' : `In ${ysel.value}`;
   box.innerHTML = t.map(([h, l, v2, s, n, tn]) => `<a class="kpi gx-k" href="${h}">${ico(n, tn)}<span class="eyebrow">${l}</span><span class="v">${v2}</span><span class="s">${s}</span></a>`).join('');
   // the one-line previews in the section tiles follow the year too
   const tip = (id, txt) => { const el = $(`.ui-tiles [data-jump="${id}"] small`); if (el) el.textContent = txt; };
-  if (S.contracts.length) tip('contracts', `${ct} · ${plural(c.length, 'contract')}`);
+  if (S.contracts.length) tip('contracts', `${ct} · ${plural(c.length, 'large contract')}`);
   if (G.cra) tip('cra', `${cr} spent`);
   if (S.votes.length) tip('votes', `${plural(v.length, 'vote')} · ${splits} split`);
-  if (S.projects.length || S.salestax.length) tip('projects', `${pr.toLocaleString('en-US')} active`);
+  if (S.projects.length || S.salestax.length) tip('projects', `${pr.toLocaleString('en-US')} tracked`);
   box.closest('section').hidden = !t.length;
 }
 
