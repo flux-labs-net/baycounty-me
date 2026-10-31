@@ -325,11 +325,11 @@ async function route(req, res, action, me) {
       published: String(Q.published || ''), q: String(Q.q || '').slice(0, 100), year: String(Q.year || '')});
     case 'corr_thread': return require('./_correspondence').thread(Q.id);
     case 'rr_list': return require('./_records_requests').list();
-    case 'rr_seed': case 'rr_save': case 'rr_send': {
+    case 'rr_seed': case 'rr_save': case 'rr_send': case 'rr_dismiss': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const R = require('./_records_requests');
-      const r = await {rr_seed: R.seed, rr_save: R.save, rr_send: R.send}[action](body, me.e);
-      await audit(me.e, action, null, {id: body.id || null, test: !!body.test, status: body.status || null}).catch(() => {});
+      const r = await {rr_seed: R.seed, rr_save: R.save, rr_send: R.send, rr_dismiss: R.dismiss}[action](body, me.e);
+      await audit(me.e, action, null, {id: body.id || null, test: !!body.test, status: body.status || null, reason: body.reason || undefined}).catch(() => {});
       return r;
     }
     case 'email_previews': return {templates: PREVIEWS, govs: Object.entries(GOVS).map(([key, [name]]) => ({key, name}))};

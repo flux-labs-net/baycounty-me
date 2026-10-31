@@ -99,6 +99,11 @@ module.exports = async (req, res) => {
   try { health = await require('./_health').checkAndNotify(key); }
   catch (e) { console.error('ingest health', e); health = {error: e.message}; }
   if ((req.query || {}).health) return res.status(200).json({ok: !health.error, health});
+  // Records request drafts for sources that stopped publishing (_records_requests.js). Admins get one notice when new
+  // drafts appear; nothing is sent to an agency until an admin approves it in /admin.
+  await require('./_records_requests').autoDraft(require('./_session').admins(),
+    (to, m) => resend('/emails', 'POST', {from: FROM, to, subject: m.subject, html: m.html, text: m.text}, key))
+    .catch(e => console.error('stale records requests', e.message));
   try {
     // Send drafts on request (after review), only when autosend is on: the owner flips ALERTS_AUTOSEND=1 to approve.
     if ((req.query || {}).send === 'drafts') {

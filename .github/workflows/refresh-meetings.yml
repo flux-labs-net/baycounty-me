@@ -85,6 +85,12 @@ jobs:
       - name: Fetch beach conditions, water quality and parks
         continue-on-error: true
         run: python3 data/outdoors/fetch_outdoors.py
+      - name: Find stale sources and draft records requests
+        # Places where an official source's newest record is older than its usual schedule (for example a beach water
+        # sampling site with no sample in weeks) -> data/civic/stale_requests.json. /admin drafts a records request for
+        # each new gap; nothing is sent until an admin approves it.
+        continue-on-error: true
+        run: python3 data/civic/scripts/stale_requests.py
       - name: Fetch the school district calendar
         # Bay District Schools' website events feed: no-school days, early release, grading periods, graduations and
         # School Board meetings. A failure keeps the events on file and records the error.
