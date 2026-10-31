@@ -326,6 +326,19 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
 .ob-who .av{width:44px;height:44px;border-radius:50%;background:var(--sunken);color:var(--navy,var(--blue));display:grid;place-items:center;font:600 1rem var(--f-display);flex-shrink:0}
 .ob-who h2{margin:0;font:600 1.1rem var(--f-display)}
 .ob-who p{margin:2px 0 0;font-size:.86rem;color:var(--muted)}
+.recap{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px;margin:0 0 18px}
+.recap .sum{margin:0 0 10px;color:var(--muted);font-size:.9rem}
+.recap .key{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.recap .key>li{border-top:1px solid var(--line);padding-top:10px}
+.recap .key b{font-weight:600}
+.recap .key .m{font-size:.84rem;color:var(--muted);margin:2px 0 0}
+.recap .key .x{font-size:.88rem;margin:4px 0 0}
+.brief-head{margin:0 0 18px}
+.brief-head p{margin:2px 0;color:var(--muted)}
+.brief-item{padding:10px 0 2px;border-top:1px solid var(--line)}
+.brief-item p{margin:0}
+.brief-item .m{font-size:.84rem;color:var(--muted)}
+.write-lines{height:calc(var(--n,4) * 26px);background:repeating-linear-gradient(to bottom,transparent 0 25px,var(--line) 25px 26px);margin:6px 0 10px}
 .mtgs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .mtgs>li{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:14px 16px}
 .mtgs .when{font:600 .95rem var(--f-display)}
@@ -427,18 +440,24 @@ dialog.modal::backdrop{background:rgba(10,14,20,.45)}
     <section id="p-board" data-panel hidden>
       <div class="ob-bar" data-report="skip">
         <label class="f grow" id="ob-pick-l" hidden><span>Board member</span><select class="sel" id="ob-pick" aria-label="Board member"></select></label>
-        <button class="btn primary pdf-btn" type="button" data-pdf data-ob-report="briefing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a1 1 0 00-1 1v16a1 1 0 001 1h10a1 1 0 001-1V7z"/><path d="M14 3v4h4"/><path d="M12 11v6M9.5 14.5L12 17l2.5-2.5"/></svg>Full briefing (PDF)</button>
+        <button class="btn primary pdf-btn" type="button" data-pdf data-ob-report="briefing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a1 1 0 00-1 1v16a1 1 0 001 1h10a1 1 0 001-1V7z"/><path d="M14 3v4h4"/><path d="M12 11v6M9.5 14.5L12 17l2.5-2.5"/></svg>Meeting briefing (PDF)</button>
       </div>
       <div id="ob-who"></div>
       <div class="kpis" id="ob-kpis"></div>
-      <div data-brief-skip><h2 class="h2">Next meetings</h2>
-      <ul class="mtgs" id="ob-next"></ul></div>
-      <div data-brief-skip><h2 class="h2">Latest votes</h2>
+      <h2 class="h2">Last meeting on record</h2>
+      <div id="ob-recap"></div>
+      <h2 class="h2">Next meetings</h2>
+      <ul class="mtgs" id="ob-next"></ul>
+      <div><h2 class="h2">Latest votes</h2>
       <div class="tw"><table class="t" id="ob-last"><thead><tr><th>Date</th><th>Vote</th><th>Motion</th><th>Result</th></tr></thead><tbody></tbody></table></div></div>
       <h2 class="h2">The board</h2>
       <div class="tw"><table class="t" id="ob-board"><thead><tr><th>Seat</th><th>Name</th><th>Since</th></tr></thead><tbody></tbody></table></div>
       <p class="ob-note">Everything here is public record, read from agendas, minutes, budgets and the government’s own accounting files. It can’t be changed here. If something is wrong, flag it under Record data and we check it against the source.</p>
     </section>
+
+    <!-- The meeting briefing PDF (Board dashboard > Overview > Meeting briefing): the next meeting's agenda with room to
+         write on each item, and a short recap of the last meeting. Not a menu page; shown only while the PDF is made. -->
+    <section id="p-brief" data-panel hidden></section>
 
     <section id="p-agendas" data-panel hidden>
       <div class="ob-bar" data-report="skip"><p class="sub grow" style="margin:0">Meetings of your board for the next 90 days, with the agenda, the full packet and every item we could read from the agenda. Money items show the amount.</p>

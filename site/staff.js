@@ -58,7 +58,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.reload(); });
 
   // ---------- menu ----------
-  const loaders = {home: loadHome, board: loadBoard, agendas: loadAgendas, votes: loadVotes, numbers: loadNumbers, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
+  const loaders = {home: loadHome, board: loadBoard, brief: loadBrief, agendas: loadAgendas, votes: loadVotes, numbers: loadNumbers, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
     submit: loadSubmit, records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) { nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open); menuBtn.setAttribute('aria-expanded', String(open)); }
@@ -144,7 +144,9 @@
   const VOTE_LBL = {yes: 'Yes', no: 'No', absent: 'Absent', abstain: 'Abstained', other: 'Not recorded'};
   const voteTag = v => `<span class="tag ${v === 'yes' ? 'yes' : v === 'no' ? 'no' : ''}">${VOTE_LBL[v] || esc(v)}</span>`;
   const mtgTime = m => { const d = new Date(m.start && m.start.length > 10 ? m.start : (m.date || '') + 'T12:00:00'); if (isNaN(d)) return esc(m.date);
-    return d.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'}) + (m.start && m.start.length > 10 ? ', ' + d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : ''); };
+    // Meetings are in Bay County (Central time), whatever the reader's clock says.
+    const tz = m.start && m.start.length > 10 ? {timeZone: 'America/Chicago'} : {};
+    return d.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', ...tz}) + (m.start && m.start.length > 10 ? ', ' + d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', ...tz}) : ''); };
   let ob = null, obFor = undefined, obBusy = null;
   async function board() {
     const want = $('#ob-pick').value || '';
@@ -177,6 +179,38 @@
     ${m.items.length ? `<ol>${m.items.slice(0, items).map(i => `<li>${esc(i.title)}${i.amount ? ` <b>${esc(i.amount)}</b>` : ''}</li>`).join('')}</ol>${m.items.length > items ? `<p class="ob-note">And ${m.items.length - items} more items on the agenda.</p>` : ''}` : `<p class="ob-note">${m.agenda_url ? 'The items haven’t been read from this agenda yet. Open the agenda for the list.' : 'No agenda posted yet.'}</p>`}</li>`;
   const empty = (cols, text) => `<tr><td colspan="${cols}" class="empty">${text}</td></tr>`;
 
+  // The last meeting in a few lines: what passed, the minutes, and the two or three votes worth knowing (not every vote).
+  const longDay = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'});
+  const plural = (n, one, many = one + 's') => `${cnt(n)} ${n === 1 ? one : many}`;
+  function recap(l, mine) {
+    if (!l) return '<p class="readonly">No votes from a recent meeting are on record yet.</p>';
+    const where = (l.boards.length ? l.boards : l.meetings.map(m => m.board_name)).join(' and ');
+    const parts = [plural(l.motions, 'motion'), l.passed && `${cnt(l.passed)} passed`, l.failed && `${cnt(l.failed)} failed`, l.tabled && `${cnt(l.tabled)} tabled or continued`,
+      l.split ? plural(l.split, 'split vote') : 'every vote unanimous'].filter(Boolean).join(', ');
+    const src = l.minutes_url ? `<a href="${esc(l.minutes_url)}" target="_blank" rel="noopener">Minutes</a>` : l.source_url ? `<a href="${esc(l.source_url)}" target="_blank" rel="noopener">Source</a>` : '';
+    return `<div class="recap"><p class="sum"><b>${esc(longDay(l.date))}</b>${where ? ' · ' + esc(where) : ''}. ${esc(parts)}.${src ? ' ' + src : ''}</p>
+      ${l.since.length ? `<p class="ob-note">Minutes from ${l.since.map(m => `the ${esc(new Date(m.date + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric'}))} ${esc(m.board_name)} meeting`).join(' and ')} aren’t posted yet, so this is the latest meeting with votes on record.</p>` : ''}
+      <ul class="key">${l.key.map(v => `<li><b>${esc(v.headline || 'Motion')}</b>
+        <p class="m">${[v.outcome && esc(v.outcome[0].toUpperCase() + v.outcome.slice(1)) + (v.tally ? ' ' + esc(v.tally) : ''), v.amount && dollars(v.amount),
+          mine && v.vote && `${esc(mine)} voted ${(VOTE_LBL[v.vote] || v.vote).toLowerCase()}`].filter(Boolean).join(' · ')}</p>
+        ${v.summary && v.summary !== v.headline ? `<p class="x">${esc(v.summary)}</p>` : ''}</li>`).join('')}</ul></div>`;
+  }
+  const lines = n => `<div class="write-lines" data-lines="${n}" style="--n:${n}" aria-hidden="true"></div>`;
+  async function loadBrief() {
+    const j = await board(), b = j.briefing || {}, day1 = b.day || [], me = j.official;
+    const first = me ? me.name.split(/\s+/)[0] : null;
+    const links = m => m.agenda_url || m.packet_url ? `<p>${m.agenda_url ? `<a href="${esc(m.agenda_url)}" target="_blank" rel="noopener">Agenda</a>` : ''}${m.agenda_url && m.packet_url ? ' · ' : ''}${m.packet_url ? `<a href="${esc(m.packet_url)}" target="_blank" rel="noopener">Full packet</a>` : ''}</p>` : '';
+    // Each meeting that day: its agenda items, each with room to write.
+    const agenda = m => `<h2 class="h2">${esc(m.board_name)}${day1.length > 1 ? ' · ' + esc(mtgTime(m).split(', ').slice(-1)[0]) : ''}${m.items.length ? `: ${plural(m.items.length, 'agenda item')}` : ''}</h2>
+      <div class="brief-head"><p>${[m.title, m.location].filter(Boolean).map(esc).join(' · ')}</p>${links(m)}</div>
+      ${m.items.length ? m.items.map((i, n) => `<div class="brief-item"><p><b>${n + 1}.</b> ${esc(i.title)}${i.amount ? ` <b>${esc(i.amount)}</b>` : ''}</p>${lines(4)}</div>`).join('')
+        : `<p class="ob-note">${m.agenda_url ? 'The items haven’t been read from this agenda yet. Open the agenda for the list; there’s room for notes below.' : 'The agenda isn’t posted yet. There’s room for notes below.'}</p>${lines(12)}`}`;
+    $('#p-brief').innerHTML = (day1.length ? `<div class="brief-head"><p><b>${esc(mtgTime(day1[0]).replace(/, \d{1,2}:\d{2}\s?[AP]M$/, ''))}</b> · ${esc([...new Set(day1.map(m => m.board_name))].join(' and '))}</p></div>`
+        : '<p class="readonly">No upcoming meeting is on the calendar yet.</p>') +
+      `<h2 class="h2">Last meeting on record</h2>${recap(b.last, first)}` + day1.map(agenda).join('') + `<h2 class="h2">Other notes</h2>${lines(8)}`;
+  }
+
+
   async function loadBoard() {
     const j = await board();
     $('#ob-who').innerHTML = who(j);
@@ -186,6 +220,7 @@
       (vt ? kpi('Votes on record', cnt(vt.count.votes), vt.first ? `since ${day(vt.first)}` : '') + kpi('Present for', vt.present_rate == null ? '—' : vt.present_rate + '%', `${cnt(vt.count.absent)} absent`) +
         kpi('Split votes', cnt(vt.count.split), `${cnt(vt.count.on_losing_side)} on the losing side`) : '') +
       (j.numbers && j.numbers.budget && j.numbers.budget.history.length ? (h => kpi(`FY${h.fiscal_year} budget`, cash(h.total ?? h.general_fund), h.general_fund ? `General Fund ${cash(h.general_fund)}` : ''))(j.numbers.budget.history[j.numbers.budget.history.length - 1]) : '');
+    $('#ob-recap').innerHTML = recap(j.briefing && j.briefing.last, j.official ? j.official.name.split(/\s+/)[0] : null);
     $('#ob-next').innerHTML = up.slice(0, 3).map(m => mtgCard(m, 8)).join('') || '<li class="muted small">No meetings on the calendar for the next 90 days.</li>';
     $('#ob-last tbody').innerHTML = vt ? vt.recent.slice(0, 10).map(voteRow).join('') || empty(4, 'No votes on record.') : empty(4, 'Pick a board member.');
     $('#ob-board tbody').innerHTML = j.board.map(b => `<tr><td class="nw">${esc(b.seat)}</td><td>${nameLink('person', b.person_id, b.name)}</td><td class="nw">${day(b.since)}</td></tr>`).join('') || empty(3, 'No seats on record.');
@@ -253,13 +288,15 @@
   // ---------- PDF reports (site/report.js) ----------
   // A report button prints its own tab; the full briefing prints the overview, agendas, votes and numbers together.
   // Each download is written to the activity log.
-  const REPORT = {briefing: ['board', 'agendas', 'votes', 'numbers'], agendas: ['agendas'], votes: ['votes'], numbers: ['numbers']};
-  const REPORT_TITLE = {briefing: 'Board briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
+  const REPORT = {briefing: ['brief'], agendas: ['agendas'], votes: ['votes'], numbers: ['numbers']};
+  const REPORT_TITLE = {briefing: 'Meeting briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
   let shown = [];
   window.addEventListener('click', e => {
     const b = e.target.closest('[data-ob-report]'); if (!b) return;
     const r = b.dataset.obReport, panels = REPORT[r];
-    window.BCReportTitle = () => `${REPORT_TITLE[r]}: ${ob && ob.official && r !== 'agendas' && r !== 'numbers' ? ob.official.name : wsInfo.name}`;
+    const nextMtg = () => ob && ob.briefing && ob.briefing.next;
+    window.BCReportTitle = () => r === 'briefing' && nextMtg() ? `${REPORT_TITLE[r]}: ${new Date(nextMtg().date + 'T12:00:00').toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}`
+      : `${REPORT_TITLE[r]}: ${ob && ob.official && r !== 'agendas' && r !== 'numbers' ? ob.official.name : wsInfo.name}`;
     window.BCReportEyebrow = () => `${wsInfo.name} · Board dashboard`;
     window.BCReportMeta = () => [ob && ob.official ? `${ob.official.name}, ${ob.official.seat}, ${ob.official.body}` : '', wsInfo.name,
       r === 'votes' && ($('#vt-q').value || $('#vt-year').value || $('#vt-vote').value) ? 'Filtered: ' + [$('#vt-q').value && `“${$('#vt-q').value}”`, $('#vt-year').value, $('#vt-vote').value && VOTE_LBL[$('#vt-vote').value]].filter(Boolean).join(', ') : ''].filter(Boolean).join(' · ');
@@ -268,11 +305,10 @@
       shown = panels.map(p => $('#p-' + p)).filter(el => el.hidden);
       shown.forEach(el => { el.hidden = false; });
       $$('[data-panel]').forEach(el => { if (!panels.includes(el.id.slice(2))) el.dataset.report = 'skip'; });
-      if (r === 'briefing') $$('[data-brief-skip]').forEach(x => { x.dataset.report = 'skip'; });
     };
     window.BCReportAfter = () => {
       shown.forEach(el => { el.hidden = true; }); shown = [];
-      $$('[data-panel], [data-brief-skip]').forEach(el => { delete el.dataset.report; });
+      $$('[data-panel]').forEach(el => { delete el.dataset.report; });
       api('report-log', {method: 'POST', body: {report: r, person: ob && ob.official ? ob.official.person_id : undefined}}).catch(() => {});
     };
   }, true);
