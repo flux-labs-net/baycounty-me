@@ -88,6 +88,9 @@ tasks.withType<Test>().configureEach {
     // Paparazzi 2.0 alphas build their HTML report with a Gradle class that 8.x lacks. The PNGs and the XML results
     // are what CI uses, so the HTML report stays off.
     reports.html.required.set(false)
+    // Every screen renders in one test JVM from the full seed data; Gradle's 512 MB default ran out on the
+    // person screen once ten screens were picked (light and dark).
+    maxHeapSize = "2g"
 }
 
 kotlin {
