@@ -41,6 +41,19 @@ NOTES = {
 # government workspace, come in straight from the government's own system. The School Board has no workspace yet.
 INTAKE = {'county': 'baycounty', 'pc': 'panamacity', 'pcb': 'panamacitybeach', 'lh': 'lynnhaven', 'cw': 'callaway', 'sp': 'springfield',
           'parker': 'parker', 'mb': 'mexicobeach'}
+# Years whose adopted budget detail the government already posts online, checked by hand on ONLINE_CHECKED. A records
+# request shouldn't ask for what's published: these years are left out of the drafts and listed in the notes instead, as
+# files for us to load. PC and PCB block reads from here, so their sites still need a by-hand look.
+ONLINE_CHECKED = '2026-10-31'
+ONLINE = {
+    'county': ({2016, 2017, 2018, 2019, 2023, 2024}, 'https://www.baycountyfl.gov/Archive.aspx?AMID=40',
+               'expenditure and revenue detail reports'),
+    'cw': ({2022, 2023, 2024, 2025, 2026, 2027}, 'https://www.cityofcallaway.com/429/Annual-Budgets', 'adopted budget books'),
+    'mb': ({2022, 2023, 2024, 2025, 2026, 2027}, 'https://mexicobeachfl.gov/government/budget-financials/', 'budget books'),
+    'sp': ({2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027}, 'https://www.springfieldfl.net/finance', 'final budget resolutions'),
+    'parker': ({2025}, 'https://cityofparker.com/government/budget/', 'final budget'),
+    'schools': ({2018, 2019, 2022, 2023, 2024, 2025, 2026}, 'https://bay.k12.fl.us/uploads/', 'final budget books'),
+}
 FY = lambda y, school: f'FY{y} ({y - 1}-{str(y)[2:]} school year)' if school else f'FY{y} (Oct 1, {y - 1} to Sep 30, {y})'
 
 
@@ -72,9 +85,36 @@ def gaps():
             if 'department' in s:
                 continue
             have_txt = 'nothing on record' if not s else ('fund totals only' if 'fund' in s else 'total only')
+            if y in ONLINE.get(g, (set(),))[0]:
+                continue
             need.append({'fiscal_year': y, 'need': f'line-item budget by fund, department and account ({have_txt})'})
         out[g] = need
     return out
+
+
+def online_note(g):
+    if g not in ONLINE:
+        return None
+    years, url, what = ONLINE[g]
+    have = {y for y, s in _have().get(g, {}).items() if 'department' in s}
+    todo = sorted(years - have)
+    if not todo:
+        return None
+    return f'Left out because they are posted online ({what}, checked {ONLINE_CHECKED}): {spans(todo)} at {url}. Load those ourselves.'
+
+
+_HAVE = None
+
+
+def _have():
+    global _HAVE
+    if _HAVE is None:
+        from page_datasets import budget_years
+        _HAVE = {}
+        for r in budget_years():
+            if r['basis'] == 'adopted':
+                _HAVE.setdefault(r['gov_id'], {}).setdefault(r['fiscal_year'], set()).add(r['section'])
+    return _HAVE
 
 
 def body(g, need):
@@ -117,8 +157,8 @@ def main():
         what = 'line-item budgets by fund and department'
         drafts.append({'key': f'budgets-{FIRST}-{g}', 'government': gov, 'government_key': g, 'recipient_name': who, 'recipient_email': email,
                        'contact_url': url, 'subject': f'Public records request: {what}, {spans(years)}', 'body': body(g, n), 'gaps': n,
-                       'notes': NOTES.get(g)})
-    out = {'as_of': '2026-10-25', 'about': 'Records request drafts for the budget years BayCounty.me is missing (FY2016 onward). Seeded into corr.records_requests and sent only from /admin.',
+                       'notes': ' '.join(x for x in (NOTES.get(g), online_note(g)) if x) or None})
+    out = {'as_of': ONLINE_CHECKED, 'about': 'Records request drafts for the budget years BayCounty.me is missing (FY2016 onward). Seeded into corr.records_requests and sent only from /admin.',
            'requests': drafts}
     json.dump(out, open(OUT, 'w'), indent=1, ensure_ascii=False)
     for d in drafts:
