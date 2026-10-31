@@ -22,3 +22,6 @@
 .ui .gx-check.warn{box-shadow:inset 3px 0 0 var(--amber)}
 .ui .gx-checklist{margin:14px 0 0}
 .ui .gx-checklist summary{cursor:pointer;font-weight:600;padding:6px 0}
+/* one line under the section menu naming the sections with nothing on file for the year picked (gov.js trimMenu) */
+.gx-off{margin:-24px 0 0}
+.gx-off[hidden]{display:none}

@@ -1,16 +1,23 @@
 import SwiftUI
 import BayCountyKit
 
-/// One government, in the same order as its page on BayCounty.me: at a glance, who's in charge, the money,
-/// how it compares, meetings, debt, audit findings, savings ideas and its redevelopment agency.
+/// One government: the year, at a glance, then one row per part with records (who's in charge, the money, how it
+/// compares, meetings, debt, audit findings, savings ideas, its redevelopment agency, every record). Each row opens
+/// that part on its own screen for the same year (`part`), so the screen stays short (GovPart).
 /// One fiscal-year picker at the top drives every year-based section, as the Year picker does on the site:
 /// a year with no record says so and names the nearest years we have (GovYear).
 struct GovernmentDetailView: View {
     @Environment(AppStore.self) private var store
     let govID: String
+    /// One part on its own screen; nil for the government's main screen.
+    var part: GovPart? = nil
+    /// The year the main screen had picked when a part was opened.
+    var startYear: Int? = nil
     @State private var year: Int?
     @State private var allFindings = false
     @State private var allBonds = false
+    @State private var allRecords = false
+    @State private var allGlance = false
 
     /// Datasets this screen reads, besides the government profiles.
     private static let datasets = ["officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies"]
@@ -25,33 +32,30 @@ struct GovernmentDetailView: View {
 
     private func rows(_ id: String) -> [Row] { store.rows[id] ?? [] }
 
-    /// Datasets that carry a gov_id column, so they can be filtered to this government.
+    /// Datasets that have rows for this government (empty ones are left off).
     private var related: [DatasetInfo] {
-        (store.catalog?.datasets ?? []).filter { !DatasetSpec.ownScreens.contains($0.id) && $0.column("gov_id") != nil }
+        store.catalog?.records(for: govID) ?? []
     }
 
     var body: some View {
         if let g = store.government(govID) {
             PageScroll {
-                PageHero(kicker: "Governments", title: g.name,
-                         subtitle: g.population.map { "\(Format.number($0)) residents (2025 estimate)" }) {
-                    GovBadge(govID: govID).scaleEffect(1.2).frame(width: 48, height: 48)
+                if part == nil {
+                    PageHero(kicker: "Governments", title: g.name,
+                             subtitle: g.population.map { "\(Format.number($0)) residents (2025 estimate)" }) {
+                        GovBadge(govID: govID).scaleEffect(1.2).frame(width: 48, height: 48)
+                    }
                 }
-                yearPicker
-                glance(g)
-                whosInCharge
-                moneySection(g)
-                compared(g)
-                meetingsSection
-                Group {
-                    debtSection
-                    auditSection
-                    savingsSection
-                    craSection
-                    recordsSection(g)
+                if let part {
+                    yearPicker
+                    partView(part, g)
+                } else {
+                    yearPicker
+                    glance(g)
+                    partsMenu(g)
                 }
             }
-            .navigationTitle(g.name)
+            .navigationTitle(part.map { "\(g.name): \($0.title)" } ?? g.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -73,7 +77,7 @@ struct GovernmentDetailView: View {
     // MARK: Year
 
     /// The fiscal year every year-based section shows: the one picked, else the current fiscal year.
-    private var picked: Int { year ?? Officeholders.fiscalYear(gov: govID) }
+    private var picked: Int { year ?? startYear ?? Officeholders.fiscalYear(gov: govID) }
     private var short: String { store.government(govID)?.name ?? "this government" }
 
     private var yearPicker: some View {
@@ -98,6 +102,78 @@ struct GovernmentDetailView: View {
             .padding(12).frame(maxWidth: .infinity, alignment: .leading).card(12)
     }
 
+    // MARK: Parts
+
+    @ViewBuilder private func partView(_ p: GovPart, _ g: Government) -> some View {
+        switch p {
+        case .who: whosInCharge
+        case .money: moneySection(g)
+        case .compare: compared(g)
+        case .meetings: meetingsSection
+        case .debt: debtSection
+        case .audits: auditSection
+        case .savings: savingsSection
+        case .cra: craSection
+        case .records: recordsSection(g)
+        }
+    }
+
+    private var upcoming: [Meeting] { Array(Meeting.upcoming(store.meetings).filter { $0.govID == govID }.prefix(3)) }
+    private var findingsAll: [Row] { rows("audit-findings").filter { $0.string("gov_id") == govID } }
+    private var ideas: [Row] { rows("savings-opportunities").filter { $0.string("gov_id") == govID || $0.strings("gov_ids").contains(govID) } }
+    private var cras: [Row] { rows("cra-agencies").filter { $0.string("gov_id") == govID } }
+
+    /// Whether a part has anything to show for this government (any year; a part's own screen says when the year picked has none).
+    private func has(_ p: GovPart) -> Bool {
+        switch p {
+        case .who: !Officeholders.years(rows("officeholder-terms"), gov: govID).isEmpty
+        case .money: rows("budget-years").contains { $0.string("gov_id") == govID }
+        case .compare: true
+        case .meetings: !upcoming.isEmpty
+        case .debt: rows("debt").contains { debtIDs.contains($0.string("gov_id") ?? "") } || rows("bonds").contains { debtIDs.contains($0.string("gov_id") ?? "") }
+        case .audits: !findingsAll.isEmpty
+        case .savings: !ideas.isEmpty
+        case .cra: !cras.isEmpty
+        case .records: !related.isEmpty
+        }
+    }
+
+    /// The one-line answer under each part's name, for the year picked.
+    private func summary(_ p: GovPart) -> String {
+        let fy = "FY\(String(picked))"
+        switch p {
+        case .who:
+            let n = Officeholders.inOffice(rows("officeholder-terms"), gov: govID, year: picked).count
+            return "\(n) seat\(n == 1 ? "" : "s") in \(fy)"
+        case .money:
+            let b = GovYear.budget(rows("budget-years"), gov: govID, year: picked)
+            return b.total.map { "\(Format.compactMoney($0)) \(fy) budget" } ?? "No \(fy) budget on file"
+        case .compare: return "Per resident, tax rate and debt beside the others"
+        case .meetings: return "\(upcoming.count) on the calendar"
+        case .debt:
+            return GovYear.row(rows("government-years"), gov: govID, year: picked)?.number("debt_total").map { "\(Format.compactMoney($0)) owed, end of \(fy)" } ?? "What it owes, bonds and loans"
+        case .audits:
+            let n = findingsAll.filter { GovYear.fiscalYearOf($0.string("fy")) == picked }.count
+            return n > 0 ? "\(n) finding\(n == 1 ? "" : "s") in \(fy)" : "Findings from every audit on file"
+        case .savings: return "\(ideas.count) idea\(ideas.count == 1 ? "" : "s") to check"
+        case .cra: return cras.compactMap { $0.string("cra") }.joined(separator: ", ")
+        case .records: return "\(related.count) datasets with records"
+        }
+    }
+
+    /// One row per part with records; each opens that part on its own screen for the year picked.
+    private func partsMenu(_ g: Government) -> some View {
+        let parts = GovPart.shown(has)
+        return PageSection(title: "Explore \(g.name)", symbol: "square.grid.2x2", tone: .teal) {
+            CardList {
+                ForEach(parts) { p in
+                    RouteRow(route: .governmentPart(govID, part: p.rawValue, year: picked), title: p.title, detail: summary(p), symbol: p.symbol)
+                    if p != parts.last { RowDivider(inset: 50) }
+                }
+            }
+        }
+    }
+
     // MARK: At a glance
 
     /// The fiscal year's figures (government-years); a figure with no record that year says so, never another year's number.
@@ -106,22 +182,30 @@ struct GovernmentDetailView: View {
         let fy = "FY\(String(picked))"
         let has = { (c: String) in !GovYear.yearsWith(gy, gov: govID, column: c).isEmpty }
         let findings = rows("audit-findings").filter { $0.string("gov_id") == govID && GovYear.fiscalYearOf($0.string("fy")) == picked }
+        var cards: [(String, String, String?)] = []
+        if let v = r?.number("budget_total") { cards.append(("Total budget", Format.compactMoney(v), "\(fy) · \(r?.string("budget_status") ?? "adopted")")) }
+        else if has("budget_total") { cards.append(("Total budget", "No data", "No \(fy) budget on file")) }
+        if let v = r?.number("millage") { cards.append(("Tax rate (mills)", Format.number(v), "Per $1,000 of taxable value")) }
+        else if has("millage") { cards.append(("Tax rate (mills)", "No data", "No \(fy) rate on file")) }
+        if let v = r?.number("debt_total") { cards.append(("Debt", Format.compactMoney(v), "Audited, end of \(fy)")) }
+        else if has("debt_total") { cards.append(("Debt", "No data", "No audited total for \(fy)")) }
+        if let v = r?.number("employees_fte") { cards.append(("Employees", Format.number(v), "\(fy) budget, staff positions")) }
+        if let v = r?.number("budget_per_resident") { cards.append(("Budget per resident", Format.money(v.rounded()), nil)) }
+        if let v = r?.number("general_fund") { cards.append(("General fund", Format.compactMoney(v), nil)) }
+        if let v = r?.number("property_tax_levy") { cards.append(("Property tax levied", Format.compactMoney(v), nil)) }
+        if !findings.isEmpty { cards.append(("Audit findings", "\(findings.count)", "\(fy) · \(findings.filter { $0.bool("repeat") == true }.count) repeat")) }
+        if let v = g.votesRecorded { cards.append(("Votes recorded", "\(v)", (g.splitVotes.map { "\($0) split · " } ?? "") + "all years")) }
+        if let v = g.typicalUtilityBill { cards.append(("Typical utility bill", Format.money(v), "Per month, today's rates")) }
+        if let v = g.femaMichael { cards.append(("FEMA, Hurricane Michael", Format.compactMoney(v), nil)) }
         return PageSection(title: "At a glance", symbol: "gauge.with.dots.needle.33percent", tone: .blue, caption: "Fiscal year \(String(picked))\(r?.string("period").map { " · " + $0 } ?? "")") {
+            // the first four figures; the rest behind "All N figures", so the parts list below stays in reach
+            let shown = allGlance ? cards : Array(cards.prefix(4))
             StatGrid {
-                if let v = r?.number("budget_total") { KPICard(title: "Total budget", value: Format.compactMoney(v), caption: "\(fy) · \(r?.string("budget_status") ?? "adopted")") }
-                else if has("budget_total") { KPICard(title: "Total budget", value: "No data", caption: "No \(fy) budget on file") }
-                if let v = r?.number("budget_per_resident") { KPICard(title: "Budget per resident", value: Format.money(v.rounded())) }
-                if let v = r?.number("general_fund") { KPICard(title: "General fund", value: Format.compactMoney(v)) }
-                if let v = r?.number("property_tax_levy") { KPICard(title: "Property tax levied", value: Format.compactMoney(v)) }
-                if let v = r?.number("millage") { KPICard(title: "Tax rate (mills)", value: Format.number(v), caption: "Per $1,000 of taxable value") }
-                else if has("millage") { KPICard(title: "Tax rate (mills)", value: "No data", caption: "No \(fy) rate on file") }
-                if let v = r?.number("debt_total") { KPICard(title: "Debt", value: Format.compactMoney(v), caption: "Audited, end of \(fy)") }
-                else if has("debt_total") { KPICard(title: "Debt", value: "No data", caption: "No audited total for \(fy)") }
-                if !findings.isEmpty { KPICard(title: "Audit findings", value: "\(findings.count)", caption: "\(fy) · \(findings.filter { $0.bool("repeat") == true }.count) repeat") }
-                if let v = r?.number("employees_fte") { KPICard(title: "Employees", value: Format.number(v), caption: "\(fy) budget, staff positions") }
-                if let v = g.votesRecorded { KPICard(title: "Votes recorded", value: "\(v)", caption: (g.splitVotes.map { "\($0) split · " } ?? "") + "all years") }
-                if let v = g.typicalUtilityBill { KPICard(title: "Typical utility bill", value: Format.money(v), caption: "Per month, today's rates") }
-                if let v = g.femaMichael { KPICard(title: "FEMA, Hurricane Michael", value: Format.compactMoney(v)) }
+                ForEach(shown, id: \.0) { c in KPICard(title: c.0, value: c.1, caption: c.2) }
+            }
+            if cards.count > 4 {
+                Button(allGlance ? "Show fewer" : "All \(cards.count) figures") { allGlance.toggle() }
+                    .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
             }
         }
     }
@@ -266,7 +350,7 @@ struct GovernmentDetailView: View {
     // MARK: Meetings
 
     @ViewBuilder private var meetingsSection: some View {
-        let upcoming = Array(Meeting.upcoming(store.meetings).filter { $0.govID == govID }.prefix(3))
+        let upcoming = self.upcoming
         if !upcoming.isEmpty {
             PageSection(title: "Upcoming meetings", symbol: "calendar", tone: .salmon) {
                 CardList {
@@ -413,11 +497,18 @@ struct GovernmentDetailView: View {
     // MARK: Records
 
     private func recordsSection(_ g: Government) -> some View {
-        PageSection(title: "Every record", symbol: "tray.full", tone: .blue, caption: "Each dataset, filtered to \(g.name).") {
+        // only datasets with rows for this government; the first few, then the rest behind "All N"
+        let shown = allRecords ? related : Array(related.prefix(6))
+        return PageSection(title: "Every record", symbol: "tray.full", tone: .blue, caption: "\(related.count) datasets with records for \(g.name).") {
             CardList {
-                ForEach(related) { d in
+                ForEach(shown) { d in
                     RouteRow(route: .dataset(d.id, filters: ["gov_id": govID]), title: d.title, symbol: DatasetSpec.for(d.id).symbol)
-                    if d.id != related.last?.id { RowDivider(inset: 50) }
+                    if d.id != shown.last?.id { RowDivider(inset: 50) }
+                }
+                if related.count > 6 {
+                    RowDivider()
+                    Button(allRecords ? "Show fewer" : "All \(related.count) datasets") { allRecords.toggle() }
+                        .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
                 }
             }
             WebLink(title: "Full profile on BayCounty.me", url: g.pageURL).font(.subheadline)

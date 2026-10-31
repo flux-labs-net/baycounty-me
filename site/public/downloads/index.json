@@ -110,7 +110,18 @@
     },
     {
      "name": "gov_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
     }
    ],
    "json": "/downloads/government-profiles.json",

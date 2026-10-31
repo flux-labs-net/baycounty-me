@@ -7,6 +7,12 @@ public struct Catalog: Codable, Hashable, Sendable {
     public let datasets: [DatasetInfo]
 
     public func dataset(_ id: String) -> DatasetInfo? { datasets.first { $0.id == id } }
+
+    /// The datasets that hold rows for one government (its gov_id column lists it), for a government's "Every record" list.
+    /// A dataset with nothing for that government is left off, so the list doesn't open onto empty tables.
+    public func records(for govID: String) -> [DatasetInfo] {
+        datasets.filter { !DatasetSpec.ownScreens.contains($0.id) && ($0.rows ?? 0) > 0 && ($0.column("gov_id")?.choices.contains(govID) ?? false) }
+    }
 }
 
 public struct DatasetInfo: Codable, Hashable, Identifiable, Sendable {

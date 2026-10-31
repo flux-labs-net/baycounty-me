@@ -19,6 +19,20 @@ class DataTest {
         assertNotNull(r["f"])
     }
 
+    /** A government's "Every record" list names only datasets with rows for it, and leaves none of those out. */
+    @Test fun governmentRecordsListOnlyDatasetsWithRows() {
+        val cat = Repo.catalog()
+        for (gov in listOf("county", "sp", "mb")) {
+            val listed = cat.records(gov).map { it.id }.toSet()
+            assertTrue(gov, listed.isNotEmpty())
+            for (d in cat.datasets) {
+                if (d.column("gov_id") == null || d.id in DatasetSpec.ownScreens) continue
+                val has = Repo.rows(d.id).any { it.string("gov_id") == gov }
+                assertEquals("$gov ${d.id}", has, d.id in listed)
+            }
+        }
+    }
+
     @Test fun everyPublishedDatasetDecodesAndReads() {
         val cat = Repo.catalog()
         assertTrue(cat.datasets.size > 20)

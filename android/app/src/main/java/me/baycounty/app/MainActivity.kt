@@ -77,6 +77,7 @@ val Route.usageName: String get() = when (this) {
     is Route.Dataset -> "dataset/$id"
     is Route.Record -> "record/$datasetID"
     is Route.Gov -> "government/$govID"
+    is Route.GovPart -> "government/$govID/$part"
     is Route.MeetingDetail -> "meeting"
     else -> (this::class.simpleName ?: "screen").lowercase()
 }
@@ -166,6 +167,7 @@ fun RouteScreen(route: Route) {
     when (route) {
         is Route.MeetingDetail -> MeetingDetailScreen(route.id)
         is Route.Gov -> GovernmentScreen(route.govID)
+        is Route.GovPart -> GovernmentScreen(route.govID, me.baycounty.kit.GovPart.of(route.part), route.year)
         Route.People -> PeopleScreen()
         is Route.Person -> PersonScreen(route.id)
         Route.Vendors -> VendorsScreen()
