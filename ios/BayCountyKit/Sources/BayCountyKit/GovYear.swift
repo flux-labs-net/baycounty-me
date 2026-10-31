@@ -53,7 +53,10 @@ public enum GovYear {
         let rs = rows.filter { $0.string("gov_id") == gov && fy($0) == year }
         func lines(_ basis: String, _ section: String) -> [Line] {
             rs.filter { $0.string("basis") == basis && $0.string("section") == section && $0.bool("in_total") != false }
-                .compactMap { r in r.number("amount").flatMap { $0 > 0 ? Line(name: r.string("name") ?? "", amount: $0) : nil } }
+                .compactMap { r -> Line? in
+                    guard let a = r.number("amount"), a > 0 else { return nil }
+                    return Line(name: r.string("name") ?? "", amount: a)
+                }
                 .sorted { $0.amount > $1.amount }
         }
         let total = rs.first { $0.string("basis") == "adopted" && $0.string("line_key") == "total" }
@@ -65,8 +68,9 @@ public enum GovYear {
 
     /// Fiscal years with budget-years lines of a basis (and, optionally, one of the sections).
     public static func budgetYears(_ rows: [Row], gov: String, basis: String, sections: Set<String>? = nil) -> [Int] {
-        Array(Set(rows.filter { $0.string("gov_id") == gov && $0.string("basis") == basis && (sections.map { s in s.contains($0.string("section") ?? "") } ?? true) }
-            .compactMap(fy))).sorted()
+        Array(Set(rows.filter { r in
+            r.string("gov_id") == gov && r.string("basis") == basis && (sections?.contains(r.string("section") ?? "") ?? true)
+        }.compactMap(fy))).sorted()
     }
 
     /// "No FY2019 audit on file. Earliest we have: FY2023. The state Auditor General posts …"
