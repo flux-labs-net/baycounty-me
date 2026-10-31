@@ -1,13 +1,18 @@
 import SwiftUI
 import BayCountyKit
 
-/// One government, in the same order as its page on BayCounty.me: at a glance, who's in charge, the money,
-/// how it compares, meetings, debt, audit findings, savings ideas and its redevelopment agency.
+/// One government: the year, at a glance, then one row per part with records (who's in charge, the money, how it
+/// compares, meetings, debt, audit findings, savings ideas, its redevelopment agency, every record). Each row opens
+/// that part on its own screen for the same year (`part`), so the screen stays short (GovPart).
 /// One fiscal-year picker at the top drives every year-based section, as the Year picker does on the site:
 /// a year with no record says so and names the nearest years we have (GovYear).
 struct GovernmentDetailView: View {
     @Environment(AppStore.self) private var store
     let govID: String
+    /// One part on its own screen; nil for the government's main screen.
+    var part: GovPart? = nil
+    /// The year the main screen had picked when a part was opened.
+    var startYear: Int? = nil
     @State private var year: Int?
     @State private var allFindings = false
     @State private var allBonds = false
@@ -34,25 +39,22 @@ struct GovernmentDetailView: View {
     var body: some View {
         if let g = store.government(govID) {
             PageScroll {
-                PageHero(kicker: "Governments", title: g.name,
-                         subtitle: g.population.map { "\(Format.number($0)) residents (2025 estimate)" }) {
-                    GovBadge(govID: govID).scaleEffect(1.2).frame(width: 48, height: 48)
+                if part == nil {
+                    PageHero(kicker: "Governments", title: g.name,
+                             subtitle: g.population.map { "\(Format.number($0)) residents (2025 estimate)" }) {
+                        GovBadge(govID: govID).scaleEffect(1.2).frame(width: 48, height: 48)
+                    }
                 }
-                yearPicker
-                glance(g)
-                whosInCharge
-                moneySection(g)
-                compared(g)
-                meetingsSection
-                Group {
-                    debtSection
-                    auditSection
-                    savingsSection
-                    craSection
-                    recordsSection(g)
+                if let part {
+                    yearPicker
+                    partView(part, g)
+                } else {
+                    yearPicker
+                    glance(g)
+                    partsMenu(g)
                 }
             }
-            .navigationTitle(g.name)
+            .navigationTitle(part.map { "\(g.name): \($0.title)" } ?? g.name)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -74,7 +76,7 @@ struct GovernmentDetailView: View {
     // MARK: Year
 
     /// The fiscal year every year-based section shows: the one picked, else the current fiscal year.
-    private var picked: Int { year ?? Officeholders.fiscalYear(gov: govID) }
+    private var picked: Int { year ?? startYear ?? Officeholders.fiscalYear(gov: govID) }
     private var short: String { store.government(govID)?.name ?? "this government" }
 
     private var yearPicker: some View {
@@ -97,6 +99,78 @@ struct GovernmentDetailView: View {
     private func gapNote(_ text: String) -> some View {
         Text(text).font(.footnote).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             .padding(12).frame(maxWidth: .infinity, alignment: .leading).card(12)
+    }
+
+    // MARK: Parts
+
+    @ViewBuilder private func partView(_ p: GovPart, _ g: Government) -> some View {
+        switch p {
+        case .who: whosInCharge
+        case .money: moneySection(g)
+        case .compare: compared(g)
+        case .meetings: meetingsSection
+        case .debt: debtSection
+        case .audits: auditSection
+        case .savings: savingsSection
+        case .cra: craSection
+        case .records: recordsSection(g)
+        }
+    }
+
+    private var upcoming: [Meeting] { Array(Meeting.upcoming(store.meetings).filter { $0.govID == govID }.prefix(3)) }
+    private var findingsAll: [Row] { rows("audit-findings").filter { $0.string("gov_id") == govID } }
+    private var ideas: [Row] { rows("savings-opportunities").filter { $0.string("gov_id") == govID || $0.strings("gov_ids").contains(govID) } }
+    private var cras: [Row] { rows("cra-agencies").filter { $0.string("gov_id") == govID } }
+
+    /// Whether a part has anything to show for this government (any year; a part's own screen says when the year picked has none).
+    private func has(_ p: GovPart) -> Bool {
+        switch p {
+        case .who: !Officeholders.years(rows("officeholder-terms"), gov: govID).isEmpty
+        case .money: rows("budget-years").contains { $0.string("gov_id") == govID }
+        case .compare: true
+        case .meetings: !upcoming.isEmpty
+        case .debt: rows("debt").contains { debtIDs.contains($0.string("gov_id") ?? "") } || rows("bonds").contains { debtIDs.contains($0.string("gov_id") ?? "") }
+        case .audits: !findingsAll.isEmpty
+        case .savings: !ideas.isEmpty
+        case .cra: !cras.isEmpty
+        case .records: !related.isEmpty
+        }
+    }
+
+    /// The one-line answer under each part's name, for the year picked.
+    private func summary(_ p: GovPart) -> String {
+        let fy = "FY\(String(picked))"
+        switch p {
+        case .who:
+            let n = Officeholders.inOffice(rows("officeholder-terms"), gov: govID, year: picked).count
+            return "\(n) seat\(n == 1 ? "" : "s") in \(fy)"
+        case .money:
+            let b = GovYear.budget(rows("budget-years"), gov: govID, year: picked)
+            return b.total.map { "\(Format.compactMoney($0)) \(fy) budget" } ?? "No \(fy) budget on file"
+        case .compare: return "Per resident, tax rate and debt beside the others"
+        case .meetings: return "\(upcoming.count) on the calendar"
+        case .debt:
+            return GovYear.row(rows("government-years"), gov: govID, year: picked)?.number("debt_total").map { "\(Format.compactMoney($0)) owed, end of \(fy)" } ?? "What it owes, bonds and loans"
+        case .audits:
+            let n = findingsAll.filter { GovYear.fiscalYearOf($0.string("fy")) == picked }.count
+            return n > 0 ? "\(n) finding\(n == 1 ? "" : "s") in \(fy)" : "Findings from every audit on file"
+        case .savings: return "\(ideas.count) idea\(ideas.count == 1 ? "" : "s") to check"
+        case .cra: return cras.compactMap { $0.string("cra") }.joined(separator: ", ")
+        case .records: return "\(related.count) datasets with records"
+        }
+    }
+
+    /// One row per part with records; each opens that part on its own screen for the year picked.
+    private func partsMenu(_ g: Government) -> some View {
+        let parts = GovPart.shown(has)
+        return PageSection(title: "Explore \(g.name)", symbol: "square.grid.2x2", tone: .teal) {
+            CardList {
+                ForEach(parts) { p in
+                    RouteRow(route: .governmentPart(govID, part: p.rawValue, year: picked), title: p.title, detail: summary(p), symbol: p.symbol)
+                    if p != parts.last { RowDivider(inset: 50) }
+                }
+            }
+        }
     }
 
     // MARK: At a glance
@@ -267,7 +341,7 @@ struct GovernmentDetailView: View {
     // MARK: Meetings
 
     @ViewBuilder private var meetingsSection: some View {
-        let upcoming = Array(Meeting.upcoming(store.meetings).filter { $0.govID == govID }.prefix(3))
+        let upcoming = self.upcoming
         if !upcoming.isEmpty {
             PageSection(title: "Upcoming meetings", symbol: "calendar", tone: .salmon) {
                 CardList {

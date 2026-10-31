@@ -29,6 +29,7 @@ import me.baycounty.kit.Format
 import me.baycounty.kit.Government
 import me.baycounty.kit.Meeting
 import me.baycounty.kit.GovYear
+import me.baycounty.kit.GovPart
 import me.baycounty.kit.Officeholders
 import me.baycounty.kit.Row as DataRow
 
@@ -41,7 +42,7 @@ private val govDatasets = listOf("officeholder-terms", "government-years", "budg
  * a year with no record says so and names the nearest years we have (GovYear).
  */
 @Composable
-fun GovernmentScreen(govID: String) {
+fun GovernmentScreen(govID: String, part: GovPart? = null, startYear: Int? = null) {
     val store = LocalStore.current
     LaunchedEffect(govID) { store.load(govDatasets); store.loadPeople() }
     val g = store.government(govID)
@@ -50,29 +51,83 @@ fun GovernmentScreen(govID: String) {
         return
     }
     fun rows(id: String) = store.rows[id] ?: emptyList()
-    var year by rememberSaveable(govID) { mutableStateOf<Int?>(null) }
-    val picked = year ?: Officeholders.fiscalYear(govID)
+    var year by rememberSaveable(govID, part) { mutableStateOf<Int?>(null) }
+    val picked = year ?: startYear ?: Officeholders.fiscalYear(govID)
     val yc = YearCtx(govID, g.name, picked)
     val shareURL = g.pageURL ?: "${BayCountyClient.SITE}/governments/${g.slug}"
-    Screen(g.name, onRefresh = { for (d in govDatasets) store.load(d, force = true) }, actions = {
+    Screen(part?.let { "${g.name}: ${it.title}" } ?: g.name, onRefresh = { for (d in govDatasets) store.load(d, force = true) }, actions = {
         ShareMenuButton(g.name, shareURL) {
             RecordShare.page(g.name, listOf("Budget, taxes, debt, votes and who's in charge"), shareURL.removePrefix(BayCountyClient.SITE))
         }
     }) {
-        item {
+        if (part == null) item {
             PageHero("Governments", g.name, g.population?.let { "${Format.number(it)} residents (2025 estimate)" }, badge = { GovBadge(govID, 48.dp) })
         }
         item { MenuPicker("Fiscal year $picked", GovYear.years(govID).map { it to "FY$it" }, "Fiscal year $picked. Changes every section below.") { year = it } }
-        item { Glance(g, yc, rows("government-years"), rows("audit-findings")) }
-        item { WhosInCharge(govID, rows("officeholder-terms"), picked) }
-        item { MoneySection(yc, rows("budget-years")) }
-        item { Compared(g) }
-        item { GovMeetings(govID) }
-        item { DebtSection(yc, rows("debt"), rows("bonds"), rows("government-years")) }
-        item { AuditSection(yc, rows("audit-findings")) }
-        item { SavingsSection(govID, rows("savings-opportunities")) }
-        item { CraSection(govID, rows("cra-agencies")) }
-        item { RecordsSection(g) }
+        if (part == null) {
+            item { Glance(g, yc, rows("government-years"), rows("audit-findings")) }
+            item { PartsMenu(g, yc, ::rows) }
+        } else item {
+            when (part) {
+                GovPart.WHO -> WhosInCharge(govID, rows("officeholder-terms"), picked)
+                GovPart.MONEY -> MoneySection(yc, rows("budget-years"))
+                GovPart.COMPARE -> Compared(g)
+                GovPart.MEETINGS -> GovMeetings(govID)
+                GovPart.DEBT -> DebtSection(yc, rows("debt"), rows("bonds"), rows("government-years"))
+                GovPart.AUDITS -> AuditSection(yc, rows("audit-findings"))
+                GovPart.SAVINGS -> SavingsSection(govID, rows("savings-opportunities"))
+                GovPart.CRA -> CraSection(govID, rows("cra-agencies"))
+                GovPart.RECORDS -> RecordsSection(g)
+            }
+        }
+    }
+}
+
+/** A city includes its port; the county includes the airport district (as on the site). */
+private fun debtIDs(govID: String) = buildSet { add(govID); if (govID == "pc") add("port"); if (govID == "county") add("airport") }
+
+/** One row per part with records, with a one-line answer for the year picked; each opens that part on its own screen. */
+@Composable
+private fun PartsMenu(g: Government, yc: YearCtx, rows: (String) -> List<DataRow>) {
+    val store = LocalStore.current
+    val govID = yc.govID
+    val fy = yc.fy
+    val upcoming = Meeting.upcoming(store.meetings).filter { it.govID == govID }.take(3)
+    val findings = rows("audit-findings").filter { it.string("gov_id") == govID }
+    val ideas = rows("savings-opportunities").filter { it.string("gov_id") == govID || govID in it.strings("gov_ids") }
+    val cras = rows("cra-agencies").filter { it.string("gov_id") == govID }
+    val related = store.catalog?.records(govID) ?: emptyList()
+    val ids = debtIDs(govID)
+    fun has(p: GovPart): Boolean = when (p) {
+        GovPart.WHO -> Officeholders.years(rows("officeholder-terms"), govID).isNotEmpty()
+        GovPart.MONEY -> rows("budget-years").any { it.string("gov_id") == govID }
+        GovPart.COMPARE -> true
+        GovPart.MEETINGS -> upcoming.isNotEmpty()
+        GovPart.DEBT -> rows("debt").any { (it.string("gov_id") ?: "") in ids } || rows("bonds").any { (it.string("gov_id") ?: "") in ids }
+        GovPart.AUDITS -> findings.isNotEmpty()
+        GovPart.SAVINGS -> ideas.isNotEmpty()
+        GovPart.CRA -> cras.isNotEmpty()
+        GovPart.RECORDS -> related.isNotEmpty()
+    }
+    fun summary(p: GovPart): String = when (p) {
+        GovPart.WHO -> Officeholders.inOffice(rows("officeholder-terms"), govID, yc.year).size.let { "$it seat${if (it == 1) "" else "s"} in $fy" }
+        GovPart.MONEY -> GovYear.budget(rows("budget-years"), govID, yc.year).total?.let { "${Format.compactMoney(it)} $fy budget" } ?: "No $fy budget on file"
+        GovPart.COMPARE -> "Per resident, tax rate and debt beside the others"
+        GovPart.MEETINGS -> "${upcoming.size} on the calendar"
+        GovPart.DEBT -> GovYear.row(rows("government-years"), govID, yc.year)?.number("debt_total")?.let { "${Format.compactMoney(it)} owed, end of $fy" } ?: "What it owes, bonds and loans"
+        GovPart.AUDITS -> findings.count { GovYear.fiscalYearOf(it.string("fy")) == yc.year }.let { if (it > 0) "$it finding${if (it == 1) "" else "s"} in $fy" else "Findings from every audit on file" }
+        GovPart.SAVINGS -> "${ideas.size} idea${if (ideas.size == 1) "" else "s"} to check"
+        GovPart.CRA -> cras.mapNotNull { it.string("cra") }.joinToString(", ")
+        GovPart.RECORDS -> "${related.size} datasets with records"
+    }
+    val parts = GovPart.shown(::has)
+    PageSection("Explore ${g.name}", "square.grid.2x2", Tone.TEAL) {
+        CardList {
+            parts.forEachIndexed { i, p ->
+                RouteRow(Route.GovPart(govID, p.id, yc.year), p.title, summary(p), symbol = p.symbol)
+                if (i < parts.lastIndex) RowDivider(50.dp)
+            }
+        }
     }
 }
 
@@ -224,7 +279,7 @@ private fun GovMeetings(govID: String) {
 @Composable
 private fun DebtSection(yc: YearCtx, debtRows: List<DataRow>, bondRows: List<DataRow>, gy: List<DataRow>) {
     val govID = yc.govID
-    val ids = buildSet { add(govID); if (govID == "pc") add("port"); if (govID == "county") add("airport") }
+    val ids = debtIDs(govID)
     val debt = debtRows.filter { (it.string("gov_id") ?: "") in ids }
     val bonds = bondRows.filter { (it.string("gov_id") ?: "") in ids }.sortedByDescending { it.number("outstanding") ?: 0.0 }
     if (debt.isEmpty() && bonds.isEmpty()) return

@@ -12,6 +12,8 @@ sealed class Route {
     data class Dataset(val id: String, val filters: Map<String, String> = emptyMap()) : Route()
     data class Record(val datasetID: String, val rowID: Int) : Route()
     data class Gov(val govID: String) : Route()
+    /** One part of a government's screen (GovPart id) on its own screen, for the year the government screen had picked. */
+    data class GovPart(val govID: String, val part: String, val year: Int?) : Route()
     data class MeetingDetail(val id: String) : Route()
     object CRA : Route()
     object MyAddress : Route()
