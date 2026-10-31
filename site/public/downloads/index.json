@@ -7529,7 +7529,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 416,
+   "rows": 415,
    "columns": [
     {
      "name": "website",
