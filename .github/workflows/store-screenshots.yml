@@ -24,7 +24,8 @@ jobs:
         run: |
           if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
           else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
-      - run: brew install xcodegen
+      - name: Install XcodeGen (once; the Mac keeps it)
+        run: command -v xcodegen >/dev/null || brew install xcodegen
       - name: Make sure Xcode has the watchOS platform (the iPhone app carries the watch app)
         run: ios/scripts/ensure_watchos.sh
       - name: Build for the simulator
@@ -44,10 +45,8 @@ jobs:
           APP=$(find build/Build/Products -name "BayCountyMe.app" -maxdepth 3 | head -1)
           # Only this simulator copy may read plain http from this machine (the release app never does).
           /usr/libexec/PlistBuddy -c "Add :NSAppTransportSecurity dict" -c "Add :NSAppTransportSecurity:NSAllowsLocalNetworking bool true" "$APP/Info.plist"
-          DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[6-9] Pro Max \(" | head -1 | grep -oE "[0-9A-F-]{36}")
-          [ -n "$DEV" ] || DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
-          xcrun simctl shutdown all || true  # the Mac Pro keeps simulators between runs
-          xcrun simctl boot "$DEV"; xcrun simctl bootstatus "$DEV" -b
+          . scripts/ci_sim.sh
+          DEV=$(ci_device "iPhone [0-9]+ Pro Max"); echo "DEV=$DEV" >> "$GITHUB_ENV"  # this runner's own simulator
           xcrun simctl ui "$DEV" appearance light
           xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 --wifiBars 3 || true
           xcrun simctl install "$DEV" "$APP"
@@ -56,14 +55,13 @@ jobs:
             xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
             if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app -apiBase "$API" -setupSeen YES -tenure own
             else xcrun simctl launch "$DEV" me.baycounty.app -apiBase "$API" -screen "$s"; fi
-            sleep 15
-            xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__').png"
+            ci_shot "$DEV" "shots/$(echo "$s" | tr ': ' '__').png"
           done
       - run: cat demo-server.log | tail -80
         if: always()
       - name: Shut down the simulator
         if: always()
-        run: xcrun simctl shutdown all || true
+        run: '[ -z "$DEV" ] || xcrun simctl shutdown "$DEV" || true'
       - uses: actions/upload-artifact@v4
         with:
           name: store-ios
