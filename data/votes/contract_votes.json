@@ -1,13 +1,13 @@
 {
  "as_of": "2026-10-31",
  "method": "Writes data/votes/contract_votes.json and data/votes/contract_votes_review.json. Run by data/build.py.\nA vote is linked to a contract record when all of these hold:\n  * same government (vote body -> gov_id; a CRA board counts as its city),\n  * vote date within 45 days of the record's agenda date (either side),\n  * and the vote agrees with the record in at least two ways, from:\n      vendor_name  - the vote text names the vendor by one of its aliases (whole words, at least 6 letters),\n      item_number  - the vote text and the record share a bid/contract/RFQ number such as \"PC24-005\" or \"24-18\",\n      agenda_item  - the vote text and the record's description share at least 3 distinctive words (not the vendor's name),\n      amount       - the vote amount equals the record amount to the dollar (and the vote names no other vendor);\n    or the vendor is named in a vote on the same day, both amounts are given and within 3%, and no other vendor is named;\n    or the number matches on the same day.\nWhen several votes qualify, the one with the most kinds of agreement (then the closest date) is kept. Everything weaker\n(amount only, description only, vendor named but amounts differ) goes to the review file. A link shows that the minutes record a vote on the item; it does not show why anyone voted as they did.",
- "count_links": 99,
- "count_records_linked": 99,
- "count_votes_linked": 97,
- "count_contracts_linked": 95,
+ "count_links": 101,
+ "count_records_linked": 101,
+ "count_votes_linked": 99,
+ "count_contracts_linked": 97,
  "by_method": {
   "vendor_name+amount": 11,
-  "vendor_name+agenda_item+amount": 31,
+  "vendor_name+agenda_item+amount": 32,
   "vendor_name": 1,
   "vendor_name+item_number+agenda_item+amount": 30,
   "vendor_name+item_number+amount": 5,
@@ -15,7 +15,8 @@
   "vendor_name+agenda_item": 3,
   "item_number+agenda_item+amount": 4,
   "vendor_name+item_number": 1,
-  "agenda_item+amount": 3
+  "agenda_item+amount": 3,
+  "item_number+amount": 1
  },
  "links": [
   {
@@ -1632,6 +1633,38 @@
    "vote_id": "pcb-council:2026-07-09:resolution-no-26-130-a-resolution-of-the",
    "vote_date": "2026-07-09",
    "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:341",
+   "record_type": "contract",
+   "vendor_ids": [],
+   "gov_id": "lh",
+   "record_date": "2026-07-14",
+   "record_amount": 100000.0,
+   "record_what": "IFB 25.26-19, as-needed asphalt repair services, not to exceed $100,000 a year (Resolution 2026-07-567)",
+   "record_url": "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_07142026-1372?packet=true",
+   "vote_index": 350,
+   "vote_id": "lh-commission:2026-07-14:item-12-discussion-and-possible-approval",
+   "vote_date": "2026-07-14",
+   "days_apart": 0,
+   "match_method": "item_number+amount"
+  },
+  {
+   "record_id": "contract:351",
+   "record_type": "contract",
+   "vendor_ids": [
+    "ecsc"
+   ],
+   "gov_id": "lh",
+   "record_date": "2025-08-12",
+   "record_amount": 4416594.43,
+   "record_what": "West 10th Street utility improvements (CDBG-DR grant of $4,400,000)",
+   "record_url": "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
+   "vote_index": 319,
+   "vote_id": "lh-commission:2025-07-22:item-18-discussion-and-possible-approval",
+   "vote_date": "2025-07-22",
+   "days_apart": 21,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {

@@ -123,6 +123,8 @@ public struct DatasetSpec: Sendable {
                                          amount: ["amount"], date: ["date"], badge: "vote", filters: ["board", "member", "vote", "kind"], page: "people"),
         "contract-vote-dollars": .init(.accountability, "dollarsign.square", title: ["headline"], subtitle: ["board", "date"], detail: "not_counted_reason",
                                        amount: ["amount"], date: ["date"], badge: "kind", filters: ["board", "counted", "kind", "outcome"], page: "public-money/votes"),
+        "contract-minutes-check": .init(.accountability, "checklist", title: ["headline"], subtitle: ["board", "date"], detail: "checked_note",
+                                        amount: ["amount"], date: ["date"], badge: "status", filters: ["gov_id", "year", "status"], page: "public-money/contracts"),
         "member-votes": .init(.accountability, "person.crop.square", title: ["headline"], subtitle: ["member", "date"],
                               date: ["date"], badge: "vote", filters: ["board", "member", "vote"], page: "public-money/votes"),
         "vendor-payments": .init(.accountability, "dollarsign.circle", title: ["vendor"], subtitle: ["government", "payments"],

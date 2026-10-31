@@ -2299,3 +2299,5 @@ DATASETS += _OVERLAPS
 DB_ONLY_COLUMNS.update(_OVERLAP_COLUMNS)
 from vote_dollars import DATASETS as _VOTE_DOLLARS  # noqa: E402  contract dollars behind officials' votes (site/vote_dollars.py)
 DATASETS += _VOTE_DOLLARS
+from contract_coverage import DATASETS as _CONTRACT_CHECK  # noqa: E402  contract votes in the minutes vs the contract list (site/contract_coverage.py)
+DATASETS += _CONTRACT_CHECK

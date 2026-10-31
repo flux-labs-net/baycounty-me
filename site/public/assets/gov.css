@@ -17,3 +17,8 @@
 .ui .gx-gap b{color:var(--ink)}
 .ui .hbars .hb.on .hb-n{font-weight:700;color:var(--ink)}
 .ui .hbars .hb.on .hb-track{outline:2px solid var(--amber);outline-offset:2px;border-radius:6px}
+/* what the contract list covers for the year picked, and the contract votes in the minutes that aren't in it (gov.js contractCheck) */
+.ui .gx-check{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:var(--sunken);color:var(--ink);line-height:1.5}
+.ui .gx-check.warn{box-shadow:inset 3px 0 0 var(--amber)}
+.ui .gx-checklist{margin:14px 0 0}
+.ui .gx-checklist summary{cursor:pointer;font-weight:600;padding:6px 0}
