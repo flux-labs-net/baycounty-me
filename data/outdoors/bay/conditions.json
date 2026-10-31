@@ -1,7 +1,7 @@
 {
- "fetched_at": "2026-10-30T12:23:06+00:00",
- "issued": "2026-10-30T10:02:00+00:00",
- "product_url": "https://api.weather.gov/products/bd200d1e-5d03-474d-9879-69d2c6ab9258",
+ "fetched_at": "2026-10-31T01:40:38+00:00",
+ "issued": "2026-10-30T15:45:00+00:00",
+ "product_url": "https://api.weather.gov/products/f3045ebf-b4ed-4baa-8850-2f47be1fd7a8",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
@@ -9,7 +9,7 @@
  "outlook": "Northeasterly offshore winds through today will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "Moderate",
    "surf_height": "Around 1 foot",
    "uv_index": "Moderate",

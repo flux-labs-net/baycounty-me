@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
  "as_of": "2026-10-30",
- "fetched": "2026-10-30T07:22:10-0500",
+ "fetched": "2026-10-30T20:39:44-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -69,23 +69,6 @@
    "recurring": true
   },
   {
-   "event_id": "pcb-chamber:27606",
-   "source_id": "pcb-chamber",
-   "source": "Panama City Beach Chamber",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Young Professionals Coffee, Conversations & Headshots",
-   "starts": "2026-10-30T09:30:00",
-   "ends": "2026-10-30T11:00:00",
-   "all_day": false,
-   "venue": "The Sapp House",
-   "category": "Chamber",
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/young-professionals-coffee-conversations-headshots/",
-   "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false
-  },
-  {
    "event_id": "library:23792:2026-10-30",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -103,40 +86,6 @@
    "recurring": true
   },
   {
-   "event_id": "panama-city:6568:2026-10-30",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Line Dancing",
-   "starts": "2026-10-30T13:00:00",
-   "ends": "2026-10-30T14:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6568",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7487:2026-10-30",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Card Club",
-   "starts": "2026-10-30T14:00:00",
-   "ends": "2026-10-30T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7487",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
    "event_id": "library:23419:2026-10-30",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -151,23 +100,6 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/crafternoon-the-library-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7423:2026-10-30",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Dream Builders at MLK",
-   "starts": "2026-10-30T15:00:00",
-   "ends": "2026-10-30T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7423",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
   },
   {
@@ -1242,6 +1174,23 @@
    "recurring": true
   },
   {
+   "event_id": "lynn-haven:1321:2026-11-10",
+   "source_id": "lynn-haven",
+   "source": "City of Lynn Haven",
+   "gov": "lh",
+   "town": "Lynn Haven",
+   "title": "CRA Meeting",
+   "starts": "2026-11-10T17:00:00",
+   "ends": "2026-11-10T17:15:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1321",
+   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "lynn-haven:1213:2026-11-10",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
@@ -1358,6 +1307,23 @@
    "cost": null,
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1712",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "pcb-chamber:27802",
+   "source_id": "pcb-chamber",
+   "source": "Panama City Beach Chamber",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Veteran’s Day Freedom Celebration",
+   "starts": "2026-11-11T15:00:00",
+   "ends": "2026-11-11T17:00:00",
+   "all_day": false,
+   "venue": "Capt. Anderson’s Marina",
+   "category": "Community",
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/veterans-day-freedom-celebration-2/",
+   "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
   },
   {
@@ -1546,6 +1512,23 @@
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7432",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
+  },
+  {
+   "event_id": "panama-city:7734:2026-11-12",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Special Event Handbook Committee Meeting",
+   "starts": "2026-11-12T16:00:00",
+   "ends": "2026-11-12T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7734",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
   },
   {
    "event_id": "panama-city:7534:2026-11-12",
@@ -2787,6 +2770,23 @@
    "url": "https://www.nwrls.com/event/youth-dungeons-dragons-ages-8-12/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
+  },
+  {
+   "event_id": "pcb-chamber:27800",
+   "source_id": "pcb-chamber",
+   "source": "Panama City Beach Chamber",
+   "gov": null,
+   "town": "Panama City",
+   "title": "14th Annual Bethlehem Christmas Village",
+   "starts": "2026-12-09T17:30:00",
+   "ends": "2026-12-12T20:30:00",
+   "all_day": false,
+   "venue": "Capt. Anderson’s Marina",
+   "category": "Community",
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/14th-annual-bethlehem-christmas-village/",
+   "source_url": "https://pcbeach.org/local-events/",
+   "recurring": false
   },
   {
    "event_id": "library:24157:2026-12-10",

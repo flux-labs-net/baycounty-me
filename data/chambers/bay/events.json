@@ -1,7 +1,7 @@
 {
- "as_of": "2026-10-30",
+ "as_of": "2026-10-31",
  "fetched": {
-  "pcb-chamber": "2026-10-30T12:22:10+00:00",
+  "pcb-chamber": "2026-10-31T01:39:44+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27606",
-   "title": "Young Professionals Coffee, Conversations & Headshots",
-   "starts": "2026-10-30T09:30:00",
-   "ends": "2026-10-30T11:00:00",
-   "all_day": false,
-   "venue": "The Sapp House",
-   "city": "Panama City",
-   "category": "Chamber Events",
-   "chamber_event": true,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/young-professionals-coffee-conversations-headshots/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27665",
@@ -115,6 +100,21 @@
    "chamber_event": true,
    "cost": null,
    "url": "https://pcbeach.org/local-event/pcb-young-professionals-giveback-small-things-big-impact/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27802",
+   "title": "Veteran’s Day Freedom Celebration",
+   "starts": "2026-11-11T15:00:00",
+   "ends": "2026-11-11T17:00:00",
+   "all_day": false,
+   "venue": "Capt. Anderson’s Marina",
+   "city": "Panama City",
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/veterans-day-freedom-celebration-2/",
    "source_url": "https://pcbeach.org/local-events/"
   },
   {
@@ -355,6 +355,21 @@
    "chamber_event": true,
    "cost": null,
    "url": "https://pcbeach.org/local-event/panama-city-beach-marathon/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27800",
+   "title": "14th Annual Bethlehem Christmas Village",
+   "starts": "2026-12-09T17:30:00",
+   "ends": "2026-12-12T20:30:00",
+   "all_day": false,
+   "venue": "Capt. Anderson’s Marina",
+   "city": "Panama City",
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/14th-annual-bethlehem-christmas-village/",
    "source_url": "https://pcbeach.org/local-events/"
   },
   {

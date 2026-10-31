@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30T12:26:48+00:00",
+ "generated": "2026-10-31T01:44:18+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -33,6 +33,109 @@
    "parties": [],
    "addresses": [],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "PRESENTATIONS",
+   "title": "National Hospice and Palliative Care Month Proclamation",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues & Expenditures and Inventory Deletions",
+   "summary": "Acknowledge receipt of the reports and approve inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2027 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2026-2027 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - County Manager's Office",
+   "title": "2027 Board of County Commissioners Meeting and Holiday Schedule",
+   "summary": "Board adopts the meeting schedule for the 2027 calendar year and approves the 2027 holiday schedule.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - Emergency Services",
+   "title": "Deckard Short Term Vacation Rental Piggyback",
+   "summary": "Board approves a piggyback agreement with Deckard Technologies.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Deckard Technologies",
+    "St. Johns County"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "533 E. 11th Street Building Roof Construction RFP 26-56",
+   "summary": "Approve the contract with A&A Roofing Company, Inc. for construction services on the roof project at 533 E. 11th Street.",
+   "kind": "contract",
+   "amount": 174000.0,
+   "parties": [
+    "A&A Roofing Company, Inc."
+   ],
+   "addresses": [
+    "533 E. 11th Street"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947"
   },
   {
    "board": "mb",

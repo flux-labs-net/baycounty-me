@@ -1,10 +1,10 @@
 {
- "as_of": "2026-10-30",
+ "as_of": "2026-10-31",
  "source": "Bay County Supervisor of Elections itemized campaign finance exports (VoterFocus); Florida Division of Corporations (Sunbiz)",
  "method": "A contributor filed as an individual is listed when the name and the street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active or still filing around the gift. Middle initials and Jr/Sr must agree. Protected voters are never matched. Name-only matches are not published.",
  "counts": {
-  "individual_lines": 8367,
-  "published_lines": 1226,
+  "individual_lines": 8373,
+  "published_lines": 1228,
   "protected_skipped": 512,
   "published_donors": 643,
   "held_zip_only": 704
@@ -8516,6 +8516,14 @@
      ]
     },
     {
+     "doc_number": "L26000151573",
+     "name": "CIV BOATS LLC",
+     "status": "active",
+     "titles": [
+      "MGR"
+     ]
+    },
+    {
      "doc_number": "P00000007823",
      "name": "FIRST LINKS, INC.",
      "status": "active",
@@ -8554,6 +8562,14 @@
      "status": "active",
      "titles": [
       "AMBR",
+      "MGR"
+     ]
+    },
+    {
+     "doc_number": "L26000280418",
+     "name": "PAMM C, LLC",
+     "status": "active",
+     "titles": [
       "MGR"
      ]
     },
@@ -22764,6 +22780,13 @@
    "item": "check"
   },
   {
+   "owner_id": "o_75f5d6017deb0627",
+   "cand_id": "728",
+   "date": "2026-10-19",
+   "amount": 250.0,
+   "item": "check"
+  },
+  {
    "owner_id": "o_763f4009e8e626d6",
    "cand_id": "545",
    "date": "2021-02-13",
@@ -25056,6 +25079,13 @@
    "owner_id": "o_bb8b8d6dcdc135b2",
    "cand_id": "691",
    "date": "2025-02-24",
+   "amount": 1000.0,
+   "item": "check"
+  },
+  {
+   "owner_id": "o_bb8b8d6dcdc135b2",
+   "cand_id": "728",
+   "date": "2026-10-19",
    "amount": 1000.0,
    "item": "check"
   },

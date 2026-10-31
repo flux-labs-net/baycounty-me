@@ -1,12 +1,12 @@
 {
- "as_of": "2026-10-30",
+ "as_of": "2026-10-31",
  "method": "Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
  "count_rows": 545,
  "count_contributor_candidate_pairs": 206,
  "count_distinct_vendors": 50,
  "count_by_confidence_pairs": {
-  "exact": 182,
-  "likely": 24
+  "likely": 24,
+  "exact": 182
  },
  "pairs_where_contract_government_matches_office": 69,
  "count_by_gift_source_pairs": {

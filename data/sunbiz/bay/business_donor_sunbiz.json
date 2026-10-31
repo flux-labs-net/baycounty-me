@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-30",
+ "as_of": "2026-10-31",
  "county": "bay",
  "method": "Business contributors to current officeholders and 2026 local candidates, matched to the Florida Division of Corporations (Sunbiz) quarterly corporate file filtered to Bay County (any principal, mailing, registered-agent or officer address in the county). exact = same name once punctuation and legal suffixes are removed; vendor_alias = a hand-checked spelling join in data/entities/vendors.json; plural_variant = same name apart from plurals/possessives; truncated_name = the filing cut the name off and only one entity starts with it; reviewed = checked by hand (donor_overrides.json). A dissolved company counts only if it was still filing within 2 years of the gift. A match says the filed name is that registered entity; it says nothing about why a gift was made. Built by data/sunbiz/build_sunbiz.py.",
  "summary": {
@@ -10,11 +10,11 @@
   "residents_on_2plus_active": 4176,
   "corporate_officers": 12,
   "agent_services": 59,
-  "business_gift_lines": 2700,
-  "matched_lines": 1639,
+  "business_gift_lines": 2705,
+  "matched_lines": 1641,
   "matched_entities": 732,
   "match_methods": {
-   "exact": 1387,
+   "exact": 1389,
    "truncated_name": 156,
    "vendor_alias": 57,
    "plural_variant": 39
@@ -7380,6 +7380,26 @@
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SMALLWOOD%20MIRANDA%20LAW%2C%20INC./Page1",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=667&rellevel=4&committee=N"
+  },
+  {
+   "contributor": "Primus Consulting LLC",
+   "candidate": "Christopher Moore",
+   "office": "School Board, District 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gov_id": "schools",
+   "contribution_amount": 1000.0,
+   "contribution_items": 1,
+   "first_date": "2026-10-18",
+   "last_date": "2026-10-18",
+   "sunbiz_doc_number": null,
+   "sunbiz_entity_name": null,
+   "sunbiz_status": null,
+   "sunbiz_filing_type": null,
+   "sunbiz_principal_city": null,
+   "match_method": null,
+   "county": "bay",
+   "source_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N"
   },
   {
    "contributor": "St. Joe Company",
@@ -19022,6 +19042,26 @@
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
   },
   {
+   "contributor": "Book That Condo, LLC",
+   "candidate": "Grant Wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gov_id": "pcb",
+   "contribution_amount": 250.0,
+   "contribution_items": 1,
+   "first_date": "2026-10-20",
+   "last_date": "2026-10-20",
+   "sunbiz_doc_number": "L10000023656",
+   "sunbiz_entity_name": "BOOK THAT CONDO LLC",
+   "sunbiz_status": "Active",
+   "sunbiz_filing_type": "FLAL",
+   "sunbiz_principal_city": "Panama City Beach",
+   "match_method": "exact",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BOOK%20THAT%20CONDO%20LLC/Page1",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
+  },
+  {
    "contributor": "Burger Guyz of FL, Inc.",
    "candidate": "Grant Wittstruck",
    "office": "Panama City Beach Council, Ward 1",
@@ -19039,6 +19079,26 @@
    "match_method": "truncated_name",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BURGER%20GUYZ%20OF%20FLORIDA%2C%20INC/Page1",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
+  },
+  {
+   "contributor": "By The Sea Resorts, LLC",
+   "candidate": "Grant Wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gov_id": "pcb",
+   "contribution_amount": 960.6,
+   "contribution_items": 1,
+   "first_date": "2026-10-20",
+   "last_date": "2026-10-20",
+   "sunbiz_doc_number": "P00000107164",
+   "sunbiz_entity_name": "BY THE SEA RESORTS, INC.",
+   "sunbiz_status": "Active",
+   "sunbiz_filing_type": "DOMP",
+   "sunbiz_principal_city": "Panama City Beach",
+   "match_method": "exact",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BY%20THE%20SEA%20RESORTS%2C%20INC./Page1",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
   },
   {
@@ -19182,6 +19242,26 @@
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
   },
   {
+   "contributor": "Gary Monahan",
+   "candidate": "Grant Wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gov_id": "pcb",
+   "contribution_amount": 250.0,
+   "contribution_items": 1,
+   "first_date": "2026-10-24",
+   "last_date": "2026-10-24",
+   "sunbiz_doc_number": null,
+   "sunbiz_entity_name": null,
+   "sunbiz_status": null,
+   "sunbiz_filing_type": null,
+   "sunbiz_principal_city": null,
+   "match_method": null,
+   "county": "bay",
+   "source_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
+  },
+  {
    "contributor": "Geilmore Resorts, LLC",
    "candidate": "Grant Wittstruck",
    "office": "Panama City Beach Council, Ward 1",
@@ -19259,6 +19339,26 @@
    "match_method": "exact",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20SUN%2C%20INC./Page1",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
+  },
+  {
+   "contributor": "Kristen Sheffield",
+   "candidate": "Grant Wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gov_id": "pcb",
+   "contribution_amount": 500.0,
+   "contribution_items": 1,
+   "first_date": "2026-10-24",
+   "last_date": "2026-10-24",
+   "sunbiz_doc_number": null,
+   "sunbiz_entity_name": null,
+   "sunbiz_status": null,
+   "sunbiz_filing_type": null,
+   "sunbiz_principal_city": null,
+   "match_method": null,
+   "county": "bay",
+   "source_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N"
   },
   {
