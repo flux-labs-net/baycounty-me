@@ -72,7 +72,7 @@
       const right = i < half, j = right ? i : i - half, n = right ? half : nodes.length - half;
       const f = n > 1 ? j / (n - 1) : 0.5, a = -span + 2 * span * f;
       const t = right ? a : Math.PI - a;
-      const r = 4 + 8 * Math.sqrt((c.amount || 0) / top);
+      const r = 4 + 8 * Math.sqrt(Math.max(0, c.amount || 0) / top); // a net refund (negative) gets the smallest circle
       return {c, right, x: cx + rx * Math.cos(t), y: cy + ry * Math.sin(a), r: c.other.photo ? Math.max(r, 11) : r};
     });
     let svg = '';

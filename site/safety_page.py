@@ -221,7 +221,7 @@ def safety_page(out_dir):
     <p class="note">As each agency reported to the FBI. The Sheriff's civilian count jumped from 71 in 2022 to 271 in 2023; the FBI data does not say why. Missing years were not reported.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><h2>Ask for police and fire records</h2></div>
-    <p>Incident reports, call logs, body camera video and fire reports are public records in Florida, with some parts held back by law. Each agency's records contact is on the <a href="/records">public records page</a>.</p></section>
+    <p>Incident reports, call logs, body camera video and fire reports are public records in Florida, with some parts held back by law. Our <a href="/records-request">records request page</a> writes the request for you and addresses it to the right office.</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">
