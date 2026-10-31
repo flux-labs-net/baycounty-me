@@ -1,45 +1,5 @@
 {
- "as_of": "2026-10-30",
+ "as_of": "2026-10-31",
  "about": "Records request drafts for sources whose newest official record is older than the source’s usual schedule. Seeded into corr.records_requests and sent only from /admin after review.",
- "requests": [
-  {
-   "key": "stale-beach-water-fdoh",
-   "kind": "stale",
-   "check": "beach-water",
-   "check_title": "Beach water quality samples",
-   "page": "/beaches#water",
-   "government": "Florida Department of Health",
-   "government_key": "fdoh",
-   "recipient_name": "Public Records Coordinator, Florida Department of Health",
-   "recipient_email": "PublicRecordsRequest@FLHealth.gov",
-   "contact_url": "https://www.floridahealth.gov/public-records/",
-   "notes": "The Department of Health takes records requests centrally (PublicRecordsRequest@FLHealth.gov, 850-245-4005). Beach sampling in Bay County is done by the Florida Department of Health in Bay County.",
-   "gaps": [
-    {
-     "gap_id": "beach-water:Bay11:2025-05-05",
-     "location": "Earl Gilbert Park",
-     "listed_as": "Dupont Bridge",
-     "site_id": "Bay11",
-     "epa_beach_id": "FL131708",
-     "last_record": "2025-05-05",
-     "expected_every_days": 14,
-     "last_result": "rated Poor (990 enterococci per 100 mL)",
-     "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=DUPONT+BRIDGE&SPNo=&SPLat=30.10676237&SPLong=-85.60231328",
-     "need": "Healthy Beaches samples at Earl Gilbert Park after May 5, 2025"
-    },
-    {
-     "gap_id": "beach-water:Bay5:2025-10-27",
-     "location": "PCB Beach Access 41",
-     "listed_as": null,
-     "site_id": "Bay5",
-     "epa_beach_id": "FL607825",
-     "last_record": "2025-10-27",
-     "expected_every_days": 14,
-     "last_result": "rated Good (10 enterococci per 100 mL)",
-     "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=PCB+Beach+Access&SPNo=&SPLat=30.183437&SPLong=-85.819953",
-     "need": "Healthy Beaches samples at PCB Beach Access 41 after October 27, 2025"
-    }
-   ]
-  }
- ]
+ "requests": []
 }
