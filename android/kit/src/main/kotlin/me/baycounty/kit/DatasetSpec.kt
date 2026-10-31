@@ -155,6 +155,8 @@ data class DatasetSpec(
                               amount = listOf("amount"), date = listOf("date"), badge = "vote", filters = listOf("board", "member", "vote", "kind"), page = "people"),
         "contract-vote-dollars" to DatasetSpec(Section.ACCOUNTABILITY, "dollarsign.square", title = listOf("headline"), subtitle = listOf("board", "date"), detail = "not_counted_reason",
                               amount = listOf("amount"), date = listOf("date"), badge = "kind", filters = listOf("board", "counted", "kind", "outcome"), page = "public-money/votes"),
+        "contract-minutes-check" to DatasetSpec(Section.ACCOUNTABILITY, "checklist", title = listOf("headline"), subtitle = listOf("board", "date"), detail = "checked_note",
+                              amount = listOf("amount"), date = listOf("date"), badge = "status", filters = listOf("gov_id", "year", "status"), page = "public-money/contracts"),
         "member-votes" to DatasetSpec(Section.ACCOUNTABILITY, "person.crop.square", title = listOf("headline"), subtitle = listOf("member", "date"),
                               date = listOf("date"), badge = "vote", filters = listOf("board", "member", "vote"), page = "public-money/votes"),
         "vendor-payments" to DatasetSpec(Section.ACCOUNTABILITY, "dollarsign.circle", title = listOf("vendor"), subtitle = listOf("government", "payments"),
