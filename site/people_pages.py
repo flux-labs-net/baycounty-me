@@ -333,13 +333,17 @@ def people_index():
                               f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases']),
                               av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id'])), order=pos, group=gname(home),
                               status=status_of(rank), sub_group=STATUS[status_of(rank)]))
-    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
+    # The tile counts only people still on the Nov 3 ballot (SOE status Qualified/Advanced). The 'candidate' kind also
+    # covers 2026 filers who withdrew, lost the primary or won unopposed, and early filers for April 2027 races.
+    ballot = [r for r in EG._ds('candidates-2026') if r.get('status') == 'on_ballot' and r.get('person_id')]
+    on_ballot, races = len({r['person_id'] for r in ballot}), len({r['race_id'] for r in ballot})
+    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', 'Candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
     <p class="lede">One page for each elected official, department leader and local candidate since 2016 in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to. Below: the five countywide officers and what top officials are paid.</p></div>
     <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
-  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
+  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "On the Nov 3 ballot", on_ballot, f'Candidates in {races} local race{"s" if races != 1 else ""}')}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
     {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')), statuses=(('', 'Current and past'), ('current', 'Current only'), ('past', 'Past only')))}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
