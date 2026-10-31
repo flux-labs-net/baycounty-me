@@ -12,5 +12,13 @@
   "np-590951529": "Health and hospice",
   "np-591682455": "Schools and reading",
   "np-596177716": "Food and basic needs"
+ },
+ "wider_than_county": {
+  "note": "Statewide or national bodies that file from a Bay address. Their Form 990 volunteer count covers members everywhere, so it is not shown as a Bay County number.",
+  "ids": {
+   "np-210624080": "National order (Sons of Union Veterans of the Civil War), files from Panama City Beach",
+   "np-590246707": "Statewide Grand Chapter (Order of the Eastern Star of Florida)",
+   "np-593394998": "Statewide Grand Chapter (Order of the Eastern Star charitable arm)"
+  }
  }
 }

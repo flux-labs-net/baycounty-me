@@ -17638,7 +17638,7 @@
    "id": "volunteer-orgs",
    "title": "Nonprofits that use volunteers",
    "description": "Local nonprofits that reported volunteers on their latest IRS Form 990 (Part I line 6, the organization's own estimate, which can cover more than this county) or that have a volunteer need open now: what each does, a plain cause, website, volunteers and employees reported, revenue, and open needs. Homeowner associations, chambers and private foundations are left out unless they post a need.",
-   "rows": 79,
+   "rows": 76,
    "columns": [
     {
      "name": "place_id",
