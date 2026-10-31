@@ -54,7 +54,7 @@ struct BoardView: View {
                     Link(destination: URL(string: "https://baycounty.me/staff#board")!) {
                         VStack(alignment: .leading, spacing: 2) {
                             Label("PDF reports", systemImage: "doc.richtext").font(.body.weight(.semibold))
-                            Text("Full briefing, agendas, voting record and numbers, on the web workspace.").font(.footnote).foregroundStyle(.secondary)
+                            Text("Meeting briefing, agendas, voting record and numbers, on the web workspace.").font(.footnote).foregroundStyle(.secondary)
                         }
                         .padding(14).frame(maxWidth: .infinity, alignment: .leading).card()
                     }

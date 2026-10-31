@@ -85,3 +85,26 @@ test('budget: adopted totals by year, and the last two compared', () => {
 test('every report the page offers has a name for the activity log', () => {
   assert.deepEqual(Object.keys(O.REPORTS).sort(), ['agendas', 'briefing', 'numbers', 'votes']);
 });
+
+test('meeting briefing recap: the last meeting with votes, its totals and the two or three votes worth knowing', () => {
+  const v = (vote_id, extra) => ({date: '2026-09-22', board: 'Lynn Haven City Commission', outcome: 'passed', tally: '5-0', split: false, vote_id, ...extra});
+  const rows = [
+    v('a', {category: 'consent agenda', headline: 'Consent agenda'}),
+    v('b', {category: 'millage', headline: 'Millage 4.25', split: true, tally: '4-1', amount: 325365, summary: 'I move to approve 4.25 millage.'}),
+    v('c', {category: 'procedural', headline: 'Add swearing-in'}),
+    v('d', {category: 'personnel', headline: 'Clerk hiring', outcome: 'tabled', summary: 'Tabled pending a workshop on the hiring process.'}),
+    v('e', {category: 'budget', headline: 'FY2027 budget', amount: 54494475}),
+    {date: '2026-09-08', outcome: 'passed', category: 'budget', headline: 'Older meeting', vote_id: 'old'},
+    {date: '2026-10-01', outcome: 'scheduled; outcome not yet published', category: 'millage', headline: 'Not held yet', vote_id: 'later'},
+  ];
+  const recent = [{date: '2026-10-13', board_name: 'City Commission', status: 'posted'}];
+  const r = O.lastMeeting(rows, recent, {b: 'no'});
+  assert.equal(r.date, '2026-09-22', 'a vote still waiting on its outcome is not a meeting that happened');
+  assert.deepEqual([r.motions, r.passed, r.tabled, r.split], [5, 4, 1, 1]);
+  assert.deepEqual(r.key.map(k => k.vote_id), ['b', 'd', 'e'], 'split, money and tabled votes, in agenda order; not the consent agenda');
+  assert.equal(r.key[0].vote, 'no');
+  assert.equal(r.key[0].summary, null, 'motion wording is dropped');
+  assert.equal(r.key[1].summary, 'Tabled pending a workshop on the hiring process.');
+  assert.deepEqual(r.since, [{date: '2026-10-13', board_name: 'City Commission'}], 'a later meeting whose minutes are not in yet');
+  assert.equal(O.lastMeeting([]), null);
+});

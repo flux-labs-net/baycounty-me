@@ -17,7 +17,7 @@ const BOARDS = {county: 'Board of County Commissioners', 'county-planning': 'Pla
   pc: 'City Commission', 'pc-cra': 'CRA Board', pcb: 'City Council', lh: 'City Commission', 'lh-cra': 'CRA Board',
   cw: 'City Commission', 'cw-cra': 'CRA Board', sp: 'City Commission', parker: 'City Council', mb: 'City Council'};
 // The PDF reports on the dashboard (site/staff.js), named in the activity log when one is downloaded.
-const REPORTS = {briefing: 'Full briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
+const REPORTS = {briefing: 'Meeting briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
 const boardOf = (gov, id) => id === gov || String(id || '').startsWith(gov + '-');
 
 // The seats on a government's board on a date, from officeholder-terms.
@@ -100,6 +100,34 @@ function contracts(rows, today, days = 365) {
   return {from, rows: list, total: list.reduce((s, c) => s + (c.amount || 0), 0), count: list.length};
 }
 
+// What the board decided at its last meeting, for the meeting briefing: the totals and the two or three votes worth
+// knowing about (split votes, money, budgets, land use), not every motion. rows: this government's votes, newest
+// first is not required. A vote still waiting on its outcome ("scheduled; outcome not yet published") doesn't count as
+// a meeting that happened. mine: {vote_id: 'yes'|'no'|...} for the official, when there is one.
+const DONE = o => o && !/scheduled|not yet|pending/i.test(o);
+const WEIGHT = {millage: 3, budget: 3, debt: 3, settlement: 3, contract: 2, 'land use': 2, ordinance: 2, fees: 2, land: 2, property: 1, grant: 1, cra: 1,
+  policy: 1, resolution: 0, personnel: 0, other: 0, appointment: -1, procedural: -3, 'consent agenda': -2};
+// Motion wording ("I move to approve ...") says nothing the headline doesn't.
+const motion = t => !t || /^(i move|i'll move|move to|motion to)|\bmoved to\b|\bmoved that\b/i.test(t.trim());
+function lastMeeting(rows, recent = [], mine = {}, {keep = 3} = {}) {
+  const done = rows.filter(v => DONE(v.outcome) && v.date);
+  if (!done.length) return null;
+  const date = done.map(v => day(v.date)).sort().pop();
+  const at = done.filter(v => day(v.date) === date);
+  const score = v => (v.split ? 6 : 0) + (WEIGHT[v.category] ?? 0) + (num(v.amount) ? 1 + Math.log10(num(v.amount)) / 3 : 0) + (/fail|den|reject|table/i.test(v.outcome) ? 2 : 0);
+  const key = at.map((v, i) => ({v, i, s: score(v)})).sort((a, b) => b.s - a.s || a.i - b.i).slice(0, keep).sort((a, b) => a.i - b.i)
+    .map(({v}) => ({headline: v.headline || null, summary: motion(v.summary) || v.summary === v.headline ? null : v.summary, outcome: v.outcome || null, tally: /^\d+\s*-\s*\d+$/.test(v.tally || '') ? v.tally : null,
+      split: Boolean(v.split), amount: num(v.amount), category: v.category || null, vote: mine[v.vote_id] || null, vote_id: v.vote_id || null, source_url: v.source_url || null}));
+  const m = recent.filter(x => x.date === date);
+  // A meeting held since then whose minutes aren't in yet (the recap is the latest meeting with votes on record).
+  const since = recent.filter(x => x.date > date && x.status !== 'cancelled').map(x => ({date: x.date, board_name: x.board_name}));
+  const out = (re) => at.filter(v => re.test(v.outcome)).length;
+  return {date, boards: [...new Set(at.map(v => v.board).filter(Boolean))], since,
+    meetings: m.map(x => ({board_name: x.board_name, title: x.title, minutes_url: x.minutes_url, agenda_url: x.agenda_url})),
+    minutes_url: (m.find(x => x.minutes_url) || {}).minutes_url || null, source_url: (at.find(v => v.source_url) || {}).source_url || null,
+    motions: at.length, passed: out(/pass|approv|adopt/i), failed: out(/fail|den|reject/i), tabled: out(/table|continu|defer/i), split: at.filter(v => v.split).length, key};
+}
+
 // A table that isn't created yet (a new deployment) reads as empty.
 const safe = async (q, sql, p) => { try { return await q(sql, p); } catch (e) { if (e.code === '42P01') return []; throw e; } };
 
@@ -114,10 +142,21 @@ async function dashboard(q, w, personId, {today = iso(new Date()), only = null} 
   if (pid && !held.length) throw bad('That person doesn’t hold a seat on this government on record.', 404);
   const me = board.find(b => b.person_id === pid) || (held.length ? {person_id: pid, name: terms.find(t => t.person_id === pid).person_name, seat: held[held.length - 1].seat,
     body: held[held.length - 1].body, since: held[held.length - 1].start, former: true} : null);
-  const want = k => !only || only === k;
+  const want = k => !only || only === k || (only === 'briefing' && k === 'agendas');
   const out = {official: me ? {...me, terms: held} : null, board, government: w.name, gov_id: w.id, today};
   if (want('agendas')) out.meetings = meetings(await safe(q, `select board, title, start, location, agenda_url, packet_url, minutes_url, status, expected, cancelled, items, agenda_items
       from meetings where board = $1 or board like $2`, [w.id, w.id + '-%']), w.id, today);
+  if (!only || only === 'briefing') {
+    // The meeting briefing: the next meeting's agenda and a recap of the last one.
+    const vs = await safe(q, `select "date"::text as date, board, category, headline, summary, amount, outcome, tally, split, vote_id, source_url
+        from votes where government_key = $1 and "date" >= $2::date and "date" <= $3::date`, [w.id, iso(new Date(Date.parse(today + 'T00:00:00Z') - 120 * DAY)), today]);
+    const mine = {};
+    if (pid && vs.length) for (const r of await safe(q, 'select vote_id, vote from member_votes where person_id = $1 and vote_id = any($2)', [pid, vs.map(v => v.vote_id).filter(Boolean)]))
+      mine[r.vote_id] = VOTE[String(r.vote || '').toLowerCase()] || 'other';
+    // The next meeting day (a commission and its CRA often meet the same day). Later agendas usually aren't posted yet.
+    const live = (out.meetings.upcoming || []).filter(m => m.status !== 'cancelled'), first = live[0];
+    out.briefing = {next: first || null, day: first ? live.filter(m => m.date === first.date) : [], last: lastMeeting(vs, out.meetings.recent, mine)};
+  }
   if (want('votes') && pid) {
     const rows = await safe(q, `select "date"::text as date, board, vote, headline, source_url, vote_id from member_votes where person_id = $1 and government_key = $2`, [pid, w.id]);
     const ids = [...new Set(rows.map(r => r.vote_id).filter(Boolean))];
@@ -148,4 +187,4 @@ async function dashboard(q, w, personId, {today = iso(new Date()), only = null} 
   return out;
 }
 
-module.exports = {BOARDS, REPORTS, boardOf, seats, career, meetings, voteRecord, budget, contracts, dashboard};
+module.exports = {BOARDS, REPORTS, boardOf, seats, career, meetings, voteRecord, lastMeeting, budget, contracts, dashboard};

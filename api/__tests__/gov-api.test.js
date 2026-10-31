@@ -60,8 +60,11 @@ insert into member_votes ("date", board, member, vote, headline, person_id, vote
   ('2026-09-08', 'Lynn Haven City Commission', 'Pat Mayor', 'yes', 'Adopt the FY2027 budget', 'pat-mayor', 'lh:1', 'lh'),
   ('2026-09-22', 'Lynn Haven City Commission', 'Pat Mayor', 'no', 'Raise the solid waste fee', 'pat-mayor', 'lh:2', 'lh'),
   ('2026-09-22', 'Lynn Haven City Commission', 'Sam Seat', 'yes', 'Raise the solid waste fee', 'sam-seat', 'lh:2', 'lh');
-create table votes (id bigint generated always as identity primary key, vote_id text, headline text, outcome text, tally text, split boolean, amount numeric, category text, source_url text);
-insert into votes (vote_id, headline, outcome, tally, split) values ('lh:1', 'Adopt the FY2027 budget', 'passed', '5-0', false), ('lh:2', 'Raise the solid waste fee', 'passed', '3-2', true);
+create table votes (id bigint generated always as identity primary key, "date" date, board text, vote_id text, headline text, summary text, outcome text, tally text, split boolean,
+  amount numeric, category text, source_url text, government_key text);
+insert into votes ("date", board, vote_id, headline, outcome, tally, split, category, government_key) values
+  ('2026-09-08', 'Lynn Haven City Commission', 'lh:1', 'Adopt the FY2027 budget', 'passed', '5-0', false, 'budget', 'lh'),
+  ('2026-09-22', 'Lynn Haven City Commission', 'lh:2', 'Raise the solid waste fee', 'passed', '3-2', true, 'fees', 'lh');
 create table contracts (id bigint generated always as identity primary key, "date" date, vendor text, vendor_id text, amount numeric, purpose text, method text, source_url text, government_key text);
 insert into contracts ("date", vendor, vendor_id, amount, purpose, government_key) values (current_date - 30, 'Panhandle Paving LLC', 'panhandle-paving', 84500, 'Resurface 5th Street', 'lh'),
   (current_date - 30, 'Other City Vendor', null, 1000, 'Not ours', 'pc');
@@ -328,6 +331,11 @@ test('elected officials: tied to their seat, see their own dashboard, change not
   assert.equal(d.body.votes.count.on_losing_side, 1, 'voted no on a split vote that passed');
   assert.equal(d.body.numbers.contracts.count, 1, 'their government only');
   assert.equal(d.body.numbers.budget.history.length, 2);
+  assert.equal(d.body.briefing.next.board, 'lh', 'the briefing is for the next meeting');
+  assert.equal(d.body.briefing.last.date, '2026-09-22', 'and recaps the last meeting with votes');
+  assert.equal(d.body.briefing.last.key[0].vote, 'no', 'with how this official voted');
+  const brief = await get('official', {only: 'briefing'});
+  assert.ok(brief.body.briefing && !brief.body.votes && !brief.body.numbers, 'the briefing alone leaves out the voting record and numbers');
   const other = await get('official', {person: 'sam-seat'});
   assert.equal(other.status, 200, JSON.stringify(other.body));
   assert.equal(other.body.official.person_id, 'sam-seat', 'a colleague’s public record');

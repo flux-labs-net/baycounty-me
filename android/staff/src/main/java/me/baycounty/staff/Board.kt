@@ -67,7 +67,7 @@ fun BoardScreen(model: StaffModel) {
         }
         Card { RowLink({ uri.openUri("https://baycounty.me/staff#board") }, {
             Text("PDF reports", style = T.bodyBold, color = Brand.navy)
-            Text("Full briefing, agendas, voting record and numbers, on the web workspace.", style = T.footnote, color = Brand.secondary)
+            Text("Meeting briefing, agendas, voting record and numbers, on the web workspace.", style = T.footnote, color = Brand.secondary)
         }) }
         Text("Public record, read from agendas, minutes and budgets. It can't be changed here; flag anything that looks wrong.", style = T.footnote, color = Brand.secondary)
         ErrorLine(model.error)
