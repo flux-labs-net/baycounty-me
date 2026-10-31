@@ -9,7 +9,7 @@ const VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 const TOOLS = [
   {name: 'list_datasets', title: 'List datasets',
-   description: 'List every BayCounty.me dataset (budgets, property taxes, exemptions, votes, contracts, campaign money, 2026 candidates, salaries, debt, audits, Hurricane Michael, meetings...) with row counts and column names. Call this first to find the right dataset id.',
+   description: 'List every BayCounty.me dataset (budgets, property taxes, exemptions, votes, contracts, campaign money, 2026 candidates (filter status = on_ballot for who is still running), salaries, debt, audits, Hurricane Michael, meetings...) with row counts and column names. Call this first to find the right dataset id.',
    inputSchema: {type: 'object', properties: {}, additionalProperties: false}, annotations: {readOnlyHint: true}},
   {name: 'query_dataset', title: 'Query a dataset',
    description: 'Get rows from a dataset. Filters match columns exactly (case-insensitive; comma-separated values mean OR). Use column suffixes _min/_max for numbers, _from/_to for dates, _contains for text. Every row includes a source link; cite it. Individual donors and rank-and-file employees are never named.',

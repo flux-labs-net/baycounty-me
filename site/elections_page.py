@@ -288,8 +288,10 @@ def elections_page():
     up_html = f'<section class="tx-sec" id="next" data-city-empty="No {{city}} candidates have filed for April 2027."><div class="sec-hd"><h2>Already running for April 2027</h2><span class="muted">City elections: candidates who have opened a campaign</span></div>{up}</section>' if up else ''
     dec = ''.join(race_html(r, False) for r in decided)
     gk = [k for k in KEYS if any(CITY(r.get('gov')) == k for r in races + up_races)]
-    ncand = sum(len(r.get('candidates') or []) for r in active)
-    raised_in = lambda rs: sum((m.get('total_raised') or 0) for m in fin if any(match_finance(c, r.get('office'), [m]) for r in rs for c in r.get('candidates') or []))
+    # only people still on the Nov 3 ballot: not those who withdrew, did not qualify or lost the primary (they are under "Also ran")
+    ballot = lambda r: [c for c in r.get('candidates') or [] if c.get('status') == 'on_ballot']
+    ncand = sum(len(ballot(r)) for r in active)
+    raised_in = lambda rs: sum((m.get('total_raised') or 0) for m in fin if any(match_finance(c, r.get('office'), [m]) for r in rs for c in ballot(r)))
     raised = raised_in(active)
 
     def per(fn):  # a headline figure per city: fn(races on the ballot, races decided); special districts count only countywide
@@ -305,8 +307,8 @@ def elections_page():
     {now}
     <div class="el-stats" role="group" aria-label="2026 races at a glance">
       <div><b{per(lambda a, d: len(a))}>{len(active)}</b><span>races on the ballot</span></div>
-      <div><b{per(lambda a, d: sum(len(r.get('candidates') or []) for r in a))}>{ncand}</b><span>candidates</span></div>
-      <div><b{per(lambda a, d: f"${raised_in(a)/1e3:,.0f}K" if raised_in(a) else "$0")}>${raised/1e3:,.0f}K</b><span>raised so far</span></div>
+      <div><b{per(lambda a, d: sum(len(ballot(r)) for r in a))}>{ncand}</b><span>candidates</span></div>
+      <div><b{per(lambda a, d: f"${raised_in(a)/1e3:,.0f}K" if raised_in(a) else "$0")}>${raised/1e3:,.0f}K</b><span>raised so far by them</span></div>
       <div><b{per(lambda a, d: len(d))}>{len(decided)}</b><span>already decided</span></div>
     </div>
   </div>

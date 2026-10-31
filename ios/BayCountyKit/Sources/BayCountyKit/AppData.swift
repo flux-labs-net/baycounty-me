@@ -573,7 +573,7 @@ public enum PeopleKind: String, Sendable, CaseIterable, Identifiable {
         switch self {
         case .everyone: "Everyone"
         case .elected: "Elected"
-        case .candidate: "2026 candidates"
+        case .candidate: "Candidates"
         case .staff: "Department leaders"
         case .past: "Past candidates"
         }
