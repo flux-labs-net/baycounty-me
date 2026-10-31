@@ -136,6 +136,24 @@ def _issues(key):
 
 
 # ---------------- audits ----------------
+def _fy(s):
+    """'FY2024 (year ended 2024-09-30)' -> 2024."""
+    m = re.search(r'FY\s*(\d{4})', str(s or ''))
+    return int(m.group(1)) if m else None
+
+
+def _iso(d):
+    """A state report's date as YYYY-MM-DD (or YYYY-MM, YYYY) for gov.js to place it in a fiscal year."""
+    from datetime import datetime
+    for f in ('%Y-%m-%d', '%B %d, %Y', '%b %d, %Y', '%B %Y', '%b %Y', '%m/%d/%Y'):
+        try:
+            return datetime.strptime(str(d).strip(), f).strftime('%Y-%m-%d' if '%d' in f else '%Y-%m')
+        except ValueError:
+            pass
+    m = re.search(r'(19|20)\d\d', str(d or ''))
+    return m.group(0) if m else ''
+
+
 def audit_section(key):
     """Every audit on file for this government (and its CRA, port or district): the opinion each year and every finding,
     newest first, plus the state Auditor General's own reports. Each finding keeps its id, so search results link to it."""
@@ -155,7 +173,7 @@ def audit_section(key):
         items = ''
         for a in aa:
             op = 'Qualified' if a['opinion'].lower().startswith('qualified') else 'Clean'
-            items += f'<li class="au-yr"><div class="fd-hd"><b>{e(fy_label(a["fy"]))}</b> <span class="badge {"warn" if op == "Qualified" else "ok"}">{op} opinion</span> <span class="muted small">{len(a["findings"])} finding{"s" if len(a["findings"]) != 1 else ""}</span> {src(a.get("source_url"), "Audit report")}</div>'
+            items += f'<li class="au-yr" data-au-fy="{_fy(a["fy"]) or ""}"><div class="fd-hd"><b>{e(fy_label(a["fy"]))}</b> <span class="badge {"warn" if op == "Qualified" else "ok"}">{op} opinion</span> <span class="muted small">{len(a["findings"])} finding{"s" if len(a["findings"]) != 1 else ""}</span> {src(a.get("source_url"), "Audit report")}</div>'
             if a['findings']:
                 items += '<ol class="findings">' + ''.join(
                     f'''<li class="fd" id="{finding_id(nm, a, f)}"><div class="fd-hd"><b>{e(re.sub(r"\s*\(first reported \d{4}\)", "", f.get("title", "")))}</b> <span class="muted small">{e(f.get("id") or "")}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
@@ -170,10 +188,11 @@ def audit_section(key):
         if 'indict' in s['type'].lower() or not mine(s['government'], key):
             continue
         fl = ''.join(f'<li><b>{e(f.get("id"))}.</b> {e(f.get("plain"))}</li>' for f in s.get('findings', []))
-        sr += f'<details class="tbl-toggle"><summary>{e(s["type"])} ({e(s["report"])}, {e(s["date"])})</summary><ul class="plain">{fl}</ul><p>{src(s.get("source_url"), "Read the report")}</p></details>'
+        sr += f'<details class="tbl-toggle" data-date="{e(_iso(s.get("date")))}"><summary>{e(s["type"])} ({e(s["report"])}, {e(s["date"])})</summary><ul class="plain">{fl}</ul><p>{src(s.get("source_url"), "Read the report")}</p></details>'
     latest = sorted(by[main[0]], key=lambda a: a['fy'], reverse=True)[0]
     sub = f'{len(latest["findings"])} finding{"s" if len(latest["findings"]) != 1 else ""} in {fy_label(latest["fy"])} · {n_all} across {len(aud)} audit{"s" if len(aud) != 1 else ""}'
-    return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="audits">What the auditors found</h2><span class="muted">{e(sub)}</span></div>
+    return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="audits">What the auditors found</h2><span class="muted" data-au-sub>{e(sub)}</span></div>
+      <p class="gx-yr" data-au-yr hidden></p>
       <p class="small muted">Every year outside accountants check the books. "Clean" means the numbers can be trusted overall; "qualified" means the auditor couldn't sign off on part of them. Findings are the to-do list, and a repeat finding means it wasn't fixed.</p>
       {"".join(parts)}
       {f'<h3 class="h4">State auditor reports</h3><p class="small muted">Florida Auditor General reviews beyond the yearly audit.</p>{sr}' if sr else ''}
@@ -242,6 +261,12 @@ def _bars(items, total, pop):
     return '<div class="hbars per">' + ''.join(
         f'<div class="hb"><span class="hb-n">{e(x["name"])}{f" <em>{e(x["type"])}</em>" if x.get("type") else ""}</span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, x["amount"] / mx * 100):.1f}%"></span></span>'
         f'<span class="hb-v">{money(x["amount"])} <em>{x["amount"] / tot * 100:.1f}%</em>{per(x["amount"])}</span></div>' for x in xs) + '</div>'
+
+
+def budget_fy(key):
+    """The fiscal year of the budget the Money section is drawn with at build (budgets_detail.json), so gov.js redraws it only for another year."""
+    g = _budgets().get(key) or {}
+    return _fy(g.get('fiscal_year'))
 
 
 def budget_detail(key, pop):

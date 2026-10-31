@@ -12,3 +12,8 @@
   :root .ui #gxGlance .kpi.gx-k{grid-template-columns:minmax(0,1fr);padding:14px}.ui #gxGlance .gx-k .ui-ti{grid-row:auto;width:34px;height:34px;font-size:17px;margin-bottom:6px}
   .ui .gx .kpis.gx-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+/* the line each section shows for the year picked (gov.js), and the "no data for that year" note */
+.ui .gx-yr{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:var(--sunken);color:var(--ink);font-size:.92rem;line-height:1.5}
+.ui .gx-gap b{color:var(--ink)}
+.ui .hbars .hb.on .hb-n{font-weight:700;color:var(--ink)}
+.ui .hbars .hb.on .hb-track{outline:2px solid var(--amber);outline-offset:2px;border-radius:6px}
