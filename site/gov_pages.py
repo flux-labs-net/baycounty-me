@@ -185,24 +185,26 @@ def gov_page(key):
     if b.get('revenue') or b.get('spending'):
         srcs = ' '.join(src(u, t) for t, u in b.get('sources', [])[:2])
         ctx = ''.join(f'<p class="note">{e(t)} {src(u)}</p>' for t, u in (b.get('context') or [])[:2])
-        secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="money">Money in, money out</h2><span class="muted">{e(b.get("status") or "")} budget{" · general fund " + money(b["general_fund"]) if b.get("general_fund") else ""}</span></div>
-          <div class="two"><div><h3 class="h4">Where the money comes from</h3>{hbars(list((b.get("revenue") or {}).items()), "var(--s3)")}</div><div><h3 class="h4">What the general fund pays for</h3>{hbars(list((b.get("spending") or {}).items()))}</div></div>
-          {ctx}{budget_detail(key, pop)}<p class="src-line">{srcs} · <a href="/compare#services">Compare every government's budget</a> · <a href="/public-money/budget-compare?gov={key}">Compare years</a>{OPEN_BOOKS_LINKS.format(key=key) if OPEN_BOOKS_PUBLIC else ''}{' · <a href="/public-money/cra-tax-increment">Property tax paid to CRAs</a>' if key == 'county' else ''}</p></section>''')
+        secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="money">Money in, money out</h2><span class="muted" data-money-sub>{e(b.get("status") or "")} budget{" · general fund " + money(b["general_fund"]) if b.get("general_fund") else ""}</span></div>
+          <div data-money-body><div class="two"><div><h3 class="h4">Where the money comes from</h3>{hbars(list((b.get("revenue") or {}).items()), "var(--s3)")}</div><div><h3 class="h4">What the general fund pays for</h3>{hbars(list((b.get("spending") or {}).items()))}</div></div>
+          {ctx}{budget_detail(key, pop)}</div><p class="src-line"><span data-money-src>{srcs}</span> · <a href="/compare#services">Compare every government's budget</a> · <a href="/public-money/budget-compare?gov={key}">Compare years</a>{OPEN_BOOKS_LINKS.format(key=key) if OPEN_BOOKS_PUBLIC else ''}{' · <a href="/public-money/cra-tax-increment">Property tax paid to CRAs</a>' if key == 'county' else ''}</p></section>''')
     # tax rate history
     m = p.get('millage')
     if m and any(x is not None for x in m.get('rate') or []):
         trip = [(y, v, (m.get('rolled_back') or [None] * len(m['rate']))[i]) for i, (y, v) in enumerate(zip(m['years'], m['rate'])) if v is not None]
         yrs, r, rb = [t[0] for t in trip], [t[1] for t in trip], [t[2] for t in trip]
         mx = max(r + [x for x in rb if x]) or 1
-        rows = ''.join(f'<div class="hb"><span class="hb-n">Tax year {y}</span><span class="hb-track"><span class="hb-bar" style="width:{v/mx*100:.1f}%;background:var(--s1)"></span>{f"<i class=mk style=left:{rb[i]/mx*100:.1f}% title=\"Rolled-back rate {rb[i]}\"></i>" if i < len(rb) and rb[i] else ""}</span><span class="hb-v">{v:g}</span></div>' for i, (y, v) in enumerate(zip(yrs, r)))
+        rows = ''.join(f'<div class="hb" data-ty="{y}"><span class="hb-n">Tax year {y}</span><span class="hb-track"><span class="hb-bar" style="width:{v/mx*100:.1f}%;background:var(--s1)"></span>{f"<i class=mk style=left:{rb[i]/mx*100:.1f}% title=\"Rolled-back rate {rb[i]}\"></i>" if i < len(rb) and rb[i] else ""}</span><span class="hb-v">{v:g}</span></div>' for i, (y, v) in enumerate(zip(yrs, r)))
         up = (r[-1] > rb[-1]) if r and rb and rb[-1] else None
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="rate">Property tax rate</h2><span class="muted">Mills: dollars per $1,000 of taxable value</span></div>
+          <p class="gx-yr" data-rate-yr hidden></p>
           <div class="hbars">{rows}</div>
           <p class="note">The tick on each bar is the <span class="term" data-term="rolled-back">rolled-back rate</span>, the rate that would bring in the same money as the year before. {f"The latest rate is {'above' if up else 'at or below'} it{', so the city takes in more from existing property than the year before' if up else ''}." if up is not None else ''} <a href="/public-money/tax-dollars">See your full tax bill</a></p></section>''')
     # debt
     d = p.get('debt')
     if d:
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="debt">Debt</h2><span class="muted">{e(d.get("fy") or "")}</span></div>
+          <p class="gx-yr" data-debt-yr hidden></p>
           <p><b>{money(d["total"])}</b> owed{f" — about {usd(pr['debt'])} per resident" if pr.get("debt") else ""}. {e(d.get("note") or "")}</p>
           {debt_detail(key)}
           <p class="src-line">{src(d.get("source_url"), "Audited financial statements")} · <a href="/compare">Compare debt across governments</a></p></section>''')
@@ -213,11 +215,9 @@ def gov_page(key):
     if p.get('utility_bill'):
         u = p['utility_bill']; static.append(kpi('Typical utility bill', f'${u["total"]:,.2f}', f'a month at 5,000 gallons at today\'s rates{"" if u.get("garbage") else ", garbage not included"} · <a href="/public-money/fees-and-bills?gov={key}">compare</a>', static=True))
     # meetings
-    if p.get('meetings'):
-        up = [x for x in p['meetings'] if not x.get('past')][:6]
-        if up:
-            secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="meet">Upcoming meetings</h2><span class="muted">{len(up)} on the calendar</span><a class="ui-crumb" href="/meetings?gov={key}">All meetings {ico("arrow")}</a></div>
-              {_meetings(up, key, p["short"])}</section>''')
+    up = [x for x in p.get('meetings') or [] if not x.get('past')][:6]
+    secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="meet" data-meet-h>Upcoming meetings</h2><span class="muted" data-meet-sub>{len(up)} on the calendar</span><a class="ui-crumb" href="/meetings?gov={key}">All meetings {ico("arrow")}</a></div>
+      <div data-meet-up>{_meetings(up, key, p["short"]) if up else f'<p class="muted small">No meetings on the calendar right now. <a href="/alerts?gov={key}">Email me when {e(p["short"])} posts an agenda</a></p>'}</div><div data-meet-yr hidden></div></section>''')
     # get involved
     secs.append(f'''<section class="tx-sec act"><div class="sec-hd"><h2 id="act">Stay informed</h2></div>
       <div class="ui-act"><div>{ico("bell", "blue")}<h3>Get updates</h3><p>Email when {e(p["short"])} has new votes, contracts or corrections on this site.</p><p><a class="ui-btn pri" href="/alerts?gov={key}">Follow {e(p["short"])}</a></p></div>
@@ -253,7 +253,8 @@ def gov_page(key):
     mini = ''.join(f'<a href="#{i}">{ico(SEC[i][0])}{SEC[i][2]}</a>' for i in ids)
     glance = (f'<section class="tx-sec gx-glance" hidden><div class="sec-hd">{ico("pulse", "blue")}<h2 id="year">At a glance</h2><span class="muted" id="gxGlanceH"></span></div>'
               '<div class="kpis" id="gxGlance"></div><p class="muted small" data-gx-loading>Loading this government\'s records…</p></section>')
-    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else '', 'fyStart': fy_start,
+    from gov_detail import budget_fy
+    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else '', 'fyStart': fy_start, 'budgetFY': budget_fy(key),
            'photos': {k: v['photo_path'] for k, v in photos().items() if ':' not in k}}
     year = '<label class="sc-f sc-year" data-scope><span>Year</span><select id="gxYear" aria-label="Year"><option value="all">All years</option></select></label>'
     bar = city_bar(None, fixed=key, extra=year)

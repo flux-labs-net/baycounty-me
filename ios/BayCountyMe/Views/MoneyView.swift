@@ -135,6 +135,7 @@ struct MoneyView: View {
 
     /// Property tax levied this year across every government, split by who levies it.
     @ViewBuilder private var levyCard: some View {
+        let g = store.governments
         let county = g.filter { $0.kind == "county" }.compactMap(\.propertyTaxLevy).reduce(0, +)
         let schools = g.filter { $0.kind == "schools" }.compactMap(\.propertyTaxLevy).reduce(0, +)
         let cities = g.filter { $0.kind == "city" }.compactMap(\.propertyTaxLevy).reduce(0, +)
