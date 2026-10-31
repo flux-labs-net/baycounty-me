@@ -65,10 +65,10 @@
       picks.sort((x, y) => x.s < y.s ? -1 : 1);
       document.getElementById('heSoon').innerHTML = (f0.note ? `<p class="ev-none ev-other">${esc(f0.note)}</p>` : '') + (picks.map(card).join('') || '<p class="ev-none">No one-off events listed in the next three weeks.</p>');
       // the town's own meetings first, then the rest of the county's
-      const wk = live.filter(e => e.c === 'Public meeting' && e.s.slice(0, 10) <= plus(7)).sort((x, y) => (town && x.w !== town) - (town && y.w !== town));
+      const wk = live.filter(e => e.c === 'Public meeting' && e.s.slice(0, 10) <= plus(6)).sort((x, y) => (town && x.w !== town) - (town && y.w !== town));
       const m = document.getElementById('heMeet');
       if (m) m.innerHTML = wk.slice(0, 4).map(e => `<li><span>${esc(dayLabel(e.s.slice(0, 10)).replace(/day,.*/, 'day'))}<br>${esc(time(e.s))}</span><a href="${esc(e.u)}" rel="noopener">${esc(e.t)}</a><small>${esc(e.src)}</small></li>`).join('') || '<li class="ev-none">No public meetings listed this week.</li>';
-      const n = document.getElementById('heCount'); if (n) n.textContent = `${live.filter(e => e.s.slice(0, 10) <= plus(7)).length} events this week`;
+      const n = document.getElementById('heCount'); if (n) n.textContent = `${live.filter(e => e.s.slice(0, 10) <= plus(6)).length} events this week`;
     };
     const g = document.getElementById('heTown');
     if (g) chips(g, v => { town = v; userPicked = true; draw(); });

@@ -140,7 +140,7 @@ def safety_page(out_dir):
     if ytdV and ytdP:
         span = lambda t: f'Jan to {MON[t["through_month"] - 1][:3]}'
         ytd_kpi = (f'Violent crimes, {span(ytdV)} {ytdV["year"]}', _num(ytdV['now']),
-                   f'{pct(ytdV["now"], ytdV["before"])} from the same months of {ytdV["year"] - 1}; {_num(ytdP["now"])} property crimes ({pct(ytdP["now"], ytdP["before"])})')
+                   f'{pct(ytdV["now"], ytdV["before"])} from the same months of {ytdV["year"] - 1}; {_num(ytdP["now"])} property crimes ({pct(ytdP["now"], ytdP["before"])}). Only the {len(ytdV["rows"])} agencies that reported every month; not a county total')
         bp = {r['agency_id']: r for r in ytdP['rows']}
         trs = ''
         for r in sorted(ytdV['rows'], key=lambda r: -r['now']):

@@ -210,7 +210,7 @@ def beaches_page(out_dir):
     n_spaces = sum(l['spaces'] or 0 for l in P)
 
     k = lambda lab, v, s, i='': f'<div class="kpi"><span class="eyebrow">{lab}</span><span class="v"{i}>{v}</span><span class="s">{s}</span></div>'
-    kpis = (k('Water samples rated good', f'{pct_good}%' if pct_good is not None else '—', f'Past 12 months, {len(yr)} samples at {len(site_cards)} sites') +
+    kpis = (k('Water samples rated good', f'{pct_good}%' if pct_good is not None else '—', f'Past 12 months, {len(yr)} samples at {len({r.get("site_id") or r.get("site") for r in yr})} sites') +
             k('Sites rated poor now', len(poor_now), 'At a test in the past six weeks' if poor_now else 'No poor result in the past six weeks') +
             k('Public beach accesses', len(A), f'{n_wc} marked wheelchair accessible, {sum(1 for a in A if a["vehicle_access"])} drive-on') +
             k('County beach parking', f'{n_spaces:,}', f'Spaces in {len(P)} county lots'))

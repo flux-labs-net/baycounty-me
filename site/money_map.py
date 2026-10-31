@@ -237,7 +237,7 @@ def money_map_section(out_dir):
     return f'''<section id="v-donors" class="mm" hidden><div class="cn-vh"><h2 id="map">Donors, officials and votes on their contracts</h2><span class="cn-note" id="mmCount"></span></div>
     <div class="cn-pad">
     <div class="kpis">
-      <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v"{per(k_donors)}>{len(D["donors"])}</span><span class="s"{per(k_off)}>gave to {len(D["officials"])} current officials</span></div>
+      <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v"{per(k_donors)}>{len(D["donors"])}</span><span class="s"{per(k_off)}>gave to {len({g["o"] for g in D["gifts"]})} current officials</span></div>
       <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v"{per(k_k)}>{len(k_ids)}</span><span class="s"{per(k_kg)}>gave ${k_gift:,.0f} in all</span></div>
       <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v"{per(k_same)}>{len(same)}</span><span class="s"{per(k_sameg)}>gifts totaling ${sum(g["a"] for g in same):,.0f}</span></div>
       <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v"{per(k_voted)}>{len(voted)}</span><span class="s"{per(k_votedn)}>official–donor pairs, {len(D["vgroups"])} recorded votes</span></div>

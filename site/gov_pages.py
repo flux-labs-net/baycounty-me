@@ -84,7 +84,8 @@ def year_cards(key, rows, fy):
         bits = [f"FY{fy} · {e(r.get('budget_status') or 'adopted')}"]
         if r.get('budget_per_resident'):
             bits.append(f"{usd(r['budget_per_resident'])} per resident")
-        if prev.get('budget_total'):
+        # no change is shown when the two years are not the same kind of total (a draft, or one with and one without interfund transfers)
+        if prev.get('budget_total') and not re.search(r'(?i)draft|tentative', prev.get('budget_status') or '') and bool(r.get('budget_excludes_transfers')) == bool(prev.get('budget_excludes_transfers')):
             ch = (r['budget_total'] / prev['budget_total'] - 1) * 100
             bits.append(f"{'up' if ch >= 0 else 'down'} {abs(ch):.0f}% from FY{fy - 1}")
         out.append(kpi('Budget', money(r['budget_total']), ' · '.join(bits) + ' ' + src(r.get('budget_source_url'))))
@@ -106,7 +107,12 @@ def year_cards(key, rows, fy):
             per = f"{usd(r['debt_total'] / r['population'])} per resident · " if r.get('population') and key != 'schools' else ''
             out.append(kpi('Debt', money(r['debt_total']), f'{per}audited, end of FY{fy} ' + src(r.get('debt_source_url'))))
         else:
-            out.append(none('Debt', 'Audited total on file for ' + ', '.join(f"FY{x['fiscal_year']}" for x in rows if x.get('debt_total')) + ' only'))
+            last = max((x for x in rows if x.get('debt_total') and x['fiscal_year'] < fy), key=lambda x: x['fiscal_year'], default=None)
+            if last:
+                per = f"{usd(last['debt_total'] / last['population'])} per resident · " if last.get('population') and key != 'schools' else ''
+                out.append(kpi('Debt', money(last['debt_total']), f"{per}latest audit, end of FY{last['fiscal_year']} " + src(last.get('debt_source_url'))))
+            else:
+                out.append(none('Debt', 'Audited total on file for ' + ', '.join(f"FY{x['fiscal_year']}" for x in rows if x.get('debt_total')) + ' only'))
     if has('employees_fte'):
         out.append(kpi('Employees', f"{r['employees_fte']:,g}", f'FY{fy} budget, staff positions') if r.get('employees_fte') else none('Employees', f'No FY{fy} count on file'))
     return out, fy, r.get('period') or ''

@@ -293,7 +293,7 @@ def _races():
     races = defaultdict(list)
     for r in _data()['CR']:
         races[(r['election_date'], r['office'])].append(r)
-    return {k: sorted(rs, key=lambda r: r['vote_rank'] or 99) for k, rs in races.items() if len(rs) > 1}
+    return {k: sorted(rs, key=lambda r: r['vote_rank'] or 99) for k, rs in races.items() if len(rs) > 1 and sum(r['total_raised'] or 0 for r in rs) > 0}  # a race where nobody raised money has no top fundraiser
 
 
 def _scatter(contested):

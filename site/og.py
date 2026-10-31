@@ -320,7 +320,7 @@ def preview_text():
         '/public-money/debt': ("What Bay County's governments owe",
                                f"{M(s['debt'])} owed by the county, schools, cities and authorities, including big single payments ahead and pension promises, from audited financial reports."),
         '/public-money/audits': ('What the auditors found in Bay County',
-                                 f"{s['findings']} audit findings across Bay County governments in three years, explained in plain English, including {s['repeats']} repeated in the latest audits."),
+                                 f"{s['findings']} audit findings in the latest audits of Bay County governments, explained in plain English, including {s['repeats']} that repeat earlier years."),
         '/glossary': ('Government money, explained simply',
                       "What's a CRA? A mill? A rolled-back rate? Plain-English definitions of every term used on BayCounty.me, with examples."),
         '/updates': ("What's new on BayCounty.me", 'New pages, new data and corrections to BayCounty.me, newest first. Subscribe by RSS.'),

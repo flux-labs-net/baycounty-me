@@ -189,8 +189,8 @@ def campaign_page():
       <li><b>We name organizations, and people who run a business.</b> Other gifts from individuals are shown only as a count and total. The full reports, with every name, are linked for each official.</li>
     </ol></div></section>
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Officials covered</span><span class="v"{per(lambda cs, ps: len(cs))}>{len(cands)}</span><span class="s">current officeholders' latest campaigns</span></div>
-    <div class="kpi"><span class="eyebrow">Raised</span><span class="v"{per(k_raised)}>${tot/1e6:,.2f}M</span><span class="s"{per(k_split)}>{usd(ind)} from individuals · {usd(org)} from organizations</span></div>
+    <div class="kpi"><span class="eyebrow">Officials covered</span><span class="v"{per(lambda cs, ps: len(cs))}>{len(cands)}</span><span class="s">Campaign accounts on file for current officeholders (the latest campaign of each); a few officials seated in 2026 have none yet</span></div>
+    <div class="kpi"><span class="eyebrow">Raised</span><span class="v"{per(k_raised)}>${tot/1e6:,.2f}M</span><span class="s"{per(k_split)}>{usd(ind)} from individuals · {usd(org)} from organizations, plus the candidates' own money and in-kind gifts. The latest campaign of each official, not every campaign since 2016</span></div>
     <div class="kpi"><span class="eyebrow">Donors with contracts</span><span class="v"{per(lambda cs, ps: len(ps))}>{len(plist)}</span><span class="s"{per(lambda cs, ps: f"gifts to {len({p['candidate'] for p in ps})} official{'' if len({p['candidate'] for p in ps}) == 1 else 's'} from contract holders")}>gifts to {off_matched} officials from contract holders</span></div>
     <div class="kpi"><span class="eyebrow">Same government</span><span class="v"{per(lambda cs, ps: sum(1 for p in ps if any(x for _, x in p['govs'])))}>{same}</span><span class="s">gifts where the contract is with the official's own government</span></div>
   </div>

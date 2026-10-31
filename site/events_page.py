@@ -111,7 +111,7 @@ def events_page(out_dir=None):
         label = 'Today' if k == today else dt.date.fromisoformat(k).strftime('%A, %B %-d')
         fallback.append(f'<section class="ev-day" data-share-date="{k}"><h3>{label}<span>{len(days[k])}</span></h3><ul class="ev-list">{"".join(_row(r, True) for r in days[k])}</ul></section>')
     n = lambda c: sum(1 for r in upcoming if r['category'] == c)
-    week = (dt.date.today() + dt.timedelta(days=7)).isoformat()
+    week = (dt.date.today() + dt.timedelta(days=6)).isoformat()  # today and the next six days
     k = lambda t, v, c, tone: f'<div class="kpi"><span class="eyebrow">{t}</span><span class="v">{v}</span><span class="s">{c}</span></div>'
     kpis = (k('This week', sum(1 for r in upcoming if r['starts'][:10] <= week), 'Events in the next seven days', 'salmon') +
             k('Next two months', len(upcoming), f'From {len(by_src)} public calendars', 'blue') +

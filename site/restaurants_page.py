@@ -493,7 +493,7 @@ def new_businesses_page(out_dir):
     kpis = (_kpi('Filed in the last 12 months', f'{len(y12):,}', f'{"Up" if chg >= 0 else "Down"} {abs(chg):.0f}% from the 12 months before') +
             _kpi(f'Filed in {last.year}', f'{per_year[str(last.year)]:,}', f'Through {last.strftime("%B %-d")}') +
             _kpi('Filed since 2016', f'{len(B):,}', f'{active / len(B) * 100:.0f}% are still active') +
-            _kpi('New restaurants', f'{len(opened_year):,}', f'New food licenses in the last 12 months; {rest_per_year.get(str(today.year - 1), 0):,} in {today.year - 1}'))
+            _kpi('New food licenses', f'{len(opened_year):,}', f'Restaurants, food trucks, caterers and vendors licensed in the last 12 months; {rest_per_year.get(str(today.year - 1), 0):,} in {today.year - 1}'))
 
     return f'''<style>{CSS}</style>
 <div class="page tax rs nb">
@@ -524,7 +524,7 @@ def new_businesses_page(out_dir):
     <div><button type="button" class="ui-btn" id="nbMore" hidden style="margin-top:12px">Show more</button></div>
     <p class="note">Every name opens the business's profile. The state record names its officers and registered agent. Older filings back to 2016 are in the <a href="/api/v1/datasets/new-businesses">new-businesses</a> data.</p></section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="restaurants" data-tile="New restaurants">New restaurants</h2><span class="muted">{len(opened_year):,} new food licenses in the last 12 months</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="restaurants" data-tile="New food licenses">New food licenses</h2><span class="muted">{len(opened_year):,} new food licenses in the last 12 months</span></div>
     <div class="tablewrap"><table class="tx-table rs-tbl"><thead><tr><th>Business</th><th>City</th><th>License holder</th><th class="n">Opened</th></tr></thead><tbody>{open_rows}</tbody></table></div>
     <p class="note">Each one's first inspection, and every one since, is on the <a href="/restaurants">Restaurant inspections</a> page.</p></section>
 
