@@ -161,9 +161,31 @@ JS = r"""
     if (window.BCMap) d.notices.filter(n => n.geometry).forEach(n => { const el = document.querySelector(`[data-geo-for="${CSS.escape(n.notice_id)}"]`); if (el) BCMap.view(el, n.geometry).catch(() => el.remove()); });
     filter();
     const st2 = new Map(d.shelters.map(s => [s.shelter_id, s]));
+    shelterLine(d);
     document.querySelectorAll('.em-sh[data-id]').forEach(el => { const s = st2.get(el.dataset.id); if (!s) return; const p = el.querySelector('.em-pill'); p.textContent = s.status; p.classList.toggle('open', s.status === 'open'); });
     (d.zones || []).forEach(z => { const el = document.querySelector(`.em-zc[data-z="${z.zone}"]`); if (el) el.classList.toggle('ordered', !!z.ordered); });
     if (location.hash.startsWith('#n-')) { const t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (t) t.scrollIntoView(); }
+  }
+  // Same wording as _shelter_status in emergency_page.py: the county's date is shown as its date, never as today's status.
+  const day = s => { if (!s) return ''; const d = new Date(String(s).length === 10 ? s + 'T12:00:00' : s); return d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/Chicago'}); };
+  const STALE = 14; // days; matches STALE_DAYS
+  function shelterLine(d) {
+    const head = $('shHead'), line = $('shLine'), S = d.shelters || [];
+    if (!head || !line || !S.length) return;
+    const src = `<a href="${esc(S[0].source_url)}" target="_blank" rel="noopener">shelter page</a>`;
+    const seen = ` We read it every 5 minutes; last checked ${ago(d.checked_at)}.`;
+    const open = S.filter(s => s.status === 'open'), dates = S.map(s => s.status_as_of).filter(Boolean).sort();
+    if (!open.length) {
+      head.textContent = 'None open right now';
+      line.innerHTML = `<b>No shelters are open.</b> Bay County's ${src} lists every shelter as closed.` +
+        (dates.length ? ` The county last dated that list ${day(dates[dates.length - 1])} and hasn't posted a newer status since.` : '') + seen +
+        ' When the county opens a shelter it shows here within minutes, and on phones signed up for shelter alerts.';
+      return;
+    }
+    const od = open.map(s => s.status_as_of).filter(Boolean).sort(), old = od.filter(x => (Date.now() - Date.parse(x)) / 864e5 > STALE);
+    head.textContent = `${open.length} open`;
+    line.innerHTML = `<b>${open.length} shelter${open.length > 1 ? 's' : ''} open</b> on Bay County's ${src}, as of ${od.length ? day(od[od.length - 1]) : 'its last update'}.${seen}` +
+      (old.length ? ` The county's page has listed ${old.length > 1 ? 'these' : 'this'} as open since ${day(old[0])} without a newer update; call the Citizens Information Center at <a href="tel:850-248-6090">850-248-6090</a> before you go.` : '');
   }
   const load = () => fetch('/api/v1/emergency').then(r => r.ok ? r.json() : Promise.reject(r.status)).then(render)
     .catch(() => { $('emSub').textContent = "Couldn't reach the live feed. The list below is from the last daily check."; });
@@ -360,6 +382,35 @@ def _project(zones, base, shelters, w=640):
             f'<path class="land" d="{land}"/><g clip-path="url(#emLand)">{zp}</g><path class="county" d="{county}"/>{sp}</svg>')
 
 
+STALE_DAYS = 14  # an "open" status older than this may be a page the county forgot to update
+
+
+def _shelter_status(S, checked=None):
+    """The Shelters heading and the line under it. The county dates its list only when it changes it (the list has said
+    "closed, current as of Nov 3, 2025" for a year), so the county's date is never shown as if it were today's status:
+    the line says what is open now, when we last read the page, and how old the county's own date is."""
+    if not S:
+        return 'Status as Bay County posts it', ''
+    src = f'<a href="{e(S[0]["source_url"])}" target="_blank" rel="noopener">shelter page</a>'
+    checked = checked or S[0].get('checked')
+    seen = f' We read it every 5 minutes; last checked {e(_when(checked))}.' if checked else ' We read it every 5 minutes.'
+    dates = sorted({s['status_as_of'] for s in S if s.get('status_as_of')})
+    county_date = _when(dates[-1]) if dates else ''
+    opened = [s for s in S if s['status'] == 'open']
+    if not opened:
+        why = (f' The county last dated that list {e(county_date)} and hasn\'t posted a newer status since.' if county_date else '')
+        return ('None open right now',
+                f'<b>No shelters are open.</b> Bay County\'s {src} lists every shelter as closed.{why}{seen} '
+                'When the county opens a shelter it shows here within minutes, and on phones signed up for shelter alerts.')
+    old = [s for s in opened if s.get('status_as_of') and (dt.date.today() - dt.date.fromisoformat(s['status_as_of'][:10])).days > STALE_DAYS]
+    n = len(opened)
+    line = f'<b>{n} shelter{"s" if n != 1 else ""} open</b> on Bay County\'s {src}, as of {e(_when(max(s.get("status_as_of") or "" for s in opened)) or "its last update")}.{seen}'
+    if old:
+        line += (f' The county\'s page has listed {"these" if len(old) > 1 else "this"} as open since {e(_when(min(s["status_as_of"] for s in old)))} without a newer update; '
+                 'call the Citizens Information Center at <a href="tel:850-248-6090">850-248-6090</a> before you go.')
+    return f'{n} open', line
+
+
 def emergency_page(out_dir):
     import os
     from page_datasets import evacuation_zones, emergency_shelters, emergency_resources, emergency_notices, _emergency_file
@@ -399,7 +450,7 @@ def emergency_page(out_dir):
   {f'<small>In evacuation Zone {e(s["evacuation_zone"])}</small>' if s.get("evacuation_zone") else ''}{f'<small>{e(s["note"])}</small>' if s.get("note") else ''}</div>''' for s in ss)
         groups.append(f'<div class="em-shg"><h3 class="ch-grp" style="margin:0">{e(TYPE.get(ss[0]["shelter_type"], g))} <span class="muted" style="font-weight:400;font-size:.86rem">· {e(g)}</span></h3>'
                       f'{f"<p class=muted style=font-size:.88rem;margin:0>{e(ss[0]["group_about"])}</p>" if ss[0].get("group_about") else ""}<div class="em-shs">{cards}</div></div>')
-    as_of = S[0]['status_as_of'] if S else None
+    sh_head, sh_line = _shelter_status(S)
 
     zcards = ''.join(f'''<div class="em-zc" data-z="{e(z["zone"])}"><span class="z" style="background:{z["color"]}">{e(z["zone"])}</span>
   <div><b>Zone {e(z["zone"])}: {e(z["where_it_is"])}</b><small>{e(z["when_ordered"])}</small></div></div>''' for z in Z)
@@ -446,10 +497,11 @@ def emergency_page(out_dir):
     <p class="em-empty" id="emNone" {"hidden" if active else ""}>Nothing of this kind right now.</p>
     <p class="note">Road closures cover state roads (FL511) and the closures cities post. City and county notices stay listed while their alert center lists them; news posts about storms and closures stay for {10} days.</p></section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="shelters" data-tile="Shelters">Shelters</h2><span class="muted">{f"Status as Bay County posted it, {e(_when(as_of))}" if as_of else "Status as Bay County posts it"}</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="shelters" data-tile="Shelters">Shelters</h2><span class="muted" id="shHead">{e(sh_head)}</span></div>
+    <p class="em-empty" id="shLine">{sh_line}</p>
     <p>Bay County Emergency Services opens shelters with Bay District Schools and the Florida Department of Health. <b>Not every shelter opens for every storm</b>, and shelters are a last resort: plan to stay with family or friends outside the zone if you can. Special needs shelters need registration ahead of time.</p>
     {"".join(groups)}
-    <p class="note">The status updates here within minutes of the county changing its <a href="{e(S[0]["source_url"] if S else "")}" target="_blank" rel="noopener">shelter page</a>. Bring medicines, bedding, ID and supplies for a few days; check whether a shelter takes pets before you go.</p></section>
+    <p class="note">Bring medicines, bedding, ID and supplies for a few days; check whether a shelter takes pets before you go.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="zones" data-tile="Zone map">The four evacuation zones</h2><span class="muted">Zone A leaves first</span></div>
     <div class="em-map">{_project(Z, base, S)}<div class="em-zl">{zcards}<p class="muted" style="margin:0;font-size:.84rem">Simplified shapes; dots are county shelters. Check an exact address above or on <a href="{e(zinfo["map_url"])}" target="_blank" rel="noopener">the county's map</a>.</p></div></div></section>
