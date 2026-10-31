@@ -40,7 +40,7 @@ def cra_increment_page(out_dir):
     return f'''<style>{CSS}</style>
 <div class="page tax ci">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Redevelopment</span><h1>How much property tax goes to the CRAs</h1>
-    <p class="lede">Seven Community Redevelopment Agencies in Bay County collect tax increment: the property tax that Bay County and the cities levy on growth in value inside each district since its base year. Here is how much that is each year, who pays it, what has been paid so far and what it could add up to before each CRA ends.</p></div>
+    <p class="lede">Six Community Redevelopment Agencies in Bay County collect tax increment, in seven areas (Panama City Beach has two, Front Beach Road and Pier Park): the property tax that Bay County and the cities levy on growth in value inside each district since its base year. Here is how much that is each year, who pays it, what has been paid so far and what it could add up to before each CRA ends.</p></div>
     <div class="stamp">{PDF_BTN}<a class="pill" href="/public-money/cra-spending">What the CRAs spend it on →</a></div></header>
   <div class="kpis" id="ciKpis"><div class="kpi"><span class="eyebrow">Loading</span><span class="v">…</span></div></div>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>What "lost" revenue means here</h2>

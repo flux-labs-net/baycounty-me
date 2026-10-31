@@ -776,7 +776,7 @@ PAGES = [
     ('/public-money/cra-spending', 'CRA Spending',
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
     ('/public-money/cra-tax-increment', 'How much property tax goes to the CRAs',
-     "How much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year, who pays it, what has been paid so far and what it could add up to before each CRA ends, with the method and the missing years.", lambda: cra_increment_page(OUT)),
+     "How much property tax Bay County and the cities pay to the six Community Redevelopment Agencies each year (seven tax-increment areas), who pays it, what has been paid so far and what it could add up to before each CRA ends, with the method and the missing years.", lambda: cra_increment_page(OUT)),
     ('/public-money/tax-dollars', 'How your tax dollars are allocated',
      'Estimate your Bay County property tax bill and see who gets each slice, plus where the county, schools and every city get their money and what they spend it on.', lambda: tax_page(OUT, gov_panel=False)),
     ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',
