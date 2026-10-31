@@ -11,7 +11,21 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
+  # Whether the watch app changed (.github/scripts/app_screens.py), so its screenshots are only taken when it did.
+  plan:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    outputs:
+      watch: ${{ steps.pick.outputs.watch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+      - id: pick
+        uses: ./.github/actions/pick-screens
+
   build:
+    needs: plan
     runs-on: [self-hosted, macOS]
     timeout-minutes: 30
     steps:
@@ -43,11 +57,12 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO build | tee staff.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" staff.log
-      - name: Apple Watch app screenshots (made-up demo day)
+      - name: Apple Watch app screenshots (made-up demo day), when the watch app changed
+        if: needs.plan.outputs.watch == 'true'
         working-directory: ios
         run: scripts/watch_screenshots.sh watch-shots
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && needs.plan.outputs.watch == 'true'
         with:
           name: watch-screens
           path: ios/watch-shots

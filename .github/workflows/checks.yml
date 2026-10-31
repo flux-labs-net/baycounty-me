@@ -30,6 +30,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+      - name: Screenshot picker picks the right app screens
+        run: python3 -m unittest discover -s .github/scripts
   migrations:
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 10
