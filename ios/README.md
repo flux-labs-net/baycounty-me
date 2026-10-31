@@ -90,6 +90,37 @@ BCM_LIVE=1 swift test       # also hits baycounty.me: catalog, ETag revalidation
 
 In Xcode, ⌘U runs the same tests.
 
+## CI on the Mac
+
+The iOS jobs (app build, UI tests, screenshots, store screenshots) run on a self-hosted runner on the Mac Studio
+(labels `self-hosted`, `macOS`). Where the time goes, and what keeps it short:
+
+- **Waiting for the Mac.** One runner takes one job at a time, so jobs queue behind each other. A pull request's
+  older runs are cancelled when it gets a new push (each workflow's `concurrency`), and all its unfinished runs are
+  cancelled when it is merged or closed (`.github/workflows/cancel-closed-pr-runs.yml`). A Mac that is asleep
+  takes nothing, so keep it awake (System Settings > Energy: prevent automatic sleeping).
+- **Building.** About 40 seconds. The screenshot jobs keep their build folder outside the checkout (`../derived`,
+  in each runner's own work folder), so a job only recompiles what changed. XcodeGen is installed once.
+- **Screenshots.** Only the screens a pull request changed (`.github/scripts/app_screens.py`). Each one is taken as
+  soon as the screen stops changing (`scripts/ci_sim.sh`, `ci_shot`), usually 5 to 7 seconds, at most 16.
+  Each runner uses its own simulator (`CI <runner name>`) and shuts down only that one, so two runners never close
+  each other's.
+
+### A second runner on the same Mac
+
+Two runners let two jobs run at once (for example one pull request's build while another's screenshots run).
+On the Mac, signed in as the user the first runner runs as:
+
+1. On GitHub: flux-labs-net/baycounty-me > Settings > Actions > Runners > New self-hosted runner > macOS, ARM64.
+   Keep that page open; it shows the download commands and a token.
+2. In Terminal, in a new folder (not the first runner's):
+   `mkdir ~/actions-runner-2 && cd ~/actions-runner-2`, then run the page's "Download" commands.
+3. Register it with the same labels and its own name:
+   `./config.sh --url https://github.com/flux-labs-net/baycounty-me --token <token from the page> --name studio-2 --labels self-hosted,macOS --unattended`
+4. Start it as a service so it comes back after a restart: `./svc.sh install && ./svc.sh start`.
+
+It shows as Idle under Settings > Actions > Runners. Nothing in the workflows needs to change.
+
 ## Next
 
 1. Run it in the simulator and fix anything Xcode flags (the SwiftUI views haven't been compiled yet; BayCountyKit has).
