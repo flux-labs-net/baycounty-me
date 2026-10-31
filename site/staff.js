@@ -243,7 +243,9 @@
     $('#vt-sub').textContent = `${j.official ? j.official.name + '’s' : 'The'} recorded votes on the ${j.government} ${j.official ? j.official.body : 'board'}, from the official minutes and hand-checked money votes.`;
     $('#vt-kpis').innerHTML = kpi('Votes on record', cnt(c.votes), vt.first ? `${day(vt.first)} to ${day(vt.last)}` : '') + kpi('Yes', cnt(c.yes), c.votes ? pctOf(c.yes / c.votes) + ' of votes' : '') +
       kpi('No', cnt(c.no), c.votes ? pctOf(c.no / c.votes) + ' of votes' : '') + kpi('Absent or abstained', cnt(c.absent + c.abstain), vt.present_rate == null ? '' : `present for ${vt.present_rate}%`) +
-      kpi('Split votes', cnt(c.split), `${cnt(c.on_losing_side)} on the losing side`);
+      kpi('Split votes', cnt(c.split), `${cnt(c.on_losing_side)} on the losing side`) +
+      (vt.contract_dollars ? kpi('Voted yes on contracts', '$' + Math.round(vt.contract_dollars.yes_total || 0).toLocaleString('en-US'),
+        `${cnt(vt.contract_dollars.yes_votes)} approved · voted no on $${Math.round(vt.contract_dollars.no_total || 0).toLocaleString('en-US')}`) : '');
     $('#vt-years tbody').innerHTML = vt.by_year.map(y => `<tr><td>${y.year}</td><td class="num">${cnt(y.votes)}</td><td class="num">${cnt(y.yes)}</td><td class="num">${cnt(y.no)}</td><td class="num">${cnt(y.absent)}</td><td class="num">${cnt(y.abstain)}</td></tr>`).join('') || empty(6, 'No votes on record.');
     $('#vt-split tbody').innerHTML = vt.split_votes.map(voteRow).join('') || empty(4, 'No split votes on record.');
     const years = [...new Set(vt.recent.map(v => String(v.date).slice(0, 4)))];

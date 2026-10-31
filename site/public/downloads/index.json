@@ -7529,7 +7529,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 415,
+   "rows": 416,
    "columns": [
     {
      "name": "website",
@@ -19229,6 +19229,509 @@
    "json": "/downloads/campaign-results.json",
    "csv": "/downloads/campaign-results.csv",
    "api": "/api/v1/datasets/campaign-results"
+  },
+  {
+   "id": "contract-vote-dollars",
+   "title": "Contract votes and their dollar figures",
+   "description": "Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.",
+   "rows": 3559,
+   "columns": [
+    {
+     "name": "vote_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "body",
+     "type": "string",
+     "values": [
+      "bay-bocc",
+      "bds-board",
+      "cw-commission",
+      "cw-cra",
+      "lh-commission",
+      "lh-cra",
+      "mb-council",
+      "parker-council",
+      "pc-commission",
+      "pc-cra",
+      "pcb-council",
+      "sp-commission"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Callaway Community Redevelopment Agency Board",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "agenda_item",
+     "type": "string"
+    },
+    {
+     "name": "headline",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "consent agenda",
+      "contract",
+      "debt",
+      "land",
+      "other",
+      "procedural",
+      "property",
+      "resolution"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "amendment",
+      "change order",
+      "consent agenda",
+      "consent agenda item",
+      "contract award",
+      "contract or agreement",
+      "property purchase",
+      "purchase",
+      "renewal or extension",
+      "task order"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "amount_from",
+     "type": "string",
+     "values": [
+      "contract record",
+      "motion text",
+      "vote summary"
+     ]
+    },
+    {
+     "name": "up_to",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "per_year",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "counted",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "not_counted_reason",
+     "type": "string"
+    },
+    {
+     "name": "same_item_as",
+     "type": "string",
+     "values": [
+      "cw-commission:2019-11-12:m32686",
+      "lh-commission:2023-04-11:m28442",
+      "lh-commission:2024-07-11:m26934",
+      "pc-commission:2016-05-24:m34972",
+      "pc-commission:2016-11-22:m34683",
+      "pc-commission:2017-01-10:m34593",
+      "pc-commission:2017-05-23:m34386",
+      "pc-commission:2018-07-24:m33649",
+      "pc-commission:2019-08-13:m32919",
+      "pc-commission:2019-10-22:m32753",
+      "pc-commission:2022-08-23:m29287",
+      "pc-commission:2023-01-10:m28748",
+      "pc-commission:2023-06-27:m28195",
+      "pc-commission:2024-01-09:m27492"
+     ]
+    },
+    {
+     "name": "outcome",
+     "type": "string",
+     "values": [
+      "failed",
+      "passed",
+      "tabled",
+      "unclear",
+      "withdrawn"
+     ]
+    },
+    {
+     "name": "tally",
+     "type": "string",
+     "values": [
+      "0-0",
+      "0-1",
+      "0-2",
+      "0-3",
+      "1-0",
+      "1-4",
+      "2-0",
+      "2-1",
+      "2-3",
+      "3-0",
+      "3-1",
+      "3-2",
+      "3-2 (failed)",
+      "4-0",
+      "4-0 (minutes: 'carried unanimously')",
+      "4-1",
+      "5 Ayes, 0 Nays",
+      "5-0",
+      "5-0 (minutes: 'carried unanimously')",
+      "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+      "6-0",
+      "unanimous"
+     ]
+    },
+    {
+     "name": "vote_method",
+     "type": "string",
+     "values": [
+      "no_dissent_recorded",
+      "outcome_only",
+      "roll_call",
+      "unanimous"
+     ]
+    },
+    {
+     "name": "verified",
+     "type": "string",
+     "values": [
+      "auto-checked",
+      "hand-checked",
+      "reviewed"
+     ]
+    },
+    {
+     "name": "contract_record_ids",
+     "type": "string"
+    },
+    {
+     "name": "contract_vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "minutes",
+      "researched"
+     ]
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "number"
+    }
+   ],
+   "json": "/downloads/contract-vote-dollars.json",
+   "csv": "/downloads/contract-vote-dollars.csv",
+   "api": "/api/v1/datasets/contract-vote-dollars"
+  },
+  {
+   "id": "member-contract-dollars",
+   "title": "Contract dollars by member vote",
+   "description": "One row per board member per counted contract vote (counted true in contract-vote-dollars): how the member voted (yes, no, absent, abstain) on that dollar figure. Sum amount where vote is yes and outcome is passed for the dollars a member voted to approve.",
+   "rows": 4302,
+   "columns": [
+    {
+     "name": "vote_id",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "member",
+     "type": "string"
+    },
+    {
+     "name": "vote",
+     "type": "string",
+     "values": [
+      "absent",
+      "abstain",
+      "no",
+      "unknown",
+      "yes"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "headline",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "amendment",
+      "change order",
+      "consent agenda item",
+      "contract award",
+      "contract or agreement",
+      "property purchase",
+      "purchase",
+      "renewal or extension",
+      "task order"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "up_to",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "per_year",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "outcome",
+     "type": "string",
+     "values": [
+      "failed",
+      "passed"
+     ]
+    },
+    {
+     "name": "tally",
+     "type": "string",
+     "values": [
+      "2-0",
+      "2-1",
+      "2-3",
+      "3-0",
+      "3-1",
+      "3-2",
+      "4-0",
+      "4-0 (minutes: 'carried unanimously')",
+      "4-1",
+      "5-0",
+      "5-0 (minutes: 'carried unanimously')",
+      "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+      "6-0",
+      "unanimous"
+     ]
+    },
+    {
+     "name": "vote_method",
+     "type": "string",
+     "values": [
+      "no_dissent_recorded",
+      "roll_call",
+      "unanimous"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "number"
+    }
+   ],
+   "json": "/downloads/member-contract-dollars.json",
+   "csv": "/downloads/member-contract-dollars.csv",
+   "api": "/api/v1/datasets/member-contract-dollars"
+  },
+  {
+   "id": "contract-dollar-totals",
+   "title": "Contract dollars each official voted on",
+   "description": "One row per official per government: the dollars in counted contract votes they voted yes on that passed (yes_total, yes_votes), voted yes on that failed (yes_failed_total), and voted no on (no_total, no_votes), the dates of the first and last counted vote, every contract vote they took part in (contract_votes), and how many of those are not in the totals and why (not_counted_*). Only votes with one clear dollar figure are counted, so the totals are a floor, not everything a board spent.",
+   "rows": 101,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "member",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "yes_total",
+     "type": "number"
+    },
+    {
+     "name": "yes_votes",
+     "type": "number"
+    },
+    {
+     "name": "yes_failed_total",
+     "type": "number"
+    },
+    {
+     "name": "yes_failed_votes",
+     "type": "number"
+    },
+    {
+     "name": "no_total",
+     "type": "number"
+    },
+    {
+     "name": "no_votes",
+     "type": "number"
+    },
+    {
+     "name": "absent_or_abstained_votes",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "contract_votes",
+     "type": "number"
+    },
+    {
+     "name": "not_counted_consent",
+     "type": "number"
+    },
+    {
+     "name": "not_counted_no_amount",
+     "type": "number"
+    },
+    {
+     "name": "not_counted_unclear",
+     "type": "number"
+    },
+    {
+     "name": "not_counted_not_spending",
+     "type": "number"
+    },
+    {
+     "name": "not_counted_repeat",
+     "type": "number"
+    }
+   ],
+   "json": "/downloads/contract-dollar-totals.json",
+   "csv": "/downloads/contract-dollar-totals.csv",
+   "api": "/api/v1/datasets/contract-dollar-totals"
   },
   {
    "id": "meetings",

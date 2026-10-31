@@ -162,6 +162,12 @@ async function dashboard(q, w, personId, {today = iso(new Date()), only = null} 
     const ids = [...new Set(rows.map(r => r.vote_id).filter(Boolean))];
     const meta = ids.length ? await safe(q, `select vote_id, headline, outcome, tally, split, amount, category, source_url from votes where vote_id = any($1)`, [ids]) : [];
     out.votes = voteRecord(rows, meta);
+    // the dollars in the contract votes they cast (site/vote_dollars.py: only votes with one clear dollar figure)
+    const [cd] = await safe(q, `select sum(yes_total)::float yes_total, sum(yes_votes)::int yes_votes, sum(yes_failed_total)::float yes_failed_total,
+        sum(yes_failed_votes)::int yes_failed_votes, sum(no_total)::float no_total, sum(no_votes)::int no_votes, sum(contract_votes)::int contract_votes,
+        sum(not_counted_consent)::int not_counted_consent, min(first_date)::text first_date, max(last_date)::text last_date
+        from contract_dollar_totals where person_id = $1 and gov_id = $2`, [pid, w.id]);
+    out.votes.contract_dollars = cd && cd.contract_votes ? {...cd, page: `/people/${pid}#contract-dollars`} : null;
   }
   if (want('numbers')) {
     const by = await safe(q, `select government, gov_id, fiscal_year, basis, section, line_key, name, service, fund_type, amount, in_total, status, source_url
