@@ -172,20 +172,12 @@ JS = r"""
   function shelterLine(d) {
     const head = $('shHead'), line = $('shLine'), S = d.shelters || [];
     if (!head || !line || !S.length) return;
-    const src = `<a href="${esc(S[0].source_url)}" target="_blank" rel="noopener">shelter page</a>`;
-    const seen = ` We read it every 5 minutes; last checked ${ago(d.checked_at)}.`;
     const open = S.filter(s => s.status === 'open'), dates = S.map(s => s.status_as_of).filter(Boolean).sort();
-    if (!open.length) {
-      head.textContent = 'None open right now';
-      line.innerHTML = `<b>No shelters are open.</b> Bay County's ${src} lists every shelter as closed.` +
-        (dates.length ? ` The county last dated that list ${day(dates[dates.length - 1])} and hasn't posted a newer status since.` : '') + seen +
-        ' When the county opens a shelter it shows here within minutes, and on phones signed up for shelter alerts.';
-      return;
-    }
-    const od = open.map(s => s.status_as_of).filter(Boolean).sort(), old = od.filter(x => (Date.now() - Date.parse(x)) / 864e5 > STALE);
-    head.textContent = `${open.length} open`;
-    line.innerHTML = `<b>${open.length} shelter${open.length > 1 ? 's' : ''} open</b> on Bay County's ${src}, as of ${od.length ? day(od[od.length - 1]) : 'its last update'}.${seen}` +
-      (old.length ? ` The county's page has listed ${old.length > 1 ? 'these' : 'this'} as open since ${day(old[0])} without a newer update; call the Citizens Information Center at <a href="tel:850-248-6090">850-248-6090</a> before you go.` : '');
+    const t = new Date(d.checked_at).toLocaleString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago'});
+    const old = open.some(s => s.status_as_of && (Date.now() - Date.parse(s.status_as_of)) / 864e5 > STALE);
+    head.textContent = open.length ? `${open.length} open` : 'None open right now';
+    line.innerHTML = `Last checked <a href="${esc(S[0].source_url)}" target="_blank" rel="noopener">official source</a>: ${t} · Last update on source: ${dates.length ? day(dates[dates.length - 1]) : 'not dated'}` +
+      (old ? ' · Call <a href="tel:850-248-6090">850-248-6090</a> to confirm before you go' : '');
   }
   const load = () => fetch('/api/v1/emergency').then(r => r.ok ? r.json() : Promise.reject(r.status)).then(render)
     .catch(() => { $('emSub').textContent = "Couldn't reach the live feed. The list below is from the last daily check."; });
@@ -391,24 +383,14 @@ def _shelter_status(S, checked=None):
     the line says what is open now, when we last read the page, and how old the county's own date is."""
     if not S:
         return 'Status as Bay County posts it', ''
-    src = f'<a href="{e(S[0]["source_url"])}" target="_blank" rel="noopener">shelter page</a>'
+    src = f'<a href="{e(S[0]["source_url"])}" target="_blank" rel="noopener">official source</a>'
     checked = checked or S[0].get('checked')
-    seen = f' We read it every 5 minutes; last checked {e(_when(checked))}.' if checked else ' We read it every 5 minutes.'
     dates = sorted({s['status_as_of'] for s in S if s.get('status_as_of')})
-    county_date = _when(dates[-1]) if dates else ''
     opened = [s for s in S if s['status'] == 'open']
-    if not opened:
-        why = (f' The county last dated that list {e(county_date)} and hasn\'t posted a newer status since.' if county_date else '')
-        return ('None open right now',
-                f'<b>No shelters are open.</b> Bay County\'s {src} lists every shelter as closed.{why}{seen} '
-                'When the county opens a shelter it shows here within minutes, and on phones signed up for shelter alerts.')
-    old = [s for s in opened if s.get('status_as_of') and (dt.date.today() - dt.date.fromisoformat(s['status_as_of'][:10])).days > STALE_DAYS]
-    n = len(opened)
-    line = f'<b>{n} shelter{"s" if n != 1 else ""} open</b> on Bay County\'s {src}, as of {e(_when(max(s.get("status_as_of") or "" for s in opened)) or "its last update")}.{seen}'
-    if old:
-        line += (f' The county\'s page has listed {"these" if len(old) > 1 else "this"} as open since {e(_when(min(s["status_as_of"] for s in old)))} without a newer update; '
-                 'call the Citizens Information Center at <a href="tel:850-248-6090">850-248-6090</a> before you go.')
-    return f'{n} open', line
+    line = f'Last checked {src}: {e(_when(checked)) or "every 5 minutes"} · Last update on source: {e(_when(dates[-1])) if dates else "not dated"}'
+    if opened and any((dt.date.today() - dt.date.fromisoformat(s['status_as_of'][:10])).days > STALE_DAYS for s in opened if s.get('status_as_of')):
+        line += ' · Call <a href="tel:850-248-6090">850-248-6090</a> to confirm before you go'
+    return (f'{len(opened)} open' if opened else 'None open right now'), line
 
 
 def emergency_page(out_dir):
@@ -498,7 +480,7 @@ def emergency_page(out_dir):
     <p class="note">Road closures cover state roads (FL511) and the closures cities post. City and county notices stay listed while their alert center lists them; news posts about storms and closures stay for {10} days.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="shelters" data-tile="Shelters">Shelters</h2><span class="muted" id="shHead">{e(sh_head)}</span></div>
-    <p class="em-empty" id="shLine">{sh_line}</p>
+    <p class="muted" id="shLine" style="margin:0;font-size:.88rem">{sh_line}</p>
     <p>Bay County Emergency Services opens shelters with Bay District Schools and the Florida Department of Health. <b>Not every shelter opens for every storm</b>, and shelters are a last resort: plan to stay with family or friends outside the zone if you can. Special needs shelters need registration ahead of time.</p>
     {"".join(groups)}
     <p class="note">Bring medicines, bedding, ID and supplies for a few days; check whether a shelter takes pets before you go.</p></section>
