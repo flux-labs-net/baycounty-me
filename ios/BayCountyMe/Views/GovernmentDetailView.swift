@@ -17,6 +17,7 @@ struct GovernmentDetailView: View {
     @State private var allFindings = false
     @State private var allBonds = false
     @State private var allRecords = false
+    @State private var allGlance = false
 
     /// Datasets this screen reads, besides the government profiles.
     private static let datasets = ["officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies"]
@@ -181,22 +182,30 @@ struct GovernmentDetailView: View {
         let fy = "FY\(String(picked))"
         let has = { (c: String) in !GovYear.yearsWith(gy, gov: govID, column: c).isEmpty }
         let findings = rows("audit-findings").filter { $0.string("gov_id") == govID && GovYear.fiscalYearOf($0.string("fy")) == picked }
+        var cards: [(String, String, String?)] = []
+        if let v = r?.number("budget_total") { cards.append(("Total budget", Format.compactMoney(v), "\(fy) · \(r?.string("budget_status") ?? "adopted")")) }
+        else if has("budget_total") { cards.append(("Total budget", "No data", "No \(fy) budget on file")) }
+        if let v = r?.number("millage") { cards.append(("Tax rate (mills)", Format.number(v), "Per $1,000 of taxable value")) }
+        else if has("millage") { cards.append(("Tax rate (mills)", "No data", "No \(fy) rate on file")) }
+        if let v = r?.number("debt_total") { cards.append(("Debt", Format.compactMoney(v), "Audited, end of \(fy)")) }
+        else if has("debt_total") { cards.append(("Debt", "No data", "No audited total for \(fy)")) }
+        if let v = r?.number("employees_fte") { cards.append(("Employees", Format.number(v), "\(fy) budget, staff positions")) }
+        if let v = r?.number("budget_per_resident") { cards.append(("Budget per resident", Format.money(v.rounded()), nil)) }
+        if let v = r?.number("general_fund") { cards.append(("General fund", Format.compactMoney(v), nil)) }
+        if let v = r?.number("property_tax_levy") { cards.append(("Property tax levied", Format.compactMoney(v), nil)) }
+        if !findings.isEmpty { cards.append(("Audit findings", "\(findings.count)", "\(fy) · \(findings.filter { $0.bool("repeat") == true }.count) repeat")) }
+        if let v = g.votesRecorded { cards.append(("Votes recorded", "\(v)", (g.splitVotes.map { "\($0) split · " } ?? "") + "all years")) }
+        if let v = g.typicalUtilityBill { cards.append(("Typical utility bill", Format.money(v), "Per month, today's rates")) }
+        if let v = g.femaMichael { cards.append(("FEMA, Hurricane Michael", Format.compactMoney(v), nil)) }
         return PageSection(title: "At a glance", symbol: "gauge.with.dots.needle.33percent", tone: .blue, caption: "Fiscal year \(String(picked))\(r?.string("period").map { " · " + $0 } ?? "")") {
+            // the first four figures; the rest behind "All N figures", so the parts list below stays in reach
+            let shown = allGlance ? cards : Array(cards.prefix(4))
             StatGrid {
-                if let v = r?.number("budget_total") { KPICard(title: "Total budget", value: Format.compactMoney(v), caption: "\(fy) · \(r?.string("budget_status") ?? "adopted")") }
-                else if has("budget_total") { KPICard(title: "Total budget", value: "No data", caption: "No \(fy) budget on file") }
-                if let v = r?.number("budget_per_resident") { KPICard(title: "Budget per resident", value: Format.money(v.rounded())) }
-                if let v = r?.number("general_fund") { KPICard(title: "General fund", value: Format.compactMoney(v)) }
-                if let v = r?.number("property_tax_levy") { KPICard(title: "Property tax levied", value: Format.compactMoney(v)) }
-                if let v = r?.number("millage") { KPICard(title: "Tax rate (mills)", value: Format.number(v), caption: "Per $1,000 of taxable value") }
-                else if has("millage") { KPICard(title: "Tax rate (mills)", value: "No data", caption: "No \(fy) rate on file") }
-                if let v = r?.number("debt_total") { KPICard(title: "Debt", value: Format.compactMoney(v), caption: "Audited, end of \(fy)") }
-                else if has("debt_total") { KPICard(title: "Debt", value: "No data", caption: "No audited total for \(fy)") }
-                if !findings.isEmpty { KPICard(title: "Audit findings", value: "\(findings.count)", caption: "\(fy) · \(findings.filter { $0.bool("repeat") == true }.count) repeat") }
-                if let v = r?.number("employees_fte") { KPICard(title: "Employees", value: Format.number(v), caption: "\(fy) budget, staff positions") }
-                if let v = g.votesRecorded { KPICard(title: "Votes recorded", value: "\(v)", caption: (g.splitVotes.map { "\($0) split · " } ?? "") + "all years") }
-                if let v = g.typicalUtilityBill { KPICard(title: "Typical utility bill", value: Format.money(v), caption: "Per month, today's rates") }
-                if let v = g.femaMichael { KPICard(title: "FEMA, Hurricane Michael", value: Format.compactMoney(v)) }
+                ForEach(shown, id: \.0) { c in KPICard(title: c.0, value: c.1, caption: c.2) }
+            }
+            if cards.count > 4 {
+                Button(allGlance ? "Show fewer" : "All \(cards.count) figures") { allGlance.toggle() }
+                    .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
             }
         }
     }

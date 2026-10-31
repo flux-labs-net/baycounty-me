@@ -151,24 +151,30 @@ private fun Glance(g: Government, yc: YearCtx, gy: List<DataRow>, audits: List<D
     val fy = yc.fy
     fun has(c: String) = GovYear.yearsWith(gy, yc.govID, c).isNotEmpty()
     val findings = audits.filter { it.string("gov_id") == yc.govID && GovYear.fiscalYearOf(it.string("fy")) == yc.year }
+    // the four headline figures first, the rest behind "All N figures", so the parts list below stays in reach
     val cards = listOfNotNull(
         r?.number("budget_total")?.let { K("Total budget", Format.compactMoney(it), "$fy · ${r.string("budget_status") ?: "adopted"}") }
             ?: if (has("budget_total")) K("Total budget", "No data", "No $fy budget on file") else null,
-        r?.number("budget_per_resident")?.let { K("Budget per resident", Format.money(Math.rint(it))) },
-        r?.number("general_fund")?.let { K("General fund", Format.compactMoney(it)) },
-        r?.number("property_tax_levy")?.let { K("Property tax levied", Format.compactMoney(it)) },
         r?.number("millage")?.let { K("Tax rate (mills)", Format.number(it), "Per \$1,000 of taxable value") }
             ?: if (has("millage")) K("Tax rate (mills)", "No data", "No $fy rate on file") else null,
         r?.number("debt_total")?.let { K("Debt", Format.compactMoney(it), "Audited, end of $fy") }
             ?: if (has("debt_total")) K("Debt", "No data", "No audited total for $fy") else null,
-        if (findings.isNotEmpty()) K("Audit findings", "${findings.size}", "$fy · ${findings.count { it.bool("repeat") == true }} repeat") else null,
         r?.number("employees_fte")?.let { K("Employees", Format.number(it), "$fy budget, staff positions") },
+        r?.number("budget_per_resident")?.let { K("Budget per resident", Format.money(Math.rint(it))) },
+        r?.number("general_fund")?.let { K("General fund", Format.compactMoney(it)) },
+        r?.number("property_tax_levy")?.let { K("Property tax levied", Format.compactMoney(it)) },
+        if (findings.isNotEmpty()) K("Audit findings", "${findings.size}", "$fy · ${findings.count { it.bool("repeat") == true }} repeat") else null,
         g.votesRecorded?.let { K("Votes recorded", "$it", (g.splitVotes?.let { s -> "$s split · " } ?: "") + "all years") },
         g.typicalUtilityBill?.let { K("Typical utility bill", Format.money(it), "Per month, today's rates") },
         g.femaMichael?.let { K("FEMA, Hurricane Michael", Format.compactMoney(it)) },
     )
+    var all by rememberSaveable(yc.govID) { mutableStateOf(false) }
+    val shown = if (all) cards else cards.take(4)
     PageSection("At a glance", "gauge.with.dots.needle.33percent", Tone.BLUE, "Fiscal year ${yc.year}" + (r?.string("period")?.let { " · $it" } ?: "")) {
-        Grid2(cards) { k, m -> KPICard(k.title, k.value, m, k.caption?.takeIf { it.isNotEmpty() }) }
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Grid2(shown) { k, m -> KPICard(k.title, k.value, m, k.caption?.takeIf { it.isNotEmpty() }) }
+            if (cards.size > 4) CardList { ShowMoreRow(all, "All ${cards.size} figures") { all = !all } }
+        }
     }
 }
 
