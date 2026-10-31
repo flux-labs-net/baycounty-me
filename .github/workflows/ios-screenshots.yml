@@ -1,16 +1,45 @@
 name: iOS screenshots
-# Runs the app in the iPhone simulator and screenshots each main screen, so changes can be checked by eye.
+# Runs the app in the iPhone simulator and screenshots the screens a pull request changed, as proof of the change.
+# .github/scripts/app_screens.py picks them from the changed files (HomeView.swift -> home, and so on), or from a
+# "Screens: taxbill, home" line in the pull request description. The all-screens label or a manual run (screens: all)
+# takes every screen, for a release. When no screen changed, the Mac isn't used at all.
 on:
   workflow_dispatch:
+    inputs:
+      screens:
+        description: 'Screens to take: "all", or names like "taxbill home staff" (staff = the staff app)'
+        default: all
   pull_request:
-    paths: ["ios/BayCountyMe/**", "ios/BayCountyStaff/**", ".github/workflows/ios-screenshots.yml"]
+    paths: ["ios/BayCountyMe/**", "ios/BayCountyKit/Sources/**", "ios/BayCountyStaff/**",
+            ".github/workflows/ios-screenshots.yml", ".github/scripts/app_screens.py", ".github/actions/pick-screens/**"]
 # One Mac runs every iOS job one at a time, so a new push to a pull request cancels that PR's older run
 # instead of queuing behind it. Runs on main are never cancelled.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
+  # Picks the screens on a cheap Linux runner, so the Mac only starts when there is something to screenshot.
+  plan:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    outputs:
+      ios: ${{ steps.pick.outputs.ios }}
+      ios_dark: ${{ steps.pick.outputs.ios_dark }}
+      ios_charts: ${{ steps.pick.outputs.ios_charts }}
+      any_ios: ${{ steps.pick.outputs.any_ios }}
+      staff: ${{ steps.pick.outputs.staff }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+      - id: pick
+        uses: ./.github/actions/pick-screens
+        with:
+          manual: ${{ inputs.screens }}
+
   screenshots:
+    needs: plan
+    if: needs.plan.outputs.any_ios == 'true'
     runs-on: [self-hosted, macOS]
     timeout-minutes: 30
     steps:
@@ -28,50 +57,43 @@ jobs:
           xcodegen
           xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyMe \
             -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build -quiet
-      - name: Screenshot each screen
+      - name: Screenshot the picked screens, light and dark
         working-directory: ios
+        env:
+          LIGHT: ${{ needs.plan.outputs.ios }}
+          DARK: ${{ needs.plan.outputs.ios_dark }}
+          CHARTS: ${{ needs.plan.outputs.ios_charts }}
         run: |
           DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
-          xcrun simctl shutdown all || true  # the Mac Pro keeps simulators between runs
+          xcrun simctl shutdown all || true  # the Mac keeps simulators between runs
           xcrun simctl boot "$DEV"; xcrun simctl bootstatus "$DEV" -b
-          xcrun simctl ui "$DEV" appearance light
           xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 || true
           APP=$(find build/Build/Products -name "BayCountyMe.app" -maxdepth 3 | head -1)
           xcrun simctl install "$DEV" "$APP"
           mkdir -p shots
-          for s in home taxbill myhome myhome:settings "address:825 Ohio Ave" tax amendment3 glossary vendors vendor people person moneymap donors contracts votes salaries accountability accproject cra craincrement chambers events beaches parks roads development schools emergency hurricaneprep "utilities:825 Ohio Ave" restaurants restaurant newbusinesses volunteer military publicsafety overlaps budget pastelections updates tab:living tab:governments gov:county gov:lh tab:money tab:meetings tab:search record:contract record:vote record:board record:nonprofit; do
+          # shot <file name> <screen> [more launch arguments]. "home:rent" is the Home tab for a renter, "setup" the
+          # first-launch setup screen; anything else opens with -screen (an "_" in the name stands for a space).
+          shot() {
+            n=$1; s=$2; shift 2
             xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
-            if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app -setupSeen YES -tenure own; else xcrun simctl launch "$DEV" me.baycounty.app -screen "$s"; fi
+            case "$s" in
+              home) xcrun simctl launch "$DEV" me.baycounty.app -setupSeen YES -tenure own ;;
+              home:*) xcrun simctl launch "$DEV" me.baycounty.app -setupSeen YES -tenure "${s#home:}" ;;
+              setup) xcrun simctl launch "$DEV" me.baycounty.app -setupSeen NO ;;
+              *) xcrun simctl launch "$DEV" me.baycounty.app -screen "${s//_/ }" "$@" ;;
+            esac
             sleep 14
-            xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__').png"
-          done
-          # The Home tab for a renter and for someone who hasn't said, and the first-launch setup screen.
-          for t in rent unset; do
-            xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
-            xcrun simctl launch "$DEV" me.baycounty.app -setupSeen YES -tenure "$t"
-            sleep 14
-            xcrun simctl io "$DEV" screenshot "shots/home_$t.png"
-          done
-          xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
-          xcrun simctl launch "$DEV" me.baycounty.app -setupSeen NO
-          sleep 10
-          xcrun simctl io "$DEV" screenshot "shots/setup.png"
+            xcrun simctl io "$DEV" screenshot "shots/$n.png"
+          }
+          name() { echo "$1" | tr ':' '_'; }
+          xcrun simctl ui "$DEV" appearance light
+          for s in $LIGHT; do shot "$(name "$s")" "$s"; done
           xcrun simctl ui "$DEV" appearance dark
-          for s in home taxbill myhome tab:living tab:governments tab:money tab:meetings gov:county person budget tax record:board; do
-            xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
-            if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app -setupSeen YES -tenure rent; else xcrun simctl launch "$DEV" me.baycounty.app -screen "$s"; fi
-            sleep 12
-            xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__')_dark.png"
-          done
+          for s in $DARK; do shot "$(name "$s")_dark" "$s"; done
           # Each chart, scrolled into view, in light and dark mode.
           for mode in light dark; do
             xcrun simctl ui "$DEV" appearance "$mode"
-            for s in craincrement cra budget vendor person tax contracts schools publicsafety overlaps; do
-              xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
-              xcrun simctl launch "$DEV" me.baycounty.app -screen "$s" -scrollTo chart
-              sleep 16
-              xcrun simctl io "$DEV" screenshot "shots/chart_${s}_${mode}.png"
-            done
+            for s in $CHARTS; do shot "chart_${s}_${mode}" "$s" -scrollTo chart; done
           done
       - name: Shut down the simulator
         if: always()
@@ -83,6 +105,8 @@ jobs:
 
   # BayCounty.me Staff, from its made-up demo data (-demo): the owner's view and a city alert sender's view.
   staff:
+    needs: plan
+    if: needs.plan.outputs.staff == 'true'
     runs-on: [self-hosted, macOS]
     timeout-minutes: 30
     steps:

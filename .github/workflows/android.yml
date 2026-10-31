@@ -1,18 +1,44 @@
 name: Android
-# Builds the Android app (android/) when it changes: kit tests, a debug APK, every screen rendered on the JVM in
-# light and dark (Paparazzi, from the data in this repo), and real emulator screenshots with live data.
-# Download the APK and both sets of pictures from the run's artifacts.
+# Builds the Android app (android/) when it changes: kit tests and debug APKs, plus pictures of the screens the change
+# touched, as proof: rendered on the JVM in light and dark (Paparazzi, from the data in this repo) and on a real
+# emulator with live data. .github/scripts/app_screens.py picks the screens from the changed files, or from a
+# "Screens: taxbill, home" line in the pull request description; the all-screens label or a manual run (screens: all)
+# takes every screen. Download the APKs and pictures from the run's artifacts.
 on:
   workflow_dispatch:
+    inputs:
+      screens:
+        description: 'Screens to take: "all", or names like "taxbill home staff watch" (staff / watch = those apps)'
+        default: all
   pull_request:
-    paths: ["android/**", "site/public/data/app/**", ".github/workflows/android.yml"]
+    paths: ["android/**", "site/public/data/app/**", ".github/workflows/android.yml", ".github/scripts/app_screens.py",
+            ".github/actions/pick-screens/**"]
   push:
     branches: [main]
     paths: ["android/**", ".github/workflows/android.yml"]
-env:
-  SCREENS: home,home:rent,home:unset,setup,taxbill,tab:living,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,chambers,events,beaches,parks,roads,development,schools,emergency,hurricaneprep,utilities,restaurants,restaurant,newbusinesses,volunteer,military,publicsafety,overlaps,budget,pastelections,updates,about,explore,myaddress,myhome,myhome:settings,record:contract,record:vote,record:board,record:nonprofit
 jobs:
+  plan:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    outputs:
+      android: ${{ steps.pick.outputs.android }}
+      any_android: ${{ steps.pick.outputs.any_android }}
+      emu: ${{ steps.pick.outputs.android_emu }}
+      emu_dark: ${{ steps.pick.outputs.android_emu_dark }}
+      any_emu: ${{ steps.pick.outputs.any_android_emu }}
+      staff: ${{ steps.pick.outputs.staff }}
+      watch: ${{ steps.pick.outputs.watch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+      - id: pick
+        uses: ./.github/actions/pick-screens
+        with:
+          manual: ${{ inputs.screens }}
+
   build:
+    needs: plan
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 40
     defaults:
@@ -27,16 +53,19 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Kit tests and debug APK
         run: ./gradlew :kit:test :app:assembleDebug
-      - name: Render every screen, light and dark
+      - name: Render the picked screens, light and dark
+        if: needs.plan.outputs.any_android == 'true'
+        env:
+          SCREENS: ${{ needs.plan.outputs.android }}
         run: ./gradlew :app:testDebugUnitTest --tests 'me.baycounty.app.ScreensTest' -Dscreens="$SCREENS" -Dfullres="$PWD/shots"
-      - name: Staff app (BayCounty.me Staff), debug APK and every screen, light and dark
-        run: |
-          ./gradlew :staff:assembleDebug
-          ./gradlew :staff:testDebugUnitTest -Dfullres="$PWD/staff-shots"
-      - name: Wear OS app, debug APK and its screens (made-up demo day)
-        run: |
-          ./gradlew :wear:assembleDebug
-          ./gradlew :wear:testDebugUnitTest -Dfullres="$PWD/wear-shots"
+      - name: Staff app (BayCounty.me Staff) and Wear OS app, debug APKs
+        run: ./gradlew :staff:assembleDebug :wear:assembleDebug
+      - name: Staff app screens, light and dark, when it changed
+        if: needs.plan.outputs.staff == 'true'
+        run: ./gradlew :staff:testDebugUnitTest -Dfullres="$PWD/staff-shots"
+      - name: Wear OS app screens (made-up demo day), when it changed
+        if: needs.plan.outputs.watch == 'true'
+        run: ./gradlew :wear:testDebugUnitTest -Dfullres="$PWD/wear-shots"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -66,7 +95,8 @@ jobs:
           path: android/shots
 
   emulator:
-    needs: build
+    needs: [plan, build]
+    if: needs.plan.outputs.any_emu == 'true'
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 45
     steps:
@@ -92,6 +122,9 @@ jobs:
           profile: pixel_6
           disable-animations: true
           script: bash android/scripts/emulator_shots.sh app-debug.apk emulator-shots
+        env:
+          SHOTS: ${{ needs.plan.outputs.emu }}
+          DARK_SHOTS: ${{ needs.plan.outputs.emu_dark }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
