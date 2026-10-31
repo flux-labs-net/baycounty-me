@@ -16,7 +16,7 @@ def M(n, d=1):
 
 def stats():
     from tax_page import build_data
-    td = build_data(); lv = {g: v[-1] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
+    td = build_data(); lv = {g: v[td['levyYear']] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
     cra = _j('merged.json')['payments']
     cra_done = [p for p in cra if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed')]  # planned and budgeted records are not counted
     cra_spent = sum(p['amount'] for p in cra_done)

@@ -4,7 +4,7 @@ Neutral explainer. Uses the state Revenue Estimating Conference's parcel-level e
 (data/amendment3/rec_bay.json) and the tax-page dataset for rates and levies.
 """
 import json, os
-from tax_page import build_data, YEARS
+from tax_page import build_data, YEARS, LV
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 A3 = os.path.join(HERE, '..', 'data', 'amendment3')
@@ -50,7 +50,7 @@ def amend_data():
     govs = []
     for r in rec['bay']:
         name, ids, bid = REC_MAP[r['name']]
-        levy = sum(td['auth'][a]['lv'][L] or 0 for a in ids)
+        levy = sum(td['auth'][a]['lv'][LV] or 0 for a in ids)
         govs.append({'n': name, 'levy': levy, 'gf': gov_gf.get(bid) if bid else None,
                      'imp': [-r['impact'][k] for k in ('FY2028', 'FY2029', 'FY2030', 'FY2031', 'FY2032')]})
     govs.sort(key=lambda g: -g['imp'][1])
@@ -190,7 +190,7 @@ def amend_page(out_dir):
 
   <section class="tx-sec method" aria-labelledby="src-h">
     <div class="sec-hd"><h2 id="src-h">Sources and method</h2></div>
-    <p>The calculator applies today's ({T('fiscal-year', 'FY2026')}) rates for your area. Today, a homestead gets $25,000 off all taxes and a second ${data['second']:,} off non-school taxes on value above $50,000. Under Amendment 3, the first $25,000 applies only to school taxes, and non-school taxes get $150,000 off in 2027 and $250,000 in 2028 (for people who moved to Florida after 2026: $50,000, then about $51,220). These amounts follow the state's analysis. Budget figures are the state Revenue Estimating Conference's estimate by government, adopted July 10, 2026. Its "Board of County Commissioners" figure includes the county fire and mosquito control taxes.</p>
+    <p>The calculator applies today's ({T('fiscal-year', 'FY2027')}) rates for your area. Today, a homestead gets $25,000 off all taxes and a second ${data['second']:,} off non-school taxes on value above $50,000. Under Amendment 3, the first $25,000 applies only to school taxes, and non-school taxes get $150,000 off in 2027 and $250,000 in 2028 (for people who moved to Florida after 2026: $50,000, then about $51,220). These amounts follow the state's analysis. Budget figures are the state Revenue Estimating Conference's estimate by government, adopted July 10, 2026. Its "Board of County Commissioners" figure includes the county fire and mosquito control taxes.</p>
     <ul class="srcs">{srcs}</ul>
   </section>
   <div class="tt" id="tt" role="tooltip" hidden></div>

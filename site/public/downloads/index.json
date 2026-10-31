@@ -936,7 +936,7 @@
    "id": "property-tax-rates",
    "title": "Property tax rates",
    "description": "Millage, rolled-back rate and levy for every taxing authority, by tax year.",
-   "rows": 90,
+   "rows": 105,
    "columns": [
     {
      "name": "authority_id",

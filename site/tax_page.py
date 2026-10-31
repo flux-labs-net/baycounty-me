@@ -10,7 +10,11 @@ from city_filter import city_bar
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data', 'tax')
 
-YEARS = [2020, 2021, 2022, 2023, 2024, 2025]           # tax years
+YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026]     # tax years (rates)
+LV = YEARS.index(2025)                                  # latest tax year with published levies (DOR publishes 2026 in winter)
+# 2026 rates not yet found: the 2025 rate is carried forward and the page says so
+CARRY_2026 = {'nwfwmd': 'NW Florida Water Management District: its September 2026 hearing materials were not found, so the 2025 rate is used',
+              'beach_mosquito': 'Beach Mosquito Control District: its 2026 rate was not found, so the 2025 rate is used'}
 FY = [f'FY{y + 1}' for y in YEARS]                      # budget years they pay for
 
 # group order is the validated categorical order: never re-sort
@@ -102,7 +106,7 @@ GAPS = [
     "Audited figures for FY2025 are not out yet (only Callaway's FY2025 spending has been posted by the state).",
     "Rates for non-ad valorem fees (fire, stormwater, garbage) are incomplete, so the calculator leaves them out.",
     "In the audited figures, CRAs set up as separate legal entities are reported apart from the city or county and are not included here. Bay County's figures include the Sheriff and other constitutional officers but do not split them out.",
-    "Tax year 2026 (FY2027) rates had not been published by the state when this page was built.",
+    "Rates are the ones adopted in September 2026 (tax year 2026, FY2027 bills). The state's levy totals for 2026 are published in winter, so the dollar totals below are for tax year 2025 (FY2026), the latest year published.",
 ]
 CRA_AMD3 = 'https://www.baycountyfl.gov/829/Understanding-Amendment-3'
 
@@ -119,6 +123,8 @@ def build_data():
 
     def series(aid, key):
         by = {y['tax_year']: y.get(key) for y in A[aid]['years']}
+        if key == 'millage' and aid in CARRY_2026 and by.get(2026) is None:
+            by[2026] = by.get(2025)
         return [by.get(y) for y in YEARS]
 
     auth = {}
@@ -129,6 +135,7 @@ def build_data():
     districts = [{'id': k, 'label': lbl, 'stack': stacks[k]} for k, lbl in DISTRICTS]
     for d in districts:  # check our stacks reproduce DOR's published totals
         tot = round(sum(auth[a]['m'][-1] for a in d['stack']), 4)
+        tot = round(sum(auth[a]['m'][LV] for a in d['stack']), 4)
         assert abs(tot - stacks['stack_totals_2025'][d['id']]) < 1e-3, (d['id'], tot)
         d['total'] = [round(sum(auth[a]['m'][i] for a in d['stack']), 4) for i in range(len(YEARS))]
 
@@ -141,9 +148,11 @@ def build_data():
         for i, v in enumerate(a['lv']):
             levy[a['g']][i] += v or 0
     levy['school'] = school_total
+    for g in levy:  # no 2026 levies yet: not zero, not shown
+        levy[g] = levy[g][:LV + 1] + [None] * (len(YEARS) - LV - 1)
 
     # FY2026 levy per government/district for the countywide bars
-    last = len(YEARS) - 1
+    last = LV
     bars = [{'n': 'Bay District Schools', 'g': 'school', 'v': school_total[last]}]
     for aid, a in auth.items():
         if not a['school'] and a['lv'][last]:
@@ -202,7 +211,7 @@ def build_data():
 
     return {
         'years': YEARS, 'fy': FY, 'second': [SECOND_HX[y] for y in YEARS], 'groups': GROUPS, 'auth': auth, 'districts': districts,
-        'levy': levy, 'bars': bars, 'govs': govs,
+        'levy': levy, 'bars': bars, 'govs': govs, 'levyYear': LV, 'carry': list(CARRY_2026.values()),
         'gaps': GAPS,
     }
 
@@ -233,7 +242,7 @@ def tax_page(out_dir, gov_panel=True):
     same budget); the Spanish page keeps the panel, as there are no Spanish government pages."""
     d = build_data()
     last = len(YEARS) - 1
-    total26 = sum(d['levy'][g][last] for g, _ in GROUPS)
+    total26 = sum(d['levy'][g][LV] for g, _ in GROUPS)
     js = open(os.path.join(HERE, 'tax.js')).read().replace('__TAX__', json.dumps(d, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'tax.js'), 'w').write(js)
 
@@ -247,7 +256,7 @@ def tax_page(out_dir, gov_panel=True):
       <h1>How your tax dollars are allocated</h1>
       <p class="lede">Your property tax bill isn't one tax. It's several governments each taking a slice. Here's who gets what from your bill, where each government's other money comes from, and what it pays for.</p>
     </div>
-    <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Rates for {FY[last]} (Oct 2025 to Sept 2026)<br>Data updated Oct 20, 2026</span></div>
+    <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Rates for {FY[last]} (Oct 2026 to Sept 2027)<br>Data updated Oct 20, 2026</span></div>
   </header>
   {city_bar(['county', 'schools', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb'], note='Opens that government in "Each government\'s money" and sets the calculator to its city')}
 
@@ -289,7 +298,7 @@ def tax_page(out_dir, gov_panel=True):
   </section>
 
   <section class="tx-sec" aria-labelledby="all-h">
-    <div class="sec-hd"><h2 id="all-h">Where all of Bay County's property tax goes</h2><span class="muted">Total {T('levy', 'levied')} in {FY[last]}: <b>${total26/1e6:,.1f}M</b></span></div>
+    <div class="sec-hd"><h2 id="all-h">Where all of Bay County's property tax goes</h2><span class="muted">Total {T('levy', 'levied')} in {FY[LV]} (latest published; {FY[last]} totals come out in winter): <b>${total26/1e6:,.1f}M</b></span></div>
     <div class="hbars" id="allBars"></div>
     <aside class="callout">
       <b>Some of this goes to redevelopment districts.</b> Bay County says about $27 million (16.5%) of the countywide property tax it collects goes to city {T('cra', 'Community Redevelopment Agencies')}, including about $22.2 million a year to Panama City Beach's Front Beach Road CRA. That money is the {T('tif', 'tax increment')} from growth inside those districts. <a href="/public-money/cra-tax-increment">How much each CRA gets, by year →</a> <a href="/public-money/cra-spending">See what the CRAs spend it on →</a> <a class="src" href="{CRA_AMD3}" target="_blank" rel="noopener">Source: Bay County</a>
@@ -303,6 +312,7 @@ def tax_page(out_dir, gov_panel=True):
     <details class="tbl-toggle"><summary>Show as a table</summary><div class="tablewrap"><table class="tx-table" id="levyTable"></table></div></details>
     <div class="sub-hd"><h3>Total rate where you live</h3><span class="muted">All slices added up, in mills. Lower is less tax per $1,000 of value.</span></div>
     <div class="tablewrap"><table class="tx-table" id="rateTable"></table></div>
+    <p class="muted small">FY2027 column: rates adopted in September 2026. Two small districts have no 2026 rate found yet, so their 2025 rate is carried into the total: {'; '.join(CARRY_2026.values())}.</p>
     <p class="note">Bay County raised its rate from 4.4362 to 5.4362 mills in FY2024. Parker started a city property tax in FY2024. Panama City Beach has no city property tax. A rate that stays the same can still be a tax increase under Florida law if it's above the {T('rolled-back', 'rolled-back rate')}, because rising values bring in more money.</p>
   </section>
 
