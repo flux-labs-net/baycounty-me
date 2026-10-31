@@ -38,6 +38,18 @@ DATA_UPDATED = 'Oct 21, 2026'
 PDF = '''<div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Data updated Oct 21, 2026</span></div>'''
 
 
+_Y27 = {}
+
+
+def budget27(key):
+    """The adopted FY2027 budget total of a government as it published it, or None (Mexico Beach has not published one)."""
+    if not _Y27:
+        from page_datasets import government_years
+        _Y27.update({r['gov_id']: r.get('budget_total') for r in government_years() if r['fiscal_year'] == 2027})
+        _Y27.setdefault('_', None)
+    return _Y27.get(key)
+
+
 def hbars(rows, color='var(--s1)'):
     rows = [(k, v) for k, v in rows if v]
     if not rows:
@@ -230,7 +242,7 @@ def gov_page(key):
     n_el = sum(1 for x in seats if x.get('elected') or not STAFF.search(x['seat']))
     up = [x for x in p.get('meetings') or [] if not x.get('past')]
     hint = {'who': ', '.join(x for x in [f'{n_el} elected' if n_el else '', f'{len(seats) - n_el} appointed' if len(seats) > n_el else ''] if x),
-            'money': f'{money(b["total"])} {e(b.get("status") or "").split(" ")[0].lower() or "budget"}'.strip() if b.get('total') else 'Money in and out',
+            'money': f'{money(budget27(p["key"]))} FY2027 budget' if budget27(p['key']) else (f'{money(b["total"])} FY2026 budget' if b.get('total') else 'Money in and out'),
             'rate': f'{mills:g} mills' if mills else ('No city property tax' if mills == 0 else 'Rate history'),
             'contracts': 'Awards and how they were bid', 'cra': 'Redevelopment spending', 'projects': 'Budget to close-out', 'votes': 'Every recorded vote',
             'meet': f'Next: {_md(up[0]["start"])}' if up else 'Calendar', 'debt': f'{money(p["debt"]["total"])} · {e(p["debt"].get("fy") or "").split(" ")[0]}' if p.get('debt') else 'What it owes',
@@ -414,7 +426,7 @@ def govs_index():
         b = p.get('budget') or {}
         kind, icon, tone = look.get(p['kind'], look['city'])
         facts = [f'{p["population"]:,} residents' if p.get('population') and p['kind'] == 'city' else '',
-                 f'{money(b["total"])} budget' if b.get('total') else '',
+                 (f'{money(budget27(p["key"]))} FY2027 budget' if budget27(p['key']) else f'{money(b["total"])} FY2026 budget' if b.get('total') else ''),
                  (f'{b["mills"]:g} mills' if b.get('mills') else 'no city property tax') if p['kind'] == 'city' else '',
                  f'{money((p.get("debt") or {}).get("total"))} in debt' if (p.get("debt") or {}).get("total") else '']
         dc = completeness.by_gov(p['key'], dc_rows)

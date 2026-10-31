@@ -105,7 +105,15 @@ def budget_data():
                 svc[k] = svc.get(k, 0) + v['amount']
     names = dict(SERVICES)
     fy = d['governments'][0]['fiscal_year'].split(' ')[0]
+    # the headline total is the adopted FY2027 budget of each government as it published it (Panama City's leaves out interfund
+    # transfers; the county's and Parker's final-hearing figures await posted minutes); governments with no total are named, not guessed
+    from page_datasets import government_years
+    y27 = {r['gov_id']: r for r in government_years() if r['fiscal_year'] == 2027}
+    have = [g for g in GOVS if (y27.get(g['key']) or {}).get('budget_total')]
+    missing = [g['short'] for g in GOVS if g not in have]
+    pending = [g['short'] for g in have if 'final hearing' in (y27[g['key']].get('budget_status') or '')]  # hearing held, minutes not posted yet
     return {'fy': fy, 'total': sum(g['total'] for g in d['governments']), 'n': len(d['governments']),
+            'total27': sum(y27[g['key']]['budget_total'] for g in have), 'n27': len(have), 'n_all': len(GOVS), 'missing27': missing, 'pending27': pending,
             'services': sorted(((names[k], v) for k, v in svc.items()), key=lambda r: -r[1])}
 
 
@@ -306,9 +314,9 @@ def home_page():
     <div class="h-sec-hd"><div><h3 id="follow">Then where it went, and who's checking.</h3></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
       <a class="h-tile t-blue" href="/compare#services">
-        <span class="eyebrow">Spending · {bd['fy']}</span>
+        <span class="eyebrow">Spending · FY2027</span>
         <span class="mini" aria-hidden="true">{budget_bars}</span>
-        <b class="fig">{M(bd['total'])}</b><span class="h-tl">Budgeted for {bd['fy']}, the year that just ended</span><span class="muted">{bd['n']} governments · biggest everyday costs: {html.escape(top2)}</span>
+        <b class="fig">{M(bd['total27'])}</b><span class="h-tl">Adopted FY2027 budgets, {bd['n27']} of {bd['n_all']} governments</span><span class="muted">{html.escape(', '.join(bd['missing27']) + ' has no published total. ' if bd['missing27'] else '')}{html.escape(', '.join(bd['pending27']) + ': final hearing held, minutes not posted yet. ' if bd['pending27'] else '')}Everyday costs in the bars are FY2026: {html.escape(top2)}</span>
       </a>
       <a class="h-tile t-salmon" href="/compare#m-debt">
         <span class="eyebrow">Debt</span>

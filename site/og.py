@@ -109,7 +109,10 @@ def gov_cards():
         b = p.get('budget') or {}
         pr = (p.get('per_resident') or {}).get('budget')
         debt = (p.get('debt') or {}).get('total')
-        if b.get('total'):
+        from gov_pages import budget27
+        if budget27(g['key']):
+            stat, label = _money(budget27(g['key'])), 'FY2027 budget' + (f', about ${budget27(g["key"]) / p["population"]:,.0f} per resident' if p.get('population') and g['kind'] != 'schools' else '')
+        elif b.get('total'):
             stat, label = _money(b['total']), 'FY2026 budget' + (f', about ${pr:,.0f} per resident' if pr else '')
         elif debt:
             stat, label = _money(debt), 'owed in bonds, loans and other debt'
