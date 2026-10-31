@@ -1,6 +1,6 @@
 {
  "about": "One record per vendor (business or organization paid by a Bay County government, CRA or tourism agency). aliases are every spelling found in contracts, change orders, emergency purchases, check registers (including 15-character truncations), TDC payments, the CRA ledger and business campaign contributions. Built by data/entities/build_entities.py; hand-reviewed joins carry merge_evidence. Look-alike names that were not joined are in vendor_review.json.",
- "count": 591,
+ "count": 608,
  "vendors": [
   {
    "id": "12elevenband",
@@ -80,7 +80,7 @@
     "850constructionservices"
    ],
    "records": {
-    "contract": 5,
+    "contract": 6,
     "register": 2
    },
    "gov_ids": [
@@ -122,6 +122,22 @@
    },
    "gov_ids": [
     "county"
+   ]
+  },
+  {
+   "id": "aag",
+   "name": "AAG",
+   "aliases": [
+    "AAG"
+   ],
+   "keys": [
+    "aag"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
    ]
   },
   {
@@ -249,7 +265,7 @@
     "actiontruckcenter"
    ],
    "records": {
-    "contract": 3
+    "contract": 4
    },
    "gov_ids": [
     "pc"
@@ -470,6 +486,7 @@
    "aliases": [
     "AMERICAN SAND &",
     "American Sand",
+    "American Sand & Asphalt",
     "American Sand & Asphalt Paving",
     "American Sand and Asphalt",
     "American Sand and Asphalt Pavi",
@@ -483,7 +500,8 @@
     "americansandasphaltpaving"
    ],
    "records": {
-    "contract": 9,
+    "contract": 11,
+    "change_order": 1,
     "register": 3
    },
    "gov_ids": [
@@ -592,7 +610,7 @@
     "andersoncolumbia"
    ],
    "records": {
-    "contract": 6,
+    "contract": 7,
     "change_order": 1,
     "register": 3
    },
@@ -621,6 +639,22 @@
     "pc"
    ],
    "site_vendor_type": "business"
+  },
+  {
+   "id": "anderson-marine-construction",
+   "name": "Anderson Marine Construction",
+   "aliases": [
+    "Anderson Marine Construction"
+   ],
+   "keys": [
+    "andersonmarineconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
   },
   {
    "id": "anne-cline-live",
@@ -1057,6 +1091,23 @@
    ]
   },
   {
+   "id": "baskerville-donovan",
+   "name": "Baskerville-Donovan, Inc.",
+   "aliases": [
+    "Baskerville-Donovan Inc",
+    "Baskerville-Donovan, Inc."
+   ],
+   "keys": [
+    "baskervilledonovan"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "cw"
+   ]
+  },
+  {
    "id": "battlesports",
    "name": "Battlesports",
    "aliases": [
@@ -1268,14 +1319,16 @@
     "bclcivilcontractors"
    ],
    "records": {
-    "contract": 6,
+    "contract": 13,
     "change_order": 1,
     "register": 2,
     "cra": 1
    },
    "gov_ids": [
     "county",
+    "cw",
     "lh",
+    "parker",
     "pc"
    ],
    "site_vendor_type": "business",
@@ -1953,19 +2006,21 @@
     "CDR Maguire",
     "CDR Maguire / CDR Emergency Management",
     "CDR Maguire Inc.",
-    "CDR Maguire, Inc."
+    "CDR Maguire, Inc.",
+    "CDR Maguire, LLC"
    ],
    "keys": [
     "cdrmaguire",
     "cdrmaguirecdremergencymanagement"
    ],
    "records": {
-    "contract": 4,
+    "contract": 5,
     "change_order": 2,
     "register": 2
    },
    "gov_ids": [
-    "county"
+    "county",
+    "pc"
    ],
    "site_vendor_type": "business"
   },
@@ -1999,6 +2054,22 @@
    },
    "gov_ids": [
     "pcb"
+   ]
+  },
+  {
+   "id": "chapel-branch-lagniappe",
+   "name": "Chapel Branch & Lagniappe",
+   "aliases": [
+    "Chapel Branch & Lagniappe"
+   ],
+   "keys": [
+    "chapelbranchlagniappe"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
    ]
   },
   {
@@ -2698,7 +2769,7 @@
     "dewberryengineers"
    ],
    "records": {
-    "contract": 18,
+    "contract": 20,
     "register": 3,
     "tdc": 1,
     "cra": 7
@@ -2878,6 +2949,22 @@
    ]
   },
   {
+   "id": "dunlap-shipman-p-a",
+   "name": "Dunlap & Shipman, P.A.",
+   "aliases": [
+    "Dunlap & Shipman, P.A."
+   ],
+   "keys": [
+    "dunlapshipman"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
    "id": "e-prodirect",
    "name": "E-proDirect LLC",
    "aliases": [
@@ -2927,8 +3014,8 @@
     "emeraldcoastsiteconstruction"
    ],
    "records": {
-    "contract": 5,
-    "change_order": 2,
+    "contract": 6,
+    "change_order": 3,
     "register": 1
    },
    "gov_ids": [
@@ -3231,7 +3318,7 @@
     "fergusonwaterworks"
    ],
    "records": {
-    "contract": 1
+    "contract": 2
    },
    "gov_ids": [
     "cw"
@@ -3332,9 +3419,10 @@
     "floridaarchitects"
    ],
    "records": {
-    "contract": 2
+    "contract": 3
    },
    "gov_ids": [
+    "county",
     "lh",
     "pc"
    ],
@@ -3777,6 +3865,22 @@
    ]
   },
   {
+   "id": "garber-chevrolet-buick-gmc",
+   "name": "Garber Chevrolet Buick GMC, Inc.",
+   "aliases": [
+    "Garber Chevrolet Buick GMC, Inc."
+   ],
+   "keys": [
+    "garberchevroletbuickgmc"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
    "id": "garber-fleet-sa",
    "name": "Garber Fleet SA",
    "aliases": [
@@ -3814,8 +3918,8 @@
     "gulfcoastutilitycontractors"
    ],
    "records": {
-    "contract": 11,
-    "change_order": 6,
+    "contract": 14,
+    "change_order": 7,
     "emergency": 1,
     "register": 2,
     "cra": 1
@@ -3875,10 +3979,11 @@
     "gortemollerengineering"
    ],
    "records": {
-    "contract": 2
+    "contract": 3
    },
    "gov_ids": [
-    "county"
+    "county",
+    "cw"
    ],
    "site_vendor_type": "business"
   },
@@ -3990,6 +4095,22 @@
    ],
    "records": {
     "register": 3
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "gro-pro",
+   "name": "Gro Pro, LLC",
+   "aliases": [
+    "Gro Pro, LLC"
+   ],
+   "keys": [
+    "gropro"
+   ],
+   "records": {
+    "contract": 1
    },
    "gov_ids": [
     "lh"
@@ -4311,7 +4432,7 @@
     "hgharderssons"
    ],
    "records": {
-    "contract": 3
+    "contract": 4
    },
    "gov_ids": [
     "county",
@@ -4842,7 +4963,7 @@
     "inlandconstructionengineering"
    ],
    "records": {
-    "contract": 4,
+    "contract": 5,
     "cra": 1
    },
    "gov_ids": [
@@ -4866,6 +4987,22 @@
    },
    "gov_ids": [
     "county"
+   ]
+  },
+  {
+   "id": "insite-contractors",
+   "name": "Insite Contractors, Inc.",
+   "aliases": [
+    "Insite Contractors, Inc."
+   ],
+   "keys": [
+    "insitecontractors"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
    ]
   },
   {
@@ -5013,6 +5150,22 @@
    },
    "gov_ids": [
     "lh"
+   ]
+  },
+  {
+   "id": "joepcoz",
+   "name": "JoePCOZ, LLC",
+   "aliases": [
+    "JoePCOZ, LLC"
+   ],
+   "keys": [
+    "joepcoz"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
    ]
   },
   {
@@ -5370,6 +5523,22 @@
    ]
   },
   {
+   "id": "lagniappe-contracting-paving",
+   "name": "Lagniappe Contracting and Paving",
+   "aliases": [
+    "Lagniappe Contracting and Paving"
+   ],
+   "keys": [
+    "lagniappecontractingpaving"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
    "id": "lake-merial",
    "name": "Lake Merial, Inc.",
    "aliases": [
@@ -5448,6 +5617,22 @@
    },
    "gov_ids": [
     "destination_pc"
+   ]
+  },
+  {
+   "id": "lawnmasters-pc",
+   "name": "Lawnmasters of PC",
+   "aliases": [
+    "Lawnmasters of PC"
+   ],
+   "keys": [
+    "lawnmastersofpc"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "cw"
    ]
   },
   {
@@ -5825,7 +6010,7 @@
     "mainlineconstruction"
    ],
    "records": {
-    "contract": 13,
+    "contract": 14,
     "change_order": 4,
     "cra": 1
    },
@@ -5908,7 +6093,7 @@
     "marshallbrothersconstructionengineering"
    ],
    "records": {
-    "contract": 14,
+    "contract": 15,
     "change_order": 2,
     "emergency": 4,
     "register": 2
@@ -6165,7 +6350,7 @@
     "mottmacdonald"
    ],
    "records": {
-    "contract": 10,
+    "contract": 12,
     "change_order": 1
    },
    "gov_ids": [
@@ -6798,10 +6983,11 @@
     "panhandleengineering"
    ],
    "records": {
-    "contract": 10,
+    "contract": 13,
     "register": 3
    },
    "gov_ids": [
+    "cw",
     "lh",
     "pc"
    ],
@@ -7115,6 +7301,7 @@
    "id": "piney-grove-nursery-landscaping",
    "name": "Piney Grove Nursery and Landscaping, Inc. (PC24-038)",
    "aliases": [
+    "Piney Grove Nursery & Landscaping",
     "Piney Grove Nursery and Landscaping, Inc.",
     "Piney Grove Nursery and Landscaping, Inc. (PC24-038)"
    ],
@@ -7122,10 +7309,11 @@
     "pineygrovenurserylandscaping"
    ],
    "records": {
-    "contract": 1,
+    "contract": 2,
     "cra": 1
    },
    "gov_ids": [
+    "lh",
     "pc"
    ]
   },
@@ -7191,6 +7379,22 @@
    },
    "gov_ids": [
     "destination_pc"
+   ]
+  },
+  {
+   "id": "playmore-recreational-products-services",
+   "name": "Playmore Recreational Products & Services",
+   "aliases": [
+    "Playmore Recreational Products & Services"
+   ],
+   "keys": [
+    "playmorerecreationalproductsservices"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
    ]
   },
   {
@@ -7947,9 +8151,27 @@
    ]
   },
   {
+   "id": "rj-gorman-construction",
+   "name": "RJ Gorman Construction, LLC",
+   "aliases": [
+    "RJ Gorman Construction",
+    "RJ Gorman Construction, LLC"
+   ],
+   "keys": [
+    "rjgormanconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "cw"
+   ]
+  },
+  {
    "id": "rj-gorman-contracting",
    "name": "RJ Gorman Contracting, LLC",
    "aliases": [
+    "R.J. Gorman Contracting",
     "RJ Gorman Contracting LLC",
     "RJ Gorman Contracting, LLC"
    ],
@@ -7957,9 +8179,10 @@
     "rjgormancontracting"
    ],
    "records": {
-    "contract": 2
+    "contract": 3
    },
    "gov_ids": [
+    "cw",
     "mb",
     "pcb"
    ]
@@ -8106,6 +8329,22 @@
    ]
   },
   {
+   "id": "rowe-drilling",
+   "name": "Rowe Drilling",
+   "aliases": [
+    "Rowe Drilling"
+   ],
+   "keys": [
+    "rowedrilling"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
    "id": "rowland-publishing",
    "name": "Rowland Publishing, Inc",
    "aliases": [
@@ -8136,13 +8375,14 @@
     "royalamericanconstruction"
    ],
    "records": {
-    "contract": 10,
+    "contract": 11,
     "register": 2
    },
    "gov_ids": [
     "county",
     "parker",
-    "pc"
+    "pc",
+    "sp"
    ],
    "site_vendor_type": "business"
   },
@@ -8657,11 +8897,12 @@
     "southernconstructionservices"
    ],
    "records": {
-    "contract": 4,
+    "contract": 5,
     "change_order": 2
    },
    "gov_ids": [
     "county",
+    "cw",
     "pc",
     "pcb"
    ],
@@ -8796,6 +9037,22 @@
    },
    "gov_ids": [
     "pc"
+   ]
+  },
+  {
+   "id": "stingray-chevrolet",
+   "name": "Stingray Chevrolet, LLC",
+   "aliases": [
+    "Stingray Chevrolet, LLC"
+   ],
+   "keys": [
+    "stingraychevrolet"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
    ]
   },
   {
@@ -9096,6 +9353,7 @@
    "id": "timmins-consulting",
    "name": "Timmins Consulting, LLC",
    "aliases": [
+    "TIMMINS CONSULTING",
     "Timmins Consulting LLC",
     "Timmins Consulting, LLC"
    ],
@@ -9245,6 +9503,22 @@
    },
    "gov_ids": [
     "visit_pcb"
+   ]
+  },
+  {
+   "id": "truckworx",
+   "name": "Truckworx (Kenworth)",
+   "aliases": [
+    "Truckworx (Kenworth)"
+   ],
+   "keys": [
+    "truckworx"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
    ]
   },
   {
@@ -10022,6 +10296,22 @@
    ]
   },
   {
+   "id": "yates-plumbing-utility-services",
+   "name": "Yates Plumbing and Utility Services, Inc.",
+   "aliases": [
+    "Yates Plumbing and Utility Services, Inc."
+   ],
+   "keys": [
+    "yatesplumbingutilityservices"
+   ],
+   "records": {
+    "change_order": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
    "id": "young-strategies",
    "name": "Young Strategies",
    "aliases": [
@@ -10081,7 +10371,7 @@
   ]
  },
  "skipped": {
-  "not a named vendor": 134,
+  "not a named vendor": 135,
   "cra money in": 2
  }
 }

@@ -10,13 +10,12 @@
   "vendor_name+agenda_item+amount": 32,
   "vendor_name": 1,
   "vendor_name+item_number+agenda_item+amount": 30,
-  "vendor_name+item_number+amount": 5,
+  "vendor_name+item_number+amount": 6,
   "vendor_name+item_number+agenda_item": 10,
   "vendor_name+agenda_item": 3,
   "item_number+agenda_item+amount": 4,
   "vendor_name+item_number": 1,
-  "agenda_item+amount": 3,
-  "item_number+amount": 1
+  "agenda_item+amount": 3
  },
  "links": [
   {
@@ -1638,7 +1637,9 @@
   {
    "record_id": "contract:341",
    "record_type": "contract",
-   "vendor_ids": [],
+   "vendor_ids": [
+    "insite-contractors"
+   ],
    "gov_id": "lh",
    "record_date": "2026-07-14",
    "record_amount": 100000.0,
@@ -1648,7 +1649,7 @@
    "vote_id": "lh-commission:2026-07-14:item-12-discussion-and-possible-approval",
    "vote_date": "2026-07-14",
    "days_apart": 0,
-   "match_method": "item_number+amount"
+   "match_method": "vendor_name+item_number+amount"
   },
   {
    "record_id": "contract:351",

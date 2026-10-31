@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-10-30",
- "fetched": "2026-10-30T20:39:44-0500",
+ "as_of": "2026-10-31",
+ "fetched": "2026-10-31T11:13:51-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -51,57 +51,6 @@
  ],
  "errors": {},
  "events": [
-  {
-   "event_id": "library:23546:2026-10-30",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Escape the Library (Ages 13+) (Registration Required)",
-   "starts": "2026-10-30T09:00:00",
-   "ends": "2026-10-31T16:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/escape-the-library-ages-13-registration-required/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23792:2026-10-30",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Sea Needles",
-   "starts": "2026-10-30T10:00:00",
-   "ends": "2026-10-30T12:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/sea-needles-8/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23419:2026-10-30",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Crafternoon @ The Library",
-   "starts": "2026-10-30T14:00:00",
-   "ends": "2026-10-30T16:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": "Free",
-   "url": "https://www.nwrls.com/event/crafternoon-the-library-2/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
   {
    "event_id": "pcb-chamber:27665",
    "source_id": "pcb-chamber",
@@ -661,7 +610,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/escape-the-library-ages-13-registration-required-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "lynn-haven:1319:2026-11-06",
@@ -1718,6 +1667,23 @@
    "recurring": false
   },
   {
+   "event_id": "panama-city:7732:2026-11-14",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Memorial Trail Unveiling Ceremony",
+   "starts": "2026-11-14T10:00:00",
+   "ends": "2026-11-14T11:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7732",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "library:23132:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -2157,7 +2123,7 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/crafternoon-the-library-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "library:23528:2026-11-21",

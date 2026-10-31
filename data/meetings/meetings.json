@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-30T20:34:28-05:00",
+  "generated": "2026-10-31T11:08:39-05:00",
   "window": {
-    "from": "2026-10-30",
-    "to": "2026-12-29"
+    "from": "2026-10-31",
+    "to": "2026-12-30"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -241,7 +241,7 @@
         "Council Meetings page": "ok (82 records)"
       },
       "coverage": {
-        "agenda_feed": 2,
+        "agenda_feed": 1,
         "calendar": 0,
         "expected": 4
       }
@@ -603,18 +603,6 @@
     },
     {
       "board": "mb",
-      "title": "3rd LDC Workshop",
-      "start": "2026-10-29T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "past": true
-    },
-    {
-      "board": "mb",
       "title": "Special Meeting and 4th LDC Workshop",
       "start": "2026-10-30T09:00:00-05:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
@@ -622,7 +610,8 @@
       "packet_url": "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "sp",

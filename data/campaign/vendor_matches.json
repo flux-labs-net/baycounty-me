@@ -1,25 +1,25 @@
 {
  "as_of": "2026-10-31",
  "method": "Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
- "count_rows": 545,
- "count_contributor_candidate_pairs": 206,
- "count_distinct_vendors": 50,
+ "count_rows": 580,
+ "count_contributor_candidate_pairs": 209,
+ "count_distinct_vendors": 52,
  "count_by_confidence_pairs": {
-  "likely": 24,
-  "exact": 182
+  "exact": 185,
+  "likely": 24
  },
- "pairs_where_contract_government_matches_office": 69,
+ "pairs_where_contract_government_matches_office": 73,
  "count_by_gift_source_pairs": {
-  "2026 candidates (finance_2026.json)": 20,
-  "current officeholders (campaign.json)": 45,
+  "2026 candidates (finance_2026.json)": 21,
+  "current officeholders (campaign.json)": 47,
   "past campaigns 2016-2025 (campaign_history.json)": 141
  },
  "count_by_record_type_rows": {
   "cra": 45,
-  "change_order": 93,
-  "contract": 415,
+  "change_order": 113,
+  "contract": 449,
   "register": 146,
-  "tdc": 64,
+  "tdc": 65,
   "emergency": 70
  },
  "matches": [
@@ -115,7 +115,7 @@
   {
    "contributor": "ECSC, LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Glenn Manley",
@@ -132,17 +132,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -284,6 +290,45 @@
   {
    "contributor": "Panhandle Engineering",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Grant Wittstruck",
+   "person_id": "grant-wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gift_source": "2026 candidates (finance_2026.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2026-06-27"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -302,27 +347,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -381,6 +432,45 @@
    ],
    "contract_government": "City of Panama City",
    "contract_gov_id": "pc",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "RJ Gorman Contracting LLC",
+   "contributor_spellings": null,
+   "vendor": "R.J. Gorman Contracting",
+   "vendor_id": "rj-gorman-contracting",
+   "vendor_entity": "RJ Gorman Contracting, LLC",
+   "candidate": "Grant Wittstruck",
+   "person_id": "grant-wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gift_source": "2026 candidates (finance_2026.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2026-05-20"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-05-09: South Berthe Avenue drainage (not to exceed) ($443,224.69)"
+   ],
+   "record_ids": [
+    "contract:365"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3371"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -774,6 +864,45 @@
   {
    "contributor": "PANHANDLE ENGINEERING",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Nick Atkinson",
+   "person_id": "nick-atkinson",
+   "office": "Panama City Beach Council, Ward 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gift_source": "2026 candidates (finance_2026.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2026-09-01"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "PANHANDLE ENGINEERING",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -792,27 +921,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -1081,6 +1216,45 @@
    "same_government_as_office": true
   },
   {
+   "contributor": "TIMMINS CONSULTING",
+   "contributor_spellings": null,
+   "vendor": "Timmins Consulting, LLC",
+   "vendor_id": "timmins-consulting",
+   "vendor_entity": "Timmins Consulting, LLC",
+   "candidate": "Nick Atkinson",
+   "person_id": "nick-atkinson",
+   "office": "Panama City Beach Council, Ward 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gift_source": "2026 candidates (finance_2026.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2026-10-28"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach) check register (FY2026): $39,000.00 paid in 3 payments"
+   ],
+   "record_ids": [
+    "tdc:0/149"
+   ],
+   "contract_source_urls": [
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/"
+   ],
+   "contract_government": "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
+   "contract_gov_id": "visit_pcb",
+   "record_types": [
+    "tdc"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
    "contributor": "BGN Contractors",
    "contributor_spellings": null,
    "vendor": "BGN Contractors (Gage Golden Construction dba BGN Contractors) / GAGE GOLDEN CONSTRUCTION / Gage Golden Construction dba BGN Contractors",
@@ -1346,7 +1520,7 @@
   {
    "contributor": "ECSC,LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Scott Duvall",
@@ -1363,17 +1537,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -1530,6 +1710,7 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-01-10: PC22-051, SRF Lift Station 82 improvements (bid $584,662.17 plus 5% contingency) ($613,895.28)",
     "Contract 2023-07-25: Bid PC-23-020, St. Andrews parking lots ($927,051.13)",
     "Contract 2024-02-27: Bid PC24-005, CDBG-DR Project Restore Millville, Subsection A ($5,596,399.52)",
     "Contract 2024-02-27: Bid PC24-005, CDBG-DR Project Restore Millville, Subsection C ($5,819,420.59)",
@@ -1544,6 +1725,7 @@
     "Panama City CRA spent FY2023: St. Andrews parking lots construction (paving of the Oaks by the Bay, W. 10th St and Bayview Ave lots) ($423,877.00)"
    ],
    "record_ids": [
+    "contract:376",
     "contract:205",
     "contract:221",
     "contract:222",
@@ -1558,6 +1740,7 @@
     "cra:9"
    ],
    "contract_source_urls": [
+    "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_01102023-593",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11122024-719?html=true",
@@ -1838,7 +2021,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Scott Duvall",
@@ -1855,12 +2038,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -1916,6 +2102,45 @@
   {
    "contributor": "Panhandle Engineering Inc.",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Scott Duvall",
+   "person_id": "scott-duvall",
+   "office": "Bay County Commission, District 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gift_source": "2026 candidates (finance_2026.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2026-03-16"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc.",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -1934,27 +2159,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -2013,6 +2244,45 @@
    ],
    "contract_government": "City of Panama City",
    "contract_gov_id": "pc",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "RJ Gorman Contracting LLC",
+   "contributor_spellings": null,
+   "vendor": "R.J. Gorman Contracting",
+   "vendor_id": "rj-gorman-contracting",
+   "vendor_entity": "RJ Gorman Contracting, LLC",
+   "candidate": "Scott Duvall",
+   "person_id": "scott-duvall",
+   "office": "Bay County Commission, District 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "gift_source": "2026 candidates (finance_2026.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2026-03-18"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-05-09: South Berthe Avenue drainage (not to exceed) ($443,224.69)"
+   ],
+   "record_ids": [
+    "contract:365"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3371"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -2513,7 +2783,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Allan Branch",
@@ -2530,12 +2800,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -3166,6 +3439,45 @@
   {
    "contributor": "Florida Architects Inc",
    "contributor_spellings": null,
+   "vendor": "Florida Architects, Inc.",
+   "vendor_id": "florida-architects",
+   "vendor_entity": "Florida Architects",
+   "candidate": "Clair Pease",
+   "person_id": "clair-pease",
+   "office": "Bay County Commission, District 5",
+   "election": "2024 primary/general",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2022-01-28"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2024-01-17: Architectural design services, Fountain Community Northern Region Resiliency Center (not to exceed) ($804,636.50)"
+   ],
+   "record_ids": [
+    "contract:360"
+   ],
+   "contract_source_urls": [
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/?minutes=2024-01-17&desc=regular%20meeting"
+   ],
+   "contract_government": "Bay County BOCC",
+   "contract_gov_id": "county",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=580&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": true
+  },
+  {
+   "contributor": "Florida Architects Inc",
+   "contributor_spellings": null,
    "vendor": "Florida Architects",
    "vendor_id": "florida-architects",
    "vendor_entity": "Florida Architects",
@@ -3337,7 +3649,7 @@
   {
    "contributor": "American Sand & Asphalt Paving",
    "contributor_spellings": null,
-   "vendor": "American Sand",
+   "vendor": "American Sand / American Sand & Asphalt",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Daniel Raffield",
@@ -3354,19 +3666,26 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2022-12-13: Cherry Street resurfacing, change order (change $589,173.60)",
+    "Contract 2024-03-26: CM2024-01, South Cherry Street sidewalk construction (not to exceed) ($2,073,200.00)",
     "Contract 2026-09-22: Bid CM2026-12, Beulah Avenue paving (not to exceed) ($334,344.25)",
     "Contract 2026-09-22: Bid CM2026-13, South Gay Avenue paving, Cherry Street to Lake Drive (base bid plus alternate; not to exceed) ($351,280.14)"
    ],
    "record_ids": [
+    "change_order:53",
+    "contract:368",
     "contract:7",
     "contract:8"
    ],
    "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3310",
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3533",
     "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425"
    ],
    "contract_government": "City of Callaway",
    "contract_gov_id": "cw",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -3378,7 +3697,7 @@
   {
    "contributor": "American Sand & Asphalt Paving",
    "contributor_spellings": null,
-   "vendor": "AMERICAN SAND & / American Sand and Asphalt",
+   "vendor": "AMERICAN SAND & / American Sand & Asphalt Paving / American Sand and Asphalt",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Daniel Raffield",
@@ -3396,18 +3715,21 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2024-06-21: Stormwater improvements and paving, Senior Center parking area ($757,965.00)",
+    "Contract 2026-07-28: ITB 25.26-20, master services agreement for culvert removal, installation and site restoration, not to exceed $250,000 (Resolution 2026-07-571) ($250,000.00)",
     "FY2023 check register, top-vendor list: $1,038,983.87 paid",
     "FY2024 check register, top-vendor list: $393,182.00 paid",
     "FY2025 check register, top-vendor list: $429,929.40 paid"
    ],
    "record_ids": [
     "contract:167",
+    "contract:343",
     "register:3/top_vendors/5",
     "register:4/top_vendors/12",
     "register:5/top_vendors/11"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -3485,6 +3807,7 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-01-18: Roadway Rehabilitation, Hurricane Michael Phase VI ($3,265,624.61)",
+    "Contract 2023-09-19: FY2023 annual resurfacing Phase 2 ($3,408,648.53)",
     "Contract 2024-07-16: Contract 24-46, West Linger Longer Road sediment reduction ($2,321,571.50)",
     "Contract 2025-04-01: Contract 25-20, FY25 dirt road paving ($1,228,745.71)",
     "Contract 2025-12-02: County Line Road paving ($1,994,232.87)",
@@ -3497,6 +3820,7 @@
    ],
    "record_ids": [
     "contract:29",
+    "contract:359",
     "contract:76",
     "contract:102",
     "contract:123",
@@ -3509,6 +3833,7 @@
    ],
    "contract_source_urls": [
     "https://baycountyfl.primegov.com/Public/CompiledDocument/1388",
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/?minutes=2023-09-19&desc=regular%20meeting",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3362",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4052",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4480",
@@ -3816,7 +4141,7 @@
   {
    "contributor": "ECSC, LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Daniel Raffield",
@@ -3833,17 +4158,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -3986,7 +4317,7 @@
   {
    "contributor": "Gulf Coast Utility Contractors",
    "contributor_spellings": null,
-   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC)",
+   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC) / Gulf Coast Utility Contractors, LLC",
    "vendor_id": "gcuc",
    "vendor_entity": "Gulf Coast Utility Contractors",
    "candidate": "Daniel Raffield",
@@ -4004,16 +4335,24 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-05-23: Legislative stormwater phase project 22012, prioritized outfalls ($620,750.00)",
+    "Contract 2026-07-28: Project 25030, Mill Bayou Boulevard drainage (Resolution 2026-07-570) ($197,269.00)",
+    "Contract 2026-07-28: ITB 26.26-15, Florida and Ohio Avenue corridor streetscape (project M0044): Phases 1A, 1B, 2 and Alternate 1, funded by a $4.3M CDBG-DR grant ($3,150,762.00)",
+    "Contract 2026-08-25: Bid 25.26-27, 18th Street paving, not to exceed $193,430 (Resolution 2026-08-578) ($193,430.00)",
     "FY2023 check register, top-vendor list: $389,470.60 paid",
     "FY2024 check register, top-vendor list: $321,450.72 paid"
    ],
    "record_ids": [
     "contract:160",
+    "contract:342",
+    "contract:344",
+    "contract:346",
     "register:3/top_vendors/13",
     "register:4/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-564",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1079,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -4048,17 +4387,21 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2023-11-02: Stormwater repairs Phase II, change order (change $215,854.00)",
     "Contract 2025-09-09: Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed ($4,267,436.00)"
    ],
    "record_ids": [
+    "change_order:54",
     "contract:187"
    ],
    "contract_source_urls": [
+    "https://mexicobeachfl.gov/uploads/2023/10/11-2-23-Special-Meeting-Minutes.pdf",
     "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf"
    ],
    "contract_government": "City of Mexico Beach",
    "contract_gov_id": "mb",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -4318,6 +4661,7 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-01-10: PC22-051, SRF Lift Station 82 improvements (bid $584,662.17 plus 5% contingency) ($613,895.28)",
     "Contract 2023-07-25: Bid PC-23-020, St. Andrews parking lots ($927,051.13)",
     "Contract 2024-02-27: Bid PC24-005, CDBG-DR Project Restore Millville, Subsection A ($5,596,399.52)",
     "Contract 2024-02-27: Bid PC24-005, CDBG-DR Project Restore Millville, Subsection C ($5,819,420.59)",
@@ -4332,6 +4676,7 @@
     "Panama City CRA spent FY2023: St. Andrews parking lots construction (paving of the Oaks by the Bay, W. 10th St and Bayview Ave lots) ($423,877.00)"
    ],
    "record_ids": [
+    "contract:376",
     "contract:205",
     "contract:221",
     "contract:222",
@@ -4346,6 +4691,7 @@
     "cra:9"
    ],
    "contract_source_urls": [
+    "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_01102023-593",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11122024-719?html=true",
@@ -4626,7 +4972,7 @@
   {
    "contributor": "Marshall Bothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Daniel Raffield",
@@ -4643,12 +4989,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -4908,6 +5257,84 @@
    "same_government_as_office": false
   },
   {
+   "contributor": "Baskerville-Donovan Inc",
+   "contributor_spellings": null,
+   "vendor": "Baskerville-Donovan, Inc.",
+   "vendor_id": "baskerville-donovan",
+   "vendor_entity": "Baskerville-Donovan, Inc.",
+   "candidate": "David Griggs",
+   "person_id": "david-griggs",
+   "office": "Callaway Commissioner, Ward 2",
+   "election": "2022 municipal (Apr 19, 2022)",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 250.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2022-03-25"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-06-13: Bid DM2023-03, Sandy Creek engineering (not to exceed) ($560,000.00)"
+   ],
+   "record_ids": [
+    "contract:367"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3389"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=584&rellevel=4&committee=N",
+   "office_gov_id": "cw",
+   "same_government_as_office": true
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "David Griggs",
+   "person_id": "david-griggs",
+   "office": "Callaway Commissioner, Ward 2",
+   "election": "2022 municipal (Apr 19, 2022)",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2022-03-18"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=584&rellevel=4&committee=N",
+   "office_gov_id": "cw",
+   "same_government_as_office": true
+  },
+  {
    "contributor": "Panhandle Engineering, Inc",
    "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
@@ -4928,27 +5355,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -5067,7 +5500,7 @@
   {
    "contributor": "American Sand and Asphalt Pavi",
    "contributor_spellings": null,
-   "vendor": "American Sand",
+   "vendor": "American Sand / American Sand & Asphalt",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Doug Crosby",
@@ -5084,19 +5517,26 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2022-12-13: Cherry Street resurfacing, change order (change $589,173.60)",
+    "Contract 2024-03-26: CM2024-01, South Cherry Street sidewalk construction (not to exceed) ($2,073,200.00)",
     "Contract 2026-09-22: Bid CM2026-12, Beulah Avenue paving (not to exceed) ($334,344.25)",
     "Contract 2026-09-22: Bid CM2026-13, South Gay Avenue paving, Cherry Street to Lake Drive (base bid plus alternate; not to exceed) ($351,280.14)"
    ],
    "record_ids": [
+    "change_order:53",
+    "contract:368",
     "contract:7",
     "contract:8"
    ],
    "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3310",
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3533",
     "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425"
    ],
    "contract_government": "City of Callaway",
    "contract_gov_id": "cw",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "likely",
@@ -5108,7 +5548,7 @@
   {
    "contributor": "American Sand and Asphalt Pavi",
    "contributor_spellings": null,
-   "vendor": "AMERICAN SAND & / American Sand and Asphalt",
+   "vendor": "AMERICAN SAND & / American Sand & Asphalt Paving / American Sand and Asphalt",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Doug Crosby",
@@ -5126,18 +5566,21 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2024-06-21: Stormwater improvements and paving, Senior Center parking area ($757,965.00)",
+    "Contract 2026-07-28: ITB 25.26-20, master services agreement for culvert removal, installation and site restoration, not to exceed $250,000 (Resolution 2026-07-571) ($250,000.00)",
     "FY2023 check register, top-vendor list: $1,038,983.87 paid",
     "FY2024 check register, top-vendor list: $393,182.00 paid",
     "FY2025 check register, top-vendor list: $429,929.40 paid"
    ],
    "record_ids": [
     "contract:167",
+    "contract:343",
     "register:3/top_vendors/5",
     "register:4/top_vendors/12",
     "register:5/top_vendors/11"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -5460,7 +5903,7 @@
   {
    "contributor": "ECSC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Doug Crosby",
@@ -5477,17 +5920,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -5630,7 +6079,7 @@
   {
    "contributor": "Gulf Coast Utility Contractors",
    "contributor_spellings": null,
-   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC)",
+   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC) / Gulf Coast Utility Contractors, LLC",
    "vendor_id": "gcuc",
    "vendor_entity": "Gulf Coast Utility Contractors",
    "candidate": "Doug Crosby",
@@ -5648,16 +6097,24 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-05-23: Legislative stormwater phase project 22012, prioritized outfalls ($620,750.00)",
+    "Contract 2026-07-28: Project 25030, Mill Bayou Boulevard drainage (Resolution 2026-07-570) ($197,269.00)",
+    "Contract 2026-07-28: ITB 26.26-15, Florida and Ohio Avenue corridor streetscape (project M0044): Phases 1A, 1B, 2 and Alternate 1, funded by a $4.3M CDBG-DR grant ($3,150,762.00)",
+    "Contract 2026-08-25: Bid 25.26-27, 18th Street paving, not to exceed $193,430 (Resolution 2026-08-578) ($193,430.00)",
     "FY2023 check register, top-vendor list: $389,470.60 paid",
     "FY2024 check register, top-vendor list: $321,450.72 paid"
    ],
    "record_ids": [
     "contract:160",
+    "contract:342",
+    "contract:344",
+    "contract:346",
     "register:3/top_vendors/13",
     "register:4/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-564",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1079,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -5692,17 +6149,21 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2023-11-02: Stormwater repairs Phase II, change order (change $215,854.00)",
     "Contract 2025-09-09: Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed ($4,267,436.00)"
    ],
    "record_ids": [
+    "change_order:54",
     "contract:187"
    ],
    "contract_source_urls": [
+    "https://mexicobeachfl.gov/uploads/2023/10/11-2-23-Special-Meeting-Minutes.pdf",
     "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf"
    ],
    "contract_government": "City of Mexico Beach",
    "contract_gov_id": "mb",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -6034,7 +6495,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Doug Crosby",
@@ -6051,12 +6512,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -6112,6 +6576,45 @@
   {
    "contributor": "Panhandle Engineering Inc",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Doug Crosby",
+   "person_id": "doug-crosby",
+   "office": "Bay County Commission, District 3",
+   "election": "2024 primary/general",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2023-10-21"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -6130,27 +6633,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -6317,6 +6826,7 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-01-18: Roadway Rehabilitation, Hurricane Michael Phase VI ($3,265,624.61)",
+    "Contract 2023-09-19: FY2023 annual resurfacing Phase 2 ($3,408,648.53)",
     "Contract 2024-07-16: Contract 24-46, West Linger Longer Road sediment reduction ($2,321,571.50)",
     "Contract 2025-04-01: Contract 25-20, FY25 dirt road paving ($1,228,745.71)",
     "Contract 2025-12-02: County Line Road paving ($1,994,232.87)",
@@ -6329,6 +6839,7 @@
    ],
    "record_ids": [
     "contract:29",
+    "contract:359",
     "contract:76",
     "contract:102",
     "contract:123",
@@ -6341,6 +6852,7 @@
    ],
    "contract_source_urls": [
     "https://baycountyfl.primegov.com/Public/CompiledDocument/1388",
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/?minutes=2023-09-19&desc=regular%20meeting",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3362",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4052",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4480",
@@ -6355,6 +6867,45 @@
     "change_order",
     "contract",
     "register"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=654&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Florida Architects, Inc.",
+   "contributor_spellings": null,
+   "vendor": "Florida Architects, Inc.",
+   "vendor_id": "florida-architects",
+   "vendor_entity": "Florida Architects",
+   "candidate": "Ethan Register",
+   "person_id": "ethan-register",
+   "office": "Panama City Beach Council, Ward 2",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": 554.79,
+   "contribution_dates": [
+    "2024-01-18"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2024-01-17: Architectural design services, Fountain Community Northern Region Resiliency Center (not to exceed) ($804,636.50)"
+   ],
+   "record_ids": [
+    "contract:360"
+   ],
+   "contract_source_urls": [
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/?minutes=2024-01-17&desc=regular%20meeting"
+   ],
+   "contract_government": "Bay County BOCC",
+   "contract_gov_id": "county",
+   "record_types": [
+    "contract"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -6790,7 +7341,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Jamie Warrick",
@@ -6807,18 +7358,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -7146,6 +7703,45 @@
   {
    "contributor": "Panhandle Engineering Inc.",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Robbie Hughes",
+   "person_id": "robbie-hughes",
+   "office": "Panama City Commission, Ward I",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2025-05-12"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=694&rellevel=4&committee=N",
+   "office_gov_id": "pc",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc.",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -7164,27 +7760,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -7441,7 +8043,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Tommy Ford",
@@ -7458,18 +8060,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -7670,6 +8278,45 @@
    "contract_gov_id": "visit_pcb",
    "record_types": [
     "tdc"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=660&rellevel=4&committee=N",
+   "office_gov_id": "sheriff",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "RJ Gorman Construction",
+   "contributor_spellings": null,
+   "vendor": "RJ Gorman Construction, LLC",
+   "vendor_id": "rj-gorman-construction",
+   "vendor_entity": "RJ Gorman Construction, LLC",
+   "candidate": "Tommy Ford",
+   "person_id": "tommy-ford",
+   "office": "Sheriff",
+   "election": "2024 primary/general",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2024-01-26"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2022-11-08: Berthe Avenue bridge replacement (not to exceed) ($2,999,492.54)"
+   ],
+   "record_ids": [
+    "contract:362"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3296"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -8090,7 +8737,7 @@
   {
    "contributor": "American Sand & Asphalt Paving",
    "contributor_spellings": null,
-   "vendor": "American Sand",
+   "vendor": "American Sand / American Sand & Asphalt",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Winston Chester",
@@ -8107,19 +8754,26 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2022-12-13: Cherry Street resurfacing, change order (change $589,173.60)",
+    "Contract 2024-03-26: CM2024-01, South Cherry Street sidewalk construction (not to exceed) ($2,073,200.00)",
     "Contract 2026-09-22: Bid CM2026-12, Beulah Avenue paving (not to exceed) ($334,344.25)",
     "Contract 2026-09-22: Bid CM2026-13, South Gay Avenue paving, Cherry Street to Lake Drive (base bid plus alternate; not to exceed) ($351,280.14)"
    ],
    "record_ids": [
+    "change_order:53",
+    "contract:368",
     "contract:7",
     "contract:8"
    ],
    "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3310",
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3533",
     "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425"
    ],
    "contract_government": "City of Callaway",
    "contract_gov_id": "cw",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -8131,7 +8785,7 @@
   {
    "contributor": "American Sand & Asphalt Paving",
    "contributor_spellings": null,
-   "vendor": "AMERICAN SAND & / American Sand and Asphalt",
+   "vendor": "AMERICAN SAND & / American Sand & Asphalt Paving / American Sand and Asphalt",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Winston Chester",
@@ -8149,18 +8803,21 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2024-06-21: Stormwater improvements and paving, Senior Center parking area ($757,965.00)",
+    "Contract 2026-07-28: ITB 25.26-20, master services agreement for culvert removal, installation and site restoration, not to exceed $250,000 (Resolution 2026-07-571) ($250,000.00)",
     "FY2023 check register, top-vendor list: $1,038,983.87 paid",
     "FY2024 check register, top-vendor list: $393,182.00 paid",
     "FY2025 check register, top-vendor list: $429,929.40 paid"
    ],
    "record_ids": [
     "contract:167",
+    "contract:343",
     "register:3/top_vendors/5",
     "register:4/top_vendors/12",
     "register:5/top_vendors/11"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -8361,7 +9018,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Bill Dozier",
@@ -8378,18 +9035,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -8783,7 +9446,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Bill Dozier",
@@ -8802,16 +9465,63 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
    "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=473&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc",
+   "contributor_spellings": [
+    "Panhandle Engineering",
+    "Panhandle Engineering Inc"
+   ],
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Bill Dozier",
+   "person_id": "william-dozier",
+   "office": "Bay County Commission, District 3",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1250.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-03-28",
+    "2020-06-16"
+   ],
+   "contribution_items": [
+    "check",
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -8847,27 +9557,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -9297,7 +10013,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Bill Husfelt",
@@ -9314,18 +10030,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -9713,7 +10435,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Bill Husfelt",
@@ -9730,16 +10452,58 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
    "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=480&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc.",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Bill Husfelt",
+   "person_id": "bill-husfelt",
+   "office": "Superintendent of Schools",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-03-10"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -9770,27 +10534,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -10477,7 +11247,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Brandon Aldridge",
@@ -10494,12 +11264,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -10511,6 +11284,45 @@
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=444&rellevel=4&committee=N",
    "office_gov_id": "lh",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Brenda Ruthven",
+   "person_id": "brenda-ruthven",
+   "office": "School Board, District 2",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-07-27"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=493&rellevel=4&committee=N",
+   "office_gov_id": "schools",
    "same_government_as_office": false
   },
   {
@@ -10534,27 +11346,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -10768,16 +11586,19 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-07-25: PC23-010, Carl Gray Park Phase 2 improvements ($2,279,246.00)",
     "Contract 2025-01-28: PC24-017, Hentz Park ($924,120.00)",
     "Contract 2025-12-16: Bid PC26-008, Hometown Revitalization Group DD ($892,500.00)",
     "Panama City CRA budgeted FY2024-FY2026: Millville Waterfront Park renovation, Phase II: playground, amphitheater, trees, restrooms (total project cost, paid from FY2024-26 Millville district budgets) ($1,500,000.00)"
    ],
    "record_ids": [
+    "contract:380",
     "contract:244",
     "contract:272",
     "cra:6"
    ],
    "contract_source_urls": [
+    "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
     "https://panamacity.gov/785/Current-Projects"
@@ -10968,7 +11789,7 @@
   {
    "contributor": "Marshall Brothers, Inc.",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Chuck Perdue",
@@ -10985,12 +11806,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -11137,7 +11961,7 @@
   {
    "contributor": "GULF COAST UTILITY CONTRACTORS",
    "contributor_spellings": null,
-   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC)",
+   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC) / Gulf Coast Utility Contractors, LLC",
    "vendor_id": "gcuc",
    "vendor_entity": "Gulf Coast Utility Contractors",
    "candidate": "Dan Sowell",
@@ -11155,16 +11979,24 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-05-23: Legislative stormwater phase project 22012, prioritized outfalls ($620,750.00)",
+    "Contract 2026-07-28: Project 25030, Mill Bayou Boulevard drainage (Resolution 2026-07-570) ($197,269.00)",
+    "Contract 2026-07-28: ITB 26.26-15, Florida and Ohio Avenue corridor streetscape (project M0044): Phases 1A, 1B, 2 and Alternate 1, funded by a $4.3M CDBG-DR grant ($3,150,762.00)",
+    "Contract 2026-08-25: Bid 25.26-27, 18th Street paving, not to exceed $193,430 (Resolution 2026-08-578) ($193,430.00)",
     "FY2023 check register, top-vendor list: $389,470.60 paid",
     "FY2024 check register, top-vendor list: $321,450.72 paid"
    ],
    "record_ids": [
     "contract:160",
+    "contract:342",
+    "contract:344",
+    "contract:346",
     "register:3/top_vendors/13",
     "register:4/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-564",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1079,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -11199,17 +12031,21 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2023-11-02: Stormwater repairs Phase II, change order (change $215,854.00)",
     "Contract 2025-09-09: Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed ($4,267,436.00)"
    ],
    "record_ids": [
+    "change_order:54",
     "contract:187"
    ],
    "contract_source_urls": [
+    "https://mexicobeachfl.gov/uploads/2023/10/11-2-23-Special-Meeting-Minutes.pdf",
     "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf"
    ],
    "contract_government": "City of Mexico Beach",
    "contract_gov_id": "mb",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -11541,7 +12377,7 @@
   {
    "contributor": "MARSHALL BROTHERS",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Dan Sowell",
@@ -11558,16 +12394,58 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
    "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=312&rellevel=4&committee=N",
+   "office_gov_id": "property_appraiser",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "PANHANDLE ENGINEERING",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Dan Sowell",
+   "person_id": "dan-sowell",
+   "office": "Property Appraiser",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 100.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-07-06"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -11598,27 +12476,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -11873,7 +12757,7 @@
   {
    "contributor": "Dewberry Engineering",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Daniel Russell",
@@ -11890,18 +12774,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -12328,7 +13218,7 @@
   {
    "contributor": "Marshall Brother's",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Daniel Russell",
@@ -12345,12 +13235,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -12406,6 +13299,45 @@
   {
    "contributor": "Panhandle Engineering, Inc.",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Doug Moore",
+   "person_id": "douglas-moore",
+   "office": "Bay County Commission, District 4",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-09-01"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=530&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc.",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -12424,27 +13356,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -12765,7 +13703,7 @@
   {
    "contributor": "ECSC LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Geoff McConnell",
@@ -12782,17 +13720,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -13078,7 +14022,7 @@
     "Marshall Brothers",
     "Marshall Brothers Construction"
    ],
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Geoff McConnell",
@@ -13097,12 +14041,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -13278,16 +14225,19 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-07-25: PC23-010, Carl Gray Park Phase 2 improvements ($2,279,246.00)",
     "Contract 2025-01-28: PC24-017, Hentz Park ($924,120.00)",
     "Contract 2025-12-16: Bid PC26-008, Hometown Revitalization Group DD ($892,500.00)",
     "Panama City CRA budgeted FY2024-FY2026: Millville Waterfront Park renovation, Phase II: playground, amphitheater, trees, restrooms (total project cost, paid from FY2024-26 Millville district budgets) ($1,500,000.00)"
    ],
    "record_ids": [
+    "contract:380",
     "contract:244",
     "contract:272",
     "cra:6"
    ],
    "contract_source_urls": [
+    "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
     "https://panamacity.gov/785/Current-Projects"
@@ -13523,7 +14473,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Greg Brudnicki",
@@ -13542,12 +14492,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -13558,6 +14511,45 @@
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=610&rellevel=4&committee=N",
+   "office_gov_id": "pc",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Greg Brudnicki",
+   "person_id": "greg-brudnicki",
+   "office": "Panama City Mayor",
+   "election": "2019 Municipal Super Tuesday (4/16/2019)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2019-01-17"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=439&rellevel=4&committee=N",
    "office_gov_id": "pc",
    "same_government_as_office": false
   },
@@ -13582,27 +14574,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -14006,6 +15004,45 @@
   {
    "contributor": "Panhandle Engineering, Inc.",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Jenna Flint Haligas",
+   "person_id": "jenna-haligas",
+   "office": "Panama City Commission, Ward 1",
+   "election": "2017 Municipal Super Tuesday (4/18/2017)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2017-02-23"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=16&c=bay&ca=389&rellevel=4&committee=N",
+   "office_gov_id": "pc",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc.",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -14024,27 +15061,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -14160,6 +15203,45 @@
   {
    "contributor": "Panhandle Engineering, Inc",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Jerry L Register",
+   "person_id": "jerry-register",
+   "office": "School Board, District 1",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-06-19"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=491&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -14178,27 +15260,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -14532,7 +15620,7 @@
   {
    "contributor": "ECSC LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Jesse Nelson",
@@ -14549,17 +15637,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -14925,7 +16019,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Joseph Ashbrook",
@@ -14942,18 +16036,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -15255,7 +16355,7 @@
   {
    "contributor": "Gulf Coast Utility Contractors",
    "contributor_spellings": null,
-   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC)",
+   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC) / Gulf Coast Utility Contractors, LLC",
    "vendor_id": "gcuc",
    "vendor_entity": "Gulf Coast Utility Contractors",
    "candidate": "Joseph Ashbrook",
@@ -15273,16 +16373,24 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-05-23: Legislative stormwater phase project 22012, prioritized outfalls ($620,750.00)",
+    "Contract 2026-07-28: Project 25030, Mill Bayou Boulevard drainage (Resolution 2026-07-570) ($197,269.00)",
+    "Contract 2026-07-28: ITB 26.26-15, Florida and Ohio Avenue corridor streetscape (project M0044): Phases 1A, 1B, 2 and Alternate 1, funded by a $4.3M CDBG-DR grant ($3,150,762.00)",
+    "Contract 2026-08-25: Bid 25.26-27, 18th Street paving, not to exceed $193,430 (Resolution 2026-08-578) ($193,430.00)",
     "FY2023 check register, top-vendor list: $389,470.60 paid",
     "FY2024 check register, top-vendor list: $321,450.72 paid"
    ],
    "record_ids": [
     "contract:160",
+    "contract:342",
+    "contract:344",
+    "contract:346",
     "register:3/top_vendors/13",
     "register:4/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-564",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1079,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -15317,17 +16425,21 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2023-11-02: Stormwater repairs Phase II, change order (change $215,854.00)",
     "Contract 2025-09-09: Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed ($4,267,436.00)"
    ],
    "record_ids": [
+    "change_order:54",
     "contract:187"
    ],
    "contract_source_urls": [
+    "https://mexicobeachfl.gov/uploads/2023/10/11-2-23-Special-Meeting-Minutes.pdf",
     "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf"
    ],
    "contract_government": "City of Mexico Beach",
    "contract_gov_id": "mb",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -15698,7 +16810,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Joseph Ashbrook",
@@ -15715,12 +16827,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -16194,7 +17309,7 @@
   {
    "contributor": "ECSC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Judy Vandergrift",
@@ -16211,17 +17326,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -16452,7 +17573,7 @@
   {
    "contributor": "ECSC, LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Keith Baker",
@@ -16469,17 +17590,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -16708,7 +17835,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Keith Baker",
@@ -16725,12 +17852,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -16953,7 +18083,7 @@
   {
    "contributor": "ECSC, LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Margo Anderson",
@@ -16970,17 +18100,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -17038,6 +18174,45 @@
   {
    "contributor": "Panhandle Engineering, Inc.",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Margo Anderson",
+   "person_id": "margo-anderson",
+   "office": "Lynn Haven Mayor",
+   "election": "2019 Municipal Super Tuesday (4/16/2019)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2019-01-15"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=433&rellevel=4&committee=N",
+   "office_gov_id": "lh",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc.",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -17056,27 +18231,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -17462,7 +18643,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Mark Sheldon",
@@ -17479,18 +18660,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -17751,7 +18938,7 @@
   {
    "contributor": "ECSC, LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Mark Sheldon",
@@ -17768,17 +18955,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -18124,7 +19317,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Mark Sheldon",
@@ -18141,12 +19334,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -18157,6 +19353,45 @@
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=22&c=bay&ca=468&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Mark Sheldon",
+   "person_id": "mark-sheldon",
+   "office": "Panama City Beach Mayor",
+   "election": "2024 Municipal Super Tuesday (4/16/2024)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2023-11-29"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=642&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
   },
@@ -18181,27 +19416,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -18648,6 +19889,45 @@
   {
    "contributor": "Panhandle Engineering, Inc.",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Michael Jarman",
+   "person_id": "michael-jarman",
+   "office": "Panama City Beach Council, Ward 4",
+   "election": "2020 Municipal Super Tuesday (4/21/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-04-04"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=22&c=bay&ca=470&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc.",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -18666,27 +19946,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -18941,7 +20227,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Mike Nelson",
@@ -18958,18 +20244,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -19271,7 +20563,7 @@
   {
    "contributor": "Gulf Coast Utility Contractor",
    "contributor_spellings": null,
-   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC)",
+   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC) / Gulf Coast Utility Contractors, LLC",
    "vendor_id": "gcuc",
    "vendor_entity": "Gulf Coast Utility Contractors",
    "candidate": "Mike Nelson",
@@ -19289,16 +20581,24 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-05-23: Legislative stormwater phase project 22012, prioritized outfalls ($620,750.00)",
+    "Contract 2026-07-28: Project 25030, Mill Bayou Boulevard drainage (Resolution 2026-07-570) ($197,269.00)",
+    "Contract 2026-07-28: ITB 26.26-15, Florida and Ohio Avenue corridor streetscape (project M0044): Phases 1A, 1B, 2 and Alternate 1, funded by a $4.3M CDBG-DR grant ($3,150,762.00)",
+    "Contract 2026-08-25: Bid 25.26-27, 18th Street paving, not to exceed $193,430 (Resolution 2026-08-578) ($193,430.00)",
     "FY2023 check register, top-vendor list: $389,470.60 paid",
     "FY2024 check register, top-vendor list: $321,450.72 paid"
    ],
    "record_ids": [
     "contract:160",
+    "contract:342",
+    "contract:344",
+    "contract:346",
     "register:3/top_vendors/13",
     "register:4/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-564",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1079,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -19333,17 +20633,21 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2023-11-02: Stormwater repairs Phase II, change order (change $215,854.00)",
     "Contract 2025-09-09: Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed ($4,267,436.00)"
    ],
    "record_ids": [
+    "change_order:54",
     "contract:187"
    ],
    "contract_source_urls": [
+    "https://mexicobeachfl.gov/uploads/2023/10/11-2-23-Special-Meeting-Minutes.pdf",
     "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf"
    ],
    "contract_government": "City of Mexico Beach",
    "contract_gov_id": "mb",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -19563,16 +20867,19 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-07-25: PC23-010, Carl Gray Park Phase 2 improvements ($2,279,246.00)",
     "Contract 2025-01-28: PC24-017, Hentz Park ($924,120.00)",
     "Contract 2025-12-16: Bid PC26-008, Hometown Revitalization Group DD ($892,500.00)",
     "Panama City CRA budgeted FY2024-FY2026: Millville Waterfront Park renovation, Phase II: playground, amphitheater, trees, restrooms (total project cost, paid from FY2024-26 Millville district budgets) ($1,500,000.00)"
    ],
    "record_ids": [
+    "contract:380",
     "contract:244",
     "contract:272",
     "cra:6"
    ],
    "contract_source_urls": [
+    "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
     "https://panamacity.gov/785/Current-Projects"
@@ -19802,7 +21109,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Mike Nelson",
@@ -19819,16 +21126,58 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
    "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=326&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Mike Nelson",
+   "person_id": "mike-nelson",
+   "office": "Bay County Commission, District 1",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-02-01"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -19859,27 +21208,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -20121,7 +21476,7 @@
   {
    "contributor": "Marshall Brothers Construction",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Mike Thomas",
@@ -20138,12 +21493,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -20531,7 +21889,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Pamm Chapman",
@@ -20548,12 +21906,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -20712,6 +22073,84 @@
    "same_government_as_office": false
   },
   {
+   "contributor": "Royal American Construction Co",
+   "contributor_spellings": null,
+   "vendor": "Royal American Construction",
+   "vendor_id": "royal-american",
+   "vendor_entity": "Royal American Construction",
+   "candidate": "Pamm Chapman",
+   "person_id": "pamm-chapman",
+   "office": "School Board, District 3",
+   "election": "2018 Primary/General Election (11/6/2018)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2018-06-20"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-08-07: Water and sewer rehabilitation project, subject to FDEP approval ($15,189,870.76)"
+   ],
+   "record_ids": [
+    "contract:389"
+   ],
+   "contract_source_urls": [
+    "https://www.springfieldfl.net/media/926"
+   ],
+   "contract_government": "City of Springfield",
+   "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=423&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Pamn Henderson",
+   "person_id": "pamn-henderson",
+   "office": "Callaway Mayor",
+   "election": "2020 Municipal Super Tuesday (4/21/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-01-17"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=22&c=bay&ca=482&rellevel=4&committee=N",
+   "office_gov_id": "cw",
+   "same_government_as_office": true
+  },
+  {
    "contributor": "Panhandle Engineering Inc",
    "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
@@ -20732,27 +22171,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -20994,7 +22439,7 @@
   {
    "contributor": "Marshall Brothers Construction",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Pat Perno",
@@ -21011,12 +22456,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -21286,7 +22734,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Phil Chester",
@@ -21303,16 +22751,58 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
    "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=22&c=bay&ca=474&rellevel=4&committee=N",
+   "office_gov_id": "pcb",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Phil Chester",
+   "person_id": "phil-chester",
+   "office": "Panama City Beach Council, Ward 2",
+   "election": "2020 Municipal Super Tuesday (4/21/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-03-09"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -21343,27 +22833,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -21722,7 +23218,7 @@
   {
    "contributor": "Marshall Brothers Construction",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Rick Russell Jr.",
@@ -21739,12 +23235,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -21947,7 +23446,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Robert Carroll",
@@ -21964,18 +23463,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -22318,7 +23823,7 @@
   {
    "contributor": "Gulf Coast Utility Contractors",
    "contributor_spellings": null,
-   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC)",
+   "vendor": "GULF COAST UTIL / Gulf Coast Utility Contractors (GCUC) / Gulf Coast Utility Contractors, LLC",
    "vendor_id": "gcuc",
    "vendor_entity": "Gulf Coast Utility Contractors",
    "candidate": "Robert Carroll",
@@ -22336,16 +23841,24 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2023-05-23: Legislative stormwater phase project 22012, prioritized outfalls ($620,750.00)",
+    "Contract 2026-07-28: Project 25030, Mill Bayou Boulevard drainage (Resolution 2026-07-570) ($197,269.00)",
+    "Contract 2026-07-28: ITB 26.26-15, Florida and Ohio Avenue corridor streetscape (project M0044): Phases 1A, 1B, 2 and Alternate 1, funded by a $4.3M CDBG-DR grant ($3,150,762.00)",
+    "Contract 2026-08-25: Bid 25.26-27, 18th Street paving, not to exceed $193,430 (Resolution 2026-08-578) ($193,430.00)",
     "FY2023 check register, top-vendor list: $389,470.60 paid",
     "FY2024 check register, top-vendor list: $321,450.72 paid"
    ],
    "record_ids": [
     "contract:160",
+    "contract:342",
+    "contract:344",
+    "contract:346",
     "register:3/top_vendors/13",
     "register:4/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-564",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1034,plainText=false)",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1079,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -22380,17 +23893,21 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Change order 2023-11-02: Stormwater repairs Phase II, change order (change $215,854.00)",
     "Contract 2025-09-09: Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed ($4,267,436.00)"
    ],
    "record_ids": [
+    "change_order:54",
     "contract:187"
    ],
    "contract_source_urls": [
+    "https://mexicobeachfl.gov/uploads/2023/10/11-2-23-Special-Meeting-Minutes.pdf",
     "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf"
    ],
    "contract_government": "City of Mexico Beach",
    "contract_gov_id": "mb",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -22766,7 +24283,7 @@
   {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Robert Carroll",
@@ -22783,12 +24300,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -22844,6 +24364,45 @@
   {
    "contributor": "Panhandle Engineering Inc",
    "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Robert Carroll",
+   "person_id": "robert-carroll",
+   "office": "Bay County Commission, District 2",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-05-24"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=349&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering Inc",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -22862,27 +24421,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -23423,7 +24988,7 @@
   {
    "contributor": "Dewberry",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "Steve Moss",
@@ -23440,18 +25005,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -23794,7 +25365,7 @@
   {
    "contributor": "Marshall Brothers Construction",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Steve Moss",
@@ -23811,12 +25382,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -23826,6 +25400,45 @@
    ],
    "match_confidence": "likely",
    "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc.",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Steve Moss",
+   "person_id": "steve-moss",
+   "office": "School Board, District 5",
+   "election": "2018 Primary/General Election (11/6/2018)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2018-06-18"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -23851,27 +25464,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -24074,6 +25693,45 @@
    ],
    "contract_government": "City of Panama City",
    "contract_gov_id": "pc",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Royal American Construction Co",
+   "contributor_spellings": null,
+   "vendor": "Royal American Construction",
+   "vendor_id": "royal-american",
+   "vendor_entity": "Royal American Construction",
+   "candidate": "Steve Moss",
+   "person_id": "steve-moss",
+   "office": "School Board, District 5",
+   "election": "2018 Primary/General Election (11/6/2018)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2018-07-05"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-08-07: Water and sewer rehabilitation project, subject to FDEP approval ($15,189,870.76)"
+   ],
+   "record_ids": [
+    "contract:389"
+   ],
+   "contract_source_urls": [
+    "https://www.springfieldfl.net/media/926"
+   ],
+   "contract_government": "City of Springfield",
+   "contract_gov_id": "sp",
    "record_types": [
     "contract"
    ],
@@ -24467,7 +26125,7 @@
   {
    "contributor": "ECSC LLC",
    "contributor_spellings": null,
-   "vendor": "Emerald Coast Site Construction",
+   "vendor": "ECSC, LLC / Emerald Coast Site Construction",
    "vendor_id": "ecsc",
    "vendor_entity": "ECSC (Emerald Coast Site Construction)",
    "candidate": "Tommy Hamm",
@@ -24484,17 +26142,23 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
-    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)"
+    "Contract 2025-08-12: West 10th Street utility improvements (CDBG-DR grant of $4,400,000) ($4,416,594.43)",
+    "Contract 2025-08-22: Legislative stormwater improvements Phase 1B (Outfall 23) ($190,288.19)",
+    "Change order 2026-03-24: West 10th Street utility improvements, change order 1 (change $826,172.93)"
    ],
    "record_ids": [
-    "contract:175"
+    "contract:351",
+    "contract:175",
+    "change_order:51"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Agenda/_03242026-1146?packet=true",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222025-990"
    ],
    "contract_government": "City of Lynn Haven",
    "contract_gov_id": "lh",
    "record_types": [
+    "change_order",
     "contract"
    ],
    "match_confidence": "exact",
@@ -24670,16 +26334,19 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-07-25: PC23-010, Carl Gray Park Phase 2 improvements ($2,279,246.00)",
     "Contract 2025-01-28: PC24-017, Hentz Park ($924,120.00)",
     "Contract 2025-12-16: Bid PC26-008, Hometown Revitalization Group DD ($892,500.00)",
     "Panama City CRA budgeted FY2024-FY2026: Millville Waterfront Park renovation, Phase II: playground, amphitheater, trees, restrooms (total project cost, paid from FY2024-26 Millville district budgets) ($1,500,000.00)"
    ],
    "record_ids": [
+    "contract:380",
     "contract:244",
     "contract:272",
     "cra:6"
    ],
    "contract_source_urls": [
+    "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
     "https://panamacity.gov/785/Current-Projects"
@@ -24693,6 +26360,45 @@
    "match_confidence": "likely",
    "note": "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Tommy Hamm",
+   "person_id": "tommy-hamm",
+   "office": "Bay County Commission, District 1",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-03-01"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=490&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
   },
@@ -24717,27 +26423,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -25029,7 +26741,7 @@
   {
    "contributor": "DEWBERRY",
    "contributor_spellings": null,
-   "vendor": "DEWBERRY / Dewberry Engineers",
+   "vendor": "DEWBERRY / Dewberry Engineering / Dewberry Engineers",
    "vendor_id": "dewberry",
    "vendor_entity": "Dewberry Engineers",
    "candidate": "William (Bill) Husfelt",
@@ -25046,18 +26758,24 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Construction and engineering services, Legislative Paving Program Phase III ($100,125.00)",
+    "Contract 2024-08-13: Construction and engineering services agreement ($100,125.00)",
     "Contract 2024-12-06: Task order, survey/analysis for additional stormwater outfalls (Main-Maryland Ave, 19th-14th St) ($140,660.00)",
     "FY2023 check register, top-vendor list: $588,231.29 paid",
     "FY2024 check register, top-vendor list: $615,587.77 paid",
     "FY2025 check register, top-vendor list: $448,640.57 paid"
    ],
    "record_ids": [
+    "contract:353",
+    "contract:356",
     "contract:172",
     "register:3/top_vendors/10",
     "register:4/top_vendors/8",
     "register:5/top_vendors/10"
    ],
    "contract_source_urls": [
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_04112023-470",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08132024-787",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12062024-832",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
@@ -25219,6 +26937,45 @@
    "record_types": [
     "contract",
     "cra"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=307&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "FLORIDA ARCHITECTS, INC",
+   "contributor_spellings": null,
+   "vendor": "Florida Architects, Inc.",
+   "vendor_id": "florida-architects",
+   "vendor_entity": "Florida Architects",
+   "candidate": "William (Bill) Husfelt",
+   "person_id": "bill-husfelt",
+   "office": "Superintendent of Schools",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-01-22"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2024-01-17: Architectural design services, Fountain Community Northern Region Resiliency Center (not to exceed) ($804,636.50)"
+   ],
+   "record_ids": [
+    "contract:360"
+   ],
+   "contract_source_urls": [
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/?minutes=2024-01-17&desc=regular%20meeting"
+   ],
+   "contract_government": "Bay County BOCC",
+   "contract_gov_id": "county",
+   "record_types": [
+    "contract"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -25478,7 +27235,7 @@
   {
    "contributor": "MARSHALL BROTHERS",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "William (Bill) Husfelt",
@@ -25495,16 +27252,58 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
    "contract_gov_id": "sp",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=307&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "PANHANDLE ENGINEERING, INC",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "William (Bill) Husfelt",
+   "person_id": "bill-husfelt",
+   "office": "Superintendent of Schools",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-11-02"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
    "record_types": [
     "contract"
    ],
@@ -25535,27 +27334,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
@@ -25877,7 +27682,7 @@
   {
    "contributor": "Marshall Brothers Construction",
    "contributor_spellings": null,
-   "vendor": "Marshall Brothers",
+   "vendor": "Marshall Brothers / Marshall Brothers Construction",
    "vendor_id": "marshall-brothers",
    "vendor_entity": "Marshall Brothers Construction & Engineering",
    "candidate": "Winston Chester",
@@ -25894,12 +27699,15 @@
     "check"
    ],
    "contract_ids_or_descriptions": [
+    "Contract 2023-12-12: HMGP sanitary sewer bypass pumps ($609,300.00)",
     "Contract 2025-12-01: RFP 25-04, sanitary sewer bypass pump station project ($566,489.00)"
    ],
    "record_ids": [
+    "contract:390",
     "contract:13"
    ],
    "contract_source_urls": [
+    "https://www.springfieldfl.net/media/1016",
     "https://www.springfieldfl.net/media/10401"
    ],
    "contract_government": "City of Springfield",
@@ -25909,6 +27717,45 @@
    ],
    "match_confidence": "likely",
    "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=489&rellevel=4&committee=N",
+   "office_gov_id": "schools",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Panhandle Engineering, Inc",
+   "contributor_spellings": null,
+   "vendor": "Panhandle Engineering",
+   "vendor_id": "panhandle-engineering",
+   "vendor_entity": "Panhandle Engineering",
+   "candidate": "Winston Chester",
+   "person_id": "winston-chester",
+   "office": "School Board, District 4",
+   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 1000.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2020-02-04"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-04-11: Hugh Thomas Drive north spine road engineering (not to exceed) ($285,188.50)"
+   ],
+   "record_ids": [
+    "contract:364"
+   ],
+   "contract_source_urls": [
+    "https://www.cityofcallaway.com/Archive.aspx?ADID=3361"
+   ],
+   "contract_government": "City of Callaway",
+   "contract_gov_id": "cw",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "exact",
+   "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=489&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -25934,27 +27781,33 @@
    ],
    "contract_ids_or_descriptions": [
     "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
+    "Contract 2023-05-23: Task order, engineering and design of James Rogers Park ($101,950.00)",
     "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
     "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
     "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
+    "Contract 2026-10-27: Task order: design, permitting and survey to replace asbestos and cast-iron water mains (Project 22039, Resolution 2026-10-599) ($130,820.00)",
     "FY2023 check register, top-vendor list: $787,419.25 paid",
     "FY2024 check register, top-vendor list: $358,261.20 paid",
     "FY2025 check register, top-vendor list: $335,960.91 paid"
    ],
    "record_ids": [
     "contract:157",
+    "contract:354",
     "contract:162",
     "contract:178",
     "contract:180",
+    "contract:350",
     "register:3/top_vendors/7",
     "register:4/top_vendors/13",
     "register:5/top_vendors/15"
    ],
    "contract_source_urls": [
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
+    "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05232023-564",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
     "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+    "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
     "https://www.cityoflynnhaven.com/AgendaCenter"
    ],
    "contract_government": "City of Lynn Haven",
