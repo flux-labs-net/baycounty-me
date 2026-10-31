@@ -42,13 +42,18 @@ jobs:
     if: needs.plan.outputs.any_ios == 'true'
     runs-on: [self-hosted, macOS]
     timeout-minutes: 30
+    env:
+      # Builds live outside the checkout (which is wiped each job), in the runner's own work folder, so a job only
+      # recompiles what changed.
+      DERIVED: ${{ github.workspace }}/../derived
     steps:
       - uses: actions/checkout@v4
       - name: Use the full Xcode, not the Command Line Tools
         run: |
           if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
           else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
-      - run: brew install xcodegen
+      - name: Install XcodeGen (once; the Mac keeps it)
+        run: command -v xcodegen >/dev/null || brew install xcodegen
       - name: Make sure Xcode has the watchOS platform (the iPhone app carries the watch app)
         run: ios/scripts/ensure_watchos.sh
       - name: Build for the simulator
@@ -56,7 +61,7 @@ jobs:
         run: |
           xcodegen
           xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyMe \
-            -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build -quiet
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath "$DERIVED" CODE_SIGNING_ALLOWED=NO build -quiet
       - name: Screenshot the picked screens, light and dark
         working-directory: ios
         env:
@@ -64,11 +69,10 @@ jobs:
           DARK: ${{ needs.plan.outputs.ios_dark }}
           CHARTS: ${{ needs.plan.outputs.ios_charts }}
         run: |
-          DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
-          xcrun simctl shutdown all || true  # the Mac keeps simulators between runs
-          xcrun simctl boot "$DEV"; xcrun simctl bootstatus "$DEV" -b
+          . scripts/ci_sim.sh
+          DEV=$(ci_device); echo "DEV=$DEV" >> "$GITHUB_ENV"
           xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 || true
-          APP=$(find build/Build/Products -name "BayCountyMe.app" -maxdepth 3 | head -1)
+          APP=$(find "$DERIVED/Build/Products" -name "BayCountyMe.app" -maxdepth 3 | head -1)
           xcrun simctl install "$DEV" "$APP"
           mkdir -p shots
           # shot <file name> <screen> [more launch arguments]. "home:rent" is the Home tab for a renter, "setup" the
@@ -82,8 +86,7 @@ jobs:
               setup) xcrun simctl launch "$DEV" me.baycounty.app -setupSeen NO ;;
               *) xcrun simctl launch "$DEV" me.baycounty.app -screen "${s//_/ }" "$@" ;;
             esac
-            sleep 14
-            xcrun simctl io "$DEV" screenshot "shots/$n.png"
+            ci_shot "$DEV" "shots/$n.png"
           }
           name() { echo "$1" | tr ':' '_'; }
           xcrun simctl ui "$DEV" appearance light
@@ -97,7 +100,7 @@ jobs:
           done
       - name: Shut down the simulator
         if: always()
-        run: xcrun simctl shutdown all || true
+        run: '[ -z "$DEV" ] || xcrun simctl shutdown "$DEV" || true'
       - uses: actions/upload-artifact@v4
         with:
           name: screenshots
@@ -109,13 +112,18 @@ jobs:
     if: needs.plan.outputs.staff == 'true'
     runs-on: [self-hosted, macOS]
     timeout-minutes: 30
+    env:
+      # Builds live outside the checkout (which is wiped each job), in the runner's own work folder, so a job only
+      # recompiles what changed.
+      DERIVED: ${{ github.workspace }}/../derived
     steps:
       - uses: actions/checkout@v4
       - name: Use the full Xcode, not the Command Line Tools
         run: |
           if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
           else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
-      - run: brew install xcodegen
+      - name: Install XcodeGen (once; the Mac keeps it)
+        run: command -v xcodegen >/dev/null || brew install xcodegen
       - name: Make sure Xcode has the watchOS platform (the iPhone app carries the watch app)
         run: ios/scripts/ensure_watchos.sh
       - name: Build the staff app for the simulator
@@ -123,22 +131,21 @@ jobs:
         run: |
           xcodegen
           xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyStaff -sdk iphonesimulator \
-            -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build -quiet
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath "$DERIVED" CODE_SIGNING_ALLOWED=NO build -quiet
       - name: Screenshot each screen, light and dark
         working-directory: ios
         run: |
-          DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
-          xcrun simctl boot "$DEV" || true; xcrun simctl bootstatus "$DEV" -b
+          . scripts/ci_sim.sh
+          DEV=$(ci_device); echo "DEV=$DEV" >> "$GITHUB_ENV"
           xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 || true
-          APP=$(find build/Build/Products -name "BayCountyStaff.app" -maxdepth 3 | head -1)
+          APP=$(find "$DERIVED/Build/Products" -name "BayCountyStaff.app" -maxdepth 3 | head -1)
           xcrun simctl install "$DEV" "$APP"
           mkdir -p staff-shots
           shot() {  # name, then launch arguments
             n=$1; shift
             xcrun simctl terminate "$DEV" me.baycounty.staff 2>/dev/null || true
             xcrun simctl launch "$DEV" me.baycounty.staff -demo "$@"
-            sleep 6
-            xcrun simctl io "$DEV" screenshot "staff-shots/$n.png"
+            CI_SHOT_MIN=2 ci_shot "$DEV" "staff-shots/$n.png"
           }
           for mode in light dark; do
             xcrun simctl ui "$DEV" appearance "$mode"

@@ -19,15 +19,17 @@ jobs:
         run: |
           if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
           else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
-      - run: brew install xcodegen
+      - name: Install XcodeGen (once; the Mac keeps it)
+        run: command -v xcodegen >/dev/null || brew install xcodegen
       - name: Make sure Xcode has the watchOS platform (the iPhone app carries the watch app)
         run: ios/scripts/ensure_watchos.sh
       - name: Run the UI tests
         working-directory: ios
         run: |
           xcodegen
-          rm -rf /tmp/ui-shots; xcrun simctl shutdown all || true  # the Mac Pro keeps both between runs
-          DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
+          rm -rf /tmp/ui-shots
+          . scripts/ci_sim.sh
+          DEV=$(ci_device); echo "DEV=$DEV" >> "$GITHUB_ENV"  # this runner's own simulator
           # Show the on-screen keyboard (the number pad tests need it), not the Mac keyboard.
           defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false
           set -o pipefail
@@ -36,7 +38,7 @@ jobs:
           grep -q "TEST SUCCEEDED" test.log
       - name: Shut down the simulator
         if: always()
-        run: xcrun simctl shutdown all || true
+        run: '[ -z "$DEV" ] || xcrun simctl shutdown "$DEV" || true'
       - name: Upload screenshots taken by the tests
         if: always()
         uses: actions/upload-artifact@v4

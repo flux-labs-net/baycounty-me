@@ -1,0 +1,27 @@
+name: Cancel runs of closed pull requests
+# When a pull request is merged or closed, its runs still waiting for the Mac (or still running) are cancelled.
+# GitHub keeps them queued otherwise, and the one Mac runner would work through screenshots and builds for
+# pull requests that are already done before it reaches the open ones.
+on:
+  pull_request:
+    types: [closed]
+permissions:
+  actions: write
+jobs:
+  cancel:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    steps:
+      - name: Cancel this pull request's unfinished runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH: ${{ github.head_ref }}
+        run: |
+          for status in queued waiting requested pending in_progress; do
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs?branch=$BRANCH&status=$status&per_page=100" \
+              --jq '.workflow_runs[] | select(.event == "pull_request" or .event == "workflow_dispatch") | .id'
+          done | sort -u | while read -r id; do
+            [ "$id" = "$GITHUB_RUN_ID" ] && continue
+            echo "Cancelling run $id"
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/runs/$id/cancel" >/dev/null || true
+          done
