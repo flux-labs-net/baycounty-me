@@ -17,6 +17,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 /** Phone notifications through Firebase Cloud Messaging. Alerts need a BayCounty.me account: the switch lives in
  *  My home > Settings, and the phone is tied to the account (POST /api/account device), so its alerts follow the home
@@ -85,6 +87,21 @@ object Push {
 
     /** Signing out turns alerts off: the server drops this phone in the same call (Account.signOut). */
     fun signedOut(context: Context) { load(context); enabled = false; status = null; save(context) }
+
+    /** When the app opens with alerts on: ask Firebase for the current token (it can change after a reinstall or a
+     *  restore) and tie it to the account; onLinked gets the token this phone had before, to drop it if it changed. */
+    suspend fun resume(context: Context, onLinked: suspend (String?) -> Unit) {
+        load(context)
+        if (!enabled || !configured || FirebaseApp.getApps(context).isEmpty()) return
+        val old = token
+        val t = runCatching {
+            suspendCancellableCoroutine<String?> { c ->
+                FirebaseMessaging.getInstance().token.addOnSuccessListener { c.resume(it) }.addOnFailureListener { c.resume(null) }
+            }
+        }.getOrNull() ?: return
+        token = t; save(context)
+        onLinked(old)
+    }
 
     fun onNewToken(context: Context, t: String) {
         load(context); token = t; save(context)

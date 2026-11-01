@@ -56,6 +56,13 @@ object Account {
         load(context)
         if (!signedIn || client.token == DEMO) return
         guard(context) { me = client.me(); loadFeed(context) }
+        // Re-tie this phone each time the account loads, with Firebase's current token, so alerts never go to an old one.
+        Push.resume(context) { old -> relinkPhone(context, old) }
+    }
+
+    private suspend fun relinkPhone(context: Context, old: String?) {
+        if (old != null && old != Push.token) unlinkPhone(old)
+        linkPhone(context)
     }
 
     suspend fun loadFeed(context: Context) {
