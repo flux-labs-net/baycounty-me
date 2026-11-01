@@ -102,7 +102,9 @@ object HomeTiles {
         val n = kind?.let { k -> active.count { it.string("kind") == k } } ?: active.size
         val title = "$n ${kind?.let { "$it " } ?: ""}notice${if (n == 1) "" else "s"} in effect"
         val others = active.size - n
-        return Alert(title, if (others > 0) "$others more active. See the map and what to do." else "See the map and what to do.")
+        // "the map" only when one of them has a map to show.
+        val next = if (active.any { AlertArea.parse(it.string("geometry")) != null }) "See the map and what to do." else "See what to do."
+        return Alert(title, if (others > 0) "$others more active. $next" else next)
     }
 
     /** "YOUR HOME · PANAMA CITY · RENTING" with a saved home, else "BAY COUNTY". The app shows it in capitals. */

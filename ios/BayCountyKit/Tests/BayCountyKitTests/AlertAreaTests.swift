@@ -42,4 +42,12 @@ final class AlertAreaTests: XCTestCase {
         XCTAssertEqual(AlertArea.parse(g)?.shapes, [.pin(.init(lat: 30.24, lng: -85.65), radius: 250)])
         XCTAssertEqual(AlertArea.parse(AlertArea.pinsGeoJSON([.init(lat: 30.24, lng: -85.65)], radius: nil))?.shapes, [.pin(.init(lat: 30.24, lng: -85.65), radius: nil)])
     }
+
+    func testPlacedRoadMapsSaySo() throws {
+        let g = #"{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"placed":"street-names"},"geometry":{"type":"LineString","coordinates":[[-85.708441,30.187998],[-85.708537,30.184905]]}}]}"#
+        let a = try XCTUnwrap(AlertArea.parse(g))
+        XCTAssertEqual(a.placed, "street-names")
+        XCTAssertEqual(a.note, "Placed on the map from the streets the notice names. Check the notice for the exact spot.")
+        XCTAssertNil(AlertArea.parse(#"{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-85.6,30.2]}}]}"#)?.note)
+    }
 }

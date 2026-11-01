@@ -505,7 +505,7 @@ def emergency_page(out_dir):
       <label class="sr" for="emTlDays">Window</label><select id="emTlDays"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select></div>
     <p class="em-tl-sum" id="emTlSum" aria-live="polite">{len(recent)} alerts in the last 30 days, from the last daily check.</p>
     <div class="em-tl" id="emTl">{timeline}</div>
-    <p class="note">Each alert shows when it started and ended, with the map of where it applies when the government drew one. Area keeps one government's notices plus the countywide ones (weather, emergency alerts, shelters). The archive started on October 27, 2026. Data: <a href="/api/v1/emergency-timeline">/api/v1/emergency-timeline</a> · every notice: <a href="/api/v1/datasets/emergency-notices">emergency-notices</a> ({", ".join(f"{v} {e(KIND.get(k, (k,))[0].lower())}" for k, v in sorted(by_kind.items(), key=lambda x: -x[1]))}).</p></section>
+    <p class="note">Each alert shows when it started and ended, with the map of where it applies when the government drew one (road closures are placed from the streets they name, or FL511's points for state roads). Area keeps one government's notices plus the countywide ones (weather, emergency alerts, shelters). The archive started on October 27, 2026. Data: <a href="/api/v1/emergency-timeline">/api/v1/emergency-timeline</a> · every notice: <a href="/api/v1/datasets/emergency-notices">emergency-notices</a> ({", ".join(f"{v} {e(KIND.get(k, (k,))[0].lower())}" for k, v in sorted(by_kind.items(), key=lambda x: -x[1]))}).</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">

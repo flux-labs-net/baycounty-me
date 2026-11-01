@@ -60,7 +60,13 @@ final class HomeTilesTests: XCTestCase {
         let n = { (k: String, s: String) in self.row(["kind": .string(k), "status": .string(s)]) }
         let a = HomeTiles.alert([n("road", "active"), n("boil-water", "active"), n("boil-water", "active"), n("weather", "ended")])
         XCTAssertEqual(a?.title, "2 boil-water notices in effect")
-        XCTAssertEqual(a?.detail, "1 more active. See the map and what to do.")
+        XCTAssertEqual(a?.detail, "1 more active. See what to do.")
+        let mapped = row(["kind": .string("road"), "status": .string("active"),
+                          "geometry": .string(#"{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"placed":"street-names"},"geometry":{"type":"LineString","coordinates":[[-85.7,30.18],[-85.7,30.19]]}}]}"#)])
+        XCTAssertEqual(HomeTiles.alert([mapped, n("road", "active")])?.detail, "See the map and what to do.")
+        // A road post the poller couldn't place keeps an empty map: no "map" promise.
+        let none = row(["kind": .string("road"), "status": .string("active"), "geometry": .string(#"{"type":"FeatureCollection","features":[]}"#)])
+        XCTAssertEqual(HomeTiles.alert([none])?.detail, "See what to do.")
         XCTAssertEqual(HomeTiles.alert([n("shelter", "active")])?.title, "1 notice in effect")
         XCTAssertNil(HomeTiles.alert([n("road", "ended")]))
     }

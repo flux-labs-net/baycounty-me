@@ -200,7 +200,10 @@ struct EmergencyView: View {
                 .font(.caption.weight(.semibold)).foregroundStyle(.secondary).textCase(.uppercase)
             Text(n.string("title") ?? "").font(.subheadline.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
             if let a = n.string("area") { Text(a).font(.footnote).foregroundStyle(.secondary).lineLimit(3) }
-            if let map = AlertArea.parse(n.string("geometry")) { AlertMapView(area: map).padding(.vertical, 4) }
+            if let map = AlertArea.parse(n.string("geometry")) {
+                AlertMapView(area: map).padding(.top, 4).padding(.bottom, map.note == nil ? 4 : 0)
+                if let note = map.note { Text(note).font(.caption2).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
+            }
             if !more.isEmpty {
                 DisclosureGroup("Details") { Text(more).font(.footnote).fixedSize(horizontal: false, vertical: true).padding(.top, 4) }
                     .font(.footnote)

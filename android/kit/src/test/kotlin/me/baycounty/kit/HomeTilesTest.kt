@@ -63,9 +63,14 @@ class HomeTilesTest {
         fun n(k: String, s: String) = row("kind" to k, "status" to s)
         val a = HomeTiles.alert(listOf(n("road", "active"), n("boil-water", "active"), n("boil-water", "active"), n("weather", "ended")))
         assertEquals("2 boil-water notices in effect", a?.title)
-        assertEquals("1 more active. See the map and what to do.", a?.detail)
+        assertEquals("1 more active. See what to do.", a?.detail)
         assertEquals("1 notice in effect", HomeTiles.alert(listOf(n("shelter", "active")))?.title)
         assertNull(HomeTiles.alert(listOf(n("road", "ended"))))
+        val line = "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"placed\":\"street-names\"},\"geometry\":{\"type\":\"LineString\",\"coordinates\":[[-85.7,30.18],[-85.7,30.19]]}}]}"
+        val mapped = row("kind" to "road", "status" to "active", "geometry" to line)
+        assertEquals("See the map and what to do.", HomeTiles.alert(listOf(mapped, n("road", "active")))?.detail)
+        val none = row("kind" to "road", "status" to "active", "geometry" to "{\"type\":\"FeatureCollection\",\"features\":[]}")
+        assertEquals("See what to do.", HomeTiles.alert(listOf(none))?.detail)
     }
 
     @Test fun eyebrow() {
