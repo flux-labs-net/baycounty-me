@@ -1,7 +1,7 @@
 {
- "as_of": "2026-10-31",
+ "as_of": "2026-11-01",
  "fetched": {
-  "pcb-chamber": "2026-10-31T16:13:50+00:00",
+  "pcb-chamber": "2026-11-01T17:14:09+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,51 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27665",
-   "title": "Boo Bash",
-   "starts": "2026-10-31T00:00:00",
-   "ends": "2026-10-31T23:59:59",
-   "all_day": true,
-   "venue": "Dave & Buster’s",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/boo-bash/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27698",
-   "title": "Toys for Kids Halloween Bash 2026",
-   "starts": "2026-10-31T00:00:00",
-   "ends": "2026-11-01T23:59:59",
-   "all_day": true,
-   "venue": "Hammerhead Fred’s",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/toys-for-kids-halloween-bash-2026/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27637",
-   "title": "ZooBoo",
-   "starts": "2026-10-31T00:00:00",
-   "ends": "2026-11-01T23:59:59",
-   "all_day": true,
-   "venue": "ZooWorld",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/zooboo-2/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27561",

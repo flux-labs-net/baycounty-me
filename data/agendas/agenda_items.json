@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-31T16:18:29+00:00",
+ "generated": "2026-11-01T17:18:44+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {

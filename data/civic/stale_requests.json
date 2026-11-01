@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-31",
+ "as_of": "2026-11-01",
  "about": "Records request drafts for sources whose newest official record is older than the source’s usual schedule. Seeded into corr.records_requests and sent only from /admin after review.",
  "requests": []
 }

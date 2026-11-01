@@ -1,13 +1,13 @@
 {
- "as_of": "2026-10-31",
+ "as_of": "2026-11-01",
  "source": "Bay County Supervisor of Elections itemized campaign finance exports (VoterFocus); Florida Division of Corporations (Sunbiz)",
  "method": "A contributor filed as an individual is listed when the name and the street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active or still filing around the gift. Middle initials and Jr/Sr must agree. Protected voters are never matched. Name-only matches are not published.",
  "counts": {
-  "individual_lines": 8374,
+  "individual_lines": 8382,
   "published_lines": 1228,
   "protected_skipped": 512,
   "published_donors": 643,
-  "held_zip_only": 704
+  "held_zip_only": 705
  },
  "campaigns": {
   "294": {
