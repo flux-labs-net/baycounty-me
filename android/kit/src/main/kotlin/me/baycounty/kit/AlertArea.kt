@@ -13,8 +13,17 @@ import kotlin.math.cos
 /** Where an alert or notice applies, as government staff drew it in the /staff workspace (site/area_map.js): pins
  *  (with a circle radius in meters), street or pipe lines, and areas. Stored as a GeoJSON FeatureCollection in the
  *  `geometry` text of a live notice (/api/v1/emergency). Mirrors the Swift `AlertArea`. */
-data class AlertArea(val shapes: List<Shape>) {
+data class AlertArea(val shapes: List<Shape>, val placed: String? = null) {
     data class Coord(val lat: Double, val lng: Double)
+
+    /** The line under the map when it was placed rather than drawn: a road post placed from the streets it names
+     *  ("street-names", api/_road_map.js) or FL511's start and end points ("fl511"). null for a staff drawing. */
+    val note: String?
+        get() = when (placed) {
+            "street-names" -> "Placed on the map from the streets the notice names. Check the notice for the exact spot."
+            "fl511" -> "Start and end points from FL511."
+            else -> null
+        }
 
     sealed interface Shape {
         /** A pin; radius in meters when staff drew a circle around it. */
@@ -65,9 +74,11 @@ data class AlertArea(val shapes: List<Shape>) {
             fun line(v: JsonElement?): List<Coord> = (v as? JsonArray).orEmpty().mapNotNull(::coord)
             fun rings(v: JsonElement?): List<List<Coord>> = (v as? JsonArray).orEmpty().map(::line).filter { it.size >= 3 }
             val shapes = mutableListOf<Shape>()
+            var placed: String? = null
             for (f in features) {
                 val fo = f as? JsonObject ?: continue
                 val g = fo["geometry"] as? JsonObject ?: continue
+                if (placed == null) placed = ((fo["properties"] as? JsonObject)?.get("placed") as? JsonPrimitive)?.content
                 val c = g["coordinates"]
                 when ((g["type"] as? JsonPrimitive)?.content) {
                     "Point" -> coord(c)?.let { p ->
@@ -80,7 +91,7 @@ data class AlertArea(val shapes: List<Shape>) {
                     "MultiPolygon" -> (c as? JsonArray).orEmpty().forEach { poly -> rings(poly).takeIf { it.isNotEmpty() }?.let { shapes += Shape.Area(it) } }
                 }
             }
-            return if (shapes.isEmpty()) null else AlertArea(shapes)
+            return if (shapes.isEmpty()) null else AlertArea(shapes, placed)
         }
 
         /** Pins dropped in the staff app, each with the same circle (meters; null or 0 = no circle), as the GeoJSON

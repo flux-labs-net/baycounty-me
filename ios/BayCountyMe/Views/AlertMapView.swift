@@ -2,8 +2,9 @@ import SwiftUI
 import MapKit
 import BayCountyKit
 
-/// The map government staff drew on an alert (where a boil-water notice or a closure applies): circles around pins,
-/// street or pipe lines and areas, in red, fitted to the drawing. Read-only, like BCMap.view on /emergency.
+/// The map government staff drew on an alert (where a boil-water notice or a closure applies), or the stretch of a
+/// road closure placed from the streets it names: circles around pins, street or pipe lines and areas, in red, fitted
+/// to the drawing. Read-only, like BCMap.view on /emergency.
 struct AlertMapView: View {
     let area: AlertArea
     var height: CGFloat = 200

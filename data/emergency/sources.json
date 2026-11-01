@@ -35,6 +35,11 @@
       "field": "EZONE",
       "page": "https://www.baycountyfl.gov/511/Evacuation-Zones"
     },
-    "addresses": {"layer": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/3"}
+    "addresses": {"layer": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/3"},
+    "roads": {
+      "_about": "Street centerlines, for placing road closure notices on a map from the street names they give (api/_road_map.js). communities: the posting government -> the LCOMM/RCOMM name its streets carry.",
+      "layer": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/5",
+      "communities": {"pc": "PANAMA CITY", "pcb": "PANAMA CITY BEACH", "lh": "LYNN HAVEN", "cw": "CALLAWAY", "sp": "SPRINGFIELD", "parker": "PARKER", "mb": "MEXICO BEACH"}
+    }
   }
 }

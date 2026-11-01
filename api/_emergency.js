@@ -225,8 +225,12 @@ function fl511Notices(rows, layer, place, cfg) {
 async function fl511(place = 'fl-bay') {
   const cfg = placeConfig(place);
   const q = encodeURIComponent(JSON.stringify({columns: [], start: 0, length: 1000}));
-  return settle(cfg.fl511.layers.map(l => async () => fl511Notices((await get(`https://fl511.com/List/GetData/${l}?query=${q}&lang=en`, {json: true})).data || [], l, place, cfg)),
-    cfg.fl511.layers.map(l => 'fl511:' + l));
+  // Each closure's start (and end) point comes from FL511's map icon list; a notice still lists without one.
+  const R = require('./_road_map');
+  return settle(cfg.fl511.layers.map(l => async () => {
+    const [list, pts] = await Promise.all([get(`https://fl511.com/List/GetData/${l}?query=${q}&lang=en`, {json: true}), R.fl511Points(get, l).catch(() => null)]);
+    return fl511Notices(list.data || [], l, place, cfg).map(n => ({...n, geometry: pts ? R.fl511Map(pts.get(n.notice_id.slice(6))) : null}));
+  }), cfg.fl511.layers.map(l => 'fl511:' + l));
 }
 
 // ---------- shelters (Bay County's Emergency Shelters page) ----------
@@ -500,4 +504,4 @@ const byUrgency = (a, b) => (SEV_RANK[a.severity] ?? 5) - (SEV_RANK[b.severity] 
 
 module.exports = {SOURCES, placeConfig, plain, decode, clip, classify, zonesIn, parseRss, rssNotices, nwsNotice, nws, nwsRecent, alertCenters, newsFeeds,
   localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, parseCap, ipawsNotice, ipaws, readAll, staffAlerts, pushTopic, topicsFor, TOPICS, ALERT_TYPES, AREAS, LOCAL_KINDS, reaches, isUrgent, quietNow, DEFAULT_TOPICS,
-  byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice};
+  byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice, get};

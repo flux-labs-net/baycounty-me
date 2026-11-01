@@ -41,4 +41,11 @@ class AlertAreaTest {
         assertEquals(listOf(AlertArea.Shape.Pin(AlertArea.Coord(30.24, -85.65), 250.0)), AlertArea.parse(g)?.shapes)
         assertEquals(listOf(AlertArea.Shape.Pin(AlertArea.Coord(30.24, -85.65), null)), AlertArea.parse(AlertArea.pinsGeoJSON(listOf(AlertArea.Coord(30.24, -85.65)), null))?.shapes)
     }
+
+    @Test fun placedRoadMapsSaySo() {
+        val g = "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"placed\":\"street-names\"},\"geometry\":{\"type\":\"LineString\",\"coordinates\":[[-85.708441,30.187998],[-85.708537,30.184905]]}}]}"
+        val a = AlertArea.parse(g)!!
+        assertEquals("street-names", a.placed)
+        assertEquals("Placed on the map from the streets the notice names. Check the notice for the exact spot.", a.note)
+    }
 }

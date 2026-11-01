@@ -131,7 +131,9 @@ public enum HomeTiles {
         let words = ["evacuation": "evacuation", "weather": "weather", "boil-water": "boil-water", "road": "road", "utility": "utility"]
         let title = "\(n) \(kind.flatMap { words[$0] }.map { $0 + " " } ?? "")notice\(n == 1 ? "" : "s") in effect"
         let others = active.count - n
-        return Alert(title: title, detail: others > 0 ? "\(others) more active. See the map and what to do." : "See the map and what to do.")
+        // "the map" only when one of them has a map to show.
+        let next = active.contains { AlertArea.parse($0.string("geometry")) != nil } ? "See the map and what to do." : "See what to do."
+        return Alert(title: title, detail: others > 0 ? "\(others) more active. \(next)" : next)
     }
 
     /// "YOUR HOME · PANAMA CITY · RENTING" with a saved home, else "BAY COUNTY". The app shows it in capitals.

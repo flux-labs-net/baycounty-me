@@ -17,6 +17,20 @@ public struct AlertArea: Equatable, Sendable {
     }
 
     public let shapes: [Shape]
+    /// Who put it on the map when staff didn't draw it: "street-names" (a road post placed from the streets it names,
+    /// api/_road_map.js) or "fl511" (FL511's start and end points). nil for a staff drawing.
+    public var placed: String? = nil
+
+    public init(shapes: [Shape], placed: String? = nil) { self.shapes = shapes; self.placed = placed }
+
+    /// The line under the map when it was placed rather than drawn.
+    public var note: String? {
+        switch placed {
+        case "street-names": return "Placed on the map from the streets the notice names. Check the notice for the exact spot."
+        case "fl511": return "Start and end points from FL511."
+        default: return nil
+        }
+    }
 
     /// Every point the map has to show, circles included (their edge, roughly), for fitting the map around them.
     public var bounds: (south: Double, west: Double, north: Double, east: Double)? {
@@ -52,8 +66,10 @@ public struct AlertArea: Equatable, Sendable {
         func line(_ v: JSONValue?) -> [Coord] { arr(v).compactMap(coord) }
         func rings(_ v: JSONValue?) -> [[Coord]] { arr(v).map(line).filter { $0.count >= 3 } }
         var shapes: [Shape] = []
+        var placed: String?
         for case .object(let f) in features {
             guard case .object(let g)? = f["geometry"], let type = g["type"]?.stringValue else { continue }
+            if placed == nil, case .object(let props)? = f["properties"], let p = props["placed"]?.stringValue { placed = p }
             let c = g["coordinates"]
             switch type {
             case "Point":
@@ -73,7 +89,7 @@ public struct AlertArea: Equatable, Sendable {
             default: continue
             }
         }
-        return shapes.isEmpty ? nil : AlertArea(shapes: shapes)
+        return shapes.isEmpty ? nil : AlertArea(shapes: shapes, placed: placed)
     }
 
     /// Pins dropped in the staff app, each with the same circle (meters; nil or 0 = no circle), as the GeoJSON

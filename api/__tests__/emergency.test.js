@@ -195,7 +195,7 @@ test('the alert timeline sums reach per notice (admin only), filters by governme
   const pub = F.buildTimeline(notices, reach, {days: 30});
   assert.equal(pub.reached, undefined, 'public timeline has no send counts');
   assert.ok(pub.items.every(i => !('reach' in i) && !('people' in i)), 'nor do its items');
-  const g = '{"type":"FeatureCollection","features":[]}';
+  const g = '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-85.65,30.24]}}]}';
   assert.equal(F.buildTimeline([{...notices[0], geometry: g}], [], {}).items[0].geometry, g, 'the staff-drawn map comes along');
   assert.equal(F.buildTimeline([{...notices[0], source: 'City of Lynn Haven'}], [], {}).items[0].source, 'Lynn Haven', 'cities read by their short name');
   const t = F.buildTimeline(notices, reach, {days: 30, admin: true});

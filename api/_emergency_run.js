@@ -117,6 +117,24 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
   return sent;
 }
 
+// City and county road closure posts name streets but have no map: place them on the street layer once
+// (api/_road_map.js) and keep that map, or the empty "looked, found none" one, on every later check.
+const ROAD_LOOKUPS_PER_RUN = 6;
+async function placeRoads(place, notices) {
+  const need = notices.filter(n => n.kind === 'road' && !n.geometry && n.source_type !== 'staff' && n.source_type !== 'fl511');
+  if (!need.length) return 0;
+  const had = new Map((await db.q('select notice_id, geometry from emergency_live where notice_id = any($1::text[]) and geometry is not null',
+    [need.map(n => n.notice_id)]).catch(() => [])).map(r => [r.notice_id, r.geometry]));
+  const R = require('./_road_map'), cfg = E.placeConfig(place);
+  let looked = 0;
+  for (const n of need) {
+    if (had.has(n.notice_id)) { n.geometry = had.get(n.notice_id); continue; }
+    if (looked++ >= ROAD_LOOKUPS_PER_RUN) continue;
+    n.geometry = await R.streetMap(n, cfg, E.get).catch(() => null);
+  }
+  return looked;
+}
+
 async function run(place = 'fl-bay', {force = false} = {}) {
   E.placeConfig(place);
   if (!db.hasDb()) throw Object.assign(new Error('The database is not connected.'), {status: 503, expose: true});
@@ -126,6 +144,7 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   }
   const t0 = Date.now();
   const r = await E.readAll(place);
+  await placeRoads(place, r.notices);
   const ended = await store(place, r.notices, r.ok);
   // The same post listed twice is sent once, as its newest version (kept versions go first).
   const live = r.notices.filter(n => n.status === 'active');
@@ -147,4 +166,4 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   return {place, checked_at: new Date().toISOString(), ms: Date.now() - t0, notices: r.notices.length, active, ended, pushed, agenda, errors: r.errors, sources_ok: r.ok};
 }
 
-module.exports = {run, sourceKey, store, pushNew, claim, reach, govFilter};
+module.exports = {run, placeRoads, sourceKey, store, pushNew, claim, reach, govFilter};

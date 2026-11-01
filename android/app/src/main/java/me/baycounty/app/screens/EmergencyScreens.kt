@@ -210,7 +210,10 @@ private fun NoticeCard(n: DataRow) {
         }
         Text(n.string("title") ?: "", style = T.subheadBold, color = Brand.text)
         n.string("area")?.let { Text(it, style = T.footnote, color = Brand.secondary, maxLines = 3) }
-        AlertArea.parse(n.string("geometry"))?.let { AlertMap(it, Modifier.fillMaxWidth().height(200.dp).padding(vertical = 4.dp)) }
+        AlertArea.parse(n.string("geometry"))?.let { map ->
+            AlertMap(map, Modifier.fillMaxWidth().height(200.dp).padding(vertical = 4.dp))
+            map.note?.let { Text(it, style = T.caption2, color = Brand.secondary) }
+        }
         if (more.isNotEmpty()) {
             Text(if (open) "Hide details" else "Details", style = T.footnote, color = Brand.navy, modifier = Modifier.clickable { open = !open })
             if (open) Text(more, style = T.footnote, color = Brand.text)

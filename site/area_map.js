@@ -38,6 +38,7 @@
 .bcmap-bar input{flex:1 1 200px;min-width:0}
 .bcmap-tip{font-size:.82rem;color:var(--muted);margin:0}
 .bcmap-tip b{color:var(--ink)}
+.bcmap-note{font-size:.8rem;color:var(--muted);margin:6px 0 0}
 .bcmap-legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.8rem;color:var(--muted);margin:6px 0 0}`;
     document.head.appendChild(st);
   }
@@ -70,6 +71,13 @@
     return [n.Point && `${n.Point} pin${n.Point > 1 ? 's' : ''}`, n.LineString && `${n.LineString} line${n.LineString > 1 ? 's' : ''}`, n.Polygon && `${n.Polygon} area${n.Polygon > 1 ? 's' : ''}`].filter(Boolean).join(', ');
   };
 
+  const placedNote = g => {
+    const by = new Set(g.features.map(f => f.properties && f.properties.placed).filter(Boolean));
+    if (by.has('street-names')) return 'Placed on the map from the streets the notice names. Check the notice for the exact spot.';
+    if (by.has('fl511')) return 'Start and end points from FL511.';
+    return '';
+  };
+
   // Read-only map on a public page.
   async function view(box, value) {
     const g = parse(value);
@@ -81,6 +89,11 @@
     const layer = L.featureGroup().addTo(map);
     draw(L, layer, g);
     fit(map, layer);
+    // Road notices placed by us, not drawn by the government, say so under the map.
+    const note = placedNote(g);
+    if (note && !(box.nextElementSibling && box.nextElementSibling.classList.contains('bcmap-note'))) {
+      const p = document.createElement('p'); p.className = 'bcmap-note'; p.textContent = note; box.after(p);
+    }
     return true;
   }
 

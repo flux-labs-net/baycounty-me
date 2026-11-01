@@ -8,6 +8,8 @@ const STALE_MS = 10 * 60e3;
 
 // A city reads as its short name ("Lynn Haven", not "City of Lynn Haven") wherever an alert says who posted it.
 const shortGov = s => (typeof s === 'string' ? s.replace(/^(City|Town) of /, '') : s);
+// A road notice the poller looked up and couldn't place keeps an empty map (api/_road_map.js NONE); readers get none.
+const mapOf = g => (typeof g === 'string' && g && !/"features":\s*\[\s*\]/.test(g) ? g : null);
 const LIVE_COLS = 'notice_id,kind,source,source_type,gov_id,title,summary,instruction,severity,event,area,zones,issued,starts,ends,updated,status,full_closure,roadway,url,source_url,geometry,first_seen,last_seen';
 const KIND_LABEL = {evacuation: 'Evacuation orders', weather: 'Weather alerts', shelter: 'Shelters open', 'boil-water': 'Boil-water notices', road: 'Road closures', utility: 'Water and utility outages', storm: 'Storm updates', safety: 'Public safety alerts'};
 
@@ -58,7 +60,7 @@ async function liveFeed(req, catalog, {place = 'fl-bay', refresh = true} = {}) {
   } else notices = live.notices;
   // A notice posted twice (re-posted with an update) is one card: the newest version, with first_posted and versions.
   notices = require('./_dupes').mergeNotices(notices, await require('./_dupes').decisions());
-  notices = notices.slice().sort(E.byUrgency).map(n => ({...n, source: shortGov(n.source), area: shortGov(n.area), page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`}));
+  notices = notices.slice().sort(E.byUrgency).map(n => ({...n, geometry: mapOf(n.geometry), source: shortGov(n.source), area: shortGov(n.area), page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`}));
   const [shelterRows, zoneRows] = await Promise.all([meta(req, catalog, 'emergency-shelters'), meta(req, catalog, 'evacuation-zones')]);
   const shelters = mergeShelters(shelterRows, state.shelters);
   const count = k => notices.filter(n => n.kind === k).length;
@@ -101,7 +103,7 @@ function buildTimeline(notices, reach, {days = 30, kind = '', gov = '', admin = 
       const rr = ids.reduce((a, id) => { const o = per.get(id); if (o) for (const k of Object.keys(a)) a[k] += o[k] || 0; return a; }, {push: 0, email: 0, sms: 0});
       const started = n.first_posted || n.issued || n.first_seen || null;
       const item = {notice_id: n.notice_id, kind: n.kind, label: KIND_LABEL[n.kind] || 'Notice', title: n.title, event: n.event || null, severity: n.severity,
-        source: shortGov(n.source), source_type: n.source_type, gov_id: n.gov_id || null, zones: n.zones || null, area: shortGov(n.area) || null, geometry: n.geometry || null,
+        source: shortGov(n.source), source_type: n.source_type, gov_id: n.gov_id || null, zones: n.zones || null, area: shortGov(n.area) || null, geometry: mapOf(n.geometry),
         started, ended: n.active ? null : (n.last_seen || null), active: !!n.active, status: n.active ? 'active' : n.status === 'lifted' ? 'lifted' : 'ended',
         url: n.url || null, page: `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`};
       if (admin) Object.assign(item, {reach: rr, people: rr.push + rr.email + rr.sms, removed_at: n.removed_at || null, removed_by: n.removed_by || null, removed_note: n.removed_note || null});
@@ -171,4 +173,4 @@ async function zoneLookup(req, catalog, q, {place = 'fl-bay'} = {}) {
   };
 }
 
-module.exports = {liveFeed, zoneLookup, timeline, buildTimeline, KIND_LABEL, GOV_NAMES, miles};
+module.exports = {mapOf, liveFeed, zoneLookup, timeline, buildTimeline, KIND_LABEL, GOV_NAMES, miles};
