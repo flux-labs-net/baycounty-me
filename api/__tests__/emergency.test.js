@@ -254,3 +254,49 @@ test('an admin removes a test alert: hidden everywhere, logged, staff alert mark
   assert.ok(calls.some(([s]) => /delete from emergency_notices/.test(s)), 'off the archive table');
   assert.ok(!calls.some(([s]) => /delete from (emergency_live|gov\.alerts)/.test(s)), 'nothing in the record is deleted');
 });
+
+// Nov 1, 2026: NWS Tallahassee put out four Flash Flood Warnings for Bay County in three hours. Only the first was sent,
+// because the same kind of warning was held back for 12 hours. Now a new warning goes out; its updates don't.
+test('weather pushes: a new warning goes out, its updates and extensions do not, statements once per 12 hours', async () => {
+  const db = require('../_db');
+  const Acct = require('../_account');
+  const realQ = db.q, realMail = Acct.emailNotice;
+  const sent = [];   // push.sent rows: {notice_id, dedupe_key, suppressed}
+  db.q = async (sql, p) => {
+    if (/insert into push.sent/.test(sql)) {
+      if (sent.some(r => r.notice_id === p[0])) return [];
+      sent.push({notice_id: p[0], dedupe_key: p[3], suppressed: p[5]});
+      return [{notice_id: p[0]}];
+    }
+    if (/from push.sent where notice_id = any/.test(sql)) return sent.filter(r => p[0].includes(r.notice_id)).map(() => ({x: 1}));
+    if (/from push.sent where place_id = \$1 and dedupe_key/.test(sql)) return sent.filter(r => r.dedupe_key === p[1] && !r.suppressed).map(() => ({x: 1}));
+    return [];   // no phones, no other rows
+  };
+  Acct.emailNotice = async () => ({sent: 0, people: 0});
+  try {
+    const R = require('../_emergency_run');
+    const now = Date.parse('2026-11-01T14:40:00Z');
+    const ffw = (id, issued, refs) => ({notice_id: 'nws:' + id, kind: 'weather', source_type: 'nws', status: 'active', event: 'Flash Flood Warning',
+      severity: 'severe', area: 'Bay, FL', issued, refs});
+    await R.pushNew('fl-bay', [ffw('a', '2026-11-01T11:53:00Z')], now);
+    await R.pushNew('fl-bay', [ffw('b', '2026-11-01T13:00:00Z', ['nws:a'])], now);          // follow-up statement on warning a
+    await R.pushNew('fl-bay', [ffw('c', '2026-11-01T14:15:00Z')], now);                    // a new warning
+    await R.pushNew('fl-bay', [ffw('d', '2026-11-01T14:36:00Z', ['nws:c'])], now);          // warning c extended
+    const hls = id => ({notice_id: 'nws:' + id, kind: 'weather', source_type: 'nws', status: 'active', event: 'Hurricane Local Statement', severity: 'moderate', issued: '2026-11-01T14:00:00Z'});
+    await R.pushNew('fl-bay', [hls('h1')], now);
+    await R.pushNew('fl-bay', [hls('h2')], now);
+    assert.deepEqual(sent.map(r => [r.notice_id, r.suppressed]),
+      [['nws:a', false], ['nws:b', true], ['nws:c', false], ['nws:d', true], ['nws:h1', false], ['nws:h2', true]]);
+  } finally { db.q = realQ; Acct.emailNotice = realMail; }
+});
+
+test('NWS notices keep the alerts they follow; severe weather warnings are time-sensitive', () => {
+  const n = E.nwsNotice({properties: {id: 'https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.c.001.1', status: 'Actual', event: 'Flash Flood Warning',
+    severity: 'Severe', messageType: 'Update', headline: 'Flash Flood Warning extended', areaDesc: 'Bay, FL', sent: '2026-11-01T08:36:00-06:00',
+    references: [{identifier: 'urn:oid:2.49.0.1.840.0.b.001.1'}]}}, 'fl-bay', E.placeConfig('fl-bay'));
+  assert.deepEqual(n.refs, ['nws:urn:oid:2.49.0.1.840.0.b.001.1']);
+  assert.equal(P.message(n, 'weather').critical, true);
+  assert.equal(P.message({...n, event: 'Flood Advisory', severity: 'minor'}, 'weather').critical, false);
+  assert.equal(P.message({...n, event: 'Tropical Storm Watch'}, 'weather').critical, false);
+  assert.equal(JSON.parse(P.apnsPayload({...P.message(n, 'weather')})).aps['interruption-level'], 'time-sensitive');
+});

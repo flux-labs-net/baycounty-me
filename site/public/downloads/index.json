@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-31",
+ "updated": "2026-11-01",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -7548,7 +7548,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 421,
+   "rows": 420,
    "columns": [
     {
      "name": "website",
@@ -9389,8 +9389,6 @@
      "name": "latest_date",
      "type": "string",
      "values": [
-      "2025-05-05",
-      "2025-10-27",
       "2026-10-26"
      ]
     },
@@ -9468,7 +9466,7 @@
    "id": "beach-water-samples",
    "title": "Beach water quality: samples",
    "description": "Every published Healthy Beaches sample at each site: date, enterococcus count per 100 mL, the state's rating and whether a health advisory was issued. The state's lookup shows the latest 50 samples per site; samples are kept here as they come in, so history grows from 2026 on.",
-   "rows": 676,
+   "rows": 732,
    "columns": [
     {
      "name": "place_id",
@@ -17242,7 +17240,7 @@
       "FY2025 for most governments; FY2024 for Bay County, City of Panama City",
       "FY2026 through July 2026 (10 months)",
       "FY2027 (Oct 1, 2026 to Sept 30, 2027)",
-      "Jan to Jul 2026 for every agency; some through Oct",
+      "Jan to Aug 2026 for every agency; some through Oct",
       "Jan to Sep 2026",
       "Oct 31, 2025",
       "State FY2025 (July 2024 to June 2025)",

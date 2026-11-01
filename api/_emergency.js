@@ -76,6 +76,8 @@ function notice(o) {
     issued: o.issued || null, starts: o.starts || null, ends: o.ends || null, updated: o.updated || null,
     status: o.status || 'active', full_closure: o.full_closure ?? null, roadway: o.roadway || null,
     url: o.url || null, source_url: o.source_url || o.url || null, geometry: o.geometry || null,
+    // NWS updates, continuations and extensions list the alerts they follow (not stored; used so a push isn't repeated).
+    ...(o.refs && o.refs.length ? {refs: o.refs} : {}),
   };
 }
 
@@ -94,6 +96,7 @@ function nwsNotice(f, place, cfg) {
     event: p.event, area: p.areaDesc, zones: evac ? zonesIn(text) : [], issued: iso(p.sent), starts: iso(p.onset || p.effective), ends: iso(p.ends || p.expires),
     updated: iso(p.sent), status: p.messageType === 'Cancel' ? 'lifted' : 'active',
     url: `https://alerts.weather.gov/search?id=${encodeURIComponent(String(p.id || '').replace(/^.*\//, ''))}`, source_url: cfg.nws.url,
+    refs: (p.references || []).map(r => r && r.identifier ? 'nws:' + String(r.identifier).replace(/^.*\//, '') : null).filter(Boolean),
   });
 }
 async function nws(place = 'fl-bay') {

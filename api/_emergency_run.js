@@ -9,7 +9,8 @@ const D = require('./_dupes');
 
 const MIN_GAP_S = 110;
 const PUSH_MAX_AGE_H = 24;      // a notice first issued longer ago than this is recorded but not pushed (e.g. on first run)
-const WEATHER_REPEAT_H = 12;    // the same weather event (e.g. Hurricane Warning) is pushed at most once in this window
+const WEATHER_REPEAT_H = 12;    // the same weather statement or watch (e.g. Hurricane Local Statement) is pushed at most once in this window
+const WARNING = /Warning$/;
 const COLS = ['notice_id', 'place_id', 'kind', 'source', 'source_type', 'gov_id', 'title', 'summary', 'instruction', 'severity', 'event', 'area', 'zones',
   'issued', 'starts', 'ends', 'updated', 'status', 'full_closure', 'roadway', 'url', 'source_url'];
 
@@ -83,7 +84,14 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
     const issued = Date.parse(n.issued || n.updated || '') || nowMs;
     const stale = nowMs - issued > PUSH_MAX_AGE_H * 3600e3;
     let suppressed = stale;
-    if (!suppressed && topic === 'weather') {
+    // An update, continuation or extension of a weather alert already handled (NWS lists the alerts it follows) isn't sent again.
+    if (!suppressed && topic === 'weather' && (n.refs || []).length) {
+      const r = await db.q('select 1 from push.sent where notice_id = any($1::text[]) limit 1', [n.refs]);
+      suppressed = r.length > 0;
+    }
+    // Statements and watches that NWS reissues every few hours go out once per event per 12 hours. A newly issued
+    // warning always goes out, even when the same kind of warning went out earlier that day (a second flash flood warning).
+    if (!suppressed && topic === 'weather' && !WARNING.test(n.event || '')) {
       const r = await db.q(`select 1 from push.sent where place_id = $1 and dedupe_key = $2 and sent_at > now() - make_interval(hours => $3) and not suppressed limit 1`, [place, dedupe, WEATHER_REPEAT_H]);
       suppressed = r.length > 0;
     }

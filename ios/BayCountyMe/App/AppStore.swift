@@ -34,6 +34,7 @@ final class AppStore {
     /// screenshot workflows) don't send, so they never show up in the counts.
     func becameActive() {
         usage.opened()
+        Task { await PushManager.shared.resume() }
         #if !DEBUG
         let usage = usage
         Task.detached { await usage.send() }
