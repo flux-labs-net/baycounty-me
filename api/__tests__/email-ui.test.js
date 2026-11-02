@@ -48,16 +48,28 @@ test('every email is a full document with preview text, dark mode and a text par
   }
 });
 
-test('the digest cuts long updates and keeps the unsubscribe placeholders', () => {
+test('the city email shows what happened in the city and what is coming up', () => {
   const {digestEmail, clip} = require('../_emails');
-  const now = Date.parse('2026-10-27T12:00:00Z');
-  const m = digestEmail({key: 'lh', slug: 'lynn-haven', name: 'Lynn Haven', changes: [{date: '2026-10-26', title: 'T', text: 'First sentence here. ' + 'word '.repeat(80), url: 'https://baycounty.me/t'}],
-    meetings: [{start: '2026-10-28T17:30:00-05:00', title: 'City Commission Meeting', agenda_url: 'https://example.gov/a', location: 'City Hall'}]}, {now});
-  assert.equal(m.subject, 'Lynn Haven this week: 1 update, 1 meeting');
-  assert.match(m.html, /Read more &rarr;/);
-  assert.match(m.html, />OCT<\/div>/);
+  const now = Date.parse('2026-11-02T13:00:00Z');
+  const g = {key: 'lh', slug: 'lynn-haven', name: 'Lynn Haven',
+    meetings: [{start: '2026-11-03T17:30:00-06:00', title: 'City Commission Meeting', agenda_url: 'https://example.gov/a', location: 'City Hall'}],
+    events: [{start: '2026-11-07T10:00:00', title: 'Fall festival', venue: 'Sheffield Park', url: 'https://example.gov/e'}],
+    alerts: [{date: '2026-10-30', title: 'Boil water notice for Ohio Ave', kind: 'boil-water', status: 'lifted', url: 'https://baycounty.me/emergency#n-1'}],
+    votes: [{date: '2026-10-29', held: '2026-10-14', title: 'Millage set at 4.25', text: 'First sentence here. ' + 'word '.repeat(80), tally: '4-1', outcome: 'passed',
+      voted_no: [{name: 'Pat Perno', url: 'https://baycounty.me/people/pat-perno'}], url: 'https://baycounty.me/v'}, {date: '2026-09-01', title: 'Old vote', url: 'https://baycounty.me/o'}],
+    contracts: [{date: '2026-10-31', held: '2026-10-27', kind: 'contract', amount: 405500, vendor: 'Truckworx', text: 'Garbage truck', url: 'https://baycounty.me/c'}],
+    notices: [{date: '2026-10-29', title: 'Request for Proposals', kind: 'Bid', url: 'https://baycounty.me/notices?gov=lh'}],
+    jobs: [{date: '2026-10-30', title: 'Police Officer', department: 'Police', url: 'https://example.gov/j'}]};
+  const m = digestEmail(g, {now});
+  assert.equal(m.subject, 'Lynn Haven this week: 1 alert, 1 meeting, 1 event');
+  assert.deepEqual(m.counts, {alerts: 1, meetings: 1, events: 1, votes: 1, contracts: 1, notices: 1, jobs: 1});
+  for (const s of ['Meetings coming up', 'Happening in Lynn Haven', 'New votes', 'New contracts', 'Public notices', 'New job openings', 'Voted no:', 'Lifted', '$405,500'])
+    assert.ok(m.html.includes(s), s);
+  assert.doesNotMatch(m.html, /Old vote|New and updated/);
+  assert.match(m.html, />NOV<\/div>/);
   assert.match(m.html, /\{\{\{RESEND_UNSUBSCRIBE_URL\}\}\}/);
   assert.match(m.html, /\{\{\{contact\.prefs_token\|none\}\}\}/);
+  assert.equal(digestEmail({...g, meetings: [], events: [], alerts: [], votes: [], contracts: [], notices: [], jobs: []}, {now}), null);
   assert.ok(clip('a'.repeat(10)) === 'a'.repeat(10));
   assert.ok(clip('One. Two. ' + 'x '.repeat(200)).length <= 221);
 });

@@ -95,7 +95,7 @@ async function preview(id, {gov, source} = {}) {
         note = m ? `Nothing new for ${g.name} in the last 7 days, so no digest would go out this week. Shown with the last 60 days instead.`
                  : `Nothing new or upcoming for ${g.name}, so no digest would go out this week.`;
         if (!m) return {subject: '', html: '', text: '', note};
-      } else note = `This week’s live data: ${m.changes} update${m.changes === 1 ? '' : 's'}, ${m.meetings} meeting${m.meetings === 1 ? '' : 's'}.`;
+      } else note = `This week’s live data: ${Object.entries(m.counts).filter(([, v]) => v).map(([k, v]) => `${v} ${k}`).join(', ')}.`;
       break;
     }
     case 'rule_alert': {
