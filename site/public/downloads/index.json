@@ -12820,7 +12820,7 @@
       "2026-11-01T16:10:02.717089+00:00",
       "2026-11-01T17:40:02.358407+00:00",
       "2026-11-02T06:00:03.795048+00:00",
-      "2026-11-02T18:05:08.384Z"
+      "2026-11-02T21:50:06.056Z"
      ]
     },
     {
@@ -13829,7 +13829,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 77,
+   "rows": 78,
    "columns": [
     {
      "name": "place_id",
@@ -13976,6 +13976,7 @@
      "name": "pdf_url",
      "type": "string",
      "values": [
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/77byaPYZHrVOozDoHCeO/cfd2./cropped-068.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
@@ -14051,6 +14052,7 @@
      "name": "emails",
      "type": "string",
      "values": [
+      "alyssa.ward@pcbfl.gov; allison.marshall@pcbfl.gov",
       "buildingdepartment@pcbfl.gov",
       "cityclerk@panamacity.gov",
       "fulleln@bay.k12.fl.us",
@@ -14130,7 +14132,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 111,
+   "rows": 110,
    "columns": [
     {
      "name": "place_id",

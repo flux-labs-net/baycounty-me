@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-02T18:05:47.972Z",
+ "as_of": "2026-11-02T21:50:52.865Z",
  "boards": [
   {
    "key": "county",
@@ -9,7 +9,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 5
+   "count": 4
   },
   {
    "key": "schools",
@@ -115,20 +115,6 @@
    "closes": null,
    "ref": "JR100059",
    "url": "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site/job/Star-Ave---FIREEMS--Sta15/EMT_JR100059",
-   "first_seen": "2026-10-27"
-  },
-  {
-   "board": "county",
-   "gov_id": "county",
-   "employer": "Bay County",
-   "title": "Paramedic-8",
-   "department": "Thomas Dr-FIRE/EMS",
-   "job_type": "Full time",
-   "pay": null,
-   "posted": "2026-10-28",
-   "closes": null,
-   "ref": "JR100057",
-   "url": "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site/job/Thomas-Dr-FIREEMS/Paramedic-8_JR100057",
    "first_seen": "2026-10-27"
   },
   {
