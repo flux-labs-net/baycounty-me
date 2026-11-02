@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-01",
- "fetched": "2026-11-01T12:14:09-0500",
+ "as_of": "2026-11-02",
+ "fetched": "2026-11-02T13:03:54-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -52,23 +52,6 @@
  "errors": {},
  "events": [
   {
-   "event_id": "panama-city:6225:2026-11-02",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Monday Morning with the Manager",
-   "starts": "2026-11-02T08:30:00",
-   "ends": "2026-11-02T09:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6225",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
    "event_id": "panama-city:7424:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
@@ -100,7 +83,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7510",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "panama-city:7568:2026-11-02",
@@ -117,7 +100,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7568",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "panama-city:6939:2026-11-02",
@@ -304,6 +287,23 @@
    "cost": null,
    "url": "https://cityofparker.com/event/cancelled-election-day-agenda-regular-meeting-november-3-2026-530-pm/",
    "source_url": "https://cityofparker.com/events/",
+   "recurring": false
+  },
+  {
+   "event_id": "lynn-haven:1187:2026-11-03",
+   "source_id": "lynn-haven",
+   "source": "City of Lynn Haven",
+   "gov": "lh",
+   "town": "Lynn Haven",
+   "title": "Planning Commission Meeting",
+   "starts": "2026-11-03T17:30:00",
+   "ends": "2026-11-03T19:30:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1187",
+   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
    "recurring": false
   },
   {
@@ -626,6 +626,23 @@
    "category": "Community",
    "cost": null,
    "url": "https://pcbeach.org/local-event/boots-bling-fundraiser/",
+   "source_url": "https://pcbeach.org/local-events/",
+   "recurring": false
+  },
+  {
+   "event_id": "pcb-chamber:27807",
+   "source_id": "pcb-chamber",
+   "source": "Panama City Beach Chamber",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Public Eye SOAR",
+   "starts": "2026-11-06T18:00:00",
+   "ends": "2026-11-07T22:00:00",
+   "all_day": false,
+   "venue": "Gulf Coast State College",
+   "category": "Community",
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/public-eye-soar/",
    "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
   },
@@ -1733,6 +1750,74 @@
    "url": "https://pcbeach.org/local-event/stay-visible-in-ai-search-aeo-seo-geo-voice-optimization/",
    "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
+  },
+  {
+   "event_id": "panama-city:7434:2026-11-16",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Dream Builders at MLK",
+   "starts": "2026-11-16T15:00:00",
+   "ends": "2026-11-16T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7434",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7341:2026-11-16",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
+   "starts": "2026-11-16T16:00:00",
+   "ends": "2026-11-16T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7341",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7516:2026-11-16",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "VOICES - Veteran Outreach",
+   "starts": "2026-11-16T17:00:00",
+   "ends": "2026-11-16T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7516",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:6941:2026-11-16",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Zumba",
+   "starts": "2026-11-16T17:30:00",
+   "ends": "2026-11-16T18:30:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6941",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
   },
   {
    "event_id": "library:23219:2026-11-17",

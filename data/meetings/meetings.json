@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-01T11:08:52-06:00",
+  "generated": "2026-11-02T11:58:32-06:00",
   "window": {
-    "from": "2026-11-01",
-    "to": "2026-12-31"
+    "from": "2026-11-02",
+    "to": "2027-01-01"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -238,12 +238,12 @@
       "calendar_url": null,
       "schedule_source_url": "https://mexicobeachfl.gov/government/council-meetings/",
       "sources": {
-        "Council Meetings page": "ok (82 records)"
+        "Council Meetings page": "ok (86 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 5,
         "calendar": 0,
-        "expected": 4
+        "expected": 2
       }
     }
   ],
@@ -611,6 +611,7 @@
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted",
+      "detail_url": "https://youtube.com/live/dX-G839lG70?feature=share",
       "past": true
     },
     {
@@ -755,15 +756,14 @@
     },
     {
       "board": "mb",
-      "title": "Regular Meeting (expected)",
+      "title": "City Council Meeting",
       "start": "2026-11-10T09:00:00-06:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "agenda_url": null,
       "packet_url": null,
       "minutes_url": null,
-      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
-      "status": "expected",
-      "expected": true
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "schools",
@@ -824,6 +824,17 @@
       "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1685"
+    },
+    {
+      "board": "mb",
+      "title": "City Council Meeting",
+      "start": "2026-11-17T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "parker",
@@ -960,15 +971,14 @@
     },
     {
       "board": "mb",
-      "title": "Regular Meeting (expected)",
+      "title": "City Council Meeting",
       "start": "2026-12-08T09:00:00-06:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "agenda_url": null,
       "packet_url": null,
       "minutes_url": null,
-      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
-      "status": "expected",
-      "expected": true
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "pcb",
@@ -1005,6 +1015,17 @@
       "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1686"
+    },
+    {
+      "board": "mb",
+      "title": "City Council Meeting",
+      "start": "2026-12-15T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "parker",

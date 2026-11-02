@@ -1,7 +1,7 @@
 {
- "fetched_at": "2026-11-01T17:15:07+00:00",
- "issued": "2026-11-01T16:13:00+00:00",
- "product_url": "https://api.weather.gov/products/1485fdaf-5c8f-4411-b083-e7c1186c7a92",
+ "fetched_at": "2026-11-02T18:05:06+00:00",
+ "issued": "2026-11-02T16:22:00+00:00",
+ "product_url": "https://api.weather.gov/products/1960a21b-5857-48bd-b397-04974b5f772e",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
@@ -11,31 +11,31 @@
   {
    "period": "Rest Of Today",
    "rip_current_risk": "Moderate",
-   "surf_height": "Around 3 feet",
-   "uv_index": "Low",
-   "water_temperature": "75 degrees",
-   "weather": "Mostly cloudy. Showers likely and a",
-   "high_temperature": "In the upper 70s",
-   "winds": "Breezy. East winds 20 to 25 mph",
-   "sunrise": "6:56 AM",
-   "sunset": "5:57 PM",
-   "summary": null
-  },
-  {
-   "period": "Monday",
-   "rip_current_risk": "Moderate",
    "surf_height": "Around 2 feet",
-   "uv_index": null,
-   "water_temperature": null,
+   "uv_index": "Moderate",
+   "water_temperature": "74 degrees",
    "weather": "Mostly sunny",
    "high_temperature": "Around 80",
-   "winds": "East winds around 20 mph",
+   "winds": "East winds 15 to 20 mph",
    "sunrise": "6:57 AM",
    "sunset": "5:56 PM",
    "summary": null
   },
   {
    "period": "Tuesday",
+   "rip_current_risk": "Moderate",
+   "surf_height": "Around 3 feet",
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": "Mostly sunny",
+   "high_temperature": "Around 80",
+   "winds": "East winds around 20 mph",
+   "sunrise": "6:57 AM",
+   "sunset": "5:55 PM",
+   "summary": null
+  },
+  {
+   "period": "Wednesday",
    "rip_current_risk": "Moderate",
    "surf_height": "around 2 feet",
    "uv_index": null,
@@ -45,20 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 2 feet. Mostly sunny. Highs in the upper 70s. East winds around 20 mph."
-  },
-  {
-   "period": "Wednesday",
-   "rip_current_risk": "Moderate",
-   "surf_height": null,
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Partly sunny. A chance of showers and thunderstorms. Highs in the upper 70s. Southeast winds around 15 mph."
+   "summary": "Moderate rip current risk*. Surf height around 2 feet. Partly sunny. Showers likely and a slight chance of thunderstorms. Highs in the upper 70s. Southeast winds around 15 mph."
   },
   {
    "period": "Thursday",
@@ -71,7 +58,20 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Mostly sunny. A slight chance of showers and thunderstorms. Highs in the upper 70s. West winds around 10 mph."
+   "summary": "Moderate rip current risk*. Sunny. Highs in the upper 70s. West winds around 10 mph."
+  },
+  {
+   "period": "Friday",
+   "rip_current_risk": "Moderate",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the mid 70s. Northwest winds around 10 mph."
   }
  ],
  "alerts": [],

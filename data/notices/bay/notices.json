@@ -1,8 +1,23 @@
 {
- "as_of": "2026-11-01T17:15:37.555Z",
+ "as_of": "2026-11-02T18:05:47.732Z",
  "source_url": "https://publicnoticesbaycountyfl.gov/",
  "about": "Government notices from the county public notice website; court, tax deed and private notices left out.",
  "notices": [
+  {
+   "notice_id": "pn:e50a4c70306c",
+   "published": "2026-11-02",
+   "gov_id": null,
+   "agency": "Panama City Port Authority",
+   "kind": "meeting",
+   "kind_label": "Public meeting",
+   "title": "Notice of Public Meeting The annual Intermodal Distribution Center Owners\u2019 Association meeting\u2026",
+   "event_date": "2026-11-09",
+   "notice_type": "Public Notice (Other)",
+   "text": "Notice of Public Meeting The annual Intermodal Distribution Center Owners\u2019 Association meeting will be held Monday, November 9th, 2026 at 8:00am. This meeting can be attended in-person at the Panama City Port Authority\u2019s Board room, address: One Seaport Drive, Panama City, Florida 32401 or via Microsoft Teams Meeting ID: 280 715 650 419 289 0, Passcode: w9nW6X4v. For questions or assistance please contact Sarah Moneyham of the Port Authority at 850-767-3220 or email at SMoneyham@portpcfl.com.",
+   "pdf_url": null,
+   "publication": "Bay County Publications",
+   "source_url": "https://publicnoticesbaycountyfl.gov/"
+  },
   {
    "notice_id": "pn:97ca07f0ad27",
    "published": "2026-10-30",

@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-01",
+ "updated": "2026-11-02",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -6456,7 +6456,7 @@
    "id": "business-officers",
    "title": "Business officers",
    "description": "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.",
-   "rows": 13553,
+   "rows": 13557,
    "columns": [
     {
      "name": "place_id",
@@ -7548,7 +7548,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 421,
+   "rows": 422,
    "columns": [
     {
      "name": "website",
@@ -8699,7 +8699,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 56,
+   "rows": 57,
    "columns": [
     {
      "name": "place_id",
@@ -8909,7 +8909,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 185,
+   "rows": 190,
    "columns": [
     {
      "name": "place_id",
@@ -9081,6 +9081,7 @@
      "type": "string",
      "values": [
       "destination-pc:17846:2026-12-12",
+      "destination-pc:19153:2026-11-06",
       "panama-city:7568:2026-11-02"
      ]
     },
@@ -9089,6 +9090,7 @@
      "type": "string",
      "values": [
       "2026-11-02T17:00:00",
+      "2026-11-06T18:00:00",
       "2026-12-12T17:00:00"
      ]
     },
@@ -9633,14 +9635,14 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-01T16:13:00+00:00"
+      "2026-11-02T16:22:00+00:00"
      ]
     },
     {
      "name": "period",
      "type": "string",
      "values": [
-      "Monday",
+      "Friday",
       "Rest Of Today",
       "Thursday",
       "Tuesday",
@@ -9689,21 +9691,20 @@
      "name": "uv_index",
      "type": "string",
      "values": [
-      "Low"
+      "Moderate"
      ]
     },
     {
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "75 degrees"
+      "74 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy. Showers likely and a",
       "Mostly sunny"
      ]
     },
@@ -9711,15 +9712,14 @@
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "Around 80",
-      "In the upper 70s"
+      "Around 80"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "Breezy. East winds 20 to 25 mph",
+      "East winds 15 to 20 mph",
       "East winds around 20 mph"
      ]
     },
@@ -9727,7 +9727,6 @@
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:56 AM",
       "6:57 AM"
      ]
     },
@@ -9735,8 +9734,8 @@
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:56 PM",
-      "5:57 PM"
+      "5:55 PM",
+      "5:56 PM"
      ]
     },
     {
@@ -9747,9 +9746,9 @@
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly sunny. A slight chance of showers and thunderstorms. Highs in the upper 70s. West winds around 10 mph.",
-      "Moderate rip current risk*. Partly sunny. A chance of showers and thunderstorms. Highs in the upper 70s. Southeast winds around 15 mph.",
-      "Moderate rip current risk*. Surf height around 2 feet. Mostly sunny. Highs in the upper 70s. East winds around 20 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the mid 70s. Northwest winds around 10 mph.",
+      "Moderate rip current risk*. Sunny. Highs in the upper 70s. West winds around 10 mph.",
+      "Moderate rip current risk*. Surf height around 2 feet. Partly sunny. Showers likely and a slight chance of thunderstorms. Highs in the upper 70s. Southeast winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
@@ -9773,7 +9772,7 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://api.weather.gov/products/1485fdaf-5c8f-4411-b083-e7c1186c7a92",
+      "https://api.weather.gov/products/1960a21b-5857-48bd-b397-04974b5f772e",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
@@ -12440,7 +12439,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-01"
+      "2026-11-02"
      ]
     },
     {
@@ -12819,7 +12818,9 @@
       "2026-11-01T15:25:03.999301+00:00",
       "2026-11-01T15:40:02.651274+00:00",
       "2026-11-01T16:10:02.717089+00:00",
-      "2026-11-01T17:15:08.849Z"
+      "2026-11-01T17:40:02.358407+00:00",
+      "2026-11-02T06:00:03.795048+00:00",
+      "2026-11-02T18:05:08.384Z"
      ]
     },
     {
@@ -13557,7 +13558,7 @@
    "id": "election-dates",
    "title": "Election dates",
    "description": "Key dates for Bay County elections: registration deadlines, early voting, vote-by-mail request and return deadlines and election days (kept by hand from the Supervisor of Elections' voter guide), plus the upcoming events on the Supervisor of Elections' calendar (canvassing board meetings, tests of the voting equipment), read daily. kind says which; starts_at is the start time when one is given.",
-   "rows": 18,
+   "rows": 15,
    "columns": [
     {
      "name": "place_id",
@@ -13577,12 +13578,9 @@
       "2026-10-05",
       "2026-10-19",
       "2026-10-22",
-      "2026-10-29",
-      "2026-10-31",
-      "2026-11-01",
       "2026-11-03",
       "2026-11-05",
-      "2026-11-07",
+      "2026-11-08",
       "2026-11-13"
      ]
     },
@@ -13597,13 +13595,11 @@
      "name": "starts_at",
      "type": "string",
      "values": [
-      "2026-10-29T08:30",
-      "2026-11-01T13:00",
       "2026-11-03T07:00",
       "2026-11-03T15:00",
       "2026-11-03T18:30",
       "2026-11-05T17:01",
-      "2026-11-07T00:00",
+      "2026-11-08T09:00",
       "2026-11-13T17:01"
      ]
     },
@@ -13646,13 +13642,10 @@
      "values": [
       "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
       "https://www.bayvotesfl.gov/elections/upcoming-elections/",
-      "https://www.bayvotesfl.gov/events/canvass-of-vote-by-mail-ballots-2/",
       "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-ballots/",
       "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-report-preliminary-results/",
       "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
       "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
-      "https://www.bayvotesfl.gov/events/canvassing-board-meeting/",
-      "https://www.bayvotesfl.gov/events/early-voting-general-election-2/",
       "https://www.bayvotesfl.gov/events/general-election/",
       "https://www.bayvotesfl.gov/events/recount-if-required/",
       "https://www.bayvotesfl.gov/voters/vote-early/"
@@ -13836,7 +13829,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 76,
+   "rows": 77,
    "columns": [
     {
      "name": "place_id",
@@ -13876,7 +13869,8 @@
       "2026-10-27",
       "2026-10-28",
       "2026-10-29",
-      "2026-10-30"
+      "2026-10-30",
+      "2026-11-02"
      ]
     },
     {
@@ -14015,7 +14009,8 @@
      "values": [
       "pn:592cfc86f14e",
       "pn:9c26a1d21bf3",
-      "pn:e13e7f99f672"
+      "pn:e13e7f99f672",
+      "pn:e50a4c70306c"
      ]
     },
     {
@@ -14023,7 +14018,8 @@
      "type": "string",
      "values": [
       "2026-10-08",
-      "2026-10-19"
+      "2026-10-19",
+      "2026-10-23"
      ]
     },
     {
@@ -14242,23 +14238,23 @@
       "2026-09-28",
       "2026-09-29",
       "2026-09-30",
-      "2026-10-02",
+      "2026-10-03",
       "2026-10-06",
       "2026-10-07",
       "2026-10-08",
       "2026-10-13",
       "2026-10-15",
       "2026-10-16",
-      "2026-10-18",
+      "2026-10-19",
       "2026-10-20",
       "2026-10-22",
       "2026-10-23",
-      "2026-10-25",
       "2026-10-26",
       "2026-10-27",
       "2026-10-28",
       "2026-10-29",
-      "2026-10-30"
+      "2026-10-30",
+      "2026-11-01"
      ]
     },
     {
@@ -14383,7 +14379,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-01"
+      "2026-11-02"
      ]
     }
    ],
@@ -15246,7 +15242,7 @@
    "id": "restaurants",
    "title": "Restaurants and food service",
    "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1438,
+   "rows": 1439,
    "columns": [
     {
      "name": "place_id",
@@ -15761,7 +15757,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 3,
+   "rows": 176,
    "columns": [
     {
      "name": "place_id",
@@ -15774,14 +15770,17 @@
      "name": "week_of",
      "type": "string",
      "values": [
-      "2026-10-26"
+      "2026-11-02"
      ]
     },
     {
      "name": "section",
      "type": "string",
      "values": [
-      "contract"
+      "contract",
+      "event",
+      "meeting",
+      "vote"
      ]
     },
     {
@@ -15792,6 +15791,7 @@
      "name": "featured",
      "type": "boolean",
      "values": [
+      false,
       true
      ]
     },
@@ -15811,8 +15811,24 @@
      "name": "date",
      "type": "string",
      "values": [
-      "2026-10-20",
-      "2026-10-22"
+      "2026-08-27",
+      "2026-09-08",
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-24",
+      "2026-10-05",
+      "2026-10-13",
+      "2026-10-27",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05",
+      "2026-11-06",
+      "2026-11-07"
      ]
     },
     {
@@ -15821,18 +15837,60 @@
     },
     {
      "name": "ends",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-02T17:00:00",
+      "2026-11-02T18:30:00",
+      "2026-11-02T19:00:00",
+      "2026-11-03T10:30:00",
+      "2026-11-03T11:00:00",
+      "2026-11-03T15:00:00",
+      "2026-11-03T15:30:00",
+      "2026-11-03T17:00:00",
+      "2026-11-03T20:00:00",
+      "2026-11-04T11:30:00",
+      "2026-11-04T17:00:00",
+      "2026-11-04T21:00:00",
+      "2026-11-05T10:30:00",
+      "2026-11-05T11:00:00",
+      "2026-11-05T13:00:00",
+      "2026-11-05T14:00:00",
+      "2026-11-05T17:00:00",
+      "2026-11-05T19:00:00",
+      "2026-11-05T22:00:00",
+      "2026-11-06T12:00:00",
+      "2026-11-06T14:00:00",
+      "2026-11-06T17:00:00",
+      "2026-11-06T21:00:00",
+      "2026-11-07T10:00:00",
+      "2026-11-07T12:00:00",
+      "2026-11-07T13:00:00",
+      "2026-11-07T16:00:00",
+      "2026-11-07T22:00:00",
+      "2026-11-07T23:59:59"
+     ]
     },
     {
      "name": "all_day",
-     "type": "string"
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
     },
     {
      "name": "gov_id",
      "type": "string",
      "values": [
       "county",
-      "pcb"
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
      ]
     },
     {
@@ -15840,32 +15898,99 @@
      "type": "string",
      "values": [
       "Bay County",
-      "Panama City Beach"
+      "Bay District Schools",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
      ]
     },
     {
      "name": "board",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City City Commission",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency (CRA) Board",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
     },
     {
      "name": "town",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Panama City",
+      "Panama City Beach"
+     ]
     },
     {
      "name": "venue",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "825 Ohio Avenue, Lynn Haven",
+      "Bay County Public Library",
+      "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "Gulf Coast State College",
+      "Historic Downtown Panama City",
+      "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
+      "Panama City Beach Public Library",
+      "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "Pier Park",
+      "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "The Barn at The Wicked Wheel",
+      "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "Virtual (live stream on the city website)"
+     ]
     },
     {
      "name": "category",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Community",
+      "Library",
+      "appointment",
+      "budget",
+      "consent agenda",
+      "contract",
+      "debt",
+      "fees",
+      "grant",
+      "land use",
+      "millage",
+      "ordinance",
+      "other",
+      "personnel",
+      "policy",
+      "procedural",
+      "property"
+     ]
     },
     {
      "name": "recurring",
-     "type": "string"
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
     },
     {
      "name": "agenda_posted",
-     "type": "string"
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
     },
     {
      "name": "amount",
@@ -15877,39 +16002,87 @@
     },
     {
      "name": "method",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Competitive sealed bid (invitation to bid)",
+      "Cooperative purchasing contract (Sourcewell 032824)",
+      "Task order / work authorization under existing continuing-services contract"
+     ]
     },
     {
      "name": "outcome",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "failed",
+      "passed",
+      "tabled",
+      "unclear"
+     ]
     },
     {
      "name": "tally",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2-2",
+      "3-1",
+      "3-2",
+      "4-0",
+      "4-1",
+      "5-0"
+     ]
     },
     {
      "name": "split",
-     "type": "string"
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
     },
     {
      "name": "voted_no",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Dave Lowery; Jamie Warrick",
+      "Dave Lowery; Judy Tinder",
+      "Jamie Warrick",
+      "Judy Tinder",
+      "Mary Coburn",
+      "Pat Perno",
+      "Pat Perno; Sam Peebles",
+      "Tonya Barrow"
+     ]
     },
     {
      "name": "people",
-     "type": "string"
+     "type": "array"
     },
     {
      "name": "vendor",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Lagniappe Contracting and Paving",
+      "Panhandle Engineering",
+      "Truckworx (Kenworth)"
+     ]
     },
     {
      "name": "vendor_entity_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "vendor:lagniappe-contracting-paving",
+      "vendor:panhandle-engineering",
+      "vendor:truckworx"
+     ]
     },
     {
      "name": "vendor_url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://baycounty.me/profile/vendor/lagniappe-contracting-paving",
+      "https://baycounty.me/profile/vendor/truckworx",
+      "https://baycounty.me/public-money/vendors/panhandle-engineering"
+     ]
     },
     {
      "name": "url",
@@ -15919,27 +16092,32 @@
      "name": "page_url",
      "type": "string",
      "values": [
-      "https://baycounty.me/public-money/contracts"
+      "https://baycounty.me/events",
+      "https://baycounty.me/meetings",
+      "https://baycounty.me/public-money/contracts",
+      "https://baycounty.me/public-money/votes"
      ]
     },
     {
      "name": "source",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "City of Panama City",
+      "Destination Panama City",
+      "Northwest Regional Library System",
+      "Panama City Beach Chamber"
+     ]
     },
     {
      "name": "source_url",
-     "type": "string",
-     "values": [
-      "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=5259",
-      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219"
-     ]
+     "type": "string"
     },
     {
      "name": "first_seen",
      "type": "string",
      "values": [
-      "2026-10-20",
-      "2026-10-22"
+      "2026-10-28",
+      "2026-10-31"
      ]
     }
    ],
@@ -17486,7 +17664,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-01"
+      "2026-11-02"
      ]
     },
     {
@@ -19778,7 +19956,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 48,
+   "rows": 50,
    "columns": [
     {
      "name": "board",
@@ -19815,6 +19993,7 @@
       "City Commission Meeting",
       "City Commission Meeting of October 27, 2026.",
       "City Council",
+      "City Council Meeting",
       "Commission Meeting",
       "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
@@ -19985,7 +20164,8 @@
       "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
-      "https://www.springfieldfl.net/community/meeting/commission-workshop-55"
+      "https://www.springfieldfl.net/community/meeting/commission-workshop-55",
+      "https://youtube.com/live/dX-G839lG70?feature=share"
      ]
     },
     {
