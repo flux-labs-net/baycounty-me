@@ -47,3 +47,43 @@ test('the Monday run checks the edition is this week’s, in Bay County time', (
   assert.equal(thisMonday(Date.parse('2026-11-02T03:00:00Z')), '2026-10-26'); // still Sunday night in Panama City
   assert.equal(thisMonday(Date.parse('2026-11-02T13:20:00Z')), '2026-11-02');
 });
+
+// The Monday route with fetch stubbed: Resend's broadcast list, the site's weekly.json and GitHub's dispatch.
+async function runWeekly(query, {weekOf, broadcasts = []} = {}) {
+  const calls = [], realFetch = global.fetch, env = {...process.env};
+  Object.assign(process.env, {CRON_SECRET: 's', RESEND_FULL_KEY: 'k', GITHUB_DISPATCH_TOKEN: 't', WEEKLY_AUTOSEND: '1'});
+  global.fetch = async (url, opt = {}) => {
+    calls.push(`${opt.method || 'GET'} ${url}`);
+    const json = b => ({ok: true, status: 200, json: async () => b, text: async () => JSON.stringify(b)});
+    if (url.includes('/data/weekly.json')) return json({week_of: weekOf, rows: ed.rows});
+    if (url.includes('/broadcasts?')) return json({data: broadcasts});
+    if (url.includes('api.github.com')) return {ok: true, status: 204, text: async () => ''};
+    if (url.includes('/contact-properties')) return json({data: [{key: 'prefs_token'}]});
+    return json({id: 'b1'});
+  };
+  const res = {code: 0, body: null, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; }};
+  try { await require('../weekly')({headers: {authorization: 'Bearer s'}, query}, res); } finally { global.fetch = realFetch; process.env = env; }
+  return {res, calls};
+}
+
+test('the Monday run: a stale list waits and restarts the refresh until the last try', async () => {
+  const monday = thisMonday();
+  const early = await runWeekly({try: '1'}, {weekOf: '2000-01-03'});
+  assert.equal(early.res.code, 202);
+  assert.ok(early.calls.some(c => c.includes('flux-labs-net/baycounty-me/actions/workflows/refresh-meetings.yml/dispatches')));
+  assert.ok(!early.calls.some(c => c.startsWith('POST https://api.resend.com/emails')), 'no failure email before the last try');
+  const last = await runWeekly({try: '3'}, {weekOf: '2000-01-03'});
+  assert.equal(last.res.code, 409);
+  assert.ok(last.calls.some(c => c.startsWith('POST https://api.resend.com/emails')), 'the last try tells the reviewer');
+  const ok = await runWeekly({try: '2'}, {weekOf: monday});
+  assert.equal(ok.res.code, 200);
+  assert.ok(ok.calls.some(c => c === 'POST https://api.resend.com/broadcasts'));
+});
+
+test('the Monday run sends the week once', async () => {
+  const monday = thisMonday();
+  const again = await runWeekly({try: '2'}, {weekOf: monday, broadcasts: [{id: 'b0', name: `This week in Bay County: 2 events (${monday})`, status: 'sent'}]});
+  assert.equal(again.res.code, 200);
+  assert.match(again.res.body.skipped, /already made/);
+  assert.ok(!again.calls.some(c => c === 'POST https://api.resend.com/broadcasts'));
+});

@@ -4,6 +4,9 @@
 name: Refresh meetings
 on:
   schedule:
+    # Backup only. GitHub starts scheduled runs hours late (5-6 h in late Oct 2026, after the Monday emails at 13:00 UTC),
+    # so the on-time start is a Vercel cron (api/refresh-kick.js, 11:10 UTC) that dispatches this workflow. The gate job
+    # skips this scheduled run when that dispatched run already ran in the last 10 hours.
     - cron: '17 11 * * *'   # 11:17 UTC: 6:17 a.m. CDT, 5:17 a.m. CST (GitHub cron is always UTC)
   workflow_dispatch: {}
 permissions:
@@ -15,7 +18,26 @@ concurrency:
   group: main-writer
   cancel-in-progress: false
 jobs:
+  gate:
+    # Scheduled runs only: skip when this morning's refresh was already started on time from Vercel (or by hand).
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    outputs:
+      skip: ${{ steps.check.outputs.skip }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" != "schedule" ]; then echo "skip=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          n=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow refresh-meetings.yml --event workflow_dispatch --limit 20 \
+                --json createdAt,status,conclusion \
+                --jq '[.[] | select((now - (.createdAt | fromdateiso8601)) < 36000 and (.status != "completed" or .conclusion == "success"))] | length')
+          if [ "${n:-0}" -gt 0 ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; echo "This morning's refresh already ran ($n dispatched run(s) in the last 10 hours)."; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
   refresh:
+    needs: gate
+    if: needs.gate.outputs.skip != 'true'
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 30
     steps:
