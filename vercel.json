@@ -36,12 +36,24 @@
   },
   "crons": [
     {
+      "path": "/api/refresh-kick",
+      "schedule": "10 11 * * *"
+    },
+    {
       "path": "/api/digest",
       "schedule": "0 13 * * 1"
     },
     {
-      "path": "/api/weekly",
+      "path": "/api/weekly?try=1",
       "schedule": "20 13 * * 1"
+    },
+    {
+      "path": "/api/weekly?try=2",
+      "schedule": "20 15 * * 1"
+    },
+    {
+      "path": "/api/weekly?try=3",
+      "schedule": "20 18 * * 1"
     },
     {
       "path": "/api/alerts-run",

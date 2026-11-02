@@ -54,12 +54,12 @@ function problemsEmail(r) {
   const text = `The daily BayCounty.me ingestion check found ${n} problem${s}:\n\n` +
     r.problems.map(p => `- ${p.level === 'error' ? '' : '(warning) '}${p.text}`).join('\n') +
     `\n\nLast successful database sync: ${r.last_sync ? new Date(r.last_sync).toLocaleString('en-US', {timeZone: 'America/Chicago'}) + ' Central' : 'never'}.\n` +
-    `\nDetails: ${SITE}/admin#ingestion\nWorkflow runs: https://github.com/jeremymcs/baycounty-me/actions\n`;
+    `\nDetails: ${SITE}/admin#ingestion\nWorkflow runs: https://github.com/flux-labs-net/baycounty-me/actions\n`;
   return ui.adminNotice({subject: `BayCounty.me ingestion check: ${n} problem${s}`, text, kicker: 'Data health',
     tone: errors.length ? 'salmon' : 'amber', icon: 'alert', eyebrow: 'Daily ingestion check', title: `${n} problem${s} need${s ? '' : 's'} a look`,
     preheader: (r.problems[0] || {}).text || '',
     body: ui.list(r.problems.map(p => p.level === 'error' ? ['salmon', 'Error', esc(p.text)] : ['amber', 'Warning', esc(p.text)])) +
-      ui.facts([['Last good sync', r.last_sync ? central(r.last_sync) : 'Never'], ['Workflow runs', ui.a('https://github.com/jeremymcs/baycounty-me/actions', 'GitHub Actions')]]) +
+      ui.facts([['Last good sync', r.last_sync ? central(r.last_sync) : 'Never'], ['Workflow runs', ui.a('https://github.com/flux-labs-net/baycounty-me/actions', 'GitHub Actions')]]) +
       ui.button(`${SITE}/admin#ingestion`, 'Open data health') + ui.small('When a fetch fails, the site keeps the previous data. Nothing is deleted.')});
 }
 

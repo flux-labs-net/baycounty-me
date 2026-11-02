@@ -4,11 +4,15 @@
 //   GET /api/weekly with Authorization: Bearer CRON_SECRET          the Monday run
 //   ...?test=1                                                      sends one copy to the reviewer only (no draft)
 //   ...?home=1                                                      "Your home this week" for residents with an account
-// The edition must be this week's (week_of = this Monday); a stale build stops the run and tells the reviewer.
+// The edition must be this week's (week_of = this Monday). Three Monday runs (?try=1, 2, 3): while the list is stale an
+// early run starts the morning refresh again and waits for the next one; only the last run tells the reviewer it failed.
+// Each run first checks Resend for this week's broadcast, so the week goes out once however often the route runs.
+//   ...?try=3                                                       the last try (a stale list emails the reviewer)
 const {WEEKLY, FROM, resend, ensurePrefsProperty, prefsUrl} = require('./_alerts');
 const {weeklyEmail} = require('./_emails');
 const {SITE_URL} = require('./_data');
 const ui = require('./_email_ui');
+const LAST_TRY = 3;
 
 // Monday of this week, in Bay County time, as YYYY-MM-DD.
 function thisMonday(now = Date.now()) {
@@ -20,10 +24,10 @@ function thisMonday(now = Date.now()) {
 function reviewEmail(kind, {why, id, subject, counts} = {}) {
   const esc = ui.esc;
   if (kind === 'failed') return ui.adminNotice({subject: 'BayCounty.me: This week in Bay County FAILED', kicker: 'Weekly email', tone: 'salmon', icon: 'alert',
-    text: `The weekly email did not go out: ${why}.\n\nNothing was sent to subscribers. Check the latest deploy, then re-run /api/weekly with the CRON_SECRET.`,
+    text: `The weekly email did not go out: ${why}.\n\nNothing was sent to subscribers. Check the latest deploy, then run the /api/weekly cron again from Vercel (Settings > Cron Jobs > Run).`,
     eyebrow: 'Weekly email', title: 'The weekly email didn’t run', preheader: why,
     body: ui.p(`This week in Bay County didn’t go out: ${esc(why)}. Nothing was sent to subscribers.`) +
-      ui.p('Check the latest deploy, then re-run /api/weekly with the CRON_SECRET.', {size: 14, lh: 21})});
+      ui.p('Check the latest deploy, then run the /api/weekly cron again from Vercel (Settings &gt; Cron Jobs &gt; Run).', {size: 14, lh: 21})});
   const c = counts || {};
   return ui.adminNotice({subject: `BayCounty.me: This week in Bay County ready to review`, kicker: 'Review queue', tone: 'amber', icon: 'check',
     text: `This week's email was saved as a draft in Resend (Broadcasts): "${subject}". Review and send it there:\n\nhttps://resend.com/broadcasts${id ? '/' + id : ''}`,
@@ -44,6 +48,14 @@ async function loadEdition() {
   } catch (e) { throw e.name === 'AbortError' ? new Error('weekly.json timed out after 15 seconds') : e; } finally { clearTimeout(timer); }
 }
 
+// This week's broadcast, if a run already made it (sent or draft). Broadcasts are named "<subject> (<monday>)".
+async function alreadyMade(monday, key) {
+  const r = await resend('/broadcasts?limit=100', 'GET', null, key);
+  if (!r.ok) throw new Error(`Resend broadcasts list: HTTP ${r.status}`);
+  return ((r.body && r.body.data) || []).find(b => b && String(b.name || '').endsWith(`(${monday})`) &&
+    (b.segment_id || b.audience_id || WEEKLY[1]) === WEEKLY[1]) || null;
+}
+
 module.exports = async (req, res) => {
   if ((req.headers.authorization || '') !== `Bearer ${process.env.CRON_SECRET}` || !process.env.CRON_SECRET) return res.status(401).json({ok: false});
   const key = process.env.RESEND_FULL_KEY;
@@ -56,6 +68,7 @@ module.exports = async (req, res) => {
     try { return res.status(200).json({ok: true, home: await require('./_account').weeklyRun(req, {only: test ? reviewer : null})}); }
     catch (e) { console.error('weekly home:', e.message); return res.status(500).json({ok: false, error: e.message}); }
   }
+  const attempt = Math.min(LAST_TRY, Math.max(1, parseInt(req.query && req.query.try, 10) || LAST_TRY));
   const fail = async (code, why) => {
     console.error('weekly:', why);
     if (!test) await resend('/emails', 'POST', {from: FROM, to: [reviewer], ...reviewEmail('failed', {why})}, key).catch(() => {});
@@ -64,7 +77,19 @@ module.exports = async (req, res) => {
   let ed;
   try { ed = await loadEdition(); } catch (e) { return fail(502, e.message); }
   const monday = thisMonday();
-  if (ed.week_of !== monday && !test) return fail(409, `the site's weekly list is for the week of ${ed.week_of}, not ${monday} (the morning rebuild may not have deployed)`);
+  if (!test) {
+    let made;
+    try { made = await alreadyMade(monday, key); } catch (e) { return attempt < LAST_TRY ? res.status(503).json({ok: false, waiting: e.message}) : fail(502, e.message); }
+    if (made) return res.status(200).json({ok: true, skipped: `already made this week (${made.status || 'draft'})`, id: made.id});
+  }
+  if (ed.week_of !== monday && !test) {
+    const why = `the site's weekly list is for the week of ${ed.week_of}, not ${monday} (the morning rebuild may not have deployed)`;
+    if (attempt >= LAST_TRY) return fail(409, why);
+    let kicked = null;  // start the refresh again; the next try reads the new list
+    try { await require('./_github').dispatch('refresh-meetings.yml'); kicked = 'refresh-meetings.yml'; } catch (e) { kicked = `could not start the refresh: ${e.message}`; }
+    console.warn('weekly: try', attempt, why, kicked);
+    return res.status(202).json({ok: false, waiting: why, try: attempt, refresh: kicked});
+  }
   const m = weeklyEmail(ed);
   if (!m) return res.status(200).json({ok: true, skipped: 'nothing this week'});
   if (test) { // one copy to the reviewer, with their own manage link in place of the broadcast placeholders
