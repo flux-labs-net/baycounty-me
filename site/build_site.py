@@ -28,6 +28,7 @@ from growth_pages import development_page, roads_page
 from schools_page import schools_page
 from emergency_page import emergency_page
 from hurricane_prep_page import hurricane_prep_page
+from ironman_page import ironman_page
 from elections_hub_page import results_page as election_results_page, voting_page
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
@@ -823,6 +824,8 @@ PAGES = [
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/events', 'Events in Bay County',
      "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
+    ('/events/ironman-florida', 'IRONMAN Florida race week: road closures and where to watch',
+     'IRONMAN Florida in Panama City Beach, Saturday, November 7, 2026: a live map of every road closure, hour by hour through race week, the race schedule, the swim, bike and run course, where to watch and how to get around.', ironman_page),
     ('/this-week', 'This week in Bay County',
      "What's happening in Bay County this week, the public meetings on the calendar, and the votes and contracts added last week. The same list goes out by email every Monday.", lambda: this_week_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',

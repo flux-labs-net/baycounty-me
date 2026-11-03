@@ -14,6 +14,7 @@ import json
 from entity_links import gov as gov_link
 from ui import ico
 import longtext
+from special_events import banner as special_banner
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 KIND = {'evacuation': ('Evacuation order', 'flag', 'salmon'), 'weather': ('Weather', 'storm', 'blue'), 'shelter': ('Shelter open', 'home', 'teal'),
@@ -459,6 +460,7 @@ def emergency_page(out_dir):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Take part · Stay safe</span><h1>Emergencies and alerts</h1>
     <p class="lede">What is happening now in Bay County: weather warnings, evacuation orders, open shelters, boil-water notices and road closures, gathered from the National Weather Service, FEMA's emergency alert system, the county and the cities every few minutes. Look up your evacuation zone, find every shelter and get alerts on your phone.</p></div>
     <div class="stamp"><a class="pill" href="#zone">Find my zone →</a><a class="pill" href="/hurricane-prep">Hurricane prep →</a><span>In an emergency, call 911. Follow instructions from emergency officials.</span></div></header>
+  {special_banner()}
 
   <div class="em-status" id="emStatus" data-sev="{"extreme" if cnt("evacuation") else "moderate" if active else "info"}" aria-live="polite">{ico("bell", "salmon")}
     <div><h2 id="emHead">{e(headline)}</h2><p id="emSub">From the last daily check. Live updates load in a moment.</p></div></div>
