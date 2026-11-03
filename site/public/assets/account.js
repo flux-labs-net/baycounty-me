@@ -201,12 +201,35 @@ function renderAlerts(p, c) {
   $('alertAreas').innerHTML = Object.entries(A).map(([k, v]) => `<label><input type="checkbox" value="${esc(k)}"${areas.includes(k) ? ' checked' : ''}>${esc(v)}</label>`).join('');
   $('areaNote').textContent = ME.home ? `Your home's city and evacuation zone always count${ME.home.zone ? ` (Zone ${ME.home.zone})` : ''}. Add any other areas you care about, like where family lives or where you work.`
     : 'Pick the parts of the county you want notices for. Save a home to get evacuation orders for your zone only.';
-  const push = p.push_topics || [], mail = p.alert_email || [];
+  const push = p.push_topics || [], mail = p.alert_email || [], txt = p.alert_sms || [];
+  // Texts: the column shows once texting is set up (or the person already has a number); boxes work once the number is confirmed.
+  const sms = ME.sms, texting = !!(c.sms_ready || sms), live = !!(sms && sms.status === 'active');
+  document.querySelectorAll('.mh-tx').forEach(el => { el.hidden = !texting; });
+  const box = (ch, t, on, label, off) => t.channels.includes(ch) ? `<input type="checkbox" data-ch="${ch}" value="${esc(t.key)}" aria-label="${esc(t.label)} ${label}"${on ? ' checked' : ''}${off ? ' disabled title="Add your mobile number below first"' : ''}>` : '';
   $('alertTypes').innerHTML = (c.alert_types || []).map(t => `<tr><td>${esc(t.label)}${t.urgency === 'urgent' ? '<span class="urg">Urgent</span>' : ''}<small>${esc(t.detail)}</small></td>
-    <td>${t.channels.includes('push') ? `<input type="checkbox" data-ch="push" value="${esc(t.key)}" aria-label="${esc(t.label)} by phone"${push.includes(t.key) ? ' checked' : ''}>` : ''}</td>
-    <td>${t.channels.includes('email') ? `<input type="checkbox" data-ch="email" value="${esc(t.key)}" aria-label="${esc(t.label)} by email"${mail.includes(t.key) ? ' checked' : ''}>` : ''}</td></tr>`).join('');
+    <td>${box('push', t, push.includes(t.key), 'by phone')}</td><td>${box('email', t, mail.includes(t.key), 'by email')}</td>${texting ? `<td>${box('sms', t, txt.includes(t.key), 'by text', !live)}</td>` : ''}</tr>`).join('');
   $('quiet').checked = !!p.quiet_hours;
+  renderSms(texting);
 }
+function renderSms(texting) {
+  const sms = ME.sms;
+  $('smsBox').hidden = !texting;
+  $('smsOn').hidden = !(sms && sms.status === 'active');
+  $('smsCode').hidden = !(sms && sms.status === 'pending');
+  $('smsStart').hidden = !!(sms && sms.status !== 'stopped');
+  if (sms && sms.status === 'active') $('smsPhone').textContent = sms.phone;
+  if (sms && sms.status === 'stopped' && !$('smsMsg').textContent) msg('smsMsg', `Texts to ${sms.phone} are stopped. Text START to the alert number, or add the number again below.`);
+}
+const smsDo = async (btn, action, payload, after) => {
+  btn.disabled = true; msg('smsMsg', 'One moment…');
+  try { const r = await api(action, payload); ME = r; renderSettings(); msg('smsMsg', r.message || '', 'ok'); if (after) after(); }
+  catch (e) { msg('smsMsg', e.message, 'err'); }
+  btn.disabled = false;
+};
+$('smsSend').addEventListener('click', () => smsDo($('smsSend'), 'sms_start', {phone: $('smsNum').value, consent: $('smsOk').checked}, () => $('smsCodeIn').focus()));
+$('smsConfirm').addEventListener('click', () => smsDo($('smsConfirm'), 'sms_verify', {code: $('smsCodeIn').value}));
+$('smsBack').addEventListener('click', () => smsDo($('smsBack'), 'sms_off', {}));
+$('smsOff').addEventListener('click', () => { if (confirm('Stop alert texts and remove your number?')) smsDo($('smsOff'), 'sms_off', {}); });
 // "All of Bay County" and single areas are exclusive.
 $('alertAreas').addEventListener('change', e => {
   const all = $('alertAreas').querySelector('input[value=all]');
@@ -227,7 +250,7 @@ $('saveSet').addEventListener('click', async () => {
   try {
     if (($('firstName').value.trim() || null) !== (ME.user.first_name || null)) ME = await api('profile', {first_name: $('firstName').value});
     ME = await api('prefs', {weekly_email: $('weekly').checked, alert_email: chan('email'), topics: checked('topics'), push_topics: chan('push'), radius_mi: Number($('radius').value),
-      alert_areas: checked('alertAreas'), quiet_hours: $('quiet').checked});
+      alert_areas: checked('alertAreas'), quiet_hours: $('quiet').checked, ...(ME.sms && ME.sms.status === 'active' ? {alert_sms: chan('sms')} : {})});
     renderTop(); renderSettings(); msg('setMsg', 'Saved.', 'ok'); if (ME.home) FEED = null;
   } catch (e) { msg('setMsg', e.message, 'err'); }
   $('saveSet').disabled = false;
