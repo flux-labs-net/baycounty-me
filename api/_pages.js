@@ -3,7 +3,8 @@
 // fails, naming the page, when one is missing or points at a dataset that doesn't exist).
 // Served at GET /api/v1/pages. `none` explains a page that has no data of its own (a form, a policy, docs).
 const PAGES = {
-  '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments', 'community-events'],
+  '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments', 'community-events',
+    'site-photos', 'beach-conditions', 'emergency-notices', 'meetings', 'event-road-closures'],
     endpoints: ['/search']},
   // the realtor console prints the address report; agent accounts and branding are private (api/_realtor.js, migration 0074)
   '/realtor': {datasets: ['tax-districts', 'property-tax-rates', 'sales-tax-projects', 'people-directory', 'officeholder-terms', 'schools', 'school-zones', 'utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates', 'parks', 'beach-access', 'development-projects', 'road-contracts'], endpoints: ['/address-report'],

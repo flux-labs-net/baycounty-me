@@ -3729,7 +3729,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 66,
+   "rows": 67,
    "columns": [
     {
      "name": "date",
@@ -3742,7 +3742,8 @@
       "2026-10-24",
       "2026-10-25",
       "2026-10-26",
-      "2026-10-27"
+      "2026-10-27",
+      "2026-11-03"
      ]
     },
     {
@@ -20200,6 +20201,171 @@
    "json": "/downloads/event-guide.json",
    "csv": "/downloads/event-guide.csv",
    "api": "/api/v1/datasets/event-guide"
+  },
+  {
+   "id": "site-photos",
+   "title": "Site photos",
+   "description": "Photos of places in the county on BayCounty.me's own pages, one row per spot a photo fills (page and slot: hero is the top of the homepage, door:<section> the homepage card for that menu section, feature the this-week story, money the Your money band). title says what it shows and place_name where. photo_url is the WebP BayCounty.me serves (small_path a smaller copy for cards). Picked by hand from Wikimedia Commons, free licenses only: credit is the photographer, license and license_url the license, source_url the photo's Commons page.",
+   "rows": 7,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "photo_id",
+     "type": "string",
+     "values": [
+      "lynn-haven-city-hall",
+      "panama-city-aerial",
+      "panama-city-city-hall",
+      "pcb-from-st-andrews",
+      "pcb-pier",
+      "st-andrews-dunes"
+     ]
+    },
+    {
+     "name": "page",
+     "type": "string",
+     "values": [
+      "/"
+     ]
+    },
+    {
+     "name": "slot",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "Downtown Panama City from above",
+      "Dunes and the Gulf at St. Andrews State Park",
+      "Lynn Haven City Hall",
+      "Panama City Beach from St. Andrews State Park",
+      "Panama City City Hall",
+      "The beach and pier at Panama City Beach"
+     ]
+    },
+    {
+     "name": "place_name",
+     "type": "string",
+     "values": [
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "St. Andrews State Park"
+     ]
+    },
+    {
+     "name": "photo_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/photos/site/lynn-haven-city-hall-800.webp",
+      "https://baycounty.me/photos/site/panama-city-aerial-1600.webp",
+      "https://baycounty.me/photos/site/panama-city-city-hall-800.webp",
+      "https://baycounty.me/photos/site/pcb-from-st-andrews-1600.webp",
+      "https://baycounty.me/photos/site/pcb-pier-800.webp",
+      "https://baycounty.me/photos/site/st-andrews-dunes-1600.webp"
+     ]
+    },
+    {
+     "name": "photo_path",
+     "type": "string",
+     "values": [
+      "/photos/site/lynn-haven-city-hall-800.webp",
+      "/photos/site/panama-city-aerial-1600.webp",
+      "/photos/site/panama-city-city-hall-800.webp",
+      "/photos/site/pcb-from-st-andrews-1600.webp",
+      "/photos/site/pcb-pier-800.webp",
+      "/photos/site/st-andrews-dunes-1600.webp"
+     ]
+    },
+    {
+     "name": "small_path",
+     "type": "string",
+     "values": [
+      "/photos/site/lynn-haven-city-hall-800.webp",
+      "/photos/site/panama-city-aerial-800.webp",
+      "/photos/site/panama-city-city-hall-800.webp",
+      "/photos/site/pcb-from-st-andrews-800.webp",
+      "/photos/site/pcb-pier-800.webp",
+      "/photos/site/st-andrews-dunes-800.webp"
+     ]
+    },
+    {
+     "name": "credit",
+     "type": "string",
+     "values": [
+      "Balon Greyjoy",
+      "Ebyabe",
+      "Evan Nichols",
+      "Iscream icecream",
+      "Royalbroil"
+     ]
+    },
+    {
+     "name": "license",
+     "type": "string",
+     "values": [
+      "CC BY 3.0",
+      "CC BY-SA 3.0",
+      "CC BY-SA 4.0",
+      "CC0"
+     ]
+    },
+    {
+     "name": "license_url",
+     "type": "string",
+     "values": [
+      "https://creativecommons.org/licenses/by-sa/3.0/",
+      "https://creativecommons.org/licenses/by-sa/4.0/",
+      "https://creativecommons.org/licenses/by/3.0/",
+      "https://creativecommons.org/publicdomain/zero/1.0/"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://commons.wikimedia.org/wiki/File:Lynn_Haven_FL_city_hall01.jpg",
+      "https://commons.wikimedia.org/wiki/File:Panama_City,_Florida,_Xaneiro_2025.jpg",
+      "https://commons.wikimedia.org/wiki/File:Panama_City_Beach_from_St_Andrews_State_Park.jpg",
+      "https://commons.wikimedia.org/wiki/File:Panama_City_FL_City_Hall.jpg",
+      "https://commons.wikimedia.org/wiki/File:Panama_City_beach_pier_-_panoramio.jpg",
+      "https://commons.wikimedia.org/wiki/File:St_Andrews_State_Park_Dunes.jpg"
+     ]
+    },
+    {
+     "name": "taken",
+     "type": "string",
+     "values": [
+      "2010-07-09",
+      "2010-11-08",
+      "2013-11-24",
+      "2013-12-31",
+      "2017-01-16",
+      "2025-01-21"
+     ]
+    },
+    {
+     "name": "fetched_on",
+     "type": "string",
+     "values": [
+      "2026-11-03"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/site-photos.json",
+   "csv": "/downloads/site-photos.csv",
+   "api": "/api/v1/datasets/site-photos"
   },
   {
    "id": "meetings",
