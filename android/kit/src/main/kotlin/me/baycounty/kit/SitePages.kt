@@ -39,6 +39,7 @@ object SitePages {
         "/volunteer" to Coverage.Native("Volunteer"),
         "/chambers" to Coverage.Native("Chambers of commerce"),
         "/events" to Coverage.Native("Events"),
+        "/events/ironman-florida" to Coverage.Web("IRONMAN Florida race week: the interactive road-closure map with its time slider, from the event-road-closures and event-guide datasets"),
         "/beaches" to Coverage.Native("Beaches"),
         "/parks" to Coverage.Native("Parks"),
         "/development" to Coverage.Dataset("development-projects"),

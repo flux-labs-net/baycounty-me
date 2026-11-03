@@ -36,6 +36,7 @@ public enum SitePages {
         "/volunteer": .native("Volunteer"),
         "/chambers": .native("Chambers of commerce"),
         "/events": .native("Events"),
+        "/events/ironman-florida": .web("IRONMAN Florida race week: the interactive road-closure map with its time slider, from the event-road-closures and event-guide datasets"),
         "/beaches": .native("Beaches"),
         "/parks": .native("Parks"),
         "/development": .dataset("development-projects"),

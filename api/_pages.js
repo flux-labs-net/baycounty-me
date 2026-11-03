@@ -30,6 +30,7 @@ const PAGES = {
   '/correspondence': {endpoints: ['/mail', '/mail/{id}', '/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts', 'shared-owner-vendors']},
   '/events': {datasets: ['community-events'], endpoints: ['/government-posts']},
+  '/events/ironman-florida': {datasets: ['event-road-closures', 'event-guide']},
   '/beaches': {datasets: ['beach-conditions', 'beach-water-sites', 'beach-water-samples', 'beach-access', 'beach-parking']},
   '/parks': {datasets: ['parks', 'boat-ramps', 'trails', 'recreation-departments']},
   '/development': {datasets: ['housing-permits', 'development-projects', 'development-companies']},

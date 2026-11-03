@@ -7,6 +7,7 @@ against the visitor's own date, so the page is right even between rebuilds. The 
 import datetime as dt
 import html
 import json
+from special_events import banner
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 KINDS = ['Community', 'Public meeting', 'Library', 'Chamber']
@@ -122,6 +123,7 @@ def events_page(out_dir=None):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Community · Calendar</span><h1>Events in {e(NAME)}</h1>
     <p class="lede">What's happening around the county, from the county and city calendars, the library system, the visitor bureaus and the chambers. One list, every town, updated every morning.</p></div>
     <div class="stamp"><a class="pill" href="/meetings">Public meetings →</a><span>Next two months, from public calendars</span></div></header>
+  {banner()}
   <div class="kpis">{kpis}</div>
   <section class="tx-sec" data-staff-posts="event" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="calendar" data-tile="Calendar">Coming up</h2><span class="muted" id="evCount">{len(upcoming)} events</span></div>
