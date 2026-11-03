@@ -7302,7 +7302,7 @@
    "id": "person-photos",
    "title": "Person photos",
    "description": "Every photo of a person on BayCounty.me, one row per profile: officials' headshots their government publishes (published_by government, same as official-photos) and chamber of commerce board and staff headshots the chamber publishes on its own site (published_by chamber). entity_id is the profile (person: for officials, member: for board members) and joins entity-profiles and chamber-leaders; person_id is set for officials. photo_url is the 320px square WebP BayCounty.me serves, credit who published it and source_url the page it came from. A government photo wins over a chamber photo for the same person. Anyone not listed is shown with initials.",
-   "rows": 106,
+   "rows": 111,
    "columns": [
     {
      "name": "place_id",
@@ -7335,6 +7335,7 @@
      "name": "published_by",
      "type": "string",
      "values": [
+      "campaign",
       "chamber",
       "government"
      ]
@@ -7353,19 +7354,27 @@
       "City of Lynn Haven",
       "City of Panama City",
       "City of Parker",
-      "Panama City Beach Chamber of Commerce"
+      "Grant Wittstruck for City Council",
+      "Karen Custer for Callaway Commission, Ward 1",
+      "Panama City Beach Chamber of Commerce",
+      "The Florida Senate",
+      "U.S. Congress (Biographical Directory)"
      ]
     },
     {
      "name": "source_url",
      "type": "string",
      "values": [
+      "https://bioguide.congress.gov/search/bio/D000032",
+      "https://bioguide.congress.gov/search/bio/M001244",
       "https://cityofparker.com/government/city-council/",
       "https://panamacity.gov/directory.aspx",
       "https://panamacity.org/board-of-directors/",
       "https://panamacity.org/staff/",
       "https://pcbeach.org/board-of-directors/",
       "https://pcbeach.org/chamber-staff/",
+      "https://vote4karencuster.com/",
+      "https://votegrantwittstruck.com/",
       "https://www.bay.k12.fl.us/page/school-board",
       "https://www.baycoclerk.com/",
       "https://www.baycountyfl.gov/directory.aspx",
@@ -7374,7 +7383,8 @@
       "https://www.bayvotesfl.gov/about/meet-the-supervisor/",
       "https://www.cityofcallaway.com/70/Mayor-Commission",
       "https://www.cityofcallaway.com/directory.aspx",
-      "https://www.cityoflynnhaven.gov/directory.aspx"
+      "https://www.cityoflynnhaven.gov/directory.aspx",
+      "https://www.flsenate.gov/Senators/s2"
      ]
     },
     {
@@ -7385,7 +7395,8 @@
      "name": "fetched_on",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-27",
+      "2026-11-03"
      ]
     },
     {
@@ -7546,7 +7557,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 424,
+   "rows": 427,
    "columns": [
     {
      "name": "website",
