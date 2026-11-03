@@ -175,7 +175,9 @@ def _election_card():
     if t < ELECTION_DAY:
         href, title, sub = '/elections/voting', f'Election Day · {day}', 'Where and when to vote'
     elif t == ELECTION_DAY:
-        href, title, sub = '/elections/voting', 'Election Day is today', 'Where to vote, and results tonight'
+        href, title, sub = '/elections/live', 'Election Day is today', 'Live results from 7 p.m.'
+    elif (t - ELECTION_DAY).days <= 17:
+        href, title, sub = '/elections/live', 'Election results', f'The {ELECTION_DAY.strftime("%B")} {ELECTION_DAY.day} count, race by race'
     else:
         href, title, sub = '/elections/results', 'Election results', f'The {ELECTION_DAY.strftime("%B")} {ELECTION_DAY.day} election'
     return f'<a class="h-td" href="{href}">{ico("vote", "salmon")}<span><b>{title}</b><span>{sub}</span></span></a>'

@@ -25,6 +25,9 @@ ENR = 'https://enr.electionsfl.org/BAY'
 ARCHIVE = 'https://www.voterfocus.com/enr_php/enrarchive.php?county=Bay&election='
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36 BayCounty.me results reader'
 FIRST_YEAR = 2016
+# Elections the SOE has on its results site but not yet in its archive list (it adds them after election night).
+# api/_election_live.js keeps the same list for the live page.
+NOT_IN_ARCHIVE_YET = [(4078, '2026-11-03', 'General Election')]
 CITY = r'(Panama City Beach|Panama City|Lynn Haven|Mexico Beach|Callaway|Springfield|Parker)'
 
 
@@ -62,7 +65,8 @@ def archive():
         m, dd, y = d.split('/')
         if int(y) >= FIRST_YEAR:
             out.append((int(eid), f'{y}-{m}-{dd}', txt(name)))
-    return out
+    have = {e[0] for e in out}
+    return out + [e for e in NOT_IN_ARCHIVE_YET if e[0] not in have]
 
 
 def kind_of(name):

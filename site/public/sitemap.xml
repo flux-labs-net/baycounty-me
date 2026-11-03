@@ -83,6 +83,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/elections"/>
   </url>
   <url>
+    <loc>https://baycounty.me/elections/live</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/elections/past</loc>
     <lastmod>2026-10-25</lastmod>
   </url>

@@ -30,6 +30,7 @@ from emergency_page import emergency_page
 from hurricane_prep_page import hurricane_prep_page
 from ironman_page import ironman_page
 from elections_hub_page import results_page as election_results_page, voting_page
+from election_live_page import election_live_page
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
 from restaurants_page import restaurants_page, new_businesses_page, restaurant_pages
@@ -812,6 +813,7 @@ PAGES = [
     ('/public-money/budget-compare', 'Compare budgets across years', "Compare any Bay County government's budget in two fiscal years, such as Lynn Haven FY2025 and FY2026: what grew, what shrank and what's new, by department, service and fund, in dollars and percent.", lambda: budget_compare_page(OUT, None)),
     *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
     ('/elections/results', 'Election results since 2016', "Results of every contest on a Bay County ballot since 2016, from the Supervisor of Elections: votes for each candidate and ballot question, on Election Day, early and by mail, and turnout for every election.", election_results_page),
+    ('/elections/live', 'Election night results', "Live results of the November 3, 2026 election in Bay County as the Supervisor of Elections counts them: every local, state and federal race and ballot question, precincts reporting, and early, mail and Election Day votes, refreshed every minute.", election_live_page),
     ('/elections/voting', 'Where and when to vote', "Bay County election dates, every early voting site, each precinct's Election Day polling place, and the local races on your ballot by address.", voting_page),
     ('/notices', 'Public notices', "Bids, public hearings and meetings that Bay County, the School Board, the cities and other public agencies announce, in one searchable list linked to the government that posted each.", notices_page),
     ('/jobs', 'Government jobs', "Open jobs at Bay County, Bay District Schools, the cities and the airport, read daily from each employer's own job board, with pay, closing dates and where to apply.", jobs_page),

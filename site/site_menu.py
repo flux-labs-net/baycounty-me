@@ -37,6 +37,7 @@ def menu(today=None):
     elections = [
         *([_i('2026 Elections', '/elections', "Who's running, their platforms and money")] if ELECTIONS_READY else []),
         _i('Where and when to vote', '/elections/voting', 'Dates, polling places and your ballot'),
+        *([_i('Election night results', '/elections/live', 'The live count, every race')] if ELECTION_DAY <= date.today() <= ELECTION_DAY + timedelta(days=17) else []),
         _i('Election results', '/elections/results', 'Every contest since 2016'),
         _i('Past elections', '/elections/past', 'Every local race since 2016 and its money'),
     ]

@@ -62,6 +62,8 @@ const PAGES = {
   '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026', 'election-dates']},
   '/elections/past': {datasets: ['campaign-history', 'campaign-contributions-history', 'campaign-results']},
   '/elections/results': {datasets: ['elections', 'election-results']},
+  // live election night count, stored by api/_election_live.js (migration 0104: election_live, election_live_snapshots)
+  '/elections/live': {datasets: ['elections', 'election-results', 'candidates-2026'], endpoints: ['/election-live', '/election-live/history']},
   '/elections/voting': {datasets: ['election-dates', 'voting-locations', 'candidates-2026']},
   '/notices': {datasets: ['public-notices', 'bid-trail'], endpoints: ['/government-posts']},
   '/jobs': {datasets: ['job-openings', 'job-boards'], endpoints: ['/government-posts']},

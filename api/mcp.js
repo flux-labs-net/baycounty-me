@@ -132,6 +132,11 @@ const TOOLS = [
      id: {type: 'string', description: 'Entity id from find_entity, e.g. "vendor:dewberry" or "person:douglas-moore"'},
      limit: {type: 'integer', minimum: 1, maximum: 500, default: 100, description: 'Connections to return, largest amounts first'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'election_results_live', title: 'Election night results',
+   description: 'The latest count for the current Bay County election, read from the Supervisor of Elections\' results site about once a minute while votes are counted: every race and ballot question with votes and percent per choice, precincts reporting, and whether Election Day, early and mail votes are fully reported. Results are unofficial until certified. Past elections: query the election-results dataset.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     contest: {type: 'string', description: 'Only races whose name contains this, e.g. "Callaway" or "School Board"'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'emergency_now', title: 'Emergencies and alerts now',
    description: 'What is happening now in Bay County: active National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and storm updates from the county and cities, checked every 5 minutes, most serious first. Always tell people to follow instructions from emergency officials.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -397,6 +402,12 @@ async function call(req, name, a = {}) {
     req._rows = Math.min(d.connections.length, lim);
     return {entity: {...d.entity, url: SITE + d.entity.page_url}, counts: d.counts, total: d.connections.length,
       connections: d.connections.slice(0, lim).map(x => ({...x, other: {...x.other, url: x.other.page_url ? SITE + x.other.page_url : null}})), note: d.note};
+  }
+  if (name === 'election_results_live') {
+    const D = require('./_db');
+    const d = await require('./_election_live').forRequest({contest: a.contest}, {q: D.q, hasDb: D.hasDb()});
+    req._rows = d.contests.length;
+    return {...d, page: 'https://baycounty.me/elections/live', note: 'Unofficial results as posted by the Supervisor of Elections; official once the canvassing board certifies them.'};
   }
   if (name === 'emergency_now') {
     const d = await require('./_emergency_feed').liveFeed(req, await load(req, '/downloads/index.json'));

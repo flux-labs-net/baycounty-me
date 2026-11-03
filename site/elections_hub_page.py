@@ -195,7 +195,7 @@ def results_page():
 <div class="page tax eh">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">People · Elections</span><h1>Election results since 2016</h1>
     <p class="lede">Every contest on a Bay County ballot since 2016, from the Supervisor of Elections' official results: who got how many votes, and how they voted (on Election Day, early or by mail).</p></div>
-    <div class="stamp"><a class="pill" href="/elections/voting">Where and when to vote →</a><span>Results checked {e(_short(dt.date.today()))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/elections/live">Live count: Nov 3, 2026 →</a><a class="pill" href="/elections/voting">Where and when to vote →</a><span>Results checked {e(_short(dt.date.today()))}</span></div></header>
   <div class="kpis">{kpis}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="results" data-tile="Results">Pick an election</h2><span class="muted">Local races first</span></div>
     <div class="eh-ctl"><label class="sr-only" for="ehPick">Election</label><select id="ehPick">{"".join(opts)}</select>

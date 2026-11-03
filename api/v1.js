@@ -23,6 +23,8 @@
 //   GET /api/v1/officials?gov=&year=&date=  who held each elected seat in a fiscal year or on a date (api/_officials.js)
 //   GET /api/v1/import-progress         how far the minutes backfill has got, per board and year (api/_progress.js)
 //   GET /api/v1/schools?address=|lat=&lon=  the elementary, middle and high school zoned for a place (api/_schools.js)
+//   GET /api/v1/election-live?election=&contest=&format=rows  live election night results from the SOE results site (api/_election_live.js)
+//   GET /api/v1/election-live/history?election=  one snapshot of every race's totals per SOE update
 //   GET /api/v1/emergency               live weather alerts, evacuation orders, shelters, boil-water notices, road closures (api/_emergency_feed.js)
 //   GET /api/v1/emergency-timeline?days=&kind=&gov=  every alert of the last days: started, ended, the map staff drew (api/_emergency_feed.js)
 //   GET /api/v1/evacuation-zone?address= (or ?lat=&lng=)  the hurricane evacuation zone for a Bay County address
@@ -230,6 +232,14 @@ function openapi(catalog) {
         parameters: [p('address', 'Street address, e.g. 1200 Harrison Ave, Panama City'), p('lat', 'Latitude (decimal degrees)', {type: 'number'}), p('lon', 'Longitude (decimal degrees)', {type: 'number'})],
         responses: {200: {description: '{data: {lat, lon, inside_district, elementary: {zone, zone_id, mou_area, zone_last_edited, school: {school_id, name, level, grades, charter, address, city, phone, enrollment, enrollment_year, latest_grade, latest_grade_year, latest_per_student, latest_spending_year, page_url}}, middle, high, note}, matched_address} or, with no location, {data: [school]}'},
           400: {description: 'A bad location or an address with no house number'}, 404: {description: 'No matching address'}}}},
+      '/election-live': {get: {operationId: 'electionLive', summary: 'Live election night results for Bay County: every race and ballot question, votes so far, precincts reporting, and Election Day, early and mail votes',
+        description: 'Read from the Supervisor of Elections\' results site (enr.electionsfl.org) at most about once a minute while an election is being counted, and stored, so the answer is the SOE\'s latest posted count. status is waiting (no votes posted yet), counting or complete (every precinct and vote type completely reported; results are unofficial until the canvassing board certifies them). reported says how far each vote type (election_day, early_voting, vote_by_mail) has been reported. A vote-type figure of null is a dash on the SOE site: 1 to 29 votes, withheld by Florida law (s. 98.0981(3)(a)). Without election, the current election. Every past election: the election-results dataset.',
+        parameters: [p('election', 'SOE election id (e.g. 4078 for Nov 3, 2026). Default: the current election', {type: 'integer'}), p('contest', 'Only contests whose name contains this text, or one contest id'), p('format', 'rows: one flat row per choice instead of contests')],
+        responses: {200: {description: '{data: {election_id, name, date, source_url, status, soe_updated, checked_at, changed_at, registered_voters, ballots_cast, turnout_pct, precincts_reporting, precincts_total, reported: {election_day, early_voting, vote_by_mail}, contests: [{contest_id, contest, over_votes, under_votes, choices: [{choice, party, votes, pct, election_day, early_voting, vote_by_mail, provisional}]}], reading_live}, elections: [{id, name, date}]}'},
+          404: {description: 'An election that is not read live'}}}},
+      '/election-live/history': {get: {operationId: 'electionLiveHistory', summary: 'How the count grew on election night: one snapshot of every race\'s totals each time the SOE posted new results',
+        parameters: [p('election', 'SOE election id. Default: the current election', {type: 'integer'})],
+        responses: {200: {description: '{election_id, data: [{taken_at, soe_updated, ballots_cast, precincts_reporting, precincts_total, totals: {contest_id: {choice: votes}}}]}'}}}},
       '/emergency': {get: {operationId: 'emergencyNow', summary: 'What is happening now: National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and water outages for Bay County',
         description: 'Live notices, checked every 5 minutes from the National Weather Service, the county and city alert centers and news, FL511 and the county shelter page; most serious first. headline is one sentence for the whole county. counts has the number of live notices per kind (evacuation, weather, shelter, boil-water, road, utility, storm). shelters lists every county shelter with its latest posted status. zones lists evacuation zones A to D and whether an order names each. geometry is the map of where it applies (GeoJSON FeatureCollection text of pins with a radius_m circle, lines and areas), or null: drawn by city and county staff on their alerts, the start and end points FL511 gives for state road closures, or, for city and county road closure posts, the stretch found on the county street map from the streets the post names (properties.placed is "fl511" or "street-names" on those). A notice its source posted twice (re-posted with an update) is one notice: the newest version, with first_posted (when the first version was posted) and versions (every version, newest first). Past notices: the emergency-notices dataset.',
         parameters: [p('kind', 'Only one kind of notice: evacuation, weather, shelter, boil-water, road, utility, storm, safety', {type: 'string'})],
@@ -298,7 +308,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, schools: `${SITE}/api/v1/schools?address=1200 Harrison Ave`, emergency: `${SITE}/api/v1/emergency`, evacuation_zone: `${SITE}/api/v1/evacuation-zone?address=825+Ohio+Ave`, utilities: `${SITE}/api/v1/utilities?address=825+Ohio+Ave`, address_report: `${SITE}/api/v1/address-report?address=825+Ohio+Ave`, nearby: `${SITE}/api/v1/nearby?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, schools: `${SITE}/api/v1/schools?address=1200 Harrison Ave`, election_live: `${SITE}/api/v1/election-live`, emergency: `${SITE}/api/v1/emergency`, evacuation_zone: `${SITE}/api/v1/evacuation-zone?address=825+Ohio+Ave`, utilities: `${SITE}/api/v1/utilities?address=825+Ohio+Ave`, address_report: `${SITE}/api/v1/address-report?address=825+Ohio+Ave`, nearby: `${SITE}/api/v1/nearby?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -456,6 +466,18 @@ module.exports = async (req, res) => {
       const rows = meta ? (await datasetRows(req, meta)).rows : [];
       try { const r = parts[0] === 'checkbook' ? O.checkbook(rows, req.query) : O.budgetActual(rows, req.query); return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message, ...e.extra}); throw e; }
+    }
+    if (parts[0] === 'election-live') {
+      // Election night results read from the SOE results site, at most about once a minute (api/_election_live.js).
+      res.locals.lastModified = null;
+      res.setHeader('Cache-Control', 'public, max-age=15, s-maxage=20, stale-while-revalidate=40');
+      const L = require('./_election_live'), D = require('./_db');
+      const db = {q: D.q, hasDb: D.hasDb()};
+      if (parts[1] === 'history') { const r = await L.history(req.query, db); info.rows = r.length; return res.status(200).json({election_id: L.pick(req.query).id, data: r}); }
+      const d = await L.forRequest(req.query, db);
+      info.rows = d.contests.length;
+      if (req.query.format === 'rows') return res.status(200).json({election_id: d.election_id, status: d.status, soe_updated: d.soe_updated, data: L.rows(d)});
+      return res.status(200).json({data: d, elections: L.ELECTIONS.map(e => ({id: e.id, name: e.name, date: e.date}))});
     }
     if (parts[0] === 'emergency') {
       res.locals.lastModified = null;
