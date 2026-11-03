@@ -133,7 +133,7 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 500, default: 100, description: 'Connections to return, largest amounts first'}}},
    annotations: {readOnlyHint: true}},
   {name: 'election_results_live', title: 'Election night results',
-   description: 'The latest count for the current Bay County election, read from the Supervisor of Elections\' results site about once a minute while votes are counted: every race and ballot question with votes and percent per choice, precincts reporting, and whether Election Day, early and mail votes are fully reported. Results are unofficial until certified. Past elections: query the election-results dataset.',
+   description: 'The latest count for the current Bay County election, read from the Supervisor of Elections\' results site about every 20 seconds while votes are counted: every race and ballot question with votes and percent per choice, precincts reporting, and whether Election Day, early and mail votes are fully reported. Results are unofficial until certified. Past elections: query the election-results dataset.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
      contest: {type: 'string', description: 'Only races whose name contains this, e.g. "Callaway" or "School Board"'}}},
    annotations: {readOnlyHint: true}},

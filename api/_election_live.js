@@ -9,7 +9,8 @@
 // runs) it reads live with a per-server cache.
 const ENR = 'https://enr.electionsfl.org/BAY';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36 BayCounty.me results reader';
-const MIN_GAP = 45 * 1000;
+const MIN_GAP = 18 * 1000;      // the SOE stamp is read at most every ~20 s (the full page only when it moved)
+const STATE_GAP = 60 * 1000;    // the state's statewide file, at most once a minute
 
 // Elections we read live. Add a line before each election night (the SOE id is in the results site's address).
 // `until` is the last day we keep reading (canvass and certification run a few days past Election Day).
@@ -106,6 +107,66 @@ const stampOf = async id => (await get(`${ENR}/${id}/stampedtime.js?random=${Dat
 const summaryOf = async id => parseSummary(await get(`${ENR}/${id}/Summary/`));
 const totalsOf = contests => Object.fromEntries(contests.map(c => [c.contest_id, Object.fromEntries(c.choices.map(x => [x.choice, x.votes]))]));
 
+// --- statewide totals (Florida Division of Elections) ---------------------------------------------------------------
+// The state posts every county's count as one tab-separated file (the same numbers the counties upload, a few minutes
+// behind them): flelectionfiles.floridados.gov/enightfilespublic/<YYYYMMDD>_ElecResultsFL.txt. We add the counties
+// up for the races Bay County voters share with the rest of the state or district.
+const STATE_FILE = d => `https://flelectionfiles.floridados.gov/enightfilespublic/${d.replace(/-/g, '')}_ElecResultsFL.txt`;
+async function statewideOf(e) {
+  const t = await get(STATE_FILE(e.date), 20000);
+  const lines = t.split(/\r?\n/), head = lines.shift().split('\t');
+  const ix = k => head.indexOf(k);
+  const [RC, RN, CO, J1, PR, PRR, LN, FN, VO] = ['RaceCode', 'RaceName', 'CountyCode', 'Juris1num', 'Precincts', 'PrecinctsReporting', 'CanNameLast', 'CanNameFirst', 'CanVotes'].map(ix);
+  const races = {};
+  for (const ln of lines) {
+    const f = ln.split('\t'); if (f.length < head.length) continue;
+    const key = `${f[RC].trim()}|${f[J1].trim()}|${f[RN].trim()}`;
+    const r = races[key] || (races[key] = {code: f[RC].trim(), district: f[J1].trim().replace(/^0+/, ''), name: f[RN].trim(), counties: {}, choices: {}});
+    r.counties[f[CO]] = [+f[PR] || 0, +f[PRR] || 0];
+    const who = f[RC].trim() === 'GOV' ? `${f[FN].trim()} and ${f[LN].trim()}` : [f[FN].trim(), f[LN].trim()].filter(Boolean).join(' '); // governor rows: First = governor, Last = lieutenant
+    r.choices[who] = (r.choices[who] || 0) + (+f[VO] || 0);
+  }
+  const keep = /^(USS|USR|GOV|ATG|CFO|AGR|STS|STR|AMD|SCJ|DCA)$/;
+  return Object.values(races).filter(r => keep.test(r.code)).map(r => {
+    const c = Object.values(r.counties);
+    return {code: r.code, district: r.district || null, name: r.name, counties: c.length, precincts_total: c.reduce((a, x) => a + x[0], 0),
+      precincts_reporting: c.reduce((a, x) => a + x[1], 0), choices: r.choices};
+  });
+}
+const fold = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const lastName = s => fold(s).toLowerCase().replace(/"[^"]*"/g, ' ').split(' and ')[0].replace(/\b(jr|sr|ii|iii)\b\.?/g, '').replace(/[^a-z ]/g, ' ').trim().split(/\s+/).pop();
+// The statewide race that matches one SOE contest, as {precincts_reporting, precincts_total, counties, choices:[{choice, votes, pct}]}.
+function statewideFor(c, all) {
+  if (!all || !all.length) return null;
+  const t = c.contest, dist = (t.match(/District\s+(\d+)/i) || [])[1];
+  const norm = s => fold(s).toLowerCase().replace(/[^a-z]/g, '');
+  let r = null;
+  if (/United States Senator/i.test(t)) r = all.find(x => x.code === 'USS');
+  else if (/Congress/i.test(t)) r = all.find(x => x.code === 'USR' && x.district === dist);
+  else if (/^Governor/i.test(t)) r = all.find(x => x.code === 'GOV');
+  else if (/Attorney General/i.test(t)) r = all.find(x => x.code === 'ATG');
+  else if (/Chief Financial/i.test(t)) r = all.find(x => x.code === 'CFO');
+  else if (/Agriculture/i.test(t)) r = all.find(x => x.code === 'AGR');
+  else if (/State Senator/i.test(t)) r = all.find(x => x.code === 'STS' && x.district === dist);
+  else if (/State Representative/i.test(t)) r = all.find(x => x.code === 'STR' && x.district === dist);
+  else if (/Constitutional Amendment/i.test(t)) {
+    const words = t.replace(/^.*Amendment\s*/i, '').toLowerCase().split(/\W+/).filter(w => w.length > 4);
+    r = all.filter(x => x.code === 'AMD').map(x => [words.filter(w => x.name.toLowerCase().includes(w.slice(0, 6))).length, x]).sort((a, b) => b[0] - a[0]).filter(x => x[0] > 0).map(x => x[1])[0] || null;
+  } else if (/Retention/i.test(t)) {
+    const who = norm(lastName(t.replace(/^.*(Judge|Court)\s+/i, '')));
+    r = all.find(x => (x.code === 'SCJ' || x.code === 'DCA') && norm(x.name).includes(who));
+  }
+  if (!r) return null;
+  const tot = Object.values(r.choices).reduce((a, v) => a + v, 0);
+  const choices = c.choices.map(ch => {
+    const k = Object.keys(r.choices).find(n => /^(yes|no)$/i.test(ch.choice) ? norm(n).startsWith(norm(ch.choice)) : lastName(n) === lastName(ch.choice));
+    const v = k ? r.choices[k] : null;
+    return {choice: ch.choice, votes: v, pct: v != null && tot ? Math.round(10000 * v / tot) / 100 : null};
+  });
+  return {name: r.name, counties: r.counties, precincts_reporting: r.precincts_reporting, precincts_total: r.precincts_total, total_votes: tot, choices,
+    needs: r.code === 'AMD' ? '60% yes statewide to pass' : null};
+}
+
 // --- the stored count -----------------------------------------------------------------------------------------------
 function shape(e, row) {
   const contests = row.contests || [];
@@ -118,7 +179,7 @@ function shape(e, row) {
     soe_updated: row.soe_updated || null, checked_at: row.checked_at || null, changed_at: row.changed_at || null,
     registered_voters: row.registered_voters == null ? null : +row.registered_voters, ballots_cast: row.ballots_cast == null ? null : +row.ballots_cast,
     turnout_pct: row.turnout_pct == null ? null : +row.turnout_pct, precincts_reporting: row.precincts_reporting, precincts_total: row.precincts_total,
-    reported, contests, reading_live: live(e),
+    reported, contests: contests.map(c => ({...c, statewide: statewideFor(c, row.statewide)})), statewide_checked_at: row.statewide_at || null, reading_live: live(e),
   };
 }
 
@@ -137,7 +198,9 @@ async function latest(e, {q, hasDb, force = false} = {}) {
     if (m && !force && Date.now() - m.at < MIN_GAP) return shape(e, m.row);
     if (!live(e) && m) return shape(e, m.row);
     const row = await readNow(e, m && m.row);
-    memo[e.id] = {at: Date.now(), row: {...row, changed_at: row.same ? m.row.changed_at : row.checked_at}};
+    let sw = m && m.row.statewide, swAt = m && m.row.statewide_at;
+    if (!swAt || Date.now() - new Date(swAt).getTime() >= STATE_GAP) { try { sw = await statewideOf(e); swAt = new Date().toISOString(); } catch (err) { console.error('statewide', err.message); } }
+    memo[e.id] = {at: Date.now(), row: {...row, statewide: sw, statewide_at: swAt, changed_at: row.same ? m.row.changed_at : row.checked_at}};
     return shape(e, memo[e.id].row);
   }
   await q(`insert into election_live (election_id, name, election_date, source_url) values ($1, $2, $3, $4) on conflict (election_id) do nothing`,
@@ -145,7 +208,7 @@ async function latest(e, {q, hasDb, force = false} = {}) {
   let [row] = await q('select * from election_live where election_id = $1', [e.id]);
   const stale = !row.checked_at || Date.now() - new Date(row.checked_at).getTime() >= MIN_GAP;
   if ((stale || force) && live(e)) {
-    const claimed = await q(`update election_live set claim_at = now() where election_id = $1 and (claim_at is null or claim_at < now() - interval '40 seconds') returning election_id`, [e.id]);
+    const claimed = await q(`update election_live set claim_at = now() where election_id = $1 and (claim_at is null or claim_at < now() - interval '15 seconds') returning election_id`, [e.id]);
     if (claimed.length) {
       try {
         const r = await readNow(e, row);
@@ -166,6 +229,13 @@ async function latest(e, {q, hasDb, force = false} = {}) {
       } catch (err) {
         console.error('election-live read', err.message);
         await q('update election_live set checked_at = now(), error = $2 where election_id = $1', [e.id, String(err.message).slice(0, 300)]).catch(() => {});
+      }
+      if (!row.statewide_at || Date.now() - new Date(row.statewide_at).getTime() >= STATE_GAP) {
+        try {
+          const sw = await statewideOf(e);
+          const [r2] = await q('update election_live set statewide = $2, statewide_at = now() where election_id = $1 returning *', [e.id, JSON.stringify(sw)]);
+          if (r2) row = r2;
+        } catch (err) { console.error('statewide', err.message); } // column not added yet, or the state file is slow: Bay numbers still go out
       }
     }
   }
