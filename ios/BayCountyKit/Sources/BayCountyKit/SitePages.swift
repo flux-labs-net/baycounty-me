@@ -59,6 +59,7 @@ public enum SitePages {
         "/public-money/budget-compare": .native("Budget compare (BudgetCompare, the same rules as /api/v1/budget-compare)"),
         "/elections": .dataset("candidates-2026"),
         "/elections/past": .dataset("campaign-history"),
+        "/elections/live": .web("live election night results: race cards that refresh every minute from /api/v1/election-live"),
         "/elections/results": .dataset("election-results"),
         "/elections/voting": .dataset("voting-locations"),
         "/notices": .dataset("public-notices"),

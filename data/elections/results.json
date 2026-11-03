@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-03T18:35:01+00:00",
+ "as_of": "2026-11-03T22:38:32+00:00",
  "source": "https://enr.electionsfl.org/BAY",
  "archive": "https://www.voterfocus.com/enr_php/enrarchive.php?county=Bay&election=",
  "first_year": 2016,
@@ -12307,6 +12307,676 @@
        "vote_by_mail": 1069,
        "votes": 6645,
        "pct": 28.85
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "election_id": 4078,
+   "date": "2026-11-03",
+   "name": "General Election",
+   "kind": "general",
+   "source_url": "https://enr.electionsfl.org/BAY/4078/Summary/",
+   "registered_voters": 128668,
+   "ballots_cast": 0,
+   "turnout_pct": 0,
+   "precincts_reporting": 0,
+   "precincts_total": 30,
+   "complete": false,
+   "updated": "2026-11-02T15:37:10",
+   "contests": [
+    {
+     "contest_id": 60447,
+     "contest": "United States Senator",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Ashley Moody",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Angie Nixon",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Neil J. Gillespie",
+       "party": "NPA",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60448,
+     "contest": "Representative in Congress District 2",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Austin Rogers",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Amanda Marie Green",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60449,
+     "contest": "Governor and Lieutenant Governor",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Byron Donalds and Bryan Avila",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "David Jolly and Gwen Graham",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Scott Eckhard Jewett and Nicole Skelly",
+       "party": "LPF",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Charles Burkett and Ruben A. Coto",
+       "party": "NPA",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Frank J. Russo and Rachel Rodriguez",
+       "party": "NPA",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Moliere \"Moe\" Dimanche and Benjamin Rojas",
+       "party": "NPA",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Dean Ocean Abrams and Joe Van Vactor",
+       "party": "NPA",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Jeffrey Peter \"Dr. Jeff\" Datto and Juan Santana",
+       "party": "NPA",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Write-in",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60450,
+     "contest": "Attorney General",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "James Uthmeier",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Jose Javier Rodriguez",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60451,
+     "contest": "Chief Financial Officer",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Blaise Ingoglia",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Annette Taddeo",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60452,
+     "contest": "Commissioner of Agriculture",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Wilton Simpson",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Joey Mendoza Atkins",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Write-in",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60453,
+     "contest": "State Senator District 2",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Jay Trumbull",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Lauren Donahoo",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60454,
+     "contest": "State Representative District 6",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Tricia Berry",
+       "party": "REP",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Stephanie Lyn Leonard",
+       "party": "DEM",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60455,
+     "contest": "Retention of Justice of the Supreme Court Carlos G. Muniz",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60456,
+     "contest": "Retention of District Court of Appeal Judge Joseph Lewis Jr.",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60457,
+     "contest": "Retention of District Court of Appeal Judge Rachel Nordby",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60458,
+     "contest": "Retention of District Court of Appeal Judge Tim Osterhaus",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60459,
+     "contest": "Retention of District Court of Appeal Judge Clay Roberts",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60460,
+     "contest": "Retention of District Court of Appeal Judge Raymond Treadwell",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60461,
+     "contest": "School Board Member District 3",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "John Haley",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Chris Moore",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60462,
+     "contest": "Callaway Commissioner Ward 1",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Bobby Birdsell",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Karen Custer",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60463,
+     "contest": "Callaway Commissioner Ward 2",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "James \"Jamie\" Kirkland",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Spring Overway",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60464,
+     "contest": "Panama City Beach Council Member Ward 1",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Carlos Sanchez",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Grant B. Wittstruck",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60465,
+     "contest": "Panama City Beach Council Member Ward 3",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Nick Atkinson",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Mary Coburn",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60466,
+     "contest": "Lake Powell Community Development District Seat 2",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Alyssa Finneyfrock",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Greg Porta",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60467,
+     "contest": "Lake Powell Community Development District Seat 5",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Kenneth Black",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "Tim Rosson",
+       "party": "NON",
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60468,
+     "contest": "No. 1 Constitutional Amendment Budget Stabilization Fund",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60469,
+     "contest": "No. 2 Constitutional Amendment Extemption of Tangible Personal Property",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60470,
+     "contest": "No. 3 Constitutional Amendment Increase Homestead Exemption",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60471,
+     "contest": "City of Lynn Haven Clarifying the City Charter Review Process",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60472,
+     "contest": "City of Lynn Haven Updating the Method of Compensation",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60473,
+     "contest": "City of Lynn Haven Extending Time to Fill Vacancy on Commission",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60474,
+     "contest": "City of Panama City Terms and Qualifications of Commissioners",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60475,
+     "contest": "City of Panama City Charter Officers",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      }
+     ]
+    },
+    {
+     "contest_id": 60476,
+     "contest": "City of Panama City Clerical Revisions",
+     "over_votes": null,
+     "under_votes": null,
+     "choices": [
+      {
+       "choice": "Yes",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
+      },
+      {
+       "choice": "No",
+       "party": null,
+       "votes": 0,
+       "pct": 0.0
       }
      ]
     }

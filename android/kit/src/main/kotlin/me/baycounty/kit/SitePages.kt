@@ -62,6 +62,7 @@ object SitePages {
         "/public-money/budget-compare" to Coverage.Native("Budget compare (BudgetCompare, the same rules as /api/v1/budget-compare)"),
         "/elections" to Coverage.Dataset("candidates-2026"),
         "/elections/past" to Coverage.Dataset("campaign-history"),
+        "/elections/live" to Coverage.Web("live election night results: race cards that refresh every minute from /api/v1/election-live"),
         "/elections/results" to Coverage.Dataset("election-results"),
         "/elections/voting" to Coverage.Dataset("voting-locations"),
         "/notices" to Coverage.Dataset("public-notices"),
