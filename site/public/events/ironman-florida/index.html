@@ -137,11 +137,12 @@
 .im-card{background:var(--surface);border-radius:22px;box-shadow:var(--ui-shadow);padding:18px 20px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .im-card h3{margin:0;display:flex;gap:10px;align-items:center;font-size:1.02rem}
 .im-card ul{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:7px;font-size:.92rem;line-height:1.5}
-.im-adv{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:18px;align-items:center}
-.im-adv img{width:100%;border-radius:16px;box-shadow:var(--ui-shadow)}
+.im-adv{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:22px;align-items:start;background:var(--surface);border-radius:22px;box-shadow:var(--ui-shadow);padding:16px}
+.im-adv a{display:block;line-height:0}.im-adv img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;border-radius:14px}
+.im-adv p{margin:6px 0 0;line-height:1.6;overflow-wrap:anywhere}
 @media (prefers-reduced-motion:reduce){.im-btn .im-dot{animation:none}}
 @media (max-width:900px){.im-live{grid-template-columns:1fr}.im-legs{grid-template-columns:1fr}}
-@media (max-width:760px){.im-map{height:400px;border-radius:18px}.im-clock{position:static;margin-top:10px;box-shadow:none;background:var(--sunken)}.im-axis b{display:none}.im-two{grid-template-columns:1fr}.im-adv{grid-template-columns:1fr}.im-adv img{max-width:260px}
+@media (max-width:760px){.im-map{height:400px;border-radius:18px}.im-clock{position:static;margin-top:10px;box-shadow:none;background:var(--sunken)}.im-axis b{display:none}.im-two{grid-template-columns:1fr}.im-adv{grid-template-columns:1fr}.im-adv img{max-width:360px;margin:0 auto}
   .im-gantt{grid-template-columns:minmax(0,6.8rem) minmax(0,1fr)}.im-sched li{grid-template-columns:5.8rem minmax(0,1fr)}.im-sched{padding:4px 16px}}
 </style><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
 <div class="page tax ui im" id="imPage">
