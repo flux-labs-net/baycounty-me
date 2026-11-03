@@ -128,6 +128,15 @@
 .lv-lead{font-size:.7rem;font-weight:700;margin-left:6px;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue);white-space:nowrap}
 .lv-lead.win{background:color-mix(in srgb,var(--teal) 16%,transparent);color:var(--teal)}
 .lv-margin{font-size:.84rem;margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);color:var(--ink)}
+.lv-sw{margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--sunken)}
+.lv-sw-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 6px;font-size:.8rem;color:var(--muted)}
+.lv-sw-h b{color:var(--ink);font-weight:600}
+.lv-sw ul{list-style:none;margin:0;padding:0;font-size:.84rem}
+.lv-sw li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:3px 0;font-variant-numeric:tabular-nums}
+.lv-sw li b{font-weight:600}
+.lv-sw li .n{color:var(--muted);min-width:5.5em;text-align:right}
+.lv-sw li.top span:first-child{font-weight:600}
+.lv-need{margin:6px 0 0;font-size:.8rem;color:var(--ink)}
 .lv-c details{margin-top:8px;font-size:.82rem}
 .lv-c summary{cursor:pointer;color:var(--blue);font-weight:600;min-height:32px;display:flex;align-items:center}
 .lv-c table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:4px}
@@ -142,7 +151,7 @@
 </style>
 <div class="page tax ui el-live">
   <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-salmon"><span class="ico i-chart" aria-hidden="true"></span></span><div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-salmon"><span class="ico i-vote" aria-hidden="true"></span>Elections</span><h1>Election night results</h1>
-    <p class="lede">The Tuesday, November 3, 2026 general election in Bay County, as the Supervisor of Elections posts the count. This page refreshes on its own every 30 seconds; results are unofficial until the canvassing board certifies them.</p></div>
+    <p class="lede">The Tuesday, November 3, 2026 general election in Bay County, as the Supervisor of Elections posts the count. This page refreshes on its own every 15 seconds; results are unofficial until the canvassing board certifies them.</p></div>
     <div class="ui-tags"><a class="ui-tag" href="/elections/results"><span class="ico i-chart" aria-hidden="true"></span>Past results →</a><a class="ui-tag" href="https://enr.electionsfl.org/BAY/4078/Summary/" target="_blank" rel="noopener"><span class="ico i-users" aria-hidden="true"></span>Official results site</a></div></div></div></header>
   <div class="lv-bar" id="lvBar" data-s="waiting" aria-live="polite">
     <span class="lv-st"><span class="lv-dot" aria-hidden="true"></span><span id="lvSt">Loading the count…</span></span>
@@ -150,7 +159,7 @@
     <div class="lv-prog"><div class="t"><span>Precincts reporting</span><b id="lvPr">—</b></div><div class="lv-track"><span id="lvTrack" style="width:0"></span></div></div>
     <div class="lv-types" id="lvTypes"></div>
   </div>
-  <p class="lv-wait" id="lvErr" hidden>The results could not be loaded just now. The page will try again in 30 seconds, or see the <a href="https://enr.electionsfl.org/BAY/4078/Summary/" target="_blank" rel="noopener">official results site</a>.</p>
+  <p class="lv-wait" id="lvErr" hidden>The results could not be loaded just now. The page will try again in 15 seconds, or see the <a href="https://enr.electionsfl.org/BAY/4078/Summary/" target="_blank" rel="noopener">official results site</a>.</p>
   <p class="lv-wait" id="lvWait" hidden>Polls close at 7 p.m. Central. The first numbers, early and mail votes, usually post shortly after, then Election Day precincts as they are counted. Every race on the ballot is below with its candidates.</p>
   <div class="lv-kpis">
     <div class="lv-k"><span class="eyebrow">Ballots counted</span><span class="v" id="lvBal">—</span><span class="s">So far tonight</span></div>
@@ -165,7 +174,8 @@
   <div id="lvBox"><p class="muted">Loading every race…</p></div>
   <section class="tx-sec method"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-chart" aria-hidden="true"></span></span><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">
-      <li><b>The count</b> is read from the Supervisor of Elections' results site about once a minute while votes are counted, and each update is saved, so the trend lines show how every race moved through the night.</li>
+      <li><b>The count</b> is read from the Supervisor of Elections' results site about every 20 seconds while votes are counted, and each update is saved, so the trend lines show how every race moved through the night.</li>
+      <li><b>Statewide and district totals</b> for state and federal races, amendments and judges come from the Florida Division of Elections' county-by-county results file, read once a minute. They can trail the county sites by a few minutes.</li>
       <li><b>Unofficial</b> until the county canvassing board certifies the results. Provisional and late overseas ballots can still change close races, and a race within half a point may go to a recount.</li>
       <li>A vote-type figure shown as "—" is 1 to 29 votes, which Florida law keeps from being reported. City races and questions are voted only by that city's voters.</li>
       <li>Local candidates link to their profiles, with what each raised from campaign finance reports (<a href="/elections">2026 races</a>).</li>
@@ -261,7 +271,16 @@
     const tr = trend(c);
     const more = table || tr || foot ? `<details><summary>How people voted</summary>${table}${tr}${foot ? `<p class="lv-when">${foot}</p>` : ''}</details>` : '';
     const tags = [k.g && GOV_NAME[k.g] ? `<span class="lv-pill g">${esc(GOV_NAME[k.g])}</span>` : '', isQ(c) ? '<span class="lv-pill">Ballot question</span>' : ''].join('');
-    return `<article class="lv-c" id="r${c.contest_id}" data-share-record><h3>${esc(c.contest)}</h3>${tags ? `<div class="lv-tags">${tags}</div>` : ''}${rows}${margin}${more}</article>`;
+    let sw = '';
+    if (c.statewide) {
+      const S = c.statewide, st = S.total_votes || 0;
+      const where = S.counties > 1 && S.counties < 67 ? `All ${S.counties} counties in the district` : S.counties === 1 ? 'Bay County is the whole district' : 'Statewide, all 67 counties';
+      const list = st ? S.choices.filter(x => x.votes != null).sort((a, b) => (b.votes || 0) - (a.votes || 0)).map((x, i) => `<li${i === 0 ? ' class="top"' : ''}><span>${esc(x.choice)}</span><b>${x.pct != null ? x.pct.toFixed(1) + '%' : '—'}</b><span class="n">${n(x.votes)}</span></li>`).join('') : '';
+      const yes = S.needs && st ? S.choices.find(x => /^yes/i.test(x.choice)) : null;
+      const need = S.needs ? `<p class="lv-need">${yes && yes.pct != null ? `${yes.pct >= 60 ? 'Above' : 'Below'} the 60% it needs to pass (yes ${yes.pct.toFixed(1)}%).` : 'Needs 60% yes statewide to pass.'}</p>` : '';
+      sw = S.counties === 1 ? '' : `<div class="lv-sw"><p class="lv-sw-h"><b>${where}</b><span>${n(S.precincts_reporting)} of ${n(S.precincts_total)} precincts</span></p>${list ? `<ul>${list}</ul>` : '<p class="lv-when">No statewide votes posted yet.</p>'}${need}</div>`;
+    }
+    return `<article class="lv-c" id="r${c.contest_id}" data-share-record><h3>${esc(c.contest)}</h3>${tags ? `<div class="lv-tags">${tags}</div>` : ''}${rows}${margin}${sw}${more}</article>`;
   }
   function render() {
     if (!D) return;
@@ -300,7 +319,7 @@
   chips.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; chips.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); lv = b.dataset.v; render(); });
   $('lvQ').addEventListener('input', ev => { q = ev.target.value.trim().toLowerCase(); render(); });
   load();
-  setInterval(() => { if (!document.hidden) load(); }, 30000);
+  setInterval(() => { if (!document.hidden) load(); }, 15000);
   setInterval(() => { if (D && !document.hidden) $('lvWhen').textContent = [SOE_TIME(D.soe_updated) ? `SOE update ${SOE_TIME(D.soe_updated)}` : '', D.checked_at ? `checked ${ago(D.checked_at)}` : ''].filter(Boolean).join(' · '); }, 5000);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
 })();
