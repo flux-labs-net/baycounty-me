@@ -5,6 +5,8 @@ Two sources, both hand-checked and both published by the organization the person
   1. official headshots a government publishes (data/civic/official_photos.json, data/civic/scripts/official_photos.py)
   2. board and staff headshots a chamber of commerce publishes (data/chambers/<county>/photos.json,
      data/chambers/scripts/chamber_photos.py), matched to the chamber's board list in chambers.json
+  3. candidates' photos from their government office or their own campaign (data/elections/candidate_photos.json),
+     for people on a Bay County ballot with no photo above
 
 A government photo wins over a chamber photo for the same person. A chamber board member who is also an official
 (person_id in chambers.json) gets the chamber photo on their official profile when their government publishes none.
@@ -55,6 +57,15 @@ def rows():
                 out.append({'entity_id': eid, 'person_id': pid, 'name': r['name'], 'photo_path': p['photo'],
                             'photo_url': SITE + p['photo'], 'published_by': 'chamber', 'credit': names.get(cid, cid),
                             'source_url': p['source_url'], 'image_source_url': p['image_url'], 'fetched_on': C.get('as_of')})
+    cand = _load(os.path.join(HERE, '..', 'data', 'elections', 'candidate_photos.json')) or {'photos': []}
+    for r in cand['photos']:
+        eid = 'person:' + r['person_id']
+        if eid in seen:
+            continue
+        seen.add(eid)
+        out.append({'entity_id': eid, 'person_id': r['person_id'], 'name': r['name'], 'photo_path': r['photo_path'],
+                    'photo_url': SITE + r['photo_path'], 'published_by': r['published_by'], 'credit': r['credit'],
+                    'source_url': r['source_url'], 'image_source_url': r['image_source_url'], 'fetched_on': r['fetched_on']})
     _C['rows'] = out
     return out
 

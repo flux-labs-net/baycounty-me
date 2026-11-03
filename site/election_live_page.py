@@ -6,6 +6,7 @@ Elections' results site at most about once a minute and stores each update, see 
 raised, from the candidates-2026 dataset. Past elections: /elections/results.
 """
 import json
+import re
 
 from entity_links import href, build
 
@@ -28,8 +29,32 @@ def _candidates():
     return out
 
 
+def _photos():
+    """{candidate name: photo path} for everyone on tonight's ballot with a photo their government or campaign publishes:
+    the site-wide person-photos lookup (site/person_photos.py), by the name as the SOE spells it."""
+    import ids
+    from person_photos import by_id
+    from page_datasets import election_results
+    ph = by_id()
+    out = {}
+    for r in election_results():
+        if r['election_id'] != ELECTION['id'] or r['measure']:
+            continue
+        name = r['choice'].split(' and ')[0]  # a governor's ticket: the first name
+        pid = ids.person_id(name) or ids.person_id(re.sub(r'\s+[A-Z]\.\s+', ' ', re.sub(r'\s*"[^"]*"', '', name)))
+        p = ph.get(pid) if pid else None
+        if not p:
+            p = next((x for x in ph.values() if x['name'].lower() == name.lower()), None)
+        if p:
+            out[r['choice']] = p['photo_path']
+    return out
+
+
 CSS = r"""
-.el-live .lv-bar{position:sticky;top:var(--sticky-top,0);z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:12px 16px;margin:0 0 14px;
+.page.tax.el-live{row-gap:16px;gap:16px}
+.el-live > .lv-bar,.el-live > .lv-wait,.el-live > .lv-kpis,.el-live > .lv-ctl{margin:0}
+.el-live > #lvBox{margin-top:-4px}
+.el-live .lv-bar{position:sticky;top:var(--sticky-top,0);z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding:14px 20px;margin:0;
   border-radius:18px;background:var(--surface);box-shadow:var(--ui-shadow)}
 .lv-dot{width:10px;height:10px;border-radius:50%;background:var(--muted);flex:none}
 .lv-bar[data-s=counting] .lv-dot{background:#d33;animation:lvp 1.6s ease-in-out infinite}
@@ -47,46 +72,56 @@ CSS = r"""
 .lv-type{font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--sunken);color:var(--muted);white-space:nowrap}
 .lv-type.part{background:color-mix(in srgb,var(--amber,#c80) 16%,transparent);color:var(--ink)}
 .lv-type.done{background:color-mix(in srgb,var(--teal) 16%,transparent);color:var(--teal)}
-.lv-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 16px}
+.lv-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 20px}
 .lv-k{padding:12px 16px;border-radius:16px;background:var(--surface);box-shadow:var(--ui-shadow);min-width:0}
 .lv-k .eyebrow{display:block}
 .lv-k .v{display:block;font:600 1.45rem var(--f-body);font-variant-numeric:tabular-nums;margin-top:2px}
 .lv-k .s{display:block;font-size:.78rem;color:var(--muted)}
-.lv-ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:0 0 6px}
+.lv-ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin:0 0 8px}
 .lv-ctl input{flex:1 1 240px;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
-.lv-wait{padding:14px 18px;border-radius:16px;background:color-mix(in srgb,var(--blue) 8%,var(--surface));margin:0 0 14px;font-size:.93rem;line-height:1.5}
-.lv-grp{font-size:1.02rem;font-weight:600;margin:22px 0 10px}
-.lv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.lv-c{padding:16px 18px;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);min-width:0;scroll-margin-top:120px}
-.lv-c h3{margin:0;font-size:.98rem;font-weight:600;text-wrap:balance}
-.lv-tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.lv-wait{padding:14px 20px;border-radius:16px;background:color-mix(in srgb,var(--blue) 8%,var(--surface));margin:0 0 16px;font-size:.93rem;line-height:1.5}
+.lv-wait[hidden]{display:none}
+.el-live .lv-grp{font-size:1.1rem;font-weight:600;margin:40px 0 14px;display:flex;align-items:baseline;gap:8px}
+.el-live .lv-grp:first-child{margin-top:12px}
+.lv-grp span{font-weight:400;color:var(--muted);font-size:.9rem}
+.lv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;align-items:start}
+.lv-c{padding:18px 20px;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);min-width:0;scroll-margin-top:120px}
+.lv-c.bc-sh-it{padding-right:20px !important}
+.lv-c > .bc-sh{top:12px;right:10px}
+.lv-c h3{margin:0;padding-right:28px;font-size:1rem;font-weight:600;text-wrap:balance}
+.lv-tags:empty{display:none}
+.lv-c h3 + .lv-ch{margin-top:8px}
+.lv-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
 .lv-pill{font-size:.72rem;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--sunken);color:var(--muted)}
 .lv-pill.g{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue)}
-.lv-ch{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;padding:8px 0;border-top:1px solid var(--line)}
+.lv-ch{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-top:1px solid var(--line);align-items:center}
+.lv-ch.q{grid-template-columns:minmax(0,1fr) auto}
+.lv-av{grid-row:1/span 3;align-self:start;width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 20%;background:var(--sunken);display:grid;place-items:center;font-size:.8rem;font-weight:600;color:var(--muted);overflow:hidden}
+.lv-ch.top .lv-av{box-shadow:0 0 0 2px var(--blue)}
 .lv-ch:first-of-type{border-top:0}
 .lv-ch .nm{font-size:.92rem;overflow-wrap:anywhere}
 .lv-ch .nm small{color:var(--muted);margin-left:4px;font-size:.76rem}
 .lv-ch .v{font-size:.9rem;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
 .lv-ch .v b{font-weight:600;font-size:1rem}
 .lv-ch .v span{color:var(--muted);margin-left:6px}
-.lv-ch .bar{grid-column:1/-1;height:8px;border-radius:8px;background:var(--sunken);overflow:hidden}
+.lv-ch .bar{grid-column:-3/-1;height:8px;border-radius:8px;background:var(--sunken);overflow:hidden}
 .lv-ch .bar span{display:block;height:100%;background:color-mix(in srgb,var(--muted) 70%,transparent);border-radius:8px;transition:width .6s ease}
 .lv-ch.top .bar span{background:var(--blue)}
-.lv-ch .meta{grid-column:1/-1;font-size:.76rem;color:var(--muted)}
+.lv-ch .meta{grid-column:-3/-1;font-size:.76rem;color:var(--muted)}
 .lv-lead{font-size:.7rem;font-weight:700;margin-left:6px;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--blue);white-space:nowrap}
 .lv-lead.win{background:color-mix(in srgb,var(--teal) 16%,transparent);color:var(--teal)}
-.lv-margin{font-size:.82rem;margin:8px 0 0;color:var(--ink)}
+.lv-margin{font-size:.84rem;margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);color:var(--ink)}
 .lv-c details{margin-top:8px;font-size:.82rem}
 .lv-c summary{cursor:pointer;color:var(--blue);font-weight:600;min-height:32px;display:flex;align-items:center}
 .lv-c table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:4px}
 .lv-c th,.lv-c td{padding:5px 4px;border-top:1px solid var(--line);text-align:right;white-space:nowrap}
 .lv-c th:first-child,.lv-c td:first-child{text-align:left;white-space:normal}
 .lv-c thead th{border-top:0;color:var(--muted);font-weight:600;font-size:.74rem}
-.lv-trend{display:block;width:100%;height:56px;margin-top:8px}
+.lv-trend{display:block;width:100%;height:56px;margin-top:12px}
 .lv-trend text{font-size:9px;fill:var(--muted)}
 .lv-flash{animation:lvf 1.8s ease}
 @keyframes lvf{0%{box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 45%,transparent)}100%{box-shadow:var(--ui-shadow)}}
-@media (max-width:760px){.lv-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.lv-grid{grid-template-columns:1fr}.el-live .lv-bar{border-radius:14px;padding:10px 12px}}
+@media (max-width:760px){.lv-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.lv-k{padding:12px 14px}.lv-grid{grid-template-columns:1fr;gap:12px}.lv-c{padding:16px}.lv-c.bc-sh-it{padding-right:16px !important}.el-live .lv-bar{border-radius:14px;padding:12px 14px;gap:8px 14px}.el-live .lv-grp{margin-top:30px}}
 """
 
 JS = r"""
@@ -99,21 +134,38 @@ JS = r"""
   const GOV = [[/Panama City Beach/i, 'pcb'], [/Panama City/i, 'pc'], [/Lynn Haven/i, 'lh'], [/Callaway/i, 'cw'], [/Parker/i, 'parker'], [/Springfield/i, 'sp'], [/Mexico Beach/i, 'mb'],
     [/School Board/i, 'schools'], [/County Commission|Bay County/i, 'county'], [/Community Development District|\bCDD\b|Fire Control|Mosquito|Soil and Water/i, 'special']];
   const GOV_NAME = {pcb: 'Panama City Beach', pc: 'Panama City', lh: 'Lynn Haven', cw: 'Callaway', parker: 'Parker', sp: 'Springfield', mb: 'Mexico Beach', schools: 'School Board', county: 'Bay County', special: 'Special district'};
-  const GROUPS = [['local', 'Local races'], ['localq', 'City ballot questions'], ['amend', 'State constitutional amendments'], ['state', 'Governor, Cabinet and Legislature'], ['federal', 'U.S. Senate and Congress'], ['judges', 'Judges on the ballot']];
+  // Races in order of office, highest first: federal, state, the constitution, judges, county, cities, special districts,
+  // then local ballot questions. Each rule: [pattern, group]; a race's rank is the first rule it matches.
+  const GROUPS = [['federal', 'U.S. Senate and Congress'], ['state', 'Governor, Cabinet and Legislature'], ['amend', 'State constitutional amendments'],
+    ['judges', 'Judges'], ['county', 'County Commission and School Board'], ['city', 'City commissions'], ['special', 'Special districts'], ['localq', 'City ballot questions']];
+  const RANK = [[/^President/i, 'federal'], [/United States Senator/i, 'federal'], [/Congress/i, 'federal'],
+    [/^Governor/i, 'state'], [/Attorney General/i, 'state'], [/Chief Financial/i, 'state'], [/Agriculture/i, 'state'], [/State Senator/i, 'state'], [/State Representative/i, 'state'],
+    [/Constitutional Amendment/i, 'amend'], [/Supreme Court/i, 'judges'], [/District Court of Appeal/i, 'judges'], [/Circuit|County Court|Judge|Justice|Retention/i, 'judges'],
+    [/County Commission|Bay County (?!School)/i, 'county'], [/Sheriff|Property Appraiser|Tax Collector|Clerk of|Supervisor of Elections/i, 'county'], [/School Board|Superintendent/i, 'county'],
+    [/Mayor/i, 'city'], [/Commission|Council/i, 'city'], [/District|CDD|Seat/i, 'special']];
+  const CITY_ORDER = ['pc', 'pcb', 'lh', 'cw', 'parker', 'sp', 'mb'];
   const isQ = c => c.choices.length && c.choices.every(x => /^(yes|no|for|against)/i.test(x.choice));
   function kind(c) {
     const t = c.contest;
     const g = (GOV.find(([re]) => re.test(t)) || [])[1] || null;
-    if (/United States|Congress|President/i.test(t)) return {grp: 'federal', g: null};
-    if (/Retention|Judge|Justice/i.test(t)) return {grp: 'judges', g: null};
-    if (/Constitutional Amendment/i.test(t)) return {grp: 'amend', g: null};
-    if (/Governor|Attorney General|Chief Financial|Agriculture|State Senator|State Representative/i.test(t)) return {grp: 'state', g: null};
-    return {grp: isQ(c) ? 'localq' : 'local', g};
+    let r = RANK.findIndex(([re]) => re.test(t)); if (r < 0) r = RANK.length;
+    let grp = r < RANK.length ? RANK[r][1] : 'special';
+    if (isQ(c) && !['amend', 'judges'].includes(grp)) grp = 'localq';
+    if (grp === 'city' && !CITY_ORDER.includes(g)) grp = g === 'special' ? 'special' : 'county';
+    const ci = CITY_ORDER.indexOf(g);
+    return {grp, g: ['federal', 'state', 'amend', 'judges'].includes(grp) ? null : g, key: [r, ci < 0 ? 9 : ci, (t.match(/\d+/) || ['0'])[0].padStart(3, '0'), t]};
+  }
+  const cmp = (a, b) => { const x = kind(a).key, y = kind(b).key; for (let i = 0; i < x.length; i++) { if (x[i] < y[i]) return -1; if (x[i] > y[i]) return 1; } return 0; };
+  const LOCAL_G = ['county', 'city', 'special', 'localq'];
+  const initials = s => String(s).replace(/"[^"]*"/g, ' ').split(' and ')[0].split(/\s+/).filter(w => /^[A-Za-z]/.test(w) && !/^(jr|sr|ii|iii)\.?$/i.test(w)).map(w => w[0].toUpperCase()).filter((_, i, a) => i === 0 || i === a.length - 1).join('');
+  function avatar(name) {
+    const src = C.ph[name];
+    return src ? `<img class="lv-av" src="${esc(src)}" alt="" loading="lazy" width="44" height="44">` : `<span class="lv-av" aria-hidden="true">${esc(initials(name))}</span>`;
   }
   const norm = s => String(s).toLowerCase().replace(/"[^"]*"/g, ' ').replace(/[^a-z ]/g, ' ').replace(/\s+/g, ' ').trim();
   function cand(name, g) {
     const k = norm(name), last = k.split(' ').pop();
-    return C.cands.find(x => norm(x.n) === k) || (() => { const m = C.cands.filter(x => x.l === last && (!g || x.g === g || g === 'special')); return m.length === 1 ? m[0] : null; })();
+    return C.cands.find(x => norm(x.n) === k) || (() => { const m = C.cands.filter(x => x.l === last && (!g || x.g === g || x.g === 'special' || g === 'special')); return m.length === 1 ? m[0] : null; })();
   }
   let D = null, H = [], lv = 'all', q = '', prev = {}, lastChanged = null;
   const SOE_TIME = s => { const m = String(s || '').match(/(\d+)\/(\d+)\/(\d+) (\d+):(\d+):\d+ ([ap])m/i); return m ? `${+m[4]}:${m[5]} ${m[6].toLowerCase() === 'p' ? 'p.m.' : 'a.m.'}` : ''; };
@@ -138,12 +190,14 @@ JS = r"""
     const types = ['election_day', 'early_voting', 'vote_by_mail', 'provisional'].filter(t => c.choices.some(x => x[t] != null));
     const rows = sorted.map((x, i) => {
       const pct = tot ? 100 * (x.votes || 0) / tot : 0;
-      const p = k.grp === 'local' ? cand(x.choice, k.g) : null;
+      const p = LOCAL_G.includes(k.grp) && k.grp !== 'localq' ? cand(x.choice, k.g) : null;
+      const q = isQ(c);
       const nm = p && p.h ? `<a href="${esc(p.h)}">${esc(x.choice)}</a>` : esc(x.choice);
       const party = x.party && !/^NO[NP]$/.test(x.party) ? `<small>${esc(x.party)}</small>` : '';
       const lead = i === 0 && tot > 0 && (x.votes || 0) > (sorted[1] ? sorted[1].votes || 0 : -1) ? `<span class="lv-lead${done ? ' win' : ''}">${done ? 'Most votes' : 'Leading'}</span>` : '';
       const meta = p ? [p.i ? 'Incumbent' : '', p.r != null ? `Raised ${usd(p.r)}` : ''].filter(Boolean).join(' · ') : '';
-      return `<div class="lv-ch${i === 0 && tot ? ' top' : ''}"><span class="nm">${nm}${party}${lead}</span><span class="v"><b>${pct.toFixed(1)}%</b><span>${n(x.votes)}</span></span>
+      const v = tot ? `<b>${pct.toFixed(1)}%</b><span>${n(x.votes)}</span>` : '<span>No votes yet</span>';
+      return `<div class="lv-ch${i === 0 && tot ? ' top' : ''}${q ? ' q' : ''}">${q ? '' : avatar(x.choice)}<span class="nm">${nm}${party}${lead}</span><span class="v">${v}</span>
         <span class="bar"><span style="width:${pct.toFixed(2)}%"></span></span>${meta ? `<span class="meta">${meta}</span>` : ''}</div>`;
     }).join('');
     let margin = '';
@@ -173,11 +227,11 @@ JS = r"""
     $('lvBal').textContent = n(D.ballots_cast); $('lvTurn').textContent = D.turnout_pct != null ? `${D.turnout_pct}%` : '—';
     $('lvReg').textContent = n(D.registered_voters); $('lvRaces').textContent = D.contests.length;
     $('lvWait').hidden = D.status !== 'waiting';
-    const want = c => { const k = kind(c); if (lv === 'local' && !['local', 'localq'].includes(k.grp)) return false; if (lv === 'state' && ['local', 'localq'].includes(k.grp)) return false;
+    const want = c => { const k = kind(c); if (lv === 'local' && !LOCAL_G.includes(k.grp)) return false; if (lv === 'state' && LOCAL_G.includes(k.grp)) return false;
       if (!q) return true; return (c.contest + ' ' + c.choices.map(x => x.choice).join(' ')).toLowerCase().includes(q); };
-    const cs = D.contests.filter(want);
+    const cs = D.contests.filter(want).sort(cmp);
     $('lvBox').innerHTML = GROUPS.map(([g, label]) => { const list = cs.filter(c => kind(c).grp === g); if (!list.length) return '';
-      return `<h2 class="lv-grp" id="g-${g}">${label} <span class="muted" style="font-weight:400">(${list.length})</span></h2><div class="lv-grid" data-share-items>${list.map(card).join('')}</div>`; }).join('') || '<p class="muted">No races match.</p>';
+      return `<h2 class="lv-grp" id="g-${g}">${label} <span>${list.length}</span></h2><div class="lv-grid" data-share-items>${list.map(card).join('')}</div>`; }).join('') || '<p class="muted">No races match.</p>';
     // briefly outline races whose numbers changed since the last refresh
     D.contests.forEach(c => { const sig = c.choices.map(x => x.votes).join(','); if (prev[c.contest_id] != null && prev[c.contest_id] !== sig) { const el = $('r' + c.contest_id); if (el) el.classList.add('lv-flash'); } prev[c.contest_id] = sig; });
   }
@@ -203,9 +257,12 @@ JS = r"""
 """
 
 
+ELECTION = {'id': 4078, 'name': 'General Election', 'date': 'Tuesday, November 3, 2026'}
+
+
 def election_live_page():
-    election = {'id': 4078, 'name': 'General Election', 'date': 'Tuesday, November 3, 2026'}
-    data = {'election': election['id'], 'cands': _candidates()}
+    election = ELECTION
+    data = {'election': election['id'], 'cands': _candidates(), 'ph': _photos()}
     src = f"https://enr.electionsfl.org/BAY/{election['id']}/Summary/"
     return f'''<style>{CSS}</style>
 <div class="page tax el-live">
