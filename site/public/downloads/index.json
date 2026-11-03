@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-02",
+ "updated": "2026-11-03",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -6456,7 +6456,7 @@
    "id": "business-officers",
    "title": "Business officers",
    "description": "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.",
-   "rows": 13557,
+   "rows": 13559,
    "columns": [
     {
      "name": "place_id",
@@ -6644,7 +6644,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16698,
+   "rows": 16699,
    "columns": [
     {
      "name": "entity_id",
@@ -6762,7 +6762,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22771,
+   "rows": 22789,
    "columns": [
     {
      "name": "link_id",
@@ -8909,7 +8909,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 190,
+   "rows": 186,
    "columns": [
     {
      "name": "place_id",
@@ -9081,15 +9081,13 @@
      "type": "string",
      "values": [
       "destination-pc:17846:2026-12-12",
-      "destination-pc:19153:2026-11-06",
-      "panama-city:7568:2026-11-02"
+      "destination-pc:19153:2026-11-06"
      ]
     },
     {
      "name": "first_posted",
      "type": "string",
      "values": [
-      "2026-11-02T17:00:00",
       "2026-11-06T18:00:00",
       "2026-12-12T17:00:00"
      ]
@@ -12588,7 +12586,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 38,
+   "rows": 39,
    "columns": [
     {
      "name": "notice_id",
@@ -12622,6 +12620,7 @@
       "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach",
+      "FL511 (Florida Department of Transportation)",
       "Lynn Haven",
       "National Weather Service Tallahassee"
      ]
@@ -12631,6 +12630,7 @@
      "type": "string",
      "values": [
       "alert-center",
+      "fl511",
       "news",
       "nws",
       "staff"
@@ -12681,7 +12681,8 @@
      "values": [
       "Boil-water notice",
       "Flash Flood Warning",
-      "Flood Advisory"
+      "Flood Advisory",
+      "Incident"
      ]
     },
     {
@@ -12718,7 +12719,8 @@
       "2026-11-01T13:42:00.000Z",
       "2026-11-01T14:15:00.000Z",
       "2026-11-01T14:36:00.000Z",
-      "2026-11-01T15:41:00.000Z"
+      "2026-11-01T15:41:00.000Z",
+      "2026-11-02T18:07"
      ]
     },
     {
@@ -12766,11 +12768,17 @@
     },
     {
      "name": "full_closure",
-     "type": "string"
+     "type": "boolean",
+     "values": [
+      false
+     ]
     },
     {
      "name": "roadway",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "US-231"
+     ]
     },
     {
      "name": "first_seen",
@@ -12794,7 +12802,8 @@
       "2026-11-01T13:45:03.129178+00:00",
       "2026-11-01T14:20:02.480062+00:00",
       "2026-11-01T14:40:02.527359+00:00",
-      "2026-11-01T15:45:02.449365+00:00"
+      "2026-11-01T15:45:02.449365+00:00",
+      "2026-11-02T23:10:02.570038+00:00"
      ]
     },
     {
@@ -12820,7 +12829,8 @@
       "2026-11-01T16:10:02.717089+00:00",
       "2026-11-01T17:40:02.358407+00:00",
       "2026-11-02T06:00:03.795048+00:00",
-      "2026-11-02T21:50:06.056Z"
+      "2026-11-02T23:10:02.570038+00:00",
+      "2026-11-03T03:38:23.478Z"
      ]
     },
     {
@@ -12832,6 +12842,7 @@
      "type": "string",
      "values": [
       "https://baycounty.me/emergency",
+      "https://fl511.com/",
       "https://mexicobeachfl.gov/government/news/",
       "https://www.baycountyfl.gov/AlertCenter.aspx",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
@@ -13829,7 +13840,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 78,
+   "rows": 79,
    "columns": [
     {
      "name": "place_id",
@@ -13870,7 +13881,8 @@
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
-      "2026-11-02"
+      "2026-11-02",
+      "2026-11-03"
      ]
     },
     {
@@ -14009,6 +14021,7 @@
      "type": "string",
      "values": [
       "pn:592cfc86f14e",
+      "pn:5cb38a6ba13e",
       "pn:9c26a1d21bf3",
       "pn:e13e7f99f672",
       "pn:e50a4c70306c"
@@ -14020,7 +14033,8 @@
      "values": [
       "2026-10-08",
       "2026-10-19",
-      "2026-10-23"
+      "2026-10-23",
+      "2026-10-27"
      ]
     },
     {
@@ -14132,7 +14146,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 110,
+   "rows": 113,
    "columns": [
     {
      "name": "place_id",
@@ -14225,49 +14239,17 @@
     },
     {
      "name": "posted",
-     "type": "string",
-     "values": [
-      "2026-06-13",
-      "2026-06-18",
-      "2026-07-13",
-      "2026-07-17",
-      "2026-08-03",
-      "2026-08-10",
-      "2026-08-22",
-      "2026-09-14",
-      "2026-09-16",
-      "2026-09-17",
-      "2026-09-28",
-      "2026-09-29",
-      "2026-09-30",
-      "2026-10-03",
-      "2026-10-06",
-      "2026-10-07",
-      "2026-10-08",
-      "2026-10-13",
-      "2026-10-15",
-      "2026-10-16",
-      "2026-10-19",
-      "2026-10-20",
-      "2026-10-22",
-      "2026-10-23",
-      "2026-10-26",
-      "2026-10-27",
-      "2026-10-28",
-      "2026-10-29",
-      "2026-10-30",
-      "2026-11-01"
-     ]
+     "type": "string"
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-02",
       "2026-11-03",
       "2026-11-04",
       "2026-11-05",
       "2026-11-06",
+      "2026-11-09",
       "2027-04-30"
      ]
     },
@@ -14287,7 +14269,8 @@
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
-      "2026-10-31"
+      "2026-10-31",
+      "2026-11-03"
      ]
     },
     {
@@ -14381,7 +14364,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-02"
+      "2026-11-03"
      ]
     }
    ],
@@ -15759,7 +15742,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 176,
+   "rows": 173,
    "columns": [
     {
      "name": "place_id",
@@ -15841,9 +15824,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-02T17:00:00",
-      "2026-11-02T18:30:00",
-      "2026-11-02T19:00:00",
       "2026-11-03T10:30:00",
       "2026-11-03T11:00:00",
       "2026-11-03T15:00:00",
@@ -17666,7 +17646,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-02"
+      "2026-11-03"
      ]
     },
     {
@@ -18190,7 +18170,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 421,
+   "rows": 473,
    "columns": [
     {
      "name": "place_id",
@@ -18241,7 +18221,10 @@
       "Budget Hearing",
       "Budget Hearing September 8, 2026.",
       "City Commission Meeting",
+      "City Commission Meeting of August 11, 2026.",
       "City Commission Meeting of August 25, 2026.",
+      "City Commission Meeting of July 14, 2026.",
+      "City Commission Meeting of July 28, 2026.",
       "City Commission Meeting of October 13, 2026.",
       "City Commission Meeting of October 27, 2026.",
       "City Commission Meeting of September 22, 2026.",
@@ -18249,9 +18232,12 @@
       "City Council",
       "City Council Meeting",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
+      "Community Redevelopment Agency Board Meeting of August 4, 2026",
       "Community Redevelopment Agency Board Meeting of September 1, 2026",
       "Final Budget Hearing",
+      "Panama City Community Fund Board of Directors Meeting of July 14, 2026.",
       "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+      "Public Workshop Meeting of July 6, 2026.",
       "Regular Meeting",
       "Special Call Panama City Community Fund Board of Directors Meeting of September 8, 2026."
      ]
@@ -18343,6 +18329,7 @@
       "Ethan Register",
       "Greg Brudnicki; Allan Branch",
       "Joseph Ashbrook",
+      "Mark Sheldon",
       "Mike Nelson; Robert Carroll; William T. Dozier",
       "Robbie Hughes",
       "Robbie Hughes; Greg Brudnicki; Jenna Haligas",
@@ -18536,15 +18523,7 @@
     },
     {
      "name": "published",
-     "type": "string",
-     "values": [
-      "2026-09-30",
-      "2026-10-05",
-      "2026-10-06",
-      "2026-10-07",
-      "2026-10-12",
-      "2026-10-27"
-     ]
+     "type": "string"
     },
     {
      "name": "due_date",
@@ -18578,15 +18557,7 @@
     },
     {
      "name": "date",
-     "type": "string",
-     "values": [
-      "2026-09-30",
-      "2026-10-05",
-      "2026-10-06",
-      "2026-10-07",
-      "2026-10-12",
-      "2026-10-27"
-     ]
+     "type": "string"
     },
     {
      "name": "what",
@@ -20058,7 +20029,8 @@
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
-      "https://www.springfieldfl.net/media/10901"
+      "https://www.springfieldfl.net/media/10901",
+      "https://www.springfieldfl.net/media/10911"
      ]
     },
     {
@@ -20163,7 +20135,7 @@
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
-      "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
+      "https://www.springfieldfl.net/community/meeting/commission-meeting-75",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-55",

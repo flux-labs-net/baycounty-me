@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
  "as_of": "2026-11-02",
- "fetched": "2026-11-02T16:48:59-0500",
+ "fetched": "2026-11-02T22:37:23-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -51,74 +51,6 @@
  ],
  "errors": {},
  "events": [
-  {
-   "event_id": "panama-city:7424:2026-11-02",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Dream Builders at MLK",
-   "starts": "2026-11-02T15:00:00",
-   "ends": "2026-11-02T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7424",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7568:2026-11-02",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "VOICES - Veteran Outreach",
-   "starts": "2026-11-02T17:00:00",
-   "ends": "2026-11-02T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7568",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7510:2026-11-02",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "VOICES - Veteran Outreach",
-   "starts": "2026-11-02T17:00:00",
-   "ends": "2026-11-02T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7510",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:6939:2026-11-02",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Zumba",
-   "starts": "2026-11-02T17:30:00",
-   "ends": "2026-11-02T18:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6939",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
   {
    "event_id": "bay-county:1594:2026-11-03",
    "source_id": "bay-county",
@@ -1800,7 +1732,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7516",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "panama-city:6941:2026-11-16",

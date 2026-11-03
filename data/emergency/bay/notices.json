@@ -3,6 +3,32 @@
  "checked": "2026-11-02",
  "notices": [
   {
+   "notice_id": "fl511:937984",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "FL511 (Florida Department of Transportation)",
+   "source_type": "fl511",
+   "gov_id": null,
+   "title": "US-231: incident (Northbound)",
+   "summary": "Crash in Bay County on US-231 North, beyond County Road 390 Near County Road 2321. Last updated at 06:08 PM.",
+   "instruction": null,
+   "severity": "minor",
+   "event": "Incident",
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-02T18:07",
+   "starts": "2026-11-02T18:07",
+   "ends": null,
+   "updated": "2026-11-02T18:08",
+   "status": "ended",
+   "full_closure": false,
+   "roadway": "US-231",
+   "url": "https://fl511.com/",
+   "source_url": "https://fl511.com/",
+   "first_seen": "2026-11-02T23:10:02.570038+00:00",
+   "last_seen": "2026-11-02T23:10:02.570038+00:00"
+  },
+  {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.ac647063353e108074d6580b5220054cb0fd08e5.001.1",
    "place_id": "fl-bay",
    "kind": "weather",
@@ -358,7 +384,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -466,7 +492,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=702",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-28T21:10:22.208921+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -654,7 +680,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -681,7 +707,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -708,7 +734,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -735,7 +761,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -762,7 +788,7 @@
    "url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "source_url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -789,7 +815,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -816,7 +842,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -869,7 +895,7 @@
    "url": "https://www.baycountyfl.gov/836/10348/Activation-Information?activeLiveTab=widgets",
    "source_url": "https://www.baycountyfl.gov/AlertCenter.aspx",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -922,7 +948,7 @@
    "url": "https://www.pcbfl.gov/storm",
    "source_url": "https://www.pcbfl.gov/storm",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -976,7 +1002,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -1003,7 +1029,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   },
   {
@@ -1030,7 +1056,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-02T21:50:06.056Z",
+   "last_seen": "2026-11-03T03:38:23.478Z",
    "geometry": null
   }
  ]

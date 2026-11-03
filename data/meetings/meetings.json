@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-02T15:43:33-06:00",
+  "generated": "2026-11-02T21:31:57-06:00",
   "window": {
     "from": "2026-11-02",
     "to": "2027-01-01"
@@ -619,12 +619,12 @@
       "title": "Commission Meeting",
       "start": "2026-11-02T17:30:00-06:00",
       "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
-      "agenda_url": null,
+      "agenda_url": "https://www.springfieldfl.net/media/10911",
       "packet_url": null,
       "minutes_url": null,
       "source": "Springfield:https://www.springfieldfl.net/meetings",
       "status": "posted",
-      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-76"
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-75"
     },
     {
       "board": "county",
