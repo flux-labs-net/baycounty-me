@@ -7545,7 +7545,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 422,
+   "rows": 424,
    "columns": [
     {
      "name": "website",
@@ -19922,6 +19922,262 @@
    "json": "/downloads/contract-minutes-check.json",
    "csv": "/downloads/contract-minutes-check.csv",
    "api": "/api/v1/datasets/contract-minutes-check"
+  },
+  {
+   "id": "event-road-closures",
+   "title": "Special event road closures",
+   "description": "Road closures and traffic delays for special events such as IRONMAN Florida, one row per closure, from the police department's traffic advisory: the road and the cross streets it is closed between, closed or delay, and when it starts and ends (ISO times with the Central offset). geometry is the closed stretch as a GeoJSON line in WGS84, placed on the county street centerlines from the street names (placed = street-names).",
+   "rows": 4,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "event_id",
+     "type": "string",
+     "values": [
+      "ironman-florida-2026"
+     ]
+    },
+    {
+     "name": "event_name",
+     "type": "string",
+     "values": [
+      "IRONMAN Florida"
+     ]
+    },
+    {
+     "name": "event_page",
+     "type": "string",
+     "values": [
+      "/events/ironman-florida"
+     ]
+    },
+    {
+     "name": "closure_id",
+     "type": "string"
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "road",
+     "type": "string"
+    },
+    {
+     "name": "limits",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "closed",
+      "delay"
+     ]
+    },
+    {
+     "name": "starts_at",
+     "type": "string",
+     "values": [
+      "2026-11-01T06:00:00-06:00",
+      "2026-11-07T02:00:00-06:00",
+      "2026-11-07T06:30:00-06:00"
+     ]
+    },
+    {
+     "name": "ends_at",
+     "type": "string",
+     "values": [
+      "2026-11-07T11:00:00-06:00",
+      "2026-11-08T04:00:00-06:00",
+      "2026-11-08T12:00:00-06:00"
+     ]
+    },
+    {
+     "name": "town",
+     "type": "string",
+     "values": [
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "geometry",
+     "type": "string"
+    },
+    {
+     "name": "placed",
+     "type": "string",
+     "values": [
+      "street-names"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-11-03"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Panama City Beach Police Department, IRONMAN road closures traffic advisory, Saturday, November 7, 2026"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/photos/events/ironman-florida-2026-closures.jpg"
+     ]
+    }
+   ],
+   "json": "/downloads/event-road-closures.json",
+   "csv": "/downloads/event-road-closures.csv",
+   "api": "/api/v1/datasets/event-road-closures"
+  },
+  {
+   "id": "event-guide",
+   "title": "Special event visitor guide",
+   "description": "The visitor guide for each special event on the site, one row per item: the race week schedule (at = start time), the course (distance_miles), where to watch (with a map point where there is one), getting around and things to do nearby, each with its source.",
+   "rows": 25,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "event_id",
+     "type": "string",
+     "values": [
+      "ironman-florida-2026"
+     ]
+    },
+    {
+     "name": "event_name",
+     "type": "string",
+     "values": [
+      "IRONMAN Florida"
+     ]
+    },
+    {
+     "name": "section",
+     "type": "string",
+     "values": [
+      "course",
+      "getting-around",
+      "schedule",
+      "stay",
+      "watch"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "text",
+     "type": "string"
+    },
+    {
+     "name": "when_text",
+     "type": "string",
+     "values": [
+      "Fri, Nov 6",
+      "Race week",
+      "Sat, 2 AM",
+      "Sat, 6:30 AM",
+      "Sat, midday",
+      "Sat, midnight",
+      "Sat, sunrise",
+      "Sun, 4 AM",
+      "Sun, Nov 1"
+     ]
+    },
+    {
+     "name": "at",
+     "type": "string",
+     "values": [
+      "2026-11-01T06:00:00-06:00",
+      "2026-11-06T07:00:00-06:00",
+      "2026-11-07T02:00:00-06:00",
+      "2026-11-07T06:00:00-06:00",
+      "2026-11-07T06:30:00-06:00",
+      "2026-11-07T11:00:00-06:00",
+      "2026-11-08T00:00:00-06:00",
+      "2026-11-08T04:00:00-06:00"
+     ]
+    },
+    {
+     "name": "distance_miles",
+     "type": "number"
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lon",
+     "type": "number"
+    },
+    {
+     "name": "link",
+     "type": "string",
+     "values": [
+      "/beaches",
+      "/events",
+      "/restaurants"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-11-03"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Panama City Beach Police Department, IRONMAN road closures traffic advisory, Saturday, November 7, 2026",
+      "Visit Panama City Beach, IRONMAN Florida"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/photos/events/ironman-florida-2026-closures.jpg",
+      "https://www.visitpanamacitybeach.com/blog/post/ironman-florida/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/event-guide.json",
+   "csv": "/downloads/event-guide.csv",
+   "api": "/api/v1/datasets/event-guide"
   },
   {
    "id": "meetings",

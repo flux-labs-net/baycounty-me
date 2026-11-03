@@ -29,7 +29,7 @@ CSS = r"""
 .im-warn{display:flex;gap:12px;align-items:center;background:var(--tint-amber);border-radius:16px;padding:12px 16px;font-size:.92rem}
 .im-warn .ico{flex:none}
 .im-live{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:16px;align-items:start}
-.im-mapbox{position:relative;min-width:0}
+.im-mapbox{position:relative;min-width:0;isolation:isolate}
 .im-map{height:560px;border-radius:22px;box-shadow:var(--ui-shadow);overflow:hidden;background:var(--sunken);z-index:0}
 :root[data-theme="dark"] .im-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .im-map .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}}
@@ -71,6 +71,7 @@ CSS = r"""
 .im-axis{position:relative;height:18px;font:500 .7rem var(--f-data);color:var(--faint)}
 .im-axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
 .im-axis span:first-child{transform:none}
+.im-axis b{font-weight:500}
 .im input[type=range]{width:100%;accent-color:var(--salmon);margin:0}
 .im-sched{list-style:none;margin:0;padding:6px 20px;display:flex;flex-direction:column;background:var(--surface);border-radius:22px;box-shadow:var(--ui-shadow)}
 .im-sched li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:14px;padding:12px 0;border-top:1px solid var(--line)}
@@ -95,7 +96,7 @@ CSS = r"""
 .im-adv img{width:100%;border-radius:16px;box-shadow:var(--ui-shadow)}
 @media (prefers-reduced-motion:reduce){.im-btn .im-dot{animation:none}}
 @media (max-width:900px){.im-live{grid-template-columns:1fr}.im-legs{grid-template-columns:1fr}}
-@media (max-width:760px){.im-map{height:400px;border-radius:18px}.im-two{grid-template-columns:1fr}.im-adv{grid-template-columns:1fr}.im-adv img{max-width:260px}
+@media (max-width:760px){.im-map{height:400px;border-radius:18px}.im-clock{position:static;margin-top:10px;box-shadow:none;background:var(--sunken)}.im-axis b{display:none}.im-two{grid-template-columns:1fr}.im-adv{grid-template-columns:1fr}.im-adv img{max-width:260px}
   .im-gantt{grid-template-columns:minmax(0,6.8rem) minmax(0,1fr)}.im-sched li{grid-template-columns:5.8rem minmax(0,1fr)}.im-sched{padding:4px 16px}}
 """
 
@@ -117,7 +118,7 @@ JS = r"""
   const days = []; for (let t = START; t <= END; t += 864e5) days.push(t);
   $('imGantt').innerHTML = C.map(c => `<span class="lab">${c.road}</span><div class="im-track"><span class="${c.kind === 'delay' ? 'd' : 'c'}" style="left:${pct(c.a)};width:calc(${pct(c.b)} - ${pct(c.a)})"></span><i class="im-head"></i></div>`).join('')
     + `<span class="lab">Time</span><div><input type="range" id="imSlider" min="${START}" max="${END}" step="900000" aria-label="Time during race week"></div>`
-    + `<span></span><div class="im-axis">${days.map(t => `<span style="left:${pct(t)}">${fmt(t, {weekday: 'short'})} ${fmt(t, {day: 'numeric'})}</span>`).join('')}</div>`;
+    + `<span></span><div class="im-axis">${days.map(t => `<span style="left:${pct(t)}"><b>${fmt(t, {weekday: 'short'})} </b>${fmt(t, {day: 'numeric'})}</span>`).join('')}</div>`;
 
   let map = null, lines = {};
   function setupMap() {
