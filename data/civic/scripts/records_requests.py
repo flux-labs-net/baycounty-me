@@ -37,6 +37,23 @@ NOTES = {
     'county': 'We already have fund totals for every year; this asks for the department and line-item detail behind them.',
     'schools': 'The district asks for a name, mailing address and phone number in each request; add them to the signature before sending.',
 }
+# Each government's intake address (migration 0091). Files emailed there, or sent from Send records in the BayCounty.me
+# government workspace, come in straight from the government's own system. The School Board has no workspace yet.
+INTAKE = {'county': 'baycounty', 'pc': 'panamacity', 'pcb': 'panamacitybeach', 'lh': 'lynnhaven', 'cw': 'callaway', 'sp': 'springfield',
+          'parker': 'parker', 'mb': 'mexicobeach'}
+# Years whose adopted budget detail the government already posts online, checked by hand on ONLINE_CHECKED. A records
+# request shouldn't ask for what's published: these years are left out of the drafts and listed in the notes instead, as
+# files for us to load. PC and PCB block reads from here, so their sites still need a by-hand look.
+ONLINE_CHECKED = '2026-10-31'
+ONLINE = {
+    'county': ({2016, 2017, 2018, 2019, 2023, 2024}, 'https://www.baycountyfl.gov/Archive.aspx?AMID=40',
+               'expenditure and revenue detail reports'),
+    'cw': ({2022, 2023, 2024, 2025, 2026, 2027}, 'https://www.cityofcallaway.com/429/Annual-Budgets', 'adopted budget books'),
+    'mb': ({2022, 2023, 2024, 2025, 2026, 2027}, 'https://mexicobeachfl.gov/government/budget-financials/', 'budget books'),
+    'sp': ({2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027}, 'https://www.springfieldfl.net/finance', 'final budget resolutions'),
+    'parker': ({2025}, 'https://cityofparker.com/government/budget/', 'final budget'),
+    'schools': ({2018, 2019, 2022, 2023, 2024, 2025, 2026}, 'https://bay.k12.fl.us/uploads/', 'final budget books'),
+}
 FY = lambda y, school: f'FY{y} ({y - 1}-{str(y)[2:]} school year)' if school else f'FY{y} (Oct 1, {y - 1} to Sep 30, {y})'
 
 
@@ -68,9 +85,36 @@ def gaps():
             if 'department' in s:
                 continue
             have_txt = 'nothing on record' if not s else ('fund totals only' if 'fund' in s else 'total only')
+            if y in ONLINE.get(g, (set(),))[0]:
+                continue
             need.append({'fiscal_year': y, 'need': f'line-item budget by fund, department and account ({have_txt})'})
         out[g] = need
     return out
+
+
+def online_note(g):
+    if g not in ONLINE:
+        return None
+    years, url, what = ONLINE[g]
+    have = {y for y, s in _have().get(g, {}).items() if 'department' in s}
+    todo = sorted(years - have)
+    if not todo:
+        return None
+    return f'Left out because they are posted online ({what}, checked {ONLINE_CHECKED}): {spans(todo)} at {url}. Load those ourselves.'
+
+
+_HAVE = None
+
+
+def _have():
+    global _HAVE
+    if _HAVE is None:
+        from page_datasets import budget_years
+        _HAVE = {}
+        for r in budget_years():
+            if r['basis'] == 'adopted':
+                _HAVE.setdefault(r['gov_id'], {}).setdefault(r['fiscal_year'], set()).add(r['section'])
+    return _HAVE
 
 
 def body(g, need):
@@ -78,6 +122,9 @@ def body(g, need):
     years = [n['fiscal_year'] for n in need]
     lines = '\n'.join(f'- {FY(y, school)}' for y in years)
     unit = 'function, cost center or school/department' if school else 'department and division (cost center)'
+    send = (f'\nTo save a step, you can email the files to {INTAKE[g]}@ingest.baycounty.me, or upload them at https://baycounty.me/staff '
+            '(we can give your finance or clerk staff a free sign-in). Nothing is published until it has been checked, and the same address '
+            'works for future check registers, budget reports and contract lists.\n') if g in INTAKE else ''
     return f'''Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:
 
 {lines}
@@ -91,7 +138,7 @@ For each year, please include:
 5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.
 
 A line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.
-
+{send}
 This is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.
 
 Thank you,
@@ -110,8 +157,8 @@ def main():
         what = 'line-item budgets by fund and department'
         drafts.append({'key': f'budgets-{FIRST}-{g}', 'government': gov, 'government_key': g, 'recipient_name': who, 'recipient_email': email,
                        'contact_url': url, 'subject': f'Public records request: {what}, {spans(years)}', 'body': body(g, n), 'gaps': n,
-                       'notes': NOTES.get(g)})
-    out = {'as_of': '2026-10-25', 'about': 'Records request drafts for the budget years BayCounty.me is missing (FY2016 onward). Seeded into corr.records_requests and sent only from /admin.',
+                       'notes': ' '.join(x for x in (NOTES.get(g), online_note(g)) if x) or None})
+    out = {'as_of': ONLINE_CHECKED, 'about': 'Records request drafts for the budget years BayCounty.me is missing (FY2016 onward). Seeded into corr.records_requests and sent only from /admin.',
            'requests': drafts}
     json.dump(out, open(OUT, 'w'), indent=1, ensure_ascii=False)
     for d in drafts:

@@ -195,7 +195,7 @@ fun CRAIncrementScreen() {
         } else {
             item {
                 val cards = listOf(
-                    Triple("Tax increment, FY${h.lastYear}", Format.compactMoney(h.total), "All ${h.agencies} CRAs. ${pct(h.frontBeachRoad, h.total)}% is Front Beach Road"),
+                    Triple("Tax increment, FY${h.lastYear}", Format.compactMoney(h.total), "All ${h.agencies} CRA areas. ${pct(h.frontBeachRoad, h.total)}% is Front Beach Road"),
                     Triple("Paid by Bay County, FY${h.lastYear}", Format.compactMoney(h.county), "${pct(h.county, h.total)}% of the total; the cities paid ${Format.compactMoney(h.total - h.county)}"),
                     Triple("Paid on record, FY${h.firstYear} to FY${h.lastYear}", Format.compactMoney(h.paidOnRecord), "${Format.compactMoney(h.countyOnRecord)} from the county. Early years are missing for several CRAs"),
                     Triple("Still to come, to each sunset", "${Format.compactMoney(h.toComeLow)} to ${Format.compactMoney(h.toComeHigh)}", "Low to high growth"),

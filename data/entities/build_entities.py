@@ -370,7 +370,8 @@ def build_people():
         seen.append((r['official'], {'role': 'officeholder: ' + (r.get('office') or ''), 'gov_id': ids.gov_id(r.get('office'), contains=True) or ids.gov_id(r.get('gov')), 'source': 'campaign'}))
     fin = _j('elections', 'finance_2026.json')
     for r in fin['candidates']:
-        seen.append((r['name'], {'role': '2026 candidate: ' + (r.get('office') or ''), 'gov_id': ids.gov_id(r.get('office'), contains=True), 'source': 'finance_2026'}))
+        yr = (re.search(r'\b(20\d\d)\b', r.get('election') or '') or [None, '2026'])[1]  # the election's year: April 2027 filers are not 2026 candidates
+        seen.append((r['name'], {'role': f'{yr} candidate: ' + (r.get('office') or ''), 'gov_id': ids.gov_id(r.get('office'), contains=True), 'source': 'finance_2026'}))
     # every other local candidate since 2016 (data/campaign/campaign_history.json), winners and losers
     hist = _j('campaign', 'campaign_history.json') or {'candidates': []}
     for r in hist['candidates']:

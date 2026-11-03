@@ -28,6 +28,7 @@ from growth_pages import development_page, roads_page
 from schools_page import schools_page
 from emergency_page import emergency_page
 from hurricane_prep_page import hurricane_prep_page
+from ironman_page import ironman_page
 from elections_hub_page import results_page as election_results_page, voting_page
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
@@ -208,6 +209,45 @@ MENU_JS = '''(() => {
     if (h.zip) p.set('z', String(h.zip).slice(0, 5));
     if (h.lat != null && h.lon != null) { p.set('lat', (+h.lat).toFixed(6)); p.set('lon', (+h.lon).toFixed(6)); }
     return '/my-address/#' + p;
+  };
+  // The signed-in person's saved home ({address, city, zip, lat, lon, zone, ...}), or null when signed out or none is
+  // saved. Fetched once per page. Every address lookup (trash day, evacuation zone, schools, ballot, the address
+  // report) starts from it instead of asking for an address.
+  let homeP = null;
+  const signedIn = /(?:^|; )bcm_in=1/.test(document.cookie), HG = 'bcm-home-gov';
+  const GOVN = {county: 'Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+  const keepCity = h => { try { if (h && GOVN[h.gov_id]) localStorage.setItem(HG, h.gov_id); else localStorage.removeItem(HG); } catch (e) {} return h; };
+  window.BCHome = () => homeP || (homeP = !signedIn ? Promise.resolve(keepCity(null))
+    : fetch('/api/account?action=me', {credentials: 'same-origin'}).then(r => r.ok ? r.json() : null)
+      .then(m => keepCity(m && m.home && m.home.address ? m.home : null), () => null));
+  // The saved home's city, known before /api/account answers (kept on this browser by BCHome, cleared when signed
+  // out): {gov: 'lh', name: 'Lynn Haven', town: 'Lynn Haven'}. Outside city limits gov is 'county' and town is null
+  // (no one town), so town lists start on the whole county. Pages start on it instead of a default city.
+  window.BCHomeCity = () => {
+    let g = null;
+    try { if (signedIn) g = localStorage.getItem(HG); else localStorage.removeItem(HG); } catch (e) {}
+    return g && GOVN[g] ? {gov: g, name: g === 'county' ? 'unincorporated Bay County' : GOVN[g], town: g === 'county' ? null : GOVN[g]} : null;
+  };
+  // Refresh it once per page; a page that needs the answer waits on BCHome().then(BCHomeCity).
+  window.BCHome();
+  // A saved home's street and unit as people type them ("825 Ohio Ave #2"), without the ZIP.
+  window.BCHomeStreet = h => String(h.address || '').replace(/\\s+\\d{5}(-\\d{4})?$/, '').trim().toLowerCase()
+    .replace(/\\b([a-z])/g, c => c.toUpperCase()).replace(/\\b(Ne|Nw|Se|Sw|Us|Cr|Sr)\\b/g, c => c.toUpperCase());
+  // Fill an address box with the saved home and run the page's lookup with it (run(home)). Does nothing when signed
+  // out, with no saved home, or once the person has typed in the box. A short line after `after` (default: the box)
+  // says it's their home; typing another address looks that one up instead, and the saved home stays as it is.
+  window.BCUseHome = async (input, run, after) => {
+    const h = input ? await window.BCHome() : null;
+    if (!h || input.value.trim()) return null;
+    input.value = window.BCHomeStreet(h);
+    const es = document.documentElement.lang.startsWith('es'), p = document.createElement('p');
+    p.className = 'bc-home-note';
+    p.innerHTML = es ? 'Esta es su casa guardada. Escriba otra dirección para buscar otro lugar, o <a href="/account">cambie su casa</a>.'
+      : 'This is your saved home. Type another address to look somewhere else, or <a href="/account">change your home</a>.';
+    (after || input).insertAdjacentElement('afterend', p);
+    input.addEventListener('input', () => { p.hidden = true; }, {once: true});
+    if (run) run(h);
+    return h;
   };
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
@@ -504,8 +544,8 @@ def cra_page():
     t = t.replace('<div class="brand">', '<div class="brand"><span class="eyebrow">Public Money · CRA Spending</span>', 1)
     t = t.replace('body{background:var(--bg);color:var(--ink);font:400 15px/1.55 var(--f-body);\n  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}', '')
     t = t.replace('.wrap{max-width:1360px;margin:0 auto;', '.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));')
-    t = t.replace('<div class="stamp">Data updated Oct 20, 2026<br>Six CRAs · 14 districts</div>',
-                  '<div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Data updated Oct 20, 2026<br>Six CRAs · 14 districts</span></div>')
+    t = t.replace('<div class="stamp">Data updated Oct 20, 2026<br>Six CRAs · 11 districts</div>',
+                  '<div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Data updated Oct 20, 2026<br>Six CRAs · 11 districts</span></div>')
     from city_filter import city_bar as _city_bar, CRA_CODE as _CRA_CODE
     t = t.replace('</header>\n\n  <div class="kpis" id="kpis"></div>', '</header>\n' + _city_bar(list(_CRA_CODE), legacy='cra cras', label='City', all_label='All six CRAs') + '\n  <p class="print-meta" id="printMeta"></p>\n\n  <div class="kpis" id="kpis"></div>', 1)
     t = t.replace('</style>', PRINT_CSS + '</style>', 1)
@@ -737,7 +777,7 @@ PAGES = [
     ('/public-money/cra-spending', 'CRA Spending',
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
     ('/public-money/cra-tax-increment', 'How much property tax goes to the CRAs',
-     "How much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year, who pays it, what has been paid so far and what it could add up to before each CRA ends, with the method and the missing years.", lambda: cra_increment_page(OUT)),
+     "How much property tax Bay County and the cities pay to the six Community Redevelopment Agencies each year (seven tax-increment areas), who pays it, what has been paid so far and what it could add up to before each CRA ends, with the method and the missing years.", lambda: cra_increment_page(OUT)),
     ('/public-money/tax-dollars', 'How your tax dollars are allocated',
      'Estimate your Bay County property tax bill and see who gets each slice, plus where the county, schools and every city get their money and what they spend it on.', lambda: tax_page(OUT, gov_panel=False)),
     ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',
@@ -778,12 +818,14 @@ PAGES = [
     ('/elections/past', 'Past local elections, 2016 to 2025', 'Every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers, with what each raised and spent and which businesses and groups gave.', past_elections_page),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
-    ('/correspondence', 'Letters to officials',
-     'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
+    ('/correspondence', 'Government mail',
+     'Every email between BayCounty.me and Bay County officials and governments, start to finish: letters, records requests and records sent in, read-only, with residents’ details hidden.', lambda: correspondence_page(OUT)),
     ('/connections/shared-owners', 'Shared-owner campaign gifts',
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/events', 'Events in Bay County',
      "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
+    ('/events/ironman-florida', 'IRONMAN Florida race week: road closures and where to watch',
+     'IRONMAN Florida in Panama City Beach, Saturday, November 7, 2026: a live map of every road closure, hour by hour through race week, the race schedule, the swim, bike and run course, where to watch and how to get around.', ironman_page),
     ('/this-week', 'This week in Bay County',
      "What's happening in Bay County this week, the public meetings on the calendar, and the votes and contracts added last week. The same list goes out by email every Monday.", lambda: this_week_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
@@ -836,7 +878,7 @@ if open_books_page.PUBLIC:  # checkbook and budget tracker, hidden until registe
         ('/public-money/checkbook', 'Checkbook', "Every payment a Bay County government makes, from its own check register: who got paid, how much, when and from which fund. Search any company, or see the money month by month.", lambda: checkbook_page(OUT)),
         ('/public-money/budget-tracker', 'Budget tracker', "How each department of a Bay County government is spending against its budget this year, from the government's own monthly budget report: spent, committed, and whether it's ahead of the calendar.", lambda: budget_tracker_page(OUT)),
     ]
-PAGES += [('/connections', 'Connections: who governments paid, and who gave to officials', 'Who every Bay County government and agency paid, how those payees connect, and which businesses gave to the officials who approve the spending.', lambda: connections_page(OUT))]
+PAGES += [('/connections', 'Connections: who was paid, who gave, and how they voted', 'Follow public money from each Bay County government to the businesses it paid, the campaigns those businesses gave to, and how those officials voted on their work.', lambda: connections_page(OUT))]
 PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
 from people_pages import pages as people_page_list, copy_assets as copy_profile_assets  # noqa: E402
 from entity_links import link_names, write_names as write_entity_names, entity_js  # noqa: E402
@@ -911,6 +953,9 @@ def main():
     shutil.copy(os.path.join(ROOT, 'gov.css'), os.path.join(OUT, 'assets', 'gov.css'))
     shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
     shutil.copy(os.path.join(ROOT, 'events.js'), os.path.join(OUT, 'assets', 'events.js'))
+    shutil.copy(os.path.join(ROOT, 'staff_posts.js'), os.path.join(OUT, 'assets', 'staff-posts.js'))  # live staff posts on /notices, /events, /jobs
+    shutil.copy(os.path.join(ROOT, 'records_sent.js'), os.path.join(OUT, 'assets', 'records-sent.js'))  # records governments send (/data-sources, contracts)
+    shutil.copy(os.path.join(ROOT, 'area_map.js'), os.path.join(OUT, 'assets', 'area-map.js'))  # maps on staff alerts and notices (/staff, /emergency, /notices)
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))
@@ -937,6 +982,8 @@ def main():
     print('possible repeated posts for review:', write_review())
     from finance_page import finance_page
     finance_page(OUT)
+    from staff_page import staff_page
+    staff_page(OUT)  # government workspace for city and county staff (api/gov.js)
     from seo import write_robots_and_sitemap
     print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES if p != '/profile'], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
     for dp, _, fs in os.walk(OUT):

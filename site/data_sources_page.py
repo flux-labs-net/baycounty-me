@@ -13,6 +13,7 @@ CSS = '''
 .ds-fresh td{vertical-align:top}.ds-fresh .sub{display:block;color:var(--muted);font-size:.8rem;margin-top:2px;line-height:1.35}
 .ds-st{display:inline-block;padding:3px 9px;border-radius:999px;font-size:.78rem;font-weight:600;line-height:1.3;white-space:nowrap}
 .ds-st-ok{background:var(--tint-teal);color:var(--teal)}.ds-st-so{background:var(--tint-blue);color:var(--blue)}
+.ds-sent-n{margin:0 0 10px}.ds-st+.sub{display:block;font-size:.78rem;color:var(--muted);margin-top:3px}
 .ds-st-wait{background:color-mix(in srgb,var(--muted) 14%,transparent);color:var(--muted)}.ds-st-hand{background:var(--tint-amber);color:var(--gold)}
 @media (max-width:640px){.ds-st{white-space:normal}}
 .ds-mx{border-collapse:separate;border-spacing:0;font-size:.84rem;min-width:860px;width:100%}
@@ -123,6 +124,12 @@ def data_sources_page(out_dir=None):
     <p class="note">The newest period is read from the data each time the site is built. The usual release schedules were checked on {CHECKED_ON}; agencies sometimes publish late. Data: <a href="/api/v1/datasets/data-freshness">data-freshness</a>.</p>
   </section>
 
+  <section class="tx-sec"><div class="sec-hd"><h2 id="sent" data-tile="Sent by governments">Sent by the governments</h2><span class="muted">Live</span></div>
+    <p>Instead of waiting for us to find their records, each city and the county can send them to us straight from their own systems: the check register, the budget-vs-actual report, contracts awarded, pay by job title, board appointments and fee changes. Their staff check a preview before anything is published, payments to private people are listed without a name, and payroll never names employees. The county’s elected officers and the School District can send records the same way. This shows who sends what, and whether the latest is in.</p>
+    <div data-records-sent="scorecard"><p class="muted">Loading…</p></div>
+    <p class="note">Current means the latest period we expect is in: last month’s payments, last quarter’s budget report, contracts sent in the last month and this fiscal year’s pay; board seats and fees count whenever they change. Data: <a href="/api/v1/records-sent">/api/v1/records-sent</a>, and the rows themselves in <a href="/api/v1/datasets/checkbook-payments">checkbook-payments</a>, <a href="/api/v1/datasets/budget-actuals">budget-actuals</a>, <a href="/api/v1/datasets/contracts">contracts</a>, <a href="/api/v1/datasets/salary-positions">salary-positions</a>, <a href="/api/v1/datasets/board-appointments">board-appointments</a> and <a href="/api/v1/datasets/fee-changes">fee-changes</a>.</p>
+  </section>
+
   <section class="tx-sec"><div class="sec-hd"><h2 id="progress" data-tile="Loaded so far">What we’ve loaded so far</h2><span class="muted">Live: every vote in every board’s minutes since 2016</span></div>
     <p>We’re reading every set of meeting minutes each governing board has posted since 2016, so every vote and how each member voted can be searched. This tracks it as it runs: files found in each government’s archive, downloaded, read into motions and roll calls, and checked. The same numbers are in the API at <a href="/api/v1/import-progress">/api/v1/import-progress</a>.</p>
     <div data-import-progress><p class="muted">Loading progress…</p></div>
@@ -162,4 +169,5 @@ def data_sources_page(out_dir=None):
   </section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script src="/assets/progress.js" defer></script>'''
+<script src="/assets/progress.js" defer></script>
+<script src="/assets/records-sent.js" defer></script>'''

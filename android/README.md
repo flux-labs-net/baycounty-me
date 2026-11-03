@@ -23,6 +23,14 @@ The numbers come from `:kit`, a Kotlin port of BayCountyKit (`ios/BayCountyKit`)
 
 App rules, the same as iOS: no data before 2016, chip rows that wrap instead of scrolling sideways, phone content that fits the screen, dark mode, icon-only toolbar buttons with the county mark top left, Poppins at weight 700, navy `#1E3A76` and salmon `#E5564A`, charts with at most six axis labels.
 
+## Wear OS
+
+`:wear` is the watch app: one screen with active alerts first (tap for the list and each notice), then the saved home's trash day, the beach flag and the next meeting, plus a watch face complication (`AlertsComplication`: alert count as short text, alerts and trash day as long text). The rules are `WatchBrief` in `:kit`, the same as the Apple Watch app.
+
+- It has the phone app's package name (`me.baycounty`) and signing key, which Wear OS needs to link the two. The phone app (`WatchSync.kt`) sends only the saved home's map point over the Wearable Data Layer; the watch looks up the city and trash day from `/api/v1/utilities` and alerts from `/api/v1/emergency`, so it also works standalone (county-wide, over the watch's own Wi-Fi or LTE).
+- Phone alerts already show on the watch: Wear OS mirrors the phone's notifications.
+- Screens render on the JVM: `./gradlew :wear:testDebugUnitTest -Dfullres=$PWD/wear-shots` (made-up demo day, round, square and a tall square that shows the whole list). The Android workflow uploads them as `wear-screens`, with the `wear-apk-debug` APK.
+
 ## Data
 
 - Datasets: `https://baycounty.me/downloads/<id>.json` (catalog at `/downloads/index.json`), app files from `/data/app`, search from `/api/v1/search`.
@@ -57,7 +65,7 @@ cd android
 
 Screen names are the iOS app's `-screen` names (`home`, `tab:money`, `gov:county`, `person`, `record:vote`, `craincrement`...). The app also takes them from an intent: `adb shell am start -n me.baycounty/me.baycounty.app.MainActivity --es screen tax --ez dark true`.
 
-On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on every pull request that touches `android/`: kit tests, the debug APK, every screen rendered on the JVM in light and dark, and real emulator screenshots with live data. All three are in the run's artifacts.
+On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on every pull request that touches `android/`: kit tests, the debug APKs, and pictures of the screens the change touched, rendered on the JVM in light and dark and on a real emulator with live data. All are in the run's artifacts. `.github/scripts/app_screens.py` picks the screens from the changed files (the iOS screenshot workflow uses the same picker). To choose them yourself, put a line like `Screens: taxbill, home` in the pull request description (`staff` and `watch` add those apps, `none` skips them), add the `all-screens` label, or run the workflow by hand (its `screens` input defaults to `all`, for a release).
 
 ## Publishing on Google Play
 
@@ -111,7 +119,8 @@ Play only accepts API uploads after the first bundle was uploaded by hand, which
    `app/build.gradle.kts`.
 3. The .aab is also in the run's `app-release-aab` artifact. If Play answers "Only releases with status draft may be
    created on draft app", run it again with status **draft** and roll it out in the Play Console.
-4. Testers get it from the Play Store. When it looks right, Play Console > **Promote release** to Production (or run
+4. **Wear OS** (first time): Play Console > Test and release > Advanced settings > Form factors > add **Wear OS**, then upload the watch screenshots (from the `wear-screens` artifact, round). Each release, upload the `wear-release-aab` artifact on the **Wear OS** track (its version code is the phone's plus 100000, as Play needs).
+5. Testers get it from the Play Store. When it looks right, Play Console > **Promote release** to Production (or run
    the workflow with track production). The first production review usually takes a few days; updates are often faster.
 
 ## Changing it

@@ -1,0 +1,28 @@
+{
+  "place_id": "fl-bay",
+  "note": "Photos of places in the county used on the site's own pages (the homepage first). Picked by hand from Wikimedia Commons, only free licenses (CC0, CC BY, CC BY-SA); never photos of private homes or of identifiable private people. Resized to WebP in site/photos/site/ (the 800px copy for cards, the 1600px copy where a photo fills a band). The credit and license show on the photo on the page. Slots: hero (the top of the homepage), door:<menu section> (the homepage card for that section), feature (the this-week story when it has no photo of its own), money (behind the Your money band).",
+  "fetched_on": "2026-11-03",
+  "photos": [
+    {"photo_id": "st-andrews-dunes", "page": "/", "slot": "hero", "title": "Dunes and the Gulf at St. Andrews State Park", "place_name": "St. Andrews State Park",
+     "file": "st-andrews-dunes", "sizes": [1600, 800], "credit": "Royalbroil", "license": "CC BY-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:St_Andrews_State_Park_Dunes.jpg", "taken": "2017-01-16"},
+    {"photo_id": "pcb-pier", "page": "/", "slot": "door:Living here", "title": "The beach and pier at Panama City Beach", "place_name": "Panama City Beach",
+     "file": "pcb-pier", "sizes": [800], "credit": "Evan Nichols", "license": "CC BY 3.0", "license_url": "https://creativecommons.org/licenses/by/3.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Panama_City_beach_pier_-_panoramio.jpg", "taken": "2010-07-09"},
+    {"photo_id": "panama-city-aerial", "page": "/", "slot": "door:Your money", "title": "Downtown Panama City from above", "place_name": "Panama City",
+     "file": "panama-city-aerial", "sizes": [1600, 800], "credit": "Iscream icecream", "license": "CC0", "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Panama_City,_Florida,_Xaneiro_2025.jpg", "taken": "2025-01-21"},
+    {"photo_id": "panama-city-aerial", "page": "/", "slot": "money", "title": "Downtown Panama City from above", "place_name": "Panama City",
+     "file": "panama-city-aerial", "sizes": [1600, 800], "credit": "Iscream icecream", "license": "CC0", "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Panama_City,_Florida,_Xaneiro_2025.jpg", "taken": "2025-01-21"},
+    {"photo_id": "panama-city-city-hall", "page": "/", "slot": "door:Your government", "title": "Panama City City Hall", "place_name": "Panama City",
+     "file": "panama-city-city-hall", "sizes": [800], "credit": "Balon Greyjoy", "license": "CC0", "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Panama_City_FL_City_Hall.jpg", "taken": "2013-11-24"},
+    {"photo_id": "lynn-haven-city-hall", "page": "/", "slot": "door:Get involved", "title": "Lynn Haven City Hall", "place_name": "Lynn Haven",
+     "file": "lynn-haven-city-hall", "sizes": [800], "credit": "Ebyabe", "license": "CC BY-SA 3.0", "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Lynn_Haven_FL_city_hall01.jpg", "taken": "2010-11-08"},
+    {"photo_id": "pcb-from-st-andrews", "page": "/", "slot": "feature", "title": "Panama City Beach from St. Andrews State Park", "place_name": "Panama City Beach",
+     "file": "pcb-from-st-andrews", "sizes": [1600, 800], "credit": "Balon Greyjoy", "license": "CC0", "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+     "source_url": "https://commons.wikimedia.org/wiki/File:Panama_City_Beach_from_St_Andrews_State_Park.jpg", "taken": "2013-12-31"}
+  ]
+}

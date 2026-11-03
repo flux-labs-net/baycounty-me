@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29T11:29:56+00:00",
+ "as_of": "2026-11-03T18:35:01+00:00",
  "errors": [],
  "finder_url": "https://www.voterfocus.com/PrecinctFinder/addressSearch?county=BAY",
  "directory_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
@@ -72,27 +72,6 @@
  ],
  "soe_events": [
   {
-   "starts": "2026-10-29T08:30",
-   "all_day": false,
-   "title": "Canvassing Board Meeting to continue canvass of vote by mail ballots, scan into audit system, and ballot duplication (as needed)",
-   "url": "https://www.bayvotesfl.gov/events/canvass-of-vote-by-mail-ballots-2/",
-   "source_url": "https://www.bayvotesfl.gov/elections/events/"
-  },
-  {
-   "starts": "2026-10-31",
-   "all_day": true,
-   "title": "Early Voting Ends. Early Voting Hours: SOE Office 8:30 AM-6PM, All other locations 10AM-6PM Early Voting Locations",
-   "url": "https://www.bayvotesfl.gov/events/early-voting-general-election-2/",
-   "source_url": "https://www.bayvotesfl.gov/elections/events/"
-  },
-  {
-   "starts": "2026-11-01T13:00",
-   "all_day": false,
-   "title": "Canvassing Board Meeting to continue canvass of vote by mail ballots(as needed), scan ballots into audit system, and ballot duplication\u2026",
-   "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting/",
-   "source_url": "https://www.bayvotesfl.gov/elections/events/"
-  },
-  {
    "starts": "2026-11-03T15:00",
    "all_day": false,
    "title": "Canvassing Board Meeting to continue canvass of vote by mail ballots, scan ballots into audit system, and ballot duplication (as\u2026",
@@ -121,7 +100,7 @@
    "source_url": "https://www.bayvotesfl.gov/elections/events/"
   },
   {
-   "starts": "2026-11-07T00:00",
+   "starts": "2026-11-08T09:00",
    "all_day": false,
    "title": "Canvassing Board Meeting to conduct recount if required and produce 2nd Unofficial Results.",
    "url": "https://www.bayvotesfl.gov/events/recount-if-required/",

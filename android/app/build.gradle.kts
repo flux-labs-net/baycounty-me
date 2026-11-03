@@ -75,6 +75,8 @@ dependencies {
     implementation("androidx.browser:browser:1.8.0")
     implementation("org.osmdroid:osmdroid-android:6.1.20")
     implementation("com.google.firebase:firebase-messaging:24.1.0")
+    // Sends the saved home's map point to the Wear OS app (WatchSync).
+    implementation("com.google.android.gms:play-services-wearable:19.0.0")
     testImplementation("junit:junit:4.13.2")
 }
 
@@ -87,6 +89,9 @@ tasks.withType<Test>().configureEach {
     // Paparazzi 2.0 alphas build their HTML report with a Gradle class that 8.x lacks. The PNGs and the XML results
     // are what CI uses, so the HTML report stays off.
     reports.html.required.set(false)
+    // Every screen renders in one test JVM from the full seed data; Gradle's 512 MB default ran out on the
+    // person screen once ten screens were picked (light and dark).
+    maxHeapSize = "2g"
 }
 
 kotlin {

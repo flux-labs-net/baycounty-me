@@ -5,14 +5,39 @@ on:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
   pull_request:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
+# One Mac runs every iOS job one at a time, so a new push to a pull request cancels that PR's older run
+# instead of queuing behind it. Runs on main are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
+  # Whether the watch app changed (.github/scripts/app_screens.py), so its screenshots are only taken when it did.
+  plan:
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    outputs:
+      watch: ${{ steps.pick.outputs.watch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github
+      - id: pick
+        uses: ./.github/actions/pick-screens
+
   build:
-    runs-on: blacksmith-6vcpu-macos-15
+    needs: plan
+    runs-on: [self-hosted, macOS]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Install XcodeGen
-        run: brew install xcodegen
+      - name: Use the full Xcode, not the Command Line Tools
+        run: |
+          if [ -d /Applications/Xcode.app ]; then echo "DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer" >> "$GITHUB_ENV"
+          else echo "::error::Xcode isn't installed on this Mac (only the Command Line Tools, which have no simulator). Install Xcode from the App Store."; exit 1; fi
+      - name: Install XcodeGen (once; the Mac keeps it)
+        run: command -v xcodegen >/dev/null || brew install xcodegen
+      - name: Make sure Xcode has the watchOS platform (the iPhone app carries the watch app)
+        run: ios/scripts/ensure_watchos.sh
       - name: Generate the Xcode project
         working-directory: ios
         run: xcodegen
@@ -24,3 +49,20 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO build | tee build.log | grep -E "error:|warning: .*(deprecated|unreachable)|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" build.log
+      - name: Build the staff app (simulator, unsigned)
+        working-directory: ios
+        run: |
+          set -o pipefail
+          xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyStaff \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tee staff.log | grep -E "error:|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" staff.log
+      - name: Apple Watch app screenshots (made-up demo day), when the watch app changed
+        if: needs.plan.outputs.watch == 'true'
+        working-directory: ios
+        run: scripts/watch_screenshots.sh watch-shots
+      - uses: actions/upload-artifact@v4
+        if: always() && needs.plan.outputs.watch == 'true'
+        with:
+          name: watch-screens
+          path: ios/watch-shots

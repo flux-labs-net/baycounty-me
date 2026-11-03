@@ -104,6 +104,45 @@ window.BC = Object.assign(window.BC || {}, window.BCNames);
     if (h.lat != null && h.lon != null) { p.set('lat', (+h.lat).toFixed(6)); p.set('lon', (+h.lon).toFixed(6)); }
     return '/my-address/#' + p;
   };
+  // The signed-in person's saved home ({address, city, zip, lat, lon, zone, ...}), or null when signed out or none is
+  // saved. Fetched once per page. Every address lookup (trash day, evacuation zone, schools, ballot, the address
+  // report) starts from it instead of asking for an address.
+  let homeP = null;
+  const signedIn = /(?:^|; )bcm_in=1/.test(document.cookie), HG = 'bcm-home-gov';
+  const GOVN = {county: 'Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+  const keepCity = h => { try { if (h && GOVN[h.gov_id]) localStorage.setItem(HG, h.gov_id); else localStorage.removeItem(HG); } catch (e) {} return h; };
+  window.BCHome = () => homeP || (homeP = !signedIn ? Promise.resolve(keepCity(null))
+    : fetch('/api/account?action=me', {credentials: 'same-origin'}).then(r => r.ok ? r.json() : null)
+      .then(m => keepCity(m && m.home && m.home.address ? m.home : null), () => null));
+  // The saved home's city, known before /api/account answers (kept on this browser by BCHome, cleared when signed
+  // out): {gov: 'lh', name: 'Lynn Haven', town: 'Lynn Haven'}. Outside city limits gov is 'county' and town is null
+  // (no one town), so town lists start on the whole county. Pages start on it instead of a default city.
+  window.BCHomeCity = () => {
+    let g = null;
+    try { if (signedIn) g = localStorage.getItem(HG); else localStorage.removeItem(HG); } catch (e) {}
+    return g && GOVN[g] ? {gov: g, name: g === 'county' ? 'unincorporated Bay County' : GOVN[g], town: g === 'county' ? null : GOVN[g]} : null;
+  };
+  // Refresh it once per page; a page that needs the answer waits on BCHome().then(BCHomeCity).
+  window.BCHome();
+  // A saved home's street and unit as people type them ("825 Ohio Ave #2"), without the ZIP.
+  window.BCHomeStreet = h => String(h.address || '').replace(/\s+\d{5}(-\d{4})?$/, '').trim().toLowerCase()
+    .replace(/\b([a-z])/g, c => c.toUpperCase()).replace(/\b(Ne|Nw|Se|Sw|Us|Cr|Sr)\b/g, c => c.toUpperCase());
+  // Fill an address box with the saved home and run the page's lookup with it (run(home)). Does nothing when signed
+  // out, with no saved home, or once the person has typed in the box. A short line after `after` (default: the box)
+  // says it's their home; typing another address looks that one up instead, and the saved home stays as it is.
+  window.BCUseHome = async (input, run, after) => {
+    const h = input ? await window.BCHome() : null;
+    if (!h || input.value.trim()) return null;
+    input.value = window.BCHomeStreet(h);
+    const es = document.documentElement.lang.startsWith('es'), p = document.createElement('p');
+    p.className = 'bc-home-note';
+    p.innerHTML = es ? 'Esta es su casa guardada. Escriba otra dirección para buscar otro lugar, o <a href="/account">cambie su casa</a>.'
+      : 'This is your saved home. Type another address to look somewhere else, or <a href="/account">change your home</a>.';
+    (after || input).insertAdjacentElement('afterend', p);
+    input.addEventListener('input', () => { p.hidden = true; }, {once: true});
+    if (run) run(h);
+    return h;
+  };
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';
@@ -340,6 +379,10 @@ CT.forEach(c => CIDX.set(cl(c.s), c.k));
 const STORE = 'bcm-city';
 let cur = '', csel = null, ready = false;
 const recall = () => { try { return localStorage.getItem(STORE) || ''; } catch (e) { return ''; } };
+// A city the reader picked in this visit; it carries across pages ahead of the saved home's city.
+const PICK = 'bcm-city-pick';
+const picked = () => { try { return sessionStorage.getItem(PICK); } catch (e) { return null; } };
+const homeGov = () => ((window.BCHomeCity && window.BCHomeCity()) || {}).gov || '';
 const remember = k => { try { if (k) localStorage.setItem(STORE, k); else localStorage.removeItem(STORE); } catch (e) {} };
 const city = B.city = {
   list: CT,
@@ -356,7 +399,8 @@ const city = B.city = {
   get: () => cur,
   /* the city the reader last picked on any page ('' if none): for tools with their own government picker and no bar */
   remembered: () => city.key(recall()) || '',
-  set(k, why = 'set') { k = city.key(k) || ''; if (!avail(k)) k = ''; remember(k); if (k !== cur || why === 'force') apply(k, why); },
+  set(k, why = 'set') { k = city.key(k) || ''; if (!avail(k)) k = ''; remember(k);
+    if (why === 'user') { try { sessionStorage.setItem(PICK, k); } catch (e) {} } if (k !== cur || why === 'force') apply(k, why); },
   on(fn) { document.addEventListener('bcm:city', e => fn(e.detail.key, e.detail)); if (ready) fn(cur, detail('now')); },
   /* After the city changes, keep the year picker on a year this city has records for. years: its rows' years. */
   fitYear(sel, years) {
@@ -388,6 +432,7 @@ function hideRows() {
   if (!csel || !csel.hasAttribute('data-city-hide')) return;
   document.querySelectorAll('main [data-g]').forEach(el => {
     if (el.closest('.scope')) return;
+    delete el.dataset.cityOther;
     const off = !!cur && el.dataset.g !== '*' && !el.dataset.g.split(/\s+/).includes(cur);
     if (off) { if (!el.hidden) { el.hidden = true; el.dataset.cityOff = '1'; } }
     else if (el.dataset.cityOff) { el.hidden = false; delete el.dataset.cityOff; }
@@ -396,8 +441,10 @@ function hideRows() {
   document.querySelectorAll('main [data-city-empty]').forEach(box => {
     const rows = [...box.querySelectorAll('[data-g]')], none = !!cur && rows.length > 0 && rows.every(r => r.hidden);
     let p = box.querySelector(':scope > .sc-empty');
-    if (none && !p) { p = document.createElement('p'); p.className = 'sc-empty muted'; box.appendChild(p); }
-    if (p) { p.hidden = !none; p.textContent = none ? (box.dataset.cityEmpty || 'Nothing here for {city}.').replace('{city}', city.label(cur)) : ''; }
+    if (none && !p) { p = document.createElement('p'); p.className = 'sc-empty muted'; box.prepend(p); }
+    // ...and then shows the rest of the county, so the reader still sees what's around them
+    if (none) rows.forEach(r => { if (r.dataset.cityOff) { r.hidden = false; delete r.dataset.cityOff; r.dataset.cityOther = '1'; } });
+    if (p) { p.hidden = !none; p.textContent = none ? (box.dataset.cityEmpty || 'Nothing here for {city}.').replace('{city}', city.label(cur)) + ' Here is the rest of Bay County.' : ''; }
   });
 }
 function apply(k, why) {
@@ -421,7 +468,9 @@ function apply(k, why) {
     const v = (u.get(p) || '').split(',')[0];
     if (v && (k = city.key(v))) break;
   }
-  if (!k && !u.has('gov')) k = city.key(recall()) || '';
+  // No city in the link: one picked earlier in this visit, then the signed-in reader's home city, then the last one picked.
+  const fromLink = !!k || u.has('gov'), pick = picked();
+  if (!fromLink) k = pick != null ? (city.key(pick) || '') : (city.key(homeGov()) || city.key(recall()) || '');
   // a government's own page is about one government: it sets the remembered city, and the picker opens another page
   const fixed = csel.dataset.cityFixed;
   if (fixed) { k = fixed; remember(fixed); }
@@ -439,6 +488,11 @@ function apply(k, why) {
     location.href = c ? '/governments/' + c.slug : '/governments';
   });
   document.addEventListener('DOMContentLoaded', () => { ready = true; apply(cur, 'init'); });
+  // The home's city wasn't known on this browser yet (first page after signing in, or the home moved): switch to it.
+  if (!fromLink && pick == null && !fixed && window.BCHome) window.BCHome().then(() => {
+    const g = city.key(homeGov());
+    if (g && g !== cur && avail(g)) city.set(g, 'home');
+  });
 })();
 
 B.enhance = (root = document) => B.bindParams(root);
@@ -957,7 +1011,7 @@ window.BC = Object.assign(window.BC || {}, {share: (rec, btn) => openMenu(btn ||
 })();
 
 (() => {
-  const R = {"gov":{"county":"bay-county","schools":"bay-district-schools","pc":"panama-city","pcb":"panama-city-beach","lh":"lynn-haven","cw":"callaway","sp":"springfield","parker":"parker","mb":"mexico-beach"},"vp":["814-sand","850-construction","a-c-schultes-florida","aaron-rich-marketing","abentras","accurate-drilling-systems","action-truck-center","ajr-publishing","alan-jay-automotive-management-alan-jay-fleet-sales","american-sand","american-sand-asphalt-x-cavation","anderson-columbia","anderson-construction","annett-bus-lines","arris","arrivalist","art-construction-northwest-florida","barge","bay-county-chamber-commerce","bay-point-billfish","bayou-builders","bcl","beard-equipment","behar-peteranecz","bgn","black-veatch","brock-lawn-pest-control","burke-blue","burke-construction-group","carollo-engineers","carr-riggs-ingram","carvertise","cbc","cdr-maguire","charles-white","charlie-coram-s-place","coast-2-coast-printing","coastal-parasail","coastal-protection-engineering","construction-services","core-main","cri","crowdriff","culpepper","cw-roberts","cwr-contracting","dag-architects","davison","destinations-florida","destinations-international","dewberry","disposal-services","dominguez-design-build","ecsc","empire-pipe","emr","energreen-ameri","first-transit","flc","florida-architects","florida-blue-blue-cross-blue-shield-florida","fpl","gac-contractors","gcuc","gortemoller","grand-slam-sports-tournaments","greensouth-solu","gts-entertainment-group","gypsy-belle-photo-bus","hagerty-consulting","halff","hall-contracting","harders","historic-st-andrews-waterfront-partnership","hmx-productions","hutt-insurance-agency","hydra","iheart-media","imageworks","infrastructure-solution-services","ingram-signalization","inland","j-v-gander-distributors","jbj-productions","kemira-water-solutions","l-r-contracting","lamar-companies","lawnscapes","lawnscapes-bay-county","leake-landscapes","madden-media","magnum-engineering","mainline","marsh-usa","marshall-brothers","metric","miles-partnership","mott-macdonald","mr-fence","ncmc","ovivo","panache-tent-event","panama-city-beach-chamber-commerce","panama-city-symphony-orchestra","panhandle-engineering","pcb-entertainment","pcb-map","pg-environmental-fl","pgit","phoenix","pineapple-public-relations","piney-grove-nursery-landscaping","press-print-graphics","public-risk-mgm","pyro-shows","quillian-powell","rategain-adara","razorback","reeves-shaw","regions-bank","reliantsouth","rj-gorman-contracting","rj-gorman-marine","roberts-and-roberts","rotolo-consultants","royal-american","sam-s-club","sj-electro","southeast-tourism-society","southeastern-outdoor","southern-construction","staline-waterworks","styleblueprint","sunbelt-rentals","tb-landmark","telemetry","ten-8","tetra-tech","timmins-consulting","tk-vandy","travelscape","us-relay","visit-florida","volkert","waste-pro","weeks-marine","williams-communications","wjhg-tv","wmbb","world-changers-first-baptist-church-panama-city"]}, VP = new Set(R.vp);
+  const R = {"gov":{"county":"bay-county","schools":"bay-district-schools","pc":"panama-city","pcb":"panama-city-beach","lh":"lynn-haven","cw":"callaway","sp":"springfield","parker":"parker","mb":"mexico-beach"},"vp":["814-sand","850-construction","a-c-schultes-florida","aaron-rich-marketing","abentras","accurate-drilling-systems","action-truck-center","ajr-publishing","alan-jay-automotive-management-alan-jay-fleet-sales","american-sand","american-sand-asphalt-x-cavation","anderson-columbia","anderson-construction","annett-bus-lines","arris","arrivalist","art-construction-northwest-florida","barge","baskerville-donovan","bay-county-chamber-commerce","bay-point-billfish","bayou-builders","bcl","beard-equipment","behar-peteranecz","bgn","black-veatch","brock-lawn-pest-control","burke-blue","burke-construction-group","carollo-engineers","carr-riggs-ingram","carvertise","cbc","cdr-maguire","charles-white","charlie-coram-s-place","coast-2-coast-printing","coastal-parasail","coastal-protection-engineering","construction-services","core-main","cri","crowdriff","culpepper","cw-roberts","cwr-contracting","dag-architects","davison","destinations-florida","destinations-international","dewberry","disposal-services","dominguez-design-build","ecsc","empire-pipe","emr","energreen-ameri","ferguson-waterworks","first-transit","flc","florida-architects","florida-blue-blue-cross-blue-shield-florida","fpl","gac-contractors","gcuc","gortemoller","grand-slam-sports-tournaments","greensouth-solu","gts-entertainment-group","gypsy-belle-photo-bus","hagerty-consulting","halff","hall-contracting","harders","historic-st-andrews-waterfront-partnership","hmx-productions","hutt-insurance-agency","hydra","iheart-media","imageworks","infrastructure-solution-services","ingram-signalization","inland","j-v-gander-distributors","jbj-productions","kemira-water-solutions","l-r-contracting","lamar-companies","lawnscapes","lawnscapes-bay-county","leake-landscapes","madden-media","magnum-engineering","mainline","marsh-usa","marshall-brothers","metric","miles-partnership","mott-macdonald","mr-fence","ncmc","ovivo","panache-tent-event","panama-city-beach-chamber-commerce","panama-city-symphony-orchestra","panhandle-engineering","pcb-entertainment","pcb-map","pg-environmental-fl","pgit","phoenix","pineapple-public-relations","piney-grove-nursery-landscaping","press-print-graphics","public-risk-mgm","pyro-shows","quillian-powell","rategain-adara","razorback","reeves-shaw","regions-bank","reliantsouth","rj-gorman-construction","rj-gorman-contracting","rj-gorman-marine","roberts-and-roberts","rotolo-consultants","royal-american","sam-s-club","sj-electro","southeast-tourism-society","southeastern-outdoor","southern-construction","staline-waterworks","styleblueprint","sunbelt-rentals","tb-landmark","telemetry","ten-8","tetra-tech","timmins-consulting","tk-vandy","travelscape","us-relay","visit-florida","volkert","waste-pro","weeks-marine","williams-communications","wjhg-tv","wmbb","world-changers-first-baptist-church-panama-city"]}, VP = new Set(R.vp);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   // the profile URL for an entity id: same rule as site/entity_graph.py page_url()
   function href(id) {

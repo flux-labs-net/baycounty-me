@@ -52,7 +52,7 @@ struct MoneyView: View {
     ]
     /// The site's Connections menu.
     private let connections: [Item] = [
-        .init(title: "Network", symbol: "point.3.filled.connected.trianglepath.dotted", detail: "Who every government paid, and who gave to officials", site: "/connections"),
+        .init(title: "Connections", symbol: "point.3.filled.connected.trianglepath.dotted", detail: "Who was paid, who gave, and how they voted", site: "/connections"),
         .init(title: "Campaign gifts", symbol: "chart.bar", detail: "What each official raised, and from whom", route: .dataset("campaign-finance")),
         .init(title: "Donors with contracts", symbol: "link", detail: "Businesses that gave and also hold contracts", route: .donorContracts),
         .init(title: "Money map", symbol: "point.3.connected.trianglepath.dotted", detail: "Donors, officials and votes on their contracts", route: .moneyMap),
@@ -87,17 +87,12 @@ struct MoneyView: View {
 
     /// Running totals shown beside a row, from the government profiles and the Amendment 3 model.
     private func value(_ item: Item) -> String? {
-        let g = store.governments
         switch item.title {
         case "Amendment 3":
             guard let a3 = store.amendment3 else { return nil }
             let v = a3.localImpact(1)
             return v > 0 ? "−" + Format.compactMoney(v) : nil
-        case "Hurricane Michael": return total(g.compactMap(\.femaMichael))
-        case "Debt": return total(g.compactMap(\.debtTotal))
-        case "Audit findings":
-            let n = g.compactMap(\.auditFindings).reduce(0, +)
-            return n > 0 ? "\(n)" : nil
+        // Hurricane Michael, Debt and Audit findings carry no running total: summing governments mixed audit years and scopes the web pages do not show
         default: return nil
         }
     }
@@ -153,7 +148,7 @@ struct MoneyView: View {
             ]
             NavigationLink(value: Route.taxCalculator()) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Property tax levied this year").font(.footnote).foregroundStyle(.white.opacity(0.8))
+                    Text("Property tax levied, FY2026 (county, schools, cities)").font(.footnote).foregroundStyle(.white.opacity(0.8))
                     Text(Format.compactMoney(total)).font(.largeTitle.weight(.heavy).monospacedDigit()).foregroundStyle(.white)
                     StackBar(parts: parts)
                     HStack(spacing: 14) {

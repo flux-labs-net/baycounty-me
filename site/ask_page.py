@@ -11,7 +11,7 @@ SEND_ICON = '<svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true">
 
 EXAMPLES = [
     'When is the next County Commission meeting?',
-    "How did Lynn Haven's budget change from 2025 to 2026?",
+    "How did Lynn Haven's budget change from 2026 to 2027?",
     'Which companies get the most Bay County contracts?',
     'What did the auditors find for Panama City?',
     'How much debt does the school district have?',

@@ -19,6 +19,20 @@ class DataTest {
         assertNotNull(r["f"])
     }
 
+    /** A government's "Every record" list names only datasets with rows for it, and leaves none of those out. */
+    @Test fun governmentRecordsListOnlyDatasetsWithRows() {
+        val cat = Repo.catalog()
+        for (gov in listOf("county", "sp", "mb")) {
+            val listed = cat.records(gov).map { it.id }.toSet()
+            assertTrue(gov, listed.isNotEmpty())
+            for (d in cat.datasets) {
+                if (d.column("gov_id") == null || d.id in DatasetSpec.ownScreens) continue
+                val has = Repo.rows(d.id).any { it.string("gov_id") == gov }
+                assertEquals("$gov ${d.id}", has, d.id in listed)
+            }
+        }
+    }
+
     @Test fun everyPublishedDatasetDecodesAndReads() {
         val cat = Repo.catalog()
         assertTrue(cat.datasets.size > 20)
@@ -98,6 +112,16 @@ class DataTest {
         val votes = RecordLinks.votesForVendor("roberts-and-roberts", all)
         assertFalse(votes.isEmpty())
         assertTrue(votes.all { it.string("vote_id") != null })
+    }
+
+    @Test fun contractDollarsAddUpForOneOfficial() {
+        val recs = RecordLinks.recordsForPerson("daniel-raffield", rows(RecordLinks.personDatasets)).toMap()
+        val c = RecordLinks.contractDollars(recs["contract-dollar-totals"] ?: emptyList())!!
+        val yes = (recs["member-contract-dollars"] ?: emptyList()).filter { it.string("vote") == "yes" && it.string("outcome") == "passed" }
+        assertEquals(yes.size, c.yesVotes)
+        assertEquals(Math.round(yes.sumOf { it.number("amount") ?: 0.0 } * 100) / 100.0, c.yes, 0.01)
+        assertTrue(c.yes > 0)
+        assertNull(RecordLinks.contractDollars(emptyList()))
     }
 
     @Test fun personLinksFindVotesAndPay() {

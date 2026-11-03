@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-29T06:22:35-05:00",
+  "generated": "2026-11-03T12:28:31-06:00",
   "window": {
-    "from": "2026-10-29",
-    "to": "2026-12-28"
+    "from": "2026-11-03",
+    "to": "2027-01-02"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -16,12 +16,12 @@
       "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "sources": {
-        "PrimeGov": "ok (22 records)",
-        "calendar (iCal cat 38)": "ok (4 records)"
+        "PrimeGov": "ok (23 records)",
+        "calendar (iCal cat 38)": "ok (3 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
-        "calendar": 4,
+        "agenda_feed": 1,
+        "calendar": 3,
         "expected": 0
       }
     },
@@ -71,7 +71,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (26 records)",
+        "AgendaCenter": "ok (25 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
@@ -127,11 +127,11 @@
       "calendar_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
       "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "CivicClerk": "ok (17 records)",
+        "CivicClerk": "ok (18 records)",
         "calendar (iCal cat 14)": "ok (4 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 5,
         "calendar": 0,
         "expected": 0
       }
@@ -205,7 +205,7 @@
         "Meetings list /meetings/recent": "ok (54 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 3,
         "calendar": 0,
         "expected": 0
       }
@@ -238,12 +238,12 @@
       "calendar_url": null,
       "schedule_source_url": "https://mexicobeachfl.gov/government/council-meetings/",
       "sources": {
-        "Council Meetings page": "ok (82 records)"
+        "Council Meetings page": "ok (86 records)"
       },
       "coverage": {
-        "agenda_feed": 3,
+        "agenda_feed": 5,
         "calendar": 0,
-        "expected": 4
+        "expected": 2
       }
     }
   ],
@@ -258,19 +258,6 @@
       "minutes_url": null,
       "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
       "status": "posted",
-      "past": true
-    },
-    {
-      "board": "sp",
-      "title": "Commission Meeting",
-      "start": "2026-10-05T17:30:00-05:00",
-      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
-      "agenda_url": "https://www.springfieldfl.net/media/10901",
-      "packet_url": null,
-      "minutes_url": "https://www.springfieldfl.net/media/10906",
-      "source": "Springfield:https://www.springfieldfl.net/meetings/recent",
-      "status": "posted",
-      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
       "past": true
     },
     {
@@ -500,18 +487,6 @@
       ]
     },
     {
-      "board": "mb",
-      "title": "City Council Meeting",
-      "start": "2026-10-27T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/09/Octerver-27-2026-City-Council-Meeting-Agena.pdf",
-      "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "past": true
-    },
-    {
       "board": "pc",
       "title": "City Commission Meeting of October 27, 2026.",
       "start": "2026-10-27T16:30:00-05:00",
@@ -615,17 +590,6 @@
     },
     {
       "board": "mb",
-      "title": "3rd LDC Workshop",
-      "start": "2026-10-29T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
-    },
-    {
-      "board": "mb",
       "title": "Special Meeting and 4th LDC Workshop",
       "start": "2026-10-30T09:00:00-05:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
@@ -633,31 +597,50 @@
       "packet_url": "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
+      "status": "posted",
+      "detail_url": "https://youtube.com/live/dX-G839lG70?feature=share",
+      "past": true
     },
     {
       "board": "sp",
       "title": "Commission Meeting",
       "start": "2026-11-02T17:30:00-06:00",
       "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
-      "agenda_url": null,
+      "agenda_url": "https://www.springfieldfl.net/media/10911",
       "packet_url": null,
       "minutes_url": null,
       "source": "Springfield:https://www.springfieldfl.net/meetings",
       "status": "posted",
-      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-76"
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-75",
+      "past": true
     },
     {
       "board": "county",
-      "title": "Bay County Board of County Commissioners Meeting",
+      "title": "BOCC Regular Meeting",
       "start": "2026-11-03T09:00:00-06:00",
-      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL",
+      "agenda_url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
+      "packet_url": "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
       "minutes_url": null,
-      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1594"
+      "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
+      "status": "posted",
+      "items": [
+        {
+          "title": "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
+          "amount": null
+        },
+        {
+          "title": "533 E. 11th Street Building Roof Construction RFP 26-56 - Approve the contract with A&A Roofing Company, Inc. to provide construction services for the roof construction project located at 533 E. 11th Street in the amount of $174,000.00.",
+          "amount": "$174,000.00"
+        }
+      ],
+      "agenda_items": [
+        "Revenues & Expenditures and Inventory Deletions - Acknowledge receipt of the reports and approve inventory deletions.",
+        "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
+        "2027 Board of County Commissioners Meeting and Holiday Schedule - Board adopt the meeting schedule for the 2027 calendar year and approve the 2027 holiday schedule.",
+        "Deckard Short Term Vacation Rental Piggyback - Board approve piggyback agreement with Deckard Technologies.",
+        "533 E. 11th Street Building Roof Construction RFP 26-56 - Approve the contract with A&A Roofing Company, Inc. to provide construction services for the roof construction project located at 533 E. 11th Street in the amount of $174,000.00."
+      ]
     },
     {
       "board": "parker",
@@ -706,6 +689,19 @@
       "status": "posted"
     },
     {
+      "board": "lh",
+      "title": "11/6/26 Joint ULDC - Commission Workshop",
+      "start": "2026-11-06T09:30:00-06:00",
+      "location": "825 Ohio Avenue, Lynn Haven",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2151/files",
+      "items": []
+    },
+    {
       "board": "cw",
       "title": "Commission Meeting",
       "start": "2026-11-10T18:00:00-06:00",
@@ -746,15 +742,14 @@
     },
     {
       "board": "mb",
-      "title": "Regular Meeting (expected)",
+      "title": "City Council Meeting",
       "start": "2026-11-10T09:00:00-06:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "agenda_url": null,
       "packet_url": null,
       "minutes_url": null,
-      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
-      "status": "expected",
-      "expected": true
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "schools",
@@ -815,6 +810,17 @@
       "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1685"
+    },
+    {
+      "board": "mb",
+      "title": "City Council Meeting",
+      "start": "2026-11-17T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "parker",
@@ -951,15 +957,14 @@
     },
     {
       "board": "mb",
-      "title": "Regular Meeting (expected)",
+      "title": "City Council Meeting",
       "start": "2026-12-08T09:00:00-06:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "agenda_url": null,
       "packet_url": null,
       "minutes_url": null,
-      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
-      "status": "expected",
-      "expected": true
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "pcb",
@@ -996,6 +1001,17 @@
       "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1686"
+    },
+    {
+      "board": "mb",
+      "title": "City Council Meeting",
+      "start": "2026-12-15T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "parker",

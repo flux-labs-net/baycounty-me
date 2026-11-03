@@ -9,6 +9,10 @@ struct MeetingsView: View {
 struct MeetingsList: View {
     @Environment(AppStore.self) private var store
     @State private var gov: String = "all"
+    /// Set once the list has started on the home's government or the reader picked a chip.
+    @State private var settled = false
+    /// The signed-in resident's government had nothing coming up, so the list shows every government.
+    @State private var homeEmpty: String?
 
     /// Chips in the order the site lists governments.
     private static let govOrder = ["county", "schools", "pc", "pcb", "lh", "cw", "sp", "parker", "mb"]
@@ -32,7 +36,10 @@ struct MeetingsList: View {
     var body: some View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    ChipRow(chips: chips, selected: gov) { id in withAnimation(.snappy) { gov = id } }
+                    ChipRow(chips: chips, selected: gov) { id in withAnimation(.snappy) { gov = id; settled = true; homeEmpty = nil } }
+                    if let homeEmpty {
+                        Text("No meetings posted for \(homeEmpty) yet. Here's the rest of Bay County.").font(.subheadline).foregroundStyle(.secondary)
+                    }
                     FreshnessNote(key: "meetings")
                     if upcoming.isEmpty {
                         VStack(spacing: 6) {
@@ -71,6 +78,14 @@ struct MeetingsList: View {
             .background(Brand.canvas)
             .navigationTitle("Meetings")
             .refreshable { await store.loadMeetings() }
+            // Signed in: start on the home's own government (its city, or the County Commission outside city limits).
+            .task(id: "\(AccountManager.shared.me?.home?.govKey ?? "")|\(store.meetings.count)") {
+                guard !settled, let home = AccountManager.shared.me?.home, !store.meetings.isEmpty else { return }
+                settled = true
+                let key = home.govKey
+                if Meeting.upcoming(store.meetings).contains(where: { $0.govID == key }) { gov = key }
+                else { homeEmpty = home.town ?? "the County Commission" }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Link(destination: BayCountyClient.meetingsCalendarURL(gov: gov == "all" ? nil : gov)) {

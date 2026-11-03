@@ -97,6 +97,10 @@ CT.forEach(c => CIDX.set(cl(c.s), c.k));
 const STORE = 'bcm-city';
 let cur = '', csel = null, ready = false;
 const recall = () => { try { return localStorage.getItem(STORE) || ''; } catch (e) { return ''; } };
+// A city the reader picked in this visit; it carries across pages ahead of the saved home's city.
+const PICK = 'bcm-city-pick';
+const picked = () => { try { return sessionStorage.getItem(PICK); } catch (e) { return null; } };
+const homeGov = () => ((window.BCHomeCity && window.BCHomeCity()) || {}).gov || '';
 const remember = k => { try { if (k) localStorage.setItem(STORE, k); else localStorage.removeItem(STORE); } catch (e) {} };
 const city = B.city = {
   list: CT,
@@ -113,7 +117,8 @@ const city = B.city = {
   get: () => cur,
   /* the city the reader last picked on any page ('' if none): for tools with their own government picker and no bar */
   remembered: () => city.key(recall()) || '',
-  set(k, why = 'set') { k = city.key(k) || ''; if (!avail(k)) k = ''; remember(k); if (k !== cur || why === 'force') apply(k, why); },
+  set(k, why = 'set') { k = city.key(k) || ''; if (!avail(k)) k = ''; remember(k);
+    if (why === 'user') { try { sessionStorage.setItem(PICK, k); } catch (e) {} } if (k !== cur || why === 'force') apply(k, why); },
   on(fn) { document.addEventListener('bcm:city', e => fn(e.detail.key, e.detail)); if (ready) fn(cur, detail('now')); },
   /* After the city changes, keep the year picker on a year this city has records for. years: its rows' years. */
   fitYear(sel, years) {
@@ -145,6 +150,7 @@ function hideRows() {
   if (!csel || !csel.hasAttribute('data-city-hide')) return;
   document.querySelectorAll('main [data-g]').forEach(el => {
     if (el.closest('.scope')) return;
+    delete el.dataset.cityOther;
     const off = !!cur && el.dataset.g !== '*' && !el.dataset.g.split(/\s+/).includes(cur);
     if (off) { if (!el.hidden) { el.hidden = true; el.dataset.cityOff = '1'; } }
     else if (el.dataset.cityOff) { el.hidden = false; delete el.dataset.cityOff; }
@@ -153,8 +159,10 @@ function hideRows() {
   document.querySelectorAll('main [data-city-empty]').forEach(box => {
     const rows = [...box.querySelectorAll('[data-g]')], none = !!cur && rows.length > 0 && rows.every(r => r.hidden);
     let p = box.querySelector(':scope > .sc-empty');
-    if (none && !p) { p = document.createElement('p'); p.className = 'sc-empty muted'; box.appendChild(p); }
-    if (p) { p.hidden = !none; p.textContent = none ? (box.dataset.cityEmpty || 'Nothing here for {city}.').replace('{city}', city.label(cur)) : ''; }
+    if (none && !p) { p = document.createElement('p'); p.className = 'sc-empty muted'; box.prepend(p); }
+    // ...and then shows the rest of the county, so the reader still sees what's around them
+    if (none) rows.forEach(r => { if (r.dataset.cityOff) { r.hidden = false; delete r.dataset.cityOff; r.dataset.cityOther = '1'; } });
+    if (p) { p.hidden = !none; p.textContent = none ? (box.dataset.cityEmpty || 'Nothing here for {city}.').replace('{city}', city.label(cur)) + ' Here is the rest of Bay County.' : ''; }
   });
 }
 function apply(k, why) {
@@ -178,7 +186,9 @@ function apply(k, why) {
     const v = (u.get(p) || '').split(',')[0];
     if (v && (k = city.key(v))) break;
   }
-  if (!k && !u.has('gov')) k = city.key(recall()) || '';
+  // No city in the link: one picked earlier in this visit, then the signed-in reader's home city, then the last one picked.
+  const fromLink = !!k || u.has('gov'), pick = picked();
+  if (!fromLink) k = pick != null ? (city.key(pick) || '') : (city.key(homeGov()) || city.key(recall()) || '');
   // a government's own page is about one government: it sets the remembered city, and the picker opens another page
   const fixed = csel.dataset.cityFixed;
   if (fixed) { k = fixed; remember(fixed); }
@@ -196,6 +206,11 @@ function apply(k, why) {
     location.href = c ? '/governments/' + c.slug : '/governments';
   });
   document.addEventListener('DOMContentLoaded', () => { ready = true; apply(cur, 'init'); });
+  // The home's city wasn't known on this browser yet (first page after signing in, or the home moved): switch to it.
+  if (!fromLink && pick == null && !fixed && window.BCHome) window.BCHome().then(() => {
+    const g = city.key(homeGov());
+    if (g && g !== cur && avail(g)) city.set(g, 'home');
+  });
 })();
 
 B.enhance = (root = document) => B.bindParams(root);

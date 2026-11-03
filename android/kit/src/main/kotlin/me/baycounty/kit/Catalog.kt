@@ -11,6 +11,11 @@ data class Catalog(
     val datasets: List<DatasetInfo> = emptyList(),
 ) {
     fun dataset(id: String): DatasetInfo? = datasets.firstOrNull { it.id == id }
+
+    /** The datasets that hold rows for one government (its gov_id column lists it), for a government's "Every record" list.
+     *  A dataset with nothing for that government is left off, so the list doesn't open onto empty tables. */
+    fun records(govID: String): List<DatasetInfo> =
+        datasets.filter { it.id !in DatasetSpec.ownScreens && (it.rows ?: 0) > 0 && it.column("gov_id")?.choices?.contains(govID) == true }
 }
 
 @Serializable

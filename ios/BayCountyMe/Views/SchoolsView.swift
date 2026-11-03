@@ -41,7 +41,13 @@ struct SchoolsView: View {
             } else {
                 kpis
                 CardList {
-                    RouteRow(route: .myAddress, title: "Which schools serve your address", detail: "Your zoned elementary, middle and high school", symbol: "mappin.and.ellipse")
+                    if let home = store.home {
+                        RouteRow(route: .address(home), title: "Schools zoned for your home", detail: home.display, symbol: "house")
+                        RowDivider(inset: 50)
+                        RouteRow(route: .myAddress, title: "Another address", detail: "Zoned schools for any Bay County address", symbol: "magnifyingglass")
+                    } else {
+                        RouteRow(route: .myAddress, title: "Which schools serve your address", detail: "Your zoned elementary, middle and high school", symbol: "mappin.and.ellipse")
+                    }
                 }
                 mapSection.id("chart")
                 calendarSection

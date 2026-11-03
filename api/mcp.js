@@ -9,7 +9,7 @@ const VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
 const TOOLS = [
   {name: 'list_datasets', title: 'List datasets',
-   description: 'List every BayCounty.me dataset (budgets, property taxes, exemptions, votes, contracts, campaign money, 2026 candidates, salaries, debt, audits, Hurricane Michael, meetings...) with row counts and column names. Call this first to find the right dataset id.',
+   description: 'List every BayCounty.me dataset (budgets, property taxes, exemptions, votes, contracts, campaign money, 2026 candidates (filter status = on_ballot for who is still running), salaries, debt, audits, Hurricane Michael, meetings...) with row counts and column names. Call this first to find the right dataset id.',
    inputSchema: {type: 'object', properties: {}, additionalProperties: false}, annotations: {readOnlyHint: true}},
   {name: 'query_dataset', title: 'Query a dataset',
    description: 'Get rows from a dataset. Filters match columns exactly (case-insensitive; comma-separated values mean OR). Use column suffixes _min/_max for numbers, _from/_to for dates, _contains for text. Every row includes a source link; cite it. Individual donors and rank-and-file employees are never named.',
@@ -92,7 +92,7 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25}}},
    annotations: {readOnlyHint: true}},
   {name: 'member_voting_record', title: 'Board member voting record',
-   description: 'How one elected board member voted on recorded money votes: totals (yes/no/absent), the votes where they were in the minority, and the latest votes, each with a source link.',
+   description: 'How one elected board member voted on recorded money votes: totals (yes/no/absent), the votes where they were in the minority, the latest votes, each with a source link, and contract_dollars: the dollars in contract and purchase votes they voted yes on that passed, yes on that failed, and no on, with the vote counts behind each (only votes with one clear dollar figure; consent agendas and votes without a figure are counted separately, not totaled).',
    inputSchema: {type: 'object', required: ['member'], additionalProperties: false, properties: {
      member: {type: 'string', description: 'Member name, e.g. "Clair Pease" (case-insensitive; partial names work if they match one member)'},
      since: {type: 'string', description: 'Only votes on or after this date (YYYY-MM-DD)'},
@@ -113,7 +113,7 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 200, default: 50, description: 'Rows per section'}}},
    annotations: {readOnlyHint: true}},
   {name: 'official_correspondence', title: 'Letters to officials',
-   description: 'Published emails BayCounty.me sent to local officials, and their replies, grouped by letter. Only threads approved for publication are returned.',
+   description: 'Emails BayCounty.me sent to local officials, and their replies, grouped by letter. Every conversation is public unless taken down with a reason. For every email with governments (records requests, records sent in, other government mail), read /api/v1/mail.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
      year: {type: 'string', description: 'A year such as 2026, or "all". Omit for the latest year with letters.'},
      government: {type: 'string', description: 'Only letters to this government (as listed in the governments field of a previous result)'},
@@ -135,8 +135,16 @@ const TOOLS = [
   {name: 'emergency_now', title: 'Emergencies and alerts now',
    description: 'What is happening now in Bay County: active National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and storm updates from the county and cities, checked every 5 minutes, most serious first. Always tell people to follow instructions from emergency officials.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
-     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm'], description: 'Only this kind of notice'},
+     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm', 'safety'], description: 'Only this kind of notice'},
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25}}},
+   annotations: {readOnlyHint: true}},
+  {name: 'emergency_timeline', title: 'Recent emergency alerts',
+   description: 'Every emergency alert in Bay County over the last days (up to 90), newest first: weather warnings, evacuation orders, public safety alerts (FEMA IPAWS), shelter openings, boil-water notices, road closures. Each has when it started and ended. Use it for questions like "were there any boil-water notices in Lynn Haven this month?".',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     days: {type: 'integer', minimum: 1, maximum: 90, default: 30},
+     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm', 'safety'], description: 'Only this kind of notice'},
+     gov: {type: 'string', enum: ['county', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb'], description: 'One government, plus the countywide alerts that reach it'},
+     limit: {type: 'integer', minimum: 1, maximum: 200, default: 50}}},
    annotations: {readOnlyHint: true}},
   {name: 'evacuation_zone', title: 'Evacuation zone for an address',
    description: 'The hurricane evacuation zone (A to D, or none) for a Bay County street address or point, what it means, whether an evacuation order covers it now, and the nearest county shelters.',
@@ -238,8 +246,23 @@ async function call(req, name, a = {}) {
     const lim = Math.min(Math.max(a.limit || 25, 1), 200);
     const pick = r => ({date: r.date, board: r.board, vote: r.vote, headline: r.headline, source_url: r.source_url});
     req._rows = Math.min(mine.length, lim);
+    // contract dollars behind their votes (site/vote_dollars.py, dataset contract-dollar-totals)
+    let dollars = null;
+    if (c.datasets.some(d => d.id === 'contract-dollar-totals')) {
+      const pid = mine.find(r => r.person_id)?.person_id;
+      const tots = (await rowsOf(req, c, 'contract-dollar-totals')).filter(t => (pid && t.person_id === pid) || t.member === who[0]);
+      if (tots.length) {
+        const sum = f => Math.round(tots.reduce((s, t) => s + (Number(t[f]) || 0), 0) * 100) / 100;
+        dollars = {voted_yes_passed: sum('yes_total'), yes_votes: sum('yes_votes'), voted_yes_failed: sum('yes_failed_total'), yes_failed_votes: sum('yes_failed_votes'),
+          voted_no: sum('no_total'), no_votes: sum('no_votes'), contract_votes_on_file: sum('contract_votes'), consent_agendas_not_totaled: sum('not_counted_consent'),
+          without_one_clear_figure: sum('not_counted_no_amount') + sum('not_counted_unclear'), not_new_spending: sum('not_counted_not_spending'),
+          first_date: tots.map(t => t.first_date).filter(Boolean).sort()[0] || null, last_date: tots.map(t => t.last_date).filter(Boolean).sort().pop() || null,
+          votes: `${SITE}/api/v1/datasets/member-contract-dollars?member=${encodeURIComponent(who[0])}&sort=-date`,
+          note: 'Only contract and purchase votes with one clear dollar figure in the record of the vote are totaled, so this is a floor. Each vote and its source is in member-contract-dollars.'};
+      }
+    }
     return {member: who[0], boards: [...new Set(mine.map(r => r.board))], votes: mine.length, tally, in_minority: minority.length,
-      minority_votes: minority.slice(0, lim).map(pick), latest: mine.slice(0, lim).map(pick),
+      minority_votes: minority.slice(0, lim).map(pick), latest: mine.slice(0, lim).map(pick), contract_dollars: dollars,
       note: 'Recorded money votes compiled by BayCounty.me, not every vote the board took. Cite each source_url.'};
   }
   if (name === 'vendor_profile') {
@@ -383,6 +406,12 @@ async function call(req, name, a = {}) {
       notices: notices.map(n => ({kind: n.kind, title: n.title, event: n.event, severity: n.severity, zones: n.zones, area: n.area, source: n.source, issued: n.issued, ends: n.ends, instruction: n.instruction, url: n.url, page: n.page})),
       zones_ordered: d.zones.filter(z => z.ordered).map(z => z.zone), page: d.links.page, note: d.note};
   }
+  if (name === 'emergency_timeline') {
+    const d = await require('./_emergency_feed').timeline(req, await load(req, '/downloads/index.json'), {days: a.days, kind: a.kind, gov: a.gov});
+    const items = d.items.slice(0, Math.min(a.limit || 50, 200));
+    req._rows = items.length;
+    return {days: d.days, total: d.total, counts: d.counts, items, page: 'https://baycounty.me/emergency#timeline', note: d.note};
+  }
   if (name === 'evacuation_zone') {
     if (!a.address && (a.lat == null || a.lng == null)) throw new Error('address, or lat and lng, is required');
     return require('./_emergency_feed').zoneLookup(req, await load(req, '/downloads/index.json'), {address: a.address, lat: a.lat, lng: a.lng});
@@ -426,7 +455,7 @@ async function handle0(req, msg) {
     const v = VERSIONS.includes(params.protocolVersion) ? params.protocolVersion : VERSIONS[0];
     return ok(id, {protocolVersion: v, capabilities: {tools: {listChanged: false}, resources: {listChanged: false, subscribe: false}},
       serverInfo: {name: 'baycounty-me', title: 'BayCounty.me', version: '1.0.0', websiteUrl: SITE},
-      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile, official_correspondence, emergency_now and evacuation_zone answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
+      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile, official_correspondence, emergency_now, emergency_timeline and evacuation_zone answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
   }
   if (method === 'ping') return ok(id, {});
   if (method === 'tools/list') return ok(id, {tools: TOOLS});

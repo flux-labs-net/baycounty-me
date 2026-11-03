@@ -125,7 +125,7 @@ test('each person has one row per government, with every role folded in', async 
   if (hamre) {
     assert.equal(hamre.relation, 'serves');
     assert.match(hamre.detail, /Ward 4 \(2022–now\)/);
-    assert.match(hamre.detail, /Running again in 2026/);
+    assert.doesNotMatch(hamre.detail, /Running again/);  // elected unopposed in April: not on the Nov 3 ballot
     assert.doesNotMatch(hamre.detail, /springfield/);  // no lowercased place names
   }
   const r = await E().getEntity({}, catalog(), 'gov:sp');

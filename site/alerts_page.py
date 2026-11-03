@@ -1,33 +1,111 @@
 """Email alerts sign-up (/alerts) and the weekly digest feed (/data/digest.json)."""
 import json, os, re
+from urllib.parse import urlencode
 from govs import GOVS, _load
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NAMES = {g['key']: g['short'] for g in GOVS}
-PAT = {'county': r'\bBay County\b(?! (District|Utility))|County Commission', 'schools': r'School Board|Bay District Schools',
-       'pc': r'Panama City(?! Beach)', 'pcb': r'Panama City Beach', 'lh': r'Lynn Haven', 'cw': r'Callaway', 'sp': r'Springfield', 'parker': r'\bParker\b', 'mb': r'Mexico Beach'}
+
+
+# How far back the feed keeps "new" items and how far ahead "coming up" items. The Monday email (digestEmail in
+# api/_emails.js) shows the last 7 days and the next 8; the wider window lets the /admin preview fall back to 60 days.
+BACK_DAYS, AHEAD_DAYS, KEEP = 60, 14, 80
+TEST = re.compile(r'\btest(ing)?\b', re.I)  # staff test alerts (an admin can hide them on the site, but not in this file)
+
+
+def _town_of(g):
+    return {'county': 'Bay County'}.get(g['key'], g['short'])
+
+
+def _city_news(today=None):
+    """What happened and what's coming up in each government, keyed by gov key: alerts, events, new votes and contracts,
+    public notices and job openings. All of it comes from the published datasets (emergency-notices, community-events,
+    school-calendar, votes, contracts, change-orders, public-notices, job-openings)."""
+    import datetime as dt
+    import weekly
+    from page_datasets import community_events, emergency_notices, public_notices, job_openings, school_calendar
+    today = today or dt.datetime.now(weekly.TZ).date()
+    back, ahead = (today - dt.timedelta(days=BACK_DAYS)).isoformat(), (today + dt.timedelta(days=AHEAD_DAYS)).isoformat()
+    now = today.isoformat()
+    towns = {_town_of(g): g['key'] for g in GOVS}
+    out = {g['key']: {'alerts': [], 'events': [], 'votes': [], 'contracts': [], 'notices': [], 'jobs': []} for g in GOVS}
+    add = lambda key, sec, row: key in out and out[key][sec].append(row)
+
+    # Alerts that named this government (boil-water, road closures, outages, city news posts). Countywide weather
+    # warnings are left out: by Monday they're over, and /emergency has the live list.
+    for n in emergency_notices():
+        when = str(n.get('issued') or n.get('first_seen') or '')[:10]
+        if n.get('same_as') or not n.get('gov_id') or not (back <= when <= now) or TEST.search(f"{n.get('title')} {n.get('summary')}"):
+            continue
+        add(n['gov_id'], 'alerts', {'date': when, 'title': n.get('title'), 'text': n.get('summary') or n.get('instruction') or '',
+                                    'kind': n.get('kind'), 'status': n.get('status'), 'url': f"https://baycounty.me/emergency#n-{n['notice_id']}"})
+
+    # Events in town (community calendar), plus the school calendar for the school district. Public meetings are
+    # their own section, so the calendar's copies of them are left out.
+    for r in community_events():
+        st = r.get('starts') or ''
+        if r.get('same_as') or r.get('category') == 'Public meeting' or not (now <= st[:10] <= ahead):
+            continue
+        key = r.get('gov') or towns.get(r.get('town'))
+        add(key, 'events', {'start': st, 'all_day': bool(r.get('all_day')), 'title': r.get('title'), 'venue': r.get('venue'),
+                            'recurring': bool(r.get('recurring')), 'url': r.get('url') or 'https://baycounty.me/events'})
+    for r in school_calendar():
+        st = r.get('starts') or ''
+        if r.get('kind') == 'board-meeting' or not (now <= st[:10] <= ahead):
+            continue
+        add('schools', 'events', {'start': st, 'all_day': bool(r.get('all_day')), 'title': r.get('title'), 'venue': r.get('venue'),
+                                  'recurring': False, 'url': 'https://baycounty.me/schools#calendar'})
+
+    # Votes, contracts and change orders that reached the site (first seen) in the window. Minutes come out weeks after
+    # a meeting, so "new" is when we first had it, the same rule as This week in Bay County (site/weekly.py): a record
+    # held more than FRESH_DAYS before we first saw it is a backfill, not news.
+    seen = weekly._first_seen()
+    lo, hi = today - dt.timedelta(days=BACK_DAYS), today
+    fresh = lambda r: (r.get('date') or '') >= (dt.date.fromisoformat(r['first_seen'][:10]) - dt.timedelta(days=weekly.FRESH_DAYS)).isoformat()
+    for r in filter(fresh, weekly._votes(seen, lo, hi)):
+        add(r['gov_id'], 'votes', {'date': r['first_seen'], 'held': r['date'], 'title': r['title'], 'text': r.get('summary') or '',
+                                   'board': r.get('board'), 'outcome': r.get('outcome'), 'tally': r.get('tally'), 'split': bool(r.get('split')),
+                                   'voted_no': [{'name': p['name'], 'url': p['url']} for p in r.get('people') or []], 'url': r['url']})
+    for r in filter(fresh, weekly._contracts(seen, lo, hi)):
+        add(r['gov_id'], 'contracts', {'date': r['first_seen'], 'held': r['date'], 'kind': r['section'], 'amount': r.get('amount') or 0,
+                                       'vendor': r.get('title'), 'text': r.get('summary') or '', 'url': r['url'], 'source_url': r.get('source_url')})
+
+    for r in public_notices():
+        if r.get('same_as') or not (back <= (r.get('published') or '') <= now):
+            continue
+        add(r.get('gov_id'), 'notices', {'date': r['published'], 'title': r.get('title'), 'kind': r.get('kind_label'), 'event_date': r.get('event_date'),
+                                         'text': (r.get('text') or '').split('\n\n')[0],
+                                         'url': r.get('pdf_url') or 'https://baycounty.me/notices?' + urlencode({'gov': r.get('gov_id'), 'q': (r.get('title') or '')[:40]})})
+    for r in job_openings():
+        when = r.get('first_seen') or r.get('posted') or ''
+        if r.get('same_as') or not (back <= when <= now):
+            continue
+        add(r.get('gov_id'), 'jobs', {'date': when, 'title': r.get('title'), 'department': r.get('department'), 'job_type': r.get('job_type'),
+                                      'pay': r.get('pay'), 'closes': r.get('closes'), 'url': r.get('url') or 'https://baycounty.me/jobs'})
+
+    for secs in out.values():
+        for k, rows in secs.items():
+            if k == 'events':
+                rows.sort(key=lambda x: (x['recurring'], x['start']))
+            elif k not in ('votes', 'contracts'):  # votes keep weekly.py's order (split and big votes first); contracts biggest first
+                rows.sort(key=lambda x: x['date'], reverse=True)
+            del rows[KEEP:]
+    return out
 
 
 def digest_json(out_dir):
-    from updates import CHANGES
+    """/data/digest.json: one entry per government for the Monday city emails (api/digest.js)."""
     D = _load()
+    news = _city_news()
     govs = []
     for g in GOVS:
-        ch = []
-        for c in CHANGES[:40]:
-            txt = c['title'] + ' ' + c['text']
-            named = [k for k, p in PAT.items() if re.search(p, txt)]
-            if c.get('govs'):
-                named = c['govs']
-            if not named or g['key'] in named or f'/governments/{g["slug"]}' in c['pages']:
-                ch.append({'date': c['date'], 'title': c['title'], 'text': c['text'], 'url': 'https://baycounty.me' + (c['pages'][0] if c['pages'] else '/updates')})
         meets = []
         md = D.get('meetings') or {}
-        bids = {b['id'] for b in md.get('boards', []) if b.get('gov') == g['key']}
+        bids = {b['id']: b for b in md.get('boards', []) if b.get('gov') == g['key']}
         for m in md.get('meetings', []):
             if m.get('board') in bids and not m.get('past') and m.get('start'):
-                meets.append({k: m.get(k) for k in ('start', 'title', 'agenda_url', 'expected', 'location')})
-        govs.append({'key': g['key'], 'slug': g['slug'], 'name': g['short'], 'changes': ch, 'meetings': meets})
+                meets.append({**{k: m.get(k) for k in ('start', 'title', 'agenda_url', 'expected', 'location')}, 'board': bids[m['board']].get('name')})
+        govs.append({'key': g['key'], 'slug': g['slug'], 'name': g['short'], 'meetings': meets, **news[g['key']]})
     os.makedirs(os.path.join(out_dir, 'data'), exist_ok=True)
     json.dump({'govs': govs}, open(os.path.join(out_dir, 'data', 'digest.json'), 'w'), separators=(',', ':'))
 
@@ -54,7 +132,7 @@ def alerts_page(out_dir):
     boxes = ''.join(f'<label class="al-opt"><input type="checkbox" name="g" value="{g["key"]}"><span>{g["short"]}</span></label>' for g in GOVS)
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved</span><h1>Get updates by email</h1>
-    <p class="lede">Follow the governments you care about. Once a week, when there's something new, you'll get a short email: new votes and data, corrections, and the meetings coming up.</p></div></header>
+    <p class="lede">Follow the governments you care about. Once a week you'll get a short email about each one: meetings and events coming up, new votes and contracts, alerts, public notices and job openings.</p></div></header>
   <p class="note" style="margin:0">Looking for weather warnings, evacuation orders, shelters or boil-water notices? See <a href="/emergency">Emergencies and alerts</a>, updated every 5 minutes, and <a href="/hurricane-prep">Hurricane prep</a>.</p>
   <div class="al-status" id="alStatus" hidden></div>
   <form class="contact al-form" id="alForm" novalidate>

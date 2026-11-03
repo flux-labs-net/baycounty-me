@@ -45,6 +45,7 @@ def _js_data(obj):
 
 CSS = r"""
 .nj-ctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:12px}
+.nj-other{margin:0 0 4px;font-size:.92rem;color:var(--muted)}.nj-other b{color:var(--ink);font-weight:600}
 .nj-ctl input[type=search],.nj-ctl select{min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;max-width:100%}
 .nj-ctl input[type=search]{flex:1 1 240px}
 .nj-list{display:flex;flex-direction:column;gap:10px}
@@ -82,20 +83,29 @@ LIST_JS = r"""
   let kind = '', open = false; const N = 25;
   const p = new URLSearchParams(location.search);
   if (p.get('q')) qi.value = p.get('q'); if (p.get('gov')) gs.value = p.get('gov');
+  // no government in the link: a signed-in reader starts on their home's (kept out of the link unless they change it)
+  let homeG = '', homeNone = '';
+  const homeStart = () => { const h = !p.has('gov') && window.BCHomeCity && window.BCHomeCity(); if (!h) return;
+    if ([...gs.options].some(o => o.value === h.gov)) gs.value = homeG = h.gov; else homeNone = h.gov === 'county' ? 'Bay County' : h.name; };
   if (p.get('kind')) { kind = p.get('kind'); chips.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === kind)); }
   function show() {
     const q = qi.value.trim().toLowerCase(), g = gs.value;
-    const rows = D.rows.filter(r => (!g || r.g === g || (g === 'other' && !r.g)) && (!kind || C.kindOf(r) === kind) && (!q || C.text(r).toLowerCase().includes(q)));
-    box.innerHTML = rows.slice(0, open ? rows.length : N).map(r => C.card(r, esc, D)).join('') || '<p class="muted">Nothing matches.</p>';
+    const fit = r => (!kind || C.kindOf(r) === kind) && (!q || C.text(r).toLowerCase().includes(q));
+    let rows = D.rows.filter(r => (!g || r.g === g || (g === 'other' && !r.g)) && fit(r)), note = '';
+    // a government with nothing that matches says so, then shows every government's
+    if (!g && homeNone && !q && !kind) note = `<p class="nj-other"><b>None from ${esc(homeNone)} right now.</b> Here are the rest in Bay County:</p>`;
+    if (g && !rows.length && D.rows.some(fit)) { note = `<p class="nj-other"><b>None from ${esc(gs.options[gs.selectedIndex].textContent)} right now.</b> Here are the rest in Bay County:</p>`; rows = D.rows.filter(fit); }
+    box.innerHTML = note + (rows.slice(0, open ? rows.length : N).map(r => C.card(r, esc, D)).join('') || '<p class="muted">Nothing matches.</p>');
     more.hidden = open || rows.length <= N; more.textContent = `Show all ${rows.length}`;
     cnt.textContent = `${rows.length} ${rows.length === 1 ? C.one : C.many}`;
-    const u = new URL(location.href); [['q', q], ['gov', g], ['kind', kind]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u);
+    const u = new URL(location.href); [['q', q], ['gov', g === homeG ? '' : g], ['kind', kind]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u);
   }
-  qi.addEventListener('input', () => { open = false; show(); }); gs.addEventListener('change', () => { open = false; show(); });
+  qi.addEventListener('input', () => { open = false; show(); }); gs.addEventListener('change', () => { open = false; homeNone = ''; show(); });
   chips.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; chips.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); kind = b.dataset.v; open = false; show(); });
   more.addEventListener('click', () => { open = true; show(); });
   // site.js (BC.longText) is deferred: draw once it has run
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show); else show();
+  const go = () => { homeStart(); show(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
 """
 
@@ -161,6 +171,7 @@ def notices_page():
     <p class="lede">Bids, public hearings and meetings that Bay County, the School Board, the cities and other public agencies are required to announce, in one searchable list. Each links to the government that posted it.</p></div>
     <div class="stamp"><a class="pill" href="/meetings">Meeting calendar →</a><span>Read {e(_short(_d(info.get("as_of") or today)))}</span></div></header>
   <div class="kpis">{kpis}</div>
+  <section class="tx-sec" data-staff-posts="notice" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="notices" data-tile="Notices">Every notice, newest first</h2><span class="muted" id="njCount"></span></div>
     <div class="nj-ctl"><label class="sr-only" for="njQ">Search notices</label><input id="njQ" type="search" placeholder="Search: a road, a business, a word like rezoning">
       {_gov_select(rows, govs, "Government")}
@@ -178,7 +189,9 @@ def notices_page():
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="njData">{_js_data(data)}</script>
-<script>{NOTICE_JS}{LIST_JS}</script>'''
+<script>{NOTICE_JS}{LIST_JS}</script>
+<script src="/assets/area-map.js" defer></script>
+<script src="/assets/staff-posts.js" defer></script>'''
 
 
 def jobs_page():
@@ -190,7 +203,7 @@ def jobs_page():
         return '<div class="page"><h1>Government jobs</h1><p>No job boards on file for this place yet.</p></div>'
     govs = _govs()
     today = dt.date.today()
-    week = (today - dt.timedelta(days=7)).isoformat()
+    week = (today - dt.timedelta(days=6)).isoformat()  # today and the six days before: seven days
 
     def ty(r):
         t = (r.get('job_type') or '').lower()
@@ -198,8 +211,8 @@ def jobs_page():
     rows = sorted(rows, key=lambda r: (r.get('posted') or '0000', r['title']), reverse=True)
     data = {'gh': _gov_hrefs(), 'rows': [{'t': r['title'], 'e': r['employer'], 'g': r['gov_id'], 'dp': r['department'], 'jt': r['job_type'], 'ty': ty(r), 'pay': r['pay'],
                       'po': r['posted'], 'cl': r['closes'], 'u': r['url']} for r in rows]}
-    new = sum(1 for r in rows if (r.get('posted') or r.get('first_seen') or '') >= week)
-    closing = sum(1 for r in rows if r.get('closes') and r['closes'] <= (today + dt.timedelta(days=7)).isoformat())
+    new = sum(1 for r in rows if (r.get('posted') or '') >= week)  # only a posted date counts: a board's first scrape day says nothing about when a job went up
+    closing = sum(1 for r in rows if r.get('closes') and today.isoformat() <= r['closes'] <= (today + dt.timedelta(days=6)).isoformat())
     read = [b for b in boards if b['read']]
     board_cards = ''.join(
         f'<div class="nj-board"><b>{gov_link(b["gov_id"], b["employer"]) if b["gov_id"] else e(b["employer"])}</b>'
@@ -207,7 +220,7 @@ def jobs_page():
         f'<small><a href="{e(b["url"])}" target="_blank" rel="noopener">{"All openings and how to apply" if b["read"] else "Its job page"}</a></small></div>' for b in boards)
     kpis = (_kpi('Open jobs', len(rows), f'At {len({r["employer"] for r in rows})} public employers') +
             _kpi('New this week', new, 'Posted in the last 7 days') +
-            _kpi('Closing soon', closing, 'Closing date in the next 7 days') +
+            _kpi('Closing soon', closing, 'Closing in the next 7 days') +
             _kpi('Job boards read', f'{len(read)} of {len(boards)}', 'The rest link to the employer'))
     chips = '<button type="button" class="chip" data-v="full" aria-pressed="false">Full time</button><button type="button" class="chip" data-v="part" aria-pressed="false">Part time, temporary or substitute</button>'
     return f'''<style>{CSS}</style>
@@ -216,6 +229,7 @@ def jobs_page():
     <p class="lede">Open jobs at Bay County, Bay District Schools, the cities and the airport, from each employer's own job board, in one list. Apply on the employer's site.</p></div>
     <div class="stamp"><a class="pill" href="/notices">Public notices →</a><span>Read {e(_short(_d(info.get("as_of") or today.isoformat())))}</span></div></header>
   <div class="kpis">{kpis}</div>
+  <section class="tx-sec" data-staff-posts="job" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="jobs" data-tile="Openings">Open jobs, newest first</h2><span class="muted" id="njCount"></span></div>
     <div class="nj-ctl"><label class="sr-only" for="njQ">Search jobs</label><input id="njQ" type="search" placeholder="Search: teacher, paramedic, mechanic, a department">
       {_gov_select(rows, govs, "Employer")}
@@ -234,4 +248,5 @@ def jobs_page():
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="njData">{_js_data(data)}</script>
-<script>{JOB_JS}{LIST_JS}</script>'''
+<script>{JOB_JS}{LIST_JS}</script>
+<script src="/assets/staff-posts.js" defer></script>'''

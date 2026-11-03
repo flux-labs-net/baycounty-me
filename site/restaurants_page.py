@@ -104,10 +104,13 @@ RS_JS = r"""
   function filter() {
     if (!D) return;
     const t = q.value.trim().toLowerCase(), c = city.value, yr = D.year_ago;
-    const ok = D.r.filter(r => (!t || (r[1] + ' ' + (r[13] || '') + ' ' + (r[4] || '')).toLowerCase().includes(t)) && (!c || r[3] === c) &&
+    const fit = r => (!t || (r[1] + ' ' + (r[13] || '') + ' ' + (r[4] || '')).toLowerCase().includes(t)) &&
       (show === 'follow' ? r[5] && (r[7] === 'warning' || r[7] === 'fine' || r[7] === 'closed') : show === 'closed' ? (r[10] || '') >= yr :
-       show === 'new' ? r[5] && (r[9] || '') >= yr : show === 'gone' ? !r[5] : (t ? true : r[5])));
-    box.innerHTML = ok.slice(0, N).map(row).join('') || '<li><span class="rs-r"><span class="muted">Nothing matches. Try another name or street.</span></span></li>';
+       show === 'new' ? r[5] && (r[9] || '') >= yr : show === 'gone' ? !r[5] : (t ? true : r[5]));
+    let ok = D.r.filter(r => (!c || r[3] === c) && fit(r)), note = '';
+    // a city with nothing that matches says so, then shows the rest of the county
+    if (c && !ok.length && D.r.some(fit)) { ok = D.r.filter(fit); note = `<li><span class="rs-r"><span><b>None in ${esc(c)}.</b> <span class="muted">Here's the rest of Bay County:</span></span></span></li>`; }
+    box.innerHTML = note + ok.slice(0, N).map(row).join('') || '<li><span class="rs-r"><span class="muted">Nothing matches. Try another name or street.</span></span></li>';
     cnt.textContent = `${ok.length.toLocaleString('en-US')} place${ok.length === 1 ? '' : 's'}, latest inspected first` + (ok.length > N ? `. Showing ${N}` : '');
     more.hidden = ok.length <= N;
   }
@@ -123,6 +126,10 @@ RS_JS = r"""
   }));
   fetch('/data/restaurants-page.json').then(r => r.json()).then(j => {
     D = j;
+    // no city picked yet: a signed-in reader starts on their home's city
+    const h = window.BCHomeCity && window.BCHomeCity();
+    if (h && h.town && !city.value && [...city.options].some(o => o.value === h.town)) city.value = h.town;
+
     const old = location.hash.match(/^#r(\d+)$/);  // old links to one restaurant on this page now go to its own page
     const hit = old && D.r.find(x => x[0] === old[1]);
     if (hit) { location.replace(hit[12]); return; }
@@ -142,8 +149,10 @@ NB_JS = r"""
     if (!D) return;
     const t = q.value.trim().toLowerCase(), c = city.value, ty = type.value;
     // [doc, name, type, filed, active, city, zip, profile_url, sunbiz_url, restaurants]
-    const ok = D.b.filter(r => (!t || r[1].toLowerCase().includes(t)) && (!c || r[5] === c) && (!ty || r[2] === ty));
-    box.innerHTML = ok.slice(0, N).map(r => `<tr><td><a href="${esc(r[7])}">${esc(r[1])}</a>${r[9] ? `<small>Restaurant: ${esc(r[9])}</small>` : ''}</td><td>${esc(r[2])}<small>${r[4] ? 'Active' : 'Inactive'}</small></td>
+    const fit = r => (!t || r[1].toLowerCase().includes(t)) && (!ty || r[2] === ty);
+    let ok = D.b.filter(r => (!c || r[5] === c) && fit(r)), note = '';
+    if (c && !ok.length && D.b.some(fit)) { ok = D.b.filter(fit); note = `<tr><td colspan="5"><b>None in ${esc(c)}.</b> <span class="muted">Here's the rest of Bay County:</span></td></tr>`; }
+    box.innerHTML = note + ok.slice(0, N).map(r => `<tr><td><a href="${esc(r[7])}">${esc(r[1])}</a>${r[9] ? `<small>Restaurant: ${esc(r[9])}</small>` : ''}</td><td>${esc(r[2])}<small>${r[4] ? 'Active' : 'Inactive'}</small></td>
       <td>${esc(r[5] || '')} <span class="muted">${esc(r[6] || '')}</span></td><td class="n">${esc(fmt(r[3]))}</td><td><a class="src" href="${esc(r[8])}" target="_blank" rel="noopener">State record</a></td></tr>`).join('')
       || '<tr><td colspan="5" class="muted">No filings match.</td></tr>';
     cnt.textContent = `${ok.length.toLocaleString('en-US')} filing${ok.length === 1 ? '' : 's'} in the last 12 months` + (ok.length > N ? `, showing ${N}` : '');
@@ -151,7 +160,11 @@ NB_JS = r"""
   }
   [q, city, type].forEach(x => x.addEventListener(x === q ? 'input' : 'change', () => { N = 25; filter(); }));
   more.addEventListener('click', () => { N += 100; filter(); });
-  fetch('/data/new-businesses-page.json').then(r => r.json()).then(j => { D = j; filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
+  fetch('/data/new-businesses-page.json').then(r => r.json()).then(j => { D = j;
+    // no city picked yet: a signed-in reader starts on their home's city
+    const h = window.BCHomeCity && window.BCHomeCity();
+    if (h && h.town && !city.value && [...city.options].some(o => o.value === h.town)) city.value = h.town;
+    filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
 })();
 """
 
@@ -480,7 +493,7 @@ def new_businesses_page(out_dir):
     kpis = (_kpi('Filed in the last 12 months', f'{len(y12):,}', f'{"Up" if chg >= 0 else "Down"} {abs(chg):.0f}% from the 12 months before') +
             _kpi(f'Filed in {last.year}', f'{per_year[str(last.year)]:,}', f'Through {last.strftime("%B %-d")}') +
             _kpi('Filed since 2016', f'{len(B):,}', f'{active / len(B) * 100:.0f}% are still active') +
-            _kpi('New restaurants', f'{len(opened_year):,}', f'New food licenses in the last 12 months; {rest_per_year.get(str(today.year - 1), 0):,} in {today.year - 1}'))
+            _kpi('New food licenses', f'{len(opened_year):,}', f'Restaurants, food trucks, caterers and vendors licensed in the last 12 months; {rest_per_year.get(str(today.year - 1), 0):,} in {today.year - 1}'))
 
     return f'''<style>{CSS}</style>
 <div class="page tax rs nb">
@@ -511,7 +524,7 @@ def new_businesses_page(out_dir):
     <div><button type="button" class="ui-btn" id="nbMore" hidden style="margin-top:12px">Show more</button></div>
     <p class="note">Every name opens the business's profile. The state record names its officers and registered agent. Older filings back to 2016 are in the <a href="/api/v1/datasets/new-businesses">new-businesses</a> data.</p></section>
 
-  <section class="tx-sec"><div class="sec-hd"><h2 id="restaurants" data-tile="New restaurants">New restaurants</h2><span class="muted">{len(opened_year):,} new food licenses in the last 12 months</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="restaurants" data-tile="New food licenses">New food licenses</h2><span class="muted">{len(opened_year):,} new food licenses in the last 12 months</span></div>
     <div class="tablewrap"><table class="tx-table rs-tbl"><thead><tr><th>Business</th><th>City</th><th>License holder</th><th class="n">Opened</th></tr></thead><tbody>{open_rows}</tbody></table></div>
     <p class="note">Each one's first inspection, and every one since, is on the <a href="/restaurants">Restaurant inspections</a> page.</p></section>
 

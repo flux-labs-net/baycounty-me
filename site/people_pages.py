@@ -120,12 +120,14 @@ def person_page(pid):
     tally = Counter(str(r.get('vote')).lower() for r in mv)
     raised = next((r['total_raised'] for r in cand if r.get('total_raised')), None) or next((r['total_raised'] for r in fin if r.get('total_raised')), None) or next((r['total_raised'] for r in hist if r.get('total_raised')), None)
     sal = next((r.get('annual') or r.get('salary') for r in pay if (r.get('annual') or r.get('salary'))), None)
-    kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'money votes on file') if mv else '',
+    cd_kpi, cd_sec = contract_dollars(pid, x['name'])
+    kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'votes on file') if mv else '',
                   kpi('Campaign raised', money(raised), 'most recent campaign on file') if raised else '',
                   kpi('From businesses and groups', money(sum(l['amount'] or 0 for l, _ in gifts)), f'{len(gifts)} donors named on this page') if gifts else '',
                   kpi('From business owners', money(sum(l['amount'] or 0 for l, _ in owner_gifts)), f'{len(owner_gifts)} people who run a business, named') if owner_gifts else '',
+                  cd_kpi,
                   kpi('Pay', money(sal), 'annual, latest on file') if sal else ''])
-    secs = vsecs = ''  # vote sections go right under the connections graph
+    secs, vsecs = '', cd_sec  # vote sections go right under the connections graph, contract dollars first
     # roles
     roles = []
     for g in govs:
@@ -190,7 +192,7 @@ def person_page(pid):
     # recent votes
     if mv:
         rv = ''.join(vote_card(r) for r in mv[:12])
-        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} money votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
     if pay:
         pr = ''.join(f'<li>{e(r.get("title"))}{", " + e(r.get("employer") or r.get("government")) if (r.get("employer") or r.get("government")) else ""}: {money(r.get("annual") or r.get("salary"))} ({e(r.get("year") or r.get("fiscal_year") or r.get("as_of") or "")}) <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>' for r in pay)
         secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="pay">Pay</h2><span class="muted">Elected officials and department leaders only</span></div><ul class="plain">{pr}</ul></section>'
@@ -211,6 +213,76 @@ def person_page(pid):
 {ASSETS}'''
 
 
+def _dt(d):
+    """2025-03-04 -> Mar 4, 2025."""
+    import datetime
+    try:
+        x = datetime.date.fromisoformat(str(d)[:10])
+    except ValueError:
+        return e(d)
+    return f'{x:%b} {x.day}, {x.year}'
+
+
+def _usd(n):
+    if n is None:
+        return '—'
+    return f'${n:,.2f}' if round(n, 2) != round(n) else f'${n:,.0f}'
+
+
+def contract_dollars(pid, name):
+    """(kpi tile, section) for the dollars in the contract votes this official took part in (site/vote_dollars.py):
+    yes on items that passed, yes on items that failed, and no, each with its vote count, then every vote behind them."""
+    tots = [t for t in EG._ds('contract-dollar-totals') if t.get('person_id') == pid and t.get('contract_votes')]
+    if not tots:
+        return '', ''
+    rows = sorted(_by_person('member-contract-dollars').get(pid, []), key=lambda r: (r.get('date') or '', r.get('vote_id') or ''), reverse=True)
+    first = lambda f: sum(t[f] or 0 for t in tots)
+    yes, yv, yf, yfv, no, nv = first('yes_total'), first('yes_votes'), first('yes_failed_total'), first('yes_failed_votes'), first('no_total'), first('no_votes')
+    dates = sorted(d for t in tots for d in (t.get('first_date'), t.get('last_date')) if d)
+    span = f'{_dt(dates[0])} to {_dt(dates[-1])}' if dates else ''
+    boards = sorted({r.get('board') for r in rows if r.get('board')})
+    govs = ' and '.join(gov_link(t['gov_id']) for t in tots if t.get('gov_id'))
+    plural = lambda n, w: f'{n:,} {w}{"" if n == 1 else "s"}'
+    kpi = (f'<div class="kpi"><span class="eyebrow">Voted yes on contracts</span><span class="v">{money(yes)}</span>'
+           f'<span class="s">{e(plural(yv, "approved item"))}{", " + e(span) if span else ""}</span></div>') if (yv or nv) else ''
+    stat = lambda lbl, amt, n, sub, tone: (f'<div class="cd-stat t-{tone}"><span class="cd-l">{e(lbl)}</span><b>{_usd(amt)}</b>'
+                                           f'<span class="small muted">{e(plural(n, "vote"))}{" · " + e(sub) if sub else ""}</span></div>')
+    stats = stat('Voted yes, and it passed', yes, yv, 'approved', 'teal') + (stat('Voted yes, but it failed', yf, yfv, 'not approved', 'amber') if yfv else '') + stat('Voted no', no, nv, 'passed or failed', 'salmon')
+    last = e(name.split()[-1])
+    no_part = (f' {last} voted no on {_usd(no)} ({e(plural(nv, "vote"))}).' if nv else f' {last} did not vote no on any contract with a dollar figure.')
+    lede = (f'<p class="lede cd-lede">{e(name)} voted yes on <b>{_usd(yes)}</b> in contracts and purchases that {govs} approved '
+            f'({e(plural(yv, "vote"))}{", " + e(span) if span else ""}).{no_part}</p>'
+            if (yv or nv) else f'<p class="lede cd-lede">None of {e(name)}\u2019s contract votes on file has one clear dollar figure yet, so there is no total.</p>')
+    vote_tone = lambda v: 'teal' if v == 'yes' else 'salmon' if v == 'no' else 'blue'
+    tr = ''
+    for r in rows:
+        v = str(r.get('vote') or '')
+        note = ' <small class="muted">up to</small>' if r.get('up_to') else ''
+        note += ' <small class="muted">a year</small>' if r.get('per_year') else ''
+        out = (r.get('outcome') or '').lower()
+        page = f'Minutes, p. {r["source_page"]}' if r.get('source_page') else 'Source'
+        tr += (f'<tr><td class="small nowrap">{_dt(r.get("date"))}</td><td class="wrap">{e(r.get("headline"))}<small class="muted cd-sub">{e(r.get("board"))} · {e(r.get("kind"))}'
+               f'{" · " + e(r.get("tally")) if r.get("tally") else ""}{" · failed" if out == "failed" else ""}</small></td>'
+               f'<td><span class="ui-pill t-{vote_tone(v)}">{e(v[:1].upper() + v[1:]) or "?"}</span></td><td class="num">{_usd(r.get("amount"))}{note}</td>'
+               f'<td>{src(r.get("source_url"), page)}</td></tr>')
+    left = {k: sum(t.get(k) or 0 for t in tots) for k in ('not_counted_consent', 'not_counted_no_amount', 'not_counted_unclear', 'not_counted_not_spending', 'not_counted_repeat')}
+    why = {'not_counted_consent': ('consent agenda', 'many items pass in one vote, and the minutes do not give each item\u2019s cost'),
+           'not_counted_no_amount': ('vote', 'no dollar figure in the record of the vote'),
+           'not_counted_unclear': ('vote', 'more than one figure (a bid plus contingency, a range), or a postponed or unclear motion'),
+           'not_counted_not_spending': ('vote', 'not new spending: a credit, sale, lease, fee, payment on work already approved, grant received or rate'),
+           'not_counted_repeat': ('repeat vote', 'an item already counted on a later vote')}
+    left_h = ''.join(f'<li>{e(plural(n, why[k][0]))}: {e(why[k][1])}</li>' for k, n in left.items() if n)
+    allv = sum(t['contract_votes'] for t in tots)
+    sec = f"""<section class="tx-sec cd-sec"><div class="sec-hd"><h2 id="contract-dollars" data-tile="Contract dollars">Contract dollars {e(name)} voted on</h2><span class="muted">{e(", ".join(boards)) or "Recorded votes"}</span></div>
+    {lede}
+    <div class="cd-stats">{stats}</div>
+    {f'<details class="cd-more"><summary>The {len(rows):,} votes behind these totals</summary><div class="tablewrap"><table class="tx-table vd-table cd-table" data-share-items><thead><tr><th scope="col">Date</th><th scope="col">What was approved</th><th scope="col">Vote</th><th scope="col" class="num">Amount</th><th scope="col">Source</th></tr></thead><tbody>{tr}</tbody></table></div></details>' if rows else ''}
+    <div class="note cd-note"><p><b>What is counted.</b> Every recorded vote {e(name)} cast on a contract award, purchase, task order, change order or renewal since 2016 that names one clear dollar figure. The figure comes from the record of the vote itself (or from a contract record tied to it), never a guess. Yes counts only items that passed; voted no counts items they voted against, whether they passed or not. “Up to” marks a not-to-exceed ceiling and “a year” one year’s price. An item voted on twice is counted once.</p>
+    {f'<p><b>Not in the totals</b>, from {allv:,} contract and consent agenda votes on file:</p><ul>{left_h}</ul>' if left_h else ''}
+    <p>So the totals are a floor, not everything the board spent while {e(name)} served. Votes are from the minutes on file (<a href="/data-sources">which years we have</a>); a vote is a fact in the record and does not show why anyone voted as they did. Every vote, counted or not, is in the <a href="/api/v1/datasets/contract-vote-dollars">contract-vote-dollars</a> dataset.</p></div></section>"""
+    return kpi, sec
+
+
 def vote_card(r):
     """One recorded vote: the date, the board and item, and how they voted as a colored pill."""
     v = str(r.get('vote') or '')
@@ -227,9 +299,13 @@ def link_name_vendor(name):
 def _kinds(p):
     """elected / candidate / staff, from where each role came from (a person can be several)."""
     ks = []
+    ballot = EG.on_ballot_ids()
     for r in p.get('roles') or []:
         src, role = r.get('source'), (r.get('role') or '').lower()
         if src == 'candidates_2026' or role.startswith('2026 candidate'):
+            # a 2026 filer is a candidate only while on the Nov 3 ballot; withdrawn, defeated and already-elected filers are not
+            ks.append('candidate' if p.get('id') in ballot else 'past')
+        elif role.startswith('2027 candidate'):
             ks.append('candidate')
         elif src in ('votes', 'officials-pay', 'campaign') and not role.startswith('former'):
             ks.append('elected')
@@ -237,6 +313,17 @@ def _kinds(p):
             ks.append('staff')
         elif src == 'campaign_history':
             ks.append('past')
+    # who holds a seat or job today comes from the entity graph's label (officeholder terms), not from every record that names
+    # them: a vote record, pay row or old campaign filing also exists for former officials and appointed managers
+    label = (EG.build().ents.get('person:' + p.get('id', '')) or {}).get('label')
+    if label == 'Elected official':
+        ks = [k for k in ks if k != 'staff'] + ['elected']
+    elif label == 'Department leader':
+        ks = [k for k in ks if k != 'elected'] + ['staff']
+    elif label in ('Former official', 'Past candidate'):
+        ks = [k for k in ks if k not in ('elected', 'staff')] + ['past']
+    elif label == 'Candidate':
+        ks = [k for k in ks if k != 'elected']
     if 'elected' in ks:
         ks = [k for k in ks if k != 'staff']  # an official's pay row is not a staff job
     if 'past' in ks and ({'elected', 'candidate'} & set(ks)):
@@ -315,6 +402,7 @@ def people_index():
     from ui import dir_card, directory, ico, avatar, tone_of, photo_of
     G = EG.build()
     cards, kinds, govs = [], Counter(), {}
+    elected_govs = set()  # the boards and offices the current elected officials sit on
     total_links = 0
     order = directory_order()
     gname = lambda g: (G.ents.get('gov:' + g) or {}).get('name') or 'Other offices'
@@ -326,6 +414,8 @@ def people_index():
         ks = _kinds(p)
         kinds.update(ks)
         gids = [g for g in (p.get('gov_ids') or []) if g]
+        if 'elected' in ks:
+            elected_govs.update(gids)
         for g in gids:
             if 'gov:' + g in G.ents:
                 govs[g] = G.ents['gov:' + g]['name']
@@ -333,19 +423,25 @@ def people_index():
                               f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases']),
                               av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id'])), order=pos, group=gname(home),
                               status=status_of(rank), sub_group=STATUS[status_of(rank)]))
-    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
+    # The tile counts only people still on the Nov 3 ballot (SOE status Qualified/Advanced). The 'candidate' kind also
+    # covers 2026 filers who withdrew, lost the primary or won unopposed, and early filers for April 2027 races.
+    ballot = [r for r in EG._ds('candidates-2026') if r.get('status') == 'on_ballot' and r.get('person_id')]
+    on_ballot, races = len({r['person_id'] for r in ballot}), len({r['race_id'] for r in ballot})
+    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', 'Candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
     <p class="lede">One page for each elected official, department leader and local candidate since 2016 in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to. Below: the five countywide officers and what top officials are paid.</p></div>
     <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
-  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
+  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(elected_govs)} boards and offices")}{k("flag", "salmon", "On the Nov 3 ballot", on_ballot, f'Candidates in {races} local race{"s" if races != 1 else ""}')}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Links in the records", f"{total_links:,}", "Companies, donors, boards and votes, counted once per link")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
     {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')), statuses=(('', 'Current and past'), ('current', 'Current only'), ('past', 'Past only')))}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
   {who_sections()}
+  <section class="tx-sec" data-records-sent="appointments" hidden></section>
+  <section class="tx-sec" data-records-sent="payroll" hidden></section>
 </div>
-{ASSETS}'''
+{ASSETS}<script src="/assets/records-sent.js" defer></script>'''
 
 
 def profile_shell():

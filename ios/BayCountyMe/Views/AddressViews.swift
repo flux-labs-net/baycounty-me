@@ -14,6 +14,17 @@ struct MyAddressView: View {
 
     var body: some View {
         List {
+            // The saved home (the account's, when signed in) comes first; the search is for any other address.
+            if let home = store.home, query.isEmpty, results.isEmpty {
+                Section("Your home") {
+                    NavigationLink(value: Route.address(home)) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Label(home.display, systemImage: "house.fill").font(.body.weight(.medium))
+                            Text("Tax estimate, representatives, schools, flood zone").font(.caption).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
             Section {
                 Text("Type a Bay County street address to see your property tax estimate, who represents you, your schools, your flood and evacuation zones, and whether you're inside a redevelopment district.")
                     .font(.subheadline)
@@ -44,11 +55,6 @@ struct MyAddressView: View {
                 }
             }
 
-            if let home = store.home, query.isEmpty, results.isEmpty {
-                Section("Saved") {
-                    NavigationLink(value: Route.address(home)) { Label(home.display, systemImage: "house.fill") }
-                }
-            }
         }
         .navigationTitle("My Address")
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "e.g. 825 Ohio Ave")

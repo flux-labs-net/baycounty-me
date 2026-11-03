@@ -17,6 +17,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 /** Phone notifications through Firebase Cloud Messaging. Alerts need a BayCounty.me account: the switch lives in
  *  My home > Settings, and the phone is tied to the account (POST /api/account device), so its alerts follow the home
@@ -24,6 +26,8 @@ import kotlinx.coroutines.launch
  *  build without them still works, with phone alerts off. */
 object Push {
     const val CHANNEL = "emergency"
+    /** Overnight alerts for people who picked "Quiet overnight": shown without sound (urgent ones still use CHANNEL). */
+    const val QUIET_CHANNEL = "emergency_quiet"
     private const val PREFS = "push"
 
     var token by mutableStateOf<String?>(null); private set
@@ -51,7 +55,9 @@ object Push {
         if (Build.VERSION.SDK_INT >= 26) {
             val ch = NotificationChannel(CHANNEL, "Emergencies and alerts", NotificationManager.IMPORTANCE_HIGH)
             ch.description = "Weather warnings, evacuation orders, shelter openings, boil-water notices and agenda items near you"
-            context.getSystemService(NotificationManager::class.java)?.createNotificationChannel(ch)
+            val quiet = NotificationChannel(QUIET_CHANNEL, "Quiet overnight alerts", NotificationManager.IMPORTANCE_LOW)
+            quiet.description = "Alerts sent between 10 pm and 7 am, without sound, when you pick Quiet overnight"
+            context.getSystemService(NotificationManager::class.java)?.let { it.createNotificationChannel(ch); it.createNotificationChannel(quiet) }
         }
         if (configured && FirebaseApp.getApps(context).isEmpty()) {
             runCatching {
@@ -82,6 +88,21 @@ object Push {
     /** Signing out turns alerts off: the server drops this phone in the same call (Account.signOut). */
     fun signedOut(context: Context) { load(context); enabled = false; status = null; save(context) }
 
+    /** When the app opens with alerts on: ask Firebase for the current token (it can change after a reinstall or a
+     *  restore) and tie it to the account; onLinked gets the token this phone had before, to drop it if it changed. */
+    suspend fun resume(context: Context, onLinked: suspend (String?) -> Unit) {
+        load(context)
+        if (!enabled || !configured || FirebaseApp.getApps(context).isEmpty()) return
+        val old = token
+        val t = runCatching {
+            suspendCancellableCoroutine<String?> { c ->
+                FirebaseMessaging.getInstance().token.addOnSuccessListener { c.resume(it) }.addOnFailureListener { c.resume(null) }
+            }
+        }.getOrNull() ?: return
+        token = t; save(context)
+        onLinked(old)
+    }
+
     fun onNewToken(context: Context, t: String) {
         load(context); token = t; save(context)
     }
@@ -103,10 +124,11 @@ class PushService : FirebaseMessagingService() {
             if (url != null) putExtra("url", url)
         }
         val pi = PendingIntent.getActivity(this, (message.data["notice_id"] ?: "").hashCode(), open, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val b = NotificationCompat.Builder(this, Push.CHANNEL)
+        val quiet = n.channelId == Push.QUIET_CHANNEL
+        val b = NotificationCompat.Builder(this, if (quiet) Push.QUIET_CHANNEL else Push.CHANNEL)
             .setSmallIcon(R.drawable.ic_launcher_monochrome).setContentTitle(n.title).setContentText(n.body)
             .setStyle(NotificationCompat.BigTextStyle().bigText(n.body)).setAutoCancel(true).setContentIntent(pi)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(if (quiet) NotificationCompat.PRIORITY_LOW else NotificationCompat.PRIORITY_HIGH).setSilent(quiet)
         runCatching { NotificationManagerCompat.from(this).notify((message.data["notice_id"] ?: "").hashCode(), b.build()) }
     }
 }

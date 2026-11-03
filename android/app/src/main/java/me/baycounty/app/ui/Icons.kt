@@ -92,7 +92,7 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "megaphone" -> Icons.Outlined.Campaign
     "info.circle" -> Icons.Outlined.Info
     "lightbulb" -> Icons.Outlined.Lightbulb
-    "flag" -> Icons.Outlined.Flag
+    "flag", "flag.checkered" -> Icons.Outlined.Flag
     "safari" -> Icons.Outlined.Public
     "curlybraces" -> Icons.Outlined.Code
     "wifi.slash" -> Icons.Outlined.WifiOff
@@ -121,7 +121,7 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "testtube.2" -> Icons.Outlined.Science
     "arrow.up.right.square" -> Icons.Outlined.Launch
     "arrow.triangle.turn.up.right.diamond" -> Icons.Outlined.Directions
-    "car.side.arrowtriangle.up.fill" -> Icons.Outlined.DirectionsCar
+    "car.side.arrowtriangle.up.fill", "car" -> Icons.Outlined.DirectionsCar
     "cloud.bolt.rain" -> Icons.Outlined.Thunderstorm
     "house.lodge" -> Icons.Outlined.NightShelter
     "drop.triangle", "drop" -> Icons.Outlined.WaterDrop

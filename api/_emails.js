@@ -33,7 +33,7 @@ function confirmEmail({what, isRule, link, govs}) {
       ui.list([['salmon', 'Events', 'What’s happening around the county that week'], ['blue', 'Meetings', 'Public meetings, with agendas'], ['teal', 'Votes', 'New votes, split votes and failed motions first'], ['amber', 'Contracts', 'New contracts and change orders, biggest first']]) +
       ui.button(link, 'Confirm my email') + tail
     : ui.p(`You asked for weekly BayCounty.me updates for <b>${esc(names ? names.join(', ') : what.replace(/^.*\bfor\s+/, ''))}</b>. Each Monday you’ll get:`) +
-      ui.list([['teal', 'New', 'Votes, data and pages added that week'], ['blue', 'Meetings', 'Meetings coming up, with agendas'], ['amber', 'Fixes', 'Corrections to anything we published']]) +
+      ui.list([['salmon', 'Coming up', 'Meetings with agendas, and events in town'], ['teal', 'Decided', 'New votes and contracts, with who voted no'], ['blue', 'Posted', 'Alerts, public notices and job openings']]) +
       ui.button(link, 'Confirm my updates') + tail;
   const html = ui.layout({title: subject, preheader: isRule ? `${what}. Tap to start it.` : 'One tap and you’re set. The link works for 7 days.',
     kicker: 'Email alerts', hero: {tone: isRule ? 'teal' : 'blue', icon: 'bell', eyebrow: 'One more step', title: isRule ? 'Confirm your alert' : weeklyOnly ? 'Confirm your weekly email' : 'Confirm your weekly updates'}, body});
@@ -95,39 +95,90 @@ function realtorReportEmail({agent, address, message, preparedFor}) {
   return {subject, html, text};
 }
 
-// Weekly digest for one government (digest.js), from one entry of /data/digest.json. Returns null when there's
-// nothing new in the last `days` days and no meeting in the next 8, which means no email that week.
+// Weekly email for one government (digest.js), from one entry of /data/digest.json (site/alerts_page.py digest_json):
+// what changed in that city or agency in the last `days` days (alerts, votes and contracts that reached the site,
+// public notices, job openings) and what's coming up in the next 8 (meetings with agendas, events in town).
+// Returns null when there's nothing in any section, which means no email that week.
 // The footer keeps Resend's broadcast placeholders ({{{RESEND_UNSUBSCRIBE_URL}}}, the prefs_token property).
+const DIGEST_CAP = {alerts: 4, meetings: 6, events: 6, votes: 5, contracts: 5, notices: 5, jobs: 5};
+const ALERT_KIND = {'boil-water': 'Boil-water notice', water: 'Boil-water notice', road: 'Road closure', utility: 'Outage', weather: 'Weather', evacuation: 'Evacuation', shelter: 'Shelter', storm: 'Update', news: 'Update'};
+const ALERT_STATUS = {active: 'Still active', lifted: 'Lifted'};
 function digestEmail(g, {now = Date.now(), days = 7} = {}) {
   const since = now - days * day, until = now + 8 * day;
-  const changes = (g.changes || []).filter(c => Date.parse(c.date + 'T23:59:59-05:00') >= since);
-  const meets = (g.meetings || []).filter(m => { const t = Date.parse(m.start); return t >= now - day / 2 && t <= until; });
-  if (!changes.length && !meets.length) return null;
+  const local = s => localTime(s.length === 10 ? s + 'T00:00:00' : s); // date-only starts count from midnight
+  const recent = xs => (xs || []).filter(x => x.date && Date.parse(x.date.slice(0, 10) + 'T23:59:59-05:00') >= since);
+  const soon = (xs, key) => (xs || []).filter(x => { const t = local(x[key]).getTime(); return t >= now - day / 2 && t <= until; });
+  const S = {alerts: recent(g.alerts), meetings: soon(g.meetings, 'start').sort((a, b) => local(a.start) - local(b.start)), events: soon(g.events, 'start'),
+    votes: recent(g.votes), contracts: recent(g.contracts).sort((a, b) => Math.abs(b.amount || 0) - Math.abs(a.amount || 0)), notices: recent(g.notices), jobs: recent(g.jobs)};
+  const n = Object.fromEntries(Object.entries(S).map(([k, v]) => [k, v.length]));
+  if (!Object.values(n).some(Boolean)) return null;
+  const top = Object.fromEntries(Object.entries(S).map(([k, v]) => [k, v.slice(0, DIGEST_CAP[k])]));
   const page = `${SITE}/governments/${g.slug}`;
-  const counts = [changes.length && plural(changes.length, 'update'), meets.length && plural(meets.length, 'meeting')].filter(Boolean);
   const weekOf = new Date(now - 6 * day).toLocaleDateString('en-US', {month: 'short', day: 'numeric', timeZone: TZ});
-  let body = '', text = `What's new on BayCounty.me for ${g.name} this week.\n`;
-  if (changes.length) {
-    body += ui.section('teal', 'spark', 'New and updated', changes.length) +
-      changes.map(c => { const t = clip(c.text); return ui.item({title: esc(c.title), url: c.url, meta: esc(nice(c.date)), text: esc(t), more: t !== String(c.text || '').trim() ? 'Read more' : ''}); }).join('');
-    text += '\nNEW AND UPDATED\n' + changes.map(c => `- ${c.title} (${nice(c.date)}): ${c.text} ${c.url}`).join('\n') + '\n';
+  const tile = (iso, o) => { const d = local(iso); return ui.meeting({mon: d.toLocaleDateString('en-US', {month: 'short', timeZone: TZ}).toUpperCase(), day: d.toLocaleDateString('en-US', {day: 'numeric', timeZone: TZ}), ...o}); };
+  const start = x => x.all_day || x.start.length === 10 ? local(x.start).toLocaleDateString('en-US', {weekday: 'short', timeZone: TZ}) + (x.all_day ? ' · All day' : '')
+    : local(x.start).toLocaleString('en-US', {weekday: 'short', hour: 'numeric', minute: '2-digit', timeZone: TZ}).replace(':00', '');
+  const more = (k, href, label) => n[k] > top[k].length ? ui.p(ui.a(href, `${label} (${n[k]}) &rarr;`), {size: 13, lh: 18, mb: 6}) : '';
+  const nameLink = p => p.url ? ui.a(p.url, esc(p.name)) : esc(p.name);
+  let body = ui.p(`Here’s what changed in ${esc(g.name)} last week and what’s coming up.`, {size: 15, lh: 22}), text = `What changed in ${g.name} last week and what's coming up.\n`;
+  let first = true;
+  const sec = (tone, ic, title, k) => { const h = (first ? '' : ui.spacer(18)) + ui.section(tone, ic, title, n[k]); first = false; return h; };
+  if (n.alerts) {
+    body += sec('salmon', 'alert', 'Alerts', 'alerts') + top.alerts.map(x => ui.item({title: esc(x.title), url: x.url,
+      meta: esc([ALERT_KIND[x.kind] || 'Alert', nice(x.date), ALERT_STATUS[x.status] || 'Ended'].join(' · ')), text: esc(clip(x.text, 180))})).join('') +
+      more('alerts', `${SITE}/emergency`, 'Every alert');
+    text += '\nALERTS\n' + top.alerts.map(x => `- ${x.title} (${nice(x.date)}${x.status === 'active' ? ', still active' : ''}) ${x.url}`).join('\n') + '\n';
   }
-  if (meets.length) {
-    body += (changes.length ? ui.spacer(18) : '') + ui.section('salmon', 'calendar', 'Coming up', meets.length) + meets.map(m => {
-      const d = at(m.start);
-      return ui.meeting({mon: d.toLocaleDateString('en-US', {month: 'short', timeZone: TZ}).toUpperCase(), day: d.toLocaleDateString('en-US', {day: 'numeric', timeZone: TZ}),
-        title: esc(m.title), time: esc([when(m.start), m.location].filter(Boolean).join(' · ')), agendaUrl: m.agenda_url, pending: m.agenda_url ? '' : 'Agenda not posted yet'});
-    }).join('');
-    text += '\nCOMING UP\n' + meets.map(m => `- ${when(m.start)}: ${m.title}${m.agenda_url ? ' ' + m.agenda_url : ''}`).join('\n') + '\n';
+  if (n.meetings) {
+    body += sec('blue', 'megaphone', 'Meetings coming up', 'meetings') + top.meetings.map(m => tile(m.start, {title: esc(m.title),
+      time: esc([start(m), m.location && m.location.replace(/\s*\(typical; confirm on agenda\)$/, '')].filter(Boolean).join(' · ')), agendaUrl: m.agenda_url, pending: m.agenda_url ? '' : 'Agenda not posted yet'})).join('') +
+      more('meetings', `${SITE}/meetings`, 'All meetings');
+    text += '\nMEETINGS COMING UP\n' + top.meetings.map(m => `- ${when(m.start)}: ${m.title}${m.agenda_url ? ' ' + m.agenda_url : ' (agenda not posted yet)'}`).join('\n') + '\n';
+  }
+  if (n.events) {
+    body += sec('salmon', 'calendar', `Happening in ${esc(g.name)}`, 'events') + top.events.map(x => tile(x.start, {title: esc(x.title),
+      time: esc([start(x), x.venue].filter(Boolean).join(' · ')), agendaUrl: x.url, linkLabel: 'Details'})).join('') + more('events', `${SITE}/events`, 'Every event');
+    text += `\nHAPPENING IN ${g.name.toUpperCase()}\n` + top.events.map(x => `- ${start(x)}: ${x.title}${x.venue ? ', ' + x.venue : ''} ${x.url || ''}`).join('\n') + '\n';
+  }
+  if (n.votes) {
+    body += sec('teal', 'vote', 'New votes', 'votes') + top.votes.map(v => {
+      const result = [v.outcome && !/not yet|unclear/.test(v.outcome) && v.outcome[0].toUpperCase() + v.outcome.slice(1), v.tally && v.tally !== 'not found' ? v.tally : ''].filter(Boolean).join(' ');
+      const sum = v.text && v.text !== v.title ? esc(clip(v.text, 160)) : '';
+      const no = (v.voted_no || []).length ? `${sum ? '<br>' : ''}<span style="font-size:13px">Voted no: ${v.voted_no.map(nameLink).join(', ')}</span>` : '';
+      return ui.item({title: esc(v.title), url: v.url, meta: esc([v.board, v.held && `Voted ${nice(v.held)}`, result].filter(Boolean).join(' · ')), text: sum + no});
+    }).join('') + more('votes', `${SITE}/public-money/votes`, 'All new votes');
+    text += '\nNEW VOTES\n' + top.votes.map(v => `- ${v.title} (${[v.held && nice(v.held), v.tally && v.tally !== 'not found' && v.tally].filter(Boolean).join(', ')})${(v.voted_no || []).length ? ' Voted no: ' + v.voted_no.map(p => p.name).join(', ') + '.' : ''} ${v.url}`).join('\n') + '\n';
+  }
+  if (n.contracts) {
+    body += sec('amber', 'dollar', 'New contracts', 'contracts') + top.contracts.map(c => ui.item({title: `${money(c.amount || 0)} · ${esc(c.vendor || 'Vendor not named')}`, url: c.url,
+      meta: esc([c.kind === 'change_order' ? 'Change order' : 'Contract', c.held && `Approved ${nice(c.held)}`].filter(Boolean).join(' · ')), text: esc(clip(c.text, 160)),
+      more: c.source_url ? 'Source' : '', moreUrl: c.source_url})).join('') + more('contracts', `${SITE}/public-money/contracts`, 'All new contracts');
+    text += '\nNEW CONTRACTS\n' + top.contracts.map(c => `- ${money(c.amount || 0)} ${c.vendor || 'Vendor not named'}${c.kind === 'change_order' ? ' (change order)' : ''}: ${c.text || ''} ${c.url}`).join('\n') + '\n';
+  }
+  if (n.notices) {
+    body += sec('blue', 'file', 'Public notices', 'notices') + top.notices.map(x => { const t = clip(x.title, 110);
+      return ui.item({title: esc(t), url: x.url, meta: esc([x.kind, `Published ${nice(x.date)}`, x.event_date && `Date: ${when(x.event_date)}`].filter(Boolean).join(' · ')),
+        text: x.text && !x.text.toLowerCase().startsWith(String(x.title || '').replace(/…$/, '').toLowerCase().slice(0, 40)) ? esc(clip(x.text, 160)) : ''}); }).join('') +
+      more('notices', `${SITE}/notices?gov=${g.key}`, 'All new notices');
+    text += '\nPUBLIC NOTICES\n' + top.notices.map(x => `- ${clip(x.title, 110)} (published ${nice(x.date)}) ${x.url}`).join('\n') + '\n';
+  }
+  if (n.jobs) {
+    body += sec('teal', 'search', 'New job openings', 'jobs') + top.jobs.map(j => ui.item({title: esc(j.title), url: j.url,
+      meta: esc([j.department, j.job_type, j.pay, j.closes ? `Closes ${nice(j.closes)}` : 'Open until filled'].filter(Boolean).join(' · '))})).join('') +
+      more('jobs', `${SITE}/jobs?gov=${g.key}`, 'All new openings');
+    text += '\nNEW JOB OPENINGS\n' + top.jobs.map(j => `- ${j.title}${j.department ? ', ' + j.department : ''} ${j.url}`).join('\n') + '\n';
   }
   body += ui.button(page, `See ${g.name} on BayCounty.me`, {mt: 22});
   const footer = `You’re getting this because you signed up for ${esc(g.name)} updates on BayCounty.me. ${ui.footLink(PREFS_LINK_TEMPLATE, 'Change what you follow')} · ${ui.footLink('{{{RESEND_UNSUBSCRIBE_URL}}}', 'Unsubscribe')}<br><br>${ui.ABOUT}`;
   text += `\n${page}\n\nChange what you follow: ${PREFS_LINK_TEMPLATE}\nUnsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`;
-  const subject = `${g.name} this week: ${counts.join(', ')}`;
-  const pre = [...changes.slice(0, 2).map(c => c.title), meets[0] && `${meets[0].title} ${nice(meets[0].start)}`].filter(Boolean).join(' · ');
+  const counts = [n.alerts && plural(n.alerts, 'alert'), n.meetings && plural(n.meetings, 'meeting'), n.events && plural(n.events, 'event'), n.votes && plural(n.votes, 'new vote'),
+    n.contracts && plural(n.contracts, 'new contract'), n.notices && plural(n.notices, 'public notice'), n.jobs && plural(n.jobs, 'job opening')].filter(Boolean);
+  const subject = `${g.name} this week: ${counts.slice(0, 3).join(', ')}`;
+  const pre = [top.alerts[0] && top.alerts[0].title, top.votes[0] && top.votes[0].title, top.meetings[0] && `${top.meetings[0].title} ${nice(top.meetings[0].start)}`, top.events[0] && top.events[0].title]
+    .filter(Boolean).slice(0, 2).join(' · ');
   const html = ui.layout({title: subject, preheader: pre, kicker: `Weekly update · ${nice(new Date(now).toISOString())}`,
-    hero: {tone: 'blue', icon: 'calendar', eyebrow: `${esc(g.name)} · Week of ${weekOf}`, title: `${counts.join(' and ').replace(/^./, c => c.toUpperCase())} this week`}, body, footer});
-  return {subject, html, text, changes: changes.length, meetings: meets.length};
+    hero: {tone: 'blue', icon: 'calendar', eyebrow: `${esc(g.name)} · Week of ${weekOf}`, title: `This week in ${esc(g.name)}`}, body, footer});
+  return {subject, html, text, counts: n};
 }
 
 // This week in Bay County (weekly.js), from /data/weekly.json (site/weekly.py; the same rows as the weekly-roundup
@@ -137,6 +188,7 @@ function digestEmail(g, {now = Date.now(), days = 7} = {}) {
 const money = n => { const a = Math.abs(n); return (n < 0 ? '-' : '') + (a >= 1e6 ? `$${(a / 1e6).toFixed(1).replace(/\.0$/, '')} million` : `$${Math.round(a).toLocaleString('en-US')}`); };
 // event times without an offset are local (Central); October to early November is CDT, the rest of the year CST
 const local = s => new Date(/[zZ]|[+-]\d\d:\d\d$/.test(s) ? s : s + (isCdt(s) ? '-05:00' : '-06:00'));
+function localTime(s) { return local(s); } // for digestEmail, which wraps it
 function isCdt(s) { // US daylight time: second Sunday of March to first Sunday of November
   const d = new Date(s.slice(0, 10) + 'T12:00:00Z'), y = d.getUTCFullYear();
   const nth = (m, k) => { const f = new Date(Date.UTC(y, m, 1)); return new Date(Date.UTC(y, m, 1 + ((7 - f.getUTCDay()) % 7) + 7 * (k - 1))); };
@@ -212,6 +264,22 @@ function accountCodeEmail(code, link, minutes = 15) {
       footer: 'You’re getting this because someone asked to sign in to BayCounty.me with this address.'})};
 }
 
+// Welcome email for a new account (api/_account.js sendWelcome). weekly: the /api/confirm link that joins the countywide
+// weekly email (This week in Bay County); it only shows a Confirm button, so nobody is added without a tap.
+// manage: the signed link to change or stop account emails. name: first name if we have it.
+function accountWelcomeEmail({weekly, manage, name}) {
+  const subject = 'Welcome to BayCounty.me';
+  const body = ui.p(`${name ? `Hi ${esc(name)}, your` : 'Your'} BayCounty.me account is ready. Want the news in your inbox too? Each Monday morning, <b>${WEEKLY_NAME}</b> is one short email with:`) +
+    ui.list([['salmon', 'Events', 'What’s happening around the county that week'], ['blue', 'Meetings', 'Public meetings, with agendas'], ['teal', 'Votes', 'New votes, split votes and failed motions first'], ['amber', 'Contracts', 'New contracts and change orders, biggest first']]) +
+    ui.button(weekly, 'Send me the weekly email') +
+    ui.small('One tap and you’re on the list. The link works for 7 days. Not interested? Do nothing and we won’t send it.', 18) +
+    ui.note(`Save your home address in ${ui.link(`${SITE}/account`, 'My home')} to also get a Monday email about what’s near you and alerts when an emergency affects your street.`);
+  const footer = `You’re getting this because you just made a BayCounty.me account with this address. ${ui.footLink(manage, 'Change or stop account emails')}<br><br>${ui.ABOUT}`;
+  const text = `Your BayCounty.me account is ready.\n\nWant ${WEEKLY_NAME} too? Each Monday morning: events around the county, public meetings with agendas, new votes and new contracts.\n\nSend me the weekly email: ${weekly}\n\nThe link works for 7 days. Not interested? Do nothing and we won't send it.\n\nSave your home address at ${SITE}/account to also get a Monday email about what's near you and alerts when an emergency affects your street.\n\nChange or stop account emails: ${manage}`;
+  return {subject, text, html: ui.layout({title: subject, preheader: `Your account is ready. One tap gets you ${WEEKLY_NAME} every Monday.`, kicker: 'Your account',
+    hero: {tone: 'teal', icon: 'mail', eyebrow: 'Welcome', title: 'You’re all set'}, body, footer})};
+}
+
 // The fuller weekday/time for an item's date ("Tue, Nov 3, 6 PM" or "Tue, Nov 3").
 const itemWhen = d => (!d ? '' : String(d).length > 10 ? local(String(d)).toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: TZ}).replace(':00', '')
   : at(String(d)).toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric', timeZone: TZ}));
@@ -250,16 +318,19 @@ function homeWeeklyEmail(f, {home, name, manage}) {
 // One emergency notice that reaches a saved home (an evacuation order for its zone, a boil-water notice in its city,
 // a weather warning), sent right away when the account turned that topic on for email.
 function homeAlertEmail(n, {home, manage}) {
-  const LABEL = {evacuation: 'Evacuation order', water: 'Boil-water notice', weather: n.event || 'Weather alert', shelters: 'Shelter open', roads: 'Road closed'};
+  const LABEL = {evacuation: 'Evacuation order', water: 'Boil-water notice', weather: n.event || 'Weather alert', shelters: 'Shelter open', roads: 'Road closed',
+    safety: 'Public safety alert', outages: 'Outage', general: 'Update'};
   const head = LABEL[n.topic] || 'Alert';
-  const subject = `${head}${n.topic === 'evacuation' && home.zone ? ` for Zone ${home.zone}` : ''}: ${clip(n.title || '', 70)}`;
+  const subject = `${head}${n.topic === 'evacuation' && home && home.zone ? ` for Zone ${home.zone}` : ''}: ${clip(n.title || '', 70)}`;
   const url = `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`;
-  const body = ui.p(`This affects your saved home at <b>${esc(home.address)}</b>${home.zone ? ` (evacuation Zone ${esc(home.zone)})` : ''}.`) +
+  const where = home ? `This affects your saved home at <b>${esc(home.address)}</b>${home.zone ? ` (evacuation Zone ${esc(home.zone)})` : ''}.` : 'This is for an area you follow in Bay County.';
+  const body = ui.p(where) +
     ui.item({title: esc(n.title || head), url, meta: esc([n.source, n.issued ? itemWhen(n.issued) : null].filter(Boolean).join(' · ')), text: esc(clip(n.summary || n.instruction || '', 400))}) +
-    ui.button(url, 'See the details') + ui.note('Always follow instructions from emergency officials. BayCounty.me passes notices along from the National Weather Service, Bay County and the cities.');
-  const footer = `You’re getting this because you asked for emergency emails about your home in your BayCounty.me account. ${ui.footLink(manage, 'Change or stop these emails')}<br><br>${ui.ABOUT}`;
-  return {subject, text: `${head}\n\n${n.title || ''}\n${n.summary || ''}\n\nThis affects your saved home at ${home.address}.\n${url}\n\nChange or stop these emails: ${manage}`,
-    html: ui.layout({title: subject, preheader: clip(n.summary || n.title || '', 120), kicker: 'Alert for your home', hero: {tone: 'salmon', icon: 'alert', eyebrow: esc(head), title: esc(clip(n.title || head, 90))}, body, footer})};
+    ui.button(url, 'See the details') + ui.note('Always follow instructions from emergency officials. BayCounty.me passes notices along from the National Weather Service, FEMA\'s emergency alert system, Bay County and the cities.');
+  const footer = `You’re getting this because you asked for emergency alerts by email in your BayCounty.me account. ${ui.footLink(manage, 'Change or stop these emails')}<br><br>${ui.ABOUT}`;
+  const plainWhere = home ? `This affects your saved home at ${home.address}.` : 'This is for an area you follow in Bay County.';
+  return {subject, text: `${head}\n\n${n.title || ''}\n${n.summary || ''}\n\n${plainWhere}\n${url}\n\nChange or stop these emails: ${manage}`,
+    html: ui.layout({title: subject, preheader: clip(n.summary || n.title || '', 120), kicker: home ? 'Alert for your home' : 'Bay County alert', hero: {tone: 'salmon', icon: 'alert', eyebrow: esc(head), title: esc(clip(n.title || head, 90))}, body, footer})};
 }
 
-module.exports = {accountCodeEmail, homeWeeklyEmail, homeAlertEmail, confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};
+module.exports = {accountCodeEmail, accountWelcomeEmail, homeWeeklyEmail, homeAlertEmail, confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};

@@ -33,10 +33,10 @@ test('flags alert email failures and an unprocessed backlog', () => {
 });
 
 test('digestEmail skips quiet weeks and widens on request', () => {
-  const g = {key: 'lh', name: 'Lynn Haven', slug: 'lynn-haven', changes: [{date: '2026-09-20', title: 'Votes', text: 'New votes', url: 'https://baycounty.me/x'}], meetings: []};
+  const g = {key: 'lh', name: 'Lynn Haven', slug: 'lynn-haven', votes: [{date: '2026-09-20', title: 'Votes', url: 'https://baycounty.me/x'}], meetings: []};
   assert.equal(digestEmail(g, {now: now.getTime()}), null);
   const m = digestEmail(g, {now: now.getTime(), days: 60});
-  assert.equal(m.subject, 'Lynn Haven this week: 1 update');
+  assert.equal(m.subject, 'Lynn Haven this week: 1 new vote');
   assert.match(m.html, /\{\{\{RESEND_UNSUBSCRIBE_URL\}\}\}/, 'live digest keeps the broadcast placeholder');
 });
 

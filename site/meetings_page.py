@@ -61,8 +61,13 @@ def ics(meetings, boards):
 
 def meetings_page(out_dir):
     md = _load().get('meetings') or {'boards': [], 'meetings': []}
+    # the meetings file is written ahead of the build: a meeting dated before today is past, whatever its flag says
+    today = datetime.now().date().isoformat()
+    for m in md['meetings']:
+        if m.get('start') and m['start'][:10] < today:
+            m['past'] = True
     boards = {b['id']: b for b in md.get('boards', [])}
-    open(os.path.join(out_dir, 'meetings.ics'), 'w', newline='').write(ics(md['meetings'], boards))
+    open(os.path.join(out_dir, 'meetings.ics'), 'w', newline='').write(ics([m for m in md['meetings'] if not m.get('past')], boards))
     up = sorted((m for m in md['meetings'] if not m.get('past') and m.get('start')), key=lambda m: m['start'])
     past = sorted((m for m in md['meetings'] if m.get('past')), key=lambda m: m.get('start') or '', reverse=True)
 
@@ -89,7 +94,7 @@ def meetings_page(out_dir):
     <label class="vf"><span>Search</span><input id="mtQ" type="search" placeholder="Board, place or agenda item"></label>
     <label class="vf"><span>Sort</span><select id="mtS"><option value="date">By date</option><option value="az">Board A to Z</option></select></label>
     <div class="vf"><span>&nbsp;</span><button type="button" class="tt-csv" id="mtCsv">Download CSV</button></div></div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="next">Coming up</h2><span class="muted" id="mtCount" aria-live="polite">{len(up)} meetings in the next 60 days</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="next">Coming up</h2><span class="muted" id="mtCount" aria-live="polite">{len(up)} meetings in the next 60 days{f' ({sum(1 for m in up if m.get("expected"))} expected from regular schedules)' if any(m.get('expected') for m in up) else ''}</span></div>
     <ol class="findings" id="mtList" data-city-empty="No upcoming meetings found for {{city}}.">{"".join(card(m) for m in up) or '<li class="muted">No upcoming meetings found.</li>'}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="recent">Most recent meeting of each board</h2></div><ol class="findings" id="mtPast" data-city-empty="No recent meetings found for {{city}}.">{"".join(card(m) for m in past)}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="sched">Regular schedules</h2></div>

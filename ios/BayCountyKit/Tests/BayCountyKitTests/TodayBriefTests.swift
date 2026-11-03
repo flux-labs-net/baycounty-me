@@ -29,9 +29,44 @@ final class TodayBriefTests: XCTestCase {
         XCTAssertEqual(TodayBrief.noticesCard([]).title, "No active alerts")
     }
 
-    func testTrashCard() {
-        XCTAssertEqual(TodayBrief.trashCard("Friday").title, "Trash day: Friday")
-        XCTAssertEqual(TodayBrief.trashCard(nil).title, "Trash day")
+    /// The trash card shows only on pickup day, or from 4 p.m. the day before. Same cases as the site's BCTrashCard.
+    func testTrashCardOnlyAroundPickupDay() {
+        var cal = Calendar(identifier: .gregorian); cal.timeZone = TimeZone(identifier: "America/Chicago")!
+        let at = { (m: Int, d: Int, h: Int) in cal.date(from: DateComponents(year: 2026, month: m, day: d, hour: h))! }
+        let holidays = [UtilityLookup.Holiday(provider: nil, holiday: "Thanksgiving Day", whenObserved: "4th Thursday in November", garbage: "Moved to the Saturday after", yardWaste: nil),
+                        UtilityLookup.Holiday(provider: nil, holiday: "Memorial Day", whenObserved: "Last Monday in May", garbage: "No pickup", yardWaste: nil),
+                        UtilityLookup.Holiday(provider: nil, holiday: "Labor Day", whenObserved: "1st Monday in September", garbage: "Normal", yardWaste: nil),
+                        UtilityLookup.Holiday(provider: nil, holiday: "Christmas Day", whenObserved: "December 25", garbage: "No pickup; in 2025 Thursday's route moved to Saturday, December 27", yardWaste: nil),
+                        UtilityLookup.Holiday(provider: nil, holiday: "New Year's Day", whenObserved: "January 1", garbage: "No pickup; in 2026 Thursday's route moved to Saturday, January 3", yardWaste: nil)]
+        let card = { (m: Int, d: Int, h: Int) in TodayBrief.trashCard(days: "Monday, Thursday", holidays: holidays, now: at(m, d, h)) }
+        XCTAssertEqual(card(10, 29, 9)?.title, "Trash pickup today")        // Thursday
+        XCTAssertEqual(card(10, 29, 9)?.detail, "At your home")
+        XCTAssertNil(card(10, 30, 9))                                       // Friday
+        XCTAssertNil(card(11, 1, 14))                                       // Sunday afternoon
+        XCTAssertEqual(card(11, 1, 17)?.title, "Trash pickup tomorrow")     // Sunday evening
+        XCTAssertEqual(card(11, 1, 17)?.detail, "Put it out tonight")
+        XCTAssertEqual(card(11, 26, 8)?.title, "No trash pickup today")     // Thanksgiving
+        XCTAssertEqual(card(11, 26, 8)?.detail, "Thanksgiving Day · Moved to the Saturday after")
+        XCTAssertEqual(card(11, 25, 18)?.title, "No trash pickup tomorrow")
+        XCTAssertEqual(card(5, 25, 8)?.detail, "Memorial Day")              // last Monday in May
+        XCTAssertEqual(card(5, 18, 8)?.title, "Trash pickup today")         // not the last Monday
+        XCTAssertEqual(card(9, 7, 8)?.title, "Trash pickup today")          // Labor Day pickup is normal
+        XCTAssertEqual(TodayBrief.trashCard(days: "Friday", holidays: holidays, now: at(12, 25, 8))?.detail, "Christmas Day")   // the 2025 note is left off
+        XCTAssertEqual(TodayBrief.trashCard(days: "Thursday", holidays: holidays, now: cal.date(from: DateComponents(year: 2026, month: 1, day: 1, hour: 8))!)?.detail,
+                       "New Year's Day · In 2026 Thursday's route moved to Saturday, January 3")
+        XCTAssertNil(TodayBrief.trashCard(days: nil, holidays: [], now: at(10, 29, 9)))
+        XCTAssertNil(TodayBrief.trashCard(nil))
+    }
+
+    func testCardsLeadWithTrashOnlyOnPickupDay() throws {
+        let url = try XCTUnwrap(Bundle.module.url(forResource: "utilities-lynn-haven", withExtension: "json", subdirectory: "Fixtures"))
+        let home = try UtilityLookup.decode(Data(contentsOf: url))   // garbage on Friday
+        var cal = Calendar(identifier: .gregorian); cal.timeZone = TimeZone(identifier: "America/Chicago")!
+        let fri = cal.date(from: DateComponents(year: 2026, month: 10, day: 30, hour: 8))!
+        let wed = cal.date(from: DateComponents(year: 2026, month: 10, day: 28, hour: 8))!
+        XCTAssertEqual(TodayBrief.cards(beach: [], notices: [], meetings: [], utilities: home, now: fri).map(\.id), ["trash", "beach", "notices", "meeting"])
+        XCTAssertEqual(TodayBrief.cards(beach: [], notices: [], meetings: [], utilities: home, now: wed).map(\.id), ["beach", "notices", "meeting"])
+        XCTAssertEqual(TodayBrief.cards(beach: [], notices: [], meetings: [], utilities: nil, now: fri).count, 3)
     }
 
     func testWeekendWindow() {

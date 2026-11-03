@@ -72,7 +72,7 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("Audit findings", "magnifyingglass", "What outside auditors flagged", Route.Dataset("audit-findings")),
     ),
     MoneySection.CONNECTIONS to listOf(
-        MoneyItem("Network", "point.3.filled.connected.trianglepath.dotted", "Who every government paid, and who gave to officials", site = "/connections"),
+        MoneyItem("Connections", "point.3.filled.connected.trianglepath.dotted", "Who was paid, who gave, and how they voted", site = "/connections"),
         MoneyItem("Campaign gifts", "chart.bar", "What each official raised, and from whom", Route.Dataset("campaign-finance")),
         MoneyItem("Donors with contracts", "link", "Businesses that gave and also hold contracts", Route.DonorContracts),
         MoneyItem("Money map", "point.3.connected.trianglepath.dotted", "Donors, officials and votes on their contracts", Route.MoneyMap),
@@ -107,12 +107,9 @@ fun MoneyScreen() {
 
     fun total(v: List<Double>): String? = v.sum().takeIf { it > 0 }?.let { Format.compactMoney(it) }
     fun value(item: MoneyItem): String? {
-        val g = store.governments
         return when (item.title) {
             "Amendment 3" -> store.amendment3?.localImpact(1)?.takeIf { it > 0 }?.let { "−" + Format.compactMoney(it) }
-            "Hurricane Michael" -> total(g.mapNotNull { it.femaMichael })
-            "Debt" -> total(g.mapNotNull { it.debtTotal })
-            "Audit findings" -> g.mapNotNull { it.auditFindings }.sum().takeIf { it > 0 }?.toString()
+            // Hurricane Michael, Debt and Audit findings carry no running total: summing governments mixed audit years and scopes the web pages do not show
             else -> null
         }
     }
@@ -167,7 +164,7 @@ private fun LevyCard() {
         Modifier.fillMaxWidth().background(Brand.navyFill, RoundedCornerShape(18.dp)).clickable { nav.push(Route.TaxCalculator()) }.padding(18.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
-        Text("Property tax levied this year", style = T.footnote, color = Color.White.copy(alpha = 0.8f))
+        Text("Property tax levied, FY2026 (county, schools, cities)", style = T.footnote, color = Color.White.copy(alpha = 0.8f))
         Text(Format.compactMoney(total), style = T.bigNumber.copy(fontSize = T.bigNumber.fontSize * 1.25f), color = Color.White)
         StackBar(parts)
         Flow(14.dp) {

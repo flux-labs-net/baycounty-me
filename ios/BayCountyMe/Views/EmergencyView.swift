@@ -13,6 +13,8 @@ struct EmergencyView: View {
     @State private var zone: Emergency.ZoneResult?
     @State private var zoneError: String?
     @State private var looking = false
+    /// The saved home shown in the address box, so a typed address is never replaced.
+    @State private var homeShown: String?
 
     private var resources: [Row] { store.rows["emergency-resources"] ?? [] }
     /// The live feed once it loads; until then (or offline) the last daily archive.
@@ -52,7 +54,12 @@ struct EmergencyView: View {
         .task {
             await store.load(Emergency.datasets)
             await loadFeed()
-            if address.isEmpty, let home = store.home { address = home.display; await lookup(home: home) }
+        }
+        // The saved home (the account's, when signed in) is looked up right away, and again if it changes.
+        .task(id: store.home?.id) {
+            guard let home = store.home, address.isEmpty || address == homeShown else { return }
+            address = home.display; homeShown = home.display
+            await lookup(home: home)
         }
         .refreshable { await loadFeed() }
     }
@@ -117,6 +124,9 @@ struct EmergencyView: View {
                         .background(Brand.hairline.opacity(0.35), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     Button("Look up") { Task { await lookup() } }
                         .buttonStyle(.borderedProminent).disabled(address.trimmingCharacters(in: .whitespaces).count < 4 || looking)
+                }
+                if let h = homeShown, address == h {
+                    Text("This is your saved home. Type another address to look somewhere else.").font(.caption).foregroundStyle(.secondary)
                 }
                 if looking { ProgressView() }
                 if let zoneError { Text(zoneError).font(.subheadline).foregroundStyle(.secondary) }
@@ -190,6 +200,10 @@ struct EmergencyView: View {
                 .font(.caption.weight(.semibold)).foregroundStyle(.secondary).textCase(.uppercase)
             Text(n.string("title") ?? "").font(.subheadline.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
             if let a = n.string("area") { Text(a).font(.footnote).foregroundStyle(.secondary).lineLimit(3) }
+            if let map = AlertArea.parse(n.string("geometry")) {
+                AlertMapView(area: map).padding(.top, 4).padding(.bottom, map.note == nil ? 4 : 0)
+                if let note = map.note { Text(note).font(.caption2).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
+            }
             if !more.isEmpty {
                 DisclosureGroup("Details") { Text(more).font(.footnote).fixedSize(horizontal: false, vertical: true).padding(.top, 4) }
                     .font(.footnote)

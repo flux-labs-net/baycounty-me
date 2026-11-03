@@ -222,6 +222,7 @@ def contracts_page(out_dir):
       <button type="button" class="pill sm" id="ctCsv">Download CSV</button></div>
     <div class="tablewrap"><table class="tx-table" id="ctT" data-tt="own"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody><tr><td colspan="6" class="muted">Loading contracts…</td></tr></tbody></table></div>
     <button type="button" class="pill" id="ctMore" hidden>Show more</button></section>
+  <section class="tx-sec" data-records-sent="contracts" hidden></section>
   {growth_section(d, f'''<details class="tbl-toggle"><summary>Every change order in this list ({len(d["change_orders"])})</summary>
     <div class="tablewrap" data-city-empty="No change orders recorded for {{city}} yet."><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></details>''')}
   <section class="tx-sec"><div class="sec-hd"><h2 id="em">Emergency purchases</h2></div><ul class="plain" data-city-empty="No emergency purchases recorded for {{city}}.">{em}</ul></section>
@@ -230,4 +231,5 @@ def contracts_page(out_dir):
     <details class="gaps"><summary>What we couldn't find ({len(d["gaps"])})</summary><ul>{''.join(f"<li>{e(g)}</li>" for g in d["gaps"])}</ul></details></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script src="/assets/contracts.js" defer></script>'''
+<script src="/assets/contracts.js" defer></script>
+<script src="/assets/records-sent.js" defer></script>'''

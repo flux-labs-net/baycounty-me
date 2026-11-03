@@ -162,6 +162,7 @@ struct PersonDetailView: View {
             Group {
                 businessGifts(byDS)
                 ownerGifts(byDS)
+                contractDollars(byDS)
                 votes(byDS)
                 donorContracts
                 WebLink(title: "Profile and connections on BayCounty.me", symbol: "point.3.connected.trianglepath.dotted",
@@ -381,6 +382,61 @@ struct PersonDetailView: View {
                     if rows.count > 15 {
                         RowDivider()
                         RouteRow(route: .dataset("owner-gifts", filters: ["candidate_id": personID]), title: "All \(rows.count)")
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: Contract dollars
+
+    /// The dollars in the contract votes they cast (site/vote_dollars.py): yes on items that passed, no, and the votes behind them.
+    @ViewBuilder private func contractDollars(_ byDS: [String: [Row]]) -> some View {
+        if let c = RecordLinks.contractDollars(byDS["contract-dollar-totals"] ?? []) {
+            let rows = byDS["member-contract-dollars"] ?? []
+            let latest = Array(rows.sorted { ($0.string("date") ?? "") > ($1.string("date") ?? "") }.prefix(10))
+            let span = [c.first, c.last].compactMap { $0.flatMap(Dates.parse).map { Dates.display($0, hasTime: false) } }.joined(separator: " to ")
+            PageSection(title: "Contract dollars they voted on", symbol: "dollarsign.square", tone: .teal,
+                        caption: "Contract and purchase votes with one clear dollar figure in the minutes, since 2016.") {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("Voted yes, and it passed").font(.caption).foregroundStyle(.secondary)
+                    Text(Format.money(c.yes)).font(.title2.weight(.semibold)).monospacedDigit()
+                    Text("\(c.yesVotes) vote\(c.yesVotes == 1 ? "" : "s")\(span.isEmpty ? "" : " · " + span)").font(.caption).foregroundStyle(.secondary)
+                    Divider().padding(.vertical, 4)
+                    FactRow(label: "Voted no", value: Format.money(c.no), detail: "\(c.noVotes) vote\(c.noVotes == 1 ? "" : "s")")
+                    if c.yesFailedVotes > 0 {
+                        FactRow(label: "Voted yes, but it failed", value: Format.money(c.yesFailed), detail: "\(c.yesFailedVotes) vote\(c.yesFailedVotes == 1 ? "" : "s")")
+                    }
+                    Text("Not totaled: \(c.consent) consent agendas (many items in one vote) and \(c.notCounted) votes without one clear dollar figure or that aren\u{2019}t new spending. So this is a floor.")
+                        .font(.caption).foregroundStyle(.secondary)
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .card(14)
+                if !latest.isEmpty {
+                    CardList {
+                        ForEach(latest) { row in
+                            NavigationLink(value: Route.record("member-contract-dollars", rowID: row.id)) {
+                                HStack(alignment: .top) {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(row.string("headline") ?? "Vote").font(.subheadline).foregroundStyle(.primary).lineLimit(2).multilineTextAlignment(.leading)
+                                        Text([row.string("date").flatMap(Dates.parse).map { Dates.display($0, hasTime: false) }, Format.money(row.number("amount"))]
+                                            .compactMap { $0 }.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    let v = (row.string("vote") ?? "").lowercased()
+                                    VoteMark(choice: v == "yes" ? .yes : v == "no" ? .no : .other)
+                                }
+                                .padding(.horizontal, 14).padding(.vertical, 10)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                            if row.id != latest.last?.id { RowDivider() }
+                        }
+                        if rows.count > latest.count {
+                            RowDivider()
+                            RouteRow(route: .dataset("member-contract-dollars", filters: ["person_id": personID]), title: "All \(rows.count) votes behind these totals")
+                        }
                     }
                 }
             }

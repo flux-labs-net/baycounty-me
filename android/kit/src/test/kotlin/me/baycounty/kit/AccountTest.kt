@@ -72,4 +72,11 @@ class AccountTest {
         val p = assertNotNull(AccountMe.decode("""{"user":{"email":"a@b.co"},"home":{"address":"825 Ohio Ave","zip":"32444","lat":30.24,"lon":-85.64}}""").home).addressMatch
         assertEquals("825 OHIO AVE", p.address); assertNull(p.unit); assertNull(p.renum)
     }
+
+    @Test fun homeCityStartsTownLists() {
+        fun home(gov: String) = assertNotNull(AccountMe.decode("""{"user":{"email":"a@b.co"},"home":{"address":"825 Ohio Ave","city":"Panama City","lat":30.2,"lon":-85.6,"gov_id":"$gov"}}""").home)
+        assertEquals("Lynn Haven", home("lh").town); assertEquals("lh", home("lh").govKey)
+        // outside city limits the mailing city isn't the town: lists start on the whole county
+        assertNull(home("county").town); assertEquals("county", home("county").govKey)
+    }
 }

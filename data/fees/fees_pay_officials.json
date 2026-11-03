@@ -1006,7 +1006,13 @@
       "bill_5000gal": 120.7,
       "calc": "Water: 21.10 + 3 x 2.60 + 2 x 2.90 = 34.70; Sewer: 37.00 + 5 x 9.80 = 86.00; Total = 120.70 (3/4-inch meter, 2026 column; assumes wastewater volume charge on all metered water)",
       "effective": "Fee schedule header 'Effective April 21, 2026'; uses the '2026' column (prior '2025' column took effect Jan 1, 2025)",
-      "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/16599/Utilities-FY-25-Fees-and-Fines"
+      "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/16599/Utilities-FY-25-Fees-and-Fines",
+      "bill_parts": {
+        "water_sewer": 120.7,
+        "garbage": null,
+        "other": 0,
+        "other_note": null
+      }
     },
     {
       "provider": "City of Panama City Utilities (water, wastewater, garbage)",
@@ -1026,7 +1032,13 @@
       "calc": "14.09 + 32.29 + 45.91 + 5 x 6.28 + 5 x 11.90 = 92.29 + 31.40 + 59.50 = 183.19",
       "calc_caveat": "The city's FAQ says the average residential bill becomes 'approximately $92.29', which equals the three base charges alone - so usage may include an allowance not described in the notice. Treat the 5,000-gallon figure as provisional until the rate ordinance is checked.",
       "effective": "October 2026 usage (first bills week of Nov 2, 2026)",
-      "source_url": "https://www.panamacity.gov/DocumentCenter/View/12312"
+      "source_url": "https://www.panamacity.gov/DocumentCenter/View/12312",
+      "bill_parts": {
+        "water_sewer": 137.28,
+        "garbage": 45.91,
+        "other": 0,
+        "other_note": null
+      }
     },
     {
       "provider": "City of Panama City Beach Utilities",
@@ -1050,7 +1062,13 @@
       "calc": "5,000 gal is within the 6,000-gal minimum: water 37.54 + sewer 49.88 = 87.42 (rate sheet also shows combined 0-6,000 gal water+sewer = 87.42)",
       "calc_caveat": "Sheet says billing is bi-monthly on even months while headings say 'monthly ... per unit'; figure is per month as labeled.",
       "effective": "February 1, 2026",
-      "source_url": "https://www.pcbfl.gov/DocumentCenter/View/3907/CityRateSheet-2026"
+      "source_url": "https://www.pcbfl.gov/DocumentCenter/View/3907/CityRateSheet-2026",
+      "bill_parts": {
+        "water_sewer": 87.42,
+        "garbage": null,
+        "other": 0,
+        "other_note": null
+      }
     },
     {
       "provider": "City of Lynn Haven Utilities",
@@ -1072,7 +1090,13 @@
       "bill_5000gal": 129.76,
       "calc": "16.85 + 16.95 + 24.86 = 58.66 base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (matches budget's own table: 5,000 gal - $129.76). Water+sewer only = 104.90",
       "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
-      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "bill_parts": {
+        "water_sewer": 104.9,
+        "garbage": 24.86,
+        "other": 0,
+        "other_note": null
+      }
     },
     {
       "provider": "City of Callaway Utility Billing (water/sewer purchased wholesale from Bay County)",
@@ -1096,7 +1120,13 @@
       "calc": "Water 11.37 + 5 x 5.32 = 37.97; franchise fee 10% = 3.80; Sewer 30.69 + 5 x 6.13 = 61.34; Stormwater 1.00; Solid waste 13.00; Total = 117.11",
       "calc_caveat": "The city's rates page mislabels its headings (outside-city base rates appear under 'per 1,000 gallons'); figures were matched by the stated 25% outside surcharge (11.37 x 1.25 = 14.21; 30.69 x 1.25 = 38.36; 5.32 x 1.25 = 6.65; 6.13 x 1.25 = 7.66). FY2027 budget assumes consumption rates rise $0.05 (water) and $0.15 (sewer) to cover county increases, which may not yet be on the page.",
       "effective": "Not stated on page (retrieved 2026-10-20)",
-      "source_url": "https://www.cityofcallaway.com/102/Rates"
+      "source_url": "https://www.cityofcallaway.com/102/Rates",
+      "bill_parts": {
+        "water_sewer": 99.31,
+        "garbage": 13.0,
+        "other": 4.8,
+        "other_note": "10% franchise fee on water ($3.80) and $1 stormwater"
+      }
     },
     {
       "provider": "City of Springfield Public Works / Utility Billing",
@@ -1121,7 +1151,13 @@
       "bill_5000gal": 180.2,
       "calc": "Base 8.95 + 30.43 + 37.67 + 3.00 = 80.05 (city's stated total base); + 5 x (5.13 + 14.90) = 100.15; total = 180.20",
       "effective": "October 1, 2025",
-      "source_url": "https://www.springfieldfl.net/publicworks/page/utility-billing-rates"
+      "source_url": "https://www.springfieldfl.net/publicworks/page/utility-billing-rates",
+      "bill_parts": {
+        "water_sewer": 139.53,
+        "garbage": 37.67,
+        "other": 3.0,
+        "other_note": "$3 stormwater"
+      }
     },
     {
       "provider": "City of Mexico Beach (water/wastewater supplied by Bay County; city bills)",
@@ -1144,7 +1180,13 @@
       "source_url": "https://mexicobeachfl.gov/residents/utilities-payments/",
       "other_sources": [
         "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/water-and-sewer-rates-rise-in-mexico-beach/amp"
-      ]
+      ],
+      "bill_parts": {
+        "water_sewer": 104.78,
+        "garbage": 40.0,
+        "other": 3.12,
+        "other_note": "7% utility tax on water"
+      }
     },
     {
       "provider": "City of Parker Water Department",

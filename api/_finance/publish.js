@@ -14,7 +14,8 @@ const cutoff = require('../_cutoff');  // nothing before FY2016 is published
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const PUBLISHABLE = ['disbursements', 'budget'];
 const GOV_NAME = {county: 'Bay County', schools: 'Bay District Schools', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway',
-  sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+  sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach', sheriff: 'Bay County Sheriff', clerk: 'Bay County Clerk of Court', property_appraiser: 'Bay County Property Appraiser',
+  tax_collector: 'Bay County Tax Collector', soe: 'Bay County Supervisor of Elections'};
 
 // Words that mark a payee as an organization rather than a person.
 const ORG = new RegExp('\\b(' + ['inc', 'incorporated', 'llc', 'l l c', 'llp', 'lp', 'ltd', 'pllc', 'pa', 'plc', 'corp', 'corporation', 'co', 'company', 'companies',
@@ -183,4 +184,4 @@ async function unpublish(q, ws, uploadId) {
   return {ok: true, removed: n};
 }
 
-module.exports = {publish, unpublish, checkbookRows, budgetRows, isOrganization, entityIndex, orgKey, individualCategory, PUBLISHABLE};
+module.exports = {publish, unpublish, checkbookRows, budgetRows, isOrganization, entityIndex, orgKey, individualCategory, PUBLISHABLE, GOV_NAME};

@@ -109,7 +109,10 @@ def gov_cards():
         b = p.get('budget') or {}
         pr = (p.get('per_resident') or {}).get('budget')
         debt = (p.get('debt') or {}).get('total')
-        if b.get('total'):
+        from gov_pages import budget27
+        if budget27(g['key']):
+            stat, label = _money(budget27(g['key'])), 'FY2027 budget' + (f', about ${budget27(g["key"]) / p["population"]:,.0f} per resident' if p.get('population') and g['kind'] != 'schools' else '')
+        elif b.get('total'):
             stat, label = _money(b['total']), 'FY2026 budget' + (f', about ${pr:,.0f} per resident' if pr else '')
         elif debt:
             stat, label = _money(debt), 'owed in bonds, loans and other debt'
@@ -298,7 +301,7 @@ def preview_text():
         '/public-money/cra-spending': ("Where Bay County's CRA money goes",
                                        f"{M(s['cra_spent'])} across {s['cra_n']} records: what Bay County's six Community Redevelopment Agencies bought, built and granted, and who was paid. Mapped, with sources."),
         '/public-money/cra-tax-increment': ('How much property tax goes to the CRAs',
-                                            "Bay County and its cities pay about $28.7M a year to seven Community Redevelopment Agencies, three-quarters of it to Front Beach Road. Year by year, who pays, and what's still to come."),
+                                            "Bay County and its cities pay about $28.7M a year to six Community Redevelopment Agencies (seven areas), three-quarters of it to Front Beach Road. Year by year, who pays, and what's still to come."),
         '/public-money/tax-dollars': ('Where your Bay County property tax goes',
                                       f"{M(s['lv_tot'])} levied in FY2026. Estimate your own bill, see each government's slice, and track six years of tax rates for the county, schools and every city."),
         '/public-money/amendment-3': ('Amendment 3: what it would mean for Bay County',
@@ -320,7 +323,7 @@ def preview_text():
         '/public-money/debt': ("What Bay County's governments owe",
                                f"{M(s['debt'])} owed by the county, schools, cities and authorities, including big single payments ahead and pension promises, from audited financial reports."),
         '/public-money/audits': ('What the auditors found in Bay County',
-                                 f"{s['findings']} audit findings across Bay County governments in three years, explained in plain English, including {s['repeats']} repeated in the latest audits."),
+                                 f"{s['findings']} audit findings in the latest audits of Bay County governments, explained in plain English, including {s['repeats']} that repeat earlier years."),
         '/glossary': ('Government money, explained simply',
                       "What's a CRA? A mill? A rolled-back rate? Plain-English definitions of every term used on BayCounty.me, with examples."),
         '/updates': ("What's new on BayCounty.me", 'New pages, new data and corrections to BayCounty.me, newest first. Subscribe by RSS.'),

@@ -76,7 +76,7 @@ struct LivingHereView: View {
                 .padding(.bottom, 24)
             }
             .background(Brand.canvas)
-            .navigationTitle("Living here")
+            .navigationTitle("Around me")
             .withRoutes()
             .task { await store.load("beach-conditions") }
         }

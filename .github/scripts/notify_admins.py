@@ -33,7 +33,7 @@ LABELS = {
     'fetch_campaign_finance': 'Fetch campaign finance reports', 'rebuild_site': 'Rebuild site',
     'commit_and_push': 'Commit and push', 'fetch_fema_ledger': 'Fetch FEMA Public Assistance ledger',
     'fetch_sales_tax_map': 'Fetch sales tax project map (Bay County GIS)', 'database_secret': 'Database secret',
-    'load_database': 'Load the database',
+    'load_database': 'Load the database', 'vercel_deploy': 'Deploy to Vercel (deploy hook)',
 }
 
 

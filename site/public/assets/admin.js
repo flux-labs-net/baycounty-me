@@ -50,8 +50,8 @@
   // Old #hashes from before the menu was regrouped still land somewhere sensible.
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
-    accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, intake: loadIntake, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, govstaff: loadGovStaff, alertsent: loadAlertsSent, govflags: loadGovFlags, filereview: loadFileReview, apps: loadApps, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -95,8 +95,10 @@
     ['ties', 'teal', 'Review', 'Business ties', 'Officials matched by name to Sunbiz officers.', 'Open queue'],
     ['minutes', 'teal', 'Review', 'Votes from minutes', 'Motions read from minutes that failed a check, plus spot checks.', 'Open queue'],
     ['accounting', 'teal', 'Review', 'Accounting files', 'Check-register rows waiting for approve or reject.', 'Open queue'],
+    ['govflags', 'teal', 'Review', 'Staff data flags', 'Record data city or county staff say is wrong.', 'Open queue'],
+    ['filereview', 'teal', 'Review', 'Sent files to check', 'Files a government sent that didn’t match our own records or couldn’t be confirmed.', 'Open queue'],
     ['replies', 'blue', 'Outreach', 'Replies to handle', 'Conversations with a reply, plus emails that matched no conversation.', 'Read replies', 'correspondence'],
-    ['records', 'blue', 'Outreach', 'Unsent records requests', 'Drafts waiting for you to press Send.', 'Open drafts'],
+    ['records', 'blue', 'Outreach', 'Records requests to approve', 'Drafts waiting for your approval, including ones made when an official source stops publishing.', 'Open drafts'],
     ['syncs', 'amber', 'Problems', 'Datasets failing now', 'Datasets whose latest load failed.', 'See data health', 'ingestion'],
     ['agendas', 'amber', 'Problems', 'Agenda errors', 'Unresolved errors from the last 14 days.', 'See agendas'],
   ];
@@ -398,7 +400,7 @@
     $('#ac-sources tbody').innerHTML = r.sources.map(s => `<tr data-src="${esc(s.id)}"><td>${esc(s.entity_name)}${s.active ? '' : ' <span class="pill revoked">Off</span>'}${s.has_map ? '' : '<div class="small" style="color:var(--warn)">No column map yet</div>'}</td>
       <td class="small">${esc(ERP[s.erp_system] || s.erp_system)}</td><td class="mono small">${esc(s.inbound_address || '')}</td>
       <td class="small">${s.finance_workspace ? esc(s.finance_workspace) : '<span class="muted">Not linked</span>'}</td>
-      <td><div class="ac-snd"><input value="${esc((s.allowed_senders || []).join(', '))}" placeholder="name@city.gov, @city.gov" aria-label="Allowed senders for ${esc(s.entity_name)}"><button class="btn" type="button" data-save-snd>Save</button></div></td>
+      <td><div class="ac-snd"><input value="${esc((s.allowed_senders || []).join(', '))}" placeholder="clerk@city.gov, finance@city.gov" aria-label="Allowed senders for ${esc(s.entity_name)}"><button class="btn" type="button" data-save-snd>Save</button></div></td>
       <td class="num">${fmt(s.files)}</td><td class="small">${when(s.last_file)}</td><td class="num">${fmt(s.pending)}</td>
       <td><label class="sw"><input type="checkbox" data-auto ${s.auto_normalize ? 'checked' : ''}> ${s.auto_normalize ? 'On' : 'Off'}</label></td></tr>`).join('') || '<tr><td colspan="9" class="empty">No sources yet.</td></tr>';
     $('#ac-files tbody').innerHTML = r.files.map(f => `<tr${f.id === LG.raw ? ' class="sel-row"' : ''}><td class="small" style="white-space:nowrap">${when(f.received_at)}</td><td class="small">${esc(f.entity_name)}</td>
@@ -558,6 +560,51 @@
     try { await api('agenda_run', {method: 'POST', body: {mode: 'both'}}); b.textContent = 'Started'; setTimeout(() => { b.textContent = 'Run now'; b.disabled = false; loadAgendas(); }, 60000); }
     catch (err) { alert(err.message); b.disabled = false; }
   });
+
+  // ---------- email intake log ----------
+  let IR = null;
+  const irDecision = {accepted: 'Accepted', refused: 'Refused', dropped: 'Dropped', unauthenticated: 'Not authenticated', failed: 'Failed', received: 'Not finished'};
+  const irParams = () => ({from: $('#ir-from').value, to: $('#ir-to').value, workspace: $('#ir-ws').value});
+  function irLinks() {
+    const qs = f => '/api/admin?' + new URLSearchParams({action: 'intake_report', format: f, ...irParams()}).toString();
+    $('#ir-csv').href = qs('csv'); $('#ir-print').href = qs('html');
+  }
+  async function loadIntake() {
+    if (!$('#ir-to').value) { const d = new Date(); $('#ir-to').value = d.toISOString().slice(0, 10); $('#ir-from').value = new Date(d - 30 * 864e5).toISOString().slice(0, 10); }
+    irLinks();
+    try { IR = await api('intake_report', {params: irParams()}); }
+    catch (e) { $('#ir-banner').innerHTML = `<div class="banner bad"><div><b>Couldn’t load the intake log.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const ch = IR.chain;
+    $('#ir-banner').innerHTML = ch.intact
+      ? `<div class="banner good"><div><b>Audit trail intact</b> <span class="small muted">All ${fmt(ch.events)} events link up. Latest #${ch.last_id || 0}.</span></div></div>`
+      : `<div class="banner bad"><div><b>Audit trail broken</b> <span class="small muted">at ${ch.breaks.map(b => '#' + b.id).join(', ')}. Something changed a row outside the app.</span></div></div>`;
+    const c = IR.counts;
+    $('#ir-tiles').innerHTML = [[IR.emails.length, 'Emails'], [c.accepted || 0, 'Accepted'], [(c.refused || 0) + (c.unauthenticated || 0), 'Refused'], [c.dropped || 0, 'Dropped'],
+      [IR.emails.reduce((n, e) => n + (e.attachments || []).filter(f => f.sha256).length, 0), 'Files stored']]
+      .map(([v, l]) => `<div class="tile"><b>${fmt(v)}</b><span>${l}</span></div>`).join('');
+    const ws = $('#ir-ws'), cur = ws.value;
+    const known = [...new Set(IR.emails.map(e => e.workspace_id).filter(Boolean).concat(cur ? [cur] : []))].sort();
+    ws.innerHTML = '<option value="">All governments</option>' + known.map(w => `<option value="${esc(w)}">${esc(w)}</option>`).join(''); ws.value = cur;
+    $('#ir-table tbody').innerHTML = IR.emails.slice().reverse().map(e => `<tr class="click" data-ir="${e.id}"><td class="small">${when(e.logged_at)}</td>
+      <td class="small">${esc(e.sender)}</td><td class="small">${esc((e.recipients || []).join(', '))}</td>
+      <td><span class="pill ${e.decision === 'accepted' ? 'delivered' : 'bounced'}">${esc(irDecision[e.decision] || e.decision)}</span></td>
+      <td class="small">${(e.attachments || []).length || '–'}</td><td class="small md-hide">${(e.events || []).length}</td></tr>`).join('')
+      || '<tr><td colspan="6" class="empty">No email reached an intake address in this window.</td></tr>';
+  }
+  function showIntake(id) {
+    const e = IR && IR.emails.find(x => String(x.id) === String(id)); if (!e) return;
+    const box = $('#ir-detail'); box.hidden = false;
+    const t = v => v ? `${new Date(v).toLocaleString()} <span class="muted mono small">${esc(new Date(v).toISOString())}</span>` : '–';
+    box.innerHTML = `<h3 style="font:600 .95rem var(--f-display);margin:0 0 8px">${esc(e.subject || (e.decision === 'accepted' ? '(no subject)' : '(not opened)'))}</h3>
+      <dl class="kv" style="display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0 0 10px;font-size:.88rem">${[['From', esc(e.sender)], ['To', esc((e.recipients || []).join(', '))], ['Decision', esc((irDecision[e.decision] || e.decision) + (e.reason ? ': ' + e.reason : ''))],
+        ['Sent', t(e.sent_at)], ['Received', t(e.received_at)], ['Webhook', t(e.webhook_at)], ['Logged', t(e.logged_at)], ['Finished', t(e.finished_at)],
+        ['Message-ID', `<span class="mono small">${esc(e.message_id || '–')}</span>`], ['Body SHA-256', `<span class="mono small">${esc(e.payload_sha256)}</span>`]]
+        .map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+      ${(e.attachments || []).map(f => `<div class="small"><b>${esc(f.name)}</b> <span class="mono muted">${esc(f.sha256 || f.skipped || '')}</span></div>`).join('')}
+      ${(e.events || []).length ? `<h4 class="small" style="margin:10px 0 4px">Audit trail</h4>` + e.events.map(a => `<div class="small">#${a.id} · ${when(a.at)} · ${esc(a.actor)} · ${esc(a.action.replace(/_/g, ' '))} <span class="mono muted">${esc(String(a.hash).slice(0, 12))}…</span></div>`).join('') : ''}`;
+  }
+  ['#ir-from', '#ir-to', '#ir-ws'].forEach(s => $(s).addEventListener('change', loadIntake));
+  $('#ir-table').addEventListener('click', ev => { const r = ev.target.closest('[data-ir]'); if (r) showIntake(r.dataset.ir); });
 
   // ---------- sent mail ----------
   let SE = null, seTimer = null;
@@ -775,30 +822,60 @@
   });
 
   // ---------- records requests ----------
+  // Budget-year requests and ones drafted automatically when an official source goes stale (data/civic/scripts/stale_requests.py).
   let RR = null, rrOpen = null;
-  const rrLabel = {draft: 'Draft', sent: 'Sent', received: 'Records received', closed: 'Closed'};
+  const rrLabel = {draft: 'Waiting for approval', sent: 'Sent', received: 'Records received', closed: 'Closed', dismissed: 'Dismissed'};
+  const rrAct = {drafted: 'Drafted', refreshed: 'Updated from the latest check', edited: 'Edited', status: 'Status changed', test_sent: 'Test sent',
+    sent: 'Sent', send_failed: 'Send failed', dismissed: 'Dismissed', resolved: 'Closed: newer records showed up'};
+  const daysAgo = d => Math.round((Date.now() - new Date(String(d).slice(0, 10) + 'T12:00:00Z')) / 864e5);
+  const shortDate = d => new Date(String(d).slice(0, 10) + 'T12:00:00Z').toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'});
   async function loadRR() {
     try { RR = await api('rr_list'); RR.requests.forEach(r => { r.id = Number(r.id); }); }
     catch (e) { $('#rr-list').innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
     renderRR();
   }
   function renderRR() {
-    const rs = RR.requests, n = s => rs.filter(r => r.status === s).length;
-    $('#rr-tiles').innerHTML = [['Drafts', n('draft')], ['Sent', n('sent')], ['Records received', n('received')], ['Need an address', rs.filter(r => r.status === 'draft' && !r.recipient_email).length]]
+    const all = RR.requests, n = s => all.filter(r => r.status === s).length, f = $('#rr-filter').value;
+    $('#rr-tiles').innerHTML = [['Waiting for approval', n('draft')], ['Stale-data drafts', all.filter(r => r.status === 'draft' && r.kind === 'stale').length],
+      ['Sent', n('sent') + n('received') + n('closed')], ['Need an address', all.filter(r => r.status === 'draft' && !r.recipient_email).length]]
       .map(([l, v]) => `<div class="tile"><b>${fmt(v)}</b><span>${l}</span></div>`).join('');
-    $('#rr-list').innerHTML = rs.map(r => `<button type="button" class="co-p${r.id === rrOpen ? ' on' : ''}" data-rr="${r.id}" style="width:100%;text-align:left;background:${r.id === rrOpen ? 'var(--sunken)' : 'none'};border-left:0;border-right:0;border-top:0;cursor:pointer;font:inherit;color:inherit">
+    const rs = all.filter(r => f === 'all' || (f === 'draft' ? r.status === 'draft' : f === 'sent' ? ['sent', 'received', 'closed'].includes(r.status) : r.status === f));
+    $('#rr-list').innerHTML = rs.map(r => {
+      const stale = r.kind === 'stale', g = r.gaps.length;
+      const what = stale ? `${esc(r.check_title || 'Stale data')} · ${g} place${g === 1 ? '' : 's'}` : `Budget · ${g} year${g === 1 ? '' : 's'}`;
+      return `<button type="button" class="co-p${r.id === rrOpen ? ' on' : ''}" data-rr="${r.id}" style="width:100%;text-align:left;background:${r.id === rrOpen ? 'var(--sunken)' : 'none'};border-left:0;border-right:0;border-top:0;cursor:pointer;font:inherit;color:inherit">
         <span></span><span class="nm">${esc(r.government)}</span><span class="pill ${esc(r.status)}">${esc(rrLabel[r.status] || r.status)}</span>
-        <span class="sub">${esc(r.gaps.length)} year${r.gaps.length === 1 ? '' : 's'} · ${r.recipient_email ? esc(r.recipient_email) : '<span style="color:var(--warn)">No address yet</span>'}</span></button>`).join('') || '<p class="empty">No requests.</p>';
+        <span class="sub">${stale ? '<span class="rr-k">Stale data</span> ' : ''}${what} · ${r.recipient_email ? esc(r.recipient_email) : '<span style="color:var(--warn)">No address yet</span>'}</span></button>`;
+    }).join('') || '<p class="empty">Nothing here.</p>';
     if (rrOpen) showRR(rrOpen);
   }
+  $('#rr-filter').addEventListener('change', () => { rrOpen = null; $('#rr-detail').innerHTML = '<p class="muted small" style="margin:0">Pick a request on the left.</p>'; renderRR(); });
   $('#rr-list').addEventListener('click', e => { const b = e.target.closest('[data-rr]'); if (b) { rrOpen = Number(b.dataset.rr); renderRR(); } });
+  function rrWhy(r) {
+    if (r.kind !== 'stale') return `<div><div class="small muted" style="margin-bottom:4px">Missing years</div><div class="rr-gaps">${r.gaps.map(g => `<span title="${esc(g.need)}">FY${esc(g.fiscal_year)}</span>`).join('')}</div></div>`;
+    return `<div class="rr-why"><div class="small muted" style="margin-bottom:6px"><b>Why this was drafted:</b> the official source’s newest record is older than its usual schedule${r.page ? ` (shown on <a href="${esc(r.page)}" target="_blank" rel="noopener">${esc(r.page)}</a>)` : ''}.</div>
+      <div class="rr-places">${r.gaps.map(g => `<div class="rr-place"><div class="row" style="gap:8px;align-items:baseline"><b class="grow">${esc(g.location)}</b>
+          <span class="rr-age">${fmt(daysAgo(g.last_record))} days old</span></div>
+        ${g.listed_as ? `<div class="small muted">The state lists it as ${esc(g.listed_as)}</div>` : ''}
+        <div class="small">Newest official record: <b>${esc(shortDate(g.last_record))}</b>${g.last_result ? ', ' + esc(g.last_result) : ''}${g.expected_every_days ? ` · usually every ${fmt(g.expected_every_days)} days` : ''}</div>
+        ${g.source_url ? `<div class="small"><a href="${esc(g.source_url)}" target="_blank" rel="noopener">Where it should be (official page)</a></div>` : ''}</div>`).join('')}</div></div>`;
+  }
+  function rrHistory(r) {
+    const h = r.history || [];
+    if (!h.length) return '';
+    return `<details class="rr-hist"><summary class="small">History (${h.length})</summary><ol>${h.map(x => `<li><span class="small muted">${esc(stamp(x.at))}</span> ${esc(rrAct[x.action] || x.action)}
+      <span class="small muted">by ${esc(x.actor === 'system' ? 'the automatic check' : x.actor)}${x.detail && x.detail.reason ? ': “' + esc(x.detail.reason) + '”' : ''}${x.detail && x.detail.to ? ' · to ' + esc(x.detail.to) : ''}</span></li>`).join('')}</ol>
+      <p class="small muted" style="margin:6px 0 0">This history is locked: entries can’t be changed or removed.</p></details>`;
+  }
   function showRR(id) {
     const r = RR.requests.find(x => x.id === id); if (!r) return;
     const draft = r.status === 'draft', box = $('#rr-detail');
+    const opts = Object.entries(rrLabel).filter(([k]) => k !== 'dismissed' || r.status === 'dismissed');
     box.innerHTML = `<div class="row" style="gap:8px;flex-wrap:wrap"><h2 class="h2 grow" style="margin:0">${esc(r.government)}</h2>
-        <select class="sel" id="rr-status" aria-label="Status" style="width:auto">${Object.entries(rrLabel).map(([k, v]) => `<option value="${k}"${k === r.status ? ' selected' : ''}>${v}</option>`).join('')}</select></div>
+        <select class="sel" id="rr-status" aria-label="Status" style="width:auto">${opts.map(([k, v]) => `<option value="${k}"${k === r.status ? ' selected' : ''}>${v}</option>`).join('')}</select></div>
+      ${r.status === 'dismissed' ? `<div class="banner"><div class="small"><b>Dismissed</b>${r.dismissed_by ? ' by ' + esc(r.dismissed_by === 'system' ? 'the automatic check' : r.dismissed_by) : ''}${r.dismissed_at ? ' on ' + esc(stamp(r.dismissed_at)) : ''}: ${esc(r.dismissed_reason || '')}</div></div>` : ''}
       ${r.notes ? `<div class="banner"><div class="small">${esc(r.notes)}</div></div>` : ''}
-      <div><div class="small muted" style="margin-bottom:4px">Missing years</div><div class="rr-gaps">${r.gaps.map(g => `<span title="${esc(g.need)}">FY${esc(g.fiscal_year)}</span>`).join('')}</div></div>
+      ${rrWhy(r)}
       <div class="row" style="gap:10px;flex-wrap:wrap">
         <label class="f grow" style="min-width:200px">To (name)<input id="rr-name" maxlength="200" value="${esc(r.recipient_name || '')}"${draft ? '' : ' disabled'}></label>
         <label class="f grow" style="min-width:200px">Email<input id="rr-email" type="email" value="${esc(r.recipient_email || '')}" placeholder="Add the records contact’s address"${draft ? '' : ' disabled'}></label>
@@ -806,20 +883,30 @@
       ${r.contact_url ? `<p class="small muted" style="margin:-4px 0 0">Contact source: <a href="${esc(r.contact_url)}" target="_blank" rel="noopener">${esc(r.contact_url)}</a></p>` : ''}
       <label class="f">Subject<input id="rr-subj" maxlength="200" value="${esc(r.subject)}"${draft ? '' : ' disabled'}></label>
       <label class="f">Message<textarea id="rr-body" style="min-height:320px"${draft ? '' : ' disabled'}>${esc(r.body)}</textarea></label>
-      <p class="small muted" style="margin:-4px 0 0">The email opens with “Dear ${esc(r.recipient_name && r.recipient_name.includes(',') ? r.recipient_name.split(',')[0] : 'Records Custodian')},” and ends with a reference number so the reply can be matched.</p>
+      <p class="small muted" style="margin:-4px 0 0">The email opens with “Dear ${esc(r.recipient_name && r.recipient_name.includes(',') && !/office|clerk|records|department/i.test(r.recipient_name.split(',')[0]) ? r.recipient_name.split(',')[0] : 'Records Custodian')},” and ends with a reference number so the reply can be matched.</p>
       <label class="f">Notes (admin only)<textarea id="rr-notes" maxlength="2000">${esc(r.notes || '')}</textarea></label>
-      <div class="row">${draft ? '<button class="btn" type="button" id="rr-save">Save draft</button><button class="btn" type="button" id="rr-test">Send a test to me</button><span class="grow"></span><button class="btn primary" type="button" id="rr-send">Send</button>'
+      <div class="row" style="flex-wrap:wrap">${draft ? '<button class="btn" type="button" id="rr-save">Save draft</button><button class="btn" type="button" id="rr-test">Send a test to me</button><button class="btn" type="button" id="rr-dis">Dismiss…</button><span class="grow"></span><button class="btn primary" type="button" id="rr-send">Approve and send</button>'
         : `<button class="btn" type="button" id="rr-save">Save notes</button><span class="grow"></span>${r.thread_id ? '<button class="btn" type="button" id="rr-thread">Open in Correspondence</button>' : ''}`}</div>
-      <p class="small" id="rr-msg" role="status" style="margin:0">${r.sent_at ? `Sent ${esc(stamp(r.sent_at))}${r.sent_by ? ' by ' + esc(r.sent_by) : ''}.` : ''}</p>`;
+      ${draft ? `<div id="rr-dis-box" class="rr-dis" hidden><label class="f">Why not send it?<input id="rr-dis-why" maxlength="500" placeholder="For example: found the results elsewhere, or the site was retired"></label>
+        <div class="row"><span class="small muted grow">Its gaps won’t be drafted again.</span><button class="btn" type="button" id="rr-dis-go">Dismiss draft</button></div></div>` : ''}
+      <p class="small" id="rr-msg" role="status" style="margin:0">${r.sent_at ? `Sent ${esc(stamp(r.sent_at))}${r.sent_by ? ' by ' + esc(r.sent_by) : ''}.` : ''}</p>
+      ${rrHistory(r)}`;
     const fields = () => draft ? {recipient_name: $('#rr-name').value, recipient_email: $('#rr-email').value, subject: $('#rr-subj').value, body: $('#rr-body').value, notes: $('#rr-notes').value} : {notes: $('#rr-notes').value};
-    const save = async () => { const x = await api('rr_save', {method: 'POST', body: {id, ...fields()}}); Object.assign(r, x.request, {id}); return r; };
-    $('#rr-save').addEventListener('click', async () => { try { await save(); renderRR(); $('#rr-msg').textContent = 'Saved.'; } catch (e) { $('#rr-msg').textContent = e.message; } });
+    const changed = o => Object.entries(o).filter(([k, v]) => (r[k] || '') !== v);
+    const save = async () => { const c = changed(fields()); if (!c.length) return r; const x = await api('rr_save', {method: 'POST', body: {id, ...Object.fromEntries(c)}}); Object.assign(r, x.request, {id}); return r; };
+    const reload = async () => { await loadRR(); };
+    $('#rr-save').addEventListener('click', async () => { try { await save(); await reload(); $('#rr-msg').textContent = 'Saved.'; } catch (e) { $('#rr-msg').textContent = e.message; } });
     $('#rr-status').addEventListener('change', async e => {
-      try { const x = await api('rr_save', {method: 'POST', body: {id, status: e.target.value}}); Object.assign(r, x.request, {id}); renderRR(); }
+      try { await api('rr_save', {method: 'POST', body: {id, status: e.target.value}}); await reload(); }
       catch (err) { e.target.value = r.status; $('#rr-msg').textContent = err.message; }
     });
     const th = $('#rr-thread'); if (th) th.addEventListener('click', () => { tab('correspondence'); showThread(Number(r.thread_id)); });
     if (!draft) return;
+    $('#rr-dis').addEventListener('click', () => { $('#rr-dis-box').hidden = !$('#rr-dis-box').hidden; if (!$('#rr-dis-box').hidden) $('#rr-dis-why').focus(); });
+    $('#rr-dis-go').addEventListener('click', async () => {
+      try { await api('rr_dismiss', {method: 'POST', body: {id, reason: $('#rr-dis-why').value}}); await reload(); $('#rr-msg').textContent = 'Dismissed.'; }
+      catch (e) { $('#rr-msg').textContent = e.message; }
+    });
     $('#rr-test').addEventListener('click', async () => {
       $('#rr-msg').textContent = 'Saving and sending a test…';
       try { await save(); const x = await api('rr_send', {method: 'POST', body: {id, test: true}}); $('#rr-msg').textContent = `Test sent to ${x.to}. Its subject starts with [Test]; the request is still a draft.`; }
@@ -882,20 +969,34 @@
         <label class="toggle small"><input type="checkbox" id="th-pub"${t.published ? ' checked' : ''}> Public</label>
         <select class="sel" id="th-status" aria-label="Status">${Object.entries(crLabel).map(([k, v]) => `<option value="${k}"${k === t.status ? ' selected' : ''}>${v}</option>`).join('')}</select>
         <button class="btn" type="button" id="th-close">Close</button></div>
-      ${t.batch_id ? `<p class="small muted" style="margin:0 0 10px">Part of a send to several officials. <button class="linkish" type="button" id="th-pub-batch">Publish every conversation from that send</button></p>` : ''}
+      ${t.batch_id ? `<p class="small muted" style="margin:0 0 10px">Part of a send to several officials. <button class="linkish" type="button" id="th-pub-batch">Put every conversation from that send back up</button></p>` : ''}
       ${d.messages.map(m => `<div class="th-msg ${m.direction}"><header><b>${m.direction === 'out' ? 'BayCounty.me' : esc(m.from_addr)}</b><span>${m.direction === 'out' ? 'to ' + esc(m.to_addr) : 'replied'}</span><span>${esc(stamp(m.at))}</span>
         ${m.direction === 'out' ? `<span class="pill ${esc(m.status)}">${esc(dLabel(m.status))}</span>` : (m.matched_by ? `<span class="small">matched by ${esc(m.matched_by)}</span>` : '')}
         ${(m.attachments || []).length ? `<span>📎 ${esc(m.attachments.map(a => a.filename).join(', '))}</span>` : ''}</header>
         <div class="body">${esc(m.shown.text || '(no text)')}</div>
         ${m.shown.quoted ? `<details class="ag" style="margin-top:6px"><summary class="small">Show quoted text</summary><pre>${esc(m.body_text)}</pre></details>` : ''}</div>`).join('')}
+      <div class="card" style="margin:10px 0;padding:10px 12px"><div class="small" style="margin-bottom:6px"><b>Public page.</b> This conversation is on <a href="/correspondence#c${id}" target="_blank" rel="noopener">/correspondence</a>${t.published ? '' : ' (taken down: ' + esc(t.hidden_reason || '') + ')'}. Residents’ email addresses, phone numbers and street addresses are hidden automatically. Hide a name or other words:</div>
+        <div class="row" style="gap:6px;flex-wrap:wrap"><input class="sel grow" id="th-hide" maxlength="200" placeholder="e.g. a resident’s name" aria-label="Words to hide"><label class="small"><input type="checkbox" id="th-hide-all"> everywhere</label><button class="btn" type="button" id="th-hide-add">Hide</button></div>
+        <div id="th-hide-list" style="margin-top:6px"></div></div>
       <label class="f" style="margin-top:6px">Reply to ${esc(cleanName(t.official_name))}<textarea id="th-reply" placeholder="Sent as a reply in the same email thread"></textarea></label>
       <div class="row" style="margin-top:8px"><button class="btn primary" type="button" id="th-send">Send reply</button><span class="small" id="th-msg" role="status"></span></div>`;
     $('#th-close').addEventListener('click', () => { box.hidden = true; crOpen = null; });
     $('#th-pub').addEventListener('change', async e => {
-      try { await api('corr_publish', {method: 'POST', body: {id, published: e.target.checked}}); loadCorr(); } catch (err) { e.target.checked = !e.target.checked; alert(err.message); }
+      let reason = '';
+      if (!e.target.checked) { reason = prompt('Why does this conversation come down? The reason is shown on the public page in its place.') || ''; if (!reason.trim()) { e.target.checked = true; return; } }
+      try { await api('corr_publish', {method: 'POST', body: {id, published: e.target.checked, reason}}); loadCorr(); } catch (err) { e.target.checked = !e.target.checked; alert(err.message); }
     });
+    const loadHide = async () => {
+      const r = await api('corr_redactions', {params: {thread_key: 'c' + id}}).catch(() => ({redactions: []}));
+      $('#th-hide-list').innerHTML = r.redactions.map(x => `<span class="pill">${esc(x.phrase)}${x.thread_key ? '' : ' (everywhere)'} <button class="linkish" type="button" data-unhide="${x.id}" aria-label="Remove">×</button></span>`).join(' ') || '<span class="muted small">Nothing hidden by hand.</span>';
+    };
+    loadHide();
+    $('#th-hide-add').addEventListener('click', async () => {
+      try { await api('corr_redact', {method: 'POST', body: {thread_key: $('#th-hide-all').checked ? null : 'c' + id, phrase: $('#th-hide').value}}); $('#th-hide').value = ''; loadHide(); } catch (err) { alert(err.message); }
+    });
+    $('#th-hide-list').addEventListener('click', async ev => { const b = ev.target.closest('[data-unhide]'); if (!b) return; await api('corr_redact', {method: 'POST', body: {remove: b.dataset.unhide}}); loadHide(); });
     const pb = $('#th-pub-batch');
-    if (pb) pb.addEventListener('click', async () => { if (!confirm('Publish every conversation from this send?')) return; await api('corr_publish', {method: 'POST', body: {batch: t.batch_id, published: true}}); loadCorr(); });
+    if (pb) pb.addEventListener('click', async () => { if (!confirm('Put every conversation from this send back on the public page?')) return; await api('corr_publish', {method: 'POST', body: {batch: t.batch_id, published: true}}); loadCorr(); });
     $('#th-status').addEventListener('change', async e => { await api('corr_status', {method: 'POST', body: {id, status: e.target.value}}); loadCorr(); });
     $('#th-send').addEventListener('click', async () => {
       const b = $('#th-send'); b.disabled = true; $('#th-msg').textContent = 'Sending…';
@@ -1422,6 +1523,125 @@
   $('#ra-add').addEventListener('click', async () => {
     const v = $('#ra-email').value.trim(); if (!v) return;
     try { await api('realtor_set', {method: 'POST', body: {email: v, status: 'active'}}); $('#ra-email').value = ''; loadRealtors(); } catch (err) { alert(err.message); }
+  });
+
+  // ---------- government workspace staff + their data flags (schema gov, api/_gov.js) ----------
+  let gsRoles = {};
+  // Elected officials are tied to their seat: the person picker lists who holds a seat now on the chosen government.
+  let gsOfficials = [];
+  function gsPeople() {
+    const p = $('#gs-person'), off = $('#gs-role').value === 'official';
+    p.hidden = !off;
+    p.innerHTML = gsOfficials.filter(o => o.gov_id === $('#gs-gov').value).map(o => `<option value="${esc(o.person_id)}">${esc(o.person_name)} (${esc(o.seat)})</option>`).join('') || '<option value="">No seats on record</option>';
+  }
+  $('#gs-role').addEventListener('change', gsPeople);
+  $('#gs-gov').addEventListener('change', gsPeople);
+  async function loadGovStaff() {
+    let r;
+    try { r = await api('gov_staff'); }
+    catch (e) { $('#gs-ws tbody').innerHTML = `<tr><td colspan="4" class="empty">${esc(e.message)}</td></tr>`; return; }
+    gsRoles = r.roles; gsOfficials = r.officials || [];
+    gsPeople();
+    const names = Object.fromEntries(r.workspaces.map(w => [w.id, w.name]));
+    $('#gs-ws tbody').innerHTML = r.workspaces.map(w => `<tr><td><b>${esc(w.name)}</b>${w.countywide ? ' <span class="small muted">countywide alerts</span>' : ''}</td><td>${fmt(w.members)}</td><td>${fmt(w.live_alerts)}</td><td class="small">${when(w.last_activity)}</td></tr>`).join('');
+    const g = $('#gs-gov'), cur = g.value;
+    g.innerHTML = r.workspaces.map(w => `<option value="${esc(w.id)}">${esc(w.name)}</option>`).join(''); if (cur) g.value = cur;
+    gsPeople();
+    $('#gs-table tbody').innerHTML = r.members.map(m => `<tr><td>${esc(names[m.workspace_id] || m.workspace_id)}</td><td>${esc(m.email)}${m.person_name ? `<div class="small muted">${esc(m.person_name)}</div>` : ''}</td>
+      <td><select class="sel" data-gs="${esc(m.workspace_id)}|${esc(m.email)}|${esc(m.person_id || '')}" aria-label="Access">${Object.entries(gsRoles).map(([k, v]) => `<option value="${k}"${k === m.role ? ' selected' : ''}>${v}</option>`).join('')}<option value="remove">Remove</option></select></td>
+      <td class="small">${esc(m.added_by || '')}</td><td class="small">${when(m.created_at)}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Nobody has access yet. Add a city’s first owner above.</td></tr>';
+  }
+  $('#gs-table').addEventListener('change', async e => {
+    const s = e.target.closest('[data-gs]'); if (!s) return;
+    const [workspace, email, person_id] = s.dataset.gs.split('|'); s.disabled = true;
+    try { await api('gov_member', {method: 'POST', body: {workspace, email, role: s.value, person_id: person_id || undefined}}); } catch (err) { alert(err.message); }
+    loadGovStaff();
+  });
+  $('#gs-add').addEventListener('click', async () => {
+    const email = $('#gs-email').value.trim(); if (!email) return;
+    try { await api('gov_member', {method: 'POST', body: {workspace: $('#gs-gov').value, email, role: $('#gs-role').value, person_id: $('#gs-role').value === 'official' ? $('#gs-person').value : undefined}}); $('#gs-email').value = ''; loadGovStaff(); } catch (err) { alert(err.message); }
+  });
+  async function loadGovFlags() {
+    let r;
+    try { r = await api('gov_flags', {params: {status: $('#gf-status').value}}); }
+    catch (e) { $('#gf-table tbody').innerHTML = `<tr><td colspan="4" class="empty">${esc(e.message)}</td></tr>`; return; }
+    $('#gf-table tbody').innerHTML = r.flags.map(f => `<tr><td><b>${esc(f.gov_name)}</b><div class="small muted">${esc(f.email)}</div><div class="small muted">${when(f.created_at)}</div></td>
+      <td>${esc(f.dataset)}${f.record_label ? `<div class="small muted">${esc(f.record_label)}</div>` : ''}${f.field ? `<div class="small">Field: ${esc(f.field)}</div>` : ''}</td>
+      <td class="small">${f.shown_value ? `Shown: ${esc(f.shown_value)}<br>` : ''}${f.correct_value ? `Should be: <b>${esc(f.correct_value)}</b>` : ''}${f.note ? `<div class="muted">${esc(f.note)}</div>` : ''}
+        ${f.evidence_url ? `<div><a href="${esc(f.evidence_url)}" target="_blank" rel="noopener noreferrer">Their source</a></div>` : ''}</td>
+      <td>${f.status === 'open' ? `<input class="sel" data-gf-reply="${f.id}" placeholder="Reply (shown to them)" style="width:100%;box-sizing:border-box"><div class="row" style="gap:6px;margin-top:6px"><button class="btn" type="button" data-gf="${f.id}|fixed">Fixed</button><button class="btn" type="button" data-gf="${f.id}|not_changed">Not changed</button></div>`
+        : `<span class="small">${f.status === 'fixed' ? 'Fixed' : 'Not changed'}${f.reply ? ': ' + esc(f.reply) : ''}</span>`}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No flags here.</td></tr>';
+  }
+  $('#gf-status').addEventListener('change', loadGovFlags);
+
+  // ---------- emergency alerts: send counts (admin only) and Remove for test posts ----------
+  async function loadAlertsSent() {
+    let r;
+    try { r = await api('alerts_sent', {params: {days: $('#as-days').value, gov: $('#as-gov').value}}); }
+    catch (e) { $('#as-table tbody').innerHTML = `<tr><td colspan="6" class="empty">${esc(e.message)}</td></tr>`; return; }
+    const n = (v, one, many) => v ? `${fmt(v)} ${v === 1 ? one : many}` : '';
+    $('#as-table tbody').innerHTML = r.items.map(i => {
+      const sent = [n(i.reach.push, 'phone', 'phones'), n(i.reach.email, 'inbox', 'inboxes'), n(i.reach.sms, 'text', 'texts')].filter(Boolean).join(', ') || '—';
+      const st = i.removed_at ? `<span class="pill bounced">Removed</span><div class="small muted">${esc(i.removed_by || '')} ${when(i.removed_at)}${i.removed_note ? ': ' + esc(i.removed_note) : ''}</div>`
+        : `<span class="pill ${i.active ? 'delivered' : ''}">${i.active ? 'Live' : i.status === 'lifted' ? 'Lifted' : 'Ended'}</span>`;
+      const btn = i.removed_at ? `<button class="btn" type="button" data-as-undo="${esc(i.notice_id)}">Put back</button>` : `<button class="btn" type="button" data-as-rm="${esc(i.notice_id)}">Remove</button>`;
+      return `<tr><td class="small">${when(i.started)}</td><td><b>${esc(i.title)}</b><div class="small muted">${esc(i.label)}${i.geometry ? ' · has a map' : ''}</div></td>
+        <td class="small">${esc(i.source || '')}</td><td>${st}</td><td class="small">${sent}</td><td>${btn}</td></tr>`;
+    }).join('') || '<tr><td colspan="6" class="empty">No alerts in this window.</td></tr>';
+  }
+  ['as-days', 'as-gov'].forEach(id => $('#' + id).addEventListener('change', loadAlertsSent));
+  $('#as-table').addEventListener('click', async e => {
+    const rm = e.target.closest('[data-as-rm]'), un = e.target.closest('[data-as-undo]');
+    if (!rm && !un) return;
+    let body;
+    if (rm) {
+      const note = prompt('Why is this alert coming off the public pages? (kept in the log)', 'Test post');
+      if (!note) return;
+      body = {notice_id: rm.dataset.asRm, note};
+    } else body = {notice_id: un.dataset.asUndo, undo: true};
+    (rm || un).disabled = true;
+    try { await api('alert_remove', {method: 'POST', body}); } catch (err) { alert(err.message); }
+    loadAlertsSent();
+  });
+
+  // ---------- sent files to check ----------
+  const FR_KIND = {checkbook: 'Checkbook', budget: 'Budget vs. actual', contracts: 'Contracts', payroll: 'Pay by job title', appointments: 'Board appointments', fees: 'Fee changes'};
+  const FR_ST = {match: 'Matches', mismatch: 'Doesn’t match', missing: 'Missing', unconfirmed: 'Couldn’t confirm'};
+  const FR_TONE = {match: 'delivered', mismatch: 'bounced', missing: 'bounced', unconfirmed: 'delivery_delayed'};
+  async function loadFileReview() {
+    let r;
+    try { r = await api('file_reviews', {params: {status: $('#fr-status').value}}); }
+    catch (e) { $('#fr-list').innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
+    const open = $('#fr-status').value === 'open';
+    $('#fr-list').innerHTML = r.files.map(f => {
+      const c = f.counts || {}, problems = (f.checks || []).filter(x => x.status !== 'match'), ok = (f.checks || []).filter(x => x.status === 'match');
+      const line = x => `<li><span class="pill ${FR_TONE[x.status]}">${FR_ST[x.status]}</span> <b>${esc(x.check)}</b> <span class="small">${esc(x.detail || '')}</span>${x.source_url ? ` <a class="small" href="${esc(x.source_url)}" target="_blank" rel="noopener noreferrer">our source</a>` : ''}</li>`;
+      return `<div class="card" style="margin-bottom:14px"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:baseline">
+          <h3 class="grow" style="font:600 1rem var(--f-display);margin:0">${esc(f.government)} · ${esc(FR_KIND[f.kind] || f.kind)}</h3>
+          <span class="small muted">${esc(f.name || '')} · ${f.rows || 0} rows${f.period_start ? ` · ${esc(f.period_start)} to ${esc(f.period_end || '')}` : ''}</span></div>
+        <div class="small muted" style="margin:4px 0 10px">Sent by ${esc(String(f.sent_by || '').replace(/^email:\s*/, ''))} ${when(f.sent_at)} · checked ${when(f.checked_at)} · SHA-256 <span class="mono">${esc(String(f.sha256 || '').slice(0, 16))}…</span></div>
+        <div class="tiles" style="margin-bottom:10px">${[['match', c.match], ['mismatch', c.mismatch], ['missing', c.missing], ['unconfirmed', c.unconfirmed]].map(([k, n]) => `<div class="tile"><b>${n || 0}</b><span>${FR_ST[k]}</span></div>`).join('')}</div>
+        <ul class="plain" style="display:flex;flex-direction:column;gap:6px;margin:0 0 10px">${problems.map(line).join('')}</ul>
+        ${ok.length ? `<details><summary class="small">${ok.length} check${ok.length === 1 ? '' : 's'} matched</summary><ul class="plain" style="display:flex;flex-direction:column;gap:6px;margin-top:8px">${ok.map(line).join('')}</ul></details>` : ''}
+        ${open ? `<div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap"><input class="sel grow" data-fr-note="${esc(f.file_id)}" maxlength="1000" placeholder="Note (required to keep it off the site)" aria-label="Note">
+          <button class="btn" type="button" data-fr="${esc(f.file_id)}|hold">Keep off the site</button><button class="btn primary" type="button" data-fr="${esc(f.file_id)}|publish">Publish</button></div>`
+          : `<p class="small" style="margin:10px 0 0"><b>${f.decision === 'publish' ? 'Published' : 'Kept off the site'}</b> by ${esc(f.decided_by)} ${when(f.decided_at)}${f.note ? ': ' + esc(f.note) : ''}</p>`}
+      </div>`;
+    }).join('') || `<p class="empty">${open ? 'Nothing waiting. Every file sent so far either passed every check or has been decided.' : 'No decisions in the last 90 days.'}</p>`;
+  }
+  $('#fr-status').addEventListener('change', loadFileReview);
+  $('#fr-list').addEventListener('click', async e => {
+    const b = e.target.closest('[data-fr]'); if (!b) return;
+    const [file_id, decision] = b.dataset.fr.split('|'), note = ($(`[data-fr-note="${file_id}"]`) || {}).value || '';
+    if (decision === 'publish' && !confirm('Publish this file’s records on the site? This can’t be undone here (the government can withdraw it).')) return;
+    b.disabled = true;
+    try { await api('file_review', {method: 'POST', body: {file_id, decision, note}}); loadFileReview(); } catch (err) { b.disabled = false; alert(err.message); }
+  });
+  $('#gf-table').addEventListener('click', async e => {
+    const b = e.target.closest('[data-gf]'); if (!b) return;
+    const [id, status] = b.dataset.gf.split('|'), reply = ($(`[data-gf-reply="${id}"]`) || {}).value || '';
+    b.disabled = true;
+    try { await api('gov_flag_review', {method: 'POST', body: {id: Number(id), status, reply}}); loadGovFlags(); } catch (err) { b.disabled = false; alert(err.message); }
   });
 
   // ---------- votes from minutes (agendas.motions, api/_minutes.js) ----------

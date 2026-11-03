@@ -50,7 +50,10 @@ async function zonesPart() {
 
 async function liveRows() {
   const cols = 'notice_id,place_id,kind,source,source_type,gov_id,title,summary,instruction,severity,event,area,zones,issued,starts,ends,updated,status,full_closure,roadway,url,source_url,first_seen,last_seen';
-  const r = await fetch(`${DB_URL}/rest/v1/emergency_live?select=${cols}&place_id=eq.${PLACE}&order=last_seen.desc&limit=2000`, {headers: {apikey: DB_KEY}});
+  const get = c => fetch(`${DB_URL}/rest/v1/emergency_live?select=${c}&place_id=eq.${PLACE}&order=last_seen.desc&limit=2000`, {headers: {apikey: DB_KEY}});
+  // removed_at: alerts an admin took off the public pages (a test post). Before migration 0095 the column isn't there.
+  let r = await get(cols + ',removed_at');
+  if (r.status === 400) r = await get(cols);
   if (!r.ok) throw new Error(`emergency_live ${r.status}`);
   return r.json();
 }
@@ -72,9 +75,11 @@ async function noticesPart() {
     const last = [p && p.last_seen, ls0, seenAt].filter(Boolean).sort().pop();
     by.set(n.notice_id, {...(p || {}), ...rest, first_seen: first, last_seen: last});
   };
-  for (const n of stored) add(n, null);
+  const removed = new Set(stored.filter(n => n.removed_at).map(n => n.notice_id));
+  for (const n of stored) if (!removed.has(n.notice_id)) { const {removed_at, ...rest} = n; add(rest, null); }
   for (const n of recent) add(n, null);
-  for (const n of live.notices) add(n, now);
+  for (const n of live.notices) if (!removed.has(n.notice_id)) add(n, now);
+  for (const id of removed) by.delete(id);  // taken off the public pages by an admin, so off the archive too
   // status in the archive: active only if it was live at this run; otherwise it has ended (or was lifted).
   const rows = [...by.values()].map(n => ({...n, status: activeNow.has(n.notice_id) ? 'active' : n.status === 'lifted' ? 'lifted' : 'ended'}))
     .sort((a, b) => String(b.issued || b.first_seen).localeCompare(String(a.issued || a.first_seen)));

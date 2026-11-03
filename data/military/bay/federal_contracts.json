@@ -1,5 +1,5 @@
 {
-"as_of":"2026-10-27",
+"as_of":"2026-11-03",
 "county":"Bay County",
 "first_date":"2016-01-01",
 "source_url":"https://www.usaspending.gov/search",
@@ -136217,7 +136217,7 @@
 "uei":"ZE98MPEDJD37",
 "recipient_city":"Panama City",
 "award_amount":19561.14,
-"description":"BLDG. 2594 ROOM EXPANSION  CUSTOMER: ULA",
+"description":"BLDG. 2594 ROOM EXPANSION CUSTOMER: ULA",
 "start_date":"2025-09-25",
 "end_date":"2025-12-25",
 "agency":"Department of Defense",
@@ -166871,7 +166871,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2017-12-04",
-"amount":332800.0,
+"amount":88400.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"17"
@@ -166882,7 +166882,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2017-12-04",
-"amount":88400.0,
+"amount":332800.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"17"
@@ -168708,7 +168708,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2018-02-01",
-"amount":190000.0,
+"amount":30000.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"16"
@@ -168719,7 +168719,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2018-02-01",
-"amount":30000.0,
+"amount":190000.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"16"
@@ -265182,6 +265182,17 @@
 "agency":"Department of Justice",
 "sub_agency":"Bureau of Alcohol, Tobacco, Firearms and Explosives Acquisition and Property Management Division",
 "mod":"0"
+},
+{
+"award_key":"CONT_AWD_70Z08426FDL930005_7008_47QTCA25D007C_4732",
+"award_id":"70Z08426FDL930005",
+"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
+"uei":"CPXAXLLYQYT3",
+"date":"2026-10-27",
+"amount":0.0,
+"agency":"Department of Homeland Security",
+"sub_agency":"U.S. Coast Guard",
+"mod":"P00005"
 }
 ]
 }

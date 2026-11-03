@@ -841,7 +841,7 @@
     return c;
   }
   const rings = g => g.type === 'Polygon' ? g.coordinates : g.coordinates.flat();
-  async function pick(f) {
+  async function pick(f, keepUrl) {
     list.hidden = true;
     const a = f.attributes, pt = f.geometry;
     inp.value = title(a.ADDRESS);
@@ -856,7 +856,7 @@
       return `<div class="sc-z"><span class="lv">${lv}</span><span class="nm"><b><a href="#s-${esc(z.school_id)}">${esc(s ? s.name : z.school || z.zone_name)}</a></b><small>${esc(sub)}${z.mou_area ? ' · MOU area: confirm with the district' : ''}</small></span>${s && s.gr ? `<span class="gr sc-g g-${esc(s.gr)}" title="State grade ${esc(s.gy)}">${esc(s.gr)}</span>` : ''}</div>`;
     });
     out.innerHTML = rows.join('') + `<p class="small muted" style="margin:4px 0 0">${esc(title(a.ADDRESS))}, ${esc(title(a.CMNTY || ''))}. <a href="/my-address?a=${encodeURIComponent(a.ADDRESS)}&z=${encodeURIComponent(a.ZIP || '')}${a.UNIT ? '&u=' + encodeURIComponent(a.UNIT) : ''}">Full report for this address →</a></p>`;
-    const u = new URL(location.href); u.searchParams.set('a', a.ADDRESS); history.replaceState(null, '', u);
+    if (!keepUrl) { const u = new URL(location.href); u.searchParams.set('a', a.ADDRESS); history.replaceState(null, '', u); }
   }
   if (inp) {
     inp.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(suggest, 250); });
@@ -872,6 +872,9 @@
     document.addEventListener('click', e => { if (!e.target.closest('.sc-ac')) list.hidden = true; });
     const q = new URLSearchParams(location.search).get('a');
     if (q) { inp.value = title(q); (async () => { await suggest(); const f = items.find(f => f.attributes.ADDRESS === q.toUpperCase()) || (items.length === 1 && items[0]); if (f) pick(f); })(); }
+    // Signed in: the saved home's zoned schools show without typing (kept out of the address bar).
+    else new Promise(r => document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', r, {once: true}) : r()).then(() => window.BCUseHome && BCUseHome(inp, h => { const m = /^(.*?)(?:\s*#\s*(\S+))?$/.exec(String(h.address).replace(/\s+\d{5}(-\d{4})?$/, '').trim());
+      pick({attributes: {ADDRESS: m[1].toUpperCase(), UNIT: m[2] || '', CMNTY: h.city || '', ZIP: h.zip || ''}, geometry: {x: +h.lon, y: +h.lat}}, true); }, inp.closest('.sc-ac')));
   }
 
   /* ---------- calendar chips ---------- */

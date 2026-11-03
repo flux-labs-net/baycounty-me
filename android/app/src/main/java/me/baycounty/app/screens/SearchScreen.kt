@@ -1,5 +1,6 @@
 package me.baycounty.app.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -25,6 +27,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -62,7 +65,8 @@ fun SearchScreen() {
         catch (e: Exception) { error = "Search needs a connection. Try again when you're online." }
         finally { busy = false }
     }
-    Screen("Search", spacing = 20) {
+    Screen("Ask or search", spacing = 20) {
+        if (query.isEmpty()) item { AskCard { o.open("${BayCountyClient.SITE}/ask") } }
         item {
             OutlinedTextField(
                 query, { query = it }, Modifier.fillMaxWidth().focusRequester(focus),
@@ -134,7 +138,6 @@ fun SearchScreen() {
                     EyebrowHeader("Take part")
                     val site = BayCountyClient.SITE
                     val web = listOf(
-                        Triple("Ask a question", "$site/ask", "bubble.left.and.text.bubble.right"),
                         Triple("Write to officials", "$site/correspondence", "envelope"),
                         Triple("Request public records", "$site/records-request", "doc.text.magnifyingglass"),
                         Triple("Email alerts", "$site/alerts", "bell"),
@@ -160,5 +163,22 @@ private fun ResultRow(r: SearchResult, onClick: () -> Unit) {
             r.summary?.takeIf { it.isNotBlank() }?.let { Text(it, style = T.caption, color = Brand.secondary, maxLines = 2, overflow = TextOverflow.Ellipsis) }
         }
         Chevron()
+    }
+}
+
+/** The Ask tab's lead card: ask a question in plain words and get an answer from the site's records. */
+@Composable
+private fun AskCard(onClick: () -> Unit) {
+    Row(
+        Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).background(Brand.navyFill).clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onClick).padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp),
+    ) {
+        Icon(icon("bubble.left.and.text.bubble.right"), null, tint = androidx.compose.ui.graphics.Color.White, modifier = Modifier.size(28.dp))
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text("Ask a question", style = T.headline, color = androidx.compose.ui.graphics.Color.White)
+            Text("Who voted on it, what it cost, when the next meeting is. Answers come from public records.",
+                style = T.footnote, color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.8f))
+        }
+        Icon(icon("chevron.right"), null, tint = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.8f), modifier = Modifier.size(18.dp))
     }
 }

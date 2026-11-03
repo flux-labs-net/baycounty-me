@@ -259,7 +259,8 @@ private struct FeedContent: View {
                     if i < feed.governments.count - 1 { RowDivider(inset: 50) }
                 }
                 RowDivider(inset: 50)
-                RouteRow(route: .myAddress, title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
+                RouteRow(route: AccountManager.shared.me?.home.map { .address($0.addressMatch) } ?? store.home.map { .address($0) } ?? .myAddress,
+                         title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
                 // Same account as the realtor console: agents get a way in from here, like the site's My home.
                 if AccountManager.shared.me?.realtor == "active" {
                     RowDivider(inset: 50)
@@ -341,6 +342,7 @@ private struct FeedRow: View {
 /// Name, home, distance, emails, topics and phone alerts; sign out and delete the account.
 struct AccountSettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppStore.self) private var store
     @State private var account = AccountManager.shared
     @State private var prefs: AccountMe.Prefs?
     @State private var name = ""
@@ -364,6 +366,10 @@ struct AccountSettingsView: View {
                         } else {
                             HomeSearch { changingHome = false }
                         }
+                        // Kept on this phone: owners' Home tab leads with the tax bill, renters' with utilities.
+                        Picker("This home", selection: Binding(get: { store.tenure ?? .unset }, set: { store.tenure = $0 })) {
+                            ForEach(HomeTiles.Tenure.allCases, id: \.self) { Text($0.label).tag($0) }
+                        }
                     } header: { Text("Home") } footer: { Text("Kept private. Used only to pick what's near you.") }
                 }
                 if let p = Binding($prefs), let c = account.me?.choices {
@@ -380,6 +386,14 @@ struct AccountSettingsView: View {
                             ? "For your home and the distance below. These follow your account on every phone you're signed in on."
                             : "Evacuation orders, weather warnings, boil-water notices and agenda items near your home."))
                     }
+                    Section {
+                        ForEach(AccountMe.areaOrder.filter { c.areas?[$0] != nil }, id: \.self) { k in
+                            Toggle(c.areas![k]!, isOn: area(p.alertAreas, k))
+                        }
+                        Toggle("Quiet overnight", isOn: Binding(get: { p.quietHours.wrappedValue ?? false }, set: { p.quietHours.wrappedValue = $0 }))
+                    } header: { Text("Alert areas") } footer: {
+                        Text("Boil-water notices, road closures and outages for the places you pick. Evacuation orders and weather warnings always reach you. Quiet overnight sends alerts from 10 pm to 7 am without sound, except evacuations and the most severe warnings.")
+                    }
                     Section("Near my home") {
                         Picker("Distance", selection: p.radiusMi) {
                             ForEach(AccountMe.radii, id: \.self) { Text(AccountMe.radiusLabel($0)).tag($0) }
@@ -393,7 +407,7 @@ struct AccountSettingsView: View {
                         ForEach(AccountMe.alertEmailOrder.filter { c.alertEmail[$0] != nil }, id: \.self) { k in
                             Toggle(c.alertEmail[k]!, isOn: member(p.alertEmail, k))
                         }
-                    } header: { Text("Email") } footer: { Text("Emergency emails go out only when a notice reaches your home.") }
+                    } header: { Text("Email") } footer: { Text("Emergency emails go out when a notice reaches your home or an area you picked.") }
                 }
                 Section {
                     Button("Sign out") { Task { await account.signOut(); dismiss() } }
@@ -411,6 +425,16 @@ struct AccountSettingsView: View {
             } message: { Text("Your email, home and choices are removed. This can't be undone.") }
             .onAppear { prefs = account.me?.prefs; name = account.me?.user.firstName ?? "" }
         }
+    }
+
+    /// "All of Bay County" is on its own: picking it clears the cities, picking a city clears it.
+    private func area(_ list: Binding<[String]?>, _ k: String) -> Binding<Bool> {
+        Binding(get: { (list.wrappedValue ?? []).contains(k) },
+                set: { on in
+                    var a = list.wrappedValue ?? []
+                    if on { a = k == "all" ? ["all"] : a.filter { $0 != "all" } + [k] } else { a.removeAll { $0 == k } }
+                    list.wrappedValue = a
+                })
     }
 
     private func member(_ list: Binding<[String]>, _ k: String) -> Binding<Bool> {

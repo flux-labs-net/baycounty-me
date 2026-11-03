@@ -93,6 +93,9 @@ public struct NearbyFeed: Decodable, Sendable {
 
 /// A resident's account (api/_account.js): who they are, their saved home and what they want to hear about.
 public struct AccountMe: Decodable, Sendable {
+    /// City government keys and their names (api/_nearby.js CITY_GOV).
+    public static let cityNames = ["pc": "Panama City", "pcb": "Panama City Beach", "lh": "Lynn Haven", "cw": "Callaway",
+                                   "sp": "Springfield", "parker": "Parker", "mb": "Mexico Beach"]
     public struct User: Decodable, Sendable { public let email: String; public let firstName: String? }
     public struct Home: Decodable, Sendable, Equatable {
         public let label: String?
@@ -105,6 +108,12 @@ public struct AccountMe: Decodable, Sendable {
         public let zone: String?
         public let parcelId: String?
         public var subtitle: String { [city, zip].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " ") }
+
+        /// The home's city as town lists name it ("Lynn Haven"); nil outside city limits, where lists start on the
+        /// whole county. Same rule as window.BCHomeCity on the site.
+        public var town: String? { govId.flatMap { AccountMe.cityNames[$0] } }
+        /// The home's local government key (pc, lh, ... or county), for lists filtered by government.
+        public var govKey: String { if let g = govId, AccountMe.cityNames[g] != nil { return g }; return "county" }
 
         /// The saved home as the phone's address ("825 Ohio Ave #2 32444" → street 825 OHIO AVE, unit 2), so the
         /// Today card, tax bill and trash day use the account's home on any phone the resident signs in on. Same
@@ -128,12 +137,18 @@ public struct AccountMe: Decodable, Sendable {
         public var pushTopics: [String]
         public var radiusMi: Double
         public var topics: [String]
+        /// Areas whose local alerts (boil water, road closures, outages) reach this person: "all", "county" or a city id.
+        /// Empty means the home's area, or all of Bay County when there is no home.
+        public var alertAreas: [String]?
+        /// Overnight (10 pm to 7 am) alerts arrive without sound, except evacuation orders and the most severe warnings.
+        public var quietHours: Bool?
     }
     public struct Choices: Decodable, Sendable {
         public let topics: [String: String]
         public let radiusMi: [Double]
         public let pushTopics: [String: String]
         public let alertEmail: [String: String]
+        public let areas: [String: String]?
     }
     public let user: User
     /// The same email's status on the realtor console's agent list ("active", "pending"), or nil: one sign-in opens both.
@@ -151,8 +166,10 @@ public struct AccountMe: Decodable, Sendable {
     }
     /// Topic keys in the order the site lists them.
     public static let topicOrder = ["meetings", "events", "projects", "notices", "food", "business"]
-    public static let pushOrder = ["weather", "evacuation", "shelters", "water", "roads", "agenda"]
-    public static let alertEmailOrder = ["evacuation", "water", "weather", "shelters"]
+    /// Alert types in the order the site lists them (the server sends the labels).
+    public static let pushOrder = ["evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general", "agenda"]
+    public static let alertEmailOrder = ["evacuation", "weather", "safety", "shelters", "water", "roads", "outages", "general"]
+    public static let areaOrder = ["all", "county", "pc", "pcb", "lh", "cw", "sp", "parker", "mb"]
     public static let radii: [Double] = [0.25, 0.5, 1, 2, 5]
     public static func radiusLabel(_ r: Double) -> String {
         switch r { case 0.25: return "A quarter mile"; case 0.5: return "Half a mile"; case 1: return "1 mile"; default: return "\(Int(r)) miles" }
@@ -222,7 +239,8 @@ public final class AccountClient: @unchecked Sendable {
     }
     public func removeHome() async throws -> AccountMe { try AccountMe.decode(try await call("home_delete", [:])) }
     public func save(prefs p: AccountMe.Prefs) async throws -> AccountMe {
-        try AccountMe.decode(try await call("prefs", ["weekly_email": p.weeklyEmail, "alert_email": p.alertEmail, "push_topics": p.pushTopics, "radius_mi": p.radiusMi, "topics": p.topics]))
+        try AccountMe.decode(try await call("prefs", ["weekly_email": p.weeklyEmail, "alert_email": p.alertEmail, "push_topics": p.pushTopics, "radius_mi": p.radiusMi, "topics": p.topics,
+                                                          "alert_areas": p.alertAreas ?? [], "quiet_hours": p.quietHours ?? false]))
     }
     public func save(firstName: String) async throws -> AccountMe { try AccountMe.decode(try await call("profile", ["first_name": firstName])) }
     public func linkDevice(pushToken: String, appVersion: String?) async throws {

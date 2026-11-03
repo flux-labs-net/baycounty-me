@@ -7,7 +7,8 @@ public enum RecordLinks {
     public static let vendorDatasets = ["contracts", "change-orders", "emergency-purchases", "cra-payments", "vendor-payments", "campaign-contributions-2026"]
     /// Datasets that name people by `person_id` (or, for votes, inside `members`; for owner gifts, `candidate_id`).
     public static let personDatasets = ["officials-pay", "salary-leaders", "campaign-finance", "candidates-2026", "member-votes", "votes",
-                                        "officeholder-terms", "campaign-history", "business-donor-sunbiz", "owner-gifts"]
+                                        "officeholder-terms", "campaign-history", "business-donor-sunbiz", "owner-gifts",
+                                        "contract-dollar-totals", "member-contract-dollars"]
 
     public static func vendorIDs(_ row: Row) -> [String] {
         var ids = row.strings("vendor_ids")
@@ -71,6 +72,30 @@ public enum RecordLinks {
     public struct Tally: Sendable, Equatable {
         public var yes = 0, no = 0, other = 0
         public var total: Int { yes + no + other }
+    }
+
+    /// The dollars in the contract votes one official cast (dataset contract-dollar-totals, one row per government):
+    /// yes on items that passed, yes on items that failed, no, the votes behind each, and what is left out.
+    public struct ContractDollars: Sendable, Equatable {
+        public var yes = 0.0, yesFailed = 0.0, no = 0.0
+        public var yesVotes = 0, yesFailedVotes = 0, noVotes = 0, contractVotes = 0, consent = 0, notCounted = 0
+        public var first: String?, last: String?
+    }
+
+    public static func contractDollars(_ totals: [Row]) -> ContractDollars? {
+        guard !totals.isEmpty else { return nil }
+        var c = ContractDollars()
+        let n = { (r: Row, k: String) in r.number(k) ?? 0 }
+        for r in totals {
+            c.yes += n(r, "yes_total"); c.yesFailed += n(r, "yes_failed_total"); c.no += n(r, "no_total")
+            c.yesVotes += Int(n(r, "yes_votes")); c.yesFailedVotes += Int(n(r, "yes_failed_votes")); c.noVotes += Int(n(r, "no_votes"))
+            c.contractVotes += Int(n(r, "contract_votes")); c.consent += Int(n(r, "not_counted_consent"))
+            c.notCounted += Int(n(r, "not_counted_no_amount") + n(r, "not_counted_unclear") + n(r, "not_counted_not_spending"))
+            if let f = r.string("first_date"), c.first.map({ f < $0 }) ?? true { c.first = f }
+            if let l = r.string("last_date"), c.last.map({ l > $0 }) ?? true { c.last = l }
+        }
+        c.yes = (c.yes * 100).rounded() / 100; c.no = (c.no * 100).rounded() / 100; c.yesFailed = (c.yesFailed * 100).rounded() / 100
+        return c.contractVotes > 0 ? c : nil
     }
 
     public static func tally(_ memberVotes: [Row]) -> Tally {

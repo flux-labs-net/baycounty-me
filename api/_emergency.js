@@ -75,7 +75,9 @@ function notice(o) {
     severity: o.severity || 'info', event: o.event || null, area: clip(o.area, 400) || null, zones: (o.zones || []).join(', ') || null,
     issued: o.issued || null, starts: o.starts || null, ends: o.ends || null, updated: o.updated || null,
     status: o.status || 'active', full_closure: o.full_closure ?? null, roadway: o.roadway || null,
-    url: o.url || null, source_url: o.source_url || o.url || null,
+    url: o.url || null, source_url: o.source_url || o.url || null, geometry: o.geometry || null,
+    // NWS updates, continuations and extensions list the alerts they follow (not stored; used so a push isn't repeated).
+    ...(o.refs && o.refs.length ? {refs: o.refs} : {}),
   };
 }
 
@@ -94,6 +96,7 @@ function nwsNotice(f, place, cfg) {
     event: p.event, area: p.areaDesc, zones: evac ? zonesIn(text) : [], issued: iso(p.sent), starts: iso(p.onset || p.effective), ends: iso(p.ends || p.expires),
     updated: iso(p.sent), status: p.messageType === 'Cancel' ? 'lifted' : 'active',
     url: `https://alerts.weather.gov/search?id=${encodeURIComponent(String(p.id || '').replace(/^.*\//, ''))}`, source_url: cfg.nws.url,
+    refs: (p.references || []).map(r => r && r.identifier ? 'nws:' + String(r.identifier).replace(/^.*\//, '') : null).filter(Boolean),
   });
 }
 async function nws(place = 'fl-bay') {
@@ -225,8 +228,12 @@ function fl511Notices(rows, layer, place, cfg) {
 async function fl511(place = 'fl-bay') {
   const cfg = placeConfig(place);
   const q = encodeURIComponent(JSON.stringify({columns: [], start: 0, length: 1000}));
-  return settle(cfg.fl511.layers.map(l => async () => fl511Notices((await get(`https://fl511.com/List/GetData/${l}?query=${q}&lang=en`, {json: true})).data || [], l, place, cfg)),
-    cfg.fl511.layers.map(l => 'fl511:' + l));
+  // Each closure's start (and end) point comes from FL511's map icon list; a notice still lists without one.
+  const R = require('./_road_map');
+  return settle(cfg.fl511.layers.map(l => async () => {
+    const [list, pts] = await Promise.all([get(`https://fl511.com/List/GetData/${l}?query=${q}&lang=en`, {json: true}), R.fl511Points(get, l).catch(() => null)]);
+    return fl511Notices(list.data || [], l, place, cfg).map(n => ({...n, geometry: pts ? R.fl511Map(pts.get(n.notice_id.slice(6))) : null}));
+  }), cfg.fl511.layers.map(l => 'fl511:' + l));
 }
 
 // ---------- shelters (Bay County's Emergency Shelters page) ----------
@@ -323,6 +330,73 @@ async function zoneGeometry(place = 'fl-bay') {
   return (d.features || []).map(f => ({zone: f.properties[cfg.zones.field], edited: f.properties.LAST_EDIT_DATE ? new Date(f.properties.LAST_EDIT_DATE).toISOString().slice(0, 10) : null, geometry: f.geometry}));
 }
 
+// ---------- FEMA IPAWS (emergency alerts sent to phones, TV and radio) ----------
+// Bay County Emergency Management sends Wireless Emergency Alerts and EAS messages through IPAWS (from Everbridge,
+// the tool behind AlertBay). FEMA's public feeds list the live ones: an Atom list of EAS messages (each links to its
+// CAP alert) and a CAP list of public (WEA and web) messages. A message drops off once it expires, so the 5-minute
+// check catches it while live and emergency_live keeps it. Weather messages sent by the NWS are left out: the NWS
+// reader already has them.
+const IPAWS = 'https://apps.fema.gov/IPAWSOPEN_EAS_SERVICE/rest';
+// SAME event codes: what kind of notice each becomes. Tests and demos (RWT, RMT, NPT, DMO, NMN) are dropped.
+const IPAWS_KIND = {EVI: 'evacuation', SPW: 'safety', CEM: 'safety', LAE: 'safety', LEW: 'safety', CAE: 'safety', CDW: 'safety', HMW: 'safety',
+  BLU: 'safety', TOE: 'safety', NUW: 'safety', RHW: 'safety', FRW: 'safety', EQW: 'safety', VOW: 'safety', ADR: 'storm'};
+const IPAWS_TESTS = /^(RWT|RMT|NPT|DMO|NMN|NIC)$/;
+const CAP_SEV = {Extreme: 'extreme', Severe: 'severe', Moderate: 'moderate', Minor: 'minor', Unknown: 'info'};
+const tag = (xml, name) => { const m = String(xml).match(new RegExp(`<(?:\\w+:)?${name}>([\\s\\S]*?)</(?:\\w+:)?${name}>`)); return m ? decode(m[1].replace(/^<!\[CDATA\[|\]\]>$/g, '')).trim() : ''; };
+const tags = (xml, name) => [...String(xml).matchAll(new RegExp(`<(?:\\w+:)?${name}>([\\s\\S]*?)</(?:\\w+:)?${name}>`, 'g'))].map(m => m[1]);
+
+// One CAP alert (XML text) as {identifier, sender, sent, status, msgType, info: [...]}.
+function parseCap(xml) {
+  const body = String(xml).replace(/<(?:\w+:)?info>[\s\S]*$/, '');
+  const info = tags(xml, 'info').map(i => ({
+    event: tag(i, 'event'), severity: tag(i, 'severity'), urgency: tag(i, 'urgency'), senderName: tag(i, 'senderName'), headline: tag(i, 'headline'),
+    description: tag(i, 'description'), instruction: tag(i, 'instruction'), web: tag(i, 'web'), effective: tag(i, 'effective'), onset: tag(i, 'onset'),
+    expires: tag(i, 'expires'), language: tag(i, 'language') || 'en-US',
+    eventCode: tags(i, 'eventCode').map(c => ({name: tag(c, 'valueName'), value: tag(c, 'value')})).find(c => c.name === 'SAME')?.value || '',
+    areas: tags(i, 'area').map(a => ({desc: tag(a, 'areaDesc'), same: tags(a, 'geocode').map(g => ({name: tag(g, 'valueName'), value: tag(g, 'value')})).filter(g => g.name === 'SAME').map(g => g.value)})),
+  }));
+  return {identifier: tag(body, 'identifier'), sender: tag(body, 'sender'), sent: tag(body, 'sent'), status: tag(body, 'status'), msgType: tag(body, 'msgType'), info};
+}
+
+// A CAP alert as a notice for this place, or null when it is not for here, is a test, or came from the NWS.
+function ipawsNotice(cap, place, cfg) {
+  if (cap.status !== 'Actual' || !cap.identifier) return null;
+  if (/nws|noaa\.gov/i.test(cap.sender)) return null;
+  const want = new Set(cfg.ipaws.same);
+  const info = cap.info.find(i => /^en/i.test(i.language) && i.areas.some(a => a.same.some(s => want.has(s)))) ||
+    cap.info.find(i => i.areas.some(a => a.same.some(s => want.has(s))));
+  if (!info || IPAWS_TESTS.test(info.eventCode)) return null;
+  const text = `${info.headline} ${info.description} ${info.instruction}`;
+  const kind = IPAWS_KIND[info.eventCode] || classify(info.headline || info.event, text) || 'safety';
+  const area = info.areas.filter(a => a.same.some(s => want.has(s))).map(a => a.desc).join('; ');
+  const id = String(cap.identifier).replace(/[^\w.:-]+/g, '-').slice(0, 120);
+  return notice({
+    notice_id: 'ipaws:' + id, place_id: place, kind, source: info.senderName || 'Emergency alert (IPAWS)', source_type: 'ipaws',
+    gov_id: /bay county/i.test(info.senderName) ? 'county' : null,
+    title: info.headline || info.event, summary: info.description, instruction: info.instruction, severity: CAP_SEV[info.severity] || 'info',
+    event: info.event, area, zones: kind === 'evacuation' ? zonesIn(text) : [], issued: iso(cap.sent), starts: iso(info.onset || info.effective), ends: iso(info.expires),
+    updated: iso(cap.sent), status: cap.msgType === 'Cancel' ? 'lifted' : 'active', url: info.web || null, source_url: cfg.ipaws.page,
+  });
+}
+
+// Live IPAWS alerts for a place: EAS messages for the state (fetched one by one) and public messages from the last day.
+async function ipaws(place = 'fl-bay', now = Date.now()) {
+  const cfg = placeConfig(place);
+  if (!cfg.ipaws) return [];
+  const feed = await get(`${IPAWS}/feed`, {timeout: 12000});
+  const links = String(feed).split(/<entry>/).slice(1)
+    .filter(e => new RegExp(`term="${cfg.ipaws.state_fips}" label="statefips"`).test(e))
+    .map(e => (e.match(/<link href="([^"]+)"/) || [])[1]).filter(Boolean).slice(0, 25);
+  const caps = [];
+  const eas = await Promise.allSettled(links.map(u => get(u, {timeout: 9000})));
+  for (const r of eas) if (r.status === 'fulfilled') caps.push(parseCap(r.value));
+  const since = new Date(now - 24 * 3600e3).toISOString().replace(/\.\d+Z$/, 'Z');
+  const pub = await get(`${IPAWS}/public/recent/${since}`, {timeout: 12000}).catch(() => '');
+  for (const a of String(pub).split(/<(?:\w+:)?alert[\s>]/).slice(1)) caps.push(parseCap('<alert>' + a));
+  const seen = new Set();
+  return caps.map(c => ipawsNotice(c, place, cfg)).filter(n => n && !seen.has(n.notice_id) && seen.add(n.notice_id));
+}
+
 // Runs readers side by side; one failing feed never stops the others. Returns {notices, errors: [{source, error}], ok: [source]}.
 async function settle(fns, names) {
   const rs = await Promise.allSettled(fns.map(f => f()));
@@ -334,13 +408,25 @@ async function settle(fns, names) {
   return out;
 }
 
+// Alerts sent by city and county staff from the government workspace (/staff, gov.alerts; see api/_gov.js). Every
+// live one on every check, so an alert ended there ends here. No database (the daily archive script): none.
+async function staffAlerts(place = 'fl-bay') {
+  const db = require('./_db');
+  if (!db.hasDb()) return {notices: [], ok: [], errors: []};
+  const rows = await require('./_gov').liveNotices(db.q, place);
+  return {notices: rows.map(notice), ok: ['staff'], errors: []};
+}
+
 // Every live source for a place. Shelter rows come back too, so the caller can store their status.
 async function readAll(place = 'fl-bay', now = Date.now()) {
-  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place)]);
+  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place), ipaws(place, now), staffAlerts(place)]);
   const out = {notices: [], errors: [], ok: [], shelters: null};
-  const [w, ac, nf, rd, sh, sp] = parts;
+  const [w, ac, nf, rd, sh, sp, ip, st] = parts;
+  if (st.status === 'fulfilled') { out.notices.push(...st.value.notices); out.ok.push(...st.value.ok); }
+  else out.errors.push({source: 'staff', error: String(st.reason.message || st.reason)});
   if (w.status === 'fulfilled') { out.notices.push(...w.value); out.ok.push('nws'); } else out.errors.push({source: 'nws', error: String(w.reason.message || w.reason)});
   for (const p of [ac, nf, rd, sp]) if (p.status === 'fulfilled') { out.notices.push(...p.value.notices); out.ok.push(...p.value.ok); out.errors.push(...p.value.errors); }
+  if (ip.status === 'fulfilled') { out.notices.push(...ip.value); out.ok.push('ipaws'); } else out.errors.push({source: 'ipaws', error: String(ip.reason.message || ip.reason)});
   if (sh.status === 'fulfilled') { out.shelters = sh.value; out.notices.push(...shelterNotices(sh.value, place)); out.ok.push('shelters'); }
   else out.errors.push({source: 'shelters', error: String(sh.reason.message || sh.reason)});
   // The same notice can show up in a government's alert center and its news feed; keep the alert center's.
@@ -355,22 +441,70 @@ async function readAll(place = 'fl-bay', now = Date.now()) {
 }
 
 // Which notices go out as a phone notification, and to which topic. Road closures only when a road is fully closed.
+// Staff alerts from the government workspace ride on the topics residents already chose (api/_gov.js TOPIC_OF).
+const STAFF_TOPIC = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'safety', general: 'general'};
 function pushTopic(n) {
   if (n.status !== 'active') return null;
+  if (n.source_type === 'staff') return STAFF_TOPIC[n.kind] || null;
   if (n.kind === 'evacuation') return 'evacuation';
   if (n.kind === 'shelter') return 'shelters';
   if (n.kind === 'boil-water') return 'water';
   if (n.kind === 'weather') return NWS_PUSH.test(n.event || '') ? 'weather' : null;
   if (n.kind === 'road') return n.full_closure ? 'roads' : null;
+  if (n.kind === 'safety') return 'safety';
+  if (n.kind === 'utility') return 'outages';
+  if (n.kind === 'storm' || n.kind === 'general') return 'general';
   return null;
 }
-const TOPICS = {weather: 'Weather warnings', evacuation: 'Evacuation orders', shelters: 'Shelter openings', water: 'Boil-water notices', roads: 'Full road closures', agenda: 'Agenda items near my saved place'};
-const DEFAULT_TOPICS = ['weather', 'evacuation', 'shelters', 'water'];
+// The alert types residents pick from (site, apps, /api/account choices), most urgent first. urgent ones always sound,
+// even in quiet hours; channels says where each can be sent.
+const ALERT_TYPES = [
+  {key: 'evacuation', label: 'Evacuation orders', detail: 'For your evacuation zone, from the county and FEMA alerts', urgency: 'urgent', channels: ['push', 'email']},
+  {key: 'weather', label: 'Severe weather warnings', detail: 'Hurricane, tornado, flash flood and storm surge, from the National Weather Service', urgency: 'urgent', channels: ['push', 'email']},
+  {key: 'safety', label: 'Public safety alerts', detail: 'Shelter in place, AMBER alerts, hazardous materials, from FEMA\'s emergency alert system', urgency: 'urgent', channels: ['push', 'email']},
+  {key: 'shelters', label: 'Shelter openings', detail: 'When the county opens a shelter', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'water', label: 'Boil-water notices', detail: 'From the city or county for your areas', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'roads', label: 'Full road closures', detail: 'State roads (FL511) and city closures', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'outages', label: 'Water and power outages', detail: 'Water main breaks, service shut-offs, sewer spills', urgency: 'standard', channels: ['push', 'email']},
+  {key: 'general', label: 'Storm and general updates', detail: 'Sandbags, closures, debris pickup, curfews', urgency: 'info', channels: ['push', 'email']},
+  {key: 'agenda', label: 'Agenda items near my home', detail: 'A public meeting will discuss a place near your home', urgency: 'info', channels: ['push']},
+];
+const TOPICS = Object.fromEntries(ALERT_TYPES.map(t => [t.key, t.label]));
+const DEFAULT_TOPICS = ['weather', 'evacuation', 'shelters', 'water', 'safety'];
+// Who gets a topic: its own switch, and for public-safety alerts (IPAWS) also everyone who asked for evacuation orders
+// (phones on app versions without the public-safety switch still get them).
+const topicsFor = topic => topic === 'safety' ? ['safety', 'evacuation'] : [topic];
+// Areas a resident can follow: all of the county or one government's notices (the county's always come too).
+const AREAS = {all: 'All of Bay County', county: 'Unincorporated Bay County', pc: 'Panama City', pcb: 'Panama City Beach', lh: 'Lynn Haven', cw: 'Callaway', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+// Notices tied to one government's area (a city's boil-water notice); everything else reaches the whole county.
+const LOCAL_KINDS = ['boil-water', 'road', 'utility', 'general', 'storm'];
+// Does a notice reach someone who follows these areas and/or has this saved home ({gov_id, zone})?
+// No areas = follow the home; no home and no areas = everything. Evacuation orders that name zones reach a home only in
+// those zones; people following areas without a home get every order (we can't tell their zone).
+function reaches(n, {areas = [], home = null} = {}) {
+  const all = areas.includes('all') || (!areas.length && !home);
+  // A staff alert from one city reaches that city's followers, whatever its kind; a countywide one (or the county's) reaches everyone.
+  if (n.source_type === 'staff') {
+    if (all || !n.gov_id || n.gov_id === 'county' || n.area === 'All of Bay County') return true;
+    return new Set([...areas, ...(home && home.gov_id ? [home.gov_id] : [])]).has(n.gov_id);
+  }
+  if (n.kind === 'evacuation') return !n.zones || all || !home || String(n.zones).split(/,\s*/).includes(home.zone);
+  if (!LOCAL_KINDS.includes(n.kind) || !n.gov_id || all) return true;
+  const govs = new Set(['county', ...areas, ...(home && home.gov_id ? [home.gov_id] : [])]);
+  return govs.has(n.gov_id);
+}
+// Urgent alerts sound even in quiet hours: evacuation orders, severe or extreme public safety alerts, extreme weather.
+const isUrgent = (n, topic) => topic === 'evacuation' || (topic === 'safety' && ['extreme', 'severe'].includes(n.severity)) || (topic === 'weather' && n.severity === 'extreme');
+// Quiet hours: 10 PM to 7 AM in the place's time zone.
+function quietNow(now = Date.now(), tz = 'America/Chicago') {
+  const h = Number(new Intl.DateTimeFormat('en-US', {timeZone: tz, hour: 'numeric', hourCycle: 'h23'}).format(new Date(now)));
+  return h >= 22 || h < 7;
+}
 
 // Active notices first by how serious they are, then newest.
 const SEV_RANK = {extreme: 0, severe: 1, moderate: 2, minor: 3, info: 4};
 const byUrgency = (a, b) => (SEV_RANK[a.severity] ?? 5) - (SEV_RANK[b.severity] ?? 5) || String(b.updated || b.issued || '').localeCompare(String(a.updated || a.issued || ''));
 
 module.exports = {SOURCES, placeConfig, plain, decode, clip, classify, zonesIn, parseRss, rssNotices, nwsNotice, nws, nwsRecent, alertCenters, newsFeeds,
-  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, readAll, pushTopic, TOPICS, DEFAULT_TOPICS,
-  byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice};
+  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, parseCap, ipawsNotice, ipaws, readAll, staffAlerts, pushTopic, topicsFor, TOPICS, ALERT_TYPES, AREAS, LOCAL_KINDS, reaches, isUrgent, quietNow, DEFAULT_TOPICS,
+  byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice, get};

@@ -1,0 +1,733 @@
+// BayCounty.me government workspace (/staff). Talks only to /api/gov.
+// Record data is read-only: the only action on it is a flag. Staff edit only what they posted here.
+(() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const when = s => { if (!s) return '—'; const d = new Date(s); return isNaN(d) ? esc(s) : d.toLocaleString('en-US', {month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit'}); };
+  const day = s => { if (!s) return ''; const d = new Date(String(s).length <= 10 ? s + 'T12:00:00' : s); return isNaN(d) ? esc(s) : d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}); };
+  const ROLE = {viewer: 1, auditor: 1, records: 1, publisher: 2, alert_sender: 3, owner: 4};
+  const ACTIONS = {signed_in: 'signed in', notice_posted: 'posted a notice', notice_edited: 'changed a notice', notice_withdrawn: 'withdrew a notice',
+    event_posted: 'posted an event', event_edited: 'changed an event', event_withdrawn: 'withdrew an event', job_posted: 'posted a job', job_edited: 'changed a job',
+    job_withdrawn: 'withdrew a job', alert_sent: 'sent an alert', alert_drafted: 'saved a countywide alert for a second person to confirm', alert_confirmed: 'confirmed an alert',
+    alert_ended: 'ended an alert', alert_cancelled: 'cancelled an alert', data_flagged: 'flagged record data', flag_answered: 'BayCounty.me answered a flag',
+    member_set: 'changed access', member_removed: 'removed access', records_published: 'published records', records_withdrawn: 'withdrew records', records_confirmed: 'confirmed a file',
+    records_review_published: 'published a file after review', records_review_held: 'kept a file off the site after review', intake_senders_changed: 'changed who may email records in',
+    feed_agreed: 'agreed to a source we read', feed_unagreed: 'took back agreement to a source'};
+
+  let me = null, ws = null, wsInfo = null, role = 'viewer', HOME = 'home';
+  // Elected officials see their board dashboard and their record data; nothing staff post or send.
+  const STAFF_ONLY = ['home', 'alerts', 'notices', 'events', 'jobs', 'submit'];
+  // submit = send records: the records role, or publisher and up.
+  const can = r => r === 'submit' ? role === 'records' || (ROLE[role] || 0) >= 2 : (ROLE[role] || 0) >= (ROLE[r] || 9);
+
+  async function api(action, {method = 'GET', body, params} = {}) {
+    const qs = new URLSearchParams({action, ...(ws && !['login', 'verify'].includes(action) ? {workspace: ws} : {}), ...(params || {})});
+    const r = await fetch('/api/gov?' + qs, {method, credentials: 'same-origin',
+      headers: method === 'POST' ? {'Content-Type': 'application/json', 'X-BCM-Gov': '1'} : {},
+      body: body ? JSON.stringify({...(ws ? {workspace: ws} : {}), ...body}) : undefined});
+    const j = await r.json().catch(() => ({}));
+    if (r.status === 401 && !['login', 'verify'].includes(action)) { showSignin(); throw new Error('Signed out'); }
+    if (!r.ok) throw Object.assign(new Error(j.error || 'Something went wrong. Try again.'), {status: r.status});
+    return j;
+  }
+
+  // ---------- sign in ----------
+  let pendingEmail = '';
+  function showSignin() { $('#app').hidden = true; $('#signin').hidden = false; $('#email-form').hidden = false; $('#code-form').hidden = true; }
+  $('#email-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button'); btn.disabled = true; $('#signin-msg').textContent = '';
+    try {
+      pendingEmail = e.target.email.value.trim();
+      await api('login', {method: 'POST', body: {email: pendingEmail}});
+      $('#email-form').hidden = true; $('#code-form').hidden = false;
+      $('#code-sent').innerHTML = `If <b>${esc(pendingEmail)}</b> has access, a code is on its way. It expires in 10 minutes.`;
+      $('#code-form').code.focus();
+    } catch (err) { $('#signin-msg').textContent = err.message; }
+    btn.disabled = false;
+  });
+  $('#code-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]'); btn.disabled = true; $('#signin-msg').textContent = '';
+    try { await api('verify', {method: 'POST', body: {email: pendingEmail, code: e.target.code.value}}); e.target.reset(); await start(); }
+    catch (err) { $('#signin-msg').textContent = err.message; }
+    btn.disabled = false;
+  });
+  $('#code-back').addEventListener('click', () => { $('#code-form').hidden = true; $('#email-form').hidden = false; $('#signin-msg').textContent = ''; });
+  $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.reload(); });
+
+  // ---------- menu ----------
+  const loaders = {home: loadHome, board: loadBoard, brief: loadBrief, agendas: loadAgendas, votes: loadVotes, numbers: loadNumbers, alerts: loadAlerts, notices: () => loadPosts('notice'), events: () => loadPosts('event'), jobs: () => loadPosts('job'),
+    submit: loadSubmit, records: loadRecords, flags: loadFlags, people: loadPeople, activity: loadActivity};
+  const nav = $('#an-nav'), menuBtn = $('#an-open');
+  function menu(open) { nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open); menuBtn.setAttribute('aria-expanded', String(open)); }
+  menuBtn.addEventListener('click', () => menu(true));
+  $('#an-close').addEventListener('click', () => menu(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) menu(false); });
+  function tab(name, push = true) {
+    if (!loaders[name]) name = HOME;
+    const link = nav.querySelector(`[data-tab="${name}"]`);
+    if (!link || link.hidden) name = HOME;
+    nav.querySelectorAll('[data-tab]').forEach(a => a.dataset.tab === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    $$('[data-panel]').forEach(p => { p.hidden = p.id !== 'p-' + name; });
+    const title = nav.querySelector(`[data-tab="${name}"] span`).textContent;
+    $('#fw-h').textContent = title; $('#an-cur').textContent = title;
+    document.title = `${title} · ${wsInfo ? wsInfo.name : 'Government workspace'} · BayCounty.me`;
+    if (push) { history.replaceState(null, '', '#' + name); window.scrollTo(0, 0); }
+    menu(false);
+    loaders[name]().catch(e => { if (e.message !== 'Signed out') console.error(e); });
+  }
+  nav.addEventListener('click', e => { const a = e.target.closest('a[data-tab]'); if (!a) return; e.preventDefault(); tab(a.dataset.tab); });
+  window.addEventListener('hashchange', () => { if (!$('#app').hidden) tab(location.hash.slice(1), false); });
+  document.addEventListener('click', e => { const g = e.target.closest('[data-go]'); if (g) tab(g.dataset.go); });
+
+  async function start() {
+    let j;
+    try { j = await api('me'); } catch (e) { if (e.message !== 'Signed out') showSignin(); return; }
+    me = j;
+    // Staff say "Panama City", not "City of Panama City".
+    for (const w of j.workspaces) w.name = String(w.name || '').replace(/^City of /, '');
+    if (!j.workspaces.length) { showSignin(); $('#signin-msg').textContent = 'You’re signed in, but no government has given you access yet.'; return; }
+    const saved = (() => { try { return localStorage.getItem('gov-ws'); } catch (e) { return null; } })();
+    wsInfo = j.workspaces.find(x => x.id === saved) || j.workspaces[0];
+    ws = wsInfo.id; role = wsInfo.role;
+    if (j.workspaces.length > 1) {
+      const sel = $('#ws-pick'); sel.hidden = false;
+      sel.innerHTML = j.workspaces.map(x => `<option value="${esc(x.id)}"${x.id === ws ? ' selected' : ''}>${esc(x.name)}</option>`).join('');
+      sel.onchange = () => { try { localStorage.setItem('gov-ws', sel.value); } catch (e) {} location.reload(); };
+    }
+    $('#ws-name').textContent = wsInfo.name; $('#ws-name').hidden = j.workspaces.length > 1;
+    $('#an-ws-cur').textContent = wsInfo.name;
+    $('#who').textContent = j.email; $('#who').title = j.email;
+    $('#who-role').textContent = (j.roles[role] || role) + (j.admin ? ' (BayCounty.me)' : '');
+    nav.querySelectorAll('[data-min]').forEach(a => { a.hidden = !can(a.dataset.min) && !(a.dataset.tab === 'activity' && role === 'auditor'); });
+    if (role === 'official') {
+      HOME = 'board';
+      STAFF_ONLY.forEach(t => { const a = nav.querySelector(`[data-tab="${t}"]`); if (a) a.hidden = true; });
+    }
+    nav.querySelectorAll('.an-g').forEach(g => { g.hidden = !g.querySelector('a[data-tab]:not([hidden])'); });
+    $$('[data-can]').forEach(el => { el.hidden = !can(el.dataset.can); });
+    $$('[data-cant]').forEach(el => { el.hidden = can(el.dataset.cant); });
+    $('#al-kind').innerHTML = Object.entries(j.alert_kinds).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
+    $('#al-cw-l').hidden = !wsInfo.countywide;
+    $('#rec-pick').innerHTML = Object.entries(j.records).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
+    $('#signin').hidden = true; $('#app').hidden = false;
+    tab(location.hash.slice(1) || HOME, false);
+  }
+
+  // ---------- home ----------
+  const actLine = a => `${esc(a.email)} ${esc(ACTIONS[a.action] || a.action.replace(/_/g, ' '))}${a.detail && a.detail.title ? `: “${esc(a.detail.title)}”` : ''}${a.detail && a.detail.email ? ` (${esc(a.detail.email)}${a.detail.role ? ', ' + esc(me.roles[a.detail.role] || a.detail.role) : ''})` : ''}`;
+  async function loadHome() {
+    const h = await api('home'), c = h.counts;
+    $('#home-lead').innerHTML = c.live_alerts ? `<b>${c.live_alerts} alert${c.live_alerts === 1 ? ' is' : 's are'} live</b> for ${esc(wsInfo.name)} right now.`
+      : `Nothing urgent for ${esc(wsInfo.name)}. Send an alert, post a notice, or check your record data.`;
+    const lc = $('#live-count'); lc.hidden = !c.live_alerts; lc.textContent = c.live_alerts;
+    const t = (go, n, label, hot) => `<button class="tile${hot ? ' hot' : ''}" type="button" data-go="${go}"><b>${n ?? '—'}</b><span>${label}</span></button>`;
+    $('#home-tiles').innerHTML = t('alerts', c.live_alerts, 'Live alerts', c.live_alerts) + (c.waiting_alerts ? t('alerts', c.waiting_alerts, 'Waiting for a second person', true) : '') +
+      t('notices', c.notices, 'Notices posted') + t('events', c.events, 'Upcoming events') + t('jobs', c.jobs, 'Open jobs') + t('flags', c.open_flags, 'Flags waiting on us') +
+      (can('owner') ? t('people', c.members, 'People with access') : '');
+    $('#home-activity').innerHTML = h.activity.length ? h.activity.map(a => `<li><div class="grow"><h3>${actLine(a)}</h3><div class="meta">${when(a.at)}</div></div></li>`).join('')
+      : '<li class="muted small">Nothing yet.</li>';
+  }
+
+
+  // ---------- board dashboard (elected officials; staff see it too) ----------
+  // One read of /api/gov?action=official per board member; every tab draws from it. All public record, read only.
+  const cash = v => v == null || isNaN(v) ? '—' : (Math.abs(v) >= 1e9 ? '$' + (v / 1e9).toFixed(2) + 'B' : Math.abs(v) >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : Math.abs(v) >= 1e4 ? '$' + Math.round(v / 1e3) + 'K' : '$' + Math.round(v).toLocaleString('en-US'));
+  const dollars = v => v == null || isNaN(v) ? '—' : '$' + Math.round(v).toLocaleString('en-US');
+  const pctOf = v => v == null ? '—' : Math.round(v * 100) + '%';
+  const cnt = v => v == null ? '—' : Number(v).toLocaleString('en-US');
+  const href = (kind, key) => kind === 'person' ? `/people/${encodeURIComponent(key)}` : `/profile/${kind}/${encodeURIComponent(key)}`;
+  const nameLink = (kind, key, text) => key ? `<a href="${href(kind, key)}" target="_blank" rel="noopener">${esc(text)}</a>` : esc(text);
+  const kpi = (label, v, sub) => `<div class="kpi"><span class="eyebrow">${esc(label)}</span><span class="v">${v}</span>${sub ? `<span class="s">${sub}</span>` : ''}</div>`;
+  const VOTE_LBL = {yes: 'Yes', no: 'No', absent: 'Absent', abstain: 'Abstained', other: 'Not recorded'};
+  const voteTag = v => `<span class="tag ${v === 'yes' ? 'yes' : v === 'no' ? 'no' : ''}">${VOTE_LBL[v] || esc(v)}</span>`;
+  const mtgTime = m => { const d = new Date(m.start && m.start.length > 10 ? m.start : (m.date || '') + 'T12:00:00'); if (isNaN(d)) return esc(m.date);
+    // Meetings are in Bay County (Central time), whatever the reader's clock says.
+    const tz = m.start && m.start.length > 10 ? {timeZone: 'America/Chicago'} : {};
+    return d.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', ...tz}) + (m.start && m.start.length > 10 ? ', ' + d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', ...tz}) : ''); };
+  let ob = null, obFor = undefined, obBusy = null;
+  async function board() {
+    const want = $('#ob-pick').value || '';
+    if (ob && obFor === want) return ob;
+    if (obBusy && obFor === want) return obBusy;
+    obFor = want;
+    obBusy = api('official', {params: want ? {person: want} : {}}).then(j => { ob = j; obBusy = null; pickers(j); return j; });
+    return obBusy;
+  }
+  function pickers(j) {
+    const sel = $('#ob-pick');
+    if (!sel.options.length && j.board.length) {
+      sel.innerHTML = j.board.map(b => `<option value="${esc(b.person_id)}">${esc(b.name)} · ${esc(b.seat)}</option>`).join('');
+      if (j.official) sel.value = j.official.person_id;
+    }
+    // Officials open on their own seat; they can still look at a colleague's record (it is all public).
+    $('#ob-pick-l').hidden = !j.board.length;
+    $('#ob-pick-l span').textContent = role === 'official' ? 'Showing' : 'Board member';
+  }
+  $('#ob-pick').addEventListener('change', () => { ob = null; tab(location.hash.slice(1) || HOME, false); });
+  const who = j => j.official ? `<div class="ob-who"><span class="av" aria-hidden="true" data-report="skip">${esc(j.official.name.split(/\s+/).map(w => w[0]).slice(0, 2).join(''))}</span><div>
+      <h2>${nameLink('person', j.official.person_id, j.official.name)}</h2><p>${esc(j.official.seat)} · ${esc(j.official.body)}, ${esc(j.government)}${j.official.since ? ` · since ${day(j.official.since)}` : ''}${j.official.former ? ' · former member' : ''}</p></div></div>`
+    : `<p class="readonly">No seat on record is tied to this account yet. Ask BayCounty.me to link your seat.</p>`;
+  const voteRow = v => `<tr><td class="nw">${day(v.date)}</td><td>${voteTag(v.vote)}${v.on_losing_side ? ' <span title="On the losing side">•</span>' : ''}</td>
+    <td class="long">${v.source_url ? `<a href="${esc(v.source_url)}" target="_blank" rel="noopener">${esc(v.headline || 'Motion')}</a>` : esc(v.headline || 'Motion')}${v.amount ? ` <b>${dollars(v.amount)}</b>` : ''}</td>
+    <td class="nw">${esc(v.outcome ? v.outcome[0].toUpperCase() + v.outcome.slice(1) : '')}${/^\d+\s*-\s*\d+$/.test(v.tally || '') ? ' ' + esc(v.tally) : ''}</td></tr>`;
+  const mtgCard = (m, items = 40) => `<li><div class="when">${mtgTime(m)}</div>
+    <div class="meta"><span>${esc(m.board_name)}</span><span>${esc(m.title)}</span>${m.location ? `<span>${esc(m.location)}</span>` : ''}${m.status === 'cancelled' ? '<span class="tag no">Cancelled</span>' : m.status === 'expected' ? '<span class="tag">Expected (agenda not posted yet)</span>' : m.agenda_url ? '<span class="tag soon">Agenda posted</span>' : ''}</div>
+    ${m.agenda_url || m.packet_url ? `<div class="links">${m.agenda_url ? `<a class="btn quiet" href="${esc(m.agenda_url)}" target="_blank" rel="noopener">Agenda</a>` : ''}${m.packet_url ? `<a class="btn quiet" href="${esc(m.packet_url)}" target="_blank" rel="noopener">Full packet</a>` : ''}</div>` : ''}
+    ${m.items.length ? `<ol>${m.items.slice(0, items).map(i => `<li>${esc(i.title)}${i.amount ? ` <b>${esc(i.amount)}</b>` : ''}</li>`).join('')}</ol>${m.items.length > items ? `<p class="ob-note">And ${m.items.length - items} more items on the agenda.</p>` : ''}` : `<p class="ob-note">${m.agenda_url ? 'The items haven’t been read from this agenda yet. Open the agenda for the list.' : 'No agenda posted yet.'}</p>`}</li>`;
+  const empty = (cols, text) => `<tr><td colspan="${cols}" class="empty">${text}</td></tr>`;
+
+  // The last meeting in a few lines: what passed, the minutes, and the two or three votes worth knowing (not every vote).
+  const longDay = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'});
+  const plural = (n, one, many = one + 's') => `${cnt(n)} ${n === 1 ? one : many}`;
+  function recap(l, mine) {
+    if (!l) return '<p class="readonly">No votes from a recent meeting are on record yet.</p>';
+    const where = (l.boards.length ? l.boards : l.meetings.map(m => m.board_name)).join(' and ');
+    const parts = [plural(l.motions, 'motion'), l.passed && `${cnt(l.passed)} passed`, l.failed && `${cnt(l.failed)} failed`, l.tabled && `${cnt(l.tabled)} tabled or continued`,
+      l.split ? plural(l.split, 'split vote') : 'every vote unanimous'].filter(Boolean).join(', ');
+    const src = l.minutes_url ? `<a href="${esc(l.minutes_url)}" target="_blank" rel="noopener">Minutes</a>` : l.source_url ? `<a href="${esc(l.source_url)}" target="_blank" rel="noopener">Source</a>` : '';
+    return `<div class="recap"><p class="sum"><b>${esc(longDay(l.date))}</b>${where ? ' · ' + esc(where) : ''}. ${esc(parts)}.${src ? ' ' + src : ''}</p>
+      ${l.since.length ? `<p class="ob-note">Minutes from ${l.since.map(m => `the ${esc(new Date(m.date + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric'}))} ${esc(m.board_name)} meeting`).join(' and ')} aren’t posted yet, so this is the latest meeting with votes on record.</p>` : ''}
+      <ul class="key">${l.key.map(v => `<li><b>${esc(v.headline || 'Motion')}</b>
+        <p class="m">${[v.outcome && esc(v.outcome[0].toUpperCase() + v.outcome.slice(1)) + (v.tally ? ' ' + esc(v.tally) : ''), v.amount && dollars(v.amount),
+          mine && v.vote && `${esc(mine)} voted ${(VOTE_LBL[v.vote] || v.vote).toLowerCase()}`].filter(Boolean).join(' · ')}</p>
+        ${v.summary && v.summary !== v.headline ? `<p class="x">${esc(v.summary)}</p>` : ''}</li>`).join('')}</ul></div>`;
+  }
+  const lines = n => `<div class="write-lines" data-lines="${n}" style="--n:${n}" aria-hidden="true"></div>`;
+  async function loadBrief() {
+    const j = await board(), b = j.briefing || {}, day1 = b.day || [], me = j.official;
+    const first = me ? me.name.split(/\s+/)[0] : null;
+    const links = m => m.agenda_url || m.packet_url ? `<p>${m.agenda_url ? `<a href="${esc(m.agenda_url)}" target="_blank" rel="noopener">Agenda</a>` : ''}${m.agenda_url && m.packet_url ? ' · ' : ''}${m.packet_url ? `<a href="${esc(m.packet_url)}" target="_blank" rel="noopener">Full packet</a>` : ''}</p>` : '';
+    // Each meeting that day: its agenda items, each with room to write.
+    const agenda = m => `<h2 class="h2">${esc(m.board_name)}${day1.length > 1 ? ' · ' + esc(mtgTime(m).split(', ').slice(-1)[0]) : ''}${m.items.length ? `: ${plural(m.items.length, 'agenda item')}` : ''}</h2>
+      <div class="brief-head"><p>${[m.title, m.location].filter(Boolean).map(esc).join(' · ')}</p>${links(m)}</div>
+      ${m.items.length ? m.items.map((i, n) => `<div class="brief-item"><p><b>${n + 1}.</b> ${esc(i.title)}${i.amount ? ` <b>${esc(i.amount)}</b>` : ''}</p>${lines(4)}</div>`).join('')
+        : `<p class="ob-note">${m.agenda_url ? 'The items haven’t been read from this agenda yet. Open the agenda for the list; there’s room for notes below.' : 'The agenda isn’t posted yet. There’s room for notes below.'}</p>${lines(12)}`}`;
+    $('#p-brief').innerHTML = (day1.length ? `<div class="brief-head"><p><b>${esc(mtgTime(day1[0]).replace(/, \d{1,2}:\d{2}\s?[AP]M$/, ''))}</b> · ${esc([...new Set(day1.map(m => m.board_name))].join(' and '))}</p></div>`
+        : '<p class="readonly">No upcoming meeting is on the calendar yet.</p>') +
+      `<h2 class="h2">Last meeting on record</h2>${recap(b.last, first)}` + day1.map(agenda).join('') + `<h2 class="h2">Other notes</h2>${lines(8)}`;
+  }
+
+
+  async function loadBoard() {
+    const j = await board();
+    $('#ob-who').innerHTML = who(j);
+    const vt = j.votes, up = j.meetings.upcoming, next = up.find(m => m.status !== 'cancelled');
+    $('#ob-kpis').innerHTML = kpi('Next meeting', next ? new Date(next.date + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) : 'None set', next ? esc(next.board_name) : '') +
+      kpi('Meetings, next 90 days', cnt(up.length), `${cnt(up.reduce((s, m) => s + m.items.length, 0))} agenda items`) +
+      (vt ? kpi('Votes on record', cnt(vt.count.votes), vt.first ? `since ${day(vt.first)}` : '') + kpi('Present for', vt.present_rate == null ? '—' : vt.present_rate + '%', `${cnt(vt.count.absent)} absent`) +
+        kpi('Split votes', cnt(vt.count.split), `${cnt(vt.count.on_losing_side)} on the losing side`) : '') +
+      (j.numbers && j.numbers.budget && j.numbers.budget.history.length ? (h => kpi(`FY${h.fiscal_year} budget`, cash(h.total ?? h.general_fund), h.general_fund ? `General Fund ${cash(h.general_fund)}` : ''))(j.numbers.budget.history[j.numbers.budget.history.length - 1]) : '');
+    $('#ob-recap').innerHTML = recap(j.briefing && j.briefing.last, j.official ? j.official.name.split(/\s+/)[0] : null);
+    $('#ob-next').innerHTML = up.slice(0, 3).map(m => mtgCard(m, 8)).join('') || '<li class="muted small">No meetings on the calendar for the next 90 days.</li>';
+    $('#ob-last tbody').innerHTML = vt ? vt.recent.slice(0, 10).map(voteRow).join('') || empty(4, 'No votes on record.') : empty(4, 'Pick a board member.');
+    $('#ob-board tbody').innerHTML = j.board.map(b => `<tr><td class="nw">${esc(b.seat)}</td><td>${nameLink('person', b.person_id, b.name)}</td><td class="nw">${day(b.since)}</td></tr>`).join('') || empty(3, 'No seats on record.');
+  }
+
+  async function loadAgendas() {
+    const j = await board(), up = j.meetings.upcoming, past = j.meetings.recent;
+    const items = up.reduce((s, m) => s + m.items.length, 0), mi = up.reduce((s, m) => s + m.money_items, 0), mt = up.reduce((s, m) => s + m.money_total, 0);
+    $('#ag-kpis').innerHTML = kpi('Meetings, next 90 days', cnt(up.length), `${cnt(up.filter(m => m.agenda_url).length)} with an agenda posted`) + kpi('Agenda items', cnt(items), '') +
+      kpi('Items with a dollar amount', cnt(mi), mt ? cash(mt) + ' in all' : '');
+    $('#ag-next').innerHTML = up.map(m => mtgCard(m)).join('') || '<li class="muted small">No meetings on the calendar for the next 90 days.</li>';
+    $('#ag-past tbody').innerHTML = past.map(m => `<tr><td class="nw">${day(m.date)}</td><td class="nw">${esc(m.board_name)}</td><td>${esc(m.title)}</td>
+      <td class="nw">${[m.agenda_url && `<a href="${esc(m.agenda_url)}" target="_blank" rel="noopener">Agenda</a>`, m.packet_url && `<a href="${esc(m.packet_url)}" target="_blank" rel="noopener">Packet</a>`, m.minutes_url && `<a href="${esc(m.minutes_url)}" target="_blank" rel="noopener">Minutes</a>`].filter(Boolean).join(' · ') || '—'}</td></tr>`).join('') || empty(4, 'None on record.');
+  }
+
+  async function loadVotes() {
+    const j = await board(), vt = j.votes;
+    if (!vt) { $('#vt-kpis').innerHTML = ''; ['#vt-years', '#vt-split', '#vt-all'].forEach(t => { $(t + ' tbody').innerHTML = empty(6, 'Pick a board member.'); }); return; }
+    const c = vt.count;
+    $('#vt-sub').textContent = `${j.official ? j.official.name + '’s' : 'The'} recorded votes on the ${j.government} ${j.official ? j.official.body : 'board'}, from the official minutes and hand-checked money votes.`;
+    $('#vt-kpis').innerHTML = kpi('Votes on record', cnt(c.votes), vt.first ? `${day(vt.first)} to ${day(vt.last)}` : '') + kpi('Yes', cnt(c.yes), c.votes ? pctOf(c.yes / c.votes) + ' of votes' : '') +
+      kpi('No', cnt(c.no), c.votes ? pctOf(c.no / c.votes) + ' of votes' : '') + kpi('Absent or abstained', cnt(c.absent + c.abstain), vt.present_rate == null ? '' : `present for ${vt.present_rate}%`) +
+      kpi('Split votes', cnt(c.split), `${cnt(c.on_losing_side)} on the losing side`) +
+      (vt.contract_dollars ? kpi('Voted yes on contracts', '$' + Math.round(vt.contract_dollars.yes_total || 0).toLocaleString('en-US'),
+        `${cnt(vt.contract_dollars.yes_votes)} approved · voted no on $${Math.round(vt.contract_dollars.no_total || 0).toLocaleString('en-US')}`) : '');
+    $('#vt-years tbody').innerHTML = vt.by_year.map(y => `<tr><td>${y.year}</td><td class="num">${cnt(y.votes)}</td><td class="num">${cnt(y.yes)}</td><td class="num">${cnt(y.no)}</td><td class="num">${cnt(y.absent)}</td><td class="num">${cnt(y.abstain)}</td></tr>`).join('') || empty(6, 'No votes on record.');
+    $('#vt-split tbody').innerHTML = vt.split_votes.map(voteRow).join('') || empty(4, 'No split votes on record.');
+    const years = [...new Set(vt.recent.map(v => String(v.date).slice(0, 4)))];
+    $('#vt-year').innerHTML = '<option value="">Every year</option>' + years.map(y => `<option>${y}</option>`).join('');
+    drawVotes();
+  }
+  function drawVotes() {
+    if (!ob || !ob.votes) return;
+    const q = $('#vt-q').value.trim().toLowerCase(), y = $('#vt-year').value, v = $('#vt-vote').value;
+    const rows = ob.votes.recent.filter(r => (!q || String(r.headline).toLowerCase().includes(q)) && (!y || String(r.date).startsWith(y)) && (!v || r.vote === v));
+    $('#vt-count').textContent = `${cnt(rows.length)} vote${rows.length === 1 ? '' : 's'}${ob.votes.count.votes > ob.votes.recent.length ? ` (latest ${cnt(ob.votes.recent.length)} of ${cnt(ob.votes.count.votes)})` : ''}`;
+    $('#vt-all tbody').innerHTML = rows.map(voteRow).join('') || empty(4, 'No votes match.');
+  }
+  ['#vt-q', '#vt-year', '#vt-vote'].forEach(s => $(s).addEventListener(s === '#vt-q' ? 'input' : 'change', drawVotes));
+
+  async function loadNumbers() {
+    const j = await board(), nb = j.numbers || {}, bud = nb.budget, bva = nb.budget_actual, book = nb.checkbook, ct = nb.contracts || {rows: []};
+    const last = bud && bud.history.length ? bud.history[bud.history.length - 1] : null, prev = bud && bud.history.length > 1 ? bud.history[bud.history.length - 2] : null;
+    const chg = last && prev && last.total && prev.total ? (last.total - prev.total) / prev.total : null;
+    $('#nb-kpis').innerHTML = (last ? kpi(`FY${last.fiscal_year} adopted budget`, cash(last.total ?? last.general_fund), chg == null ? '' : `${chg >= 0 ? '+' : '−'}${Math.abs(Math.round(chg * 1000) / 10)}% from FY${prev.fiscal_year}`) : kpi('Adopted budget', 'Not on file', '')) +
+      (bva ? kpi(`Spent, FY${bva.fiscal_year}`, pctOf(bva.totals.used), `of ${cash(bva.totals.budget)} as of ${day(bva.as_of)}`) : '') +
+      (book ? kpi(`Checkbook, FY${book.fiscal_year}`, cash(book.total), `${cnt(book.payments)} payments to ${cnt(book.payees)} payees`) : '') +
+      kpi('Contracts, last 12 months', cash(ct.total), `${cnt(ct.count)} approved`);
+    $('#nb-budget').innerHTML = bud ? `<h2 class="h2">Budget by year</h2><div class="tw"><table class="t"><thead><tr><th>Fiscal year</th><th class="num">Adopted budget</th><th class="num">General Fund</th><th class="num">Change</th></tr></thead><tbody>
+      ${[...bud.history].reverse().map((h, i, a) => { const p = a[i + 1]; const c = p && h.total && p.total ? (h.total - p.total) / p.total : null;
+        return `<tr><td>FY${h.fiscal_year}</td><td class="num">${dollars(h.total)}</td><td class="num">${dollars(h.general_fund)}</td><td class="num">${c == null ? '—' : (c >= 0 ? '+' : '−') + Math.abs(Math.round(c * 1000) / 10) + '%'}</td></tr>`; }).join('')}</tbody></table></div>
+      ${bud.compare && bud.compare.departments.length ? `<h3 class="h3" style="margin:18px 0 6px">${esc(bud.compare.label || 'General Fund departments')}, FY${bud.compare.from} to FY${bud.compare.to}</h3>
+      <div class="tw"><table class="t"><thead><tr><th>${bud.compare.by === 'fund' ? 'Fund' : 'Department'}</th><th class="num">FY${bud.compare.from}</th><th class="num">FY${bud.compare.to}</th><th class="num">Change</th></tr></thead><tbody>
+      ${bud.compare.departments.map(d => `<tr><td>${esc(d.name)}</td><td class="num">${dollars(d.from)}</td><td class="num">${dollars(d.to)}</td><td class="num">${d.change >= 0 ? '+' : '−'}${dollars(Math.abs(d.change)).slice(0)}</td></tr>`).join('')}</tbody></table></div>
+      ${(bud.compare.notes || []).map(x => `<p class="ob-note">${esc(x)}</p>`).join('')}` : ''}` : '<h2 class="h2">Budget by year</h2><p class="readonly">No adopted budget on file for this government yet.</p>';
+    $('#nb-bva').innerHTML = bva ? `<h2 class="h2">Spending against the FY${bva.fiscal_year} budget</h2><p class="sub">From the government’s own budget-vs-actual report as of ${day(bva.as_of)}, when ${pctOf(bva.elapsed)} of the year had gone by. Spent includes open purchase orders.${bva.over_budget.length ? ` Over budget: ${esc(bva.over_budget.join(', '))}.` : ''}</p>
+      <div class="tw"><table class="t"><thead><tr><th>Department</th><th class="num">Budget</th><th class="num">Spent</th><th class="num">Used</th></tr></thead><tbody>
+      ${bva.departments.slice(0, 25).map(d => `<tr><td>${esc(d.name)}</td><td class="num">${dollars(d.budget)}</td><td class="num">${dollars(d.spent)}</td><td class="num">${pctOf(d.used)}</td></tr>`).join('')}
+      <tr><td><b>Total</b></td><td class="num"><b>${dollars(bva.totals.budget)}</b></td><td class="num"><b>${dollars(bva.totals.spent)}</b></td><td class="num"><b>${pctOf(bva.totals.used)}</b></td></tr></tbody></table></div>` : '';
+    $('#nb-book').innerHTML = book ? `<h2 class="h2">Checkbook, FY${book.fiscal_year}</h2><p class="sub">${cnt(book.payments)} payments from ${day(book.from)} to ${day(book.through)}, from the government’s own check register. Payments to private people are counted but not named.</p>
+      <div class="tw"><table class="t"><thead><tr><th>Payee</th><th class="num">Payments</th><th class="num">Total</th></tr></thead><tbody>
+      ${book.top_payees.map(p => `<tr><td>${p.payee_entity_id ? `<a href="/profile/vendor/${encodeURIComponent(p.payee_entity_id.replace(/^vendor:/, ''))}" target="_blank" rel="noopener">${esc(p.payee)}</a>` : esc(p.payee)}</td><td class="num">${cnt(p.payments)}</td><td class="num">${dollars(p.total)}</td></tr>`).join('')}</tbody></table></div>` : '';
+    $('#nb-contracts').innerHTML = `<h2 class="h2">Contracts approved since ${day(ct.from)}</h2>` + (ct.rows.length ? `<div class="tw"><table class="t"><thead><tr><th>Date</th><th>Vendor</th><th class="num">Amount</th><th>For</th></tr></thead><tbody>
+      ${ct.rows.map(c => `<tr><td class="nw">${day(c.date)}</td><td class="nw">${nameLink('vendor', c.vendor_id, c.vendor)}</td><td class="num">${dollars(c.amount)}</td><td class="long">${c.source_url ? `<a href="${esc(c.source_url)}" target="_blank" rel="noopener">${esc(c.purpose || 'Contract')}</a>` : esc(c.purpose || '')}</td></tr>`).join('')}</tbody></table></div>` : '<p class="readonly">No contracts on record for the last 12 months.</p>');
+  }
+
+  // ---------- PDF reports (site/report.js) ----------
+  // A report button prints its own tab; the full briefing prints the overview, agendas, votes and numbers together.
+  // Each download is written to the activity log.
+  const REPORT = {briefing: ['brief'], agendas: ['agendas'], votes: ['votes'], numbers: ['numbers']};
+  const REPORT_TITLE = {briefing: 'Meeting briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
+  let shown = [];
+  window.addEventListener('click', e => {
+    const b = e.target.closest('[data-ob-report]'); if (!b) return;
+    const r = b.dataset.obReport, panels = REPORT[r];
+    const nextMtg = () => ob && ob.briefing && ob.briefing.next;
+    window.BCReportTitle = () => r === 'briefing' && nextMtg() ? `${REPORT_TITLE[r]}: ${new Date(nextMtg().date + 'T12:00:00').toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'})}`
+      : `${REPORT_TITLE[r]}: ${ob && ob.official && r !== 'agendas' && r !== 'numbers' ? ob.official.name : wsInfo.name}`;
+    window.BCReportEyebrow = () => `${wsInfo.name} · Board dashboard`;
+    window.BCReportMeta = () => [ob && ob.official ? `${ob.official.name}, ${ob.official.seat}, ${ob.official.body}` : '', wsInfo.name,
+      r === 'votes' && ($('#vt-q').value || $('#vt-year').value || $('#vt-vote').value) ? 'Filtered: ' + [$('#vt-q').value && `“${$('#vt-q').value}”`, $('#vt-year').value, $('#vt-vote').value && VOTE_LBL[$('#vt-vote').value]].filter(Boolean).join(', ') : ''].filter(Boolean).join(' · ');
+    window.BCReportBefore = async () => {
+      await Promise.all(panels.map(p => loaders[p]()));
+      shown = panels.map(p => $('#p-' + p)).filter(el => el.hidden);
+      shown.forEach(el => { el.hidden = false; });
+      $$('[data-panel]').forEach(el => { if (!panels.includes(el.id.slice(2))) el.dataset.report = 'skip'; });
+    };
+    window.BCReportAfter = () => {
+      shown.forEach(el => { el.hidden = true; }); shown = [];
+      $$('[data-panel]').forEach(el => { delete el.dataset.report; });
+      api('report-log', {method: 'POST', body: {report: r, person: ob && ob.official ? ob.official.person_id : undefined}}).catch(() => {});
+    };
+  }, true);
+
+  // ---------- map field (alerts and notices) ----------
+  // The map editor loads only when someone presses "Add a map". The drawing lives in the form's hidden geometry field.
+  async function mapOpen(fld) {
+    const box = fld.querySelector('[data-map-box]'), input = fld.querySelector('input[name=geometry]');
+    box.hidden = false; fld.querySelector('[data-map-open]').hidden = true;
+    if (!fld._ed) fld._ed = await window.BCMap.editor(box, input);
+    else fld._ed.refresh();
+  }
+  function mapSet(form, value) {
+    const fld = form.querySelector('.mapfld'); if (!fld) return;
+    const input = fld.querySelector('input[name=geometry]');
+    input.value = value || '';
+    if (fld._ed) fld._ed.set(value || '');
+    const has = window.BCMap && window.BCMap.parse(value);
+    if (has) mapOpen(fld);
+    else { fld.querySelector('[data-map-box]').hidden = true; fld.querySelector('[data-map-open]').hidden = false; }
+    mapSum(fld);
+  }
+  function mapSum(fld) {
+    const g = window.BCMap && window.BCMap.parse(fld.querySelector('input[name=geometry]').value);
+    fld.querySelector('[data-map-sum]').textContent = g ? 'On the map: ' + window.BCMap.describe(g) : '';
+  }
+  document.addEventListener('click', e => { const b = e.target.closest('[data-map-open]'); if (b) mapOpen(b.closest('.mapfld')); });
+  document.addEventListener('change', e => { if (e.target.name === 'geometry') mapSum(e.target.closest('.mapfld')); });
+
+  // ---------- alerts ----------
+  const fAlert = $('#f-alert');
+  async function showReach() {
+    const box = $('#al-reach');
+    if (!can('alert_sender')) return;
+    try {
+      const r = await api('reach', {params: {kind: fAlert.elements.kind.value, countywide: $('#al-cw').checked ? '1' : ''}});
+      box.innerHTML = r.topic ? `<span>Reaches now: <b>${r.phones ?? '—'}</b> phones · <b>${r.emails ?? '—'}</b> email inboxes</span><span class="muted">${$('#al-cw').checked ? 'All of Bay County' : 'People in ' + esc(wsInfo.name)}</span>`
+        : `<span class="muted">${esc(r.note)}</span>`;
+      return r;
+    } catch (e) { box.textContent = e.message; }
+  }
+  fAlert.elements.kind.addEventListener('change', showReach);
+  $('#al-cw').addEventListener('change', showReach);
+  fAlert.addEventListener('submit', async e => {
+    e.preventDefault();
+    fAlert.querySelector('.err').textContent = '';
+    const r = await showReach();
+    const cw = $('#al-cw').checked;
+    $('#al-confirm-h').textContent = cw ? 'Save this countywide alert for a second person to confirm?' : `Send this alert to ${wsInfo.name} now?`;
+    $('#al-confirm-p').innerHTML = `“${esc(fAlert.elements.title.value)}”` + (r && r.topic ? ` will reach about ${r.phones ?? 0} phones and ${r.emails ?? 0} inboxes, and show on the public alert timeline.` : ' will show on the public alert timeline.') +
+      (window.BCMap.parse(fAlert.elements.geometry.value) ? ' The map you drew shows with it.' : '') +
+      (cw ? ' Nothing goes out until another alert sender confirms it.' : ' It can’t be unsent, but you can end it at any time.');
+    $('#al-confirm').hidden = false; $('#al-send').focus();
+  });
+  $('#al-back').addEventListener('click', () => { $('#al-confirm').hidden = true; });
+  $('#al-send').addEventListener('click', async () => {
+    const btn = $('#al-send'); btn.disabled = true;
+    const f = Object.fromEntries(new FormData(fAlert));
+    try {
+      const r = await api('alert', {method: 'POST', body: {...f, countywide: $('#al-cw').checked}});
+      fAlert.reset(); mapSet(fAlert, ''); $('#al-confirm').hidden = true;
+      fAlert.querySelector('.err').textContent = r.message + (r.delivery && r.delivery.error ? ' ' + r.delivery.error : '');
+      await loadAlerts();
+    } catch (err) { fAlert.querySelector('.err').textContent = err.message; }
+    btn.disabled = false;
+  });
+  async function loadAlerts() {
+    showReach();
+    const j = await api('alerts');
+    $('#l-alerts').innerHTML = j.alerts.length ? j.alerts.map(a => {
+      const st = a.live ? '<span class="status live">Live</span>' : a.status === 'pending' ? '<span class="status pending">Waiting for a second person</span>'
+        : `<span class="status done">${a.status === 'cancelled' ? 'Cancelled' : a.status === 'removed' ? 'Removed' : 'Ended'}</span>`;
+      const s = a.sent || {}, n = (k, one, many) => s[k] ? `${s[k]} ${s[k] === 1 ? one : many}` : '';
+      const sent = [n('push', 'phone', 'phones'), n('email', 'inbox', 'inboxes'), n('sms', 'text', 'texts')].filter(Boolean).join(', ');
+      const mine = (a.created_by || '').toLowerCase() === (me.email || '').toLowerCase();
+      const btns = !can('alert_sender') ? '' : (a.status === 'pending' && (!mine || me.admin) ? `<button class="btn primary" type="button" data-confirm="${a.id}">Confirm and send</button>` : '') +
+        (a.live || a.status === 'pending' ? `<button class="btn" type="button" data-end="${a.id}">${a.status === 'pending' ? 'Cancel' : 'End now'}</button>` : '');
+      return `<li><div class="grow"><h3>${esc(a.title)} ${st}</h3><div class="meta"><span>${esc(me.alert_kinds[a.kind] || a.kind)}</span><span>${a.countywide ? 'All of Bay County' : esc(wsInfo.name)}</span>
+        <span>By ${esc(a.created_by)}${a.confirmed_by ? `, confirmed by ${esc(a.confirmed_by)}` : ''}</span><span>${a.sent_at ? 'Sent ' + when(a.sent_at) : 'Saved ' + when(a.created_at)}</span>
+        ${a.geometry ? '<span>Has a map</span>' : ''}${a.live && a.ends_at ? `<span>Ends ${when(a.ends_at)}</span>` : ''}${a.ended_at ? `<span>${a.status === 'cancelled' ? 'Cancelled' : 'Ended'} ${when(a.ended_at)} by ${esc(a.ended_by)}</span>` : ''}${a.status === 'removed' ? '<span>Taken off the public pages by BayCounty.me</span>' : ''}${sent ? `<span>Sent to ${sent}</span>` : ''}</div>
+        <p class="body">${esc(a.message)}${a.instruction ? '\n\n' + esc(a.instruction) : ''}</p></div><div class="row">${btns}</div></li>`;
+    }).join('') : '<li class="muted small">No alerts sent from this workspace yet.</li>';
+  }
+  $('#l-alerts').addEventListener('click', async e => {
+    const c = e.target.closest('[data-confirm]'), x = e.target.closest('[data-end]');
+    if (!c && !x) return;
+    const b = c || x; b.disabled = true;
+    try { await api(c ? 'alert-confirm' : 'alert-end', {method: 'POST', body: {id: Number(b.dataset.confirm || b.dataset.end)}}); await loadAlerts(); }
+    catch (err) { b.disabled = false; b.insertAdjacentHTML('afterend', `<span class="small err">${esc(err.message)}</span>`); }
+  });
+
+  // ---------- notices, events, jobs ----------
+  const posts = {notice: [], event: [], job: []};
+  const LINE = {
+    notice: r => ({h: r.title, meta: [r.kind_label, r.published && 'Published ' + day(r.published), r.event_date && 'Date: ' + day(r.event_date), r.geometry && 'Has a map'], body: r.text}),
+    event: r => ({h: r.title, meta: [day(r.starts) + (String(r.starts || '').length > 10 ? ', ' + new Date(r.starts).toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'}) : ''), r.venue, r.category, r.cost]}),
+    job: r => ({h: r.title, meta: [r.department, r.job_type, r.pay, r.posted && 'Posted ' + day(r.posted), r.closes && 'Closes ' + day(r.closes)]}),
+  };
+  const postItem = (kind, r) => {
+    const l = LINE[kind](r);
+    const btns = r.editable && can('publisher') ? `<div class="row"><button class="btn" type="button" data-edit="${kind}:${r.id}">Edit</button><button class="btn quiet" type="button" data-withdraw="${kind}:${r.id}">Withdraw</button></div>` : '';
+    return `<li><div class="grow"><h3>${esc(l.h)}</h3><div class="meta">${l.meta.filter(Boolean).map(m => `<span>${esc(m)}</span>`).join('')}${r.editable ? '' : '<span>From records · read only</span>'}</div>
+      ${l.body ? `<p class="body">${esc(String(l.body).slice(0, 400))}${String(l.body).length > 400 ? '…' : ''}</p>` : ''}</div>${btns}</li>`;
+  };
+  async function loadPosts(kind) {
+    const j = await api('posts', {params: {kind}});
+    posts[kind] = j.posts;
+    $('#l-' + kind).innerHTML = j.posts.length ? j.posts.map(r => postItem(kind, r)).join('') : '<li class="muted small">Nothing posted from this workspace yet.</li>';
+    $('#r-' + kind).innerHTML = j.from_records.length ? j.from_records.map(r => postItem(kind, r)).join('') : '<li class="muted small">None on file.</li>';
+  }
+  const localInput = s => String(s || '').slice(0, 16);
+  function openForm(kind, row) {
+    const f = $('#f-' + kind); f.reset(); f.hidden = false; f.querySelector('.err').textContent = '';
+    if (row) for (const el of f.elements) if (el.name && row[el.name] != null) el.value = el.type === 'datetime-local' ? localInput(row[el.name]) : el.type === 'date' ? String(row[el.name]).slice(0, 10) : row[el.name];
+    mapSet(f, row && row.geometry);
+    f.querySelector('input:not([type=hidden]),textarea').focus();
+  }
+  document.addEventListener('click', async e => {
+    const n = e.target.closest('[data-new]'), ed = e.target.closest('[data-edit]'), w = e.target.closest('[data-withdraw]'), c = e.target.closest('[data-cancel]');
+    if (n) openForm(n.dataset.new);
+    if (ed) { const [k, id] = ed.dataset.edit.split(':'); openForm(k, posts[k].find(r => String(r.id) === id)); }
+    if (c) c.closest('form').hidden = true;
+    if (w) {
+      const [k, id] = w.dataset.withdraw.split(':');
+      if (w.dataset.sure !== '1') { w.dataset.sure = '1'; w.textContent = 'Withdraw: are you sure?'; return; }
+      w.disabled = true;
+      try { await api('withdraw', {method: 'POST', body: {kind: k, id: Number(id)}}); await loadPosts(k); } catch (err) { w.disabled = false; w.textContent = err.message; }
+    }
+  });
+  $$('form[data-kind]').forEach(f => f.addEventListener('submit', async e => {
+    e.preventDefault();
+    const kind = f.dataset.kind, btn = f.querySelector('button[type=submit]'); btn.disabled = true; f.querySelector('.err').textContent = '';
+    const data = Object.fromEntries(new FormData(f));
+    if (!data.id) delete data.id;
+    try { await api('post', {method: 'POST', body: {...data, ...(kind === 'notice' ? {notice_kind: data.kind} : {}), kind}}); f.hidden = true; await loadPosts(kind); }
+    catch (err) { f.querySelector('.err').textContent = err.message; }
+    btn.disabled = false;
+  }));
+
+  // ---------- send records ----------
+  // A file goes up as base64 (or through a storage link when it's over 3 MB) and comes back as a report saved as
+  // "waiting". Nothing is taken in until someone presses "Yes, this is the right file"; then it's checked against our
+  // own records and either published (everything matched) or held for review. Emailed files arrive as "waiting" too.
+  const money = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const ST = {waiting: ['pending', 'Waiting for your OK'], checking: ['pending', 'Being checked'], in_review: ['held', 'In review'], published: ['fixed', 'Published'],
+    held: ['held', 'Doesn’t add up'], not_published: ['done', 'Not published after review'], withdrawn: ['done', 'Withdrawn']};
+  const CK = {match: 'Matches', mismatch: 'Doesn’t match', missing: 'Missing', unconfirmed: 'Couldn’t confirm'};
+  const findings = c => !c || !c.findings || !c.findings.length ? '' : `<details class="ck"><summary>${c.counts.match || 0} matched · ${(c.counts.mismatch || 0) + (c.counts.missing || 0)} didn’t match or missing · ${c.counts.unconfirmed || 0} couldn’t confirm</summary>
+    <ul>${c.findings.map(x => `<li><span class="status ${x.status === 'unconfirmed' ? 'pending' : 'held'}">${CK[x.status]}</span> <b>${esc(x.check)}</b> ${esc(x.detail || '')}${x.source_url ? ` <a href="${esc(x.source_url)}" target="_blank" rel="noopener noreferrer">source</a>` : ''}</li>`).join('')}</ul></details>`;
+  const openBooks = $('#app').dataset.openBooks === '1';
+  let sub = null, subKind = 'checkbook', pv = null;
+  const toB64 = f => new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = () => no(new Error('The file couldn’t be read.')); r.readAsDataURL(f); });
+  function kindsUi() {
+    $('#sub-kinds').innerHTML = Object.entries(me.record_kinds).map(([k, v]) => `<label><input type="radio" name="sub-kind" value="${k}"${k === subKind ? ' checked' : ''}><span><b>${esc(v.label)}</b>${esc(v.hint)}</span></label>`).join('');
+    $('#sub-opts').hidden = !FINANCE.includes(subKind);
+    $('#sub-asof-l').hidden = subKind !== 'budget';
+  }
+  // Kinds the finance importer reads (they can be checked against a printed total); the rest are lists.
+  const FINANCE = ['checkbook', 'budget'];
+  $('#sub-kinds').addEventListener('change', e => { if (e.target.name === 'sub-kind') { subKind = e.target.value; kindsUi(); } });
+  async function loadSubmit() {
+    if (!$('#sub-kinds').innerHTML) kindsUi();
+    sub = await api('submissions');
+    $('#sub-due').innerHTML = sub.due.map(d => `<div class="${d.current ? 'in' : ''}"><b>${esc(d.label)}</b><span>${esc(d.text)}</span>
+      <span class="status ${d.current ? 'fixed' : 'pending'}" style="align-self:flex-start">${d.current ? 'In' : d.have ? 'Due: latest is ' + day(d.have) : 'Not sent yet'}</span></div>`).join('');
+    $('#sub-inbox').hidden = !sub.address; $('#sub-addr').textContent = sub.address || '';
+    $('#sub-senders').innerHTML = (sub.senders || []).length ? 'Allowed to send: ' + sub.senders.map(a => `<code>${esc(a)}</code>`).join(', ') + (can('owner') ? ' · <a href="#people">Change under People</a>' : '')
+      : 'No one is allowed to email files in yet.' + (can('owner') ? ' Add addresses under People.' : ' Ask an owner here to add your address.');
+    $('#sub-tpl').innerHTML = 'No export handy? Column templates: ' + Object.keys(sub.templates).map(k => `<a href="/api/gov?action=template&workspace=${encodeURIComponent(ws)}&kind=${k}">${esc(me.record_kinds[k].label)}</a>`).join(' · ') + '.';
+    $('#sub-list').innerHTML = sub.files.length ? sub.files.map(f => {
+      const st = ST[f.status] || ['done', f.status];
+      const period = f.period_start && f.period_end && f.period_start !== f.period_end ? `${day(f.period_start)} to ${day(f.period_end)}` : f.period_end ? day(f.period_end) : '';
+      const btns = !can('submit') ? '' : f.status === 'waiting' ? `<button class="btn primary" type="button" data-sub-pub="${f.id}">Review and confirm</button><button class="btn quiet" type="button" data-sub-wd="${f.id}">Discard</button>`
+        : ['published', 'in_review'].includes(f.status) ? `<button class="btn quiet" type="button" data-sub-wd="${f.id}">Withdraw</button>` : '';
+      return `<li><div class="grow"><h3>${esc(f.name)} <span class="status ${st[0]}">${st[1]}</span></h3><div class="meta"><span>${esc(me.record_kinds[f.kind] ? me.record_kinds[f.kind].label : f.kind)}</span>
+        ${period ? `<span>${esc(period)}</span>` : ''}${f.rows != null ? `<span>${Number(f.rows).toLocaleString('en-US')} row${Number(f.rows) === 1 ? '' : 's'}</span>` : ''}<span>${f.via === 'email' ? 'Emailed in by' : 'Sent by'} ${esc(f.sent_by)}, ${when(f.sent_at)}</span>
+        ${f.published_at ? `<span>Published ${when(f.published_at)}${f.published_by ? ' by ' + esc(f.published_by) : ''}</span>` : ''}</div>
+        ${f.status === 'held' ? `<p class="body">The rows don’t add up to the file’s own printed total${f.difference ? ` (off by ${money(f.difference)})` : ''}, so nothing from it is used. Send a corrected file.</p>` : ''}
+        ${f.problem && f.status === 'waiting' ? `<p class="body">${esc(f.problem)}</p>` : ''}
+        ${f.status === 'in_review' ? '<p class="body">Some records didn’t match ours or couldn’t be confirmed, so this waits for review before anything is public. If something is wrong in the file, withdraw it and send a corrected one.</p>' : ''}
+        ${f.status === 'not_published' && f.check && f.check.note ? `<p class="body">Not published: ${esc(f.check.note)}</p>` : ''}
+        ${findings(f.check)}${f.sha256 ? `<div class="meta"><span class="mono" title="SHA-256 of the file as received">SHA-256 ${esc(f.sha256.slice(0, 16))}…</span></div>` : ''}</div><div class="row">${btns}</div></li>`;
+    }).join('') : '<li class="muted small">Nothing sent yet. Your first file shows up here.</li>';
+    const feeds = sub.feeds || [];
+    $('#sub-feeds-w').hidden = !feeds.length;
+    $('#sub-feeds').innerHTML = feeds.map(f => `<li><div class="grow"><h3>${esc(f.name)} ${f.agreed ? '<span class="status fixed">You agreed</span>' : ''}</h3>
+      <div class="meta"><span><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.url.replace(/^https?:\/\//, '').slice(0, 60))}</a></span>${f.how_often ? `<span>${esc(f.how_often)}</span>` : ''}${f.agreed ? `<span>By ${esc(f.agreed_by)}, ${when(f.agreed_at)}</span>` : ''}</div>
+      ${f.takes ? `<p class="body">${esc(f.takes)}</p>` : ''}</div>
+      ${can('submit') ? `<div class="row"><button class="btn${f.agreed ? ' quiet' : ''}" type="button" data-feed="${esc(f.url)}" data-agree="${f.agreed ? '0' : '1'}">${f.agreed ? 'Take back' : 'Yes, this is right'}</button></div>` : ''}</li>`).join('');
+  }
+  $('#sub-feeds').addEventListener('click', async e => {
+    const b = e.target.closest('[data-feed]');
+    if (!b) return;
+    b.disabled = true;
+    try { await api('feed-agree', {method: 'POST', body: {url: b.dataset.feed, agree: b.dataset.agree === '1'}}); await loadSubmit(); } catch (err) { b.disabled = false; b.textContent = err.message; }
+  });
+  const drop = $('#sub-drop'), finput = $('#sub-file');
+  drop.addEventListener('click', () => finput.click());
+  drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); finput.click(); } });
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) sendFile(e.dataTransfer.files[0]); });
+  finput.addEventListener('change', () => { if (finput.files[0]) sendFile(finput.files[0]); });
+  async function sendFile(file) {
+    $('#sub-msg').textContent = `Reading ${file.name}…`; $('#sub-pv').hidden = true;
+    const body = {kind: subKind, filename: file.name};
+    if (subKind === 'budget' && $('#sub-asof').value) body.as_of = $('#sub-asof').value;
+    if (FINANCE.includes(subKind) && $('#sub-total').value.trim()) body.printed_total = $('#sub-total').value.trim();
+    try {
+      if (file.size <= 3 * 1024 * 1024) body.content = await toB64(file);
+      else {
+        const u = await api('submit-url', {method: 'POST', body: {filename: file.name}});
+        const r = await fetch(u.url, {method: 'PUT', body: file, headers: {'x-upsert': 'true', 'Content-Type': file.type || 'application/octet-stream'}});
+        if (!r.ok) throw new Error('The file didn’t upload (' + r.status + '). Try again.');
+        body.path = u.path;
+      }
+      showPreview(await api('submit-preview', {method: 'POST', body}));
+      $('#sub-msg').textContent = '';
+    } catch (err) { $('#sub-msg').innerHTML = `<span class="err">${esc(err.message)}</span>`; }
+    finput.value = '';
+    loadSubmit().catch(() => {});
+  }
+  const COLS = {
+    checkbook: [['paid_on', 'Date'], ['doc_no', 'Check'], ['payee', 'Paid to'], ['amount', 'Amount', 1], ['description', 'Description']],
+    budget: [['department', 'Department'], ['account', 'Account'], ['description', 'Description'], ['amended_budget', 'Budget', 1], ['actual_ytd', 'Spent or received', 1]],
+    contracts: [['date', 'Awarded'], ['vendor', 'Vendor'], ['purpose', 'What for'], ['amount', 'Amount', 1], ['method', 'How awarded']],
+    payroll: [['title', 'Job title'], ['department', 'Department'], ['people', 'People'], ['typical', 'Typical pay', 1], ['pay_max', 'Top of range', 1]],
+    appointments: [['board', 'Board'], ['seat', 'Seat'], ['person', 'Member'], ['term_start', 'Term starts'], ['term_end', 'Term ends']],
+    fees: [['fee', 'Fee'], ['old_amount', 'Was', 1], ['new_amount', 'Now', 1], ['unit', 'Per'], ['effective_date', 'Starts']],
+  };
+  const DATES = ['paid_on', 'date', 'term_start', 'term_end', 'effective_date'];
+  function showPreview(p) {
+    pv = p;
+    const cols = COLS[p.kind], period = p.period && (p.period.start || p.period.end) ? [p.period.start, p.period.end].filter(Boolean).map(day).join(' to ') : '';
+    $('#sub-pv-h').textContent = p.ok ? `Is this the right file? ${me.record_kinds[p.kind].label}` : 'This file can’t be taken in yet';
+    $('#sub-pv-rep').innerHTML = p.ok ? reportHtml(p.report) : '';
+    $('#sub-pv-sum').innerHTML = [`<span><b>${Number(p.row_count || 0).toLocaleString('en-US')}</b> ${p.kind === 'payroll' ? 'job titles' : 'rows'}</span>`, p.parsed_total != null && p.kind !== 'payroll' ? `<span>Total <b>${money(p.parsed_total)}</b></span>` : '',
+      period ? `<span>${esc(period)}</span>` : '', p.tie && p.tie.status === 'ties' ? '<span class="status fixed">Adds up to the printed total</span>' : '',
+      p.tie && p.tie.status === 'mismatch' ? `<span class="status held">Off from the printed total by ${money(p.tie.difference)}</span>` : '',
+      p.used_saved_mapping ? '<span class="muted">Columns matched like last time</span>' : ''].filter(Boolean).join('');
+    const notes = [];
+    if (!p.ok) notes.push(`Missing: ${esc((p.missing || []).join('; '))}. Check you chose the right kind of record, or send the report straight from your system.`);
+    if (p.kind === 'checkbook' && p.ok) notes.push('Payments to private people (refunds, reimbursements) are published without their name. Voided checks are left out.');
+    if (p.kind === 'contracts') {
+      if (p.already_on_site) notes.push(`${p.already_on_site} contract${p.already_on_site === 1 ? ' is' : 's are'} already on the site and won’t be added twice.`);
+      if (p.withheld) notes.push(`${p.withheld} with a private person will be listed without the person’s name.`);
+      if (p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
+    }
+    if (p.kind === 'payroll' && p.ok) notes.push(`Employee names are removed: each row is a job title with how many people hold it and their pay${p.names_removed ? ` (${Number(p.names_removed).toLocaleString('en-US')} names taken out)` : ''}. Hourly rates are shown as a yearly amount at 2,080 hours.`);
+    if (['appointments', 'fees'].includes(p.kind) && p.skipped) notes.push(`${p.skipped} row${p.skipped === 1 ? ' was' : 's were'} left out (${esc(Object.entries(p.reasons || {}).map(([k, n]) => `${n} ${k}`).join(', '))}).`);
+    if (p.already_added) notes.push('This exact file was already added before.');
+    if (p.ok && FINANCE.includes(p.kind) && !openBooks) notes.push('Published files show on the public checkbook and budget tracker pages once those pages open; they are on the site’s data downloads and API right away.');
+    $('#sub-pv-note').innerHTML = notes.join(' ');
+    $('#sub-pv-t thead').innerHTML = `<tr>${cols.map(c => `<th>${esc(c[1])}</th>`).join('')}</tr>`;
+    $('#sub-pv-t tbody').innerHTML = (p.sample || []).map(r => `<tr>${cols.map(c => `<td${c[2] ? ' class="num"' : ''} title="${esc(r[c[0]] ?? '')}">${esc(c[2] ? (p.kind === 'payroll' && r[c[0]] != null ? '$' + Math.round(r[c[0]]).toLocaleString('en-US') : money(r[c[0]])) : DATES.includes(c[0]) ? (r[c[0]] ? day(r[c[0]]) : '') : r[c[0]] ?? '')}</td>`).join('')}</tr>`).join('')
+      || `<tr><td class="empty" colspan="${cols.length}">No rows to show.</td></tr>`;
+    $('#sub-go').hidden = !p.ok || (p.tie && p.tie.status === 'mismatch');
+    $('#sub-err').textContent = '';
+    $('#sub-pv').hidden = false; $('#sub-pv').scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+  // The confirm report: what the file says, in the shape of the government's own books.
+  const n0 = v => Number(v || 0).toLocaleString('en-US');
+  const ym = k => /^\d{4}-\d{2}$/.test(k) ? new Date(k + '-15T12:00:00Z').toLocaleDateString('en-US', {month: 'short', year: 'numeric', timeZone: 'UTC'}) : k;
+  const grp = (title, list, val = g => money(g.total), key = g => g.key) => !list || !list.length ? '' : `<div><h3>${title}</h3><table class="t"><tbody>${list.map(g => `<tr${g.rest ? ' class="muted"' : ''}><td>${esc(key(g))}</td><td class="num">${val(g)}</td><td class="num muted">${n0(g.rows)}</td></tr>`).join('')}</tbody></table></div>`;
+  function reportHtml(r) {
+    if (!r) return '';
+    const facts = [];
+    if (r.kind === 'checkbook') {
+      facts.push(['Total paid', money(r.total)], ['Payments', n0(r.rows - (r.voided || 0))]);
+      if (r.voided) facts.push(['Voided', n0(r.voided)]);
+      if (r.checks) facts.push(['First check', '#' + r.checks.first], ['Last check', '#' + r.checks.last]);
+      if (r.dates && r.dates.first) facts.push(['Dates', `${day(r.dates.first)} to ${day(r.dates.last)}`]);
+      return `<div class="pvfacts">${facts.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('')}</div><div class="pvgrid">
+        ${grp('By month', r.by_month, undefined, g => ym(g.key))}${grp('Biggest payees', r.top_payees)}${grp('By fund', r.by_fund)}</div>`;
+    }
+    if (r.kind === 'budget') {
+      facts.push(['Original budget', money(r.original)], ['Amended budget', money(r.amended)], ['Spent or received so far', money(r.actual)]);
+      if (r.as_of) facts.push(['As of', day(r.as_of)]);
+      return `<div class="pvfacts">${facts.map(([k, v]) => `<div><span>${k}</span><b>${esc(v)}</b></div>`).join('')}</div><div class="pvgrid">
+        ${grp('By department', r.by_department, g => `${money(g.amended || g.original)}<div class="muted small">${money(g.actual)} so far</div>`)}</div>`;
+    }
+    if (r.kind === 'contracts') return `<div class="pvfacts"><div><span>Total awarded</span><b>${money(r.total)}</b></div><div><span>Contracts</span><b>${n0(r.rows)}</b></div></div>
+      <div class="pvgrid">${grp('By month', r.by_month, undefined, g => ym(g.key))}${grp('Biggest vendors', r.top_payees)}</div>`;
+    if (r.kind === 'payroll') return `<div class="pvfacts"><div><span>People</span><b>${n0(r.people)}</b></div><div><span>Yearly pay, all together</span><b>${money(r.total)}</b></div><div><span>Job titles</span><b>${n0(r.rows)}</b></div></div>
+      <div class="pvgrid">${grp('By department', r.by_department)}</div>`;
+    if (r.by_group) return `<div class="pvgrid">${grp(r.kind === 'fees' ? 'By kind of fee' : 'By board', r.by_group, g => n0(g.rows))}</div>`;
+    return '';
+  }
+  async function publishFile(id, btn) {
+    btn.disabled = true;
+    try {
+      const r = await api('submit-confirm', {method: 'POST', body: {id}});
+      if (r.held) throw new Error(r.message);
+      $('#sub-pv').hidden = true; pv = null;
+      if (r.status === 'published') {
+        const p = r.published || {};
+        const msg = `Every check matched our own records. Published ${n0(p.rows)} rows${p.individuals_withheld ? `, ${p.individuals_withheld} without a private person’s name` : ''}.`;
+        $('#sub-msg').innerHTML = esc(msg) + (p.page && (!FINANCE.includes(r.kind) || openBooks) ? ` <a href="${esc(p.page)}" target="_blank" rel="noopener">See it on the site</a>` : '');
+      } else $('#sub-msg').innerHTML = `<b>Thanks, it’s in.</b> ${esc(r.message || '')} You can see what didn’t match under Files sent.`;
+      await loadSubmit();
+    } catch (err) { btn.disabled = false; ($('#sub-pv').hidden ? $('#sub-msg') : $('#sub-err')).textContent = err.message; }
+  }
+  $('#sub-go').addEventListener('click', e => pv && publishFile(pv.id, e.currentTarget));
+  $('#sub-cancel').addEventListener('click', async () => { if (pv) await api('submit-withdraw', {method: 'POST', body: {id: pv.id}}).catch(() => {}); pv = null; $('#sub-pv').hidden = true; loadSubmit(); });
+  $('#sub-list').addEventListener('click', async e => {
+    const p = e.target.closest('[data-sub-pub]'), w = e.target.closest('[data-sub-wd]');
+    if (p) {
+      // An emailed or earlier file: read it again to show the report before anyone confirms it.
+      const id = p.dataset.subPub, f = sub.files.find(x => x.id === id);
+      if (id[0] === 'f') { p.disabled = true; try { showPreview(await api('submit-preview', {method: 'POST', body: {kind: f.kind, upload_id: Number(id.slice(1))}})); } catch (err) { p.textContent = err.message; } p.disabled = false; return; }
+      if (pv && pv.id === id) { $('#sub-pv').hidden = false; $('#sub-pv').scrollIntoView({behavior: 'smooth'}); return; }
+      if (p.dataset.sure !== '1') { p.dataset.sure = '1'; p.textContent = 'Yes, this is the right file'; return; }
+      return publishFile(id, p);
+    }
+    if (!w) return;
+    if (w.dataset.sure !== '1') { w.dataset.sure = '1'; w.textContent = w.textContent === 'Discard' ? 'Discard: sure?' : 'Take it off the site?'; return; }
+    w.disabled = true;
+    try { await api('submit-withdraw', {method: 'POST', body: {id: w.dataset.subWd}}); await loadSubmit(); } catch (err) { w.disabled = false; w.textContent = err.message; }
+  });
+
+  // ---------- record data (read only) + flags ----------
+  let recRows = [], recCols = [];
+  const SKIP = new Set(['id', 'gov_id', 'source_url', 'date_start', 'date_end', 'date_precision']);
+  const label = c => c.replace(/_/g, ' ').replace(/^./, x => x.toUpperCase());
+  const cell = v => v == null ? '' : typeof v === 'object' ? JSON.stringify(v) : typeof v === 'number' ? v.toLocaleString('en-US') : String(v);
+  async function loadRecords() {
+    const ds = $('#rec-pick').value;
+    const j = await api('records', {params: {dataset: ds}});
+    recRows = j.rows;
+    recCols = recRows.length ? Object.keys(recRows[0]).filter(c => !SKIP.has(c)).slice(0, 7) : [];
+    $('#rec-count').textContent = `${recRows.length} row${recRows.length === 1 ? '' : 's'} · read only`;
+    $('#rec-t thead').innerHTML = recRows.length ? `<tr>${recCols.map(c => `<th>${esc(label(c))}</th>`).join('')}<th></th></tr>` : '';
+    $('#rec-t tbody').innerHTML = recRows.length ? recRows.map((r, i) => `<tr>${recCols.map(c => `<td title="${esc(cell(r[c]))}">${esc(cell(r[c]))}</td>`).join('')}
+      <td class="act">${r.source_url ? `<a class="btn quiet" href="${esc(r.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}<button class="btn" type="button" data-flag-row="${i}">Flag</button></td></tr>`).join('')
+      : `<tr><td class="empty">Nothing on file for ${esc(wsInfo.name)} in this dataset.</td></tr>`;
+  }
+  $('#rec-pick').addEventListener('change', loadRecords);
+  const dlg = $('#flag-dlg'), ff = $('#flag-form');
+  let flagRow = null;
+  $('#rec-t').addEventListener('click', e => {
+    const b = e.target.closest('[data-flag-row]'); if (!b) return;
+    flagRow = recRows[Number(b.dataset.flagRow)];
+    ff.reset(); ff.querySelector('.err').textContent = '';
+    const cols = Object.keys(flagRow).filter(c => !SKIP.has(c));
+    $('#flag-rec').innerHTML = recCols.slice(0, 4).map(c => `<dt>${esc(label(c))}</dt><dd>${esc(cell(flagRow[c]))}</dd>`).join('');
+    $('#flag-field').innerHTML = cols.map(c => `<option value="${esc(c)}">${esc(label(c))}: ${esc(cell(flagRow[c]).slice(0, 60))}</option>`).join('') + '<option value="">Something else</option>';
+    dlg.showModal();
+  });
+  $('#flag-cancel').addEventListener('click', () => dlg.close());
+  ff.addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(ff)), field = f.field;
+    const labelOf = recCols.slice(0, 3).map(c => cell(flagRow[c])).filter(Boolean).join(' · ');
+    try {
+      await api('flag', {method: 'POST', body: {dataset: $('#rec-pick').value, record_key: String(flagRow.id ?? ''), record_label: labelOf, field,
+        shown_value: field ? cell(flagRow[field]) : '', correct_value: f.correct_value, evidence_url: f.evidence_url, note: f.note}});
+      dlg.close();
+      $('#rec-count').textContent = 'Flag sent. We’ll check it against the source and answer under Flags you sent.';
+    } catch (err) { ff.querySelector('.err').textContent = err.message; }
+  });
+  async function loadFlags() {
+    const j = await api('flags');
+    const st = {open: ['open', 'Waiting on us'], fixed: ['fixed', 'Fixed'], not_changed: ['done', 'Not changed']};
+    $('#l-flags').innerHTML = j.flags.length ? j.flags.map(f => `<li><div class="grow"><h3>${esc(me.records[f.dataset] || f.dataset)}${f.record_label ? ': ' + esc(f.record_label) : ''} <span class="status ${st[f.status][0]}">${st[f.status][1]}</span></h3>
+      <div class="meta"><span>${esc(f.email)}</span><span>${when(f.created_at)}</span></div>
+      <p class="body">${f.field ? `${esc(label(f.field))}: “${esc(f.shown_value)}”` : ''}${f.correct_value ? ` should be “${esc(f.correct_value)}”` : ''}${f.note ? '\n' + esc(f.note) : ''}${f.reply ? `\n\nBayCounty.me: ${esc(f.reply)}` : ''}</p></div></li>`).join('')
+      : '<li class="muted small">No flags sent yet. Use Record data to flag a value that looks wrong.</li>';
+  }
+
+  // ---------- people + activity ----------
+  async function loadPeople() {
+    if (can('owner')) {
+      const s = await api('intake-senders').catch(() => null);
+      $('#is-w').hidden = !s;
+      if (s) { $('#is-addr').textContent = s.address; $('#is-list').value = (s.senders || []).join('\n'); $('#is-dom').textContent = s.gov_domain ? `Someone writing from @${s.gov_domain} who isn’t listed gets a short reply naming who may send. Mail from anywhere else is turned away unopened.` : 'Mail from anyone not listed is turned away unopened.'; }
+    }
+    const j = await api('members');
+    $('#pp-person').innerHTML = (j.officials || []).map(o => `<option value="${esc(o.person_id)}">${esc(o.person_name)} (${esc(o.seat)})</option>`).join('');
+    $('#pp-t tbody').innerHTML = j.members.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(me.roles[m.role] || m.role)}${m.person_name ? `: ${esc(m.person_name)}` : ''}</td><td>${esc(m.added_by || '')}</td><td>${day(m.created_at)}</td>
+      <td>${m.email.toLowerCase() === me.email ? '' : `<button class="btn quiet" type="button" data-rm="${esc(m.email)}">Remove</button>`}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">Nobody yet.</td></tr>';
+  }
+  $('#pp-form').role.addEventListener('change', e => { $('#pp-person-l').hidden = e.target.value !== 'official'; });
+  $('#pp-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    if (f.role !== 'official') delete f.person_id;
+    try { await api('members', {method: 'POST', body: f}); e.target.reset(); $('#pp-person-l').hidden = true; $('#pp-msg').textContent = `${f.email} can now sign in.`; await loadPeople(); }
+    catch (err) { $('#pp-msg').textContent = err.message; }
+  });
+  $('#pp-t').addEventListener('click', async e => {
+    const b = e.target.closest('[data-rm]'); if (!b) return;
+    if (b.dataset.sure !== '1') { b.dataset.sure = '1'; b.textContent = 'Remove: sure?'; return; }
+    await api('members', {method: 'POST', body: {email: b.dataset.rm, role: 'remove'}}).catch(err => { $('#pp-msg').textContent = err.message; });
+    loadPeople();
+  });
+  $('#is-save').addEventListener('click', async () => {
+    const senders = $('#is-list').value.split(/[\s,;]+/).filter(Boolean);
+    try { const r = await api('intake-senders', {method: 'POST', body: {senders}}); $('#is-list').value = r.senders.join('\n'); $('#is-msg').textContent = 'Saved.'; }
+    catch (err) { $('#is-msg').textContent = err.message; }
+  });
+  async function loadActivity() {
+    const j = await api('activity');
+    $('#act-t tbody').innerHTML = j.activity.map(a => `<tr><td>${when(a.at)}</td><td>${esc(a.email)}</td><td>${actLine({...a, email: ''}).trim()}</td></tr>`).join('') || '<tr><td colspan="3" class="empty">Nothing yet.</td></tr>';
+  }
+
+  // ---------- theme: same three-way setting as the rest of BayCounty.me (localStorage "theme") ----------
+  const NAMES = {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
+  const root = document.documentElement, mode = () => root.getAttribute('data-theme') || 'system';
+  const showTheme = m => $$('.theme-btn').forEach(b => { b.dataset.mode = m; b.querySelector('.theme-lbl').textContent = NAMES[m];
+    b.setAttribute('aria-label', 'Theme: ' + (m === 'system' ? 'match system' : NAMES[m].toLowerCase()) + '. Click to change.'); });
+  $$('.theme-btn').forEach(b => b.addEventListener('click', () => {
+    const m = NEXT[mode()];
+    if (m === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', m);
+    try { if (m === 'system') localStorage.removeItem('theme'); else localStorage.setItem('theme', m); } catch (e) {}
+    showTheme(m);
+  }));
+  showTheme(mode());
+
+  start();
+})();

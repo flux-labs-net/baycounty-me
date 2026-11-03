@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-29",
+ "as_of": "2026-11-03",
  "county": "bay",
  "method": "Organizations recognized by the IRS with an address in Bay County (EO Business Master File), plus active Florida nonprofit corporations (Sunbiz) with a principal address there. Financials are from the latest 990, 990-EZ or 990-PF e-filed with the IRS; government payment records are matched by exact name. Board members are the officers, directors, trustees and key employees listed on IRS returns, 990-N postcards, state corporate filings and Florida charity registrations (FDACS), grouped by name across boards. Charity registrations are the county's registrations in the FDACS Check-A-Charity database, with the financial summary each charity reported to the state. Built by data/nonprofits/build_nonprofits.py.",
  "summary": {
@@ -293169,8 +293169,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 18400.0,
-   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
+   "campaign_gifts_total": 19400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Nick Atkinson, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -301473,8 +301473,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 18400.0,
-   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
+   "campaign_gifts_total": 19400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Nick Atkinson, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -307041,8 +307041,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 18400.0,
-   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
+   "campaign_gifts_total": 19400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Nick Atkinson, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -314505,8 +314505,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 18400.0,
-   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
+   "campaign_gifts_total": 19400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Nick Atkinson, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },

@@ -118,6 +118,13 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .pill.awaiting{color:var(--warn)} .pill.replied{color:var(--ok)} .pill.closed{color:var(--muted)} .pill.public{color:var(--blue)}
 .pill.draft{color:var(--muted)} .pill.received{color:var(--ok)}
 .rr-gaps{display:flex;flex-wrap:wrap;gap:4px}
+.rr-k{font:600 .7rem var(--f-data);color:var(--warn);border:1px solid currentColor;border-radius:5px;padding:0 5px;margin-right:2px}
+.pill.dismissed{color:var(--muted)}
+.rr-places{display:flex;flex-direction:column;gap:8px}
+.rr-place{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.rr-age{font:600 .8rem var(--f-data);color:var(--warn);white-space:nowrap}
+.rr-dis{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;background:var(--sunken)}
+.rr-hist summary{cursor:pointer;color:var(--muted)} .rr-hist ol{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:.86rem}
 .rr-gaps span{font:500 .74rem var(--f-data);border:1px solid var(--line);border-radius:6px;padding:1px 6px;background:var(--sunken)}
 .co-p.on{background:var(--sunken)}
 .th-msg{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--bg)}
@@ -236,12 +243,14 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 MENU = [
     ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
                                   ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'), ('names', 'Name matches', None),
-                                  ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting')]),
+                                  ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting'),
+                                  ('filereview', 'Sent files to check', 'filereview'), ('govflags', 'Staff data flags', 'govflags')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
-                                     ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
-    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None)]),
+                                     ('sent', 'Sent mail', None), ('intake', 'Email intake log', None), ('emails', 'Email templates', None)]),
+    ('Accounts', 'teal', 'users', [('apps', 'App usage', None), ('realtors', 'Realtor agents', None), ('govstaff', 'Government staff', None),
+                                   ('alertsent', 'Emergency alerts', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
 TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
@@ -293,6 +302,7 @@ def shell_html():
       {''.join(groups)}
       <div class="an-foot">
         <a href="/finance" target="_blank" rel="noopener"><span>Finance workspace</span>{_svg('out', 14)}</a>
+        <a href="/staff" target="_blank" rel="noopener"><span>Government workspace</span>{_svg('out', 14)}</a>
         <a href="/" target="_blank" rel="noopener"><span>Public site</span>{_svg('out', 14)}</a>
         <div class="an-who"><span id="who"></span><button class="linkish" id="signout" type="button">Sign out</button></div>
       </div>
@@ -389,7 +399,7 @@ def admin_page(out_dir):
 
     <section id="tab-ingestion" class="pane" hidden>
       <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Each database sync logs one run per dataset. Admins (ADMIN_EMAILS) are emailed when a workflow fails and by the daily check below.</p>
-        <a class="btn" href="https://github.com/jeremymcs/baycounty-me/actions" target="_blank" rel="noopener">Workflow runs</a><button class="btn" id="in-refresh" type="button">Refresh</button></div>
+        <a class="btn" href="https://github.com/flux-labs-net/baycounty-me/actions" target="_blank" rel="noopener">Workflow runs</a><button class="btn" id="in-refresh" type="button">Refresh</button></div>
       <div id="in-banner"></div>
       <div class="tiles" id="in-tiles"></div>
       <div class="lists" style="margin-top:0">
@@ -407,7 +417,7 @@ def admin_page(out_dir):
 
     <section id="tab-agendas" class="pane" hidden>
       <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Notice emails (CivicPlus Notify Me and similar) arrive at ingest@baycounty.me. Each one triggers a rescan of that government’s agenda system; every agenda, packet and minutes file is downloaded and hashed. A changed file is a new version.</p>
-        <a class="btn" href="https://github.com/jeremymcs/baycounty-me/actions/workflows/watch-agendas.yml" target="_blank" rel="noopener">Workflow runs</a>
+        <a class="btn" href="https://github.com/flux-labs-net/baycounty-me/actions/workflows/watch-agendas.yml" target="_blank" rel="noopener">Workflow runs</a>
         <button class="btn" id="ag-run" type="button">Run now</button><button class="btn" id="ag-refresh" type="button">Refresh</button></div>
       <div id="ag-banner"></div>
       <div class="tiles" id="ag-tiles"></div>
@@ -441,6 +451,21 @@ def admin_page(out_dir):
       <div class="card" id="se-detail" hidden style="margin-bottom:14px"></div>
       <div class="tw"><table class="at" id="se-table" data-tt="off"><thead><tr><th>Sent</th><th>Subject</th><th>To</th><th class="md-hide">From</th><th>Status</th><th class="act ph-hide"></th></tr></thead><tbody></tbody></table></div>
       <p class="muted small" id="se-foot"></p>
+    </section>
+
+    <section id="tab-intake" class="pane" hidden>
+      <p class="muted small" style="margin:0 0 12px">Every email that reached a government’s address at ingest.baycounty.me: when it was sent, received, signed and logged, who it was from, whether it was accepted and why, and each file’s SHA-256 with what happened to it next. Rows are locked: they can’t be edited or deleted. Refused and dropped emails keep only the envelope; nothing inside them is opened.</p>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:0 0 12px">
+        <label class="small">From <input class="sel" type="date" id="ir-from"></label>
+        <label class="small">To <input class="sel" type="date" id="ir-to"></label>
+        <select class="sel" id="ir-ws" aria-label="Government"><option value="">All governments</option></select>
+        <span class="grow"></span>
+        <a class="btn" id="ir-csv" href="#" download>Download CSV</a><a class="btn primary" id="ir-print" href="#" target="_blank" rel="noopener">Printable report</a>
+      </div>
+      <div id="ir-banner"></div>
+      <div class="tiles" id="ir-tiles"></div>
+      <div class="tw"><table class="at" id="ir-table" data-tt="off"><thead><tr><th>Logged</th><th>From</th><th>To</th><th>Decision</th><th>Files</th><th class="md-hide">Events</th></tr></thead><tbody></tbody></table></div>
+      <div class="card" id="ir-detail" hidden style="margin-top:14px"></div>
     </section>
 
     <section id="tab-emails" class="pane" hidden>
@@ -506,8 +531,9 @@ def admin_page(out_dir):
     </section>
 
     <section id="tab-records" class="pane" hidden>
-      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119) for the budget years the site is missing, one draft per government. Nothing is sent until you press Send on a request. Each goes to one address from hello@baycounty.me, and the reply shows up under Conversations.</p>
+      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119). Two kinds of drafts: the budget years the site is missing, and <b>stale data</b>, drafted automatically each day when an official source’s newest record is older than its usual schedule (for example a beach water sampling site with no new sample in weeks). A gap is drafted once: after a request is sent or dismissed it isn’t drafted again. Nothing is sent until you press Approve and send. Each goes to one address from hello@baycounty.me, the reply shows up under Conversations, and every step is kept in a locked history.</p>
       <div class="tiles" id="rr-tiles"></div>
+      <div class="row" style="gap:8px;margin:0 0 10px"><select class="sel" id="rr-filter" aria-label="Show" style="width:auto"><option value="draft">Waiting for approval</option><option value="sent">Sent</option><option value="dismissed">Dismissed</option><option value="all">All requests</option></select></div>
       <div class="co">
         <div class="co-list" id="rr-list"><p class="empty">Loading…</p></div>
         <div class="card" id="rr-detail" style="display:flex;flex-direction:column;gap:12px"><p class="muted small" style="margin:0">Pick a request on the left.</p></div>
@@ -545,6 +571,42 @@ def admin_page(out_dir):
         <button class="btn" id="ra-add" type="button">Add agent</button>
       </div>
       <div class="tw"><table class="at" id="ra-table" data-tt="off"><thead><tr><th>Agent</th><th>Brokerage</th><th>Joined</th><th>Last sign-in</th><th>Reports</th><th>Emailed</th><th>Access</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-govstaff" class="pane" hidden>
+      <div class="banner"><div><b>Who can sign in to the government workspace.</b> <span class="small muted">City and county staff sign in at <a href="/staff" target="_blank" rel="noopener">/staff</a> with an emailed code. Viewers see everything and change nothing; publishers post notices, events and jobs; alert senders also send emergency alerts; owners also manage their own staff list. Elected officials (commissioners and council members) get a board dashboard of their agendas, their votes and the numbers, with PDF reports, tied to their seat. Nobody there can edit record data, only flag it (Staff data flags). Countywide alerts need a second person.</span></div></div>
+      <div class="tw"><table class="at" id="gs-ws" data-tt="off"><thead><tr><th>Government</th><th>People</th><th>Live alerts</th><th>Last activity</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">People</h2>
+        <select class="sel" id="gs-gov" aria-label="Government"></select>
+        <input class="sel" id="gs-email" type="email" placeholder="name@city.gov" aria-label="Email">
+        <select class="sel" id="gs-role" aria-label="Access"><option value="owner">Owner</option><option value="alert_sender">Alert sender</option><option value="publisher">Publisher</option><option value="records">Records sender</option><option value="viewer">Viewer</option><option value="auditor">Auditor</option><option value="official">Elected official</option></select>
+        <select class="sel" id="gs-person" aria-label="Which official" hidden></select>
+        <button class="btn" id="gs-add" type="button">Give access</button>
+      </div>
+      <div class="tw"><table class="at" id="gs-table" data-tt="off"><thead><tr><th>Government</th><th>Email</th><th>Access</th><th>Added by</th><th>Since</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-alertsent" class="pane" hidden>
+      <div class="banner"><div><b>Every emergency alert and how many it was sent to.</b> <span class="small muted">Phones, inboxes and texts are counts only, shown here and to the government's staff, never on public pages. Remove takes an alert (a test post, a mistake) off /emergency, the home page, the apps and the archive. Nothing is deleted: who removed it, when and why stay on the record, and Put back undoes it.</span></div></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:0 0 8px">
+        <h2 class="h2 grow" style="margin:0">Alerts</h2>
+        <select class="sel" id="as-gov" aria-label="Government"><option value="">Every government</option><option value="county">Bay County</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select>
+        <select class="sel" id="as-days" aria-label="Window"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select>
+      </div>
+      <div class="tw"><table class="at" id="as-table"><thead><tr><th>Started</th><th>Alert</th><th>From</th><th>Status</th><th>Sent to</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-filereview" class="pane" hidden>
+      <div class="banner"><div><b>Files governments sent that didn’t pass every check.</b> <span class="small muted">We never take a government’s file as the true source. Each one is checked against records we collect ourselves: approvals and votes from agendas and minutes, adopted budgets, the state’s yearly figures, published pay and check-number gaps. Files where everything matched are already public. These have a mismatch, something missing or records we couldn’t confirm. <b>Publish</b> puts the file’s records on the site with what we found; <b>Keep off the site</b> needs a reason. Both are final and go in the audit trail.</span></div></div>
+      <div class="row" style="margin-bottom:12px"><select class="sel" id="fr-status" aria-label="Status"><option value="open">Waiting for you</option><option value="decided">Decided (last 90 days)</option></select></div>
+      <div id="fr-list"><p class="muted">Loading…</p></div>
+    </section>
+
+    <section id="tab-govflags" class="pane" hidden>
+      <div class="banner"><div><b>Record data staff say is wrong.</b> <span class="small muted">Staff can’t edit numbers that came from public records. When one looks wrong they flag it here with the right value and a source. Check the source, fix the record or the reader, then mark it <b>Fixed</b>, or <b>Not changed</b> with a reason. Your reply shows in their workspace.</span></div></div>
+      <div class="row" style="margin-bottom:12px"><select class="sel" id="gf-status" aria-label="Status"><option value="open">Open</option><option value="fixed">Fixed</option><option value="not_changed">Not changed</option><option value="all">All</option></select></div>
+      <div class="tw"><table class="at" id="gf-table" data-tt="off" data-fit="off"><thead><tr><th>Government</th><th>Record</th><th>What they say</th><th style="width:30%">Answer</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-names" class="pane" hidden>
