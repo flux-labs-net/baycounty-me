@@ -1345,15 +1345,12 @@
      "type": "string",
      "values": [
       "Obligated",
-      "Pending Amendment Processing",
-      "Pending Applicant 406 HMP Completion",
       "Pending Applicant Project Review",
       "Pending Award",
       "Pending Closeout Award",
       "Pending Closeout Completion",
-      "Pending EHP Closeout Review",
+      "Pending FEMA 406 HMP Completion",
       "Pending Insurance Closeout Review",
-      "Pending Large Project Review",
       "Pending PDMG Project Review",
       "Pending Project Closeout Final Review",
       "Pending Project Closeout Initial Review",
@@ -12977,7 +12974,7 @@
    "id": "disaster-declarations",
    "title": "Disaster declarations",
    "description": "Every federal major disaster, emergency and fire management declaration that included the county since 2016, from OpenFEMA: the storm or event, the dates, and which FEMA programs were opened (individual aid to households, public aid to governments, hazard mitigation).",
-   "rows": 19,
+   "rows": 20,
    "columns": [
     {
      "name": "place_id",
@@ -13108,7 +13105,7 @@
    "id": "rebuild-money",
    "title": "Rebuild money by ZIP code",
    "description": "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.",
-   "rows": 164,
+   "rows": 179,
    "columns": [
     {
      "name": "place_id",
@@ -13180,6 +13177,7 @@
       "Hurricane Hermine",
       "Hurricane Ian",
       "Hurricane Irma",
+      "Hurricane Isaias",
       "Hurricane Michael",
       "Hurricane Milton",
       "Hurricane Sally",
