@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-02T22:27:23-06:00",
+  "generated": "2026-11-03T12:28:31-06:00",
   "window": {
-    "from": "2026-11-02",
-    "to": "2027-01-01"
+    "from": "2026-11-03",
+    "to": "2027-01-02"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -17,7 +17,7 @@
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "sources": {
         "PrimeGov": "ok (23 records)",
-        "calendar (iCal cat 38)": "ok (4 records)"
+        "calendar (iCal cat 38)": "ok (3 records)"
       },
       "coverage": {
         "agenda_feed": 1,
@@ -205,7 +205,7 @@
         "Meetings list /meetings/recent": "ok (54 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 3,
         "calendar": 0,
         "expected": 0
       }
@@ -258,19 +258,6 @@
       "minutes_url": null,
       "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
       "status": "posted",
-      "past": true
-    },
-    {
-      "board": "sp",
-      "title": "Commission Meeting",
-      "start": "2026-10-05T17:30:00-05:00",
-      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
-      "agenda_url": "https://www.springfieldfl.net/media/10901",
-      "packet_url": null,
-      "minutes_url": "https://www.springfieldfl.net/media/10906",
-      "source": "Springfield:https://www.springfieldfl.net/meetings/recent",
-      "status": "posted",
-      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
       "past": true
     },
     {
@@ -624,20 +611,19 @@
       "minutes_url": null,
       "source": "Springfield:https://www.springfieldfl.net/meetings",
       "status": "posted",
-      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-75"
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-75",
+      "past": true
     },
     {
       "board": "county",
       "title": "BOCC Regular Meeting",
       "start": "2026-11-03T09:00:00-06:00",
-      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL",
       "agenda_url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
       "packet_url": "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
       "minutes_url": null,
       "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "status": "posted",
-      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
-      "calendar_source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "items": [
         {
           "title": "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",

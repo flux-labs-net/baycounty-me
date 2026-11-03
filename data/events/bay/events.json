@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-02",
- "fetched": "2026-11-02T23:32:39-0500",
+ "as_of": "2026-11-03",
+ "fetched": "2026-11-03T13:33:54-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -51,23 +51,6 @@
  ],
  "errors": {},
  "events": [
-  {
-   "event_id": "bay-county:1594:2026-11-03",
-   "source_id": "bay-county",
-   "source": "Bay County",
-   "gov": "county",
-   "town": "Bay County",
-   "title": "Bay County Board of County Commissioners Meeting",
-   "starts": "2026-11-03T09:00:00",
-   "ends": "2026-11-03T11:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1594",
-   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false
-  },
   {
    "event_id": "library:23217:2026-11-03",
    "source_id": "library",
@@ -1069,7 +1052,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7712",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "bay-county:1613:2026-11-11",
@@ -1820,6 +1803,57 @@
    "recurring": true
   },
   {
+   "event_id": "panama-city:6992:2026-11-17",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Knifty Crafters",
+   "starts": "2026-11-17T13:30:00",
+   "ends": "2026-11-17T15:30:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6992",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7435:2026-11-17",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Dream Builders at MLK",
+   "starts": "2026-11-17T15:00:00",
+   "ends": "2026-11-17T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7435",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:6364:2026-11-17",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "55+ Club",
+   "starts": "2026-11-17T16:00:00",
+   "ends": "2026-11-17T20:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6364",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:23177:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1871,6 +1905,23 @@
    "recurring": false
   },
   {
+   "event_id": "panama-city:7564:2026-11-17",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "City Commission Meeting",
+   "starts": "2026-11-17T16:30:00",
+   "ends": "2026-11-17T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7564",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "library:23903:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1885,6 +1936,40 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/homemade-for-the-holidays-registration-required/",
    "source_url": "https://www.nwrls.com/events",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7713:2026-11-17",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Double Dutch - Jump Rope Program",
+   "starts": "2026-11-17T18:00:00",
+   "ends": "2026-11-17T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7713",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "callaway:2559:2026-11-17",
+   "source_id": "callaway",
+   "source": "City of Callaway",
+   "gov": "cw",
+   "town": "Callaway",
+   "title": "Planning Board Meeting (Potential)",
+   "starts": "2026-11-17T18:00:00",
+   "ends": "2026-11-17T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.cityofcallaway.com/Calendar.aspx?EID=2559",
+   "source_url": "https://www.cityofcallaway.com/Calendar.aspx",
    "recurring": false
   },
   {

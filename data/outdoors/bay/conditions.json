@@ -1,34 +1,21 @@
 {
- "fetched_at": "2026-11-03T04:33:39+00:00",
- "issued": "2026-11-02T16:22:00+00:00",
- "product_url": "https://api.weather.gov/products/1960a21b-5857-48bd-b397-04974b5f772e",
+ "fetched_at": "2026-11-03T18:34:56+00:00",
+ "issued": "2026-11-03T17:40:00+00:00",
+ "product_url": "https://api.weather.gov/products/bbd69bbb-9d34-45b6-8fdd-a2850e93d2e5",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "Brisk easterly winds maintain a high risk of rip currents at Franklin County beaches where a persistent longshore flow fosters surf heights up to 2 ft today. Offshore flow makes for a moderate risk at Gulf- Bay-Walton County beaches. This pattern continues for another 2-3 days.",
+ "outlook": "Brisk easterly to southeasterly winds maintain a high risk of rip currents through midweek at Walton, Bay and Franklin County beaches where a persistent longshore flow fosters surf heights up to 3 ft. Offshore flow makes for a moderate risk at Gulf County beaches.",
  "periods": [
   {
    "period": "Rest Of Today",
-   "rip_current_risk": "Moderate",
-   "surf_height": "Around 2 feet",
+   "rip_current_risk": "High",
+   "surf_height": "Around 3 feet",
    "uv_index": "Moderate",
    "water_temperature": "74 degrees",
-   "weather": "Mostly sunny",
-   "high_temperature": "Around 80",
-   "winds": "East winds 15 to 20 mph",
-   "sunrise": "6:57 AM",
-   "sunset": "5:56 PM",
-   "summary": null
-  },
-  {
-   "period": "Tuesday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "Around 3 feet",
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": "Mostly sunny",
-   "high_temperature": "Around 80",
+   "weather": "Partly sunny. A slight chance of",
+   "high_temperature": "In the upper 70s",
    "winds": "East winds around 20 mph",
    "sunrise": "6:57 AM",
    "sunset": "5:55 PM",
@@ -36,21 +23,21 @@
   },
   {
    "period": "Wednesday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "around 2 feet",
+   "rip_current_risk": "High",
+   "surf_height": "Around 4 feet",
    "uv_index": null,
    "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 2 feet. Partly sunny. Showers likely and a slight chance of thunderstorms. Highs in the upper 70s. Southeast winds around 15 mph."
+   "weather": "Mostly cloudy until 1 PM, then mostly",
+   "high_temperature": "Around 80",
+   "winds": "South winds around 10 mph",
+   "sunrise": "6:58 AM",
+   "sunset": "5:54 PM",
+   "summary": null
   },
   {
    "period": "Thursday",
    "rip_current_risk": "Moderate",
-   "surf_height": null,
+   "surf_height": "around 1 foot",
    "uv_index": null,
    "water_temperature": null,
    "weather": null,
@@ -58,7 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Sunny. Highs in the upper 70s. West winds around 10 mph."
+   "summary": "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the upper 70s. South winds around 5 mph."
   },
   {
    "period": "Friday",
@@ -71,10 +58,31 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
+   "summary": "Moderate rip current risk*. Partly sunny. A slight chance of showers. Highs in the upper 70s. West winds around 10 mph."
+  },
+  {
+   "period": "Saturday",
+   "rip_current_risk": "Moderate",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
    "summary": "Moderate rip current risk*. Mostly sunny. Highs in the mid 70s. Northwest winds around 10 mph."
   }
  ],
- "alerts": [],
+ "alerts": [
+  {
+   "event": "Rip Current Statement",
+   "headline": "Rip Current Statement issued November 3 at 12:33PM EST until November 4 at 7:00PM EST by NWS Tallahassee FL",
+   "starts": "2026-11-03T12:33:00-05:00",
+   "ends": "2026-11-04T19:00:00-05:00",
+   "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.ac877f317ad59d9ec6f97108a0c24719fe53c728.001.1"
+  }
+ ],
  "flag_history": [
   {
    "date": "2026-10-27",
