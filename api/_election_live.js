@@ -174,7 +174,7 @@ async function latest(e, {q, hasDb, force = false} = {}) {
 
 async function history(e, {q, hasDb}) {
   if (!hasDb) return [];
-  const rows = await q('select taken_at, soe_updated, ballots_cast, precincts_reporting, precincts_total, totals from election_live_snapshots where election_id = $1 order by taken_at', [e.id]);
+  const rows = await q('select taken_at, soe_updated, ballots_cast, precincts_reporting, precincts_total, totals from election_live_snapshots where election_id = $1 order by taken_at', [e.id]).catch(() => []);
   return rows.map(r => ({taken_at: r.taken_at, soe_updated: r.soe_updated, ballots_cast: r.ballots_cast == null ? null : +r.ballots_cast,
     precincts_reporting: r.precincts_reporting, precincts_total: r.precincts_total, totals: r.totals}));
 }
@@ -192,7 +192,12 @@ const rows = d => d.contests.flatMap(c => c.choices.map(x => ({election_id: d.el
 
 async function forRequest(query, db) {
   const e = pick(query);
-  const d = await latest(e, {...db, force: false});
+  let d;
+  try { d = await latest(e, {...db, force: false}); }
+  catch (err) { // database down or migration not applied yet: read the SOE directly (per-server cache)
+    console.error('election-live db', err.message);
+    d = await latest(e, {hasDb: false});
+  }
   if (query.contest) { const s = String(query.contest).toLowerCase(); d.contests = d.contests.filter(c => String(c.contest_id) === s || c.contest.toLowerCase().includes(s)); }
   return d;
 }
