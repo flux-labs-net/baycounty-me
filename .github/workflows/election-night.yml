@@ -43,14 +43,18 @@ jobs:
           if [ -z "$(git status --porcelain -- data/elections/results.json)" ]; then echo "No changes"; exit 0; fi
           .github/scripts/push_refresh.sh "Election night results ($(date -u +%Y-%m-%dT%H:%MZ))" data/elections/results.json
       - name: Deploy to Vercel
+        id: vercel_deploy
         if: steps.commit_and_push.outputs.pushed == 'true'
         env:
           HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
         run: |
           if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set."; exit 0; fi
-          curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "$HOOK" || true)
+          if [ "${code:0:1}" = 2 ]; then echo "Vercel deploy started"; exit 0; fi
+          echo "::error title=Vercel deploy hook::The deploy hook answered HTTP $code. A 404 means the hook was deleted (Vercel removes hooks when the Git repo is reconnected). Make a new one in Vercel > Project > Settings > Git > Deploy Hooks (branch main) and save its URL as the repository secret VERCEL_DEPLOY_HOOK."
+          exit 1
       - name: Sync the database
-        if: steps.commit_and_push.outputs.pushed == 'true'
+        if: ${{ !cancelled() && steps.commit_and_push.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run sync-db.yml --repo "$GITHUB_REPOSITORY" --ref main

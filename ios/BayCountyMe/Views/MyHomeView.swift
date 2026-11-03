@@ -259,7 +259,8 @@ private struct FeedContent: View {
                     if i < feed.governments.count - 1 { RowDivider(inset: 50) }
                 }
                 RowDivider(inset: 50)
-                RouteRow(route: .myAddress, title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
+                RouteRow(route: AccountManager.shared.me?.home.map { .address($0.addressMatch) } ?? store.home.map { .address($0) } ?? .myAddress,
+                         title: "Full address report", detail: "Taxes, flood zone, schools and who represents you", symbol: "doc.text.magnifyingglass")
                 // Same account as the realtor console: agents get a way in from here, like the site's My home.
                 if AccountManager.shared.me?.realtor == "active" {
                     RowDivider(inset: 50)
@@ -341,6 +342,7 @@ private struct FeedRow: View {
 /// Name, home, distance, emails, topics and phone alerts; sign out and delete the account.
 struct AccountSettingsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppStore.self) private var store
     @State private var account = AccountManager.shared
     @State private var prefs: AccountMe.Prefs?
     @State private var name = ""
@@ -363,6 +365,10 @@ struct AccountSettingsView: View {
                             Button("Remove home", role: .destructive) { Task { await account.removeHome() } }
                         } else {
                             HomeSearch { changingHome = false }
+                        }
+                        // Kept on this phone: owners' Home tab leads with the tax bill, renters' with utilities.
+                        Picker("This home", selection: Binding(get: { store.tenure ?? .unset }, set: { store.tenure = $0 })) {
+                            ForEach(HomeTiles.Tenure.allCases, id: \.self) { Text($0.label).tag($0) }
                         }
                     } header: { Text("Home") } footer: { Text("Kept private. Used only to pick what's near you.") }
                 }

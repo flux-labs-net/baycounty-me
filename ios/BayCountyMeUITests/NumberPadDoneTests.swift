@@ -5,6 +5,7 @@ import XCTest
 final class NumberPadDoneTests: XCTestCase {
     func testDoneClosesTheNumberPad() throws {
         let app = XCUIApplication()
+        app.launchArguments += ["-setupSeen", "YES"]
         app.launchArguments += ["-screen", "tax"]
         app.launch()
         let field = app.textFields["assessedValue"]

@@ -75,7 +75,9 @@ function notice(o) {
     severity: o.severity || 'info', event: o.event || null, area: clip(o.area, 400) || null, zones: (o.zones || []).join(', ') || null,
     issued: o.issued || null, starts: o.starts || null, ends: o.ends || null, updated: o.updated || null,
     status: o.status || 'active', full_closure: o.full_closure ?? null, roadway: o.roadway || null,
-    url: o.url || null, source_url: o.source_url || o.url || null,
+    url: o.url || null, source_url: o.source_url || o.url || null, geometry: o.geometry || null,
+    // NWS updates, continuations and extensions list the alerts they follow (not stored; used so a push isn't repeated).
+    ...(o.refs && o.refs.length ? {refs: o.refs} : {}),
   };
 }
 
@@ -94,6 +96,7 @@ function nwsNotice(f, place, cfg) {
     event: p.event, area: p.areaDesc, zones: evac ? zonesIn(text) : [], issued: iso(p.sent), starts: iso(p.onset || p.effective), ends: iso(p.ends || p.expires),
     updated: iso(p.sent), status: p.messageType === 'Cancel' ? 'lifted' : 'active',
     url: `https://alerts.weather.gov/search?id=${encodeURIComponent(String(p.id || '').replace(/^.*\//, ''))}`, source_url: cfg.nws.url,
+    refs: (p.references || []).map(r => r && r.identifier ? 'nws:' + String(r.identifier).replace(/^.*\//, '') : null).filter(Boolean),
   });
 }
 async function nws(place = 'fl-bay') {
@@ -225,8 +228,12 @@ function fl511Notices(rows, layer, place, cfg) {
 async function fl511(place = 'fl-bay') {
   const cfg = placeConfig(place);
   const q = encodeURIComponent(JSON.stringify({columns: [], start: 0, length: 1000}));
-  return settle(cfg.fl511.layers.map(l => async () => fl511Notices((await get(`https://fl511.com/List/GetData/${l}?query=${q}&lang=en`, {json: true})).data || [], l, place, cfg)),
-    cfg.fl511.layers.map(l => 'fl511:' + l));
+  // Each closure's start (and end) point comes from FL511's map icon list; a notice still lists without one.
+  const R = require('./_road_map');
+  return settle(cfg.fl511.layers.map(l => async () => {
+    const [list, pts] = await Promise.all([get(`https://fl511.com/List/GetData/${l}?query=${q}&lang=en`, {json: true}), R.fl511Points(get, l).catch(() => null)]);
+    return fl511Notices(list.data || [], l, place, cfg).map(n => ({...n, geometry: pts ? R.fl511Map(pts.get(n.notice_id.slice(6))) : null}));
+  }), cfg.fl511.layers.map(l => 'fl511:' + l));
 }
 
 // ---------- shelters (Bay County's Emergency Shelters page) ----------
@@ -401,11 +408,22 @@ async function settle(fns, names) {
   return out;
 }
 
+// Alerts sent by city and county staff from the government workspace (/staff, gov.alerts; see api/_gov.js). Every
+// live one on every check, so an alert ended there ends here. No database (the daily archive script): none.
+async function staffAlerts(place = 'fl-bay') {
+  const db = require('./_db');
+  if (!db.hasDb()) return {notices: [], ok: [], errors: []};
+  const rows = await require('./_gov').liveNotices(db.q, place);
+  return {notices: rows.map(notice), ok: ['staff'], errors: []};
+}
+
 // Every live source for a place. Shelter rows come back too, so the caller can store their status.
 async function readAll(place = 'fl-bay', now = Date.now()) {
-  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place), ipaws(place, now)]);
+  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place), ipaws(place, now), staffAlerts(place)]);
   const out = {notices: [], errors: [], ok: [], shelters: null};
-  const [w, ac, nf, rd, sh, sp, ip] = parts;
+  const [w, ac, nf, rd, sh, sp, ip, st] = parts;
+  if (st.status === 'fulfilled') { out.notices.push(...st.value.notices); out.ok.push(...st.value.ok); }
+  else out.errors.push({source: 'staff', error: String(st.reason.message || st.reason)});
   if (w.status === 'fulfilled') { out.notices.push(...w.value); out.ok.push('nws'); } else out.errors.push({source: 'nws', error: String(w.reason.message || w.reason)});
   for (const p of [ac, nf, rd, sp]) if (p.status === 'fulfilled') { out.notices.push(...p.value.notices); out.ok.push(...p.value.ok); out.errors.push(...p.value.errors); }
   if (ip.status === 'fulfilled') { out.notices.push(...ip.value); out.ok.push('ipaws'); } else out.errors.push({source: 'ipaws', error: String(ip.reason.message || ip.reason)});
@@ -423,8 +441,11 @@ async function readAll(place = 'fl-bay', now = Date.now()) {
 }
 
 // Which notices go out as a phone notification, and to which topic. Road closures only when a road is fully closed.
+// Staff alerts from the government workspace ride on the topics residents already chose (api/_gov.js TOPIC_OF).
+const STAFF_TOPIC = {evacuation: 'evacuation', shelter: 'shelters', 'boil-water': 'water', road: 'roads', safety: 'safety', general: 'general'};
 function pushTopic(n) {
   if (n.status !== 'active') return null;
+  if (n.source_type === 'staff') return STAFF_TOPIC[n.kind] || null;
   if (n.kind === 'evacuation') return 'evacuation';
   if (n.kind === 'shelter') return 'shelters';
   if (n.kind === 'boil-water') return 'water';
@@ -462,6 +483,11 @@ const LOCAL_KINDS = ['boil-water', 'road', 'utility', 'general', 'storm'];
 // those zones; people following areas without a home get every order (we can't tell their zone).
 function reaches(n, {areas = [], home = null} = {}) {
   const all = areas.includes('all') || (!areas.length && !home);
+  // A staff alert from one city reaches that city's followers, whatever its kind; a countywide one (or the county's) reaches everyone.
+  if (n.source_type === 'staff') {
+    if (all || !n.gov_id || n.gov_id === 'county' || n.area === 'All of Bay County') return true;
+    return new Set([...areas, ...(home && home.gov_id ? [home.gov_id] : [])]).has(n.gov_id);
+  }
   if (n.kind === 'evacuation') return !n.zones || all || !home || String(n.zones).split(/,\s*/).includes(home.zone);
   if (!LOCAL_KINDS.includes(n.kind) || !n.gov_id || all) return true;
   const govs = new Set(['county', ...areas, ...(home && home.gov_id ? [home.gov_id] : [])]);
@@ -480,5 +506,5 @@ const SEV_RANK = {extreme: 0, severe: 1, moderate: 2, minor: 3, info: 4};
 const byUrgency = (a, b) => (SEV_RANK[a.severity] ?? 5) - (SEV_RANK[b.severity] ?? 5) || String(b.updated || b.issued || '').localeCompare(String(a.updated || a.issued || ''));
 
 module.exports = {SOURCES, placeConfig, plain, decode, clip, classify, zonesIn, parseRss, rssNotices, nwsNotice, nws, nwsRecent, alertCenters, newsFeeds,
-  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, parseCap, ipawsNotice, ipaws, readAll, pushTopic, topicsFor, TOPICS, ALERT_TYPES, AREAS, LOCAL_KINDS, reaches, isUrgent, quietNow, DEFAULT_TOPICS,
-  byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice};
+  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, parseCap, ipawsNotice, ipaws, readAll, staffAlerts, pushTopic, topicsFor, TOPICS, ALERT_TYPES, AREAS, LOCAL_KINDS, reaches, isUrgent, quietNow, DEFAULT_TOPICS,
+  byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice, get};

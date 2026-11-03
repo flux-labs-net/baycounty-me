@@ -22,7 +22,7 @@ struct CRAIncrementView: View {
             if let h = CRAIncrement.headline(agencies: agencies, years: years) {
                 StatGrid {
                     KPICard(title: "Tax increment, FY\(String(h.lastYear))", value: Format.compactMoney(h.total),
-                            caption: "All \(h.agencies) CRAs. \(pct(h.frontBeachRoad, h.total))% is Front Beach Road", symbol: "percent", tone: .amber)
+                            caption: "All \(h.agencies) CRA areas. \(pct(h.frontBeachRoad, h.total))% is Front Beach Road", symbol: "percent", tone: .amber)
                     KPICard(title: "Paid by Bay County, FY\(String(h.lastYear))", value: Format.compactMoney(h.county),
                             caption: "\(pct(h.county, h.total))% of the total; the cities paid \(Format.compactMoney(h.total - h.county))", symbol: "building.columns", tone: .blue)
                     KPICard(title: "Paid on record, FY\(String(h.firstYear)) to FY\(String(h.lastYear))", value: Format.compactMoney(h.paidOnRecord),

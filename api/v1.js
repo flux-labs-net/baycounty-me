@@ -12,6 +12,8 @@
 //   GET /api/v1/changes?since=&dataset= records added to the database since a time
 //   GET /api/v1/meetings.ics?gov=       calendar of upcoming meetings (one government or all)
 //   GET /api/v1/correspondence?year=    published emails with officials (year=all for every year)
+//   GET /api/v1/mail?folder=&government=&q=&page=   every email with officials and governments, newest first (the /correspondence viewer)
+//   GET /api/v1/mail/{id}               one conversation start to finish (c123 letter or request, e45 records sent in, m67 other mail)
 //   GET /api/v1/pages[?path=]           which datasets and endpoints hold each site page's data
 //   GET /api/v1/entities?q=&kind=       find a company, official, candidate, nonprofit, board member or business
 //   GET /api/v1/entities/{id}           one entity's profile and every documented connection (api/_entities.js)
@@ -22,11 +24,13 @@
 //   GET /api/v1/import-progress         how far the minutes backfill has got, per board and year (api/_progress.js)
 //   GET /api/v1/schools?address=|lat=&lon=  the elementary, middle and high school zoned for a place (api/_schools.js)
 //   GET /api/v1/emergency               live weather alerts, evacuation orders, shelters, boil-water notices, road closures (api/_emergency_feed.js)
-//   GET /api/v1/emergency-timeline?days=&kind=&gov=  every alert of the last days: started, ended, people reached (api/_emergency_feed.js)
+//   GET /api/v1/emergency-timeline?days=&kind=&gov=  every alert of the last days: started, ended, the map staff drew (api/_emergency_feed.js)
 //   GET /api/v1/evacuation-zone?address= (or ?lat=&lng=)  the hurricane evacuation zone for a Bay County address
 //   GET /api/v1/utilities?lat=&lon=     water, sewer, power, gas, trash provider and pickup days at an address (api/_utilities.js)
 //   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
 //   GET /api/v1/nearby?address=|lat=&lon=&radius_mi=  what's happening near a place: alerts, meetings, events, work nearby (api/_nearby.js)
+//   GET /api/v1/government-posts?gov=&kind=  notices, events and jobs posted by city and county staff (api/_gov.js)
+//   GET /api/v1/records-sent?gov=            which records each government sends us itself, and the contracts staff sent (api/_records.js)
 //   GET /api/v1/overlaps?section=&gov=  live overlaps: officials' businesses and nonprofits in their votes, checkbook donors, split purchases (api/_overlaps.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
@@ -168,6 +172,13 @@ function openapi(catalog) {
         description: 'Each conversation is one letter sent to one or more officials, with every published reply. Unpublished threads are never returned. Defaults to the latest year that has letters.',
         parameters: [p('year', 'A year such as 2026, or all for every year. Default: the latest year with letters'), p('government', 'Only letters to this government, as shown in the governments list of the response')],
         responses: {200: {description: '{year, years, governments, total, conversations: [{subject, sent_at, governments, replies, threads: [{official, seat, government, status, messages: [{direction, text, at}]}]}]}'}}}},
+      '/mail': {get: {operationId: 'mail', summary: 'Every email between BayCounty.me and officials or governments (read-only)',
+        description: 'Letters to officials, public records requests, records governments emailed in (with what happened to each file) and other mail from government addresses. Residents\' email addresses, phone numbers and street addresses are hidden; officials and staff are named. Sign-in codes and links are never included. Newest first, 50 per page.',
+        parameters: [p('folder', 'letters, requests, sent_in or other. Default: all'), p('government', 'One government, as listed in governments'), p('q', 'Words in the subject, names or text'), p('page', 'Page number', {type: 'integer'})],
+        responses: {200: {description: '{folders: [{id, label, count}], total, governments, matched, page, pages, threads: [{id, folder, subject, government, with, started_at, last_at, messages, replies, files, status, hidden_reason, snippet}]}'}}}},
+      '/mail/{id}': {get: {operationId: 'mailThread', summary: 'One email conversation, start to finish',
+        parameters: [{name: 'id', in: 'path', required: true, description: 'Conversation id from /mail, e.g. c12, e3 or m40', schema: {type: 'string'}}],
+        responses: {200: {description: '{id, folder, subject, government, status, participants, items: [{type: message, id, direction, from, to, at, subject, text, quoted, attachments: [{name, size, sha256}], delivery, message_id} | {type: event, at, text, file, hash}], newer, older}'}, 404: {description: 'Unknown conversation'}}}},
       '/pages': {get: {operationId: 'pages', summary: 'Which datasets and endpoints hold the data behind each page on BayCounty.me',
         parameters: [p('page', 'One page path, e.g. /connections. Omit for every page')],
         responses: {200: {description: '{data: [{page, url, datasets: [{id, api}], endpoints, none, note}]}'}, 404: {description: 'Unknown page'}}}},
@@ -189,6 +200,16 @@ function openapi(catalog) {
         parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('year', 'Fiscal year, e.g. 2019 (the year it ends)', {type: 'integer'}), p('date', 'A date (YYYY-MM-DD) instead of a year')],
         responses: {200: {description: '{data: {gov_id, government, body, place_id, fiscal_year, from, to, seats: [{seat, appointed, holders: [{person_name, person_id, vacant, confirmed, start_date, end_date, start_approx, end_approx, how, part_of_period, note, source_title, source_url}]}], note}} or, without gov, {data: [{gov_id, government, body, seats, unconfirmed}]}'},
           400: {description: 'A bad year or date'}, 404: {description: 'Unknown government'}}}},
+      '/government-posts': {get: {operationId: 'governmentPosts', summary: 'Public notices, events and job openings posted directly by city and county staff',
+        description: 'Posts made in the BayCounty.me government workspace by a government\'s own staff: notices (published in the last 30 days or about a date ahead), upcoming events, and open jobs. They are also rows of the public-notices, community-events and job-openings datasets with origin gov. posted_by is the government\'s name. Record data read from public sources is never edited by staff. geometry (notices) is the map staff drew of where it applies, as GeoJSON FeatureCollection text: pins (properties.radius_m is the circle around them), street or pipe lines, and areas; null when there is no map.',
+        parameters: [p('gov', 'Only one government: county, pc, pcb, lh, cw, sp, parker, mb'), p('kind', 'Comma list of notice, event, job (default all)')],
+        responses: {200: {description: '{data: {notices: [{id, notice_id, gov_id, title, kind, kind_label, published, event_date, text, pdf_url, geometry, posted_by}], events: [{id, event_id, gov_id, title, starts, ends, venue, category, cost, url, posted_by}], jobs: [{id, job_id, gov_id, title, department, job_type, pay, posted, closes, url, posted_by}]}, note}'},
+          400: {description: 'Unknown kind'}}}},
+      '/records-sent': {get: {operationId: 'recordsSent', summary: 'Which records each government sends BayCounty.me directly, how current they are, and the contracts its staff sent',
+        description: 'The scorecard behind "Sent by the governments" on /data-sources. For each government (the county, every city, the School Board and the five constitutional officers): the records its own staff sent from their systems through the BayCounty.me government workspace or its intake email address. Kinds: checkbook (check registers), budget (budget-vs-actual reports), contracts, payroll (pay by job title, never named), appointments (board appointments) and fees (fee or rate changes). status per kind: current (in for the latest period expected: last month for payments, last quarter for budgets, the last month for contracts, this fiscal year for payroll; appointments and fees whenever they change), behind (sent before, not the latest) or not_sent. feeds_agreed = sources we read automatically that the government has said yes to. contracts, appointments, fees and payroll list what staff sent (also rows of the contracts, board-appointments, fee-changes and salary-positions datasets with origin gov). Payments to private individuals and contracts with individuals carry no name; payroll never names employees. Staff names and emails are never included.',
+        parameters: [p('gov', 'Only one government: county, pc, pcb, lh, cw, sp, parker, mb, schools, sheriff, clerk, property_appraiser, tax_collector, soe')],
+        responses: {200: {description: '{data: {governments: [{gov_id, government, sends, feeds_agreed, records: {checkbook|budget|contracts|payroll|appointments|fees: {status, files, rows, latest, last_sent}}}], contracts: [{government, gov_id, vendor, amount, purpose, date, method, source_title, source_url, notes}], appointments: [{government, gov_id, board, seat, person, appointed_by, term_start, term_end}], fees: [{government, gov_id, fee, category, old_amount, new_amount, unit, effective_date, adopted_by}], payroll: [{government, gov_id, fiscal_year, title, department, grade, pay_min, pay_max, actual_salaries, budgeted_fte}]}, note}'},
+          400: {description: 'A bad government id'}}}},
       '/overlaps': {get: {operationId: 'overlaps', summary: 'Live overlaps between records: an official\'s own business or nonprofit named in a vote they cast, checkbook payees that gave to a campaign, and payments just under a purchasing threshold',
         description: 'Joins that use hand-confirmed matches (official-businesses, nonprofit-officials) or rows only the database holds (checkbook-payments, school-grades, school-spending). Sections: official_business_votes (an official\'s registered business named in a motion they voted on, with what their own government paid it), nonprofit_board_money (a nonprofit with an official on its board: payments from that official\'s government and their votes naming it), checkbook_donors (checkbook payees that gave to a local campaign, or whose owners did), split_purchases (two or more payments to one payee within 30 days, each at least 90% of a common threshold: thresholds lists them) and school_spending_grades. Each section is {rows, error}. Individual donors are never named. The other overlaps are datasets: vote-mentions, donor-votes, agenda-parties, development-companies, bid-trail, shared-owner-vendors, chamber-overlaps, emergency-purchase-donors and campaign-results. A row puts two public records side by side; it is not a finding of wrongdoing.',
         parameters: [p('section', 'One section: official_business_votes, nonprofit_board_money, checkbook_donors, split_purchases or school_spending_grades'), p('gov', 'Only one government: county, schools, pc, pcb, lh, cw, sp, parker, mb')],
@@ -210,14 +231,14 @@ function openapi(catalog) {
         responses: {200: {description: '{data: {lat, lon, inside_district, elementary: {zone, zone_id, mou_area, zone_last_edited, school: {school_id, name, level, grades, charter, address, city, phone, enrollment, enrollment_year, latest_grade, latest_grade_year, latest_per_student, latest_spending_year, page_url}}, middle, high, note}, matched_address} or, with no location, {data: [school]}'},
           400: {description: 'A bad location or an address with no house number'}, 404: {description: 'No matching address'}}}},
       '/emergency': {get: {operationId: 'emergencyNow', summary: 'What is happening now: National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and water outages for Bay County',
-        description: 'Live notices, checked every 5 minutes from the National Weather Service, the county and city alert centers and news, FL511 and the county shelter page; most serious first. headline is one sentence for the whole county. counts has the number of live notices per kind (evacuation, weather, shelter, boil-water, road, utility, storm). shelters lists every county shelter with its latest posted status. zones lists evacuation zones A to D and whether an order names each. A notice its source posted twice (re-posted with an update) is one notice: the newest version, with first_posted (when the first version was posted) and versions (every version, newest first). Past notices: the emergency-notices dataset.',
+        description: 'Live notices, checked every 5 minutes from the National Weather Service, the county and city alert centers and news, FL511 and the county shelter page; most serious first. headline is one sentence for the whole county. counts has the number of live notices per kind (evacuation, weather, shelter, boil-water, road, utility, storm). shelters lists every county shelter with its latest posted status. zones lists evacuation zones A to D and whether an order names each. geometry is the map of where it applies (GeoJSON FeatureCollection text of pins with a radius_m circle, lines and areas), or null: drawn by city and county staff on their alerts, the start and end points FL511 gives for state road closures, or, for city and county road closure posts, the stretch found on the county street map from the streets the post names (properties.placed is "fl511" or "street-names" on those). A notice its source posted twice (re-posted with an update) is one notice: the newest version, with first_posted (when the first version was posted) and versions (every version, newest first). Past notices: the emergency-notices dataset.',
         parameters: [p('kind', 'Only one kind of notice: evacuation, weather, shelter, boil-water, road, utility, storm, safety', {type: 'string'})],
-        responses: {200: {description: '{place, checked_at, data_source, headline, counts, shelters_open, notices: [{notice_id, kind, source, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, status, full_closure, roadway, url, page}], shelters: [{shelter_id, name, address, type, group, status, status_as_of, lat, lng, evacuation_zone}], zones: [{zone, where_it_is, when_ordered, plain, ordered}], sources_ok, source_errors, links, note}'}}}},
-      '/emergency-timeline': {get: {operationId: 'emergencyTimeline', summary: 'Every emergency alert of the last days (up to 90): when each started and ended, and how many phones and inboxes it was sent to',
-        description: 'The alert history behind the timeline on /emergency: weather warnings, evacuation orders, public safety alerts from FEMA IPAWS, shelter openings, boil-water notices, road closures and outages, newest first. reach counts how many people each channel (push, email, sms) sent it to; counts only, nobody is named. gov keeps one government\'s notices plus the countywide ones that reach it (weather, IPAWS, shelters).',
+        responses: {200: {description: '{place, checked_at, data_source, headline, counts, shelters_open, notices: [{notice_id, kind, source, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, status, full_closure, roadway, url, geometry, page}], shelters: [{shelter_id, name, address, type, group, status, status_as_of, lat, lng, evacuation_zone}], zones: [{zone, where_it_is, when_ordered, plain, ordered}], sources_ok, source_errors, links, note}'}}}},
+      '/emergency-timeline': {get: {operationId: 'emergencyTimeline', summary: 'Every emergency alert of the last days (up to 90): when each started and ended, and the map of where it applies when staff drew one',
+        description: 'The alert history behind the timeline on /emergency: weather warnings, evacuation orders, public safety alerts from FEMA IPAWS, shelter openings, boil-water notices, road closures and outages, newest first. geometry is the area government staff drew for it (GeoJSON FeatureCollection: pins with radius_m, street lines, areas) or null. gov keeps one government\'s notices plus the countywide ones that reach it (weather, IPAWS, shelters).',
         parameters: [p('days', 'How many days back, 1 to 90 (default 30)', {type: 'integer'}), p('kind', 'One kind: evacuation, weather, shelter, boil-water, road, utility, storm, safety', {type: 'string'}),
           p('gov', 'One government: county, pc, pcb, lh, cw, sp, parker, mb', {type: 'string'})],
-        responses: {200: {description: '{place, days, kind, gov, total, counts, labels, governments, reached, items: [{notice_id, kind, label, title, event, severity, source, source_type, gov_id, zones, area, started, ended, active, status, reach: {push, email, sms}, people, url, page}], note}'}}}},
+        responses: {200: {description: '{place, days, kind, gov, total, counts, labels, governments, items: [{notice_id, kind, label, title, event, severity, source, source_type, gov_id, zones, area, geometry, started, ended, active, status, url, page}], note}'}}}},
       '/evacuation-zone': {get: {operationId: 'evacuationZone', summary: 'The hurricane evacuation zone (A to D, or none) for a Bay County street address or map point, any evacuation order now in effect for it, and the three nearest shelters',
         description: 'The address is matched to Bay County\'s address points (house number and street; city and ZIP are ignored), then to the county\'s evacuation zone map.',
         parameters: [p('address', 'Street address, e.g. 825 Ohio Ave'), p('lat', 'Latitude (instead of address)', {type: 'number'}), p('lng', 'Longitude', {type: 'number'})],
@@ -410,6 +431,16 @@ module.exports = async (req, res) => {
       try { const r = await U.lookup(D, req.query); info.rows = r.services.length + r.pickup.length; return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
+    if (parts[0] === 'government-posts') {
+      res.locals.lastModified = null;
+      try { const r = await require('./_gov').publicPosts(require('./_db').q, req.query); info.rows = Object.values(r.data).reduce((a, x) => a + x.length, 0); return res.status(200).json(r); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
+    if (parts[0] === 'records-sent') {
+      res.locals.lastModified = null;
+      try { const r = await require('./_records').publicSent(require('./_db').q, req.query); info.rows = r.data.governments.length + r.data.contracts.length; return res.status(200).json(r); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
     if (parts[0] === 'overlaps') {
       res.locals.lastModified = null;
       const r = await require('./_overlaps').overlaps(req.query);
@@ -443,6 +474,16 @@ module.exports = async (req, res) => {
     if (parts[0] === 'evacuation-zone') {
       res.locals.lastModified = null;
       const r = await require('./_emergency_feed').zoneLookup(req, catalog, req.query, {place: 'fl-bay'});
+      return res.status(200).json(r);
+    }
+    if (parts[0] === 'mail') {
+      // Every email between BayCounty.me and officials or governments, read-only, residents' details hidden (api/_mail.js).
+      res.locals.lastModified = null;
+      const M = require('./_mail');
+      if (parts[1]) return res.status(200).json(await M.thread(require('./_db').q, String(parts[1]).slice(0, 20)));
+      const r = await M.list(require('./_db').q, {folder: String(req.query.folder || '').slice(0, 20), government: String(req.query.government || '').slice(0, 120),
+        q: String(req.query.q || '').slice(0, 100), page: req.query.page});
+      info.rows = r.threads.length;
       return res.status(200).json(r);
     }
     if (parts[0] === 'correspondence') {

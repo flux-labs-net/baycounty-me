@@ -132,4 +132,6 @@ document.addEventListener('click', ev => { if (!ev.target.closest('.ac')) hide()
 
 const qa = new URLSearchParams(location.search).get('a');
 if (qa) gis({where: `ADDRESS = '${sq(qa.toUpperCase())}'`, resultRecordCount: '1'}).then(f => f[0] && pick(f[0])).catch(() => {});
+// Signed in: the saved home's trash day shows without typing (kept out of the address bar).
+else if (window.BCUseHome) BCUseHome(inp, h => run(h.lat, h.lon, inp.value + (h.city ? ', ' + title(h.city) : '')), inp.closest('.ac'));
 })();

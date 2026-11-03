@@ -37,6 +37,8 @@ enum Route: Hashable {
     case dataset(String, filters: [String: String] = [:])
     case record(String, rowID: Int)
     case government(String)
+    /// One part of a government's screen (GovPart id) on its own screen, for the year the government screen had picked.
+    case governmentPart(String, part: String, year: Int?)
     case meeting(String)
     case cra
     case myAddress
@@ -74,6 +76,7 @@ enum Route: Hashable {
     case meetings
     case publicSafety
     case overlaps
+    case taxBill(districtID: String? = nil)
 
     /// The screen's name in the anonymous usage counts (AppUsage): the case name, plus the list or government for
     /// those two, and the list a record came from. Never a person, address, search or record id.
@@ -82,6 +85,7 @@ enum Route: Hashable {
         case .dataset(let id, _): return "dataset/" + id
         case .record(let id, _): return "record/" + id
         case .government(let g): return "government/" + g
+        case .governmentPart(let g, let part, _): return "government/" + g + "/" + part
         default: return String(String(describing: self).prefix { $0 != "(" }).lowercased()
         }
     }
@@ -104,6 +108,7 @@ extension View {
                 case .dataset(let id, let filters): DatasetView(datasetID: id, preset: filters)
                 case .record(let id, let rowID): RecordDetailView(datasetID: id, rowID: rowID)
                 case .government(let govID): GovernmentDetailView(govID: govID)
+                case .governmentPart(let govID, let part, let year): GovernmentDetailView(govID: govID, part: GovPart(rawValue: part), startYear: year)
                 case .meeting(let id): MeetingDetailView(meetingID: id)
                 case .cra: CRAView()
                 case .myAddress: MyAddressView()
@@ -141,6 +146,7 @@ extension View {
                 case .myHome: MyHomeView()
                 case .publicSafety: PublicSafetyView()
                 case .overlaps: OverlapsView()
+                case .taxBill(let d): TaxBillView(districtID: d)
                 }
             }
             .pageBackground()

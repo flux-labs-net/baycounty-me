@@ -169,9 +169,9 @@ def volunteer_page(out_dir):
 
     k = lambda lab, v, s: f'<div class="kpi"><span class="eyebrow">{lab}</span><span class="v">{v}</span><span class="s">{s}</span></div>'
     kpis = (k('Open needs', len(N), f'From {n_orgs_posting} organizations, on {len(boards)} public volunteer boards') +
-            k('Posted by local nonprofits', local, 'The rest are regional groups serving Bay County') +
+            k('Needs from local nonprofits', local, 'Of the open needs; the rest are from regional groups serving Bay County') +
             k('Nonprofits that use volunteers', len(O), 'Reported on their IRS filing, or posting a need now') +
-            k('Volunteers they reported', f'{reported:,}', 'On their latest Form 990; some counts cover a whole state group'))
+            k('Volunteers they reported', f'{reported:,}', 'On their latest Form 990. Statewide and national bodies that file from a Bay address are left out'))
 
     return f'''<style>{CSS}</style>
 <div class="page tax vo">

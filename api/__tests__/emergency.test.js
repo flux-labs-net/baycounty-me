@@ -183,7 +183,7 @@ test('IPAWS alerts for Bay County become notices; tests, NWS and other counties 
   assert.equal(E.ipawsNotice(E.parseCap(cap({msgType: 'Cancel'})), 'fl-bay', cfg).status, 'lifted');
 });
 
-test('the alert timeline sums reach per notice, filters by government and sorts newest first', () => {
+test('the alert timeline sums reach per notice (admin only), filters by government and sorts newest first', () => {
   const F = require('../_emergency_feed');
   const notices = [
     {notice_id: 'a', kind: 'boil-water', title: 'Boil notice', gov_id: 'lh', issued: '2026-10-28T10:00:00Z', active: false, last_seen: '2026-10-29T10:00:00Z', status: 'lifted',
@@ -192,7 +192,13 @@ test('the alert timeline sums reach per notice, filters by government and sorts 
     {notice_id: 'c', kind: 'road', title: 'PCB road closed', gov_id: 'pcb', issued: '2026-10-27T10:00:00Z', active: false, last_seen: '2026-10-27T12:00:00Z', status: 'active'},
   ];
   const reach = [{notice_id: 'a', channel: 'push', people: 5}, {notice_id: 'a2', channel: 'email', people: 7}, {notice_id: 'b', channel: 'push', people: 3}];
-  const t = F.buildTimeline(notices, reach, {days: 30});
+  const pub = F.buildTimeline(notices, reach, {days: 30});
+  assert.equal(pub.reached, undefined, 'public timeline has no send counts');
+  assert.ok(pub.items.every(i => !('reach' in i) && !('people' in i)), 'nor do its items');
+  const g = '{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[-85.65,30.24]}}]}';
+  assert.equal(F.buildTimeline([{...notices[0], geometry: g}], [], {}).items[0].geometry, g, 'the staff-drawn map comes along');
+  assert.equal(F.buildTimeline([{...notices[0], source: 'City of Lynn Haven'}], [], {}).items[0].source, 'Lynn Haven', 'cities read by their short name');
+  const t = F.buildTimeline(notices, reach, {days: 30, admin: true});
   assert.deepEqual(t.items.map(i => i.notice_id), ['b', 'a', 'c']);
   assert.deepEqual(t.items[1].reach, {push: 5, email: 7, sms: 0}, 'reach of earlier versions counts');
   assert.equal(t.items[1].status, 'lifted');
@@ -228,4 +234,69 @@ test('alert areas: who a notice reaches', () => {
   assert.equal(quiet.aps.sound, undefined);
   assert.equal(quiet.aps['interruption-level'], 'passive');
   assert.equal(JSON.parse(P.apnsPayload({title: 't', body: 'b', topic: 'water', notice_id: 'x'})).aps.sound, 'default');
+});
+
+test('an admin removes a test alert: hidden everywhere, logged, staff alert marked removed', async () => {
+  const G = require('../_gov');
+  const calls = [];
+  const q = async (sql, params) => {
+    calls.push([sql.replace(/\s+/g, ' ').trim(), params]);
+    if (/update emergency_live/.test(sql)) return [{notice_id: 'staff:1', title: 'Boil Water Notice (TEST)', gov_id: 'lh'}];
+    if (/update gov.alerts/.test(sql)) return [{id: 1, workspace_id: 'lh'}];
+    return [];
+  };
+  await assert.rejects(G.adminRemoveAlert(q, {notice_id: 'staff:1'}, 'a@b.c'), /why/, 'a reason is required');
+  const r = await G.adminRemoveAlert(q, {notice_id: 'staff:1', note: 'test post'}, 'a@b.c');
+  assert.deepEqual(r, {ok: true, notice_id: 'staff:1', removed: true});
+  assert.ok(calls.some(([s, p]) => /set removed_at = now\(\)/.test(s) && p[1] === 'a@b.c' && p[2] === 'test post'));
+  assert.ok(calls.some(([s]) => /set status = 'removed'/.test(s)));
+  assert.ok(calls.some(([s, p]) => /insert into gov.activity/.test(s) && p.includes('alert_removed')), 'logged for the government');
+  assert.ok(calls.some(([s]) => /delete from emergency_notices/.test(s)), 'off the archive table');
+  assert.ok(!calls.some(([s]) => /delete from (emergency_live|gov\.alerts)/.test(s)), 'nothing in the record is deleted');
+});
+
+// Nov 1, 2026: NWS Tallahassee put out four Flash Flood Warnings for Bay County in three hours. Only the first was sent,
+// because the same kind of warning was held back for 12 hours. Now a new warning goes out; its updates don't.
+test('weather pushes: a new warning goes out, its updates and extensions do not, statements once per 12 hours', async () => {
+  const db = require('../_db');
+  const Acct = require('../_account');
+  const realQ = db.q, realMail = Acct.emailNotice;
+  const sent = [];   // push.sent rows: {notice_id, dedupe_key, suppressed}
+  db.q = async (sql, p) => {
+    if (/insert into push.sent/.test(sql)) {
+      if (sent.some(r => r.notice_id === p[0])) return [];
+      sent.push({notice_id: p[0], dedupe_key: p[3], suppressed: p[5]});
+      return [{notice_id: p[0]}];
+    }
+    if (/from push.sent where notice_id = any/.test(sql)) return sent.filter(r => p[0].includes(r.notice_id)).map(() => ({x: 1}));
+    if (/from push.sent where place_id = \$1 and dedupe_key/.test(sql)) return sent.filter(r => r.dedupe_key === p[1] && !r.suppressed).map(() => ({x: 1}));
+    return [];   // no phones, no other rows
+  };
+  Acct.emailNotice = async () => ({sent: 0, people: 0});
+  try {
+    const R = require('../_emergency_run');
+    const now = Date.parse('2026-11-01T14:40:00Z');
+    const ffw = (id, issued, refs) => ({notice_id: 'nws:' + id, kind: 'weather', source_type: 'nws', status: 'active', event: 'Flash Flood Warning',
+      severity: 'severe', area: 'Bay, FL', issued, refs});
+    await R.pushNew('fl-bay', [ffw('a', '2026-11-01T11:53:00Z')], now);
+    await R.pushNew('fl-bay', [ffw('b', '2026-11-01T13:00:00Z', ['nws:a'])], now);          // follow-up statement on warning a
+    await R.pushNew('fl-bay', [ffw('c', '2026-11-01T14:15:00Z')], now);                    // a new warning
+    await R.pushNew('fl-bay', [ffw('d', '2026-11-01T14:36:00Z', ['nws:c'])], now);          // warning c extended
+    const hls = id => ({notice_id: 'nws:' + id, kind: 'weather', source_type: 'nws', status: 'active', event: 'Hurricane Local Statement', severity: 'moderate', issued: '2026-11-01T14:00:00Z'});
+    await R.pushNew('fl-bay', [hls('h1')], now);
+    await R.pushNew('fl-bay', [hls('h2')], now);
+    assert.deepEqual(sent.map(r => [r.notice_id, r.suppressed]),
+      [['nws:a', false], ['nws:b', true], ['nws:c', false], ['nws:d', true], ['nws:h1', false], ['nws:h2', true]]);
+  } finally { db.q = realQ; Acct.emailNotice = realMail; }
+});
+
+test('NWS notices keep the alerts they follow; severe weather warnings are time-sensitive', () => {
+  const n = E.nwsNotice({properties: {id: 'https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.c.001.1', status: 'Actual', event: 'Flash Flood Warning',
+    severity: 'Severe', messageType: 'Update', headline: 'Flash Flood Warning extended', areaDesc: 'Bay, FL', sent: '2026-11-01T08:36:00-06:00',
+    references: [{identifier: 'urn:oid:2.49.0.1.840.0.b.001.1'}]}}, 'fl-bay', E.placeConfig('fl-bay'));
+  assert.deepEqual(n.refs, ['nws:urn:oid:2.49.0.1.840.0.b.001.1']);
+  assert.equal(P.message(n, 'weather').critical, true);
+  assert.equal(P.message({...n, event: 'Flood Advisory', severity: 'minor'}, 'weather').critical, false);
+  assert.equal(P.message({...n, event: 'Tropical Storm Watch'}, 'weather').critical, false);
+  assert.equal(JSON.parse(P.apnsPayload({...P.message(n, 'weather')})).aps['interruption-level'], 'time-sensitive');
 });

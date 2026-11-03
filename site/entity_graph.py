@@ -131,6 +131,21 @@ def _ds(did):
     return _C[did]
 
 
+def on_ballot_ids():
+    """Person ids still on the Nov 3, 2026 ballot (SOE status Qualified/Advanced in candidates-2026). Everyone else who filed
+    in 2026 withdrew, did not qualify, lost the primary or was elected unopposed, so is not a current candidate."""
+    return {r['person_id'] for r in _ds('candidates-2026') if r.get('status') == 'on_ballot' and r.get('person_id')}
+
+
+def _cand_role(roles):
+    """The 2026 or 2027 candidate role of a person, if any: (role, year)."""
+    for src in ('candidates_2026', 'finance_2026'):
+        for r in roles:
+            if r.get('source') == src:
+                return r, ('2027' if (r.get('role') or '').startswith('2027') else '2026')
+    return None, None
+
+
 class Graph:
     def __init__(self):
         self.ents = {}
@@ -203,12 +218,15 @@ def person_title(p):
     if past and not t:  # someone known here only from a past campaign (campaign-history): their latest race
         r = max(past, key=lambda r: r.get('year') or 0)
         t = f"Ran for {r['office']} in {r['year']}" + (' (won)' if r.get('outcome') == 'won' else '')
-    c = first('candidates_2026') or first('finance_2026')
+    c, yr = _cand_role(roles)
     if c:
         race = _race(c['role'], c.get('gov_id')) if ':' in c['role'] else ''
         race = f'{race}, {short(c["gov_id"])}' if race and short(c['gov_id']).lower() not in race.lower() else race or short(c['gov_id'])
         again = t and _seat(race) and _seat(race) == _seat(t) and short(c['gov_id']).lower() in t.lower()
-        t = t + ' · running again in 2026' if again else (t + ' · ' if t else '') + f'2026 candidate for {race}'
+        if yr == '2026' and p.get('id') not in on_ballot_ids():  # filed in 2026 but is not on the Nov 3 ballot
+            t = t if t else f'Ran for {race} in 2026'
+        else:
+            t = t + f' · running again in {yr}' if again else (t + ' · ' if t else '') + f'{yr} candidate for {race}'
     return t
 
 
@@ -298,11 +316,11 @@ def service(p, gid, terms):
             kind = 'elected'
     if elected_title and kind == 'staff':
         kind = 'elected'
-    cand = next((r for r in roles if r.get('source') == 'candidates_2026'), None) or next((r for r in roles if r.get('source') == 'finance_2026'), None)
-    if cand:
+    cand, yr = _cand_role(roles)
+    if cand and (yr == '2027' or p.get('id') in on_ballot_ids()):  # 2026 filers who are off the ballot are not shown as candidates
         race = _race(cand['role'], gid)
         same = _seat(race) and (_seat(race) in seats or (elected_title and _seat(race) == _seat(elected_title['role'])))
-        parts.append('Running again in 2026' if same else f'2026 candidate for {race}')
+        parts.append(f'Running again in {yr}' if same else f'{yr} candidate for {race}')
         kind = kind or 'candidate'
     for t in past:
         parts.append(f'{_term_label(t)} ({yrs(t)})')

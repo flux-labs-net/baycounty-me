@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The county mark (same outline as the iOS icon), scaled into the adaptive icon's safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp" android:viewportWidth="1024" android:viewportHeight="1024">
+    <group android:pivotX="512" android:pivotY="512" android:scaleX="0.62" android:scaleY="0.62">
+        <path android:fillColor="#1E3A76" android:pathData="M698,170 L793,170 L790,855 L775,838 L760,828 L720,815 L700,815 L680,805 L650,780 L612,735 L605,715 L590,712 L545,690 L505,670 L470,645 L435,610 L400,585 L350,555 L300,525 L230,488 L233,358 L360,303 L696,308 Z" />
+        <path android:fillColor="#E5564A" android:pathData="M539,604 m-34,0 a34,34 0 1,0 68,0 a34,34 0 1,0 -68,0" />
+    </group>
+</vector>

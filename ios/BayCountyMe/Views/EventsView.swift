@@ -9,13 +9,22 @@ struct EventsView: View {
     @State private var oneOff = false
     @State private var query = ""
     @State private var days = 7
+    /// Set once the list has started on the home's town or the reader picked one, so the home never overrides a pick.
+    @State private var settled = false
+
+    /// The signed-in resident's town (nil outside city limits or signed out).
+    private var homeTown: String? { AccountManager.shared.me?.home?.town }
 
     private var rows: [Row] { store.rows[Events.dataset] ?? [] }
 
     var body: some View {
         let today = Events.todayKey()
-        let list = Events.upcoming(rows, today: today, town: town.isEmpty ? nil : town, kind: kind.isEmpty ? nil : kind, oneOff: oneOff, query: query)
+        let inTown = Events.upcoming(rows, today: today, town: town.isEmpty ? nil : town, kind: kind.isEmpty ? nil : kind, oneOff: oneOff, query: query)
+        // A town with nothing that matches says so, then shows the rest of the county.
+        let elsewhere = !town.isEmpty && inTown.isEmpty
+        let list = elsewhere ? Events.upcoming(rows, today: today, kind: kind.isEmpty ? nil : kind, oneOff: oneOff, query: query) : inTown
         let groups = Events.byDay(list, today: today)
+        let towns = Events.towns(rows)
         PageScroll {
             PageHero(kicker: "Community · Calendar", title: "Events in Bay County",
                      subtitle: "What's happening around the county, from the county and city calendars, the library system, the visitor bureaus and the chambers.",
@@ -35,11 +44,15 @@ struct EventsView: View {
                             caption: "Commissions, boards and workshops", symbol: "building.columns", tone: .blue)
                 }
                 VStack(alignment: .leading, spacing: 10) {
-                    ChipRow(chips: [(id: "", label: "Every town")] + Events.towns(rows).map { (id: $0, label: $0) }, selected: town) { town = $0; days = 7 }
+                    ChipRow(chips: [(id: "", label: "Every town")] + ((homeTown.map { towns.contains($0) ? [] : [$0] } ?? []) + towns).map { (id: $0, label: $0) },
+                            selected: town) { town = $0; settled = true; days = 7 }
                     ChipRow(chips: [(id: "", label: "All kinds")] + Events.kinds.map { (id: $0, label: $0) }, selected: kind) { kind = $0; days = 7 }
                     TextField("Search events, places, organizers", text: $query)
                         .textFieldStyle(.roundedBorder)
                     Toggle("One-off events only", isOn: $oneOff).font(.subheadline)
+                }
+                if elsewhere && !groups.isEmpty {
+                    Text("Nothing coming up in \(town). Here's the rest of Bay County.").font(.subheadline.weight(.medium))
                 }
                 if groups.isEmpty {
                     Text("No upcoming events match.").font(.subheadline).foregroundStyle(.secondary)
@@ -74,6 +87,8 @@ struct EventsView: View {
         .navigationTitle("Events")
         .navigationBarTitleDisplayMode(.inline)
         .task { await store.load(Events.dataset) }
+        // Signed in: start on the home's town.
+        .task(id: homeTown) { if !settled, let t = homeTown { town = t; settled = true } }
         .refreshable { await store.load(Events.dataset, force: true) }
     }
 }

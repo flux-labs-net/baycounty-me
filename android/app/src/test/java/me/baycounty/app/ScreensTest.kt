@@ -51,7 +51,17 @@ class ScreensTest(@Suppress("unused") private val label: String, private val scr
         runBlocking {
             store.loadEssentials()
             store.loadTax(); store.loadAmendment3(); store.loadPeople(); store.loadVendors()
-            if (screen != "home") openScreenshotRoute(store, nav, screen)
+            // Home: the saved sample address and an own/rent answer ("home" owns, "home:rent", "home:unset" has neither).
+            val home = screen == "home" || screen.startsWith("home:")
+            if (screen != "setup") store.markSetupSeen(false)
+            if (home) {
+                val tenure = me.baycounty.kit.HomeTiles.Tenure.of(screen.substringAfter(":", "own"))
+                if (tenure != me.baycounty.kit.HomeTiles.Tenure.UNSET) {
+                    store.saveHome(me.baycounty.app.screens.UTILITIES_SAMPLE)
+                    store.utilities[me.baycounty.app.screens.UTILITIES_SAMPLE.id] = me.baycounty.kit.UtilityLookup.decode(File(repo, "ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/utilities-lynn-haven.json").readText())
+                    store.previewTenure(tenure)
+                }
+            } else openScreenshotRoute(store, nav, screen)
             preload(store, nav.stack().lastOrNull())
         }
         // -Dpages=3 also captures the page scrolled down one and two screens.

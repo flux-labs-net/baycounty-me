@@ -288,30 +288,42 @@ def fetch_water(county, prev):
         q = dict(urllib.parse.parse_qsl(urllib.parse.urlparse(link).query)) if link else {}
         sites.append({'site_id': clean(a.get('STORET_Sta')), 'name': title(a.get('SPLocation')), 'epa_beach_id': clean(a.get('EPAbeachID')),
                       'active': yes(a.get('Active')), 'latitude': a.get('SPLat'), 'longitude': a.get('SPLong'),
-                      'lookup_name': q.get('SPLocation'), 'source_url': link or DOH_PAGE})
+                      'lookup_name': q.get('SPLocation'), 'layer_name': clean(a.get('SPLocation')), 'source_url': link or DOH_PAGE})
     old = {(s['site_id'], s['sample_number']): s for s in (prev or {}).get('samples', []) if s['date'] >= cutoff.FIRST_DATE}
     samples, errors = dict(old), []
     for s in sites:
-        if not s['active'] or not s['lookup_name']:
+        # The state renames sites in its sample lookup without always updating the map layer's link (Dupont Bridge became
+        # Earl Gilbert Park, PCB Beach Access became PCB Beach Access 41), so samples are looked up under both names.
+        names = list(dict.fromkeys(n for n in (s['lookup_name'], s.pop('layer_name', None)) if n))
+        if not s['active'] or not names:
             continue
-        url = f"{CASPIO}?{urllib.parse.urlencode({'County': cname, 'SPLocation': s['lookup_name']})}"
-        try:
-            page, seen = get(url, accept='text/html'), {1}
-            while True:
-                rows, nxt = caspio_rows(page)
-                for r in rows:
-                    if r['date'] < cutoff.FIRST_DATE:
-                        continue
-                    samples[(s['site_id'], r['sample_number'])] = {'site_id': s['site_id'], 'site': s['name'], **r,
-                                                                    'rating': rating(r['enterococcus']) if r['enterococcus'] is not None else ('No result' if r['reported'] == 'NR' else None),
-                                                                    'source_url': s['source_url']}
-                more = sorted(n for n in nxt if n not in seen)
-                if not more:
-                    break
-                seen.add(more[0])
-                page = get(nxt[more[0]], accept='text/html')
-        except Exception as ex:  # keep what's on file for this site
-            errors.append(f"{s['name']}: {ex}")
+        found = []
+        for name in names:
+            url = f"{CASPIO}?{urllib.parse.urlencode({'County': cname, 'SPLocation': name})}"
+            try:
+                page, seen = get(url, accept='text/html'), {1}
+                while True:
+                    rows, nxt = caspio_rows(page)
+                    for r in rows:
+                        if r['date'] < cutoff.FIRST_DATE:
+                            continue
+                        found.append((name, r['date']))
+                        samples[(s['site_id'], r['sample_number'])] = {'site_id': s['site_id'], 'site': s['name'], **r,
+                                                                        'rating': rating(r['enterococcus']) if r['enterococcus'] is not None else ('No result' if r['reported'] == 'NR' else None),
+                                                                        'source_url': s['source_url']}
+                    more = sorted(n for n in nxt if n not in seen)
+                    if not more:
+                        break
+                    seen.add(more[0])
+                    page = get(nxt[more[0]], accept='text/html')
+            except Exception as ex:  # keep what's on file for this site
+                errors.append(f"{s['name']}: {ex}")
+        # Link to the name the state posts its newest samples under.
+        if found:
+            newest = max(found, key=lambda f: f[1])[0]
+            if newest != s['lookup_name']:
+                s['lookup_name'] = newest
+                s['source_url'] = f"{DOH_PAGE}?{urllib.parse.urlencode({'County': cname, 'SPLocation': newest, 'SPLat': s['latitude'], 'SPLong': s['longitude']})}"
     return {'fetched_at': dt.datetime.now(dt.timezone.utc).isoformat(timespec='seconds'), 'sites': sites,
             'samples': sorted(samples.values(), key=lambda r: (r['site_id'], r['date'])), 'errors': errors}
 

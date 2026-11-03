@@ -92,6 +92,7 @@ def _rows():
     N = json.load(open(p))
     hand = json.load(open(os.path.join(d, 'organizations.json'))) if os.path.exists(os.path.join(d, 'organizations.json')) else {}
     aliases, overrides = hand.get('aliases', {}), hand.get('causes', {})
+    wide = set((hand.get('wider_than_county') or {}).get('ids', {}))  # statewide/national bodies: their 990 count is not a Bay number
     vol = {}
     vp = os.path.join(d, 'volunteers_990.csv')
     if os.path.exists(vp):
@@ -131,7 +132,7 @@ def _rows():
     for nid, n in nps.items():
         v = vol.get(n.get('ein') or '')
         has = open_by.get(nid, [])
-        if not v and not has:
+        if (not v or nid in wide) and not has:
             continue
         if (n.get('kind') in SKIP_KINDS or 'credit union' in (n.get('name') or '').lower()) and not has:
             continue
@@ -146,7 +147,7 @@ def _rows():
             'place_id': PLACE_ID, 'nonprofit_id': nid, 'entity_id': eid, 'page_url': page_url(eid),
             'name': ids.biz_case(re.sub(r'\s+FKA\b.*$', '', n['name'])), 'cause': _np_cause(n, overrides), 'kind': n.get('kind'), 'city': n.get('city'),
             'mission': (n.get('mission') or '').capitalize() or None, 'website': web,
-            'volunteers_reported': int(v['volunteers']) if v else None, 'volunteers_year': int(v['tax_year']) if v else None,
+            'volunteers_reported': int(v['volunteers']) if v and nid not in wide else None, 'volunteers_year': int(v['tax_year']) if v and nid not in wide else None,
             'employees': n.get('employees'), 'revenue': n.get('total_revenue'),
             'open_needs': len(has), 'needs_boards': '; '.join(dict.fromkeys(x['board'] for x in has)) or None,
             'latest_return_form': n.get('latest_return_form'), 'latest_return_year': n.get('latest_return_year'),

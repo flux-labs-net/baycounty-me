@@ -85,16 +85,11 @@ async function resolveError(id, all) {
   return {resolved: (await db.q(`update agendas.errors set resolved_at = now() where id = $1 and resolved_at is null returning id`, [id])).length};
 }
 
-// Ask GitHub to run the watcher now (needs GITHUB_DISPATCH_TOKEN in Vercel: a fine-grained token with Actions: write on the repo).
+// Ask GitHub to run the watcher now (GITHUB_DISPATCH_TOKEN in Vercel, see _github.js).
 async function runNow(mode = 'both', only = '', emailId = '') {
-  const tok = process.env.GITHUB_DISPATCH_TOKEN;
-  if (!tok) throw Object.assign(new Error('Set GITHUB_DISPATCH_TOKEN in Vercel to run the watcher from here, or use the Workflow runs link.'), {status: 409});
-  const r = await fetch('https://api.github.com/repos/jeremymcs/baycounty-me/actions/workflows/watch-agendas.yml/dispatches', {
-    method: 'POST', headers: {Authorization: `Bearer ${tok}`, Accept: 'application/vnd.github+json', 'User-Agent': 'baycounty-me-admin'},
-    body: JSON.stringify({ref: 'main', inputs: {mode: ['inbox', 'sweep', 'both'].includes(mode) ? mode : 'both', only: String(only).replace(/[^a-z,-]/g, ''),
-      email_id: String(emailId || '').replace(/[^A-Za-z0-9-]/g, '').slice(0, 64)}})});
-  if (r.status !== 204) throw Object.assign(new Error(`GitHub said ${r.status}: ${(await r.text()).slice(0, 200)}`), {status: 502});
-  return {started: true};
+  if (!process.env.GITHUB_DISPATCH_TOKEN) throw Object.assign(new Error('Set GITHUB_DISPATCH_TOKEN in Vercel to run the watcher from here, or use the Workflow runs link.'), {status: 409});
+  return require('./_github').dispatch('watch-agendas.yml', {mode: ['inbox', 'sweep', 'both'].includes(mode) ? mode : 'both', only: String(only).replace(/[^a-z,-]/g, ''),
+    email_id: String(emailId || '').replace(/[^A-Za-z0-9-]/g, '').slice(0, 64)});
 }
 
 // The items read from one extraction (agendas.items), for the expandable row on the Agendas tab.

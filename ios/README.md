@@ -44,6 +44,15 @@ CRA Spending has its own screen with the map, paid-out vs committed/budgeted tot
 
 Budget compare and CRA tax increment have native screens. Their numbers come from BayCountyKit ports of the site's own rules (`BudgetCompare` from api/_budget.js, `Officeholders` from api/_officials.js, `CRAIncrement` from site/cra_increment.js), and `ApiParityTests` checks them against the API's answers (fixtures from `node ios/scripts/make_fixtures.js`). Government screens follow the site's government page: who's in charge by fiscal year, the money, debt, audit findings, savings ideas and the CRA. Ask, Compare, Connections and the forms open the website page in the in-app browser. `SitePages.swift` lists how the app covers every site page.
 
+## Apple Watch
+
+`BayCountyWatch` ships inside the iPhone app. One screen: active alerts first (tap for the list and each notice), then the saved home's trash day (the Today card's rule: pickup day, or from 4 p.m. the day before; otherwise "Next pickup Friday"), the beach flag and the next meeting of the home's own government. `BayCountyWatchComplications` adds watch face complications: the alert count (round), alerts plus trash day (rectangle) and a line under the time (inline). Both read the same rules from BayCountyKit (`WatchBrief`, tested in `WatchBriefTests`, mirrored in Android's `WatchBrief.kt`).
+
+- The iPhone app (`App/WatchSync.swift`) sends the watch only the saved home's map point. The watch looks up the city and trash day itself from `/api/v1/utilities` and reads alerts from `/api/v1/emergency`, so it also works with no home saved (county-wide) and away from the phone.
+- Phone alerts already reach the wrist: watchOS shows the iPhone's notifications on the watch when the phone is locked.
+- The two watch targets share the `group.me.baycounty.app` app group (Xcode's automatic signing adds it).
+- Builds need Xcode's watchOS platform: `ios/scripts/ensure_watchos.sh` downloads it once. `ios/scripts/watch_screenshots.sh` takes screenshots from a made-up demo day (`-demo`, `-demo-clear`, `-screen alerts`, `-screen faces`); the iOS app build workflow uploads them as `watch-screens`.
+
 ## Data
 
 - Datasets: `https://baycounty.me/downloads/<id>.json` (catalog at `/downloads/index.json`). Static, CDN-served, no rate limit, identical to what the site shows.
@@ -60,9 +69,12 @@ ios/
   BayCountyKit/               Swift package: models, client, formatting (Foundation only)
     Tests/                    tests against site/public/downloads, plus an opt-in live test
   BayCountyMe/
-    App/                      entry point, AppStore (app state)
+    App/                      entry point, AppStore (app state), WatchSync (saved home to the watch)
     Views/                    Home, Governments, Meetings, Explore, Dataset, Record, CRA, Search, shared components
     Resources/                asset catalog (site palette, app icon, Flux Labs logo), seed data
+  BayCountyWatch/             Apple Watch app (brief, alert list, phone link)
+  BayCountyWatchComplications/ watch face complications (WidgetKit)
+  BayCountyWatchShared/       loading and colors shared by the two watch targets
   scripts/sync_seed.sh        refresh the bundled seed
 ```
 
@@ -77,6 +89,37 @@ BCM_LIVE=1 swift test       # also hits baycounty.me: catalog, ETag revalidation
 ```
 
 In Xcode, ⌘U runs the same tests.
+
+## CI on the Mac
+
+The iOS jobs (app build, UI tests, screenshots, store screenshots) run on a self-hosted runner on the Mac Studio
+(labels `self-hosted`, `macOS`). Where the time goes, and what keeps it short:
+
+- **Waiting for the Mac.** One runner takes one job at a time, so jobs queue behind each other. A pull request's
+  older runs are cancelled when it gets a new push (each workflow's `concurrency`), and all its unfinished runs are
+  cancelled when it is merged or closed (`.github/workflows/cancel-closed-pr-runs.yml`). A Mac that is asleep
+  takes nothing, so keep it awake (System Settings > Energy: prevent automatic sleeping).
+- **Building.** About 40 seconds. The screenshot jobs keep their build folder outside the checkout (`../derived`,
+  in each runner's own work folder), so a job only recompiles what changed. XcodeGen is installed once.
+- **Screenshots.** Only the screens a pull request changed (`.github/scripts/app_screens.py`). Each one is taken as
+  soon as the screen stops changing (`scripts/ci_sim.sh`, `ci_shot`), usually 5 to 7 seconds, at most 16.
+  Each runner uses its own simulator (`CI <runner name>`) and shuts down only that one, so two runners never close
+  each other's.
+
+### A second runner on the same Mac
+
+Two runners let two jobs run at once (for example one pull request's build while another's screenshots run).
+On the Mac, signed in as the user the first runner runs as:
+
+1. On GitHub: flux-labs-net/baycounty-me > Settings > Actions > Runners > New self-hosted runner > macOS, ARM64.
+   Keep that page open; it shows the download commands and a token.
+2. In Terminal, in a new folder (not the first runner's):
+   `mkdir ~/actions-runner-2 && cd ~/actions-runner-2`, then run the page's "Download" commands.
+3. Register it with the same labels and its own name:
+   `./config.sh --url https://github.com/flux-labs-net/baycounty-me --token <token from the page> --name studio-2 --labels self-hosted,macOS --unattended`
+4. Start it as a service so it comes back after a restart: `./svc.sh install && ./svc.sh start`.
+
+It shows as Idle under Settings > Actions > Runners. Nothing in the workflows needs to change.
 
 ## Next
 

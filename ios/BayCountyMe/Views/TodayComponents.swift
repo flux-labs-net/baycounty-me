@@ -352,22 +352,42 @@ extension View {
 /// One of the Today tab's "right now" cards: a tone icon, a bold line and a short line under it.
 struct RightNowCard: View {
     let card: TodayBrief.Card
+    /// The odd card out: full width, icon beside the text.
+    var wide = false
 
     private var tone: Tone {
         switch card.tone { case "teal": .teal; case "amber": .amber; case "salmon": .salmon; default: .blue }
     }
 
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            ToneIcon(symbol: card.symbol, tone: tone, size: 34)
+    private var text: some View {
+        VStack(alignment: .leading, spacing: wide ? 2 : 8) {
             Text(card.title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
                 .multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
             Text(card.detail).font(.caption).foregroundStyle(.secondary)
                 .multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)
-            Spacer(minLength: 0)
         }
-        .padding(14)
-        .frame(maxWidth: .infinity, minHeight: 128, alignment: .topLeading)
+    }
+
+    var body: some View {
+        Group {
+            if wide {
+                HStack(spacing: 12) {
+                    ToneIcon(symbol: card.symbol, tone: tone, size: 34)
+                    text
+                    Spacer(minLength: 0)
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                VStack(alignment: .leading, spacing: 8) {
+                    ToneIcon(symbol: card.symbol, tone: tone, size: 34)
+                    text
+                    Spacer(minLength: 0)
+                }
+                .padding(14)
+                .frame(maxWidth: .infinity, minHeight: 128, maxHeight: .infinity, alignment: .topLeading)
+            }
+        }
         .card(16)
         .accessibilityElement(children: .combine)
     }

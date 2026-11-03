@@ -471,6 +471,9 @@ def es_fees_page():
         for k in ('area', 'calc', 'effective') if u.get('bill_5000gal') else ():
             if u.get(k):
                 u[k] = tr(u[k])
+        bp = u.get('bill_parts') or {}
+        if bp.get('other_note'):
+            bp['other_note'] = next((v for k, v in T['other_note'].items() if u['provider'].startswith(k)), bp['other_note'])
     shown = [g for g in d['gaps'] if not re.search(r'salar|pay|roster|term|school board|manager', g, re.I)]
     d['gaps'] = [tr(g) for g in shown]
     assert not any(re.search(r'salar|pay|roster|term|school board|manager', g, re.I) for g in d['gaps']), 'a Spanish gap would be filtered out'
@@ -479,7 +482,7 @@ def es_fees_page():
     with tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as f:
         json.dump(d, f, ensure_ascii=False)
     try:
-        with patched(fp, SRC=f.name, OTHER_NOTE={k: T['other_note'][k] for k in fp.OTHER_NOTE}):
+        with patched(fp, SRC=f.name):
             page = fp.fees_page()
     finally:
         os.unlink(f.name)

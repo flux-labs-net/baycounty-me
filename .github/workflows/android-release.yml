@@ -37,9 +37,14 @@ jobs:
           FCM_SENDER_ID: ${{ secrets.FCM_SENDER_ID }}
         run: |
           export BCM_VERSION_CODE=$((${{ github.run_number }} + 100))
-          ./gradlew :kit:test :app:bundleRelease
+          ./gradlew :kit:test :app:bundleRelease :wear:bundleRelease
           rm -f "$BCM_KEYSTORE"
       - uses: actions/upload-artifact@v4
         with:
           name: app-release-aab
           path: android/app/build/outputs/bundle/release/app-release.aab
+      # The Wear OS app: same package, its own bundle. Play takes it on the Wear OS release track (android/README.md).
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wear-release-aab
+          path: android/wear/build/outputs/bundle/release/wear-release.aab

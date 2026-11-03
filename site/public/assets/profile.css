@@ -39,3 +39,19 @@
 .pf-net .pf-me-ph{stroke-width:3}
 .pf-net a:hover .pf-face{stroke:var(--ink)}
 .pf-row-ph{float:left;width:32px;height:32px;border-radius:50%;object-fit:cover;margin:1px 10px 0 0;background:var(--sunken)}
+
+/* contract dollars an official voted on (people_pages.contract_dollars) */
+.cd-sec .cd-lede{max-width:72ch;margin:4px 0 14px}
+.cd-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:0 0 14px}
+.cd-stat{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-radius:16px;background:var(--sunken)}
+.cd-stat.t-teal{background:var(--tint-teal)}.cd-stat.t-salmon{background:var(--tint-salmon)}.cd-stat.t-amber{background:var(--tint-amber)}
+.cd-stat b{font-family:var(--f-data);font-variant-numeric:tabular-nums;font-size:1.45rem;font-weight:600;color:var(--ink);line-height:1.2}
+.cd-stat .cd-l{font-size:.86rem;font-weight:500;color:var(--muted)}
+.cd-more{margin:0 0 12px}
+.cd-more>summary{cursor:pointer;font-weight:600;padding:8px 0;color:var(--navy,var(--ink))}
+.cd-table td.wrap{white-space:normal;min-width:240px}
+.cd-table .nowrap{white-space:nowrap}
+.cd-table .cd-sub{display:block;margin-top:2px}
+.cd-table .ui-pill{margin:0}
+.cd-note p{margin:0 0 8px}.cd-note ul{margin:0 0 8px 18px;padding:0}
+@media (max-width:640px){.cd-stat b{font-size:1.2rem}.cd-table{min-width:0}.cd-table td.wrap{min-width:180px}}

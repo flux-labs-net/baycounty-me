@@ -124,7 +124,8 @@ async function send(devices, msg) {
   return res;
 }
 
-// What a notification says. Short: lock screens cut at about 110 characters.
+// What a notification says. Short: lock screens cut at about 110 characters. critical = time-sensitive on iPhone, so
+// it shows through Focus and Sleep: evacuation orders, severe safety alerts, and severe or extreme weather warnings.
 const LABEL = {weather: 'Weather', evacuation: 'Evacuation order', shelters: 'Shelter open', water: 'Boil-water notice', roads: 'Road closed', safety: 'Emergency alert', outages: 'Outage', general: 'Update'};
 function message(n, topic, site = 'https://baycounty.me') {
   const lead = topic === 'weather' ? n.event || 'Weather alert' : LABEL[topic] || 'Alert';
@@ -134,7 +135,7 @@ function message(n, topic, site = 'https://baycounty.me') {
   let body = n.title || '';
   if (topic === 'weather' && n.area) body = `${n.event} for ${n.area}`.replace(/;/g, ',');
   if (body.length > 160) body = body.slice(0, 157).replace(/\s+\S*$/, '') + '…';
-  return {title, body, topic, notice_id: n.notice_id, url: `${site}/emergency#n-${encodeURIComponent(n.notice_id)}`, critical: topic === 'evacuation' || (topic === 'safety' && ['extreme', 'severe'].includes(n.severity)) || (topic === 'weather' && n.severity === 'extreme')};
+  return {title, body, topic, notice_id: n.notice_id, url: `${site}/emergency#n-${encodeURIComponent(n.notice_id)}`, critical: topic === 'evacuation' || (topic === 'safety' && ['extreme', 'severe'].includes(n.severity)) || (topic === 'weather' && (n.severity === 'extreme' || (n.severity === 'severe' && /Warning$/.test(n.event || ''))))};
 }
 
 module.exports = {ready, send, message, apnsToken, apnsPayload, apnsReason, chunks};

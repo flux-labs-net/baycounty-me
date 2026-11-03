@@ -9,7 +9,8 @@ const D = require('./_dupes');
 
 const MIN_GAP_S = 110;
 const PUSH_MAX_AGE_H = 24;      // a notice first issued longer ago than this is recorded but not pushed (e.g. on first run)
-const WEATHER_REPEAT_H = 12;    // the same weather event (e.g. Hurricane Warning) is pushed at most once in this window
+const WEATHER_REPEAT_H = 12;    // the same weather statement or watch (e.g. Hurricane Local Statement) is pushed at most once in this window
+const WARNING = /Warning$/;
 const COLS = ['notice_id', 'place_id', 'kind', 'source', 'source_type', 'gov_id', 'title', 'summary', 'instruction', 'severity', 'event', 'area', 'zones',
   'issued', 'starts', 'ends', 'updated', 'status', 'full_closure', 'roadway', 'url', 'source_url'];
 
@@ -33,11 +34,13 @@ async function claim(place) {
 }
 
 async function store(place, notices, ok) {
-  const rows = notices.map(n => ({...Object.fromEntries(COLS.map(c => [c, n[c] ?? null])), push_topic: E.pushTopic(n), active: n.status === 'active'}));
+  // The map shape (staff alerts) is written only when a notice has one, so a run before migration 0090 still stores.
+  const cols = notices.some(n => n.geometry) ? [...COLS, 'geometry'] : COLS;
+  const rows = notices.map(n => ({...Object.fromEntries(cols.map(c => [c, n[c] ?? null])), push_topic: E.pushTopic(n), active: n.status === 'active'}));
   if (rows.length) {
-    await db.q(`insert into emergency_live (${COLS.join(', ')}, push_topic, active)
-      select ${COLS.join(', ')}, push_topic, active from json_populate_recordset(null::emergency_live, $1::json)
-      on conflict (notice_id) do update set ${[...COLS.filter(c => c !== 'notice_id'), 'push_topic', 'active'].map(c => `${c} = excluded.${c}`).join(', ')}, last_seen = now()`,
+    await db.q(`insert into emergency_live (${cols.join(', ')}, push_topic, active)
+      select ${cols.join(', ')}, push_topic, active from json_populate_recordset(null::emergency_live, $1::json)
+      on conflict (notice_id) do update set ${[...cols.filter(c => c !== 'notice_id'), 'push_topic', 'active'].map(c => `${c} = excluded.${c}`).join(', ')}, last_seen = now()`,
     [JSON.stringify(rows)]);
   }
   // End notices that their source no longer lists (only for sources that answered this time).
@@ -49,9 +52,14 @@ async function store(place, notices, ok) {
 }
 
 // Signed-in phones that want this notice (only phones tied to an account get alerts): the topic is on, and the notice's government is one they follow (or they follow all).
+// A staff alert for one city goes to phones following that city; a countywide one (or one from the county) to all.
+function govFilter(n) {
+  if (n.source_type === 'staff') return n.area === require('./_gov').COUNTYWIDE || n.gov_id === 'county' ? null : n.gov_id;
+  return E.LOCAL_KINDS.includes(n.kind) ? n.gov_id : null;
+}
 async function devicesFor(place, topic, n) {
   return db.q(`select token, platform, quiet from push.devices where place_id = $1 and disabled_at is null and user_id is not null and topics && $2::text[]
-      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, E.topicsFor(topic), E.LOCAL_KINDS.includes(n.kind) ? n.gov_id : null]);
+      and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, E.topicsFor(topic), govFilter(n)]);
 }
 
 // How many people a notice reached per channel, for the alert timeline (emergency_reach, counts only).
@@ -76,7 +84,14 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
     const issued = Date.parse(n.issued || n.updated || '') || nowMs;
     const stale = nowMs - issued > PUSH_MAX_AGE_H * 3600e3;
     let suppressed = stale;
-    if (!suppressed && topic === 'weather') {
+    // An update, continuation or extension of a weather alert already handled (NWS lists the alerts it follows) isn't sent again.
+    if (!suppressed && topic === 'weather' && (n.refs || []).length) {
+      const r = await db.q('select 1 from push.sent where notice_id = any($1::text[]) limit 1', [n.refs]);
+      suppressed = r.length > 0;
+    }
+    // Statements and watches that NWS reissues every few hours go out once per event per 12 hours. A newly issued
+    // warning always goes out, even when the same kind of warning went out earlier that day (a second flash flood warning).
+    if (!suppressed && topic === 'weather' && !WARNING.test(n.event || '')) {
       const r = await db.q(`select 1 from push.sent where place_id = $1 and dedupe_key = $2 and sent_at > now() - make_interval(hours => $3) and not suppressed limit 1`, [place, dedupe, WEATHER_REPEAT_H]);
       suppressed = r.length > 0;
     }
@@ -113,6 +128,24 @@ async function pushNew(place, notices, nowMs = Date.now(), repeats = new Map()) 
   return sent;
 }
 
+// City and county road closure posts name streets but have no map: place them on the street layer once
+// (api/_road_map.js) and keep that map, or the empty "looked, found none" one, on every later check.
+const ROAD_LOOKUPS_PER_RUN = 6;
+async function placeRoads(place, notices) {
+  const need = notices.filter(n => n.kind === 'road' && !n.geometry && n.source_type !== 'staff' && n.source_type !== 'fl511');
+  if (!need.length) return 0;
+  const had = new Map((await db.q('select notice_id, geometry from emergency_live where notice_id = any($1::text[]) and geometry is not null',
+    [need.map(n => n.notice_id)]).catch(() => [])).map(r => [r.notice_id, r.geometry]));
+  const R = require('./_road_map'), cfg = E.placeConfig(place);
+  let looked = 0;
+  for (const n of need) {
+    if (had.has(n.notice_id)) { n.geometry = had.get(n.notice_id); continue; }
+    if (looked++ >= ROAD_LOOKUPS_PER_RUN) continue;
+    n.geometry = await R.streetMap(n, cfg, E.get).catch(() => null);
+  }
+  return looked;
+}
+
 async function run(place = 'fl-bay', {force = false} = {}) {
   E.placeConfig(place);
   if (!db.hasDb()) throw Object.assign(new Error('The database is not connected.'), {status: 503, expose: true});
@@ -122,6 +155,7 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   }
   const t0 = Date.now();
   const r = await E.readAll(place);
+  await placeRoads(place, r.notices);
   const ended = await store(place, r.notices, r.ok);
   // The same post listed twice is sent once, as its newest version (kept versions go first).
   const live = r.notices.filter(n => n.status === 'active');
@@ -143,4 +177,4 @@ async function run(place = 'fl-bay', {force = false} = {}) {
   return {place, checked_at: new Date().toISOString(), ms: Date.now() - t0, notices: r.notices.length, active, ended, pushed, agenda, errors: r.errors, sources_ok: r.ok};
 }
 
-module.exports = {run, sourceKey, store, pushNew, claim, reach};
+module.exports = {run, placeRoads, sourceKey, store, pushNew, claim, reach, govFilter};

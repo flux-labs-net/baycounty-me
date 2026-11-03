@@ -1,4 +1,5 @@
-"""Home page for baycounty.me: address search, headline numbers, every topic, what's new."""
+"""Home page for baycounty.me: a photo of the county with the address search, today's facts, a photo card per menu
+section, this week, and the money in one band."""
 import json, os, html
 from datetime import date
 
@@ -16,16 +17,17 @@ def M(n, d=1):
 
 def stats():
     from tax_page import build_data
-    td = build_data(); lv = {g: v[-1] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
+    td = build_data(); lv = {g: v[td['levyYear']] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
     cra = _j('merged.json')['payments']
-    cra_spent = sum(p['amount'] for p in cra if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed'))
+    cra_done = [p for p in cra if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed')]  # planned and budgeted records are not counted
+    cra_spent = sum(p['amount'] for p in cra_done)
     mi = _j('michael', 'michael.json'); pa = mi['fema_pa']['bay_totals']
     da = _j('debt_audit', 'debt_audit.json')
     debt = sum(x['total_debt'] for x in da['debt'] if x['total_debt'])
-    findings = sum(len(a['findings']) for a in da['audits'])
     latest = {}
     for a in da['audits']:
         latest.setdefault(a['government'], a)
+    findings = sum(len(a['findings']) for a in latest.values())  # latest audit of each entity, the same scope as the repeats
     repeats = sum(1 for a in latest.values() for f in a['findings'] if f.get('repeat'))
     ts = _j('tourism', 'tourism_surtax.json')
     bt25 = sum(c['amount'] for c in ts['bed_tax']['collections'] if c['fy'] == 2025)
@@ -35,7 +37,7 @@ def stats():
     ct = _j('contracts', 'contracts.json'); ct_n = sum(1 for c in ct['contracts'] if c.get('amount'))
     rec = _j('amendment3', 'rec_bay.json')
     a3 = -sum(r['impact']['FY2029'] for r in rec['bay'])
-    return dict(lv_tot=lv_tot, school_share=lv['school'] / lv_tot, ngovs=len(td['govs']), cra_spent=cra_spent, cra_n=len(cra),
+    return dict(lv_tot=lv_tot, school_share=lv['school'] / lv_tot, ngovs=len(td['govs']), cra_spent=cra_spent, cra_n=len(cra_done),
                 fema=pa['federal_obligated'], fema_n=pa['projects'], ia=mi['fema_ia']['bay_total_approved_ihp_owners_plus_renters'],
                 debt=debt, findings=findings, repeats=repeats, bt25=bt25, pcb_share=pcb25 / bt25, sp_n=len(sp), sp_done=done, a3=a3, ct_n=ct_n)
 
@@ -48,8 +50,8 @@ def topics(s):
         ('/public-money/hurricane-michael', 'Hurricane Michael', 'Where the recovery money went', 'Every FEMA rebuilding project, aid to households, Rebuild Florida awards and debris costs.', M(s['fema'], 0), f'FEMA rebuilding money, {s["fema_n"]} projects'),
         ('/public-money/sales-tax-projects', 'Sales Tax Projects', 'Promised vs built', 'Every half-cent sales tax project on the county map, with its status, plus the school half-cent.', f'{s["sp_done"]:,} of {s["sp_n"]:,}', 'projects marked completed'),
         ('/public-money/tourist-tax', 'Tourist Tax', 'What visitors pay, and where it goes', 'Ten years of bed tax collections, how the pennies are split and what Visit PCB spends.', M(s['bt25']), f'collected in FY2025, {s["pcb_share"]:.0%} from the PCB zone'),
-        ('/compare', 'Debt', 'What local governments owe', 'Debt per resident for every government, side by side; each government\'s page lists its bonds and loans.', M(s['debt']), 'owed across Bay County governments'),
-        ('/governments', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English on each government\'s page, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
+        ('/compare', 'Debt', 'What local governments owe', 'Debt per resident for every government, side by side; each government\'s page lists its bonds and loans.', M(s['debt']), 'owed, latest audit of each (FY2024 or FY2025)'),
+        ('/governments', 'Audit Findings', 'What the auditors found', 'Up to three years of audit findings in plain English on each government\'s page, including problems that keep coming back.', f'{s["findings"]}', f'findings in the latest audits, {s["repeats"]} of them repeats'),
         ('/public-money/fees-and-bills', 'Fees & Bills', 'Fees on your tax bill, and water and garbage', 'Fire, stormwater and other flat fees, plus a typical monthly utility bill in each city.', '$28.1M', 'in flat fees on FY2026 tax bills'),
         ('/people', 'Officials', 'Officials and pay', 'Every official and candidate, the five county officers, and what top officials are paid.', '5', 'independently elected county officers'),
         ('/public-money/contracts', 'Contracts', 'Who gets the contracts', 'Major contracts since 2022: winners, how they were awarded, change orders and who the county paid most.', str(s['ct_n']), 'contracts tracked'),
@@ -57,7 +59,7 @@ def topics(s):
     ]
 
 
-# ---- Home page (2026 redesign): start with your bill, then follow the money ----
+# ---- Tax bill and budget figures for the Your money band ----
 
 AREA_SHORT = {'Panama City - Downtown DIB': 'Downtown Panama City', 'unincorporated': 'Unincorporated',
               'unincorporated - beach area': 'Unincorporated beach'}
@@ -77,17 +79,6 @@ def bill_data():
     return {'year': td['years'][i], 'fy': FY[i], 'auth': auth, 'areas': areas, 'value': DEFAULT_VALUE, 'area': DEFAULT_AREA}
 
 
-def money_data():
-    """Small breakdowns for the follow-the-money tiles."""
-    from govs import GOVS
-    mi = _j('michael', 'michael.json')
-    cats = sorted(mi['fema_pa']['by_category'], key=lambda c: -c['federal_obligated'])
-    da = _j('debt_audit', 'debt_audit.json')
-    short = lambda name: next((g['short'] for g in GOVS if g['debt'] and name.startswith(g['debt'])), name.split(' (')[0])
-    debt = sorted(((short(x['government']), x['total_debt']) for x in da['debt'] if x['total_debt']), key=lambda r: -r[1])
-    return {'fema': [(c['description'], c['federal_obligated']) for c in cats], 'debt': debt, 'budget': budget_data()}
-
-
 def budget_data():
     """This year's adopted budgets: the total for every government, and the everyday General Fund
     spending of the county and cities grouped by service (same grouping as the budget explorer)."""
@@ -104,7 +95,15 @@ def budget_data():
                 svc[k] = svc.get(k, 0) + v['amount']
     names = dict(SERVICES)
     fy = d['governments'][0]['fiscal_year'].split(' ')[0]
+    # the headline total is the adopted FY2027 budget of each government as it published it (Panama City's leaves out interfund
+    # transfers; the county's and Parker's final-hearing figures await posted minutes); governments with no total are named, not guessed
+    from page_datasets import government_years
+    y27 = {r['gov_id']: r for r in government_years() if r['fiscal_year'] == 2027}
+    have = [g for g in GOVS if (y27.get(g['key']) or {}).get('budget_total')]
+    missing = [g['short'] for g in GOVS if g not in have]
+    pending = [g['short'] for g in have if 'final hearing' in (y27[g['key']].get('budget_status') or '')]  # hearing held, minutes not posted yet
     return {'fy': fy, 'total': sum(g['total'] for g in d['governments']), 'n': len(d['governments']),
+            'total27': sum(y27[g['key']]['budget_total'] for g in have), 'n27': len(have), 'n_all': len(GOVS), 'missing27': missing, 'pending27': pending,
             'services': sorted(((names[k], v) for k, v in svc.items()), key=lambda r: -r[1])}
 
 
@@ -112,50 +111,86 @@ def _money(v):
     return f'${round(v):,}'
 
 
-def _bars(rows, colors):
-    top = rows[0][1]
-    return ''.join(f'<span style="height:{max(4, v / top * 100):.0f}%;background:var({colors[min(k, len(colors) - 1)]})" title="{html.escape(n)}: {M(v)}"></span>'
-                   for k, (n, v) in enumerate(rows[:5]))
+# ---- Home page (2026-11 "Postcard" layout): a photo of the county up top, today's facts, four photo doors, this week,
+# then the money in one band. Photos come from the site-photos dataset (site/site_photos.py) with their credits. ----
 
-
-DOOR_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'), 'Your government': ('county', 'blue'),
-             'Elections': ('vote', 'salmon'), 'Get involved': ('megaphone', 'teal')}
 # the links each homepage door shows first; the rest of its menu section opens under "All N"
-DOOR_PICKS = {'Living here': ['/my-address', '/utilities', '/schools', '/beaches', '/emergency', '/events'],
-              'Your government': ['/people', '/governments', '/connections', '/connections/campaign-gifts', '/elections/results'],
-              'Elections': ['/elections', '/elections/voting', '/elections/results', '/elections/past'],
-              'Get involved': ['/meetings', '/notices', '/volunteer', '/records-request', '/alerts']}
+DOOR_PICKS = {'Living here': ['/my-address', '/beaches', '/events'],
+              'Your money': ['/public-money/tax-dollars', '/public-money/fees-and-bills', '/compare'],
+              'Your government': ['/people', '/governments', '/connections'],
+              'Get involved': ['/meetings', '/notices', '/volunteer']}
+# how the tax-bill sentence names each area ("A $200,000 home in ... pays")
+AREA_IN = {'Panama City - Downtown DIB': 'downtown Panama City', 'unincorporated': 'unincorporated Bay County',
+           'unincorporated - beach area': 'the unincorporated beach area'}
+
+
+def _img(r, cls='', eager=False, big=False, alt=None):
+    """An <img> for a site-photos row: the small copy for cards, the big one (with the small in srcset) for bands."""
+    e = html.escape
+    alt = r['title'] if alt is None else alt
+    if big and r['small_path'] != r['photo_path']:
+        src = (f'src="{e(r["photo_path"])}" srcset="{e(r["small_path"])} 800w, {e(r["photo_path"])} 1600w" sizes="(max-width: 640px) 100vw, 1360px"')
+    else:
+        src = f'src="{e(r["small_path"])}"'
+    load = 'fetchpriority="high"' if eager else 'loading="lazy"'
+    return f'<img class="{cls}" {src} alt="{e(alt)}" {load} decoding="async">'
+
+
+def _credit(r, cls='h-pc-credit'):
+    from site_photos import credit_html
+    return f'<p class="{cls}">{html.escape(r["title"])} · {credit_html(r)}</p>'
 
 
 def _doors():
-    """One card per menu section (site_menu.menu()), so the homepage and the menu always list the same pages."""
+    """One photo card per menu section (site_menu.menu()), so the homepage and the menu always list the same pages.
+    The election-season section isn't a card: it's on the Today strip while it lasts."""
     from site_menu import menu, links
-    from ui import ico
+    from site_photos import photo, credit_html
     out = []
-    # the election-season card goes last: it's shorter than the others (no "All N" footer)
-    for m in sorted(menu(), key=lambda m: bool(m.get('season'))):
-        # Your money gets its own band further down the page (_money_band), so it has no card here
-        if m.get('footer') or m['label'] == 'Your money':
+    for m in menu():
+        if m.get('footer') or m.get('season'):
             continue
         ls = links(m)
-        picks = [l for h in DOOR_PICKS.get(m['label'], []) for l in ls if l['href'] == h] or ls[:5]
+        picks = [l for h in DOOR_PICKS.get(m['label'], []) for l in ls if l['href'] == h] or ls[:3]
         rest = [l for l in ls if l not in picks]
-        icon, tone = DOOR_LOOK.get(m['label'], ('grid', 'blue'))
+        start = (m.get('start') or {}).get('href') or ls[0]['href']
+        ph = photo('door:' + m['label'])
+        img = (f'<a class="h-pc-dimg" href="{start}" tabindex="-1" aria-hidden="true">{_img(ph, alt="")}</a>'
+               f'<p class="h-pc-dcred">{credit_html(ph)}</p>') if ph else ''
         li = lambda l: f'<li><a href="{l["href"]}">{html.escape(l["label"])}</a></li>'
         more = (f'<details class="h-more"><summary>All {len(ls)}</summary><ul>{"".join(li(l) for l in rest)}</ul></details>' if rest else '')
-        out.append(f'<div class="h-door{" season" if m.get("season") else ""}"><div class="h-door-hd">{ico(icon, tone)}'
-                   f'<div><h3>{html.escape(m["label"])}</h3><p>{html.escape(m["question"])}</p></div></div><ul>{"".join(li(l) for l in picks)}</ul>{more}</div>')
+        out.append(f'<div class="h-pc-door">{img}<div class="h-pc-dbody"><h3><a href="{start}">{html.escape(m["label"])}</a></h3>'
+                   f'<p>{html.escape(m["question"])}</p><ul class="h-pc-picks">{"".join(li(l) for l in picks)}</ul>{more}</div></div>')
     return ''.join(out)
 
 
+def _election_card():
+    """The Today strip's election card, in election season only: where to vote until Election Day, then results."""
+    from site_menu import election_season, ELECTION_DAY
+    from ui import ico
+    t = date.today()
+    if not election_season(t):
+        return ''
+    day = f"{ELECTION_DAY.strftime('%a %b')} {ELECTION_DAY.day}"
+    if t < ELECTION_DAY:
+        href, title, sub = '/elections/voting', f'Election Day · {day}', 'Where and when to vote'
+    elif t == ELECTION_DAY:
+        href, title, sub = '/elections/voting', 'Election Day is today', 'Where to vote, and results tonight'
+    else:
+        href, title, sub = '/elections/results', 'Election results', f'The {ELECTION_DAY.strftime("%B")} {ELECTION_DAY.day} election'
+    return f'<a class="h-td" href="{href}">{ico("vote", "salmon")}<span><b>{title}</b><span>{sub}</span></span></a>'
+
+
 def _today():
-    """Live cards: today's beach flag, active alerts, the next public meeting, and trash day (by address)."""
+    """Live cards: today's beach flag, active alerts, the next public meeting and, in election season, the election.
+    A signed-in resident's trash card (#hTrash) stays hidden unless their saved home's pickup is today, or tomorrow once
+    it's evening (home.js). The alert map (#hAlertMap) goes under the strip, filled by home.js."""
     from datetime import datetime
     from page_datasets import beach_conditions, emergency_notices
     from govs import _load
     from ui import ico
-    card = lambda href, icon, tone, title, sub: (f'<a class="h-td" href="{href}">{ico(icon, tone)}<span><b>{title}</b>'
-                                                 f'<span>{sub}</span></span></a>')
+    card = lambda href, icon, tone, title, sub, id='': (f'<a class="h-td" href="{href}"{f" id={chr(34)}{id}{chr(34)}" if id else ""}>{ico(icon, tone)}<span><b>{title}</b>'
+                                                        f'<span>{sub}</span></span></a>')
     fc = sorted((r for r in beach_conditions() if r['kind'] == 'forecast'), key=lambda r: r['sort_order'])
     now = fc[0] if fc else {}
     flag = now.get('flag_color')
@@ -169,9 +204,9 @@ def _today():
             k = kinds.get(n['kind'], 'other')
             by[k] = by.get(k, 0) + 1
         sub = ', '.join(f'{v} {k}' for k, v in sorted(by.items(), key=lambda x: -x[1]))
-        alerts = card('/emergency', 'storm', 'salmon', f'{len(act)} active notice{"s" if len(act) != 1 else ""}', html.escape(sub))
+        alerts = card('/emergency', 'storm', 'salmon', f'{len(act)} active notice{"s" if len(act) != 1 else ""}', html.escape(sub), 'hAlerts')
     else:
-        alerts = card('/emergency', 'storm', 'salmon', 'No active alerts', 'Weather, boil-water and road notices')
+        alerts = card('/emergency', 'storm', 'salmon', 'No active alerts', 'Weather, boil-water and road notices', 'hAlerts')
     md = _load().get('meetings') or {'boards': [], 'meetings': []}
     boards = {b['id']: b for b in md.get('boards', [])}
     stamp = datetime.now().strftime('%Y-%m-%dT%H:%M')
@@ -183,141 +218,138 @@ def _today():
         meet = card('/meetings', 'calendar', 'blue', 'Next meeting · ' + when, html.escape(boards.get(m0['board'], {}).get('name') or m0['board']))
     else:
         meet = card('/meetings', 'calendar', 'blue', 'Meetings', 'When every board meets, with agendas')
-    trash = card('/utilities', 'drop', 'teal', 'Trash day', 'Your pickup day and who provides water, power and internet')
-    return beach + alerts + meet + trash
+    # each government's next few meetings, so a signed-in resident's card shows their own government's (home.js)
+    per = {}
+    for m in up:
+        g = boards.get(m['board'], {}).get('gov') or 'county'
+        if len(per.setdefault(g, [])) < 3:
+            per[g].append([m['start'][:16], boards.get(m['board'], {}).get('name') or m['board']])
+    if up:
+        meet = meet.replace('<a class="h-td" href="/meetings">', f'<a class="h-td" href="/meetings" id="hMeet" data-next="{html.escape(json.dumps(per, separators=(",", ":")))}">', 1)
+    trash = (f'<a class="h-td" id="hTrash" href="/utilities" hidden>{ico('trash', 'teal')}<span><b id="hTrashT"></b>'
+             f'<span id="hTrashS"></span></span></a>')
+    amap = '<div class="h-td h-amap" id="hAlertMap" hidden><a id="hAlertMapT" href="/emergency"></a><div id="hAlertMapBox" role="img" aria-label="Map of where this alert applies"></div></div>'
+    return trash + beach + alerts + meet + _election_card(), amap
+
+
+def _week():
+    """This week: the special event on now (its road-closure page, with a photo) beside the next one-off events from
+    the community-events dataset. Built daily; with no special event the list runs the full width."""
+    import datetime as dtm
+    from events_page import rows, _time
+    from special_events import events as special
+    from site_photos import photo
+    from place import NAME
+    e = html.escape
+    rs = rows()
+    today = date.today()
+    t0, wk, soon = today.isoformat(), (today + dtm.timedelta(days=6)).isoformat(), (today + dtm.timedelta(days=21)).isoformat()
+    n_week = sum(1 for r in rs if t0 <= r['starts'][:10] <= wk or r['starts'][:10] <= t0 <= (r['ends'] or r['starts'])[:10])
+    cand = [r for r in rs if not r['recurring'] and r['category'] != 'Public meeting' and t0 < r['starts'][:10] <= soon]
+    cand.sort(key=lambda r: (r['category'] == 'Library', r['starts']))  # community and chamber events before library programs
+    seen, picks = set(), []
+    for r in cand:
+        if r['title'] in seen:
+            continue
+        seen.add(r['title'])
+        picks.append(r)
+    feat = ''
+    for ev in special():
+        first = (dtm.date.fromisoformat(ev['starts_at'][:10]) - dtm.timedelta(days=7)).isoformat()
+        if first <= t0 <= ev['ends_at'][:10]:
+            ph = photo('event:' + ev['id']) or photo('feature')
+            day = dtm.date.fromisoformat(ev.get('race_day') or ev['starts_at'][:10])
+            n = len(ev['closures'])
+            img = _img(ph, 'h-pc-fimg', big=True, alt='') if ph else ''
+            feat = (f'<a class="h-pc-feat" href="{e(ev["page"])}">{img}<span class="h-pc-fbody">'
+                    f'<span class="h-pc-tag">{day.strftime("%A, %b")} {day.day} · {e(ev["town"])}</span><b>{e(ev["name"])}</b>'
+                    f'<span>{n} road closures and delays. See what\'s closed now and play through the day on the map.</span>'
+                    f'<span class="h-pc-btn">See the closure map →</span></span></a>')
+            if ph:
+                feat = f'<div class="h-pc-featw">{feat}{_credit(ph, "h-pc-fcred")}</div>'
+            break
+    picks = sorted(picks[:4 if feat else 6], key=lambda r: r['starts'])
+
+    def row(r):
+        d = dtm.date.fromisoformat(r['starts'][:10])
+        when = d.strftime('%A') + ('' if r['all_day'] else ', ' + _time(r['starts']))
+        where = ' · '.join(e(x) for x in (when, r['venue'] or r['town']) if x)
+        return (f'<li><span class="h-pc-date" aria-hidden="true"><b>{d.strftime("%b").upper()}</b>{d.day}</span>'
+                f'<span><a href="{e(r["url"])}" rel="noopener">{e(r["title"])}</a><small>{where}</small></span></li>')
+    lst = (f'<div class="h-pc-list"><ul>{"".join(row(r) for r in picks) or "<li class=ev-none>No one-off events listed in the next three weeks.</li>"}</ul>'
+           f'<a class="h-pc-lmore" href="/meetings">Public meetings this week →</a></div>')
+    return f'''<section class="h-pc-sec" aria-labelledby="hweek">
+    <div class="h-sec-hd"><div><h2 id="hweek" class="h-pc-h2">This week in {e(NAME)}</h2><p class="h-pc-lede">{n_week} events from public calendars.</p></div><a href="/events">All events →</a></div>
+    <div class="h-pc-week{'' if feat else ' solo'}">{feat}{lst}</div>
+  </section>'''
 
 
 def home_page():
     s = stats()
-    from updates import CHANGES, nice
-    from events_page import home_section
-    from govs import GOVS
     from place import NAME
+    from site_photos import photo
+    from ui import ico
     b = bill_data()
-    md = money_data()
-    election = date.today() <= date(2026, 11, 3)
+    bd = budget_data()
     area = next(a for a in b['areas'] if a['id'] == b['area'])
     val = b['value']
-    # server-rendered first state; home.js redraws on every change
-    lines = ''.join(
-        f'<li class="g-{b["auth"][a]["g"]}"><span class="rl-n"><i></i>{html.escape(b["auth"][a]["n"])}</span>'
-        f'<span class="rl-m">{b["auth"][a]["m"]:.4f}</span><span class="rl-v">{_money(b["auth"][a]["m"] * val / 1000)}</span></li>'
-        for a in area['stack'])
-    segs = ''.join(f'<span class="g-{b["auth"][a]["g"]}" style="flex:{b["auth"][a]["m"]}"></span>' for a in area['stack'])
-    chips = ''.join(f'<button type="button" data-area="{html.escape(a["id"])}" aria-pressed="{"true" if a["id"] == b["area"] else "false"}">{html.escape(a["n"])}</button>'
-                    for a in b['areas'])
-    tmax = max(a['t'] for a in b['areas'])
-    ranked = ''.join(
-        f'<li{" class=on" if a["id"] == b["area"] else ""}><button type="button" data-area="{html.escape(a["id"])}"><span class="cb-n">{html.escape(a["n"])}</span>'
-        f'<span class="cb-t"><span style="width:{a["t"] / tmax * 100:.1f}%"></span></span><span class="cb-v">{_money(a["t"] * val / 1000)}</span></button></li>'
-        for a in sorted(b['areas'], key=lambda a: -a['t']))
-    news = ''.join(f'<li><span class="hn-d">{nice(c["date"])}</span><a href="{c["pages"][0]}">{html.escape(c["title"])}</a></li>' for c in CHANGES[:4])
-    govchips = ''.join(f'<a href="/governments/{g["slug"]}">{html.escape(g["short"])}</a>' for g in GOVS)
-    bd = md['budget']
-    budget_bars = _bars(bd['services'], ['--navy', '--blue', '--blue', '--bar', '--bar'])
-    short = {'Police / law enforcement': 'police', 'Administration & support': 'administration', 'Parks & recreation': 'parks', 'Fire': 'fire', 'Streets & public works': 'streets'}
-    top2 = ', '.join(f'{short.get(n, n.lower())} {M(v)}' for n, v in bd['services'][:2])
-    debt_bars = _bars(md['debt'], ['--salmon', '--salmon', '--gold', '--gold', '--bar'])
-    from ui import ico
-    data = json.dumps(b, separators=(',', ':'))
-    today = _today()
-    doors = _doors()
-    return f'''<div class="page home h-home">
-  <section class="h-top" aria-labelledby="h1">
-    <div class="h-lead">
+    today, amap = _today()
+    hero = photo('hero')
+    money = photo('money')
+    data = json.dumps({'area': b['area'], 'value': val, 'areas': [{'id': a['id'], 'p': AREA_IN.get(a['id'], a['n']), 't': a['t']} for a in b['areas']]},
+                      separators=(',', ':'))
+    hero_img = _img(hero, 'h-pc-himg', eager=True, big=True) if hero else ''
+    money_img = _img(money, 'h-pc-mimg', big=True, alt='') if money else ''
+    return f'''<div class="page home h-home h-pc">
+  <section class="h-pc-hero{'' if hero else ' nophoto'}" aria-labelledby="h1">
+    {hero_img}
+    <div class="h-pc-hin">
+      <p class="h-pc-kick">{html.escape(NAME)}, Florida</p>
       <h1 id="h1">Everything about {html.escape(NAME)}, <span class="hl">in plain view.</span></h1>
-      <p class="lede">Trash day and schools, beaches and storms, your tax bill and who decides how it's spent. Every figure links to its source.</p>
+      <p class="h-pc-sub">Beaches and storms, trash day and schools, your tax bill and who decides how it's spent. Every figure links to its source.</p>
       <form class="h-addr" action="/my-address/" method="get" role="search">
         <label class="sr" for="hq">Your address</label>
         <input id="hq" name="q" type="search" placeholder="Enter your address" autocomplete="street-address">
         <button type="submit">Look up</button>
       </form>
-      <p class="h-addr-note" id="hAddrNote">One page for your address: tax bill, trash day, zoned schools, evacuation zone, meetings and who represents you.</p>
+      <p class="h-addr-note" id="hAddrNote">One page for your address: tax bill, trash day, schools, evacuation zone and who represents you.</p>
       <div class="h-mine" id="hMine" hidden>
         <a class="h-mine-main" id="hMineLink" href="/my-address/">{ico('home', 'blue')}<span class="h-mine-t"><span class="h-mine-k">Your home</span><b id="hMineAddr"></b><span id="hMineSub"></span></span><span class="h-mine-go">Open<span class="ico i-arrow" aria-hidden="true"></span></span></a>
         <p class="h-mine-more"><a href="/account">My home: what's happening nearby</a><button type="button" id="hMineOther">Look up another address</button></p>
       </div>
     </div>
-    <div class="h-today" aria-labelledby="htd">
-      <h2 class="eyebrow mute" id="htd">Today in {html.escape(NAME)}</h2>
-      {today}
-    </div>
+    {_credit(hero) if hero else ''}
   </section>
 
-  <section class="h-doors-sec" aria-labelledby="hdoors">
-    <h2 id="hdoors" class="h-h2">Find your way around</h2>
-    <div class="h-doors">{doors}</div>
+  <section class="h-pc-today" aria-labelledby="htd">
+    <h2 class="sr" id="htd">Today in {html.escape(NAME)}</h2>
+    <div class="h-today">{today}</div>
+    {amap}
   </section>
 
-  {home_section()}
-
-  <section class="h-row h-row2" aria-label="Governments and updates">
-    <div class="h-card">
-      <div class="h-card-hd"><b>Pick a government</b><a href="/compare">Compare →</a></div>
-      <nav class="gov-chips" aria-label="Governments">{govchips}</nav>
-    </div>
-    <div class="h-card">
-      <div class="h-card-hd"><b>What's new</b><a href="/updates">All updates →</a></div>
-      <ol class="h-news">{news}</ol>
-    </div>
+  <section class="h-pc-sec" aria-labelledby="hdoors">
+    <div class="h-sec-hd"><div><h2 id="hdoors" class="h-pc-h2">Find your way around</h2><p class="h-pc-lede">Four doors into everything on the site.</p></div></div>
+    <div class="h-pc-doors">{_doors()}</div>
   </section>
-  <section class="h-money" aria-labelledby="hmoneyband">
-    <div class="h-money-hd">{ico('wallet', 'amber')}<div><h2 id="hmoneyband">Your money</h2><p>What you pay, where it goes, what they owe, and what the auditors found.</p></div></div>
-  <div class="h-hero" aria-labelledby="hmoney">
-    <div class="h-intro">
-      <h3 id="hmoney" class="h-big">Start with your tax bill.</h3>
-      <p class="lede">Pick where you live and your home's value to see each line of the bill.</p>
-      <div class="h-ctl">
-        <span class="h-lbl" id="areaLbl">Where you live</span>
-        <div class="h-chips" role="group" aria-labelledby="areaLbl">{chips}</div>
-        <label class="h-lbl h-val" for="hVal"><span>Taxable value</span><output id="hValOut" for="hVal">{_money(val)}</output></label>
-        <input id="hVal" type="range" min="50000" max="600000" step="10000" value="{val}">
+
+  {_week()}
+
+  <section class="h-pc-money{'' if money else ' nophoto'}" aria-labelledby="hmoneyband">
+    {money_img}
+    <div class="h-pc-min">
+      <div class="h-pc-mlead">
+        <p class="h-pc-kick">Your money</p>
+        <h2 id="hmoneyband">A <span id="hTeaseVal">{_money(val)}</span> home in <span id="hTeaseArea">{html.escape(AREA_IN.get(area['id'], area['n']))}</span> pays <span class="hl" id="hTeaseAmt">{_money(area['t'] * val / 1000)}</span> a year.</h2>
+        <p>Tax year {b['year']}, before exemptions. Pick where you live and your home's value to see each line of the bill, and how it compares across the county.</p>
+        <a class="h-pc-cta" href="/public-money/tax-dollars">Open your tax bill →</a>
+      </div>
+      <div class="h-pc-stats">
+        <a href="/compare#services"><b>{M(bd['total27'])}</b><span>Adopted FY2027 budgets, {bd['n27']} of {bd['n_all']} governments</span><i>Spending →</i></a>
+        <a href="/compare#m-debt"><b>{M(s['debt'])}</b><span>Owed by the county, cities, schools and authorities, latest audits</span><i>Debt →</i></a>
+        <a href="/compare#m-findings"><b>{s['findings']}</b><span>Findings in the latest audits, {s['repeats']} of them repeats</span><i>Audits →</i></a>
       </div>
     </div>
-
-    <div class="h-bill">
-      <div class="hb-hd"><div><span class="eyebrow mute">Who you pay · tax year {b["year"]}</span><b id="billArea">{html.escape(area["n"])}</b></div><span class="hb-fy">{b["fy"]}<br>rates</span></div>
-      <div class="hb-stack" id="billStack" aria-hidden="true">{segs}</div>
-      <div class="hb-cols"><span>Levied by</span><span>Mills</span><span>You pay</span></div>
-      <ul class="hb-lines" id="billLines">{lines}</ul>
-      <div class="hb-total" aria-live="polite"><b>Total</b><span id="billMills">{area["t"]:.4f}</span><span id="billTotal">{_money(area["t"] * val / 1000)}</span></div>
-      <p class="hb-note">Rate × taxable value, before exemptions. Flat fees (fire, stormwater, garbage) are billed separately. <a href="/public-money/tax-dollars">Full calculator →</a> · <a href="/public-money/fees-and-bills">Fees and bills →</a></p>
-    </div>
-    <div class="h-card h-compare">
-        <div class="h-card-hd"><b>Same home, every area</b><span class="muted">at <span data-val>{_money(val)}</span></span></div>
-        <ol class="cmp-bars" id="cmpBars">{ranked}</ol>
-      </div>
-  </div>
-
-  <div class="h-follow" aria-labelledby="follow">
-    <div class="h-sec-hd"><div><h3 id="follow">Then where it went, and who's checking.</h3></div><a href="/public-money/accountability">Accountability console →</a></div>
-    <div class="h-tiles">
-      <a class="h-tile t-blue" href="/compare#services">
-        <span class="eyebrow">Spending · {bd['fy']}</span>
-        <span class="mini" aria-hidden="true">{budget_bars}</span>
-        <b class="fig">{M(bd['total'])}</b><span class="h-tl">Budgeted this year</span><span class="muted">{bd['n']} governments · biggest everyday costs: {html.escape(top2)}</span>
-      </a>
-      <a class="h-tile t-salmon" href="/compare#m-debt">
-        <span class="eyebrow">Debt</span>
-        <span class="mini" aria-hidden="true">{debt_bars}</span>
-        <b class="fig">{M(s['debt'])}</b><span class="h-tl">Owed by local governments</span><span class="muted">County, cities, schools and authorities</span>
-      </a>
-      <a class="h-tile t-amber" href="/compare#m-findings">
-        <span class="eyebrow">Accountability</span>
-        <span class="prog" aria-hidden="true"><span class="p-a"><i style="width:{(s['findings'] - s['repeats']) / s['findings'] * 100:.0f}%"></i></span><span class="p-b"><i style="width:{s['sp_done'] / s['sp_n'] * 100:.0f}%"></i></span></span>
-        <b class="fig">{s['findings']} findings</b><span class="h-tl">{s['repeats']} repeat audit findings</span><span class="muted">{s['sp_done']:,} of {s['sp_n']:,} sales tax projects done</span>
-      </a>
-    </div>
-    <nav class="h-links" aria-label="Your money pages">
-      <a href="/public-money/contracts">{s['ct_n']} contracts</a>
-      <a href="/public-money/votes">How they voted</a>
-      <a href="/connections">Connections</a>
-      <a href="/governments">Governments</a>
-      <a href="/public-money/tourist-tax">Bed tax {M(s['bt25'])}</a>
-      <a href="/public-money/hurricane-michael">Hurricane Michael {M(s['fema'], 0)}</a>
-      {f'<a class="hot" href="/public-money/amendment-3">Amendment 3 · −{M(s["a3"])} FY2029</a>' if election else ''}
-    </nav>
-  </div>
+    {_credit(money, 'h-pc-credit h-pc-mcred') if money else ''}
   </section>
 </div>
 <script type="application/json" id="homeData">{data}</script>

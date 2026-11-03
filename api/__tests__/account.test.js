@@ -133,3 +133,43 @@ test('the nearby endpoint is documented, in the page map and never logs the addr
   const src = require('fs').readFileSync(require.resolve('../v1'), 'utf8');
   assert.match(src, /parts\[0\] === 'address-report' \|\| parts\[0\] === 'nearby'/);
 });
+
+test('a new account gets one welcome email linking to the weekly email sign-up', async () => {
+  const w = E.accountWelcomeEmail({weekly: 'https://baycounty.me/api/confirm?t=abc', manage: 'https://baycounty.me/m', name: 'Sam'});
+  assert.equal(w.subject, 'Welcome to BayCounty.me');
+  assert.match(w.html, /Hi Sam/); assert.match(w.html, /This week in Bay County/); assert.match(w.html, /api\/confirm\?t=abc/);
+  assert.match(w.text, /api\/confirm\?t=abc/); assert.match(w.text, /https:\/\/baycounty\.me\/m/);
+
+  // Fresh copy of _account with a stand-in database and Resend, to watch what sendWelcome does.
+  const dbPath = require.resolve('../_db'), accPath = require.resolve('../_account');
+  const realDb = require.cache[dbPath], realAcc = require.cache[accPath], realFetch = global.fetch, realKey = process.env.RESEND_API_KEY;
+  const sends = new Set(), sql = [], mail = [];
+  require.cache[dbPath] = {id: dbPath, filename: dbPath, loaded: true, exports: {hasDb: () => true, q: async (s, p) => {
+    sql.push(s);
+    if (/insert into account\.sends/.test(s)) { const k = p[0]; if (sends.has(k)) return []; sends.add(k); return [{id: 7}]; }
+    return [];
+  }}};
+  delete require.cache[accPath];
+  global.fetch = async (url, o) => { mail.push(JSON.parse(o.body)); return {ok: true, status: 200, json: async () => ({id: 're_1'})}; };
+  process.env.RESEND_API_KEY = 'test';
+  try {
+    const A2 = require('../_account');
+    const u = {id: 'u1', email: 'new@example.com', first_name: null};
+    assert.equal(await A2.sendWelcome(u), true);
+    assert.equal(await A2.sendWelcome(u), false, 'only once per account');
+    assert.equal(mail.length, 1);
+    assert.deepEqual(mail[0].to, ['new@example.com']);
+    assert.match(mail[0].headers['List-Unsubscribe'], /action=emails/);
+    const t = /api\/confirm\?t=([A-Za-z0-9._-]+)/.exec(mail[0].text)[1];
+    const p = require('../_alerts').readToken(t);
+    assert.deepEqual([p.e, p.g], ['new@example.com', ['week']], 'the link joins the countywide weekly list only after Confirm');
+  } finally {
+    if (realDb) require.cache[dbPath] = realDb; else delete require.cache[dbPath];
+    if (realAcc) require.cache[accPath] = realAcc; else delete require.cache[accPath];
+    global.fetch = realFetch;
+    if (realKey === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = realKey;
+  }
+  const src = require('fs').readFileSync(accPath, 'utf8');
+  assert.equal((src.match(/if \(u\.created\) await sendWelcome\(u\);/g) || []).length, 2, 'code and one-tap sign-in both send it');
+  assert.match(src, /\(xmax = 0\) as created/);
+});

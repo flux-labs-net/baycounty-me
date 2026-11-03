@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-29",
+ "updated": "2026-10-31",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -936,7 +936,7 @@
    "id": "property-tax-rates",
    "title": "Property tax rates",
    "description": "Millage, rolled-back rate and levy for every taxing authority, by tax year.",
-   "rows": 90,
+   "rows": 105,
    "columns": [
     {
      "name": "authority_id",
@@ -1591,7 +1591,7 @@
   {
    "id": "bed-tax-collections",
    "title": "Tourist tax collections",
-   "description": "Bed tax collected by zone and fiscal year.",
+   "description": "Bed tax collected by zone and fiscal year. A partial year (the current one) also gives prior_year_same_period: what was collected over the same months a year earlier, from the same Clerk report.",
    "rows": 33,
    "columns": [
     {
@@ -1624,6 +1624,10 @@
      "values": [
       "fiscal year to date through July 2026 (10 months)"
      ]
+    },
+    {
+     "name": "prior_year_same_period",
+     "type": "number"
     },
     {
      "name": "basis",
@@ -2671,7 +2675,7 @@
    "id": "connections-gifts",
    "title": "Connections: business gifts to officials",
    "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
-   "rows": 2676,
+   "rows": 2681,
    "columns": [
     {
      "name": "donor",
@@ -3125,7 +3129,7 @@
   {
    "id": "money-map-votes",
    "title": "Money map: votes on donors' contracts",
-   "description": "Recorded votes by an official on a contract with one of their own donors, and whether the gift came before or after.",
+   "description": "Recorded votes by an official on a contract with one of their own donors, with the gift dates and whether the gifts came before the vote, after it, or both (column gift_before_or_after_vote: before, after, before and after).",
    "rows": 18,
    "columns": [
     {
@@ -3261,7 +3265,7 @@
      "name": "gift_before_or_after_vote",
      "type": "string",
      "values": [
-      "after"
+      "before"
      ]
     },
     {
@@ -3688,7 +3692,7 @@
      "type": "string",
      "values": [
       "5 mills on a home taxed at $200,000 is $1,000 a year.",
-      "FY2026 runs from October 1, 2025 to September 30, 2026.",
+      "FY2027 runs from October 1, 2026 to September 30, 2027.",
       "For Amendment 3, it estimated the loss for every county, city and special district.",
       "If a district was worth $100 million when it started and is worth $150 million now, the taxes on the $50 million difference go to the CRA.",
       "In 2025, a homestead assessed at $200,000 was taxed on $149,278 by the city and county and on $175,000 by the school board.",
@@ -4660,7 +4664,7 @@
    "id": "business-donor-sunbiz",
    "title": "Business donors in the state corporate registry",
    "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
-   "rows": 2663,
+   "rows": 2668,
    "columns": [
     {
      "name": "contributor",
@@ -6499,7 +6503,7 @@
    "id": "owner-gifts",
    "title": "Campaign gifts from business owners",
    "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
-   "rows": 1115,
+   "rows": 1117,
    "columns": [
     {
      "name": "donor_id",
@@ -6621,7 +6625,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16679,
+   "rows": 16682,
    "columns": [
     {
      "name": "entity_id",
@@ -6658,6 +6662,7 @@
       "Government",
       "Nonprofit",
       "Nonprofit board member",
+      "Official or candidate",
       "Past candidate"
      ]
     },
@@ -6738,7 +6743,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22672,
+   "rows": 22670,
    "columns": [
     {
      "name": "link_id",
@@ -7524,7 +7529,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 414,
+   "rows": 415,
    "columns": [
     {
      "name": "website",
@@ -7623,7 +7628,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 74,
+   "rows": 75,
    "columns": [
     {
      "name": "place_id",
@@ -7807,6 +7812,116 @@
    "json": "/downloads/checkbook-payments.json",
    "csv": "/downloads/checkbook-payments.csv",
    "api": "/api/v1/datasets/checkbook-payments"
+  },
+  {
+   "id": "board-appointments",
+   "title": "Board appointments",
+   "description": "Who sits on each advisory board, committee and authority a Bay County government appoints, as the government sends it from its BayCounty.me workspace: the board, the seat, the member's name, who appointed them, and the term (term_start, term_end; blank term_end = no end date given). Appointees are named because a public appointment is public record; no addresses, phone numbers or emails. source_title says which government sent it and when.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "board",
+     "type": "string"
+    },
+    {
+     "name": "seat",
+     "type": "string"
+    },
+    {
+     "name": "person",
+     "type": "string"
+    },
+    {
+     "name": "appointed_by",
+     "type": "string"
+    },
+    {
+     "name": "term_start",
+     "type": "string"
+    },
+    {
+     "name": "term_end",
+     "type": "string"
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/board-appointments.json",
+   "csv": "/downloads/board-appointments.csv",
+   "api": "/api/v1/datasets/board-appointments"
+  },
+  {
+   "id": "fee-changes",
+   "title": "Fee and rate changes",
+   "description": "New and changed fees and utility rates, as each government sends them from its BayCounty.me workspace: the fee, a category (utility, trash, permit, parks, impact, license, other), old_amount (blank for a new fee), new_amount, the unit (per month, per 1,000 gallons, each), effective_date and the ordinance or resolution that adopted it. source_title says which government sent it and when.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "fee",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string"
+    },
+    {
+     "name": "old_amount",
+     "type": "number"
+    },
+    {
+     "name": "new_amount",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string"
+    },
+    {
+     "name": "effective_date",
+     "type": "string"
+    },
+    {
+     "name": "adopted_by",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/fee-changes.json",
+   "csv": "/downloads/fee-changes.csv",
+   "api": "/api/v1/datasets/fee-changes"
   },
   {
    "id": "budget-actuals",
@@ -8563,7 +8678,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 58,
+   "rows": 59,
    "columns": [
     {
      "name": "place_id",
@@ -8670,6 +8785,7 @@
       "Aaron Bessant Park",
       "Anchorage Children’s Home",
       "Bay Point Golf Club",
+      "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
       "Dave & Buster’s",
       "Dolly Parton’s Pirates Voyage Dinner & Show",
@@ -8694,7 +8810,6 @@
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
       "The Barn at The Wicked Wheel",
-      "The Sapp House",
       "Webinar",
       "ZooWorld"
      ]
@@ -8776,7 +8891,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 187,
+   "rows": 189,
    "columns": [
     {
      "name": "place_id",
@@ -9471,18 +9586,18 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-10-29T07:53:00+00:00"
+      "2026-10-30T15:45:00+00:00"
      ]
     },
     {
      "name": "period",
      "type": "string",
      "values": [
-      "Friday",
       "Monday",
+      "Rest Of Today",
       "Saturday",
       "Sunday",
-      "Today"
+      "Tuesday"
      ]
     },
     {
@@ -9519,15 +9634,15 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "1 foot or less",
-      "around 1 foot"
+      "Around 1 foot",
+      "around 3 feet"
      ]
     },
     {
      "name": "uv_index",
      "type": "string",
      "values": [
-      "High"
+      "Moderate"
      ]
     },
     {
@@ -9541,8 +9656,8 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Partly sunny",
-      "Sunny"
+      "Mostly cloudy until 3 PM, then mostly",
+      "Partly sunny"
      ]
     },
     {
@@ -9556,23 +9671,24 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "Northeast winds 10 to 15 mph"
+      "East winds 10 to 15 mph",
+      "East winds around 15 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:54 AM",
-      "7:55 AM"
+      "7:55 AM",
+      "7:56 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "6:58 PM",
-      "6:59 PM"
+      "6:57 PM",
+      "6:58 PM"
      ]
     },
     {
@@ -9580,13 +9696,13 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph.",
-      "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 15 mph.",
+      "High rip current risk*. Mostly sunny. Highs in the upper 70s. Northeast winds around 20 mph.",
+      "High rip current risk*. Surf height around 3 feet. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the mid 70s. East winds around 20 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. A slight chance of showers. Highs in the upper 70s. East winds around 15 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the upper 70s. East winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Northeasterly offshore winds through Friday will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
+      "Northeasterly offshore winds through today will maintain a moderate rip current risk. The exception is Franklin County, where sufficient easterly swell component locks in a high rip current risk through the weekend. Elsewhere this weekend, a southeasterly component of swell may lead to a high rip current risk across the Emerald Coast beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9610,7 +9726,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/9e6d46da-df7a-48bb-bda7-4b8df3125aee",
+      "https://api.weather.gov/products/f3045ebf-b4ed-4baa-8850-2f47be1fd7a8",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -10297,7 +10413,7 @@
    "id": "development-projects",
    "title": "Development projects",
    "description": "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.",
-   "rows": 246,
+   "rows": 245,
    "columns": [
     {
      "name": "place_id",
@@ -10422,7 +10538,7 @@
      "name": "fetched",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-29"
      ]
     },
     {
@@ -10513,7 +10629,7 @@
       "2023",
       "2024",
       "2025",
-      "Jan to Aug 2026"
+      "Jan to Sep 2026"
      ]
     },
     {
@@ -10594,7 +10710,7 @@
       "https://www2.census.gov/econ/bps/County/co2023a.txt",
       "https://www2.census.gov/econ/bps/County/co2024a.txt",
       "https://www2.census.gov/econ/bps/County/co2025a.txt",
-      "https://www2.census.gov/econ/bps/County/co2608y.txt",
+      "https://www2.census.gov/econ/bps/County/co2609y.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2016a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2017a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2018a.txt",
@@ -10605,7 +10721,7 @@
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2023a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2024a.txt",
       "https://www2.census.gov/econ/bps/Place/South%20Region/so2025a.txt",
-      "https://www2.census.gov/econ/bps/Place/South%20Region/so2608y.txt"
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2609y.txt"
      ]
     },
     {
@@ -11157,15 +11273,26 @@
     },
     {
      "name": "latest_grade",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ]
     },
     {
      "name": "latest_grade_year",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "prior_grade",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C"
+     ]
     },
     {
      "name": "grades_on_record",
@@ -11173,11 +11300,11 @@
     },
     {
      "name": "latest_per_student",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "latest_spending_year",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "zoned_levels",
@@ -11224,12 +11351,15 @@
   {
    "id": "school-grades",
    "title": "School grades",
-   "description": "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).",
-   "rows": 0,
+   "description": "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). school_type is Elementary, Middle, High or Combination. Components (percent of students: third-grade reading (grade3_ela_achievement), English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for each year whose state file was read (the latest two). No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).",
+   "rows": 343,
    "columns": [
     {
      "name": "place_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
     },
     {
      "name": "school_id",
@@ -11240,19 +11370,56 @@
      "type": "string"
     },
     {
+     "name": "year",
+     "type": "number"
+    },
+    {
      "name": "school_year",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2015-16",
+      "2016-17",
+      "2017-18",
+      "2018-19",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
+      "2024-25",
+      "2025-26"
+     ]
     },
     {
      "name": "grade",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "F"
+     ]
     },
     {
      "name": "informational_baseline",
-     "type": "boolean"
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
     },
     {
-     "name": "year",
+     "name": "school_type",
+     "type": "string",
+     "values": [
+      "Combination",
+      "Elementary",
+      "High",
+      "Middle"
+     ]
+    },
+    {
+     "name": "grade3_ela_achievement",
      "type": "number"
     },
     {
@@ -11317,11 +11484,17 @@
     },
     {
      "name": "source_url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://www.fldoe.org/file/18534/SchoolGrades26.xlsx"
+     ]
     },
     {
      "name": "gov_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "schools"
+     ]
     }
    ],
    "json": "/downloads/school-grades.json",
@@ -11329,14 +11502,300 @@
    "api": "/api/v1/datasets/school-grades"
   },
   {
-   "id": "school-spending",
-   "title": "Spending per school",
-   "description": "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.",
-   "rows": 0,
+   "id": "school-grade-state",
+   "title": "School grades statewide",
+   "description": "Florida-wide school grade results by school type (Elementary, Middle, High, Combination, and All), one row per school type and year, worked out from the Florida Department of Education's statewide school grades file: how many schools got each grade (grade_a to grade_i) and the average of each grade component across the state's schools (simple average of schools, not weighted by students). Used to compare a school with the state.",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "state",
+     "type": "string",
+     "values": [
+      "FL"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2024-25",
+      "2025-26"
+     ]
+    },
+    {
+     "name": "school_type",
+     "type": "string",
+     "values": [
+      "All",
+      "Combination",
+      "Elementary",
+      "High",
+      "Middle"
+     ]
+    },
+    {
+     "name": "schools_graded",
+     "type": "number"
+    },
+    {
+     "name": "grade_a",
+     "type": "number"
+    },
+    {
+     "name": "grade_b",
+     "type": "number"
+    },
+    {
+     "name": "grade_c",
+     "type": "number"
+    },
+    {
+     "name": "grade_d",
+     "type": "number"
+    },
+    {
+     "name": "grade_f",
+     "type": "number"
+    },
+    {
+     "name": "grade_i",
+     "type": "number"
+    },
+    {
+     "name": "grade3_ela_achievement",
+     "type": "number"
+    },
+    {
+     "name": "ela_achievement",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "math_achievement",
+     "type": "number"
+    },
+    {
+     "name": "math_gains",
+     "type": "number"
+    },
+    {
+     "name": "math_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "science_achievement",
+     "type": "number"
+    },
+    {
+     "name": "social_studies_achievement",
+     "type": "number"
+    },
+    {
+     "name": "middle_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "graduation_rate",
+     "type": "number"
+    },
+    {
+     "name": "college_career_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "percent_of_points",
+     "type": "number"
+    },
+    {
+     "name": "percent_tested",
+     "type": "number"
+    },
+    {
+     "name": "pct_economically_disadvantaged",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.fldoe.org/file/18534/SchoolGrades25.xlsx",
+      "https://www.fldoe.org/file/18534/SchoolGrades26.xlsx"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-grade-state.json",
+   "csv": "/downloads/school-grade-state.csv",
+   "api": "/api/v1/datasets/school-grade-state"
+  },
+  {
+   "id": "school-bell-times",
+   "title": "School start and end times",
+   "description": "When each public school's day starts and ends this school year (24-hour HH:MM), from the district's published start and end times chart, typed in by hand. Some schools have more than one row: different grade bands (part), a zero period, or a shorter Friday (note). Rows with kind 'early release' give the dismissal time by school level on early release days. school_id is empty for programs that aren't in the federal school directory.",
+   "rows": 55,
    "columns": [
     {
      "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "school_id",
      "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "part",
+     "type": "string",
+     "values": [
+      "Elementary (K-5)",
+      "Elementary schools",
+      "Grades 3-5",
+      "Grades 4-8",
+      "Grades 6-12",
+      "Grades 6-8",
+      "Grades K-2",
+      "Grades K-3",
+      "Grades K-5",
+      "Grades K-8",
+      "High schools",
+      "Middle (6-8)",
+      "Middle schools",
+      "Regular day (9-12)",
+      "Zero period (9-12)"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "early release",
+      "school day"
+     ]
+    },
+    {
+     "name": "start_time",
+     "type": "string",
+     "values": [
+      "07:00",
+      "07:15",
+      "07:20",
+      "07:30",
+      "07:40",
+      "07:45",
+      "07:55",
+      "08:00",
+      "08:15",
+      "08:25",
+      "08:30",
+      "09:00"
+     ]
+    },
+    {
+     "name": "end_time",
+     "type": "string",
+     "values": [
+      "08:05",
+      "11:30",
+      "12:30",
+      "13:00",
+      "13:50",
+      "14:00",
+      "14:05",
+      "14:15",
+      "14:30",
+      "14:45",
+      "14:55",
+      "15:00",
+      "15:15",
+      "15:30"
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Early release days let out 2.5 hours before the end of the school day",
+      "Fridays 7:40-12:30",
+      "Fridays 7:45-11:45",
+      "Fridays 7:55-11:55",
+      "Fridays 8:00-12:45",
+      "Listed with Palm Bay Preparatory Academy"
+     ]
+    },
+    {
+     "name": "group_name",
+     "type": "string",
+     "values": [
+      "Adult and technical",
+      "Charter schools",
+      "Combination schools",
+      "Elementary schools",
+      "High schools",
+      "Middle schools",
+      "Special purpose schools"
+     ]
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2026-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.bay.k12.fl.us/page/start-end-times"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-bell-times.json",
+   "csv": "/downloads/school-bell-times.csv",
+   "api": "/api/v1/datasets/school-bell-times"
+  },
+  {
+   "id": "school-spending",
+   "title": "Spending per school",
+   "description": "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.",
+   "rows": 352,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
     },
     {
      "name": "school_id",
@@ -11352,7 +11811,17 @@
     },
     {
      "name": "school_year",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2017-18",
+      "2018-19",
+      "2019-20",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
+      "2024-25"
+     ]
     },
     {
      "name": "federal_per_student",
@@ -11376,11 +11845,24 @@
     },
     {
      "name": "source_url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/1718School-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/1819School-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/1920School-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/2021Scool-PerPupil-Expen.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA22School-PerPupil-Expend.xlsx",
+      "https://www.fldoe.org/core/fileparse.php/7507/urlt/ESSA23School-PerPupil-Expend.xlsx",
+      "https://www.fldoe.org/file/7507/ESSA-2025-School-Per-Pupil-Expenditures.xlsx",
+      "https://www.fldoe.org/file/7507/ESSA24School-PerPupil-Expend.xlsx"
+     ]
     },
     {
      "name": "gov_id",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "schools"
+     ]
     }
    ],
    "json": "/downloads/school-spending.json",
@@ -11910,7 +12392,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-10-30"
      ]
     },
     {
@@ -12059,7 +12541,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 23,
+   "rows": 28,
    "columns": [
     {
      "name": "notice_id",
@@ -12091,7 +12573,8 @@
       "City of Lynn Haven",
       "City of Mexico Beach",
       "City of Panama City",
-      "City of Panama City Beach"
+      "City of Panama City Beach",
+      "Lynn Haven"
      ]
     },
     {
@@ -12099,7 +12582,8 @@
      "type": "string",
      "values": [
       "alert-center",
-      "news"
+      "news",
+      "staff"
      ]
     },
     {
@@ -12118,7 +12602,9 @@
      "name": "title",
      "type": "string",
      "values": [
+      "All Boil Water Notices Rescinded",
       "Bay County expands storm debris assistance",
+      "Boil Water Notice (TEST)",
       "Boil Water Notice Rescinded",
       "Damage Assessment Reporting",
       "Florida Avenue & W. 7th Street Closure",
@@ -12128,16 +12614,19 @@
       "PRECAUTIONARY BOIL WATER NOTICE",
       "PRECAUTIONARY BOIL WATER NOTICE - Scheduled Outage",
       "Precautionary Boil Water Norice",
-      "Precautionary Boil Water Notice for Manistee Drive",
+      "Precautionary Boil Water Notice for Manistee Drive Rescinded",
       "Precautionary Boil Water Notice for Sugar Sands & Sunstop Gas Station",
       "RESCINDED: Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-27",
       "RESCINDED: Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr. Updated on 2026-10-27",
       "Reuse System Offline Due to Repair",
       "Reuse System Temporarily Out of Service",
+      "Road Closure Notice: 10th Street just west of W. Caroline Boulevard to Lisenby Avenue",
       "Road Closure Notice: Michigan Ave. between W 22nd St. and W 20th Ct.",
       "Sand Available Ahead of Tropical Storm Isaias",
+      "Tear Boil Alert",
       "Tropical Storm Isaias Updates",
-      "Water Quality Advisory Issued for Carl Gray Park"
+      "Water Quality Advisory Issued for Carl Gray Park",
+      "West Side of Martina T-Dock Closed Friday, October 30, from 12-10 PM Due to Special Event"
      ]
     },
     {
@@ -12148,7 +12637,8 @@
       "As the storms clear, Bay County Emergency Management asks the residents of the county to fill out their residential damage assessment form.",
       "Beginning Monday, Oct. 26, Bay County crews will conduct a single roadside collection pass specifically for unbagged vegetative debris in the hardest-hit areas of unincorporated Bay County.",
       "Beginning Monday, October 5, the following sections will be closed to vehicle traffic: - Florida Avenue: W. 7th Street to W. 8th Street - W. 7th Street: Ohio Avenue to Florida Avenue Detour signs will be in place to help motorists navigate the area",
-      "Due to an install of a new section of water main, 104-181 Manistee Drive is under a Precautionary Boil Water Notice in Panama City Beach.",
+      "Boil Water Notices have been rescinded for the following areas:",
+      "Boil water notice for Highway 77",
       "For local information on Tropical Storm Isaias, please visit www.pcbfl.gov/storm.",
       "For the latest on Hurricane Isaias response and recovery, visit www.pcbfl.gov/storm",
       "Heavy rain is expected this weekend with Tropical Storm Isaias. Bay County has sand available to the public to help you protect your home and property. Find sandbag pickup locations and details below.",
@@ -12158,9 +12648,13 @@
       "RESCINDED: Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Water restored at 6:00 PM Monday evening, October 26, 2026.",
       "RESCINDED: Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr for Tues., Oct. 27 due to scheduled system upgrades. Update: Updated Maintenance Window: Water service will be interrupted starting at 11:00 a.m. Tuesday October 27, 2026, and ending at 7:00 p.m. Tuesday October 27 , 2026, due to scheduled system upgrades. A precautionary boil water notice will be in effect for this area once service is restored.",
       "ROAD CLOSURE NOTICE: Michigan Avenue – Road Work",
+      "Road Closure Notice: 10th Street just west of W. Caroline Boulevard to Lisenby Avenue",
+      "Testing push",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main.",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main.",
       "The Florida Department of Health in Bay County (DOH-Bay) has issued a water quality advisory for high bacterial levels for the following Panama City location: Carl Gray Park",
+      "The Precautionary Boil Water Notice that was issued for 104-181 Manistee Drive has been rescinded.",
+      "West Side of Martina T-Dock Closed Friday, October 30, from 12-10 PM Due to Special Event",
       "With heavy rain expected, now is a good time to check your evacuation zone. Evacuation zones in Bay County may be different than you think. Look up your address on the Evacuation Zones map on the Bay County website below."
      ]
     },
@@ -12173,16 +12667,24 @@
      "type": "string",
      "values": [
       "minor",
-      "moderate"
+      "moderate",
+      "severe"
      ]
     },
     {
      "name": "event",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Boil-water notice"
+     ]
     },
     {
      "name": "area",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "City of Lynn Haven",
+      "Lynn Haven"
+     ]
     },
     {
      "name": "zones",
@@ -12207,18 +12709,27 @@
       "2026-10-14T16:52:00.000Z",
       "2026-10-23T13:42:27.000Z",
       "2026-10-23T14:35:50.000Z",
-      "2026-10-27T22:46:29.000Z",
       "2026-10-28T18:47:00.000Z",
       "2026-10-28T18:48:00.000Z",
       "2026-10-28T18:55:43.000Z",
       "2026-10-28T18:56:07.000Z",
       "2026-10-28T21:03:00.000Z",
-      "2026-10-28T21:10:16.000Z"
+      "2026-10-28T21:10:16.000Z",
+      "2026-10-29T17:30:51.000Z",
+      "2026-10-29T20:49:18.000Z",
+      "2026-10-30T16:17:11.000Z",
+      "2026-10-30T16:49:07.000Z",
+      "2026-10-30T21:03:28.929Z",
+      "2026-10-30T23:58:03.370Z"
      ]
     },
     {
      "name": "starts",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-10-30T21:03:28.929Z",
+      "2026-10-30T23:58:03.370Z"
+     ]
     },
     {
      "name": "ends",
@@ -12234,9 +12745,12 @@
       "2026-10-22T20:05:36.000Z",
       "2026-10-24T15:51:36.000Z",
       "2026-10-24T16:52:00.000Z",
+      "2026-10-31T21:03:28.936Z",
+      "2026-10-31T23:58:03.377Z",
       "2026-11-07T18:47:00.000Z",
       "2026-11-07T18:48:00.000Z",
-      "2026-11-07T21:03:00.000Z"
+      "2026-11-07T21:03:00.000Z",
+      "2026-11-09T16:17:11.000Z"
      ]
     },
     {
@@ -12258,13 +12772,18 @@
       "2026-10-14T16:52:00.000Z",
       "2026-10-23T13:42:27.000Z",
       "2026-10-23T14:35:50.000Z",
-      "2026-10-27T22:46:29.000Z",
       "2026-10-28T18:47:00.000Z",
       "2026-10-28T18:48:00.000Z",
       "2026-10-28T18:55:43.000Z",
       "2026-10-28T18:56:07.000Z",
       "2026-10-28T21:03:00.000Z",
-      "2026-10-28T21:10:16.000Z"
+      "2026-10-28T21:10:16.000Z",
+      "2026-10-29T17:30:51.000Z",
+      "2026-10-29T20:49:18.000Z",
+      "2026-10-30T16:17:11.000Z",
+      "2026-10-30T16:49:07.000Z",
+      "2026-10-30T21:03:28.929Z",
+      "2026-10-30T23:58:03.370Z"
      ]
     },
     {
@@ -12291,7 +12810,12 @@
       "2026-10-27T20:41:37.771Z",
       "2026-10-28T00:40:09.58179+00:00",
       "2026-10-28T21:06:37.512914+00:00",
-      "2026-10-28T21:10:22.208921+00:00"
+      "2026-10-28T21:10:22.208921+00:00",
+      "2026-10-29T20:50:02.816934+00:00",
+      "2026-10-30T16:20:02.668444+00:00",
+      "2026-10-30T16:50:03.082394+00:00",
+      "2026-10-30T21:03:30.939594+00:00",
+      "2026-10-30T23:58:05.972064+00:00"
      ]
     },
     {
@@ -12300,13 +12824,20 @@
      "values": [
       "2026-10-27T20:41:53.613Z",
       "2026-10-28T14:45:01.081378+00:00",
-      "2026-10-29T11:29:50.403Z"
+      "2026-10-30T14:20:03.043418+00:00",
+      "2026-10-30T16:05:02.665696+00:00",
+      "2026-10-30T16:15:09.300669+00:00",
+      "2026-10-30T19:45:09.304981+00:00",
+      "2026-10-30T21:10:02.829464+00:00",
+      "2026-10-30T23:58:05.972064+00:00",
+      "2026-10-31T01:40:40.132Z"
      ]
     },
     {
      "name": "url",
      "type": "string",
      "values": [
+      "https://baycounty.me/emergency",
       "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
       "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
       "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
@@ -12318,6 +12849,7 @@
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2155",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2156",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2157",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2158",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=144",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
@@ -12325,6 +12857,8 @@
       "https://www.panamacity.gov/AlertCenter.aspx?AID=700",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=701",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=702",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=703",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
       "https://www.pcbfl.gov/AlertCenter.aspx?AID=23",
       "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
       "https://www.pcbfl.gov/storm"
@@ -12334,6 +12868,7 @@
      "name": "source_url",
      "type": "string",
      "values": [
+      "https://baycounty.me/emergency",
       "https://mexicobeachfl.gov/government/news/",
       "https://www.baycountyfl.gov/AlertCenter.aspx",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
@@ -12343,6 +12878,7 @@
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2155",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2156",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2157",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2158",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
       "https://www.panamacity.gov/AlertCenter.aspx",
@@ -13337,7 +13873,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 67,
+   "rows": 76,
    "columns": [
     {
      "name": "place_id",
@@ -13376,7 +13912,8 @@
       "2026-10-26",
       "2026-10-27",
       "2026-10-28",
-      "2026-10-29"
+      "2026-10-29",
+      "2026-10-30"
      ]
     },
     {
@@ -13451,9 +13988,11 @@
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
+      "2026-11-02",
       "2026-11-03",
       "2026-11-04",
       "2026-11-06",
+      "2026-11-07",
       "2026-11-09",
       "2026-11-10",
       "2026-11-12",
@@ -13480,10 +14019,11 @@
      "name": "pdf_url",
      "type": "string",
      "values": [
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-220.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-028.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-108.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/mlwyHIF8RUrB6T3Ot2Df/d59b./cropped-510.pdf",
@@ -13536,9 +14076,12 @@
       "Ordinance 1153",
       "Ordinance 1154",
       "Ordinance 1192R",
+      "Ordinance 1197",
       "Ordinance 1691",
       "Ordinance 3315",
+      "Ordinance 3317",
       "Ordinance 904",
+      "Ordinance 950",
       "Project 414877",
       "Project R2025-14-0005600",
       "RFP PCB26-51",
@@ -13559,6 +14102,7 @@
       "lynne.fasone@pcbfl.gov",
       "mell@mexicobeachfl.gov",
       "planning@baycountyfl.gov",
+      "planning@panamacity.gov",
       "purchasing@cityoflynnhaven.com",
       "purchasing@panamacity.gov",
       "purchasing@pcbfl.gov",
@@ -13584,14 +14128,18 @@
       "(850) 248-8270",
       "(850) 265-2121",
       "(850) 648-5700",
+      "(850) 691-4595; (850) 872-3014; (850) 872-3028",
       "(850) 691-4902",
       "(850) 723-3089",
       "(850) 763-5730",
       "(850) 767-3220",
       "(850) 767-4100",
       "(850) 767-4139",
+      "(850) 767-4159",
       "(850) 767-4363",
-      "(850) 872-3020"
+      "(850) 871-6000",
+      "(850) 872-3020",
+      "(850) 872-3021"
      ]
     },
     {
@@ -13602,10 +14150,12 @@
       "https://cityoflynnhaven.com/Bids.aspx",
       "https://drive.google.com/drive/folders/1xcGtgH-2HGNKVYBXkhRnpbUbaTk-DBJC?usp=sharing",
       "https://lynnhavenfl.portal.civicclerk.com/event/1066/files/agenda/1051",
+      "https://lynnhavenfl.v8.civicclerk.com/Meetings/Agenda?id=2112",
       "https://mexicobeachfl.gov/bids/",
       "https://panamacity.bonfirehub.com/portal/?tab=openOpportunities",
       "https://procurement.opengov.com/signup",
       "lynnhavenfl.portal.civicclerk.com",
+      "www.CITYOFCALLAWAY.COM",
       "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/bids.aspx",
       "www.panamacity.gov",
@@ -13621,7 +14171,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 118,
+   "rows": 109,
    "columns": [
     {
      "name": "place_id",
@@ -13721,17 +14271,15 @@
       "2026-07-13",
       "2026-07-17",
       "2026-08-03",
-      "2026-08-06",
       "2026-08-10",
-      "2026-08-31",
       "2026-09-14",
       "2026-09-16",
-      "2026-09-22",
-      "2026-09-24",
       "2026-09-28",
       "2026-09-29",
       "2026-09-30",
+      "2026-10-01",
       "2026-10-02",
+      "2026-10-03",
       "2026-10-06",
       "2026-10-07",
       "2026-10-08",
@@ -13739,24 +14287,25 @@
       "2026-10-15",
       "2026-10-16",
       "2026-10-17",
-      "2026-10-19",
       "2026-10-20",
       "2026-10-22",
       "2026-10-23",
+      "2026-10-24",
       "2026-10-26",
       "2026-10-27",
-      "2026-10-28"
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30"
      ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-10-29",
-      "2026-10-30",
       "2026-11-02",
       "2026-11-03",
       "2026-11-04",
+      "2026-11-05",
       "2026-11-06",
       "2027-04-30"
      ]
@@ -13775,7 +14324,9 @@
      "values": [
       "2026-10-27",
       "2026-10-28",
-      "2026-10-29"
+      "2026-10-29",
+      "2026-10-30",
+      "2026-10-31"
      ]
     },
     {
@@ -13869,7 +14420,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-10-31"
      ]
     }
    ],
@@ -14163,8 +14714,8 @@
   {
    "id": "utility-rates",
    "title": "Utilities: rates",
-   "description": "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.",
-   "rows": 73,
+   "description": "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes, plus the same bill split into water and sewer, garbage and other charges. effective says which rate schedule the row comes from.",
+   "rows": 88,
    "columns": [
     {
      "name": "place_id",
@@ -14276,6 +14827,9 @@
       "Solid waste (city trash and yard pickup)",
       "Stormwater",
       "Typical monthly bill at 5,000 gallons",
+      "Typical monthly bill at 5,000 gallons: garbage",
+      "Typical monthly bill at 5,000 gallons: other charges",
+      "Typical monthly bill at 5,000 gallons: water and sewer",
       "Usage",
       "Usage above 4,000 gallons",
       "Usage above 6,000 gallons",
@@ -14347,10 +14901,13 @@
      "name": "notes",
      "type": "string",
      "values": [
+      "$3 stormwater",
+      "10% franchise fee on water ($3.80) and $1 stormwater",
       "14.09 + 32.29 + 45.91 + 5 x 6.28 + 5 x 11.90 = 92.29 + 31.40 + 59.50 = 183.19 The city's FAQ says the average residential bill becomes 'approximately $92.29', which equals the three base charges alone - so usage may include an allowance not described in the notice. Treat the 5,000-gallon figure as provisional until the rate ordinance is checked.",
       "16.85 + 16.95 + 24.86 = 58.66 base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (matches budget's own table: 5,000 gal - $129.76). Water+sewer only = 104.90",
       "2 pickups per week",
       "5,000 gal is within the 6,000-gal minimum: water 37.54 + sewer 49.88 = 87.42 (rate sheet also shows combined 0-6,000 gal water+sewer = 87.42) Sheet says billing is bi-monthly on even months while headings say 'monthly ... per unit'; figure is per month as labeled.",
+      "7% utility tax on water",
       "Base 8.95 + 30.43 + 37.67 + 3.00 = 80.05 (city's stated total base); + 5 x (5.13 + 14.90) = 100.15; total = 180.20",
       "Water 11.37 + 5 x 5.32 = 37.97; franchise fee 10% = 3.80; Sewer 30.69 + 5 x 6.13 = 61.34; Stormwater 1.00; Solid waste 13.00; Total = 117.11 The city's rates page mislabels its headings (outside-city base rates appear under 'per 1,000 gallons'); figures were matched by the stated 25% outside surcharge (11.37 x 1.25 = 14.21; 30.69 x 1.25 = 38.36; 5.32 x 1.25 = 6.65; 6.13 x 1.25 = 7.66). FY2027 budget assumes consumption rates rise $0.05 (water) and $0.15 (sewer) to cover county increases, which may not yet be on the page.",
       "Water 40.83 + 1 x 3.68 = 44.51; utility tax 7% = 3.12; Sewer 55.07 + 1 x 5.20 = 60.27; Sanitation 40.00; Total = 147.90 (city's stated minimum bill is $138.76)",
@@ -14726,7 +15283,7 @@
    "id": "restaurants",
    "title": "Restaurants and food service",
    "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1435,
+   "rows": 1437,
    "columns": [
     {
      "name": "place_id",
@@ -14970,7 +15527,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17190,
+   "rows": 17195,
    "columns": [
     {
      "name": "place_id",
@@ -15241,7 +15798,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 23,
+   "rows": 12,
    "columns": [
     {
      "name": "place_id",
@@ -15274,7 +15831,6 @@
      "name": "featured",
      "type": "boolean",
      "values": [
-      false,
       true
      ]
     },
@@ -15284,31 +15840,7 @@
     },
     {
      "name": "title",
-     "type": "string",
-     "values": [
-      "Bay County Fire Rescue Open House",
-      "Boo Bash",
-      "Card Club",
-      "Craft Drop-in: Halloween",
-      "Crafternoon @ The Library",
-      "Dream Builders at MLK",
-      "Escape the Library (Ages 13+) (Registration Required)",
-      "Fall Festival",
-      "Line Dancing",
-      "Marshall Brothers",
-      "Mexico Beach: 3rd LDC Workshop",
-      "Mexico Beach: Special Meeting and 4th LDC Workshop",
-      "PC Senior Living",
-      "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
-      "Sail Into School (Ages 3 – 5)",
-      "Sansom Equipment Company, Inc.",
-      "Sea Needles",
-      "Sunset Yoga",
-      "Ten-8 Fire & Safety, LLC",
-      "Toys for Kids Halloween Bash 2026",
-      "Young Professionals Coffee, Conversations & Headshots",
-      "ZooBoo"
-     ]
+     "type": "string"
     },
     {
      "name": "summary",
@@ -15325,7 +15857,6 @@
      "values": [
       "2026-10-20",
       "2026-10-22",
-      "2026-10-29",
       "2026-10-30",
       "2026-10-31"
      ]
@@ -15334,20 +15865,10 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-10-29T09:00:00",
-      "2026-10-29T09:00:00-05:00",
-      "2026-10-29T10:00:00",
-      "2026-10-29T10:30:00",
-      "2026-10-29T15:00:00",
-      "2026-10-29T17:30:00",
-      "2026-10-29T18:00:00",
       "2026-10-30T09:00:00",
       "2026-10-30T09:00:00-05:00",
-      "2026-10-30T09:30:00",
       "2026-10-30T10:00:00",
-      "2026-10-30T13:00:00",
       "2026-10-30T14:00:00",
-      "2026-10-30T15:00:00",
       "2026-10-31T00:00:00",
       "2026-10-31T08:00:00",
       "2026-10-31T09:00:00"
@@ -15357,17 +15878,8 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-10-29T10:30:00",
-      "2026-10-29T11:00:00",
-      "2026-10-29T13:00:00",
-      "2026-10-29T17:00:00",
-      "2026-10-29T19:00:00",
-      "2026-10-29T20:00:00",
-      "2026-10-30T11:00:00",
       "2026-10-30T12:00:00",
-      "2026-10-30T14:00:00",
       "2026-10-30T16:00:00",
-      "2026-10-30T17:00:00",
       "2026-10-31T13:00:00",
       "2026-10-31T16:00:00",
       "2026-10-31T23:59:59",
@@ -15411,7 +15923,6 @@
      "name": "town",
      "type": "string",
      "values": [
-      "Bay County",
       "Mexico Beach",
       "Panama City",
       "Panama City Beach"
@@ -15426,7 +15937,6 @@
       "Hammerhead Fred’s",
       "Panama City Beach Public Library",
       "Parker Park",
-      "The Sapp House",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "ZooWorld"
      ]
@@ -15435,7 +15945,6 @@
      "name": "category",
      "type": "string",
      "values": [
-      "Chamber",
       "Community",
       "Library"
      ]
@@ -15536,8 +16045,6 @@
      "name": "source",
      "type": "string",
      "values": [
-      "Bay County",
-      "City of Panama City",
       "Mexico Beach (visitor events)",
       "Northwest Regional Library System",
       "Panama City Beach Chamber"
@@ -15551,10 +16058,8 @@
       "https://mexicobeachfl.gov/government/council-meetings/",
       "https://pcbeach.org/local-events/",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
-      "https://www.baycountyfl.gov/Calendar.aspx",
       "https://www.mexicobeach.com/events/",
-      "https://www.nwrls.com/events",
-      "https://www.panamacity.gov/Calendar.aspx"
+      "https://www.nwrls.com/events"
      ]
     },
     {
@@ -16130,6 +16635,749 @@
    "api": "/api/v1/datasets/tax-districts"
   },
   {
+   "id": "safety-agencies",
+   "title": "Police and fire departments",
+   "description": "Who polices and who fights fires in each local government: the agency, how it is arranged (own department, the Sheriff, or a city paying the Sheriff by contract), the FY2026 budget for it (budget_lines names the lines added from the government's adopted budget, the same figures as the budget pages), cost_per_resident (the budget over residents: the city's population; the whole county for the Sheriff, who runs the jail for everyone; the unincorporated county for county fire), the latest sworn officers and civilian staff the agency reported to the FBI, and its FBI reporting number (fbi_ori). Hand-checked.",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string"
+    },
+    {
+     "name": "agency",
+     "type": "string"
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "fire",
+      "police"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "agency_gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sheriff",
+      "sp"
+     ]
+    },
+    {
+     "name": "arrangement",
+     "type": "string",
+     "values": [
+      "City fire department",
+      "City police department",
+      "County fire department for the unincorporated areas, paid by the fire services MSTU",
+      "Sheriff (countywide; unincorporated areas, the county jail and the cities that contract)",
+      "The city pays the Sheriff's Office to police Callaway",
+      "The city pays the Sheriff's Office to police Mexico Beach (since Nov 1, 2019; the city's own police department reported until 2019)"
+     ]
+    },
+    {
+     "name": "budget_amount",
+     "type": "number"
+    },
+    {
+     "name": "budget_lines",
+     "type": "string",
+     "values": [
+      "145 M.S.T.U. - Fire Services",
+      "Fire",
+      "Fire Department",
+      "Law Enforcement",
+      "Law Enforcement (Sheriff contract)",
+      "Police",
+      "Police (Sheriff contract)",
+      "Sheriff / law enforcement; Jail operations (Sheriff-run)"
+     ]
+    },
+    {
+     "name": "budget_fiscal_year",
+     "type": "string",
+     "values": [
+      "FY2026"
+     ]
+    },
+    {
+     "name": "budget_source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6275/Agenda-Budget-Meeting-091725.pdf",
+      "https://publicnoticesbaycountyfl.gov/public-notices",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09182025-374?packet=true",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "https://www.springfieldfl.net/media/10201"
+     ]
+    },
+    {
+     "name": "residents",
+     "type": "number"
+    },
+    {
+     "name": "cost_per_resident",
+     "type": "number"
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030400",
+      "FL0030500",
+      "FL0030600",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "officers",
+     "type": "number"
+    },
+    {
+     "name": "civilians",
+     "type": "number"
+    },
+    {
+     "name": "staffing_year",
+     "type": "number"
+    },
+    {
+     "name": "website",
+     "type": "string",
+     "values": [
+      "https://bayso.org",
+      "https://www.panamacitypolice.gov"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bayso.org",
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6275/Agenda-Budget-Meeting-091725.pdf",
+      "https://publicnoticesbaycountyfl.gov/public-notices",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09182025-374?packet=true",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.panamacitypolice.gov",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "https://www.springfieldfl.net/media/10201",
+      "https://www.wjhg.com/2020/11/03/officials-look-back-at-transition-from-mexico-beach-police-department-to-bay-county-sheriffs-office"
+     ]
+    }
+   ],
+   "json": "/downloads/safety-agencies.json",
+   "csv": "/downloads/safety-agencies.csv",
+   "api": "/api/v1/datasets/safety-agencies"
+  },
+  {
+   "id": "crime-counts",
+   "title": "Crimes reported by police agency",
+   "description": "Offenses each police agency in the county reported to the FBI's Uniform Crime Reporting program each year since 2016, from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and murder, rape, robbery, aggravated assault, burglary, larceny-theft, motor vehicle theft and arson, with offenses cleared (solved or closed), the population the agency covers, and the statewide rate for the same offense and year (florida_per_1000; blank for 2021, when only half of Florida reported). A missing year means the agency sent nothing that year (no Florida agency reported for 2021; Panama City Beach has not reported since 2020). Florida agencies sent one yearly summary until 2024 and monthly incident reports (NIBRS) from 2025, so 2025 on is not directly comparable with earlier years. months_reported below 12 means the year is partial; per_1000 is left blank then. Counts only; no person is named.",
+   "rows": 580,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string",
+     "values": [
+      "bcso",
+      "lhpd",
+      "mb-police",
+      "parkerpd",
+      "pcbpd",
+      "pcpd",
+      "sppd"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County Sheriff's Office",
+      "Lynn Haven Police Department",
+      "Mexico Beach Police Department (reported until 2019)",
+      "Panama City Beach Police Department",
+      "Panama City Police Department",
+      "Parker Police Department",
+      "Springfield Police Department"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030400",
+      "FL0030500",
+      "FL0030600",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "offense_code",
+     "type": "string",
+     "values": [
+      "ARS",
+      "ASS",
+      "BUR",
+      "HOM",
+      "LAR",
+      "MVT",
+      "P",
+      "ROB",
+      "RPE",
+      "V"
+     ]
+    },
+    {
+     "name": "offense",
+     "type": "string",
+     "values": [
+      "Aggravated assault",
+      "Arson",
+      "Burglary",
+      "Larceny-theft",
+      "Motor vehicle theft",
+      "Murder",
+      "Property crime",
+      "Rape",
+      "Robbery",
+      "Violent crime"
+     ]
+    },
+    {
+     "name": "offense_group",
+     "type": "string",
+     "values": [
+      "property",
+      "violent"
+     ]
+    },
+    {
+     "name": "total_row",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "count",
+     "type": "number"
+    },
+    {
+     "name": "cleared",
+     "type": "number"
+    },
+    {
+     "name": "months_reported",
+     "type": "number"
+    },
+    {
+     "name": "population",
+     "type": "number"
+    },
+    {
+     "name": "per_1000",
+     "type": "number"
+    },
+    {
+     "name": "florida_per_1000",
+     "type": "number"
+    },
+    {
+     "name": "reporting",
+     "type": "string",
+     "values": [
+      "monthly incident reports (NIBRS)",
+      "yearly summary"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+     ]
+    }
+   ],
+   "json": "/downloads/crime-counts.json",
+   "csv": "/downloads/crime-counts.csv",
+   "api": "/api/v1/datasets/crime-counts"
+  },
+  {
+   "id": "crime-monthly",
+   "title": "Crimes reported by police agency, by month",
+   "description": "Offenses each police agency in the county reported to the FBI each month since January 2025, when Florida agencies moved to monthly incident reports (NIBRS), from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and the eight main offenses, with offenses cleared. This is where this year's numbers come from before the year is over: the page compares this year so far with the same months last year, leaving out the current month and the two before it, which agencies are still adding to. A month that is missing has not been sent yet. Counts only; no person is named.",
+   "rows": 1040,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string",
+     "values": [
+      "bcso",
+      "lhpd",
+      "parkerpd",
+      "pcpd",
+      "sppd"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County Sheriff's Office",
+      "Lynn Haven Police Department",
+      "Panama City Police Department",
+      "Parker Police Department",
+      "Springfield Police Department"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030500",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "month",
+     "type": "number"
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10"
+     ]
+    },
+    {
+     "name": "offense_code",
+     "type": "string",
+     "values": [
+      "ARS",
+      "ASS",
+      "BUR",
+      "HOM",
+      "LAR",
+      "MVT",
+      "P",
+      "ROB",
+      "RPE",
+      "V"
+     ]
+    },
+    {
+     "name": "offense",
+     "type": "string",
+     "values": [
+      "Aggravated assault",
+      "Arson",
+      "Burglary",
+      "Larceny-theft",
+      "Motor vehicle theft",
+      "Murder",
+      "Property crime",
+      "Rape",
+      "Robbery",
+      "Violent crime"
+     ]
+    },
+    {
+     "name": "offense_group",
+     "type": "string",
+     "values": [
+      "property",
+      "violent"
+     ]
+    },
+    {
+     "name": "total_row",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "count",
+     "type": "number"
+    },
+    {
+     "name": "cleared",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+     ]
+    }
+   ],
+   "json": "/downloads/crime-monthly.json",
+   "csv": "/downloads/crime-monthly.csv",
+   "api": "/api/v1/datasets/crime-monthly"
+  },
+  {
+   "id": "police-staffing",
+   "title": "Police staffing",
+   "description": "Sworn officers and civilian employees at each police agency in the county on October 31 each year since 2016, as the agency reported them to the FBI (Crime Data Explorer police employee data), with employees per 1,000 residents covered. The Sheriff's reported civilian staff went from 71 in 2022 to 271 in 2023; the FBI data does not say why.",
+   "rows": 54,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency_id",
+     "type": "string",
+     "values": [
+      "bcso",
+      "lhpd",
+      "mb-police",
+      "parkerpd",
+      "pcbpd",
+      "pcpd",
+      "sppd"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County Sheriff's Office",
+      "Lynn Haven Police Department",
+      "Mexico Beach Police Department (reported until 2019)",
+      "Panama City Beach Police Department",
+      "Panama City Police Department",
+      "Parker Police Department",
+      "Springfield Police Department"
+     ]
+    },
+    {
+     "name": "fbi_ori",
+     "type": "string",
+     "values": [
+      "FL0030000",
+      "FL0030100",
+      "FL0030400",
+      "FL0030500",
+      "FL0030600",
+      "FL0030700",
+      "FL0032600"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "officers",
+     "type": "number"
+    },
+    {
+     "name": "civilians",
+     "type": "number"
+    },
+    {
+     "name": "employees",
+     "type": "number"
+    },
+    {
+     "name": "female_officers",
+     "type": "number"
+    },
+    {
+     "name": "employees_per_1000",
+     "type": "number"
+    },
+    {
+     "name": "population",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend"
+     ]
+    }
+   ],
+   "json": "/downloads/police-staffing.json",
+   "csv": "/downloads/police-staffing.csv",
+   "api": "/api/v1/datasets/police-staffing"
+  },
+  {
+   "id": "data-freshness",
+   "title": "How current each figure is",
+   "description": "One row per headline figure on the site: the newest period we have (latest_period, read from the data itself so it moves as refreshes bring in more), whether that is this year, this year so far, the newest the source has published, or newer data that needs a by-hand download (status), when the next period is usually published (next_due, the source's usual schedule as checked on checked_on, not a promise), how we get it, and the source.",
+   "rows": 14,
+   "columns": [
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "Budgets",
+      "Growth",
+      "Living here",
+      "People",
+      "Public safety",
+      "Sales tax",
+      "Schools",
+      "Tourist tax"
+     ]
+    },
+    {
+     "name": "figure",
+     "type": "string"
+    },
+    {
+     "name": "page",
+     "type": "string",
+     "values": [
+      "/development",
+      "/governments",
+      "/new-businesses",
+      "/public-money/accountability",
+      "/public-money/budget-compare",
+      "/public-money/sales-tax-projects",
+      "/public-money/tourist-tax",
+      "/public-safety#staff",
+      "/public-safety#ytd",
+      "/restaurants",
+      "/schools"
+     ]
+    },
+    {
+     "name": "latest_period",
+     "type": "string",
+     "values": [
+      "2024-25 school year",
+      "2025-26 school year",
+      "April 1, 2025 estimate",
+      "FY2024",
+      "FY2025 for most governments; FY2024 for Bay County, City of Panama City",
+      "FY2026 through July 2026 (10 months)",
+      "FY2027 (Oct 1, 2026 to Sept 30, 2027)",
+      "Jan to Jul 2026 for every agency; some through Oct",
+      "Jan to Sep 2026",
+      "Oct 31, 2025",
+      "State FY2025 (July 2024 to June 2025)",
+      "Updated every day"
+     ]
+    },
+    {
+     "name": "latest_year",
+     "type": "number"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Current",
+      "Newer data needs a by-hand download",
+      "Newest published",
+      "Year so far"
+     ]
+    },
+    {
+     "name": "next_due",
+     "type": "string",
+     "values": [
+      "2025-26 counts are on fldoe.org now; the federal directory adds them about a year later",
+      "2025-26 figures, usually posted the next spring",
+      "2026-27 grades, usually July 2027",
+      "April 1, 2026 estimates, usually published in December 2026",
+      "Each month about four weeks after it ends",
+      "Every day",
+      "FY2025, once the state compiles the reports governments filed by June 2026",
+      "FY2026 audits are due by June 30, 2027; the late FY2025 audits as soon as they are filed",
+      "FY2028 budgets are adopted in September 2027",
+      "More months each week as the FBI posts them, usually one to two months behind",
+      "State FY2026 (to June 2026), when the state updates its yearly file",
+      "The Clerk posts each month about four to six weeks after it ends; September closes the fiscal year",
+      "The Oct 31, 2026 count, published by the FBI in the fall of 2027"
+     ]
+    },
+    {
+     "name": "how_we_get_it",
+     "type": "string",
+     "values": [
+      "Automatic (federal directory); the state file needs a by-hand download",
+      "Automatic, daily",
+      "Automatic, weekly",
+      "By-hand download",
+      "Read by hand from each audit",
+      "Read by hand from each budget book",
+      "Read by hand from the Clerk's monthly report",
+      "State bulk file, by hand",
+      "State file, by hand",
+      "State workbook, by hand"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bebr.ufl.edu/florida-estimates-of-population-2025/",
+      "https://cde.ucr.cjis.gov/",
+      "https://dos.fl.gov/sunbiz/",
+      "https://edr.state.fl.us/Content/local-government/data/data-a-to-z/discstxco.xlsx",
+      "https://edr.state.fl.us/Content/local-government/data/revenues-expenditures/index.cfm",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090",
+      "https://flauditor.gov/pages/municipalities_efiles.html",
+      "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf",
+      "https://www.census.gov/construction/bps/",
+      "https://www.fldoe.org/accountability/accountability-reporting/school-grades/",
+      "https://www.fldoe.org/finance/fl-edu-finance-program-fefp/essa.stml",
+      "https://www2.myfloridalicense.com/hotels-restaurants/"
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string",
+     "values": [
+      "Florida moved to monthly reports in 2025, so this year is compared with the same months last year. The latest months are left out of that comparison while agencies finish them.",
+      "Police and fire department lines on /public-safety still use FY2026, the newest year with department lines for every government.",
+      "The state's education site blocks automated downloads, so the newer state count has to be saved by hand."
+     ]
+    },
+    {
+     "name": "checked_on",
+     "type": "string",
+     "values": [
+      "2026-10-29"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/data-freshness.json",
+   "csv": "/downloads/data-freshness.csv",
+   "api": "/api/v1/datasets/data-freshness"
+  },
+  {
    "id": "volunteer-needs",
    "title": "Volunteer needs",
    "description": "Open volunteer needs in the county, read every day from public volunteer boards (United Way of Northwest Florida's volunteer center and Idealist): what volunteers do, the organization, a plain cause, when (ongoing, one day or shifts), the city and ZIP, and the board's sign-up link. nonprofit_id and organization_entity_id link to the local nonprofit's profile where the name matches. No street addresses or contact details.",
@@ -16366,7 +17614,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-10-31"
      ]
     },
     {
@@ -16390,7 +17638,7 @@
    "id": "volunteer-orgs",
    "title": "Nonprofits that use volunteers",
    "description": "Local nonprofits that reported volunteers on their latest IRS Form 990 (Part I line 6, the organization's own estimate, which can cover more than this county) or that have a volunteer need open now: what each does, a plain cause, website, volunteers and employees reported, revenue, and open needs. Homeowner associations, chambers and private foundations are left out unless they post a need.",
-   "rows": 79,
+   "rows": 76,
    "columns": [
     {
      "name": "place_id",
@@ -16890,7 +18138,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 418,
+   "rows": 421,
    "columns": [
     {
      "name": "place_id",
@@ -18013,6 +19261,7 @@
      "values": [
       "10/13/26 CRA Board Meeting",
       "11/10/26 CRA Meeting",
+      "11/6/26 Joint ULDC - Commission Workshop",
       "3rd LDC Workshop",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
@@ -18023,7 +19272,6 @@
       "City Commission Meeting",
       "City Commission Meeting of October 27, 2026.",
       "City Council",
-      "City Council Meeting",
       "Commission Meeting",
       "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
@@ -18073,11 +19321,11 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1942",
+      "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
-      "https://mexicobeachfl.gov/uploads/2026/09/Octerver-27-2026-City-Council-Meeting-Agena.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
@@ -18095,9 +19343,9 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
+      "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
-      "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
@@ -18177,6 +19425,7 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2151/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
@@ -18206,17 +19455,18 @@
      "type": "array"
     },
     {
+     "name": "calendar_source",
+     "type": "string",
+     "values": [
+      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+     ]
+    },
+    {
      "name": "cancelled",
      "type": "boolean",
      "values": [
       true
-     ]
-    },
-    {
-     "name": "calendar_source",
-     "type": "string",
-     "values": [
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
      ]
     },
     {
@@ -19463,6 +20713,7 @@
       "2026-08-13",
       "2026-09-10",
       "2026-10-16",
+      "2026-10-29",
       "2026-11-16"
      ]
     },
@@ -19498,7 +20749,7 @@
    "id": "campaign-contributions-2026",
    "title": "2026 contributions from organizations",
    "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.",
-   "rows": 155,
+   "rows": 160,
    "columns": [
     {
      "name": "candidate",
@@ -19508,6 +20759,7 @@
       "Brian Rust",
       "Carl Curti",
       "Carlos Sanchez",
+      "Christopher Moore",
       "Colleen Koch",
       "Dr. John L. Haley",
       "Glenn Manley",
@@ -19556,6 +20808,7 @@
      "values": [
       "GOODLETTSVILLE",
       "Homewood",
+      "Jacksonville",
       "LYNN HAVEN",
       "Lecanto",
       "Lynn Haven",
@@ -19609,6 +20862,7 @@
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=734&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=735&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=736&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=739&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=742&rellevel=4&committee=N",

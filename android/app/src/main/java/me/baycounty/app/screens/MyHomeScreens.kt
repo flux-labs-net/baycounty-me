@@ -53,6 +53,7 @@ import me.baycounty.app.Route
 import me.baycounty.app.ui.*
 import me.baycounty.kit.AccountMe
 import me.baycounty.kit.AddressMatch
+import me.baycounty.kit.HomeTiles
 import me.baycounty.kit.NearbyFeed
 import java.time.LocalTime
 
@@ -264,7 +265,7 @@ private fun androidx.compose.foundation.lazy.LazyListScope.feedContent(f: Nearby
                     RouteRow(Route.Gov(g.govId), g.name, symbol = "building.columns")
                     RowDivider(50.dp)
                 }
-                RouteRow(Route.MyAddress, "Full address report", "Taxes, flood zone, schools and who represents you", "doc.text.magnifyingglass")
+                RouteRow(Account.me?.home?.addressMatch?.let { Route.Address(it) } ?: Route.MyAddress, "Full address report", "Taxes, flood zone, schools and who represents you", "doc.text.magnifyingglass")
                 // Same account as the realtor console: agents get a way in from here, like the site's My home.
                 if (Account.me?.realtor == "active") {
                     RowDivider(50.dp)
@@ -370,6 +371,12 @@ fun AccountSettingsScreen() {
                             Text("Remove home", style = T.body, color = Brand.salmon, modifier = Modifier.fillMaxWidth().padding(14.dp))
                         }
                     } else HomeSearch { changingHome = false }
+                }
+            }
+            item {
+                val store = LocalStore.current
+                PageSection("This home", "house", Tone.BLUE, "Owners see the tax bill first on Home; renters see utilities and services. Kept on this phone.") {
+                    TenurePicker(store.tenure ?: HomeTiles.Tenure.UNSET) { store.saveTenure(it) }
                 }
             }
         }

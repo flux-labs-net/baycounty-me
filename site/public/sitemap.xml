@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://baycounty.me/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-03</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/"/>
@@ -166,6 +166,10 @@
     <lastmod>2026-10-27</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/events/ironman-florida</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/glossary</loc>
     <lastmod>2026-10-20</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/glossary"/>
@@ -248,7 +252,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/parks</loc>
@@ -1680,6 +1684,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/baskerville-donovan</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/bay-county-chamber-commerce</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -1833,6 +1841,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/energreen-ameri</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/ferguson-waterworks</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -2089,6 +2101,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/reliantsouth</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/rj-gorman-construction</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -2563,6 +2579,14 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/restaurants/bayside-resort-a-hilton-vacation-club-1302984</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/restaurants/bayside-resort-a-hilton-vacation-club-1305733</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/restaurants/beach-bear-coastal-1306104</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -2776,14 +2800,6 @@
   </url>
   <url>
     <loc>https://baycounty.me/restaurants/bluefin-hospitality-llc-1305092</loc>
-    <lastmod>2026-10-20</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/restaurants/bluegreens-bayside-resort-spa-flip-flops-1305733</loc>
-    <lastmod>2026-10-20</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/restaurants/bluegreens-bayside-resort-spa-tides-champagne-lady-1302984</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -4999,6 +5015,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/restaurants/la-patrona-express-llc-1350520</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/restaurants/la-peras-sweet-shop-1306094</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -5056,6 +5076,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/restaurants/last-call-eats-1350434</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/restaurants/latin-moments-llc-1306135</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -5212,6 +5236,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/restaurants/lupitas-cafe-1303143</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/restaurants/mad-dog-catering-1350521</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -6252,6 +6280,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/restaurants/quality-inn-suites-1305326</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/restaurants/rack-grill-1306136</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -7435,6 +7467,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/restaurants/the-candy-bar-1306137</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/restaurants/the-front-porch-1305754</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -7988,7 +8024,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-11-03</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/utilities</loc>

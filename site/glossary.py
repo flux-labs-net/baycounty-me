@@ -114,7 +114,7 @@ TERMS = [
     dict(id='fiscal-year', group='budget', term='Fiscal year (FY)',
          simple="A government's budget year. In Florida it runs from October 1 to September 30.",
          more="It is named for the year it ends in.",
-         example="FY2026 runs from October 1, 2025 to September 30, 2026."),
+         example="FY2027 runs from October 1, 2026 to September 30, 2027."),
     dict(id='general-fund', group='budget', term='General fund',
          simple="A government's main checking account for everyday services like police, parks and running city hall.",
          more="Most property tax goes here. Money for special purposes is kept in separate funds.",

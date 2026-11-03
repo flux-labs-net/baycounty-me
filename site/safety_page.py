@@ -140,7 +140,7 @@ def safety_page(out_dir):
     if ytdV and ytdP:
         span = lambda t: f'Jan to {MON[t["through_month"] - 1][:3]}'
         ytd_kpi = (f'Violent crimes, {span(ytdV)} {ytdV["year"]}', _num(ytdV['now']),
-                   f'{pct(ytdV["now"], ytdV["before"])} from the same months of {ytdV["year"] - 1}; {_num(ytdP["now"])} property crimes ({pct(ytdP["now"], ytdP["before"])})')
+                   f'{pct(ytdV["now"], ytdV["before"])} from the same months of {ytdV["year"] - 1}; {_num(ytdP["now"])} property crimes ({pct(ytdP["now"], ytdP["before"])}). Only the {len(ytdV["rows"])} agencies that reported every month; not a county total')
         bp = {r['agency_id']: r for r in ytdP['rows']}
         trs = ''
         for r in sorted(ytdV['rows'], key=lambda r: -r['now']):
@@ -221,7 +221,7 @@ def safety_page(out_dir):
     <p class="note">As each agency reported to the FBI. The Sheriff's civilian count jumped from 71 in 2022 to 271 in 2023; the FBI data does not say why. Missing years were not reported.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><h2>Ask for police and fire records</h2></div>
-    <p>Incident reports, call logs, body camera video and fire reports are public records in Florida, with some parts held back by law. Each agency's records contact is on the <a href="/records">public records page</a>.</p></section>
+    <p>Incident reports, call logs, body camera video and fire reports are public records in Florida, with some parts held back by law. Our <a href="/records-request">records request page</a> writes the request for you and addresses it to the right office.</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">

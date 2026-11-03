@@ -5,7 +5,7 @@
 // to each other, which can become a meeting outside the public eye under Florida's Sunshine Law.
 // Replies are matched to a thread by, in order: the In-Reply-To/References headers (our Message-ID carries the
 // thread token), the "Ref: BCM-..." line quoted back in the reply, then the sender's address. Anything left over is
-// kept as unmatched so it can be assigned by hand. Nothing is public until a thread is published in /admin.
+// kept as unmatched so it can be assigned by hand. Every conversation is public on /correspondence by default (migration 0094).
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
@@ -263,7 +263,7 @@ function replyNotice(thread, d, from, by) {
                  : {tone: 'amber', icon: 'mail', eyebrow: 'New email · Not matched yet', title: `Email to ${esc(INBOX)}`},
     body: ui.facts([['From', esc(who)], ['Subject', esc(d.subject || '(no subject)')], ...(thread ? [['Thread', esc(thread.subject)]] : []), ...(atts ? [['Attachments', `${atts} file${atts === 1 ? '' : 's'}`]] : [])]) +
       ui.quote(snippet || '(no text)') + ui.button(`${SITE}/admin#correspondence`, thread ? 'Open in Correspondence' : 'Match it to a thread') +
-      ui.small('Nothing is public until you publish the thread.'),
+      ui.small('Conversations with officials and governments are public on /correspondence automatically. Residents’ addresses and phone numbers are hidden; hide a name in Conversations if needed.'),
     footer: ui.adminFooter()});
   return {subject, html, text: `${who} wrote:\n\n${snippet}\n\n${SITE}/admin#correspondence`};
 }
@@ -304,13 +304,31 @@ async function thread(id) {
   return {thread: t, messages: msgs.map(m => ({...m, shown: m.direction === 'in' ? stripQuoted(m.body_text) : {text: m.body_text, quoted: false}}))};
 }
 
-async function publish({id, published, batch}, me) {
+// Conversations are public by default (migration 0094). Taking one down needs a reason, which the public page shows
+// in its place; putting it back clears the reason.
+async function publish({id, published, batch, reason}, me) {
   const on = !!published;
+  const why = String(reason || '').trim().slice(0, 500);
+  if (!on && why.length < 5) throw err('Say why this conversation comes down. The reason is shown on the public page in its place.');
+  const set = `published = $2, published_at = case when $2 then coalesce(published_at, now()) end, published_by = case when $2 then $3 end, hidden_reason = case when $2 then null else $4 end`;
   const rows = batch
-    ? await q(`update corr.threads set published = $2, published_at = case when $2 then now() end, published_by = case when $2 then $3 end where batch_id = $1 returning id`, [parseInt(batch, 10) || 0, on, me])
-    : await q(`update corr.threads set published = $2, published_at = case when $2 then now() end, published_by = case when $2 then $3 end where id = $1 returning id`, [parseInt(id, 10) || 0, on, me]);
+    ? await q(`update corr.threads set ${set} where batch_id = $1 returning id`, [parseInt(batch, 10) || 0, on, me, why || null])
+    : await q(`update corr.threads set ${set} where id = $1 returning id`, [parseInt(id, 10) || 0, on, me, why || null]);
   if (!rows.length) throw err('Thread not found.', 404);
   return {ok: true, changed: rows.length, published: on};
+}
+
+// Words hidden on the public page (a resident's name, say), for one conversation or everywhere.
+async function redactions({thread_key = ''} = {}) {
+  return {redactions: await q(`select id, thread_key, phrase, reason, added_by, added_at from corr.redactions where $1 = '' or thread_key = $1 or thread_key is null order by added_at desc`, [String(thread_key)])};
+}
+async function redactSet({thread_key, phrase, reason, remove}, me) {
+  if (remove) { await q('delete from corr.redactions where id = $1', [parseInt(remove, 10) || 0]); return {ok: true}; }
+  const p = String(phrase || '').trim();
+  if (p.length < 2) throw err('Type the words to hide.');
+  const k = thread_key && /^[cem]\d{1,12}$/.test(thread_key) ? thread_key : null;
+  await q(`insert into corr.redactions (thread_key, phrase, reason, added_by) values ($1, $2, $3, $4) on conflict do nothing`, [k, p.slice(0, 200), String(reason || '').slice(0, 300) || null, me]);
+  return {ok: true};
 }
 
 async function setStatus({id, status}) {
@@ -368,5 +386,5 @@ async function publicFeed({year = '', government = ''} = {}) {
   return {year: y, years, governments, total: all.length, conversations: out};
 }
 
-module.exports = {INBOX, replyNotice, forInbox, inbound, seed, contacts, saveContact, send, reply, threads, thread, publish, setStatus, assign, dismiss, publicFeed,
+module.exports = {INBOX, replyNotice, forInbox, inbound, seed, contacts, saveContact, send, reply, threads, thread, publish, redactions, redactSet, setStatus, assign, dismiss, publicFeed,
   tokenFrom, stripQuoted, composeEmail, messageIdFor, newToken};

@@ -1,6 +1,6 @@
 {
  "about": "Possible contract-vote links that were NOT used: amount-only matches, matches more than 14 days apart, votes that also name another vendor, and second-best votes. For a person to check.",
- "count": 58,
+ "count": 60,
  "review": [
   {
    "record_id": "contract:1",
@@ -765,6 +765,21 @@
    "reason": "another vote matched more closely in time"
   },
   {
+   "record_id": "contract:345",
+   "record": "Dunlap & Shipman, P.A. · 2026-08-11 · Municipal legal services (city attorney), annual flat fee of $275,000 (Resolution 2026-08-576; amended and restated 2026-09-08)",
+   "record_amount": 275000.0,
+   "vote_id": "lh-commission:2026-07-14:accept-the-proposal-of-a-yearly-flat-rat",
+   "vote": "2026-07-14 · accept the proposal of a yearly flat rate of $275k for all legal services from Dunlap Shipman",
+   "vote_amount": 275000.0,
+   "days_apart": 28,
+   "match_method": "amount",
+   "shared_words": [
+    "flat",
+    "legal"
+   ],
+   "reason": "weak: amount only"
+  },
+  {
    "record_id": "change_order:24",
    "record": "CBC Construction · 2025-04-24 · Harrison Avenue streetscapes Phase II (PC24-022), change orders 2-5",
    "record_amount": 143837.99,
@@ -880,6 +895,20 @@
     "segment"
    ],
    "reason": "weak: description words only"
+  },
+  {
+   "record_id": "change_order:51",
+   "record": "ECSC, LLC · 2026-03-24 · West 10th Street utility improvements, change order 1",
+   "record_amount": 826172.93,
+   "vote_id": "lh-commission:2026-03-24:approve-resolution-2026-03-527-approving",
+   "vote": "2026-03-24 · approve Resolution 2026-03-527 Approving the W10th Street Change Order with ECSC, LLC",
+   "vote_amount": null,
+   "days_apart": 0,
+   "match_method": "vendor_name",
+   "shared_words": [
+    "street"
+   ],
+   "reason": "weak: vendor_name, 0 days apart, amounts differ"
   }
  ]
 }

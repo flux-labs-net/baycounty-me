@@ -11,7 +11,7 @@ DOMAIN = 'https://baycounty.me'
 SITE = 'BayCounty.me'
 TITLE_MAX = 60
 DESC_MAX = 160
-PRIVATE = ('/admin', '/finance')          # never in the sitemap; robots.txt disallows them
+PRIVATE = ('/admin', '/finance', '/staff')          # never in the sitemap; robots.txt disallows them
 ORG = {'@type': 'Organization', '@id': DOMAIN + '/#org', 'name': 'Flux Labs', 'url': 'https://fluxlabs.net/',
        'logo': DOMAIN + '/assets/flux-labs.webp'}
 PLACE = {'@type': 'AdministrativeArea', 'name': 'Bay County, Florida', 'sameAs': 'https://en.wikipedia.org/wiki/Bay_County,_Florida'}
@@ -127,7 +127,7 @@ def jsonld(path, title, desc, labels, modified=None, out_dir=None, kind=None, ab
 def write_robots_and_sitemap(out_dir, pages, alternates, lastmod):
     """robots.txt pointing at sitemap.xml; sitemap lists every public page with lastmod and en/es alternates."""
     open(os.path.join(out_dir, 'robots.txt'), 'w').write(
-        'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /finance\nDisallow: /api/\nDisallow: /alerts/manage\n\n'
+        'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /finance\nDisallow: /staff\nDisallow: /api/\nDisallow: /alerts/manage\n\n'
         f'Sitemap: {DOMAIN}/sitemap.xml\n')
     rows = []
     for path in sorted({p for p in pages if not p.startswith(PRIVATE) and p != '/404'}):

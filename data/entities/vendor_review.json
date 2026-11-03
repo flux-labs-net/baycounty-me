@@ -115,7 +115,7 @@
   {
    "a": "rjgormanconstruction",
    "b": "rj-gorman-marine",
-   "a_vendor": null,
+   "a_vendor": "rj-gorman-construction",
    "why": "\"RJ Gorman Construction\" in one campaign filing could be either RJ Gorman company; left unmatched."
   }
  ],
@@ -129,6 +129,17 @@
    "names": {
     "forgotten-coast-living": "Forgotten Coast Living",
     "forgotten-coast-property-management": "Forgotten Coast Property Management"
+   }
+  },
+  {
+   "shared_words": "lawnmasters of",
+   "vendors": [
+    "lawnmasters-panama-city",
+    "lawnmasters-pc"
+   ],
+   "names": {
+    "lawnmasters-panama-city": "Lawnmasters of Panama City LLC",
+    "lawnmasters-pc": "Lawnmasters of PC"
    }
   },
   {
@@ -475,12 +486,13 @@
    "a": {
     "key": "americansand",
     "names": [
-     "AMERICAN SAND &",
-     "American Sand"
+     "American Sand",
+     "AMERICAN SAND &"
     ],
     "vendor_id": "american-sand",
     "records": {
      "contract": 2,
+     "change_order": 1,
      "register": 3
     },
     "gifts": null,
@@ -504,11 +516,12 @@
    "a": {
     "key": "americansandasphalt",
     "names": [
-     "American Sand and Asphalt"
+     "American Sand and Asphalt",
+     "American Sand & Asphalt"
     ],
     "vendor_id": "american-sand",
     "records": {
-     "contract": 1
+     "contract": 2
     },
     "gifts": null,
     "given": null
@@ -1088,7 +1101,7 @@
     ],
     "vendor_id": "inland",
     "records": {
-     "contract": 3,
+     "contract": 4,
      "cra": 1
     },
     "gifts": null,
@@ -1710,12 +1723,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "reason": "plural"
   },
@@ -1868,12 +1882,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "b": {
     "key": "bythesearesortsincbeach",
@@ -1892,12 +1907,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "b": {
     "key": "bythesearesortsinccandl",
@@ -1916,12 +1932,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "b": {
     "key": "bythesearesortsincchate",
@@ -1940,12 +1957,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "b": {
     "key": "bythesearesortsincholid",
@@ -1964,12 +1982,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "b": {
     "key": "bythesearesortsincocean",
@@ -1988,12 +2007,13 @@
     "key": "bythesearesorts",
     "names": [
      "By the Sea Resorts Inc",
+     "By The Sea Resorts, LLC",
      "By The Sea Resorts, Inc"
     ],
     "vendor_id": null,
     "records": null,
-    "gifts": 4,
-    "given": 4000.0
+    "gifts": 5,
+    "given": 4960.6
    },
    "b": {
     "key": "bythesearesortsincsugar",

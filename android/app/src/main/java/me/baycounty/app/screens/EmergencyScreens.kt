@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
+import me.baycounty.kit.AlertArea
 import me.baycounty.kit.BayCountyClient
 import me.baycounty.kit.Emergency
 import me.baycounty.kit.Format
@@ -57,6 +58,8 @@ fun EmergencyScreen() {
     var address by rememberSaveable { mutableStateOf("") }
     var zone by remember { mutableStateOf<Emergency.ZoneResult?>(null) }
     var zoneError by remember { mutableStateOf<String?>(null) }
+    // The saved home shown in the address box, so a typed address is never replaced.
+    var homeShown by rememberSaveable { mutableStateOf<String?>(null) }
     var looking by remember { mutableStateOf(false) }
 
     suspend fun loadFeed() {
@@ -70,7 +73,14 @@ fun EmergencyScreen() {
     LaunchedEffect(Unit) {
         store.load(Emergency.datasets)
         loadFeed()
-        store.home?.let { h -> if (address.isEmpty()) { address = h.display; lookup(Emergency.zonePath(h.point.y, h.point.x)) } }
+    }
+    // The saved home (the account's, when signed in) is looked up right away, and again if it changes.
+    val home = store.home
+    LaunchedEffect(home?.id) {
+        val h = home ?: return@LaunchedEffect
+        if (address.isNotEmpty() && address != homeShown) return@LaunchedEffect
+        address = h.display; homeShown = h.display
+        lookup(Emergency.zonePath(h.point.y, h.point.x))
     }
     val shown = feed ?: store.rows["emergency-notices"]?.let {
         Emergency.offlineFeed(it, store.rows["emergency-shelters"] ?: emptyList(), store.rows["evacuation-zones"] ?: emptyList())
@@ -113,6 +123,7 @@ fun EmergencyScreen() {
                         Button({ scope.launch { lookup(Emergency.zonePath(address)) } }, enabled = address.trim().length >= 4 && !looking,
                             colors = ButtonDefaults.buttonColors(containerColor = Brand.navy)) { Text("Look up") }
                     }
+                    if (homeShown != null && address == homeShown) Text("This is your saved home. Type another address to look somewhere else.", style = T.caption, color = Brand.secondary)
                     if (looking) Loading()
                     zoneError?.let { Text(it, style = T.subhead, color = Brand.secondary) }
                     zone?.let { ZoneCard(it) }
@@ -199,6 +210,10 @@ private fun NoticeCard(n: DataRow) {
         }
         Text(n.string("title") ?: "", style = T.subheadBold, color = Brand.text)
         n.string("area")?.let { Text(it, style = T.footnote, color = Brand.secondary, maxLines = 3) }
+        AlertArea.parse(n.string("geometry"))?.let { map ->
+            AlertMap(map, Modifier.fillMaxWidth().height(200.dp).padding(vertical = 4.dp))
+            map.note?.let { Text(it, style = T.caption2, color = Brand.secondary) }
+        }
         if (more.isNotEmpty()) {
             Text(if (open) "Hide details" else "Details", style = T.footnote, color = Brand.navy, modifier = Modifier.clickable { open = !open })
             if (open) Text(more, style = T.footnote, color = Brand.text)

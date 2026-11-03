@@ -4,6 +4,9 @@
 name: Refresh meetings
 on:
   schedule:
+    # Backup only. GitHub starts scheduled runs hours late (5-6 h in late Oct 2026, after the Monday emails at 13:00 UTC),
+    # so the on-time start is a Vercel cron (api/refresh-kick.js, 11:10 UTC) that dispatches this workflow. The gate job
+    # skips this scheduled run when that dispatched run already ran in the last 10 hours.
     - cron: '17 11 * * *'   # 11:17 UTC: 6:17 a.m. CDT, 5:17 a.m. CST (GitHub cron is always UTC)
   workflow_dispatch: {}
 permissions:
@@ -15,7 +18,26 @@ concurrency:
   group: main-writer
   cancel-in-progress: false
 jobs:
+  gate:
+    # Scheduled runs only: skip when this morning's refresh was already started on time from Vercel (or by hand).
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+    timeout-minutes: 5
+    outputs:
+      skip: ${{ steps.check.outputs.skip }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" != "schedule" ]; then echo "skip=false" >> "$GITHUB_OUTPUT"; exit 0; fi
+          n=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow refresh-meetings.yml --event workflow_dispatch --limit 20 \
+                --json createdAt,status,conclusion \
+                --jq '[.[] | select((now - (.createdAt | fromdateiso8601)) < 36000 and (.status != "completed" or .conclusion == "success"))] | length')
+          if [ "${n:-0}" -gt 0 ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; echo "This morning's refresh already ran ($n dispatched run(s) in the last 10 hours)."; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
   refresh:
+    needs: gate
+    if: needs.gate.outputs.skip != 'true'
     runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 30
     steps:
@@ -85,6 +107,12 @@ jobs:
       - name: Fetch beach conditions, water quality and parks
         continue-on-error: true
         run: python3 data/outdoors/fetch_outdoors.py
+      - name: Find stale sources and draft records requests
+        # Places where an official source's newest record is older than its usual schedule (for example a beach water
+        # sampling site with no sample in weeks) -> data/civic/stale_requests.json. /admin drafts a records request for
+        # each new gap; nothing is sent until an admin approves it.
+        continue-on-error: true
+        run: python3 data/civic/scripts/stale_requests.py
       - name: Fetch the school district calendar
         # Bay District Schools' website events feed: no-school days, early release, grading periods, graduations and
         # School Board meetings. A failure keeps the events on file and records the error.
@@ -198,15 +226,19 @@ jobs:
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store
         # its URL as the repository secret VERCEL_DEPLOY_HOOK. Skipped when nothing was pushed or the secret isn't set.
+        id: vercel_deploy
         if: steps.commit_and_push.outputs.pushed == 'true'
         env:
           HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
         run: |
           if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set, so this refresh waits for the next merge to deploy."; exit 0; fi
-          curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "$HOOK" || true)
+          if [ "${code:0:1}" = 2 ]; then echo "Vercel deploy started"; exit 0; fi
+          echo "::error title=Vercel deploy hook::The deploy hook answered HTTP $code. A 404 means the hook was deleted (Vercel removes hooks when the Git repo is reconnected). Make a new one in Vercel > Project > Settings > Git > Deploy Hooks (branch main) and save its URL as the repository secret VERCEL_DEPLOY_HOOK."
+          exit 1
       - name: Sync the database
         # sync-db.yml's push trigger doesn't fire for this bot's pushes, so start it here.
-        if: steps.commit_and_push.outputs.pushed == 'true'
+        if: ${{ !cancelled() && steps.commit_and_push.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run sync-db.yml --repo "$GITHUB_REPOSITORY" --ref main

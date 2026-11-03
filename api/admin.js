@@ -171,6 +171,21 @@ async function route(req, res, action, me) {
     case 'summary': return require('./_summary').summary();
     case 'ingestion': return require('./_health').report();
     // ---------- accounting-system files (ingest schema) ----------
+    // ---------- email intake log (records sent by email) ----------
+    case 'intake_report': {
+      const IR = require('./_intake_report');
+      const r = await IR.report(q, {from: String(Q.from || ''), to: String(Q.to || ''), workspace: String(Q.workspace || '').slice(0, 60)});
+      const fmt = String(Q.format || 'json');
+      if (fmt === 'json') return r;
+      await audit(me.e, 'intake_report', null, {from: r.from, to: r.to, workspace: r.workspace, format: fmt, emails: r.emails.length}).catch(() => {});
+      const name = `intake-report-${r.from}-to-${r.to}`;
+      if (fmt === 'csv') {
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8'); res.setHeader('Content-Disposition', `attachment; filename="${name}.csv"`);
+        res.status(200).send(IR.toCsv(r)); return undefined;
+      }
+      res.setHeader('Content-Type', 'text/html; charset=utf-8'); res.setHeader('Content-Disposition', `inline; filename="${name}.html"`);
+      res.status(200).send(IR.toHtml(r)); return undefined;
+    }
     case 'ledger': return require('./_ledger').report({status: String(Q.status || 'pending'), source: String(Q.source || ''), raw: String(Q.raw || '')});
     case 'ledger_normalize': case 'ledger_approve': case 'ledger_reject': case 'ledger_source': case 'ledger_finance': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
@@ -242,6 +257,36 @@ async function route(req, res, action, me) {
       await audit(me.e, action, null, {status: body.status, n: r.updated, motions: r.rows.map(x => x.id)});
       return r;
     }
+    case 'gov_staff': return require('./_gov').adminOverview(q);
+    // ---------- emergency alerts: every alert with how many it was sent to, and Remove for test posts ----------
+    case 'alerts_sent': return require('./_emergency_feed').timeline(req, null, {days: Q.days, kind: Q.kind, gov: Q.gov}, {place: 'fl-bay', admin: true});
+    case 'alert_remove': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_gov').adminRemoveAlert(q, body, me.e);
+      await audit(me.e, action, null, {notice_id: r.notice_id, removed: r.removed, note: body.note || null});
+      return r;
+    }
+    case 'gov_flags': return require('./_gov').adminFlags(q, String(Q.status || 'open'));
+    // ---------- sent files that didn't pass every check (records submission, step two) ----------
+    case 'file_reviews': return require('./_records').reviewList(q, {status: String(Q.status || 'open')});
+    case 'file_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const deps = {q, storage: require('./_finance/storage'), ingest: require('./finance').ingest, publisher: require('./_finance/publish'), log: require('./_gov').log};
+      const r = await require('./_records').review(deps, body, me.e);
+      await audit(me.e, action, null, {file: body.file_id, decision: body.decision, note: body.note || null});
+      return r;
+    }
+    case 'gov_member': case 'gov_flag_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const G = require('./_gov');
+      if (action === 'gov_member') {
+        const [w] = await q('select id from gov.workspaces where id = $1', [String(body.workspace || '')]);
+        if (!w) throw Object.assign(new Error('Pick a government.'), {status: 400});
+      }
+      const r = action === 'gov_member' ? await G.setMember(q, String(body.workspace), body, me.e) : await G.adminFlagReview(q, body, me.e);
+      await audit(me.e, action, null, {workspace: body.workspace, email: body.email, role: body.role, id: body.id, status: body.status});
+      return r;
+    }
     case 'realtors': return require('./_realtor').adminList();
     case 'sms': return require('./_sms').adminReport();
     case 'sms_settings': {
@@ -272,25 +317,26 @@ async function route(req, res, action, me) {
       return r;
     }
     case 'corr_contacts': return require('./_correspondence').contacts();
-    case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': {
+    case 'corr_redactions': return require('./_correspondence').redactions({thread_key: String(Q.thread_key || '')});
+    case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': case 'corr_redact': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const C = require('./_correspondence');
       const fn = {corr_contact: C.saveContact, corr_seed: C.seed, corr_send: C.send, corr_reply: C.reply, corr_publish: C.publish,
-        corr_status: C.setStatus, corr_assign: C.assign, corr_dismiss: C.dismiss}[action];
+        corr_status: C.setStatus, corr_assign: C.assign, corr_dismiss: C.dismiss, corr_redact: C.redactSet}[action];
       const r = await fn(body, me.e);
       await audit(me.e, action, null, action === 'corr_send' ? {subject: body.subject, recipients: (body.ids || []).length, test: !!body.test, batch: r.batch_id || null}
-        : {id: body.id || body.thread_id || body.message_id || body.batch || null}).catch(() => {});
+        : {id: body.id || body.thread_id || body.message_id || body.batch || body.thread_key || null, reason: body.reason || undefined, phrase: body.phrase ? 'set' : undefined}).catch(() => {});
       return r;
     }
     case 'corr_threads': return require('./_correspondence').threads({status: String(Q.status || '').slice(0, 20), government: String(Q.government || '').slice(0, 120),
       published: String(Q.published || ''), q: String(Q.q || '').slice(0, 100), year: String(Q.year || '')});
     case 'corr_thread': return require('./_correspondence').thread(Q.id);
     case 'rr_list': return require('./_records_requests').list();
-    case 'rr_seed': case 'rr_save': case 'rr_send': {
+    case 'rr_seed': case 'rr_save': case 'rr_send': case 'rr_dismiss': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const R = require('./_records_requests');
-      const r = await {rr_seed: R.seed, rr_save: R.save, rr_send: R.send}[action](body, me.e);
-      await audit(me.e, action, null, {id: body.id || null, test: !!body.test, status: body.status || null}).catch(() => {});
+      const r = await {rr_seed: R.seed, rr_save: R.save, rr_send: R.send, rr_dismiss: R.dismiss}[action](body, me.e);
+      await audit(me.e, action, null, {id: body.id || null, test: !!body.test, status: body.status || null, reason: body.reason || undefined}).catch(() => {});
       return r;
     }
     case 'email_previews': return {templates: PREVIEWS, govs: Object.entries(GOVS).map(([key, [name]]) => ({key, name}))};
@@ -366,7 +412,9 @@ module.exports = async (req, res) => {
   if (!me) return res.status(401).json({error: 'Sign in first.'});
   if (req.method === 'POST' && req.headers['x-bcm-admin'] !== '1') return res.status(403).json({error: 'Missing admin header.'});
   try {
-    return res.status(200).json(await route(req, res, action, me));
+    const out = await route(req, res, action, me);
+    if (out === undefined && res.headersSent) return undefined;  // already sent (a CSV or report page)
+    return res.status(200).json(out);
   } catch (e) {
     if (!e.status) console.error('admin', action, e);
     return res.status(e.status || 500).json({error: e.status ? e.message : 'Something went wrong.'});

@@ -74,4 +74,13 @@ final class AccountTests: XCTestCase {
         let p = try XCTUnwrap(AccountMe.decode(Data(plain.utf8)).home).addressMatch
         XCTAssertEqual(p.address, "825 OHIO AVE"); XCTAssertNil(p.unit); XCTAssertNil(p.renum)
     }
+
+    func testHomeCityStartsTownLists() throws {
+        let home = { (gov: String) throws -> AccountMe.Home in
+            try XCTUnwrap(AccountMe.decode(Data(#"{"user":{"email":"a@b.co"},"home":{"address":"825 Ohio Ave","city":"Panama City","lat":30.2,"lon":-85.6,"gov_id":"\#(gov)"}}"#.utf8)).home)
+        }
+        XCTAssertEqual(try home("lh").town, "Lynn Haven"); XCTAssertEqual(try home("lh").govKey, "lh")
+        // outside city limits the mailing city isn't the town: lists start on the whole county
+        XCTAssertNil(try home("county").town); XCTAssertEqual(try home("county").govKey, "county")
+    }
 }

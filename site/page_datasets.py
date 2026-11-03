@@ -1492,6 +1492,10 @@ def utility_rates():
         if r.get('bill_5000gal'):
             add(area, prov, 'bill', 'Typical monthly bill at 5,000 gallons', r['bill_5000gal'], 'per month', 'Residential, all city charges on the bill', eff, src,
                 ' '.join(x for x in [r.get('calc'), r.get('calc_caveat')] if x))
+            bp = r.get('bill_parts') or {}  # the same bill split into the parts the Fees & bills page compares
+            for k, label in (('water_sewer', 'water and sewer'), ('garbage', 'garbage'), ('other', 'other charges')):
+                if bp.get(k):
+                    add(area, prov, 'bill', f'Typical monthly bill at 5,000 gallons: {label}', bp[k], 'per month', 'Residential', eff, src, bp.get('other_note') if k == 'other' else None)
     for x in U.get('rates', []):
         add(x['area'], x['provider'], x['service'], x['charge'], x['amount'], x['unit'], x['applies_to'], x['effective'], x['source_url'])
     return out
@@ -1919,6 +1923,22 @@ def checkbook_payments():
     return []
 
 
+# Records each government sends from the government workspace (Send records, migration 0092): written to the database
+# when staff publish, never by the site build.
+BOARD_APPOINTMENT_COLUMNS = ['government', 'board', 'seat', 'person', 'appointed_by', 'term_start', 'term_end', 'notes', 'source_url', 'source_title', 'gov_id']
+DB_ONLY_COLUMNS['board-appointments'] = {c: 'string' for c in BOARD_APPOINTMENT_COLUMNS}
+FEE_CHANGE_COLUMNS = ['government', 'fee', 'category', 'old_amount', 'new_amount', 'unit', 'effective_date', 'adopted_by', 'source_url', 'source_title', 'gov_id']
+DB_ONLY_COLUMNS['fee-changes'] = {c: ('number' if c in ('old_amount', 'new_amount') else 'string') for c in FEE_CHANGE_COLUMNS}
+
+
+def board_appointments():
+    return []
+
+
+def fee_changes():
+    return []
+
+
 def budget_actuals():
     return []
 
@@ -2208,6 +2228,8 @@ DATASETS = [
     ('data-source-sites', 'Websites our records cite', "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.", data_source_sites),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),
     ('checkbook-payments', 'Checkbook: every payment', "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.", checkbook_payments),
+    ('board-appointments', 'Board appointments', "Who sits on each advisory board, committee and authority a Bay County government appoints, as the government sends it from its BayCounty.me workspace: the board, the seat, the member's name, who appointed them, and the term (term_start, term_end; blank term_end = no end date given). Appointees are named because a public appointment is public record; no addresses, phone numbers or emails. source_title says which government sent it and when.", board_appointments),
+    ('fee-changes', 'Fee and rate changes', "New and changed fees and utility rates, as each government sends them from its BayCounty.me workspace: the fee, a category (utility, trash, permit, parks, impact, license, other), old_amount (blank for a new fee), new_amount, the unit (per month, per 1,000 gallons, each), effective_date and the ordinance or resolution that adopted it. source_title says which government sent it and when.", fee_changes),
     ('budget-actuals', 'Budget vs. actual, month by month', "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).", budget_actuals),
     ('cra-agencies', 'CRAs: tax increment by agency', "One row per Community Redevelopment Agency that collects tax increment in Bay County: when it was created, its base year, the FY2025 increment and how much of it Bay County and the city paid, the total on record, its sunset date and what that date rests on, and the increment still to come under a 3%, 6% or 9% growth scenario. sunset_assumed is true where the CRA's plan was not found.", cra_agencies),
     ('cra-tax-increment', 'CRAs: tax increment by year', "Property tax paid to each CRA by fiscal year, split between Bay County and the city by millage. scenario history: basis reported (from CRA reports, audits and budgets) or filled gap (between two reported years). scenario low, mid, high: FY2026 to the CRA's sunset, from adopted budgets where they exist, then 3%, 6% or 9% growth a year (Front Beach Road capped at $30M). Schools and the water management district are exempt and pay nothing.", cra_tax_increment),
@@ -2252,7 +2274,7 @@ DATASETS = [
     ('job-openings', 'Government job openings', "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.", job_openings),
     ('job-boards', 'Government job boards', "Each local government's job board and whether its openings are read automatically: openings is how many are open now, blank where the board cannot be read (note says why and where to look).", job_boards),
     ('utility-providers', 'Utilities: who provides each service', "Who provides water, sewer, electricity, natural gas, garbage, yard waste, recycling and internet in each part of the county (area: a city, unincorporated, or all for countywide providers): the provider, what kind of provider it is, whether it covers all, most or some of the area, its phone number, website and outage page, and notes on how the service works. entity_id is the provider's profile (entity-profiles) where there is one. /api/v1/utilities?lat=&lon= picks the rows for one address.", utility_providers),
-    ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
+    ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes, plus the same bill split into water and sewer, garbage and other charges. effective says which rate schedule the row comes from.", utility_rates),
     ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
     ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
     ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
@@ -2275,3 +2297,11 @@ DATASETS += _VOLUNTEER
 from correlations import DATASETS as _OVERLAPS, COLUMNS as _OVERLAP_COLUMNS  # noqa: E402  /connections/overlaps (site/correlations.py)
 DATASETS += _OVERLAPS
 DB_ONLY_COLUMNS.update(_OVERLAP_COLUMNS)
+from vote_dollars import DATASETS as _VOTE_DOLLARS  # noqa: E402  contract dollars behind officials' votes (site/vote_dollars.py)
+DATASETS += _VOTE_DOLLARS
+from contract_coverage import DATASETS as _CONTRACT_CHECK  # noqa: E402  contract votes in the minutes vs the contract list (site/contract_coverage.py)
+DATASETS += _CONTRACT_CHECK
+from special_events import DATASETS as _SPECIAL  # noqa: E402  special event road closures and guides (site/special_events.py)
+DATASETS += _SPECIAL
+from site_photos import DATASETS as _SITE_PHOTOS  # noqa: E402  photos of places on the site's own pages (site/site_photos.py)
+DATASETS += _SITE_PHOTOS

@@ -1,4 +1,5 @@
 place_id,disaster_number,title,kind,incident_type,declared,began,ended,individual_aid,public_aid,mitigation,source_url,gov_id
+fl-bay,4955,Hurricane Isaias,Major disaster,Hurricane,2026-10-27,2026-10-06,2026-10-12,True,True,False,https://www.fema.gov/disaster/4955,
 fl-bay,3655,Hurricane Isaias,Emergency,Tropical Storm,2026-10-09,2026-10-06,2026-10-12,False,True,False,https://www.fema.gov/disaster/3655,
 fl-bay,4828,Hurricane Helene,Major disaster,Hurricane,2024-09-28,2024-09-23,2024-10-07,False,True,True,https://www.fema.gov/disaster/4828,
 fl-bay,3615,Tropical Storm Helene,Emergency,Tropical Storm,2024-09-24,2024-09-23,2024-10-07,False,True,False,https://www.fema.gov/disaster/3615,

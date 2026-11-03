@@ -7,6 +7,7 @@ against the visitor's own date, so the page is right even between rebuilds. The 
 import datetime as dt
 import html
 import json
+from special_events import banner
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 KINDS = ['Community', 'Public meeting', 'Library', 'Chamber']
@@ -111,7 +112,7 @@ def events_page(out_dir=None):
         label = 'Today' if k == today else dt.date.fromisoformat(k).strftime('%A, %B %-d')
         fallback.append(f'<section class="ev-day" data-share-date="{k}"><h3>{label}<span>{len(days[k])}</span></h3><ul class="ev-list">{"".join(_row(r, True) for r in days[k])}</ul></section>')
     n = lambda c: sum(1 for r in upcoming if r['category'] == c)
-    week = (dt.date.today() + dt.timedelta(days=7)).isoformat()
+    week = (dt.date.today() + dt.timedelta(days=6)).isoformat()  # today and the next six days
     k = lambda t, v, c, tone: f'<div class="kpi"><span class="eyebrow">{t}</span><span class="v">{v}</span><span class="s">{c}</span></div>'
     kpis = (k('This week', sum(1 for r in upcoming if r['starts'][:10] <= week), 'Events in the next seven days', 'salmon') +
             k('Next two months', len(upcoming), f'From {len(by_src)} public calendars', 'blue') +
@@ -122,7 +123,9 @@ def events_page(out_dir=None):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Community · Calendar</span><h1>Events in {e(NAME)}</h1>
     <p class="lede">What's happening around the county, from the county and city calendars, the library system, the visitor bureaus and the chambers. One list, every town, updated every morning.</p></div>
     <div class="stamp"><a class="pill" href="/meetings">Public meetings →</a><span>Next two months, from public calendars</span></div></header>
+  {banner()}
   <div class="kpis">{kpis}</div>
+  <section class="tx-sec" data-staff-posts="event" hidden></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="calendar" data-tile="Calendar">Coming up</h2><span class="muted" id="evCount">{len(upcoming)} events</span></div>
     <div class="ev-ctl">
       {_chips('evTown', 'Town', towns(rs), 'Every town')}
@@ -144,4 +147,5 @@ def events_page(out_dir=None):
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script type="application/json" id="evData">{data_json(rs)}</script>
-<script src="/assets/events.js" defer></script>'''
+<script src="/assets/events.js" defer></script>
+<script src="/assets/staff-posts.js" defer></script>'''

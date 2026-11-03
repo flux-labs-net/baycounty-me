@@ -72,7 +72,7 @@
       const right = i < half, j = right ? i : i - half, n = right ? half : nodes.length - half;
       const f = n > 1 ? j / (n - 1) : 0.5, a = -span + 2 * span * f;
       const t = right ? a : Math.PI - a;
-      const r = 4 + 8 * Math.sqrt((c.amount || 0) / top);
+      const r = 4 + 8 * Math.sqrt(Math.max(0, c.amount || 0) / top); // a net refund (negative) gets the smallest circle
       return {c, right, x: cx + rx * Math.cos(t), y: cy + ry * Math.sin(a), r: c.other.photo ? Math.max(r, 11) : r};
     });
     let svg = '';
@@ -180,9 +180,20 @@
     if (lb) lb.hidden = !live.length;
   }
 
-  function draw() { if (!D) return; if (!embedded) header(D.entity); net(D); list(D); }
+  // a government page's Year picker (gov.js) narrows the network and list to one calendar year: a connection counts
+  // when its first to last date touches that year; one with no date (a current candidate) always shows
+  let YR = window.BCYEAR || null;
+  const touches = c => { const a = +String(c.first_date || c.last_date || '').slice(0, 4), b = +String(c.last_date || c.first_date || '').slice(0, 4); return !a || (a <= YR && b >= YR); };
+  const view = d => YR ? {...d, connections: d.connections.filter(touches)} : d;
+  function draw() {
+    if (!D) return; if (!embedded) header(D.entity);
+    const v = view(D); net(v); list(v);
+    const sm = root.querySelector('.pf-all > summary');
+    if (sm) sm.textContent = `Every connection${YR ? ' in ' + YR : ''} (${new Set(v.connections.map(c => c.relation + '|' + c.direction + '|' + c.other.entity_id)).size.toLocaleString('en-US')})`;
+  }
+  addEventListener('bc:year', e => { YR = e.detail || null; draw(); });
   draw();
-  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => D && net(D), 200); });
+  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => D && net(view(D)), 200); });
   if (!id) return;
   fetch('/api/v1/entities/' + encodeURIComponent(id)).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(j => {
     const e = j.data.entity;
