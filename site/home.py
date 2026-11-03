@@ -241,6 +241,7 @@ def home_page():
     debt_bars = _bars(md['debt'], ['--salmon', '--salmon', '--gold', '--gold', '--bar'])
     from ui import ico
     data = json.dumps(b, separators=(',', ':'))
+    from special_events import banner as special_banner
     today = _today()
     doors = _doors()
     return f'''<div class="page home h-home">
@@ -264,6 +265,8 @@ def home_page():
       {today}
     </div>
   </section>
+
+  {f'<section class="h-event" aria-label="Special event this week">{ev}</section>' if (ev := special_banner()) else ''}
 
   <section class="h-doors-sec" aria-labelledby="hdoors">
     <h2 id="hdoors" class="h-h2">Find your way around</h2>
