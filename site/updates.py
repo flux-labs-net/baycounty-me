@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-11-03', 'title': 'A new home page, with photos of the county',
+     'text': "The home page opens on a photo of St. Andrews State Park with the address search on it, today's beach flag, notices, next meeting and election news in one strip, a photo card for each part of the site, this week's biggest event beside what's coming up, and the money in one band: what a typical home pays and the county's budgets, debt and audit findings. The full tax bill calculator is a click away. The photos are free-license pictures from Wikimedia Commons, each credited on the page, and the list is a new open dataset, site-photos.",
+     'pages': ['/', '/open-data']},
     {'date': '2026-10-27', 'title': 'This week in Bay County, by email',
      'text': "A new weekly email and page, This week in Bay County, puts the week in one place: events happening around the county, the public meetings on the calendar, and the votes, contracts and change orders that reached BayCounty.me in the past week, with split votes, failed motions, budgets and the biggest contracts first. Every company and official links to their profile. Sign up on the page for one short email on Monday mornings; every email has a one-click unsubscribe.",
      'pages': ['/this-week', '/alerts', '/events', '/public-money/votes', '/public-money/contracts', '/open-data']},

@@ -2303,3 +2303,5 @@ from contract_coverage import DATASETS as _CONTRACT_CHECK  # noqa: E402  contrac
 DATASETS += _CONTRACT_CHECK
 from special_events import DATASETS as _SPECIAL  # noqa: E402  special event road closures and guides (site/special_events.py)
 DATASETS += _SPECIAL
+from site_photos import DATASETS as _SITE_PHOTOS  # noqa: E402  photos of places on the site's own pages (site/site_photos.py)
+DATASETS += _SITE_PHOTOS
