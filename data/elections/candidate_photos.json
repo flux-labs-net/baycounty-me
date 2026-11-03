@@ -2,10 +2,85 @@
  "note": "Photos of candidates on Bay County ballots, published by their government office or their own campaign. Hand-checked; cropped to a headshot. Used by site/person_photos.py (dataset person-photos) and /elections/live.",
  "as_of": "2026-11-03",
  "photos": [
-  {"person_id": "ashley-moody", "name": "Ashley Moody", "photo_path": "/photos/candidates/ashley-moody.webp", "published_by": "government", "credit": "U.S. Congress (Biographical Directory)", "source_url": "https://bioguide.congress.gov/search/bio/M001244", "image_source_url": "https://bioguide.congress.gov/photo/M001244.jpg", "fetched_on": "2026-11-03"},
-  {"person_id": "byron-donalds", "name": "Byron Donalds", "photo_path": "/photos/candidates/byron-donalds.webp", "published_by": "government", "credit": "U.S. Congress (Biographical Directory)", "source_url": "https://bioguide.congress.gov/search/bio/D000032", "image_source_url": "https://bioguide.congress.gov/photo/D000032.jpg", "fetched_on": "2026-11-03"},
-  {"person_id": "jay-trumbull", "name": "Jay Trumbull", "photo_path": "/photos/candidates/jay-trumbull.webp", "published_by": "government", "credit": "The Florida Senate", "source_url": "https://www.flsenate.gov/Senators/s2", "image_source_url": "https://www.flsenate.gov/PublishedContent/Senators/2024-2026/Photos/s02_5389.jpg", "fetched_on": "2026-11-03"},
-  {"person_id": "karen-custer", "name": "Karen Custer", "photo_path": "/photos/candidates/karen-custer.webp", "published_by": "campaign", "credit": "Karen Custer for Callaway Commission, Ward 1", "source_url": "https://vote4karencuster.com/", "image_source_url": "https://content.campaignpartner.net/images/152590/Karen_Custer_Candidate_Photo_3_Paid_Ad.jpg", "fetched_on": "2026-11-03"},
-  {"person_id": "grant-wittstruck", "name": "Grant B. Wittstruck", "photo_path": "/photos/candidates/grant-wittstruck.webp", "published_by": "campaign", "credit": "Grant Wittstruck for City Council", "source_url": "https://votegrantwittstruck.com/", "image_source_url": "https://votegrantwittstruck.com/wp-content/uploads/2026/05/cover-photo-1200x636-2.jpg", "fetched_on": "2026-11-03"}
+  {
+   "person_id": "ashley-moody",
+   "name": "Ashley Moody",
+   "photo_path": "/photos/candidates/ashley-moody.webp",
+   "published_by": "government",
+   "credit": "U.S. Congress (Biographical Directory)",
+   "source_url": "https://bioguide.congress.gov/search/bio/M001244",
+   "image_source_url": "https://bioguide.congress.gov/photo/M001244.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "byron-donalds",
+   "name": "Byron Donalds",
+   "photo_path": "/photos/candidates/byron-donalds.webp",
+   "published_by": "government",
+   "credit": "U.S. Congress (Biographical Directory)",
+   "source_url": "https://bioguide.congress.gov/search/bio/D000032",
+   "image_source_url": "https://bioguide.congress.gov/photo/D000032.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "jay-trumbull",
+   "name": "Jay Trumbull",
+   "photo_path": "/photos/candidates/jay-trumbull.webp",
+   "published_by": "government",
+   "credit": "The Florida Senate",
+   "source_url": "https://www.flsenate.gov/Senators/s2",
+   "image_source_url": "https://www.flsenate.gov/PublishedContent/Senators/2024-2026/Photos/s02_5389.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "karen-custer",
+   "name": "Karen Custer",
+   "photo_path": "/photos/candidates/karen-custer.webp",
+   "published_by": "campaign",
+   "credit": "Karen Custer for Callaway Commission, Ward 1",
+   "source_url": "https://vote4karencuster.com/",
+   "image_source_url": "https://content.campaignpartner.net/images/152590/Karen_Custer_Candidate_Photo_3_Paid_Ad.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "grant-wittstruck",
+   "name": "Grant B. Wittstruck",
+   "photo_path": "/photos/candidates/grant-wittstruck.webp",
+   "published_by": "campaign",
+   "credit": "Grant Wittstruck for City Council",
+   "source_url": "https://votegrantwittstruck.com/",
+   "image_source_url": "https://votegrantwittstruck.com/wp-content/uploads/2026/05/cover-photo-1200x636-2.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "david-jolly",
+   "name": "David Jolly",
+   "photo_path": "/photos/candidates/david-jolly.webp",
+   "published_by": "government",
+   "credit": "U.S. Congress (Biographical Directory), official portrait from his House term",
+   "source_url": "https://bioguide.congress.gov/search/bio/J000296",
+   "image_source_url": "https://bioguide.congress.gov/photo/J000296.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "blaise-ingoglia",
+   "name": "Blaise Ingoglia",
+   "photo_path": "/photos/candidates/blaise-ingoglia.webp",
+   "published_by": "government",
+   "credit": "Official portrait of the Florida Chief Financial Officer",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Official_portrait_of_Chief_Financial_Officer_Blaise_Ingoglia_(cropped).jpg",
+   "image_source_url": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Official_portrait_of_Chief_Financial_Officer_Blaise_Ingoglia_%28cropped%29.jpg",
+   "fetched_on": "2026-11-03"
+  },
+  {
+   "person_id": "carlos-sanchez",
+   "name": "Carlos Sanchez",
+   "photo_path": "/photos/candidates/carlos-sanchez.webp",
+   "published_by": "campaign",
+   "credit": "Carlos Sanchez for Panama City Beach City Council, Ward 1",
+   "source_url": "https://www.sanchezforpcb.com/",
+   "image_source_url": "https://www.sanchezforpcb.com/UserFiles/image/banner.webp",
+   "fetched_on": "2026-11-03"
+  }
  ]
 }

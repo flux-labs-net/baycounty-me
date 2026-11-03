@@ -7302,7 +7302,7 @@
    "id": "person-photos",
    "title": "Person photos",
    "description": "Every photo of a person on BayCounty.me, one row per profile: officials' headshots their government publishes (published_by government, same as official-photos) and chamber of commerce board and staff headshots the chamber publishes on its own site (published_by chamber). entity_id is the profile (person: for officials, member: for board members) and joins entity-profiles and chamber-leaders; person_id is set for officials. photo_url is the 320px square WebP BayCounty.me serves, credit who published it and source_url the page it came from. A government photo wins over a chamber photo for the same person. Anyone not listed is shown with initials.",
-   "rows": 111,
+   "rows": 114,
    "columns": [
     {
      "name": "place_id",
@@ -7350,15 +7350,18 @@
       "Bay County Sheriff's Office",
       "Bay County Supervisor of Elections",
       "Bay District Schools",
+      "Carlos Sanchez for Panama City Beach City Council, Ward 1",
       "City of Callaway",
       "City of Lynn Haven",
       "City of Panama City",
       "City of Parker",
       "Grant Wittstruck for City Council",
       "Karen Custer for Callaway Commission, Ward 1",
+      "Official portrait of the Florida Chief Financial Officer",
       "Panama City Beach Chamber of Commerce",
       "The Florida Senate",
-      "U.S. Congress (Biographical Directory)"
+      "U.S. Congress (Biographical Directory)",
+      "U.S. Congress (Biographical Directory), official portrait from his House term"
      ]
     },
     {
@@ -7366,8 +7369,10 @@
      "type": "string",
      "values": [
       "https://bioguide.congress.gov/search/bio/D000032",
+      "https://bioguide.congress.gov/search/bio/J000296",
       "https://bioguide.congress.gov/search/bio/M001244",
       "https://cityofparker.com/government/city-council/",
+      "https://commons.wikimedia.org/wiki/File:Official_portrait_of_Chief_Financial_Officer_Blaise_Ingoglia_(cropped).jpg",
       "https://panamacity.gov/directory.aspx",
       "https://panamacity.org/board-of-directors/",
       "https://panamacity.org/staff/",
@@ -7384,7 +7389,8 @@
       "https://www.cityofcallaway.com/70/Mayor-Commission",
       "https://www.cityofcallaway.com/directory.aspx",
       "https://www.cityoflynnhaven.gov/directory.aspx",
-      "https://www.flsenate.gov/Senators/s2"
+      "https://www.flsenate.gov/Senators/s2",
+      "https://www.sanchezforpcb.com/"
      ]
     },
     {
@@ -7557,7 +7563,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 427,
+   "rows": 429,
    "columns": [
     {
      "name": "website",
