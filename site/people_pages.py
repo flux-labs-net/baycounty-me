@@ -312,6 +312,23 @@ def _pct(a, b):
     return f'{x:.1f}' if (x > 99.5 or x < 0.5) and 0 < a < b else f'{round(x)}'
 
 
+def _terms(pid):
+    """[(start, end, note)] of a person's seats from officeholder-terms (dates as YYYY-MM-DD, None when open)."""
+    return sorted(((r.get('start_date') or '0000', r.get('end_date') or '9999', r.get('note') or '') for r in EG._ds('officeholder-terms') if r.get('person_id') == pid))
+
+
+def _in_office(terms, y):
+    return any(s <= f'{y}-12-31' and e >= f'{y}-01-01' for s, e, _ in terms)
+
+
+def _nice_day(d):
+    from datetime import date
+    try:
+        return date.fromisoformat(d).strftime('%b %-d, %Y')
+    except (TypeError, ValueError):
+        return d or ''
+
+
 def vote_years(pid, name, mv):
     """Stats and a yes / no / absent bar per year for one person's recorded votes (member-votes dataset). Each year links to
     the votes page filtered to that person and year. The same chart is drawn by votes.js when that page is filtered to a person."""
@@ -333,13 +350,17 @@ def vote_years(pid, name, mv):
     n = sum(t.values())
     cast = t['yes'] + t['no']
     years = list(range(min(by), max(by) + 1))
+    terms = _terms(pid)
+    # time between two seats (left, then came back), so an empty year reads "Not in office", not as missing minutes
+    gaps = [(a[1], b[0], a[2].rstrip('.').split('. ')[-1] + '.' if a[2] else '') for a, b in zip(terms, terms[1:]) if b[0] > a[1]]  # the term note's last sentence says why they left
     top = max(sum(c.values()) for c in by.values())
     bars = ''
     for y in years:
         c = by.get(y, Counter())
         tot = sum(c.values())
         if not tot:
-            bars += f'<div class="vy-row vy-empty"><span class="vy-y">{y}</span><span class="vy-track"></span><span class="vy-c">No votes on file</span></div>'
+            why = 'No votes on file' if not terms or _in_office(terms, y) else 'Not in office'
+            bars += f'<div class="vy-row vy-empty"><span class="vy-y">{y}</span><span class="vy-track"></span><span class="vy-c">{why}</span></div>'
             continue
         seg = ''.join(f'<i class="{cls}" style="flex:{c[k]}"></i>' for k, _, cls in VOTE_KEYS if c[k])
         txt = ' · '.join(f'{c[k]:,} {w}' for k, w, _ in VOTE_KEYS if c[k])
@@ -354,6 +375,7 @@ def vote_years(pid, name, mv):
     return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="vote-years" data-tile="Votes by year">Yes and no votes by year</h2><span class="muted">{n:,} recorded votes, {years[0]} to {years[-1]}</span></div>
     <dl class="vy-stats">{stats}</dl>
     <figure class="vy" aria-label="{e(name)}'s recorded votes by year"><figcaption class="vy-key"><span><i class="vy-yes"></i>Yes</span><span><i class="vy-no"></i>No</span><span><i class="vy-ab"></i>Absent or abstained</span><span class="muted">Bar length is that year's number of votes. Pick a year to see its votes.</span></figcaption>{bars}</figure>
+    {''.join(f'<p class="note"><b>Not in office {e(_nice_day(a))} to {e(_nice_day(b))}.</b> {e(n)}</p>' for a, b, n in gaps)}
     <p class="note">Counts cover the votes in the minutes on file (<a href="/data-sources">which years we have</a>), so a short bar can mean fewer minutes, not fewer votes. Most items pass unanimously, often on a consent agenda.</p></section>'''
 
 

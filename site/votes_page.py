@@ -101,6 +101,9 @@ def vote_people():
         x = out.setdefault(pid, {'n': names.get(pid) or r['member'], 'k': []})
         if [r['gov_id'], r['member']] not in x['k']:
             x['k'].append([r['gov_id'], r['member']])
+    for r in EG._ds('officeholder-terms'):  # seats held, so the year chart can say "Not in office" for years between seats
+        if r.get('person_id') in out:
+            out[r['person_id']].setdefault('t', []).append([r.get('start_date') or '0000', r.get('end_date') or '9999'])
     return out
 
 

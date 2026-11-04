@@ -49,7 +49,8 @@ function yearChart(m, mk, rows) {
   let bars = '';
   for (let y = Math.min(...ys); y <= Math.max(...ys); y++) {
     const c = by[y] || {}, tot = sum(c);
-    if (!tot) { bars += `<div class="vy-row vy-empty"><span class="vy-y">${y}</span><span class="vy-track"></span><span class="vy-c">No votes on file</span></div>`; continue; }
+    if (!tot) { const tm = m.startsWith('p:') && PEOPLE[m.slice(2)]?.t, inOff = !tm || tm.some(([s, e]) => s <= y + '-12-31' && e >= y + '-01-01');
+      bars += `<div class="vy-row vy-empty"><span class="vy-y">${y}</span><span class="vy-track"></span><span class="vy-c">${inOff ? 'No votes on file' : 'Not in office'}</span></div>`; continue; }
     const txt = YK.filter(([k]) => c[k]).map(([k, w]) => `${fmt(c[k])} ${w}`).join(' · ');
     bars += `<button type="button" class="vy-row${sel === String(y) ? ' on' : ''}" data-y="${y}" aria-pressed="${sel === String(y)}" aria-label="${y}: ${txt}"><span class="vy-y">${y}</span><span class="vy-track"><span class="vy-bar" style="width:${Math.max(2, Math.round(100 * tot / top))}%">${YK.filter(([k]) => c[k]).map(([k, , cls]) => `<i class="${cls}" style="flex:${c[k]}"></i>`).join('')}</span></span><span class="vy-c">${txt}</span></button>`;
   }
