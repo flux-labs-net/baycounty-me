@@ -132,7 +132,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 11777,
+   "rows": 11763,
    "columns": [
     {
      "name": "date",
@@ -352,7 +352,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 57041,
+   "rows": 56971,
    "columns": [
     {
      "name": "date",
@@ -8924,7 +8924,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 191,
+   "rows": 185,
    "columns": [
     {
      "name": "place_id",
@@ -9768,7 +9768,7 @@
       "Moderate rip current risk*. Partly sunny. A slight chance of showers. Highs in the upper 70s. West winds around 10 mph.",
       "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the upper 70s. South winds around 5 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Rip Current Statement issued November 3 at 12:33PM EST until November 4 at 7:00PM EST by NWS Tallahassee FL",
+      "Rip Current Statement issued November 3 at 8:52PM EST until November 4 at 7:00PM EST by NWS Tallahassee FL",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9777,7 +9777,7 @@
      "type": "string",
      "values": [
       "2026-10-27",
-      "2026-11-03T12:33:00-05:00"
+      "2026-11-03T20:52:00-05:00"
      ]
     },
     {
@@ -9795,7 +9795,7 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.ac877f317ad59d9ec6f97108a0c24719fe53c728.001.1",
+      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.ab38e8a3704510619b8f5957bfa2f52ffa3ff851.001.1",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
       "https://api.weather.gov/products/bbd69bbb-9d34-45b6-8fdd-a2850e93d2e5",
       "https://www.pcbfl.gov/174/Beach-Flags"
@@ -12613,7 +12613,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 41,
+   "rows": 44,
    "columns": [
     {
      "name": "notice_id",
@@ -12724,7 +12724,8 @@
       "City of Lynn Haven",
       "Coastal Bay",
       "Lynn Haven",
-      "Right lane blocked"
+      "Right lane blocked",
+      "South Walton; Coastal Bay; Coastal Franklin"
      ]
     },
     {
@@ -12753,7 +12754,9 @@
       "2026-11-01T15:41:00.000Z",
       "2026-11-02T18:07",
       "2026-11-03T13:22",
-      "2026-11-03T17:33:00.000Z"
+      "2026-11-03T17:33:00.000Z",
+      "2026-11-03T17:55",
+      "2026-11-04T01:52:00.000Z"
      ]
     },
     {
@@ -12839,7 +12842,10 @@
       "2026-11-01T15:45:02.449365+00:00",
       "2026-11-02T23:10:02.570038+00:00",
       "2026-11-03T17:35:01.060033+00:00",
-      "2026-11-03T18:25:01.131238+00:00"
+      "2026-11-03T18:25:01.131238+00:00",
+      "2026-11-03T21:40:01.144219+00:00",
+      "2026-11-03T23:00:01.396018+00:00",
+      "2026-11-04T01:55:01.156535+00:00"
      ]
     },
     {
@@ -12866,7 +12872,10 @@
       "2026-11-01T17:40:02.358407+00:00",
       "2026-11-02T06:00:03.795048+00:00",
       "2026-11-02T23:10:02.570038+00:00",
-      "2026-11-03T18:34:58.474Z"
+      "2026-11-03T20:30:01.622887+00:00",
+      "2026-11-04T01:50:01.217739+00:00",
+      "2026-11-04T01:55:01.156535+00:00",
+      "2026-11-04T02:12:58.493Z"
      ]
     },
     {
@@ -13574,7 +13583,7 @@
    "id": "election-dates",
    "title": "Election dates",
    "description": "Key dates for Bay County elections: registration deadlines, early voting, vote-by-mail request and return deadlines and election days (kept by hand from the Supervisor of Elections' voter guide), plus the upcoming events on the Supervisor of Elections' calendar (canvassing board meetings, tests of the voting equipment), read daily. kind says which; starts_at is the start time when one is given.",
-   "rows": 15,
+   "rows": 13,
    "columns": [
     {
      "name": "place_id",
@@ -13612,8 +13621,6 @@
      "type": "string",
      "values": [
       "2026-11-03T07:00",
-      "2026-11-03T15:00",
-      "2026-11-03T18:30",
       "2026-11-05T17:01",
       "2026-11-08T09:00",
       "2026-11-13T17:01"
@@ -13658,8 +13665,6 @@
      "values": [
       "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
       "https://www.bayvotesfl.gov/elections/upcoming-elections/",
-      "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-ballots/",
-      "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-report-preliminary-results/",
       "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
       "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
       "https://www.bayvotesfl.gov/events/general-election/",
@@ -13845,7 +13850,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 80,
+   "rows": 87,
    "columns": [
     {
      "name": "place_id",
@@ -13998,7 +14003,9 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-028.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-710.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-367.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/cpDASFgvl7rNFiwwZJHT/8d29./cropped-446.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-108.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
@@ -14029,6 +14036,7 @@
       "pn:592cfc86f14e",
       "pn:5cb38a6ba13e",
       "pn:9c26a1d21bf3",
+      "pn:a46ae64b5f4f",
       "pn:e13e7f99f672",
       "pn:e50a4c70306c"
      ]
@@ -14055,6 +14063,8 @@
       "Ordinance 1152",
       "Ordinance 1153",
       "Ordinance 1154",
+      "Ordinance 1155",
+      "Ordinance 1156",
       "Ordinance 1192R",
       "Ordinance 1197",
       "Ordinance 1691",
@@ -14153,7 +14163,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 96,
+   "rows": 119,
    "columns": [
     {
      "name": "place_id",
@@ -14216,6 +14226,7 @@
      "name": "job_type",
      "type": "string",
      "values": [
+      "Administrative",
       "Full Time",
       "Full time",
       "Full- Time",
@@ -14223,8 +14234,10 @@
       "Licensed",
       "Part time",
       "Part-Time",
+      "Safety officers",
       "Substitutes",
-      "Support"
+      "Support",
+      "West bay elem school"
      ]
     },
     {
@@ -14251,16 +14264,20 @@
       "2026-08-10",
       "2026-08-22",
       "2026-09-14",
+      "2026-09-16",
       "2026-09-17",
       "2026-09-24",
       "2026-09-28",
       "2026-09-29",
       "2026-09-30",
-      "2026-10-04",
+      "2026-10-05",
+      "2026-10-06",
       "2026-10-07",
       "2026-10-08",
+      "2026-10-15",
       "2026-10-16",
       "2026-10-20",
+      "2026-10-21",
       "2026-10-22",
       "2026-10-23",
       "2026-10-26",
@@ -14270,7 +14287,8 @@
       "2026-10-30",
       "2026-11-01",
       "2026-11-02",
-      "2026-11-03"
+      "2026-11-03",
+      "2026-11-04"
      ]
     },
     {
@@ -14282,6 +14300,7 @@
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
+      "2026-11-12",
       "2027-04-30"
      ]
     },
@@ -14302,7 +14321,8 @@
       "2026-10-29",
       "2026-10-30",
       "2026-10-31",
-      "2026-11-03"
+      "2026-11-03",
+      "2026-11-04"
      ]
     },
     {
@@ -14396,7 +14416,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-03"
+      "2026-11-04"
      ]
     }
    ],
@@ -15774,7 +15794,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 172,
+   "rows": 154,
    "columns": [
     {
      "name": "place_id",
@@ -15858,9 +15878,7 @@
       "2026-11-03T10:30:00",
       "2026-11-03T11:00:00",
       "2026-11-03T15:00:00",
-      "2026-11-03T15:30:00",
       "2026-11-03T17:00:00",
-      "2026-11-03T20:00:00",
       "2026-11-04T11:30:00",
       "2026-11-04T17:00:00",
       "2026-11-04T21:00:00",
@@ -15934,7 +15952,6 @@
       "Panama City Beach City Council (also sits as Front Beach Road CRA)",
       "Panama City City Commission",
       "Panama City Commission",
-      "Panama City Community Redevelopment Agency (CRA) Board",
       "Parker City Council",
       "Springfield City Commission"
      ]
@@ -15956,7 +15973,6 @@
       "Bay County Public Library",
       "Gulf Coast State College",
       "Historic Downtown Panama City",
-      "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
       "Panama City Beach Public Library",
       "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
       "Pier Park",
@@ -17676,7 +17692,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-03"
+      "2026-11-04"
      ]
     },
     {
@@ -19296,7 +19312,7 @@
    "id": "contract-vote-dollars",
    "title": "Contract votes and their dollar figures",
    "description": "Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.",
-   "rows": 3560,
+   "rows": 3557,
    "columns": [
     {
      "name": "vote_id",
@@ -19799,7 +19815,7 @@
    "id": "contract-minutes-check",
    "title": "Contract votes checked against the contract list",
    "description": "Every passed contract vote read from the minutes since October 2022 (consent agendas and votes that approve no spending, such as mutual aid, interlocal agreements, terminations and rejected bids, left out), checked against the contracts dataset. status: in_list (tied to a contract, change order or emergency purchase there, contract_record_ids), under_threshold (the vote's one clear figure is below list_threshold, the smallest award the list collects for that government), after_review (the meeting is after list_reviewed_through, the last meeting date read into the list), no_amount (the minutes give no single clear dollar figure), or missing (at or above the threshold, before the review date, and not in the list). amount is the vote's one clear figure from contract-vote-dollars. checked_note explains a vote looked at by hand (for example, the minutes don't name the seller). Rules: site/contract_coverage.py.",
-   "rows": 707,
+   "rows": 705,
    "columns": [
     {
      "name": "vote_id",
@@ -20380,7 +20396,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 49,
+   "rows": 48,
    "columns": [
     {
      "name": "board",
@@ -20427,8 +20443,7 @@
       "Regular Meeting (expected)",
       "School Board Meeting",
       "School Board Meeting - Organizational Meeting",
-      "Special Meeting and 4th LDC Workshop",
-      "Virtual CRA Workshop"
+      "Special Meeting and 4th LDC Workshop"
      ]
     },
     {
@@ -20453,7 +20468,6 @@
       "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "Government Center - 840 W. 11th st. Panama City FL 32401",
-      "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
       "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
       "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
@@ -20500,7 +20514,8 @@
      "name": "minutes_url",
      "type": "string",
      "values": [
-      "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf"
+      "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
+      "https://www.springfieldfl.net/media/10921"
      ]
     },
     {
@@ -20515,6 +20530,7 @@
       "Parker:https://cityofparker.com/government/agendas-minutes/",
       "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "Springfield:https://www.springfieldfl.net/meetings",
+      "Springfield:https://www.springfieldfl.net/meetings/recent",
       "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
@@ -20561,6 +20577,7 @@
      "type": "string",
      "values": [
       "https://baycountyfl.new.swagit.com/videos/404435",
+      "https://baycountyfl.new.swagit.com/videos/405753",
       "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
@@ -20577,7 +20594,6 @@
       "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
-      "https://www.panamacity.gov/calendar.aspx?EID=6076",
       "https://www.panamacity.gov/calendar.aspx?EID=6077",
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",

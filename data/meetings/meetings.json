@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-03T12:28:31-06:00",
+  "generated": "2026-11-03T20:06:35-06:00",
   "window": {
     "from": "2026-11-03",
     "to": "2027-01-02"
@@ -91,11 +91,11 @@
       "schedule_source_url": "https://panamacity.gov/787/CRA-Board",
       "sources": {
         "AgendaCenter": "ok (3 records)",
-        "calendar (iCal cat 22)": "ok (11 records)"
+        "calendar (iCal cat 22)": "ok (10 records)"
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 2,
+        "calendar": 1,
         "expected": 0
       }
     },
@@ -201,8 +201,8 @@
       "calendar_url": "https://www.springfieldfl.net/calendar",
       "schedule_source_url": "https://www.springfieldfl.net/city-commission",
       "sources": {
-        "Meetings list /meetings": "ok (4 records)",
-        "Meetings list /meetings/recent": "ok (54 records)"
+        "Meetings list /meetings": "ok (3 records)",
+        "Meetings list /meetings/recent": "ok (53 records)"
       },
       "coverage": {
         "agenda_feed": 3,
@@ -608,8 +608,8 @@
       "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
       "agenda_url": "https://www.springfieldfl.net/media/10911",
       "packet_url": null,
-      "minutes_url": null,
-      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "minutes_url": "https://www.springfieldfl.net/media/10921",
+      "source": "Springfield:https://www.springfieldfl.net/meetings/recent",
       "status": "posted",
       "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-75",
       "past": true
@@ -624,6 +624,7 @@
       "minutes_url": null,
       "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "status": "posted",
+      "detail_url": "https://baycountyfl.new.swagit.com/videos/405753",
       "items": [
         {
           "title": "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
@@ -664,18 +665,6 @@
       "minutes_url": null,
       "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
       "status": "posted"
-    },
-    {
-      "board": "pc-cra",
-      "title": "Virtual CRA Workshop",
-      "start": "2026-11-03T15:30:00-06:00",
-      "location": "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6076"
     },
     {
       "board": "mb",
