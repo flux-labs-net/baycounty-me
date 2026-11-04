@@ -116,7 +116,7 @@ Run by Flux Labs (https://fluxlabs.net/), a managed IT services company in Panam
 
 - [llms-full.txt](https://baycounty.me/llms-full.txt): every page and dataset in one file
 - [Sitemap](https://baycounty.me/sitemap.xml): every public page
-- [Profile sitemap](https://baycounty.me/sitemap-profiles.xml): a profile for every government, company, business, nonprofit and political committee in the records
+- [Profile sitemap](https://baycounty.me/sitemap-profiles.xml): a profile for every government, company, business, nonprofit, political committee, board member and business owner in the records
 - [What is new (RSS)](https://baycounty.me/updates.xml): new pages, data and corrections
 - [Glossary](https://baycounty.me/glossary): CRA, millage, homestead and other terms in plain words
 - [About](https://baycounty.me/about): who runs the site, method and corrections

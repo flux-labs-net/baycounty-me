@@ -81,7 +81,7 @@ test('link-preview crawlers, and only they, get the profile crawler page', () =>
   assert.ok(!re.test('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Safari/604.1'));
 });
 
-test('organization profiles open to search with structured data; people stay noindex', () => {
+test('profiles open to search with structured data; the shell alone stays noindex', () => {
   const {structured, INDEXED} = require('../meta');
   const shell = '<meta name="robots" content="noindex, follow"><script type="application/ld+json">{"old":1}</script><title>Profile · BayCounty.me</title><main id="main">';
   const e = {name: 'Acme <Paving>', subtitle: 'Company paid by Bay County', source_url: 'https://search.sunbiz.org/x'};
@@ -94,7 +94,8 @@ test('organization profiles open to search with structured data; people stay noi
   // the same kinds the build lists in sitemap-profiles.xml (site/seo.py)
   const py = fs.readFileSync(path.join(__dirname, '..', '..', 'site', 'seo.py'), 'utf8').match(/INDEXED_PROFILE_KINDS = \(([^)]*)\)/)[1];
   assert.deepEqual([...INDEXED].sort(), py.match(/'(\w+)'/g).map(s => s.slice(1, -1)).sort());
-  assert.ok(!INDEXED.has('member') && !INDEXED.has('owner'));
+  assert.ok(INDEXED.has('member') && INDEXED.has('owner'));
+  assert.equal(structured(e, 'owner', 'u', 't', 'd')['@graph'][1]['@type'], 'Person');
   const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'vercel.json'), 'utf8'));
   assert.match(vercel.rewrites.find(r => r.destination.startsWith('/api/meta')).has[0].value, /Googlebot.*bingbot/);
 });

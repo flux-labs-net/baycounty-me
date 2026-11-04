@@ -70,7 +70,7 @@ def llms_txt(menu, links, pages, es_alt, catalog):
     out += ['', '## Optional', '',
             _line('/llms-full.txt', 'llms-full.txt', 'every page and dataset in one file'),
             _line('/sitemap.xml', 'Sitemap', 'every public page'),
-            _line('/sitemap-profiles.xml', 'Profile sitemap', 'a profile for every government, company, business, nonprofit and political committee in the records'),
+            _line('/sitemap-profiles.xml', 'Profile sitemap', 'a profile for every government, company, business, nonprofit, political committee, board member and business owner in the records'),
             _line('/updates.xml', 'What is new (RSS)', 'new pages, data and corrections'),
             _line('/glossary', 'Glossary', 'CRA, millage, homestead and other terms in plain words'),
             _line('/about', 'About', 'who runs the site, method and corrections'), '']

@@ -2,8 +2,8 @@
 // crawler (iMessage, Facebook, X, Slack, LinkedIn, Discord, WhatsApp...) that doesn't run scripts would only see the
 // shell's generic title. vercel.json sends those crawlers here instead (matched by user agent); people still get the
 // static shell. This returns the same shell with the profile's own title, summary and preview image (api/og.js).
-// Search engines get the same page. Organization profiles (INDEXED) are opened to search with structured data and a
-// short text summary; profiles of private people (board members, business owners) stay noindex. Keep INDEXED in step
+// Search engines get the same page, opened to search with structured data and a short text summary (every kind in
+// INDEXED; Jeremy chose all profiles, 2026-11-04). Keep INDEXED in step
 // with site/seo.py INDEXED_PROFILE_KINDS, which lists the same profiles in sitemap-profiles.xml.
 //   GET /api/meta?p=/profile/<kind>/<id>
 const {loadFile, SITE_URL} = require('./_data');
@@ -11,8 +11,8 @@ const {loadFile, SITE_URL} = require('./_data');
 const PROF = /^\/profile\/(vendor|nonprofit|member|owner|business|committee|gov)\/([A-Za-z0-9_.-]{1,100})$/;
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
 let SHELL = null;
-const INDEXED = new Set(['gov', 'vendor', 'nonprofit', 'business', 'committee']);
-const LD_TYPE = {gov: 'GovernmentOrganization', nonprofit: 'NGO', vendor: 'Organization', business: 'Organization', committee: 'Organization'};
+const INDEXED = new Set(['gov', 'vendor', 'nonprofit', 'business', 'committee', 'member', 'owner']);
+const LD_TYPE = {gov: 'GovernmentOrganization', nonprofit: 'NGO', vendor: 'Organization', business: 'Organization', committee: 'Organization', member: 'Person', owner: 'Person'};
 
 async function shell() {
   if (SHELL && Date.now() - SHELL.t < 3600e3) return SHELL.html;
@@ -47,7 +47,7 @@ function describe(e) {
   return bits.filter(Boolean).join('. ') + ', each with its source.';
 }
 
-// WebPage about the organization, with a source link and breadcrumbs (same graph shape as site/seo.py jsonld()).
+// ProfilePage about the organization or person, with a source link and breadcrumbs (same graph shape as site/seo.py jsonld()).
 function structured(e, kind, url, title, desc) {
   const org = {'@type': LD_TYPE[kind] || 'Organization', '@id': url + '#entity', name: e.name, url,
     ...(e.subtitle ? {description: e.subtitle} : {}), ...(e.source_url ? {sameAs: e.source_url} : {}),

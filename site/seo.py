@@ -12,7 +12,7 @@ SITE = 'BayCounty.me'
 TITLE_MAX = 60
 DESC_MAX = 160
 PRIVATE = ('/admin', '/finance', '/staff')          # never in the sitemap; robots.txt disallows them
-INDEXED_PROFILE_KINDS = ('gov', 'vendor', 'nonprofit', 'business', 'committee')  # organization profiles open to search (api/meta.js INDEXED); people stay out
+INDEXED_PROFILE_KINDS = ('gov', 'vendor', 'nonprofit', 'business', 'committee', 'member', 'owner')  # every profile is open to search (api/meta.js INDEXED; Jeremy, 2026-11-04)
 NOINDEX = ('/404', '/profile', '/account')          # built pages search engines should skip: the 404, the profile shell, sign-in
 ORG = {'@type': 'Organization', '@id': DOMAIN + '/#org', 'name': 'Flux Labs', 'url': 'https://fluxlabs.net/',
        'logo': DOMAIN + '/assets/flux-labs.webp'}
@@ -150,7 +150,7 @@ def write_robots_and_sitemap(out_dir, pages, alternates, lastmod):
 
 
 def write_profile_sitemap(out_dir):
-    """sitemap-profiles.xml: every organization profile (/profile/<kind>/<id>) from the entity-profiles dataset.
+    """sitemap-profiles.xml: every profile (/profile/<kind>/<id>) from the entity-profiles dataset.
     Profiles are one client-side shell; search engines get each one's own title, summary and structured data from api/meta.js."""
     fp = os.path.join(out_dir, 'downloads', 'entity-profiles.json')
     rows = json.load(open(fp)) if os.path.exists(fp) else []
