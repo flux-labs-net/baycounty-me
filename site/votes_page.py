@@ -206,6 +206,7 @@ def votes_page(out_dir):
       <label class="vf"><span>Sort</span><select id="vtSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="amt">Largest amount</option><option value="close">Closest votes</option><option value="az">Item A to Z</option></select></label>
     </div>
     <div class="vt-status"><span id="vtCount" class="muted" aria-live="polite">Loading votes…</span><span id="vtMember" class="vt-memsum"></span><button type="button" class="linkbtn" id="vtClear" hidden>Clear filters</button><button type="button" class="tt-csv" id="vtCsv">Download CSV</button></div>
+    <div id="vtYears" class="vt-years" hidden></div>
     <ol class="findings" id="vtList"></ol><button type="button" class="pill" id="vtMore">Show more</button></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Members and their records</h2><span class="muted">Counts cover only the votes recorded on this page</span></div>{roster}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Coverage and gaps</h2></div>

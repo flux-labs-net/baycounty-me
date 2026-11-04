@@ -37,13 +37,43 @@ function members() { // members who appear in recorded roll calls, grouped by go
   F.m.value = [...F.m.options].some(o => o.value === keep) ? keep : '';
 }
 
+// a person's yes / no / absent by year (same look as the profile's chart, people_pages.vote_years); a year picks that year
+const YK = [['yes', 'yes', 'vy-yes'], ['no', 'no', 'vy-no'], ['absent', 'absent', 'vy-ab'], ['abstain', 'abstained', 'vy-ab']];
+function yearChart(m, mk, rows) {
+  const box = $('vtYears'), by = {}, t = {}; let lost = 0;
+  rows.forEach(v => { const x = voteOf(v, mk)?.[1], y = +(v.d || '').slice(0, 4); if (!x || !y) return;
+    (by[y] ||= {})[x] = (by[y][x] || 0) + 1; t[x] = (t[x] || 0) + 1; if ((x === 'no' && !failed(v)) || (x === 'yes' && failed(v))) lost++; });
+  const ys = Object.keys(by).map(Number); if (!ys.length) { box.hidden = true; return; }
+  const sum = c => Object.values(c).reduce((a, b) => a + b, 0), top = Math.max(...ys.map(y => sum(by[y]))), n = k => t[k] || 0, cast = n('yes') + n('no');
+  const fmt = x => x.toLocaleString('en-US'), sel = F.y.value;
+  let bars = '';
+  for (let y = Math.min(...ys); y <= Math.max(...ys); y++) {
+    const c = by[y] || {}, tot = sum(c);
+    if (!tot) { bars += `<div class="vy-row vy-empty"><span class="vy-y">${y}</span><span class="vy-track"></span><span class="vy-c">No votes on file</span></div>`; continue; }
+    const txt = YK.filter(([k]) => c[k]).map(([k, w]) => `${fmt(c[k])} ${w}`).join(' · ');
+    bars += `<button type="button" class="vy-row${sel === String(y) ? ' on' : ''}" data-y="${y}" aria-pressed="${sel === String(y)}" aria-label="${y}: ${txt}"><span class="vy-y">${y}</span><span class="vy-track"><span class="vy-bar" style="width:${Math.max(2, Math.round(100 * tot / top))}%">${YK.filter(([k]) => c[k]).map(([k, , cls]) => `<i class="${cls}" style="flex:${c[k]}"></i>`).join('')}</span></span><span class="vy-c">${txt}</span></button>`;
+  }
+  // one decimal near the ends so 5 no votes in 1,254 never reads as 100% yes (same as people_pages._pct)
+  const pct = (a, b) => { if (!b) return '0'; const x = 100 * a / b; return (x > 99.5 || x < 0.5) && a > 0 && a < b ? x.toFixed(1) : String(Math.round(x)); };
+  const st = (l, v, s) => `<div><dt>${l}</dt><dd>${v}</dd><span>${s}</span></div>`;
+  box.innerHTML = `<dl class="vy-stats">${st('Voted yes', pct(n('yes'), cast) + '%', `${fmt(n('yes'))} of ${fmt(cast)} yes or no votes`)}${st('Voted no', fmt(n('no')), `${cast ? (100 * n('no') / cast).toFixed(1) : 0}% of yes or no votes`)}${st('Missed', fmt(n('absent') + n('abstain')), 'absent or abstained')}${st('On the losing side', fmt(lost), 'voted no and it passed, or yes and it failed')}</dl>
+    <figure class="vy" aria-label="${esc(labelOf(m))}'s votes by year"><figcaption class="vy-key"><span><i class="vy-yes"></i>Yes</span><span><i class="vy-no"></i>No</span><span><i class="vy-ab"></i>Absent or abstained</span><span class="muted">${esc(labelOf(m))}'s votes that match the other filters. Pick a year to list only its votes${sel !== 'all' ? ', or pick it again for every year' : ''}.</span></figcaption>${bars}</figure>`;
+  box.hidden = false;
+}
+$('vtYears').addEventListener('click', ev => { const b = ev.target.closest('[data-y]'); if (!b) return;
+  F.y.value = F.y.value === b.dataset.y ? 'all' : b.dataset.y; shown = 40; filt(); });
+
 let shown = 40, last = [];
 function filt(push = true) {
   const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, mk = keysOf(m), c = F.c.value, y = F.y.value === 'all' ? '' : F.y.value, o = F.o.value;
-  let cur = D.votes.filter(v => (!g || v.g === g) && (!c || v.c === c) && (!y || (v.d || '').startsWith(y))
+  const keep = v => (!g || v.g === g) && (!c || v.c === c)
     && (!m || voteOf(v, mk))
     && (!o || (o === 'split' ? v.x : o === 'unan' ? !v.x && !failed(v) : failed(v)))
-    && (!q || (v.h + ' ' + v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ') + ' ' + (D.bodies[v.b]?.n || '')).toLowerCase().includes(q)));
+    && (!q || (v.h + ' ' + v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ') + ' ' + (D.bodies[v.b]?.n || '')).toLowerCase().includes(q));
+  const base = D.votes.filter(keep); // every filter but the year
+  let cur = y ? base.filter(v => (v.d || '').startsWith(y)) : base;
+  if (m) yearChart(m, mk, base);
+  else $('vtYears').hidden = true;
   const sort = F.sort.value;
   // every order breaks ties newest first, then by item A to Z
   const az = (a, b) => (a.h || '').localeCompare(b.h || '', 'en', {numeric: true, sensitivity: 'base'}), nw = (a, b) => (b.d || '').localeCompare(a.d || '') || az(a, b);
