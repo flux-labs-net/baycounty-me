@@ -183,6 +183,20 @@ def _election_card():
     return f'<a class="h-td" href="{href}">{ico("vote", "salmon")}<span><b>{title}</b><span>{sub}</span></span></a>'
 
 
+def _election_banner():
+    """Banner across the top of the homepage from Election Day until the count is 17 days old: links to /elections/live.
+    home.js fills in the live status (precincts in, ballots counted) from /api/v1/election-live."""
+    from site_menu import ELECTION_DAY
+    d = (date.today() - ELECTION_DAY).days
+    if d < 0 or d > 17:
+        return ''
+    when = 'Election night' if d <= 1 else f'{ELECTION_DAY.strftime("%B")} {ELECTION_DAY.day} election'
+    sub = 'Live results from 7 p.m., updated every few seconds' if d <= 1 else 'Results race by race'
+    return (f'<a class="h-elb" id="hElb" href="/elections/live"><span class="h-elb-live" id="hElbTag"><i aria-hidden="true"></i>Live</span>'
+            f'<span class="h-elb-t"><b>{when}: Bay County results</b><span id="hElbSub">{sub}</span></span>'
+            f'<span class="h-elb-go">See results<span class="ico i-arrow" aria-hidden="true"></span></span></a>')
+
+
 def _today():
     """Live cards: today's beach flag, active alerts, the next public meeting and, in election season, the election.
     A signed-in resident's trash card (#hTrash) stays hidden unless their saved home's pickup is today, or tomorrow once
@@ -303,6 +317,7 @@ def home_page():
     hero_img = _img(hero, 'h-pc-himg', eager=True, big=True) if hero else ''
     money_img = _img(money, 'h-pc-mimg', big=True, alt='') if money else ''
     return f'''<div class="page home h-home h-pc">
+  {_election_banner()}
   <section class="h-pc-hero{'' if hero else ' nophoto'}" aria-labelledby="h1">
     {hero_img}
     <div class="h-pc-hin">
