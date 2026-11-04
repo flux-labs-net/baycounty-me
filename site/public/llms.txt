@@ -1,0 +1,122 @@
+# BayCounty.me
+
+> BayCounty.me is a free, independent guide to the public records of Bay County, Florida: its county, cities, school district and special districts. It shows where tax money goes, budgets, contracts and the vendors paid, how officials voted, campaign money, meetings, elections, public notices, schools, restaurant inspections, emergencies and more, each figure linked to its government source.
+
+Maps, money and public records for Bay County, Florida, with a source on every figure.
+
+Run by Flux Labs (https://fluxlabs.net/), a managed IT services company in Panama City. Contact: hello@fluxlabs.net. Free to use; the data is open (see Open data).
+
+## Living here
+
+- [My address](https://baycounty.me/my-address): Your tax bill, trash day, schools, districts and meetings for one address
+- [Utilities & trash day](https://baycounty.me/utilities): Who provides what, and your pickup day
+- [Public schools](https://baycounty.me/schools): Your zoned schools, calendar, grades and spending
+- [Restaurant inspections](https://baycounty.me/restaurants): Every inspection, warning and closure
+- [Police, fire & Sheriff](https://baycounty.me/public-safety): Who covers your town, crimes reported, budgets
+- [Government jobs](https://baycounty.me/jobs): Open jobs at every local government
+- [Beaches](https://baycounty.me/beaches): Today's flag, rip currents, water quality, access
+- [Parks](https://baycounty.me/parks): Parks, boat ramps, trails and sign-ups
+- [Emergencies & alerts](https://baycounty.me/emergency): Warnings, evacuation zones, shelters, boil-water notices
+- [Hurricane prep](https://baycounty.me/hurricane-prep): Sandbags, generators, disaster help
+- [Events](https://baycounty.me/events): What's happening around the county
+- [New businesses](https://baycounty.me/new-businesses): Companies filed in Bay County, month by month
+- [Building & development](https://baycounty.me/development): New homes permitted and projects in review
+- [Road projects](https://baycounty.me/roads): State road work, costs and the five-year plan
+- [Military and the bases](https://baycounty.me/military): Base news and federal contracts to local firms
+
+## Your money
+
+- [Your tax bill](https://baycounty.me/public-money/tax-dollars): Who gets each dollar of your property tax, for any area
+- [Fees & bills](https://baycounty.me/public-money/fees-and-bills): Tax-bill fees, water and garbage
+- [Exemptions](https://baycounty.me/public-money/exemptions): Homestead, veterans, seniors and more
+- [Tourist tax](https://baycounty.me/public-money/tourist-tax): The 5% bed tax visitors pay
+- [Amendment 3](https://baycounty.me/public-money/amendment-3): What the ballot amendment would change
+- [Compare governments](https://baycounty.me/compare): Budgets, taxes, debt and audits per resident
+- [Budgets by year](https://baycounty.me/public-money/budget-compare): Compare any two years, line by line
+- [CRA spending](https://baycounty.me/public-money/cra-spending): What redevelopment agencies paid for
+- [CRA tax increment](https://baycounty.me/public-money/cra-tax-increment): Property tax paid to the CRAs, by year
+- [Sales tax projects](https://baycounty.me/public-money/sales-tax-projects): Half-cent projects: promised vs built
+- [Hurricane Michael](https://baycounty.me/public-money/hurricane-michael): FEMA, HUD and state recovery money
+- [Accountability console](https://baycounty.me/public-money/accountability): Big projects from approval to close
+- [Contracts](https://baycounty.me/public-money/contracts): Who wins them, and how
+- [Vendors](https://baycounty.me/public-money/vendors): Every company paid, with contracts and votes
+- [How they voted](https://baycounty.me/public-money/votes): Every recorded vote on money decisions
+
+## Your government
+
+- [Officials and pay](https://baycounty.me/people): Every official, county officers and top salaries
+- [Bay County](https://baycounty.me/governments/bay-county): Bay County, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Bay District Schools](https://baycounty.me/governments/bay-district-schools): Bay District Schools, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Panama City](https://baycounty.me/governments/panama-city): Panama City, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Panama City Beach](https://baycounty.me/governments/panama-city-beach): Panama City Beach, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Lynn Haven](https://baycounty.me/governments/lynn-haven): Lynn Haven, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Callaway](https://baycounty.me/governments/callaway): Callaway, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Springfield](https://baycounty.me/governments/springfield): Springfield, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Parker](https://baycounty.me/governments/parker): Parker, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [Mexico Beach](https://baycounty.me/governments/mexico-beach): Mexico Beach, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.
+- [All governments](https://baycounty.me/governments): Every local government at a glance
+- [Connections network](https://baycounty.me/connections): Who governments paid, and who gave to officials
+- [Campaign gifts](https://baycounty.me/connections/campaign-gifts): Who funds campaigns, and donors with contracts
+- [Where records overlap](https://baycounty.me/connections/overlaps): Votes naming donors, agendas, bids and more
+- [Business ties](https://baycounty.me/connections/business-ties): Officials' and candidates' businesses
+- [Shared owners](https://baycounty.me/connections/shared-owners): Companies with a shared owner giving to one candidate
+- [Nonprofits](https://baycounty.me/connections/nonprofits): Public money, and officials on their boards
+- [Chambers of commerce](https://baycounty.me/chambers): Boards, events and public money
+
+## Elections
+
+- [2026 Elections](https://baycounty.me/elections): Who's running, their platforms and money
+- [Where and when to vote](https://baycounty.me/elections/voting): Dates, polling places and your ballot
+- [Election night results](https://baycounty.me/elections/live): The live count, every race
+- [Election results](https://baycounty.me/elections/results): Every contest since 2016
+- [Past elections](https://baycounty.me/elections/past): Every local race since 2016 and its money
+
+## Get involved
+
+- [Meetings](https://baycounty.me/meetings): When every board meets, with agendas
+- [Public notices](https://baycounty.me/notices): Bids, hearings and meetings
+- [Volunteer](https://baycounty.me/volunteer): Open needs from local nonprofits
+- [Email alerts](https://baycounty.me/alerts): Weekly updates for your government
+- [This week](https://baycounty.me/this-week): The weekly email: events, votes, contracts
+- [Request a record](https://baycounty.me/records-request): Write a public records request
+- [Letters to officials](https://baycounty.me/correspondence): What we asked, and what they said
+
+## About & data
+
+- [Glossary](https://baycounty.me/glossary): Government money, explained simply
+- [Open data](https://baycounty.me/open-data): Download every dataset
+- [API](https://baycounty.me/developers): Connect apps and AI assistants
+- [Realtor console](https://baycounty.me/realtor): Branded address reports for agents
+- [What's new](https://baycounty.me/updates): New pages, data and corrections
+- [Data sources](https://baycounty.me/data-sources): Every source, link and process
+- [About](https://baycounty.me/about): Sources, method and corrections
+
+## Data and API
+
+- [Open data](https://baycounty.me/open-data): 142 datasets as CSV and JSON, refreshed daily
+- [Dataset catalog (JSON)](https://baycounty.me/downloads/index.json): every dataset with its columns and download links
+- [API and assistant connector](https://baycounty.me/developers): REST API, OpenAPI description and an MCP server for AI assistants
+- [OpenAPI description](https://baycounty.me/api/v1/openapi.json): the /api/v1 endpoints
+- [MCP server](https://baycounty.me/api/mcp): tools that answer common questions from the same data
+- [Data sources](https://baycounty.me/data-sources): every source, link and how often it is read
+
+## En español
+
+- [Registros públicos en español](https://baycounty.me/es)
+- [Mi dirección](https://baycounty.me/es/mi-direccion)
+- [Glosario en lenguaje sencillo](https://baycounty.me/es/glosario)
+- [Solicite un registro público](https://baycounty.me/es/solicitar-registros)
+- [A dónde va su impuesto a la propiedad](https://baycounty.me/es/impuestos)
+- [Tarifas en su factura de impuestos, y facturas de servicios](https://baycounty.me/es/tarifas-y-facturas)
+- [Exenciones del impuesto a la propiedad](https://baycounty.me/es/exenciones)
+- [Quiénes son candidatos en 2026](https://baycounty.me/es/elecciones)
+- [Próximas reuniones públicas en el condado de Bay](https://baycounty.me/es/reuniones)
+
+## Optional
+
+- [llms-full.txt](https://baycounty.me/llms-full.txt): every page and dataset in one file
+- [Sitemap](https://baycounty.me/sitemap.xml): every public page
+- [Profile sitemap](https://baycounty.me/sitemap-profiles.xml): a profile for every government, company, business, nonprofit and political committee in the records
+- [What is new (RSS)](https://baycounty.me/updates.xml): new pages, data and corrections
+- [Glossary](https://baycounty.me/glossary): CRA, millage, homestead and other terms in plain words
+- [About](https://baycounty.me/about): who runs the site, method and corrections

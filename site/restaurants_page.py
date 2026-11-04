@@ -277,15 +277,26 @@ def restaurant_pages():
     """One page per license: /restaurants/<name>-<license> (page_url in the restaurants dataset)."""
     R, I, by = _by_license()
     from collections import Counter
-    same = Counter(r['business_name'] for r in R if r.get('page_url'))
+    rows = [r for r in R if r.get('page_url')]
+    same = Counter(r['business_name'] for r in rows)
     def name(r):  # chains share a name: add the street (or town) so each page has its own title
         if same[r['business_name']] < 2: return r['business_name']
         at = r.get('address') or r.get('city')
         return f'{r["business_name"]}, {at}' if at else r['business_name']
-    return [(r['page_url'], f'{name(r)}: restaurant inspections',
-             f'{r["business_name"]}{", " + r["city"] if r.get("city") else ""}: every Florida food safety inspection since 2016, the latest result, violations, warnings and emergency closures.',
+    names = {r['license_number']: name(r) for r in rows}
+    twice = Counter(names.values())
+    for r in rows:  # two licenses at one address (a new owner, a second kitchen): the license number tells them apart
+        if twice[names[r['license_number']]] > 1:
+            at = r.get('address') or r.get('city')
+            names[r['license_number']] = f'{r["business_name"]} #{r["license_number"]}' + (f', {at}' if at else '')
+    def where(r):
+        at = ', '.join(x for x in [r.get('address') if same[r['business_name']] > 1 else None, r.get('city')] if x)
+        lic = f' (license {r["license_number"]})' if twice[name(r)] > 1 else ''
+        return f'{r["business_name"]}{lic}{", " + at if at else ""}'
+    return [(r['page_url'], f'{names[r["license_number"]]}: restaurant inspections',
+             f'{where(r)}: every Florida food safety inspection since 2016, the latest result, violations, warnings and emergency closures.',
              (lambda r=r: restaurant_page(r, by.get(r['license_number'], []))))
-            for r in R if r.get('page_url')]
+            for r in rows]
 
 
 def restaurant_page(r, hist):

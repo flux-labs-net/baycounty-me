@@ -80,3 +80,21 @@ test('link-preview crawlers, and only they, get the profile crawler page', () =>
     assert.ok(re.test(ua), ua);
   assert.ok(!re.test('Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Safari/604.1'));
 });
+
+test('organization profiles open to search with structured data; people stay noindex', () => {
+  const {structured, INDEXED} = require('../meta');
+  const shell = '<meta name="robots" content="noindex, follow"><script type="application/ld+json">{"old":1}</script><title>Profile · BayCounty.me</title><main id="main">';
+  const e = {name: 'Acme <Paving>', subtitle: 'Company paid by Bay County', source_url: 'https://search.sunbiz.org/x'};
+  const ld = structured(e, 'vendor', 'https://baycounty.me/profile/vendor/acme', 'Acme: company', 'Paid $1M.');
+  const out = withMeta(shell, {title: 'Acme', desc: 'd', url: 'u', img: 'i', index: true, ld, summary: 'Acme <Paving>. d'});
+  assert.match(out, /content="index, follow, max-image-preview:large"/);
+  assert.ok(!out.includes('{"old":1}') && out.includes('"@type":"ProfilePage"') && out.includes('\\u003cPaving>'), 'ld swapped and escaped');
+  assert.match(out, /<noscript><p class="pf-noscript">Acme &lt;Paving&gt;\. d<\/p><\/noscript>/);
+  assert.match(withMeta(shell, {title: 'A', desc: 'd', url: 'u', img: 'i'}), /noindex, follow/);
+  // the same kinds the build lists in sitemap-profiles.xml (site/seo.py)
+  const py = fs.readFileSync(path.join(__dirname, '..', '..', 'site', 'seo.py'), 'utf8').match(/INDEXED_PROFILE_KINDS = \(([^)]*)\)/)[1];
+  assert.deepEqual([...INDEXED].sort(), py.match(/'(\w+)'/g).map(s => s.slice(1, -1)).sort());
+  assert.ok(!INDEXED.has('member') && !INDEXED.has('owner'));
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, '..', '..', 'vercel.json'), 'utf8'));
+  assert.match(vercel.rewrites.find(r => r.destination.startsWith('/api/meta')).has[0].value, /Googlebot.*bingbot/);
+});

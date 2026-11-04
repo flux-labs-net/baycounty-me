@@ -9,7 +9,8 @@ from html.parser import HTMLParser
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
 SITE = 'https://baycounty.me'
-SKIP = ('admin',)          # private pages, noindex by design
+SKIP = ('admin', 'finance', 'staff')          # private pages, noindex by design
+PROFILE = re.compile(r'^/profile/(gov|vendor|nonprofit|member|owner|business|committee)/[A-Za-z0-9_.-]{1,100}$')  # one shell, vercel.json rewrite
 
 
 class Page(HTMLParser):
@@ -18,12 +19,14 @@ class Page(HTMLParser):
         self.lang = None; self.title = ''; self._in = None
         self.meta = {}; self.links = []; self.canon = None; self.alts = []
         self.h1 = []; self.heads = []; self.jsonld = []; self.hreflang = {}
-        self.imgs_noalt = 0; self.imgs = 0; self._buf = ''
+        self.imgs_noalt = 0; self.imgs = 0; self._buf = ''; self._svg = 0; self._got_title = False
 
     def handle_starttag(self, tag, a):
         a = dict(a)
+        if tag == 'svg': self._svg += 1
         if tag == 'html': self.lang = a.get('lang')
-        elif tag == 'title': self._in = 'title'
+        elif tag == 'title':
+            if not self._svg and not self._got_title: self._in = 'title'   # an <svg><title> is a tooltip, not the page title
         elif tag == 'meta':
             k = a.get('name') or a.get('property')
             if k: self.meta[k.lower()] = a.get('content', '')
@@ -40,7 +43,8 @@ class Page(HTMLParser):
         elif tag == 'script' and a.get('type') == 'application/ld+json': self._in = 'ld'; self._buf = ''
 
     def handle_endtag(self, tag):
-        if tag == 'title' and self._in == 'title': self._in = None
+        if tag == 'svg': self._svg = max(0, self._svg - 1)
+        if tag == 'title' and self._in == 'title': self._in = None; self._got_title = True
         elif self._in == tag and tag.startswith('h') and len(tag) == 2:
             t = re.sub(r'\s+', ' ', self._buf).strip()
             self.heads.append(int(tag[1]))
@@ -111,7 +115,7 @@ def audit():
             if h.startswith(('http', 'mailto:', 'tel:', '#', 'javascript:', 'webcal:')) or h.startswith('//'): continue
             path = h.split('#')[0].split('?')[0]
             if not path or not path.startswith('/'): continue
-            if path.startswith('/api/') or path == '/alerts/manage': continue
+            if path.startswith('/api/') or path == '/alerts/manage' or PROFILE.match(path.rstrip('/')): continue
             if path.rstrip('/') in known or path in files or (path.rstrip('/') or '/') in known: continue
             E(f'broken internal link {h}')
     for t, us in titles.items():
@@ -123,6 +127,15 @@ def audit():
     site = []
     if not os.path.exists(os.path.join(ROOT, 'robots.txt')): site.append(('error', 'no robots.txt'))
     if not os.path.exists(os.path.join(ROOT, 'sitemap.xml')): site.append(('error', 'no sitemap.xml'))
+    else:
+        locs = {re.sub(r'^' + re.escape(SITE), '', x) or '/' for x in re.findall(r'<loc>([^<]+)</loc>', open(os.path.join(ROOT, 'sitemap.xml')).read())}
+        index = {u for u, p in pages.items() if 'noindex' not in p.meta.get('robots', '')}
+        for u in sorted(index - locs): site.append(('error', f'indexable page missing from sitemap.xml: {u}'))
+        for u in sorted(u for u in locs & set(pages) if 'noindex' in pages[u].meta.get('robots', '')): site.append(('error', f'noindex page listed in sitemap.xml: {u}'))
+    robots = open(os.path.join(ROOT, 'robots.txt')).read() if os.path.exists(os.path.join(ROOT, 'robots.txt')) else ''
+    if robots and 'Sitemap:' not in robots: site.append(('error', 'robots.txt has no Sitemap line'))
+    for f in ('llms.txt', 'llms-full.txt'):
+        if not os.path.exists(os.path.join(ROOT, f)): site.append(('error', f'no {f}'))
     return pages, issues, site
 
 

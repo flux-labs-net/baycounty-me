@@ -420,7 +420,7 @@ def layout(title, desc, path, body, extra_head=''):
 def _layout(title, desc, path, body, extra_head=''):
     import html as _h
     from og import slug as _slug
-    from seo import head_title, meta_desc, jsonld
+    from seo import head_title, meta_desc, jsonld, NOINDEX
     from ui import data_notice
     full = _h.escape(head_title(title, path), quote=False)
     pt, pd = PREVIEW.get(path, (title, desc))
@@ -431,7 +431,7 @@ def _layout(title, desc, path, body, extra_head=''):
     img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
     if path.startswith('/restaurants/'):  # each restaurant's card is drawn on request from its latest inspection (api/og.js)
         img = f'{DOMAIN}/api/og?p={path}'
-    robots = '<meta name="robots" content="noindex, follow">\n' if path in ('/404', '/profile') else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
+    robots = '<meta name="robots" content="noindex, follow">\n' if path in NOINDEX else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
     ld = '' if path == '/404' else jsonld(path, pt, pd, PAGE_LABELS, modified=last_updated(es_updated_key(path)), out_dir=OUT,
                                            kind=page_kind(path), about=page_about(path))
     return f'''<!doctype html>
@@ -999,6 +999,8 @@ def main():
     staff_page(OUT)  # government workspace for city and county staff (api/gov.js)
     from seo import write_robots_and_sitemap
     print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES if p != '/profile'], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
+    from llms import write_llms
+    print('llms.txt, llms-full.txt:', write_llms(OUT, MENU, menu_links, PAGES, ES_ALT), 'chars')  # site map for AI assistants
     for dp, _, fs in os.walk(OUT):
         for f in fs:
             p = os.path.join(dp, f); print(os.path.relpath(p, OUT), os.path.getsize(p))
