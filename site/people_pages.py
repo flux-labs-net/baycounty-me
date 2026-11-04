@@ -191,8 +191,14 @@ def person_page(pid):
         vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="contract-votes" data-tile="Contract votes">Votes on companies\' contracts</h2><span class="muted">Contract approvals matched to the minutes</span></div><div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Company</th><th scope="col">Votes</th><th scope="col" class="num">Approvals</th><th scope="col">When</th></tr></thead><tbody>{vr}</tbody></table></div></section>'
     # recent votes
     if mv:
+        vsecs += vote_years(pid, x['name'], mv)
         rv = ''.join(vote_card(r) for r in mv[:12])
-        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
+        vc = Counter(str(r.get('vote') or '').lower() for r in mv)
+        n_all = sum(n for k, n in vc.items() if k != 'unknown')  # what the votes page lists for them (it leaves out tally-only roll calls)
+        tot = ' · '.join(f'{vc[k]:,} {w}' for k, w in (('yes', 'yes'), ('no', 'no'), ('absent', 'absent'), ('abstain', 'abstained')) if vc[k])
+        more = (f'<p><a class="ui-btn" href="/public-money/votes?p={e(pid)}#all">See all {n_all:,} of {e(x["name"])}\u2019s votes</a></p>'
+                f'<p class="small muted">Search, sort and filter them by year, type and outcome, or download them as a CSV.</p>') if n_all else ''
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{n_all:,} votes on file{" · " + tot if tot else ""}</span></div><ul class="plain ui-votes">{rv}</ul>{more}</section>'
     if pay:
         pr = ''.join(f'<li>{e(r.get("title"))}{", " + e(r.get("employer") or r.get("government")) if (r.get("employer") or r.get("government")) else ""}: {money(r.get("annual") or r.get("salary"))} ({e(r.get("year") or r.get("fiscal_year") or r.get("as_of") or "")}) <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>' for r in pay)
         secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="pay">Pay</h2><span class="muted">Elected officials and department leaders only</span></div><ul class="plain">{pr}</ul></section>'
@@ -281,6 +287,74 @@ def contract_dollars(pid, name):
     {f'<p><b>Not in the totals</b>, from {allv:,} contract and consent agenda votes on file:</p><ul>{left_h}</ul>' if left_h else ''}
     <p>So the totals are a floor, not everything the board spent while {e(name)} served. Votes are from the minutes on file (<a href="/data-sources">which years we have</a>); a vote is a fact in the record and does not show why anyone voted as they did. Every vote, counted or not, is in the <a href="/api/v1/datasets/contract-vote-dollars">contract-vote-dollars</a> dataset.</p></div></section>"""
     return kpi, sec
+
+
+VOTE_KEYS = (('yes', 'yes', 'vy-yes'), ('no', 'no', 'vy-no'), ('absent', 'absent', 'vy-ab'), ('abstain', 'abstained', 'vy-ab'))
+
+
+def _outcomes():
+    """(date, board, headline) -> outcome, from the votes dataset, so a member's vote can be set against how the motion went."""
+    if '_oc' not in globals():
+        globals()['_oc'] = {(r.get('date'), r.get('board'), r.get('headline')): r.get('outcome') or '' for r in EG._ds('votes')}
+    return globals()['_oc']
+
+
+def _failed(outcome):
+    import re
+    return bool(re.search(r'fail|denied|reject', outcome or '', re.I))
+
+
+def _pct(a, b):
+    """Whole percent, with one decimal near the ends so 5 no votes in 1,254 never reads as 100% yes."""
+    if not b:
+        return '0'
+    x = 100 * a / b
+    return f'{x:.1f}' if (x > 99.5 or x < 0.5) and 0 < a < b else f'{round(x)}'
+
+
+def vote_years(pid, name, mv):
+    """Stats and a yes / no / absent bar per year for one person's recorded votes (member-votes dataset). Each year links to
+    the votes page filtered to that person and year. The same chart is drawn by votes.js when that page is filtered to a person."""
+    rows = [r for r in mv if str(r.get('vote') or '').lower() != 'unknown' and (r.get('date') or '')[:4].isdigit()]
+    if not rows:
+        return ''
+    oc = _outcomes()
+    by = defaultdict(Counter)
+    lost = 0
+    for r in rows:
+        v = str(r['vote']).lower()
+        by[int(r['date'][:4])][v] += 1
+        o = oc.get((r.get('date'), r.get('board'), r.get('headline')))
+        if o and ((v == 'no' and not _failed(o)) or (v == 'yes' and _failed(o))):
+            lost += 1
+    t = Counter()
+    for c in by.values():
+        t.update(c)
+    n = sum(t.values())
+    cast = t['yes'] + t['no']
+    years = list(range(min(by), max(by) + 1))
+    top = max(sum(c.values()) for c in by.values())
+    bars = ''
+    for y in years:
+        c = by.get(y, Counter())
+        tot = sum(c.values())
+        if not tot:
+            bars += f'<div class="vy-row vy-empty"><span class="vy-y">{y}</span><span class="vy-track"></span><span class="vy-c">No votes on file</span></div>'
+            continue
+        seg = ''.join(f'<i class="{cls}" style="flex:{c[k]}"></i>' for k, _, cls in VOTE_KEYS if c[k])
+        txt = ' · '.join(f'{c[k]:,} {w}' for k, w, _ in VOTE_KEYS if c[k])
+        bars += (f'<a class="vy-row" href="/public-money/votes?p={e(pid)}&amp;y={y}#all" aria-label="{y}: {e(txt)}"><span class="vy-y">{y}</span>'
+                 f'<span class="vy-track"><span class="vy-bar" style="width:{max(2, round(100 * tot / top))}%">{seg}</span></span><span class="vy-c">{e(txt)}</span></a>')
+    stat = lambda lbl, val, sub: f'<div><dt>{lbl}</dt><dd>{val}</dd><span>{sub}</span></div>'
+    stats = ''.join([
+        stat('Voted yes', f'{_pct(t["yes"], cast)}%', f'{t["yes"]:,} of {cast:,} yes or no votes'),
+        stat('Voted no', f'{t["no"]:,}', f'{round(100 * t["no"] / cast, 1) if cast else 0}% of yes or no votes'),
+        stat('Missed', f'{t["absent"] + t["abstain"]:,}', 'absent' + (f' or abstained ({t["abstain"]})' if t['abstain'] else '')),
+        stat('On the losing side', f'{lost:,}', 'voted no and it passed, or yes and it failed')])
+    return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="vote-years" data-tile="Votes by year">Yes and no votes by year</h2><span class="muted">{n:,} recorded votes, {years[0]} to {years[-1]}</span></div>
+    <dl class="vy-stats">{stats}</dl>
+    <figure class="vy" aria-label="{e(name)}'s recorded votes by year"><figcaption class="vy-key"><span><i class="vy-yes"></i>Yes</span><span><i class="vy-no"></i>No</span><span><i class="vy-ab"></i>Absent or abstained</span><span class="muted">Bar length is that year's number of votes. Pick a year to see its votes.</span></figcaption>{bars}</figure>
+    <p class="note">Counts cover the votes in the minutes on file (<a href="/data-sources">which years we have</a>), so a short bar can mean fewer minutes, not fewer votes. Most items pass unanimously, often on a consent agenda.</p></section>'''
 
 
 def vote_card(r):
