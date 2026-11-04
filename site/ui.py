@@ -107,15 +107,18 @@ SECTION_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber
 PAGE_ICON = {
     '/who-runs-bay-county': 'users', '/governments': 'county', '/compare': 'compare',
     '/my-address': 'pin', '/ask': 'bulb', '/public-money/tax-dollars': 'receipt', '/public-money/fees-and-bills': 'drop',
-    '/public-money/exemptions': 'home', '/public-money/tourist-tax': 'sun', '/public-money/amendment-3': 'vote',
+    '/public-money/exemptions': 'home', '/public-money/tourist-tax': 'sun', '/public-money/amendment-3': 'scale',
     '/public-money/budget-explorer': 'wallet', '/public-money/budget-compare': 'trend', '/public-money/checkbook': 'wallet', '/public-money/budget-tracker': 'columns', '/public-money/cra-spending': 'columns', '/public-money/cra-tax-increment': 'percent', '/public-money/sales-tax-projects': 'crane',
     '/public-money/hurricane-michael': 'storm', '/public-money/debt': 'dollar', '/public-money/map': 'map',
     '/public-money/accountability': 'shield', '/public-money/contracts': 'file', '/public-money/vendors': 'store',
     '/public-money/who-gets-paid': 'dollar', '/public-money/votes': 'vote', '/public-money/savings': 'piggy',
-    '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/elections/past': 'flag', '/connections/campaign-gifts': 'heart',
+    '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/elections/past': 'clock', '/connections/campaign-gifts': 'heart',
     '/connections/money-map': 'link', '/connections/business-ties': 'store', '/connections/overlaps': 'link', '/connections/shared-owners': 'network',
     '/connections/nonprofits': 'heart', '/chambers': 'store', '/events': 'calendar', '/beaches': 'waves', '/parks': 'tree', '/schools': 'school', '/this-week': 'mail', '/volunteer': 'heart', '/military': 'shield', '/meetings': 'calendar', '/emergency': 'storm', '/hurricane-prep': 'shield', '/alerts': 'bell', '/records-request': 'mail',
     '/correspondence': 'mail', '/glossary': 'book', '/open-data': 'download', '/developers': 'code', '/updates': 'news',
+    '/utilities': 'trash', '/restaurants': 'utensils', '/public-safety': 'siren', '/jobs': 'briefcase', '/new-businesses': 'store',
+    '/development': 'building', '/roads': 'cone', '/elections/voting': 'pin', '/elections/live': 'pulse', '/elections/results': 'chart',
+    '/notices': 'megaphone', '/realtor': 'tag', '/data-sources': 'folder',
     '/about': 'info', '/privacy': 'shield', '/search': 'search', '/people': 'users', '/profile': 'user',
 }
 _SECTION_OF = {}
