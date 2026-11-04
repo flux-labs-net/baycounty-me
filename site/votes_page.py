@@ -88,6 +88,22 @@ def all_votes(d):
     return out
 
 
+def vote_people():
+    """Person id -> {n: name, k: [[government, name as in the roll calls], ...]}, so one link (?p=<person id>) finds
+    every vote a person cast, under every spelling the minutes use (Bill Dozier and William T. Dozier)."""
+    import entity_graph as EG
+    names = {p['id']: p['name'] for p in (EG.ids._load('people.json') or {'people': []})['people']}
+    out = {}
+    for r in EG._ds('member-votes'):
+        pid = r.get('person_id')
+        if not pid or not r.get('member'):
+            continue
+        x = out.setdefault(pid, {'n': names.get(pid) or r['member'], 'k': []})
+        if [r['gov_id'], r['member']] not in x['k']:
+            x['k'].append([r['gov_id'], r['member']])
+    return out
+
+
 def votes_page(out_dir):
     d = json.load(open(SRC))
     bodies = {b['id']: b for b in d['bodies']}
@@ -119,6 +135,7 @@ def votes_page(out_dir):
     for g, rows in per_g.items():
         json.dump({'cat': CAT, 'votes': rows}, open(os.path.join(out_dir, 'data', 'votes-page', f'{g}.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     meta = {k: data[k] for k in ('bodies', 'cat', 'govs')}
+    meta['people'] = vote_people()
     meta['files'] = {g: {'url': f'/data/votes-page/{g}.json', 'n': len(rows)} for g, rows in per_g.items()}
     json.dump(meta, open(os.path.join(out_dir, 'data', 'votes-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     shutil.copy(os.path.join(HERE, 'votes.js'), os.path.join(out_dir, 'assets', 'votes.js'))

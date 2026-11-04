@@ -192,7 +192,12 @@ def person_page(pid):
     # recent votes
     if mv:
         rv = ''.join(vote_card(r) for r in mv[:12])
-        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
+        vc = Counter(str(r.get('vote') or '').lower() for r in mv)
+        n_all = sum(n for k, n in vc.items() if k != 'unknown')  # what the votes page lists for them (it leaves out tally-only roll calls)
+        tot = ' · '.join(f'{vc[k]:,} {w}' for k, w in (('yes', 'yes'), ('no', 'no'), ('absent', 'absent'), ('abstain', 'abstained')) if vc[k])
+        more = (f'<p><a class="ui-btn" href="/public-money/votes?p={e(pid)}#all">See all {n_all:,} of {e(x["name"])}\u2019s votes</a></p>'
+                f'<p class="small muted">Search, sort and filter them by year, type and outcome, or download them as a CSV.</p>') if n_all else ''
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{n_all:,} votes on file{" · " + tot if tot else ""}</span></div><ul class="plain ui-votes">{rv}</ul>{more}</section>'
     if pay:
         pr = ''.join(f'<li>{e(r.get("title"))}{", " + e(r.get("employer") or r.get("government")) if (r.get("employer") or r.get("government")) else ""}: {money(r.get("annual") or r.get("salary"))} ({e(r.get("year") or r.get("fiscal_year") or r.get("as_of") or "")}) <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>' for r in pay)
         secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="pay">Pay</h2><span class="muted">Elected officials and department leaders only</span></div><ul class="plain">{pr}</ul></section>'

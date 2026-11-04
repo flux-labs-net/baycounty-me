@@ -13,6 +13,12 @@ const cap = s => s ? s[0].toUpperCase() + s.slice(1) : '';
 const GN = Object.fromEntries(D.govs);
 const margin = v => { const m = /(\d+)\s*-\s*(\d+)/.exec(v.t || ''); return m ? Math.abs(+m[1] - +m[2]) : 99; };
 const failed = v => /fail|denied|reject/i.test(v.o || '');
+// people: one option and one link (?p=<person id>) per person, covering every spelling of their name in the minutes
+const PEOPLE = D.people || {}, KEY2P = {};
+Object.entries(PEOPLE).forEach(([pid, p]) => p.k.forEach(([g, n]) => { KEY2P[g + '|' + n] = pid; }));
+const keysOf = m => !m ? null : m.startsWith('p:') ? (PEOPLE[m.slice(2)]?.k || []) : D.govs.map(([g]) => [g, m]);
+const voteOf = (v, keys) => { for (const [g, n] of keys) { const x = v.g === g && v.m[n]; if (x && x !== 'unknown') return [n, x]; } return null; };
+const labelOf = m => m.startsWith('p:') ? (PEOPLE[m.slice(2)]?.n || m.slice(2)) : m;
 const F = {q: $('vtQ'), g: $('vtG'), m: $('vtM'), c: $('vtC'), y: $('vtY'), o: $('vtO'), sort: $('vtSort')};
 
 // options
@@ -21,20 +27,21 @@ Object.entries(D.cat).forEach(([k, n]) => { if (D.votes.some(v => v.c === k)) F.
 const YRS = [...new Set(D.votes.map(v => (v.d || '').slice(0, 4)).filter(Boolean))].sort().reverse();
 YRS.forEach(y => F.y.insertAdjacentHTML('beforeend', `<option>${y}</option>`));
 // opens on the newest year with votes; a search or member link (?q=, ?m=) looks across every year
-{ const Q = new URLSearchParams(location.search); F.y.value = (Q.get('q') || Q.get('m')) ? 'all' : String(TT.startYear(YRS.map(Number), TT.countBy(D.votes.map(v => +(v.d || '').slice(0, 4) || null))) || 'all'); }
+{ const Q = new URLSearchParams(location.search); F.y.value = (Q.get('q') || Q.get('m') || Q.get('p')) ? 'all' : String(TT.startYear(YRS.map(Number), TT.countBy(D.votes.map(v => +(v.d || '').slice(0, 4) || null))) || 'all'); }
 function members() { // members who appear in recorded roll calls, grouped by government
   const g = F.g.value, by = {};
-  D.votes.forEach(v => { if (g && v.g !== g) return; Object.entries(v.m).forEach(([n, x]) => { if (x === 'unknown') return; (by[v.g] ||= new Set()).add(n); }); });
+  D.votes.forEach(v => { if (g && v.g !== g) return; Object.entries(v.m).forEach(([n, x]) => { if (x === 'unknown') return; const pid = KEY2P[v.g + '|' + n];
+    (by[v.g] ||= new Map()).set(pid ? 'p:' + pid : n, pid ? PEOPLE[pid].n : n); }); });
   const keep = F.m.value;
-  F.m.innerHTML = '<option value="">Anyone</option>' + D.govs.filter(([k]) => by[k]).map(([k, n]) => `<optgroup label="${esc(n)}">${[...by[k]].sort((a, b) => a.split(' ').pop().localeCompare(b.split(' ').pop())).map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('')}</optgroup>`).join('');
+  F.m.innerHTML = '<option value="">Anyone</option>' + D.govs.filter(([k]) => by[k]).map(([k, n]) => `<optgroup label="${esc(n)}">${[...by[k]].sort((a, b) => a[1].split(' ').pop().localeCompare(b[1].split(' ').pop()) || a[1].localeCompare(b[1])).map(([val, lab]) => `<option value="${esc(val)}">${esc(lab)}</option>`).join('')}</optgroup>`).join('');
   F.m.value = [...F.m.options].some(o => o.value === keep) ? keep : '';
 }
 
 let shown = 40, last = [];
 function filt(push = true) {
-  const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, c = F.c.value, y = F.y.value === 'all' ? '' : F.y.value, o = F.o.value;
+  const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, mk = keysOf(m), c = F.c.value, y = F.y.value === 'all' ? '' : F.y.value, o = F.o.value;
   let cur = D.votes.filter(v => (!g || v.g === g) && (!c || v.c === c) && (!y || (v.d || '').startsWith(y))
-    && (!m || (v.m[m] && v.m[m] !== 'unknown'))
+    && (!m || voteOf(v, mk))
     && (!o || (o === 'split' ? v.x : o === 'unan' ? !v.x && !failed(v) : failed(v)))
     && (!q || (v.h + ' ' + v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ') + ' ' + (D.bodies[v.b]?.n || '')).toLowerCase().includes(q)));
   const sort = F.sort.value;
@@ -45,13 +52,15 @@ function filt(push = true) {
   last = cur;
   const ns = cur.filter(v => v.x).length;
   $('vtCount').textContent = `${cur.length} vote${cur.length === 1 ? '' : 's'}${ns ? ` · ${ns} split` : ''}`;
-  if (m) { const mine = cur.map(v => v.m[m]); const c2 = k => mine.filter(x => x === k).length;
-    $('vtMember').innerHTML = `<b>${esc(m)}</b>: yes ${c2('yes')} · no ${c2('no')}${c2('absent') ? ' · absent ' + c2('absent') : ''}${c2('abstain') ? ' · abstained ' + c2('abstain') : ''}`; }
+  if (m) { const mine = cur.map(v => voteOf(v, mk)?.[1]); const c2 = k => mine.filter(x => x === k).length;
+    const pid = m.startsWith('p:') ? m.slice(2) : '', prof = pid ? (window.BC?.href ? BC.href('person:' + pid) : '/people/' + pid) : '';
+    $('vtMember').innerHTML = `<b>${prof ? `<a href="${esc(prof)}">${esc(labelOf(m))}</a>` : esc(labelOf(m))}</b>: yes ${c2('yes')} · no ${c2('no')}${c2('absent') ? ' · absent ' + c2('absent') : ''}${c2('abstain') ? ' · abstained ' + c2('abstain') : ''}`; }
   else $('vtMember').innerHTML = '';
   $('vtClear').hidden = !(q || g || m || c || y || o || sort !== 'new');
   $('vtList').innerHTML = cur.slice(0, shown).map(v => {
+    const me = m ? voteOf(v, mk)?.[0] : null;
     const meta = [v.dn, D.cat[v.c] || v.c, v.a ? '$' + Math.round(v.a).toLocaleString('en-US') : ''].filter(Boolean).join(' · ');
-    const ch = Object.entries(v.m).sort((a, b) => (ORD[a[1]] ?? 9) - (ORD[b[1]] ?? 9)).map(([n, x]) => `<span class="vchip v-${esc(x)}${n === m ? ' me' : ''}">${esc(n)} <b>${V[x] || esc(x)}</b></span>`).join('');
+    const ch = Object.entries(v.m).sort((a, b) => (ORD[a[1]] ?? 9) - (ORD[b[1]] ?? 9)).map(([n, x]) => `<span class="vchip v-${esc(x)}${n === me ? ' me' : ''}">${esc(n)} <b>${V[x] || esc(x)}</b></span>`).join('');
     return `<li class="fd vt"><div class="vt-top"><span class="vt-board">${esc(D.bodies[v.b]?.n || v.b)}</span><span class="badge ${v.x || failed(v) ? 'warn' : 'ok'}">${esc(v.t || '')} ${esc(cap(v.o || ''))}</span></div>
       <span class="vt-meta muted">${esc(meta)}</span>
       <div class="vt-h">${esc(v.h)}</div>${v.s ? `<p class="vt-s">${esc(v.s)}</p>` : ''}
@@ -62,14 +71,19 @@ function filt(push = true) {
   $('vtMore').textContent = `Show more (${(cur.length - shown).toLocaleString()} left)`;
   if (push) { // keep filters in the link so a view can be shared
     const u = new URL(location.href);
-    [['q', q], ['g', g], ['m', m], ['c', c], ['y', F.y.value], ['o', o], ['sort', sort === 'new' ? '' : sort]].forEach(([k, val]) => val ? u.searchParams.set(k, val) : u.searchParams.delete(k));
+    [['q', q], ['g', g], ['m', m.startsWith('p:') ? '' : m], ['p', m.startsWith('p:') ? m.slice(2) : ''], ['c', c], ['y', F.y.value], ['o', o], ['sort', sort === 'new' ? '' : sort]].forEach(([k, val]) => val ? u.searchParams.set(k, val) : u.searchParams.delete(k));
     history.replaceState(null, '', u);
   }
 }
 // restore from link
 const P0 = new URLSearchParams(location.search);
 ['q', 'g', 'c', 'y', 'o', 'sort'].forEach(k => { const val = P0.get(k); if (val != null && F[k]) F[k].value = val; });
-members(); if (P0.get('m')) F.m.value = P0.get('m');
+members();
+{ // ?p=<person id>, or an older ?m=<name> link: pick the person's one option when the name is theirs
+  const want = P0.get('p') ? 'p:' + P0.get('p') : P0.get('m');
+  if (want) { const has = val => [...F.m.options].some(o => o.value === val);
+    const pid = !want.startsWith('p:') && Object.keys(PEOPLE).find(k => PEOPLE[k].k.some(([, n]) => n === want));
+    F.m.value = has(want) ? want : pid && has('p:' + pid) ? 'p:' + pid : ''; } }
 F.g.addEventListener('change', () => { members(); shown = 40; filt(); });
 ['q', 'm', 'c', 'y', 'o', 'sort'].forEach(k => F[k].addEventListener('input', () => { shown = 40; filt(); }));
 $('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'o'].forEach(k => F[k].value = ''); F.y.value = 'all'; F.sort.value = 'new'; members(); F.m.value = ''; shown = 40; filt(); });
@@ -77,10 +91,10 @@ $('vtMore').addEventListener('click', () => { shown += 60; filt(false); });
 filt(false);
 // the city bar at the top: keep the year on one this government has votes for
 BCM.city.on(k => BCM.city.fitYear(F.y, D.votes.filter(v => !k || v.g === k).map(v => +(v.d || '').slice(0, 4) || null)));
-if ([...P0.keys()].some(k => ['q', 'g', 'm', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();
+if ([...P0.keys()].some(k => ['q', 'g', 'm', 'p', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();
 $('vtCsv').addEventListener('click', () => {
   const gov = Object.fromEntries(D.govs);
-  TT.csv(`baycounty-votes${F.g.value ? '-' + TT.slug(gov[F.g.value] || F.g.value) : ''}`,
+  TT.csv(`baycounty-votes${F.g.value ? '-' + TT.slug(gov[F.g.value] || F.g.value) : ''}${F.m.value ? '-' + TT.slug(labelOf(F.m.value)) : ''}`,
     ['date', 'government', 'board', 'item', 'summary', 'category', 'amount', 'outcome', 'tally', 'split', 'member_votes', 'source'],
     last.map(v => [v.d, gov[v.g] || v.g, D.bodies[v.b]?.n || v.b, v.h, v.s, D.cat[v.c] || v.c, v.a ?? '', cap(v.o || ''), v.t, v.x ? 'yes' : 'no',
       Object.entries(v.m).map(([n, x]) => `${n}: ${x}`).join('; '), v.u]));
