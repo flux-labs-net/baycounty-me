@@ -12,6 +12,8 @@ SITE = 'BayCounty.me'
 TITLE_MAX = 60
 DESC_MAX = 160
 PRIVATE = ('/admin', '/finance', '/staff')          # never in the sitemap; robots.txt disallows them
+INDEXED_PROFILE_KINDS = ('gov', 'vendor', 'nonprofit', 'business', 'committee', 'member', 'owner')  # every profile is open to search (api/meta.js INDEXED; Jeremy, 2026-11-04)
+NOINDEX = ('/404', '/profile', '/account')          # built pages search engines should skip: the 404, the profile shell, sign-in
 ORG = {'@type': 'Organization', '@id': DOMAIN + '/#org', 'name': 'Flux Labs', 'url': 'https://fluxlabs.net/',
        'logo': DOMAIN + '/assets/flux-labs.webp'}
 PLACE = {'@type': 'AdministrativeArea', 'name': 'Bay County, Florida', 'sameAs': 'https://en.wikipedia.org/wiki/Bay_County,_Florida'}
@@ -128,9 +130,10 @@ def write_robots_and_sitemap(out_dir, pages, alternates, lastmod):
     """robots.txt pointing at sitemap.xml; sitemap lists every public page with lastmod and en/es alternates."""
     open(os.path.join(out_dir, 'robots.txt'), 'w').write(
         'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /finance\nDisallow: /staff\nDisallow: /api/\nDisallow: /alerts/manage\n\n'
-        f'Sitemap: {DOMAIN}/sitemap.xml\n')
+        f'Sitemap: {DOMAIN}/sitemap.xml\nSitemap: {DOMAIN}/sitemap-profiles.xml\n')
+    write_profile_sitemap(out_dir)
     rows = []
-    for path in sorted({p for p in pages if not p.startswith(PRIVATE) and p != '/404'}):
+    for path in sorted({p for p in pages if not p.startswith(PRIVATE) and p not in NOINDEX}):
         alt = alternates(path)
         x = f'  <url>\n    <loc>{_h.escape(DOMAIN + path)}</loc>\n'
         m = lastmod(path)
@@ -144,3 +147,15 @@ def write_robots_and_sitemap(out_dir, pages, alternates, lastmod):
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
         + '\n'.join(rows) + '\n</urlset>\n')
     return len(rows)
+
+
+def write_profile_sitemap(out_dir):
+    """sitemap-profiles.xml: every profile (/profile/<kind>/<id>) from the entity-profiles dataset.
+    Profiles are one client-side shell; search engines get each one's own title, summary and structured data from api/meta.js."""
+    fp = os.path.join(out_dir, 'downloads', 'entity-profiles.json')
+    rows = json.load(open(fp)) if os.path.exists(fp) else []
+    urls = sorted({r['page_url'] for r in rows if r.get('kind') in INDEXED_PROFILE_KINDS and (r.get('page_url') or '').startswith('/profile/')})
+    open(os.path.join(out_dir, 'sitemap-profiles.xml'), 'w').write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + ''.join(f'  <url><loc>{_h.escape(DOMAIN + u)}</loc></url>\n' for u in urls) + '</urlset>\n')
+    return len(urls)
