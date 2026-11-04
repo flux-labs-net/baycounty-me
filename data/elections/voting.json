@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-04T02:13:02+00:00",
+ "as_of": "2026-11-04T18:47:09+00:00",
  "errors": [],
  "finder_url": "https://www.voterfocus.com/PrecinctFinder/addressSearch?county=BAY",
  "directory_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
@@ -71,13 +71,6 @@
   }
  ],
  "soe_events": [
-  {
-   "starts": "2026-11-03T07:00",
-   "all_day": false,
-   "title": "Voting for the General Election.",
-   "url": "https://www.bayvotesfl.gov/events/general-election/",
-   "source_url": "https://www.bayvotesfl.gov/elections/events/"
-  },
   {
    "starts": "2026-11-05T17:01",
    "all_day": false,

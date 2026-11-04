@@ -1,7 +1,144 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-03",
+ "checked": "2026-11-04",
  "notices": [
+  {
+   "notice_id": "alert:pc:708",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "City of Panama City",
+   "source_type": "alert-center",
+   "gov_id": "pc",
+   "title": "Temporary Road Closure on November 5: E 5th St. between Luverne & Magnolia",
+   "summary": "E 5th Street, between Luverne Avenue and Magnolia Avenue, will be closed on Thursday, November 5, from 12:00 PM to 2:00 PM due to a special event.",
+   "instruction": null,
+   "severity": "minor",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-04T17:55:23.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-04T17:55:23.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=708",
+   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-04T18:00:02.827569+00:00",
+   "last_seen": "2026-11-04T18:47:03.632Z",
+   "geometry": null
+  },
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.3eddc5f082a4ce912271017c55765f2e611fb736.002.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Rip Current Statement issued November 4 at 11:43AM EST until November 5 at 1:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Dangerous rip currents. * WHERE...Walton, Bay, and Franklin County Beaches. * WHEN...Through late tonight. * IMPACTS...Rip currents can sweep even the best swimmers away from shore into deeper water.",
+   "instruction": "Swim near a lifeguard. If caught in a rip current, relax and float. Don't swim against the current. If able, swim in a direction following the shoreline. If unable to escape, face the shore and call or wave for help.",
+   "severity": "moderate",
+   "event": "Rip Current Statement",
+   "area": "South Walton; Coastal Bay; Coastal Franklin",
+   "zones": null,
+   "issued": "2026-11-04T16:43:00.000Z",
+   "starts": "2026-11-04T16:43:00.000Z",
+   "ends": "2026-11-05T06:00:00.000Z",
+   "updated": "2026-11-04T16:43:00.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.3eddc5f082a4ce912271017c55765f2e611fb736.002.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-04T16:45:02.545299+00:00",
+   "last_seen": "2026-11-04T18:47:03.632Z",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.ab38e8a3704510619b8f5957bfa2f52ffa3ff851.001.1"
+   ]
+  },
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.54e208ade9ded35fb4b0120ce500e47964445382.001.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Flood Advisory issued November 4 at 6:12AM EST until November 4 at 8:15AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Flooding caused by excessive rainfall is expected. * WHERE...Southeastern Bay County in the panhandle of Florida... Central Gulf County in the panhandle of Florida... * WHEN...Until 815 AM EST /715 AM CST/. * IMPACTS...Minor flooding in low-lying and poor drainage areas. * ADDITIONAL DETAILS... - At 611 AM EST /511 AM CST/, Doppler radar indicated heavy rain due to thunderstorms. Minor flooding is ongoing or expected to begin shortly in the advisory area. Between 1 and 2 inches of rain have fallen. - Additional rainfall amounts of 1 to 2 inches are expected over the area. This additional rain will result in minor flooding. - Some locations that will experience flooding include... Port St. Joe, Mexico Beach, Highland View, Ward Ridge, Jones Homestead, Simmons Bayou, Saint Joe Beach, St Joseph State Park, Beacon Hill, Indian Pass, Odena, Cape San Blas and Overstreet. -…",
+   "instruction": "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles.",
+   "severity": "minor",
+   "event": "Flood Advisory",
+   "area": "Bay, FL; Gulf, FL",
+   "zones": null,
+   "issued": "2026-11-04T11:12:00.000Z",
+   "starts": "2026-11-04T11:12:00.000Z",
+   "ends": "2026-11-04T13:15:00.000Z",
+   "updated": "2026-11-04T11:12:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.54e208ade9ded35fb4b0120ce500e47964445382.001.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-04T11:15:01.272676+00:00",
+   "last_seen": "2026-11-04T13:10:02.119153+00:00",
+   "geometry": null
+  },
+  {
+   "notice_id": "fl511:940789",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "FL511 (Florida Department of Transportation)",
+   "source_type": "fl511",
+   "gov_id": null,
+   "title": "US-231: incident (Northbound)",
+   "summary": "Crash in Bay County on US-231 North, at County Road 167. Last updated at 09:52 AM.",
+   "instruction": null,
+   "severity": "minor",
+   "event": "Incident",
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-04T09:50",
+   "starts": "2026-11-04T09:50",
+   "ends": null,
+   "updated": "2026-11-04T09:52",
+   "status": "ended",
+   "full_closure": false,
+   "roadway": "US-231",
+   "url": "https://fl511.com/",
+   "source_url": "https://fl511.com/",
+   "first_seen": "2026-11-04T14:55:01.818462+00:00",
+   "last_seen": "2026-11-04T15:00:02.112415+00:00"
+  },
+  {
+   "notice_id": "alert:pc:707",
+   "place_id": "fl-bay",
+   "kind": "boil-water",
+   "source": "City of Panama City",
+   "source_type": "alert-center",
+   "gov_id": "pc",
+   "title": "Precautionary Boil Water Notice for residents of Stephen Drive",
+   "summary": "Precautionary Boil Water Notice for Panama City residents in the following areas: Stephen Dr",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-04T03:01:32.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-04T03:01:32.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=707",
+   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-04T03:05:01.077774+00:00",
+   "last_seen": "2026-11-04T18:47:03.632Z",
+   "geometry": null
+  },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.ab38e8a3704510619b8f5957bfa2f52ffa3ff851.001.1",
    "place_id": "fl-bay",
@@ -20,13 +157,13 @@
    "starts": "2026-11-04T01:52:00.000Z",
    "ends": "2026-11-05T00:00:00.000Z",
    "updated": "2026-11-04T01:52:00.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.ab38e8a3704510619b8f5957bfa2f52ffa3ff851.001.1",
    "source_url": "https://www.weather.gov/tae/",
    "first_seen": "2026-11-04T01:55:01.156535+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T16:40:09.456724+00:00",
    "geometry": null
   },
   {
@@ -53,7 +190,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=706",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-03T21:40:01.144219+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -518,7 +655,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -620,13 +757,13 @@
    "starts": null,
    "ends": null,
    "updated": "2026-10-28T21:10:16.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=702",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-28T21:10:22.208921+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:05:09.273425+00:00",
    "geometry": null
   },
   {
@@ -814,7 +951,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -841,7 +978,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -868,7 +1005,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -895,7 +1032,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -922,7 +1059,7 @@
    "url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "source_url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -949,7 +1086,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -976,7 +1113,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -1029,7 +1166,7 @@
    "url": "https://www.baycountyfl.gov/836/10348/Activation-Information?activeLiveTab=widgets",
    "source_url": "https://www.baycountyfl.gov/AlertCenter.aspx",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -1082,7 +1219,7 @@
    "url": "https://www.pcbfl.gov/storm",
    "source_url": "https://www.pcbfl.gov/storm",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -1136,7 +1273,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -1163,7 +1300,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   },
   {
@@ -1190,7 +1327,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-04T02:12:58.493Z",
+   "last_seen": "2026-11-04T18:47:03.632Z",
    "geometry": null
   }
  ]
