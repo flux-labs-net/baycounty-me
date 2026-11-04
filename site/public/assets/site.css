@@ -969,6 +969,26 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
   .h-pc-stats a{padding:18px}
 }
 
+/* Menu icons (2026-11-04): each menu link shows its page's icon (ui.PAGE_ICON), gray, blue on hover. The Start here
+   card shows it in a soft square on desktop; the search dialog's Start here list uses the section's tinted tile. */
+.nav-mega .nav-links a,.nav-mega .nav-grp a{display:grid;grid-template-columns:18px minmax(0,1fr);column-gap:10px;align-items:start}
+.nav-mega .nav-links a > .ico,.nav-mega .nav-grp a > .ico{grid-row:span 2;width:18px;height:18px;margin-top:2px;color:var(--muted);transition:color .15s}
+.nav-mega .nav-links a:hover > .ico,.nav-mega .nav-links a:focus-visible > .ico,.nav-mega .nav-links a[aria-current="page"] > .ico,
+.nav-mega .nav-grp a:hover > .ico,.nav-mega .nav-grp a[aria-current="page"] > .ico{color:var(--blue)}
+.nav-start .ns-ic{display:grid;place-items:center;width:36px;height:36px;margin-bottom:6px;border-radius:10px;background:rgba(255,255,255,.12)}
+.nav-start .ns-ic .ico{width:20px;height:20px;color:var(--start-ink)}
+.sx-g a.sx-ic{display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:12px;align-items:center}
+.sx-g a.sx-ic .ui-ti{grid-row:span 2}
+.sx-g a.sx-ic .ui-ti .ico{width:18px;height:18px}
+.foot-cols b{display:flex;align-items:center;gap:7px}
+.foot-cols b .ico{width:14px;height:14px}
+@media (prefers-reduced-motion:reduce){.nav-mega a > .ico{transition:none}}
+@media (max-width:980px){
+  .nav-mega .nav-links a,.nav-mega.has-start:not(.one) .nav-links a,.nav-mega .nav-grp a{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:14px;padding-left:6px}
+  .nav-mega .nav-links a > .ico,.nav-mega .nav-grp a > .ico{width:20px;height:20px;margin:0}
+  .nav-start .ns-ic{display:none}
+}
+
 /* Shared page pieces (first built for the government pages): header with the picker card, section tiles, icon stat cards,
    people and meeting cards. Built by site/ui.py; ui.enhance() gives every page that uses the standard page header these pieces.
    Icons are CSS masks (.ico.i-<name>) so they follow the text color in light and dark. */
@@ -1014,6 +1034,11 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
 .i-user{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 4-6 8-6s8 2 8 6'/%3E%3C/svg%3E")}
 .i-flag{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 21V4M5 4h11l-2 4 2 4H5'/%3E%3C/svg%3E")}
 .i-waves{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 7c2 0 2-1.5 4-1.5S8 7 10 7s2-1.5 4-1.5S16 7 18 7s2-1.5 4-1.5M2 12.5c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M2 18c2 0 2-1.5 4-1.5S8 18 10 18s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5'/%3E%3C/svg%3E")}
+/* menu pages (2026-11-04) */
+.i-utensils{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M4%203v7a3%203%200%200%200%203%203v8M7%203v6M10%203v7a3%203%200%200%201-3%203'/%3E%3Cpath%20d='M17%2021V3c-2%201-3%204-3%208h3'/%3E%3C/svg%3E")}
+.i-siren{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M7%2018v-6a5%205%200%200%201%2010%200v6'/%3E%3Cpath%20d='M5%2021h14M4%2018h16M12%203v2M4.2%206.2l1.4%201.4M19.8%206.2l-1.4%201.4'/%3E%3C/svg%3E")}
+.i-building{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Crect%20x='5'%20y='3'%20width='14'%20height='18'%20rx='1'/%3E%3Cpath%20d='M9%207h2M13%207h2M9%2011h2M13%2011h2M9%2015h2M13%2015h2M10%2021v-3h4v3'/%3E%3C/svg%3E")}
+.i-cone{--i:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M10%203h4l5%2016H5z'/%3E%3Cpath%20d='M3%2021h18M8%2010h8M7%2015h10'/%3E%3C/svg%3E")}
 .i-tree{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22v-6M12 16l-6.5 0a1 1 0 0 1-.8-1.6L8 10H6.7a1 1 0 0 1-.8-1.6L12 2l6.1 6.4a1 1 0 0 1-.8 1.6H16l3.3 4.4a1 1 0 0 1-.8 1.6H12Z'/%3E%3C/svg%3E")}
 .i-receipt{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h12v18l-3-2-3 2-3-2-3 2V3ZM9 8h6M9 12h6M9 16h3'/%3E%3C/svg%3E")}
 .i-home{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11 12 4l9 7M5 10v10h14V10M10 20v-5h4v5'/%3E%3C/svg%3E")}

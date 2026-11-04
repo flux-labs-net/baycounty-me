@@ -76,10 +76,18 @@ CHEV = '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path
 SEARCH_ICON = '<svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13.2 13.2L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
 
 
+def _page_ico(href):
+    """The page's icon (ui.PAGE_ICON) for a menu link; Spanish pages use their English twin's."""
+    from ui import PAGE_ICON
+    en = ES_ALT.get(href, href)
+    name = PAGE_ICON.get(en) or ('city' if en.startswith('/governments/') else 'chart')
+    return f'<span class="ico i-{name}" aria-hidden="true"></span>'
+
+
 def _link(c, active):
     cur = ' aria-current="page"' if c['href'] == active else ''
     kd = f'<span class="kd">{c["desc"]}</span>' if c.get('desc') else ''
-    return f'<li><a href="{c["href"]}"{cur}><span class="k">{c["label"]}</span>{kd}</a></li>'
+    return f'<li><a href="{c["href"]}"{cur}>{_page_ico(c["href"])}<span class="k">{c["label"]}</span>{kd}</a></li>'
 
 
 def _section(m, active):
@@ -98,7 +106,7 @@ def _section(m, active):
     if m.get('start'):
         st = m['start']
         cur = ' aria-current="page"' if st['href'] == active else ''
-        card = (f'<a class="nav-start" href="{st["href"]}"{cur}><span class="ns-e">Start here</span><span class="ns-t">{st["label"]}</span>'
+        card = (f'<a class="nav-start" href="{st["href"]}"{cur}><span class="ns-ic">{_page_ico(st["href"])}</span><span class="ns-e">Start here</span><span class="ns-t">{st["label"]}</span>'
                 f'<span class="ns-d">{st["desc"]}</span><span class="ns-go" aria-hidden="true">Open →</span></a>')
         n = len(m['groups'])
         cols = ''.join(f'<div class="nav-col"><span class="nav-gh">{g["group"]}</span><ul class="nav-links">'
@@ -120,7 +128,9 @@ def _footer_section(m, active):
 def search_dialog():
     """The full-screen search dialog the header's search icon opens (site/search.js). Before typing it lists each
     section's start page."""
-    pop = ''.join(f'<li><a href="{m["start"]["href"]}"><b>{m["start"]["label"]}</b><span>{m["label"]} · {m["start"]["desc"]}</span></a></li>'
+    from ui import SECTION_LOOK
+    pop = ''.join(f'<li><a class="sx-ic" href="{m["start"]["href"]}"><span class="ui-ti t-{SECTION_LOOK.get(m["label"], ("", "blue"))[1]}">'
+                  f'{_page_ico(m["start"]["href"])}</span><b>{m["start"]["label"]}</b><span>{m["label"]} · {m["start"]["desc"]}</span></a></li>'
                   for m in MENU if m.get('start'))
     return f'''<div class="sx" id="sx" role="dialog" aria-modal="true" aria-label="Search {SITE}" hidden>
   <div class="sx-top"><span class="wordmark" aria-hidden="true"><span>{wordmark_html()}</span></span>
@@ -178,7 +188,8 @@ def nav_html(active):
 
 def _foot_cols():
     """One footer column per menu section: its start page and first links."""
-    return ''.join(f'<div><b>{m["label"]}</b>' + ''.join(f'<a href="{c["href"]}">{c["label"]}</a>' for c in
+    from ui import ico, SECTION_LOOK
+    return ''.join(f'<div><b>{ico(SECTION_LOOK.get(m["label"], ("grid",))[0])}{m["label"]}</b>' + ''.join(f'<a href="{c["href"]}">{c["label"]}</a>' for c in
                                                      [c for c in menu_links(m) if not c['href'].startswith('/governments/')][:6]) + '</div>'
                    for m in MENU if m.get('start') and not m.get('season'))
 
