@@ -122,3 +122,20 @@ window.BCTrashCard = (lookup, now = new Date()) => {
     if (next) { b.textContent = 'Next meeting · ' + fmt(next[0]); sub.textContent = `None posted for ${c.name} yet. Next in the county: ${next[1]}`; }
   });
 })();
+
+// Election banner (#hElb): live status from /api/v1/election-live, refreshed every 30 seconds while the count runs.
+(() => {
+  const b = document.getElementById('hElb'); if (!b) return;
+  const sub = document.getElementById('hElbSub'), tag = document.getElementById('hElbTag');
+  const n = v => Number(v || 0).toLocaleString('en-US');
+  let timer;
+  const read = () => fetch('/api/v1/election-live').then(r => r.ok ? r.json() : null).then(j => {
+    const d = j && j.data; if (!d) return;
+    if (d.status === 'waiting') sub.textContent = 'Waiting for the first results. Polls close at 7 p.m.';
+    else {
+      sub.textContent = `${n(d.precincts_reporting)} of ${n(d.precincts_total)} precincts in · ${n(d.ballots_cast)} ballots counted`;
+      if (d.status === 'complete') { tag.classList.add('done'); tag.lastChild.textContent = 'Final'; clearInterval(timer); }
+    }
+  }).catch(() => {});
+  read(); timer = setInterval(read, 30000);
+})();
