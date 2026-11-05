@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-04",
+ "updated": "2026-11-05",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -132,7 +132,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 11763,
+   "rows": 11794,
    "columns": [
     {
      "name": "date",
@@ -352,7 +352,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 56971,
+   "rows": 57126,
    "columns": [
     {
      "name": "date",
@@ -6760,7 +6760,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22802,
+   "rows": 22807,
    "columns": [
     {
      "name": "link_id",
@@ -8714,7 +8714,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 57,
+   "rows": 58,
    "columns": [
     {
      "name": "place_id",
@@ -8840,6 +8840,7 @@
       "Panama City Marina",
       "Panama Country Club",
       "Pier Park",
+      "Sharky’s Beachfront Restaurant",
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
@@ -8924,7 +8925,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 188,
+   "rows": 193,
    "columns": [
     {
      "name": "place_id",
@@ -9034,6 +9035,7 @@
       "Parker Park",
       "Parker Public Library",
       "Pier Park",
+      "Sharky’s Beachfront Restaurant",
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
@@ -9622,7 +9624,7 @@
    "id": "beach-conditions",
    "title": "Beach conditions and flags",
    "description": "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.",
-   "rows": 12,
+   "rows": 11,
    "columns": [
     {
      "name": "place_id",
@@ -9643,7 +9645,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-04T16:43:00+00:00"
+      "2026-11-05T16:19:00+00:00"
      ]
     },
     {
@@ -9651,11 +9653,10 @@
      "type": "string",
      "values": [
       "Friday",
+      "Monday",
       "Rest Of Today",
-      "Rip Current Statement",
       "Saturday",
-      "Sunday",
-      "Thursday"
+      "Sunday"
      ]
     },
     {
@@ -9684,7 +9685,6 @@
      "name": "rip_current_risk",
      "type": "string",
      "values": [
-      "High",
       "Moderate"
      ]
     },
@@ -9693,7 +9693,6 @@
      "type": "string",
      "values": [
       "Around 1 foot",
-      "Around 3 feet",
       "around 1 foot"
      ]
     },
@@ -9716,7 +9715,7 @@
      "type": "string",
      "values": [
       "Mostly sunny",
-      "Mostly sunny. A chance of showers"
+      "Mostly sunny. A slight chance of"
      ]
     },
     {
@@ -9730,7 +9729,7 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "South winds 10 to 15 mph",
+      "Northwest winds around 10 mph",
       "South winds around 5 mph"
      ]
     },
@@ -9738,31 +9737,29 @@
      "name": "sunrise",
      "type": "string",
      "values": [
-      "5:58 AM",
-      "5:59 AM"
+      "6:59 AM",
+      "7:00 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "4:53 PM",
-      "4:54 PM"
+      "5:53 PM"
      ]
     },
     {
      "name": "summary",
      "type": "string",
      "values": [
-      "Brisk southeasterly winds and turning southerly today and gradually decreasing. Nonetheless, offshore buoys late this morning were showing 3-4 foot waves out of the southeast, which will continue to bring a high risk fo rip currents for all beaches for the rest of today. A Moderate risk is expected at Gulf County beaches.",
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly sunny. A slight chance of showers. Highs around 70. North winds around 10 mph.",
-      "Moderate rip current risk*. Sunny. Highs in the mid 70s. North winds around 15 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the upper 70s. Northwest winds around 10 mph.",
+      "Light southerly winds today will lead to a moderate risk of rip currents at area beaches.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. North winds around 10 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northeast winds around 10 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the mid 70s. North winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Rip Current Statement issued November 4 at 11:43AM EST until November 5 at 1:00AM EST by NWS Tallahassee FL",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9770,16 +9767,12 @@
      "name": "date",
      "type": "string",
      "values": [
-      "2026-10-27",
-      "2026-11-04T11:43:00-05:00"
+      "2026-10-27"
      ]
     },
     {
      "name": "ends",
-     "type": "string",
-     "values": [
-      "2026-11-05T01:00:00-05:00"
-     ]
+     "type": "string"
     },
     {
      "name": "sort_order",
@@ -9789,9 +9782,8 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.3eddc5f082a4ce912271017c55765f2e611fb736.002.1",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/6905dd68-fcfe-4b32-ab2f-d3ea4095b74f",
+      "https://api.weather.gov/products/c8cc31ee-62d7-4ab8-b017-bedd4d437511",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -9799,7 +9791,6 @@
      "name": "kind",
      "type": "string",
      "values": [
-      "alert",
       "flag",
       "forecast",
       "legend"
@@ -12458,7 +12449,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-04"
+      "2026-11-05"
      ]
     },
     {
@@ -12607,7 +12598,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 49,
+   "rows": 52,
    "columns": [
     {
      "name": "notice_id",
@@ -12683,6 +12674,7 @@
      "values": [
       "Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely.",
       "Be especially cautious at night when it is harder to recognize the dangers of flooding. Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely.",
+      "If driving, slow down, use your headlights, and leave plenty of distance ahead of you.",
       "Swim near a lifeguard. If caught in a rip current, relax and float. Don't swim against the current. If able, swim in a direction following the shoreline. If unable to escape, face the shore and call or wave for help.",
       "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles.",
       "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles. Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely."
@@ -12702,6 +12694,7 @@
      "type": "string",
      "values": [
       "Boil-water notice",
+      "Dense Fog Advisory",
       "Flash Flood Warning",
       "Flood Advisory",
       "Incident",
@@ -12718,6 +12711,7 @@
       "City of Lynn Haven",
       "Coastal Bay",
       "Lynn Haven",
+      "North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf",
       "Right lane blocked",
       "South Walton; Coastal Bay; Coastal Franklin"
      ]
@@ -12753,7 +12747,10 @@
       "2026-11-04T01:52:00.000Z",
       "2026-11-04T09:50",
       "2026-11-04T11:12:00.000Z",
-      "2026-11-04T16:43:00.000Z"
+      "2026-11-04T16:43:00.000Z",
+      "2026-11-05T02:07",
+      "2026-11-05T06:10:00.000Z",
+      "2026-11-05T07:52:00.000Z"
      ]
     },
     {
@@ -12783,6 +12780,7 @@
       "2026-11-04T13:15:00.000Z",
       "2026-11-05T00:00:00.000Z",
       "2026-11-05T06:00:00.000Z",
+      "2026-11-05T15:00:00.000Z",
       "2026-11-07T18:47:00.000Z",
       "2026-11-07T18:48:00.000Z",
       "2026-11-07T21:03:00.000Z",
@@ -12818,73 +12816,11 @@
     },
     {
      "name": "first_seen",
-     "type": "string",
-     "values": [
-      "2026-10-27T20:41:37.771Z",
-      "2026-10-28T00:40:09.58179+00:00",
-      "2026-10-28T21:06:37.512914+00:00",
-      "2026-10-28T21:10:22.208921+00:00",
-      "2026-10-29T20:50:02.816934+00:00",
-      "2026-10-30T16:20:02.668444+00:00",
-      "2026-10-30T16:50:03.082394+00:00",
-      "2026-10-30T21:03:30.939594+00:00",
-      "2026-10-30T23:58:05.972064+00:00",
-      "2026-11-01T09:55:02.870443+00:00",
-      "2026-11-01T11:05:02.808086+00:00",
-      "2026-11-01T11:20:02.42166+00:00",
-      "2026-11-01T11:55:02.779459+00:00",
-      "2026-11-01T13:05:02.43846+00:00",
-      "2026-11-01T13:35:02.114606+00:00",
-      "2026-11-01T13:45:03.129178+00:00",
-      "2026-11-01T14:20:02.480062+00:00",
-      "2026-11-01T14:40:02.527359+00:00",
-      "2026-11-01T15:45:02.449365+00:00",
-      "2026-11-02T23:10:02.570038+00:00",
-      "2026-11-03T17:35:01.060033+00:00",
-      "2026-11-03T18:25:01.131238+00:00",
-      "2026-11-03T21:40:01.144219+00:00",
-      "2026-11-03T23:00:01.396018+00:00",
-      "2026-11-04T01:55:01.156535+00:00",
-      "2026-11-04T03:05:01.077774+00:00",
-      "2026-11-04T11:15:01.272676+00:00",
-      "2026-11-04T14:55:01.818462+00:00",
-      "2026-11-04T16:45:02.545299+00:00",
-      "2026-11-04T18:00:02.827569+00:00"
-     ]
+     "type": "string"
     },
     {
      "name": "last_seen",
-     "type": "string",
-     "values": [
-      "2026-10-27T20:41:53.613Z",
-      "2026-10-28T14:45:01.081378+00:00",
-      "2026-10-30T14:20:03.043418+00:00",
-      "2026-10-30T16:05:02.665696+00:00",
-      "2026-10-30T16:15:09.300669+00:00",
-      "2026-10-30T19:45:09.304981+00:00",
-      "2026-10-30T21:10:02.829464+00:00",
-      "2026-10-30T23:58:05.972064+00:00",
-      "2026-10-31T03:35:02.65221+00:00",
-      "2026-11-01T11:00:02.8448+00:00",
-      "2026-11-01T12:40:03.533726+00:00",
-      "2026-11-01T13:00:03.443719+00:00",
-      "2026-11-01T13:10:02.821527+00:00",
-      "2026-11-01T14:35:02.811386+00:00",
-      "2026-11-01T15:25:03.999301+00:00",
-      "2026-11-01T15:40:02.651274+00:00",
-      "2026-11-01T16:10:02.717089+00:00",
-      "2026-11-01T17:40:02.358407+00:00",
-      "2026-11-02T06:00:03.795048+00:00",
-      "2026-11-02T23:10:02.570038+00:00",
-      "2026-11-03T20:30:01.622887+00:00",
-      "2026-11-04T01:50:01.217739+00:00",
-      "2026-11-04T01:55:01.156535+00:00",
-      "2026-11-04T13:10:02.119153+00:00",
-      "2026-11-04T15:00:02.112415+00:00",
-      "2026-11-04T16:40:09.456724+00:00",
-      "2026-11-04T18:05:09.273425+00:00",
-      "2026-11-04T18:47:03.632Z"
-     ]
+     "type": "string"
     },
     {
      "name": "url",
@@ -13856,7 +13792,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 92,
+   "rows": 98,
    "columns": [
     {
      "name": "place_id",
@@ -13899,7 +13835,8 @@
       "2026-10-30",
       "2026-11-02",
       "2026-11-03",
-      "2026-11-04"
+      "2026-11-04",
+      "2026-11-05"
      ]
     },
     {
@@ -13910,6 +13847,7 @@
       "cw",
       "lh",
       "mb",
+      "parker",
       "pc",
       "pcb",
       "schools"
@@ -13927,6 +13865,7 @@
       "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach",
+      "City of Parker",
       "Community development district",
       "Gulf Coast State College",
       "Panama City Port Authority"
@@ -13958,39 +13897,7 @@
     },
     {
      "name": "event_date",
-     "type": "string",
-     "values": [
-      "2026-10-05",
-      "2026-10-06",
-      "2026-10-08",
-      "2026-10-13",
-      "2026-10-14",
-      "2026-10-15",
-      "2026-10-16",
-      "2026-10-20",
-      "2026-10-22",
-      "2026-10-26",
-      "2026-10-27",
-      "2026-10-28",
-      "2026-10-29",
-      "2026-10-30",
-      "2026-11-02",
-      "2026-11-03",
-      "2026-11-04",
-      "2026-11-05",
-      "2026-11-06",
-      "2026-11-07",
-      "2026-11-09",
-      "2026-11-10",
-      "2026-11-12",
-      "2026-11-13",
-      "2026-11-16",
-      "2026-11-17",
-      "2026-11-19",
-      "2026-11-24",
-      "2026-12-03",
-      "2026-12-15"
-     ]
+     "type": "string"
     },
     {
      "name": "notice_type",
@@ -14012,11 +13919,12 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-710.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-007.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-367.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/cpDASFgvl7rNFiwwZJHT/8d29./cropped-446.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-108.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fVpPl6iXiXDSxDnuB1YA/9d55./cropped-298.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/cpDASFgvl7rNFiwwZJHT/8d29./cropped-026.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/eDtCd6G38jQ78Aa9t16b/bb33./cropped-638.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-235.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fVpPl6iXiXDSxDnuB1YA/9d55./cropped-395.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/mlwyHIF8RUrB6T3Ot2Df/d59b./cropped-510.pdf",
@@ -14070,6 +13978,7 @@
      "name": "reference",
      "type": "string",
      "values": [
+      "Bid 27-01",
       "Bid PCB27-07",
       "Bid PCB27-10",
       "Emergency order 27-02",
@@ -14084,6 +13993,7 @@
       "Ordinance 1197",
       "Ordinance 1691",
       "Ordinance 1692",
+      "Ordinance 2026-430",
       "Ordinance 3315",
       "Ordinance 3317",
       "Ordinance 904",
@@ -14163,6 +14073,7 @@
       "https://procurement.opengov.com/signup",
       "lynnhavenfl.portal.civicclerk.com",
       "www.CITYOFCALLAWAY.COM",
+      "www.demandstar.com",
       "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/bids.aspx",
       "www.panamacity.gov",
@@ -14178,7 +14089,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 120,
+   "rows": 131,
    "columns": [
     {
      "name": "place_id",
@@ -14273,49 +14184,19 @@
     },
     {
      "name": "posted",
-     "type": "string",
-     "values": [
-      "2026-07-13",
-      "2026-08-10",
-      "2026-08-22",
-      "2026-09-14",
-      "2026-09-16",
-      "2026-09-17",
-      "2026-09-24",
-      "2026-09-28",
-      "2026-09-29",
-      "2026-09-30",
-      "2026-10-05",
-      "2026-10-06",
-      "2026-10-07",
-      "2026-10-08",
-      "2026-10-15",
-      "2026-10-16",
-      "2026-10-20",
-      "2026-10-21",
-      "2026-10-22",
-      "2026-10-23",
-      "2026-10-26",
-      "2026-10-27",
-      "2026-10-28",
-      "2026-10-29",
-      "2026-10-30",
-      "2026-11-01",
-      "2026-11-02",
-      "2026-11-03",
-      "2026-11-04"
-     ]
+     "type": "string"
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-04",
       "2026-11-05",
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
       "2026-11-12",
+      "2026-11-13",
+      "2026-11-16",
       "2027-04-30"
      ]
     },
@@ -14333,11 +14214,11 @@
      "values": [
       "2026-10-27",
       "2026-10-28",
-      "2026-10-29",
       "2026-10-30",
       "2026-10-31",
       "2026-11-03",
-      "2026-11-04"
+      "2026-11-04",
+      "2026-11-05"
      ]
     },
     {
@@ -14431,7 +14312,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-04"
+      "2026-11-05"
      ]
     }
    ],
@@ -15459,7 +15340,6 @@
       "Follow-up visit: more time given",
       "Follow-up visit: not fixed, fine recommended",
       "Met inspection standards",
-      "Ordered closed (emergency order)",
       "Stayed closed: more time given",
       "Warning, follow-up visit set"
      ]
@@ -15539,7 +15419,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17210,
+   "rows": 17212,
    "columns": [
     {
      "name": "place_id",
@@ -15810,7 +15690,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 147,
+   "rows": 143,
    "columns": [
     {
      "name": "place_id",
@@ -15876,7 +15756,6 @@
       "2026-10-05",
       "2026-10-13",
       "2026-10-27",
-      "2026-11-04",
       "2026-11-05",
       "2026-11-06",
       "2026-11-07"
@@ -15886,10 +15765,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-04T10:30:00",
-      "2026-11-04T14:00:00",
-      "2026-11-04T15:00:00",
-      "2026-11-04T18:00:00",
       "2026-11-05T09:00:00",
       "2026-11-05T09:00:00-06:00",
       "2026-11-05T10:00:00",
@@ -15917,9 +15792,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-04T11:30:00",
-      "2026-11-04T17:00:00",
-      "2026-11-04T21:00:00",
       "2026-11-05T10:30:00",
       "2026-11-05T11:00:00",
       "2026-11-05T13:00:00",
@@ -17755,7 +17627,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-04"
+      "2026-11-05"
      ]
     },
     {
@@ -17920,7 +17792,7 @@
    "id": "vote-mentions",
    "title": "Votes that name a company or organization",
    "description": "One row per recorded vote and each company, nonprofit or registered business its motion names, matched by name from the minutes (hand-researched votes and every vote read from minutes since 2016): the vote, the organization and its profile (entity_id), the words that matched, the roll call (roll_call, 'Name: vote' pairs) and the members' profile ids (member_ids). A match means the minutes name the organization in that motion; consent agendas name many items in one vote.",
-   "rows": 1371,
+   "rows": 1373,
    "columns": [
     {
      "name": "place_id",
@@ -18100,7 +17972,7 @@
    "id": "donor-votes",
    "title": "Votes on motions naming a member's donor",
    "description": "One row per member vote on a motion that names a company which gave to that member's campaign (donor_kind company) or whose owner gave personally (donor_kind business owner; owners are named only when their name and address match a Sunbiz officer, manager or registered agent). With the gift total, the first and last gift dates and whether the gifts came before or after the vote. A gift near a vote does not show why anyone voted the way they did. Individual donors are never named.",
-   "rows": 569,
+   "rows": 571,
    "columns": [
     {
      "name": "place_id",
@@ -18587,7 +18459,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 7,
+   "rows": 8,
    "columns": [
     {
      "name": "place_id",
@@ -18604,6 +18476,7 @@
      "name": "reference",
      "type": "string",
      "values": [
+      "Bid 27-01",
       "Bid PCB27-07",
       "Bid PCB27-10",
       "ITB 27-02",
@@ -18627,7 +18500,8 @@
      "values": [
       "Bay County",
       "City of Panama City",
-      "City of Panama City Beach"
+      "City of Panama City Beach",
+      "Panama City Port Authority"
      ]
     },
     {
@@ -18643,7 +18517,8 @@
       "2026-10-30",
       "2026-11-04",
       "2026-11-06",
-      "2026-11-10"
+      "2026-11-10",
+      "2026-12-07"
      ]
     },
     {
@@ -19375,7 +19250,7 @@
    "id": "contract-vote-dollars",
    "title": "Contract votes and their dollar figures",
    "description": "Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.",
-   "rows": 3557,
+   "rows": 3562,
    "columns": [
     {
      "name": "vote_id",
@@ -19630,7 +19505,7 @@
    "id": "member-contract-dollars",
    "title": "Contract dollars by member vote",
    "description": "One row per board member per counted contract vote (counted true in contract-vote-dollars): how the member voted (yes, no, absent, abstain) on that dollar figure. Sum amount where vote is yes and outcome is passed for the dollars a member voted to approve.",
-   "rows": 4302,
+   "rows": 4307,
    "columns": [
     {
      "name": "vote_id",
@@ -19878,7 +19753,7 @@
    "id": "contract-minutes-check",
    "title": "Contract votes checked against the contract list",
    "description": "Every passed contract vote read from the minutes since October 2022 (consent agendas and votes that approve no spending, such as mutual aid, interlocal agreements, terminations and rejected bids, left out), checked against the contracts dataset. status: in_list (tied to a contract, change order or emergency purchase there, contract_record_ids), under_threshold (the vote's one clear figure is below list_threshold, the smallest award the list collects for that government), after_review (the meeting is after list_reviewed_through, the last meeting date read into the list), no_amount (the minutes give no single clear dollar figure), or missing (at or above the threshold, before the review date, and not in the list). amount is the vote's one clear figure from contract-vote-dollars. checked_note explains a vote looked at by hand (for example, the minutes don't name the seller). Rules: site/contract_coverage.py.",
-   "rows": 705,
+   "rows": 708,
    "columns": [
     {
      "name": "vote_id",

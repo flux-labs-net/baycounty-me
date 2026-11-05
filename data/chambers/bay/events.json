@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-04",
+ "as_of": "2026-11-05",
  "fetched": {
-  "pcb-chamber": "2026-11-04T18:45:50+00:00",
+  "pcb-chamber": "2026-11-05T18:53:32+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -85,6 +85,21 @@
    "chamber_event": false,
    "cost": null,
    "url": "https://pcbeach.org/local-event/veterans-day-freedom-celebration-2/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27811",
+   "title": "Bay Helping Bay – The Arc of the Bay",
+   "starts": "2026-11-12T00:00:00",
+   "ends": "2026-11-12T23:59:59",
+   "all_day": true,
+   "venue": "Sharky’s Beachfront Restaurant",
+   "city": null,
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/bay-helping-bay-the-ark-of-the-bay/",
    "source_url": "https://pcbeach.org/local-events/"
   },
   {
@@ -345,7 +360,7 @@
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:26653",
-   "title": "Business After Hours – Annual Christmas Party",
+   "title": "Annual Christmas Party | After Party",
    "starts": "2026-12-10T16:30:00",
    "ends": "2026-12-10T18:30:00",
    "all_day": false,

@@ -2244,12 +2244,12 @@ CSV: https://baycounty.me/downloads/government-profiles.csv · JSON: https://bay
 
 ### Recorded votes (votes)
 Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.
-Rows: 11,763. Columns: date, government, board, category, headline, summary, amount, outcome, tally, split, voted_yes, voted_no, absent_or_abstained, agenda_item, source_title, source_url, members, source_type, verified, vote_method, mover, seconder, source_page, vote_id, contract_ids, contract_match_method, gov_id
+Rows: 11,794. Columns: date, government, board, category, headline, summary, amount, outcome, tally, split, voted_yes, voted_no, absent_or_abstained, agenda_item, source_title, source_url, members, source_type, verified, vote_method, mover, seconder, source_page, vote_id, contract_ids, contract_match_method, gov_id
 CSV: https://baycounty.me/downloads/votes.csv · JSON: https://baycounty.me/downloads/votes.json
 
 ### Votes by member (member-votes)
 One row per member per vote (long format), for tallying individual records.
-Rows: 56,971. Columns: date, board, member, vote, headline, source_url, gov_id, source_type, vote_id, person_id
+Rows: 57,126. Columns: date, board, member, vote, headline, source_url, gov_id, source_type, vote_id, person_id
 CSV: https://baycounty.me/downloads/member-votes.csv · JSON: https://baycounty.me/downloads/member-votes.json
 
 ### Contracts (contracts)
@@ -2454,7 +2454,7 @@ CSV: https://baycounty.me/downloads/entity-profiles.csv · JSON: https://baycoun
 
 ### Connections between people, companies and organizations (entity-connections)
 Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.
-Rows: 22,802. Columns: link_id, from_id, from_name, from_kind, from_url, to_id, to_name, to_kind, to_url, relation, relation_label, amount, records, first_date, last_date, detail, source_url, county, gov_id
+Rows: 22,807. Columns: link_id, from_id, from_name, from_kind, from_url, to_id, to_name, to_kind, to_url, relation, relation_label, amount, records, first_date, last_date, detail, source_url, county, gov_id
 CSV: https://baycounty.me/downloads/entity-connections.csv · JSON: https://baycounty.me/downloads/entity-connections.json
 
 ### Officeholders by year (officeholder-terms)
@@ -2519,12 +2519,12 @@ CSV: https://baycounty.me/downloads/chamber-leaders.csv · JSON: https://baycoun
 
 ### Chambers of commerce: events and programs (chamber-events)
 Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.
-Rows: 57. Columns: place_id, chamber_id, chamber, kind, sort_order, title, schedule, about, starts, ends, all_day, venue, city, category, chamber_event, cost, event_id, url, source_url, gov_id
+Rows: 58. Columns: place_id, chamber_id, chamber, kind, sort_order, title, schedule, about, starts, ends, all_day, venue, city, category, chamber_event, cost, event_id, url, source_url, gov_id
 CSV: https://baycounty.me/downloads/chamber-events.csv · JSON: https://baycounty.me/downloads/chamber-events.json
 
 ### Community events (community-events)
 What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 188. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
+Rows: 193. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
 CSV: https://baycounty.me/downloads/community-events.csv · JSON: https://baycounty.me/downloads/community-events.json
 
 ### Beach access points (beach-access)
@@ -2549,7 +2549,7 @@ CSV: https://baycounty.me/downloads/beach-water-samples.csv · JSON: https://bay
 
 ### Beach conditions and flags (beach-conditions)
 From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.
-Rows: 12. Columns: place_id, zone, issued, period, flag_color, meaning, rip_current_risk, surf_height, uv_index, water_temperature, weather, high_temperature, winds, sunrise, sunset, summary, date, ends, sort_order, source_url, kind, gov_id
+Rows: 11. Columns: place_id, zone, issued, period, flag_color, meaning, rip_current_risk, surf_height, uv_index, water_temperature, weather, high_temperature, winds, sunrise, sunset, summary, date, ends, sort_order, source_url, kind, gov_id
 CSV: https://baycounty.me/downloads/beach-conditions.csv · JSON: https://baycounty.me/downloads/beach-conditions.json
 
 ### Parks (parks)
@@ -2649,7 +2649,7 @@ CSV: https://baycounty.me/downloads/emergency-resources.csv · JSON: https://bay
 
 ### Emergency notices archive (emergency-notices)
 Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 49. Columns: notice_id, place_id, kind, source, source_type, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, updated, status, full_closure, roadway, first_seen, last_seen, url, source_url, same_as, first_posted
+Rows: 52. Columns: notice_id, place_id, kind, source, source_type, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, updated, status, full_closure, roadway, first_seen, last_seen, url, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/emergency-notices.csv · JSON: https://baycounty.me/downloads/emergency-notices.json
 
 ### Hurricane prep steps (hurricane-prep)
@@ -2689,12 +2689,12 @@ CSV: https://baycounty.me/downloads/voting-locations.csv · JSON: https://baycou
 
 ### Public notices (public-notices)
 Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.
-Rows: 92. Columns: place_id, notice_id, published, gov_id, agency, kind, kind_label, title, event_date, notice_type, text, pdf_url, publication, source_url, same_as, first_posted, reference, emails, phones, links
+Rows: 98. Columns: place_id, notice_id, published, gov_id, agency, kind, kind_label, title, event_date, notice_type, text, pdf_url, publication, source_url, same_as, first_posted, reference, emails, phones, links
 CSV: https://baycounty.me/downloads/public-notices.csv · JSON: https://baycounty.me/downloads/public-notices.json
 
 ### Government job openings (job-openings)
 Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 120. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
+Rows: 131. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/job-openings.csv · JSON: https://baycounty.me/downloads/job-openings.json
 
 ### Government job boards (job-boards)
@@ -2729,7 +2729,7 @@ CSV: https://baycounty.me/downloads/restaurants.csv · JSON: https://baycounty.m
 
 ### Restaurant inspections (restaurant-inspections)
 Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.
-Rows: 17,210. Columns: place_id, visit_id, license_number, business_name, city, date, inspection_type, visit_number, disposition, result, result_level, high_priority, intermediate, basic, total_violations, violation_codes, violation_items, source_url, gov_id
+Rows: 17,212. Columns: place_id, visit_id, license_number, business_name, city, date, inspection_type, visit_number, disposition, result, result_level, high_priority, intermediate, basic, total_violations, violation_codes, violation_items, source_url, gov_id
 CSV: https://baycounty.me/downloads/restaurant-inspections.csv · JSON: https://baycounty.me/downloads/restaurant-inspections.json
 
 ### New businesses (new-businesses)
@@ -2739,7 +2739,7 @@ CSV: https://baycounty.me/downloads/new-businesses.csv · JSON: https://baycount
 
 ### This week in Bay County (weekly-roundup)
 This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.
-Rows: 147. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
+Rows: 143. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
 CSV: https://baycounty.me/downloads/weekly-roundup.csv · JSON: https://baycounty.me/downloads/weekly-roundup.json
 
 ### Military installations (military-installations)
@@ -2804,12 +2804,12 @@ CSV: https://baycounty.me/downloads/volunteer-orgs.csv · JSON: https://baycount
 
 ### Votes that name a company or organization (vote-mentions)
 One row per recorded vote and each company, nonprofit or registered business its motion names, matched by name from the minutes (hand-researched votes and every vote read from minutes since 2016): the vote, the organization and its profile (entity_id), the words that matched, the roll call (roll_call, 'Name: vote' pairs) and the members' profile ids (member_ids). A match means the minutes name the organization in that motion; consent agendas name many items in one vote.
-Rows: 1,371. Columns: place_id, vote_id, date, gov_id, board, entity_id, entity_name, entity_kind, entity_url, matched_words, headline, agenda_item, category, amount, outcome, tally, consent_agenda, roll_call, member_ids, source_type, source_url
+Rows: 1,373. Columns: place_id, vote_id, date, gov_id, board, entity_id, entity_name, entity_kind, entity_url, matched_words, headline, agenda_item, category, amount, outcome, tally, consent_agenda, roll_call, member_ids, source_type, source_url
 CSV: https://baycounty.me/downloads/vote-mentions.csv · JSON: https://baycounty.me/downloads/vote-mentions.json
 
 ### Votes on motions naming a member's donor (donor-votes)
 One row per member vote on a motion that names a company which gave to that member's campaign (donor_kind company) or whose owner gave personally (donor_kind business owner; owners are named only when their name and address match a Sunbiz officer, manager or registered agent). With the gift total, the first and last gift dates and whether the gifts came before or after the vote. A gift near a vote does not show why anyone voted the way they did. Individual donors are never named.
-Rows: 569. Columns: place_id, vote_id, date, gov_id, board, member, member_id, member_url, member_vote, donor, donor_id, donor_url, donor_kind, company, company_id, company_url, gift_amount, gift_first_date, gift_last_date, gift_timing, headline, amount, outcome, tally, consent_agenda, source_type, source_url, report_url
+Rows: 571. Columns: place_id, vote_id, date, gov_id, board, member, member_id, member_url, member_vote, donor, donor_id, donor_url, donor_kind, company, company_id, company_url, gift_amount, gift_first_date, gift_last_date, gift_timing, headline, amount, outcome, tally, consent_agenda, source_type, source_url, report_url
 CSV: https://baycounty.me/downloads/donor-votes.csv · JSON: https://baycounty.me/downloads/donor-votes.json
 
 ### Companies and organizations on agendas (agenda-parties)
@@ -2824,7 +2824,7 @@ CSV: https://baycounty.me/downloads/development-companies.csv · JSON: https://b
 
 ### Bids from notice to award (bid-trail)
 Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.
-Rows: 7. Columns: place_id, notice_id, reference, gov_id, agency, published, due_date, notice_title, notice_url, stage, date, what, vendor, vendor_id, amount, outcome, source_url
+Rows: 8. Columns: place_id, notice_id, reference, gov_id, agency, published, due_date, notice_title, notice_url, stage, date, what, vendor, vendor_id, amount, outcome, source_url
 CSV: https://baycounty.me/downloads/bid-trail.csv · JSON: https://baycounty.me/downloads/bid-trail.json
 
 ### Companies paid by one government that share an officer (shared-owner-vendors)
@@ -2849,12 +2849,12 @@ CSV: https://baycounty.me/downloads/campaign-results.csv · JSON: https://baycou
 
 ### Contract votes and their dollar figures (contract-vote-dollars)
 Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.
-Rows: 3,557. Columns: vote_id, gov_id, body, board, date, agenda_item, headline, category, kind, amount, amount_from, up_to, per_year, counted, not_counted_reason, same_item_as, outcome, tally, vote_method, verified, contract_record_ids, contract_vendor_ids, source_type, source_title, source_url, source_page
+Rows: 3,562. Columns: vote_id, gov_id, body, board, date, agenda_item, headline, category, kind, amount, amount_from, up_to, per_year, counted, not_counted_reason, same_item_as, outcome, tally, vote_method, verified, contract_record_ids, contract_vendor_ids, source_type, source_title, source_url, source_page
 CSV: https://baycounty.me/downloads/contract-vote-dollars.csv · JSON: https://baycounty.me/downloads/contract-vote-dollars.json
 
 ### Contract dollars by member vote (member-contract-dollars)
 One row per board member per counted contract vote (counted true in contract-vote-dollars): how the member voted (yes, no, absent, abstain) on that dollar figure. Sum amount where vote is yes and outcome is passed for the dollars a member voted to approve.
-Rows: 4,302. Columns: vote_id, person_id, member, vote, gov_id, board, date, headline, kind, amount, up_to, per_year, outcome, tally, vote_method, source_url, source_page
+Rows: 4,307. Columns: vote_id, person_id, member, vote, gov_id, board, date, headline, kind, amount, up_to, per_year, outcome, tally, vote_method, source_url, source_page
 CSV: https://baycounty.me/downloads/member-contract-dollars.csv · JSON: https://baycounty.me/downloads/member-contract-dollars.json
 
 ### Contract dollars each official voted on (contract-dollar-totals)
@@ -2864,7 +2864,7 @@ CSV: https://baycounty.me/downloads/contract-dollar-totals.csv · JSON: https://
 
 ### Contract votes checked against the contract list (contract-minutes-check)
 Every passed contract vote read from the minutes since October 2022 (consent agendas and votes that approve no spending, such as mutual aid, interlocal agreements, terminations and rejected bids, left out), checked against the contracts dataset. status: in_list (tied to a contract, change order or emergency purchase there, contract_record_ids), under_threshold (the vote's one clear figure is below list_threshold, the smallest award the list collects for that government), after_review (the meeting is after list_reviewed_through, the last meeting date read into the list), no_amount (the minutes give no single clear dollar figure), or missing (at or above the threshold, before the review date, and not in the list). amount is the vote's one clear figure from contract-vote-dollars. checked_note explains a vote looked at by hand (for example, the minutes don't name the seller). Rules: site/contract_coverage.py.
-Rows: 705. Columns: vote_id, gov_id, board, date, year, headline, kind, amount, up_to, status, checked_note, in_contract_list, contract_record_ids, list_threshold, list_reviewed_through, source_title, source_url
+Rows: 708. Columns: vote_id, gov_id, board, date, year, headline, kind, amount, up_to, status, checked_note, in_contract_list, contract_record_ids, list_threshold, list_reviewed_through, source_title, source_url
 CSV: https://baycounty.me/downloads/contract-minutes-check.csv · JSON: https://baycounty.me/downloads/contract-minutes-check.json
 
 ### Special event road closures (event-road-closures)

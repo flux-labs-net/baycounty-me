@@ -1,4 +1,6 @@
 visit_id,inspection_number,visit_number,license_number,license_type_code,business_name,address,city,zip,inspection_type,disposition,date,total_violations,high_priority,intermediate,basic,violations,license_id
+13963540,3792154,2,1306010,2010,THE SALTY BOTTLE,106 CARILLON MARKET ST,PANAMA CITY BEACH,32413,Complaint Full,Emergency Order Callback Time Extension,2026-11-04,2,0,1,1,08:1;51:1,8703061
+13787911,3749409,1,1305565,2010,DAVE & BUSTER'S,600 PIER PARK DR,PANAMA CITY BEACH,32413,Routine - Food,Inspection Completed - No Further Action,2026-11-04,6,1,0,5,03:1;14:1;22:1;23:1;36:1;42:1,5667894
 13962004,3792154,1,1306010,2010,THE SALTY BOTTLE,106 CARILLON MARKET ST,PANAMA CITY BEACH,32413,Complaint Full,Emergency order recommended,2026-11-03,15,3,2,10,01:1;03:1;08:1;12:1;13:1;14:1;21:2;24:1;25:1;31:1;32:2;35:1;51:1,8703061
 13916341,3777857,1,1305504,2010,SANDPIPER BEACON BEACH RESORT'S COCONUTS,17458 FRONT BEACH RD,PANAMA CITY BEACH,32413,Complaint Full,Inspection Completed - No Further Action,2026-11-03,5,1,0,4,14:2;29:1;41:1;51:1,5786700
 13760293,3721800,1,1304573,2010,ALL AMERICAN DINER,15406 W FRONT BEACH RD,PANAMA CITY BEACH,32413,Routine - Food,Inspection Completed - No Further Action,2026-11-03,5,1,2,2,14:1;22:1;27:1;36:1;41:1,5891460
