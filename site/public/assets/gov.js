@@ -44,8 +44,15 @@ const checkFor = async () => {
   const f = await get('/downloads/contract-minutes-check.json');
   return Array.isArray(f) ? f.filter(r => r.gov_id === K) : [];
 };
-const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr, BYr, CKr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor(), budgetFor(), checkFor()]);
+// contract awards in the minutes with no later record of the job (award-follow-up, status no_follow_up)
+const quietFor = async () => {
+  const api = await get(`/api/v1/datasets/award-follow-up?gov_id=${encodeURIComponent(K)}&status=no_follow_up&limit=5000`);
+  if (api && Array.isArray(api.data)) return api.data;
+  const f = await get('/downloads/award-follow-up.json');
+  return Array.isArray(f) ? f.filter(r => r.gov_id === K && r.status === 'no_follow_up') : [];
+};
+const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr, BYr, CKr, QTr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor(), budgetFor(), checkFor(), quietFor()]);
 const OH = (OHr || []).slice().sort((a, b) => a.seat_order - b.seat_order || a.term_order - b.term_order);
 const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
@@ -59,6 +66,7 @@ S.salestax = (ST || []).filter(p => has(p.g)).map(p => ({...p, ys: [...new Set([
 S.fema = (FM?.rows || []).filter(r => has(r.a)).map(r => ({...r, ys: [yr(r.d1)].filter(Boolean)}));
 S.votes = (VT?.votes || []).filter(v => v.g === K).map(v => ({...v, ys: [yr(v.d)].filter(Boolean)}));
 S.check = (CKr || []).map(r => ({...r, ys: [yr(r.date)].filter(Boolean)}));
+S.quiet = (QTr || []).map(r => ({...r, ys: [yr(r.award_date)].filter(Boolean)}));
 
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
@@ -122,19 +130,34 @@ function contractCheck() {
     + `<p class="small muted">From the contract-minutes-check dataset (<a href="/api/v1/datasets/contract-minutes-check?gov_id=${K}">API</a>). Consent agendas and votes that approve no spending (mutual aid, interlocal agreements, rejected bids) are left out.</p></details>` : '';
   return {line, body, size, gapN};
 }
+// awards in the picked year with nothing on record after them: a question to ask, worded as one
+function quietAwards() {
+  const rs = S.quiet.filter(inYear).sort((a, b) => b.award_date.localeCompare(a.award_date));
+  if (!rs.length) return '';
+  const co = r => r.entity_id && window.BC ? BC.a(r.entity_id, r.company) : esc(r.company);
+  return `<details class="gx-checklist gx-quiet"><summary>Awards with no later record in ${ylabel()} (${rs.length})</summary>`
+    + `<p class="small">For each of these, the minutes record a contract award, and we found nothing after it that names the same company or bid: `
+    + `no later vote or agenda item, contract record, change order, payment or project history. That doesn't mean anything went wrong. `
+    + `${esc(G.short)} may have the signed contract and payments in files we haven't received, the award may have been dropped or rebid, `
+    + `or the company may have changed its name. It's a question to ask: was a contract signed, and what has been paid?</p>`
+    + table(['Awarded', 'Company', 'What the minutes say', 'Amount'], rs.map(r =>
+      `<td class="small nowrap">${esc(nice(r.award_date))}${src(r.source_url)}</td><td class="wrap">${co(r)}</td><td class="wrap small">${esc(r.headline)}</td><td class="num">${r.amount ? usd(r.amount) : '—'}</td>`), 10)
+    + `<p class="small muted">Checked six months or more after each award, against every vote, agenda, contract, payment and project record the site holds for ${esc(G.short)}. `
+    + `From the award-follow-up dataset (<a href="/api/v1/datasets/award-follow-up?gov_id=${K}&status=no_follow_up">API</a>).</p></details>`;
+}
 function contracts() {
-  if (!S.contracts.length) return gone('contracts');
+  if (!S.contracts.length && !S.quiet.length) return gone('contracts');
   const rs = S.contracts.filter(inYear).sort((a, b) => (b.a || 0) - (a.a || 0)), tot = rs.reduce((s, r) => s + (r.a || 0), 0);
   const comp = rs.filter(r => /^competitive/i.test(r.m || '')).length;
   const ck = contractCheck();
-  if (!rs.length && !S.check.some(inYear)) EMPTY.add('contracts');
+  if (!rs.length && !S.check.some(inYear) && !S.quiet.some(inYear)) EMPTY.add('contracts');
   fill('contracts', {
     sub: `${plural(rs.length, 'contract')} ${ck.size || 'over the list size'} approved in ${ylabel()}`,
     kpis: rs.length ? kpi('Awarded', money(tot), plural(rs.length, 'contract')) + kpi('Competitively bid', rs.length ? Math.round(comp / rs.length * 100) + '%' : '—', `${comp} of ${rs.length}`)
       + kpi('Largest', money(rs[0].a), esc(rs[0].v)) : '',
     body: ck.line + (rs.length ? table(['Company', 'For', 'Amount', 'How awarded', 'Approved'], rs.map(r =>
       `<td class="wrap"><a href="${esc(r.e && window.BC ? BC.href(r.e) : '/public-money/contracts?company=' + encodeURIComponent(r.id) + '#company')}">${esc(r.v)}</a></td><td class="wrap small">${esc(r.p)}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small nowrap">${esc(nice(r.d))}${src(r.u)}</td>`))
-      : `<p class="muted gx-none">No contracts ${ck.size || ''} recorded for ${esc(G.short)} in ${ylabel()}. <button type="button" class="linkbtn" data-allyears>See all years</button></p>`) + ck.body,
+      : `<p class="muted gx-none">No contracts ${ck.size || ''} recorded for ${esc(G.short)} in ${ylabel()}. <button type="button" class="linkbtn" data-allyears>See all years</button></p>`) + ck.body + quietAwards(),
     empty: `No major contracts recorded for ${esc(G.short)} in ${ylabel()}.`,
     link: `<a href="${dash('/public-money/contracts')}#all">All ${esc(G.short)} contracts, change orders and payments</a>`,
   });

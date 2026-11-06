@@ -2484,7 +2484,7 @@ CSV: https://baycounty.me/downloads/data-completeness.csv · JSON: https://bayco
 
 ### Websites our records cite (data-source-sites)
 Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.
-Rows: 429. Columns: website, topic, topic_id, documents_cited, source_url, gov_id
+Rows: 433. Columns: website, topic, topic_id, documents_cited, source_url, gov_id
 CSV: https://baycounty.me/downloads/data-source-sites.csv · JSON: https://baycounty.me/downloads/data-source-sites.json
 
 ### Site menu (site-menu)
@@ -2866,6 +2866,11 @@ CSV: https://baycounty.me/downloads/contract-dollar-totals.csv · JSON: https://
 Every passed contract vote read from the minutes since October 2022 (consent agendas and votes that approve no spending, such as mutual aid, interlocal agreements, terminations and rejected bids, left out), checked against the contracts dataset. status: in_list (tied to a contract, change order or emergency purchase there, contract_record_ids), under_threshold (the vote's one clear figure is below list_threshold, the smallest award the list collects for that government), after_review (the meeting is after list_reviewed_through, the last meeting date read into the list), no_amount (the minutes give no single clear dollar figure), or missing (at or above the threshold, before the review date, and not in the list). amount is the vote's one clear figure from contract-vote-dollars. checked_note explains a vote looked at by hand (for example, the minutes don't name the seller). Rules: site/contract_coverage.py.
 Rows: 708. Columns: vote_id, gov_id, board, date, year, headline, kind, amount, up_to, status, checked_note, in_contract_list, contract_record_ids, list_threshold, list_reviewed_through, source_title, source_url
 CSV: https://baycounty.me/downloads/contract-minutes-check.csv · JSON: https://baycounty.me/downloads/contract-minutes-check.json
+
+### Contract awards and what came after (award-follow-up)
+Every passed contract award read from the minutes since 2016 (consent agendas, votes that approve no spending, and change orders, amendments and renewals left out), one row per award and company named, checked for any later record at the same government that names the same company or carries the same bid number: later votes and agenda items, contract records and change orders, check register, tourist tax and CRA payments, and project histories. status: followed_up (later_records found; later_kinds says which, first_later_* is the first one), no_follow_up (no later record by flag_after, six months after the award), too_soon (not yet six months), as_needed (no later record, but the award is a standing or on-call agreement used only when work is ordered), cant_check (the minutes name no company). company_from says whether the company matched a profile (entity_id) or is the name as the motion writes it. A no_follow_up row is a question for the government, not a finding: the work may be recorded in files the site doesn't hold. Rules: site/award_followup.py.
+Rows: 1,490. Columns: vote_id, gov_id, board, award_date, year, headline, amount, bid_numbers, flag_after, source_url, entity_id, company, company_from, status, later_records, later_kinds, first_later_date, first_later_what, first_later_url, last_later_date
+CSV: https://baycounty.me/downloads/award-follow-up.csv · JSON: https://baycounty.me/downloads/award-follow-up.json
 
 ### Special event road closures (event-road-closures)
 Road closures and traffic delays for special events such as IRONMAN Florida, one row per closure, from the police department's traffic advisory: the road and the cross streets it is closed between, closed or delay, and when it starts and ends (ISO times with the Central offset). geometry is the closed stretch as a GeoJSON line in WGS84, placed on the county street centerlines from the street names (placed = street-names).

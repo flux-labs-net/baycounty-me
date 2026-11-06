@@ -39,11 +39,35 @@ test('the gap finder flags only active sites past 45 days, with the date in the 
   execFileSync('python3', [path.join(__dirname, '../../data/civic/scripts/stale_requests.py'), '--today', '2026-10-30', '--out', tmp], {encoding: 'utf8'});
   const f = JSON.parse(fs.readFileSync(tmp, 'utf8'));
   fs.unlinkSync(tmp);
-  for (const r of f.requests) for (const g of r.gaps) {
+  for (const r of f.requests.filter(r => r.check === 'beach-water')) for (const g of r.gaps) {
     assert.match(g.gap_id, /^[a-z-]+:[^:]+:\d{4}-\d{2}-\d{2}$/);
     assert.ok((new Date('2026-10-30') - new Date(g.last_record)) / 864e5 > 45, g.gap_id);
     assert.match(g.source_url, /^https:\/\//);
   }
+  // awards with no later record: one draft per government, six months or more after the award, biggest first, a capped letter
+  const aw = f.requests.filter(r => r.check === 'award-follow-up');
+  assert.ok(aw.length);
+  assert.equal(new Set(aw.map(r => r.government_key)).size, aw.length);
+  for (const r of aw) {
+    assert.ok(r.max_gaps > 0 && r.page.startsWith('/governments/'), r.key);
+    const amts = r.gaps.map(g => g.amount || 0);
+    assert.deepEqual(amts, [...amts].sort((a, b) => b - a), r.key);
+    for (const g of r.gaps) {
+      assert.ok(g.gap_id.startsWith('award-follow-up:') && g.company && g.award_date >= '2016-01-01', g.gap_id);
+      assert.ok((new Date('2026-10-30') - new Date(g.award_date)) / 864e5 >= 180, g.gap_id);
+      assert.match(g.source_url, /^https?:\/\//);
+    }
+  }
+});
+
+test('the award letter asks for the contract, payments and whether it was carried out', () => {
+  const m = compose('award-follow-up', 'Contract awards with no later record', [{company: 'Acme Paving, Inc.', board: 'City Commission', award_date: '2024-03-12',
+    amount: 250000, bid_numbers: 'PC24-001', headline: 'Awarded paving to Acme Paving.', source_url: 'https://example.gov/minutes.pdf'}]);
+  assert.match(m.subject, /March 12, 2024 award to Acme Paving/);
+  assert.match(m.body, /\$250,000 in the minutes/);
+  assert.match(m.body, /signed contract/);
+  assert.match(m.body, /payments made to the company/);
+  assert.match(m.body, /cancelled, rebid/);
 });
 
 /* ---------- the queue, against Postgres ---------- */
