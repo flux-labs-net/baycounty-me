@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-05T20:27:37-06:00",
+  "generated": "2026-11-06T12:02:46-06:00",
   "window": {
-    "from": "2026-11-05",
-    "to": "2027-01-04"
+    "from": "2026-11-06",
+    "to": "2027-01-05"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -21,7 +21,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 3,
+        "calendar": 4,
         "expected": 0
       }
     },
@@ -95,7 +95,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 1,
+        "calendar": 2,
         "expected": 0
       }
     },
@@ -164,12 +164,12 @@
       "calendar_url": "https://www.cityofcallaway.com/Calendar.aspx",
       "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "AgendaCenter": "ok (12 records)",
+        "AgendaCenter": "ok (13 records)",
         "calendar (iCal cat 14)": "ok (10 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
-        "calendar": 2,
+        "agenda_feed": 1,
+        "calendar": 1,
         "expected": 0
       }
     },
@@ -225,7 +225,7 @@
       "coverage": {
         "agenda_feed": 0,
         "calendar": 0,
-        "expected": 3
+        "expected": 4
       }
     },
     {
@@ -241,7 +241,7 @@
         "Council Meetings page": "ok (86 records)"
       },
       "coverage": {
-        "agenda_feed": 5,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 2
       }
@@ -426,19 +426,6 @@
       "past": true
     },
     {
-      "board": "mb",
-      "title": "Special Meeting and 4th LDC Workshop",
-      "start": "2026-10-30T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
-      "packet_url": "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "detail_url": "https://youtube.com/live/dX-G839lG70?feature=share",
-      "past": true
-    },
-    {
       "board": "sp",
       "title": "Commission Meeting",
       "start": "2026-11-02T17:30:00-06:00",
@@ -502,7 +489,8 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "lh",
@@ -522,15 +510,16 @@
     },
     {
       "board": "cw",
-      "title": "Commission Meeting",
+      "title": "Regular Meeting",
       "start": "2026-11-10T18:00:00-06:00",
       "location": "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
-      "agenda_url": null,
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429",
       "packet_url": null,
       "minutes_url": null,
-      "source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2696"
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted",
+      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
+      "calendar_source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
     },
     {
       "board": "lh",
@@ -946,6 +935,42 @@
       "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
       "status": "expected",
       "expected": true
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2027-01-05T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1713"
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2027-01-05T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc-cra",
+      "title": "Virtual CRA Workshop",
+      "start": "2027-01-05T16:30:00-06:00",
+      "location": "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 32402",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7549"
     }
   ],
   "errors": [],
