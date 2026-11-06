@@ -5191,7 +5191,7 @@ gov:cw,gov,Government,Callaway,City,/governments/callaway,,67,,19615972.29,cw,ba
 gov:destination_pc,gov,Government,Destination Panama City,Tourism agency,/profile/gov/destination_pc,,174,,4471596.43,destination_pc,bay,
 gov:fdot,gov,Government,Florida Department of Transportation,State agency: state highways and bridges,/profile/gov/fdot,,33,,,,bay,https://www.fdot.gov/
 gov:lake_powell_cdd,gov,Government,Lake Powell CDD,Special district,/profile/gov/lake_powell_cdd,,21,,,lake_powell_cdd,bay,
-gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,133,,70032287.37,lh,bay,
+gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,134,,70032287.37,lh,bay,
 gov:mb,gov,Government,Mexico Beach,City,/governments/mexico-beach,,81,132438.9,17922207.87,mb,bay,
 gov:mb_cdc,gov,Government,Mexico Beach CDC,Tourism agency,/profile/gov/mb_cdc,,72,,2071159.31,mb_cdc,bay,
 gov:nwfwmd,gov,Government,Water Management District,Special district,/profile/gov/nwfwmd,,0,,,nwfwmd,bay,
@@ -16247,7 +16247,7 @@ vendor:deckard-technologies,vendor,Company,"Deckard Technologies, Inc.",Company 
 vendor:destination-media,vendor,Company,Destination Media,Company paid or hired by local governments,/profile/vendor/destination-media,,1,37550.0,,visit_pcb,bay,
 vendor:destinations-florida,vendor,Company,"Destinations Florida, Inc",Company paid or hired by local governments,/public-money/vendors/destinations-florida,Destinations Florida,3,48035.0,,destination_pc,bay,
 vendor:destinations-international,vendor,Company,Destinations International,Company paid or hired by local governments,/public-money/vendors/destinations-international,,2,107899.0,,destination_pc,bay,
-vendor:dewberry,vendor,Company,Dewberry Engineers,Company paid or hired by local governments,/public-money/vendors/dewberry,"Dewberry; Dewberry Engineering; Dewberry Engineering Inc.; Dewberry Engineering, Inc.; Dewberry Engineers Inc.; Dewberry Engineers, Inc; Dewberry Engineers, Inc.",87,11134615.88,5500.0,county,bay,
+vendor:dewberry,vendor,Company,Dewberry Engineers,Company paid or hired by local governments,/public-money/vendors/dewberry,"Dewberry; Dewberry Engineering; Dewberry Engineering Inc.; Dewberry Engineering, Inc.; Dewberry Engineers Inc.; Dewberry Engineers, Inc; Dewberry Engineers, Inc.",88,11134615.88,5500.0,county,bay,
 vendor:dex-imaging,vendor,Company,DEX imaging,Company paid or hired by local governments,/profile/vendor/dex-imaging,,5,874.71,,mb_cdc,bay,
 vendor:direct-deposit,vendor,Company,Direct Deposit,Company paid or hired by local governments,/profile/vendor/direct-deposit,,1,1307722.53,,visit_pcb,bay,
 vendor:disposal-services,vendor,Company,Disposal Services LLC,Company paid or hired by local governments,/public-money/vendors/disposal-services,"Disposal Services; Disposal Services, LLC",26,55862.1,3250.0,visit_pcb,bay,

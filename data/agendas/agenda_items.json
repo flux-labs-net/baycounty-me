@@ -1,7 +1,391 @@
 {
- "generated": "2026-11-05T18:58:42+00:00",
+ "generated": "2026-11-06T02:37:47+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "4",
+   "section": "PROCLAMATIONS & ANNOUNCEMENTS",
+   "title": "Presentation of Donation Check from Tractor Supply to Lynn Haven Fire Rescue",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "Lynn Haven Fire Rescue"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA",
+   "title": "Approval of minutes of meeting dated 10/27/26",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-10-590: Award ITB 25.26-31 Wyoming Ave Drainage Improvements Project (22031)",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Wyoming Ave"
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-11-603 FY 2027 Budget Amendment to remove Flock contract",
+   "summary": null,
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "Flock"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-11-604 Approving Purchase of Stormwater Drainage Easement at Illinois Ave.",
+   "summary": null,
+   "kind": "purchase",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Illinois Ave."
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-11-606 Approving Albertsons Companies Opioid Settlement Participation",
+   "summary": null,
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-11-607 Approving GreenSouth Contract Extension Renewal",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "GreenSouth"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-11-608 Approving US Water Services Agreement Extension Renewal",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "US Water Services"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "12",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution 2026-11-610 Approving Post Design Professional Services for the Wyoming Avenue Drainage improvements to Dewberry Engineering",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Dewberry Engineering"
+   ],
+   "addresses": [
+    "Wyoming Avenue"
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "13",
+   "section": "QUASI-JUDICIAL PUBLIC HEARINGS",
+   "title": "Community Bank Site Plan Development Order Quasi-Judicial Public Hearing",
+   "summary": null,
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [
+    "Community Bank"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "14",
+   "section": "QUASI-JUDICIAL PUBLIC HEARINGS",
+   "title": "Dutch Bros Site Plan Development Order Quasi-Judicial Public Hearing",
+   "summary": null,
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [
+    "Dutch Bros"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "15",
+   "section": "QUASI-JUDICIAL PUBLIC HEARINGS",
+   "title": "Chipotle Site Plan Development Order Quasi-Public Hearing",
+   "summary": null,
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [
+    "Chipotle"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "16",
+   "section": "NEW BUSINESS",
+   "title": "First Reading of Ordinance 1199 Approving the Hera Contract for Registration of Foreclosing Mortgaged Property",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [
+    "Hera"
+   ],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "17",
+   "section": "OLD BUSINESS",
+   "title": "Final Reading of Ordinance 1197 Reducing CRA budget to 75%",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "18",
+   "section": "OLD BUSINESS",
+   "title": "Resolution 2026-11-609 Adopting Rules of Procedure",
+   "summary": null,
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "19",
+   "section": "OLD BUSINESS",
+   "title": "Finalizing Clerk's Job Description and posting of position",
+   "summary": null,
+   "kind": "personnel",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "City Commission Meeting",
+   "number": "22B",
+   "section": "REPORTS",
+   "title": "Discussion of Amendment 3 results and future impacts on the city",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)"
+  },
+  {
+   "board": "lh-cra",
+   "body": "Lynn Haven Community Redevelopment Agency (CRA) Board",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "11/10/26 CRA Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA",
+   "title": "Approval of the CRA meeting minutes from 10/13/26",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)"
+  },
+  {
+   "board": "lh-cra",
+   "body": "Lynn Haven Community Redevelopment Agency (CRA) Board",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "11/10/26 CRA Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA",
+   "title": "Approval Residential Incentive for 1406 Michigan Ave. contingent upon project completion",
+   "summary": null,
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1406 Michigan Ave."
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)"
+  },
+  {
+   "board": "lh-cra",
+   "body": "Lynn Haven Community Redevelopment Agency (CRA) Board",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "11/10/26 CRA Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA",
+   "title": "Approval of Residential Incentive for 1408 Michigan Ave. contingent upon project completion",
+   "summary": null,
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1408 Michigan Ave."
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)"
+  },
+  {
+   "board": "lh-cra",
+   "body": "Lynn Haven Community Redevelopment Agency (CRA) Board",
+   "gov": "lh",
+   "date": "2026-11-10",
+   "meeting": "11/10/26 CRA Meeting",
+   "number": "6",
+   "section": "NEW BUSINESS",
+   "title": "Discussion and possible approval of a new drive-through facility for 201 West 14th St. Community Bank",
+   "summary": "The agency will discuss and possibly approve a new drive-through facility for Community Bank at 201 West 14th St.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Community Bank"
+   ],
+   "addresses": [
+    "201 West 14th St."
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)"
+  },
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-06",
+   "meeting": "11/6/26 Joint ULDC - Commission Workshop",
+   "number": null,
+   "section": null,
+   "title": "Discussion about the ULDC updates and processes",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1162,plainText=false)"
+  },
   {
    "board": "mb",
    "body": "Mexico Beach City Council",

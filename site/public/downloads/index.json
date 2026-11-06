@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-05",
+ "updated": "2026-11-06",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -6760,7 +6760,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22807,
+   "rows": 22808,
    "columns": [
     {
      "name": "link_id",
@@ -8925,7 +8925,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 193,
+   "rows": 189,
    "columns": [
     {
      "name": "place_id",
@@ -13792,7 +13792,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 98,
+   "rows": 105,
    "columns": [
     {
      "name": "place_id",
@@ -13836,7 +13836,8 @@
       "2026-11-02",
       "2026-11-03",
       "2026-11-04",
-      "2026-11-05"
+      "2026-11-05",
+      "2026-11-06"
      ]
     },
     {
@@ -13926,6 +13927,7 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-235.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fVpPl6iXiXDSxDnuB1YA/9d55./cropped-395.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fsNphCPoWUMkcos8Yyew/9af0./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/mlwyHIF8RUrB6T3Ot2Df/d59b./cropped-510.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ubbtWJbCLCwAynktGtIJ/91ea./cropped-729.pdf",
@@ -13979,6 +13981,7 @@
      "type": "string",
      "values": [
       "Bid 27-01",
+      "Bid PCB27-05",
       "Bid PCB27-07",
       "Bid PCB27-10",
       "Emergency order 27-02",
@@ -13997,6 +14000,7 @@
       "Ordinance 3315",
       "Ordinance 3317",
       "Ordinance 904",
+      "Ordinance 905",
       "Ordinance 950",
       "Project 414877",
       "Project R2025-14-0005600",
@@ -14023,6 +14027,7 @@
       "purchasing@cityoflynnhaven.com",
       "purchasing@panamacity.gov",
       "purchasing@pcbfl.gov",
+      "purchasing@pcbfl.gov; cityclerk@pcbfl.gov",
       "ryan.fowler@atkinsrealis.com",
       "smoneyham@portpcfl.com",
       "t.brunson@mexicobeachfl.gov",
@@ -14076,6 +14081,7 @@
       "www.demandstar.com",
       "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/bids.aspx",
+      "www.demandstar.com; www.pcbfl.gov/bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.panamacity.gov",
       "www.pcbfl.gov"
      ]
@@ -14089,7 +14095,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 131,
+   "rows": 127,
    "columns": [
     {
      "name": "place_id",
@@ -14184,13 +14190,44 @@
     },
     {
      "name": "posted",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-06-13",
+      "2026-06-18",
+      "2026-07-13",
+      "2026-07-17",
+      "2026-08-10",
+      "2026-09-14",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-24",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-20",
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23",
+      "2026-10-26",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-05"
+     ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-05",
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
@@ -14218,7 +14255,8 @@
       "2026-10-31",
       "2026-11-03",
       "2026-11-04",
-      "2026-11-05"
+      "2026-11-05",
+      "2026-11-06"
      ]
     },
     {
@@ -14312,7 +14350,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-05"
+      "2026-11-06"
      ]
     }
    ],
@@ -15690,7 +15728,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 143,
+   "rows": 139,
    "columns": [
     {
      "name": "place_id",
@@ -15765,13 +15803,9 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-05T09:00:00",
       "2026-11-05T09:00:00-06:00",
       "2026-11-05T10:00:00",
       "2026-11-05T10:30:00",
-      "2026-11-05T13:00:00",
-      "2026-11-05T15:00:00",
-      "2026-11-05T18:00:00",
       "2026-11-05T18:30:00",
       "2026-11-06T09:00:00",
       "2026-11-06T09:30:00-06:00",
@@ -15794,10 +15828,6 @@
      "values": [
       "2026-11-05T10:30:00",
       "2026-11-05T11:00:00",
-      "2026-11-05T13:00:00",
-      "2026-11-05T14:00:00",
-      "2026-11-05T17:00:00",
-      "2026-11-05T19:00:00",
       "2026-11-05T22:00:00",
       "2026-11-06T12:00:00",
       "2026-11-06T14:00:00",
@@ -15919,7 +15949,6 @@
      "name": "agenda_posted",
      "type": "boolean",
      "values": [
-      false,
       true
      ]
     },
@@ -17627,7 +17656,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-05"
+      "2026-11-06"
      ]
     },
     {
@@ -18151,7 +18180,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 509,
+   "rows": 519,
    "columns": [
     {
      "name": "place_id",
@@ -18197,6 +18226,7 @@
      "values": [
       "09/08/26 CRA Agenda",
       "10/13/26 CRA Board Meeting",
+      "11/10/26 CRA Meeting",
       "1st Budget Hearing",
       "BOCC Regular Meeting",
       "Budget Hearing",
@@ -18309,6 +18339,7 @@
       "Doug Crosby; Mike Nelson; Robert Carroll; Daniel Raffield",
       "Ethan Register",
       "Greg Brudnicki; Allan Branch",
+      "Jamie Warrick; Dan Russell; Joseph Ashbrook",
       "Joseph Ashbrook",
       "Mark Sheldon",
       "Mike Nelson; Robert Carroll; William T. Dozier",
@@ -18459,7 +18490,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 8,
+   "rows": 10,
    "columns": [
     {
      "name": "place_id",
@@ -18477,6 +18508,7 @@
      "type": "string",
      "values": [
       "Bid 27-01",
+      "Bid PCB27-05",
       "Bid PCB27-07",
       "Bid PCB27-10",
       "ITB 27-02",
@@ -18506,7 +18538,18 @@
     },
     {
      "name": "published",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-09-30",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-12",
+      "2026-10-27",
+      "2026-11-03",
+      "2026-11-05",
+      "2026-11-06"
+     ]
     },
     {
      "name": "due_date",
@@ -18518,6 +18561,8 @@
       "2026-11-04",
       "2026-11-06",
       "2026-11-10",
+      "2026-11-12",
+      "2026-11-17",
       "2026-12-07"
      ]
     },
@@ -18541,7 +18586,18 @@
     },
     {
      "name": "date",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-09-30",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-12",
+      "2026-10-27",
+      "2026-11-03",
+      "2026-11-05",
+      "2026-11-06"
+     ]
     },
     {
      "name": "what",
@@ -20420,8 +20476,12 @@
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1162,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427",
@@ -20437,7 +20497,10 @@
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1159,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true"
      ]
     },

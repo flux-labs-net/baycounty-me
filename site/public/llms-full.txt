@@ -2454,7 +2454,7 @@ CSV: https://baycounty.me/downloads/entity-profiles.csv · JSON: https://baycoun
 
 ### Connections between people, companies and organizations (entity-connections)
 Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.
-Rows: 22,807. Columns: link_id, from_id, from_name, from_kind, from_url, to_id, to_name, to_kind, to_url, relation, relation_label, amount, records, first_date, last_date, detail, source_url, county, gov_id
+Rows: 22,808. Columns: link_id, from_id, from_name, from_kind, from_url, to_id, to_name, to_kind, to_url, relation, relation_label, amount, records, first_date, last_date, detail, source_url, county, gov_id
 CSV: https://baycounty.me/downloads/entity-connections.csv · JSON: https://baycounty.me/downloads/entity-connections.json
 
 ### Officeholders by year (officeholder-terms)
@@ -2524,7 +2524,7 @@ CSV: https://baycounty.me/downloads/chamber-events.csv · JSON: https://baycount
 
 ### Community events (community-events)
 What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 193. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
+Rows: 189. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
 CSV: https://baycounty.me/downloads/community-events.csv · JSON: https://baycounty.me/downloads/community-events.json
 
 ### Beach access points (beach-access)
@@ -2689,12 +2689,12 @@ CSV: https://baycounty.me/downloads/voting-locations.csv · JSON: https://baycou
 
 ### Public notices (public-notices)
 Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.
-Rows: 98. Columns: place_id, notice_id, published, gov_id, agency, kind, kind_label, title, event_date, notice_type, text, pdf_url, publication, source_url, same_as, first_posted, reference, emails, phones, links
+Rows: 105. Columns: place_id, notice_id, published, gov_id, agency, kind, kind_label, title, event_date, notice_type, text, pdf_url, publication, source_url, same_as, first_posted, reference, emails, phones, links
 CSV: https://baycounty.me/downloads/public-notices.csv · JSON: https://baycounty.me/downloads/public-notices.json
 
 ### Government job openings (job-openings)
 Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 131. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
+Rows: 127. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/job-openings.csv · JSON: https://baycounty.me/downloads/job-openings.json
 
 ### Government job boards (job-boards)
@@ -2739,7 +2739,7 @@ CSV: https://baycounty.me/downloads/new-businesses.csv · JSON: https://baycount
 
 ### This week in Bay County (weekly-roundup)
 This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.
-Rows: 143. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
+Rows: 139. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
 CSV: https://baycounty.me/downloads/weekly-roundup.csv · JSON: https://baycounty.me/downloads/weekly-roundup.json
 
 ### Military installations (military-installations)
@@ -2814,7 +2814,7 @@ CSV: https://baycounty.me/downloads/donor-votes.csv · JSON: https://baycounty.m
 
 ### Companies and organizations on agendas (agenda-parties)
 One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.
-Rows: 509. Columns: place_id, gov_id, board, meeting_date, meeting, item_number, title, kind, rezoning, amount, party, entity_id, entity_name, entity_kind, entity_url, gave_to_members, gave_to, source_url
+Rows: 519. Columns: place_id, gov_id, board, meeting_date, meeting, item_number, title, kind, rezoning, amount, party, entity_id, entity_name, entity_kind, entity_url, gave_to_members, gave_to, source_url
 CSV: https://baycounty.me/downloads/agenda-parties.csv · JSON: https://baycounty.me/downloads/agenda-parties.json
 
 ### Development projects and the businesses behind them (development-companies)
@@ -2824,7 +2824,7 @@ CSV: https://baycounty.me/downloads/development-companies.csv · JSON: https://b
 
 ### Bids from notice to award (bid-trail)
 Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.
-Rows: 8. Columns: place_id, notice_id, reference, gov_id, agency, published, due_date, notice_title, notice_url, stage, date, what, vendor, vendor_id, amount, outcome, source_url
+Rows: 10. Columns: place_id, notice_id, reference, gov_id, agency, published, due_date, notice_title, notice_url, stage, date, what, vendor, vendor_id, amount, outcome, source_url
 CSV: https://baycounty.me/downloads/bid-trail.csv · JSON: https://baycounty.me/downloads/bid-trail.json
 
 ### Companies paid by one government that share an officer (shared-owner-vendors)

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05T12:47:57-06:00",
+  "generated": "2026-11-05T20:27:37-06:00",
   "window": {
     "from": "2026-11-05",
     "to": "2027-01-04"
@@ -509,13 +509,16 @@
       "title": "11/6/26 Joint ULDC - Commission Workshop",
       "start": "2026-11-06T09:30:00-06:00",
       "location": "825 Ohio Avenue, Lynn Haven",
-      "agenda_url": null,
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1162,plainText=false)",
       "packet_url": null,
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2151/files",
-      "items": []
+      "items": [],
+      "agenda_items": [
+        "Discussion about the ULDC updates and processes"
+      ]
     },
     {
       "board": "cw",
@@ -534,35 +537,90 @@
       "title": "City Commission Meeting",
       "start": "2026-11-10T17:30:00-06:00",
       "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1159,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
       "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "items": []
+      "items": [
+        {
+          "title": "Approve Resolution 2026-10-590: Discussion and possible approval of Award ITB 25.26-31 Wyoming Ave Drainage Improvements Project (22031)",
+          "amount": null
+        },
+        {
+          "title": "Approve Resolution 2026-11-603 FY 2027 Budget Amendment to remove Flock contract",
+          "amount": null
+        },
+        {
+          "title": "Approve Resolution 2026-11-604 Approving Purchase of Stormwater Drainage Easement at Illinois Ave.",
+          "amount": null
+        },
+        {
+          "title": "Approve Resolution 2026-11-607 Approving GreenSouth Contract Extension Renewal.",
+          "amount": null
+        },
+        {
+          "title": "First Reading of Ordinance 1199 Approving the Hera Contract for Registration of Foreclosing Mortgaged Property.",
+          "amount": null
+        },
+        {
+          "title": "Final Reading of Ordinance 1197 Reducing CRA budget to 75%",
+          "amount": null
+        }
+      ],
+      "agenda_items": [
+        "Presentation of Donation Check from Tractor Supply to Lynn Haven Fire Rescue",
+        "Approval of minutes of meeting dated 10/27/26.",
+        "Approve Resolution 2026-10-590: Discussion and possible approval of Award ITB 25.26-31 Wyoming Ave Drainage Improvements Project (22031)",
+        "Approve Resolution 2026-11-603 FY 2027 Budget Amendment to remove Flock contract",
+        "Approve Resolution 2026-11-604 Approving Purchase of Stormwater Drainage Easement at Illinois Ave.",
+        "Approve Resolution 2026-11-606 Approving Albertsons Companies Opioid Settlement Participation",
+        "Approve Resolution 2026-11-607 Approving GreenSouth Contract Extension Renewal.",
+        "Approve Resolution 2026-11-608 Approving US Water Services Agreement Extension Renewal.",
+        "Approve Resolution 2026-11-610 Approving Post Design Professional Services for the Wyoming Avenue Drainage improvements to Dewberry Engineering",
+        "Discussion and Possible Decision on Community Bank Site Plan Development Order Quasi-Judicial Public Hearing",
+        "Discussion and Possible Decision on Dutch Bros Site Plan Development Order Quasi-Judicial Public Hearing",
+        "Discussion and Possible Decision on Chipotle Site Plan Development Order Quasi-Public Hearing",
+        "First Reading of Ordinance 1199 Approving the Hera Contract for Registration of Foreclosing Mortgaged Property.",
+        "Final Reading of Ordinance 1197 Reducing CRA budget to 75%",
+        "Discussion and possible approval of Resolution 2026-11-609 Adopting Rules of Procedure.",
+        "Discussion and possible approval of finalizing Clerk's Job Description and posting of position.",
+        "Mayor’s Report.",
+        "Commissioners’ Reports.",
+        "City Manager’s Report.",
+        "Finance Report.",
+        "Discussion of Amendment 3 results and future impacts on the city.",
+        "City Attorney’s Report."
+      ]
     },
     {
       "board": "lh-cra",
       "title": "11/10/26 CRA Meeting",
       "start": "2026-11-10T17:15:00-06:00",
       "location": "825 Ohio Ave., Lynn Haven, FL 32444",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
-      "items": []
+      "items": [],
+      "agenda_items": [
+        "Approval of the CRA meeting minutes from 10/13/26.",
+        "Approval Residential Incentive for 1406 Michigan Ave. contingent upon project completion.",
+        "Approval of Residential Incentive for 1408 Michigan Ave. contingent upon project completion.",
+        "Discussion and possible approval of a new drive-through facility for 201 West 14th St. Community Bank"
+      ]
     },
     {
       "board": "mb",
       "title": "City Council Meeting",
       "start": "2026-11-10T09:00:00-06:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
+      "packet_url": "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted"
