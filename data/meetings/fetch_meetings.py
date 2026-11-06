@@ -377,7 +377,7 @@ def src_civicclerk_lh(today, days):
         "$filter": "startDateTime ge %sT00:00:00Z and startDateTime lt %sT00:00:00Z" % (start, end),
         "$orderby": "startDateTime"})
     url = "%s/Events?%s" % (LH_CC_API, q)
-    out = {"lh": [], "lh-cra": []}
+    out = {"lh": [], "lh-cra": [], "lh-planning": [], "lh-boa": []}
     events = []
     try:
         nxt, pages = url, 0
@@ -391,14 +391,18 @@ def src_civicclerk_lh(today, days):
                 nxt = None
             pages += 1
     except Exception as e:
-        note_error("lh", "CivicClerk", url, e)
-        note_error("lh-cra", "CivicClerk", url, e)
+        for b in out:
+            note_error(b, "CivicClerk", url, e)
         return out
     for ev in events:
         name = ev.get("eventName") or ""
         cat = ev.get("categoryName") or ""
         if re.search(r"\bCRA\b|Redevelopment", name, re.I):
             board = "lh-cra"
+        elif cat == "Planning" or re.search(r"planning commission", name, re.I):
+            board = "lh-planning"
+        elif re.search(r"board of adjustment", name, re.I):
+            board = "lh-boa"
         elif cat == "City Commission" or re.search(r"commission (meeting|workshop)|budget (workshop|hearing)|special (commission )?meeting", name, re.I):
             if re.search(r"planning commission|charter", name, re.I):
                 continue
@@ -426,8 +430,8 @@ def src_civicclerk_lh(today, days):
                     detail_url="%s/event/%s/files" % (LH_CC_PORTAL, ev.get("id")))
         m["_cc_agenda"] = ev.get("agendaId") if ev.get("hasAgenda") else None
         out[board].append(m)
-    note_ok("lh", "CivicClerk", len(out["lh"]))
-    note_ok("lh-cra", "CivicClerk", len(out["lh-cra"]))
+    for b in out:
+        note_ok(b, "CivicClerk", len(out[b]))
     return out
 
 
@@ -513,6 +517,8 @@ def src_agendacenter(host, today, days, cat_map):
             d = dt.date(int(dm.group(3)), int(dm.group(1)), int(dm.group(2)))
             am = re.search(r'<p>\s*<a[^>]*href="([^"]+)"[^>]*>(.*?)</a>', row, re.S)
             title = clean(am.group(2)) if am else cname
+            if board.endswith("-planning"):   # "October 12, 2026 Planning Board Meeting Agenda" -> "Planning Board Meeting"
+                title = re.sub(r"\s+agenda$", "", DATE_RE.sub("", title), flags=re.I).strip(" ,-") or cname
             href = am.group(1) if am else None
             base = "https://" + host
             agenda = urllib.parse.urljoin(base, href) if href else None
@@ -561,16 +567,22 @@ PCB_RSS = "https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agend
 
 
 def src_granicus_pcb():
-    out = []
+    """{board: [...]}: City Council meetings (pcb) and Planning Board meetings (pcb-planning)."""
+    out = {"pcb": [], "pcb-planning": []}
     try:
         root = ET.fromstring(fetch(PCB_RSS).encode("utf-8"))
     except Exception as e:
-        note_error("pcb", "Granicus RSS", PCB_RSS, e)
+        for b in out:
+            note_error(b, "Granicus RSS", PCB_RSS, e)
         return out
     ns = {"gran": "https://www.granicus.com/schema/rss-supplements"}
     for it in root.iter("item"):
         title = (it.findtext("title") or "").strip()
-        if not re.match(r"city council", title, re.I):
+        if re.match(r"city council", title, re.I):
+            board = "pcb"
+        elif re.match(r"planning board", title, re.I):
+            board = "pcb-planning"
+        else:
             continue
         tm = re.search(r"-\s*([A-Za-z]{3,9})\s+(\d{1,2}),\s*(\d{4})", title)
         if not tm:
@@ -590,15 +602,16 @@ def src_granicus_pcb():
                                            "%a, %d %b %Y %H:%M:%S")
                 if pdt.date() == d:  # some clips were published days later
                     hh, mm = (pdt.hour + 2) % 24, pdt.minute
-                    if hh < 8:  # no council meeting starts before 8 a.m., so it was p.m.
+                    if hh < 8:  # no council or board meeting starts before 8 a.m., so it was p.m.
                         hh += 12
             except Exception:
                 hh = mm = None
-        m = meeting("pcb", re.sub(r"\s+-\s+.*$", "", title), d, hh, mm or 0,
+        m = meeting(board, re.sub(r"\s+-\s+.*$", "", title).strip(), d, hh, mm or 0,
                     location="City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
                     agenda_url=link or None, source="Granicus:" + PCB_RSS)
-        out.append(m)
-    note_ok("pcb", "Granicus RSS", len(out))
+        out[board].append(m)
+    for b in out:
+        note_ok(b, "Granicus RSS", len(out[b]))
     return out
 
 
@@ -608,11 +621,14 @@ PARKER_AM = "https://cityofparker.com/government/agendas-minutes/"
 
 
 def src_parker():
-    out = []
+    """{board: [...]}: City Council (parker) and Planning Commission (parker-planning). Magistrate and
+    quasi-judicial hearings are left out."""
+    out = {"parker": [], "parker-planning": []}
     try:
         page = fetch(PARKER_AM)
     except Exception as e:
-        note_error("parker", "Agendas & Minutes page", PARKER_AM, e)
+        for b in out:
+            note_error(b, "Agendas & Minutes page", PARKER_AM, e)
         return out
     def rows(table_id_rx):
         tm = re.search(r'<table[^>]*id="%s"[^>]*>(.*?)</table>' % table_id_rx, page, re.S)
@@ -628,23 +644,28 @@ def src_parker():
     minutes = {}
     for title, href in rows(r"filr-library-minutes[^\"]*"):
         d = parse_date_text(title)
-        if d and not re.search(r"planning|magistrate", title, re.I):
-            minutes.setdefault(d, href)
+        if d and not re.search(r"magistrate|quasi", title, re.I):
+            minutes.setdefault(("parker-planning" if re.search(r"planning", title, re.I) else "parker", d), href)
     for title, href in rows(r"filr-library-agendas[^\"]*"):
-        if re.search(r"planning|magistrate|code enforcement|quasi", title, re.I):
+        if re.search(r"magistrate|code enforcement|quasi", title, re.I):
             continue
+        board = "parker-planning" if re.search(r"planning", title, re.I) else "parker"
         d = parse_date_text(title)
         if not d:
             continue
         t = parse_time_text(title.split(str(d.year), 1)[-1])
-        m = meeting("parker", re.sub(r",?\s*" + DATE_RE.pattern + r".*$", "", title, flags=re.I).strip(" ,") or title,
+        m = meeting(board, re.sub(r",?\s*" + DATE_RE.pattern + r".*$", "", title, flags=re.I).strip(" ,") or title,
                     d, t[0] if t else None, t[1] if t else 0,
                     location=None,
-                    agenda_url=href, minutes_url=minutes.get(d),
+                    agenda_url=href, minutes_url=minutes.get((board, d)),
                     source="Parker:" + PARKER_AM)
         m["title"] = re.sub(r"^[*\s]*(updated|amended)?[*\s]*(agenda\s+)?", "", m["title"], flags=re.I) or title
-        out.append(m)
-    note_ok("parker", "Agendas & Minutes page", len(out))
+        if re.search(r"\bcancel+ed\b", title, re.I):
+            m["cancelled"] = True
+            m["title"] = re.sub(r",?\s*\bcancel+ed\b", "", m["title"], flags=re.I).strip(" ,") + " (cancelled)"
+        out[board].append(m)
+    for b in out:
+        note_ok(b, "Agendas & Minutes page", len(out[b]))
     return out
 
 
@@ -654,11 +675,13 @@ MB_URL = "https://mexicobeachfl.gov/government/council-meetings/"
 
 
 def src_mexico_beach(today):
-    out = []
+    """{board: [...]}: City Council (mb) and Planning & Zoning Board (mb-planning), from the same page."""
+    out = {"mb": [], "mb-planning": []}
     try:
         page = fetch(MB_URL)
     except Exception as e:
-        note_error("mb", "Council Meetings page", MB_URL, e)
+        for b in out:
+            note_error(b, "Council Meetings page", MB_URL, e)
         return out
     chunks = [page]
     im = re.search(r':items="(\[.*?\])"', page, re.S)
@@ -676,8 +699,9 @@ def src_mexico_beach(today):
             if not tm:
                 continue
             title = clean(tm.group(1))
-            if re.search(r"planning|zoning|\bP&Z\b|code enforcement", title, re.I):
+            if re.search(r"code enforcement", title, re.I):
                 continue
+            board = "mb-planning" if re.search(r"planning|zoning|\bP&Z\b", title, re.I) else "mb"
             d = parse_date_text(title)
             if not d:
                 continue
@@ -690,12 +714,13 @@ def src_mexico_beach(today):
                 continue
             seen.add(key)
             name = DATE_RE.sub("", title).strip(" ,-")
-            out.append(meeting("mb", name or title, d, t[0] if t else None, t[1] if t else 0,
+            out[board].append(meeting(board, name or title, d, t[0] if t else None, t[1] if t else 0,
                                location=None,
                                agenda_url=links.get("agenda"), packet_url=links.get("packet"),
                                minutes_url=links.get("minutes"), source="MexicoBeach:" + MB_URL,
                                detail_url=links.get("video link") or links.get("video")))
-    note_ok("mb", "Council Meetings page", len(out))
+    for b in out:
+        note_ok(b, "Council Meetings page", len(out[b]))
     return out
 
 
@@ -798,7 +823,7 @@ BOARDS = [
      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
      "source_url": "https://baycountyfl.primegov.com/public/portal",
      "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx"},
-    {"id": "county-planning", "name": "Bay County Planning Commission", "gov": "county",
+    {"id": "county-planning", "name": "Bay County Planning Commission", "gov": "county", "kind": "planning",
      "schedule": "Monthly; recent posted dates are the 3rd Tuesday at 1:30 p.m. (per the County calendar).",
      "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
@@ -876,6 +901,44 @@ BOARDS = [
     {"id": "mb", "name": "Mexico Beach City Council", "gov": "mb",
      "schedule": "Second and fourth Tuesdays of the month at 9:00 a.m. CT.",
      "schedule_source_url": "https://mexicobeachfl.gov/government/council-meetings/",
+     "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+     "source_url": "https://mexicobeachfl.gov/government/council-meetings/", "calendar_url": None},
+
+    # Planning and zoning boards: appointed boards that hear rezonings, land-use changes, site plans and variances
+    # and recommend to the commission or council, which makes the final decision. Members: data/civic/planning_boards.py.
+    {"id": "pc-planning", "name": "Panama City Planning Board", "gov": "pc", "kind": "planning",
+     "schedule": "2nd Monday of each month at 4 p.m., unless rescheduled for holidays or City Commission dates.",
+     "schedule_source_url": "https://www.panamacity.gov/241/Planning-Board",
+     "location": "Panama City City Hall, 501 Harrison Ave., Panama City, FL 32401 (confirm room on agenda)",
+     "source_url": "https://www.panamacity.gov/AgendaCenter", "calendar_url": None},
+    {"id": "pcb-planning", "name": "Panama City Beach Planning Board", "gov": "pcb", "kind": "planning",
+     "schedule": "Monthly, usually the 2nd Wednesday at 1 p.m. (pattern of meetings in the Granicus archive).",
+     "schedule_source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
+     "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+     "source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1", "calendar_url": None},
+    {"id": "lh-planning", "name": "Lynn Haven Planning Commission", "gov": "lh", "kind": "planning",
+     "schedule": "First Tuesday of each month at 5:30 p.m., agenda items permitting.",
+     "schedule_source_url": "https://www.cityoflynnhaven.gov/300/Planning-Commission",
+     "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
+     "source_url": "https://lynnhavenfl.portal.civicclerk.com/", "calendar_url": None},
+    {"id": "lh-boa", "name": "Lynn Haven Board of Adjustment", "gov": "lh", "kind": "adjustment",
+     "schedule": "Meets as needed (variance requests).",
+     "schedule_source_url": "https://www.cityoflynnhaven.gov/296/Board-of-Adjustment",
+     "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
+     "source_url": "https://lynnhavenfl.portal.civicclerk.com/", "calendar_url": None},
+    {"id": "cw-planning", "name": "Callaway Planning Board", "gov": "cw", "kind": "planning",
+     "schedule": "Meets as needed; recent meetings were on Tuesdays at 6 p.m.",
+     "schedule_source_url": "https://www.cityofcallaway.com/160/Planning-Board",
+     "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+     "source_url": "https://www.cityofcallaway.com/AgendaCenter", "calendar_url": None},
+    {"id": "parker-planning", "name": "Parker Planning Commission", "gov": "parker", "kind": "planning",
+     "schedule": "Second Tuesday of each month at 5 p.m.",
+     "schedule_source_url": "https://cityofparker.com/government/planning-commission/",
+     "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (confirm venue on agenda)",
+     "source_url": "https://cityofparker.com/government/agendas-minutes/", "calendar_url": None},
+    {"id": "mb-planning", "name": "Mexico Beach Planning & Zoning Board", "gov": "mb", "kind": "planning",
+     "schedule": "Monthly, on the dates in the city's yearly Planning & Zoning schedule.",
+     "schedule_source_url": "https://mexicobeachfl.gov/uploads/2025/12/2026-Planning-Zoning-Schedule.pdf",
      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
      "source_url": "https://mexicobeachfl.gov/government/council-meetings/", "calendar_url": None},
 ]
@@ -1010,7 +1073,7 @@ def main(argv):
 
     # Panama City + CRA
     r = safe("pc", "AgendaCenter", src_agendacenter, "www.panamacity.gov", today, days,
-             [(r"community redevelopment|\bCRA\b", "pc-cra"),
+             [(r"planning board", "pc-planning"), (r"community redevelopment|\bCRA\b", "pc-cra"),
               (r"city commission|budget hearing|public workshop", "pc")]) or {}
     for b, lst in r.items():
         per[b] += lst
@@ -1018,7 +1081,12 @@ def main(argv):
     cal["pc-cra"] += civicplus_ical("pc-cra", "www.panamacity.gov", 22, r"\bCRA\b")
 
     # Panama City Beach
-    per["pcb"] += safe("pcb", "Granicus RSS", src_granicus_pcb) or []
+    r = safe("pcb", "Granicus RSS", src_granicus_pcb) or {}
+    for b, lst in r.items():
+        per[b] += lst
+    for m in per["pcb-planning"]:
+        if m["hh"] is None:   # upcoming feed items carry only a date; the board meets at 1 p.m.
+            m["hh"], m["mm"], m["time_from_schedule"] = 13, 0, True
     for m in per["pcb"]:
         if m["hh"] is None:
             for n, wd, hh, mm in rule_slots(RULES["pcb"], m["date"].month):
@@ -1033,14 +1101,16 @@ def main(argv):
 
     # Callaway + CRA
     r = safe("cw", "AgendaCenter", src_agendacenter, "www.cityofcallaway.com", today, days,
-             [(r"community redevelopment|\bCRA\b", "cw-cra"), (r"commission", "cw")]) or {}
+             [(r"planning", "cw-planning"), (r"community redevelopment|\bCRA\b", "cw-cra"), (r"commission", "cw")]) or {}
     for b, lst in r.items():
         per[b] += lst
     cal["cw"] += civicplus_ical("cw", "www.cityofcallaway.com", 14, r"^Commission Meeting|City Commission")
 
     per["sp"] += safe("sp", "Meetings list", src_springfield) or []
-    per["parker"] += safe("parker", "Agendas & Minutes page", src_parker) or []
-    per["mb"] += safe("mb", "Council Meetings page", src_mexico_beach, today) or []
+    for src in (safe("parker", "Agendas & Minutes page", src_parker) or {},
+                safe("mb", "Council Meetings page", src_mexico_beach, today) or {}):
+        for b, lst in src.items():
+            per[b] += lst
 
     boards_out, meetings_out = [], []
     for b in BOARDS:
@@ -1078,7 +1148,7 @@ def main(argv):
         if last:
             meetings_out.append(finalize(last, b, past=True))
 
-        bo = {k: b.get(k) for k in ["id", "name", "gov", "schedule", "location",
+        bo = {k: b.get(k) for k in ["id", "name", "gov", "kind", "schedule", "location",
                                     "source_url", "calendar_url", "schedule_source_url"]}
         bo["sources"] = SOURCE_LOG.get(bid, {})
         n_live = sum(1 for m in upcoming if m.get("status") == "posted")

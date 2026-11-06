@@ -15,7 +15,9 @@ const num = v => (v === null || v === undefined || v === '' ? null : Number(v));
 // Board names for the meetings dataset's board ids (data/meetings/meetings.json "boards").
 const BOARDS = {county: 'Board of County Commissioners', 'county-planning': 'Planning Commission', schools: 'School Board',
   pc: 'City Commission', 'pc-cra': 'CRA Board', pcb: 'City Council', lh: 'City Commission', 'lh-cra': 'CRA Board',
-  cw: 'City Commission', 'cw-cra': 'CRA Board', sp: 'City Commission', parker: 'City Council', mb: 'City Council'};
+  cw: 'City Commission', 'cw-cra': 'CRA Board', sp: 'City Commission', parker: 'City Council', mb: 'City Council',
+  'pc-planning': 'Planning Board', 'pcb-planning': 'Planning Board', 'lh-planning': 'Planning Commission', 'lh-boa': 'Board of Adjustment',
+  'cw-planning': 'Planning Board', 'parker-planning': 'Planning Commission', 'mb-planning': 'Planning & Zoning Board'};
 // The PDF reports on the dashboard (site/staff.js), named in the activity log when one is downloaded.
 const REPORTS = {briefing: 'Meeting briefing', agendas: 'Upcoming agendas', votes: 'Voting record', numbers: 'Budget, spending and contracts'};
 const boardOf = (gov, id) => id === gov || String(id || '').startsWith(gov + '-');

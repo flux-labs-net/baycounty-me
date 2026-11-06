@@ -70,6 +70,7 @@ SEC = {'who': ('users', 'blue', 'Officials'), 'money': ('wallet', 'blue', 'Budge
        'contracts': ('file', 'blue', 'Contracts'), 'cra': ('columns', 'teal', 'CRA'), 'projects': ('crane', 'salmon', 'Projects'),
        'votes': ('vote', 'amber', 'Votes'), 'meet': ('calendar', 'salmon', 'Meetings'), 'debt': ('dollar', 'salmon', 'Debt'),
        'audits': ('search', 'teal', 'Audits'), 'savings': ('piggy', 'teal', 'Savings'), 'act': ('bell', 'blue', 'Stay informed'),
+       'plan': ('gavel', 'teal', 'Planning board'),
        'year': ('pulse', 'blue', 'At a glance')}
 
 
@@ -218,6 +219,10 @@ def gov_page(key):
     up = [x for x in p.get('meetings') or [] if not x.get('past')][:6]
     secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="meet" data-meet-h>Upcoming meetings</h2><span class="muted" data-meet-sub>{len(up)} on the calendar</span><a class="ui-crumb" href="/meetings?gov={key}">All meetings {ico("arrow")}</a></div>
       <div data-meet-up>{_meetings(up, key, p["short"]) if up else f'<p class="muted small">No meetings on the calendar right now. <a href="/alerts?gov={key}">Email me when {e(p["short"])} posts an agenda</a></p>'}</div><div data-meet-yr hidden></div></section>''')
+    # planning and zoning boards (site/planning_boards.py): members, next meeting, what they decide
+    from planning_boards import section as planning_section, hint as planning_hint
+    if planning_section(key):
+        secs.append(planning_section(key))
     # get involved
     secs.append(f'''<section class="tx-sec act"><div class="sec-hd"><h2 id="act">Stay informed</h2></div>
       <div class="ui-act"><div>{ico("bell", "blue")}<h3>Get updates</h3><p>Email when {e(p["short"])} has new votes, contracts or corrections on this site.</p><p><a class="ui-btn pri" href="/alerts?gov={key}">Follow {e(p["short"])}</a></p></div>
@@ -235,7 +240,7 @@ def gov_page(key):
     live_secs = {'contracts': live('contracts', 'Contracts'), 'cra': live('cra', 'Redevelopment (CRA) spending', '<p class="src-line"><a href="/public-money/cra-tax-increment#cras">How much property tax this CRA gets each year, and from whom →</a></p>') if cra else '',
                  'projects': live('projects', 'Projects'), 'votes': live('votes', 'How they voted'), 'savings': savings_section(key)}
     live_secs['savings'] = live_secs['savings'].replace('<div class="sec-hd"><h2>', f'<div class="sec-hd">{ico(*SEC["savings"][:2])}<h2>', 1)
-    order = ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'debt', 'audits', 'savings', 'act']
+    order = ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'plan', 'debt', 'audits', 'savings', 'act']
     body = ''.join(by_id.get(i) or live_secs.get(i) or '' for i in order)
     # section tiles: a one-line preview under each name (gov.js fills the year-dependent ones)
     seats = off.get('seats') or []
@@ -247,8 +252,8 @@ def gov_page(key):
             'contracts': 'Awards and how they were bid', 'cra': 'Redevelopment spending', 'projects': 'Budget to close-out', 'votes': 'Every recorded vote',
             'meet': f'Next: {_md(up[0]["start"])}' if up else 'Calendar', 'debt': f'{money(p["debt"]["total"])} · {e(p["debt"].get("fy") or "").split(" ")[0]}' if p.get('debt') else 'What it owes',
             'audits': (lambda au: f'{len(au[0]["findings"])} finding{"s" if len(au[0]["findings"]) != 1 else ""} in {e(au[0]["fy"])}')(p['audits']) if p.get('audits') else 'Audit findings',
-            'savings': savings_hint(key)}
-    ids = [i for i in ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'debt', 'audits', 'savings'] if f'id="{i}"' in body]
+            'savings': savings_hint(key), 'plan': planning_hint(key)}
+    ids = [i for i in ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'plan', 'debt', 'audits', 'savings'] if f'id="{i}"' in body]
     tiles = ''.join(f'<a href="#{i}" data-jump="{i}">{ico(SEC[i][0], SEC[i][1])}<span><b>{SEC[i][2]}</b><small>{hint.get(i, "")}</small></span></a>' for i in ids)
     mini = ''.join(f'<a href="#{i}">{ico(SEC[i][0])}{SEC[i][2]}</a>' for i in ids)
     glance = (f'<section class="tx-sec gx-glance" hidden><div class="sec-hd">{ico("pulse", "blue")}<h2 id="year">At a glance</h2><span class="muted" id="gxGlanceH"></span></div>'

@@ -6642,7 +6642,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16699,
+   "rows": 16720,
    "columns": [
     {
      "name": "entity_id",
@@ -6760,7 +6760,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22808,
+   "rows": 22842,
    "columns": [
     {
      "name": "link_id",
@@ -6820,6 +6820,7 @@
      "type": "string",
      "values": [
       "agenda",
+      "appointed",
       "board",
       "candidate",
       "charter",
@@ -6858,6 +6859,7 @@
       "runs a charter school for",
       "served",
       "serves",
+      "serves on an appointed board of",
       "shares a project or address with",
       "sits on the board of",
       "voted on contracts with",
@@ -7098,7 +7100,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 180,
+   "rows": 187,
    "columns": [
     {
      "name": "topic",
@@ -7563,7 +7565,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 433,
+   "rows": 434,
    "columns": [
     {
      "name": "website",
@@ -15728,7 +15730,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 139,
+   "rows": 138,
    "columns": [
     {
      "name": "place_id",
@@ -15803,7 +15805,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-05T09:00:00-06:00",
       "2026-11-05T10:00:00",
       "2026-11-05T10:30:00",
       "2026-11-05T18:30:00",
@@ -15910,8 +15911,7 @@
       "Historic Downtown Panama City",
       "Panama City Beach Public Library",
       "Pier Park",
-      "The Barn at The Wicked Wheel",
-      "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456"
+      "The Barn at The Wicked Wheel"
      ]
     },
     {
@@ -16085,7 +16085,6 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1142,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "https://lynnhavenfl.portal.civicclerk.com/",
-      "https://mexicobeachfl.gov/government/council-meetings/",
       "https://mexicobeachfl.gov/uploads/2026/08/September-11-2026-FY26-27-1st-Budget-Hearing-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/08/September-21-2026-Final-Budget-Hearing-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/08/September-22-2026-Cit-Council-Meeting-Minutes.pdf",
@@ -20514,10 +20513,376 @@
    "api": "/api/v1/datasets/site-photos"
   },
   {
+   "id": "planning-boards",
+   "title": "Planning and zoning boards",
+   "description": "Each government's appointed planning board (planning commission, planning board, planning & zoning board) and board of adjustment: what it decides, who it recommends to (the commission or council makes the final decision), who appoints it, seats and terms, how many members are listed and from what record (roster_as_of, roster_source_url), the next and last meeting from the meetings dataset (board_id matches meetings.board) with agenda and minutes links, and what records the government posts online.",
+   "rows": 9,
+   "columns": [
+    {
+     "name": "board_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Board of adjustment",
+      "Planning board"
+     ]
+    },
+    {
+     "name": "also",
+     "type": "string",
+     "values": [
+      "Local planning agency",
+      "Local planning agency for unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "what_it_does",
+     "type": "string",
+     "values": [
+      "Hears requests for variances from the zoning code and advises the City Commission.",
+      "Holds the first public hearing on rezonings, land-use and comprehensive plan changes, site plans and subdivisions, then recommends to the Board of County Commissioners, which makes the final decision.",
+      "Holds the first public hearing on rezonings, land-use and comprehensive plan changes, site plans and subdivisions, then recommends to the City Commission, which makes the final decision.",
+      "Holds the first public hearing on rezonings, land-use and comprehensive plan changes, site plans and subdivisions, then recommends to the City Council, which makes the final decision."
+     ]
+    },
+    {
+     "name": "recommends_to",
+     "type": "string",
+     "values": [
+      "Board of County Commissioners",
+      "City Commission",
+      "City Council"
+     ]
+    },
+    {
+     "name": "appointed_by",
+     "type": "string",
+     "values": [
+      "Board of County Commissioners",
+      "City Commission",
+      "City Council"
+     ]
+    },
+    {
+     "name": "seats",
+     "type": "number"
+    },
+    {
+     "name": "alternates",
+     "type": "number"
+    },
+    {
+     "name": "term_years",
+     "type": "number"
+    },
+    {
+     "name": "members_listed",
+     "type": "number"
+    },
+    {
+     "name": "roster_as_of",
+     "type": "string",
+     "values": [
+      "2025-02-20",
+      "2026-06-02",
+      "2026-09-14",
+      "2026-10-20",
+      "2026-11-06",
+      "2026-11-12"
+     ]
+    },
+    {
+     "name": "roster_source",
+     "type": "string",
+     "values": [
+      "Callaway Planning Board minutes, October 20, 2026 (roll call)",
+      "Lynn Haven Board of Adjustment minutes, February 20, 2025 (roll call)",
+      "Lynn Haven Planning Commission minutes, June 2, 2026 (roll call)",
+      "Mexico Beach Planning & Zoning page (city website)",
+      "Panama City Beach Planning Board agenda packet, November 12, 2026 (minutes and officer item)",
+      "Panama City Planning Board minutes, September 2026 meeting (roll call)",
+      "Parker Planning Commission page (city website)"
+     ]
+    },
+    {
+     "name": "roster_source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/government/planning-commission/",
+      "https://d3n9y02raazwpg.cloudfront.net/pcbgov/d1a7f16c-3289-11f1-bb28-005056a89546-aebf6d52-58a9-4341-a472-98e656509a29-1793824316.pdf",
+      "https://mexicobeachfl.gov/government/planning-zoning/",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_10202026-426",
+      "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_02202025-864",
+      "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_06022026-1337",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09142026-907"
+     ]
+    },
+    {
+     "name": "roster_note",
+     "type": "string",
+     "values": [
+      "A fifth member, Ms. Boyanov, is named by last name only in the minutes. The board last posted minutes in February 2025.",
+      "Robert Waddell and Aaron White, also on the June 2026 roll call, have resigned. The City Commission's October 13, 2026 consent agenda proposed Carly Weaver and Jacob Durrance for their seats; they are not listed until minutes confirm the appointments.",
+      "The minutes name the other five members by last name only (Mr. Bishop, Mr. Coleman, Mr. Painter, Mr. Thomas and Mr. Wittstruck), so they are not listed by name."
+     ]
+    },
+    {
+     "name": "records_online",
+     "type": "string",
+     "values": [
+      "Agendas and minutes in the city's Agenda Center.",
+      "Agendas and minutes in the city's Agenda Center; meets only when there is a variance request.",
+      "Agendas and some minutes on the city's Agendas & Minutes page; members on the Planning Commission page.",
+      "Agendas on CivicClerk; older agendas and minutes in the city's Agenda Center.",
+      "Agendas, packets, minutes and video in the city's Granicus archive.",
+      "Meeting dates only (County calendar). Agendas, minutes and members are not posted online; rezonings reach the County Commission's agendas after the hearing.",
+      "Members, posts and terms on the city's Planning & Zoning page; agendas, minutes and video on the Council Meetings page.",
+      "Set up by city ordinance (later raised from 3 to 5 members). The city posts no Planning Board meetings, agendas or members online."
+     ]
+    },
+    {
+     "name": "next_meeting",
+     "type": "string",
+     "values": [
+      "2026-11-09T16:00:00-06:00",
+      "2026-11-12T13:00:00-06:00",
+      "2026-11-17T13:30:00-06:00",
+      "2026-12-01T17:30:00-06:00",
+      "2026-12-14T18:00:00-06:00"
+     ]
+    },
+    {
+     "name": "next_meeting_status",
+     "type": "string",
+     "values": [
+      "calendar",
+      "posted"
+     ]
+    },
+    {
+     "name": "next_agenda_url",
+     "type": "string",
+     "values": [
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?html=true"
+     ]
+    },
+    {
+     "name": "last_meeting",
+     "type": "string",
+     "values": [
+      "2026-06-01",
+      "2026-10-05T18:00:00-05:00",
+      "2026-10-12T16:00:00-05:00",
+      "2026-10-14T13:00:00-05:00",
+      "2026-11-03",
+      "2026-11-03T17:30:00-06:00"
+     ]
+    },
+    {
+     "name": "last_agenda_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
+      "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=420",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?html=true"
+     ]
+    },
+    {
+     "name": "last_minutes_url",
+     "type": "string"
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/planning-boards.json",
+   "csv": "/downloads/planning-boards.csv",
+   "api": "/api/v1/datasets/planning-boards"
+  },
+  {
+   "id": "planning-board-members",
+   "title": "Planning and zoning board members",
+   "description": "Who sits on each planning and zoning board: name, role (chair, vice chair, member, alternate), seat and term end where the city lists them, and who appoints the board. Members are public appointees, named because the government publishes them; no addresses, phone numbers or emails. From the city's own board page where there is one (Mexico Beach, Parker), otherwise the roll call in the board's latest posted minutes (as_of is that meeting's date). Only full names are listed. person_entity_id links to the member's profile; person_match is 'official' when the member is also a local official.",
+   "rows": 34,
+   "columns": [
+    {
+     "name": "board_id",
+     "type": "string",
+     "values": [
+      "cw-planning",
+      "lh-boa",
+      "lh-planning",
+      "mb-planning",
+      "parker-planning",
+      "pc-planning",
+      "pcb-planning"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Callaway Planning Board",
+      "Lynn Haven Board of Adjustment",
+      "Lynn Haven Planning Commission",
+      "Mexico Beach Planning & Zoning Board",
+      "Panama City Beach Planning Board",
+      "Panama City Planning Board",
+      "Parker Planning Commission"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "role",
+     "type": "string",
+     "values": [
+      "Alternate",
+      "Chair",
+      "Member",
+      "Vice Chair"
+     ]
+    },
+    {
+     "name": "seat",
+     "type": "string",
+     "values": [
+      "Alternate Post 1",
+      "Alternate Post 2",
+      "Post 1",
+      "Post 2",
+      "Post 3",
+      "Post 4",
+      "Post 5"
+     ]
+    },
+    {
+     "name": "term_end",
+     "type": "string",
+     "values": [
+      "2027-01-08",
+      "2028-01-08"
+     ]
+    },
+    {
+     "name": "appointed_by",
+     "type": "string",
+     "values": [
+      "City Commission",
+      "City Council"
+     ]
+    },
+    {
+     "name": "person_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "person_url",
+     "type": "string"
+    },
+    {
+     "name": "person_match",
+     "type": "string",
+     "values": [
+      "official"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2025-02-20",
+      "2026-06-02",
+      "2026-09-14",
+      "2026-10-20",
+      "2026-11-06",
+      "2026-11-12"
+     ]
+    },
+    {
+     "name": "source_title",
+     "type": "string",
+     "values": [
+      "Callaway Planning Board minutes, October 20, 2026 (roll call)",
+      "Lynn Haven Board of Adjustment minutes, February 20, 2025 (roll call)",
+      "Lynn Haven Planning Commission minutes, June 2, 2026 (roll call)",
+      "Mexico Beach Planning & Zoning page (city website)",
+      "Panama City Beach Planning Board agenda packet, November 12, 2026 (minutes and officer item)",
+      "Panama City Planning Board minutes, September 2026 meeting (roll call)",
+      "Parker Planning Commission page (city website)"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/government/planning-commission/",
+      "https://d3n9y02raazwpg.cloudfront.net/pcbgov/d1a7f16c-3289-11f1-bb28-005056a89546-aebf6d52-58a9-4341-a472-98e656509a29-1793824316.pdf",
+      "https://mexicobeachfl.gov/government/planning-zoning/",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_10202026-426",
+      "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_02202025-864",
+      "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_06022026-1337",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09142026-907"
+     ]
+    }
+   ],
+   "json": "/downloads/planning-board-members.json",
+   "csv": "/downloads/planning-board-members.csv",
+   "api": "/api/v1/datasets/planning-board-members"
+  },
+  {
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 45,
+   "rows": 58,
    "columns": [
     {
      "name": "board",
@@ -20527,13 +20892,19 @@
       "county-planning",
       "cw",
       "cw-cra",
+      "cw-planning",
       "lh",
       "lh-cra",
+      "lh-planning",
       "mb",
+      "mb-planning",
       "parker",
+      "parker-planning",
       "pc",
       "pc-cra",
+      "pc-planning",
       "pcb",
+      "pcb-planning",
       "schools",
       "sp"
      ]
@@ -20557,12 +20928,17 @@
       "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
       "LDC 5th Workshop",
+      "Planning Board",
+      "Planning Board Meeting",
+      "Planning Commission",
       "Planning Commission Meeting",
+      "Planning and Zoning Meeting",
       "Regular Meeting",
       "Regular Meeting (expected)",
       "School Board Meeting",
       "School Board Meeting - Organizational Meeting",
-      "Special Meeting and 4th LDC Workshop"
+      "Special Planning Commission Meeting",
+      "Virtual CRA Workshop"
      ]
     },
     {
@@ -20574,6 +20950,7 @@
      "type": "string",
      "values": [
       "1311 Balboa Ave, Panama City, FL 32401",
+      "825 Ohio Ave, Lynn Haven",
       "825 Ohio Ave., Lynn Haven, FL 32444",
       "825 Ohio Avenue, Lynn Haven",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
@@ -20587,7 +20964,10 @@
       "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 32402",
+      "Panama City City Hall, 501 Harrison Ave., Panama City, FL 32401 (confirm room on agenda)",
       "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (confirm venue on agenda)",
       "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "Virtual (live stream on the city website)",
@@ -20600,20 +20980,27 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
+      "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1162,plainText=false)",
+      "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
-      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=420",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?html=true",
       "https://www.springfieldfl.net/media/10911"
      ]
     },
@@ -20624,11 +21011,14 @@
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1159,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
-      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true"
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?packet=true"
      ]
     },
     {
@@ -20703,6 +21093,9 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2131/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2133/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2137/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2151/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
@@ -20711,16 +21104,18 @@
       "https://www.baycountyfl.gov/calendar.aspx?EID=1605",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1685",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1713",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
       "https://www.panamacity.gov/calendar.aspx?EID=6077",
+      "https://www.panamacity.gov/calendar.aspx?EID=7549",
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-75",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-55",
-      "https://youtube.com/live/dX-G839lG70?feature=share"
+      "https://youtube.com/live/N6DW4qprYos?feature=share"
      ]
     },
     {
@@ -20740,6 +21135,13 @@
     },
     {
      "name": "expected",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "time_from_schedule",
      "type": "boolean",
      "values": [
       true

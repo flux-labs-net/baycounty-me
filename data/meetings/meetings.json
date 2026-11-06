@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-05T20:27:37-06:00",
+  "generated": "2026-11-06T10:10:27-06:00",
   "window": {
-    "from": "2026-11-05",
-    "to": "2027-01-04"
+    "from": "2026-11-06",
+    "to": "2027-01-05"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -10,6 +10,7 @@
       "id": "county",
       "name": "Bay County Board of County Commissioners",
       "gov": "county",
+      "kind": null,
       "schedule": "Regular meetings at 9:00 a.m., generally the 1st and 3rd Tuesday of the month (dates as posted on the County calendar and PrimeGov; budget hearings at 5:01 p.m. in September).",
       "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "source_url": "https://baycountyfl.primegov.com/public/portal",
@@ -21,7 +22,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 3,
+        "calendar": 4,
         "expected": 0
       }
     },
@@ -29,6 +30,7 @@
       "id": "county-planning",
       "name": "Bay County Planning Commission",
       "gov": "county",
+      "kind": "planning",
       "schedule": "Monthly; recent posted dates are the 3rd Tuesday at 1:30 p.m. (per the County calendar).",
       "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
@@ -47,6 +49,7 @@
       "id": "schools",
       "name": "Bay District School Board",
       "gov": "schools",
+      "kind": null,
       "schedule": "Regular meetings generally the 2nd and 4th Tuesday at 3:00 p.m. at the district office, 1311 Balboa Ave. (dates and times as posted on the district calendar). Agendas are posted on the district's School Board Meetings page.",
       "location": "Bay District Schools, 1311 Balboa Ave., Panama City, FL 32401",
       "source_url": "https://www.bay.k12.fl.us/school-board-meetings",
@@ -65,6 +68,7 @@
       "id": "pc",
       "name": "Panama City City Commission",
       "gov": "pc",
+      "kind": null,
       "schedule": "2nd and 4th Tuesday of each month, unless otherwise stated: 2nd Tuesday at 8 a.m., 4th Tuesday at 4:30 p.m., at the Bay County Government Center, 840 W. 11th St. Virtual workshops are also posted on the city calendar. Holiday months are consolidated on the city calendar.",
       "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "source_url": "https://www.panamacity.gov/AgendaCenter",
@@ -84,6 +88,7 @@
       "id": "pc-cra",
       "name": "Panama City Community Redevelopment Agency (CRA) Board",
       "gov": "pc",
+      "kind": null,
       "schedule": "Beginning October 2026: first Tuesday of the month at 4:30 p.m., alternating monthly between a regular CRA Board meeting and a virtual CRA workshop.",
       "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401 (workshops are virtual)",
       "source_url": "https://www.panamacity.gov/AgendaCenter",
@@ -95,7 +100,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 1,
+        "calendar": 2,
         "expected": 0
       }
     },
@@ -103,6 +108,7 @@
       "id": "pcb",
       "name": "Panama City Beach City Council",
       "gov": "pcb",
+      "kind": null,
       "schedule": "2nd and 4th Thursday of every month; 2nd Thursday meetings at 5 p.m., 4th Thursday meetings at 9 a.m. November and December have one meeting, on the 2nd Thursday at 9 a.m.",
       "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
@@ -121,6 +127,7 @@
       "id": "lh",
       "name": "Lynn Haven City Commission",
       "gov": "lh",
+      "kind": null,
       "schedule": "Regular meetings 2nd and 4th Tuesday at 5:30 p.m. in the Walter T. Kelley Commission Chambers, 825 Ohio Ave. (pattern of dates on the city calendar and CivicClerk; holiday months consolidated).",
       "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
       "source_url": "https://lynnhavenfl.portal.civicclerk.com/",
@@ -140,6 +147,7 @@
       "id": "lh-cra",
       "name": "Lynn Haven Community Redevelopment Agency (CRA) Board",
       "gov": "lh",
+      "kind": null,
       "schedule": "Recent CRA Board meetings have been held at 5:15 p.m. before City Commission meetings (observed on CivicClerk; no standalone published schedule found).",
       "location": "825 Ohio Ave., Lynn Haven, FL 32444",
       "source_url": "https://lynnhavenfl.portal.civicclerk.com/",
@@ -158,6 +166,7 @@
       "id": "cw",
       "name": "Callaway City Commission",
       "gov": "cw",
+      "kind": null,
       "schedule": "Commission meetings at 6:00 p.m. at the Callaway Arts & Conference Center, 500 Callaway Pkwy; 2nd and 4th Tuesday pattern on the city calendar (one meeting in Nov/Dec).",
       "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
       "source_url": "https://www.cityofcallaway.com/AgendaCenter",
@@ -177,6 +186,7 @@
       "id": "cw-cra",
       "name": "Callaway Community Redevelopment Agency (CRA)",
       "gov": "cw",
+      "kind": null,
       "schedule": "No published regular schedule found; meetings appear in the AgendaCenter when posted.",
       "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
       "source_url": "https://www.cityofcallaway.com/AgendaCenter",
@@ -195,6 +205,7 @@
       "id": "sp",
       "name": "Springfield City Commission",
       "gov": "sp",
+      "kind": null,
       "schedule": "Commission Meetings the first Monday of the month and Commission Workshops the third Monday, at 5:30 p.m., City Hall Commission Room, 408 School Avenue.",
       "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL 32401",
       "source_url": "https://www.springfieldfl.net/meetings",
@@ -214,6 +225,7 @@
       "id": "parker",
       "name": "Parker City Council",
       "gov": "parker",
+      "kind": null,
       "schedule": "Regular meetings 1st and 3rd Tuesday at 5:30 p.m. (pattern of posted agendas; no current published schedule statement found - expected dates are marked as such).",
       "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
       "source_url": "https://cityofparker.com/government/agendas-minutes/",
@@ -225,13 +237,14 @@
       "coverage": {
         "agenda_feed": 0,
         "calendar": 0,
-        "expected": 3
+        "expected": 4
       }
     },
     {
       "id": "mb",
       "name": "Mexico Beach City Council",
       "gov": "mb",
+      "kind": null,
       "schedule": "Second and fourth Tuesdays of the month at 9:00 a.m. CT.",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "source_url": "https://mexicobeachfl.gov/government/council-meetings/",
@@ -241,13 +254,158 @@
         "Council Meetings page": "ok (86 records)"
       },
       "coverage": {
-        "agenda_feed": 5,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 2
+      }
+    },
+    {
+      "id": "pc-planning",
+      "name": "Panama City Planning Board",
+      "gov": "pc",
+      "kind": "planning",
+      "schedule": "2nd Monday of each month at 4 p.m., unless rescheduled for holidays or City Commission dates.",
+      "location": "Panama City City Hall, 501 Harrison Ave., Panama City, FL 32401 (confirm room on agenda)",
+      "source_url": "https://www.panamacity.gov/AgendaCenter",
+      "calendar_url": null,
+      "schedule_source_url": "https://www.panamacity.gov/241/Planning-Board",
+      "sources": {
+        "AgendaCenter": "ok (6 records)"
+      },
+      "coverage": {
+        "agenda_feed": 1,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "pcb-planning",
+      "name": "Panama City Beach Planning Board",
+      "gov": "pcb",
+      "kind": "planning",
+      "schedule": "Monthly, usually the 2nd Wednesday at 1 p.m. (pattern of meetings in the Granicus archive).",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
+      "calendar_url": null,
+      "schedule_source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
+      "sources": {
+        "Granicus RSS": "ok (27 records)"
+      },
+      "coverage": {
+        "agenda_feed": 1,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "lh-planning",
+      "name": "Lynn Haven Planning Commission",
+      "gov": "lh",
+      "kind": "planning",
+      "schedule": "First Tuesday of each month at 5:30 p.m., agenda items permitting.",
+      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
+      "source_url": "https://lynnhavenfl.portal.civicclerk.com/",
+      "calendar_url": null,
+      "schedule_source_url": "https://www.cityoflynnhaven.gov/300/Planning-Commission",
+      "sources": {
+        "CivicClerk": "ok (5 records)"
+      },
+      "coverage": {
+        "agenda_feed": 2,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "lh-boa",
+      "name": "Lynn Haven Board of Adjustment",
+      "gov": "lh",
+      "kind": "adjustment",
+      "schedule": "Meets as needed (variance requests).",
+      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
+      "source_url": "https://lynnhavenfl.portal.civicclerk.com/",
+      "calendar_url": null,
+      "schedule_source_url": "https://www.cityoflynnhaven.gov/296/Board-of-Adjustment",
+      "sources": {
+        "CivicClerk": "ok (0 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "cw-planning",
+      "name": "Callaway Planning Board",
+      "gov": "cw",
+      "kind": "planning",
+      "schedule": "Meets as needed; recent meetings were on Tuesdays at 6 p.m.",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "source_url": "https://www.cityofcallaway.com/AgendaCenter",
+      "calendar_url": null,
+      "schedule_source_url": "https://www.cityofcallaway.com/160/Planning-Board",
+      "sources": {
+        "AgendaCenter": "ok (4 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "parker-planning",
+      "name": "Parker Planning Commission",
+      "gov": "parker",
+      "kind": "planning",
+      "schedule": "Second Tuesday of each month at 5 p.m.",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (confirm venue on agenda)",
+      "source_url": "https://cityofparker.com/government/agendas-minutes/",
+      "calendar_url": null,
+      "schedule_source_url": "https://cityofparker.com/government/planning-commission/",
+      "sources": {
+        "Agendas & Minutes page": "ok (32 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "mb-planning",
+      "name": "Mexico Beach Planning & Zoning Board",
+      "gov": "mb",
+      "kind": "planning",
+      "schedule": "Monthly, on the dates in the city's yearly Planning & Zoning schedule.",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "source_url": "https://mexicobeachfl.gov/government/council-meetings/",
+      "calendar_url": null,
+      "schedule_source_url": "https://mexicobeachfl.gov/uploads/2025/12/2026-Planning-Zoning-Schedule.pdf",
+      "sources": {
+        "Council Meetings page": "ok (29 records)"
+      },
+      "coverage": {
+        "agenda_feed": 1,
+        "calendar": 0,
+        "expected": 0
       }
     }
   ],
   "meetings": [
+    {
+      "board": "parker-planning",
+      "title": "Special Planning Commission Meeting",
+      "start": "2026-06-01",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (confirm venue on agenda)",
+      "agenda_url": "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Parker:https://cityofparker.com/government/agendas-minutes/",
+      "status": "posted",
+      "past": true
+    },
     {
       "board": "cw-cra",
       "title": "Budget Hearing",
@@ -259,6 +417,54 @@
       "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
       "status": "posted",
       "past": true
+    },
+    {
+      "board": "mb-planning",
+      "title": "Planning and Zoning Meeting",
+      "start": "2026-10-05T18:00:00-05:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
+      "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Meeting-Agenda-Packet.pdf",
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted",
+      "detail_url": "https://youtube.com/live/N6DW4qprYos?feature=share",
+      "past": true
+    },
+    {
+      "board": "pc-planning",
+      "title": "Planning Board Meeting",
+      "start": "2026-10-12T16:00:00-05:00",
+      "location": "Panama City City Hall, 501 Harrison Ave., Panama City, FL 32401 (confirm room on agenda)",
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?html=true",
+      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?packet=true",
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted",
+      "past": true,
+      "items": [
+        {
+          "title": "Agenda - 10/12/2026 Planning Board Meeting Agenda Monday, October 12, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
+          "amount": null
+        }
+      ],
+      "agenda_items": [
+        "Agenda - 10/12/2026 Planning Board Meeting Agenda Monday, October 12, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
+        "Call Public Meeting to Order / Roll Call",
+        "Changes / Deletions to Agenda",
+        "Announcements – Disclosures (as applicable)",
+        "Approval of Minutes",
+        "Approval of the September 14, 2026, Planning Board Meeting Minutes",
+        "Quasi-Judicial Proceedings",
+        "Requests",
+        "Case Number: CPC-PLN-2026-1825 Application Type : Variance Request: The applicant is requesting a variance from the accessory structure size regulations established by Sec. 110-4 (A)(1)(iv) and Sec. 110-4(B)(3) - Accessory Structures of the City of Panama City Unified Land Development Code (ULDC). The applicant is requesting a variance to allow for an accessory structure to exceed the 60% maximum ",
+        "Case Number: CPC-PLN-2026-1924 Application Type : Variance Request: The applicant is requesting a variance from the General Commercial (GC-2) setback regulations established by Sec. 104-38 of the City of Panama City Unified Land Development Code (ULDC). Owner: STONEY POINT INVESTMENTS LLC Applicant: Bayou Builders Address/Location: 3120 W 23 RD STREET (Parcel ID #: 26787-010-000) Acreage (+/-): 0.",
+        "Case Number: CPC-PLN-2026-1918 Application Type: Unified Land Development Code Text Amendment Request: Amend Sec. 104-66 (B), Gateway Overlay, District defined, to apply the Overlay to non-residential land parcels of record within 200 ft. instead of 400 ft. of the roadway on each side of the major roadways within the city. Applicant: City of Panama City Planning Board Public Hearing Date: October ",
+        "Case Number: CPC-PLN-2026-1857 Application Type: Unified Land Development Code Text Amendment Request: Request to amend Sec. 104-39, Light Industrial (LI) zoning district, Unified Land Development Code to permit Recycling Centers. Planning Board Public Hearing Date: October 12, 2026 (continued from September 14, 2026) City Commission Public Hearing Date (s): First Reading/Public Hearing: September",
+        "Case Number: CPC-PLN-2026-1793 Application Type: Comprehensive Plan Text and Future Land Use Map Series Update Request: Update and the local Comprehensive Plan per the latest data and analyses. Applicant: City of Panama City Planning Board Public Hearing Date: October 12, 2026 (continued from September 14, 2026) City Commission Public Hearing Date (s): Introduction Hearing: September 22, 2026, 4:3",
+        "Non- Action Item (s):",
+        "Audience Participation"
+      ]
     },
     {
       "board": "lh-cra",
@@ -331,6 +537,18 @@
         "Incremental Development Alliance Summary Report.",
         "Motion to Adjourn Meeting Adjournment In accordance with the Americans with Disabilities Act and Section 286.26, Florida Statutes, persons with disabilities needing special accommodation to participate in this proceeding should contact the City's Human Resources Department one week prior to the proceeding at telephone (850) 872-3014 for assistance; if hearing impaired, telephone (850) 872-3028 (TD"
       ]
+    },
+    {
+      "board": "pcb-planning",
+      "title": "Planning Board",
+      "start": "2026-10-14T13:00:00-05:00",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=420",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted",
+      "past": true
     },
     {
       "board": "parker",
@@ -426,19 +644,6 @@
       "past": true
     },
     {
-      "board": "mb",
-      "title": "Special Meeting and 4th LDC Workshop",
-      "start": "2026-10-30T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
-      "packet_url": "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "detail_url": "https://youtube.com/live/dX-G839lG70?feature=share",
-      "past": true
-    },
-    {
       "board": "sp",
       "title": "Commission Meeting",
       "start": "2026-11-02T17:30:00-06:00",
@@ -482,6 +687,43 @@
       ]
     },
     {
+      "board": "cw-planning",
+      "title": "Planning Board Meeting",
+      "start": "2026-11-03",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted",
+      "past": true
+    },
+    {
+      "board": "lh-planning",
+      "title": "Planning Commission Meeting",
+      "start": "2026-11-03T17:30:00-06:00",
+      "location": "825 Ohio Ave, Lynn Haven",
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2131/files",
+      "past": true,
+      "items": [],
+      "agenda_items": [
+        "Previous Minutes Approval",
+        "Approve minutes of meeting September 1, 2026",
+        "Public Hearing",
+        "Discussion and Possible Recommendation to the City Commission for the Community Bank Site Plan Development Order",
+        "Discussion and Possible Recommendation to the City Commission for the Dutch Bros Site Plan Development Order",
+        "Discussion and Possible Recommendation to the City Commission for the Chipotle Site Plan Development Order",
+        "Discussion and Possible Recommendation to City Commission for CBC Construction Site Plan Development Order",
+        "Discussion and Possible Recommendation to the City Commission for the Nature Walk Subdivision Large Scale FLUM Amendment",
+        "Director of Planning and Development's Report"
+      ]
+    },
+    {
       "board": "pc",
       "title": "CRA Virtual Workshop Agenda",
       "start": "2026-11-03",
@@ -502,7 +744,8 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "lh",
@@ -518,6 +761,40 @@
       "items": [],
       "agenda_items": [
         "Discussion about the ULDC updates and processes"
+      ]
+    },
+    {
+      "board": "pc-planning",
+      "title": "Planning Board Meeting",
+      "start": "2026-11-09T16:00:00-06:00",
+      "location": "Panama City City Hall, 501 Harrison Ave., Panama City, FL 32401 (confirm room on agenda)",
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?html=true",
+      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?packet=true",
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted",
+      "items": [
+        {
+          "title": "Agenda - 11/09/2026 Planning Board Meeting Agenda Monday, November 9, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
+          "amount": null
+        }
+      ],
+      "agenda_items": [
+        "Agenda - 11/09/2026 Planning Board Meeting Agenda Monday, November 9, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
+        "Call Public Meeting to Order / Roll Call",
+        "Changes / Deletions to Agenda",
+        "Announcements – Disclosures (as applicable)",
+        "Approval of Minutes",
+        "Approval of the October 12, 2026 Planning Board Meeting Minutes",
+        "Quasi-Judicial Proceedings",
+        "Requests",
+        "Case Number: CPC-PLN-2026-1957 Application Type : Major Development Request: The applicant requests to development a seven-story Multifamily development. Any commercial development over three stories in height is subject to Major Development approval. Owner: PCAD PHASE I LLC Applicant: Panhandle Engineering Address/Location: 300 LUVERNE AVENUE (Parcel ID #: 19640-000-000) Acreage (+/-): 3.354 Plan",
+        "Case Number: CPC-PLN-2026-2033 Application Type : Variance Request: The applicant is requesting a variance from the Neighborhood General setback regulations established by Table 104-36.2.A. The applicant is requesting a 39-foot front building setback instead of the maximum 15-foot building setback, and 0-foot parking setback instead of the minimum required 25-foot front parking setback. Owner: BEN",
+        "Case Number: CPC-PLN-2026-1918 Application Type: Unified Land Development Code Text Amendment Request: Amend Sec. 104-66 (B), Gateway Overlay, District defined, to apply the Overlay to non-residential land parcels of record within 200 ft. instead of 400 ft. of the roadway on each side of the major roadways within the city. Applicant: City of Panama City Planning Board Public Hearing Date: November",
+        "Case Number: CPC-PLN-2027-0106 Application Type: Unified Land Development Code Text Amendment Request: Request to amend Sec. 104-39, Light Industrial (LI) zoning district, Unified Land Development Code to require impact analysis for all development in the LI zoning district. Planning Board Public Hearing Date: November 9, 2026 City Commission Public Hearing Date (s): First Reading/Public Hearing: ",
+        "Case Number: CPC-PLN-2026-1793 Application Type: Comprehensive Plan Text and Future Land Use Map Series Update Request: Update and the local Comprehensive Plan per the latest data and analyses. Applicant: City of Panama City Planning Board Public Hearing Date: November 9, 2026 (continued from September 14, 2026, and October 12, 2026) City Commission Public Hearing Date (s): Introduction Hearing: S",
+        "Non- Action Item (s):",
+        "Audience Participation"
       ]
     },
     {
@@ -650,6 +927,18 @@
       "expected": true
     },
     {
+      "board": "pcb-planning",
+      "title": "Planning Board",
+      "start": "2026-11-12T13:00:00-06:00",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted",
+      "time_from_schedule": true
+    },
+    {
       "board": "sp",
       "title": "Commission Workshop",
       "start": "2026-11-16T17:30:00-06:00",
@@ -769,6 +1058,18 @@
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1595"
     },
     {
+      "board": "lh-planning",
+      "title": "Planning Commission",
+      "start": "2026-12-01T17:30:00-06:00",
+      "location": "825 Ohio Ave, Lynn Haven",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2137/files"
+    },
+    {
       "board": "parker",
       "title": "Regular Meeting (expected)",
       "start": "2026-12-01T17:30:00-06:00",
@@ -851,6 +1152,17 @@
       "source": "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive",
       "status": "expected",
       "expected": true
+    },
+    {
+      "board": "mb-planning",
+      "title": "Planning and Zoning Meeting",
+      "start": "2026-12-14T18:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
     },
     {
       "board": "county",
@@ -946,6 +1258,54 @@
       "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
       "status": "expected",
       "expected": true
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2027-01-05T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1713"
+    },
+    {
+      "board": "lh-planning",
+      "title": "Planning Commission",
+      "start": "2027-01-05T17:30:00-06:00",
+      "location": "825 Ohio Ave, Lynn Haven",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2133/files"
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2027-01-05T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc-cra",
+      "title": "Virtual CRA Workshop",
+      "start": "2027-01-05T16:30:00-06:00",
+      "location": "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 32402",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7549"
     }
   ],
   "errors": [],

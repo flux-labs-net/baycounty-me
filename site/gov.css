@@ -25,3 +25,10 @@
 /* one line under the section menu naming the sections with nothing on file for the year picked (gov.js trimMenu) */
 .gx-off{margin:-24px 0 0}
 .gx-off[hidden]{display:none}
+
+/* Planning and zoning boards (site/planning_boards.py) */
+.pb-card{padding:14px 0 6px;border-top:1px solid var(--line)}
+.pb-card:first-of-type{border-top:0;padding-top:4px}
+.pb-card .ui-h3{margin:0 0 4px}
+.pb-card .ui-meta{margin:8px 0 12px}
+.pb-card .src-line{margin-top:10px}

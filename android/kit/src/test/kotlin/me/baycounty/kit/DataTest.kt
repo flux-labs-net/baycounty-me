@@ -101,6 +101,7 @@ class DataTest {
         assertEquals("Oct 27, 2026", Format.value(JsonPrimitive("2026-10-27"), "date"))
         assertEquals("Oct 27, 2026 at 6:00 PM", Format.value(JsonPrimitive("2026-10-27T18:00:00-05:00"), "start"))
         assertEquals("Lynn Haven CRA Board", Governments.boardName("lh-cra"))
+        assertEquals("Mexico Beach Planning & Zoning Board", Governments.boardName("mb-planning"))
     }
 
     private fun rows(ids: List<String>) = ids.associateWith { Repo.rows(it) }

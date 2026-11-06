@@ -2307,3 +2307,5 @@ from special_events import DATASETS as _SPECIAL  # noqa: E402  special event roa
 DATASETS += _SPECIAL
 from site_photos import DATASETS as _SITE_PHOTOS  # noqa: E402  photos of places on the site's own pages (site/site_photos.py)
 DATASETS += _SITE_PHOTOS
+from planning_boards import DATASETS as _PLANNING  # noqa: E402  planning and zoning boards and members (site/planning_boards.py)
+DATASETS += _PLANNING

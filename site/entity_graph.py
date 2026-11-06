@@ -59,6 +59,7 @@ RELATION = {
     'motion': ('voted on motions naming', 'was named in motions voted on by'),
     'agenda': ('is on the agenda of', 'has on its agenda'),
     'project': ('has a development project in', 'has development projects by'),
+    'appointed': ('serves on an appointed board of', 'has on an appointed board'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -550,6 +551,19 @@ def build():
             oid = business(oid.split(':', 1)[1], r['organization'])
         if oid and oid in G.ents and not pid.startswith('person:'):
             G.link(pid, oid, 'works', None, when, f"Listed with it on the {r['chamber']} board", r.get('source_url'), key='chamber')
+
+    # planning and zoning boards: members appointed by a city or the county (planning-board-members: the city's own
+    # board page, or the roll call in the board's latest posted minutes)
+    for r in _ds('planning-board-members'):
+        pid, gid = r['person_entity_id'], 'gov:' + r['gov_id']
+        if gid not in G.ents:
+            continue
+        if pid.startswith('member:'):
+            G.ent(pid, r['name'], r['board'] + (' alternate' if r['role'] == 'Alternate' else ' member'), r['gov_id'])
+        if pid not in G.ents:
+            continue
+        G.link(pid, gid, 'appointed', None, r['as_of'], ' · '.join(x for x in [r['board'], r['role'] if r['role'] != 'Member' else None, r.get('seat')] if x),
+               r['source_url'], key=r['board_id'])
 
     # charter schools: the local nonprofit that runs each one, and the school district that authorized it (schools dataset)
     for r in _ds('schools'):
