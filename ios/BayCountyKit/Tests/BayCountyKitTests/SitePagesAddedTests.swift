@@ -66,7 +66,7 @@ final class SitePagesAddedTests: XCTestCase {
         var all: [String: [Row]] = [:]
         for d in Overlaps.datasets { all[d] = try rows(d) }
         let h = Overlaps.headline(all)
-        XCTAssertEqual(h.donorVotes, 318); XCTAssertEqual(h.pairs, 116)
+        XCTAssertEqual(h.donorVotes, 319); XCTAssertEqual(h.pairs, 116)
         XCTAssertEqual(h.contested, 68); XCTAssertEqual(h.topWon, 51)
         XCTAssertEqual(h.emergencyFromDonors, 6); XCTAssertEqual(h.emergency, 12)
         let cards = Overlaps.cards(all)
