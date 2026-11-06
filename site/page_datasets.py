@@ -2301,6 +2301,8 @@ from vote_dollars import DATASETS as _VOTE_DOLLARS  # noqa: E402  contract dolla
 DATASETS += _VOTE_DOLLARS
 from contract_coverage import DATASETS as _CONTRACT_CHECK  # noqa: E402  contract votes in the minutes vs the contract list (site/contract_coverage.py)
 DATASETS += _CONTRACT_CHECK
+from award_followup import DATASETS as _AWARD_FOLLOWUP  # noqa: E402  awards in the minutes with no later record (site/award_followup.py)
+DATASETS += _AWARD_FOLLOWUP
 from special_events import DATASETS as _SPECIAL  # noqa: E402  special event road closures and guides (site/special_events.py)
 DATASETS += _SPECIAL
 from site_photos import DATASETS as _SITE_PHOTOS  # noqa: E402  photos of places on the site's own pages (site/site_photos.py)

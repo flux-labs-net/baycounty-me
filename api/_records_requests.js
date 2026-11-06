@@ -64,11 +64,24 @@ async function seed() {
   return {added, updated, stale};
 }
 
+// Award gaps (an award with no later record) whose company the government's own checkbook shows paid after the award:
+// the follow-up exists, so they aren't asked for. checkbook-payments lives only in the database, so this is checked here.
+async function paidSince(gaps) {
+  const want = gaps.filter(g => g.award_date && g.entity_id && g.gov_id);
+  if (!want.length) return new Set();
+  const rows = await q(`select distinct x.gap_id from jsonb_to_recordset($1::jsonb) as x(gap_id text, gov_id text, entity_id text, award_date date)
+      join checkbook_payments p on p.gov_id = x.gov_id and p.payee_entity_id = x.entity_id and p.paid_on > x.award_date`,
+    [JSON.stringify(want.map(g => ({gap_id: g.gap_id, gov_id: g.gov_id, entity_id: g.entity_id, award_date: g.award_date})))]).catch(() => []);
+  return new Set(rows.map(r => r.gap_id));
+}
+
 // Drafts for stale sources. For each check and custodian in the file:
 //  - gaps already in a sent, received, closed or dismissed request are left out (never asked twice);
 //  - an open draft nobody has edited follows the file (gaps added or gone); an edited one is left as it is, and new gaps
 //    wait for a new draft once it is sent or dismissed;
-//  - with no open draft and gaps left, a new draft is made.
+//  - with no open draft and gaps left, a new draft is made;
+//  - max_gaps caps how many go in one letter (the file lists them in the order to ask); the rest wait for the next draft;
+//  - an award whose company the checkbook shows paid after the award is left out (paidSince).
 // An open draft whose gaps have all closed (newer records showed up at the source) is dismissed by the system.
 async function seedStale(drafts = fileDrafts(STALE_FILE)) {
   if (!drafts) return {added: [], updated: 0, resolved: 0, note: 'data/civic/stale_requests.json wasn’t found in this deployment.'};
@@ -80,7 +93,8 @@ async function seedStale(drafts = fileDrafts(STALE_FILE)) {
     all.forEach(g => current.add(g.gap_id));
     const done = new Set((await q(`select distinct unnest(gap_ids) g from corr.records_requests where status <> 'draft' and gap_ids && $1::text[]`,
       [all.map(g => g.gap_id)])).map(r => r.g));
-    const gaps = all.filter(g => !done.has(g.gap_id));
+    const paid = await paidSince(all);
+    const gaps = all.filter(g => !done.has(g.gap_id) && !paid.has(g.gap_id)).slice(0, d.max_gaps || undefined);
     const [open] = await q(`select * from corr.records_requests where group_key = $1 and status = 'draft' order by id limit 1`, [d.key]);
     if (!gaps.length) continue;                                     // all requested already; an open draft is handled below
     const ids = gaps.map(g => g.gap_id).sort();

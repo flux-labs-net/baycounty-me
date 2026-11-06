@@ -21,6 +21,7 @@ import argparse
 import datetime as dt
 import json
 import os
+import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..', '..', '..')
@@ -70,11 +71,51 @@ def beach_water(today):
     return gaps
 
 
-# check id -> (title, custodian key, find gaps, where the data shows on the site). The letter for each check is written
+def _gov_custodians():
+    """Each local government's records custodian (the same list the budget requests use)."""
+    sys.path.insert(0, HERE)
+    from records_requests import RECIPIENTS, NOTES
+    return {g: {'government': gov, 'government_key': g, 'recipient_name': who, 'recipient_email': email, 'contact_url': url,
+                'notes': NOTES.get(g) if g in ('pcb', 'sp', 'schools') else None}
+            for g, (gov, who, email, url) in RECIPIENTS.items()}
+
+
+# biggest and newest first; a draft asks for at most this many awards, and the rest wait for the next one
+AWARDS_PER_REQUEST = 12
+
+
+def award_follow_up(today):
+    """Contract awards in the minutes with no later record of the job six months on (site/award_followup.py): ask the
+    government for the signed contract, purchase orders and payments. Gaps carry their government's custodian."""
+    os.environ.setdefault('BC_TODAY', today.isoformat())
+    sys.path.insert(0, os.path.join(ROOT, 'site'))
+    import award_followup as A
+    cust = _gov_custodians()
+    gaps = []
+    for r in A.flagged():
+        if r['gov_id'] not in cust:
+            continue
+        who = r['entity_id'] or 'text:' + r['company'].lower().replace(' ', '-')
+        gaps.append({'gap_id': f'award-follow-up:{r["vote_id"]}:{who}', 'custodian': r['gov_id'], 'gov_id': r['gov_id'],
+                     'location': f'{r["company"]}, awarded {r["award_date"]}', 'company': r['company'], 'entity_id': r['entity_id'],
+                     'award_date': r['award_date'], 'last_record': r['award_date'], 'amount': r['amount'], 'bid_numbers': r['bid_numbers'],
+                     'board': r['board'], 'headline': r['headline'], 'source_url': r['source_url'],
+                     'need': f'Contract, purchase orders and payments for the {r["award_date"]} award to {r["company"]}'})
+    gaps.sort(key=lambda g: g['award_date'], reverse=True)
+    gaps.sort(key=lambda g: -(g['amount'] or 0))  # stable: biggest first, then newest
+    return gaps
+
+
+# check id -> (title, custodian key, find gaps, where the data shows on the site). custodian None: each gap names its
+# own (gap['custodian'], a government key), and each custodian gets its own draft. The letter for each check is written
 # in api/_stale_requests.js, which drafts it from the gaps that haven't been requested yet.
 CHECKS = {
     'beach-water': ('Beach water quality samples', 'fdoh', beach_water, '/beaches#water'),
+    'award-follow-up': ('Contract awards with no later record', None, award_follow_up, '/governments'),
 }
+# checks whose gaps are already in the order to ask for them (the rest are sorted by gap id), and how many go in one letter
+ORDERED = {'award-follow-up'}
+PER_REQUEST = {'award-follow-up': AWARDS_PER_REQUEST}
 
 
 def drafts(today):
@@ -83,13 +124,29 @@ def drafts(today):
         gaps = find(today)
         if not gaps:
             continue
-        c = CUSTODIANS[cust]
-        gaps.sort(key=lambda g: g['gap_id'])
-        out.append({'key': f'stale-{check}-{cust}', 'kind': 'stale', 'check': check, 'check_title': title, 'page': page,
-                    'government': c['government'], 'government_key': c['government_key'], 'recipient_name': c['recipient_name'],
-                    'recipient_email': c['recipient_email'], 'contact_url': c['contact_url'], 'notes': c.get('notes'),
-                    'gaps': gaps})
+        groups = {}
+        for g in gaps:
+            groups.setdefault(cust or g['custodian'], []).append(g)
+        for ck, gs in groups.items():
+            c = CUSTODIANS[ck] if cust else _gov_custodians()[ck]
+            if check not in ORDERED:
+                gs.sort(key=lambda g: g['gap_id'])
+            pg = f'/governments/{_slug(ck)}#contracts' if check == 'award-follow-up' else page
+            out.append({'key': f'stale-{check}-{ck}', 'kind': 'stale', 'check': check, 'check_title': title, 'page': pg,
+                        'government': c['government'], 'government_key': c['government_key'], 'recipient_name': c['recipient_name'],
+                        'recipient_email': c['recipient_email'], 'contact_url': c['contact_url'], 'notes': c.get('notes'),
+                        'max_gaps': PER_REQUEST.get(check), 'gaps': gs})
     return out
+
+
+def _slug(gov_id):
+    """The government page's slug (/governments/<slug>)."""
+    sys.path.insert(0, os.path.join(ROOT, 'data', 'entities'))
+    import ids
+    for g in ids.governments():
+        if g.get('id') == gov_id:
+            return g.get('slug') or gov_id
+    return gov_id
 
 
 def main():

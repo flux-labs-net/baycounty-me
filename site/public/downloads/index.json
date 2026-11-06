@@ -7563,7 +7563,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 429,
+   "rows": 433,
    "columns": [
     {
      "name": "website",
@@ -19964,6 +19964,133 @@
    "json": "/downloads/contract-minutes-check.json",
    "csv": "/downloads/contract-minutes-check.csv",
    "api": "/api/v1/datasets/contract-minutes-check"
+  },
+  {
+   "id": "award-follow-up",
+   "title": "Contract awards and what came after",
+   "description": "Every passed contract award read from the minutes since 2016 (consent agendas, votes that approve no spending, and change orders, amendments and renewals left out), one row per award and company named, checked for any later record at the same government that names the same company or carries the same bid number: later votes and agenda items, contract records and change orders, check register, tourist tax and CRA payments, and project histories. status: followed_up (later_records found; later_kinds says which, first_later_* is the first one), no_follow_up (no later record by flag_after, six months after the award), too_soon (not yet six months), as_needed (no later record, but the award is a standing or on-call agreement used only when work is ordered), cant_check (the minutes name no company). company_from says whether the company matched a profile (entity_id) or is the name as the motion writes it. A no_follow_up row is a question for the government, not a finding: the work may be recorded in files the site doesn't hold. Rules: site/award_followup.py.",
+   "rows": 1490,
+   "columns": [
+    {
+     "name": "vote_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Callaway Community Redevelopment Agency Board",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
+    },
+    {
+     "name": "award_date",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "headline",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "bid_numbers",
+     "type": "string"
+    },
+    {
+     "name": "flag_after",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "company",
+     "type": "string"
+    },
+    {
+     "name": "company_from",
+     "type": "string",
+     "values": [
+      "minutes text",
+      "profile"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "as_needed",
+      "cant_check",
+      "followed_up",
+      "no_follow_up",
+      "too_soon"
+     ]
+    },
+    {
+     "name": "later_records",
+     "type": "number"
+    },
+    {
+     "name": "later_kinds",
+     "type": "string"
+    },
+    {
+     "name": "first_later_date",
+     "type": "string"
+    },
+    {
+     "name": "first_later_what",
+     "type": "string"
+    },
+    {
+     "name": "first_later_url",
+     "type": "string"
+    },
+    {
+     "name": "last_later_date",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/award-follow-up.json",
+   "csv": "/downloads/award-follow-up.csv",
+   "api": "/api/v1/datasets/award-follow-up"
   },
   {
    "id": "event-road-closures",
