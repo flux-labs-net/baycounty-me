@@ -2814,7 +2814,7 @@ CSV: https://baycounty.me/downloads/donor-votes.csv · JSON: https://baycounty.m
 
 ### Companies and organizations on agendas (agenda-parties)
 One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.
-Rows: 519. Columns: place_id, gov_id, board, meeting_date, meeting, item_number, title, kind, rezoning, amount, party, entity_id, entity_name, entity_kind, entity_url, gave_to_members, gave_to, source_url
+Rows: 520. Columns: place_id, gov_id, board, meeting_date, meeting, item_number, title, kind, rezoning, amount, party, entity_id, entity_name, entity_kind, entity_url, gave_to_members, gave_to, source_url
 CSV: https://baycounty.me/downloads/agenda-parties.csv · JSON: https://baycounty.me/downloads/agenda-parties.json
 
 ### Development projects and the businesses behind them (development-companies)

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-06T18:18:08+00:00",
+ "generated": "2026-11-06T19:39:12+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -1263,6 +1263,61 @@
     "Cherry Street (Tyndall Parkway to Star Avenue)"
    ],
    "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-10-27",
+   "meeting": "Regular Meeting",
+   "number": null,
+   "section": "Approval of Minutes",
+   "title": "Minutes of October 13, 2026 Regular Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-10-27",
+   "meeting": "Regular Meeting",
+   "number": null,
+   "section": "Regular Agenda",
+   "title": "Development Order Review – Whitaker/Douglas Subdivision",
+   "summary": "The Development Order was reviewed and approved; it will eliminate the dead end on Douglas.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Whitaker/Douglas Subdivision",
+    "Douglas"
+   ],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-10-27",
+   "meeting": "Regular Meeting",
+   "number": null,
+   "section": "Regular Agenda",
+   "title": "Task Order Change Order – DHGroup, Cherry Street",
+   "summary": "Commission approved a change order to DHGroup's task order for utility relocation on Cherry Street after the earlier $50k time-and-materials task order ran out due to conflicts.",
+   "kind": "change_order",
+   "amount": 50000.0,
+   "parties": [
+    "DHGroup"
+   ],
+   "addresses": [
+    "Cherry Street"
+   ],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429"
   },
   {
    "board": "pcb",

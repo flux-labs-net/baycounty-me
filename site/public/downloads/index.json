@@ -18148,7 +18148,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 519,
+   "rows": 520,
    "columns": [
     {
      "name": "place_id",
