@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-06",
- "fetched": "2026-11-06T21:08:24-0500",
+ "as_of": "2026-11-07",
+ "fetched": "2026-11-07T11:57:21-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -52,74 +52,6 @@
  "errors": {},
  "events": [
   {
-   "event_id": "library:23550:2026-11-06",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Escape the Library (Ages 13+) (Registration Required)",
-   "starts": "2026-11-06T09:00:00",
-   "ends": "2026-11-07T16:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/escape-the-library-ages-13-registration-required-2/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
-   "event_id": "library:23790:2026-11-06",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Sea Needles",
-   "starts": "2026-11-06T10:00:00",
-   "ends": "2026-11-06T12:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/sea-needles-9/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "destination-pc:19153:2026-11-06",
-   "source_id": "destination-pc",
-   "source": "Destination Panama City",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Public Eye Soar",
-   "starts": "2026-11-06T18:00:00",
-   "ends": "2026-11-07T22:00:00",
-   "all_day": false,
-   "venue": "Gulf Coast State College",
-   "category": "Community",
-   "cost": "Free",
-   "url": "https://destinationpanamacity.com/annual-event/publiceyesoar/",
-   "source_url": "https://www.destinationpanamacity.com/events/",
-   "recurring": false
-  },
-  {
-   "event_id": "destination-pc:19160:2026-11-06",
-   "source_id": "destination-pc",
-   "source": "Destination Panama City",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Panama City Songwriters Festival",
-   "starts": "2026-11-06T18:30:00",
-   "ends": "2026-11-07T22:00:00",
-   "all_day": false,
-   "venue": "Historic Downtown Panama City",
-   "category": "Community",
-   "cost": null,
-   "url": "https://destinationpanamacity.com/annual-event/panama-city-songwriters-festival/",
-   "source_url": "https://www.destinationpanamacity.com/events/",
-   "recurring": false
-  },
-  {
    "event_id": "pcb-chamber:27383",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
@@ -134,23 +66,6 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/visit-panama-city-beach-ironman-florida-3/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:6052:2026-11-07",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Town Hall",
-   "starts": "2026-11-07T08:00:00",
-   "ends": "2026-11-07T10:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6052",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": false
   },
   {
@@ -2041,6 +1956,40 @@
    "recurring": true
   },
   {
+   "event_id": "lynn-haven:1277:2026-11-21",
+   "source_id": "lynn-haven",
+   "source": "City of Lynn Haven",
+   "gov": "lh",
+   "town": "Lynn Haven",
+   "title": "Winter Wonderland 2026",
+   "starts": "2026-11-21T09:00:00",
+   "ends": "2026-11-21T15:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1277",
+   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7730:2026-11-21",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Chess Tournament",
+   "starts": "2026-11-21T10:00:00",
+   "ends": "2026-11-21T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7730",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "library:23528:2026-11-21",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -2361,7 +2310,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/beach-book-club/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24360:2026-12-03",
@@ -3261,6 +3210,23 @@
    "category": "Library",
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-advisory-board-ages-14-17-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24380:2027-01-06",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City Beach",
+   "title": "Beach Book Club",
+   "starts": "2027-01-06T10:30:00",
+   "ends": "2027-01-06T11:30:00",
+   "all_day": false,
+   "venue": "Panama City Beach Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/beach-book-club-2/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
   }

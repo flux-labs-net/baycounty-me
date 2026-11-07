@@ -132,7 +132,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 11794,
+   "rows": 11802,
    "columns": [
     {
      "name": "date",
@@ -352,7 +352,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 57126,
+   "rows": 57166,
    "columns": [
     {
      "name": "date",
@@ -8926,7 +8926,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 189,
+   "rows": 187,
    "columns": [
     {
      "name": "place_id",
@@ -9025,7 +9025,6 @@
       "Gulf Coast State College",
       "Gulf Coast State College, Student Union East",
       "Gulf of America",
-      "Historic Downtown Panama City",
       "LaCo",
       "McGuire’s Irish Pub",
       "PCB Wheel",
@@ -9643,7 +9642,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-06T16:19:00+00:00"
+      "2026-11-07T07:06:00+00:00"
      ]
     },
     {
@@ -9651,10 +9650,10 @@
      "type": "string",
      "values": [
       "Monday",
-      "Rest Of Today",
-      "Saturday",
       "Sunday",
-      "Tuesday"
+      "Today",
+      "Tuesday",
+      "Veterans Day"
      ]
     },
     {
@@ -9713,15 +9712,14 @@
      "type": "string",
      "values": [
       "Mostly sunny",
-      "Sunny"
+      "Partly sunny"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 70s",
-      "In the upper 70s"
+      "In the lower 70s"
      ]
     },
     {
@@ -9729,14 +9727,13 @@
      "type": "string",
      "values": [
       "North winds 10 to 15 mph",
-      "Northwest winds around 10 mph"
+      "North winds 5 to 10 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:00 AM",
       "7:01 AM"
      ]
     },
@@ -9744,8 +9741,8 @@
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:52 PM",
-      "5:53 PM"
+      "5:51 PM",
+      "5:52 PM"
      ]
     },
     {
@@ -9755,10 +9752,10 @@
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Light westerly to northwesterly winds develop behind today's cold front. A Moderate Risk of Rip Currents is forecast at all area beaches through the weekend into early next week.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Southeast winds around 5 mph.",
-      "Moderate rip current risk*. Sunny. Highs in the lower 70s. East winds around 10 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the lower 70s. North winds around 10 mph.",
+      "Light northwesterly to northerly winds prevail through the weekend into early next week. A Moderate Risk of Rip Currents is forecast at all area beaches through the weekend into early next week.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. North winds around 5 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northeast winds around 5 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the mid 70s. North winds around 10 mph.",
       "Moderate surf and/or currents. Use caution.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
@@ -9783,7 +9780,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/b0dca3b8-70f7-4da5-a8b8-b672a656da7b",
+      "https://api.weather.gov/products/a95bea8f-bc64-430d-b5b3-7c2c7468be1a",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12449,7 +12446,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-06"
+      "2026-11-07"
      ]
     },
     {
@@ -12598,7 +12595,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 56,
+   "rows": 58,
    "columns": [
     {
      "name": "notice_id",
@@ -12712,6 +12709,7 @@
       "Coastal Bay",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf; Quitman; Clay; Randolph; Calhoun; Terrell; Dougherty; Lee; Early; Miller; Baker; Seminole",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
+      "Left lane blocked",
       "Lynn Haven",
       "North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf",
       "Right lane blocked",
@@ -12755,7 +12753,8 @@
       "2026-11-05T07:52:00.000Z",
       "2026-11-06T03:00:00.000Z",
       "2026-11-06T04:15:00.000Z",
-      "2026-11-06T12:37:00.000Z"
+      "2026-11-06T12:37:00.000Z",
+      "2026-11-06T21:27"
      ]
     },
     {
@@ -15704,7 +15703,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 131,
+   "rows": 125,
    "columns": [
     {
      "name": "place_id",
@@ -15726,7 +15725,6 @@
      "values": [
       "contract",
       "event",
-      "meeting",
       "vote"
      ]
     },
@@ -15770,7 +15768,6 @@
       "2026-10-05",
       "2026-10-13",
       "2026-10-27",
-      "2026-11-06",
       "2026-11-07"
      ]
     },
@@ -15778,13 +15775,7 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-06T09:00:00",
-      "2026-11-06T09:30:00-06:00",
-      "2026-11-06T10:00:00",
-      "2026-11-06T18:00:00",
-      "2026-11-06T18:30:00",
       "2026-11-07T00:00:00",
-      "2026-11-07T08:00:00",
       "2026-11-07T09:00:00",
       "2026-11-07T10:00:00"
      ]
@@ -15793,12 +15784,8 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-06T12:00:00",
-      "2026-11-07T10:00:00",
       "2026-11-07T12:00:00",
       "2026-11-07T13:00:00",
-      "2026-11-07T16:00:00",
-      "2026-11-07T22:00:00",
       "2026-11-07T23:59:59"
      ]
     },
@@ -15865,11 +15852,7 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "825 Ohio Avenue, Lynn Haven",
       "Bay County Public Library",
-      "Gulf Coast State College",
-      "Historic Downtown Panama City",
-      "Panama City Beach Public Library",
       "Pier Park"
      ]
     },
@@ -15900,16 +15883,12 @@
      "name": "recurring",
      "type": "boolean",
      "values": [
-      false,
-      true
+      false
      ]
     },
     {
      "name": "agenda_posted",
-     "type": "boolean",
-     "values": [
-      true
-     ]
+     "type": "string"
     },
     {
      "name": "amount",
@@ -16012,7 +15991,6 @@
      "type": "string",
      "values": [
       "https://baycounty.me/events",
-      "https://baycounty.me/meetings",
       "https://baycounty.me/public-money/contracts",
       "https://baycounty.me/public-money/votes"
      ]
@@ -16022,7 +16000,6 @@
      "type": "string",
      "values": [
       "City of Panama City",
-      "Destination Panama City",
       "Northwest Regional Library System",
       "Panama City Beach Chamber"
      ]
@@ -16043,7 +16020,6 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1141,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1142,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
-      "https://lynnhavenfl.portal.civicclerk.com/",
       "https://mexicobeachfl.gov/uploads/2026/08/September-11-2026-FY26-27-1st-Budget-Hearing-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/08/September-21-2026-Final-Budget-Hearing-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/08/September-22-2026-Cit-Council-Meeting-Minutes.pdf",
@@ -16053,7 +16029,6 @@
       "https://pcbgov.granicus.com/MinutesViewer.php?view_id=1&clip_id=418&doc_id=2f050b9d-bc36-11f1-89ef-005056a84798",
       "https://pcbgov.granicus.com/MinutesViewer.php?view_id=1&clip_id=419&doc_id=daf0cf8b-d214-11f1-89ef-005056a84798",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09082026-420",
-      "https://www.destinationpanamacity.com/events/",
       "https://www.nwrls.com/events",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09082026-890",
       "https://www.panamacity.gov/Calendar.aspx",
@@ -19269,7 +19244,7 @@
    "id": "contract-vote-dollars",
    "title": "Contract votes and their dollar figures",
    "description": "Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.",
-   "rows": 3562,
+   "rows": 3566,
    "columns": [
     {
      "name": "vote_id",
@@ -19932,7 +19907,7 @@
    "id": "award-follow-up",
    "title": "Contract awards and what came after",
    "description": "Every passed contract award read from the minutes since 2016 (consent agendas, votes that approve no spending, and change orders, amendments and renewals left out), one row per award and company named, checked for any later record at the same government that names the same company or carries the same bid number: later votes and agenda items, contract records and change orders, check register, tourist tax and CRA payments, and project histories. status: followed_up (later_records found; later_kinds says which, first_later_* is the first one), no_follow_up (no later record by flag_after, six months after the award), too_soon (not yet six months), as_needed (no later record, but the award is a standing or on-call agreement used only when work is ordered), cant_check (the minutes name no company). company_from says whether the company matched a profile (entity_id) or is the name as the motion writes it. A no_follow_up row is a question for the government, not a finding: the work may be recorded in files the site doesn't hold. Rules: site/award_followup.py.",
-   "rows": 1490,
+   "rows": 1493,
    "columns": [
     {
      "name": "vote_id",
@@ -20846,7 +20821,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 58,
+   "rows": 57,
    "columns": [
     {
      "name": "board",
@@ -20947,7 +20922,6 @@
       "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
@@ -20975,7 +20949,6 @@
      "values": [
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1159,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
@@ -21054,7 +21027,6 @@
       "https://baycountyfl.new.swagit.com/videos/405753",
       "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
-      "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",

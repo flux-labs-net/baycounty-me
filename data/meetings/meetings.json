@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-06T20:03:02-06:00",
+  "generated": "2026-11-07T10:52:08-06:00",
   "window": {
-    "from": "2026-11-06",
-    "to": "2027-01-05"
+    "from": "2026-11-07",
+    "to": "2027-01-06"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -75,7 +75,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (24 records)",
+        "AgendaCenter": "ok (23 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
@@ -138,7 +138,7 @@
         "calendar (iCal cat 14)": "ok (4 records)"
       },
       "coverage": {
-        "agenda_feed": 5,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 0
       }
@@ -587,50 +587,6 @@
       "past": true
     },
     {
-      "board": "lh",
-      "title": "City Commission Meeting",
-      "start": "2026-10-27T17:30:00-05:00",
-      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
-      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
-      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
-      "minutes_url": null,
-      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
-      "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
-      "past": true,
-      "items": [
-        {
-          "title": "Approve Resolution # 2026-10-601, Purchase - Sanitation, Labrie Garbage Truck.",
-          "amount": null
-        },
-        {
-          "title": "Approve Resolution # 2026-10-602 , Purchase - Stormwater, Ford F 250 Vehicle purchase",
-          "amount": null
-        }
-      ],
-      "agenda_items": [
-        "Approve minutes of the 10/13/26 Commission meeting",
-        "Approve Amended Minutes 07/28/26 MEMO",
-        "Approve Surplus of Asset 4749; 2020 Nissan Pathfinder.",
-        "Authorize the Mayor to execute the Annual Drinking Water Fee Waiver request.",
-        "Approve Resolution 2026-10-598 Rails To Trails Force Main Amendment Engineering Services",
-        "Approve Resolution 2026-10-600 MOU between LHPD and Office of The State Attorney",
-        "Approve Resolution 2026-10-596 MOU between LHPD and Panama City Beach PD.",
-        "Approve Resolution # 2026-10-597 Construction -Headwall Project at 1104 Vermont Ave.",
-        "Approve Resolution # 2026-10-601, Purchase - Sanitation, Labrie Garbage Truck.",
-        "Approve Resolution # 2026-10-602 , Purchase - Stormwater, Ford F 250 Vehicle purchase",
-        "Final Reading of Ordinance 1192R Updating Rules of Conduct in City Parks",
-        "First Reading of Ordinance 1197 — Approval of the Lynn Haven CRA TIF contribution to 75%",
-        "Resolution 2026-10-599: Approval of Panhandle Task Order for the Design, permitting and surveying to replace Asbestos and Cast Iron Watermains (Project 22039).",
-        "Draft Ordinance 1191",
-        "Mayor’s Report.",
-        "Commissioners’ Reports.",
-        "City Manager’s Report.",
-        "Finance Report.",
-        "City Attorney’s Report."
-      ]
-    },
-    {
       "board": "schools",
       "title": "School Board Meeting",
       "start": "2026-10-27T15:00:00-05:00",
@@ -758,6 +714,7 @@
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2151/files",
+      "past": true,
       "items": [],
       "agenda_items": [
         "Discussion about the ULDC updates and processes"
