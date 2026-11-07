@@ -5191,7 +5191,7 @@ gov:cw,gov,Government,Callaway,City,/governments/callaway,,74,,19615972.29,cw,ba
 gov:destination_pc,gov,Government,Destination Panama City,Tourism agency,/profile/gov/destination_pc,,174,,4471596.43,destination_pc,bay,
 gov:fdot,gov,Government,Florida Department of Transportation,State agency: state highways and bridges,/profile/gov/fdot,,33,,,,bay,https://www.fdot.gov/
 gov:lake_powell_cdd,gov,Government,Lake Powell CDD,Special district,/profile/gov/lake_powell_cdd,,21,,,lake_powell_cdd,bay,
-gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,143,,70032287.37,lh,bay,
+gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,144,,70032287.37,lh,bay,
 gov:mb,gov,Government,Mexico Beach,City,/governments/mexico-beach,,88,132438.9,17922207.87,mb,bay,
 gov:mb_cdc,gov,Government,Mexico Beach CDC,Tourism agency,/profile/gov/mb_cdc,,72,,2071159.31,mb_cdc,bay,
 gov:nwfwmd,gov,Government,Water Management District,Special district,/profile/gov/nwfwmd,,0,,,nwfwmd,bay,
@@ -16225,7 +16225,7 @@ vendor:carvertise,vendor,Company,"Carvertise, Inc",Company paid or hired by loca
 vendor:catered-by-carla,vendor,Company,Catered by Carla,Company paid or hired by local governments,/profile/vendor/catered-by-carla,,1,3116.4,,destination_pc,bay,
 vendor:cathey-s-ace-hardware,vendor,Company,Cathey's Ace Hardware,Company paid or hired by local governments,/profile/vendor/cathey-s-ace-hardware,,1,13876.41,,mb_cdc,bay,
 vendor:cavalier-distributing-florida,vendor,Company,Cavalier Distributing Florida,Company paid or hired by local governments,/profile/vendor/cavalier-distributing-florida,,1,1325.64,,destination_pc,bay,
-vendor:cbc,vendor,Company,CBC Construction,Company paid or hired by local governments,/public-money/vendors/cbc,,14,11873983.59,,lh,bay,
+vendor:cbc,vendor,Company,CBC Construction,Company paid or hired by local governments,/public-money/vendors/cbc,,15,11873983.59,,lh,bay,
 vendor:cdr-maguire,vendor,Company,CDR Maguire,Company paid or hired by local governments,/public-money/vendors/cdr-maguire,"CDR Maguire / CDR Emergency Management; CDR Maguire Inc.; CDR Maguire, Inc.; CDR Maguire, LLC",25,6878794.05,,county,bay,
 vendor:center-action-committee,vendor,Company,Center Action Committee,Company paid or hired by local governments,/profile/vendor/center-action-committee,,1,2400.0,,destination_pc,bay,
 vendor:chandler-associates,vendor,Company,Chandler and Associates,Company paid or hired by local governments,/profile/vendor/chandler-associates,,9,,,pcb,bay,

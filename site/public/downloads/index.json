@@ -6760,7 +6760,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22842,
+   "rows": 22843,
    "columns": [
     {
      "name": "link_id",
@@ -8716,7 +8716,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 58,
+   "rows": 56,
    "columns": [
     {
      "name": "place_id",
@@ -8846,7 +8846,6 @@
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
-      "The Barn at The Wicked Wheel",
       "Webinar"
      ]
     },
@@ -8927,7 +8926,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 194,
+   "rows": 189,
    "columns": [
     {
      "name": "place_id",
@@ -9041,7 +9040,6 @@
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
-      "The Barn at The Wicked Wheel",
       "Under the Palms Park",
       "Webinar",
       "Wild Root Coffee & Tea"
@@ -9095,15 +9093,13 @@
      "name": "same_as",
      "type": "string",
      "values": [
-      "destination-pc:17846:2026-12-12",
-      "destination-pc:19153:2026-11-06"
+      "destination-pc:17846:2026-12-12"
      ]
     },
     {
      "name": "first_posted",
      "type": "string",
      "values": [
-      "2026-11-06T18:00:00",
       "2026-12-12T17:00:00"
      ]
     },
@@ -12602,7 +12598,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 55,
+   "rows": 56,
    "columns": [
     {
      "name": "notice_id",
@@ -13802,7 +13798,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 106,
+   "rows": 107,
    "columns": [
     {
      "name": "place_id",
@@ -14015,6 +14011,7 @@
       "Ordinance 950",
       "Project 414877",
       "Project R2025-14-0005600",
+      "RFP 26.27-1",
       "RFP PCB26-51",
       "RFQ 27-03"
      ]
@@ -14106,7 +14103,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 121,
+   "rows": 122,
    "columns": [
     {
      "name": "place_id",
@@ -14202,37 +14199,7 @@
     },
     {
      "name": "posted",
-     "type": "string",
-     "values": [
-      "2026-06-13",
-      "2026-06-18",
-      "2026-07-13",
-      "2026-07-17",
-      "2026-08-10",
-      "2026-09-14",
-      "2026-09-16",
-      "2026-09-24",
-      "2026-09-30",
-      "2026-10-06",
-      "2026-10-07",
-      "2026-10-08",
-      "2026-10-15",
-      "2026-10-16",
-      "2026-10-20",
-      "2026-10-21",
-      "2026-10-22",
-      "2026-10-23",
-      "2026-10-26",
-      "2026-10-27",
-      "2026-10-28",
-      "2026-10-29",
-      "2026-10-30",
-      "2026-11-02",
-      "2026-11-03",
-      "2026-11-04",
-      "2026-11-05",
-      "2026-11-06"
-     ]
+     "type": "string"
     },
     {
      "name": "closes",
@@ -14359,7 +14326,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-06"
+      "2026-11-07"
      ]
     }
    ],
@@ -15737,7 +15704,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 135,
+   "rows": 131,
    "columns": [
     {
      "name": "place_id",
@@ -15814,10 +15781,6 @@
       "2026-11-06T09:00:00",
       "2026-11-06T09:30:00-06:00",
       "2026-11-06T10:00:00",
-      "2026-11-06T13:00:00",
-      "2026-11-06T14:00:00",
-      "2026-11-06T15:00:00",
-      "2026-11-06T17:30:00",
       "2026-11-06T18:00:00",
       "2026-11-06T18:30:00",
       "2026-11-07T00:00:00",
@@ -15831,9 +15794,6 @@
      "type": "string",
      "values": [
       "2026-11-06T12:00:00",
-      "2026-11-06T14:00:00",
-      "2026-11-06T17:00:00",
-      "2026-11-06T21:00:00",
       "2026-11-07T10:00:00",
       "2026-11-07T12:00:00",
       "2026-11-07T13:00:00",
@@ -15910,8 +15870,7 @@
       "Gulf Coast State College",
       "Historic Downtown Panama City",
       "Panama City Beach Public Library",
-      "Pier Park",
-      "The Barn at The Wicked Wheel"
+      "Pier Park"
      ]
     },
     {
@@ -17655,7 +17614,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-06"
+      "2026-11-07"
      ]
     },
     {
@@ -18179,7 +18138,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 520,
+   "rows": 526,
    "columns": [
     {
      "name": "place_id",
@@ -18209,8 +18168,10 @@
       "Callaway Community Redevelopment Agency (CRA)",
       "Lynn Haven City Commission",
       "Lynn Haven Community Redevelopment Agency (CRA) Board",
+      "Lynn Haven Planning Commission",
       "Mexico Beach City Council",
       "Panama City Beach City Council",
+      "Panama City Beach Planning Board",
       "Panama City City Commission",
       "Panama City Community Redevelopment Agency (CRA) Board"
      ]
@@ -18247,6 +18208,8 @@
       "Final Budget Hearing",
       "Panama City Community Fund Board of Directors Meeting of July 14, 2026.",
       "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+      "Planning Board",
+      "Planning Commission Meeting",
       "Public Workshop Meeting of July 6, 2026.",
       "Regular Meeting",
       "Special Call Panama City Community Fund Board of Directors Meeting of September 8, 2026."
@@ -18489,7 +18452,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 10,
+   "rows": 11,
    "columns": [
     {
      "name": "place_id",
@@ -18513,6 +18476,7 @@
       "ITB 27-02",
       "ITB 27-04",
       "Project 414877",
+      "RFP 26.27-1",
       "RFQ 27-03"
      ]
     },
@@ -20608,7 +20572,7 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-06",
+      "2026-11-07",
       "2026-11-12"
      ]
     },
@@ -20843,7 +20807,7 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-06",
+      "2026-11-07",
       "2026-11-12"
      ]
     },

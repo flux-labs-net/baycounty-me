@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-06",
+ "as_of": "2026-11-07",
  "fetched": {
-  "pcb-chamber": "2026-11-06T19:32:43+00:00",
+  "pcb-chamber": "2026-11-07T02:08:24+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,36 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27561",
-   "title": "Boots & Bling Fundraiser",
-   "starts": "2026-11-06T17:30:00",
-   "ends": "2026-11-06T21:00:00",
-   "all_day": false,
-   "venue": "The Barn at The Wicked Wheel",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/boots-bling-fundraiser/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27807",
-   "title": "Public Eye SOAR",
-   "starts": "2026-11-06T18:00:00",
-   "ends": "2026-11-07T22:00:00",
-   "all_day": false,
-   "venue": "Gulf Coast State College",
-   "city": "Panama City",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/public-eye-soar/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27383",
