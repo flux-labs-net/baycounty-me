@@ -20,7 +20,7 @@ struct GovernmentDetailView: View {
     @State private var allGlance = false
 
     /// Datasets this screen reads, besides the government profiles.
-    private static let datasets = ["officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies"]
+    private static let datasets = ["officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies"] + PlanningBoards.datasets
 
     /// A city page includes its port; the county page includes the airport district (as on the site).
     private var debtIDs: Set<String> {
@@ -110,6 +110,7 @@ struct GovernmentDetailView: View {
         case .money: moneySection(g)
         case .compare: compared(g)
         case .meetings: meetingsSection
+        case .planning: planningSection
         case .debt: debtSection
         case .audits: auditSection
         case .savings: savingsSection
@@ -130,6 +131,7 @@ struct GovernmentDetailView: View {
         case .money: rows("budget-years").contains { $0.string("gov_id") == govID }
         case .compare: true
         case .meetings: !upcoming.isEmpty
+        case .planning: !PlanningBoards.boards(rows("planning-boards"), gov: govID).isEmpty
         case .debt: rows("debt").contains { debtIDs.contains($0.string("gov_id") ?? "") } || rows("bonds").contains { debtIDs.contains($0.string("gov_id") ?? "") }
         case .audits: !findingsAll.isEmpty
         case .savings: !ideas.isEmpty
@@ -150,6 +152,7 @@ struct GovernmentDetailView: View {
             return b.total.map { "\(Format.compactMoney($0)) \(fy) budget" } ?? "No \(fy) budget on file"
         case .compare: return "Per resident, tax rate and debt beside the others"
         case .meetings: return "\(upcoming.count) on the calendar"
+        case .planning: return PlanningBoards.summary(PlanningBoards.boards(rows("planning-boards"), gov: govID))
         case .debt:
             return GovYear.row(rows("government-years"), gov: govID, year: picked)?.number("debt_total").map { "\(Format.compactMoney($0)) owed, end of \(fy)" } ?? "What it owes, bonds and loans"
         case .audits:
@@ -360,6 +363,50 @@ struct GovernmentDetailView: View {
                     }
                 }
             }
+        }
+    }
+
+    // MARK: Planning and zoning
+
+    /// Each planning and zoning board: what it decides, its next meeting and who sits on it (site/planning_boards.py).
+    @ViewBuilder private var planningSection: some View {
+        let boards = PlanningBoards.boards(rows("planning-boards"), gov: govID)
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(boards) { b in
+                let ms = PlanningBoards.members(rows("planning-board-members"), board: b.string("board_id"))
+                PageSection(title: b.string("name") ?? "Planning board", symbol: "map", tone: .teal, caption: b.string("what_it_does")) {
+                    CardList {
+                        if let next = PlanningBoards.meetingLine(b.string("next_meeting")) {
+                            FactRow(label: "Next meeting", value: next, detail: b.string("next_agenda_url") != nil ? "Agenda posted" : "Agenda not posted yet")
+                            RowDivider()
+                        }
+                        if ms.isEmpty {
+                            FactRow(label: "Members", value: "Not published online", detail: "Appointed by the \(b.string("appointed_by") ?? "commission")")
+                        }
+                        ForEach(ms) { m in
+                            planningMember(m)
+                            if m.id != ms.last?.id { RowDivider() }
+                        }
+                    }
+                    ForEach([b.string("roster_source").map { "Members: \($0)." }, b.string("roster_note"), b.string("records_online")].compactMap { $0 }, id: \.self) { t in
+                        Text(t).font(.footnote).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    }
+                    WebLink(title: "Next agenda", symbol: "doc.text", url: b.string("next_agenda_url").flatMap(URL.init(string:))).font(.subheadline)
+                    WebLink(title: "Board page", url: b.string("page_url").flatMap(URL.init(string:))).font(.subheadline)
+                }
+            }
+        }
+    }
+
+    /// A member's row: officials open their profile in the app, everyone else their profile on the site.
+    @ViewBuilder private func planningMember(_ m: Row) -> some View {
+        let eid = m.string("person_entity_id") ?? ""
+        if eid.hasPrefix("person:") {
+            NavigationLink(value: Route.person(String(eid.dropFirst(7)))) { FactRow(label: m.string("name") ?? "", value: PlanningBoards.memberLine(m)) }.buttonStyle(.plain)
+        } else {
+            Button { store.open(BayCountyClient.site.appendingPathComponent(m.string("person_url") ?? "")) } label: {
+                FactRow(label: m.string("name") ?? "", value: PlanningBoards.memberLine(m))
+            }.buttonStyle(.plain)
         }
     }
 

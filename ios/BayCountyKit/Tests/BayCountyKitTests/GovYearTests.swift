@@ -44,7 +44,7 @@ final class GovYearTests: XCTestCase {
 
     /// The government screen lists only parts with records, in screen order; same list as GovYearTest.kt.
     func testGovPartsShownInOrder() {
-        XCTAssertEqual(GovPart.allCases.map(\.id), ["who", "money", "compare", "meetings", "debt", "audits", "savings", "cra", "records"])
+        XCTAssertEqual(GovPart.allCases.map(\.id), ["who", "money", "compare", "meetings", "planning", "debt", "audits", "savings", "cra", "records"])
         XCTAssertEqual(GovPart.shown { [.who, .audits].contains($0) }.map(\.id), ["who", "compare", "audits"])
         XCTAssertEqual(GovPart(rawValue: "cra")?.title, "Redevelopment (CRA)")
     }

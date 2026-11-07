@@ -48,7 +48,7 @@ class GovYearTest {
 
     /** The government screen lists only parts with records, in screen order; same list as GovYearTests.swift. */
     @Test fun govPartsShownInOrder() {
-        assertEquals(listOf("who", "money", "compare", "meetings", "debt", "audits", "savings", "cra", "records"), GovPart.entries.map { it.id })
+        assertEquals(listOf("who", "money", "compare", "meetings", "planning", "debt", "audits", "savings", "cra", "records"), GovPart.entries.map { it.id })
         assertEquals(listOf("who", "compare", "audits"), GovPart.shown { it == GovPart.WHO || it == GovPart.AUDITS }.map { it.id })
         assertEquals("Redevelopment (CRA)", GovPart.of("cra")?.title)
     }

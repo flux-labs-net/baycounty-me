@@ -36,6 +36,8 @@ function boardName(board, gov) {
   const g = GOV_NAME[gov] || GOV_NAME[String(board || '').split('-')[0]] || 'Local board';
   if (/-cra$/.test(board || '')) return `${g} CRA board`;
   if (board === 'county-planning') return 'Bay County Planning Commission';
+  if (/-planning$/.test(board || '')) return `${g} planning board`;
+  if (/-boa$/.test(board || '')) return `${g} board of adjustment`;
   if (board === 'schools') return 'School Board';
   if (gov === 'county') return 'County Commission';
   return `${g} ${Object.values(CITY_GOV).includes(gov) ? 'City Commission' : 'board'}`;

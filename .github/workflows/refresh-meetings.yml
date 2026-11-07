@@ -107,6 +107,11 @@ jobs:
       - name: Fetch beach conditions, water quality and parks
         continue-on-error: true
         run: python3 data/outdoors/fetch_outdoors.py
+      - name: Fetch planning and zoning board members
+        # Mexico Beach and Parker list their members on the city website (data/civic/planning_boards.py); the other
+        # rosters come from minutes roll calls kept in the script. A failed page keeps the last good roster.
+        continue-on-error: true
+        run: python3 data/civic/planning_boards.py
       - name: Find stale sources and draft records requests
         # Places where an official source's newest record is older than its usual schedule (for example a beach water
         # sampling site with no sample in weeks) -> data/civic/stale_requests.json. /admin drafts a records request for
@@ -218,7 +223,7 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/dupes data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json data/restaurants/bay data/volunteer/bay/needs.json data/military/bay/news.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/dupes data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json data/restaurants/bay data/volunteer/bay/needs.json data/military/bay/news.json data/civic/planning_boards.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
           .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes, campaign finance, elections, notices, jobs and emergency notices ($(date -u +%Y-%m-%d))" $src

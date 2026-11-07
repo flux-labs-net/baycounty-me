@@ -4,7 +4,7 @@ import Foundation
 /// records for that government; each row opens that part on its own screen, for the same year, so the screen
 /// doesn't run on as one long page. Mirrors android/kit GovParts.kt.
 public enum GovPart: String, CaseIterable, Sendable, Identifiable {
-    case who, money, compare, meetings, debt, audits, savings, cra, records
+    case who, money, compare, meetings, planning, debt, audits, savings, cra, records
 
     public var id: String { rawValue }
 
@@ -14,6 +14,7 @@ public enum GovPart: String, CaseIterable, Sendable, Identifiable {
         case .money: "Money in, money out"
         case .compare: "Compared with the others"
         case .meetings: "Upcoming meetings"
+        case .planning: "Planning and zoning"
         case .debt: "Debt"
         case .audits: "What the auditors found"
         case .savings: "Where it could spend less"
@@ -29,6 +30,7 @@ public enum GovPart: String, CaseIterable, Sendable, Identifiable {
         case .money: "chart.pie"
         case .compare: "chart.bar.xaxis"
         case .meetings: "calendar"
+        case .planning: "map"
         case .debt: "creditcard"
         case .audits: "magnifyingglass"
         case .savings: "dollarsign.arrow.circlepath"

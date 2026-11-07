@@ -21,6 +21,10 @@ object Governments {
         "pcb" to "Panama City Beach City Council", "lh" to "Lynn Haven City Commission", "lh-cra" to "Lynn Haven CRA Board",
         "cw" to "Callaway City Commission", "cw-cra" to "Callaway CRA Board", "sp" to "Springfield City Commission",
         "parker" to "Parker City Council", "mb" to "Mexico Beach City Council",
+        "pc-planning" to "Panama City Planning Board", "pcb-planning" to "Panama City Beach Planning Board",
+        "lh-planning" to "Lynn Haven Planning Commission", "lh-boa" to "Lynn Haven Board of Adjustment",
+        "cw-planning" to "Callaway Planning Board", "parker-planning" to "Parker Planning Commission",
+        "mb-planning" to "Mexico Beach Planning & Zoning Board",
     )
 
     /** Two letters for a government's badge. */

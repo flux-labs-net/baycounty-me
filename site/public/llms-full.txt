@@ -2449,12 +2449,12 @@ CSV: https://baycounty.me/downloads/owner-gifts.csv · JSON: https://baycounty.m
 
 ### Profiles: people, companies and organizations (entity-profiles)
 Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).
-Rows: 16,699. Columns: entity_id, kind, kind_label, name, subtitle, page_url, aliases, connections, amount_received, amount_given, gov_id, county, source_url
+Rows: 16,720. Columns: entity_id, kind, kind_label, name, subtitle, page_url, aliases, connections, amount_received, amount_given, gov_id, county, source_url
 CSV: https://baycounty.me/downloads/entity-profiles.csv · JSON: https://baycounty.me/downloads/entity-profiles.json
 
 ### Connections between people, companies and organizations (entity-connections)
 Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.
-Rows: 22,808. Columns: link_id, from_id, from_name, from_kind, from_url, to_id, to_name, to_kind, to_url, relation, relation_label, amount, records, first_date, last_date, detail, source_url, county, gov_id
+Rows: 22,842. Columns: link_id, from_id, from_name, from_kind, from_url, to_id, to_name, to_kind, to_url, relation, relation_label, amount, records, first_date, last_date, detail, source_url, county, gov_id
 CSV: https://baycounty.me/downloads/entity-connections.csv · JSON: https://baycounty.me/downloads/entity-connections.json
 
 ### Officeholders by year (officeholder-terms)
@@ -2464,7 +2464,7 @@ CSV: https://baycounty.me/downloads/officeholder-terms.csv · JSON: https://bayc
 
 ### Where the data comes from (data-sources)
 Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.
-Rows: 180. Columns: topic, topic_id, government, government_id, source_name, source_url, method, refresh, what_we_take, how_we_process, checks, page, gov_id
+Rows: 187. Columns: topic, topic_id, government, government_id, source_name, source_url, method, refresh, what_we_take, how_we_process, checks, page, gov_id
 CSV: https://baycounty.me/downloads/data-sources.csv · JSON: https://baycounty.me/downloads/data-sources.json
 
 ### Official photos (official-photos)
@@ -2484,7 +2484,7 @@ CSV: https://baycounty.me/downloads/data-completeness.csv · JSON: https://bayco
 
 ### Websites our records cite (data-source-sites)
 Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.
-Rows: 432. Columns: website, topic, topic_id, documents_cited, source_url, gov_id
+Rows: 434. Columns: website, topic, topic_id, documents_cited, source_url, gov_id
 CSV: https://baycounty.me/downloads/data-source-sites.csv · JSON: https://baycounty.me/downloads/data-source-sites.json
 
 ### Site menu (site-menu)
@@ -2694,7 +2694,7 @@ CSV: https://baycounty.me/downloads/public-notices.csv · JSON: https://baycount
 
 ### Government job openings (job-openings)
 Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 132. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
+Rows: 121. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/job-openings.csv · JSON: https://baycounty.me/downloads/job-openings.json
 
 ### Government job boards (job-boards)
@@ -2887,9 +2887,19 @@ Photos of places in the county on BayCounty.me's own pages, one row per spot a p
 Rows: 7. Columns: place_id, photo_id, page, slot, title, place_name, photo_url, photo_path, small_path, credit, license, license_url, source_url, taken, fetched_on, gov_id
 CSV: https://baycounty.me/downloads/site-photos.csv · JSON: https://baycounty.me/downloads/site-photos.json
 
+### Planning and zoning boards (planning-boards)
+Each government's appointed planning board (planning commission, planning board, planning & zoning board) and board of adjustment: what it decides, who it recommends to (the commission or council makes the final decision), who appoints it, seats and terms, how many members are listed and from what record (roster_as_of, roster_source_url), the next and last meeting from the meetings dataset (board_id matches meetings.board) with agenda and minutes links, and what records the government posts online.
+Rows: 9. Columns: board_id, gov_id, name, kind, also, what_it_does, recommends_to, appointed_by, seats, alternates, term_years, members_listed, roster_as_of, roster_source, roster_source_url, roster_note, records_online, next_meeting, next_meeting_status, next_agenda_url, last_meeting, last_agenda_url, last_minutes_url, page_url, source_url
+CSV: https://baycounty.me/downloads/planning-boards.csv · JSON: https://baycounty.me/downloads/planning-boards.json
+
+### Planning and zoning board members (planning-board-members)
+Who sits on each planning and zoning board: name, role (chair, vice chair, member, alternate), seat and term end where the city lists them, and who appoints the board. Members are public appointees, named because the government publishes them; no addresses, phone numbers or emails. From the city's own board page where there is one (Mexico Beach, Parker), otherwise the roll call in the board's latest posted minutes (as_of is that meeting's date). Only full names are listed. person_entity_id links to the member's profile; person_match is 'official' when the member is also a local official.
+Rows: 34. Columns: board_id, gov_id, board, sort_order, name, role, seat, term_end, appointed_by, person_entity_id, person_url, person_match, as_of, source_title, source_url
+CSV: https://baycounty.me/downloads/planning-board-members.csv · JSON: https://baycounty.me/downloads/planning-board-members.json
+
 ### Upcoming meetings (meetings)
 Scheduled and expected meetings for every board.
-Rows: 47. Columns: board, title, start, location, agenda_url, packet_url, minutes_url, source, status, past, gov_id, detail_url, items, agenda_items, calendar_source, expected
+Rows: 58. Columns: board, title, start, location, agenda_url, packet_url, minutes_url, source, status, past, gov_id, detail_url, items, agenda_items, calendar_source, expected, time_from_schedule
 CSV: https://baycounty.me/downloads/meetings.csv · JSON: https://baycounty.me/downloads/meetings.json
 
 ### Campaign finance totals (campaign-finance)

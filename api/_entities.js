@@ -40,6 +40,7 @@ const RELATION = {
   motion: ['voted on motions naming', 'was named in motions voted on by'],
   agenda: ['is on the agenda of', 'has on its agenda'],
   project: ['has a development project in', 'has development projects by'],
+  appointed: ['serves on an appointed board of', 'has on an appointed board'],
 };
 const KIND_LABEL = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Nonprofit board member', owner: 'Business owner',
   business: 'Business', committee: 'Committee or PAC'};

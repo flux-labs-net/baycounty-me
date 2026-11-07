@@ -93,7 +93,7 @@ Run by Flux Labs (https://fluxlabs.net/), a managed IT services company in Panam
 
 ## Data and API
 
-- [Open data](https://baycounty.me/open-data): 143 datasets as CSV and JSON, refreshed daily
+- [Open data](https://baycounty.me/open-data): 145 datasets as CSV and JSON, refreshed daily
 - [Dataset catalog (JSON)](https://baycounty.me/downloads/index.json): every dataset with its columns and download links
 - [API and assistant connector](https://baycounty.me/developers): REST API, OpenAPI description and an MCP server for AI assistants
 - [OpenAPI description](https://baycounty.me/api/v1/openapi.json): the /api/v1 endpoints

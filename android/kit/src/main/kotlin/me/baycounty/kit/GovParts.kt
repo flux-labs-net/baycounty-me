@@ -10,6 +10,7 @@ enum class GovPart(val id: String, val title: String, val symbol: String) {
     MONEY("money", "Money in, money out", "chart.pie"),
     COMPARE("compare", "Compared with the others", "chart.bar.xaxis"),
     MEETINGS("meetings", "Upcoming meetings", "calendar"),
+    PLANNING("planning", "Planning and zoning", "map"),
     DEBT("debt", "Debt", "creditcard"),
     AUDITS("audits", "What the auditors found", "magnifyingglass"),
     SAVINGS("savings", "Where it could spend less", "dollarsign.arrow.circlepath"),

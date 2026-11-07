@@ -120,6 +120,7 @@ final class DataTests: XCTestCase {
         XCTAssertEqual(Format.value(.string("2026-10-27"), column: "date"), "Oct 27, 2026")
         XCTAssertEqual(Format.value(.string("2026-10-27T18:00:00-05:00"), column: "start"), "Oct 27, 2026 at 6:00 PM")
         XCTAssertEqual(Governments.boardName("lh-cra"), "Lynn Haven CRA Board")
+        XCTAssertEqual(Governments.boardName("mb-planning"), "Mexico Beach Planning & Zoning Board")
     }
 
     /// Opt-in: BCM_LIVE=1 swift test. Hits baycounty.me.

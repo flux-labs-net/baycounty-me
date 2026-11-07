@@ -14,6 +14,10 @@ public enum Governments {
         "pcb": "Panama City Beach City Council", "lh": "Lynn Haven City Commission", "lh-cra": "Lynn Haven CRA Board",
         "cw": "Callaway City Commission", "cw-cra": "Callaway CRA Board", "sp": "Springfield City Commission",
         "parker": "Parker City Council", "mb": "Mexico Beach City Council",
+        "pc-planning": "Panama City Planning Board", "pcb-planning": "Panama City Beach Planning Board",
+        "lh-planning": "Lynn Haven Planning Commission", "lh-boa": "Lynn Haven Board of Adjustment",
+        "cw-planning": "Callaway Planning Board", "parker-planning": "Parker Planning Commission",
+        "mb-planning": "Mexico Beach Planning & Zoning Board",
     ]
 
     /// Two letters for a government's badge.

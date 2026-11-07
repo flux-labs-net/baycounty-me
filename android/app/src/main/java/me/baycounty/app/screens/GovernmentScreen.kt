@@ -31,9 +31,10 @@ import me.baycounty.kit.Meeting
 import me.baycounty.kit.GovYear
 import me.baycounty.kit.GovPart
 import me.baycounty.kit.Officeholders
+import me.baycounty.kit.PlanningBoards
 import me.baycounty.kit.Row as DataRow
 
-private val govDatasets = listOf("officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies")
+private val govDatasets = listOf("officeholder-terms", "government-years", "budget-years", "debt", "bonds", "audit-findings", "savings-opportunities", "cra-agencies") + PlanningBoards.datasets
 
 /**
  * One government, in the same order as its page on BayCounty.me: at a glance, who's in charge, the money,
@@ -73,6 +74,7 @@ fun GovernmentScreen(govID: String, part: GovPart? = null, startYear: Int? = nul
                 GovPart.MONEY -> MoneySection(yc, rows("budget-years"))
                 GovPart.COMPARE -> Compared(g)
                 GovPart.MEETINGS -> GovMeetings(govID)
+                GovPart.PLANNING -> PlanningSection(govID, rows("planning-boards"), rows("planning-board-members"))
                 GovPart.DEBT -> DebtSection(yc, rows("debt"), rows("bonds"), rows("government-years"))
                 GovPart.AUDITS -> AuditSection(yc, rows("audit-findings"))
                 GovPart.SAVINGS -> SavingsSection(govID, rows("savings-opportunities"))
@@ -103,6 +105,7 @@ private fun PartsMenu(g: Government, yc: YearCtx, rows: (String) -> List<DataRow
         GovPart.MONEY -> rows("budget-years").any { it.string("gov_id") == govID }
         GovPart.COMPARE -> true
         GovPart.MEETINGS -> upcoming.isNotEmpty()
+        GovPart.PLANNING -> PlanningBoards.boards(rows("planning-boards"), govID).isNotEmpty()
         GovPart.DEBT -> rows("debt").any { (it.string("gov_id") ?: "") in ids } || rows("bonds").any { (it.string("gov_id") ?: "") in ids }
         GovPart.AUDITS -> findings.isNotEmpty()
         GovPart.SAVINGS -> ideas.isNotEmpty()
@@ -114,6 +117,7 @@ private fun PartsMenu(g: Government, yc: YearCtx, rows: (String) -> List<DataRow
         GovPart.MONEY -> GovYear.budget(rows("budget-years"), govID, yc.year).total?.let { "${Format.compactMoney(it)} $fy budget" } ?: "No $fy budget on file"
         GovPart.COMPARE -> "Per resident, tax rate and debt beside the others"
         GovPart.MEETINGS -> "${upcoming.size} on the calendar"
+        GovPart.PLANNING -> PlanningBoards.summary(PlanningBoards.boards(rows("planning-boards"), govID))
         GovPart.DEBT -> GovYear.row(rows("government-years"), govID, yc.year)?.number("debt_total")?.let { "${Format.compactMoney(it)} owed, end of $fy" } ?: "What it owes, bonds and loans"
         GovPart.AUDITS -> findings.count { GovYear.fiscalYearOf(it.string("fy")) == yc.year }.let { if (it > 0) "$it finding${if (it == 1) "" else "s"} in $fy" else "Findings from every audit on file" }
         GovPart.SAVINGS -> "${ideas.size} idea${if (ideas.size == 1) "" else "s"} to check"
@@ -277,6 +281,42 @@ private fun GovMeetings(govID: String) {
             upcoming.forEachIndexed { i, m ->
                 Box(Modifier.clickable { nav.push(Route.MeetingDetail(m.id)) }) { TodayMeetingRow(m) }
                 if (i < upcoming.lastIndex) RowDivider(66.dp)
+            }
+        }
+    }
+}
+
+/** Each planning and zoning board: what it decides, its next meeting and who sits on it (site/planning_boards.py). */
+@Composable
+private fun PlanningSection(govID: String, boardRows: List<DataRow>, memberRows: List<DataRow>) {
+    val o = rememberOpener()
+    val nav = LocalNav.current
+    val boards = PlanningBoards.boards(boardRows, govID)
+    if (boards.isEmpty()) return
+    Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        boards.forEach { b ->
+            val ms = PlanningBoards.members(memberRows, b.string("board_id"))
+            PageSection(b.string("name") ?: "Planning board", "map", Tone.TEAL, b.string("what_it_does")) {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    CardList {
+                        PlanningBoards.meetingLine(b.string("next_meeting"))?.let {
+                            FactRow("Next meeting", it, if (b.string("next_agenda_url") != null) "Agenda posted" else "Agenda not posted yet")
+                            RowDivider()
+                        }
+                        if (ms.isEmpty()) FactRow("Members", "Not published online", "Appointed by the ${b.string("appointed_by") ?: "commission"}")
+                        ms.forEachIndexed { i, m ->
+                            val eid = m.string("person_entity_id") ?: ""
+                            Box(Modifier.clickable {
+                                if (eid.startsWith("person:")) nav.push(Route.Person(eid.removePrefix("person:"))) else o.openSite(m.string("person_url") ?: "")
+                            }) { FactRow(m.string("name") ?: "", PlanningBoards.memberLine(m)) }
+                            if (i < ms.lastIndex) RowDivider()
+                        }
+                    }
+                    listOfNotNull(b.string("roster_source")?.let { "Members: $it." }, b.string("roster_note"), b.string("records_online"))
+                        .forEach { Text(it, style = T.caption, color = Brand.secondary) }
+                    b.string("next_agenda_url")?.let { url -> LinkLine("Next agenda", "doc.text") { o.open(url) } }
+                    b.string("page_url")?.let { url -> LinkLine("Board page", "safari") { o.open(url) } }
+                }
             }
         }
     }
