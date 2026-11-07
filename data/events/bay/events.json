@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-05",
- "fetched": "2026-11-05T21:33:08-0500",
+ "as_of": "2026-11-06",
+ "fetched": "2026-11-06T14:32:43-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -52,57 +52,6 @@
  "errors": {},
  "events": [
   {
-   "event_id": "library:23773:2026-11-05",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Sail Into School (Ages 3 – 5)",
-   "starts": "2026-11-05T10:00:00",
-   "ends": "2026-11-05T10:30:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/sail-into-school-ages-3-5-6/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23233:2026-11-05",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
-   "starts": "2026-11-05T10:30:00",
-   "ends": "2026-11-05T11:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-10/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7723:2026-11-05",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Sandy Steppers - Dance Class",
-   "starts": "2026-11-05T18:30:00",
-   "ends": "2026-11-05T22:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7723",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
    "event_id": "library:23550:2026-11-06",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -117,23 +66,6 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/escape-the-library-ages-13-registration-required-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
-   "event_id": "lynn-haven:1319:2026-11-06",
-   "source_id": "lynn-haven",
-   "source": "City of Lynn Haven",
-   "gov": "lh",
-   "town": "Lynn Haven",
-   "title": "Joint ULDC Workshop",
-   "starts": "2026-11-06T09:30:00",
-   "ends": "2026-11-06T11:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1319",
-   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
    "recurring": false
   },
   {
@@ -1027,8 +959,8 @@
    "gov": "pc",
    "town": "Panama City",
    "title": "Sunset Yoga",
-   "starts": "2026-11-12T18:00:00",
-   "ends": "2026-11-12T19:00:00",
+   "starts": "2026-11-12T17:30:00",
+   "ends": "2026-11-12T18:30:00",
    "all_day": false,
    "venue": null,
    "category": "Community",
@@ -1851,7 +1783,7 @@
    "cost": null,
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1674",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "panama-city:6520:2026-11-19",
@@ -1936,7 +1868,7 @@
    "cost": null,
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1675",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "panama-city:7437:2026-11-19",
@@ -2024,19 +1956,19 @@
    "recurring": true
   },
   {
-   "event_id": "panama-city:7535:2026-11-19",
+   "event_id": "panama-city:7738:2026-11-19",
    "source_id": "panama-city",
    "source": "City of Panama City",
    "gov": "pc",
    "town": "Panama City",
    "title": "Sunset Yoga",
-   "starts": "2026-11-19T18:00:00",
-   "ends": "2026-11-19T19:00:00",
+   "starts": "2026-11-19T17:30:00",
+   "ends": "2026-11-19T18:30:00",
    "all_day": false,
    "venue": null,
    "category": "Community",
    "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7535",
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7738",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
   },
@@ -2058,6 +1990,23 @@
    "recurring": true
   },
   {
+   "event_id": "bay-county:1676:2026-11-20",
+   "source_id": "bay-county",
+   "source": "Bay County",
+   "gov": "county",
+   "town": "Bay County",
+   "title": "Code Enforcement Magistrate Hearings",
+   "starts": "2026-11-20T09:00:00",
+   "ends": "2026-11-20T11:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1676",
+   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:23786:2026-11-20",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -2072,6 +2021,40 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sea-needles-14/",
    "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "bay-county:1677:2026-11-20",
+   "source_id": "bay-county",
+   "source": "Bay County",
+   "gov": "county",
+   "town": "Bay County",
+   "title": "Code Enforcement Magistrate Hearings",
+   "starts": "2026-11-20T13:00:00",
+   "ends": "2026-11-20T15:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1677",
+   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:6571:2026-11-20",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Line Dancing",
+   "starts": "2026-11-20T13:00:00",
+   "ends": "2026-11-20T14:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6571",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
   },
   {
@@ -2092,6 +2075,23 @@
    "recurring": false
   },
   {
+   "event_id": "panama-city:7493:2026-11-20",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Card Club",
+   "starts": "2026-11-20T14:00:00",
+   "ends": "2026-11-20T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7493",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:23417:2026-11-20",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -2107,6 +2107,23 @@
    "url": "https://www.nwrls.com/event/crafternoon-the-library-4/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": false
+  },
+  {
+   "event_id": "panama-city:7438:2026-11-20",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Dream Builders at MLK",
+   "starts": "2026-11-20T15:00:00",
+   "ends": "2026-11-20T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7438",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
   },
   {
    "event_id": "library:23528:2026-11-21",
@@ -2412,7 +2429,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-advisory-board-ages-14-17/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24372:2026-12-02",
@@ -3261,6 +3278,74 @@
    "category": "Library",
    "cost": "Free",
    "url": "https://www.nwrls.com/event/new-adult-social-hour-ages-18-25-3/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24014:2027-01-05",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
+   "starts": "2027-01-05T09:30:00",
+   "ends": "2027-01-05T11:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-4/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24161:2027-01-05",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Computer Basics (Registration Required)",
+   "starts": "2027-01-05T09:30:00",
+   "ends": "2027-01-05T11:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/computer-basics-registration-required-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24468:2027-01-05",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City Beach",
+   "title": "Mahjong Meetup (Adults)",
+   "starts": "2027-01-05T12:00:00",
+   "ends": "2027-01-05T15:00:00",
+   "all_day": false,
+   "venue": "Panama City Beach Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/mahjong-meetup-adults-5/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24081:2027-01-05",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Teen Advisory Board (Ages 14 – 17)",
+   "starts": "2027-01-05T16:00:00",
+   "ends": "2027-01-05T17:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/teen-advisory-board-ages-14-17-2/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
   }

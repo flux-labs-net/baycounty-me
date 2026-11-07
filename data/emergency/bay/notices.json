@@ -1,7 +1,94 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-05",
+ "checked": "2026-11-06",
  "notices": [
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.259a880b83e3d11c4029805b1a0051c0ed7dba64.001.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "The Dense Fog Advisory has been cancelled.",
+   "summary": "The Dense Fog Advisory has been cancelled and is no longer in effect.",
+   "instruction": null,
+   "severity": "minor",
+   "event": "Dense Fog Advisory",
+   "area": "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf; Quitman; Clay; Randolph; Calhoun; Terrell; Dougherty; Lee; Early; Miller; Baker; Seminole",
+   "zones": null,
+   "issued": "2026-11-06T12:37:00.000Z",
+   "starts": "2026-11-06T12:37:00.000Z",
+   "ends": "2026-11-06T14:00:00.000Z",
+   "updated": "2026-11-06T12:37:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.259a880b83e3d11c4029805b1a0051c0ed7dba64.001.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.464a7cdd768631adbb4d64758746981e43c07cad.001.1",
+    "nws:urn:oid:2.49.0.1.840.0.464a7cdd768631adbb4d64758746981e43c07cad.002.1",
+    "nws:urn:oid:2.49.0.1.840.0.3456c3ac03b8e81ac3ff8c192edd71fd34a565f0.001.1"
+   ]
+  },
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.464a7cdd768631adbb4d64758746981e43c07cad.002.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Dense Fog Advisory issued November 5 at 11:15PM EST until November 6 at 9:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Visibility one quarter mile or less in dense fog. * WHERE...Portions of southeast Alabama, Big Bend and Panhandle Florida, and southwest Georgia. * WHEN...Until 9 AM EST /8 AM CST/ Friday. * IMPACTS...Low visibility could make driving conditions hazardous.",
+   "instruction": "If driving, slow down, use your headlights, and leave plenty of distance ahead of you.",
+   "severity": "moderate",
+   "event": "Dense Fog Advisory",
+   "area": "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
+   "zones": null,
+   "issued": "2026-11-06T04:15:00.000Z",
+   "starts": "2026-11-06T04:15:00.000Z",
+   "ends": "2026-11-06T14:00:00.000Z",
+   "updated": "2026-11-06T04:15:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.464a7cdd768631adbb4d64758746981e43c07cad.002.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-06T04:20:01.200445+00:00",
+   "last_seen": "2026-11-06T12:35:09.28402+00:00",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.3456c3ac03b8e81ac3ff8c192edd71fd34a565f0.001.1"
+   ]
+  },
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.3456c3ac03b8e81ac3ff8c192edd71fd34a565f0.001.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Dense Fog Advisory issued November 5 at 9:57PM EST until November 6 at 9:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Visibility one quarter mile or less in dense fog. * WHERE...Portions of southeast Alabama, Big Bend and Panhandle Florida, and southwest Georgia. * WHEN...Until 9 AM EST /8 AM CST/ Friday. * IMPACTS...Low visibility could make driving conditions hazardous.",
+   "instruction": "If driving, slow down, use your headlights, and leave plenty of distance ahead of you.",
+   "severity": "moderate",
+   "event": "Dense Fog Advisory",
+   "area": "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
+   "zones": null,
+   "issued": "2026-11-06T02:57:00.000Z",
+   "starts": "2026-11-06T03:00:00.000Z",
+   "ends": "2026-11-06T14:00:00.000Z",
+   "updated": "2026-11-06T02:57:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.3456c3ac03b8e81ac3ff8c192edd71fd34a565f0.001.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-06T03:00:01.361788+00:00",
+   "last_seen": "2026-11-06T04:15:01.174265+00:00",
+   "geometry": null
+  },
   {
    "notice_id": "alert:pc:707",
    "place_id": "fl-bay",
@@ -26,7 +113,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=707",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-04T03:05:01.077774+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -136,7 +223,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=706",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-03T21:40:01.144219+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T14:05:01.317334+00:00",
    "geometry": null
   },
   {
@@ -738,7 +825,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1034,7 +1121,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1061,7 +1148,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1088,7 +1175,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1115,7 +1202,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1142,7 +1229,7 @@
    "url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "source_url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1169,7 +1256,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1196,7 +1283,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1249,7 +1336,7 @@
    "url": "https://www.baycountyfl.gov/836/10348/Activation-Information?activeLiveTab=widgets",
    "source_url": "https://www.baycountyfl.gov/AlertCenter.aspx",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1302,7 +1389,7 @@
    "url": "https://www.pcbfl.gov/storm",
    "source_url": "https://www.pcbfl.gov/storm",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T18:15:02.863544+00:00",
    "geometry": null
   },
   {
@@ -1356,7 +1443,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1383,7 +1470,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   },
   {
@@ -1410,7 +1497,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-06T02:34:11.437Z",
+   "last_seen": "2026-11-06T19:34:05.059Z",
    "geometry": null
   }
  ]

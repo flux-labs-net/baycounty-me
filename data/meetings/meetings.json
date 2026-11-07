@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-06T10:10:27-06:00",
+  "generated": "2026-11-06T18:03:53-06:00",
   "window": {
     "from": "2026-11-06",
     "to": "2027-01-05"
@@ -173,12 +173,12 @@
       "calendar_url": "https://www.cityofcallaway.com/Calendar.aspx",
       "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "AgendaCenter": "ok (12 records)",
+        "AgendaCenter": "ok (13 records)",
         "calendar (iCal cat 14)": "ok (10 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
-        "calendar": 2,
+        "agenda_feed": 1,
+        "calendar": 1,
         "expected": 0
       }
     },
@@ -799,15 +799,16 @@
     },
     {
       "board": "cw",
-      "title": "Commission Meeting",
+      "title": "Regular Meeting",
       "start": "2026-11-10T18:00:00-06:00",
       "location": "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
-      "agenda_url": null,
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429",
       "packet_url": null,
       "minutes_url": null,
-      "source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2696"
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted",
+      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
+      "calendar_source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
     },
     {
       "board": "lh",
