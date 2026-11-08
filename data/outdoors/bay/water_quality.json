@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-07T16:58:16+00:00",
+ "fetched_at": "2026-11-08T17:12:22+00:00",
  "sites": [
   {
    "site_id": "Bay12",
@@ -5040,11 +5040,11 @@
    "site_id": "Bay403",
    "site": "Leslie Porter Wayside Park",
    "sample_number": "1287",
-   "date": "2026-03-19",
-   "enterococcus": 10.0,
-   "reported": "10",
+   "date": "2026-03-17",
+   "enterococcus": 213.0,
+   "reported": "213",
    "advisory": false,
-   "rating": "Good",
+   "rating": "Poor",
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LESLIE+PORTER+WAYSIDE+PARK&SPNo=&SPLat=30.254081&SPLong=-85.646434"
   },
   {

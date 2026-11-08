@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-07",
+ "as_of": "2026-11-08",
  "about": "Records request drafts for sources whose newest official record is older than the source’s usual schedule. Seeded into corr.records_requests and sent only from /admin after review.",
  "requests": [
   {
@@ -1487,6 +1487,38 @@
      "headline": "The commission approved the contract for temporary legal services with the Law Offices of Jeff Carter, PA.",
      "source_url": "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_08252020-214",
      "need": "Contract, purchase orders and payments for the 2020-08-25 award to Law Offices of Jeff Carter, PA"
+    },
+    {
+     "gap_id": "award-follow-up:lh-commission:2026-05-12:m24227:text:univar-solutions",
+     "custodian": "lh",
+     "gov_id": "lh",
+     "location": "Univar Solutions, awarded 2026-05-12",
+     "company": "Univar Solutions",
+     "entity_id": null,
+     "award_date": "2026-05-12",
+     "last_record": "2026-05-12",
+     "amount": null,
+     "bid_numbers": "04-557; 05-557",
+     "board": "Lynn Haven City Commission",
+     "headline": "The commission awarded the Bulk Aluminum Sulfate contract to Univar Solutions.",
+     "source_url": "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05122026-1308",
+     "need": "Contract, purchase orders and payments for the 2026-05-12 award to Univar Solutions"
+    },
+    {
+     "gap_id": "award-follow-up:lh-commission:2026-05-12:m24226:vendor:gro-pro",
+     "custodian": "lh",
+     "gov_id": "lh",
+     "location": "Gro Pro, LLC, awarded 2026-05-12",
+     "company": "Gro Pro, LLC",
+     "entity_id": "vendor:gro-pro",
+     "award_date": "2026-05-12",
+     "last_record": "2026-05-12",
+     "amount": null,
+     "bid_numbers": "04-556; 05-556",
+     "board": "Lynn Haven City Commission",
+     "headline": "The commission awarded the Cemetery Lawn Care Services agreement to Gro Pro LLC.",
+     "source_url": "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_05122026-1308",
+     "need": "Contract, purchase orders and payments for the 2026-05-12 award to Gro Pro, LLC"
     },
     {
      "gap_id": "award-follow-up:lh-commission:2026-04-28:m24282:vendor:florida-architects",
@@ -3455,6 +3487,22 @@
      "headline": "Council awarded the Mexico Beach Artificial Reef Association project to Walter Marine for $132,250, funded by a $60,000 FWC grant and $72,250 from the association.",
      "source_url": "https://mexicobeachfl.gov/uploads/2026/02/February-24-2026-City-Council-Meeting-Minutes.pdf",
      "need": "Contract, purchase orders and payments for the 2026-02-24 award to Walter Marine"
+    },
+    {
+     "gap_id": "award-follow-up:mb-council:2026-05-12:m24251:vendor:dewberry",
+     "custodian": "mb",
+     "gov_id": "mb",
+     "location": "Dewberry Engineers, awarded 2026-05-12",
+     "company": "Dewberry Engineers",
+     "entity_id": "vendor:dewberry",
+     "award_date": "2026-05-12",
+     "last_record": "2026-05-12",
+     "amount": 119867.0,
+     "bid_numbers": null,
+     "board": "Mexico Beach City Council",
+     "headline": "Council approved a $119,867.00 task order with Dewberry Engineering for jetty construction services.",
+     "source_url": "https://mexicobeachfl.gov/uploads/2026/05/May-12-2026-City-Council-Meeting-Minutes.pdf",
+     "need": "Contract, purchase orders and payments for the 2026-05-12 award to Dewberry Engineers"
     },
     {
      "gap_id": "award-follow-up:mb-council:2025-04-08:m26012:text:gortomoller-engineering",

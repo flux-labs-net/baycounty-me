@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-07",
- "fetched": "2026-11-07T11:57:21-0500",
+ "as_of": "2026-11-08",
+ "fetched": "2026-11-08T12:11:08-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -49,59 +49,10 @@
    "page": "https://pcbeach.org/local-events/"
   }
  ],
- "errors": {},
+ "errors": {
+  "parker": "HTTPError: HTTP Error 500: Internal Server Error"
+ },
  "events": [
-  {
-   "event_id": "pcb-chamber:27383",
-   "source_id": "pcb-chamber",
-   "source": "Panama City Beach Chamber",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Visit Panama City Beach Ironman Florida",
-   "starts": "2026-11-07T00:00:00",
-   "ends": "2026-11-07T23:59:59",
-   "all_day": true,
-   "venue": "Pier Park",
-   "category": "Community",
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/visit-panama-city-beach-ironman-florida-3/",
-   "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false
-  },
-  {
-   "event_id": "library:24003:2026-11-07",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Explore Native Plants Event (All Ages)",
-   "starts": "2026-11-07T09:00:00",
-   "ends": "2026-11-07T12:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/explore-native-plant-event-all-ages/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:7618:2026-11-07",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Touch-A-Truck 2026",
-   "starts": "2026-11-07T10:00:00",
-   "ends": "2026-11-07T13:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7618",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
-  },
   {
    "event_id": "library:23534:2026-11-09",
    "source_id": "library",
@@ -3227,6 +3178,40 @@
    "category": "Library",
    "cost": null,
    "url": "https://www.nwrls.com/event/beach-book-club-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24165:2027-01-07",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Internet Basics (Registration Required)",
+   "starts": "2027-01-07T09:30:00",
+   "ends": "2027-01-07T11:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/internet-basics-registration-required-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24038:2027-01-07",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
+   "starts": "2027-01-07T10:30:00",
+   "ends": "2027-01-07T11:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-4/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
   }

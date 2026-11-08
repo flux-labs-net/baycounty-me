@@ -40,7 +40,7 @@ sp,Springfield,actuals,Audited spending,FY2016–FY2025,9,10,years,90.0,partial,
 sp,Springfield,tax,Tax rates,FY2016–FY2027,7,12,years,58.3,partial,FY2016–FY2020,The property tax rate (millage) adopted for each fiscal year.,/governments/springfield#rate,/data-sources#matrix
 sp,Springfield,debt,Debt,FY2016–FY2025,1,10,years,10.0,missing,FY2016–FY2024,Total debt from each year's audited financial statements.,/governments/springfield#debt,/data-sources#matrix
 sp,Springfield,audits,Audit findings,FY2016–FY2025,3,10,years,30.0,missing,FY2016–FY2022,"Audits filed with the Florida Auditor General, read for findings and the auditor's opinion.",/governments/springfield#audits,/data-sources#matrix
-sp,Springfield,officials,Officials by year,2016–2026,54.0,54.3,seat-years,99.4,partial,,Seat-years since 2016 where the officeholder is confirmed from a record.,/governments/springfield#who,/data-sources#matrix
+sp,Springfield,officials,Officials by year,2016–2026,54.0,54.3,seat-years,99.5,partial,,Seat-years since 2016 where the officeholder is confirmed from a record.,/governments/springfield#who,/data-sources#matrix
 parker,Parker,budgets,Adopted budgets,FY2016–FY2027,11,12,years,91.7,partial,FY2020,Adopted budget total or General Fund for each fiscal year.,/governments/parker#money,/data-sources#matrix
 parker,Parker,actuals,Audited spending,FY2016–FY2025,9,10,years,90.0,partial,FY2025,"From the state's Local Government Financial Reports, filed through FY2025.",/governments/parker#money,/data-sources#matrix
 parker,Parker,tax,Tax rates,FY2016–FY2027,7,12,years,58.3,partial,FY2016–FY2020,The property tax rate (millage) adopted for each fiscal year.,/governments/parker#rate,/data-sources#matrix

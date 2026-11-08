@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-07",
+ "updated": "2026-11-08",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -8716,7 +8716,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 56,
+   "rows": 55,
    "columns": [
     {
      "name": "place_id",
@@ -8926,7 +8926,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 187,
+   "rows": 186,
    "columns": [
     {
      "name": "place_id",
@@ -9642,7 +9642,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-07T07:06:00+00:00"
+      "2026-11-08T17:06:00+00:00"
      ]
     },
     {
@@ -9650,8 +9650,8 @@
      "type": "string",
      "values": [
       "Monday",
-      "Sunday",
-      "Today",
+      "Rest Of Today",
+      "Thursday",
       "Tuesday",
       "Veterans Day"
      ]
@@ -9682,6 +9682,7 @@
      "name": "rip_current_risk",
      "type": "string",
      "values": [
+      "High",
       "Moderate"
      ]
     },
@@ -9689,6 +9690,7 @@
      "name": "surf_height",
      "type": "string",
      "values": [
+      "1 foot or less",
       "Around 1 foot",
       "around 1 foot"
      ]
@@ -9704,7 +9706,7 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "75 degrees"
+      "74 degrees"
      ]
     },
     {
@@ -9712,37 +9714,38 @@
      "type": "string",
      "values": [
       "Mostly sunny",
-      "Partly sunny"
+      "Mostly sunny until 5 PM, then mostly"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 70s"
+      "In the lower 70s",
+      "In the mid 70s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "North winds 10 to 15 mph",
-      "North winds 5 to 10 mph"
+      "North winds 5 to 10 mph",
+      "North winds around 5 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:01 AM"
+      "7:01 AM",
+      "7:02 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:51 PM",
-      "5:52 PM"
+      "5:51 PM"
      ]
     },
     {
@@ -9750,12 +9753,12 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
+      "High rip current risk*. Mostly cloudy. A slight chance of showers and thunderstorms. Highs in the lower 70s. West winds around 20 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Light northwesterly to northerly winds prevail through the weekend into early next week. A Moderate Risk of Rip Currents is forecast at all area beaches through the weekend into early next week.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. North winds around 5 mph.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northeast winds around 5 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the mid 70s. North winds around 10 mph.",
+      "Light northwesterly to northerly winds prevail through the weekend into early next week. A Moderate Risk of Rip Currents is forecast at all area beaches through mid-week. A cold front is forecast to near the area late Wednesday and cause winds to increase, which increases the potential for rip currents to high as soon as Thursday.",
+      "Moderate rip current risk*. Partly sunny. Highs in the mid 70s. Northwest winds around 5 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the mid 70s. East winds around 5 mph.",
       "Moderate surf and/or currents. Use caution.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
@@ -9779,8 +9782,8 @@
      "name": "source_url",
      "type": "string",
      "values": [
+      "https://api.weather.gov/products/1a909771-a08b-4291-a679-de9597e03d37",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/a95bea8f-bc64-430d-b5b3-7c2c7468be1a",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12446,7 +12449,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-07"
+      "2026-11-08"
      ]
     },
     {
@@ -12595,7 +12598,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 58,
+   "rows": 60,
    "columns": [
     {
      "name": "notice_id",
@@ -12754,7 +12757,8 @@
       "2026-11-06T03:00:00.000Z",
       "2026-11-06T04:15:00.000Z",
       "2026-11-06T12:37:00.000Z",
-      "2026-11-06T21:27"
+      "2026-11-06T21:27",
+      "2026-11-07T19:13"
      ]
     },
     {
@@ -12789,7 +12793,8 @@
       "2026-11-07T18:47:00.000Z",
       "2026-11-07T18:48:00.000Z",
       "2026-11-07T21:03:00.000Z",
-      "2026-11-09T16:17:11.000Z"
+      "2026-11-09T16:17:11.000Z",
+      "2026-11-17T19:30:23.000Z"
      ]
     },
     {
@@ -12816,7 +12821,8 @@
      "name": "roadway",
      "type": "string",
      "values": [
-      "US-231"
+      "US-231",
+      "US-98"
      ]
     },
     {
@@ -12849,6 +12855,7 @@
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2158",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
+      "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
       "https://www.panamacity.gov/AlertCenter.aspx",
       "https://www.pcbfl.gov/AlertCenter.aspx",
       "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
@@ -14102,7 +14109,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 122,
+   "rows": 124,
    "columns": [
     {
      "name": "place_id",
@@ -14231,7 +14238,8 @@
       "2026-11-03",
       "2026-11-04",
       "2026-11-05",
-      "2026-11-06"
+      "2026-11-06",
+      "2026-11-08"
      ]
     },
     {
@@ -14325,7 +14333,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-07"
+      "2026-11-08"
      ]
     }
    ],
@@ -15703,7 +15711,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 125,
+   "rows": 122,
    "columns": [
     {
      "name": "place_id",
@@ -15724,7 +15732,6 @@
      "type": "string",
      "values": [
       "contract",
-      "event",
       "vote"
      ]
     },
@@ -15767,35 +15774,20 @@
       "2026-09-24",
       "2026-10-05",
       "2026-10-13",
-      "2026-10-27",
-      "2026-11-07"
+      "2026-10-27"
      ]
     },
     {
      "name": "starts",
-     "type": "string",
-     "values": [
-      "2026-11-07T00:00:00",
-      "2026-11-07T09:00:00",
-      "2026-11-07T10:00:00"
-     ]
+     "type": "string"
     },
     {
      "name": "ends",
-     "type": "string",
-     "values": [
-      "2026-11-07T12:00:00",
-      "2026-11-07T13:00:00",
-      "2026-11-07T23:59:59"
-     ]
+     "type": "string"
     },
     {
      "name": "all_day",
-     "type": "boolean",
-     "values": [
-      false,
-      true
-     ]
+     "type": "string"
     },
     {
      "name": "gov_id",
@@ -15842,26 +15834,16 @@
     },
     {
      "name": "town",
-     "type": "string",
-     "values": [
-      "Panama City",
-      "Panama City Beach"
-     ]
+     "type": "string"
     },
     {
      "name": "venue",
-     "type": "string",
-     "values": [
-      "Bay County Public Library",
-      "Pier Park"
-     ]
+     "type": "string"
     },
     {
      "name": "category",
      "type": "string",
      "values": [
-      "Community",
-      "Library",
       "appointment",
       "budget",
       "consent agenda",
@@ -15881,10 +15863,7 @@
     },
     {
      "name": "recurring",
-     "type": "boolean",
-     "values": [
-      false
-     ]
+     "type": "string"
     },
     {
      "name": "agenda_posted",
@@ -15990,19 +15969,13 @@
      "name": "page_url",
      "type": "string",
      "values": [
-      "https://baycounty.me/events",
       "https://baycounty.me/public-money/contracts",
       "https://baycounty.me/public-money/votes"
      ]
     },
     {
      "name": "source",
-     "type": "string",
-     "values": [
-      "City of Panama City",
-      "Northwest Regional Library System",
-      "Panama City Beach Chamber"
-     ]
+     "type": "string"
     },
     {
      "name": "source_url",
@@ -16024,14 +15997,11 @@
       "https://mexicobeachfl.gov/uploads/2026/08/September-21-2026-Final-Budget-Hearing-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/08/September-22-2026-Cit-Council-Meeting-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/08/September-8-2026-CIty-Council-Minutes.pdf",
-      "https://pcbeach.org/local-events/",
       "https://pcbgov.granicus.com/MinutesViewer.php?view_id=1&clip_id=416&doc_id=f7101529-be9b-11f1-89ef-005056a84798",
       "https://pcbgov.granicus.com/MinutesViewer.php?view_id=1&clip_id=418&doc_id=2f050b9d-bc36-11f1-89ef-005056a84798",
       "https://pcbgov.granicus.com/MinutesViewer.php?view_id=1&clip_id=419&doc_id=daf0cf8b-d214-11f1-89ef-005056a84798",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09082026-420",
-      "https://www.nwrls.com/events",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09082026-890",
-      "https://www.panamacity.gov/Calendar.aspx",
       "https://www.springfieldfl.net/media/10871",
       "https://www.springfieldfl.net/media/10881",
       "https://www.springfieldfl.net/media/10906"
@@ -17589,7 +17559,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-07"
+      "2026-11-08"
      ]
     },
     {
@@ -20547,7 +20517,7 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-07",
+      "2026-11-08",
       "2026-11-12"
      ]
     },
@@ -20782,7 +20752,7 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-07",
+      "2026-11-08",
       "2026-11-12"
      ]
     },

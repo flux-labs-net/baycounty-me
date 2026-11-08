@@ -1,7 +1,60 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-07",
+ "checked": "2026-11-08",
  "notices": [
+  {
+   "notice_id": "news:lh:365",
+   "place_id": "fl-bay",
+   "kind": "storm",
+   "source": "City of Lynn Haven",
+   "source_type": "news",
+   "gov_id": "lh",
+   "title": "Hunker Down: The Story of Lynn Haven's Hurricane Heroes",
+   "summary": "What happens when a hurricane threatens Lynn Haven? In this episode of Haven444, discover how city employees and first responders prepare, protect residents, and help our community recover.",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-07T19:30:23.000Z",
+   "starts": null,
+   "ends": "2026-11-17T19:30:23.000Z",
+   "updated": "2026-11-07T19:30:23.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
+   "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
+   "first_seen": "2026-11-07T19:35:02.59984+00:00",
+   "last_seen": "2026-11-08T17:12:36.087Z",
+   "geometry": null
+  },
+  {
+   "notice_id": "fl511:948018",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "FL511 (Florida Department of Transportation)",
+   "source_type": "fl511",
+   "gov_id": null,
+   "title": "US-98: incident (Westbound)",
+   "summary": "Crash in Bay County on US-98 East, at Bay County Line. Right lane blocked. Last updated at 07:26 PM.",
+   "instruction": null,
+   "severity": "moderate",
+   "event": "Incident",
+   "area": "Right lane blocked",
+   "zones": null,
+   "issued": "2026-11-07T19:13",
+   "starts": "2026-11-07T19:13",
+   "ends": null,
+   "updated": "2026-11-07T19:26",
+   "status": "ended",
+   "full_closure": false,
+   "roadway": "US-98",
+   "url": "https://fl511.com/",
+   "source_url": "https://fl511.com/",
+   "first_seen": "2026-11-08T00:20:02.37162+00:00",
+   "last_seen": "2026-11-08T00:50:01.890902+00:00"
+  },
   {
    "notice_id": "fl511:946421",
    "place_id": "fl-bay",
@@ -52,7 +105,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -166,7 +219,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=709",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-07T14:10:03.404756+00:00",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -905,7 +958,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1201,7 +1254,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1228,7 +1281,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1255,7 +1308,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1282,7 +1335,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1309,7 +1362,7 @@
    "url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "source_url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1336,7 +1389,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1363,7 +1416,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-07T17:05:09.465489+00:00",
    "geometry": null
   },
   {
@@ -1523,7 +1576,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1550,7 +1603,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   },
   {
@@ -1577,7 +1630,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-07T16:58:31.479Z",
+   "last_seen": "2026-11-08T17:12:36.087Z",
    "geometry": null
   }
  ]

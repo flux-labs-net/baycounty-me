@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-07",
+ "as_of": "2026-11-08",
  "fetched": {
-  "pcb-chamber": "2026-11-07T16:57:21+00:00",
+  "pcb-chamber": "2026-11-08T17:11:08+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27383",
-   "title": "Visit Panama City Beach Ironman Florida",
-   "starts": "2026-11-07T00:00:00",
-   "ends": "2026-11-07T23:59:59",
-   "all_day": true,
-   "venue": "Pier Park",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/visit-panama-city-beach-ironman-florida-3/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27730",
