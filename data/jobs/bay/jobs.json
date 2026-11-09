@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T21:35:40.622Z",
+ "as_of": "2026-11-09T22:21:22.817Z",
  "boards": [
   {
    "key": "county",
@@ -28,7 +28,7 @@
    "url": "https://www.governmentjobs.com/careers/pcgov",
    "read": true,
    "note": null,
-   "error": null,
+   "error": "page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://www.governmentjobs.com/careers/pcgov\", waiting until \"networkidle\"\n",
    "count": 24
   },
   {
