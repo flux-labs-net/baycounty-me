@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-08T11:05:51-06:00",
+  "generated": "2026-11-09T15:28:02-06:00",
   "window": {
-    "from": "2026-11-08",
-    "to": "2027-01-07"
+    "from": "2026-11-09",
+    "to": "2027-01-08"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -701,6 +701,7 @@
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted",
+      "detail_url": "https://youtube.com/live/wmvZU--ANIk?feature=share",
       "past": true
     },
     {
@@ -773,7 +774,7 @@
       "start": "2026-11-10T17:30:00-06:00",
       "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
       "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
-      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1159,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
