@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-09T16:13:49-06:00",
+  "generated": "2026-11-10T12:41:50-06:00",
   "window": {
-    "from": "2026-11-09",
-    "to": "2027-01-08"
+    "from": "2026-11-10",
+    "to": "2027-01-09"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -273,7 +273,7 @@
         "AgendaCenter": "ok (6 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 0,
         "calendar": 0,
         "expected": 0
       }
@@ -430,41 +430,6 @@
       "status": "posted",
       "detail_url": "https://youtube.com/live/N6DW4qprYos?feature=share",
       "past": true
-    },
-    {
-      "board": "pc-planning",
-      "title": "Planning Board Meeting",
-      "start": "2026-10-12T16:00:00-05:00",
-      "location": "Panama City City Hall, 501 Harrison Ave., Panama City, FL 32401 (confirm room on agenda)",
-      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?html=true",
-      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10122026-913?packet=true",
-      "minutes_url": null,
-      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
-      "status": "posted",
-      "past": true,
-      "items": [
-        {
-          "title": "Agenda - 10/12/2026 Planning Board Meeting Agenda Monday, October 12, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
-          "amount": null
-        }
-      ],
-      "agenda_items": [
-        "Agenda - 10/12/2026 Planning Board Meeting Agenda Monday, October 12, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
-        "Call Public Meeting to Order / Roll Call",
-        "Changes / Deletions to Agenda",
-        "Announcements – Disclosures (as applicable)",
-        "Approval of Minutes",
-        "Approval of the September 14, 2026, Planning Board Meeting Minutes",
-        "Quasi-Judicial Proceedings",
-        "Requests",
-        "Case Number: CPC-PLN-2026-1825 Application Type : Variance Request: The applicant is requesting a variance from the accessory structure size regulations established by Sec. 110-4 (A)(1)(iv) and Sec. 110-4(B)(3) - Accessory Structures of the City of Panama City Unified Land Development Code (ULDC). The applicant is requesting a variance to allow for an accessory structure to exceed the 60% maximum ",
-        "Case Number: CPC-PLN-2026-1924 Application Type : Variance Request: The applicant is requesting a variance from the General Commercial (GC-2) setback regulations established by Sec. 104-38 of the City of Panama City Unified Land Development Code (ULDC). Owner: STONEY POINT INVESTMENTS LLC Applicant: Bayou Builders Address/Location: 3120 W 23 RD STREET (Parcel ID #: 26787-010-000) Acreage (+/-): 0.",
-        "Case Number: CPC-PLN-2026-1918 Application Type: Unified Land Development Code Text Amendment Request: Amend Sec. 104-66 (B), Gateway Overlay, District defined, to apply the Overlay to non-residential land parcels of record within 200 ft. instead of 400 ft. of the roadway on each side of the major roadways within the city. Applicant: City of Panama City Planning Board Public Hearing Date: October ",
-        "Case Number: CPC-PLN-2026-1857 Application Type: Unified Land Development Code Text Amendment Request: Request to amend Sec. 104-39, Light Industrial (LI) zoning district, Unified Land Development Code to permit Recycling Centers. Planning Board Public Hearing Date: October 12, 2026 (continued from September 14, 2026) City Commission Public Hearing Date (s): First Reading/Public Hearing: September",
-        "Case Number: CPC-PLN-2026-1793 Application Type: Comprehensive Plan Text and Future Land Use Map Series Update Request: Update and the local Comprehensive Plan per the latest data and analyses. Applicant: City of Panama City Planning Board Public Hearing Date: October 12, 2026 (continued from September 14, 2026) City Commission Public Hearing Date (s): Introduction Hearing: September 22, 2026, 4:3",
-        "Non- Action Item (s):",
-        "Audience Participation"
-      ]
     },
     {
       "board": "lh-cra",
@@ -731,6 +696,7 @@
       "minutes_url": null,
       "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
       "status": "posted",
+      "past": true,
       "items": [
         {
           "title": "Agenda - 11/09/2026 Planning Board Meeting Agenda Monday, November 9, 2026, 4:00 PM City of Panama City, City Hall 501 Harrison Avenue, Lower Level, Room 010 Panama City, FL 32401 Fraudulent Planning & Zoning Fee Scam Emails - Applicants Take Notice The City of Panama City Development Services Department's Planning and Zoning Division is alerting applicants to a scam involving fraudulent emails th",
