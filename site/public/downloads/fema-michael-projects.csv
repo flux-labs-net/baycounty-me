@@ -5,7 +5,7 @@ Bay County,628,Countywide Stormwater Outfall System Debris,A,84915104.48,9435011
 School Board of Bay County Florida,85,"EXP-Emergency Protective Measures from October 10 - November 24, 2018",B,38916426.15,38916530.01,2019-04-26,2023-08-16,Project Closed Out,Large,schools
 Bay County,103,"EXP - Debris Removal from October 10 – November 24, 2018",A,36597327.69,36597327.69,2019-04-05,2020-08-05,Pending Closeout Award,Large,county
 "Mexico Beach, City Of",658,"Debris Removal November 25, 2018 - Completion",A,34733369.3,38592632.56,2019-10-02,2020-07-01,Pending Closeout Award,Large,mb
-Bay County,2095,"Countywide Asphalt Reconstruction, Resurfacing and Pavement Conditioning Survey due to Debris Operation",C,20411193.75,27214925,2021-06-04,2023-07-26,Pending Applicant Project Review,Large,county
+Bay County,2095,"Countywide Asphalt Reconstruction, Resurfacing and Pavement Conditioning Survey due to Debris Operation",C,20411193.75,27214925,2021-06-04,2023-07-26,Pending Award,Large,county
 "Panama City, City of",35,"EXP - Debris Removal from October 10 – November 24, 2018",A,20333488.55,20333488.55,2019-03-15,2020-03-27,Project Closed Out,Large,pc
 School Board of Bay County Florida,1276,District Wide A&E Costs,E,19261152,21401280,2020-05-08,2026-08-28,Obligated,Large,schools
 The Board of Trustees of Bay Medical Center,1547,"CM  Emergency Protective Measures from October 10 - November 24, 2018",B,16924386.54,16928844.23,2020-09-30,2025-05-16,Project Closed Out,Large,
@@ -31,7 +31,7 @@ School Board of Bay County Florida,309,Estimated Management Cost - School Board 
 "Panama City, City of",1347,Water and Sewer Line Repairs - FA; Contract; Mutual Aid,F,6322881.58,9756223.07,2020-05-22,2026-07-14,Project Closed Out,Large,pc
 Family Of God Baptist Church,1751,"(428 fixed cost)  FOGBC Buildings (EAST & WEST Campus), Specialized Damages",E,5749104.76,6387894.17,2021-06-04,2026-08-28,Obligated,Large,
 "Parker, City Of",1001,"Debris Removal from November 25, 2018 – August 23,2019",A,5697614.1,6330682.33,2020-03-31,2023-12-05,Project Closed Out,Large,parker
-"Mexico Beach, City Of",1961,NOT A 428 Project - Harbor and Canal Dredging WTBC,D,5647300.83,8335227,2021-08-19,2026-10-28,Pending Closeout Completion,Large,mb
+"Mexico Beach, City Of",1961,NOT A 428 Project - Harbor and Canal Dredging WTBC,D,5647300.83,8335227,2021-08-19,2026-10-28,Project Closed Out,Large,mb
 School Board of Bay County Florida,1305,428 Jinks Gym Building 7,E,5399163,5999070,2020-06-02,2026-08-28,Obligated,Large,schools
 "Chemical Addictions Recovery Effort, Inc. (CARE)",1511,NOT 428 PROJECT - C.A.R.E. Main Campus Facilities,E,5155514.75,5728349.72,2021-08-31,2026-08-29,Obligated,Large,
 Bay County,1459,Countywide Ditches and Shoulders Roadside,C,5072030.1,5635589,2021-03-16,2026-08-28,Obligated,Large,county
@@ -39,8 +39,8 @@ Bay County,1459,Countywide Ditches and Shoulders Roadside,C,5072030.1,5635589,20
 Panama City Fellowship Church of Praise,2323,PCFCP  Building,E,5030573.4,5589526,2024-05-16,2026-08-27,Obligated,Large,
 "Panama City, City of",27,"EXP – Emergency Protective Measures from October 10 - November 24, 2018",B,4967764.26,4967764.26,2019-03-08,2019-04-30,Project Closed Out,Large,pc
 "Mexico Beach, City Of",330,Mexico Beach Management Costs,Z,4836051.52,4836051.52,2019-06-10,2022-06-09,Obligated,Large,mb
-"Howard Carlisle Memorial Baptist Church, Inc",2317,IMPROVED - Sanctuary/Office/Senior Adult/Youth/Pre-School,E,4566693.65,6088924.86,2023-08-21,2023-08-21,Pending FEMA 406 HMP Completion,Large,
-School Board of Bay County Florida,2099,NON 428 Merritt Brown Buildings,E,4407039.62,4896710.68,2023-10-06,2026-10-30,Pending Closeout Completion,Large,schools
+"Howard Carlisle Memorial Baptist Church, Inc",2317,IMPROVED - Sanctuary/Office/Senior Adult/Youth/Pre-School,E,4566693.65,6088924.86,2023-08-21,2023-08-21,Pending Recipient Final Review,Large,
+School Board of Bay County Florida,2099,NON 428 Merritt Brown Buildings,E,4407039.62,4896710.68,2023-10-06,2026-10-30,Project Closed Out,Large,schools
 The Board of Trustees of Bay Medical Center,2291,Hospital Core Group II,E,4268982.89,4743314.32,2021-10-12,2026-08-27,Obligated,Large,
 "Panama City, City of",1295,"428 Project - Repairs to facilities in Martin Luther King, Jr. Recreation Center including buildings and property in the open",E,4258972.72,4732191.91,2020-05-22,2026-08-28,Obligated,Large,pc
 Bay County,1425,H.G. Harders Park,G,4250205.23,4722450.25,2020-09-17,2026-08-28,Obligated,Large,county
@@ -54,7 +54,7 @@ Bay County,1735,Countywide Demolition Debris,A,3816560.12,4240622.35,2020-11-10,
 "Callaway, City of",140,"EXP - Debris Removal from October 10 – November 24, 2018",A,3532516.29,3532516.29,2019-04-26,2019-09-24,Project Closed Out,Large,cw
 "Callaway, City of",548,(428) Callaway City Wide Parks and Fencing,G,3357917.14,3731019.04,2021-03-19,2026-08-28,Obligated,Large,cw
 "Springfield, City of",1358,428 Springfield Level 1 Road Damages Citywide,C,3294166.32,3660184.8,2020-10-14,2026-08-28,Obligated,Large,sp
-Bay County,1864,Waste to Energy Facility,F,3222701.19,3580779.09,2021-04-18,2026-10-28,Pending Closeout Completion,Large,county
+Bay County,1864,Waste to Energy Facility,F,3222701.19,3580779.09,2021-04-18,2026-10-28,Project Closed Out,Large,county
 "Mexico Beach, City Of",556,Emergency Berm on Beach,B,3218684.76,3962663,2020-02-11,2025-08-11,Project Closed Out,Large,mb
 Harvest Worship Center,252,428 - Harvest Worship Church Campus,E,3123477.54,3470530.6,2021-06-04,2026-08-28,Obligated,Large,
 First Presbyterian Church (Bay),2167,Sanctuary Building and Contents  428,E,2996206.2,3329118,2022-12-23,2026-08-27,Obligated,Large,
@@ -62,7 +62,7 @@ First Presbyterian Church (Bay),2167,Sanctuary Building and Contents  428,E,2996
 The Board of Trustees of Bay Medical Center,1996,Buildings- Tom Cooley Building,E,2957818.62,3286465.13,2021-05-24,2026-09-30,Project Closed Out,Large,
 School Board of Bay County Florida,2315,NON - 428 Haney Tech Buildings Group Project,E,2951608.44,3279564.93,2022-06-28,2026-08-27,Obligated,Large,schools
 The Board of Trustees of Bay Medical Center,1667,Management Costs-The Board of Trustees of Bay Medical Center (005-UB98H-00),Z,2886650.81,2886650.81,2020-09-04,2023-03-31,Obligated,Large,
-"Lynn Haven, City of",1420,(428) - City of Lynn Haven Sports Complex Gymnasium and Administration Facility,E,2799012.76,3732017.01,2020-10-14,2021-11-05,Pending Applicant Project Review,Large,lh
+"Lynn Haven, City of",1420,(428) - City of Lynn Haven Sports Complex Gymnasium and Administration Facility,E,2799012.76,3732017.01,2020-10-14,2021-11-05,Pending Award,Large,lh
 "Mexico Beach, City Of",2,"Debris Removal City Wide - Operational Period Oct. 11 - 23, 2018.",A,2769334.82,2775612.77,2019-01-28,2024-03-11,Project Closed Out,Large,mb
 School Board of Bay County Florida,2236,"NON - 428 RLY Transportation Buildings 2, 3",E,2765701.1,5085047.67,2021-08-31,2026-08-27,Obligated,Large,schools
 The Board of Trustees of Bay Medical Center,2226,NOT A 428-MATERIAL MANAGEMENT PLANT SERVICES BLDG SYSTEMS,E,2742053.47,3656071.29,2022-03-03,2022-03-03,Pending Scope and Cost Development,Large,
@@ -83,7 +83,7 @@ Bay County,1500,Temporary Facilities - Fire Station Buildings,B,2231444.41,24793
 "Mexico Beach, City Of",17,428 PROJECT - Canal Parkway Bridge/Culvert,C,2163384.9,2403761,2019-03-01,2026-08-27,Obligated,Large,mb
 School Board of Bay County Florida,2166,NON - 428 Mosley Ancillary Components Project 1,G,2162674.58,2402971.75,2021-08-19,2026-08-27,Obligated,Large,schools
 Bay County,1447,(428) Courthouse Annex,E,2149162.1,2387957.88,2021-05-24,2026-08-28,Obligated,Large,county
-Bay County,1117,"(NOT A 428) Countywide Roads (County Line, Baldwin, E CR-388 and Steelfield)",C,2142461.92,3206445.38,2021-07-10,2026-10-28,Pending Closeout Completion,Large,county
+Bay County,1117,"(NOT A 428) Countywide Roads (County Line, Baldwin, E CR-388 and Steelfield)",C,2142461.92,3206445.38,2021-07-10,2026-10-28,Project Closed Out,Large,county
 The Board of Trustees of Bay Medical Center,2332,CM-  North Tower & Systems,E,2078420.17,2309355.74,2023-05-25,2026-08-28,Obligated,Large,
 School Board of Bay County Florida,2298,NON - 428 Mowat Buildings Project 1,E,2056040.3,2284489.22,2022-01-26,2026-08-27,Obligated,Large,schools
 Bay County Sheriff's Office,1053,"CAT B - Emergency Protective Measures October 10-November 24, 2018",B,2030078.77,2030078.77,2020-03-03,2023-07-26,Project Closed Out,Large,sheriff
@@ -101,7 +101,7 @@ Panama City Housing Authority,2039,MC-  Kirkland Buildings Project 2   *428*,E,1
 Panama City Housing Authority,2336,HENRY T. KIRKLAND MAINTENANCE COMPLEX - Combined Alternate Project,E,1581409.71,1757121.9,2026-02-04,2026-08-27,Obligated,Large,
 "Mexico Beach, City Of",1042,428 PROJECT-Mexico Beach - City Wide Roads,C,1520429.4,1689366,2020-05-08,2026-08-28,Obligated,Large,mb
 Bay County,622,Countywide Canals/Waterway Debris,A,1498675.35,1665194.83,2019-11-08,2026-06-01,Project Closed Out,Large,county
-"Mexico Beach, City Of",1829,NOT A 428 PROJECT - 87205 - Waste Water Collection System,F,1474576.23,1638418.03,2021-03-16,2026-10-28,Pending Closeout Completion,Large,mb
+"Mexico Beach, City Of",1829,NOT A 428 PROJECT - 87205 - Waste Water Collection System,F,1474576.23,1638418.03,2021-03-16,2026-10-28,Project Closed Out,Large,mb
 "Panama City, City of",2272,Contents/Equipment/Supplies Buildings Citywide,E,1457570.94,1619523.26,2021-12-15,2026-08-27,Obligated,Large,pc
 "Panama City, City of",2270,Wet and Land Debris Removal -  Wet Debris Removal - Panama City Marina; St Andrews Marina,A,1453577.86,1636929.94,2022-01-26,2024-03-08,Project Closed Out,Large,pc
 First Presbyterian Church (Bay),2263,"Social Building, Chapel  Building and Playground",E,1441595.57,1601772.85,2022-11-29,2026-08-27,Obligated,Large,
@@ -124,11 +124,10 @@ School Board of Bay County Florida,1366,428-CAT E: Jinks Portables,E,1166380.29,
 Holy Nativity Episcopal School,236,EXP - Emergency Protective Measures from Oct 10 to Nov 24,B,1163807.76,1187407.75,2019-05-16,2023-07-13,Project Closed Out,Large,
 "Panama City, City of",1758,428 - Old City Hall Annex - Repair or Replacement,E,1138195.8,1264662,2021-07-10,2026-08-28,Obligated,Large,pc
 "Mexico Beach, City Of",751,428 Dune Access (wooden walk-overs),G,1128961.8,1254402,2020-01-17,2026-08-27,Obligated,Large,mb
-School Board of Bay County Florida,2161,NON - 428 MKL Millville Buildings,E,1125920.25,1264778.34,2021-07-10,2026-10-30,Pending Closeout Completion,Large,schools
-"Palm Bay Education Group, Inc.",1044,Temporary Facilities - November 25 2018  - and Beyond,B,1123713.72,1248570.79,2020-03-06,2024-05-09,Pending Project Closeout Final Review,Large,
+School Board of Bay County Florida,2161,NON - 428 MKL Millville Buildings,E,1125920.25,1264778.34,2021-07-10,2026-10-30,Project Closed Out,Large,schools
+"Palm Bay Education Group, Inc.",1044,Temporary Facilities - November 25 2018  - and Beyond,B,1123713.72,1248570.79,2020-03-06,2024-05-09,Pending Closeout Award,Large,
 "Panama City, City of",1441,428 - Facility Repairs - Sudduth Park & Henry Davis Park,G,1089292,1210324.44,2020-07-06,2026-08-28,Obligated,Large,pc
 "Mexico Beach, City Of",1627,428 PROJECT-Water Treatment System and Public Works Building,F,1068409.74,1187121.93,2020-09-08,2026-08-28,Obligated,Large,mb
-Panama City Housing Authority,2278,MC-  Dickinson Building and Ancillary Components Project 2   *NON 428*,E,1047245.76,1163606.4,2022-04-07,2026-08-27,Pending Award,Small,
 "Mexico Beach, City Of",1550,"Municipal Water System, Meters, Meter boxes, Meter Taps, Lines",F,1045856.62,1162062.91,2020-07-06,2026-10-28,Pending Closeout Completion,Large,mb
 City Church at Northside,2096,E-1 Worship Center Bldg- 428 project,E,1040620.58,1156245.08,2021-05-19,2026-08-27,Obligated,Large,
 Bay County,1706,(428) Documents Management Building,E,1007493.18,1119436.86,2021-04-22,2026-08-28,Obligated,Large,county
@@ -151,7 +150,7 @@ Bay County Transportation Planning Organization,385,"EXP - Emergency Protective 
 School Board of Bay County Florida,2254,NON - 428 Mowat Buildings Project 2,E,847038.77,996172.15,2021-08-31,2026-08-27,Obligated,Large,schools
 "Panama City, City of",1272,Post 45 days (Operational Period #2) Safety Inspections - Building Department (Contracted),B,843232.5,936925,2020-04-24,2024-03-27,Project Closed Out,Large,pc
 School Board of Bay County Florida,1669,"428 Project - Everitt Contents, Equipment & Supplies",E,835130.38,927922.64,2020-10-23,2026-08-28,Obligated,Large,schools
-Bay County,935,Countywide Dirt Road Grading and Pulling Ditches,C,829802.68,922002.97,2020-02-14,2026-10-28,Pending Closeout Completion,Large,county
+Bay County,935,Countywide Dirt Road Grading and Pulling Ditches,C,829802.68,922002.97,2020-02-14,2026-10-28,Project Closed Out,Large,county
 "Early Education and Care, Inc.",338,"Early Education and Care, Inc Oct 7-9 2018 and Nov 25th and beyond @ 90% Cost Share",B,827939.25,1139513.7,2020-03-13,2026-10-14,Obligated,Large,
 "Springfield, City of",746,428 City of Springfield Fire Department Sub-station,E,821716.2,913018,2020-04-21,2026-08-27,Pending Closeout Completion,Large,sp
 Bay County,1766,Steelfield DMS Debris,A,802179,891310,2021-01-16,2026-08-28,Obligated,Large,county
@@ -173,10 +172,10 @@ The Board of Trustees of Bay Medical Center,1970,Campus Exterior,G,702548.66,780
 School Board of Bay County Florida,2152,NON 428 Special Services Buildings and Ancillary Components,E,664187.37,737985.96,2021-06-15,2026-08-27,Obligated,Large,schools
 School Board of Bay County Florida,2178,NON - 428 M Cherry St. Buildings Project 1,E,661276.75,734751.94,2021-07-26,2026-08-27,Project Closed Out,Large,schools
 "Panama City, City of",1709,"428 - Carl Gray Park - Panama City, City of",G,649867.45,722074.94,2024-01-12,2026-08-28,Obligated,Large,pc
-Bay County,648,Fiber Optics Network - Communications,F,646436.15,748965.96,2020-05-19,2026-10-21,Obligated,Large,county
+Bay County,648,Fiber Optics Network - Communications,F,646436.15,748965.96,2020-05-19,2026-10-21,Project Closed Out,Large,county
 "Early Education and Care, Inc.",1092,"Early Education and Care, Inc. Temporary Facilities - Portables",B,645926.61,717696.24,2020-04-09,2025-08-28,Project Closed Out,Large,
 "Parker, City Of",1564,Management Cost - Estimated,Z,639571.08,639571.08,2020-07-09,2021-12-15,Obligated,Large,parker
-School Board of Bay County Florida,2249,NON - 428 Parker Buildings,E,634806.73,705340.81,2021-08-31,2026-10-30,Pending Closeout Completion,Large,schools
+School Board of Bay County Florida,2249,NON - 428 Parker Buildings,E,634806.73,705340.81,2021-08-31,2026-10-30,Project Closed Out,Large,schools
 School Board of Bay County Florida,2123,NON - 428 - Portables; Patterson and Maintenance,E,628724.54,698582.82,2021-11-17,2026-08-27,Obligated,Large,schools
 Panama City Housing Authority,2268,MC- Dickinson Buildings Project 1,E,625833.53,695370.58,2021-09-20,2026-08-27,Obligated,Large,
 The Rock of Panama City,1063,428 Alternative Project Approved,E,621297.9,690331,2020-03-27,2026-08-28,Obligated,Large,
@@ -217,10 +216,9 @@ Panama City Housing Authority,243,"EXP-Emergency Protective Measures from Octobe
 The Rock of Panama City,1030,Rock - Equipment Content and Supplies,E,450622.34,500691.48,2020-03-27,2026-07-26,Obligated,Large,
 School Board of Bay County Florida,1806,428-Everitt Ancillary Components Project 1,G,444363.58,493737.31,2021-04-16,2026-07-26,Obligated,Large,schools
 Bay County,1625,Sheriff's Office Jail,E,435966.39,484407.1,2021-04-22,2026-07-26,Obligated,Large,county
-Bay County,1739,PPDR Debris Removal Countywide,A,433936.95,482152.17,2021-01-26,2021-01-26,Pending Applicant Project Review,Large,county
+Bay County,1739,PPDR Debris Removal Countywide,A,433936.95,482152.17,2021-01-26,2021-01-26,Pending DIU Final Validation,Large,county
 Bay County,1798,Countywide Stormwater Outfall System Stabilization,D,428141.27,475712.52,2021-01-26,2026-08-03,Project Closed Out,Large,county
 Trinity Holiness Church,681,428 Trinity Sanctuary Building,E,424320.17,471466.85,2020-01-10,2026-07-26,Obligated,Large,
-Panama City Housing Authority,2267,MC-  Kirkland Buildings Project 1  * NON 428*,E,417521.5,463912.77,2021-11-05,2026-07-26,Pending Award,Small,
 School Board of Bay County Florida,2071,NON 428 Bay High Gym Building 15 and Bay Drama Building,E,416486.91,462763.23,2021-11-17,2026-07-26,Obligated,Large,schools
 "Mexico Beach, City Of",1941,PPDR - Demolition & Removal of Private Residential Structures,B,414827.47,460919.4,2021-09-08,2023-12-08,Project Closed Out,Large,mb
 Bay County,1403,Countywide Aggregate Road Damage,C,414087.73,1245398.32,2020-05-26,2026-10-19,Project Closed Out,Large,county
@@ -288,14 +286,14 @@ Rising Leaders Academy,742,"Rising Leaders Academy Emergency Protective Measures
 St. Andrew United Methodist Church,401,"Emergency Protective Measures - from October 10, 2018 - November 24, 2018",B,236149.82,236149.82,2019-08-23,2025-12-08,Project Closed Out,Large,
 "Panama City, City of",1682,428 - Police Department Administration - Clubhouse,E,233621.62,259579.57,2021-07-10,2026-07-26,Obligated,Large,pc
 Panama City Housing Authority,1240,"Massalina Contents, Equipment, and Supplies  *428*",E,230068.35,255631.5,2020-05-06,2026-07-26,Obligated,Large,
-School Board of Bay County Florida,2148,NON - 428 - Project - Playgrounds Standalone Project 3,G,229748.11,255275.67,2021-06-15,2026-07-26,Pending FEMA 406 HMP Completion,Large,schools
+School Board of Bay County Florida,2148,NON - 428 - Project - Playgrounds Standalone Project 3,G,229748.11,255275.67,2021-06-15,2026-07-26,Pending Recipient Final Review,Large,schools
 Holy Nativity Episcopal Church,1833,Cat. B - Holy Nativity Episcopal Church,B,228530.19,281507.1,2021-04-01,2025-03-10,Project Closed Out,Large,
 "Mexico Beach, City Of",1086,Mexico Beach Parks,G,225064.65,417147.83,2020-04-10,2026-07-26,Obligated,Large,mb
 "Panama City, City of",1490,428 - Vehicle and Equipment Damage doing emergency response and damaged while parked,E,224749.99,249722.21,2020-08-05,2026-07-26,Obligated,Large,pc
 Bay Haven Charter Academy,1423,"Buccaneer Dr Facilities Repairs: Exterior Lighting; Covered Walkways; Playgroup Canopy; Signage; Fixed Exterior Athletic equipment; Bleachers, Tennis Courts and Flag pole",G,224090.21,248989.12,2020-07-17,2026-07-26,Obligated,Large,
 "Callaway, City of",1073,Citywide Guiderails and Signage ***428,C,223400.47,248222.74,2020-05-06,2026-07-26,Obligated,Large,cw
 "Panama City, City of",1015,NOT 428 - Repairs to cemeteries City Wide including fencing and lights and grounds and grave site restoration,G,218312.59,242569.54,2020-04-30,2026-08-03,Project Closed Out,Large,pc
-"Chemical Addictions Recovery Effort, Inc. (CARE)",1249,428 PROJECT- C.A.R.E. DUI Counseling Facility,E,217633.07,290177.43,2020-05-29,2020-05-29,Pending Project Closeout Final Review,Large,
+"Chemical Addictions Recovery Effort, Inc. (CARE)",1249,428 PROJECT- C.A.R.E. DUI Counseling Facility,E,217633.07,290177.43,2020-05-29,2020-05-29,Pending Recipient Closeout Review,Large,
 School Board of Bay County Florida,2259,NON - 428 Bay High Ancillary Project,E,213472.4,853235.89,2021-09-20,2026-07-26,Obligated,Large,schools
 "Trustees, Springfield Baptist Church, Inc.",1919,Management Costs - Springfield Baptist Church,Z,212567.75,212567.75,2021-01-26,2021-01-26,Obligated,Large,
 School Board of Bay County Florida,2176,NON - 428 Mosley Buildings Project 2,E,206964.29,229960.32,2021-08-09,2026-07-26,Obligated,Large,schools
@@ -528,7 +526,7 @@ Harvest Worship Center,1331,Management Cost,Z,38535.78,38535.78,2021-06-29,2021-
 School Board of Bay County Florida,2005,NON - 428 Tyndall Buildings Project 1,E,38518.75,42798.61,2021-04-16,2026-07-26,Obligated,Small,schools
 "Independence Village, LLC",564,"Emergency Protective Measures - Operational Period 1 (Oct 10 - Nov 24, 2018)",B,38492.35,38492.35,2020-05-06,2020-05-06,Project Closed Out,Small,
 Northstar Church,500,"Debris Removal from October 10 - November 24, 2018",A,38472.99,38472.99,2019-08-01,2019-08-01,Obligated,Small,
-"Panama City, City of",2222,Non 428 - City Wide - Repair of Storm Water/Drainage ditches,D,38467.29,42741.43,2021-11-05,2026-10-09,Pending Closeout Completion,Small,pc
+"Panama City, City of",2222,Non 428 - City Wide - Repair of Storm Water/Drainage ditches,D,38467.29,42741.43,2021-11-05,2026-10-09,Pending Project Closeout Final Review,Small,pc
 "Springfield, City of",1467,"Springfield City Hall, Police Department and Library Supplies, Contents and Equipment",E,38408.4,42675.99,2020-06-18,2026-08-03,Project Closed Out,Small,sp
 Chautauqua Charter School,443,Buildings and Campus-wide Damages,E,37973.97,42193.3,2020-02-07,2026-08-03,Project Closed Out,Small,
 School Board of Bay County Florida,1301,"Southport Elementary Contents, Equipments & Supplies",E,37790.84,41989.82,2020-05-15,2026-07-26,Obligated,Small,schools
@@ -753,6 +751,8 @@ Lynn Haven United Methodist Church,828,"Emergency Protective Measures  from Oct.
 "Lynn Haven, City of",1867,(428) - Citywide Road Damage,C,0,3095900.23,2021-05-06,2021-09-30,Project Closed Out,Small,lh
 "Martin Theatre, Inc.",229,Martin Theatre - Contents and Equipment,E,0,145580.01,2019-05-24,2025-11-10,Obligated,Small,
 "Martin Theatre, Inc.",388,Management Costs,Z,0,7279,2019-06-16,2025-09-18,Obligated,Small,
+Panama City Housing Authority,2267,MC-  Kirkland Buildings Project 1  * NON 428*,E,0,463912.77,2021-11-05,2026-11-03,Obligated,Small,
+Panama City Housing Authority,2278,MC-  Dickinson Building and Ancillary Components Project 2   *NON 428*,E,0,1163606.4,2022-04-07,2026-11-03,Obligated,Small,
 "Panama City, City of",2279,Repairs of Storm Water systems (Open and Closed) and Stormwater Pumping stations,D,0,136174.37,2021-09-20,2025-08-11,Obligated,Small,pc
 School Board of Bay County Florida,1291,"428-Tyndall Elementary Contents, Equipment & Supplies",E,0,262931.01,2020-05-15,2021-08-03,Obligated,Small,schools
 School Board of Bay County Florida,1296,"428-Springfield Elementary Contents, Supplies and Equipment",E,0,823636.79,2020-05-19,2021-08-03,Obligated,Small,schools

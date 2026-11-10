@@ -1,5 +1,5 @@
 {
-"as_of":"2026-11-03",
+"as_of":"2026-11-10",
 "county":"Bay County",
 "first_date":"2016-01-01",
 "source_url":"https://www.usaspending.gov/search",
@@ -26641,7 +26641,7 @@
 "award_amount":1244103.0,
 "description":"REPLACE FLOATING DOCK AT U.S COAST GUARD BASE GALVESTON, TX  PNUM 21545722",
 "start_date":"2024-09-11",
-"end_date":"2026-10-16",
+"end_date":"2026-12-17",
 "agency":"Department of Homeland Security",
 "sub_agency":"U.S. Coast Guard",
 "award_type":"DELIVERY ORDER",
@@ -109032,9 +109032,9 @@
 "naics_description":"FABRICATED PIPE AND PIPE FITTING MANUFACTURING",
 "psc":"4730",
 "psc_description":"HOSE, PIPE, TUBE, LUBRICATION, AND RAILING FITTINGS",
-"performance_city":"Panama City",
-"performance_county":"Bay",
-"performance_state":"FL"
+"performance_city":"Fort Worth",
+"performance_county":"Tarrant",
+"performance_state":"TX"
 },
 {
 "award_key":"CONT_AWD_SPE7L326P2323_9700_-NONE-_-NONE-",
@@ -130924,7 +130924,7 @@
 "recipient":"DMR CONSULTING, INC.",
 "uei":"HX6PP597DG69",
 "recipient_city":"Panama City Beach",
-"award_amount":7310.08,
+"award_amount":14620.16,
 "description":"COMMODITY NAME: CABLE ASSEMBLY, SPECIAL PURPOSE | NSN: 6150-01-501-9067 QTY: 8EA PLUS 100% OPTION",
 "start_date":"2025-12-17",
 "end_date":"2026-07-15",
@@ -131428,7 +131428,7 @@
 "recipient":"DMR CONSULTING, INC.",
 "uei":"HX6PP597DG69",
 "recipient_city":"Panama City Beach",
-"award_amount":74742.75,
+"award_amount":149485.5,
 "description":"DLA SPARES CABLE ASSEMBLY SPEC",
 "start_date":"2025-12-30",
 "end_date":"2026-12-14",
@@ -131449,7 +131449,7 @@
 "recipient":"DMR CONSULTING, INC.",
 "uei":"HX6PP597DG69",
 "recipient_city":"Panama City Beach",
-"award_amount":27901.86,
+"award_amount":55803.72,
 "description":"DISTRIBUTION BOX NSN: 6110-01-609-3447 MFR CAGE: 18876 MFR PART NUMBER: 13646367",
 "start_date":"2025-12-16",
 "end_date":"2026-10-31",
@@ -131470,7 +131470,7 @@
 "recipient":"DMR CONSULTING, INC.",
 "uei":"HX6PP597DG69",
 "recipient_city":"Panama City Beach",
-"award_amount":47235.58,
+"award_amount":94471.16,
 "description":"DLA SPARES DELIVERY ORDER AWARDED OFF OF BASE CONTRACT SPRRA2-26-D-0020.",
 "start_date":"2026-06-25",
 "end_date":"2026-12-19",
@@ -133066,7 +133066,7 @@
 "recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
 "uei":"CPXAXLLYQYT3",
 "recipient_city":"Panama City",
-"award_amount":100560.94,
+"award_amount":201121.88,
 "description":"CM PRO SOFTWARE.",
 "start_date":"2021-01-28",
 "end_date":"2024-01-27",
@@ -168708,7 +168708,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2018-02-01",
-"amount":30000.0,
+"amount":190000.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"16"
@@ -168719,7 +168719,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2018-02-01",
-"amount":190000.0,
+"amount":30000.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"16"
@@ -207225,6 +207225,17 @@
 "mod":"0"
 },
 {
+"award_key":"CONT_AWD_W15QKN21F0110_9700_GS35F0473S_4730",
+"award_id":"W15QKN21F0110",
+"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
+"uei":"CPXAXLLYQYT3",
+"date":"2021-01-21",
+"amount":31815.26,
+"agency":"Department of Defense",
+"sub_agency":"Department of the Army",
+"mod":"0"
+},
+{
 "award_key":"CONT_AWD_SPE7M321V2043_9700_-NONE-_-NONE-",
 "award_id":"SPE7M321V2043",
 "recipient":"GIGLI ENTERPRISES, INC.",
@@ -207784,6 +207795,17 @@
 "agency":"Department of Defense",
 "sub_agency":"Defense Logistics Agency",
 "mod":"0"
+},
+{
+"award_key":"CONT_AWD_W15QKN21F0110_9700_GS35F0473S_4730",
+"award_id":"W15QKN21F0110",
+"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
+"uei":"CPXAXLLYQYT3",
+"date":"2021-02-04",
+"amount":0.0,
+"agency":"Department of Defense",
+"sub_agency":"Department of the Army",
+"mod":"P00001"
 },
 {
 "award_key":"CONT_AWD_W15QKN21F0110_9700_GS35F0473S_4730",
@@ -217312,6 +217334,17 @@
 "mod":"P00002"
 },
 {
+"award_key":"CONT_AWD_W15QKN21F0110_9700_GS35F0473S_4730",
+"award_id":"W15QKN21F0110",
+"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
+"uei":"CPXAXLLYQYT3",
+"date":"2022-01-25",
+"amount":34372.84,
+"agency":"Department of Defense",
+"sub_agency":"Department of the Army",
+"mod":"P00002"
+},
+{
 "award_key":"CONT_AWD_36C24922C0047_3600_-NONE-_-NONE-",
 "award_id":"36C24922C0047",
 "recipient":"CONTEGO ENVIRONMENTAL LLC",
@@ -226319,6 +226352,17 @@
 "agency":"Department of Defense",
 "sub_agency":"Defense Logistics Agency",
 "mod":"0"
+},
+{
+"award_key":"CONT_AWD_W15QKN21F0110_9700_GS35F0473S_4730",
+"award_id":"W15QKN21F0110",
+"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
+"uei":"CPXAXLLYQYT3",
+"date":"2022-12-09",
+"amount":34372.84,
+"agency":"Department of Defense",
+"sub_agency":"Department of the Army",
+"mod":"P00003"
 },
 {
 "award_key":"CONT_AWD_W15QKN21F0110_9700_GS35F0473S_4730",
@@ -258122,12 +258166,34 @@
 "mod":"0"
 },
 {
+"award_key":"CONT_AWD_SPRRA226F0017_9700_SPRRA226D0006_9700",
+"award_id":"SPRRA226F0017",
+"recipient":"DMR CONSULTING, INC.",
+"uei":"HX6PP597DG69",
+"date":"2025-12-16",
+"amount":27901.86,
+"agency":"Department of Defense",
+"sub_agency":"Defense Logistics Agency",
+"mod":"0"
+},
+{
 "award_key":"CONT_AWD_SPE4A626V5423_9700_-NONE-_-NONE-",
 "award_id":"SPE4A626V5423",
 "recipient":"DMR CONSULTING, INC.",
 "uei":"HX6PP597DG69",
 "date":"2025-12-17",
 "amount":199.2,
+"agency":"Department of Defense",
+"sub_agency":"Defense Logistics Agency",
+"mod":"0"
+},
+{
+"award_key":"CONT_AWD_SPRDL126P0035_9700_-NONE-_-NONE-",
+"award_id":"SPRDL126P0035",
+"recipient":"DMR CONSULTING, INC.",
+"uei":"HX6PP597DG69",
+"date":"2025-12-17",
+"amount":7310.08,
 "agency":"Department of Defense",
 "sub_agency":"Defense Logistics Agency",
 "mod":"0"
@@ -258425,6 +258491,17 @@
 "uei":"ELRJA5VU2TC4",
 "date":"2025-12-30",
 "amount":18748.4,
+"agency":"Department of Defense",
+"sub_agency":"Defense Logistics Agency",
+"mod":"0"
+},
+{
+"award_key":"CONT_AWD_SPRRA226F0004_9700_SPRRA226D0002_9700",
+"award_id":"SPRRA226F0004",
+"recipient":"DMR CONSULTING, INC.",
+"uei":"HX6PP597DG69",
+"date":"2025-12-30",
+"amount":74742.75,
 "agency":"Department of Defense",
 "sub_agency":"Defense Logistics Agency",
 "mod":"0"
@@ -263798,6 +263875,17 @@
 "mod":"0"
 },
 {
+"award_key":"CONT_AWD_SPRRA226F0099_9700_SPRRA226D0020_9700",
+"award_id":"SPRRA226F0099",
+"recipient":"DMR CONSULTING, INC.",
+"uei":"HX6PP597DG69",
+"date":"2026-06-25",
+"amount":47235.58,
+"agency":"Department of Defense",
+"sub_agency":"Defense Logistics Agency",
+"mod":"0"
+},
+{
 "award_key":"CONT_AWD_N6133126P0147_9700_-NONE-_-NONE-",
 "award_id":"N6133126P0147",
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
@@ -263884,6 +263972,17 @@
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"0"
+},
+{
+"award_key":"CONT_AWD_SPRDL126P0035_9700_-NONE-_-NONE-",
+"award_id":"SPRDL126P0035",
+"recipient":"DMR CONSULTING, INC.",
+"uei":"HX6PP597DG69",
+"date":"2026-07-01",
+"amount":0.0,
+"agency":"Department of Defense",
+"sub_agency":"Defense Logistics Agency",
+"mod":"P00001"
 },
 {
 "award_key":"CONT_AWD_SPRDL126P0035_9700_-NONE-_-NONE-",
@@ -265193,6 +265292,17 @@
 "agency":"Department of Homeland Security",
 "sub_agency":"U.S. Coast Guard",
 "mod":"P00005"
+},
+{
+"award_key":"CONT_AWD_70Z08224FCEUM0020_7008_70Z08219DPMV11600_7008",
+"award_id":"70Z08224FCEUM0020",
+"recipient":"INLAND CONSTRUCTION & ENGINEERING INC",
+"uei":"MG6FCPMUWYW3",
+"date":"2026-11-02",
+"amount":0.0,
+"agency":"Department of Homeland Security",
+"sub_agency":"U.S. Coast Guard",
+"mod":"P00003"
 }
 ]
 }

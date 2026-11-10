@@ -1349,11 +1349,12 @@
       "Pending Award",
       "Pending Closeout Award",
       "Pending Closeout Completion",
-      "Pending FEMA 406 HMP Completion",
+      "Pending DIU Final Validation",
       "Pending Insurance Closeout Review",
       "Pending PDMG Project Review",
       "Pending Project Closeout Final Review",
       "Pending Project Closeout Initial Review",
+      "Pending Recipient Closeout Review",
       "Pending Recipient Final Review",
       "Pending Scope and Cost Development",
       "Project Closed Out"
@@ -11155,7 +11156,7 @@
    "id": "schools",
    "title": "Public schools",
    "description": "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).",
-   "rows": 59,
+   "rows": 58,
    "columns": [
     {
      "name": "place_id",
@@ -11311,9 +11312,7 @@
      "values": [
       "2015-16",
       "2017-18",
-      "2019-20",
-      "2020-21",
-      "2022-23"
+      "2018-19"
      ]
     },
     {
@@ -11930,7 +11929,7 @@
    "id": "school-enrollment",
    "title": "School enrollment by year",
    "description": "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.",
-   "rows": 486,
+   "rows": 252,
    "columns": [
     {
      "name": "place_id",
@@ -11959,11 +11958,6 @@
       "2016-17",
       "2017-18",
       "2018-19",
-      "2019-20",
-      "2020-21",
-      "2021-22",
-      "2022-23",
-      "2023-24",
       "2024-25"
      ]
     },
@@ -11979,11 +11973,6 @@
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090",
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090",
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090",
-      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090",
-      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090",
-      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090",
-      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090",
-      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090",
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090"
      ]
     },

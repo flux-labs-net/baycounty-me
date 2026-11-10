@@ -2595,7 +2595,7 @@ CSV: https://baycounty.me/downloads/road-work-program.csv · JSON: https://bayco
 
 ### Public schools (schools)
 One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).
-Rows: 59. Columns: place_id, school_id, nces_id, name, status, level, school_type, grades, charter, virtual, operator_entity_id, address, city, zip, phone, latitude, longitude, enrollment, enrollment_year, last_year_open, teachers_fte, students_per_teacher, free_reduced_lunch_pct, latest_grade, latest_grade_year, prior_grade, grades_on_record, latest_per_student, latest_spending_year, zoned_levels, district, page_url, source_url, gov_id
+Rows: 58. Columns: place_id, school_id, nces_id, name, status, level, school_type, grades, charter, virtual, operator_entity_id, address, city, zip, phone, latitude, longitude, enrollment, enrollment_year, last_year_open, teachers_fte, students_per_teacher, free_reduced_lunch_pct, latest_grade, latest_grade_year, prior_grade, grades_on_record, latest_per_student, latest_spending_year, zoned_levels, district, page_url, source_url, gov_id
 CSV: https://baycounty.me/downloads/schools.csv · JSON: https://baycounty.me/downloads/schools.json
 
 ### School grades (school-grades)
@@ -2620,7 +2620,7 @@ CSV: https://baycounty.me/downloads/school-spending.csv · JSON: https://baycoun
 
 ### School enrollment by year (school-enrollment)
 Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.
-Rows: 486. Columns: place_id, school_id, school, year, school_year, enrollment, source_url, gov_id
+Rows: 252. Columns: place_id, school_id, school, year, school_year, enrollment, source_url, gov_id
 CSV: https://baycounty.me/downloads/school-enrollment.csv · JSON: https://baycounty.me/downloads/school-enrollment.json
 
 ### School district calendar (school-calendar)
