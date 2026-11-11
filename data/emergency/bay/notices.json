@@ -1,7 +1,88 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-10",
+ "checked": "2026-11-11",
  "notices": [
+  {
+   "notice_id": "alert:pc:704",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "City of Panama City",
+   "source_type": "alert-center",
+   "gov_id": "pc",
+   "title": "Road Closure Notice: 10th Street just west of W. Caroline Boulevard to Lisenby Avenue",
+   "summary": "Road Closure Notice: 10th Street just west of W. Caroline Boulevard to Lisenby Avenue",
+   "instruction": null,
+   "severity": "minor",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-11T12:58:44.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-11T12:58:44.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
+   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
+   "first_seen": "2026-10-30T16:50:03.082394+00:00",
+   "last_seen": "2026-11-11T18:50:42.926Z",
+   "geometry": null
+  },
+  {
+   "notice_id": "alert:pc:710",
+   "place_id": "fl-bay",
+   "kind": "storm",
+   "source": "City of Panama City",
+   "source_type": "alert-center",
+   "gov_id": "pc",
+   "title": "DOH-Bay Issues Advisory for Red Tide at Panama City Marina",
+   "summary": "DOH-Bay Issues Advisory for Red Tide at Panama City Marina",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-11T12:57:43.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-11T12:57:43.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
+   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-06T20:35:02.562709+00:00",
+   "last_seen": "2026-11-11T18:50:42.926Z",
+   "geometry": null
+  },
+  {
+   "notice_id": "alert:pc:715",
+   "place_id": "fl-bay",
+   "kind": "boil-water",
+   "source": "City of Panama City",
+   "source_type": "alert-center",
+   "gov_id": "pc",
+   "title": "Boil Water Notice for: Airport Rd from Lindenwood Dr to E Norwood Dr and W 23rd St from Lisenby Ave to Airport Rd",
+   "summary": "Boil Water Notice",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-11T12:56:19.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-11T12:56:19.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=715",
+   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-11T13:00:02.86368+00:00",
+   "last_seen": "2026-11-11T18:50:42.926Z",
+   "geometry": null
+  },
   {
    "notice_id": "news:cw:2163",
    "place_id": "fl-bay",
@@ -26,7 +107,7 @@
    "url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2163",
    "source_url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2163",
    "first_seen": "2026-11-09T18:55:02.231982+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -53,34 +134,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=24",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-09T16:00:01.821502+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
-   "geometry": null
-  },
-  {
-   "notice_id": "alert:pc:710",
-   "place_id": "fl-bay",
-   "kind": "storm",
-   "source": "City of Panama City",
-   "source_type": "alert-center",
-   "gov_id": "pc",
-   "title": "DOH-Bay Issues Advisory for Red Tide at Panama City Marina",
-   "summary": "DOH-Bay Issues Advisory for Red Tide at Panama City Marina",
-   "instruction": null,
-   "severity": "moderate",
-   "event": null,
-   "area": null,
-   "zones": null,
-   "issued": "2026-11-09T14:38:57.000Z",
-   "starts": null,
-   "ends": null,
-   "updated": "2026-11-09T14:38:57.000Z",
-   "status": "active",
-   "full_closure": null,
-   "roadway": null,
-   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
-   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
-   "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -101,13 +155,13 @@
    "starts": null,
    "ends": null,
    "updated": "2026-11-09T14:37:57.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=712",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-09T12:10:01.993658+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T12:55:02.61219+00:00",
    "geometry": null
   },
   {
@@ -134,7 +188,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -294,13 +348,13 @@
    "starts": null,
    "ends": null,
    "updated": "2026-11-05T23:00:36.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=709",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-07T14:10:03.404756+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T12:55:02.61219+00:00",
    "geometry": null
   },
   {
@@ -1016,33 +1070,6 @@
    "last_seen": "2026-10-30T21:10:02.829464+00:00"
   },
   {
-   "notice_id": "alert:pc:704",
-   "place_id": "fl-bay",
-   "kind": "road",
-   "source": "City of Panama City",
-   "source_type": "alert-center",
-   "gov_id": "pc",
-   "title": "Road Closure Notice: 10th Street just west of W. Caroline Boulevard to Lisenby Avenue",
-   "summary": "Road Closure Notice: 10th Street just west of W. Caroline Boulevard to Lisenby Avenue",
-   "instruction": null,
-   "severity": "minor",
-   "event": null,
-   "area": null,
-   "zones": null,
-   "issued": "2026-10-30T16:49:07.000Z",
-   "starts": null,
-   "ends": null,
-   "updated": "2026-10-30T16:49:07.000Z",
-   "status": "active",
-   "full_closure": null,
-   "roadway": null,
-   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
-   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
-   "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
-   "geometry": null
-  },
-  {
    "notice_id": "news:cw:2158",
    "place_id": "fl-bay",
    "kind": "boil-water",
@@ -1335,7 +1362,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1362,7 +1389,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1389,7 +1416,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1416,7 +1443,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1443,7 +1470,7 @@
    "url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "source_url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1657,7 +1684,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1684,7 +1711,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   },
   {
@@ -1711,7 +1738,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-11T01:58:27.824Z",
+   "last_seen": "2026-11-11T18:50:42.926Z",
    "geometry": null
   }
  ]

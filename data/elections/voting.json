@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-11T01:58:32+00:00",
+ "as_of": "2026-11-11T18:50:51+00:00",
  "errors": [],
  "finder_url": "https://www.voterfocus.com/PrecinctFinder/addressSearch?county=BAY",
  "directory_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
@@ -72,24 +72,24 @@
  ],
  "soe_events": [
   {
-   "starts": "2026-11-05T17:01",
-   "all_day": false,
-   "title": "Canvassing Board Meeting to process Provisional Ballots and Vote By Mail Ballots referred to Canvassing Board for signature defects, and\u2026",
-   "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
-   "source_url": "https://www.bayvotesfl.gov/elections/events/"
-  },
-  {
-   "starts": "2026-11-08T09:00",
-   "all_day": false,
-   "title": "Canvassing Board Meeting to conduct recount if required and produce 2nd Unofficial Results.",
-   "url": "https://www.bayvotesfl.gov/events/recount-if-required/",
-   "source_url": "https://www.bayvotesfl.gov/elections/events/"
-  },
-  {
    "starts": "2026-11-13T17:01",
    "all_day": false,
    "title": "Canvassing Board Meeting to canvass 10 Day Overseas ballots for General Election (F.S. 101.0695(5), File Official Results and conduct Post\u2026",
    "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2027-04-20",
+   "all_day": true,
+   "title": "Cities with offices up for election: Lynn Haven, Mexico Beach, Panama City, Parker On Election Day you must vote at\u2026",
+   "url": "https://www.bayvotesfl.gov/events/municipal-super-tuesday/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2027-05-18",
+   "all_day": true,
+   "title": "",
+   "url": "https://www.bayvotesfl.gov/events/municipal-runoff-election-if-required/",
    "source_url": "https://www.bayvotesfl.gov/elections/events/"
   }
  ],

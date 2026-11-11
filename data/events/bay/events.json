@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-10",
- "fetched": "2026-11-10T20:56:58-0500",
+ "as_of": "2026-11-11",
+ "fetched": "2026-11-11T13:49:06-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -54,57 +54,6 @@
  },
  "events": [
   {
-   "event_id": "panama-city:6363:2026-11-10",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "55+ Club",
-   "starts": "2026-11-10T16:00:00",
-   "ends": "2026-11-10T20:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6363",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23171:2026-11-10",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Art Club (Ages 12 – 17)",
-   "starts": "2026-11-10T16:00:00",
-   "ends": "2026-11-10T17:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/art-club-ages-12-17-3/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "callaway:2696:2026-11-10",
-   "source_id": "callaway",
-   "source": "City of Callaway",
-   "gov": "cw",
-   "town": "Callaway",
-   "title": "Commission Meeting",
-   "starts": "2026-11-10T18:00:00",
-   "ends": "2026-11-10T20:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.cityofcallaway.com/Calendar.aspx?EID=2696",
-   "source_url": "https://www.cityofcallaway.com/Calendar.aspx",
-   "recurring": false
-  },
-  {
    "event_id": "bay-county:1613:2026-11-11",
    "source_id": "bay-county",
    "source": "Bay County",
@@ -136,23 +85,6 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7707",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
-   "event_id": "bay-county:1712:2026-11-11",
-   "source_id": "bay-county",
-   "source": "Bay County",
-   "gov": "county",
-   "town": "Bay County",
-   "title": "Veterans Day Parade and Wreath-Laying Ceremony",
-   "starts": "2026-11-11T08:30:00",
-   "ends": "2026-11-11T10:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1712",
-   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
    "recurring": false
   },
   {
@@ -1207,7 +1139,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6710",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "bay-county:1674:2026-11-19",
@@ -1856,6 +1788,40 @@
    "recurring": true
   },
   {
+   "event_id": "panama-city:7628:2026-11-25",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "PC Senior Arts",
+   "starts": "2026-11-25T13:00:00",
+   "ends": "2026-11-25T15:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7628",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7494:2026-11-25",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Card Club",
+   "starts": "2026-11-25T14:00:00",
+   "ends": "2026-11-25T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7494",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:23688:2026-11-25",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1870,6 +1836,23 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/lego-club-ages-6-12-7/",
    "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:6711:2026-11-25",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "PC Art Club",
+   "starts": "2026-11-25T18:00:00",
+   "ends": "2026-11-25T21:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6711",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
   },
   {
@@ -2329,7 +2312,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/art-club-ages-12-17/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "library:24050:2026-12-09",

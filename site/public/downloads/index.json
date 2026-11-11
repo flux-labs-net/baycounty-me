@@ -8926,7 +8926,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 179,
+   "rows": 178,
    "columns": [
     {
      "name": "place_id",
@@ -9639,7 +9639,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-10T17:03:00+00:00"
+      "2026-11-11T16:13:00+00:00"
      ]
     },
     {
@@ -9649,8 +9649,8 @@
       "Friday",
       "Rest Of Today",
       "Saturday",
-      "Thursday",
-      "Veterans Day"
+      "Sunday",
+      "Thursday"
      ]
     },
     {
@@ -9687,9 +9687,9 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "1 foot or less",
       "Around 1 foot",
-      "around 3 feet"
+      "Around 3 feet",
+      "around 1 foot"
      ]
     },
     {
@@ -9703,15 +9703,15 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "73 degrees"
+      "72 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy until 3 PM, then mostly",
-      "Mostly sunny"
+      "Mostly sunny until 3 PM, then partly",
+      "Partly sunny"
      ]
     },
     {
@@ -9725,24 +9725,23 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "North winds around 5 mph, becoming",
-      "West winds around 5 mph"
+      "Northwest winds 5 to 10 mph",
+      "West winds 15 to 20 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:03 AM",
-      "7:04 AM"
+      "7:04 AM",
+      "7:05 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:49 PM",
-      "5:50 PM"
+      "5:49 PM"
      ]
     },
     {
@@ -9750,12 +9749,12 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Sunny. Highs in the lower 60s. North winds around 15 mph.",
-      "High rip current risk*. Surf height around 3 feet. Partly sunny. Highs in the mid 70s. Northwest winds around 20 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Light northwesterly to northerly winds prevail through mid-week. A Moderate Risk of Rip Currents is forecast at all area beaches through Wednesday. A cold front is forecast to near the area late Wednesday and cause winds to increase, which increases the potential for rip currents to high for most area beaches Thursday and Friday.",
-      "Moderate rip current risk*. Sunny. Highs in the mid 60s. Northwest winds around 20 mph.",
+      "Light northwesterly to northerly winds prevail again today. A Moderate Risk of Rip Currents is forecast at all area beaches. A cold front nears the area late Wednesday and causes winds to increase, which increases the potential for rip currents to high for most area beaches Thursday and Friday.",
+      "Moderate rip current risk*. Sunny. Highs in the lower 60s. Northeast winds around 15 mph.",
+      "Moderate rip current risk*. Sunny. Highs in the mid 60s. Northeast winds around 15 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Sunny, cooler. Highs in the mid 60s. North winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
@@ -9780,7 +9779,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/23707153-d4e5-48b6-b5ff-3e10aec1a419",
+      "https://api.weather.gov/products/a3575c8e-a618-42e4-baa1-eb249634a0b5",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12434,7 +12433,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-10"
+      "2026-11-11"
      ]
     },
     {
@@ -12583,7 +12582,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 63,
+   "rows": 64,
    "columns": [
     {
      "name": "notice_id",
@@ -13514,9 +13513,9 @@
       "2026-10-19",
       "2026-10-22",
       "2026-11-03",
-      "2026-11-05",
-      "2026-11-08",
-      "2026-11-13"
+      "2026-11-13",
+      "2027-04-20",
+      "2027-05-18"
      ]
     },
     {
@@ -13530,8 +13529,6 @@
      "name": "starts_at",
      "type": "string",
      "values": [
-      "2026-11-05T17:01",
-      "2026-11-08T09:00",
       "2026-11-13T17:01"
      ]
     },
@@ -13558,7 +13555,20 @@
     },
     {
      "name": "title",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "5 p.m.: last day to ask for a vote-by-mail ballot to be mailed to you",
+      "7 p.m.: vote-by-mail ballots must reach the Elections Office or an early voting drop box before this (not your precinct)",
+      "Canvassing Board Meeting to canvass 10 Day Overseas ballots for General Election (F.S. 101.0695(5), File Official Results and conduct Post…",
+      "Cities with offices up for election: Lynn Haven, Mexico Beach, Panama City, Parker On Election Day you must vote at…",
+      "Early voting at any of the eight early voting sites, 10 a.m. to 6 p.m. (the Elections Office opens at 8:30 a.m.)",
+      "General Election Day, polls open 7 a.m. to 7 p.m. at your own precinct",
+      "Last day to register or change party for the April 21 municipal election",
+      "Last day to register or change party for the August 18 primary",
+      "Last day to register to vote in the November 3 general election",
+      "Municipal Election Day, polls open 7 a.m. to 7 p.m.",
+      "Primary Election Day, polls open 7 a.m. to 7 p.m."
+     ]
     },
     {
      "name": "source",
@@ -13574,9 +13584,9 @@
      "values": [
       "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
       "https://www.bayvotesfl.gov/elections/upcoming-elections/",
-      "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
       "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
-      "https://www.bayvotesfl.gov/events/recount-if-required/",
+      "https://www.bayvotesfl.gov/events/municipal-runoff-election-if-required/",
+      "https://www.bayvotesfl.gov/events/municipal-super-tuesday/",
       "https://www.bayvotesfl.gov/voters/vote-early/"
      ]
     },
@@ -13854,7 +13864,7 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/77byaPYZHrVOozDoHCeO/cfd2./cropped-789.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/IWs6mUXnnBJ2jDJa89W4/ac60./cropped-993.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/IWs6mUXnnBJ2jDJa89W4/ac60./cropped-698.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/VeWabPeG03Kf0uFQceYJ/0ccc./cropped-032.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-007.pdf",
@@ -14007,7 +14017,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 93,
+   "rows": 103,
    "columns": [
     {
      "name": "place_id",
@@ -14117,7 +14127,7 @@
       "2026-10-20",
       "2026-10-21",
       "2026-10-22",
-      "2026-10-27",
+      "2026-10-26",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
@@ -14128,7 +14138,7 @@
       "2026-11-06",
       "2026-11-07",
       "2026-11-09",
-      "2026-11-11"
+      "2026-11-10"
      ]
     },
     {
@@ -14138,6 +14148,7 @@
       "2026-11-12",
       "2026-11-13",
       "2026-11-16",
+      "2026-11-17",
       "2026-11-19",
       "2027-04-30"
      ]
@@ -15366,7 +15377,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17222,
+   "rows": 17227,
    "columns": [
     {
      "name": "place_id",
@@ -15637,7 +15648,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 89,
+   "rows": 82,
    "columns": [
     {
      "name": "place_id",
@@ -15693,7 +15704,6 @@
       "2026-09-22",
       "2026-10-13",
       "2026-10-27",
-      "2026-11-10",
       "2026-11-11",
       "2026-11-12",
       "2026-11-13",
@@ -15702,15 +15712,42 @@
     },
     {
      "name": "starts",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-11T08:00:00",
+      "2026-11-11T15:00:00",
+      "2026-11-11T16:00:00",
+      "2026-11-12T00:00:00",
+      "2026-11-12T09:00:00",
+      "2026-11-12T09:00:00-06:00",
+      "2026-11-12T09:30:00",
+      "2026-11-12T10:00:00",
+      "2026-11-12T10:30:00",
+      "2026-11-12T13:00:00",
+      "2026-11-12T13:00:00-06:00",
+      "2026-11-12T15:00:00",
+      "2026-11-12T17:30:00",
+      "2026-11-12T18:30:00",
+      "2026-11-13T07:30:00",
+      "2026-11-13T10:00:00",
+      "2026-11-13T13:00:00",
+      "2026-11-13T14:00:00",
+      "2026-11-13T15:00:00",
+      "2026-11-13T15:30:00-06:00",
+      "2026-11-13T18:00:00",
+      "2026-11-14T08:00:00",
+      "2026-11-14T09:00:00",
+      "2026-11-14T10:00:00",
+      "2026-11-14T11:00:00",
+      "2026-11-14T12:30:00",
+      "2026-11-14T14:00:00",
+      "2026-11-14T15:30:00"
+     ]
     },
     {
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-10T17:00:00",
-      "2026-11-10T20:00:00",
-      "2026-11-11T10:30:00",
       "2026-11-11T17:00:00",
       "2026-11-12T10:30:00",
       "2026-11-12T11:00:00",
@@ -15749,7 +15786,6 @@
      "name": "gov_id",
      "type": "string",
      "values": [
-      "cw",
       "lh",
       "mb",
       "pc",
@@ -15762,7 +15798,6 @@
      "type": "string",
      "values": [
       "Bay District Schools",
-      "Callaway",
       "Lynn Haven",
       "Mexico Beach",
       "Panama City",
@@ -15774,9 +15809,7 @@
      "type": "string",
      "values": [
       "Bay District School Board",
-      "Callaway City Commission",
       "Lynn Haven City Commission",
-      "Lynn Haven Community Redevelopment Agency (CRA) Board",
       "Mexico Beach City Council",
       "Panama City Beach City Council",
       "Panama City Beach Planning Board",
@@ -15798,11 +15831,9 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "1311 Balboa Ave, Panama City, FL 32401",
-      "825 Ohio Ave., Lynn Haven, FL 32444",
+      "825 Ohio Avenue, Lynn Haven",
       "Aaron Bessant Park",
       "Bay County Public Library",
-      "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
       "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
@@ -15813,9 +15844,7 @@
       "Panama City Beach Public Library",
       "Parker Park",
       "Parker Public Library",
-      "Sharky’s Beachfront Restaurant",
-      "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444"
+      "Sharky’s Beachfront Restaurant"
      ]
     },
     {
@@ -15948,13 +15977,10 @@
      "values": [
       "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DW9J2V4AB676",
       "https://lynnhavenfl.portal.civicclerk.com/",
-      "https://mexicobeachfl.gov/government/council-meetings/",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-Council-Meeting-Minutes.pdf",
       "https://pcbeach.org/local-events/",
       "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
-      "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/Calendar.aspx",
-      "https://www.cityofcallaway.com/AgendaCenter",
       "https://www.mexicobeach.com/events/",
       "https://www.nwrls.com/events",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09222026-891",
@@ -20760,7 +20786,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 56,
+   "rows": 52,
    "columns": [
     {
      "name": "board",
@@ -20791,9 +20817,8 @@
      "name": "title",
      "type": "string",
      "values": [
-      "10/13/26 CRA Board Meeting",
       "11/10/26 CRA Meeting",
-      "11/6/26 Joint ULDC - Commission Workshop",
+      "11/13/26 Special Commission Meeting",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
       "Budget Hearing",
@@ -20806,7 +20831,6 @@
       "Commission Meeting",
       "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
-      "LDC 5th Workshop",
       "Planning Board",
       "Planning Board Meeting",
       "Planning Commission",
@@ -20861,19 +20885,15 @@
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
       "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1162,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
-      "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=420",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
-      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
@@ -20888,7 +20908,6 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
@@ -20969,12 +20988,11 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
-      "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2131/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2133/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2137/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
-      "https://lynnhavenfl.portal.civicclerk.com/event/2151/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2154/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
@@ -20982,7 +21000,6 @@
       "https://www.baycountyfl.gov/calendar.aspx?EID=1685",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1713",
-      "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
       "https://www.panamacity.gov/calendar.aspx?EID=6077",
       "https://www.panamacity.gov/calendar.aspx?EID=7549",
@@ -20992,8 +21009,7 @@
       "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-55",
-      "https://youtube.com/live/N6DW4qprYos?feature=share",
-      "https://youtube.com/live/wmvZU--ANIk?feature=share"
+      "https://youtube.com/live/N6DW4qprYos?feature=share"
      ]
     },
     {
@@ -21003,15 +21019,6 @@
     {
      "name": "agenda_items",
      "type": "array"
-    },
-    {
-     "name": "calendar_source",
-     "type": "string",
-     "values": [
-      "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
-     ]
     },
     {
      "name": "expected",
@@ -21025,6 +21032,14 @@
      "type": "boolean",
      "values": [
       true
+     ]
+    },
+    {
+     "name": "calendar_source",
+     "type": "string",
+     "values": [
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
      ]
     }
    ],

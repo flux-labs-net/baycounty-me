@@ -2401,22 +2401,6 @@
      "need": "Contract, purchase orders and payments for the 2018-08-28 award to Energy Systems"
     },
     {
-     "gap_id": "award-follow-up:pc-commission:2023-12-12:m27555:vendor:hagerty-consulting",
-     "custodian": "pc",
-     "gov_id": "pc",
-     "location": "Hagerty Consulting, awarded 2023-12-12",
-     "company": "Hagerty Consulting",
-     "entity_id": "vendor:hagerty-consulting",
-     "award_date": "2023-12-12",
-     "last_record": "2023-12-12",
-     "amount": 237120.0,
-     "bid_numbers": null,
-     "board": "Panama City Commission",
-     "headline": "The Commission approved a $237,120 task order with Hagerty Consulting for Hazard Mitigation Grant Program work.",
-     "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_12122023-653",
-     "need": "Contract, purchase orders and payments for the 2023-12-12 award to Hagerty Consulting"
-    },
-    {
      "gap_id": "award-follow-up:pc-commission:2016-08-09:m34863:vendor:mrd-associates",
      "custodian": "pc",
      "gov_id": "pc",
