@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-10",
+ "updated": "2026-11-11",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -6761,7 +6761,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22843,
+   "rows": 22845,
    "columns": [
     {
      "name": "link_id",
@@ -8717,7 +8717,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 55,
+   "rows": 54,
    "columns": [
     {
      "name": "place_id",
@@ -8826,7 +8826,6 @@
       "Bay Point Golf Club",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
-      "Dolly Parton’s Pirates Voyage Dinner & Show",
       "Edgewater Beach & Golf Resort",
       "Embassy Suites Panama City Beach, VUE55 (Rooftop)",
       "Frank Brown Park",
@@ -8927,7 +8926,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 191,
+   "rows": 179,
    "columns": [
     {
      "name": "place_id",
@@ -9020,7 +9019,6 @@
       "Bay County Public Library",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
-      "Dolly Parton’s Pirates Voyage Dinner & Show",
       "Edgewater Beach & Golf Resort",
       "Frank Brown Park Recreation Center",
       "Gulf Coast State College",
@@ -9427,7 +9425,8 @@
      "name": "latest_date",
      "type": "string",
      "values": [
-      "2026-10-26"
+      "2026-10-26",
+      "2026-11-09"
      ]
     },
     {
@@ -9438,17 +9437,14 @@
      "name": "latest_rating",
      "type": "string",
      "values": [
-      "Good",
-      "Moderate",
-      "Poor"
+      "Good"
      ]
     },
     {
      "name": "latest_advisory",
      "type": "boolean",
      "values": [
-      false,
-      true
+      false
      ]
     },
     {
@@ -9504,7 +9500,7 @@
    "id": "beach-water-samples",
    "title": "Beach water quality: samples",
    "description": "Every published Healthy Beaches sample at each site: date, enterococcus count per 100 mL, the state's rating and whether a health advisory was issued. The state's lookup shows the latest 50 samples per site; samples are kept here as they come in, so history grows from 2026 on.",
-   "rows": 732,
+   "rows": 739,
    "columns": [
     {
      "name": "place_id",
@@ -13762,7 +13758,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 115,
+   "rows": 117,
    "columns": [
     {
      "name": "place_id",
@@ -13860,10 +13856,11 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/IWs6mUXnnBJ2jDJa89W4/ac60./cropped-993.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/VeWabPeG03Kf0uFQceYJ/0ccc./cropped-032.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-007.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-367.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/cpDASFgvl7rNFiwwZJHT/8d29./cropped-026.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/eDtCd6G38jQ78Aa9t16b/bb33./cropped-638.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/eDtCd6G38jQ78Aa9t16b/bb33./cropped-816.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-235.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fVpPl6iXiXDSxDnuB1YA/9d55./cropped-395.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
@@ -13896,6 +13893,7 @@
       "pn:592cfc86f14e",
       "pn:5cb38a6ba13e",
       "pn:8b900805578b",
+      "pn:91c2fdb7224f",
       "pn:9c26a1d21bf3",
       "pn:a46ae64b5f4f",
       "pn:accece2b1ab5",
@@ -13990,6 +13988,7 @@
       "https://procurement.opengov.com/signup",
       "lynnhavenfl.portal.civicclerk.com",
       "www.CITYOFCALLAWAY.COM",
+      "www.cityoflynnhaven.com",
       "www.demandstar.com",
       "www.demandstar.com; https://www.pcbfl.gov/bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
@@ -14008,7 +14007,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 100,
+   "rows": 93,
    "columns": [
     {
      "name": "place_id",
@@ -14077,7 +14076,6 @@
       "Full time",
       "Full- Time",
       "Instructional",
-      "Licensed",
       "Part time",
       "Part-Time",
       "Substitutes",
@@ -14105,10 +14103,7 @@
      "name": "posted",
      "type": "string",
      "values": [
-      "2026-06-13",
-      "2026-06-18",
       "2026-07-13",
-      "2026-07-17",
       "2026-08-10",
       "2026-09-14",
       "2026-09-17",
@@ -14117,11 +14112,11 @@
       "2026-09-30",
       "2026-10-07",
       "2026-10-08",
-      "2026-10-11",
+      "2026-10-12",
       "2026-10-16",
       "2026-10-20",
+      "2026-10-21",
       "2026-10-22",
-      "2026-10-26",
       "2026-10-27",
       "2026-10-28",
       "2026-10-29",
@@ -14133,14 +14128,13 @@
       "2026-11-06",
       "2026-11-07",
       "2026-11-09",
-      "2026-11-10"
+      "2026-11-11"
      ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-10",
       "2026-11-12",
       "2026-11-13",
       "2026-11-16",
@@ -14170,7 +14164,8 @@
       "2026-11-06",
       "2026-11-08",
       "2026-11-09",
-      "2026-11-10"
+      "2026-11-10",
+      "2026-11-11"
      ]
     },
     {
@@ -14264,7 +14259,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-10"
+      "2026-11-11"
      ]
     }
    ],
@@ -15642,7 +15637,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 99,
+   "rows": 89,
    "columns": [
     {
      "name": "place_id",
@@ -15711,7 +15706,36 @@
     },
     {
      "name": "ends",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-10T17:00:00",
+      "2026-11-10T20:00:00",
+      "2026-11-11T10:30:00",
+      "2026-11-11T17:00:00",
+      "2026-11-12T10:30:00",
+      "2026-11-12T11:00:00",
+      "2026-11-12T11:30:00",
+      "2026-11-12T13:00:00",
+      "2026-11-12T14:00:00",
+      "2026-11-12T17:00:00",
+      "2026-11-12T18:30:00",
+      "2026-11-12T22:00:00",
+      "2026-11-12T23:59:59",
+      "2026-11-13T09:00:00",
+      "2026-11-13T12:00:00",
+      "2026-11-13T14:00:00",
+      "2026-11-13T17:00:00",
+      "2026-11-13T19:00:00",
+      "2026-11-14T11:00:00",
+      "2026-11-14T11:30:00",
+      "2026-11-14T12:00:00",
+      "2026-11-14T13:30:00",
+      "2026-11-14T15:00:00",
+      "2026-11-14T16:00:00",
+      "2026-11-14T16:30:00",
+      "2026-11-14T23:59:59",
+      "2026-11-15T23:59:59"
+     ]
     },
     {
      "name": "all_day",
@@ -15783,7 +15807,6 @@
       "Captain Anderson’s Event Center",
       "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "Dolly Parton’s Pirates Voyage Dinner & Show",
       "Edgewater Beach & Golf Resort",
       "Frank Brown Park Recreation Center",
       "Gulf Coast State College, Student Union East",
@@ -15792,7 +15815,7 @@
       "Parker Public Library",
       "Sharky’s Beachfront Restaurant",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444"
+      "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444"
      ]
     },
     {
@@ -17492,7 +17515,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-10"
+      "2026-11-11"
      ]
     },
     {
@@ -18016,7 +18039,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 526,
+   "rows": 536,
    "columns": [
     {
      "name": "place_id",
@@ -18074,6 +18097,7 @@
       "City Commission Meeting of August 25, 2026.",
       "City Commission Meeting of July 14, 2026.",
       "City Commission Meeting of July 28, 2026.",
+      "City Commission Meeting of November 17, 2026.",
       "City Commission Meeting of October 13, 2026.",
       "City Commission Meeting of October 27, 2026.",
       "City Commission Meeting of September 22, 2026.",
@@ -18330,7 +18354,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 17,
+   "rows": 18,
    "columns": [
     {
      "name": "place_id",
@@ -20464,7 +20488,7 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-10",
+      "2026-11-11",
       "2026-11-12"
      ]
     },
@@ -20697,7 +20721,7 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-10",
+      "2026-11-11",
       "2026-11-12"
      ]
     },
@@ -20776,6 +20800,7 @@
       "CRA Board Meeting",
       "CRA Virtual Workshop Agenda",
       "City Commission Meeting",
+      "City Commission Meeting of November 17, 2026.",
       "City Council",
       "City Council Meeting",
       "Commission Meeting",
@@ -20854,6 +20879,7 @@
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?html=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true",
       "https://www.springfieldfl.net/media/10911"
      ]
     },
@@ -20869,7 +20895,8 @@
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?packet=true"
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?packet=true"
      ]
     },
     {
@@ -20982,7 +21009,8 @@
      "type": "string",
      "values": [
       "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
      ]
     },
     {

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10T12:41:50-06:00",
+  "generated": "2026-11-10T19:51:47-06:00",
   "window": {
     "from": "2026-11-10",
     "to": "2027-01-09"
@@ -75,12 +75,12 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (23 records)",
+        "AgendaCenter": "ok (24 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
-        "calendar": 2,
+        "agenda_feed": 1,
+        "calendar": 1,
         "expected": 0
       }
     },
@@ -135,7 +135,7 @@
       "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
         "CivicClerk": "ok (18 records)",
-        "calendar (iCal cat 14)": "ok (4 records)"
+        "calendar (iCal cat 14)": "ok (3 records)"
       },
       "coverage": {
         "agenda_feed": 4,
@@ -738,14 +738,13 @@
       "board": "lh",
       "title": "City Commission Meeting",
       "start": "2026-11-10T17:30:00-06:00",
-      "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
       "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
       "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
-      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "items": [
         {
           "title": "Approve Resolution 2026-10-590: Discussion and possible approval of Award ITB 25.26-31 Wyoming Ave Drainage Improvements Project (22031)",
@@ -924,15 +923,127 @@
     },
     {
       "board": "pc",
-      "title": "City Commission Meeting",
+      "title": "City Commission Meeting of November 17, 2026.",
       "start": "2026-11-17T16:00:00-06:00",
       "location": "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true",
+      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?packet=true",
       "minutes_url": null,
-      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7564"
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7564",
+      "calendar_source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "items": [
+        {
+          "title": "Consideration of purchasing a budgeted 2028 Compressed Natural Gas Side Load Garbage Truck for Residential Garbage Service in the amount of $518,655.40.",
+          "amount": "$518,655.40"
+        },
+        {
+          "title": "Consideration of purchasing two new budgeted 2028 Compressed Natural Gas (CNG) Trash trucks for the Environmental Services Division in the amount of $564,341.00.",
+          "amount": "$564,341.00"
+        },
+        {
+          "title": "Consideration to authorize staff to enter into negotiations with Anchor CEI for a Stormwater Master Plan funded by the previously approved Resilient Florida Grant.",
+          "amount": null
+        },
+        {
+          "title": "Approval of Panama City's Grant Policy and process.",
+          "amount": null
+        },
+        {
+          "title": "FDOT purchase of city parcels 118R,138,757,805 and 812 for multi-lane construction and roadway improvements for Highway 231.",
+          "amount": null
+        },
+        {
+          "title": "Consideration for approval of contract for Sale of Vacant Land at 2215 E 3rd Street to Marco Designs.",
+          "amount": null
+        },
+        {
+          "title": "Consideration of approval to go into contract with Hagerty Consulting for Flood Mitigation Assistance Program (FMA).",
+          "amount": null
+        },
+        {
+          "title": "Consideration for approval of Storm Water Grant Application.",
+          "amount": null
+        },
+        {
+          "title": "Consideration for approval of Change Order 2 to Southern Construction Service on CDBG-DR Project Captain's Table Hometown Revitalization in the amount of $6,750.00.",
+          "amount": "$6,750.00"
+        },
+        {
+          "title": "Discussion and report on Huron Consulting Group zero-based budget.",
+          "amount": null
+        },
+        {
+          "title": "Consideration to approve Budget Amendment Resolution No. 20261117.1 to receive and utilize donations for the Parks, Culture and Recreation Department in the amount of $9,050.00.",
+          "amount": "$9,050.00"
+        },
+        {
+          "title": "Consideration to approve the Fiscal Year 2026 final Budget Amendment Resolution 20261117.2.",
+          "amount": null
+        },
+        {
+          "title": "Consideration to approve Budget Amendment Resolution 20261117.3 to carry forward Fiscal Year 2026 funds into Fiscal Year 2027.",
+          "amount": null
+        },
+        {
+          "title": "Consideration to approve Budget Amendment Resolution 20261117.4 for $54,888.00 to utilize revenue received from RedSpeed to purchase eight (8) school zone beacons.",
+          "amount": "$54,888.00"
+        },
+        {
+          "title": "Consideration for Budget Amendment Resolution No. 20261117.5 and H1588 agreement, increase of $177,672.00 to the existing subrecipient agreement for HMGP Fire Station No. 3 & 4 Generators.",
+          "amount": "$177,672.00"
+        },
+        {
+          "title": "Consideration to approve Budget Amendment 20261117.6 to accept and expend $31,000.00 in FDOT grant funds and transfer $740.00 from the Police Department General Fund to the grant fund.",
+          "amount": "$31,000.00"
+        },
+        {
+          "title": "Discussion of and consideration to direct staff to put out a competitive Invitation to Bid on improvements to the Downtown marina boat ramp.",
+          "amount": null
+        }
+      ],
+      "agenda_items": [
+        "Agenda - 11/17/2026 AGENDA CITY COMMISSION MEETING 840 WEST 11 TH STREET NOVEMBER 17, 2026, 4:00 p.m.",
+        "Opening prayer with Rev. Dr. Steve Tipton, Senior Pastor of Covenant Presbyterian Church.",
+        "Community Announcements & Presentations.",
+        "Discussion and consideration of draft Ordinance 3321 amending Destination Panama City board composition changes.",
+        "Public Hearings.",
+        "Second and final of two public hearings on Ordinance 3315, an ordinance amending sec. 104-39.B, allowable uses in Light Industrial (LI) of the Unified Land Development Code (ULDC).",
+        "First and only Quasi-Judicial Hearing on the approval of the proposed Gateway Overlay Special Exception for 1023 E 15th Street (Parcel ID 14450-000-000).",
+        "First of two public hearings on Ordinance 3317 to amend Sec. 104-66(B) Gateway Overlay District of the City of Panama City Unified Land Development Code (ULDC).",
+        "Second and final of two public hearings on Ordinance 3319, an ordinance to vacate and abandon a portion of Grace Avenue north of W. 6th Street and south of W. 7th Street.",
+        "First Reading of Ordinance 3323 amending Section 23-35 of the City Code relating to backflow preventer inspections and testing.",
+        "Audience Participation for items on this agenda only (Each speaker is limited to three (3) minutes).",
+        "Consent Agenda",
+        "Consideration of purchasing a budgeted 2028 Compressed Natural Gas Side Load Garbage Truck for Residential Garbage Service in the amount of $518,655.40.",
+        "Consideration of purchasing two new budgeted 2028 Compressed Natural Gas (CNG) Trash trucks for the Environmental Services Division in the amount of $564,341.00.",
+        "Consideration to authorize staff to enter into negotiations with Anchor CEI for a Stormwater Master Plan funded by the previously approved Resilient Florida Grant.",
+        "Approval of Panama City's Grant Policy and process.",
+        "Discussion of bulk trash collection and pickup in and around Panama City.",
+        "Commissioner Lucas - Discussion and consideration of adoption of Standardized Definitions for Affordable, Attainable, and Workforce Housing and Establishment of a Housing-Focused Public Land Disposition Policy.",
+        "City Attorney",
+        "FDOT purchase of city parcels 118R,138,757,805 and 812 for multi-lane construction and roadway improvements for Highway 231.",
+        "Consideration for approval of contract for Sale of Vacant Land at 2215 E 3rd Street to Marco Designs.",
+        "City Clerk-Treasurer",
+        "Notice of vacancy and appointment to the Infrastructure Surtax Citizens' Committee.",
+        "Consideration of approval to go into contract with Hagerty Consulting for Flood Mitigation Assistance Program (FMA).",
+        "Consideration for approval of Storm Water Grant Application.",
+        "Popular monthly Financial Reports.",
+        "City Manager",
+        "Consideration for approval of Change Order 2 to Southern Construction Service on CDBG-DR Project Captain's Table Hometown Revitalization in the amount of $6,750.00.",
+        "Discussion and report on Huron Consulting Group zero-based budget.",
+        "Consideration to approve Budget Amendment Resolution No. 20261117.1 to receive and utilize donations for the Parks, Culture and Recreation Department in the amount of $9,050.00.",
+        "Consideration to approve the Fiscal Year 2026 final Budget Amendment Resolution 20261117.2.",
+        "Consideration to approve Budget Amendment Resolution 20261117.3 to carry forward Fiscal Year 2026 funds into Fiscal Year 2027.",
+        "Consideration to approve Budget Amendment Resolution 20261117.4 for $54,888.00 to utilize revenue received from RedSpeed to purchase eight (8) school zone beacons.",
+        "Consideration for Budget Amendment Resolution No. 20261117.5 and H1588 agreement, increase of $177,672.00 to the existing subrecipient agreement for HMGP Fire Station No. 3 & 4 Generators.",
+        "Consideration to approve Budget Amendment 20261117.6 to accept and expend $31,000.00 in FDOT grant funds and transfer $740.00 from the Police Department General Fund to the grant fund.",
+        "Discussion on FEMA funds for the East Basin Downtown Marina.",
+        "Discussion of and consideration to direct staff to put out a competitive Invitation to Bid on improvements to the Downtown marina boat ramp.",
+        "Projects and efforts update.",
+        "Motion to Adjourn. In accordance with the Americans with Disabilities Act and Section 286.26, Florida Statutes, persons with disabilities needing special accommodation to participate in this proceeding should contact the City's Human Resources Department by 5 pm on the Thursday prior to the proceeding at telephone (850) 872-3009 for assistance. If a person decides to appeal any decision by the Cit"
+      ]
     },
     {
       "board": "schools",

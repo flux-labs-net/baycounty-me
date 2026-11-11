@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-10",
+ "as_of": "2026-11-11",
  "fetched": {
-  "pcb-chamber": "2026-11-10T18:47:10+00:00",
+  "pcb-chamber": "2026-11-11T01:56:58+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27730",
-   "title": "PCB Young Professionals Social: Small Things, Big Impact",
-   "starts": "2026-11-10T17:30:00",
-   "ends": "2026-11-10T18:30:00",
-   "all_day": false,
-   "venue": "Dolly Parton’s Pirates Voyage Dinner & Show",
-   "city": "Panama City Beach",
-   "category": "Chamber Events, Community Events",
-   "chamber_event": true,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/pcb-young-professionals-giveback-small-things-big-impact/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27802",
