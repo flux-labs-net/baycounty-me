@@ -177,7 +177,7 @@ test('an open draft closes itself when the source catches up; an edited one keep
 });
 
 // Vendor records requests (data/civic/scripts/vendor_requests.py): everything about one company's dealings with a government.
-test('vendor letters: CivicPlus to Lynn Haven and Panama City, since 2016, with each city’s records address', () => {
+test('vendor letters: CivicPlus contracts and invoices from Lynn Haven and Panama City, since 2000, to each city’s records address', () => {
   const tmp = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/civic/vendor_requests.json'), 'utf8')).requests;
   const by = Object.fromEntries(tmp.map(r => [r.government_key, r]));
   assert.deepEqual(Object.keys(by).sort(), ['lh', 'pc']);
@@ -188,7 +188,9 @@ test('vendor letters: CivicPlus to Lynn Haven and Panama City, since 2016, with 
     assert.match(r.key, /^vendor-civicplus-(lh|pc)$/);
     assert.match(r.body, /^Under Chapter 119, Florida Statutes/);
     assert.match(r.body, new RegExp(`public records of the ${r.government} relating to CivicPlus, LLC`));
-    assert.match(r.body, /January 1, 2016 to the date of your search/);
+    assert.match(r.body, /January 1, 2000 to the date of your search/);
+    assert.match(r.body, /1\. Contracts: .*\n2\. Invoices: /);
+    assert.doesNotMatch(r.body, /emails|communications/i);
     assert.match(r.body, /invoice/);
     assert.match(r.body, /119\.07\(1\)\(e\)/);
     assert.match(r.body, /Jeremy McSpadden\nBayCounty\.me$/);
