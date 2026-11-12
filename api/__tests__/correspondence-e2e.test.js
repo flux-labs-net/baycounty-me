@@ -143,6 +143,9 @@ test('records request drafts seed from the file, keep edits, and send only on re
   assert.equal(requests.length, file.length);
   assert.ok(requests.every(r => r.status === 'draft' && !r.thread_id));
   assert.equal((await R.seed()).updated, 0);
+  const vendor = (await R.list()).requests.filter(r => r.kind === 'vendor');
+  assert.deepEqual(vendor.map(r => r.government_key).sort(), ['lh', 'pc']);
+  assert.ok(vendor.every(r => r.status === 'draft' && r.check_title === 'CivicPlus agreements' && r.recipient_email));
 
   const pcb = requests.find(r => r.government_key === 'pcb');
   const noAddr = await R.send({id: pcb.id}, 'jeremy@fluxlabs.net').catch(e => e);

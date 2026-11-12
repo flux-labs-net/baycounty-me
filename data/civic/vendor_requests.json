@@ -1,0 +1,74 @@
+{
+ "as_of": "2026-11-12",
+ "about": "Records request drafts about one vendor’s dealings with a government (contracts, invoices, payments, communications). Seeded into corr.records_requests and sent only from /admin.",
+ "requests": [
+  {
+   "key": "vendor-civicplus-lh",
+   "kind": "vendor",
+   "check_title": "CivicPlus agreements",
+   "government": "City of Lynn Haven",
+   "government_key": "lh",
+   "recipient_name": "Public Records Request, City of Lynn Haven",
+   "recipient_email": "publicrecordsrequest@cityoflynnhaven.com",
+   "contact_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/2545/Public-Records-Request-Form-updated-April-2023",
+   "subject": "Public records request: CivicPlus, LLC agreements, invoices and communications since 2016",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the following public records of the City of Lynn Haven relating to CivicPlus, LLC (also known as Civic Plus), including its predecessors, subsidiaries and affiliates, such as Municipal Code Corporation (Municode) and SeeClickFix, and any reseller or cooperative-purchasing contract through which the city bought CivicPlus products. This covers every CivicPlus product or service, for example the city website and its hosting and redesigns, agenda and meeting management, mass notification, recreation, HR or permitting modules, 311 or citizen request tools, and code of ordinances codification and hosting.\n\nThe period is January 1, 2016 to the date of your search.\n\n1. Agreements: every contract, master services agreement, order form, quote or proposal, statement of work, renewal, amendment, addendum, change order, price increase or renewal notice, and termination or non-renewal notice, with all exhibits, schedules and attachments.\n2. Purchasing: any request for proposals, request for quotes or bid and the responses received, evaluation or scoring sheets, sole-source or cooperative-contract (piggyback) justifications, requisitions and purchase orders.\n3. Approvals: agenda items, staff reports or memos, resolutions, and the minutes or approvals for each purchase, renewal or amendment.\n4. Money: every invoice and credit memo, and the payment records for each (check or ACH register entries, purchasing card charges), plus the budget account or line each was charged to.\n5. Communications: emails (with attachments), letters, text messages and meeting notes or calendar entries between any city official or employee and anyone at the company, and city officials’ and employees’ internal communications about these agreements, products or invoices. A search of city email accounts for these terms should find most of them: “CivicPlus”, “Civic Plus”, “civicplus.com”, “CivicEngage”, “CivicClerk”, “CivicReady”, “CivicRec”, “CivicHR”, “CivicSend”, “SeeClickFix”, “Municode”, “Municipal Code Corporation”.\n6. Service records: implementation and project plans, acceptance or sign-off documents, support tickets or escalations, service-level or performance reports, complaints, security or data incident notices, data ownership or export terms, and certificates of insurance.\n7. Any list or summary of the CivicPlus products the city uses now or has used since 2016, with the yearly cost of each, if one exists.\n\nElectronic copies are preferred: documents as PDF or in their original format, spreadsheets in Excel or CSV, and emails as PDF or in their native format with the sender, recipients and date shown. If any of this is already posted online, a link is all I need.\n\nPlease send the agreements, invoices and payment records as soon as they’re ready, and the communications after, rather than holding the whole request until everything is gathered. If any record or part of one is withheld or redacted, please cite the statute for each exemption, as section 119.07(1)(e) requires, and release the rest.\n\nIf it’s easier, the files can also be emailed to lynnhaven@ingest.baycounty.me or uploaded at https://baycounty.me/staff (we can give your clerk’s staff a free sign-in).\n\nThese records will be shown to residents on BayCounty.me, an independent public-records site for Bay County. If fulfilling the request will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "gaps": [
+    {
+     "vendor": "CivicPlus, LLC",
+     "since": "2016-01-01",
+     "names": [
+      "CivicPlus",
+      "Civic Plus",
+      "civicplus.com",
+      "CivicEngage",
+      "CivicClerk",
+      "CivicReady",
+      "CivicRec",
+      "CivicHR",
+      "CivicSend",
+      "SeeClickFix",
+      "Municode",
+      "Municipal Code Corporation"
+     ],
+     "need": "Contracts, quotes, renewals, amendments, purchasing, approvals, invoices, payments, communications and service records"
+    }
+   ],
+   "notes": "Lynn Haven’s public records request form (updated April 2023) says to email requests to publicrecordsrequest@cityoflynnhaven.com or mail them to 825 Ohio Avenue (checked 2026-11-12). The city has since moved its website to cityoflynnhaven.gov, and the commission took up changes to its records policy in January 2026, so a call to 850-265-2121 to confirm the address costs little."
+  },
+  {
+   "key": "vendor-civicplus-pc",
+   "kind": "vendor",
+   "check_title": "CivicPlus agreements",
+   "government": "City of Panama City",
+   "government_key": "pc",
+   "recipient_name": "Public Records, City Clerk’s Office",
+   "recipient_email": "publicrecords@panamacity.gov",
+   "contact_url": "https://panamacity.gov/581/Public-Records-Request",
+   "subject": "Public records request: CivicPlus, LLC agreements, invoices and communications since 2016",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the following public records of the City of Panama City relating to CivicPlus, LLC (also known as Civic Plus), including its predecessors, subsidiaries and affiliates, such as Municipal Code Corporation (Municode) and SeeClickFix, and any reseller or cooperative-purchasing contract through which the city bought CivicPlus products. This covers every CivicPlus product or service, for example the city website and its hosting and redesigns, agenda and meeting management, mass notification, recreation, HR or permitting modules, 311 or citizen request tools, and code of ordinances codification and hosting.\n\nThe period is January 1, 2016 to the date of your search.\n\n1. Agreements: every contract, master services agreement, order form, quote or proposal, statement of work, renewal, amendment, addendum, change order, price increase or renewal notice, and termination or non-renewal notice, with all exhibits, schedules and attachments.\n2. Purchasing: any request for proposals, request for quotes or bid and the responses received, evaluation or scoring sheets, sole-source or cooperative-contract (piggyback) justifications, requisitions and purchase orders.\n3. Approvals: agenda items, staff reports or memos, resolutions, and the minutes or approvals for each purchase, renewal or amendment.\n4. Money: every invoice and credit memo, and the payment records for each (check or ACH register entries, purchasing card charges), plus the budget account or line each was charged to.\n5. Communications: emails (with attachments), letters, text messages and meeting notes or calendar entries between any city official or employee and anyone at the company, and city officials’ and employees’ internal communications about these agreements, products or invoices. A search of city email accounts for these terms should find most of them: “CivicPlus”, “Civic Plus”, “civicplus.com”, “CivicEngage”, “CivicClerk”, “CivicReady”, “CivicRec”, “CivicHR”, “CivicSend”, “SeeClickFix”, “Municode”, “Municipal Code Corporation”.\n6. Service records: implementation and project plans, acceptance or sign-off documents, support tickets or escalations, service-level or performance reports, complaints, security or data incident notices, data ownership or export terms, and certificates of insurance.\n7. Any list or summary of the CivicPlus products the city uses now or has used since 2016, with the yearly cost of each, if one exists.\n\nElectronic copies are preferred: documents as PDF or in their original format, spreadsheets in Excel or CSV, and emails as PDF or in their native format with the sender, recipients and date shown. If any of this is already posted online, a link is all I need.\n\nPlease send the agreements, invoices and payment records as soon as they’re ready, and the communications after, rather than holding the whole request until everything is gathered. If any record or part of one is withheld or redacted, please cite the statute for each exemption, as section 119.07(1)(e) requires, and release the rest.\n\nIf it’s easier, the files can also be emailed to panamacity@ingest.baycounty.me or uploaded at https://baycounty.me/staff (we can give your clerk’s staff a free sign-in).\n\nThese records will be shown to residents on BayCounty.me, an independent public-records site for Bay County. If fulfilling the request will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "gaps": [
+    {
+     "vendor": "CivicPlus, LLC",
+     "since": "2016-01-01",
+     "names": [
+      "CivicPlus",
+      "Civic Plus",
+      "civicplus.com",
+      "CivicEngage",
+      "CivicClerk",
+      "CivicReady",
+      "CivicRec",
+      "CivicHR",
+      "CivicSend",
+      "SeeClickFix",
+      "Municode",
+      "Municipal Code Corporation"
+     ],
+     "need": "Contracts, quotes, renewals, amendments, purchasing, approvals, invoices, payments, communications and service records"
+    }
+   ],
+   "notes": "Panama City’s records contacts page lists the City Clerk’s Office at publicrecords@panamacity.gov, (850) 872-3021, 501 Harrison Avenue (checked 2026-11-12). Its 2025 records policy says the clerk sends each request on to the departments that hold the records."
+  }
+ ]
+}

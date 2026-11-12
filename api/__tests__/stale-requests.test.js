@@ -175,3 +175,24 @@ test('an open draft closes itself when the source catches up; an edited one keep
   assert.equal(notice.subject, '1 records request drafted for stale data');
   assert.match(notice.html, /admin#records/);
 });
+
+// Vendor records requests (data/civic/scripts/vendor_requests.py): everything about one company's dealings with a government.
+test('vendor letters: CivicPlus to Lynn Haven and Panama City, since 2016, with each city’s records address', () => {
+  const tmp = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/civic/vendor_requests.json'), 'utf8')).requests;
+  const by = Object.fromEntries(tmp.map(r => [r.government_key, r]));
+  assert.deepEqual(Object.keys(by).sort(), ['lh', 'pc']);
+  assert.equal(by.lh.recipient_email, 'publicrecordsrequest@cityoflynnhaven.com');
+  assert.equal(by.pc.recipient_email, 'publicrecords@panamacity.gov');
+  for (const r of tmp) {
+    assert.equal(r.kind, 'vendor');
+    assert.match(r.key, /^vendor-civicplus-(lh|pc)$/);
+    assert.match(r.body, /^Under Chapter 119, Florida Statutes/);
+    assert.match(r.body, new RegExp(`public records of the ${r.government} relating to CivicPlus, LLC`));
+    assert.match(r.body, /January 1, 2016 to the date of your search/);
+    assert.match(r.body, /invoice/);
+    assert.match(r.body, /119\.07\(1\)\(e\)/);
+    assert.match(r.body, /Jeremy McSpadden\nBayCounty\.me$/);
+    assert.doesNotMatch(r.body + r.subject, /\b(AI|Claude|Anthropic|GPT|automated reader|artificial)\b/i);
+    assert.ok(r.notes && r.contact_url.startsWith('https://'));
+  }
+});

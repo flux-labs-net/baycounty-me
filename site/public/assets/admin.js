@@ -843,7 +843,8 @@
     $('#rr-list').innerHTML = rs.map(r => {
       const stale = r.kind === 'stale', g = r.gaps.length;
       const unit = r.gaps.some(x => x.award_date) ? 'award' : 'place';
-      const what = stale ? `${esc(r.check_title || 'Stale data')} · ${g} ${unit}${g === 1 ? '' : 's'}` : `Budget · ${g} year${g === 1 ? '' : 's'}`;
+      const what = stale ? `${esc(r.check_title || 'Stale data')} · ${g} ${unit}${g === 1 ? '' : 's'}`
+        : r.kind === 'vendor' ? esc(r.check_title || 'Vendor records') : `Budget · ${g} year${g === 1 ? '' : 's'}`;
       return `<button type="button" class="co-p${r.id === rrOpen ? ' on' : ''}" data-rr="${r.id}" style="width:100%;text-align:left;background:${r.id === rrOpen ? 'var(--sunken)' : 'none'};border-left:0;border-right:0;border-top:0;cursor:pointer;font:inherit;color:inherit">
         <span></span><span class="nm">${esc(r.government)}</span><span class="pill ${esc(r.status)}">${esc(rrLabel[r.status] || r.status)}</span>
         <span class="sub">${stale ? '<span class="rr-k">Stale data</span> ' : ''}${what} · ${r.recipient_email ? esc(r.recipient_email) : '<span style="color:var(--warn)">No address yet</span>'}</span></button>`;
@@ -853,6 +854,8 @@
   $('#rr-filter').addEventListener('change', () => { rrOpen = null; $('#rr-detail').innerHTML = '<p class="muted small" style="margin:0">Pick a request on the left.</p>'; renderRR(); });
   $('#rr-list').addEventListener('click', e => { const b = e.target.closest('[data-rr]'); if (b) { rrOpen = Number(b.dataset.rr); renderRR(); } });
   function rrWhy(r) {
+    if (r.kind === 'vendor') return `<div class="rr-why">${r.gaps.map(g => `<div class="small muted" style="margin-bottom:6px"><b>What it asks for:</b> ${esc(g.need || '')} about <b>${esc(g.vendor)}</b>, since ${esc(shortDate(g.since))}.</div>
+      ${(g.names || []).length ? `<div class="small muted" style="margin-bottom:4px">Search terms in the letter</div><div class="rr-gaps">${g.names.map(n => `<span>${esc(n)}</span>`).join('')}</div>` : ''}`).join('')}</div>`;
     if (r.kind !== 'stale') return `<div><div class="small muted" style="margin-bottom:4px">Missing years</div><div class="rr-gaps">${r.gaps.map(g => `<span title="${esc(g.need)}">FY${esc(g.fiscal_year)}</span>`).join('')}</div></div>`;
     if (r.gaps.some(g => g.award_date)) return `<div class="rr-why"><div class="small muted" style="margin-bottom:6px"><b>Why this was drafted:</b> the minutes record each award below, and six months or more later the site holds no later record of the job (no vote, agenda item, contract record, change order, payment or project history naming the company or bid). Awards the government’s checkbook shows paid since are left out${r.page ? ` (shown on <a href="${esc(r.page)}" target="_blank" rel="noopener">${esc(r.page)}</a>)` : ''}.</div>
       <div class="rr-places">${r.gaps.map(g => `<div class="rr-place"><div class="row" style="gap:8px;align-items:baseline"><b class="grow">${esc(g.company)}</b>
