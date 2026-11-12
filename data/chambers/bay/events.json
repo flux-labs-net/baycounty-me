@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-11",
+ "as_of": "2026-11-12",
  "fetched": {
-  "pcb-chamber": "2026-11-11T18:49:06+00:00",
+  "pcb-chamber": "2026-11-12T02:57:29+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27802",
-   "title": "Veteran’s Day Freedom Celebration",
-   "starts": "2026-11-11T15:00:00",
-   "ends": "2026-11-11T17:00:00",
-   "all_day": false,
-   "venue": "Capt. Anderson’s Marina",
-   "city": "Panama City",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/veterans-day-freedom-celebration-2/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27811",
