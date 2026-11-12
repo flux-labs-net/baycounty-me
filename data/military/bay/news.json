@@ -1,14 +1,27 @@
 {
  "as_of": "2026-11-12",
  "fetched": {
-  "325fw": "2026-11-12T03:02:39+00:00",
-  "601aoc": "2026-11-12T03:02:39+00:00",
-  "nsapc": "2026-11-12T03:02:39+00:00",
-  "nswc-pcd": "2026-11-12T03:02:40+00:00",
-  "nedu": "2026-11-12T03:02:40+00:00"
+  "325fw": "2026-11-12T19:08:59+00:00",
+  "601aoc": "2026-11-12T19:08:59+00:00",
+  "nsapc": "2026-11-12T19:08:59+00:00",
+  "nswc-pcd": "2026-11-12T19:09:00+00:00",
+  "nedu": "2026-11-12T19:09:00+00:00"
  },
  "errors": [],
  "stories": [
+  {
+   "news_id": "dvids:579181",
+   "installation_id": "tyndall-afb",
+   "unit": "325th Fighter Wing",
+   "unit_id": "325fw",
+   "title": "Checkered Flag 27-1 strengthens joint, coalition air combat readiness",
+   "summary": "Exercise Checkered Flag 27-1 concluded Nov. 5, 2026, at Tyndall Air Force Base, Florida, following more than two weeks of large-scale air combat training focused on readiness and interoperability.",
+   "published": "2026-11-12T11:21",
+   "author": "Airman 1st Class Rosario Garcia",
+   "url": "https://www.dvidshub.net/news/579181/checkered-flag-27-1-strengthens-joint-coalition-air-combat-readiness",
+   "image_url": "https://d1ldvf68ux039x.cloudfront.net/thumbs/photos/2610/10043748/250w_q95.jpg",
+   "source_url": "https://www.dvidshub.net/unit/325FWPA"
+  },
   {
    "news_id": "dvids:574989",
    "installation_id": "nsa-panama-city",

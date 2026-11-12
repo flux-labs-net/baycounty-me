@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-11T20:52:15-06:00",
+  "generated": "2026-11-12T12:58:14-06:00",
   "window": {
-    "from": "2026-11-11",
-    "to": "2027-01-10"
+    "from": "2026-11-12",
+    "to": "2027-01-11"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -56,7 +56,7 @@
       "calendar_url": "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events/generate_ical?filter_ids&section_ids",
       "schedule_source_url": "https://www.bay.k12.fl.us/events",
       "sources": {
-        "District calendar (Thrillshare)": "ok (10 records)"
+        "District calendar (Thrillshare)": "ok (9 records)"
       },
       "coverage": {
         "agenda_feed": 0,
@@ -75,7 +75,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (24 records)",
+        "AgendaCenter": "ok (22 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
@@ -173,7 +173,7 @@
       "calendar_url": "https://www.cityofcallaway.com/Calendar.aspx",
       "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "AgendaCenter": "ok (13 records)",
+        "AgendaCenter": "ok (12 records)",
         "calendar (iCal cat 14)": "ok (9 records)"
       },
       "coverage": {

@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-11",
- "fetched": "2026-11-11T21:57:30-0500",
+ "as_of": "2026-11-12",
+ "fetched": "2026-11-12T14:03:40-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -103,108 +103,6 @@
    "url": "https://pcbeach.org/local-event/holly-fair-2026/",
    "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
-  },
-  {
-   "event_id": "panama-city:6519:2026-11-12",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "PC Senior Living",
-   "starts": "2026-11-12T09:00:00",
-   "ends": "2026-11-12T13:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6519",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23737:2026-11-12",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Internet Basics (Registration Required)",
-   "starts": "2026-11-12T09:30:00",
-   "ends": "2026-11-12T11:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/internet-basics-registration-required-3/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23771:2026-11-12",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Sail Into School (Ages 3 – 5)",
-   "starts": "2026-11-12T10:00:00",
-   "ends": "2026-11-12T10:30:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/sail-into-school-ages-3-5-7/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23384:2026-11-12",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "BCPL Virtual Book Club (Zoom Program, Registration Required)",
-   "starts": "2026-11-12T10:30:00",
-   "ends": "2026-11-12T11:30:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": "Free",
-   "url": "https://www.nwrls.com/event/bcpl-virtual-book-club-zoom-program-registration-required-4/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7151:2026-11-12",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Help Me Grow - Playgroups",
-   "starts": "2026-11-12T10:30:00",
-   "ends": "2026-11-12T11:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7151",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23231:2026-11-12",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
-   "starts": "2026-11-12T10:30:00",
-   "ends": "2026-11-12T11:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-11/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
   },
   {
    "event_id": "library:20541:2026-11-12",
@@ -392,6 +290,23 @@
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7433",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
+  },
+  {
+   "event_id": "lynn-haven:1323:2026-11-13",
+   "source_id": "lynn-haven",
+   "source": "City of Lynn Haven",
+   "gov": "lh",
+   "town": "Lynn Haven",
+   "title": "Special Commission Meeting",
+   "starts": "2026-11-13T15:30:00",
+   "ends": "2026-11-13T17:30:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Public meeting",
+   "cost": null,
+   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1323",
+   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
+   "recurring": false
   },
   {
    "event_id": "panama-city:7652:2026-11-13",
@@ -853,23 +768,6 @@
    "recurring": false
   },
   {
-   "event_id": "library:23903:2026-11-17",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Homemade for the Holidays (Registration Required)",
-   "starts": "2026-11-17T17:00:00",
-   "ends": "2026-11-17T18:30:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/homemade-for-the-holidays-registration-required/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
    "event_id": "panama-city:7713:2026-11-17",
    "source_id": "panama-city",
    "source": "City of Panama City",
@@ -935,7 +833,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7152",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "panama-city:7492:2026-11-18",
@@ -1105,7 +1003,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6520",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "library:23869:2026-11-19",
@@ -1805,6 +1703,40 @@
    "recurring": false
   },
   {
+   "event_id": "bay-county:1614:2026-11-26",
+   "source_id": "bay-county",
+   "source": "Bay County",
+   "gov": "county",
+   "town": "Bay County",
+   "title": "Thanksgiving Day - County Offices will be closed.",
+   "starts": "2026-11-26T08:00:00",
+   "ends": "2026-11-26T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1614",
+   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7708:2026-11-26",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Thanksgiving Holiday",
+   "starts": "2026-11-26T08:00:00",
+   "ends": "2026-11-27T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7708",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "mexico-beach:10001395-1795680000-1795680000:2026-11-26",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
@@ -2329,7 +2261,7 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/bcpl-virtual-book-club-zoom-program-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "library:24042:2026-12-10",
@@ -2516,7 +2448,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/craft-camp-ages-8-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24150:2026-12-14",
@@ -3008,6 +2940,23 @@
    "category": "Library",
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-dungeons-dragons-ages-13-17-3/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24350:2027-01-11",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Craft Camp (Ages 8 – 12)",
+   "starts": "2027-01-11T16:00:00",
+   "ends": "2027-01-11T17:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/craft-camp-ages-8-12-4/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
   }

@@ -132,7 +132,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 11802,
+   "rows": 11806,
    "columns": [
     {
      "name": "date",
@@ -352,7 +352,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 57166,
+   "rows": 57182,
    "columns": [
     {
      "name": "date",
@@ -8926,7 +8926,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 174,
+   "rows": 171,
    "columns": [
     {
      "name": "place_id",
@@ -9639,7 +9639,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-11T16:13:00+00:00"
+      "2026-11-12T07:57:00+00:00"
      ]
     },
     {
@@ -9647,10 +9647,10 @@
      "type": "string",
      "values": [
       "Friday",
-      "Rest Of Today",
+      "Monday",
       "Saturday",
       "Sunday",
-      "Thursday"
+      "Today"
      ]
     },
     {
@@ -9687,9 +9687,8 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "Around 1 foot",
-      "Around 3 feet",
-      "around 1 foot"
+      "Around 2 feet",
+      "around 2 feet"
      ]
     },
     {
@@ -9710,14 +9709,15 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly sunny until 3 PM, then partly",
-      "Partly sunny"
+      "Mostly cloudy until 12 PM, then mostly",
+      "Sunny"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
+      "In the mid 60s",
       "In the mid 70s"
      ]
     },
@@ -9725,7 +9725,7 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "Northwest winds 5 to 10 mph",
+      "Northwest winds 15 to 20 mph",
       "West winds 15 to 20 mph"
      ]
     },
@@ -9733,7 +9733,6 @@
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:04 AM",
       "7:05 AM"
      ]
     },
@@ -9741,6 +9740,7 @@
      "name": "sunset",
      "type": "string",
      "values": [
+      "5:48 PM",
       "5:49 PM"
      ]
     },
@@ -9749,14 +9749,14 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
+      "High rip current risk*. Partly sunny. A slight chance of showers. Highs in the mid 60s. Breezy. Northeast winds around 25 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Light northwesterly to northerly winds prevail again today. A Moderate Risk of Rip Currents is forecast at all area beaches. A cold front nears the area late Wednesday and causes winds to increase, which increases the potential for rip currents to high for most area beaches Thursday and Friday.",
       "Moderate rip current risk*. Sunny. Highs in the lower 60s. Northeast winds around 15 mph.",
-      "Moderate rip current risk*. Sunny. Highs in the mid 60s. Northeast winds around 15 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Sunny, cooler. Highs in the mid 60s. North winds around 15 mph.",
+      "Moderate rip current risk*. Surf height around 2 feet. Sunny. Highs around 60. North winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
+      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County).",
+      "Westerly to northwesterly winds prevail today behind the first of two cold fronts. Surf heights gradually increase to near 2 feet along the Emerald Coast, which will maintain a Moderate Risk of Rip Currents. A High Risk of Rip Currents remains on the table for Friday."
      ]
     },
     {
@@ -9779,7 +9779,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/a3575c8e-a618-42e4-baa1-eb249634a0b5",
+      "https://api.weather.gov/products/e0b06555-b93f-4283-ad52-6f7a1c023ed7",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12433,7 +12433,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-11"
+      "2026-11-12"
      ]
     },
     {
@@ -12582,7 +12582,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 64,
+   "rows": 65,
    "columns": [
     {
      "name": "notice_id",
@@ -13768,7 +13768,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 119,
+   "rows": 120,
    "columns": [
     {
      "name": "place_id",
@@ -14019,7 +14019,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 104,
+   "rows": 106,
    "columns": [
     {
      "name": "place_id",
@@ -14091,8 +14091,7 @@
       "Part time",
       "Part-Time",
       "Substitutes",
-      "Support",
-      "West bay elem school"
+      "Support"
      ]
     },
     {
@@ -14117,6 +14116,7 @@
      "values": [
       "2026-07-13",
       "2026-08-10",
+      "2026-08-22",
       "2026-09-14",
       "2026-09-17",
       "2026-09-28",
@@ -14128,7 +14128,7 @@
       "2026-10-16",
       "2026-10-20",
       "2026-10-22",
-      "2026-10-27",
+      "2026-10-26",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
@@ -14140,7 +14140,7 @@
       "2026-11-07",
       "2026-11-09",
       "2026-11-10",
-      "2026-11-11"
+      "2026-11-12"
      ]
     },
     {
@@ -14152,7 +14152,6 @@
       "2026-11-16",
       "2026-11-17",
       "2026-11-18",
-      "2026-11-19",
       "2027-04-30"
      ]
     },
@@ -15652,7 +15651,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 78,
+   "rows": 72,
    "columns": [
     {
      "name": "place_id",
@@ -15718,11 +15717,7 @@
      "type": "string",
      "values": [
       "2026-11-12T00:00:00",
-      "2026-11-12T09:00:00",
       "2026-11-12T09:00:00-06:00",
-      "2026-11-12T09:30:00",
-      "2026-11-12T10:00:00",
-      "2026-11-12T10:30:00",
       "2026-11-12T13:00:00",
       "2026-11-12T13:00:00-06:00",
       "2026-11-12T15:00:00",
@@ -15748,10 +15743,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-12T10:30:00",
-      "2026-11-12T11:00:00",
-      "2026-11-12T11:30:00",
-      "2026-11-12T13:00:00",
       "2026-11-12T14:00:00",
       "2026-11-12T17:00:00",
       "2026-11-12T18:30:00",
@@ -16121,7 +16112,7 @@
    "id": "military-news",
    "title": "Military news from the bases",
    "description": "News stories published by the public affairs offices of the units at Tyndall Air Force Base and Naval Support Activity Panama City (325th Fighter Wing, 601st Air and Space Operations Center, NSA Panama City, Naval Surface Warfare Center Panama City Division, Navy Experimental Diving Unit), read daily from each unit's DVIDS feed: title, summary, date (Central time), author and the story's own link. Story text and photos stay on DVIDS. 2016 and later.",
-   "rows": 43,
+   "rows": 44,
    "columns": [
     {
      "name": "place_id",
@@ -18375,7 +18366,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 18,
+   "rows": 19,
    "columns": [
     {
      "name": "place_id",
@@ -18394,6 +18385,7 @@
      "values": [
       "Bid 27-01",
       "Bid PC27-019",
+      "Bid PCB26-32",
       "Bid PCB27-02",
       "Bid PCB27-03",
       "Bid PCB27-05",
@@ -18459,6 +18451,7 @@
       "2026-11-12",
       "2026-11-17",
       "2026-11-18",
+      "2026-11-19",
       "2026-12-07",
       "2026-12-09",
       "2026-12-15"
@@ -19206,7 +19199,7 @@
    "id": "contract-vote-dollars",
    "title": "Contract votes and their dollar figures",
    "description": "Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.",
-   "rows": 3566,
+   "rows": 3568,
    "columns": [
     {
      "name": "vote_id",
@@ -19461,7 +19454,7 @@
    "id": "member-contract-dollars",
    "title": "Contract dollars by member vote",
    "description": "One row per board member per counted contract vote (counted true in contract-vote-dollars): how the member voted (yes, no, absent, abstain) on that dollar figure. Sum amount where vote is yes and outcome is passed for the dollars a member voted to approve.",
-   "rows": 4307,
+   "rows": 4312,
    "columns": [
     {
      "name": "vote_id",
@@ -19709,7 +19702,7 @@
    "id": "contract-minutes-check",
    "title": "Contract votes checked against the contract list",
    "description": "Every passed contract vote read from the minutes since October 2022 (consent agendas and votes that approve no spending, such as mutual aid, interlocal agreements, terminations and rejected bids, left out), checked against the contracts dataset. status: in_list (tied to a contract, change order or emergency purchase there, contract_record_ids), under_threshold (the vote's one clear figure is below list_threshold, the smallest award the list collects for that government), after_review (the meeting is after list_reviewed_through, the last meeting date read into the list), no_amount (the minutes give no single clear dollar figure), or missing (at or above the threshold, before the review date, and not in the list). amount is the vote's one clear figure from contract-vote-dollars. checked_note explains a vote looked at by hand (for example, the minutes don't name the seller). Rules: site/contract_coverage.py.",
-   "rows": 708,
+   "rows": 709,
    "columns": [
     {
      "name": "vote_id",
@@ -19869,7 +19862,7 @@
    "id": "award-follow-up",
    "title": "Contract awards and what came after",
    "description": "Every passed contract award read from the minutes since 2016 (consent agendas, votes that approve no spending, and change orders, amendments and renewals left out), one row per award and company named, checked for any later record at the same government that names the same company or carries the same bid number: later votes and agenda items, contract records and change orders, check register, tourist tax and CRA payments, and project histories. status: followed_up (later_records found; later_kinds says which, first_later_* is the first one), no_follow_up (no later record by flag_after, six months after the award), too_soon (not yet six months), as_needed (no later record, but the award is a standing or on-call agreement used only when work is ordered), cant_check (the minutes name no company). company_from says whether the company matched a profile (entity_id) or is the name as the motion writes it. A no_follow_up row is a question for the government, not a finding: the work may be recorded in files the site doesn't hold. Rules: site/award_followup.py.",
-   "rows": 1493,
+   "rows": 1494,
    "columns": [
     {
      "name": "vote_id",
