@@ -1,5 +1,7 @@
-// Public records requests drafted in /admin ("Records requests" tab). Two kinds of drafts:
+// Public records requests drafted in /admin ("Records requests" tab). Three kinds of drafts:
 //   budget: from data/civic/records_requests.json (data/civic/scripts/records_requests.py, the budget years we're missing).
+//   vendor: from data/civic/vendor_requests.json (data/civic/scripts/vendor_requests.py), everything about one company's dealings
+//           with a government (contracts, invoices, payments, communications), e.g. CivicPlus.
 //   stale:  from data/civic/stale_requests.json (data/civic/scripts/stale_requests.py), places where an official source's
 //           newest record is older than its usual schedule. One open draft per check and custodian; a gap already in a
 //           sent or dismissed request is never drafted again. Letters are in _stale_requests.js.
@@ -16,6 +18,7 @@ const {INBOX, composeEmail, messageIdFor, newToken} = require('./_correspondence
 const {compose} = require('./_stale_requests');
 
 const FILE = path.join(__dirname, '..', 'data', 'civic', 'records_requests.json');
+const VENDOR_FILE = path.join(__dirname, '..', 'data', 'civic', 'vendor_requests.json');  // data/civic/scripts/vendor_requests.py
 const STALE_FILE = path.join(__dirname, '..', 'data', 'civic', 'stale_requests.json');
 const EMAIL = /^[^\s@<>]+@[^\s@<>]+\.[a-z]{2,}$/i;
 const STATUSES = ['draft', 'sent', 'received', 'closed', 'dismissed'];
@@ -38,30 +41,37 @@ function fileDrafts(file = FILE) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')).requests || []; } catch (e) { return null; }
 }
 
-// Adds drafts from the file and refreshes ones nobody has edited or sent. Edited (origin = 'manual') or sent rows stay as they are.
+// Adds drafts from the files and refreshes ones nobody has edited or sent. Edited (origin = 'manual') or sent rows stay as they are.
 async function seed() {
   const stale = await seedStale().catch(e => { console.error('stale records requests', e.message); return {added: [], error: e.message}; });
-  const f = fileDrafts();
-  if (!f) return {added: 0, updated: 0, stale, note: 'data/civic/records_requests.json wasn’t found in this deployment.'};
+  const vendor = await seedFile(VENDOR_FILE, 'vendor').catch(e => { console.error('vendor records requests', e.message); return {error: e.message}; });
+  const r = await seedFile(FILE, 'budget');
+  if (!r) return {added: 0, updated: 0, stale, vendor, note: 'data/civic/records_requests.json wasn’t found in this deployment.'};
+  return {...r, stale, vendor};
+}
+
+async function seedFile(file, kind) {
+  const f = fileDrafts(file);
+  if (!f) return null;
   let added = 0, updated = 0;
   for (const d of f) {
-    const r = await q(`insert into corr.records_requests (key, government, government_key, recipient_name, recipient_email, contact_url, subject, body, gaps, notes)
-        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    const r = await q(`insert into corr.records_requests (key, kind, check_title, government, government_key, recipient_name, recipient_email, contact_url, subject, body, gaps, notes)
+        values ($1, $11, $12, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         on conflict (key) do update set government = excluded.government, government_key = excluded.government_key, recipient_name = excluded.recipient_name,
           recipient_email = excluded.recipient_email, contact_url = excluded.contact_url, subject = excluded.subject, body = excluded.body,
-          gaps = excluded.gaps, notes = excluded.notes, updated_at = now()
+          gaps = excluded.gaps, notes = excluded.notes, check_title = excluded.check_title, updated_at = now()
         where corr.records_requests.origin = 'file' and corr.records_requests.status = 'draft'
           and (corr.records_requests.subject, corr.records_requests.body, corr.records_requests.recipient_email, corr.records_requests.gaps::text, corr.records_requests.notes)
             is distinct from (excluded.subject, excluded.body, excluded.recipient_email, excluded.gaps::text, excluded.notes)
         returning id, (xmax = 0) inserted`,
       [d.key, d.government, d.government_key || null, d.recipient_name || null, d.recipient_email && EMAIL.test(d.recipient_email) ? d.recipient_email : null,
-       d.contact_url || null, d.subject, d.body, JSON.stringify(d.gaps || []), d.notes || null]);
+       d.contact_url || null, d.subject, d.body, JSON.stringify(d.gaps || []), d.notes || null, d.kind || kind, d.check_title || null]);
     if (r.length) {
       r[0].inserted ? added++ : updated++;
-      await log(r[0].id, 'system', r[0].inserted ? 'drafted' : 'refreshed', {gaps: (d.gaps || []).length, source: 'records_requests.json'});
+      await log(r[0].id, 'system', r[0].inserted ? 'drafted' : 'refreshed', {gaps: (d.gaps || []).length, source: path.basename(file)});
     }
   }
-  return {added, updated, stale};
+  return {added, updated};
 }
 
 // Award gaps (an award with no later record) whose company the government's own checkbook shows paid after the award:
@@ -137,7 +147,7 @@ async function seedStale(drafts = fileDrafts(STALE_FILE)) {
 async function list() {
   await seed();
   const rows = await q(`select r.*, t.status thread_status, t.last_at thread_last_at from corr.records_requests r left join corr.threads t on t.id = r.thread_id
-      order by (r.status = 'draft') desc, (r.kind = 'stale') desc, r.id desc`);
+      order by (r.status = 'draft') desc, (r.kind = 'vendor') desc, (r.kind = 'stale') desc, r.id desc`);
   const hist = await q(`select request_id, at, actor, action, detail from corr.records_request_log order by id`);
   const by = {};
   for (const h of hist) (by[h.request_id] = by[h.request_id] || []).push(h);
@@ -239,4 +249,4 @@ function newDraftsNotice(added) {
     text: added.map(a => `${a.government}: ${a.subject}`).join('\n') + `\n\nReview: ${ui.SITE}/admin#records`});
 }
 
-module.exports = {seed, seedStale, list, save, dismiss, send, greetName, autoDraft, newDraftsNotice, log};
+module.exports = {seed, seedFile, seedStale, list, save, dismiss, send, greetName, autoDraft, newDraftsNotice, log};
