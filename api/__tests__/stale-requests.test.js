@@ -190,7 +190,7 @@ test('vendor letters: CivicPlus contracts and invoices from Lynn Haven and Panam
     assert.match(r.body, new RegExp(`public records of the ${r.government} relating to CivicPlus, LLC`));
     assert.match(r.body, /January 1, 2000 to the date of your search/);
     assert.match(r.body, /1\. Contracts: .*\n2\. Invoices: /);
-    assert.doesNotMatch(r.body, /emails|communications/i);
+    assert.doesNotMatch(r.body, /emails|communications|ingest\.baycounty/i);
     assert.match(r.body, /invoice/);
     assert.match(r.body, /119\.07\(1\)\(e\)/);
     assert.match(r.body, /Jeremy McSpadden\nBayCounty\.me$/);

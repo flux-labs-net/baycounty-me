@@ -13,7 +13,6 @@ import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..', '..', '..')
 sys.path.insert(0, HERE)
-from records_requests import INTAKE  # noqa: E402
 
 OUT = os.path.join(HERE, '..', 'vendor_requests.json')
 
@@ -49,8 +48,7 @@ VENDORS = {
 
 def letter(gov_key, v):
     gov = CUSTODIANS[gov_key][0]
-    intake = (f'\nIf it’s easier, the files can also be emailed to {INTAKE[gov_key]}@ingest.baycounty.me or uploaded at https://baycounty.me/staff '
-              '(we can give your clerk’s staff a free sign-in).\n') if gov_key in INTAKE else ''
+    # No ingest-address line yet: neither city has allowed senders, so emailed files would be refused (Jeremy, 2026-11-12).
     return f'''Under Chapter 119, Florida Statutes, I’m requesting copies of the following public records of the {gov} relating to {v['about']}
 
 The period is January 1, {v['since']} to the date of your search.
@@ -59,7 +57,7 @@ The period is January 1, {v['since']} to the date of your search.
 2. Invoices: every invoice and credit memo the city received.
 
 Electronic copies are preferred, as PDF or in their original format. If any of this is already posted online, a link is all I need. If a year can’t be found, please send what exists rather than holding the rest, and if any record or part of one is withheld or redacted, please cite the statute for each exemption, as section 119.07(1)(e) requires.
-{intake}
+
 These records will be used by BayCounty.me, an independent public-records site for Bay County. If fulfilling the request will cost more than $25, please send an estimate before starting.
 
 Thank you,
