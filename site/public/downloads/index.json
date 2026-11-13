@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-12",
+ "updated": "2026-11-13",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -7566,7 +7566,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 434,
+   "rows": 435,
    "columns": [
     {
      "name": "website",
@@ -8717,7 +8717,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 53,
+   "rows": 50,
    "columns": [
     {
      "name": "place_id",
@@ -8842,7 +8842,6 @@
       "Panama City Marina",
       "Panama Country Club",
       "Pier Park",
-      "Sharky’s Beachfront Restaurant",
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
@@ -8926,7 +8925,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 171,
+   "rows": 165,
    "columns": [
     {
      "name": "place_id",
@@ -9034,7 +9033,6 @@
       "Parker Park",
       "Parker Public Library",
       "Pier Park",
-      "Sharky’s Beachfront Restaurant",
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
@@ -12582,7 +12580,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 65,
+   "rows": 68,
    "columns": [
     {
      "name": "notice_id",
@@ -12601,6 +12599,7 @@
      "values": [
       "boil-water",
       "road",
+      "safety",
       "storm",
       "utility",
       "weather"
@@ -12610,6 +12609,7 @@
      "name": "source",
      "type": "string",
      "values": [
+      "200575,FDLE Alerts,FLDeptofLawEnforcement",
       "Bay County",
       "City of Callaway",
       "City of Lynn Haven",
@@ -12627,6 +12627,7 @@
      "values": [
       "alert-center",
       "fl511",
+      "ipaws",
       "news",
       "nws",
       "staff"
@@ -12659,6 +12660,7 @@
       "Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely.",
       "Be especially cautious at night when it is harder to recognize the dangers of flooding. Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely.",
       "If driving, slow down, use your headlights, and leave plenty of distance ahead of you.",
+      "If you have any information on the whereabouts of this child please contact the New Smyrna Beach Police Department at 386-424-2000 or 911. #FLAMBER.",
       "Swim near a lifeguard. If caught in a rip current, relax and float. Don't swim against the current. If able, swim in a direction following the shoreline. If unable to escape, face the shore and call or wave for help.",
       "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles.",
       "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles. Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely."
@@ -12668,6 +12670,7 @@
      "name": "severity",
      "type": "string",
      "values": [
+      "extreme",
       "minor",
       "moderate",
       "severe"
@@ -12678,6 +12681,7 @@
      "type": "string",
      "values": [
       "Boil-water notice",
+      "Child Abduction Emergency",
       "Dense Fog Advisory",
       "Flash Flood Warning",
       "Flood Advisory",
@@ -12692,10 +12696,12 @@
       "Bay, FL",
       "Bay, FL; Gulf, FL",
       "Bay, FL; Walton, FL; Washington, FL",
+      "Both shoulders blocked",
       "City of Lynn Haven",
       "Coastal Bay",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf; Quitman; Clay; Randolph; Calhoun; Terrell; Dougherty; Lee; Early; Miller; Baker; Seminole",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
+      "FLORIDA-ALL",
       "Left lane blocked",
       "Lynn Haven",
       "North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf",
@@ -12742,7 +12748,8 @@
       "2026-11-06T04:15:00.000Z",
       "2026-11-06T12:37:00.000Z",
       "2026-11-06T21:27",
-      "2026-11-07T19:13"
+      "2026-11-07T19:13",
+      "2026-11-12T20:20"
      ]
     },
     {
@@ -12809,6 +12816,7 @@
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
+      "https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system",
       "https://www.panamacity.gov/AlertCenter.aspx",
       "https://www.pcbfl.gov/AlertCenter.aspx",
       "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
@@ -13768,7 +13776,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 120,
+   "rows": 121,
    "columns": [
     {
      "name": "place_id",
@@ -14019,7 +14027,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 106,
+   "rows": 99,
    "columns": [
     {
      "name": "place_id",
@@ -14083,11 +14091,11 @@
      "type": "string",
      "values": [
       "Administrative",
-      "Confidential",
       "Full Time",
       "Full time",
       "Full- Time",
       "Instructional",
+      "Licensed",
       "Part time",
       "Part-Time",
       "Substitutes",
@@ -14114,7 +14122,10 @@
      "name": "posted",
      "type": "string",
      "values": [
+      "2026-06-13",
+      "2026-06-18",
       "2026-07-13",
+      "2026-07-17",
       "2026-08-10",
       "2026-08-22",
       "2026-09-14",
@@ -14124,30 +14135,29 @@
       "2026-09-30",
       "2026-10-07",
       "2026-10-08",
-      "2026-10-13",
+      "2026-10-14",
       "2026-10-16",
       "2026-10-20",
-      "2026-10-22",
-      "2026-10-26",
+      "2026-10-23",
+      "2026-10-27",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
       "2026-11-02",
       "2026-11-03",
       "2026-11-04",
-      "2026-11-05",
       "2026-11-06",
       "2026-11-07",
       "2026-11-09",
       "2026-11-10",
-      "2026-11-12"
+      "2026-11-11",
+      "2026-11-13"
      ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-12",
       "2026-11-13",
       "2026-11-16",
       "2026-11-17",
@@ -14179,7 +14189,8 @@
       "2026-11-09",
       "2026-11-10",
       "2026-11-11",
-      "2026-11-12"
+      "2026-11-12",
+      "2026-11-13"
      ]
     },
     {
@@ -14273,7 +14284,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-12"
+      "2026-11-13"
      ]
     }
    ],
@@ -15651,7 +15662,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 72,
+   "rows": 67,
    "columns": [
     {
      "name": "place_id",
@@ -15716,12 +15727,9 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-12T00:00:00",
       "2026-11-12T09:00:00-06:00",
       "2026-11-12T13:00:00",
       "2026-11-12T13:00:00-06:00",
-      "2026-11-12T15:00:00",
-      "2026-11-12T17:30:00",
       "2026-11-12T18:30:00",
       "2026-11-13T07:30:00",
       "2026-11-13T10:00:00",
@@ -15744,10 +15752,7 @@
      "type": "string",
      "values": [
       "2026-11-12T14:00:00",
-      "2026-11-12T17:00:00",
-      "2026-11-12T18:30:00",
       "2026-11-12T22:00:00",
-      "2026-11-12T23:59:59",
       "2026-11-13T09:00:00",
       "2026-11-13T12:00:00",
       "2026-11-13T14:00:00",
@@ -15759,17 +15764,14 @@
       "2026-11-14T13:30:00",
       "2026-11-14T15:00:00",
       "2026-11-14T16:00:00",
-      "2026-11-14T16:30:00",
-      "2026-11-14T23:59:59",
-      "2026-11-15T23:59:59"
+      "2026-11-14T16:30:00"
      ]
     },
     {
      "name": "all_day",
      "type": "boolean",
      "values": [
-      false,
-      true
+      false
      ]
     },
     {
@@ -15821,18 +15823,15 @@
      "type": "string",
      "values": [
       "825 Ohio Avenue, Lynn Haven",
-      "Aaron Bessant Park",
       "Bay County Public Library",
       "Captain Anderson’s Event Center",
       "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "Edgewater Beach & Golf Resort",
       "Frank Brown Park Recreation Center",
       "Gulf Coast State College, Student Union East",
       "Panama City Beach Public Library",
       "Parker Park",
-      "Parker Public Library",
-      "Sharky’s Beachfront Restaurant"
+      "Parker Public Library"
      ]
     },
     {
@@ -17527,7 +17526,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-12"
+      "2026-11-13"
      ]
     },
     {
@@ -20502,7 +20501,8 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-12"
+      "2026-11-12",
+      "2026-11-13"
      ]
     },
     {
@@ -20576,7 +20576,7 @@
      "name": "next_agenda_url",
      "type": "string",
      "values": [
-      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231"
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422"
      ]
     },
     {
@@ -20734,7 +20734,8 @@
       "2026-06-02",
       "2026-09-14",
       "2026-10-20",
-      "2026-11-12"
+      "2026-11-12",
+      "2026-11-13"
      ]
     },
     {
@@ -20877,9 +20878,10 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1180,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=420",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
-      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429",
@@ -20900,6 +20902,7 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?packet=true"
@@ -21009,13 +21012,6 @@
     },
     {
      "name": "expected",
-     "type": "boolean",
-     "values": [
-      true
-     ]
-    },
-    {
-     "name": "time_from_schedule",
      "type": "boolean",
      "values": [
       true

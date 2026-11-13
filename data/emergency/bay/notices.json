@@ -3,6 +3,86 @@
  "checked": "2026-11-12",
  "notices": [
   {
+   "notice_id": "ipaws:2833683593563301",
+   "place_id": "fl-bay",
+   "kind": "safety",
+   "source": "200575,FDLE Alerts,FLDeptofLawEnforcement",
+   "source_type": "ipaws",
+   "gov_id": null,
+   "title": "Florida AMBER Alert for Fayren Morris",
+   "summary": "A Florida AMBER Alert has been issued for Fayren Morris, a black female, 16 years old, 5 feet 4 inches tall, 150 pounds, brown hair and brown eyes, last seen in the area of the 1300th block of Washington Street in New Smyrna Beach, Florida. The child may be in the company of Ra'kim Edwards, a black male, 6 feet tall, 200 pounds, black hair and brown eyes. Ra'kim has the tattoos of the word \"Lala\" on his right shoulder, \"Boy\" on his left forearm, \"C.O.D.\" on his right forearm, and a sleeve on his right arm which states \"C.O.D. Boy\". They may be traveling in a 2016, gray Acura Tlx, FL tag number FDMA64. They may be traveling in the Deland, Florida area. If located, DO NOT APPROACH. Contact law enforcement immediately.",
+   "instruction": "If you have any information on the whereabouts of this child please contact the New Smyrna Beach Police Department at 386-424-2000 or 911. #FLAMBER.",
+   "severity": "extreme",
+   "event": "Child Abduction Emergency",
+   "area": "FLORIDA-ALL",
+   "zones": null,
+   "issued": "2026-11-12T23:45:15.000Z",
+   "starts": null,
+   "ends": "2026-11-13T01:45:15.000Z",
+   "updated": "2026-11-12T23:45:15.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://mepic.fdle.state.fl.us/Flyers/FlyerCust.asp%3FID=529311",
+   "source_url": "https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system",
+   "first_seen": "2026-11-12T23:50:01.571579+00:00",
+   "last_seen": "2026-11-13T01:45:02.039243+00:00"
+  },
+  {
+   "notice_id": "fl511:957841",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "FL511 (Florida Department of Transportation)",
+   "source_type": "fl511",
+   "gov_id": null,
+   "title": "US-98: incident (Eastbound)",
+   "summary": "Multi-vehicle crash in Bay County on US-98 West, at Walton County Line. Both shoulders blocked. Last updated at 09:11 PM.",
+   "instruction": null,
+   "severity": "minor",
+   "event": "Incident",
+   "area": "Both shoulders blocked",
+   "zones": null,
+   "issued": "2026-11-12T20:20",
+   "starts": "2026-11-12T20:20",
+   "ends": null,
+   "updated": "2026-11-12T21:11",
+   "status": "active",
+   "full_closure": false,
+   "roadway": "US-98",
+   "url": "https://fl511.com/",
+   "source_url": "https://fl511.com/",
+   "first_seen": "2026-11-13T01:25:01.739726+00:00",
+   "last_seen": "2026-11-13T02:40:20.483Z",
+   "geometry": "{\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"properties\":{\"placed\":\"fl511\"},\"geometry\":{\"type\":\"Point\",\"coordinates\":[-85.995526,30.275097]}}]}"
+  },
+  {
+   "notice_id": "alert:pcb:25",
+   "place_id": "fl-bay",
+   "kind": "boil-water",
+   "source": "City of Panama City Beach",
+   "source_type": "alert-center",
+   "gov_id": "pcb",
+   "title": "Hutchison Blvd Precautionary Boil Water Notice Rescinded",
+   "summary": "The Precautionary Boil Water Notice issued for all residents and businesses at 100 – 802 Grand Panama Blvd, 11501, 11525, 11535,11911 Hutchison Blvd and Fire Station 32 has been rescinded.",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-12T19:40:53.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-12T19:40:53.000Z",
+   "status": "lifted",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=25",
+   "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-12T19:45:01.308244+00:00",
+   "last_seen": "2026-11-13T02:40:20.483Z",
+   "geometry": null
+  },
+  {
    "notice_id": "alert:pc:716",
    "place_id": "fl-bay",
    "kind": "road",
@@ -26,7 +106,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -53,7 +133,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=715",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-11T13:00:02.86368+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -80,7 +160,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=24",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-09T16:00:01.821502+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-12T19:35:01.223983+00:00",
    "geometry": null
   },
   {
@@ -107,7 +187,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -134,7 +214,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -215,7 +295,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -1389,7 +1469,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -1416,7 +1496,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -1443,7 +1523,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -1464,13 +1544,13 @@
    "starts": null,
    "ends": null,
    "updated": "2026-10-13T19:40:17.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-12T21:40:06.556882+00:00",
    "geometry": null
   },
   {
@@ -1711,7 +1791,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -1738,7 +1818,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   },
   {
@@ -1765,7 +1845,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-12T19:05:14.003Z",
+   "last_seen": "2026-11-13T02:40:20.483Z",
    "geometry": null
   }
  ]

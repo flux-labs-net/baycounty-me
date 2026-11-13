@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12T12:58:14-06:00",
+  "generated": "2026-11-12T20:33:57-06:00",
   "window": {
     "from": "2026-11-12",
     "to": "2027-01-11"
@@ -784,12 +784,11 @@
       "title": "Planning Board",
       "start": "2026-11-12T13:00:00-06:00",
       "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422",
       "packet_url": null,
       "minutes_url": null,
       "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
-      "status": "posted",
-      "time_from_schedule": true
+      "status": "posted"
     },
     {
       "board": "lh",
@@ -848,8 +847,8 @@
       "title": "City Council Meeting",
       "start": "2026-11-17T09:00:00-06:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
+      "packet_url": "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Agenda-Packet.pdf",
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted"

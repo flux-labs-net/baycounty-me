@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-12T19:09:08+00:00",
+ "generated": "2026-11-13T02:43:55+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -634,6 +634,93 @@
     "Parcel 37252-030-000"
    ],
    "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=231"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-11-12",
+   "meeting": "Planning Board",
+   "number": "3",
+   "section": null,
+   "title": "Approval of the October 14, 2026 Planning Board Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-11-12",
+   "meeting": "Planning Board",
+   "number": "5",
+   "section": null,
+   "title": "Code Enforcement Update",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-11-12",
+   "meeting": "Planning Board",
+   "number": "6.A",
+   "section": "Regular Agenda Items",
+   "title": "Vice Chair Election",
+   "summary": null,
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-11-12",
+   "meeting": "Planning Board",
+   "number": "6.B",
+   "section": "Regular Agenda Items",
+   "title": "Conditional Use to operate as a bar / lounge at 13125 Panama City Beach Parkway, Unit D",
+   "summary": "Chris Weeks (owner) and Zanesar Islam (applicant) request approval of a Conditional Use for a bar/lounge of approximately 1,500 square feet within an existing building.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "13125 Panama City Beach Parkway, Unit D",
+    "Parcel 34168-200-10"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-11-12",
+   "meeting": "Planning Board",
+   "number": "6.C",
+   "section": "Regular Agenda Items",
+   "title": "Appeal filed by Eric Montalvo regarding administrative approval of a land clearing application",
+   "summary": "Appeal of the administrative approval of a land clearing application for an approximately 14.49-acre property on Panama City Beach Parkway, east of Deluna Street and west of South Wells Street.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Panama City Beach Parkway, east of Deluna Street and west of South Wells Street",
+    "Parcel 37252-010-000",
+    "Parcel 37252-030-000"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422"
   },
   {
    "board": "lh",
