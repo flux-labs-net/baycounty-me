@@ -3,15 +3,15 @@
  "files": [
   {
    "url": "https://www2.myfloridalicense.com/sto/file_download/extracts/6fdinspi.csv",
-   "rows": 593,
-   "read": "2026-11-13T02:39:01Z"
+   "rows": 595,
+   "read": "2026-11-13T18:39:17Z"
   },
   {
    "url": "https://www2.myfloridalicense.com/sto/file_download/extracts/hrfood6.csv",
    "rows": 883,
-   "read": "2026-11-13T02:39:01Z"
+   "read": "2026-11-13T18:39:17Z"
   }
  ],
- "inspections": 17232,
- "latest_inspection": "2026-11-10"
+ "inspections": 17234,
+ "latest_inspection": "2026-11-12"
 }

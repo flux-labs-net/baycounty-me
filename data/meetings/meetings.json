@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-12T20:33:57-06:00",
+  "generated": "2026-11-13T12:33:58-06:00",
   "window": {
-    "from": "2026-11-12",
-    "to": "2027-01-11"
+    "from": "2026-11-13",
+    "to": "2027-01-12"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -75,7 +75,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (22 records)",
+        "AgendaCenter": "ok (21 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
@@ -120,7 +120,7 @@
       "coverage": {
         "agenda_feed": 0,
         "calendar": 0,
-        "expected": 2
+        "expected": 1
       }
     },
     {
@@ -134,11 +134,11 @@
       "calendar_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
       "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "CivicClerk": "ok (19 records)",
+        "CivicClerk": "ok (20 records)",
         "calendar (iCal cat 14)": "ok (3 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 5,
         "calendar": 0,
         "expected": 0
       }
@@ -256,7 +256,7 @@
       "coverage": {
         "agenda_feed": 3,
         "calendar": 0,
-        "expected": 2
+        "expected": 3
       }
     },
     {
@@ -292,7 +292,7 @@
         "Granicus RSS": "ok (27 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 0,
         "calendar": 0,
         "expected": 0
       }
@@ -483,18 +483,6 @@
         "Incremental Development Alliance Summary Report.",
         "Motion to Adjourn Meeting Adjournment In accordance with the Americans with Disabilities Act and Section 286.26, Florida Statutes, persons with disabilities needing special accommodation to participate in this proceeding should contact the City's Human Resources Department one week prior to the proceeding at telephone (850) 872-3014 for assistance; if hearing impaired, telephone (850) 872-3028 (TD"
       ]
-    },
-    {
-      "board": "pcb-planning",
-      "title": "Planning Board",
-      "start": "2026-10-14T13:00:00-05:00",
-      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=420",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
-      "status": "posted",
-      "past": true
     },
     {
       "board": "parker",
@@ -752,6 +740,7 @@
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted",
+      "detail_url": "https://youtube.com/live/ICu66iPorg0?feature=share",
       "past": true
     },
     {
@@ -768,18 +757,6 @@
       "past": true
     },
     {
-      "board": "pcb",
-      "title": "Regular Meeting (expected)",
-      "start": "2026-11-12T09:00:00-06:00",
-      "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive",
-      "status": "expected",
-      "expected": true
-    },
-    {
       "board": "pcb-planning",
       "title": "Planning Board",
       "start": "2026-11-12T13:00:00-06:00",
@@ -788,7 +765,8 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "lh",
@@ -1286,6 +1264,31 @@
       "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7549"
+    },
+    {
+      "board": "lh",
+      "title": "City Commission Meeting",
+      "start": "2027-01-12T17:30:00-06:00",
+      "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1071/files",
+      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+    },
+    {
+      "board": "mb",
+      "title": "Regular Meeting (expected)",
+      "start": "2027-01-12T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "status": "expected",
+      "expected": true
     }
   ],
   "errors": [],

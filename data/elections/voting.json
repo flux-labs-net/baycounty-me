@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-13T02:40:24+00:00",
+ "as_of": "2026-11-13T18:40:49+00:00",
  "errors": [],
  "finder_url": "https://www.voterfocus.com/PrecinctFinder/addressSearch?county=BAY",
  "directory_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
@@ -76,6 +76,34 @@
    "all_day": false,
    "title": "Canvassing Board Meeting to canvass 10 Day Overseas ballots for General Election (F.S. 101.0695(5), File Official Results and conduct Post\u2026",
    "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2027-03-06",
+   "all_day": true,
+   "title": "Deadline to send vote-by-mail ballots for Municipal Super Tuesday to absent and overseas military and overseas civilian voters. Vote by\u2026",
+   "url": "https://www.bayvotesfl.gov/events/panama-city-candidate-petition-deadline/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2027-03-11",
+   "all_day": true,
+   "title": "Start of Vote By Mail daily mailings for Municipal Super Tuesday election to regular domestic voters with requests on file.",
+   "url": "https://www.bayvotesfl.gov/events/vote-by-mail-send-date/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2027-03-22",
+   "all_day": true,
+   "title": "Voter registration deadline for Municipal Super Tuesday.",
+   "url": "https://www.bayvotesfl.gov/events/voter-registration-deadline/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2027-04-13",
+   "all_day": true,
+   "title": "Deadline to request a Vote by Mail Ballots for Municipal Super Tuesday.",
+   "url": "https://www.bayvotesfl.gov/events/vote-by-mail-request-deadline/",
    "source_url": "https://www.bayvotesfl.gov/elections/events/"
   },
   {

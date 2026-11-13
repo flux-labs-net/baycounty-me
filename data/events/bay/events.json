@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-12",
- "fetched": "2026-11-12T21:39:02-0500",
+ "as_of": "2026-11-13",
+ "fetched": "2026-11-13T13:39:19-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -53,40 +53,6 @@
   "parker": "HTTPError: HTTP Error 500: Internal Server Error"
  },
  "events": [
-  {
-   "event_id": "library:20541:2026-11-12",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Library Advisory Council Meeting",
-   "starts": "2026-11-12T13:00:00",
-   "ends": "2026-11-12T14:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/library-advisory-council-meeting-6/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:7724:2026-11-12",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Sandy Steppers - Dance Class",
-   "starts": "2026-11-12T18:30:00",
-   "ends": "2026-11-12T22:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7724",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
   {
    "event_id": "pcb-chamber:26491",
    "source_id": "pcb-chamber",
@@ -1088,7 +1054,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7725",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "bay-county:1676:2026-11-20",
@@ -1686,6 +1652,40 @@
    "recurring": false
   },
   {
+   "event_id": "bay-county:1615:2026-11-27",
+   "source_id": "bay-county",
+   "source": "Bay County",
+   "gov": "county",
+   "town": "Bay County",
+   "title": "Thanksgiving Day Friday - County offices will be closed",
+   "starts": "2026-11-27T08:00:00",
+   "ends": "2026-11-27T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1615",
+   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7733:2026-11-27",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Oaks by the Bay Christmas Lights",
+   "starts": "2026-11-27T18:00:00",
+   "ends": "2026-11-27T19:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7733",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "mexico-beach:10001864-1795852800-1795867200:2026-11-28",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
@@ -2023,7 +2023,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/crafternoon-adults-teens-16/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24435:2026-12-08",
@@ -2057,7 +2057,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/lego-club-ages-7-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24083:2026-12-08",
@@ -2074,7 +2074,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/art-club-ages-12-17/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24050:2026-12-09",
@@ -2855,6 +2855,125 @@
    "category": "Library",
    "cost": null,
    "url": "https://www.nwrls.com/event/craft-camp-ages-8-12-4/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24012:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
+   "starts": "2027-01-12T09:30:00",
+   "ends": "2027-01-12T11:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-5/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24401:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City Beach",
+   "title": "Book Babies (Ages 0 – 2)",
+   "starts": "2027-01-12T10:00:00",
+   "ends": "2027-01-12T10:30:00",
+   "all_day": false,
+   "venue": "Panama City Beach Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/book-babies-ages-0-2-3/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24247:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Parker",
+   "title": "Crafternoon (Adults & Teens 16+)",
+   "starts": "2027-01-12T11:00:00",
+   "ends": "2027-01-12T12:00:00",
+   "all_day": false,
+   "venue": "Parker Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/crafternoon-adults-teens-16-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24466:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City Beach",
+   "title": "Mahjong Meetup (Adults)",
+   "starts": "2027-01-12T12:00:00",
+   "ends": "2027-01-12T15:00:00",
+   "all_day": false,
+   "venue": "Panama City Beach Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/mahjong-meetup-adults-6/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24197:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Operation Ivy Bells: Cold War Espionage Beneath the Waves",
+   "starts": "2027-01-12T14:00:00",
+   "ends": "2027-01-12T15:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": "Free",
+   "url": "https://www.nwrls.com/event/operation-ivy-bells-cold-war-espionage-beneath-the-waves/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": false
+  },
+  {
+   "event_id": "library:24343:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City Beach",
+   "title": "LEGO Club (Ages 7 – 12)",
+   "starts": "2027-01-12T15:30:00",
+   "ends": "2027-01-12T16:30:00",
+   "all_day": false,
+   "venue": "Panama City Beach Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/lego-club-ages-7-12-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24088:2027-01-12",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Art Club (Ages 12 – 17)",
+   "starts": "2027-01-12T16:00:00",
+   "ends": "2027-01-12T17:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/art-club-ages-12-17-2/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
   }
