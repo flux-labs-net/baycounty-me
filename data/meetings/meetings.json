@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-13T20:12:41-06:00",
+  "generated": "2026-11-14T11:11:21-06:00",
   "window": {
-    "from": "2026-11-13",
-    "to": "2027-01-12"
+    "from": "2026-11-14",
+    "to": "2027-01-13"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -75,7 +75,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (21 records)",
+        "AgendaCenter": "ok (20 records)",
         "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
@@ -138,7 +138,7 @@
         "calendar (iCal cat 14)": "ok (3 records)"
       },
       "coverage": {
-        "agenda_feed": 5,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 0
       }
@@ -648,69 +648,6 @@
       "past": true
     },
     {
-      "board": "lh",
-      "title": "City Commission Meeting",
-      "start": "2026-11-10T17:30:00-06:00",
-      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
-      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
-      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
-      "minutes_url": null,
-      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
-      "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
-      "past": true,
-      "items": [
-        {
-          "title": "Approve Resolution 2026-10-590: Discussion and possible approval of Award ITB 25.26-31 Wyoming Ave Drainage Improvements Project (22031)",
-          "amount": null
-        },
-        {
-          "title": "Approve Resolution 2026-11-603 FY 2027 Budget Amendment to remove Flock contract",
-          "amount": null
-        },
-        {
-          "title": "Approve Resolution 2026-11-604 Approving Purchase of Stormwater Drainage Easement at Illinois Ave.",
-          "amount": null
-        },
-        {
-          "title": "Approve Resolution 2026-11-607 Approving GreenSouth Contract Extension Renewal.",
-          "amount": null
-        },
-        {
-          "title": "First Reading of Ordinance 1199 Approving the Hera Contract for Registration of Foreclosing Mortgaged Property.",
-          "amount": null
-        },
-        {
-          "title": "Final Reading of Ordinance 1197 Reducing CRA budget to 75%",
-          "amount": null
-        }
-      ],
-      "agenda_items": [
-        "Presentation of Donation Check from Tractor Supply to Lynn Haven Fire Rescue",
-        "Approval of minutes of meeting dated 10/27/26.",
-        "Approve Resolution 2026-10-590: Discussion and possible approval of Award ITB 25.26-31 Wyoming Ave Drainage Improvements Project (22031)",
-        "Approve Resolution 2026-11-603 FY 2027 Budget Amendment to remove Flock contract",
-        "Approve Resolution 2026-11-604 Approving Purchase of Stormwater Drainage Easement at Illinois Ave.",
-        "Approve Resolution 2026-11-606 Approving Albertsons Companies Opioid Settlement Participation",
-        "Approve Resolution 2026-11-607 Approving GreenSouth Contract Extension Renewal.",
-        "Approve Resolution 2026-11-608 Approving US Water Services Agreement Extension Renewal.",
-        "Approve Resolution 2026-11-610 Approving Post Design Professional Services for the Wyoming Avenue Drainage improvements to Dewberry Engineering",
-        "Discussion and Possible Decision on Community Bank Site Plan Development Order Quasi-Judicial Public Hearing",
-        "Discussion and Possible Decision on Dutch Bros Site Plan Development Order Quasi-Judicial Public Hearing",
-        "Discussion and Possible Decision on Chipotle Site Plan Development Order Quasi-Public Hearing",
-        "First Reading of Ordinance 1199 Approving the Hera Contract for Registration of Foreclosing Mortgaged Property.",
-        "Final Reading of Ordinance 1197 Reducing CRA budget to 75%",
-        "Discussion and possible approval of Resolution 2026-11-609 Adopting Rules of Procedure.",
-        "Discussion and possible approval of finalizing Clerk's Job Description and posting of position.",
-        "Mayor’s Report.",
-        "Commissioners’ Reports.",
-        "City Manager’s Report.",
-        "Finance Report.",
-        "Discussion of Amendment 3 results and future impacts on the city.",
-        "City Attorney’s Report."
-      ]
-    },
-    {
       "board": "lh-cra",
       "title": "11/10/26 CRA Meeting",
       "start": "2026-11-10T17:15:00-06:00",
@@ -779,6 +716,7 @@
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2154/files",
+      "past": true,
       "items": [],
       "agenda_items": [
         "Discussion regarding the hiring of a new City Clerk/Treasurer."

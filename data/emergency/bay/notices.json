@@ -1,7 +1,64 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-13",
+ "checked": "2026-11-14",
  "notices": [
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.3a47ab2d34e6fb4385d34784a0a940757c770d2c.003.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Frost Advisory issued November 14 at 9:02AM EST until November 15 at 9:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Temperatures as low as 34 will result in frost formation on Sunday morning. * WHERE...Portions of Big Bend and Panhandle Florida and south central and southwest Georgia. * WHEN...From 1 AM EST /midnight CST/ to 9 AM EST /8 AM CST/ Sunday. * IMPACTS...Frost could harm sensitive outdoor vegetation. Sensitive outdoor plants may be killed if left uncovered.",
+   "instruction": "Take steps now to protect tender plants from the cold.",
+   "severity": "minor",
+   "event": "Frost Advisory",
+   "area": "Central Walton; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
+   "zones": null,
+   "issued": "2026-11-14T14:02:00.000Z",
+   "starts": "2026-11-15T06:00:00.000Z",
+   "ends": "2026-11-15T14:00:00.000Z",
+   "updated": "2026-11-14T14:02:00.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.3a47ab2d34e6fb4385d34784a0a940757c770d2c.003.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-14T14:05:02.45953+00:00",
+   "last_seen": "2026-11-14T17:17:49.742Z",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.776f40aa624110cda88b90c62c5b5f8237c714c5.003.1"
+   ]
+  },
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.776f40aa624110cda88b90c62c5b5f8237c714c5.003.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Frost Advisory issued November 14 at 1:29AM EST until November 15 at 9:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Temperatures as low as 33 will result in frost formation. * WHERE...Portions of the Big Bend and Panhandle of Florida and south central and southwest Georgia. * WHEN...From 1 AM EST /midnight CST/ to 9 AM EST /8 AM CST/ Sunday. * IMPACTS...Frost could harm sensitive outdoor vegetation. Sensitive outdoor plants may be killed if left uncovered.",
+   "instruction": "Take steps now to protect tender plants from the cold.",
+   "severity": "minor",
+   "event": "Frost Advisory",
+   "area": "Central Walton; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
+   "zones": null,
+   "issued": "2026-11-14T06:29:00.000Z",
+   "starts": "2026-11-15T06:00:00.000Z",
+   "ends": "2026-11-15T14:00:00.000Z",
+   "updated": "2026-11-14T06:29:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.776f40aa624110cda88b90c62c5b5f8237c714c5.003.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-14T06:35:01.340076+00:00",
+   "last_seen": "2026-11-14T14:00:02.277904+00:00",
+   "geometry": null
+  },
   {
    "notice_id": "fl511:959397",
    "place_id": "fl-bay",
@@ -105,7 +162,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=25",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T19:45:01.308244+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -132,7 +189,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -213,7 +270,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -240,7 +297,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -321,7 +378,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -1495,7 +1552,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -1817,7 +1874,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -1844,7 +1901,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   },
   {
@@ -1871,7 +1928,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-14T02:19:12.756Z",
+   "last_seen": "2026-11-14T17:17:49.742Z",
    "geometry": null
   }
  ]

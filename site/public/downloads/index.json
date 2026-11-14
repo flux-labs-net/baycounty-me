@@ -9698,7 +9698,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-13T16:20:00+00:00"
+      "2026-11-14T16:58:00+00:00"
      ]
     },
     {
@@ -9707,9 +9707,9 @@
      "values": [
       "Monday",
       "Rest Of Today",
-      "Saturday",
       "Sunday",
-      "Tuesday"
+      "Tuesday",
+      "Wednesday"
      ]
     },
     {
@@ -9745,7 +9745,7 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "Around 2 feet",
+      "Around 1 foot",
       "around 1 foot"
      ]
     },
@@ -9767,6 +9767,7 @@
      "name": "weather",
      "type": "string",
      "values": [
+      "Mostly sunny",
       "Sunny"
      ]
     },
@@ -9782,22 +9783,23 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "North winds around 20 mph, diminishing",
-      "Northwest winds 15 to 20 mph"
+      "North winds 10 to 15 mph",
+      "Northeast winds 10 to 15 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:05 AM",
-      "6:06 AM"
+      "6:06 AM",
+      "6:07 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
+      "4:47 PM",
       "4:48 PM"
      ]
     },
@@ -9808,12 +9810,12 @@
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Partly sunny. A slight chance of showers. Highs in the upper 60s. Breezy. Northeast winds around 25 mph.",
-      "Moderate rip current risk*. Partly sunny. Highs in the mid 60s. Breezy. Northeast winds around 25 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the mid 60s. Northeast winds around 15 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the upper 60s. Breezy. Northeast winds around 25 mph.",
+      "Moderate rip current risk*. Sunny. Highs in the lower 70s. Northeast winds around 20 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Mostly cloudy. Highs in the lower 60s. Northeast winds around 20 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Northwest winds behind last nights cold front have increased the rip current risk along West-facing Gulf County beaches, where high risk rip current conditions may continue into Saturday morning. Looking ahead to early next week, there will be an increasing potential for a high rip current risk along Franklin County beaches.",
-      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
+      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County).",
+      "Winds throughout the eastern Gulf are now northeasterly, so any lingering rip risk along west-facing Gulf County beaches will fade quickly this afternoon. On Sunday night, northeast winds will increase quite a bit, bringing a high risk of rip currents to Franklin County beaches starting Monday. Elsewhere, a moderate rip current risk should prevail."
      ]
     },
     {
@@ -9836,7 +9838,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/6fb16f4e-dd06-4c1f-a62a-5a64f72194c7",
+      "https://api.weather.gov/products/89d5e3d3-d664-46dc-ba84-3166f39dc3e5",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12490,7 +12492,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-13"
+      "2026-11-14"
      ]
     },
     {
@@ -12639,7 +12641,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 69,
+   "rows": 71,
    "columns": [
     {
      "name": "notice_id",
@@ -12721,6 +12723,7 @@
       "If driving, slow down, use your headlights, and leave plenty of distance ahead of you.",
       "If you have any information on the whereabouts of this child please contact the New Smyrna Beach Police Department at 386-424-2000 or 911. #FLAMBER.",
       "Swim near a lifeguard. If caught in a rip current, relax and float. Don't swim against the current. If able, swim in a direction following the shoreline. If unable to escape, face the shore and call or wave for help.",
+      "Take steps now to protect tender plants from the cold.",
       "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles.",
       "Turn around, don't drown when encountering flooded roads. Most flood deaths occur in vehicles. Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely."
      ]
@@ -12744,6 +12747,7 @@
       "Dense Fog Advisory",
       "Flash Flood Warning",
       "Flood Advisory",
+      "Frost Advisory",
       "Incident",
       "Rip Current Statement"
      ]
@@ -12756,6 +12760,7 @@
       "Bay, FL; Gulf, FL",
       "Bay, FL; Walton, FL; Washington, FL",
       "Both shoulders blocked",
+      "Central Walton; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
       "City of Lynn Haven",
       "Coastal Bay",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf; Quitman; Clay; Randolph; Calhoun; Terrell; Dougherty; Lee; Early; Miller; Baker; Seminole",
@@ -12778,39 +12783,7 @@
     },
     {
      "name": "starts",
-     "type": "string",
-     "values": [
-      "2026-10-30T21:03:28.929Z",
-      "2026-10-30T23:58:03.370Z",
-      "2026-11-01T09:51:00.000Z",
-      "2026-11-01T11:00:00.000Z",
-      "2026-11-01T11:17:00.000Z",
-      "2026-11-01T11:53:00.000Z",
-      "2026-11-01T13:00:00.000Z",
-      "2026-11-01T13:34:00.000Z",
-      "2026-11-01T13:42:00.000Z",
-      "2026-11-01T14:15:00.000Z",
-      "2026-11-01T14:36:00.000Z",
-      "2026-11-01T15:41:00.000Z",
-      "2026-11-02T18:07",
-      "2026-11-03T13:22",
-      "2026-11-03T17:33:00.000Z",
-      "2026-11-03T17:55",
-      "2026-11-04T01:52:00.000Z",
-      "2026-11-04T09:50",
-      "2026-11-04T11:12:00.000Z",
-      "2026-11-04T16:43:00.000Z",
-      "2026-11-05T02:07",
-      "2026-11-05T06:10:00.000Z",
-      "2026-11-05T07:52:00.000Z",
-      "2026-11-06T03:00:00.000Z",
-      "2026-11-06T04:15:00.000Z",
-      "2026-11-06T12:37:00.000Z",
-      "2026-11-06T21:27",
-      "2026-11-07T19:13",
-      "2026-11-12T20:20",
-      "2026-11-13T15:25"
-     ]
+     "type": "string"
     },
     {
      "name": "ends",
@@ -14103,7 +14076,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 104,
+   "rows": 112,
    "columns": [
     {
      "name": "place_id",
@@ -14206,6 +14179,8 @@
       "2026-11-16",
       "2026-11-17",
       "2026-11-18",
+      "2026-11-19",
+      "2026-11-20",
       "2027-04-30"
      ]
     },
@@ -15436,7 +15411,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17229,
+   "rows": 17232,
    "columns": [
     {
      "name": "place_id",
@@ -15707,7 +15682,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 56,
+   "rows": 54,
    "columns": [
     {
      "name": "place_id",
@@ -15728,7 +15703,6 @@
      "type": "string",
      "values": [
       "event",
-      "meeting",
       "vote"
      ]
     },
@@ -15763,7 +15737,6 @@
       "2026-09-22",
       "2026-10-13",
       "2026-10-27",
-      "2026-11-13",
       "2026-11-14"
      ]
     },
@@ -15771,10 +15744,8 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-13T15:30:00-06:00",
       "2026-11-14T08:00:00",
       "2026-11-14T09:00:00",
-      "2026-11-14T10:00:00",
       "2026-11-14T11:00:00",
       "2026-11-14T12:30:00",
       "2026-11-14T14:00:00",
@@ -15785,7 +15756,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-14T11:00:00",
       "2026-11-14T11:30:00",
       "2026-11-14T12:00:00",
       "2026-11-14T13:30:00",
@@ -15805,7 +15775,6 @@
      "name": "gov_id",
      "type": "string",
      "values": [
-      "lh",
       "mb",
       "pc",
       "schools"
@@ -15816,7 +15785,6 @@
      "type": "string",
      "values": [
       "Bay District Schools",
-      "Lynn Haven",
       "Mexico Beach",
       "Panama City"
      ]
@@ -15826,7 +15794,6 @@
      "type": "string",
      "values": [
       "Bay District School Board",
-      "Lynn Haven City Commission",
       "Mexico Beach City Council",
       "Panama City Commission"
      ]
@@ -15845,7 +15812,6 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "825 Ohio Avenue, Lynn Haven",
       "Bay County Public Library",
       "Frank Brown Park Recreation Center",
       "Parker Park",
@@ -15884,10 +15850,7 @@
     },
     {
      "name": "agenda_posted",
-     "type": "boolean",
-     "values": [
-      true
-     ]
+     "type": "string"
     },
     {
      "name": "amount",
@@ -15959,7 +15922,6 @@
      "type": "string",
      "values": [
       "https://baycounty.me/events",
-      "https://baycounty.me/meetings",
       "https://baycounty.me/public-money/votes"
      ]
     },
@@ -15967,7 +15929,6 @@
      "name": "source",
      "type": "string",
      "values": [
-      "City of Panama City",
       "Mexico Beach (visitor events)",
       "Northwest Regional Library System",
       "Panama City Beach Chamber"
@@ -15978,14 +15939,12 @@
      "type": "string",
      "values": [
       "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DW9J2V4AB676",
-      "https://lynnhavenfl.portal.civicclerk.com/",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-Council-Meeting-Minutes.pdf",
       "https://pcbeach.org/local-events/",
       "https://www.mexicobeach.com/events/",
       "https://www.nwrls.com/events",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09222026-891",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_10132026-901",
-      "https://www.panamacity.gov/Calendar.aspx"
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_10132026-901"
      ]
     },
     {
@@ -20752,7 +20711,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 55,
+   "rows": 54,
    "columns": [
     {
      "name": "board",
@@ -20854,7 +20813,6 @@
       "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1158,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1180,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
@@ -20883,7 +20841,6 @@
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1952&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Agenda-Packet.pdf",
@@ -20958,7 +20915,6 @@
      "type": "string",
      "values": [
       "https://baycountyfl.new.swagit.com/videos/405753",
-      "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1071/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",

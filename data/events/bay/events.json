@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-13",
- "fetched": "2026-11-13T21:17:50-0500",
+ "as_of": "2026-11-14",
+ "fetched": "2026-11-14T12:16:23-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -85,23 +85,6 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/womens-civic-club-fall-fling-juried-arts-and-crafts-show/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:7732:2026-11-14",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Memorial Trail Unveiling Ceremony",
-   "starts": "2026-11-14T10:00:00",
-   "ends": "2026-11-14T11:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7732",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": false
   },
   {
@@ -2838,6 +2821,23 @@
    "category": "Library",
    "cost": null,
    "url": "https://www.nwrls.com/event/art-club-ages-12-17-2/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "library:24121:2027-01-13",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Youth Dungeons & Dragons (Ages 8 – 12)",
+   "starts": "2027-01-13T14:00:00",
+   "ends": "2027-01-13T17:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/youth-dungeons-dragons-ages-8-12-2/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
   }
