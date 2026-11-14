@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-13T12:33:58-06:00",
+  "generated": "2026-11-13T20:12:41-06:00",
   "window": {
     "from": "2026-11-13",
     "to": "2027-01-12"
@@ -17,12 +17,12 @@
       "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "sources": {
-        "PrimeGov": "ok (23 records)",
+        "PrimeGov": "ok (24 records)",
         "calendar (iCal cat 38)": "ok (27 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
-        "calendar": 4,
+        "agenda_feed": 1,
+        "calendar": 3,
         "expected": 0
       }
     },
@@ -115,10 +115,10 @@
       "calendar_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
       "schedule_source_url": "https://www.pcbfl.gov/185/City-Council",
       "sources": {
-        "Granicus RSS": "ok (66 records)"
+        "Granicus RSS": "ok (67 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 1,
         "calendar": 0,
         "expected": 1
       }
@@ -173,11 +173,11 @@
       "calendar_url": "https://www.cityofcallaway.com/Calendar.aspx",
       "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "AgendaCenter": "ok (12 records)",
+        "AgendaCenter": "ok (14 records)",
         "calendar (iCal cat 14)": "ok (9 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 2,
         "calendar": 1,
         "expected": 0
       }
@@ -798,15 +798,63 @@
     },
     {
       "board": "county",
-      "title": "Bay County Board of County Commissioners Meeting",
+      "title": "BOCC Regular Meeting",
       "start": "2026-11-17T09:00:00-06:00",
       "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952",
+      "packet_url": "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1952&compileOutputType=1",
       "minutes_url": null,
-      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1604"
+      "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
+      "status": "posted",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
+      "calendar_source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "items": [
+        {
+          "title": "FY 2026 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+          "amount": null
+        },
+        {
+          "title": "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
+          "amount": null
+        },
+        {
+          "title": "Fiscal Year 2025 Financial Statement Audit Change Order #2 - Board to ratify change order #2 in the amount of $27,782 to Carr Riggs & Ingram LLC for Professional Auditing Services for the FY 2025 Financial Statement Audit.",
+          "amount": "$27,782"
+        },
+        {
+          "title": "FY2027 FTA Section 5311 Operating Grant - Board adopt the FY2027 FTA Section 5311 Grant Agreement with the Florida Department of Transportation in the amount of $180,000.",
+          "amount": "$180,000"
+        },
+        {
+          "title": "Westbay Parkway Extension Funding Agreements - Approve the state-funded grant agreement and accompanying resolution for engineering design of the extension of Westbay Parkway and associated private local match agreement with St. Joe Company.",
+          "amount": null
+        },
+        {
+          "title": "Traffic Signal Detection Loop Installation Contract Award - Award the Traffic Signal Detection Loop Assembly Installation Contract to Griffin Traffic Signals for an initial one-year term with three additional one-year renewal options.",
+          "amount": null
+        },
+        {
+          "title": "Hydromax USA, LLC Contract Assignment - Authorize the chairman to sign a consent to assignment with Hydromax USA, LLC.",
+          "amount": null
+        }
+      ],
+      "agenda_items": [
+        "Revenues and Expenditures - Board acknowledge receipt of the reports.",
+        "FY 2026 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+        "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
+        "2027 Fees & Fines Schedule Amendment - Board to adopt a resolution to amend the 2027 Fees & Fines Schedule regarding Utilities.",
+        "Fiscal Year 2025 Financial Statement Audit Change Order #2 - Board to ratify change order #2 in the amount of $27,782 to Carr Riggs & Ingram LLC for Professional Auditing Services for the FY 2025 Financial Statement Audit.",
+        "FY2027 FTA Section 5311 Operating Grant - Board adopt the FY2027 FTA Section 5311 Grant Agreement with the Florida Department of Transportation in the amount of $180,000.",
+        "Library Annual Plan of Service FY 2027 - Approve the FY 2027 Annual Plan of Service for the Northwest Regional Library System for submission to the Florida Division of Library and Information Services by December 1, 2026.",
+        "Authorization for Albertsons Companies, Inc. Opioid Settlement - Board approve a settlement in the opioid litigation for Albertsons Companies, Inc.",
+        "George Wallace Blvd. Drainage Easement - Approve and accept the drainage easement to Bay County, allowing the property owner to relocate the existing easement.",
+        "Westbay Parkway Extension Funding Agreements - Approve the state-funded grant agreement and accompanying resolution for engineering design of the extension of Westbay Parkway and associated private local match agreement with St. Joe Company.",
+        "Traffic Signal Detection Loop Installation Contract Award - Award the Traffic Signal Detection Loop Assembly Installation Contract to Griffin Traffic Signals for an initial one-year term with three additional one-year renewal options.",
+        "Hydromax USA, LLC Contract Assignment - Authorize the chairman to sign a consent to assignment with Hydromax USA, LLC.",
+        "PLDPA20260222 & PLZCA20260223 - Small Scale Amendment & Zone Change - Southwest of Hornbill Drive - Board to conduct a quasi-judicial public hearing and approve a proposal of a Small-Scale Amendment to the Bay County Comprehensive Plan, Future Land Use Map, and to approve a proposed zone change from “AG-1” General Agriculture to “R-2” Single-Family & Duplex Dwellings zone. Located south west of Ho",
+        "PLDPA20260224 & PLZCA20260225 - Small Scale Amendment & Zone Change - Spikes Road - Board to conduct a quasi-judicial public hearing and approve a proposal of a Small-Scale Amendment to the Bay County Comprehensive Plan, Future Land Use Map, and to approve a proposed zone change from “AG-1” General Agriculture to “R-2” Single-Family & Duplex Dwellings zone. Located south of Spikes Road, in the San",
+        "PLDPA20260235 & PLZCA20260236 - Small Scale Amendment & Zone Change - 1106 Everitt Avenue - Board to conduct a quasi-judicial public hearing and approve a proposal of a Small-Scale Amendment to the Bay County Comprehensive Plan, Future Land Use Map, and to change the zoning from “R-1” Single Family to “C-3A” General Commercial Low. The subject property is located at 1106 Everitt Avenue, in the uni"
+      ]
     },
     {
       "board": "county-planning",
@@ -819,6 +867,28 @@
       "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1685"
+    },
+    {
+      "board": "cw",
+      "title": "Commission Workshop",
+      "start": "2026-11-17",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-431",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted"
+    },
+    {
+      "board": "cw",
+      "title": "Special Meeting - Swearing In",
+      "start": "2026-11-17",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted"
     },
     {
       "board": "mb",
@@ -978,6 +1048,17 @@
       "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "status": "calendar",
       "detail_url": "https://www.bay.k12.fl.us/school-board-meetings"
+    },
+    {
+      "board": "pcb",
+      "title": "City Council",
+      "start": "2026-11-19",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted"
     },
     {
       "board": "lh",

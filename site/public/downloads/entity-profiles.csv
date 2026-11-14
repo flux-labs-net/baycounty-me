@@ -1048,7 +1048,7 @@ business:l07000014942,business,Business,Mashburn Electric Company LLC,Registered
 business:l07000018420,business,Business,"Gulf Coast Temp Services, LLC",Registered business (inactive),/profile/business/l07000018420,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GULF%20COAST%20TEMP%20SERVICES%2C%20LLC/Page1
 business:l07000022058,business,Business,Land's END Realty LLC,Registered business,/profile/business/l07000022058,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Land%27s%20END%20Realty%20LLC/Page1
 business:l07000022059,business,Business,"Peachtree Investments, LLC",Registered business,/profile/business/l07000022059,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Peachtree%20Investments%2C%20LLC/Page1
-business:l07000022282,business,Business,The Holman Company LLC,Registered business,/profile/business/l07000022282,,1,,200.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/The%20Holman%20Company%20LLC/Page1
+business:l07000022282,business,Business,The Holman Company LLC,Registered business,/profile/business/l07000022282,,1,,100.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/The%20Holman%20Company%20LLC/Page1
 business:l07000023646,business,Business,"Drummond Land Company, LLC",Registered business,/profile/business/l07000023646,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Drummond%20Land%20Company%2C%20LLC/Page1
 business:l07000028193,business,Business,PCB Leasing Group LLC,Registered business,/profile/business/l07000028193,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PCB%20LEASING%20GROUP%20LLC/Page1
 business:l07000028836,business,Business,"MAC Properties of Bay County, LLC",Registered business,/profile/business/l07000028836,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MAC%20PROPERTIES%20OF%20BAY%20COUNTY%2C%20LLC/Page1
@@ -5185,7 +5185,7 @@ committee:wes-pac-inc-dba-firefly,committee,Committee or PAC,Wes Pac Inc DBA Fir
 gov:airport,gov,Government,Airport District,Special district,/profile/gov/airport,,2,,,airport,bay,
 gov:beach_mosquito,gov,Government,Beach Mosquito Control,Special district,/profile/gov/beach_mosquito,,12,,,beach_mosquito,bay,
 gov:clerk,gov,Government,Clerk of Court,Constitutional,/profile/gov/clerk,,4,,,clerk,bay,
-gov:county,gov,Government,Bay County,County government,/governments/bay-county,,266,52634.4,372269524.01,county,bay,
+gov:county,gov,Government,Bay County,County government,/governments/bay-county,,267,52634.4,372269524.01,county,bay,
 gov:county_court,gov,Government,County Court,Court,/profile/gov/county_court,,7,,,county_court,bay,
 gov:cw,gov,Government,Callaway,City,/governments/callaway,,74,,19615972.29,cw,bay,
 gov:destination_pc,gov,Government,Destination Panama City,Tourism agency,/profile/gov/destination_pc,,174,,4471596.43,destination_pc,bay,
@@ -15896,7 +15896,7 @@ person:george-gainer,person,Former official,George Gainer,"Former county commiss
 person:george-hines,person,Past candidate,George H. Hines Jr.,"Ran for Lynn Haven Commission, Seat 3 in 2021",/people/george-hines,,13,2070.0,,lh,bay,
 person:george-record,person,Past candidate,George Record II,Ran for Sheriff in 2020,/people/george-record,,1,,,sheriff,bay,
 person:ginger-littleton,person,Former official,Ginger Littleton,"Former school board member, District 2, Bay District Schools",/people/ginger-littleton,,10,4050.0,,schools,bay,
-person:glenn-manley,person,Official or candidate,Glenn Manley,"Ran for Bay District School Board, District 3, Bay District Schools in 2026",/people/glenn-manley,,28,11750.0,,schools,bay,
+person:glenn-manley,person,Official or candidate,Glenn Manley,"Ran for Bay District School Board, District 3, Bay District Schools in 2026",/people/glenn-manley,,28,11650.0,,schools,bay,
 person:grant-wittstruck,person,Candidate,Grant Wittstruck,"2026 candidate for Council, Ward 1, Panama City Beach",/people/grant-wittstruck,,64,40822.5,,pcb,bay,
 person:greg-brudnicki,person,Former official,Greg Brudnicki,"Former mayor, Panama City",/people/greg-brudnicki,,292,138204.4,,pc,bay,
 person:greg-porta,person,Candidate,Greg Porta,"2026 candidate for Lake Powell Residential Golf Community Development District, Seat 2, Lake Powell CDD",/people/greg-porta,,1,,,lake_powell_cdd,bay,
@@ -16220,7 +16220,7 @@ vendor:c-miles-construction,vendor,Company,"C-Miles Construction, Inc.",Company 
 vendor:careco-multimedia-entertainment,vendor,Company,"Careco Multimedia Entertainment, LLC",Company paid or hired by local governments,/profile/vendor/careco-multimedia-entertainment,,1,256274.5,,visit_pcb,bay,
 vendor:caribbean-coffee,vendor,Company,Caribbean Coffee,Company paid or hired by local governments,/profile/vendor/caribbean-coffee,,1,90.0,,mb_cdc,bay,
 vendor:carollo-engineers,vendor,Company,"Carollo Engineers, Inc.",Company paid or hired by local governments,/public-money/vendors/carollo-engineers,Carollo Engineers,6,1167489.0,,county,bay,
-vendor:carr-riggs-ingram,vendor,Company,"Carr, Riggs & Ingram, LLC",Company paid or hired by local governments,/public-money/vendors/carr-riggs-ingram,Carr Riggs & Ingram,32,54540.0,,destination_pc,bay,
+vendor:carr-riggs-ingram,vendor,Company,"Carr, Riggs & Ingram, LLC",Company paid or hired by local governments,/public-money/vendors/carr-riggs-ingram,Carr Riggs & Ingram,33,54540.0,,destination_pc,bay,
 vendor:carvertise,vendor,Company,"Carvertise, Inc",Company paid or hired by local governments,/public-money/vendors/carvertise,Carvertise,2,200010.0,,destination_pc,bay,
 vendor:catered-by-carla,vendor,Company,Catered by Carla,Company paid or hired by local governments,/profile/vendor/catered-by-carla,,1,3116.4,,destination_pc,bay,
 vendor:cathey-s-ace-hardware,vendor,Company,Cathey's Ace Hardware,Company paid or hired by local governments,/profile/vendor/cathey-s-ace-hardware,,1,13876.41,,mb_cdc,bay,

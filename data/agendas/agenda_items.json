@@ -1,7 +1,203 @@
 {
- "generated": "2026-11-13T18:44:20+00:00",
+ "generated": "2026-11-14T02:22:50+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "F.1",
+   "section": "CERTIFICATION OF ELECTION RESULTS",
+   "title": "Resolution No. 27-35, accepting the results of the General Election",
+   "summary": null,
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "I.1",
+   "section": "APPROVAL OF MEETING MINUTES",
+   "title": "October 22, 2026 Regular Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "K.1",
+   "section": "PRESENTATIONS",
+   "title": "Employee Years of Service Awards",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "K.2",
+   "section": "PRESENTATIONS",
+   "title": "Hospital Update by Andrew Starr, President, Western Market Tallahassee Memorial Healthcare",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.1",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-30, authorizing certain expenditures related to Front Beach Road Community Redevelopment Area acquisitions and activities for Fiscal Year 2027",
+   "summary": "Authorizes expenditures for Front Beach Road CRA acquisitions and activities in amounts not to exceed the limits set forth in Exhibit A for FY 2027.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Front Beach Road Community Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.2",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-31, Optimist Club of the Beaches' Annual Christmas Parade road closures",
+   "summary": "Authorizes closure of portions of South Pier Park Drive and L.C. Hilton Drive and temporary use of a portion of Front Beach Road (US 98A) between 3:00 p.m. and 8:00 p.m. on Saturday, December 12, 2026.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Optimist Club of the Beaches"
+   ],
+   "addresses": [
+    "South Pier Park Drive",
+    "L.C. Hilton Drive",
+    "Front Beach Road (US 98A)"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.3",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-32, agreement with Atlas Engineering Services, LLC for professional program management services and task order for the Front Beach Community Redevelopment Area",
+   "summary": "Approves an agreement and a task order for program management services in an amount not to exceed $1,105,511.00.",
+   "kind": "contract",
+   "amount": 1105511.0,
+   "parties": [
+    "Atlas Engineering Services, LLC"
+   ],
+   "addresses": [
+    "Front Beach Community Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.4",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-33, Front Beach Road Redevelopment Area Near-Term Work Plan",
+   "summary": "Authorizes and directs execution of a near-term work plan for community redevelopment within the Front Beach Road Redevelopment Area.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Panama City Beach Community Redevelopment Agency"
+   ],
+   "addresses": [
+    "Front Beach Road Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.5",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-34, combined task order and notice to proceed with Drummond Carpenter, PLLC for environmental impact assessment services",
+   "summary": "Approves a task order and notice to proceed for environmental impact assessment services for property at 17687 Ashley Drive in an amount not to exceed $60,955.94.",
+   "kind": "contract",
+   "amount": 60955.94,
+   "parties": [
+    "Drummond Carpenter, PLLC"
+   ],
+   "addresses": [
+    "17687 Ashley Drive"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.6",
+   "section": "CONSENT AGENDA",
+   "title": "Revision of the Master Audit List to remove obsolete items",
+   "summary": "Council finds the listed items surplus, approves their removal from the Master Audit List, and authorizes disposal in any lawful manner.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "N.1",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Ordinance No. 1692, amending City Code Chapter 30, Pensions, Article II, Police Pension Plan, Sections 30-54 and 30-55 - Second Reading / Public Hearing",
+   "summary": "Amends the police pension plan sections on contributions and on benefit amounts and eligibility.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
   {
    "board": "pc",
    "body": "Panama City City Commission",
@@ -531,6 +727,389 @@
    "parties": [],
    "addresses": [],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "PRESENTATIONS",
+   "title": "Swearing in Commissioners",
+   "summary": "Swearing in of Commissioners Robert Carroll and Scott Duvall.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "Holy Nativity Episcopal Church",
+    "First Baptist Church of Panama City"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "PRESENTATIONS",
+   "title": "Citizens Academy Graduation",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues and Expenditures",
+   "summary": "Board acknowledges receipt of the reports.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2027 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2026-2027 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "2027 Fees & Fines Schedule Amendment",
+   "summary": "Board adopts a resolution to amend the 2027 Fees & Fines Schedule regarding Utilities.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "Fiscal Year 2025 Financial Statement Audit Change Order #2",
+   "summary": "Board to ratify change order #2 to Carr Riggs & Ingram LLC for Professional Auditing Services for the FY 2025 Financial Statement Audit.",
+   "kind": "change_order",
+   "amount": 27782.0,
+   "parties": [
+    "Carr Riggs & Ingram LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - Collaborative Services",
+   "title": "FY2027 FTA Section 5311 Operating Grant",
+   "summary": "Board adopts the FY2027 FTA Section 5311 Grant Agreement with the Florida Department of Transportation.",
+   "kind": "grant",
+   "amount": 180000.0,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - Collaborative Services",
+   "title": "Library Annual Plan of Service FY 2027",
+   "summary": "Approve the FY 2027 Annual Plan of Service for the Northwest Regional Library System for submission to the Florida Division of Library and Information Services by December 1, 2026.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Northwest Regional Library System",
+    "Florida Division of Library and Information Services"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Authorization for Albertsons Companies, Inc. Opioid Settlement",
+   "summary": "Board approves a settlement in the opioid litigation for Albertsons Companies, Inc.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Albertsons Companies, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "George Wallace Blvd. Drainage Easement",
+   "summary": "Approve and accept the drainage easement to Bay County, allowing the property owner to relocate the existing easement.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "313 George Wallace Blvd."
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Westbay Parkway Extension Funding Agreements",
+   "summary": "Approve the state-funded grant agreement and resolution for engineering design of the Westbay Parkway extension and the associated private local match agreement with St. Joe Company.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "St. Joe Company"
+   ],
+   "addresses": [
+    "Westbay Parkway"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Traffic Signal Detection Loop Installation Contract Award",
+   "summary": "Award the Traffic Signal Detection Loop Assembly Installation Contract to Griffin Traffic Signals for an initial one-year term with three additional one-year renewal options.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Hydromax USA, LLC Contract Assignment",
+   "summary": "Authorize the chairman to sign a consent to assignment with Hydromax USA, LLC.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Hydromax USA, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260222 & PLZCA20260223 - Small Scale Amendment & Zone Change - Southwest of Hornbill Drive",
+   "summary": "Quasi-judicial public hearing on a Small-Scale Comprehensive Plan Future Land Use Map amendment and zone change from AG-1 General Agriculture to R-2 Single-Family & Duplex Dwellings, in the Youngstown area.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Southwest of Hornbill Drive, Youngstown area"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260224 & PLZCA20260225 - Small Scale Amendment & Zone Change - Spikes Road",
+   "summary": "Quasi-judicial public hearing on a Small-Scale Comprehensive Plan Future Land Use Map amendment and zone change from AG-1 General Agriculture to R-2 Single-Family & Duplex Dwellings, in the Sand Hills area.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "South of Spikes Road, Sand Hills area"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260235 & PLZCA20260236 - Small Scale Amendment & Zone Change - 1106 Everitt Avenue",
+   "summary": "Quasi-judicial public hearing on a Small-Scale Comprehensive Plan Future Land Use Map amendment and zoning change from R-1 Single Family to C-3A General Commercial Low, in the unincorporated Springfield area.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1106 Everitt Avenue"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-11-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "COUNTY MANAGER REPORT",
+   "title": "Chairmanship Discussion",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-11-17",
+   "meeting": "Commission Workshop",
+   "number": "1",
+   "section": "Regular Agenda",
+   "title": "Solid Waste Pickup",
+   "summary": "Staff will discuss current solid waste collection practices, including debris limitations, disposal costs, equipment needs and operational challenges, and potential improvements.",
+   "kind": "presentation",
+   "amount": 75000.0,
+   "parties": [
+    "Redmond's"
+   ],
+   "addresses": [],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-431"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-11-17",
+   "meeting": "Special Meeting - Swearing In",
+   "number": "1",
+   "section": "Regular Agenda",
+   "title": "Canvassing Board Election Results",
+   "summary": "Presents the Bay County Canvassing Board's preliminary results for the Commission Ward I and Ward II races in the November 3, 2026 General Election, with official results to be obtained from the Supervisor of Elections before the meeting.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "Bay County Canvassing Board",
+    "Supervisor of Elections Office"
+   ],
+   "addresses": [],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-11-17",
+   "meeting": "Special Meeting - Swearing In",
+   "number": "2",
+   "section": "Regular Agenda",
+   "title": "Swearing-In Ceremony",
+   "summary": "The City Clerk will administer the Oath of Office to the newly elected Commissioners of Wards I and II for four-year terms, and they will then take their seats.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-11-17",
+   "meeting": "Special Meeting - Swearing In",
+   "number": "3",
+   "section": "Regular Agenda",
+   "title": "Appointment of Mayor Pro Tempore",
+   "summary": "The Commission is to appoint a Mayor Pro tempore for the 2-year term from November 17, 2026 through certification of the November 7, 2028 election results.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430"
   },
   {
    "board": "lh",

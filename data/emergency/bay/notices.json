@@ -3,6 +3,32 @@
  "checked": "2026-11-13",
  "notices": [
   {
+   "notice_id": "fl511:959397",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "FL511 (Florida Department of Transportation)",
+   "source_type": "fl511",
+   "gov_id": null,
+   "title": "US-231: incident (Northbound)",
+   "summary": "Crash in Bay County on US-231 North, beyond State Road 20 Near Owenwood Rd. Last updated at 03:28 PM.",
+   "instruction": null,
+   "severity": "minor",
+   "event": "Incident",
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-13T15:25",
+   "starts": "2026-11-13T15:25",
+   "ends": null,
+   "updated": "2026-11-13T15:28",
+   "status": "ended",
+   "full_closure": false,
+   "roadway": "US-231",
+   "url": "https://fl511.com/",
+   "source_url": "https://fl511.com/",
+   "first_seen": "2026-11-13T20:30:02.740792+00:00",
+   "last_seen": "2026-11-13T20:30:02.740792+00:00"
+  },
+  {
    "notice_id": "ipaws:2833683593563301",
    "place_id": "fl-bay",
    "kind": "safety",
@@ -79,7 +105,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=25",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T19:45:01.308244+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -106,7 +132,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -187,7 +213,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -214,7 +240,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -295,7 +321,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -1469,7 +1495,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -1496,7 +1522,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-13T18:50:04.349028+00:00",
    "geometry": null
   },
   {
@@ -1791,7 +1817,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -1818,7 +1844,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   },
   {
@@ -1845,7 +1871,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-13T18:40:45.687Z",
+   "last_seen": "2026-11-14T02:19:12.756Z",
    "geometry": null
   }
  ]

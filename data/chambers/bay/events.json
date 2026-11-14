@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-13",
+ "as_of": "2026-11-14",
  "fetched": {
-  "pcb-chamber": "2026-11-13T18:39:18+00:00",
+  "pcb-chamber": "2026-11-14T02:17:50+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,36 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:26491",
-   "title": "Friday at the Beach – November 2026",
-   "starts": "2026-11-13T07:30:00",
-   "ends": "2026-11-13T09:00:00",
-   "all_day": false,
-   "venue": "Captain Anderson’s Event Center",
-   "city": null,
-   "category": "Chamber Events",
-   "chamber_event": true,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/friday-at-the-beach-nov-2026/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27477",
-   "title": "Paychecks for Patriots 2026 Job Fair",
-   "starts": "2026-11-13T10:00:00",
-   "ends": "2026-11-13T12:00:00",
-   "all_day": false,
-   "venue": "Gulf Coast State College, Student Union East",
-   "city": "Panama City",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/paychecks-for-patriots-2026-job-fair/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27564",

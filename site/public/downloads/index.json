@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-13",
+ "updated": "2026-11-14",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -6761,7 +6761,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22845,
+   "rows": 22846,
    "columns": [
     {
      "name": "link_id",
@@ -8717,7 +8717,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 50,
+   "rows": 48,
    "columns": [
     {
      "name": "place_id",
@@ -8803,11 +8803,75 @@
     },
     {
      "name": "starts",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-14T09:00:00",
+      "2026-11-16T11:30:00",
+      "2026-11-17T16:00:00",
+      "2026-11-18T10:00:00",
+      "2026-11-19T16:30:00",
+      "2026-11-21T18:00:00",
+      "2026-11-21T19:00:00",
+      "2026-11-26T07:30:00",
+      "2026-11-26T11:00:00",
+      "2026-11-27T00:00:00",
+      "2026-12-05T00:00:00",
+      "2026-12-09T17:30:00",
+      "2026-12-10T16:30:00",
+      "2026-12-12T17:30:00",
+      "2026-12-31T00:00:00",
+      "2026-12-31T17:00:00",
+      "2027-01-15T07:30:00",
+      "2027-01-23T19:00:00",
+      "2027-01-29T00:00:00",
+      "2027-02-20T19:00:00",
+      "2027-02-25T17:30:00",
+      "2027-02-26T12:00:00",
+      "2027-03-06T19:00:00",
+      "2027-03-25T16:30:00",
+      "2027-03-30T08:00:00",
+      "2027-04-03T00:00:00",
+      "2027-04-08T09:00:00",
+      "2027-06-05T07:00:00",
+      "2027-06-22T08:00:00",
+      "2027-09-21T08:00:00"
+     ]
     },
     {
      "name": "ends",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-14T15:00:00",
+      "2026-11-16T12:30:00",
+      "2026-11-17T18:00:00",
+      "2026-11-18T12:00:00",
+      "2026-11-19T18:30:00",
+      "2026-11-21T19:00:00",
+      "2026-11-21T21:00:00",
+      "2026-11-26T10:00:00",
+      "2026-11-26T11:00:00",
+      "2026-11-28T23:59:59",
+      "2026-12-05T23:59:59",
+      "2026-12-10T18:30:00",
+      "2026-12-12T19:30:00",
+      "2026-12-12T20:30:00",
+      "2026-12-31T18:30:00",
+      "2026-12-31T23:59:59",
+      "2027-01-15T09:00:00",
+      "2027-01-23T21:00:00",
+      "2027-01-30T23:59:59",
+      "2027-02-20T21:00:00",
+      "2027-02-25T21:00:00",
+      "2027-02-28T18:00:00",
+      "2027-03-06T21:00:00",
+      "2027-03-25T18:30:00",
+      "2027-03-30T09:30:00",
+      "2027-04-03T23:59:59",
+      "2027-04-09T17:00:00",
+      "2027-06-05T09:30:00",
+      "2027-06-22T09:30:00",
+      "2027-09-21T09:30:00"
+     ]
     },
     {
      "name": "all_day",
@@ -8831,7 +8895,6 @@
       "Frank Brown Park",
       "Frank Brown Park Recreation Center",
       "Gulf Coast State College",
-      "Gulf Coast State College, Student Union East",
       "Historic St. Andrews",
       "LaCo",
       "McGuire’s Irish Pub",
@@ -8925,7 +8988,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 172,
+   "rows": 164,
    "columns": [
     {
      "name": "place_id",
@@ -9017,11 +9080,9 @@
       "Anchorage Children’s Home",
       "Bay County Public Library",
       "Capt. Anderson’s Marina",
-      "Captain Anderson’s Event Center",
       "Edgewater Beach & Golf Resort",
       "Frank Brown Park Recreation Center",
       "Gulf Coast State College",
-      "Gulf Coast State College, Student Union East",
       "Gulf of America",
       "LaCo",
       "McGuire’s Irish Pub",
@@ -12578,7 +12639,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 68,
+   "rows": 69,
    "columns": [
     {
      "name": "notice_id",
@@ -12747,7 +12808,8 @@
       "2026-11-06T12:37:00.000Z",
       "2026-11-06T21:27",
       "2026-11-07T19:13",
-      "2026-11-12T20:20"
+      "2026-11-12T20:20",
+      "2026-11-13T15:25"
      ]
     },
     {
@@ -13786,7 +13848,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 125,
+   "rows": 126,
    "columns": [
     {
      "name": "place_id",
@@ -13889,6 +13951,7 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-007.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-367.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/cpDASFgvl7rNFiwwZJHT/8d29./cropped-026.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/e2102y9kG2b6qMkC863b/3fef./cropped-322.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/eDtCd6G38jQ78Aa9t16b/bb33./cropped-816.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/f8e1amlBGN8HsnuaFixM/a601./cropped-235.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fVpPl6iXiXDSxDnuB1YA/9d55./cropped-395.pdf",
@@ -14040,7 +14103,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 107,
+   "rows": 104,
    "columns": [
     {
      "name": "place_id",
@@ -14140,7 +14203,6 @@
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-13",
       "2026-11-16",
       "2026-11-17",
       "2026-11-18",
@@ -14172,7 +14234,8 @@
       "2026-11-10",
       "2026-11-11",
       "2026-11-12",
-      "2026-11-13"
+      "2026-11-13",
+      "2026-11-14"
      ]
     },
     {
@@ -14266,7 +14329,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-13"
+      "2026-11-14"
      ]
     }
    ],
@@ -15644,7 +15707,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 63,
+   "rows": 56,
    "columns": [
     {
      "name": "place_id",
@@ -15708,13 +15771,7 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-13T07:30:00",
-      "2026-11-13T10:00:00",
-      "2026-11-13T13:00:00",
-      "2026-11-13T14:00:00",
-      "2026-11-13T15:00:00",
       "2026-11-13T15:30:00-06:00",
-      "2026-11-13T18:00:00",
       "2026-11-14T08:00:00",
       "2026-11-14T09:00:00",
       "2026-11-14T10:00:00",
@@ -15728,11 +15785,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-13T09:00:00",
-      "2026-11-13T12:00:00",
-      "2026-11-13T14:00:00",
-      "2026-11-13T17:00:00",
-      "2026-11-13T19:00:00",
       "2026-11-14T11:00:00",
       "2026-11-14T11:30:00",
       "2026-11-14T12:00:00",
@@ -15795,10 +15847,7 @@
      "values": [
       "825 Ohio Avenue, Lynn Haven",
       "Bay County Public Library",
-      "Captain Anderson’s Event Center",
       "Frank Brown Park Recreation Center",
-      "Gulf Coast State College, Student Union East",
-      "Panama City Beach Public Library",
       "Parker Park",
       "Parker Public Library"
      ]
@@ -15807,7 +15856,6 @@
      "name": "category",
      "type": "string",
      "values": [
-      "Chamber",
       "Community",
       "Library",
       "appointment",
@@ -17493,7 +17541,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-13"
+      "2026-11-14"
      ]
     },
     {
@@ -18017,7 +18065,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 536,
+   "rows": 552,
    "columns": [
     {
      "name": "place_id",
@@ -18061,39 +18109,7 @@
     },
     {
      "name": "meeting",
-     "type": "string",
-     "values": [
-      "09/08/26 CRA Agenda",
-      "10/13/26 CRA Board Meeting",
-      "11/10/26 CRA Meeting",
-      "1st Budget Hearing",
-      "BOCC Regular Meeting",
-      "Budget Hearing",
-      "Budget Hearing September 8, 2026.",
-      "City Commission Meeting",
-      "City Commission Meeting of August 11, 2026.",
-      "City Commission Meeting of August 25, 2026.",
-      "City Commission Meeting of July 14, 2026.",
-      "City Commission Meeting of July 28, 2026.",
-      "City Commission Meeting of November 17, 2026.",
-      "City Commission Meeting of October 13, 2026.",
-      "City Commission Meeting of October 27, 2026.",
-      "City Commission Meeting of September 22, 2026.",
-      "City Commission Meeting of September 8, 2026.",
-      "City Council",
-      "City Council Meeting",
-      "Community Redevelopment Agency Board Meeting for October 13, 2026",
-      "Community Redevelopment Agency Board Meeting of August 4, 2026",
-      "Community Redevelopment Agency Board Meeting of September 1, 2026",
-      "Final Budget Hearing",
-      "Panama City Community Fund Board of Directors Meeting of July 14, 2026.",
-      "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
-      "Planning Board",
-      "Planning Commission Meeting",
-      "Public Workshop Meeting of July 6, 2026.",
-      "Regular Meeting",
-      "Special Call Panama City Community Fund Board of Directors Meeting of September 8, 2026."
-     ]
+     "type": "string"
     },
     {
      "name": "item_number",
@@ -20469,7 +20485,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-13"
+      "2026-11-14"
      ]
     },
     {
@@ -20698,7 +20714,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-13"
+      "2026-11-14"
      ]
     },
     {
@@ -20736,7 +20752,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 52,
+   "rows": 55,
    "columns": [
     {
      "name": "board",
@@ -20790,6 +20806,7 @@
       "Regular Meeting (expected)",
       "School Board Meeting",
       "School Board Meeting - Organizational Meeting",
+      "Special Meeting - Swearing In",
       "Special Planning Commission Meeting",
       "Virtual CRA Workshop"
      ]
@@ -20833,6 +20850,7 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
+      "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952",
       "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
@@ -20844,9 +20862,12 @@
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-431",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?html=true",
@@ -20859,6 +20880,7 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
+      "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1952&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1164,plainText=false)",
@@ -20975,18 +20997,19 @@
      "type": "array"
     },
     {
+     "name": "calendar_source",
+     "type": "string",
+     "values": [
+      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
+     ]
+    },
+    {
      "name": "expected",
      "type": "boolean",
      "values": [
       true
-     ]
-    },
-    {
-     "name": "calendar_source",
-     "type": "string",
-     "values": [
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
      ]
     }
    ],

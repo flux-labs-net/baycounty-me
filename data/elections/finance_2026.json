@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-13",
+ "as_of": "2026-11-14",
  "source": "Bay County Supervisor of Elections campaign finance system (VoterFocus), https://www.voterfocus.com/ws/WScand/candidate_pr.php?c=Bay, embedded at https://www.bayvotesfl.gov/candidates/candidate-committee-finances/. Reporting groups: 2026 Primary/General Election (el=35), 2026 Municipal Super Tuesday (el=36), Lynn Haven Recall 1/20/2026 (el=34). Per-candidate itemized CSV export: https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id={id}&dhc=0&county=bay",
  "field_notes": {
   "total_raised": "SOE monetary contributions plus SOE in-kind contributions. Monetary includes candidate loans and bank interest as filed.",
@@ -16,10 +16,10 @@
  },
  "summary": {
   "candidates": 42,
-  "total_raised_all": 404886.36,
-  "total_monetary_all": 395621.55,
+  "total_raised_all": 405136.36,
+  "total_monetary_all": 395871.55,
   "total_in_kind_all": 9264.81,
-  "total_spent_all": 348846.19,
+  "total_spent_all": 353565.29,
   "reconciled": 30,
   "no_activity": 12
  },
@@ -1072,7 +1072,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Bobby J. Birdsell (NON)",
    "cand_id": 729,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
@@ -1195,7 +1195,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Karen Custer (NON)",
    "cand_id": 726,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=726&rellevel=4&committee=N",
@@ -1399,7 +1399,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Jamie Kirkland (NON)",
    "cand_id": 732,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=732&rellevel=4&committee=N",
@@ -1571,7 +1571,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Spring Overway (NON)",
    "cand_id": 742,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=742&rellevel=4&committee=N",
@@ -1708,7 +1708,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Alyssa Finneyfrock (NON)",
    "cand_id": 746,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=746&rellevel=4&committee=N",
@@ -1779,7 +1779,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Greg Porta (NON)",
    "cand_id": 744,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=744&rellevel=4&committee=N",
@@ -1850,7 +1850,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Kenneth Black (NON)",
    "cand_id": 741,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=741&rellevel=4&committee=N",
@@ -1992,7 +1992,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Tim Rosson (NON)",
    "cand_id": 747,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=747&rellevel=4&committee=N",
@@ -2063,7 +2063,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Carlos Sanchez (NON)",
    "cand_id": 739,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=739&rellevel=4&committee=N",
@@ -2274,7 +2274,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Grant Wittstruck (NON)",
    "cand_id": 730,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
@@ -3022,7 +3022,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Mary Coburn (NON)",
    "cand_id": 727,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
@@ -3236,7 +3236,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Qualified",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Nick Atkinson (NON)",
    "cand_id": 743,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
@@ -3879,7 +3879,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Advanced",
+   "soe_status": "Active - Defeated",
    "soe_campaign_name": "Christopher Moore (NON)",
    "cand_id": 738,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N",
@@ -4238,7 +4238,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Advanced",
+   "soe_status": "Active - Elected",
    "soe_campaign_name": "Dr. John L. Haley (NON)",
    "cand_id": 728,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=728&rellevel=4&committee=N",
@@ -4798,31 +4798,31 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Defeated",
+   "soe_status": "Inactive - Defeated",
    "soe_campaign_name": "Glenn Manley (NON)",
    "cand_id": 735,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=735&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=735&dhc=0&county=bay",
-   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
-   "through": "2026-08-13",
-   "total_raised": 25530.0,
-   "monetary": 23780.0,
+   "latest_report": "TRP / period 2026-08-14 to 2026-11-16 / due 2026-11-16",
+   "through": "2026-11-16",
+   "total_raised": 25780.0,
+   "monetary": 24030.0,
    "in_kind": 1750.0,
    "loans": 5000.0,
-   "total_spent": 19310.9,
-   "cash_on_hand_estimate": 4469.1,
-   "n_contributions": 68,
+   "total_spent": 24030.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 70,
    "from_individuals": {
-    "count": 43,
-    "total": 11680.0,
+    "count": 46,
+    "total": 12030.0,
     "bands": {
      "under_100": {
-      "count": 5,
-      "total": 230.0
+      "count": 6,
+      "total": 280.0
      },
      "100_499": {
-      "count": 30,
-      "total": 4950.0
+      "count": 32,
+      "total": 5250.0
      },
      "500_999": {
       "count": 3,
@@ -4834,26 +4834,26 @@
      }
     },
     "in_county": {
-     "count": 37,
-     "total": 8780.0
+     "count": 39,
+     "total": 8930.0
     },
     "out_of_county": {
-     "count": 3,
-     "total": 750.0
+     "count": 4,
+     "total": 950.0
     },
     "location_unknown": {
      "count": 3,
      "total": 2150.0
     },
-    "unique_donors_approx": 42
+    "unique_donors_approx": 45
    },
    "candidate_self": {
     "contributions": 0.0,
     "loans": 5000.0
    },
    "by_type_total": {
-    "individual": 11680.0,
-    "business": 8850.0,
+    "individual": 12030.0,
+    "business": 8750.0,
     "pac": 0.0,
     "party": 0.0,
     "candidate_self": 5000.0,
@@ -5008,7 +5008,7 @@
      "name": "The Holman Company LLC",
      "city": "Panama City",
      "type": "business",
-     "amount": 100.0,
+     "amount": 0.0,
      "date": "2026-07-27",
      "kind": "check"
     },
@@ -5064,9 +5064,15 @@
    "top_expenditures": [
     {
      "payee": "Neves Media Productions LLC",
-     "total": 15143.86,
-     "payments": 16,
-     "purpose": "Political mail outs; Political Mail outs; Graphic design; Business signs-4â€™x3â€™; and 10 other descriptions"
+     "total": 14433.55,
+     "payments": 17,
+     "purpose": "Political mail outs; Political Mail outs; Graphic Designs; Yard Signs/ Business Cards; and 11 other descriptions"
+    },
+    {
+     "payee": "Fred G Manley",
+     "total": 5000.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Repay personal loan to campaign"
     },
     {
      "payee": "Bay County Supervisor of Elections",
@@ -5076,9 +5082,15 @@
     },
     {
      "payee": "Almega Sports",
-     "total": 1247.4,
+     "total": 1116.9,
      "payments": 3,
      "purpose": "T-Shirts political promo; Political promos; Political signature footballs"
+    },
+    {
+     "payee": "Unsanctioned Footprints Inc",
+     "total": 559.91,
+     "payments": 1,
+     "purpose": "Donate to charity"
     },
     {
      "payee": "ESPN Radio NW Fla",
@@ -5113,7 +5125,7 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Includes 5,000.00 in loans; loans count in SOE monetary contributions."
+    "Campaign filed a termination report (TRP); account is closed."
    ]
   },
   {
