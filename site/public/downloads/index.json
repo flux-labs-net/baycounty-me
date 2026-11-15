@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-14",
+ "updated": "2026-11-15",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -8717,7 +8717,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 48,
+   "rows": 47,
    "columns": [
     {
      "name": "place_id",
@@ -8805,7 +8805,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-14T09:00:00",
       "2026-11-16T11:30:00",
       "2026-11-17T16:00:00",
       "2026-11-18T10:00:00",
@@ -8841,7 +8840,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-14T15:00:00",
       "2026-11-16T12:30:00",
       "2026-11-17T18:00:00",
       "2026-11-18T12:00:00",
@@ -8893,7 +8891,6 @@
       "Edgewater Beach & Golf Resort",
       "Embassy Suites Panama City Beach, VUE55 (Rooftop)",
       "Frank Brown Park",
-      "Frank Brown Park Recreation Center",
       "Gulf Coast State College",
       "Historic St. Andrews",
       "LaCo",
@@ -8988,7 +8985,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 164,
+   "rows": 160,
    "columns": [
     {
      "name": "place_id",
@@ -9081,7 +9078,6 @@
       "Bay County Public Library",
       "Capt. Anderson’s Marina",
       "Edgewater Beach & Golf Resort",
-      "Frank Brown Park Recreation Center",
       "Gulf Coast State College",
       "Gulf of America",
       "LaCo",
@@ -9698,7 +9694,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-14T16:58:00+00:00"
+      "2026-11-15T08:06:00+00:00"
      ]
     },
     {
@@ -9706,8 +9702,8 @@
      "type": "string",
      "values": [
       "Monday",
-      "Rest Of Today",
-      "Sunday",
+      "Thursday",
+      "Today",
       "Tuesday",
       "Wednesday"
      ]
@@ -9767,8 +9763,8 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly sunny",
-      "Sunny"
+      "Mostly cloudy",
+      "Mostly sunny"
      ]
     },
     {
@@ -9783,24 +9779,23 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "North winds 10 to 15 mph",
-      "Northeast winds 10 to 15 mph"
+      "Northeast winds 10 to 15 mph",
+      "Northeast winds around 20 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:06 AM",
-      "6:07 AM"
+      "7:07 AM",
+      "7:08 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "4:47 PM",
-      "4:48 PM"
+      "5:47 PM"
      ]
     },
     {
@@ -9810,12 +9805,12 @@
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the upper 60s. Breezy. Northeast winds around 25 mph.",
       "Moderate rip current risk*. Sunny. Highs in the lower 70s. Northeast winds around 20 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Mostly cloudy. Highs in the lower 60s. Northeast winds around 20 mph.",
+      "Moderate rip current risk*. Sunny. Highs in the mid 70s. Northeast winds around 20 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs around 70. Northeast winds around 20 mph.",
       "Moderate surf and/or currents. Use caution.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County).",
-      "Winds throughout the eastern Gulf are now northeasterly, so any lingering rip risk along west-facing Gulf County beaches will fade quickly this afternoon. On Sunday night, northeast winds will increase quite a bit, bringing a high risk of rip currents to Franklin County beaches starting Monday. Elsewhere, a moderate rip current risk should prevail."
+      "There is an increasing potential for a high rip current risk along Franklin County beaches early next week with brisk east winds. Otherwise, a moderate rip current risk should prevail."
      ]
     },
     {
@@ -9838,7 +9833,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/89d5e3d3-d664-46dc-ba84-3166f39dc3e5",
+      "https://api.weather.gov/products/fd910470-5591-417f-bead-9a5996f06902",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12492,7 +12487,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-14"
+      "2026-11-15"
      ]
     },
     {
@@ -12641,7 +12636,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 71,
+   "rows": 73,
    "columns": [
     {
      "name": "notice_id",
@@ -12766,6 +12761,7 @@
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf; Quitman; Clay; Randolph; Calhoun; Terrell; Dougherty; Lee; Early; Miller; Baker; Seminole",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
       "FLORIDA-ALL",
+      "Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Worth; Turner; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
       "Left lane blocked",
       "Lynn Haven",
       "North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf",
@@ -14304,7 +14300,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-14"
+      "2026-11-15"
      ]
     }
    ],
@@ -15682,7 +15678,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 54,
+   "rows": 46,
    "columns": [
     {
      "name": "place_id",
@@ -15702,7 +15698,6 @@
      "name": "section",
      "type": "string",
      "values": [
-      "event",
       "vote"
      ]
     },
@@ -15736,40 +15731,20 @@
      "values": [
       "2026-09-22",
       "2026-10-13",
-      "2026-10-27",
-      "2026-11-14"
+      "2026-10-27"
      ]
     },
     {
      "name": "starts",
-     "type": "string",
-     "values": [
-      "2026-11-14T08:00:00",
-      "2026-11-14T09:00:00",
-      "2026-11-14T11:00:00",
-      "2026-11-14T12:30:00",
-      "2026-11-14T14:00:00",
-      "2026-11-14T15:30:00"
-     ]
+     "type": "string"
     },
     {
      "name": "ends",
-     "type": "string",
-     "values": [
-      "2026-11-14T11:30:00",
-      "2026-11-14T12:00:00",
-      "2026-11-14T13:30:00",
-      "2026-11-14T15:00:00",
-      "2026-11-14T16:00:00",
-      "2026-11-14T16:30:00"
-     ]
+     "type": "string"
     },
     {
      "name": "all_day",
-     "type": "boolean",
-     "values": [
-      false
-     ]
+     "type": "string"
     },
     {
      "name": "gov_id",
@@ -15800,30 +15775,16 @@
     },
     {
      "name": "town",
-     "type": "string",
-     "values": [
-      "Mexico Beach",
-      "Panama City",
-      "Panama City Beach",
-      "Parker"
-     ]
+     "type": "string"
     },
     {
      "name": "venue",
-     "type": "string",
-     "values": [
-      "Bay County Public Library",
-      "Frank Brown Park Recreation Center",
-      "Parker Park",
-      "Parker Public Library"
-     ]
+     "type": "string"
     },
     {
      "name": "category",
      "type": "string",
      "values": [
-      "Community",
-      "Library",
       "appointment",
       "budget",
       "consent agenda",
@@ -15842,11 +15803,7 @@
     },
     {
      "name": "recurring",
-     "type": "boolean",
-     "values": [
-      false,
-      true
-     ]
+     "type": "string"
     },
     {
      "name": "agenda_posted",
@@ -15921,18 +15878,12 @@
      "name": "page_url",
      "type": "string",
      "values": [
-      "https://baycounty.me/events",
       "https://baycounty.me/public-money/votes"
      ]
     },
     {
      "name": "source",
-     "type": "string",
-     "values": [
-      "Mexico Beach (visitor events)",
-      "Northwest Regional Library System",
-      "Panama City Beach Chamber"
-     ]
+     "type": "string"
     },
     {
      "name": "source_url",
@@ -15940,9 +15891,6 @@
      "values": [
       "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DW9J2V4AB676",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-Council-Meeting-Minutes.pdf",
-      "https://pcbeach.org/local-events/",
-      "https://www.mexicobeach.com/events/",
-      "https://www.nwrls.com/events",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09222026-891",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_10132026-901"
      ]
@@ -17500,7 +17448,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-14"
+      "2026-11-15"
      ]
     },
     {
@@ -20444,7 +20392,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-14"
+      "2026-11-15"
      ]
     },
     {
@@ -20673,7 +20621,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-14"
+      "2026-11-15"
      ]
     },
     {
@@ -20711,7 +20659,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 54,
+   "rows": 55,
    "columns": [
     {
      "name": "board",

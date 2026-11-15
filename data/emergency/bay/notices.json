@@ -1,7 +1,70 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-14",
+ "checked": "2026-11-15",
  "notices": [
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.fa57f21f0aaccd3a1e8beadaf87cb9038b67de53.002.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Frost Advisory issued November 15 at 1:39AM EST until November 15 at 9:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Temperatures as low as 33 will result in frost formation. * WHERE...Portions of southeast Alabama, the Big Bend and Panhandle of Florida, and south central and southwest Georgia. * WHEN...Until 9 AM EST /8 AM CST/ this morning. * IMPACTS...Frost could harm sensitive outdoor vegetation. Sensitive outdoor plants may be killed if left uncovered.",
+   "instruction": "Take steps now to protect tender plants from the cold.",
+   "severity": "minor",
+   "event": "Frost Advisory",
+   "area": "Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Worth; Turner; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
+   "zones": null,
+   "issued": "2026-11-15T06:39:00.000Z",
+   "starts": "2026-11-15T06:39:00.000Z",
+   "ends": "2026-11-15T14:00:00.000Z",
+   "updated": "2026-11-15T06:39:00.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.fa57f21f0aaccd3a1e8beadaf87cb9038b67de53.002.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-15T06:40:02.363316+00:00",
+   "last_seen": "2026-11-15T11:17:08.328Z",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.f3de3ec9923a43c3838185ed8d654938f4829183.003.1"
+   ]
+  },
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.f3de3ec9923a43c3838185ed8d654938f4829183.003.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Frost Advisory issued November 14 at 12:49PM EST until November 15 at 9:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Temperatures as low as 34 will result in frost formation. * WHERE...Portions of southeast Alabama, Big Bend and Panhandle Florida, and south central and southwest Georgia. * WHEN...From 1 AM EST /midnight CST/ to 9 AM EST /8 AM CST/ Sunday. * IMPACTS...Frost could harm sensitive outdoor vegetation. Sensitive outdoor plants may be killed if left uncovered.",
+   "instruction": "Take steps now to protect tender plants from the cold.",
+   "severity": "minor",
+   "event": "Frost Advisory",
+   "area": "Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Worth; Turner; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
+   "zones": null,
+   "issued": "2026-11-14T17:49:00.000Z",
+   "starts": "2026-11-15T06:00:00.000Z",
+   "ends": "2026-11-15T14:00:00.000Z",
+   "updated": "2026-11-14T17:49:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.f3de3ec9923a43c3838185ed8d654938f4829183.003.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-14T17:55:02.08673+00:00",
+   "last_seen": "2026-11-15T06:35:02.094933+00:00",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.3a47ab2d34e6fb4385d34784a0a940757c770d2c.002.2",
+    "nws:urn:oid:2.49.0.1.840.0.3a47ab2d34e6fb4385d34784a0a940757c770d2c.003.1",
+    "nws:urn:oid:2.49.0.1.840.0.776f40aa624110cda88b90c62c5b5f8237c714c5.002.1",
+    "nws:urn:oid:2.49.0.1.840.0.776f40aa624110cda88b90c62c5b5f8237c714c5.003.1"
+   ]
+  },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.3a47ab2d34e6fb4385d34784a0a940757c770d2c.003.1",
    "place_id": "fl-bay",
@@ -20,13 +83,13 @@
    "starts": "2026-11-15T06:00:00.000Z",
    "ends": "2026-11-15T14:00:00.000Z",
    "updated": "2026-11-14T14:02:00.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.3a47ab2d34e6fb4385d34784a0a940757c770d2c.003.1",
    "source_url": "https://www.weather.gov/tae/",
    "first_seen": "2026-11-14T14:05:02.45953+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-14T17:50:02.079588+00:00",
    "geometry": null,
    "refs": [
     "nws:urn:oid:2.49.0.1.840.0.776f40aa624110cda88b90c62c5b5f8237c714c5.003.1"
@@ -162,7 +225,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=25",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T19:45:01.308244+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -189,7 +252,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -270,7 +333,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -297,7 +360,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -378,7 +441,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -1552,7 +1615,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -1874,7 +1937,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -1901,7 +1964,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   },
   {
@@ -1928,7 +1991,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-14T17:17:49.742Z",
+   "last_seen": "2026-11-15T11:17:08.328Z",
    "geometry": null
   }
  ]

@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-14",
+ "as_of": "2026-11-15",
  "fetched": {
-  "pcb-chamber": "2026-11-14T17:16:23+00:00",
+  "pcb-chamber": "2026-11-15T11:15:46+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27564",
-   "title": "Women’s Civic Club Fall Fling Juried Arts and Crafts Show",
-   "starts": "2026-11-14T09:00:00",
-   "ends": "2026-11-14T15:00:00",
-   "all_day": false,
-   "venue": "Frank Brown Park Recreation Center",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/womens-civic-club-fall-fling-juried-arts-and-crafts-show/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27774",

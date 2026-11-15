@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-14T11:11:21-06:00",
+  "generated": "2026-11-15T05:10:44-06:00",
   "window": {
-    "from": "2026-11-14",
-    "to": "2027-01-13"
+    "from": "2026-11-15",
+    "to": "2027-01-14"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -120,7 +120,7 @@
       "coverage": {
         "agenda_feed": 1,
         "calendar": 0,
-        "expected": 1
+        "expected": 2
       }
     },
     {
@@ -1306,6 +1306,18 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pcb",
+      "title": "Regular Meeting (expected)",
+      "start": "2027-01-14T17:00:00-06:00",
+      "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive",
       "status": "expected",
       "expected": true
     }
