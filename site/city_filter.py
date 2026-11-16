@@ -77,14 +77,14 @@ def gkey(name):
 
 
 def data_g(*keys):
-    ks = [k for k in dict.fromkeys(gkey(k) for k in keys if k) if k]
+    ks = sorted(k for k in dict.fromkeys(gkey(k) for k in keys if k) if k)  # sorted: callers pass sets, and the build must not change between runs
     return f' data-g="{" ".join(ks)}"' if ks else ''
 
 
 def by_city(values):
     """data-by for a figure that changes with the city: values = {'': countywide html, 'pc': ..., ...}.
     The first value shows before the script runs; a missing city keeps the countywide value."""
-    v = {k: ('' if x is None else str(x)) for k, x in values.items() if x is not None}
+    v = {k: ('' if x is None else str(x)) for k, x in sorted(values.items(), key=lambda kv: (kv[0] != '', kv[0])) if x is not None}  # countywide first, then a fixed order
     return f" data-by='{html.escape(json.dumps(v, separators=(',', ':')), quote=True)}'"
 
 
