@@ -1,7 +1,33 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-15",
+ "checked": "2026-11-16",
  "notices": [
+  {
+   "notice_id": "fl511:963690",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "FL511 (Florida Department of Transportation)",
+   "source_type": "fl511",
+   "gov_id": null,
+   "title": "US-231: incident (Southbound)",
+   "summary": "Vehicle on fire in Bay County on US-231 South, beyond SR-20 Near Linger Longer Rd. Right shoulder blocked. Last updated at 03:08 AM.",
+   "instruction": null,
+   "severity": "minor",
+   "event": "Incident",
+   "area": "Right shoulder blocked",
+   "zones": null,
+   "issued": "2026-11-16T02:11",
+   "starts": "2026-11-16T02:11",
+   "ends": null,
+   "updated": "2026-11-16T03:08",
+   "status": "ended",
+   "full_closure": false,
+   "roadway": "US-231",
+   "url": "https://fl511.com/",
+   "source_url": "https://fl511.com/",
+   "first_seen": "2026-11-16T07:15:02.490026+00:00",
+   "last_seen": "2026-11-16T08:50:02.193413+00:00"
+  },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.fa57f21f0aaccd3a1e8beadaf87cb9038b67de53.002.1",
    "place_id": "fl-bay",
@@ -20,13 +46,13 @@
    "starts": "2026-11-15T06:39:00.000Z",
    "ends": "2026-11-15T14:00:00.000Z",
    "updated": "2026-11-15T06:39:00.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.fa57f21f0aaccd3a1e8beadaf87cb9038b67de53.002.1",
    "source_url": "https://www.weather.gov/tae/",
    "first_seen": "2026-11-15T06:40:02.363316+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-15T13:55:02.26103+00:00",
    "geometry": null,
    "refs": [
     "nws:urn:oid:2.49.0.1.840.0.f3de3ec9923a43c3838185ed8d654938f4829183.003.1"
@@ -225,7 +251,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=25",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T19:45:01.308244+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -252,7 +278,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -333,7 +359,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -360,7 +386,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -441,7 +467,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -1615,7 +1641,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -1937,7 +1963,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -1964,7 +1990,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   },
   {
@@ -1991,7 +2017,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-15T11:17:08.328Z",
+   "last_seen": "2026-11-16T11:17:33.602Z",
    "geometry": null
   }
  ]

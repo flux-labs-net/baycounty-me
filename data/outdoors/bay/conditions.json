@@ -1,32 +1,19 @@
 {
- "fetched_at": "2026-11-15T11:16:54+00:00",
- "issued": "2026-11-15T08:06:00+00:00",
- "product_url": "https://api.weather.gov/products/fd910470-5591-417f-bead-9a5996f06902",
+ "fetched_at": "2026-11-16T11:17:21+00:00",
+ "issued": "2026-11-16T07:04:00+00:00",
+ "product_url": "https://api.weather.gov/products/1c34ad83-2253-4151-8600-34693217c783",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "There is an increasing potential for a high rip current risk along Franklin County beaches early next week with brisk east winds. Otherwise, a moderate rip current risk should prevail.",
+ "outlook": "The Gulf Beaches will be under the influence of brisk Northeast winds over the next several days. This will set the stage for a prolonged period of High Rip Current Risk along the Franklin County beaches from today through at least Thursday night. At the remainder of the Gulf beaches, the offshore flow will tamp down on surf heights, with a Moderate Risk of Rip Currents in the forecast over the next several days.",
  "periods": [
   {
    "period": "Today",
    "rip_current_risk": "Moderate",
    "surf_height": "Around 1 foot",
-   "uv_index": "Moderate",
-   "water_temperature": "71 degrees",
-   "weather": "Mostly sunny",
-   "high_temperature": "In the mid 60s",
-   "winds": "Northeast winds 10 to 15 mph",
-   "sunrise": "7:07 AM",
-   "sunset": "5:47 PM",
-   "summary": null
-  },
-  {
-   "period": "Monday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "Around 1 foot",
-   "uv_index": null,
-   "water_temperature": null,
+   "uv_index": "Low",
+   "water_temperature": "70 degrees",
    "weather": "Mostly cloudy",
    "high_temperature": "In the lower 60s",
    "winds": "Northeast winds around 20 mph",
@@ -37,20 +24,20 @@
   {
    "period": "Tuesday",
    "rip_current_risk": "Moderate",
-   "surf_height": "around 1 foot",
+   "surf_height": "Around 2 feet",
    "uv_index": null,
    "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs around 70. Northeast winds around 20 mph."
+   "weather": "Mostly cloudy. A chance of showers",
+   "high_temperature": "In the upper 60s",
+   "winds": "Breezy. Northeast winds around 25 mph",
+   "sunrise": "7:09 AM",
+   "sunset": "5:46 PM",
+   "summary": null
   },
   {
    "period": "Wednesday",
    "rip_current_risk": "Moderate",
-   "surf_height": null,
+   "surf_height": "around 2 feet",
    "uv_index": null,
    "water_temperature": null,
    "weather": null,
@@ -58,7 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Sunny. Highs in the lower 70s. Northeast winds around 20 mph."
+   "summary": "Moderate rip current risk*. Surf height around 2 feet. Mostly sunny. Highs in the lower 70s. Breezy. Northeast winds around 25 mph."
   },
   {
    "period": "Thursday",
@@ -71,7 +58,20 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Sunny. Highs in the mid 70s. Northeast winds around 20 mph."
+   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the mid 70s. Northeast winds around 20 mph."
+  },
+  {
+   "period": "Friday",
+   "rip_current_risk": "Moderate",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "Moderate rip current risk*. Partly sunny. Highs in the mid 70s. Northeast winds around 20 mph."
   }
  ],
  "alerts": [],
