@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-16T11:18:00.921Z",
+ "as_of": "2026-11-16T22:08:19.425Z",
  "boards": [
   {
    "key": "county",
@@ -29,7 +29,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 24
+   "count": 26
   },
   {
    "key": "lh",
@@ -69,7 +69,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 6
+   "count": 5
   },
   {
    "key": "pcb",
@@ -1311,6 +1311,34 @@
    "board": "pc",
    "gov_id": "pc",
    "employer": "City of Panama City",
+   "title": "Mechanic I (Full-Time or Part-Time)",
+   "department": "Logistics",
+   "job_type": "Full- Time",
+   "pay": "$39,104.00 Annually",
+   "posted": "2026-11-16",
+   "closes": null,
+   "ref": "5551297",
+   "url": "https://www.governmentjobs.com/careers/pcgov/jobs/5551297/mechanic-i-full-time-or-part-time",
+   "first_seen": "2026-11-16"
+  },
+  {
+   "board": "pc",
+   "gov_id": "pc",
+   "employer": "City of Panama City",
+   "title": "Mechanic II (Full-Time or Part-Time)",
+   "department": "Logistics",
+   "job_type": "Full- Time",
+   "pay": "$42,286.40 Annually",
+   "posted": "2026-11-16",
+   "closes": null,
+   "ref": "5551313",
+   "url": "https://www.governmentjobs.com/careers/pcgov/jobs/5551313/mechanic-ii-full-time-or-part-time",
+   "first_seen": "2026-11-16"
+  },
+  {
+   "board": "pc",
+   "gov_id": "pc",
+   "employer": "City of Panama City",
    "title": "Mechanic III",
    "department": "Logistics",
    "job_type": "Full- Time",
@@ -1606,20 +1634,6 @@
    "gov_id": null,
    "employer": "Northwest Florida Beaches International Airport",
    "title": "Police Officer",
-   "department": null,
-   "job_type": null,
-   "pay": null,
-   "posted": null,
-   "closes": null,
-   "ref": null,
-   "url": "https://www.iflybeaches.com/airport-district/employment",
-   "first_seen": "2026-10-27"
-  },
-  {
-   "board": "airport",
-   "gov_id": null,
-   "employer": "Northwest Florida Beaches International Airport",
-   "title": "Airport Operations Officer 1",
    "department": null,
    "job_type": null,
    "pay": null,

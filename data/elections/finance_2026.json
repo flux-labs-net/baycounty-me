@@ -16,10 +16,10 @@
  },
  "summary": {
   "candidates": 42,
-  "total_raised_all": 405136.36,
-  "total_monetary_all": 395871.55,
+  "total_raised_all": 406026.36,
+  "total_monetary_all": 396761.55,
   "total_in_kind_all": 9264.81,
-  "total_spent_all": 353565.29,
+  "total_spent_all": 355337.98,
   "reconciled": 30,
   "no_activity": 12
  },
@@ -1200,14 +1200,14 @@
    "cand_id": 726,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=726&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=726&dhc=0&county=bay",
-   "latest_report": "G6 / period 2026-10-17 to 2026-10-29 / due 2026-10-30",
-   "through": "2026-10-29",
+   "latest_report": "TRG / period 2026-10-30 to 2027-02-01 / due 2027-02-01",
+   "through": "2027-02-01",
    "total_raised": 1993.79,
    "monetary": 1993.79,
    "in_kind": 0.0,
    "loans": 100.0,
-   "total_spent": 1595.53,
-   "cash_on_hand_estimate": 398.26,
+   "total_spent": 1993.79,
+   "cash_on_hand_estimate": null,
    "n_contributions": 30,
    "from_individuals": {
     "count": 29,
@@ -1344,6 +1344,12 @@
      "purpose": "reception food"
     },
     {
+     "payee": "Donovan's",
+     "total": 250.09,
+     "payments": 1,
+     "purpose": "Election Night Watch"
+    },
+    {
      "payee": "Campaign Partners",
      "total": 237.0,
      "payments": 9,
@@ -1354,6 +1360,12 @@
      "total": 230.59,
      "payments": 2,
      "purpose": "shirts; Refund of loan to open account."
+    },
+    {
+     "payee": "Kiwanis Club of Panama City",
+     "total": 148.17,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Donation to 501(c)(3) charitable organization"
     },
     {
      "payee": "Walmart",
@@ -1388,7 +1400,7 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Includes 100.00 in loans; loans count in SOE monetary contributions.",
+    "Campaign filed a termination report (TRG); account is closed.",
     "Includes 0.79 bank interest (filed as a contribution item)."
    ]
   },
@@ -2068,30 +2080,30 @@
    "cand_id": 739,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=739&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=739&dhc=0&county=bay",
-   "latest_report": "G6 / period 2026-10-17 to 2026-10-29 / due 2026-10-30",
+   "latest_report": "G6 (amended) / period 2026-10-17 to 2026-10-29 / due 2026-10-30",
    "through": "2026-10-29",
-   "total_raised": 30830.72,
-   "monetary": 30434.91,
+   "total_raised": 31720.72,
+   "monetary": 31324.91,
    "in_kind": 395.81,
    "loans": 10000.0,
    "total_spent": 21662.26,
-   "cash_on_hand_estimate": 8772.65,
-   "n_contributions": 138,
+   "cash_on_hand_estimate": 9662.65,
+   "n_contributions": 147,
    "from_individuals": {
-    "count": 132,
-    "total": 19530.72,
+    "count": 141,
+    "total": 20420.72,
     "bands": {
      "under_100": {
-      "count": 41,
-      "total": 1684.91
+      "count": 46,
+      "total": 1874.91
      },
      "100_499": {
-      "count": 82,
-      "total": 11345.81
+      "count": 85,
+      "total": 11545.81
      },
      "500_999": {
-      "count": 5,
-      "total": 2500.0
+      "count": 6,
+      "total": 3000.0
      },
      "1000_plus": {
       "count": 4,
@@ -2099,21 +2111,21 @@
      }
     },
     "in_county": {
-     "count": 30,
-     "total": 5690.81
+     "count": 33,
+     "total": 6310.81
     },
     "out_of_county": {
-     "count": 102,
-     "total": 13839.91
+     "count": 108,
+     "total": 14109.91
     },
-    "unique_donors_approx": 128
+    "unique_donors_approx": 137
    },
    "candidate_self": {
     "contributions": 0.0,
     "loans": 10000.0
    },
    "by_type_total": {
-    "individual": 19530.72,
+    "individual": 20420.72,
     "business": 1300.0,
     "pac": 0.0,
     "party": 0.0,
@@ -4027,14 +4039,14 @@
    "cand_id": 740,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=740&dhc=0&county=bay",
-   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
-   "through": "2026-08-13",
+   "latest_report": "TRP / period 2026-08-14 to 2026-11-16 / due 2026-11-16",
+   "through": "2026-11-16",
    "total_raised": 18832.5,
    "monetary": 17378.42,
    "in_kind": 1454.08,
    "loans": 2000.0,
-   "total_spent": 15904.93,
-   "cash_on_hand_estimate": 1473.49,
+   "total_spent": 17279.36,
+   "cash_on_hand_estimate": null,
    "n_contributions": 55,
    "from_individuals": {
     "count": 49,
@@ -4141,15 +4153,15 @@
      "purpose": "Advertising"
     },
     {
-     "payee": "Premium Outdoor LLC.",
-     "total": 3150.0,
-     "payments": 1,
+     "payee": "Google",
+     "total": 3244.45,
+     "payments": 6,
      "purpose": "Advertising"
     },
     {
-     "payee": "Google",
-     "total": 2121.57,
-     "payments": 3,
+     "payee": "Premium Outdoor LLC.",
+     "total": 3150.0,
+     "payments": 1,
      "purpose": "Advertising"
     },
     {
@@ -4201,6 +4213,12 @@
      "purpose": "Production"
     },
     {
+     "payee": "Banccard",
+     "total": 225.47,
+     "payments": 3,
+     "purpose": "Card Processing Fee; Card Processing Fees; Card Processing"
+    },
+    {
      "payee": "BancCard",
      "total": 223.25,
      "payments": 2,
@@ -4217,17 +4235,12 @@
      "total": 87.82,
      "payments": 3,
      "purpose": "Marketing"
-    },
-    {
-     "payee": "The Home Depot",
-     "total": 45.41,
-     "payments": 1,
-     "purpose": "Sign Frame Supplies"
     }
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Includes 2,000.00 in loans; loans count in SOE monetary contributions.",
+    "Campaign filed a termination report (TRP); account is closed.",
+    "Monetary contributions minus expenditures/distributions = 99.06 at termination (SOE figures).",
     "Amended report replaced a $1,000 contribution first filed as from a business with a contribution from an individual (D/A pair applied)."
    ]
   },

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-16T05:10:45-06:00",
+  "generated": "2026-11-16T16:00:16-06:00",
   "window": {
     "from": "2026-11-16",
     "to": "2027-01-15"
@@ -134,11 +134,11 @@
       "calendar_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
       "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "CivicClerk": "ok (20 records)",
+        "CivicClerk": "ok (21 records)",
         "calendar (iCal cat 14)": "ok (3 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 5,
         "calendar": 0,
         "expected": 0
       }
@@ -154,10 +154,10 @@
       "calendar_url": null,
       "schedule_source_url": "https://lynnhavenfl.portal.civicclerk.com/",
       "sources": {
-        "CivicClerk": "ok (6 records)"
+        "CivicClerk": "ok (7 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 1,
         "calendar": 0,
         "expected": 0
       }
@@ -1000,6 +1000,22 @@
     },
     {
       "board": "lh",
+      "title": "11/20/26 Special Commission Meeting",
+      "start": "2026-11-20T15:30:00-06:00",
+      "location": "825 Ohio Avenue, Lynn Haven",
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/3154/files",
+      "items": [],
+      "agenda_items": [
+        "​Hiring ​of the new City Clerk/Treasurer."
+      ]
+    },
+    {
+      "board": "lh",
       "title": "City Commission Meeting",
       "start": "2026-11-24T17:30:00-06:00",
       "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
@@ -1044,7 +1060,8 @@
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2137/files"
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2137/files",
+      "items": []
     },
     {
       "board": "parker",
@@ -1105,7 +1122,21 @@
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
-      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "items": []
+    },
+    {
+      "board": "lh-cra",
+      "title": "12/8/26 CRA Meetings",
+      "start": "2026-12-08T17:15:00-06:00",
+      "location": "825 Ohio Avenue, Lynn Haven",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/3155/files",
+      "items": []
     },
     {
       "board": "mb",

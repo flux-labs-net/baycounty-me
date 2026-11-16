@@ -6455,7 +6455,7 @@
    "id": "business-officers",
    "title": "Business officers",
    "description": "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.",
-   "rows": 13561,
+   "rows": 13566,
    "columns": [
     {
      "name": "place_id",
@@ -8985,7 +8985,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 164,
+   "rows": 165,
    "columns": [
     {
      "name": "place_id",
@@ -12639,7 +12639,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 74,
+   "rows": 75,
    "columns": [
     {
      "name": "notice_id",
@@ -13821,7 +13821,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 126,
+   "rows": 131,
    "columns": [
     {
      "name": "place_id",
@@ -13990,6 +13990,7 @@
      "name": "emails",
      "type": "string",
      "values": [
+      "abranch@panamacity.gov",
       "alyssa.ward@pcbfl.gov; allison.marshall@pcbfl.gov",
       "buildingdepartment@pcbfl.gov",
       "cityclerk@panamacity.gov",
@@ -14002,6 +14003,7 @@
       "lynne.fasone@pcbfl.gov",
       "mell@mexicobeachfl.gov",
       "planning@baycountyfl.gov",
+      "planning@cityoflynnhaven.gov",
       "planning@panamacity.gov",
       "purchasing@cityoflynnhaven.com",
       "purchasing@panamacity.gov",
@@ -14039,6 +14041,7 @@
       "(850) 767-4159",
       "(850) 767-4363",
       "(850) 871-6000",
+      "(850) 872-3000; (850) 872-3010",
       "(850) 872-3020",
       "(850) 872-3021"
      ]
@@ -14059,6 +14062,7 @@
       "www.CITYOFCALLAWAY.COM",
       "www.cityoflynnhaven.com",
       "www.demandstar.com",
+      "www.demandstar.com; https://www.pcbfl.gov/",
       "www.demandstar.com; https://www.pcbfl.gov/bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/Bids.aspx; www.pcbfl.gov; https://pcbfl.nextrequest.com/",
       "www.demandstar.com; www.pcbfl.gov/bids.aspx",
@@ -14076,7 +14080,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 112,
+   "rows": 113,
    "columns": [
     {
      "name": "place_id",
@@ -14163,6 +14167,7 @@
       "$37,585.60 Annually",
       "$39,104.00 Annually",
       "$40,643.20 Annually",
+      "$42,286.40 Annually",
       "$43,950.40 Annually",
       "$48,526.40 Annually",
       "$51,958.40 Annually"
@@ -15683,7 +15688,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 61,
+   "rows": 62,
    "columns": [
     {
      "name": "place_id",
@@ -15774,6 +15779,7 @@
      "values": [
       "county",
       "cw",
+      "lh",
       "mb",
       "parker",
       "pc",
@@ -15789,6 +15795,7 @@
       "Bay County",
       "Bay District Schools",
       "Callaway",
+      "Lynn Haven",
       "Mexico Beach",
       "Panama City",
       "Panama City Beach",
@@ -15804,6 +15811,7 @@
       "Bay County Planning Commission",
       "Bay District School Board",
       "Callaway City Commission",
+      "Lynn Haven City Commission",
       "Mexico Beach City Council",
       "Panama City Beach City Council",
       "Panama City City Commission",
@@ -15825,6 +15833,7 @@
      "type": "string",
      "values": [
       "1311 Balboa Ave, Panama City, FL 32401",
+      "825 Ohio Avenue, Lynn Haven",
       "Anchorage Children’s Home",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
@@ -15958,6 +15967,7 @@
      "values": [
       "https://baycountyfl.primegov.com/public/portal",
       "https://cityofparker.com/government/agendas-minutes/",
+      "https://lynnhavenfl.portal.civicclerk.com/",
       "https://mexicobeachfl.gov/government/council-meetings/",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-Council-Meeting-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-6-2026-Special-Meeting-and-LDC-Workshop-Minutes.pdf",
@@ -18332,7 +18342,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 19,
+   "rows": 21,
    "columns": [
     {
      "name": "place_id",
@@ -18356,11 +18366,13 @@
       "Bid PCB27-03",
       "Bid PCB27-05",
       "Bid PCB27-07",
+      "Bid PCB27-08",
       "Bid PCB27-10",
       "ITB 27-02",
       "ITB 27-04",
       "Project 414877",
       "RFP 26.27-1",
+      "RFP 27-05",
       "RFQ 27-03",
       "RFQ 27-07"
      ]
@@ -18400,7 +18412,8 @@
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
-      "2026-11-12"
+      "2026-11-12",
+      "2026-11-16"
      ]
     },
     {
@@ -18418,14 +18431,38 @@
       "2026-11-17",
       "2026-11-18",
       "2026-11-19",
+      "2026-12-02",
       "2026-12-07",
       "2026-12-09",
-      "2026-12-15"
+      "2026-12-15",
+      "2026-12-16"
      ]
     },
     {
      "name": "notice_title",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "(Owner) is requesting Bids for the construction of the following Project: City Bid Number…",
+      "(Owner) is requesting Bids for the construction of the following Project: PC26-037 SRF Area…",
+      "Advertisement to Bid Construction ITB 26.27-3",
+      "ITB 27-02: Parks and Recreation Grounds Maintenance Service",
+      "ITB 27-04: FY27 Annual Resurfacing Phase 1 (Local Roads)",
+      "Invitation to Bid 27-01: PANAMA CITY PORT AUTHORITY DUNNAGE LUMBER UNIT PRICE CONTRACT Notice",
+      "Invitation to Bid ITB 26.27-4 Bailey Bridge Rehabilitation",
+      "Invitation to Bid PCB27-02 Citywide Automated Fleet Washing Services",
+      "Invitation to Bid PCB27-03: MINI-BULK LIQUID SODIUM HYPOCHLORITE The City of Panama City Beach",
+      "Invitation to Bid PCB27-05: FLOW METER REPLACEMENT PURCHASE The City of Panama City Beach",
+      "Invitation to Bid PCB27-10: LAW ENFORCEMENT DUTY WEAPONS TRADE IN The City of Panama City Beach",
+      "Invitation to Bid PCB27-10R: LAW ENFORCEMENT DUTY WEAPONS TRADE IN The City of Panama City Beach",
+      "NOTICE TO PROPOSERS PCB26-32 OFF ROAD VEHICLE AND WATERCRAFT EQUIPMENT MAINTENANCE & REPAIR…",
+      "Notice to Proposers",
+      "November 5, 2026 Prospective Respondents Request for Proposal (RFP) 26.27-1 Generator…",
+      "RFP 27-05: Compensation Plan Conversion and Classification Study",
+      "RFQ 27-03: Standby Audit Services",
+      "RFQ 27-07: Design of (2) Booster Stations and (2) 5MG Prestressed Concrete Ground Storage Tanks",
+      "Request for Proposal Number: PC27-018",
+      "Request for Proposal PC27-016: Residential Lot Disposition Program"
+     ]
     },
     {
      "name": "notice_url",
@@ -18455,7 +18492,8 @@
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
-      "2026-11-12"
+      "2026-11-12",
+      "2026-11-16"
      ]
     },
     {
@@ -20736,7 +20774,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 55,
+   "rows": 57,
    "columns": [
     {
      "name": "board",
@@ -20769,6 +20807,8 @@
      "values": [
       "11/10/26 CRA Meeting",
       "11/13/26 Special Commission Meeting",
+      "11/20/26 Special Commission Meeting",
+      "12/8/26 CRA Meetings",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
       "Budget Hearing",
@@ -20840,6 +20880,7 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1180,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
@@ -20949,6 +20990,8 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/2137/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2154/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/3154/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/3155/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
@@ -22230,7 +22273,8 @@
       "2026-08-13",
       "2026-09-10",
       "2026-10-29",
-      "2026-11-16"
+      "2026-11-16",
+      "2027-02-01"
      ]
     },
     {

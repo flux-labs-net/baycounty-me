@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-16T11:17:37+00:00",
+ "as_of": "2026-11-16T22:07:51+00:00",
  "source": "https://enr.electionsfl.org/BAY",
  "archive": "https://www.voterfocus.com/enr_php/enrarchive.php?county=Bay&election=",
  "first_year": 2016,
@@ -12324,29 +12324,38 @@
    "precincts_reporting": 30,
    "precincts_total": 30,
    "complete": true,
-   "updated": "2026-11-13T17:30:30",
+   "updated": "2026-11-16T09:18:44",
    "contests": [
     {
      "contest_id": 60447,
      "contest": "United States Senator",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 353,
      "choices": [
       {
        "choice": "Ashley Moody",
        "party": "REP",
+       "election_day": 17498,
+       "early_voting": 24988,
+       "vote_by_mail": 6284,
        "votes": 48770,
        "pct": 69.33
       },
       {
        "choice": "Angie Nixon",
        "party": "DEM",
+       "election_day": 5980,
+       "early_voting": 9934,
+       "vote_by_mail": 4859,
        "votes": 20773,
        "pct": 29.53
       },
       {
        "choice": "Neil J. Gillespie",
        "party": "NPA",
+       "election_day": 373,
+       "early_voting": 292,
+       "vote_by_mail": 140,
        "votes": 805,
        "pct": 1.14
       }
@@ -12356,17 +12365,23 @@
      "contest_id": 60448,
      "contest": "Representative in Congress District 2",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 739,
      "choices": [
       {
        "choice": "Austin Rogers",
        "party": "REP",
+       "election_day": 17281,
+       "early_voting": 24452,
+       "vote_by_mail": 6034,
        "votes": 47767,
        "pct": 68.28
       },
       {
        "choice": "Amanda Marie Green",
        "party": "DEM",
+       "election_day": 6436,
+       "early_voting": 10573,
+       "vote_by_mail": 5185,
        "votes": 22194,
        "pct": 31.72
       }
@@ -12376,59 +12391,86 @@
      "contest_id": 60449,
      "contest": "Governor and Lieutenant Governor",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 404,
      "choices": [
       {
        "choice": "Byron Donalds and Bryan Avila",
        "party": "REP",
+       "election_day": 17467,
+       "early_voting": 24808,
+       "vote_by_mail": 6159,
        "votes": 48434,
        "pct": 68.94
       },
       {
        "choice": "David Jolly and Gwen Graham",
        "party": "DEM",
+       "election_day": 5886,
+       "early_voting": 9951,
+       "vote_by_mail": 4875,
        "votes": 20712,
        "pct": 29.48
       },
       {
        "choice": "Scott Eckhard Jewett and Nicole Skelly",
        "party": "LPF",
+       "election_day": 188,
+       "early_voting": 160,
+       "vote_by_mail": 65,
        "votes": 413,
        "pct": 0.59
       },
       {
        "choice": "Charles Burkett and Ruben A. Coto",
        "party": "NPA",
+       "election_day": 62,
+       "early_voting": 49,
+       "vote_by_mail": 41,
        "votes": 152,
        "pct": 0.22
       },
       {
        "choice": "Frank J. Russo and Rachel Rodriguez",
        "party": "NPA",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 163,
        "pct": 0.23
       },
       {
        "choice": "Moliere \"Moe\" Dimanche and Benjamin Rojas",
        "party": "NPA",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 65,
        "pct": 0.09
       },
       {
        "choice": "Dean Ocean Abrams and Joe Van Vactor",
        "party": "NPA",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 108,
        "pct": 0.15
       },
       {
        "choice": "Jeffrey Peter \"Dr. Jeff\" Datto and Juan Santana",
        "party": "NPA",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 61,
        "pct": 0.09
       },
       {
        "choice": "Write-in",
        "party": "NON",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 150,
        "pct": 0.21
       }
@@ -12438,17 +12480,23 @@
      "contest_id": 60450,
      "contest": "Attorney General",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 1025,
      "choices": [
       {
        "choice": "James Uthmeier",
        "party": "REP",
+       "election_day": 17578,
+       "early_voting": 25016,
+       "vote_by_mail": 6232,
        "votes": 48826,
        "pct": 70.08
       },
       {
        "choice": "Jose Javier Rodriguez",
        "party": "DEM",
+       "election_day": 6043,
+       "early_voting": 9972,
+       "vote_by_mail": 4832,
        "votes": 20847,
        "pct": 29.92
       }
@@ -12458,17 +12506,23 @@
      "contest_id": 60451,
      "contest": "Chief Financial Officer",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 1212,
      "choices": [
       {
        "choice": "Blaise Ingoglia",
        "party": "REP",
+       "election_day": 17517,
+       "early_voting": 25008,
+       "vote_by_mail": 6197,
        "votes": 48722,
        "pct": 70.11
       },
       {
        "choice": "Annette Taddeo",
        "party": "DEM",
+       "election_day": 6008,
+       "early_voting": 9881,
+       "vote_by_mail": 4879,
        "votes": 20768,
        "pct": 29.89
       }
@@ -12478,23 +12532,32 @@
      "contest_id": 60452,
      "contest": "Commissioner of Agriculture",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 995,
      "choices": [
       {
        "choice": "Wilton Simpson",
        "party": "REP",
+       "election_day": 17444,
+       "early_voting": 24957,
+       "vote_by_mail": 6261,
        "votes": 48662,
        "pct": 69.82
       },
       {
        "choice": "Joey Mendoza Atkins",
        "party": "DEM",
+       "election_day": 6050,
+       "early_voting": 9918,
+       "vote_by_mail": 4916,
        "votes": 20884,
        "pct": 29.96
       },
       {
        "choice": "Write-in",
        "party": "NON",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 153,
        "pct": 0.22
       }
@@ -12504,17 +12567,23 @@
      "contest_id": 60453,
      "contest": "State Senator District 2",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 820,
      "choices": [
       {
        "choice": "Jay Trumbull",
        "party": "REP",
+       "election_day": 17682,
+       "early_voting": 25209,
+       "vote_by_mail": 6416,
        "votes": 49307,
        "pct": 70.56
       },
       {
        "choice": "Lauren Donahoo",
        "party": "DEM",
+       "election_day": 5963,
+       "early_voting": 9797,
+       "vote_by_mail": 4810,
        "votes": 20570,
        "pct": 29.44
       }
@@ -12524,17 +12593,23 @@
      "contest_id": 60454,
      "contest": "State Representative District 6",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 1268,
      "choices": [
       {
        "choice": "Tricia Berry",
        "party": "REP",
+       "election_day": 17425,
+       "early_voting": 24794,
+       "vote_by_mail": 6153,
        "votes": 48372,
        "pct": 69.67
       },
       {
        "choice": "Stephanie Lyn Leonard",
        "party": "DEM",
+       "election_day": 6057,
+       "early_voting": 10029,
+       "vote_by_mail": 4977,
        "votes": 21063,
        "pct": 30.33
       }
@@ -12544,17 +12619,23 @@
      "contest_id": 60455,
      "contest": "Retention of Justice of the Supreme Court Carlos G. Muniz",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 6541,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 14092,
+       "early_voting": 20935,
+       "vote_by_mail": 5906,
        "votes": 40933,
        "pct": 63.81
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 7493,
+       "early_voting": 11283,
+       "vote_by_mail": 4437,
        "votes": 23213,
        "pct": 36.19
       }
@@ -12564,17 +12645,23 @@
      "contest_id": 60456,
      "contest": "Retention of District Court of Appeal Judge Joseph Lewis Jr.",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 6672,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 13811,
+       "early_voting": 20331,
+       "vote_by_mail": 6629,
        "votes": 40771,
        "pct": 63.69
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 7723,
+       "early_voting": 11827,
+       "vote_by_mail": 3694,
        "votes": 23244,
        "pct": 36.31
       }
@@ -12584,17 +12671,23 @@
      "contest_id": 60457,
      "contest": "Retention of District Court of Appeal Judge Rachel Nordby",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 6846,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 14414,
+       "early_voting": 21208,
+       "vote_by_mail": 6238,
        "votes": 41860,
        "pct": 65.57
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 7055,
+       "early_voting": 10847,
+       "vote_by_mail": 4076,
        "votes": 21978,
        "pct": 34.43
       }
@@ -12604,17 +12697,23 @@
      "contest_id": 60458,
      "contest": "Retention of District Court of Appeal Judge Tim Osterhaus",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 6894,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 14075,
+       "early_voting": 20811,
+       "vote_by_mail": 6117,
        "votes": 41003,
        "pct": 64.28
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 7379,
+       "early_voting": 11241,
+       "vote_by_mail": 4164,
        "votes": 22784,
        "pct": 35.72
       }
@@ -12624,17 +12723,23 @@
      "contest_id": 60459,
      "contest": "Retention of District Court of Appeal Judge Clay Roberts",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 6853,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 13823,
+       "early_voting": 19842,
+       "vote_by_mail": 6154,
        "votes": 39819,
        "pct": 62.37
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 7651,
+       "early_voting": 12238,
+       "vote_by_mail": 4139,
        "votes": 24028,
        "pct": 37.63
       }
@@ -12644,17 +12749,23 @@
      "contest_id": 60460,
      "contest": "Retention of District Court of Appeal Judge Raymond Treadwell",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 7048,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 14359,
+       "early_voting": 21109,
+       "vote_by_mail": 6084,
        "votes": 41552,
        "pct": 65.29
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 7053,
+       "early_voting": 10873,
+       "vote_by_mail": 4165,
        "votes": 22091,
        "pct": 34.71
       }
@@ -12664,17 +12775,23 @@
      "contest_id": 60461,
      "contest": "School Board Member District 3",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 8818,
      "choices": [
       {
        "choice": "John Haley",
        "party": "NON",
+       "election_day": 11726,
+       "early_voting": 17217,
+       "vote_by_mail": 5493,
        "votes": 34436,
        "pct": 55.67
       },
       {
        "choice": "Chris Moore",
        "party": "NON",
+       "election_day": 9093,
+       "early_voting": 13806,
+       "vote_by_mail": 4526,
        "votes": 27425,
        "pct": 44.33
       }
@@ -12684,17 +12801,23 @@
      "contest_id": 60462,
      "contest": "Callaway Commissioner Ward 1",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 418,
      "choices": [
       {
        "choice": "Bobby Birdsell",
        "party": "NON",
+       "election_day": 886,
+       "early_voting": 1184,
+       "vote_by_mail": 382,
        "votes": 2452,
        "pct": 58.52
       },
       {
        "choice": "Karen Custer",
        "party": "NON",
+       "election_day": 580,
+       "early_voting": 804,
+       "vote_by_mail": 354,
        "votes": 1738,
        "pct": 41.48
       }
@@ -12704,17 +12827,23 @@
      "contest_id": 60463,
      "contest": "Callaway Commissioner Ward 2",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 442,
      "choices": [
       {
        "choice": "James \"Jamie\" Kirkland",
        "party": "NON",
+       "election_day": 929,
+       "early_voting": 1204,
+       "vote_by_mail": 382,
        "votes": 2515,
        "pct": 60.37
       },
       {
        "choice": "Spring Overway",
        "party": "NON",
+       "election_day": 534,
+       "early_voting": 773,
+       "vote_by_mail": 344,
        "votes": 1651,
        "pct": 39.63
       }
@@ -12724,17 +12853,23 @@
      "contest_id": 60464,
      "contest": "Panama City Beach Council Member Ward 1",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 675,
      "choices": [
       {
        "choice": "Carlos Sanchez",
        "party": "NON",
+       "election_day": 1160,
+       "early_voting": 2111,
+       "vote_by_mail": 649,
        "votes": 3920,
        "pct": 60.03
       },
       {
        "choice": "Grant B. Wittstruck",
        "party": "NON",
+       "election_day": 837,
+       "early_voting": 1357,
+       "vote_by_mail": 416,
        "votes": 2610,
        "pct": 39.97
       }
@@ -12744,17 +12879,23 @@
      "contest_id": 60465,
      "contest": "Panama City Beach Council Member Ward 3",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 781,
      "choices": [
       {
        "choice": "Nick Atkinson",
        "party": "NON",
+       "election_day": 1056,
+       "early_voting": 1686,
+       "vote_by_mail": 435,
        "votes": 3177,
        "pct": 49.47
       },
       {
        "choice": "Mary Coburn",
        "party": "NON",
+       "election_day": 913,
+       "early_voting": 1719,
+       "vote_by_mail": 613,
        "votes": 3245,
        "pct": 50.53
       }
@@ -12764,17 +12905,23 @@
      "contest_id": 60466,
      "contest": "Lake Powell Community Development District Seat 2",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 46,
      "choices": [
       {
        "choice": "Alyssa Finneyfrock",
        "party": "NON",
+       "election_day": 58,
+       "early_voting": 124,
+       "vote_by_mail": 37,
        "votes": 219,
        "pct": 69.75
       },
       {
        "choice": "Greg Porta",
        "party": "NON",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 95,
        "pct": 30.25
       }
@@ -12784,17 +12931,23 @@
      "contest_id": 60467,
      "contest": "Lake Powell Community Development District Seat 5",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 55,
      "choices": [
       {
        "choice": "Kenneth Black",
        "party": "NON",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 145,
        "pct": 47.54
       },
       {
        "choice": "Tim Rosson",
        "party": "NON",
+       "election_day": null,
+       "early_voting": null,
+       "vote_by_mail": null,
        "votes": 160,
        "pct": 52.46
       }
@@ -12804,17 +12957,23 @@
      "contest_id": 60468,
      "contest": "No. 1 Constitutional Amendment Budget Stabilization Fund",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 3295,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 10560,
+       "early_voting": 15400,
+       "vote_by_mail": 5091,
        "votes": 31051,
        "pct": 46.09
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 12193,
+       "early_voting": 18441,
+       "vote_by_mail": 5691,
        "votes": 36325,
        "pct": 53.91
       }
@@ -12824,17 +12983,23 @@
      "contest_id": 60469,
      "contest": "No. 2 Constitutional Amendment Extemption of Tangible Personal Property",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 3249,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 16586,
+       "early_voting": 23171,
+       "vote_by_mail": 6660,
        "votes": 46417,
        "pct": 68.84
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 6283,
+       "early_voting": 10683,
+       "vote_by_mail": 4046,
        "votes": 21012,
        "pct": 31.16
       }
@@ -12844,17 +13009,23 @@
      "contest_id": 60470,
      "contest": "No. 3 Constitutional Amendment Increase Homestead Exemption",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 2090,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 17096,
+       "early_voting": 24472,
+       "vote_by_mail": 7236,
        "votes": 48804,
        "pct": 71.14
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 6171,
+       "early_voting": 9949,
+       "vote_by_mail": 3681,
        "votes": 19801,
        "pct": 28.86
       }
@@ -12864,17 +13035,23 @@
      "contest_id": 60471,
      "contest": "City of Lynn Haven Clarifying the City Charter Review Process",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 440,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 2035,
+       "early_voting": 3530,
+       "vote_by_mail": 952,
        "votes": 6517,
        "pct": 85.5
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 330,
+       "early_voting": 667,
+       "vote_by_mail": 108,
        "votes": 1105,
        "pct": 14.5
       }
@@ -12884,17 +13061,23 @@
      "contest_id": 60472,
      "contest": "City of Lynn Haven Updating the Method of Compensation",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 469,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 1649,
+       "early_voting": 2957,
+       "vote_by_mail": 798,
        "votes": 5404,
        "pct": 71.21
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 698,
+       "early_voting": 1229,
+       "vote_by_mail": 258,
        "votes": 2185,
        "pct": 28.79
       }
@@ -12904,17 +13087,23 @@
      "contest_id": 60473,
      "contest": "City of Lynn Haven Extending Time to Fill Vacancy on Commission",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 457,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 1707,
+       "early_voting": 2878,
+       "vote_by_mail": 785,
        "votes": 5370,
        "pct": 70.61
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 644,
+       "early_voting": 1321,
+       "vote_by_mail": 270,
        "votes": 2235,
        "pct": 29.39
       }
@@ -12924,17 +13113,23 @@
      "contest_id": 60474,
      "contest": "City of Panama City Terms and Qualifications of Commissioners",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 660,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 1850,
+       "early_voting": 2773,
+       "vote_by_mail": 1028,
        "votes": 5651,
        "pct": 49.18
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 1946,
+       "early_voting": 2970,
+       "vote_by_mail": 924,
        "votes": 5840,
        "pct": 50.82
       }
@@ -12944,17 +13139,23 @@
      "contest_id": 60475,
      "contest": "City of Panama City Charter Officers",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 905,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 1770,
+       "early_voting": 2609,
+       "vote_by_mail": 901,
        "votes": 5280,
        "pct": 46.94
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 1932,
+       "early_voting": 3014,
+       "vote_by_mail": 1023,
        "votes": 5969,
        "pct": 53.06
       }
@@ -12964,17 +13165,23 @@
      "contest_id": 60476,
      "contest": "City of Panama City Clerical Revisions",
      "over_votes": null,
-     "under_votes": null,
+     "under_votes": 932,
      "choices": [
       {
        "choice": "Yes",
        "party": null,
+       "election_day": 2172,
+       "early_voting": 3207,
+       "vote_by_mail": 1176,
        "votes": 6555,
        "pct": 58.41
       },
       {
        "choice": "No",
        "party": null,
+       "election_day": 1523,
+       "early_voting": 2412,
+       "vote_by_mail": 732,
        "votes": 4667,
        "pct": 41.59
       }

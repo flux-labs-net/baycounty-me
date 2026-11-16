@@ -1,7 +1,23 @@
 {
- "generated": "2026-11-16T11:21:09+00:00",
+ "generated": "2026-11-16T22:11:31+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
+  {
+   "board": "lh",
+   "body": "Lynn Haven City Commission",
+   "gov": "lh",
+   "date": "2026-11-20",
+   "meeting": "11/20/26 Special Commission Meeting",
+   "number": "2",
+   "section": "OPENING ITEMS",
+   "title": "Hiring of the new City Clerk/Treasurer",
+   "summary": null,
+   "kind": "personnel",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)"
+  },
   {
    "board": "pcb",
    "body": "Panama City Beach City Council",
