@@ -8,7 +8,7 @@
 set -euo pipefail
 msg="$1"; shift
 src=("$@")
-built="data site/public"
+built="data site/public site/page_updated.json"  # page_updated.json: each page's real "Page updated" date (site/page_dates.py)
 
 rebuild() {
   (cd data && python build.py > /dev/null && python prep_dash.py > /dev/null)

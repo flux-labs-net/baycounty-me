@@ -1,7 +1,8 @@
-"""Change log for baycounty.me: drives the 'Updated' line on each page, /updates and /updates.xml (RSS).
+"""Change log for baycounty.me: drives /updates and /updates.xml (RSS). Each page's 'Page updated' date is the last
+day its content changed (site/page_dates.py); a newer entry here for the page still wins.
 
 Add an entry at the TOP of CHANGES whenever a page's data changes. 'pages' lists the
-paths the change touched; each page shows the date of its most recent entry.
+paths the change touched.
 """
 from datetime import date
 from email.utils import format_datetime

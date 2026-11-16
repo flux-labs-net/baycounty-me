@@ -43,10 +43,11 @@ from account_page import account_page
 from business_ties_page import business_ties_page
 from overlaps_page import overlaps_page, for_page as overlap_sections
 from updates import updates_page, rss, last_updated, nice as nice_date
+import page_dates
 OUT = os.path.join(ROOT, 'public')
 from place import SITE, DOMAIN, LABEL as PLACE_LABEL, EMAIL, OPERATOR, OFFICIALS, wordmark_html, governments as _place_govs
 PREVIEW = {}  # path -> (title, summary) for link previews, filled from og.preview_text()
-from es_pages import ES_ALT, updated_key as es_updated_key  # Spanish page -> English twin (hreflang, language switch)
+from es_pages import ES_ALT, es_date, updated_key as es_updated_key  # Spanish page -> English twin (hreflang, language switch)
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
@@ -491,12 +492,18 @@ def _layout(title, desc, path, body, extra_head=''):
 
 
 def write(path, html):
-    # keep each page's 'Data updated' stamp in step with its latest What's new entry
-    html = re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Data updated ' + nice_date(last_updated(path)), html)
     html = linkify_html(html)
     html = link_names(html, path)  # official, company and nonprofit names -> their profiles (site/entity_links.py)
     html = us_dates_html(html, es=path.startswith('/es'))  # 2025-02-10 -> Feb 10, 2025 in page text (site/dates.py)
     fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
+    # 'Page updated' / 'Data updated' / dateModified: the last day this page's content changed (site/page_dates.py)
+    d = page_dates.updated(path, html, fp, floor=last_updated(es_updated_key(path)))
+    en, es = nice_date(d), es_date(nice_date(d))
+    html = re.sub(r'Page updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Page updated ' + en, html)
+    html = re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Data updated ' + en, html)
+    html = re.sub(r'Página actualizada el \d{1,2} de [a-z]+ de \d{4}', 'Página actualizada el ' + es, html)
+    html = re.sub(r'Datos actualizados el \d{1,2} de [a-z]+ de \d{4}', 'Datos actualizados el ' + es, html)
+    html = re.sub(r'"dateModified": ?"\d{4}-\d{2}-\d{2}"', f'"dateModified": "{d}"', html)
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, 'w').write(html)
 
@@ -983,6 +990,7 @@ def main():
     write_savings_data(OUT)  # savings ideas on each government's page
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn() + overlap_sections(path)))  # overlaps live on the page they belong to
+    print('page dates:', page_dates.save(), 'pages')  # site/page_updated.json
     print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith(PROFILE_PREFIXES)]), 'entries')  # profiles: own indexers
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     from app_data import write_app_data
@@ -998,7 +1006,7 @@ def main():
     from staff_page import staff_page
     staff_page(OUT)  # government workspace for city and county staff (api/gov.js)
     from seo import write_robots_and_sitemap
-    print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES if p != '/profile'], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
+    print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES if p != '/profile'], alternates, lambda p: page_dates.get(p, last_updated(es_updated_key(p)))), 'urls')
     from llms import write_llms
     print('llms.txt, llms-full.txt:', write_llms(OUT, MENU, menu_links, PAGES, ES_ALT), 'chars')  # site map for AI assistants
     for dp, _, fs in os.walk(OUT):
