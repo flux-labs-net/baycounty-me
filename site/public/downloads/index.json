@@ -8982,7 +8982,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 160,
+   "rows": 168,
    "columns": [
     {
      "name": "place_id",
@@ -9670,7 +9670,7 @@
    "id": "beach-conditions",
    "title": "Beach conditions and flags",
    "description": "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.",
-   "rows": 11,
+   "rows": 12,
    "columns": [
     {
      "name": "place_id",
@@ -9691,7 +9691,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-16T16:37:00+00:00"
+      "2026-11-17T07:11:00+00:00"
      ]
     },
     {
@@ -9699,9 +9699,10 @@
      "type": "string",
      "values": [
       "Friday",
-      "Rest Of Today",
+      "Rip Current Statement",
+      "Saturday",
       "Thursday",
-      "Tuesday",
+      "Today",
       "Wednesday"
      ]
     },
@@ -9731,6 +9732,7 @@
      "name": "rip_current_risk",
      "type": "string",
      "values": [
+      "High",
       "Moderate"
      ]
     },
@@ -9738,54 +9740,52 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "Around 1 foot",
-      "Around 2 feet",
-      "around 2 feet"
+      "Around 3 feet",
+      "around 3 feet"
      ]
     },
     {
      "name": "uv_index",
      "type": "string",
      "values": [
-      "Low"
+      "Moderate"
      ]
     },
     {
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "69 degrees"
+      "68 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy",
-      "Mostly cloudy. A chance of showers"
+      "Mostly cloudy. A chance of showers",
+      "Partly sunny"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 60s",
-      "In the upper 60s"
+      "In the lower 70s",
+      "In the mid 60s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "Breezy. Northeast winds around 25 mph",
-      "Northeast winds around 20 mph"
+      "Breezy. East winds around 25 mph",
+      "Breezy. Northeast winds around 25 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:08 AM",
       "7:09 AM"
      ]
     },
@@ -9793,35 +9793,39 @@
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:46 PM",
-      "5:47 PM"
+      "5:46 PM"
      ]
     },
     {
      "name": "summary",
      "type": "string",
      "values": [
+      "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast.",
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
+      "High rip current risk*. Surf height around 3 feet. Mostly cloudy. Highs in the lower 70s. Breezy. Northeast winds around 25 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the mid 70s. Northeast winds around 20 mph.",
-      "Moderate rip current risk*. Partly sunny. Highs in the mid 70s. Northeast winds around 20 mph.",
-      "Moderate rip current risk*. Surf height around 2 feet. Mostly sunny. Highs in the lower 70s. Breezy. Northeast winds around 25 mph.",
+      "Moderate rip current risk*. Mostly cloudy. A chance of showers and a slight chance of thunderstorms. Highs in the lower 70s. Northeast winds around 20 mph.",
+      "Moderate rip current risk*. Partly sunny. A slight chance of showers and thunderstorms. Highs in the mid 70s. Northeast winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County).",
-      "The Gulf Beaches will be under the influence of brisk Northeast winds over the next several days. This will set the stage for a prolonged period of High Rip Current Risk along the Franklin County beaches from today through at least Thursday night. At the remainder of the Gulf beaches, the offshore flow will tamp down on surf heights, with a Moderate Risk of Rip Currents in the forecast over the next several days."
+      "Rip Current Statement issued November 17 at 2:45AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
+      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
     {
      "name": "date",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-27",
+      "2026-11-17T02:45:00-05:00"
      ]
     },
     {
      "name": "ends",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-20T01:00:00-05:00"
+     ]
     },
     {
      "name": "sort_order",
@@ -9831,8 +9835,9 @@
      "name": "source_url",
      "type": "string",
      "values": [
+      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.55150f13c1981b47fd0d37af5c5f4459340517fe.001.1",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/946ade27-c433-442b-946a-dfe3959bd5fd",
+      "https://api.weather.gov/products/5d64a859-038c-446f-b28e-4be6715d6c50",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -9840,6 +9845,7 @@
      "name": "kind",
      "type": "string",
      "values": [
+      "alert",
       "flag",
       "forecast",
       "legend"
@@ -12486,7 +12492,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-16"
+      "2026-11-17"
      ]
     },
     {
@@ -12635,7 +12641,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 76,
+   "rows": 78,
    "columns": [
     {
      "name": "notice_id",
@@ -12766,7 +12772,8 @@
       "North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf",
       "Right lane blocked",
       "Right shoulder blocked",
-      "South Walton; Coastal Bay; Coastal Franklin"
+      "South Walton; Coastal Bay; Coastal Franklin",
+      "South Walton; Coastal Bay; Coastal Gulf"
      ]
     },
     {
@@ -14172,7 +14179,39 @@
     },
     {
      "name": "posted",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-06-13",
+      "2026-06-18",
+      "2026-07-13",
+      "2026-07-17",
+      "2026-08-10",
+      "2026-08-22",
+      "2026-09-14",
+      "2026-09-16",
+      "2026-09-30",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-15",
+      "2026-10-18",
+      "2026-10-19",
+      "2026-10-20",
+      "2026-10-21",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-06",
+      "2026-11-07",
+      "2026-11-09",
+      "2026-11-10",
+      "2026-11-12",
+      "2026-11-13",
+      "2026-11-16"
+     ]
     },
     {
      "name": "closes",
@@ -15686,7 +15725,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 57,
+   "rows": 56,
    "columns": [
     {
      "name": "place_id",
@@ -15748,7 +15787,6 @@
       "2026-10-06",
       "2026-10-13",
       "2026-11-02",
-      "2026-11-16",
       "2026-11-17",
       "2026-11-18",
       "2026-11-19",
@@ -15845,7 +15883,6 @@
       "Panama City Beach Public Library",
       "Panama City Beach Senior Center",
       "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
-      "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
       "St. Andrews Baptist Church",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
       "Wild Root Coffee & Tea"
@@ -15977,8 +16014,7 @@
       "https://www.nwrls.com/events",
       "https://www.panamacity.gov/AgendaCenter",
       "https://www.panamacity.gov/Calendar.aspx",
-      "https://www.springfieldfl.net/media/10921",
-      "https://www.springfieldfl.net/meetings"
+      "https://www.springfieldfl.net/media/10921"
      ]
     },
     {
@@ -20771,7 +20807,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 57,
+   "rows": 56,
    "columns": [
     {
      "name": "board",
@@ -20892,8 +20928,7 @@
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11092026-920?html=true",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true",
-      "https://www.springfieldfl.net/media/10911"
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true"
      ]
     },
     {
@@ -20914,10 +20949,7 @@
     },
     {
      "name": "minutes_url",
-     "type": "string",
-     "values": [
-      "https://www.springfieldfl.net/media/10921"
-     ]
+     "type": "string"
     },
     {
      "name": "source",
@@ -20931,7 +20963,6 @@
       "Parker:https://cityofparker.com/government/agendas-minutes/",
       "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "Springfield:https://www.springfieldfl.net/meetings",
-      "Springfield:https://www.springfieldfl.net/meetings/recent",
       "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
@@ -21001,7 +21032,6 @@
       "https://www.panamacity.gov/calendar.aspx?EID=7549",
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
-      "https://www.springfieldfl.net/community/meeting/commission-meeting-75",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-55",

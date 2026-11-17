@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://baycounty.me/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/"/>
@@ -21,7 +21,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/beaches</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/chambers</loc>
@@ -61,11 +61,11 @@
   </url>
   <url>
     <loc>https://baycounty.me/data-sources</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/developers</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/development</loc>
@@ -96,7 +96,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/emergency</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/es</loc>
@@ -142,7 +142,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/es/reuniones</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/meetings"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/reuniones"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/meetings"/>
@@ -163,7 +163,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/events</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/events/ironman-florida</loc>
@@ -222,11 +222,11 @@
   </url>
   <url>
     <loc>https://baycounty.me/jobs</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/meetings</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/meetings"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/reuniones"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/meetings"/>
@@ -252,7 +252,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/parks</loc>
@@ -8024,7 +8024,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/this-week</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-17</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
