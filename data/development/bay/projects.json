@@ -1,6 +1,6 @@
 {
  "place_id": "fl-bay",
- "fetched": "2026-10-29",
+ "fetched": "2026-11-17",
  "layers": [
   {
    "id": "county-do",
@@ -8,7 +8,7 @@
    "label": "Bay County development orders (unincorporated county)",
    "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
    "page": "https://www.baycountyfl.gov/157/Planning-Zoning",
-   "rows": 199
+   "rows": 198
   },
   {
    "id": "pcb-dev",
@@ -447,9 +447,9 @@
    "description": "9 lot Residential Subdivision",
    "size": "1.7 acres",
    "location": "19975 Front Beach Road",
-   "status": "Under review",
+   "status": "Approved",
    "applied_date": "2026-04-09",
-   "approved_date": null,
+   "approved_date": "2026-10-14",
    "permit_date": null,
    "occupancy_date": null,
    "plans_url": null,
@@ -3248,25 +3248,6 @@
    "plans_url": null,
    "lat": 30.161984,
    "lng": -85.769291,
-   "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18"
-  },
-  {
-   "project_id": "county-do:PZ 23-158",
-   "layer": "county-do",
-   "gov_id": "county",
-   "name": "Hwy 77 Pest Control",
-   "case_number": "PZ 23-158",
-   "description": "2,400 sq. ft. Pest Control Facility",
-   "size": "1.4 acres",
-   "location": "14216 Highway 77",
-   "status": "Approved",
-   "applied_date": "2023-06-28",
-   "approved_date": "2023-10-24",
-   "permit_date": null,
-   "occupancy_date": null,
-   "plans_url": null,
-   "lat": 30.408874,
-   "lng": -85.689386,
    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18"
   },
   {

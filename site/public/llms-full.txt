@@ -2575,7 +2575,7 @@ CSV: https://baycounty.me/downloads/trails.csv · JSON: https://baycounty.me/dow
 
 ### Development projects (development-projects)
 Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.
-Rows: 245. Columns: place_id, project_id, gov_id, government, name, case_number, description, size, location, status, applied_date, approved_date, permit_date, occupancy_date, plans_url, lat, lng, source, source_page, fetched, source_url
+Rows: 244. Columns: place_id, project_id, gov_id, government, name, case_number, description, size, location, status, applied_date, approved_date, permit_date, occupancy_date, plans_url, lat, lng, source, source_page, fetched, source_url
 CSV: https://baycounty.me/downloads/development-projects.csv · JSON: https://baycounty.me/downloads/development-projects.json
 
 ### New homes permitted (housing-permits)
@@ -2595,7 +2595,7 @@ CSV: https://baycounty.me/downloads/road-work-program.csv · JSON: https://bayco
 
 ### Public schools (schools)
 One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).
-Rows: 58. Columns: place_id, school_id, nces_id, name, status, level, school_type, grades, charter, virtual, operator_entity_id, address, city, zip, phone, latitude, longitude, enrollment, enrollment_year, last_year_open, teachers_fte, students_per_teacher, free_reduced_lunch_pct, latest_grade, latest_grade_year, prior_grade, grades_on_record, latest_per_student, latest_spending_year, zoned_levels, district, page_url, source_url, gov_id
+Rows: 59. Columns: place_id, school_id, nces_id, name, status, level, school_type, grades, charter, virtual, operator_entity_id, address, city, zip, phone, latitude, longitude, enrollment, enrollment_year, last_year_open, teachers_fte, students_per_teacher, free_reduced_lunch_pct, latest_grade, latest_grade_year, prior_grade, grades_on_record, latest_per_student, latest_spending_year, zoned_levels, district, page_url, source_url, gov_id
 CSV: https://baycounty.me/downloads/schools.csv · JSON: https://baycounty.me/downloads/schools.json
 
 ### School grades (school-grades)
@@ -2620,7 +2620,7 @@ CSV: https://baycounty.me/downloads/school-spending.csv · JSON: https://baycoun
 
 ### School enrollment by year (school-enrollment)
 Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.
-Rows: 252. Columns: place_id, school_id, school, year, school_year, enrollment, source_url, gov_id
+Rows: 486. Columns: place_id, school_id, school, year, school_year, enrollment, source_url, gov_id
 CSV: https://baycounty.me/downloads/school-enrollment.csv · JSON: https://baycounty.me/downloads/school-enrollment.json
 
 ### School district calendar (school-calendar)
@@ -2665,7 +2665,7 @@ CSV: https://baycounty.me/downloads/disaster-declarations.csv · JSON: https://b
 
 ### Rebuild money by ZIP code (rebuild-money)
 Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.
-Rows: 179. Columns: place_id, zip, area_name, program, disaster_number, event, year, count, count_label, approved, amount_paid, repair_amount, rental_amount, inspected_damage, source_url, gov_id
+Rows: 197. Columns: place_id, zip, area_name, program, disaster_number, event, year, count, count_label, approved, amount_paid, repair_amount, rental_amount, inspected_damage, source_url, gov_id
 CSV: https://baycounty.me/downloads/rebuild-money.csv · JSON: https://baycounty.me/downloads/rebuild-money.json
 
 ### Elections since 2016 (elections)
@@ -2780,7 +2780,7 @@ CSV: https://baycounty.me/downloads/crime-counts.csv · JSON: https://baycounty.
 
 ### Crimes reported by police agency, by month (crime-monthly)
 Offenses each police agency in the county reported to the FBI each month since January 2025, when Florida agencies moved to monthly incident reports (NIBRS), from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and the eight main offenses, with offenses cleared. This is where this year's numbers come from before the year is over: the page compares this year so far with the same months last year, leaving out the current month and the two before it, which agencies are still adding to. A month that is missing has not been sent yet. Counts only; no person is named.
-Rows: 1,040. Columns: place_id, agency_id, agency, fbi_ori, gov_id, year, month, period, offense_code, offense, offense_group, total_row, count, cleared, source_url
+Rows: 1,110. Columns: place_id, agency_id, agency, fbi_ori, gov_id, year, month, period, offense_code, offense, offense_group, total_row, count, cleared, source_url
 CSV: https://baycounty.me/downloads/crime-monthly.csv · JSON: https://baycounty.me/downloads/crime-monthly.json
 
 ### Police staffing (police-staffing)

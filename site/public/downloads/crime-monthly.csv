@@ -338,17 +338,19 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,V,Violent cr
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,V,Violent crime,violent,True,10,10,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,V,Violent crime,violent,True,18,11,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,V,Violent crime,violent,True,10,7,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,V,Violent crime,violent,True,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,V,Violent crime,violent,True,11,9,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,V,Violent crime,violent,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,P,Property crime,property,True,53,33,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,P,Property crime,property,True,24,15,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,P,Property crime,property,True,34,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,4,2026-04,P,Property crime,property,True,32,19,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,5,2026-05,P,Property crime,property,True,44,26,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,P,Property crime,property,True,32,22,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,P,Property crime,property,True,34,27,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,P,Property crime,property,True,34,22,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,P,Property crime,property,True,35,27,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,P,Property crime,property,True,30,18,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,P,Property crime,property,True,38,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,P,Property crime,property,True,3,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,P,Property crime,property,True,43,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,P,Property crime,property,True,23,19,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,P,Property crime,property,True,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -357,8 +359,9 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,5,2026-05,HOM,Murder,v
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,HOM,Murder,violent,False,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,HOM,Murder,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,HOM,Murder,violent,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,RPE,Rape,violent,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,RPE,Rape,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -369,6 +372,7 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,RPE,Rape,vio
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,RPE,Rape,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,RPE,Rape,violent,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,ROB,Robbery,violent,False,1,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -379,6 +383,7 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,ROB,Robbery,
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,ASS,Aggravated assault,violent,False,14,11,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,ASS,Aggravated assault,violent,False,13,12,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,ASS,Aggravated assault,violent,False,6,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -387,8 +392,9 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,5,2026-05,ASS,Aggravat
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,ASS,Aggravated assault,violent,False,10,9,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,ASS,Aggravated assault,violent,False,8,8,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,ASS,Aggravated assault,violent,False,17,10,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,ASS,Aggravated assault,violent,False,7,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,ASS,Aggravated assault,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,ASS,Aggravated assault,violent,False,8,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,ASS,Aggravated assault,violent,False,11,9,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,ASS,Aggravated assault,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,BUR,Burglary,property,False,10,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,BUR,Burglary,property,False,6,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,BUR,Burglary,property,False,6,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -397,18 +403,20 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,5,2026-05,BUR,Burglary
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,BUR,Burglary,property,False,4,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,BUR,Burglary,property,False,7,7,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,BUR,Burglary,property,False,3,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,BUR,Burglary,property,False,6,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,BUR,Burglary,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,BUR,Burglary,property,False,5,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,BUR,Burglary,property,False,3,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,BUR,Burglary,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,LAR,Larceny-theft,property,False,43,28,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,LAR,Larceny-theft,property,False,18,10,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,LAR,Larceny-theft,property,False,28,18,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,4,2026-04,LAR,Larceny-theft,property,False,28,14,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,5,2026-05,LAR,Larceny-theft,property,False,34,22,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,LAR,Larceny-theft,property,False,28,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,LAR,Larceny-theft,property,False,27,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,6,2026-06,LAR,Larceny-theft,property,False,30,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,LAR,Larceny-theft,property,False,28,20,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,LAR,Larceny-theft,property,False,27,17,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,LAR,Larceny-theft,property,False,32,18,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,LAR,Larceny-theft,property,False,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,LAR,Larceny-theft,property,False,38,18,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,LAR,Larceny-theft,property,False,20,17,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,LAR,Larceny-theft,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -419,6 +427,7 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,MVT,Motor ve
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,1,2026-01,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,2,2026-02,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,3,2026-03,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -429,6 +438,7 @@ fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,7,2026-07,ARS,Arson,pr
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,8,2026-08,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,9,2026-09,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,10,2026-10,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,pcpd,Panama City Police Department,FL0030100,,2026,11,2026-11,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,1,2025-01,V,Violent crime,violent,True,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,2,2025-02,V,Violent crime,violent,True,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,3,2025-03,V,Violent crime,violent,True,3,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -449,7 +459,7 @@ fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,5,2025-05,P,Property cr
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,6,2025-06,P,Property crime,property,True,15,8,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,7,2025-07,P,Property crime,property,True,12,13,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,8,2025-08,P,Property crime,property,True,6,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,9,2025-09,P,Property crime,property,True,11,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,9,2025-09,P,Property crime,property,True,10,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,10,2025-10,P,Property crime,property,True,15,11,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,11,2025-11,P,Property crime,property,True,12,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,12,2025-12,P,Property crime,property,True,14,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -521,7 +531,7 @@ fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,5,2025-05,LAR,Larceny-t
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,6,2025-06,LAR,Larceny-theft,property,False,14,8,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,7,2025-07,LAR,Larceny-theft,property,False,11,12,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,8,2025-08,LAR,Larceny-theft,property,False,5,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,9,2025-09,LAR,Larceny-theft,property,False,10,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,9,2025-09,LAR,Larceny-theft,property,False,9,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,10,2025-10,LAR,Larceny-theft,property,False,13,10,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,11,2025-11,LAR,Larceny-theft,property,False,12,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,12,2025-12,LAR,Larceny-theft,property,False,14,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -552,63 +562,103 @@ fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2025,12,2025-12,ARS,Arson,pr
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,V,Violent crime,violent,True,3,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,V,Violent crime,violent,True,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,V,Violent crime,violent,True,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,V,Violent crime,violent,True,3,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,V,Violent crime,violent,True,4,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,V,Violent crime,violent,True,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,V,Violent crime,violent,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,V,Violent crime,violent,True,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,V,Violent crime,violent,True,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,V,Violent crime,violent,True,3,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,V,Violent crime,violent,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,V,Violent crime,violent,True,4,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,P,Property crime,property,True,11,9,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,P,Property crime,property,True,8,8,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,P,Property crime,property,True,5,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,P,Property crime,property,True,14,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,P,Property crime,property,True,7,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,P,Property crime,property,True,3,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,P,Property crime,property,True,15,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,P,Property crime,property,True,8,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,P,Property crime,property,True,15,9,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,P,Property crime,property,True,5,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,P,Property crime,property,True,12,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,P,Property crime,property,True,8,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,P,Property crime,property,True,8,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,RPE,Rape,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,RPE,Rape,violent,False,0,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,RPE,Rape,violent,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,RPE,Rape,violent,False,0,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,RPE,Rape,violent,False,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,ROB,Robbery,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,ROB,Robbery,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,ASS,Aggravated assault,violent,False,3,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,ASS,Aggravated assault,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,ASS,Aggravated assault,violent,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,ASS,Aggravated assault,violent,False,2,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,ASS,Aggravated assault,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,ASS,Aggravated assault,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,ASS,Aggravated assault,violent,False,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,ASS,Aggravated assault,violent,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,ASS,Aggravated assault,violent,False,2,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,ASS,Aggravated assault,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,ASS,Aggravated assault,violent,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,BUR,Burglary,property,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,BUR,Burglary,property,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,BUR,Burglary,property,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,BUR,Burglary,property,False,3,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,BUR,Burglary,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,BUR,Burglary,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,BUR,Burglary,property,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,BUR,Burglary,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,BUR,Burglary,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,BUR,Burglary,property,False,3,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,BUR,Burglary,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,BUR,Burglary,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,LAR,Larceny-theft,property,False,9,8,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,LAR,Larceny-theft,property,False,7,7,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,LAR,Larceny-theft,property,False,4,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,LAR,Larceny-theft,property,False,11,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,LAR,Larceny-theft,property,False,6,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,LAR,Larceny-theft,property,False,3,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,LAR,Larceny-theft,property,False,12,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,LAR,Larceny-theft,property,False,7,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,LAR,Larceny-theft,property,False,14,9,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,LAR,Larceny-theft,property,False,5,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,LAR,Larceny-theft,property,False,9,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,LAR,Larceny-theft,property,False,7,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,LAR,Larceny-theft,property,False,8,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,1,2026-01,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,2,2026-02,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,3,2026-03,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,4,2026-04,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,5,2026-05,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,6,2026-06,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,7,2026-07,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,8,2026-08,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,9,2026-09,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,lhpd,Lynn Haven Police Department,FL0030700,,2026,10,2026-10,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2025,1,2025-01,V,Violent crime,violent,True,3,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2025,2,2025-02,V,Violent crime,violent,True,6,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2025,3,2025-03,V,Violent crime,violent,True,5,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -738,15 +788,19 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,V,Violent cr
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,V,Violent crime,violent,True,6,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,V,Violent crime,violent,True,6,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,V,Violent crime,violent,True,4,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,P,Property crime,property,True,11,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,V,Violent crime,violent,True,3,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,V,Violent crime,violent,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,P,Property crime,property,True,12,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,P,Property crime,property,True,6,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,P,Property crime,property,True,15,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,4,2026-04,P,Property crime,property,True,10,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,5,2026-05,P,Property crime,property,True,13,5,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,P,Property crime,property,True,12,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,P,Property crime,property,True,10,7,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,P,Property crime,property,True,11,7,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,P,Property crime,property,True,14,8,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,P,Property crime,property,True,6,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,P,Property crime,property,True,6,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,P,Property crime,property,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -756,6 +810,8 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,HOM,Murder,v
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,HOM,Murder,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,HOM,Murder,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,RPE,Rape,violent,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,RPE,Rape,violent,False,0,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -765,6 +821,8 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,RPE,Rape,vio
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,RPE,Rape,violent,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,RPE,Rape,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,ROB,Robbery,violent,False,2,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,ROB,Robbery,violent,False,1,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -774,6 +832,8 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,ROB,Robbery,
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,ROB,Robbery,violent,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,ROB,Robbery,violent,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,ROB,Robbery,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,ASS,Aggravated assault,violent,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,ASS,Aggravated assault,violent,False,2,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,ASS,Aggravated assault,violent,False,3,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -783,16 +843,20 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,ASS,Aggravat
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,ASS,Aggravated assault,violent,False,3,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,ASS,Aggravated assault,violent,False,4,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,ASS,Aggravated assault,violent,False,4,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,ASS,Aggravated assault,violent,False,3,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,ASS,Aggravated assault,violent,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,BUR,Burglary,property,False,2,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,BUR,Burglary,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,BUR,Burglary,property,False,4,3,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,4,2026-04,BUR,Burglary,property,False,4,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,5,2026-05,BUR,Burglary,property,False,1,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,BUR,Burglary,property,False,4,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,BUR,Burglary,property,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,BUR,Burglary,property,False,3,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,BUR,Burglary,property,False,7,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,BUR,Burglary,property,False,4,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
-fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,LAR,Larceny-theft,property,False,9,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,BUR,Burglary,property,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,BUR,Burglary,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,LAR,Larceny-theft,property,False,10,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,LAR,Larceny-theft,property,False,5,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,LAR,Larceny-theft,property,False,11,2,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,4,2026-04,LAR,Larceny-theft,property,False,6,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -801,6 +865,8 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,LAR,Larceny-
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,LAR,Larceny-theft,property,False,8,6,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,LAR,Larceny-theft,property,False,7,4,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,LAR,Larceny-theft,property,False,2,1,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,LAR,Larceny-theft,property,False,4,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,LAR,Larceny-theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -810,6 +876,8 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,MVT,Motor ve
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,MVT,Motor vehicle theft,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,1,2026-01,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,2,2026-02,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,3,2026-03,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
@@ -819,6 +887,8 @@ fl-bay,sppd,Springfield Police Department,FL0030500,,2026,6,2026-06,ARS,Arson,pr
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,7,2026-07,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,8,2026-08,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,sppd,Springfield Police Department,FL0030500,,2026,9,2026-09,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,10,2026-10,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
+fl-bay,sppd,Springfield Police Department,FL0030500,,2026,11,2026-11,ARS,Arson,property,False,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,parkerpd,Parker Police Department,FL0032600,,2025,1,2025-01,V,Violent crime,violent,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,parkerpd,Parker Police Department,FL0032600,,2025,2,2025-02,V,Violent crime,violent,True,2,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend
 fl-bay,parkerpd,Parker Police Department,FL0032600,,2025,3,2025-03,V,Violent crime,violent,True,0,0,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend

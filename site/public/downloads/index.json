@@ -1349,12 +1349,10 @@
       "Pending Award",
       "Pending Closeout Award",
       "Pending Closeout Completion",
-      "Pending DIU Final Validation",
       "Pending Insurance Closeout Review",
+      "Pending Large Project Review",
       "Pending PDMG Project Review",
-      "Pending Project Closeout Final Review",
       "Pending Project Closeout Initial Review",
-      "Pending Recipient Closeout Review",
       "Pending Recipient Final Review",
       "Pending Scope and Cost Development",
       "Project Closed Out"
@@ -10525,7 +10523,7 @@
    "id": "development-projects",
    "title": "Development projects",
    "description": "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.",
-   "rows": 245,
+   "rows": 244,
    "columns": [
     {
      "name": "place_id",
@@ -10650,7 +10648,7 @@
      "name": "fetched",
      "type": "string",
      "values": [
-      "2026-10-29"
+      "2026-11-17"
      ]
     },
     {
@@ -11210,7 +11208,7 @@
    "id": "schools",
    "title": "Public schools",
    "description": "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).",
-   "rows": 58,
+   "rows": 59,
    "columns": [
     {
      "name": "place_id",
@@ -11366,7 +11364,9 @@
      "values": [
       "2015-16",
       "2017-18",
-      "2018-19"
+      "2019-20",
+      "2020-21",
+      "2022-23"
      ]
     },
     {
@@ -11983,7 +11983,7 @@
    "id": "school-enrollment",
    "title": "School enrollment by year",
    "description": "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.",
-   "rows": 252,
+   "rows": 486,
    "columns": [
     {
      "name": "place_id",
@@ -12012,6 +12012,11 @@
       "2016-17",
       "2017-18",
       "2018-19",
+      "2019-20",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
       "2024-25"
      ]
     },
@@ -12027,6 +12032,11 @@
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090",
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090",
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090",
       "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090"
      ]
     },
@@ -13107,7 +13117,7 @@
    "id": "rebuild-money",
    "title": "Rebuild money by ZIP code",
    "description": "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.",
-   "rows": 179,
+   "rows": 197,
    "columns": [
     {
      "name": "place_id",
@@ -13173,6 +13183,8 @@
      "name": "event",
      "type": "string",
      "values": [
+      "2026-10-Isaias-HU",
+      "2026-11-Florida-King Tides",
       "Hurricane Eta",
       "Hurricane Francine",
       "Hurricane Helene",
@@ -16930,7 +16942,7 @@
    "id": "crime-monthly",
    "title": "Crimes reported by police agency, by month",
    "description": "Offenses each police agency in the county reported to the FBI each month since January 2025, when Florida agencies moved to monthly incident reports (NIBRS), from the FBI Crime Data Explorer: violent and property crime totals (total_row true) and the eight main offenses, with offenses cleared. This is where this year's numbers come from before the year is over: the page compares this year so far with the same months last year, leaving out the current month and the two before it, which agencies are still adding to. A month that is missing has not been sent yet. Counts only; no person is named.",
-   "rows": 1040,
+   "rows": 1110,
    "columns": [
     {
      "name": "place_id",
@@ -17009,7 +17021,8 @@
       "2026-07",
       "2026-08",
       "2026-09",
-      "2026-10"
+      "2026-10",
+      "2026-11"
      ]
     },
     {
@@ -17228,7 +17241,7 @@
       "FY2025 for most governments; FY2024 for Bay County, City of Panama City",
       "FY2026 through July 2026 (10 months)",
       "FY2027 (Oct 1, 2026 to Sept 30, 2027)",
-      "Jan to Aug 2026 for every agency; some through Oct",
+      "Jan to Aug 2026 for every agency; some through Nov",
       "Jan to Sep 2026",
       "Oct 31, 2025",
       "State FY2025 (July 2024 to June 2025)",
