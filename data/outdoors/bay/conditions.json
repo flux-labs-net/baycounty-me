@@ -1,22 +1,22 @@
 {
- "fetched_at": "2026-11-17T11:17:09+00:00",
- "issued": "2026-11-17T07:11:00+00:00",
- "product_url": "https://api.weather.gov/products/5d64a859-038c-446f-b28e-4be6715d6c50",
+ "fetched_at": "2026-11-17T20:53:15+00:00",
+ "issued": "2026-11-17T17:31:00+00:00",
+ "product_url": "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
- "flag": null,
+ "flag": "Yellow",
  "outlook": "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "High",
    "surf_height": "Around 3 feet",
    "uv_index": "Moderate",
-   "water_temperature": "68 degrees",
-   "weather": "Mostly cloudy. A chance of showers",
-   "high_temperature": "In the mid 60s",
-   "winds": "Breezy. East winds around 25 mph",
+   "water_temperature": "69 degrees",
+   "weather": "Partly sunny. A slight chance of rain",
+   "high_temperature": "In the upper 60s",
+   "winds": "Breezy. Northeast winds around 25 mph",
    "sunrise": "7:09 AM",
    "sunset": "5:46 PM",
    "summary": null
@@ -89,6 +89,12 @@
    "flag": "Yellow",
    "issued": "2026-10-27T16:01:00+00:00",
    "source_url": "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8"
+  },
+  {
+   "date": "2026-11-17",
+   "flag": "Yellow",
+   "issued": "2026-11-17T17:31:00+00:00",
+   "source_url": "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a"
   }
  ]
 }

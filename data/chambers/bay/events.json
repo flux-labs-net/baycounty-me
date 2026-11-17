@@ -1,7 +1,7 @@
 {
  "as_of": "2026-11-17",
  "fetched": {
-  "pcb-chamber": "2026-11-17T11:15:58+00:00",
+  "pcb-chamber": "2026-11-17T20:51:58+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -160,6 +160,21 @@
    "chamber_event": true,
    "cost": null,
    "url": "https://pcbeach.org/local-event/panama-city-beach-marathon/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27827",
+   "title": "Breakfast with Santa!",
+   "starts": "2026-12-06T09:00:00",
+   "ends": "2026-12-06T11:00:00",
+   "all_day": false,
+   "venue": "Dave & Buster’s",
+   "city": "Panama City Beach",
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/breakfast-with-santa/",
    "source_url": "https://pcbeach.org/local-events/"
   },
   {

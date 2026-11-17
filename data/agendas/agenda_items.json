@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-17T11:21:04+00:00",
+ "generated": "2026-11-17T20:57:23+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -238,8 +238,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "5.a",
    "section": "Community Announcements & Presentations",
-   "title": "Discussion and consideration of draft Ordinance 3321 amending Destination Panama City board composition",
-   "summary": "The commission will discuss a draft ordinance changing the composition of the Destination Panama City board.",
+   "title": "Draft Ordinance 3321 amending Destination Panama City board composition",
+   "summary": "Discussion and consideration of a draft ordinance changing the composition of the Destination Panama City board.",
    "kind": "ordinance",
    "amount": null,
    "parties": [
@@ -256,8 +256,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "6.a",
    "section": "Public Hearings",
-   "title": "Second and final public hearing on Ordinance 3315 amending sec. 104-39.B, allowable uses in Light Industrial (LI) of the Unified Land Development Code (ULDC)",
-   "summary": null,
+   "title": "Ordinance 3315 amending Sec. 104-39.B, allowable uses in Light Industrial (LI) of the ULDC",
+   "summary": "Second and final public hearing on amending allowable uses in Light Industrial in the Unified Land Development Code.",
    "kind": "public_hearing",
    "amount": null,
    "parties": [],
@@ -272,8 +272,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "6.b",
    "section": "Public Hearings",
-   "title": "First and only Quasi-Judicial Hearing on the proposed Gateway Overlay Special Exception for 1023 E 15th Street",
-   "summary": null,
+   "title": "Gateway Overlay Special Exception for 1023 E 15th Street",
+   "summary": "First and only quasi-judicial hearing on approval of the proposed Gateway Overlay Special Exception.",
    "kind": "rezoning_land_use",
    "amount": null,
    "parties": [],
@@ -291,8 +291,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "6.c",
    "section": "Public Hearings",
-   "title": "First of two public hearings on Ordinance 3317 to amend Sec. 104-66(B) Gateway Overlay District of the Unified Land Development Code (ULDC)",
-   "summary": null,
+   "title": "Ordinance 3317 amending Sec. 104-66(B) Gateway Overlay District of the ULDC",
+   "summary": "First of two public hearings on amending the Gateway Overlay District section of the Unified Land Development Code.",
    "kind": "public_hearing",
    "amount": null,
    "parties": [],
@@ -307,8 +307,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "6.d",
    "section": "Public Hearings",
-   "title": "Second and final public hearing on Ordinance 3319 to vacate and abandon a portion of Grace Avenue north of W. 6th Street and south of W. 7th Street",
-   "summary": null,
+   "title": "Ordinance 3319 to vacate and abandon a portion of Grace Avenue",
+   "summary": "Second and final public hearing on vacating a portion of Grace Avenue north of W. 6th Street and south of W. 7th Street.",
    "kind": "public_hearing",
    "amount": null,
    "parties": [],
@@ -357,7 +357,7 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "8.b",
    "section": "Consent Agenda",
-   "title": "Purchase of two new budgeted 2028 Compressed Natural Gas (CNG) Trash trucks for the Environmental Services Division",
+   "title": "Purchase of two new budgeted 2028 CNG Trash trucks for the Environmental Services Division",
    "summary": null,
    "kind": "purchase",
    "amount": 564341.0,
@@ -373,8 +373,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "8.c",
    "section": "Consent Agenda",
-   "title": "Authorize staff to enter into negotiations with Anchor CEI for a Stormwater Master Plan funded by the previously approved Resilient Florida Grant",
-   "summary": null,
+   "title": "Authorize staff to enter into negotiations with Anchor CEI for a Stormwater Master Plan",
+   "summary": "The plan would be funded by the previously approved Resilient Florida Grant.",
    "kind": "contract",
    "amount": null,
    "parties": [
@@ -393,7 +393,7 @@
    "section": "Consent Agenda",
    "title": "Approval of Panama City's Grant Policy and process",
    "summary": null,
-   "kind": "other",
+   "kind": "resolution",
    "amount": null,
    "parties": [],
    "addresses": [],
@@ -423,8 +423,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "10.a",
    "section": "Commissioners' Report(s)",
-   "title": "Commissioner Lucas - Discussion and consideration of adoption of Standardized Definitions for Affordable, Attainable, and Workforce Housing and Establishment of a Housing-Focused Public Land Disposition Policy",
-   "summary": null,
+   "title": "Commissioner Lucas - Standardized Definitions for Affordable, Attainable, and Workforce Housing and Housing-Focused Public Land Disposition Policy",
+   "summary": "Discussion and consideration of adopting standard housing definitions and establishing a public land disposition policy focused on housing.",
    "kind": "other",
    "amount": null,
    "parties": [],
@@ -439,15 +439,15 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "11.a",
    "section": "City Attorney",
-   "title": "FDOT purchase of city parcels 118R, 138, 757, 805 and 812 for multi-lane construction and roadway improvements for Highway 231",
-   "summary": null,
+   "title": "FDOT purchase of city parcels 118R, 138, 757, 805 and 812 for Highway 231 improvements",
+   "summary": "FDOT would purchase city parcels for multi-lane construction and roadway improvements for Highway 231.",
    "kind": "purchase",
    "amount": null,
    "parties": [
     "FDOT"
    ],
    "addresses": [
-    "City parcels 118R, 138, 757, 805 and 812",
+    "Parcels 118R, 138, 757, 805, 812",
     "Highway 231"
    ],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909"
@@ -482,9 +482,7 @@
    "summary": null,
    "kind": "appointment",
    "amount": null,
-   "parties": [
-    "Infrastructure Surtax Citizens' Committee"
-   ],
+   "parties": [],
    "addresses": [],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909"
   },
@@ -546,7 +544,7 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "13.a",
    "section": "City Manager",
-   "title": "Approval of Change Order 2 to Southern Construction Service on CDBG-DR Project Captain's Table Hometown Revitalization",
+   "title": "Change Order 2 to Southern Construction Service on CDBG-DR Project Captain's Table Hometown Revitalization",
    "summary": null,
    "kind": "change_order",
    "amount": 6750.0,
@@ -664,8 +662,8 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "13.h",
    "section": "City Manager",
-   "title": "Budget Amendment Resolution No. 20261117.5 and H1588 agreement, increase to the existing subrecipient agreement for HMGP Fire Station No. 3 & 4 Generators",
-   "summary": null,
+   "title": "Budget Amendment Resolution No. 20261117.5 and H1588 agreement for HMGP Fire Station No. 3 & 4 Generators",
+   "summary": "Increase to the existing subrecipient agreement.",
    "kind": "budget",
    "amount": 177672.0,
    "parties": [],
@@ -680,7 +678,7 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "13.i",
    "section": "City Manager",
-   "title": "Budget Amendment 20261117.6 to accept and expend FDOT grant funds and transfer funds from the Police Department General Fund to the grant fund",
+   "title": "Budget Amendment 20261117.6 to accept and expend FDOT grant funds and transfer from Police Department General Fund to the grant fund",
    "summary": null,
    "kind": "budget",
    "amount": 31000.0,
@@ -706,7 +704,7 @@
     "FEMA"
    ],
    "addresses": [
-    "East Basin Downtown Marina"
+    "Downtown Marina East Basin"
    ],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909"
   },
@@ -718,13 +716,13 @@
    "meeting": "City Commission Meeting of November 17, 2026.",
    "number": "13.k",
    "section": "City Manager",
-   "title": "Discussion and consideration to direct staff to put out a competitive Invitation to Bid on improvements to the Downtown marina boat ramp",
+   "title": "Direct staff to put out a competitive Invitation to Bid on improvements to the Downtown marina boat ramp",
    "summary": null,
-   "kind": "contract",
+   "kind": "other",
    "amount": null,
    "parties": [],
    "addresses": [
-    "Downtown marina boat ramp"
+    "Downtown Marina boat ramp"
    ],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909"
   },

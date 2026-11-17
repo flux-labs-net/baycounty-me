@@ -19,7 +19,7 @@
   "total_raised_all": 406026.36,
   "total_monetary_all": 396761.55,
   "total_in_kind_all": 9264.81,
-  "total_spent_all": 355337.98,
+  "total_spent_all": 361339.73,
   "reconciled": 30,
   "no_activity": 12
  },
@@ -1195,7 +1195,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Defeated",
+   "soe_status": "Inactive - Defeated",
    "soe_campaign_name": "Karen Custer (NON)",
    "cand_id": 726,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=726&rellevel=4&committee=N",
@@ -3695,26 +3695,26 @@
    "cand_id": 734,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=734&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=734&dhc=0&county=bay",
-   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
-   "through": "2026-08-13",
+   "latest_report": "TRP / period 2026-08-14 to 2026-11-16 / due 2026-11-16",
+   "through": "2026-11-16",
    "total_raised": 17741.25,
    "monetary": 17071.3,
    "in_kind": 669.95,
    "loans": 150.0,
-   "total_spent": 8895.61,
-   "cash_on_hand_estimate": 8175.69,
-   "n_contributions": 84,
+   "total_spent": 14798.3,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 86,
    "from_individuals": {
-    "count": 77,
+    "count": 79,
     "total": 14041.3,
     "bands": {
      "under_100": {
-      "count": 39,
-      "total": 1606.75
+      "count": 40,
+      "total": 1638.75
      },
      "100_499": {
-      "count": 29,
-      "total": 4974.85
+      "count": 30,
+      "total": 5119.85
      },
      "500_999": {
       "count": 4,
@@ -3730,10 +3730,11 @@
      "total": 8898.95
     },
     "out_of_county": {
-     "count": 39,
+     "count": 41,
      "total": 5142.35
     },
-    "unique_donors_approx": 69
+    "refunds_to_individuals": -177.0,
+    "unique_donors_approx": 70
    },
    "candidate_self": {
     "contributions": 49.95,
@@ -3807,6 +3808,12 @@
    ],
    "top_expenditures": [
     {
+     "payee": "Bay County Reading Association",
+     "total": 5652.34,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Donation"
+    },
+    {
      "payee": "GNS Embroidery",
      "total": 2863.5,
      "payments": 1,
@@ -3843,6 +3850,12 @@
      "purpose": "Yard signs"
     },
     {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 150.0,
+     "payments": 1,
+     "purpose": "Repayment of Loan"
+    },
+    {
      "payee": "Amazon",
      "total": 143.88,
      "payments": 2,
@@ -3850,9 +3863,15 @@
     },
     {
      "payee": "Tracfone Services",
-     "total": 74.0,
-     "payments": 5,
+     "total": 125.15,
+     "payments": 8,
      "purpose": "Campaign phone; campaign phone; cellphone"
+    },
+    {
+     "payee": "Namecheap.com",
+     "total": 107.43,
+     "payments": 13,
+     "purpose": "Campaign website; website; Website"
     },
     {
      "payee": "League of Women Voters",
@@ -3867,10 +3886,10 @@
      "purpose": "checks; Refund: bank error; wire fee; Refund: Fee Refund"
     },
     {
-     "payee": "Namecheap.com",
-     "total": 60.15,
-     "payments": 7,
-     "purpose": "website; Website"
+     "payee": "Facebook (Meta)",
+     "total": 1.92,
+     "payments": 1,
+     "purpose": "Facebook ad"
     },
     {
      "payee": "Venmo",
@@ -3881,7 +3900,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Includes 150.00 in loans; loans count in SOE monetary contributions."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "Monetary contributions minus expenditures/distributions = 2,273.00 at termination (SOE figures)."
    ]
   },
   {
@@ -4034,7 +4054,7 @@
    "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
    "election_id": 35,
    "party": "Nonpartisan",
-   "soe_status": "Active - Defeated",
+   "soe_status": "Inactive - Defeated",
    "soe_campaign_name": "Colleen Koch (NON)",
    "cand_id": 740,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
@@ -4045,7 +4065,7 @@
    "monetary": 17378.42,
    "in_kind": 1454.08,
    "loans": 2000.0,
-   "total_spent": 17279.36,
+   "total_spent": 17378.42,
    "cash_on_hand_estimate": null,
    "n_contributions": 55,
    "from_individuals": {
@@ -4178,7 +4198,7 @@
     },
     {
      "payee": "Who Dey Prints & Embroidery",
-     "total": 821.31,
+     "total": 821.76,
      "payments": 1,
      "purpose": "Wearables"
     },
@@ -4207,16 +4227,16 @@
      "purpose": "Marketing Items"
     },
     {
+     "payee": "Banccard",
+     "total": 316.18,
+     "payments": 5,
+     "purpose": "Card Processing Fees; Card Processing Fee; Card Processing"
+    },
+    {
      "payee": "Front Door Photo",
      "total": 250.0,
      "payments": 1,
      "purpose": "Production"
-    },
-    {
-     "payee": "Banccard",
-     "total": 225.47,
-     "payments": 3,
-     "purpose": "Card Processing Fee; Card Processing Fees; Card Processing"
     },
     {
      "payee": "BancCard",
@@ -4232,15 +4252,14 @@
     },
     {
      "payee": "Facebook (Meta)",
-     "total": 87.82,
-     "payments": 3,
-     "purpose": "Marketing"
+     "total": 95.72,
+     "payments": 4,
+     "purpose": "Marketing; Advertising"
     }
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
     "Campaign filed a termination report (TRP); account is closed.",
-    "Monetary contributions minus expenditures/distributions = 99.06 at termination (SOE figures).",
     "Amended report replaced a $1,000 contribution first filed as from a business with a contribution from an individual (D/A pair applied)."
    ]
   },

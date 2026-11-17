@@ -7564,7 +7564,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 435,
+   "rows": 436,
    "columns": [
     {
      "name": "website",
@@ -8715,7 +8715,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 46,
+   "rows": 47,
    "columns": [
     {
      "name": "place_id",
@@ -8812,6 +8812,7 @@
       "2026-11-26T11:00:00",
       "2026-11-27T00:00:00",
       "2026-12-05T00:00:00",
+      "2026-12-06T09:00:00",
       "2026-12-09T17:30:00",
       "2026-12-10T16:30:00",
       "2026-12-12T17:30:00",
@@ -8846,6 +8847,7 @@
       "2026-11-26T11:00:00",
       "2026-11-28T23:59:59",
       "2026-12-05T23:59:59",
+      "2026-12-06T11:00:00",
       "2026-12-10T18:30:00",
       "2026-12-12T19:30:00",
       "2026-12-12T20:30:00",
@@ -8884,6 +8886,7 @@
       "Bay Point Golf Club",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
+      "Dave & Buster’s",
       "Edgewater Beach & Golf Resort",
       "Embassy Suites Panama City Beach, VUE55 (Rooftop)",
       "Frank Brown Park",
@@ -8980,7 +8983,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 168,
+   "rows": 169,
    "columns": [
     {
      "name": "place_id",
@@ -9073,6 +9076,7 @@
       "Bay County Public Library",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
+      "Dave & Buster’s",
       "Edgewater Beach & Golf Resort",
       "Gulf Coast State College",
       "Gulf of America",
@@ -9668,7 +9672,7 @@
    "id": "beach-conditions",
    "title": "Beach conditions and flags",
    "description": "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.",
-   "rows": 12,
+   "rows": 13,
    "columns": [
     {
      "name": "place_id",
@@ -9689,7 +9693,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-17T07:11:00+00:00"
+      "2026-11-17T17:31:00+00:00"
      ]
     },
     {
@@ -9697,10 +9701,10 @@
      "type": "string",
      "values": [
       "Friday",
+      "Rest Of Today",
       "Rip Current Statement",
       "Saturday",
       "Thursday",
-      "Today",
       "Wednesday"
      ]
     },
@@ -9753,15 +9757,15 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "68 degrees"
+      "69 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy. A chance of showers",
-      "Partly sunny"
+      "Partly sunny",
+      "Partly sunny. A slight chance of rain"
      ]
     },
     {
@@ -9769,14 +9773,13 @@
      "type": "string",
      "values": [
       "In the lower 70s",
-      "In the mid 60s"
+      "In the upper 60s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "Breezy. East winds around 25 mph",
       "Breezy. Northeast winds around 25 mph"
      ]
     },
@@ -9815,6 +9818,7 @@
      "type": "string",
      "values": [
       "2026-10-27",
+      "2026-11-17",
       "2026-11-17T02:45:00-05:00"
      ]
     },
@@ -9835,7 +9839,7 @@
      "values": [
       "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.55150f13c1981b47fd0d37af5c5f4459340517fe.001.1",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/5d64a859-038c-446f-b28e-4be6715d6c50",
+      "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -13837,7 +13841,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 131,
+   "rows": 132,
    "columns": [
     {
      "name": "place_id",
@@ -14059,7 +14063,8 @@
       "(850) 871-6000",
       "(850) 872-3000; (850) 872-3010",
       "(850) 872-3020",
-      "(850) 872-3021"
+      "(850) 872-3021",
+      "(850) 872-3070"
      ]
     },
     {
@@ -14073,6 +14078,7 @@
       "https://lynnhavenfl.v8.civicclerk.com/Meetings/Agenda?id=2112",
       "https://mexicobeachfl.gov/bids/",
       "https://panamacity.bonfirehub.com/portal/?tab=openOpportunities",
+      "https://panamacity.bonfirehub.com/portal/?tab=openOpportunities; https://www.panamacity.gov/bids/aspx; https://www.panamacity.gov/DocumentCenter/View/12277/Purchasing-Manual---Oct-28-2025?bidId=",
       "https://procurement.opengov.com/signup",
       "lynnhavenfl.portal.civicclerk.com",
       "www.CITYOFCALLAWAY.COM",
@@ -14096,7 +14102,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 110,
+   "rows": 106,
    "columns": [
     {
      "name": "place_id",
@@ -15466,7 +15472,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17232,
+   "rows": 17236,
    "columns": [
     {
      "name": "place_id",
@@ -15884,12 +15890,12 @@
       "825 Ohio Avenue, Lynn Haven",
       "Anchorage Children’s Home",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
+      "Bay County Government Center, 840 W. 11th St., Panama City, FL",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "Bay County Public Library",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "Edgewater Beach & Golf Resort",
-      "Government Center - 840 W. 11th st. Panama City FL 32401",
       "Gulf Coast State College",
       "PCB Wheel",
       "Panama City Beach Public Library",
@@ -16165,7 +16171,7 @@
    "id": "military-news",
    "title": "Military news from the bases",
    "description": "News stories published by the public affairs offices of the units at Tyndall Air Force Base and Naval Support Activity Panama City (325th Fighter Wing, 601st Air and Space Operations Center, NSA Panama City, Naval Surface Warfare Center Panama City Division, Navy Experimental Diving Unit), read daily from each unit's DVIDS feed: title, summary, date (Central time), author and the story's own link. Story text and photos stay on DVIDS. 2016 and later.",
-   "rows": 44,
+   "rows": 45,
    "columns": [
     {
      "name": "place_id",
@@ -18105,7 +18111,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 552,
+   "rows": 551,
    "columns": [
     {
      "name": "place_id",
@@ -18388,7 +18394,7 @@
    "id": "bid-trail",
    "title": "Bids from notice to award",
    "description": "Each bid or proposal request in the public notices, followed by its bid number to the recorded votes and contract records (awards, change orders, emergency purchases) at the same government that carry the same number: one row per step (stage notice, vote, award, change order), oldest notice last.",
-   "rows": 21,
+   "rows": 22,
    "columns": [
     {
      "name": "place_id",
@@ -18406,6 +18412,7 @@
      "type": "string",
      "values": [
       "Bid 27-01",
+      "Bid PC27-005",
       "Bid PC27-019",
       "Bid PCB26-32",
       "Bid PCB27-02",
@@ -18459,7 +18466,8 @@
       "2026-11-09",
       "2026-11-10",
       "2026-11-12",
-      "2026-11-16"
+      "2026-11-16",
+      "2026-11-17"
      ]
     },
     {
@@ -18490,6 +18498,7 @@
      "values": [
       "(Owner) is requesting Bids for the construction of the following Project: City Bid Number…",
       "(Owner) is requesting Bids for the construction of the following Project: PC26-037 SRF Area…",
+      "Advertisement for Bids",
       "Advertisement to Bid Construction ITB 26.27-3",
       "ITB 27-02: Parks and Recreation Grounds Maintenance Service",
       "ITB 27-04: FY27 Annual Resurfacing Phase 1 (Local Roads)",
@@ -18539,7 +18548,8 @@
       "2026-11-09",
       "2026-11-10",
       "2026-11-12",
-      "2026-11-16"
+      "2026-11-16",
+      "2026-11-17"
      ]
     },
     {
@@ -21035,7 +21045,6 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/3155/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1605",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1685",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
@@ -21049,7 +21058,8 @@
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-55",
       "https://youtube.com/live/ICu66iPorg0?feature=share",
-      "https://youtube.com/live/N6DW4qprYos?feature=share"
+      "https://youtube.com/live/N6DW4qprYos?feature=share",
+      "https://youtube.com/live/pxpDlEybhpk?feature=share"
      ]
     },
     {
@@ -21061,19 +21071,18 @@
      "type": "array"
     },
     {
-     "name": "calendar_source",
-     "type": "string",
-     "values": [
-      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
-     ]
-    },
-    {
      "name": "expected",
      "type": "boolean",
      "values": [
       true
+     ]
+    },
+    {
+     "name": "calendar_source",
+     "type": "string",
+     "values": [
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
      ]
     }
    ],
@@ -22310,7 +22319,6 @@
       "2026-07-20",
       "2026-07-23",
       "2026-08-09",
-      "2026-08-13",
       "2026-09-10",
       "2026-10-29",
       "2026-11-16",

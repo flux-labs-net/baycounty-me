@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
  "as_of": "2026-11-17",
- "fetched": "2026-11-17T06:15:58-0500",
+ "fetched": "2026-11-17T15:51:58-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -1159,6 +1159,23 @@
    "recurring": true
   },
   {
+   "event_id": "panama-city:7708:2026-11-25",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Thanksgiving Holiday",
+   "starts": "2026-11-25T14:00:00",
+   "ends": "2026-11-27T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7708",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
    "event_id": "panama-city:6711:2026-11-25",
    "source_id": "panama-city",
    "source": "City of Panama City",
@@ -1207,23 +1224,6 @@
    "cost": null,
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1614",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:7708:2026-11-26",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Thanksgiving Holiday",
-   "starts": "2026-11-26T08:00:00",
-   "ends": "2026-11-27T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7708",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": false
   },
   {
@@ -1701,6 +1701,23 @@
    "url": "https://www.nwrls.com/event/saturday-programs-ages-6-12/",
    "source_url": "https://www.nwrls.com/events",
    "recurring": true
+  },
+  {
+   "event_id": "pcb-chamber:27827",
+   "source_id": "pcb-chamber",
+   "source": "Panama City Beach Chamber",
+   "gov": null,
+   "town": "Panama City Beach",
+   "title": "Breakfast with Santa!",
+   "starts": "2026-12-06T09:00:00",
+   "ends": "2026-12-06T11:00:00",
+   "all_day": false,
+   "venue": "Dave & Buster’s",
+   "category": "Community",
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/breakfast-with-santa/",
+   "source_url": "https://pcbeach.org/local-events/",
+   "recurring": false
   },
   {
    "event_id": "mexico-beach:10001391-1796580000-1796585400:2026-12-06",
