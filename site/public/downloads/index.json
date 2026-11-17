@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-16",
+ "updated": "2026-11-17",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -8717,7 +8717,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 47,
+   "rows": 46,
    "columns": [
     {
      "name": "place_id",
@@ -8805,7 +8805,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-16T11:30:00",
       "2026-11-17T16:00:00",
       "2026-11-18T10:00:00",
       "2026-11-19T16:30:00",
@@ -8840,7 +8839,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-16T12:30:00",
       "2026-11-17T18:00:00",
       "2026-11-18T12:00:00",
       "2026-11-19T18:30:00",
@@ -8904,8 +8902,7 @@
       "Pier Park",
       "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
-      "SweetBay Community",
-      "Webinar"
+      "SweetBay Community"
      ]
     },
     {
@@ -8985,7 +8982,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 165,
+   "rows": 160,
    "columns": [
     {
      "name": "place_id",
@@ -9095,7 +9092,6 @@
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
       "Under the Palms Park",
-      "Webinar",
       "Wild Root Coffee & Tea"
      ]
     },
@@ -9695,7 +9691,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-11-16T07:04:00+00:00"
+      "2026-11-16T16:37:00+00:00"
      ]
     },
     {
@@ -9703,8 +9699,8 @@
      "type": "string",
      "values": [
       "Friday",
+      "Rest Of Today",
       "Thursday",
-      "Today",
       "Tuesday",
       "Wednesday"
      ]
@@ -9758,7 +9754,7 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "70 degrees"
+      "69 degrees"
      ]
     },
     {
@@ -9835,8 +9831,8 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://api.weather.gov/products/1c34ad83-2253-4151-8600-34693217c783",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+      "https://api.weather.gov/products/946ade27-c433-442b-946a-dfe3959bd5fd",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12639,7 +12635,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 75,
+   "rows": 76,
    "columns": [
     {
      "name": "notice_id",
@@ -12846,6 +12842,7 @@
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2157",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2158",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2163",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2169",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
@@ -14080,7 +14077,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 113,
+   "rows": 110,
    "columns": [
     {
      "name": "place_id",
@@ -14181,11 +14178,12 @@
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-16",
       "2026-11-17",
       "2026-11-18",
       "2026-11-19",
       "2026-11-20",
+      "2026-11-30",
+      "2026-12-04",
       "2027-04-30"
      ]
     },
@@ -14207,7 +14205,6 @@
       "2026-10-31",
       "2026-11-03",
       "2026-11-04",
-      "2026-11-05",
       "2026-11-06",
       "2026-11-08",
       "2026-11-09",
@@ -14216,7 +14213,8 @@
       "2026-11-12",
       "2026-11-13",
       "2026-11-14",
-      "2026-11-16"
+      "2026-11-16",
+      "2026-11-17"
      ]
     },
     {
@@ -14310,7 +14308,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-16"
+      "2026-11-17"
      ]
     }
    ],
@@ -15688,7 +15686,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 62,
+   "rows": 57,
    "columns": [
     {
      "name": "place_id",
@@ -15850,7 +15848,6 @@
       "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
       "St. Andrews Baptist Church",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "Webinar",
       "Wild Root Coffee & Tea"
      ]
     },
@@ -17535,7 +17532,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-16"
+      "2026-11-17"
      ]
     },
     {
@@ -20507,7 +20504,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-16"
+      "2026-11-17"
      ]
     },
     {
@@ -20736,7 +20733,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-16"
+      "2026-11-17"
      ]
     },
     {

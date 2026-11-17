@@ -1,7 +1,7 @@
 {
- "fetched_at": "2026-11-16T11:17:21+00:00",
- "issued": "2026-11-16T07:04:00+00:00",
- "product_url": "https://api.weather.gov/products/1c34ad83-2253-4151-8600-34693217c783",
+ "fetched_at": "2026-11-17T04:34:07+00:00",
+ "issued": "2026-11-16T16:37:00+00:00",
+ "product_url": "https://api.weather.gov/products/946ade27-c433-442b-946a-dfe3959bd5fd",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
@@ -9,11 +9,11 @@
  "outlook": "The Gulf Beaches will be under the influence of brisk Northeast winds over the next several days. This will set the stage for a prolonged period of High Rip Current Risk along the Franklin County beaches from today through at least Thursday night. At the remainder of the Gulf beaches, the offshore flow will tamp down on surf heights, with a Moderate Risk of Rip Currents in the forecast over the next several days.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "Moderate",
    "surf_height": "Around 1 foot",
    "uv_index": "Low",
-   "water_temperature": "70 degrees",
+   "water_temperature": "69 degrees",
    "weather": "Mostly cloudy",
    "high_temperature": "In the lower 60s",
    "winds": "Northeast winds around 20 mph",

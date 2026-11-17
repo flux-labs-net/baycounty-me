@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-16",
+ "as_of": "2026-11-17",
  "fetched": {
-  "pcb-chamber": "2026-11-16T22:05:42+00:00",
+  "pcb-chamber": "2026-11-17T04:32:57+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27774",
-   "title": "Stay Visible in AI Search: AEO, SEO, GEO, & Voice Optimization",
-   "starts": "2026-11-16T11:30:00",
-   "ends": "2026-11-16T12:30:00",
-   "all_day": false,
-   "venue": "Webinar",
-   "city": null,
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/stay-visible-in-ai-search-aeo-seo-geo-voice-optimization/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27776",
