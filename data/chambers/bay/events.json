@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-17",
+ "as_of": "2026-11-18",
  "fetched": {
-  "pcb-chamber": "2026-11-17T20:51:58+00:00",
+  "pcb-chamber": "2026-11-18T11:16:54+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,36 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27776",
-   "title": "Drop Anchor at GCSC Open House",
-   "starts": "2026-11-17T16:00:00",
-   "ends": "2026-11-17T18:00:00",
-   "all_day": false,
-   "venue": "Gulf Coast State College",
-   "city": "Panama City",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/drop-anchor-at-gcsc-open-house/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:26798",
-   "title": "IdeaCamp – November 2026",
-   "starts": "2026-11-17T16:00:00",
-   "ends": "2026-11-17T18:00:00",
-   "all_day": false,
-   "venue": "Anchorage Children’s Home",
-   "city": "Panama City",
-   "category": "Chamber Events",
-   "chamber_event": true,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/ideacamp-november-2026/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27591",

@@ -5,85 +5,8 @@ CALSCALE:GREGORIAN
 X-WR-CALNAME:Bay County public meetings
 X-WR-TIMEZONE:America/Chicago
 BEGIN:VEVENT
-UID:county20261117t0900000600boccregularmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART:20261117T150000Z
-DTEND:20261117T170000Z
-SUMMARY:Bay County Board of County Commissioners: BOCC Regular Meeting
-LOCATION:Bay County Government Center\, 840 W. 11th St.\, Panama City\, FL
-DESCRIPTION:Agenda: https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952\nFrom BayCounty.me/meetings
-URL:https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952
-END:VEVENT
-BEGIN:VEVENT
-UID:countyplanning20261117t1330000600planningcommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART:20261117T193000Z
-DTEND:20261117T213000Z
-SUMMARY:Bay County Planning Commission: Planning Commission Meeting
-LOCATION:Bay County Government Center\, 840 W. 11th St.\, Panama City\, FL 32401
-DESCRIPTION:From BayCounty.me/meetings
-END:VEVENT
-BEGIN:VEVENT
-UID:cw20261117commissionworkshop@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART;VALUE=DATE:20261117
-DTEND;VALUE=DATE:20261118
-SUMMARY:Callaway City Commission: Commission Workshop
-LOCATION:Callaway Arts & Conference Center\, 500 Callaway Pkwy\, Callaway\, FL 32404
-DESCRIPTION:Agenda: https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-431\nFrom BayCounty.me/meetings
-URL:https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-431
-END:VEVENT
-BEGIN:VEVENT
-UID:cw20261117specialmeetingswearingin@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART;VALUE=DATE:20261117
-DTEND;VALUE=DATE:20261118
-SUMMARY:Callaway City Commission: Special Meeting - Swearing In
-LOCATION:Callaway Arts & Conference Center\, 500 Callaway Pkwy\, Callaway\, FL 32404
-DESCRIPTION:Agenda: https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430\nFrom BayCounty.me/meetings
-URL:https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430
-END:VEVENT
-BEGIN:VEVENT
-UID:mb20261117t0900000600citycouncilmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART:20261117T150000Z
-DTEND:20261117T170000Z
-SUMMARY:Mexico Beach City Council: City Council Meeting
-LOCATION:Venue not stated on the council meetings page\; City of Mexico Beach offices: 201 Paradise Path\, Mexico Beach\, FL 32456
-DESCRIPTION:Agenda: https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf\nFrom BayCounty.me/meetings
-URL:https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf
-END:VEVENT
-BEGIN:VEVENT
-UID:parker20261117t1730000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART:20261117T233000Z
-DTEND:20261118T013000Z
-SUMMARY:Parker City Council: Regular Meeting (expected) (expected)
-LOCATION:Parker City Hall\, 1001 West Park Street\, Parker\, FL 32404 (city contact address\; confirm venue on agenda)
-DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom BayCounty.me/meetings
-END:VEVENT
-BEGIN:VEVENT
-UID:pc20261117t1600000600citycommissionmeetingofnovember172026@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART:20261117T220000Z
-DTEND:20261118T000000Z
-SUMMARY:Panama City City Commission: City Commission Meeting of November 17\, 2026.
-LOCATION:Bay County Government Center - 840 W 11th St. Panama City FL 32401
-DESCRIPTION:Agenda: https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true\nFrom BayCounty.me/meetings
-URL:https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true
-END:VEVENT
-BEGIN:VEVENT
-UID:schools20261117t1500000600schoolboardmeetingorganizationalme@baycounty.me
-DTSTAMP:20261117T205908Z
-DTSTART:20261117T210000Z
-DTEND:20261117T230000Z
-SUMMARY:Bay District School Board: School Board Meeting - Organizational Meeting
-LOCATION:1311 Balboa Ave\, Panama City\, FL 32401
-DESCRIPTION:From BayCounty.me/meetings
-END:VEVENT
-BEGIN:VEVENT
 UID:pcb20261119citycouncil@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:Panama City Beach City Council: City Council
@@ -93,7 +16,7 @@ URL:https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240
 END:VEVENT
 BEGIN:VEVENT
 UID:lh20261120t1530000600112026specialcommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261120T213000Z
 DTEND:20261120T233000Z
 SUMMARY:Lynn Haven City Commission: 11/20/26 Special Commission Meeting
@@ -103,7 +26,7 @@ URL:https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(file
 END:VEVENT
 BEGIN:VEVENT
 UID:lh20261124t1730000600citycommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261124T233000Z
 DTEND:20261125T013000Z
 SUMMARY:Lynn Haven City Commission: City Commission Meeting
@@ -112,7 +35,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:mb20261124t0900000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261124T150000Z
 DTEND:20261124T170000Z
 SUMMARY:Mexico Beach City Council: Regular Meeting (expected) (expected)
@@ -121,7 +44,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:county20261201t0900000600baycountyboardofcountycommissioners@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261201T150000Z
 DTEND:20261201T170000Z
 SUMMARY:Bay County Board of County Commissioners: Bay County Board of County Commissioners Meeting
@@ -130,7 +53,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:lhplanning20261201t1730000600planningcommission@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261201T233000Z
 DTEND:20261202T013000Z
 SUMMARY:Lynn Haven Planning Commission: Planning Commission
@@ -139,7 +62,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:parker20261201t1730000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261201T233000Z
 DTEND:20261202T013000Z
 SUMMARY:Parker City Council: Regular Meeting (expected) (expected)
@@ -148,7 +71,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:pccra20261201t1630000600craboardmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261201T223000Z
 DTEND:20261202T003000Z
 SUMMARY:Panama City Community Redevelopment Agency (CRA) Board: CRA Board Meeting
@@ -157,7 +80,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:sp20261207t1730000600commissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261207T233000Z
 DTEND:20261208T013000Z
 SUMMARY:Springfield City Commission: Commission Meeting
@@ -166,7 +89,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:cw20261208t1800000600commissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261209T000000Z
 DTEND:20261209T020000Z
 SUMMARY:Callaway City Commission: Commission Meeting
@@ -175,7 +98,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:lh20261208t1730000600citycommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261208T233000Z
 DTEND:20261209T013000Z
 SUMMARY:Lynn Haven City Commission: City Commission Meeting
@@ -184,7 +107,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:lhcra20261208t171500060012826crameetings@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261208T231500Z
 DTEND:20261209T011500Z
 SUMMARY:Lynn Haven Community Redevelopment Agency (CRA) Board: 12/8/26 CRA Meetings
@@ -193,7 +116,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:mb20261208t0900000600citycouncilmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261208T150000Z
 DTEND:20261208T170000Z
 SUMMARY:Mexico Beach City Council: City Council Meeting
@@ -202,7 +125,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:pcb20261210t0900000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261210T150000Z
 DTEND:20261210T170000Z
 SUMMARY:Panama City Beach City Council: Regular Meeting (expected) (expected)
@@ -211,7 +134,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:mbplanning20261214t1800000600planningandzoningmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261215T000000Z
 DTEND:20261215T020000Z
 SUMMARY:Mexico Beach Planning & Zoning Board: Planning and Zoning Meeting
@@ -220,7 +143,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:county20261215t0900000600baycountyboardofcountycommissioners@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261215T150000Z
 DTEND:20261215T170000Z
 SUMMARY:Bay County Board of County Commissioners: Bay County Board of County Commissioners Meeting
@@ -229,7 +152,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:countyplanning20261215t1330000600planningcommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261215T193000Z
 DTEND:20261215T213000Z
 SUMMARY:Bay County Planning Commission: Planning Commission Meeting
@@ -238,7 +161,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:mb20261215t0900000600citycouncilmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261215T150000Z
 DTEND:20261215T170000Z
 SUMMARY:Mexico Beach City Council: City Council Meeting
@@ -247,7 +170,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:parker20261215t1730000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261215T233000Z
 DTEND:20261216T013000Z
 SUMMARY:Parker City Council: Regular Meeting (expected) (expected)
@@ -256,7 +179,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:pc20261215t1630000600citycommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261215T223000Z
 DTEND:20261216T003000Z
 SUMMARY:Panama City City Commission: City Commission Meeting
@@ -265,7 +188,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:sp20261221t1730000600commissionworkshop@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261221T233000Z
 DTEND:20261222T013000Z
 SUMMARY:Springfield City Commission: Commission Workshop
@@ -274,7 +197,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:lh20261222t1730000600citycommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261222T233000Z
 DTEND:20261223T013000Z
 SUMMARY:Lynn Haven City Commission: City Commission Meeting
@@ -283,7 +206,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:mb20261222t0900000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20261222T150000Z
 DTEND:20261222T170000Z
 SUMMARY:Mexico Beach City Council: Regular Meeting (expected) (expected)
@@ -292,7 +215,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:county20270105t0900000600baycountyboardofcountycommissioners@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270105T150000Z
 DTEND:20270105T170000Z
 SUMMARY:Bay County Board of County Commissioners: Bay County Board of County Commissioners Meeting
@@ -301,7 +224,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:lhplanning20270105t1730000600planningcommission@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270105T233000Z
 DTEND:20270106T013000Z
 SUMMARY:Lynn Haven Planning Commission: Planning Commission
@@ -310,7 +233,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:parker20270105t1730000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270105T233000Z
 DTEND:20270106T013000Z
 SUMMARY:Parker City Council: Regular Meeting (expected) (expected)
@@ -319,7 +242,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:pccra20270105t1630000600virtualcraworkshop@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270105T223000Z
 DTEND:20270106T003000Z
 SUMMARY:Panama City Community Redevelopment Agency (CRA) Board: Virtual CRA Workshop
@@ -328,7 +251,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:lh20270112t1730000600citycommissionmeeting@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270112T233000Z
 DTEND:20270113T013000Z
 SUMMARY:Lynn Haven City Commission: City Commission Meeting
@@ -337,7 +260,7 @@ DESCRIPTION:From BayCounty.me/meetings
 END:VEVENT
 BEGIN:VEVENT
 UID:mb20270112t0900000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270112T150000Z
 DTEND:20270112T170000Z
 SUMMARY:Mexico Beach City Council: Regular Meeting (expected) (expected)
@@ -346,7 +269,7 @@ DESCRIPTION:Expected from the regular schedule\; confirm before going.\nFrom Bay
 END:VEVENT
 BEGIN:VEVENT
 UID:pcb20270114t1700000600regularmeetingexpected@baycounty.me
-DTSTAMP:20261117T205908Z
+DTSTAMP:20261118T112424Z
 DTSTART:20270114T230000Z
 DTEND:20270115T010000Z
 SUMMARY:Panama City Beach City Council: Regular Meeting (expected) (expected)

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-17T14:46:36-06:00",
+  "generated": "2026-11-18T05:10:46-06:00",
   "window": {
-    "from": "2026-11-17",
-    "to": "2027-01-16"
+    "from": "2026-11-18",
+    "to": "2027-01-17"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -21,7 +21,7 @@
         "calendar (iCal cat 38)": "ok (26 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 0,
         "calendar": 3,
         "expected": 0
       }
@@ -37,11 +37,11 @@
       "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "sources": {
-        "calendar (iCal cat 26)": "ok (2 records)"
+        "calendar (iCal cat 26)": "ok (1 records)"
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 2,
+        "calendar": 1,
         "expected": 0
       }
     },
@@ -60,7 +60,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 1,
+        "calendar": 0,
         "expected": 0
       }
     },
@@ -75,11 +75,11 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (20 records)",
-        "calendar (iCal cat 22)": "ok (51 records)"
+        "AgendaCenter": "ok (19 records)",
+        "calendar (iCal cat 22)": "ok (50 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 0,
         "calendar": 1,
         "expected": 0
       }
@@ -177,7 +177,7 @@
         "calendar (iCal cat 14)": "ok (9 records)"
       },
       "coverage": {
-        "agenda_feed": 2,
+        "agenda_feed": 0,
         "calendar": 1,
         "expected": 0
       }
@@ -232,12 +232,12 @@
       "calendar_url": null,
       "schedule_source_url": "https://cityofparker.com/government/agendas-minutes/",
       "sources": {
-        "Agendas & Minutes page": "ok (210 records)"
+        "Agendas & Minutes page": "ok (0 records)"
       },
       "coverage": {
         "agenda_feed": 0,
         "calendar": 0,
-        "expected": 4
+        "expected": 3
       }
     },
     {
@@ -254,7 +254,7 @@
         "Council Meetings page": "ok (86 records)"
       },
       "coverage": {
-        "agenda_feed": 3,
+        "agenda_feed": 2,
         "calendar": 0,
         "expected": 3
       }
@@ -270,7 +270,7 @@
       "calendar_url": null,
       "schedule_source_url": "https://www.panamacity.gov/241/Planning-Board",
       "sources": {
-        "AgendaCenter": "ok (5 records)"
+        "AgendaCenter": "ok (4 records)"
       },
       "coverage": {
         "agenda_feed": 0,
@@ -365,7 +365,7 @@
       "calendar_url": null,
       "schedule_source_url": "https://cityofparker.com/government/planning-commission/",
       "sources": {
-        "Agendas & Minutes page": "ok (32 records)"
+        "Agendas & Minutes page": "ok (0 records)"
       },
       "coverage": {
         "agenda_feed": 0,
@@ -394,18 +394,6 @@
     }
   ],
   "meetings": [
-    {
-      "board": "parker-planning",
-      "title": "Special Planning Commission Meeting",
-      "start": "2026-06-01",
-      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (confirm venue on agenda)",
-      "agenda_url": "https://cityofparker.com/wp-content/uploads/filr/6694/Agenda-Planning-Special-Meeting.pdf",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Parker:https://cityofparker.com/government/agendas-minutes/",
-      "status": "posted",
-      "past": true
-    },
     {
       "board": "cw-cra",
       "title": "Budget Hearing",
@@ -485,18 +473,6 @@
       ]
     },
     {
-      "board": "parker",
-      "title": "Regular Meeting",
-      "start": "2026-10-20T17:30:00-05:00",
-      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
-      "agenda_url": "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Parker:https://cityofparker.com/government/agendas-minutes/",
-      "status": "posted",
-      "past": true
-    },
-    {
       "board": "pcb",
       "title": "City Council",
       "start": "2026-10-22T09:00:00-05:00",
@@ -507,36 +483,6 @@
       "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
       "status": "posted",
       "past": true
-    },
-    {
-      "board": "county",
-      "title": "BOCC Regular Meeting",
-      "start": "2026-11-03T09:00:00-06:00",
-      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL",
-      "agenda_url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1947",
-      "packet_url": "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1947&compileOutputType=1",
-      "minutes_url": null,
-      "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
-      "status": "posted",
-      "detail_url": "https://baycountyfl.new.swagit.com/videos/405753",
-      "past": true,
-      "items": [
-        {
-          "title": "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
-          "amount": null
-        },
-        {
-          "title": "533 E. 11th Street Building Roof Construction RFP 26-56 - Approve the contract with A&A Roofing Company, Inc. to provide construction services for the roof construction project located at 533 E. 11th Street in the amount of $174,000.00.",
-          "amount": "$174,000.00"
-        }
-      ],
-      "agenda_items": [
-        "Revenues & Expenditures and Inventory Deletions - Acknowledge receipt of the reports and approve inventory deletions.",
-        "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
-        "2027 Board of County Commissioners Meeting and Holiday Schedule - Board adopt the meeting schedule for the 2027 calendar year and approve the 2027 holiday schedule.",
-        "Deckard Short Term Vacation Rental Piggyback - Board approve piggyback agreement with Deckard Technologies.",
-        "533 E. 11th Street Building Roof Construction RFP 26-56 - Approve the contract with A&A Roofing Company, Inc. to provide construction services for the roof construction project located at 533 E. 11th Street in the amount of $174,000.00."
-      ]
     },
     {
       "board": "cw-planning",
@@ -576,18 +522,6 @@
       ]
     },
     {
-      "board": "pc",
-      "title": "CRA Virtual Workshop Agenda",
-      "start": "2026-11-03",
-      "location": "Virtual (live stream on the city website)",
-      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
-      "status": "posted",
-      "past": true
-    },
-    {
       "board": "pc-planning",
       "title": "Planning Board Meeting",
       "start": "2026-11-09T16:00:00-06:00",
@@ -623,18 +557,6 @@
       ]
     },
     {
-      "board": "cw",
-      "title": "Regular Meeting",
-      "start": "2026-11-10",
-      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
-      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11102026-429",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
-      "status": "posted",
-      "past": true
-    },
-    {
       "board": "lh-cra",
       "title": "11/10/26 CRA Meeting",
       "start": "2026-11-10T17:15:00-06:00",
@@ -653,32 +575,6 @@
         "Approval of Residential Incentive for 1408 Michigan Ave. contingent upon project completion.",
         "Discussion and possible approval of a new drive-through facility for 201 West 14th St. Community Bank"
       ]
-    },
-    {
-      "board": "mb",
-      "title": "City Council Meeting",
-      "start": "2026-11-10T09:00:00-06:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda.pdf",
-      "packet_url": "https://mexicobeachfl.gov/uploads/2026/11/November-10-2026-City-Council-Meeting-Agenda-Packet.pdf",
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "detail_url": "https://youtube.com/live/ICu66iPorg0?feature=share",
-      "past": true
-    },
-    {
-      "board": "schools",
-      "title": "School Board Meeting",
-      "start": "2026-11-10T15:00:00-06:00",
-      "location": "1311 Balboa Ave, Panama City, FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
-      "status": "calendar",
-      "detail_url": "https://www.bay.k12.fl.us/school-board-meetings",
-      "past": true
     },
     {
       "board": "pcb-planning",
@@ -732,6 +628,8 @@
       "minutes_url": null,
       "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "status": "posted",
+      "detail_url": "https://baycountyfl.new.swagit.com/videos/409062",
+      "past": true,
       "items": [
         {
           "title": "FY 2026 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
@@ -781,18 +679,6 @@
       ]
     },
     {
-      "board": "county-planning",
-      "title": "Planning Commission Meeting",
-      "start": "2026-11-17T13:30:00-06:00",
-      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1685"
-    },
-    {
       "board": "cw",
       "title": "Commission Workshop",
       "start": "2026-11-17",
@@ -801,18 +687,8 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
-      "status": "posted"
-    },
-    {
-      "board": "cw",
-      "title": "Special Meeting - Swearing In",
-      "start": "2026-11-17",
-      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
-      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-430",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "mb",
@@ -824,32 +700,20 @@
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted",
-      "detail_url": "https://youtube.com/live/pxpDlEybhpk?feature=share"
-    },
-    {
-      "board": "parker",
-      "title": "Regular Meeting (expected)",
-      "start": "2026-11-17T17:30:00-06:00",
-      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
-      "status": "expected",
-      "expected": true
+      "detail_url": "https://youtube.com/live/pxpDlEybhpk?feature=share",
+      "past": true
     },
     {
       "board": "pc",
       "title": "City Commission Meeting of November 17, 2026.",
       "start": "2026-11-17T16:00:00-06:00",
-      "location": "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?html=true",
       "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11172026-909?packet=true",
       "minutes_url": null,
       "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
       "status": "posted",
-      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7564",
-      "calendar_source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "past": true,
       "items": [
         {
           "title": "Consideration of purchasing a budgeted 2028 Compressed Natural Gas Side Load Garbage Truck for Residential Garbage Service in the amount of $518,655.40.",
@@ -972,7 +836,8 @@
       "minutes_url": null,
       "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "status": "calendar",
-      "detail_url": "https://www.bay.k12.fl.us/school-board-meetings"
+      "detail_url": "https://www.bay.k12.fl.us/school-board-meetings",
+      "past": true
     },
     {
       "board": "pcb",
