@@ -1,34 +1,21 @@
 {
- "fetched_at": "2026-11-18T11:18:21+00:00",
- "issued": "2026-11-18T07:17:00+00:00",
- "product_url": "https://api.weather.gov/products/84647311-dfec-47f8-abbd-ca1cee1cfe17",
+ "fetched_at": "2026-11-19T11:18:05+00:00",
+ "issued": "2026-11-19T07:51:00+00:00",
+ "product_url": "https://api.weather.gov/products/1af65364-6cf9-44e1-8c8e-b5307e33644c",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast.",
+ "outlook": "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast. The rip current risk is expected to decrease to moderate along the Emerald Coast beaches Friday and the Franklin and South-facing Gulf County beaches on Saturday.",
  "periods": [
   {
    "period": "Today",
    "rip_current_risk": "High",
    "surf_height": "Around 3 feet",
    "uv_index": "Moderate",
-   "water_temperature": "68 degrees",
-   "weather": "Mostly sunny",
-   "high_temperature": "In the lower 70s",
-   "winds": "Breezy. Northeast winds around 25 mph",
-   "sunrise": "7:09 AM",
-   "sunset": "5:46 PM",
-   "summary": null
-  },
-  {
-   "period": "Thursday",
-   "rip_current_risk": "High",
-   "surf_height": "Around 3 feet",
-   "uv_index": null,
-   "water_temperature": null,
+   "water_temperature": "69 degrees",
    "weather": "Partly sunny. A slight chance of",
-   "high_temperature": "In the upper 60s",
+   "high_temperature": "Around 70",
    "winds": "Breezy. Northeast winds around 25 mph",
    "sunrise": "7:10 AM",
    "sunset": "5:45 PM",
@@ -37,20 +24,20 @@
   {
    "period": "Friday",
    "rip_current_risk": "Moderate",
-   "surf_height": "around 2 feet",
+   "surf_height": "Around 2 feet",
    "uv_index": null,
    "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 2 feet. Mostly cloudy. A chance of showers. Highs in the lower 70s. Northeast winds around 20 mph."
+   "weather": "Mostly cloudy",
+   "high_temperature": "In the lower 70s",
+   "winds": "Northeast winds around 20 mph",
+   "sunrise": "7:11 AM",
+   "sunset": "5:45 PM",
+   "summary": null
   },
   {
    "period": "Saturday",
    "rip_current_risk": "Moderate",
-   "surf_height": null,
+   "surf_height": "around 1 foot",
    "uv_index": null,
    "water_temperature": null,
    "weather": null,
@@ -58,7 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northeast winds around 15 mph."
+   "summary": "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. Northeast winds around 15 mph."
   },
   {
    "period": "Sunday",
@@ -72,15 +59,28 @@
    "sunrise": null,
    "sunset": null,
    "summary": "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. East winds around 10 mph."
+  },
+  {
+   "period": "Monday",
+   "rip_current_risk": "Moderate",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northwest winds around 5 mph."
   }
  ],
  "alerts": [
   {
    "event": "Rip Current Statement",
-   "headline": "Rip Current Statement issued November 18 at 2:11AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
-   "starts": "2026-11-18T02:11:00-05:00",
+   "headline": "Rip Current Statement issued November 19 at 2:49AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
+   "starts": "2026-11-19T02:49:00-05:00",
    "ends": "2026-11-20T01:00:00-05:00",
-   "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1"
+   "url": "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1"
   }
  ],
  "flag_history": [

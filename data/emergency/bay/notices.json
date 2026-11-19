@@ -1,7 +1,64 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-18",
+ "checked": "2026-11-19",
  "notices": [
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Rip Current Statement issued November 19 at 2:49AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
+   "summary": "* WHAT...Dangerous rip currents. * WHERE...Walton, Bay, and South-facing Gulf County Beaches. * WHEN...Through late tonight. * IMPACTS...Rip currents can sweep even the best swimmers away from shore into deeper water. * ADDITIONAL INFORMATION...A moderate risk of rip currents is forecast for West-facing and State Park Gulf County beaches.",
+   "instruction": "Swim near a lifeguard. If caught in a rip current, relax and float. Don't swim against the current. If able, swim in a direction following the shoreline. If unable to escape, face the shore and call or wave for help.",
+   "severity": "moderate",
+   "event": "Rip Current Statement",
+   "area": "South Walton; Coastal Bay; Coastal Gulf",
+   "zones": null,
+   "issued": "2026-11-19T07:49:00.000Z",
+   "starts": "2026-11-19T07:49:00.000Z",
+   "ends": "2026-11-20T06:00:00.000Z",
+   "updated": "2026-11-19T07:49:00.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "first_seen": "2026-11-19T07:50:02.584412+00:00",
+   "last_seen": "2026-11-19T11:18:18.586Z",
+   "geometry": null,
+   "refs": [
+    "nws:urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1"
+   ]
+  },
+  {
+   "notice_id": "alert:pcb:26",
+   "place_id": "fl-bay",
+   "kind": "boil-water",
+   "source": "City of Panama City Beach",
+   "source_type": "alert-center",
+   "gov_id": "pcb",
+   "title": "Precautionary Boil Water Notice for Burnham Ave & Manistee Dr",
+   "summary": "Due to a relocation of a water main earlier today, all residents at 504-510 Burnham Avenue, 164-187 Manistee Drive, and 171 Heather Drive in Panama City Beach are under a Precautionary Boil Water Notice.",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-18T19:15:21.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-18T19:15:21.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=26",
+   "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-18T17:20:02.22566+00:00",
+   "last_seen": "2026-11-19T11:18:18.586Z",
+   "geometry": null
+  },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1",
    "place_id": "fl-bay",
@@ -20,13 +77,13 @@
    "starts": "2026-11-18T07:11:00.000Z",
    "ends": "2026-11-20T06:00:00.000Z",
    "updated": "2026-11-18T07:11:00.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1",
    "source_url": "https://www.weather.gov/tae/",
    "first_seen": "2026-11-18T07:15:01.10501+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T07:45:01.860046+00:00",
    "geometry": null,
    "refs": [
     "nws:urn:oid:2.49.0.1.840.0.55150f13c1981b47fd0d37af5c5f4459340517fe.001.1",
@@ -141,7 +198,7 @@
    "source_url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2169",
    "geometry": null,
    "first_seen": "2026-11-17T04:34:22.347Z",
-   "last_seen": "2026-11-18T11:18:36.132Z"
+   "last_seen": "2026-11-19T11:18:18.586Z"
   },
   {
    "notice_id": "fl511:964701",
@@ -445,7 +502,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -526,7 +583,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -553,7 +610,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -634,7 +691,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -1808,7 +1865,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -2130,7 +2187,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -2157,7 +2214,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   },
   {
@@ -2184,7 +2241,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-18T11:18:36.132Z",
+   "last_seen": "2026-11-19T11:18:18.586Z",
    "geometry": null
   }
  ]

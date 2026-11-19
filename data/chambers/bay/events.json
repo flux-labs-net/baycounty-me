@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-18",
+ "as_of": "2026-11-19",
  "fetched": {
-  "pcb-chamber": "2026-11-18T11:16:54+00:00",
+  "pcb-chamber": "2026-11-19T11:16:51+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27591",
-   "title": "Health Fair",
-   "starts": "2026-11-18T10:00:00",
-   "ends": "2026-11-18T12:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Senior Center",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/health-fair-2/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:26955",
@@ -89,6 +74,21 @@
   },
   {
    "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27832",
+   "title": "Thanksgiving Dinner at Barefoot Hide-A-Way",
+   "starts": "2026-11-26T11:00:00",
+   "ends": "2026-11-26T20:00:00",
+   "all_day": false,
+   "venue": "Barefoot Hide-A-Way",
+   "city": "Panama City Beach",
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/thanksgiving-dinner-at-barefoot-hide-a-way/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27545",
    "title": "Thanksgiving at LaCo",
    "starts": "2026-11-26T11:00:00",
@@ -115,6 +115,21 @@
    "chamber_event": false,
    "cost": null,
    "url": "https://pcbeach.org/local-event/beach-home-for-the-holidays-3/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27830",
+   "title": "Cocktails for a Cause “12 Purses & Spirits of Christmas”",
+   "starts": "2026-12-03T18:00:00",
+   "ends": "2026-12-03T21:00:00",
+   "all_day": false,
+   "venue": "Panama City Center for the Arts",
+   "city": "Panama City",
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/cocktails-for-a-cause-12-purses-spirits-of-christmas-2/",
    "source_url": "https://pcbeach.org/local-events/"
   },
   {

@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -132,7 +132,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 11806,
+   "rows": 11812,
    "columns": [
     {
      "name": "date",
@@ -352,7 +352,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 57182,
+   "rows": 57212,
    "columns": [
     {
      "name": "date",
@@ -8715,7 +8715,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 45,
+   "rows": 46,
    "columns": [
     {
      "name": "place_id",
@@ -8803,13 +8803,13 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-18T10:00:00",
       "2026-11-19T16:30:00",
       "2026-11-21T18:00:00",
       "2026-11-21T19:00:00",
       "2026-11-26T07:30:00",
       "2026-11-26T11:00:00",
       "2026-11-27T00:00:00",
+      "2026-12-03T18:00:00",
       "2026-12-05T00:00:00",
       "2026-12-06T09:00:00",
       "2026-12-09T17:30:00",
@@ -8837,13 +8837,14 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-18T12:00:00",
       "2026-11-19T18:30:00",
       "2026-11-21T19:00:00",
       "2026-11-21T21:00:00",
       "2026-11-26T10:00:00",
       "2026-11-26T11:00:00",
+      "2026-11-26T20:00:00",
       "2026-11-28T23:59:59",
+      "2026-12-03T21:00:00",
       "2026-12-05T23:59:59",
       "2026-12-06T11:00:00",
       "2026-12-10T18:30:00",
@@ -8880,6 +8881,7 @@
      "type": "string",
      "values": [
       "Aaron Bessant Park",
+      "Barefoot Hide-A-Way",
       "Bay Point Golf Club",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
@@ -8894,7 +8896,7 @@
       "McKenize Park",
       "National Peanut Festival",
       "PCB Wheel",
-      "Panama City Beach Senior Center",
+      "Panama City Center for the Arts",
       "Panama City Marina",
       "Panama Country Club",
       "Pier Park",
@@ -8980,7 +8982,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 160,
+   "rows": 154,
    "columns": [
     {
      "name": "place_id",
@@ -9069,6 +9071,7 @@
      "type": "string",
      "values": [
       "Aaron Bessant Park",
+      "Barefoot Hide-A-Way",
       "Bay County Public Library",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
@@ -9079,7 +9082,7 @@
       "McGuire’s Irish Pub",
       "PCB Wheel",
       "Panama City Beach Public Library",
-      "Panama City Beach Senior Center",
+      "Panama City Center for the Arts",
       "Panama City Marina",
       "Panama Country Club",
       "Parker Park",
@@ -9689,7 +9692,7 @@
      "values": [
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
-      "2026-11-18T07:17:00+00:00"
+      "2026-11-19T07:51:00+00:00"
      ]
     },
     {
@@ -9697,10 +9700,10 @@
      "type": "string",
      "values": [
       "Friday",
+      "Monday",
       "Rip Current Statement",
       "Saturday",
       "Sunday",
-      "Thursday",
       "Today"
      ]
     },
@@ -9738,8 +9741,9 @@
      "name": "surf_height",
      "type": "string",
      "values": [
+      "Around 2 feet",
       "Around 3 feet",
-      "around 2 feet"
+      "around 1 foot"
      ]
     },
     {
@@ -9753,14 +9757,14 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "68 degrees"
+      "69 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly sunny",
+      "Mostly cloudy",
       "Partly sunny. A slight chance of"
      ]
     },
@@ -9768,46 +9772,46 @@
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 70s",
-      "In the upper 60s"
+      "Around 70",
+      "In the lower 70s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "Breezy. Northeast winds around 25 mph"
+      "Breezy. Northeast winds around 25 mph",
+      "Northeast winds around 20 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:09 AM",
-      "7:10 AM"
+      "7:10 AM",
+      "7:11 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:45 PM",
-      "5:46 PM"
+      "5:45 PM"
      ]
     },
     {
      "name": "summary",
      "type": "string",
      "values": [
-      "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast.",
+      "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast. The rip current risk is expected to decrease to moderate along the Emerald Coast beaches Friday and the Franklin and South-facing Gulf County beaches on Saturday.",
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
       "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. East winds around 10 mph.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northeast winds around 15 mph.",
-      "Moderate rip current risk*. Surf height around 2 feet. Mostly cloudy. A chance of showers. Highs in the lower 70s. Northeast winds around 20 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northwest winds around 5 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. Northeast winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Rip Current Statement issued November 18 at 2:11AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
+      "Rip Current Statement issued November 19 at 2:49AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9817,7 +9821,7 @@
      "values": [
       "2026-10-27",
       "2026-11-17",
-      "2026-11-18T02:11:00-05:00"
+      "2026-11-19T02:49:00-05:00"
      ]
     },
     {
@@ -9835,10 +9839,10 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1",
+      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1",
+      "https://api.weather.gov/products/1af65364-6cf9-44e1-8c8e-b5307e33644c",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
-      "https://api.weather.gov/products/84647311-dfec-47f8-abbd-ca1cee1cfe17",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12505,7 +12509,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-18"
+      "2026-11-19"
      ]
     },
     {
@@ -12654,7 +12658,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 80,
+   "rows": 82,
    "columns": [
     {
      "name": "notice_id",
@@ -13840,7 +13844,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 132,
+   "rows": 133,
    "columns": [
     {
      "name": "place_id",
@@ -14017,6 +14021,7 @@
       "fulleln@bay.k12.fl.us",
       "fulleln@bay.k12.fl.us; facilities@bay.k12.fl.us",
       "harveam@bay.k12.fl.us",
+      "jaldride@panamacity.gov",
       "jpowell@mcneilcarroll.com",
       "kmeyerl@panamacity.gov",
       "lynne.fasone@pcbfl.gov",
@@ -14101,7 +14106,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 98,
+   "rows": 94,
    "columns": [
     {
      "name": "place_id",
@@ -14165,7 +14170,6 @@
       "Full time",
       "Full- Time",
       "Instructional",
-      "Licensed",
       "Part time",
       "Part-Time",
       "Safety officers",
@@ -14194,25 +14198,18 @@
      "name": "posted",
      "type": "string",
      "values": [
-      "2026-06-13",
-      "2026-06-18",
       "2026-07-13",
-      "2026-07-17",
-      "2026-08-22",
       "2026-09-14",
-      "2026-09-16",
-      "2026-09-30",
-      "2026-10-06",
+      "2026-09-17",
       "2026-10-08",
       "2026-10-15",
       "2026-10-19",
       "2026-10-20",
-      "2026-10-21",
+      "2026-10-22",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
       "2026-11-03",
-      "2026-11-04",
       "2026-11-06",
       "2026-11-07",
       "2026-11-09",
@@ -14220,14 +14217,15 @@
       "2026-11-12",
       "2026-11-13",
       "2026-11-16",
-      "2026-11-17"
+      "2026-11-17",
+      "2026-11-18",
+      "2026-11-19"
      ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-18",
       "2026-11-19",
       "2026-11-20",
       "2026-11-24",
@@ -14263,7 +14261,8 @@
       "2026-11-14",
       "2026-11-16",
       "2026-11-17",
-      "2026-11-18"
+      "2026-11-18",
+      "2026-11-19"
      ]
     },
     {
@@ -14356,7 +14355,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-18"
+      "2026-11-19"
      ]
     }
    ],
@@ -15463,7 +15462,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17236,
+   "rows": 17246,
    "columns": [
     {
      "name": "place_id",
@@ -15734,7 +15733,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 37,
+   "rows": 29,
    "columns": [
     {
      "name": "place_id",
@@ -15777,7 +15776,37 @@
     },
     {
      "name": "title",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "11th Street Dulcimer Group Practice",
+      "8th Annual Festival of Trees",
+      "Business After Hours – November 2026",
+      "Card Club",
+      "Chess Tournament",
+      "Council voted to read Ordinance 901 by title only.",
+      "Crafternoon @ The Library",
+      "David Phelps I Speak of Love Tour",
+      "Dream Builders at MLK",
+      "Holiday Shopping, Safety, & Scams (Registration Required)",
+      "Line Dancing",
+      "Lynn Haven: 11/20/26 Special Commission Meeting",
+      "MLK x FSU Ascent – Drone Challenge",
+      "Middle Grades Book Club (Grades 6 – 8)",
+      "PC Senior Living",
+      "Panama City Beach: City Council",
+      "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
+      "Sail Into School (Ages 3 – 5)",
+      "Sandy Steppers - Dance Class",
+      "Sea Needles",
+      "Shelf Indulgence Book Club (Off-Site)",
+      "Sunset Yoga",
+      "Teen Dungeons & Dragons (Ages 13 – 17)",
+      "The commission approved Resolution 26-13, the final amendment to the FY25-26 annual budget.",
+      "The commission approved the Consent Agenda, which contained the October 5, 2026 meeting minutes.",
+      "The council voted to award the bid for a roughly 25-foot pre-lit decorated outdoor Christmas tree to Universal Concepts for $12,800.",
+      "Winter Wonderland 2026",
+      "Youth Writing Group (Ages 6 – 12)"
+     ]
     },
     {
      "name": "summary",
@@ -15796,7 +15825,6 @@
       "2026-10-06",
       "2026-10-13",
       "2026-11-02",
-      "2026-11-18",
       "2026-11-19",
       "2026-11-20",
       "2026-11-21"
@@ -15806,12 +15834,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-18T10:00:00",
-      "2026-11-18T10:30:00",
-      "2026-11-18T14:00:00",
-      "2026-11-18T15:00:00",
-      "2026-11-18T16:00:00",
-      "2026-11-18T18:00:00",
       "2026-11-19",
       "2026-11-19T09:00:00",
       "2026-11-19T09:30:00",
@@ -15840,11 +15862,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-18T11:30:00",
-      "2026-11-18T12:00:00",
-      "2026-11-18T17:00:00",
-      "2026-11-18T19:00:00",
-      "2026-11-18T21:00:00",
       "2026-11-19T10:30:00",
       "2026-11-19T11:00:00",
       "2026-11-19T13:00:00",
@@ -15922,7 +15939,6 @@
       "Edgewater Beach & Golf Resort",
       "PCB Wheel",
       "Panama City Beach Public Library",
-      "Panama City Beach Senior Center",
       "St. Andrews Baptist Church",
       "Wild Root Coffee & Tea"
      ]
@@ -17600,7 +17616,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-18"
+      "2026-11-19"
      ]
     },
     {
@@ -19272,7 +19288,7 @@
    "id": "contract-vote-dollars",
    "title": "Contract votes and their dollar figures",
    "description": "Every recorded vote since 2016 on a contract, purchase, change order or task order, or on a consent agenda, with the dollar figure it approved and whether that figure is counted in the officials' contract-dollar totals. counted false gives not_counted_reason: no figure in the record of the vote, several figures (which one passed is not clear), a consent agenda (many items in one vote), not new spending (a credit, sale, lease, fee, payment on work already approved, grant received, rate or new total), or the same item voted on again (same_item_as is the vote that is counted). amount_from says where the figure came from: the vote summary, the motion text, or a contract record tied to the vote (contract_record_ids). up_to marks a not-to-exceed ceiling; per_year marks one year's price. Rules: site/vote_dollars.py.",
-   "rows": 3568,
+   "rows": 3569,
    "columns": [
     {
      "name": "vote_id",
@@ -20576,7 +20592,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-18"
+      "2026-11-19"
      ]
     },
     {
@@ -20803,7 +20819,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-18"
+      "2026-11-19"
      ]
     },
     {
@@ -20979,6 +20995,7 @@
       "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "Springfield:https://www.springfieldfl.net/meetings",
+      "Springfield:https://www.springfieldfl.net/meetings/recent",
       "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
