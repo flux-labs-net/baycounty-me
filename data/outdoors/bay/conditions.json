@@ -1,7 +1,7 @@
 {
- "fetched_at": "2026-11-19T11:18:05+00:00",
- "issued": "2026-11-19T07:51:00+00:00",
- "product_url": "https://api.weather.gov/products/1af65364-6cf9-44e1-8c8e-b5307e33644c",
+ "fetched_at": "2026-11-19T20:32:24+00:00",
+ "issued": "2026-11-19T17:44:00+00:00",
+ "product_url": "https://api.weather.gov/products/bdb78d43-3244-4e01-8355-6e1ec7de88a9",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
@@ -9,12 +9,12 @@
  "outlook": "A high rip current risk of rip currents is expected along the Gulf Beaches over the next several days. The exception will be the west- facing Gulf County beaches, where a moderate risk is in the forecast. The rip current risk is expected to decrease to moderate along the Emerald Coast beaches Friday and the Franklin and South-facing Gulf County beaches on Saturday.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "High",
    "surf_height": "Around 3 feet",
    "uv_index": "Moderate",
    "water_temperature": "69 degrees",
-   "weather": "Partly sunny. A slight chance of",
+   "weather": "Mostly cloudy. A slight chance of",
    "high_temperature": "Around 70",
    "winds": "Breezy. Northeast winds around 25 mph",
    "sunrise": "7:10 AM",

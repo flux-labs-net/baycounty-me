@@ -26,7 +26,7 @@
    "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1",
    "source_url": "https://www.weather.gov/tae/",
    "first_seen": "2026-11-19T07:50:02.584412+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null,
    "refs": [
     "nws:urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1"
@@ -56,7 +56,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=26",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-18T17:20:02.22566+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -198,7 +198,7 @@
    "source_url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2169",
    "geometry": null,
    "first_seen": "2026-11-17T04:34:22.347Z",
-   "last_seen": "2026-11-19T11:18:18.586Z"
+   "last_seen": "2026-11-19T20:32:48.877Z"
   },
   {
    "notice_id": "fl511:964701",
@@ -502,7 +502,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -583,7 +583,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -610,7 +610,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -691,7 +691,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -1865,7 +1865,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -2187,7 +2187,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -2214,7 +2214,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   },
   {
@@ -2241,7 +2241,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-19T11:18:18.586Z",
+   "last_seen": "2026-11-19T20:32:48.877Z",
    "geometry": null
   }
  ]

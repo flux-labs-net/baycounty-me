@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
  "as_of": "2026-11-19",
- "fetched": "2026-11-19T06:16:52-0500",
+ "fetched": "2026-11-19T15:30:54-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -53,40 +53,6 @@
   "parker": "HTTPError: HTTP Error 404: Not Found"
  },
  "events": [
-  {
-   "event_id": "bay-county:1674:2026-11-19",
-   "source_id": "bay-county",
-   "source": "Bay County",
-   "gov": "county",
-   "town": "Bay County",
-   "title": "Code Enforcement Magistrate Hearings",
-   "starts": "2026-11-19T09:00:00",
-   "ends": "2026-11-19T11:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1674",
-   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:6520:2026-11-19",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "PC Senior Living",
-   "starts": "2026-11-19T09:00:00",
-   "ends": "2026-11-19T13:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6520",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
   {
    "event_id": "library:23869:2026-11-19",
    "source_id": "library",
@@ -1292,7 +1258,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6522",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "library:24360:2026-12-03",

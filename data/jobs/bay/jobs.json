@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-19T11:18:44.851Z",
+ "as_of": "2026-11-19T20:33:32.773Z",
  "boards": [
   {
    "key": "county",
@@ -19,7 +19,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 51
+   "count": 52
   },
   {
    "key": "pc",
@@ -29,7 +29,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 22
+   "count": 23
   },
   {
    "key": "lh",
@@ -49,7 +49,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 3
+   "count": 0
   },
   {
    "key": "parker",
@@ -331,27 +331,13 @@
    "board": "schools",
    "gov_id": "schools",
    "employer": "Bay District Schools",
-   "title": "PE ELEM-TCHR",
+   "title": "5TH GRADE-TCHR",
    "department": "OSCAR PATTERSON ACADEMY",
    "job_type": "Instructional",
    "pay": null,
    "posted": "2026-11-13",
    "closes": "2026-11-20",
-   "ref": "03910474",
-   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
-   "first_seen": "2026-11-14"
-  },
-  {
-   "board": "schools",
-   "gov_id": "schools",
-   "employer": "Bay District Schools",
-   "title": "ELA MG-TCHR",
-   "department": "RUTHERFORD HIGH SCHOOL",
-   "job_type": "Instructional",
-   "pay": null,
-   "posted": "2026-11-13",
-   "closes": "2026-11-19",
-   "ref": "03410300",
+   "ref": "03910475",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-11-14"
   },
@@ -373,15 +359,43 @@
    "board": "schools",
    "gov_id": "schools",
    "employer": "Bay District Schools",
-   "title": "5TH GRADE-TCHR",
+   "title": "ELA MG-TCHR",
+   "department": "RUTHERFORD HIGH SCHOOL",
+   "job_type": "Instructional",
+   "pay": null,
+   "posted": "2026-11-13",
+   "closes": "2026-11-19",
+   "ref": "03410300",
+   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
+   "first_seen": "2026-11-14"
+  },
+  {
+   "board": "schools",
+   "gov_id": "schools",
+   "employer": "Bay District Schools",
+   "title": "PE ELEM-TCHR",
    "department": "OSCAR PATTERSON ACADEMY",
    "job_type": "Instructional",
    "pay": null,
    "posted": "2026-11-13",
    "closes": "2026-11-20",
-   "ref": "03910475",
+   "ref": "03910474",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-11-14"
+  },
+  {
+   "board": "schools",
+   "gov_id": "schools",
+   "employer": "Bay District Schools",
+   "title": "2ND GRADE-TCHR",
+   "department": "NORTHSIDE ELEM SCHOOL",
+   "job_type": "Instructional",
+   "pay": null,
+   "posted": "2026-11-16",
+   "closes": "2026-11-20",
+   "ref": "04710264",
+   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
+   "first_seen": "2026-11-17"
   },
   {
    "board": "schools",
@@ -415,15 +429,15 @@
    "board": "schools",
    "gov_id": "schools",
    "employer": "Bay District Schools",
-   "title": "2ND GRADE-TCHR",
-   "department": "NORTHSIDE ELEM SCHOOL",
+   "title": "KINDERGARTEN-TCHR",
+   "department": "TOMMY SMITH ELEM SCHOOL",
    "job_type": "Instructional",
    "pay": null,
-   "posted": "2026-11-16",
-   "closes": "2026-11-20",
-   "ref": "04710264",
+   "posted": "2026-11-17",
+   "closes": "2026-11-30",
+   "ref": "05110190",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
-   "first_seen": "2026-11-17"
+   "first_seen": "2026-11-18"
   },
   {
    "board": "schools",
@@ -436,20 +450,6 @@
    "posted": "2026-11-17",
    "closes": "2026-11-24",
    "ref": "05110191",
-   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
-   "first_seen": "2026-11-18"
-  },
-  {
-   "board": "schools",
-   "gov_id": "schools",
-   "employer": "Bay District Schools",
-   "title": "KINDERGARTEN-TCHR",
-   "department": "TOMMY SMITH ELEM SCHOOL",
-   "job_type": "Instructional",
-   "pay": null,
-   "posted": "2026-11-17",
-   "closes": "2026-11-30",
-   "ref": "05110190",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-11-18"
   },
@@ -477,7 +477,7 @@
    "pay": null,
    "posted": "2026-11-12",
    "closes": "2026-11-30",
-   "ref": "91280074",
+   "ref": "91280072",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-11-13"
   },
@@ -491,7 +491,7 @@
    "pay": null,
    "posted": "2026-11-12",
    "closes": "2026-11-30",
-   "ref": "91280072",
+   "ref": "91280074",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-11-13"
   },
@@ -527,20 +527,6 @@
    "board": "schools",
    "gov_id": "schools",
    "employer": "Bay District Schools",
-   "title": "SUB BAY BASE",
-   "department": "SUBSTITUTE EMPLOYEES",
-   "job_type": "Substitutes",
-   "pay": null,
-   "posted": "2026-07-13",
-   "closes": "2027-04-30",
-   "ref": "90510010",
-   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
-   "first_seen": "2026-10-27"
-  },
-  {
-   "board": "schools",
-   "gov_id": "schools",
-   "employer": "Bay District Schools",
    "title": "SUB INTERPRETER",
    "department": "SUBSTITUTE EMPLOYEES",
    "job_type": "Substitutes",
@@ -562,6 +548,20 @@
    "posted": "2026-07-13",
    "closes": "2027-04-30",
    "ref": "90510007",
+   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
+   "first_seen": "2026-10-27"
+  },
+  {
+   "board": "schools",
+   "gov_id": "schools",
+   "employer": "Bay District Schools",
+   "title": "SUB BAY BASE",
+   "department": "SUBSTITUTE EMPLOYEES",
+   "job_type": "Substitutes",
+   "pay": null,
+   "posted": "2026-07-13",
+   "closes": "2027-04-30",
+   "ref": "90510010",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-10-27"
   },
@@ -634,6 +634,20 @@
    "ref": "02410172",
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "first_seen": "2026-11-04"
+  },
+  {
+   "board": "schools",
+   "gov_id": "schools",
+   "employer": "Bay District Schools",
+   "title": "SCHOOL BOOKKEEPER TECHNICIAN",
+   "department": "TOM P HANEY TECHNICAL COLLEGE",
+   "job_type": "Support",
+   "pay": null,
+   "posted": "2026-11-04",
+   "closes": "2026-11-23",
+   "ref": "04810080",
+   "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
+   "first_seen": "2026-11-19"
   },
   {
    "board": "schools",
@@ -989,6 +1003,20 @@
    "board": "pc",
    "gov_id": "pc",
    "employer": "City of Panama City",
+   "title": "Deputy City Clerk",
+   "department": "City Clerk Treasurer",
+   "job_type": "Full- Time",
+   "pay": "$48,526.40 Annually",
+   "posted": "2026-11-19",
+   "closes": null,
+   "ref": "5555271",
+   "url": "https://www.governmentjobs.com/careers/pcgov/jobs/5555271/deputy-city-clerk",
+   "first_seen": "2026-11-19"
+  },
+  {
+   "board": "pc",
+   "gov_id": "pc",
+   "employer": "City of Panama City",
    "title": "Electrician I - (Full-Time or Part-Time)",
    "department": "Logistics",
    "job_type": "Full- Time",
@@ -1292,48 +1320,6 @@
    "ref": null,
    "url": "https://jobs.keldair.com/cityoflynnhaven/jobs/100742/police-officer",
    "first_seen": "2026-10-27"
-  },
-  {
-   "board": "cw",
-   "gov_id": "cw",
-   "employer": "City of Callaway",
-   "title": "Equipment Operator I (Second Position)",
-   "department": null,
-   "job_type": null,
-   "pay": null,
-   "posted": "2026-10-20",
-   "closes": null,
-   "ref": null,
-   "url": "https://www.cityofcallaway.com/Jobs.aspx?UniqueId=76&CommunityJobs=False&JobID=Equipment-Operator-I-Second-Position-200",
-   "first_seen": "2026-10-28"
-  },
-  {
-   "board": "cw",
-   "gov_id": "cw",
-   "employer": "City of Callaway",
-   "title": "Equipment Operator I",
-   "department": null,
-   "job_type": null,
-   "pay": null,
-   "posted": "2026-10-20",
-   "closes": null,
-   "ref": null,
-   "url": "https://www.cityofcallaway.com/Jobs.aspx?UniqueId=76&CommunityJobs=False&JobID=Equipment-Operator-I-182",
-   "first_seen": "2026-10-28"
-  },
-  {
-   "board": "cw",
-   "gov_id": "cw",
-   "employer": "City of Callaway",
-   "title": "Street Maintenance Worker I",
-   "department": null,
-   "job_type": null,
-   "pay": null,
-   "posted": "2026-10-20",
-   "closes": null,
-   "ref": null,
-   "url": "https://www.cityofcallaway.com/Jobs.aspx?UniqueId=76&CommunityJobs=False&JobID=Street-Maintenance-Worker-I-193",
-   "first_seen": "2026-10-28"
   },
   {
    "board": "airport",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-19T05:10:47-06:00",
+  "generated": "2026-11-19T14:24:40-06:00",
   "window": {
     "from": "2026-11-19",
     "to": "2027-01-18"
@@ -115,10 +115,10 @@
       "calendar_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
       "schedule_source_url": "https://www.pcbfl.gov/185/City-Council",
       "sources": {
-        "Granicus RSS": "ok (67 records)"
+        "Granicus RSS": "ok (66 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 0,
         "calendar": 0,
         "expected": 2
       }
@@ -840,23 +840,12 @@
       "past": true
     },
     {
-      "board": "pcb",
-      "title": "City Council",
-      "start": "2026-11-19",
-      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
-      "status": "posted"
-    },
-    {
       "board": "lh",
       "title": "11/20/26 Special Commission Meeting",
       "start": "2026-11-20T15:30:00-06:00",
       "location": "825 Ohio Avenue, Lynn Haven",
       "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)",
-      "packet_url": null,
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2185,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
