@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-19T14:24:40-06:00",
+  "generated": "2026-11-20T05:10:47-06:00",
   "window": {
-    "from": "2026-11-19",
-    "to": "2027-01-18"
+    "from": "2026-11-20",
+    "to": "2027-01-19"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -80,7 +80,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 1,
+        "calendar": 2,
         "expected": 0
       }
     },
@@ -237,7 +237,7 @@
       "coverage": {
         "agenda_feed": 0,
         "calendar": 0,
-        "expected": 3
+        "expected": 4
       }
     },
     {
@@ -1192,6 +1192,30 @@
       "source": "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive",
       "status": "expected",
       "expected": true
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2027-01-19T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc",
+      "title": "City Commission Virtual Workshop",
+      "start": "2027-01-19T16:30:00-06:00",
+      "location": "Virtual (live stream on the city website)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7656"
     }
   ],
   "errors": [],

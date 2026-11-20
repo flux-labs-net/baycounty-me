@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-19",
+ "as_of": "2026-11-20",
  "fetched": {
-  "pcb-chamber": "2026-11-19T20:30:54+00:00",
+  "pcb-chamber": "2026-11-20T11:16:37+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:26955",
-   "title": "Business After Hours – November 2026",
-   "starts": "2026-11-19T16:30:00",
-   "ends": "2026-11-19T18:30:00",
-   "all_day": false,
-   "venue": "PCB Wheel",
-   "city": "Panama City Beach",
-   "category": "Chamber Events",
-   "chamber_event": true,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/business-after-hours-nov-2026/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27576",

@@ -1,7 +1,32 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-19",
+ "checked": "2026-11-20",
  "notices": [
+  {
+   "notice_id": "nws:urn:oid:2.49.0.1.840.0.00ca131e1fe3de6c07a2fe368d7aec48595547ca.002.1",
+   "place_id": "fl-bay",
+   "kind": "weather",
+   "source": "National Weather Service Tallahassee",
+   "source_type": "nws",
+   "gov_id": null,
+   "title": "Rip Current Statement issued November 20 at 1:04AM EST until November 20 at 1:00AM EST by NWS Tallahassee FL",
+   "summary": null,
+   "instruction": null,
+   "severity": "moderate",
+   "event": "Rip Current Statement",
+   "area": "South Walton; Coastal Bay",
+   "zones": null,
+   "issued": "2026-11-20T06:04:00.000Z",
+   "starts": "2026-11-20T06:04:00.000Z",
+   "ends": "2026-11-20T06:00:00.000Z",
+   "updated": "2026-11-20T06:04:00.000Z",
+   "status": "ended",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.00ca131e1fe3de6c07a2fe368d7aec48595547ca.002.1",
+   "source_url": "https://www.weather.gov/tae/",
+   "geometry": null
+  },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1",
    "place_id": "fl-bay",
@@ -20,13 +45,13 @@
    "starts": "2026-11-19T07:49:00.000Z",
    "ends": "2026-11-20T06:00:00.000Z",
    "updated": "2026-11-19T07:49:00.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://alerts.weather.gov/search?id=urn%3Aoid%3A2.49.0.1.840.0.b0d393bb0934efa42af5672a9b8de3f35793f4cd.001.1",
    "source_url": "https://www.weather.gov/tae/",
    "first_seen": "2026-11-19T07:50:02.584412+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T05:55:01.073477+00:00",
    "geometry": null,
    "refs": [
     "nws:urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1"
@@ -56,7 +81,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=26",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-18T17:20:02.22566+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -191,14 +216,14 @@
    "starts": null,
    "ends": "2026-11-27T04:31:59.000Z",
    "updated": "2026-11-17T04:31:59.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2169",
    "source_url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2169",
    "geometry": null,
    "first_seen": "2026-11-17T04:34:22.347Z",
-   "last_seen": "2026-11-19T20:32:48.877Z"
+   "last_seen": "2026-11-19T23:05:01.867936+00:00"
   },
   {
    "notice_id": "fl511:964701",
@@ -502,7 +527,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -583,7 +608,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -610,7 +635,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -691,7 +716,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -1865,7 +1890,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -2187,7 +2212,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -2214,7 +2239,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   },
   {
@@ -2241,7 +2266,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-19T20:32:48.877Z",
+   "last_seen": "2026-11-20T11:18:14.968Z",
    "geometry": null
   }
  ]
