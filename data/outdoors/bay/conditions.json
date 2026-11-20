@@ -1,24 +1,24 @@
 {
- "fetched_at": "2026-11-20T11:18:02+00:00",
- "issued": "2026-11-20T06:58:00+00:00",
- "product_url": "https://api.weather.gov/products/8d1f6962-7ef1-45c1-b334-89d4ce8bb84d",
+ "fetched_at": "2026-11-20T20:02:35+00:00",
+ "issued": "2026-11-20T17:15:00+00:00",
+ "product_url": "https://api.weather.gov/products/3688f68c-78cb-41f8-97f5-9f5194ab47eb",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "Strong northeast winds over the Gulf waters will favor Franklin County beaches for a high risk of rip currents today. South-facing Gulf County beaches could also have some lingering high risk this morning, but conditions there should improve around midday. As winds turn more northerly late Saturday, the high rip risk along Franklin County beaches will ease. Offshore winds will hold the rip risk in the moderate category for all beaches from Sunday through Tuesday.",
+ "outlook": "Strong northeast winds over the Gulf waters will favor Franklin County beaches for a high risk of rip currents today. As winds turn more northerly late Saturday, the high rip risk along Franklin County beaches will ease. Offshore winds will hold the rip risk in the moderate category for all beaches from Sunday through Tuesday.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "Moderate",
    "surf_height": "Around 2 feet",
    "uv_index": "Moderate",
    "water_temperature": "68 degrees",
-   "weather": "Mostly cloudy. A chance of showers",
+   "weather": "Mostly cloudy. A slight chance of",
    "high_temperature": "Around 70",
    "winds": "Northeast winds around 20 mph",
-   "sunrise": "6:11 AM",
-   "sunset": "4:45 PM",
+   "sunrise": "7:11 AM",
+   "sunset": "5:45 PM",
    "summary": null
   },
   {
@@ -30,8 +30,8 @@
    "weather": "Partly sunny",
    "high_temperature": "In the lower 70s",
    "winds": "Northeast winds around 15 mph",
-   "sunrise": "6:12 AM",
-   "sunset": "4:44 PM",
+   "sunrise": "7:12 AM",
+   "sunset": "5:44 PM",
    "summary": null
   },
   {

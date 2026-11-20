@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-20T11:21:52+00:00",
+ "generated": "2026-11-20T20:06:45+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -213,6 +213,202 @@
    "parties": [],
    "addresses": [],
    "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=240"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "F.1",
+   "section": "CERTIFICATION OF ELECTION RESULTS",
+   "title": "Resolution No. 27-35, accepting the results of the General Election",
+   "summary": null,
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "I.1",
+   "section": "APPROVAL OF MEETING MINUTES",
+   "title": "October 22, 2026 Regular Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "K.1",
+   "section": "PRESENTATIONS",
+   "title": "Employee Years of Service Awards",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "K.2",
+   "section": "PRESENTATIONS",
+   "title": "Hospital Update by Andrew Starr, President, Western Market Tallahassee Memorial Healthcare",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.1",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-30, authorizing certain expenditures related to Front Beach Road Community Redevelopment Area acquisitions and activities for Fiscal Year 2027",
+   "summary": "Authorizes CRA expenditures in amounts not to exceed the limits set forth in Exhibit A for fiscal year 2027.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Front Beach Road Community Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.2",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-31, Optimist Club of the Beaches' Annual Christmas Parade road closures",
+   "summary": "Authorizes closure of portions of South Pier Park Drive and L.C. Hilton Drive and temporary use of a portion of Front Beach Road (US 98A) between 3:00 p.m. and 8:00 p.m. on Saturday, December 12, 2026.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Optimist Club of the Beaches"
+   ],
+   "addresses": [
+    "South Pier Park Drive",
+    "L.C. Hilton Drive",
+    "Front Beach Road (US 98A)"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.3",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-32, agreement with Atlas Engineering Services, LLC for professional program management services and task order related to the Front Beach Community Redevelopment Area",
+   "summary": "Approves an agreement and a task order for program management services in an amount not to exceed $1,105,511.00.",
+   "kind": "contract",
+   "amount": 1105511.0,
+   "parties": [
+    "Atlas Engineering Services, LLC"
+   ],
+   "addresses": [
+    "Front Beach Community Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.4",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-33, Front Beach Road Redevelopment Area near-term work plan",
+   "summary": "Authorizes and directs execution of a near-term work plan for community redevelopment within the Front Beach Road Redevelopment Area.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Panama City Beach Community Redevelopment Agency"
+   ],
+   "addresses": [
+    "Front Beach Road Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.5",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-34, combined task order and notice to proceed with Drummond Carpenter, PLLC for environmental impact assessment services",
+   "summary": "Approves a combined task order and notice to proceed for environmental impact assessment services for property at 17687 Ashley Drive in an amount not to exceed $60,955.94.",
+   "kind": "contract",
+   "amount": 60955.94,
+   "parties": [
+    "Drummond Carpenter, PLLC"
+   ],
+   "addresses": [
+    "17687 Ashley Drive"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "M.6",
+   "section": "CONSENT AGENDA",
+   "title": "Revision of the Master Audit List to remove obsolete items",
+   "summary": "Removes obsolete items from the Master Audit List, with a finding of surplus and authorization to dispose of them in any lawful manner.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-11-19",
+   "meeting": "City Council",
+   "number": "N.1",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Ordinance No. 1692, amending City Code Chapter 30, Pensions, Article II, Police Pension Plan; amending Sections 30-54 and 30-55 - Second Reading / Public Hearing",
+   "summary": "Amends the police pension plan's contribution and benefit amounts and eligibility sections.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423"
   },
   {
    "board": "pc",

@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
  "as_of": "2026-11-20",
- "fetched": "2026-11-20T06:16:37-0500",
+ "fetched": "2026-11-20T15:01:19-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -54,23 +54,6 @@
  },
  "events": [
   {
-   "event_id": "bay-county:1676:2026-11-20",
-   "source_id": "bay-county",
-   "source": "Bay County",
-   "gov": "county",
-   "town": "Bay County",
-   "title": "Code Enforcement Magistrate Hearings",
-   "starts": "2026-11-20T09:00:00",
-   "ends": "2026-11-20T11:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1676",
-   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
    "event_id": "library:23786:2026-11-20",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -103,23 +86,6 @@
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1677",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
    "recurring": false
-  },
-  {
-   "event_id": "panama-city:6571:2026-11-20",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Line Dancing",
-   "starts": "2026-11-20T13:00:00",
-   "ends": "2026-11-20T14:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6571",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
   },
   {
    "event_id": "library:23412:2026-11-20",
@@ -1190,7 +1156,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6573",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "panama-city:7497:2026-12-04",

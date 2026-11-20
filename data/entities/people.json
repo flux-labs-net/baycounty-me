@@ -1985,6 +1985,11 @@
      "source": "salaries"
     },
     {
+     "role": "2027 candidate: Lynn Haven Commissioner Seat 4",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    },
+    {
      "role": "City commissioner, Seat 4",
      "gov_id": "lh",
      "seat": "Seat 4",

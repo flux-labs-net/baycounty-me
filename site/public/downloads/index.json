@@ -8979,7 +8979,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 152,
+   "rows": 150,
    "columns": [
     {
      "name": "place_id",
@@ -9688,7 +9688,7 @@
      "values": [
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
-      "2026-11-20T06:58:00+00:00"
+      "2026-11-20T17:15:00+00:00"
      ]
     },
     {
@@ -9696,9 +9696,9 @@
      "type": "string",
      "values": [
       "Monday",
+      "Rest Of Today",
       "Saturday",
       "Sunday",
-      "Today",
       "Tuesday"
      ]
     },
@@ -9758,7 +9758,7 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy. A chance of showers",
+      "Mostly cloudy. A slight chance of",
       "Partly sunny"
      ]
     },
@@ -9782,16 +9782,16 @@
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:11 AM",
-      "6:12 AM"
+      "7:11 AM",
+      "7:12 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "4:44 PM",
-      "4:45 PM"
+      "5:44 PM",
+      "5:45 PM"
      ]
     },
     {
@@ -9805,7 +9805,7 @@
       "Moderate rip current risk*. Partly sunny. A slight chance of showers and thunderstorms. Highs around 70. Northeast winds around 10 mph.",
       "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the lower 70s. Northwest winds around 10 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Strong northeast winds over the Gulf waters will favor Franklin County beaches for a high risk of rip currents today. South-facing Gulf County beaches could also have some lingering high risk this morning, but conditions there should improve around midday. As winds turn more northerly late Saturday, the high rip risk along Franklin County beaches will ease. Offshore winds will hold the rip risk in the moderate category for all beaches from Sunday through Tuesday.",
+      "Strong northeast winds over the Gulf waters will favor Franklin County beaches for a high risk of rip currents today. As winds turn more northerly late Saturday, the high rip risk along Franklin County beaches will ease. Offshore winds will hold the rip risk in the moderate category for all beaches from Sunday through Tuesday.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9830,8 +9830,8 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+      "https://api.weather.gov/products/3688f68c-78cb-41f8-97f5-9f5194ab47eb",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
-      "https://api.weather.gov/products/8d1f6962-7ef1-45c1-b334-89d4ce8bb84d",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -14102,7 +14102,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 94,
+   "rows": 92,
    "columns": [
     {
      "name": "place_id",
@@ -15212,7 +15212,7 @@
    "id": "restaurants",
    "title": "Restaurants and food service",
    "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1441,
+   "rows": 1442,
    "columns": [
     {
      "name": "place_id",
@@ -15456,7 +15456,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17252,
+   "rows": 17262,
    "columns": [
     {
      "name": "place_id",
@@ -15727,7 +15727,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 17,
+   "rows": 16,
    "columns": [
     {
      "name": "place_id",
@@ -15798,7 +15798,6 @@
      "type": "string",
      "values": [
       "2026-11-20T10:00:00",
-      "2026-11-20T13:00:00",
       "2026-11-20T14:00:00",
       "2026-11-20T15:00:00",
       "2026-11-20T15:30:00-06:00",
@@ -15815,7 +15814,6 @@
      "type": "string",
      "values": [
       "2026-11-20T12:00:00",
-      "2026-11-20T14:00:00",
       "2026-11-20T15:30:00",
       "2026-11-20T16:00:00",
       "2026-11-20T17:00:00",
@@ -18076,7 +18074,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 551,
+   "rows": 555,
    "columns": [
     {
      "name": "place_id",
@@ -20898,8 +20896,8 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
-      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11032026-428",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_11172026-431",

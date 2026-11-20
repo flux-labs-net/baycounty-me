@@ -15,13 +15,13 @@
   "top_expenditures": "Up to 15 largest payees by total. Payee name variants are merged. Payments to individual people are aggregated as \"Payments to individuals\" or \"Refunds to individual contributors\". purpose lists the filed descriptions, most money first."
  },
  "summary": {
-  "candidates": 42,
+  "candidates": 43,
   "total_raised_all": 406026.36,
   "total_monetary_all": 396761.55,
   "total_in_kind_all": 9264.81,
   "total_spent_all": 361339.73,
   "reconciled": 30,
-  "no_activity": 12
+  "no_activity": 13
  },
  "candidates": [
   {
@@ -6342,6 +6342,77 @@
    "cand_id": 754,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=37&c=bay&ca=754&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=754&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Corey Langford",
+   "office": "Lynn Haven Commissioner Seat 4",
+   "soe_office": "Lynn Haven Commissioner Seat 4",
+   "election": "2027 Municipal Super Tuesday (Apr 20, 2027)",
+   "election_id": 37,
+   "party": "Nonpartisan",
+   "soe_status": "Active - Prefiled",
+   "soe_campaign_name": "Corey Langford (NON)",
+   "cand_id": 757,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=37&c=bay&ca=757&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=757&dhc=0&county=bay",
    "latest_report": null,
    "through": null,
    "total_raised": 0.0,

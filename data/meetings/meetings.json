@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-20T05:10:47-06:00",
+  "generated": "2026-11-20T13:55:06-06:00",
   "window": {
     "from": "2026-11-20",
     "to": "2027-01-19"
@@ -115,7 +115,7 @@
       "calendar_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
       "schedule_source_url": "https://www.pcbfl.gov/185/City-Council",
       "sources": {
-        "Granicus RSS": "ok (66 records)"
+        "Granicus RSS": "ok (67 records)"
       },
       "coverage": {
         "agenda_feed": 0,
@@ -289,7 +289,7 @@
       "calendar_url": null,
       "schedule_source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
       "sources": {
-        "Granicus RSS": "ok (27 records)"
+        "Granicus RSS": "ok (26 records)"
       },
       "coverage": {
         "agenda_feed": 0,
@@ -471,18 +471,6 @@
         "Incremental Development Alliance Summary Report.",
         "Motion to Adjourn Meeting Adjournment In accordance with the Americans with Disabilities Act and Section 286.26, Florida Statutes, persons with disabilities needing special accommodation to participate in this proceeding should contact the City's Human Resources Department one week prior to the proceeding at telephone (850) 872-3014 for assistance; if hearing impaired, telephone (850) 872-3028 (TD"
       ]
-    },
-    {
-      "board": "pcb",
-      "title": "City Council",
-      "start": "2026-10-22T09:00:00-05:00",
-      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
-      "status": "posted",
-      "past": true
     },
     {
       "board": "cw-planning",
@@ -837,6 +825,18 @@
       "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "status": "calendar",
       "detail_url": "https://www.bay.k12.fl.us/school-board-meetings",
+      "past": true
+    },
+    {
+      "board": "pcb",
+      "title": "City Council",
+      "start": "2026-11-19T08:45:00-06:00",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=423",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted",
       "past": true
     },
     {
