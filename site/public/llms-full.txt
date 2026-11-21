@@ -218,10 +218,6 @@ Who's running, their platforms and money
 URL: https://baycounty.me/elections/voting
 Dates, polling places and your ballot
 
-### Election night results
-URL: https://baycounty.me/elections/live
-The live count, every race
-
 ### Election results
 URL: https://baycounty.me/elections/results
 Every contest since 2016
@@ -769,6 +765,10 @@ Sources, method and corrections
 - [WJHG-TV: contracts, payments and votes](https://baycounty.me/public-money/vendors/wjhg-tv): Every public record on BayCounty.me naming WJHG-TV: contracts, change orders, payments, CRA records, business campaign gifts and how officials voted on its contracts.
 - [WMBB: contracts, payments and votes](https://baycounty.me/public-money/vendors/wmbb): Every public record on BayCounty.me naming WMBB: contracts, change orders, payments, CRA records, business campaign gifts and how officials voted on its contracts.
 - [World Changers (with First Baptist Church of Panama City): contracts, payments and votes](https://baycounty.me/public-money/vendors/world-changers-first-baptist-church-panama-city): Every public record on BayCounty.me naming World Changers (with First Baptist Church of Panama City): contracts, change orders, payments, CRA records, business campaign gifts and how officials voted on its contracts.
+
+## Elections pages
+
+- [Election night results](https://baycounty.me/elections/live): Live results of the November 3, 2026 election in Bay County as the Supervisor of Elections counts them: every local, state and federal race and ballot question, precincts reporting, and early, mail and Election Day votes, refreshed every minute.
 
 ## Restaurants (one page per state license, every inspection since 2016)
 
@@ -2491,7 +2491,7 @@ CSV: https://baycounty.me/downloads/data-source-sites.csv · JSON: https://bayco
 
 ### Site menu (site-menu)
 Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.
-Rows: 76. Columns: place_id, lang, section, section_order, question, item_group, item_order, label, href, description, start_here, gov_id
+Rows: 75. Columns: place_id, lang, section, section_order, question, item_group, item_order, label, href, description, start_here, gov_id
 CSV: https://baycounty.me/downloads/site-menu.csv · JSON: https://baycounty.me/downloads/site-menu.json
 
 ### CRAs: tax increment by agency (cra-agencies)
@@ -2526,7 +2526,7 @@ CSV: https://baycounty.me/downloads/chamber-events.csv · JSON: https://baycount
 
 ### Community events (community-events)
 What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 150. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
+Rows: 147. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
 CSV: https://baycounty.me/downloads/community-events.csv · JSON: https://baycounty.me/downloads/community-events.json
 
 ### Beach access points (beach-access)
@@ -2696,7 +2696,7 @@ CSV: https://baycounty.me/downloads/public-notices.csv · JSON: https://baycount
 
 ### Government job openings (job-openings)
 Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 92. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
+Rows: 100. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/job-openings.csv · JSON: https://baycounty.me/downloads/job-openings.json
 
 ### Government job boards (job-boards)
@@ -2741,7 +2741,7 @@ CSV: https://baycounty.me/downloads/new-businesses.csv · JSON: https://baycount
 
 ### This week in Bay County (weekly-roundup)
 This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.
-Rows: 16. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
+Rows: 10. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
 CSV: https://baycounty.me/downloads/weekly-roundup.csv · JSON: https://baycounty.me/downloads/weekly-roundup.json
 
 ### Military installations (military-installations)

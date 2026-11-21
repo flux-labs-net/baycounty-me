@@ -67,7 +67,6 @@ Run by Flux Labs (https://fluxlabs.net/), a managed IT services company in Panam
 
 - [2026 Elections](https://baycounty.me/elections): Who's running, their platforms and money
 - [Where and when to vote](https://baycounty.me/elections/voting): Dates, polling places and your ballot
-- [Election night results](https://baycounty.me/elections/live): The live count, every race
 - [Election results](https://baycounty.me/elections/results): Every contest since 2016
 - [Past elections](https://baycounty.me/elections/past): Every local race since 2016 and its money
 

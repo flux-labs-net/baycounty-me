@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-20T13:55:06-06:00",
+  "generated": "2026-11-21T05:10:43-06:00",
   "window": {
-    "from": "2026-11-20",
-    "to": "2027-01-19"
+    "from": "2026-11-21",
+    "to": "2027-01-20"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -17,11 +17,11 @@
       "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "sources": {
-        "PrimeGov": "ok (24 records)",
+        "PrimeGov": "ok (25 records)",
         "calendar (iCal cat 38)": "ok (26 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 1,
         "calendar": 3,
         "expected": 0
       }
@@ -138,7 +138,7 @@
         "calendar (iCal cat 14)": "ok (3 records)"
       },
       "coverage": {
-        "agenda_feed": 5,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 0
       }
@@ -577,23 +577,6 @@
       "past": true
     },
     {
-      "board": "lh",
-      "title": "11/13/26 Special Commission Meeting",
-      "start": "2026-11-13T15:30:00-06:00",
-      "location": "825 Ohio Avenue, Lynn Haven",
-      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1180,plainText=false)",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
-      "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2154/files",
-      "past": true,
-      "items": [],
-      "agenda_items": [
-        "Discussion regarding the hiring of a new City Clerk/Treasurer."
-      ]
-    },
-    {
       "board": "sp",
       "title": "Commission Workshop",
       "start": "2026-11-16T17:30:00-06:00",
@@ -850,6 +833,7 @@
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/3154/files",
+      "past": true,
       "items": [],
       "agenda_items": [
         "​Hiring ​of the new City Clerk/Treasurer."
@@ -881,15 +865,16 @@
     },
     {
       "board": "county",
-      "title": "Bay County Board of County Commissioners Meeting",
+      "title": "BOCC Regular Meeting",
       "start": "2026-12-01T09:00:00-06:00",
       "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
       "agenda_url": null,
       "packet_url": null,
       "minutes_url": null,
-      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1595"
+      "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
+      "status": "posted",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
+      "calendar_source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar"
     },
     {
       "board": "lh-planning",
@@ -1216,6 +1201,18 @@
       "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7656"
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2027-01-20T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1714"
     }
   ],
   "errors": [],

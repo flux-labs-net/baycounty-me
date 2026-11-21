@@ -1,41 +1,41 @@
 {
- "fetched_at": "2026-11-20T20:02:35+00:00",
- "issued": "2026-11-20T17:15:00+00:00",
- "product_url": "https://api.weather.gov/products/3688f68c-78cb-41f8-97f5-9f5194ab47eb",
+ "fetched_at": "2026-11-21T11:18:25+00:00",
+ "issued": "2026-11-21T07:12:00+00:00",
+ "product_url": "https://api.weather.gov/products/c3ee1e4a-cd0c-41de-93a1-2d38d606ceaf",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "Strong northeast winds over the Gulf waters will favor Franklin County beaches for a high risk of rip currents today. As winds turn more northerly late Saturday, the high rip risk along Franklin County beaches will ease. Offshore winds will hold the rip risk in the moderate category for all beaches from Sunday through Tuesday.",
+ "outlook": "A lingering high risk of rips could exist along Franklin County beaches early this morning, but the turn to more solidly offshore northerly winds today will bring a drop to moderate risk within a short couple of hours after sunrise. Otherwise, offshore winds for most of this week will cap the rip current risk in the moderate category.",
  "periods": [
   {
-   "period": "Rest Of Today",
+   "period": "Today",
    "rip_current_risk": "Moderate",
    "surf_height": "Around 2 feet",
    "uv_index": "Moderate",
    "water_temperature": "68 degrees",
-   "weather": "Mostly cloudy. A slight chance of",
-   "high_temperature": "Around 70",
-   "winds": "Northeast winds around 20 mph",
-   "sunrise": "7:11 AM",
-   "sunset": "5:45 PM",
-   "summary": null
-  },
-  {
-   "period": "Saturday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "Around 1 foot",
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": "Partly sunny",
-   "high_temperature": "In the lower 70s",
-   "winds": "Northeast winds around 15 mph",
-   "sunrise": "7:12 AM",
-   "sunset": "5:44 PM",
+   "weather": "Mostly cloudy until 7 AM, then partly",
+   "high_temperature": "In the upper 60s",
+   "winds": "North winds around 20 mph",
+   "sunrise": "6:12 AM",
+   "sunset": "4:44 PM",
    "summary": null
   },
   {
    "period": "Sunday",
+   "rip_current_risk": "Moderate",
+   "surf_height": "Around 1 foot",
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": "Sunny",
+   "high_temperature": "In the lower 70s",
+   "winds": "Northwest winds around 10 mph",
+   "sunrise": "6:13 AM",
+   "sunset": "4:44 PM",
+   "summary": null
+  },
+  {
+   "period": "Monday",
    "rip_current_risk": "Moderate",
    "surf_height": "around 1 foot",
    "uv_index": null,
@@ -45,20 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the lower 70s. Northwest winds around 10 mph."
-  },
-  {
-   "period": "Monday",
-   "rip_current_risk": "Moderate",
-   "surf_height": null,
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northwest winds around 5 mph."
+   "summary": "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. Northwest winds around 5 mph."
   },
   {
    "period": "Tuesday",
@@ -71,7 +58,20 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Partly sunny. A slight chance of showers and thunderstorms. Highs around 70. Northeast winds around 10 mph."
+   "summary": "Moderate rip current risk*. Partly sunny. Highs in the lower 70s. Northeast winds around 10 mph."
+  },
+  {
+   "period": "Wednesday",
+   "rip_current_risk": "Moderate",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "Moderate rip current risk*. Partly sunny. A chance of showers and a slight chance of thunderstorms. Highs in the upper 60s. Northeast winds around 15 mph."
   }
  ],
  "alerts": [],

@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-20",
+ "updated": "2026-11-21",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -7663,7 +7663,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 76,
+   "rows": 75,
    "columns": [
     {
      "name": "place_id",
@@ -8979,7 +8979,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 150,
+   "rows": 147,
    "columns": [
     {
      "name": "place_id",
@@ -9688,7 +9688,7 @@
      "values": [
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
-      "2026-11-20T17:15:00+00:00"
+      "2026-11-21T07:12:00+00:00"
      ]
     },
     {
@@ -9696,10 +9696,10 @@
      "type": "string",
      "values": [
       "Monday",
-      "Rest Of Today",
-      "Saturday",
       "Sunday",
-      "Tuesday"
+      "Today",
+      "Tuesday",
+      "Wednesday"
      ]
     },
     {
@@ -9758,54 +9758,53 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy. A slight chance of",
-      "Partly sunny"
+      "Mostly cloudy until 7 AM, then partly",
+      "Sunny"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "Around 70",
-      "In the lower 70s"
+      "In the lower 70s",
+      "In the upper 60s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "Northeast winds around 15 mph",
-      "Northeast winds around 20 mph"
+      "North winds around 20 mph",
+      "Northwest winds around 10 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:11 AM",
-      "7:12 AM"
+      "6:12 AM",
+      "6:13 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:44 PM",
-      "5:45 PM"
+      "4:44 PM"
      ]
     },
     {
      "name": "summary",
      "type": "string",
      "values": [
+      "A lingering high risk of rips could exist along Franklin County beaches early this morning, but the turn to more solidly offshore northerly winds today will bring a drop to moderate risk within a short couple of hours after sunrise. Otherwise, offshore winds for most of this week will cap the rip current risk in the moderate category.",
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the lower 70s. Northwest winds around 5 mph.",
-      "Moderate rip current risk*. Partly sunny. A slight chance of showers and thunderstorms. Highs around 70. Northeast winds around 10 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Sunny. Highs in the lower 70s. Northwest winds around 10 mph.",
+      "Moderate rip current risk*. Partly sunny. A chance of showers and a slight chance of thunderstorms. Highs in the upper 60s. Northeast winds around 15 mph.",
+      "Moderate rip current risk*. Partly sunny. Highs in the lower 70s. Northeast winds around 10 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. Northwest winds around 5 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Strong northeast winds over the Gulf waters will favor Franklin County beaches for a high risk of rip currents today. As winds turn more northerly late Saturday, the high rip risk along Franklin County beaches will ease. Offshore winds will hold the rip risk in the moderate category for all beaches from Sunday through Tuesday.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9830,8 +9829,8 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/3688f68c-78cb-41f8-97f5-9f5194ab47eb",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
+      "https://api.weather.gov/products/c3ee1e4a-cd0c-41de-93a1-2d38d606ceaf",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12497,7 +12496,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-20"
+      "2026-11-21"
      ]
     },
     {
@@ -14102,7 +14101,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 92,
+   "rows": 100,
    "columns": [
     {
      "name": "place_id",
@@ -14163,6 +14162,7 @@
       "Full time",
       "Full- Time",
       "Instructional",
+      "Licensed",
       "Part time",
       "Part-Time",
       "Safety officers",
@@ -14191,17 +14191,23 @@
      "name": "posted",
      "type": "string",
      "values": [
+      "2026-06-13",
+      "2026-06-18",
       "2026-07-13",
+      "2026-07-17",
       "2026-09-14",
       "2026-09-17",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
       "2026-10-08",
-      "2026-10-15",
       "2026-10-19",
-      "2026-10-21",
-      "2026-10-23",
+      "2026-10-22",
+      "2026-10-24",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
+      "2026-10-31",
       "2026-11-03",
       "2026-11-04",
       "2026-11-06",
@@ -14209,21 +14215,21 @@
       "2026-11-09",
       "2026-11-10",
       "2026-11-12",
-      "2026-11-13",
       "2026-11-16",
       "2026-11-17",
       "2026-11-18",
-      "2026-11-19"
+      "2026-11-19",
+      "2026-11-20"
      ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-20",
       "2026-11-23",
       "2026-11-24",
       "2026-11-30",
+      "2026-12-03",
       "2026-12-04",
       "2027-04-30"
      ]
@@ -14252,12 +14258,12 @@
       "2026-11-11",
       "2026-11-12",
       "2026-11-13",
-      "2026-11-14",
       "2026-11-16",
       "2026-11-17",
       "2026-11-18",
       "2026-11-19",
-      "2026-11-20"
+      "2026-11-20",
+      "2026-11-21"
      ]
     },
     {
@@ -14349,7 +14355,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-20"
+      "2026-11-21"
      ]
     }
    ],
@@ -15727,7 +15733,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 16,
+   "rows": 10,
    "columns": [
     {
      "name": "place_id",
@@ -15748,7 +15754,6 @@
      "type": "string",
      "values": [
       "event",
-      "meeting",
       "vote"
      ]
     },
@@ -15760,7 +15765,6 @@
      "name": "featured",
      "type": "boolean",
      "values": [
-      false,
       true
      ]
     },
@@ -15789,7 +15793,6 @@
       "2026-10-06",
       "2026-10-13",
       "2026-11-02",
-      "2026-11-20",
       "2026-11-21"
      ]
     },
@@ -15797,10 +15800,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-20T10:00:00",
-      "2026-11-20T14:00:00",
-      "2026-11-20T15:00:00",
-      "2026-11-20T15:30:00-06:00",
       "2026-11-21T09:00:00",
       "2026-11-21T10:00:00",
       "2026-11-21T13:00:00",
@@ -15813,10 +15812,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-20T12:00:00",
-      "2026-11-20T15:30:00",
-      "2026-11-20T16:00:00",
-      "2026-11-20T17:00:00",
       "2026-11-21T14:00:00",
       "2026-11-21T15:00:00",
       "2026-11-21T16:00:00",
@@ -15836,7 +15831,6 @@
      "name": "gov_id",
      "type": "string",
      "values": [
-      "lh",
       "mb",
       "sp"
      ]
@@ -15845,7 +15839,6 @@
      "name": "government",
      "type": "string",
      "values": [
-      "Lynn Haven",
       "Mexico Beach",
       "Springfield"
      ]
@@ -15854,7 +15847,6 @@
      "name": "board",
      "type": "string",
      "values": [
-      "Lynn Haven City Commission",
       "Mexico Beach City Council",
       "Springfield City Commission"
      ]
@@ -15872,7 +15864,6 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "825 Ohio Avenue, Lynn Haven",
       "Bay County Public Library",
       "Edgewater Beach & Golf Resort",
       "Panama City Beach Public Library",
@@ -15901,10 +15892,7 @@
     },
     {
      "name": "agenda_posted",
-     "type": "boolean",
-     "values": [
-      true
-     ]
+     "type": "string"
     },
     {
      "name": "amount",
@@ -15970,7 +15958,6 @@
      "type": "string",
      "values": [
       "https://baycounty.me/events",
-      "https://baycounty.me/meetings",
       "https://baycounty.me/public-money/votes"
      ]
     },
@@ -15988,7 +15975,6 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://lynnhavenfl.portal.civicclerk.com/",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-Council-Meeting-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-6-2026-Special-Meeting-and-LDC-Workshop-Minutes.pdf",
       "https://pcbeach.org/local-events/",
@@ -17550,7 +17536,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-20"
+      "2026-11-21"
      ]
     },
     {
@@ -20531,7 +20517,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-20"
+      "2026-11-21"
      ]
     },
     {
@@ -20758,7 +20744,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-20"
+      "2026-11-21"
      ]
     },
     {
@@ -20827,7 +20813,6 @@
      "type": "string",
      "values": [
       "11/10/26 CRA Meeting",
-      "11/13/26 Special Commission Meeting",
       "11/20/26 Special Commission Meeting",
       "12/8/26 CRA Meetings",
       "BOCC Regular Meeting",
@@ -20892,7 +20877,6 @@
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1180,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
@@ -20991,7 +20975,6 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/2133/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2137/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
-      "https://lynnhavenfl.portal.civicclerk.com/event/2154/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/3154/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/3155/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
@@ -20999,6 +20982,7 @@
       "https://www.baycountyfl.gov/calendar.aspx?EID=1605",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1713",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1714",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
       "https://www.panamacity.gov/calendar.aspx?EID=6077",
       "https://www.panamacity.gov/calendar.aspx?EID=7549",
@@ -21030,6 +21014,7 @@
      "name": "calendar_source",
      "type": "string",
      "values": [
+      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
      ]
     }
