@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -8715,7 +8715,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 45,
+   "rows": 43,
    "columns": [
     {
      "name": "place_id",
@@ -8803,8 +8803,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-21T18:00:00",
-      "2026-11-21T19:00:00",
       "2026-11-26T07:30:00",
       "2026-11-26T11:00:00",
       "2026-11-27T00:00:00",
@@ -8836,8 +8834,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-21T19:00:00",
-      "2026-11-21T21:00:00",
       "2026-11-26T10:00:00",
       "2026-11-26T11:00:00",
       "2026-11-26T20:00:00",
@@ -8897,7 +8893,6 @@
       "Panama City Marina",
       "Panama Country Club",
       "Pier Park",
-      "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community"
      ]
@@ -8979,7 +8974,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 147,
+   "rows": 145,
    "columns": [
     {
      "name": "place_id",
@@ -9073,7 +9068,6 @@
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
       "Dave & Buster’s",
-      "Edgewater Beach & Golf Resort",
       "Gulf of America",
       "LaCo",
       "McGuire’s Irish Pub",
@@ -9084,7 +9078,6 @@
       "Parker Park",
       "Parker Public Library",
       "Pier Park",
-      "St. Andrews Baptist Church",
       "Start/Finish Line located at Pier Park",
       "SweetBay Community",
       "Under the Palms Park",
@@ -9688,7 +9681,7 @@
      "values": [
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
-      "2026-11-21T07:12:00+00:00"
+      "2026-11-22T07:01:00+00:00"
      ]
     },
     {
@@ -9696,7 +9689,7 @@
      "type": "string",
      "values": [
       "Monday",
-      "Sunday",
+      "Thanksgiving Day",
       "Today",
       "Tuesday",
       "Wednesday"
@@ -9728,6 +9721,7 @@
      "name": "rip_current_risk",
      "type": "string",
      "values": [
+      "High",
       "Moderate"
      ]
     },
@@ -9736,7 +9730,6 @@
      "type": "string",
      "values": [
       "Around 1 foot",
-      "Around 2 feet",
       "around 1 foot"
      ]
     },
@@ -9758,23 +9751,22 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy until 7 AM, then partly",
-      "Sunny"
+      "Partly sunny",
+      "Partly sunny until 1 PM, then sunny"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 70s",
-      "In the upper 60s"
+      "In the lower 70s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "North winds around 20 mph",
+      "Northeast winds around 5 mph, becoming",
       "Northwest winds around 10 mph"
      ]
     },
@@ -9782,8 +9774,8 @@
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:12 AM",
-      "6:13 AM"
+      "6:13 AM",
+      "6:14 AM"
      ]
     },
     {
@@ -9797,14 +9789,14 @@
      "name": "summary",
      "type": "string",
      "values": [
-      "A lingering high risk of rips could exist along Franklin County beaches early this morning, but the turn to more solidly offshore northerly winds today will bring a drop to moderate risk within a short couple of hours after sunrise. Otherwise, offshore winds for most of this week will cap the rip current risk in the moderate category.",
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
+      "High rip current risk*. Mostly sunny. Highs in the mid 60s. Northwest winds around 15 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Partly sunny. A chance of showers and a slight chance of thunderstorms. Highs in the upper 60s. Northeast winds around 15 mph.",
-      "Moderate rip current risk*. Partly sunny. Highs in the lower 70s. Northeast winds around 10 mph.",
-      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. Northwest winds around 5 mph.",
+      "Moderate rip current risk*. Partly sunny. A chance of showers and a slight chance of thunderstorms. Highs in the upper 60s. East winds around 20 mph.",
+      "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. East winds around 10 mph.",
       "Moderate surf and/or currents. Use caution.",
+      "Northwesterly offshore winds today will keep the rip current risk subdued. Weak winds are expected Monday and most of Tuesday, before northeast winds pick up Tuesday night behind a back door cold front. That will kick up the rip risk on Wednesday for Franklin County beaches. Another cold front on Wednesday will bring a shift to westerly winds, which could pick up the rip risk for Panhandle beaches Thursday.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9829,8 +9821,8 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+      "https://api.weather.gov/products/41f232d2-32d6-471a-992a-03afa0340f87",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
-      "https://api.weather.gov/products/c3ee1e4a-cd0c-41de-93a1-2d38d606ceaf",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12496,7 +12488,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-21"
+      "2026-11-22"
      ]
     },
     {
@@ -14101,7 +14093,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 100,
+   "rows": 99,
    "columns": [
     {
      "name": "place_id",
@@ -14202,12 +14194,11 @@
       "2026-09-30",
       "2026-10-08",
       "2026-10-19",
-      "2026-10-22",
-      "2026-10-24",
+      "2026-10-23",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
-      "2026-10-31",
+      "2026-11-01",
       "2026-11-03",
       "2026-11-04",
       "2026-11-06",
@@ -14219,7 +14210,8 @@
       "2026-11-17",
       "2026-11-18",
       "2026-11-19",
-      "2026-11-20"
+      "2026-11-20",
+      "2026-11-21"
      ]
     },
     {
@@ -14263,7 +14255,8 @@
       "2026-11-18",
       "2026-11-19",
       "2026-11-20",
-      "2026-11-21"
+      "2026-11-21",
+      "2026-11-22"
      ]
     },
     {
@@ -14355,7 +14348,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-21"
+      "2026-11-22"
      ]
     }
    ],
@@ -15462,7 +15455,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17262,
+   "rows": 17263,
    "columns": [
     {
      "name": "place_id",
@@ -15733,7 +15726,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 10,
+   "rows": 4,
    "columns": [
     {
      "name": "place_id",
@@ -15753,7 +15746,6 @@
      "name": "section",
      "type": "string",
      "values": [
-      "event",
       "vote"
      ]
     },
@@ -15778,13 +15770,7 @@
     },
     {
      "name": "summary",
-     "type": "string",
-     "values": [
-      "Motion by Commissioner Griffis to approve the Consent Agenda (approval of minutes for October 5, 2026, Commission Meeting).",
-      "Motion by Commissioner Hamre to approve Resolution 26-13 Final Amendment to the Annual Budget for FY25-26.",
-      "Mr. Fosshage motioned to award Universal Concepts for the approximately 25-foot pre lit decorated outdoor Christmas tree in the amount of $12,800.00.",
-      "Mrs. Hamilton motioned to read Ordinance 901 by title only."
-     ]
+     "type": "string"
     },
     {
      "name": "date",
@@ -15792,40 +15778,20 @@
      "values": [
       "2026-10-06",
       "2026-10-13",
-      "2026-11-02",
-      "2026-11-21"
+      "2026-11-02"
      ]
     },
     {
      "name": "starts",
-     "type": "string",
-     "values": [
-      "2026-11-21T09:00:00",
-      "2026-11-21T10:00:00",
-      "2026-11-21T13:00:00",
-      "2026-11-21T14:00:00",
-      "2026-11-21T18:00:00",
-      "2026-11-21T19:00:00"
-     ]
+     "type": "string"
     },
     {
      "name": "ends",
-     "type": "string",
-     "values": [
-      "2026-11-21T14:00:00",
-      "2026-11-21T15:00:00",
-      "2026-11-21T16:00:00",
-      "2026-11-21T17:00:00",
-      "2026-11-21T19:00:00",
-      "2026-11-21T21:00:00"
-     ]
+     "type": "string"
     },
     {
      "name": "all_day",
-     "type": "boolean",
-     "values": [
-      false
-     ]
+     "type": "string"
     },
     {
      "name": "gov_id",
@@ -15853,42 +15819,19 @@
     },
     {
      "name": "town",
-     "type": "string",
-     "values": [
-      "Lynn Haven",
-      "Panama City",
-      "Panama City Beach"
-     ]
+     "type": "string"
     },
     {
      "name": "venue",
-     "type": "string",
-     "values": [
-      "Bay County Public Library",
-      "Edgewater Beach & Golf Resort",
-      "Panama City Beach Public Library",
-      "St. Andrews Baptist Church"
-     ]
+     "type": "string"
     },
     {
      "name": "category",
-     "type": "string",
-     "values": [
-      "Community",
-      "Library",
-      "budget",
-      "consent agenda",
-      "contract",
-      "procedural"
-     ]
+     "type": "string"
     },
     {
      "name": "recurring",
-     "type": "boolean",
-     "values": [
-      false,
-      true
-     ]
+     "type": "string"
     },
     {
      "name": "agenda_posted",
@@ -15957,19 +15900,12 @@
      "name": "page_url",
      "type": "string",
      "values": [
-      "https://baycounty.me/events",
       "https://baycounty.me/public-money/votes"
      ]
     },
     {
      "name": "source",
-     "type": "string",
-     "values": [
-      "City of Lynn Haven",
-      "City of Panama City",
-      "Northwest Regional Library System",
-      "Panama City Beach Chamber"
-     ]
+     "type": "string"
     },
     {
      "name": "source_url",
@@ -15977,10 +15913,6 @@
      "values": [
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-Council-Meeting-Minutes.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-6-2026-Special-Meeting-and-LDC-Workshop-Minutes.pdf",
-      "https://pcbeach.org/local-events/",
-      "https://www.cityoflynnhaven.gov/Calendar.aspx",
-      "https://www.nwrls.com/events",
-      "https://www.panamacity.gov/Calendar.aspx",
       "https://www.springfieldfl.net/media/10921"
      ]
     },
@@ -17536,7 +17468,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-21"
+      "2026-11-22"
      ]
     },
     {
@@ -20517,7 +20449,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-21"
+      "2026-11-22"
      ]
     },
     {
@@ -20744,7 +20676,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-21"
+      "2026-11-22"
      ]
     },
     {

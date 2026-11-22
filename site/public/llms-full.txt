@@ -2521,12 +2521,12 @@ CSV: https://baycounty.me/downloads/chamber-leaders.csv · JSON: https://baycoun
 
 ### Chambers of commerce: events and programs (chamber-events)
 Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.
-Rows: 45. Columns: place_id, chamber_id, chamber, kind, sort_order, title, schedule, about, starts, ends, all_day, venue, city, category, chamber_event, cost, event_id, url, source_url, gov_id
+Rows: 43. Columns: place_id, chamber_id, chamber, kind, sort_order, title, schedule, about, starts, ends, all_day, venue, city, category, chamber_event, cost, event_id, url, source_url, gov_id
 CSV: https://baycounty.me/downloads/chamber-events.csv · JSON: https://baycounty.me/downloads/chamber-events.json
 
 ### Community events (community-events)
 What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 147. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
+Rows: 145. Columns: place_id, event_id, source_id, source, gov, town, title, starts, ends, all_day, venue, category, recurring, cost, url, source_url, same_as, first_posted, gov_id
 CSV: https://baycounty.me/downloads/community-events.csv · JSON: https://baycounty.me/downloads/community-events.json
 
 ### Beach access points (beach-access)
@@ -2696,7 +2696,7 @@ CSV: https://baycounty.me/downloads/public-notices.csv · JSON: https://baycount
 
 ### Government job openings (job-openings)
 Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 100. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
+Rows: 99. Columns: place_id, job_id, board, gov_id, employer, title, department, job_type, pay, posted, closes, ref, url, first_seen, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/job-openings.csv · JSON: https://baycounty.me/downloads/job-openings.json
 
 ### Government job boards (job-boards)
@@ -2731,7 +2731,7 @@ CSV: https://baycounty.me/downloads/restaurants.csv · JSON: https://baycounty.m
 
 ### Restaurant inspections (restaurant-inspections)
 Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.
-Rows: 17,262. Columns: place_id, visit_id, license_number, business_name, city, date, inspection_type, visit_number, disposition, result, result_level, high_priority, intermediate, basic, total_violations, violation_codes, violation_items, source_url, gov_id
+Rows: 17,263. Columns: place_id, visit_id, license_number, business_name, city, date, inspection_type, visit_number, disposition, result, result_level, high_priority, intermediate, basic, total_violations, violation_codes, violation_items, source_url, gov_id
 CSV: https://baycounty.me/downloads/restaurant-inspections.csv · JSON: https://baycounty.me/downloads/restaurant-inspections.json
 
 ### New businesses (new-businesses)
@@ -2741,7 +2741,7 @@ CSV: https://baycounty.me/downloads/new-businesses.csv · JSON: https://baycount
 
 ### This week in Bay County (weekly-roundup)
 This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.
-Rows: 10. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
+Rows: 4. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
 CSV: https://baycounty.me/downloads/weekly-roundup.csv · JSON: https://baycounty.me/downloads/weekly-roundup.json
 
 ### Military installations (military-installations)

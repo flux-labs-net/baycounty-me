@@ -1,33 +1,20 @@
 {
- "fetched_at": "2026-11-21T11:18:25+00:00",
- "issued": "2026-11-21T07:12:00+00:00",
- "product_url": "https://api.weather.gov/products/c3ee1e4a-cd0c-41de-93a1-2d38d606ceaf",
+ "fetched_at": "2026-11-22T11:17:35+00:00",
+ "issued": "2026-11-22T07:01:00+00:00",
+ "product_url": "https://api.weather.gov/products/41f232d2-32d6-471a-992a-03afa0340f87",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "A lingering high risk of rips could exist along Franklin County beaches early this morning, but the turn to more solidly offshore northerly winds today will bring a drop to moderate risk within a short couple of hours after sunrise. Otherwise, offshore winds for most of this week will cap the rip current risk in the moderate category.",
+ "outlook": "Northwesterly offshore winds today will keep the rip current risk subdued. Weak winds are expected Monday and most of Tuesday, before northeast winds pick up Tuesday night behind a back door cold front. That will kick up the rip risk on Wednesday for Franklin County beaches. Another cold front on Wednesday will bring a shift to westerly winds, which could pick up the rip risk for Panhandle beaches Thursday.",
  "periods": [
   {
    "period": "Today",
    "rip_current_risk": "Moderate",
-   "surf_height": "Around 2 feet",
+   "surf_height": "Around 1 foot",
    "uv_index": "Moderate",
    "water_temperature": "68 degrees",
-   "weather": "Mostly cloudy until 7 AM, then partly",
-   "high_temperature": "In the upper 60s",
-   "winds": "North winds around 20 mph",
-   "sunrise": "6:12 AM",
-   "sunset": "4:44 PM",
-   "summary": null
-  },
-  {
-   "period": "Sunday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "Around 1 foot",
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": "Sunny",
+   "weather": "Partly sunny until 1 PM, then sunny",
    "high_temperature": "In the lower 70s",
    "winds": "Northwest winds around 10 mph",
    "sunrise": "6:13 AM",
@@ -37,6 +24,19 @@
   {
    "period": "Monday",
    "rip_current_risk": "Moderate",
+   "surf_height": "Around 1 foot",
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": "Partly sunny",
+   "high_temperature": "In the lower 70s",
+   "winds": "Northeast winds around 5 mph, becoming",
+   "sunrise": "6:14 AM",
+   "sunset": "4:44 PM",
+   "summary": null
+  },
+  {
+   "period": "Tuesday",
+   "rip_current_risk": "Moderate",
    "surf_height": "around 1 foot",
    "uv_index": null,
    "water_temperature": null,
@@ -45,20 +45,7 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. Northwest winds around 5 mph."
-  },
-  {
-   "period": "Tuesday",
-   "rip_current_risk": "Moderate",
-   "surf_height": null,
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Partly sunny. Highs in the lower 70s. Northeast winds around 10 mph."
+   "summary": "Moderate rip current risk*. Surf height around 1 foot. Partly sunny. Highs in the lower 70s. East winds around 10 mph."
   },
   {
    "period": "Wednesday",
@@ -71,7 +58,20 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Partly sunny. A chance of showers and a slight chance of thunderstorms. Highs in the upper 60s. Northeast winds around 15 mph."
+   "summary": "Moderate rip current risk*. Partly sunny. A chance of showers and a slight chance of thunderstorms. Highs in the upper 60s. East winds around 20 mph."
+  },
+  {
+   "period": "Thanksgiving Day",
+   "rip_current_risk": "High",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "High rip current risk*. Mostly sunny. Highs in the mid 60s. Northwest winds around 15 mph."
   }
  ],
  "alerts": [],

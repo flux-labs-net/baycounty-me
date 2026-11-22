@@ -1,4 +1,5 @@
 visit_id,inspection_number,visit_number,license_number,license_type_code,business_name,address,city,zip,inspection_type,disposition,date,total_violations,high_priority,intermediate,basic,violations,license_id
+13975867,3740114,4,1306114,2010,MANNA CAFE,1815 W 15 ST STE 7,PANAMA CITY,32401,Routine - Food,Call Back - Complied,2026-11-20,0,0,0,0,,9918833
 13728210,1336668,1,1350452,2014,LA CUSCATLECA 2,606-B COMMERCE DR,PANAMA CITY BEACH,32408,Routine - Food,Inspection Completed - No Further Action,2026-11-19,1,0,1,0,02:1,9345227
 13961872,1350616,1,1350364,2014,JUSSBUSS,8701 FRONT BEACH RD,PANAMA CITY BEACH,32407,Complaint Full,Warning Issued,2026-11-19,13,3,4,6,03:1;08:1;14:1;29:1;31:3;36:3;41:1;50:1;53:1,9786441
 13965976,3793368,1,1306139,2010,PIZZA BY THE SEA,8411 TOWN CENTER BLVD STE 108,PANAMA CITY BEACH,32413,Food-Licensing Inspection,Inspection Completed - No Further Action,2026-11-19,0,0,0,0,,10177075

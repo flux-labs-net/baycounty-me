@@ -1,4 +1,5 @@
 place_id,visit_id,license_number,business_name,city,date,inspection_type,visit_number,disposition,result,result_level,high_priority,intermediate,basic,total_violations,violation_codes,violation_items,source_url,gov_id
+fl-bay,13975867,1306114,Manna Cafe,Panama City,2026-11-20,Routine - Food,4,Call Back - Complied,Follow-up visit: fixed,ok,0,0,0,0,,,https://www2.myfloridalicense.com/hotels-restaurants/public-records/,
 fl-bay,13707093,1305263,Jimmy John's Gourmet Sandwiches,Lynn Haven,2026-11-19,Routine - Food,3,Call Back - Complied,Follow-up visit: fixed,ok,0,0,0,0,,,https://www2.myfloridalicense.com/hotels-restaurants/public-records/,
 fl-bay,13707063,1306036,Sweet Stacks,Lynn Haven,2026-11-19,Routine - Food,3,"Call Back - Extension given, pending",Follow-up visit: more time given,warning,0,1,0,1,53:1,Food manager certification or employee training,https://www2.myfloridalicense.com/hotels-restaurants/public-records/,
 fl-bay,13965976,1306139,Pizza by the Sea,Panama City Beach,2026-11-19,Food-Licensing Inspection,1,Inspection Completed - No Further Action,Met inspection standards,ok,0,0,0,0,,,https://www2.myfloridalicense.com/hotels-restaurants/public-records/,

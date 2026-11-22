@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-21",
+ "as_of": "2026-11-22",
  "fetched": {
-  "pcb-chamber": "2026-11-21T11:17:09+00:00",
+  "pcb-chamber": "2026-11-22T11:16:27+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,36 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27576",
-   "title": "8th Annual Festival of Trees",
-   "starts": "2026-11-21T18:00:00",
-   "ends": "2026-11-21T21:00:00",
-   "all_day": false,
-   "venue": "Edgewater Beach & Golf Resort",
-   "city": null,
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/festival-of-trees-2/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27767",
-   "title": "David Phelps I Speak of Love Tour",
-   "starts": "2026-11-21T19:00:00",
-   "ends": "2026-11-21T19:00:00",
-   "all_day": false,
-   "venue": "St. Andrews Baptist Church",
-   "city": "Panama City",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/david-phelps-i-speak-of-love-tour/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27688",

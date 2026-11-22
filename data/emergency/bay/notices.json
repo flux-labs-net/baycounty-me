@@ -1,7 +1,34 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-21",
+ "checked": "2026-11-22",
  "notices": [
+  {
+   "notice_id": "alert:pcb:26",
+   "place_id": "fl-bay",
+   "kind": "boil-water",
+   "source": "City of Panama City Beach",
+   "source_type": "alert-center",
+   "gov_id": "pcb",
+   "title": "Boil Water Notice for Burnham Ave, Manistee Dr & Heather Dr Rescinded",
+   "summary": "The Precautionary Boil Water Notice for residents at 504-510 Burnham Avenue, 164-187 Manistee Drive, and 171 Heather Drive has been rescinded.",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-21T19:17:11.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-11-21T19:17:11.000Z",
+   "status": "lifted",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=26",
+   "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
+   "first_seen": "2026-11-18T17:20:02.22566+00:00",
+   "last_seen": "2026-11-22T11:17:51.837Z",
+   "geometry": null
+  },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.00ca131e1fe3de6c07a2fe368d7aec48595547ca.002.1",
    "place_id": "fl-bay",
@@ -56,33 +83,6 @@
    "refs": [
     "nws:urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1"
    ]
-  },
-  {
-   "notice_id": "alert:pcb:26",
-   "place_id": "fl-bay",
-   "kind": "boil-water",
-   "source": "City of Panama City Beach",
-   "source_type": "alert-center",
-   "gov_id": "pcb",
-   "title": "Precautionary Boil Water Notice for Burnham Ave & Manistee Dr",
-   "summary": "Due to a relocation of a water main earlier today, all residents at 504-510 Burnham Avenue, 164-187 Manistee Drive, and 171 Heather Drive in Panama City Beach are under a Precautionary Boil Water Notice.",
-   "instruction": null,
-   "severity": "moderate",
-   "event": null,
-   "area": null,
-   "zones": null,
-   "issued": "2026-11-18T19:15:21.000Z",
-   "starts": null,
-   "ends": null,
-   "updated": "2026-11-18T19:15:21.000Z",
-   "status": "active",
-   "full_closure": null,
-   "roadway": null,
-   "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=26",
-   "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
-   "first_seen": "2026-11-18T17:20:02.22566+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
-   "geometry": null
   },
   {
    "notice_id": "nws:urn:oid:2.49.0.1.840.0.b2a7f24d1b4a997cf025d7734f872363760fc58b.001.1",
@@ -527,7 +527,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -608,7 +608,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -635,7 +635,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -716,7 +716,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -1890,7 +1890,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -2212,7 +2212,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -2239,7 +2239,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   },
   {
@@ -2266,7 +2266,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-21T11:18:37.774Z",
+   "last_seen": "2026-11-22T11:17:51.837Z",
    "geometry": null
   }
  ]
