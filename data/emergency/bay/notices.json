@@ -1,6 +1,6 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-22",
+ "checked": "2026-11-23",
  "notices": [
   {
    "notice_id": "alert:pcb:26",
@@ -26,7 +26,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=26",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-11-18T17:20:02.22566+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -527,7 +527,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -608,7 +608,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -635,7 +635,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -716,7 +716,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -1884,13 +1884,13 @@
    "starts": null,
    "ends": null,
    "updated": "2026-10-23T13:42:27.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-22T15:40:01.052187+00:00",
    "geometry": null
   },
   {
@@ -2212,7 +2212,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -2239,7 +2239,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   },
   {
@@ -2266,7 +2266,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-22T11:17:51.837Z",
+   "last_seen": "2026-11-23T13:27:37.058Z",
    "geometry": null
   }
  ]
