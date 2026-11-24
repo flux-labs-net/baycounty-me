@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -8974,7 +8974,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 152,
+   "rows": 156,
    "columns": [
     {
      "name": "place_id",
@@ -9681,7 +9681,7 @@
      "values": [
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
-      "2026-11-23T06:52:00+00:00"
+      "2026-11-24T06:52:00+00:00"
      ]
     },
     {
@@ -9689,9 +9689,9 @@
      "type": "string",
      "values": [
       "Friday",
+      "Saturday",
       "Thanksgiving Day",
       "Today",
-      "Tuesday",
       "Wednesday"
      ]
     },
@@ -9730,28 +9730,29 @@
      "type": "string",
      "values": [
       "Around 1 foot",
-      "around 2 feet"
+      "Around 2 feet",
+      "around 3 feet"
      ]
     },
     {
      "name": "uv_index",
      "type": "string",
      "values": [
-      "Moderate"
+      "Low"
      ]
     },
     {
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "68 degrees"
+      "69 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly sunny",
+      "Mostly cloudy. Showers likely and a",
       "Partly sunny"
      ]
     },
@@ -9760,29 +9761,31 @@
      "type": "string",
      "values": [
       "In the lower 70s",
-      "In the mid 70s"
+      "In the mid 60s"
      ]
     },
     {
      "name": "winds",
      "type": "string",
      "values": [
-      "Northeast winds 10 to 15 mph",
-      "Northeast winds around 5 mph, becoming"
+      "Breezy. East winds 20 to 25 mph",
+      "Northeast winds around 15 mph,"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:14 AM"
+      "6:14 AM",
+      "6:15 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "4:44 PM"
+      "4:44 PM",
+      "6:43 PM"
      ]
     },
     {
@@ -9790,13 +9793,13 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Partly sunny. Highs in the lower 60s. Breezy. Northwest winds around 25 mph.",
+      "High rip current risk*. Partly sunny. Highs around 60. Northwest winds around 15 mph.",
+      "High rip current risk*. Surf height around 3 feet. Partly sunny. Highs in the lower 60s. Breezy. Northwest winds around 25 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Light winds today will become northeasterly on Tuesday, strengthening enough on Tuesday night to bring a high risk of rip currents to Franklin County beaches on Wednesday. A cold front on Wednesday night will shift winds around westerly or northwesterly on Thursday and Friday. These winds will push surf more directly at Panhandle beaches and increase the risk of rip currents.",
-      "Moderate rip current risk*. Partly sunny. Highs in the lower 60s. Northwest winds around 15 mph.",
-      "Moderate rip current risk*. Surf height around 2 feet. Mostly cloudy. A chance of showers. Highs in the mid 60s. Breezy. East winds around 25 mph.",
+      "Moderate rip current risk*. Mostly cloudy. Highs in the mid 60s. Northeast winds around 5 mph.",
       "Moderate surf and/or currents. Use caution.",
+      "Northeast breezes will strengthen and become strong this evening, pushing enough surf onto Franklin County beaches starting Wednesday for a high risk of rip current. A cold front on Wednesday night will shift winds around westerly or northwesterly on Thursday and Friday. These winds will push surf more directly at Panhandle beaches and increase the risk of rip currents.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9821,7 +9824,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/4458b0c5-af2e-4fd0-bb82-9bae30c9cfcb",
+      "https://api.weather.gov/products/81ef46ac-2cad-4beb-b741-475ec770a4d2",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
@@ -12488,7 +12491,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-23"
+      "2026-11-24"
      ]
     },
     {
@@ -12637,7 +12640,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 83,
+   "rows": 84,
    "columns": [
     {
      "name": "notice_id",
@@ -12847,6 +12850,7 @@
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2158",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2163",
       "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2169",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2170",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
@@ -13824,7 +13828,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 139,
+   "rows": 145,
    "columns": [
     {
      "name": "place_id",
@@ -13922,7 +13926,9 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-752.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/IWs6mUXnnBJ2jDJa89W4/ac60./cropped-698.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Nc7tQmbT94sUg6TzK0Wo/dcd3./cropped-422.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/UMX3wC6UPG1etGBKTVM9/ccbf./cropped-951.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/VeWabPeG03Kf0uFQceYJ/0ccc./cropped-208.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-007.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-367.pdf",
@@ -14002,6 +14008,7 @@
       "buildingdepartment@pcbfl.gov",
       "cityclerk@panamacity.gov",
       "cityclerk@pcbfl.gov",
+      "dmcardle@cityoflynnhaven.gov",
       "fulleln@bay.k12.fl.us",
       "fulleln@bay.k12.fl.us; facilities@bay.k12.fl.us",
       "harveam@bay.k12.fl.us",
@@ -14095,7 +14102,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 98,
+   "rows": 102,
    "columns": [
     {
      "name": "place_id",
@@ -14196,14 +14203,12 @@
       "2026-09-30",
       "2026-10-08",
       "2026-10-19",
-      "2026-10-24",
-      "2026-10-26",
+      "2026-10-25",
+      "2026-10-27",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
-      "2026-11-02",
       "2026-11-03",
-      "2026-11-04",
       "2026-11-06",
       "2026-11-07",
       "2026-11-09",
@@ -14214,14 +14219,14 @@
       "2026-11-18",
       "2026-11-19",
       "2026-11-20",
-      "2026-11-21"
+      "2026-11-21",
+      "2026-11-23"
      ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-11-23",
       "2026-11-24",
       "2026-11-30",
       "2026-12-03",
@@ -14259,7 +14264,8 @@
       "2026-11-19",
       "2026-11-20",
       "2026-11-21",
-      "2026-11-22"
+      "2026-11-22",
+      "2026-11-24"
      ]
     },
     {
@@ -14351,7 +14357,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-23"
+      "2026-11-24"
      ]
     }
    ],
@@ -15729,7 +15735,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 33,
+   "rows": 29,
    "columns": [
     {
      "name": "place_id",
@@ -15789,7 +15795,6 @@
      "values": [
       "2026-10-13",
       "2026-10-27",
-      "2026-11-23",
       "2026-11-24",
       "2026-11-25",
       "2026-11-26",
@@ -15802,9 +15807,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-23T15:00:00",
-      "2026-11-23T16:00:00",
-      "2026-11-23T17:30:00",
       "2026-11-24T09:00:00-06:00",
       "2026-11-24T13:30:00",
       "2026-11-24T14:00:00",
@@ -15830,8 +15832,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-23T17:00:00",
-      "2026-11-23T18:30:00",
       "2026-11-24T15:00:00",
       "2026-11-24T15:30:00",
       "2026-11-24T17:00:00",
@@ -15995,7 +15995,36 @@
     },
     {
      "name": "url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://baycounty.me/public-money/votes?q=The%20board%20approved%20a%20new%20drive-through%20f#all",
+      "https://baycounty.me/public-money/votes?q=The%20commission%20approved%20Ordinance%201191%20o#all",
+      "https://baycounty.me/public-money/votes?q=The%20commission%20approved%20Ordinance%201192R%20#all",
+      "https://baycounty.me/public-money/votes?q=The%20commission%20approved%20Resolution%202026-#all",
+      "https://baycounty.me/public-money/votes?q=The%20commission%20approved%20the%20consent%20agen#all",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
+      "https://mexicobeach.com/event/farmers-market/2026-11-28/",
+      "https://mexicobeach.com/event/license-free-saltwater-fishing-day/",
+      "https://mexicobeach.com/event/thanksgiving-turkey-trot/",
+      "https://pcbeach.org/local-event/beach-home-for-the-holidays-3/",
+      "https://pcbeach.org/local-event/charlotte-claires-turkey-trot/",
+      "https://pcbeach.org/local-event/thanksgiving-at-laco-2/",
+      "https://pcbeach.org/local-event/thanksgiving-dinner-at-barefoot-hide-a-way/",
+      "https://www.baycountyfl.gov/Calendar.aspx?EID=1614",
+      "https://www.baycountyfl.gov/Calendar.aspx?EID=1615",
+      "https://www.nwrls.com/event/chapter-chat-book-club-2/",
+      "https://www.nwrls.com/event/lego-club-ages-6-12-7/",
+      "https://www.nwrls.com/event/photography-club-adults-3/",
+      "https://www.panamacity.gov/Calendar.aspx?EID=6365",
+      "https://www.panamacity.gov/Calendar.aspx?EID=6711",
+      "https://www.panamacity.gov/Calendar.aspx?EID=6993",
+      "https://www.panamacity.gov/Calendar.aspx?EID=7440",
+      "https://www.panamacity.gov/Calendar.aspx?EID=7494",
+      "https://www.panamacity.gov/Calendar.aspx?EID=7628",
+      "https://www.panamacity.gov/Calendar.aspx?EID=7708",
+      "https://www.panamacity.gov/Calendar.aspx?EID=7714",
+      "https://www.panamacity.gov/Calendar.aspx?EID=7733"
+     ]
     },
     {
      "name": "page_url",
@@ -17584,7 +17613,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-23"
+      "2026-11-24"
      ]
     },
     {
@@ -20565,7 +20594,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-23"
+      "2026-11-24"
      ]
     },
     {
@@ -20792,7 +20821,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-23"
+      "2026-11-24"
      ]
     },
     {

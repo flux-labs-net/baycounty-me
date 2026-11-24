@@ -1,31 +1,4 @@
 {
  "about": "Posts that may be the same thing listed twice, for /admin > Name matches. Written by site/repeats.py; see data/dupes.py.",
- "pairs": [
-  {
-   "a": {
-    "key": "panama-city:7744:2026-12-04",
-    "names": [
-     "Annual Christmas Tree Lighting - Downtown PC"
-    ],
-    "source": "City of Panama City",
-    "posted": "2026-12-04T17:30:00",
-    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7744",
-    "text": null
-   },
-   "b": {
-    "key": "panama-city:7745:2026-12-04",
-    "names": [
-     "Downtown PC Christmas Tree Lighting Ceremony"
-    ],
-    "source": "City of Panama City",
-    "posted": "2026-12-04T17:00:00",
-    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7745",
-    "text": null
-   },
-   "title": 0.71,
-   "body": null,
-   "feed": "events",
-   "feed_label": "Event"
-  }
- ]
+ "pairs": []
 }
