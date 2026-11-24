@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-24T05:10:47-06:00",
+  "generated": "2026-11-24T15:17:11-06:00",
   "window": {
     "from": "2026-11-24",
     "to": "2027-01-23"
@@ -289,10 +289,10 @@
       "calendar_url": null,
       "schedule_source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
       "sources": {
-        "Granicus RSS": "ok (26 records)"
+        "Granicus RSS": "ok (27 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 1,
         "calendar": 0,
         "expected": 0
       }
@@ -346,10 +346,10 @@
       "calendar_url": null,
       "schedule_source_url": "https://www.cityofcallaway.com/160/Planning-Board",
       "sources": {
-        "AgendaCenter": "ok (4 records)"
+        "AgendaCenter": "ok (5 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 1,
         "calendar": 0,
         "expected": 0
       }
@@ -877,6 +877,17 @@
       "calendar_source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar"
     },
     {
+      "board": "cw-planning",
+      "title": "Planning Board Meeting",
+      "start": "2026-12-01",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_12012026-432",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted"
+    },
+    {
       "board": "lh-planning",
       "title": "Planning Commission",
       "start": "2026-12-01T17:30:00-06:00",
@@ -974,6 +985,18 @@
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted"
+    },
+    {
+      "board": "pcb-planning",
+      "title": "Planning Board",
+      "start": "2026-12-09T13:00:00-06:00",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=232",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted",
+      "time_from_schedule": true
     },
     {
       "board": "pcb",

@@ -1,24 +1,24 @@
 {
- "fetched_at": "2026-11-24T11:17:38+00:00",
- "issued": "2026-11-24T06:52:00+00:00",
- "product_url": "https://api.weather.gov/products/81ef46ac-2cad-4beb-b741-475ec770a4d2",
+ "fetched_at": "2026-11-24T21:24:15+00:00",
+ "issued": "2026-11-24T16:19:00+00:00",
+ "product_url": "https://api.weather.gov/products/51d344a3-9ee7-46e7-9d03-8ddc4605f6ab",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
- "flag": null,
+ "flag": "Yellow",
  "outlook": "Northeast breezes will strengthen and become strong this evening, pushing enough surf onto Franklin County beaches starting Wednesday for a high risk of rip current. A cold front on Wednesday night will shift winds around westerly or northwesterly on Thursday and Friday. These winds will push surf more directly at Panhandle beaches and increase the risk of rip currents.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "Moderate",
    "surf_height": "Around 1 foot",
    "uv_index": "Low",
-   "water_temperature": "69 degrees",
+   "water_temperature": "68 degrees",
    "weather": "Partly sunny",
    "high_temperature": "In the lower 70s",
-   "winds": "Northeast winds around 15 mph,",
-   "sunrise": "6:14 AM",
-   "sunset": "4:44 PM",
+   "winds": "Northeast winds 5 to 10 mph",
+   "sunrise": "7:14 AM",
+   "sunset": "5:44 PM",
    "summary": null
   },
   {
@@ -30,8 +30,8 @@
    "weather": "Mostly cloudy. Showers likely and a",
    "high_temperature": "In the mid 60s",
    "winds": "Breezy. East winds 20 to 25 mph",
-   "sunrise": "6:15 AM",
-   "sunset": "6:43 PM",
+   "sunrise": "7:15 AM",
+   "sunset": "5:43 PM",
    "summary": null
   },
   {
@@ -87,6 +87,12 @@
    "flag": "Yellow",
    "issued": "2026-11-17T17:31:00+00:00",
    "source_url": "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a"
+  },
+  {
+   "date": "2026-11-24",
+   "flag": "Yellow",
+   "issued": "2026-11-24T16:19:00+00:00",
+   "source_url": "https://api.weather.gov/products/51d344a3-9ee7-46e7-9d03-8ddc4605f6ab"
   }
  ]
 }

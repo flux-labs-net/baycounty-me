@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-24T11:18:31.865Z",
+ "as_of": "2026-11-24T21:25:21.638Z",
  "boards": [
   {
    "key": "county",
@@ -9,7 +9,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 8
+   "count": 11
   },
   {
    "key": "schools",
@@ -29,7 +29,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 23
+   "count": 22
   },
   {
    "key": "lh",
@@ -39,7 +39,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 3
+   "count": 2
   },
   {
    "key": "cw",
@@ -103,6 +103,48 @@
   }
  ],
  "jobs": [
+  {
+   "board": "county",
+   "gov_id": "county",
+   "employer": "Bay County",
+   "title": "Senior Staff Assistant - Building Safety Division",
+   "department": "Government Center",
+   "job_type": "Full time",
+   "pay": null,
+   "posted": "2026-11-24",
+   "closes": null,
+   "ref": "JR100081",
+   "url": "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site/job/Government-Center/Senior-Staff-Assistant---Building-Safety-Division_JR100081",
+   "first_seen": "2026-11-24"
+  },
+  {
+   "board": "county",
+   "gov_id": "county",
+   "employer": "Bay County",
+   "title": "Building Safety Manager",
+   "department": "Government Center",
+   "job_type": "Full time",
+   "pay": null,
+   "posted": "2026-11-24",
+   "closes": null,
+   "ref": "JR100082",
+   "url": "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site/job/Government-Center/Building-Safety-Manager_JR100082",
+   "first_seen": "2026-11-24"
+  },
+  {
+   "board": "county",
+   "gov_id": "county",
+   "employer": "Bay County",
+   "title": "Fire Inspector I",
+   "department": "Emergency Services",
+   "job_type": "Full time",
+   "pay": null,
+   "posted": "2026-11-24",
+   "closes": null,
+   "ref": "JR100079",
+   "url": "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site/job/Emergency-Services/Fire-Inspector-I_JR100079",
+   "first_seen": "2026-11-24"
+  },
   {
    "board": "county",
    "gov_id": "county",
@@ -1143,20 +1185,6 @@
    "board": "pc",
    "gov_id": "pc",
    "employer": "City of Panama City",
-   "title": "Deputy City Clerk",
-   "department": "City Clerk Treasurer",
-   "job_type": "Full- Time",
-   "pay": "$48,526.40 Annually",
-   "posted": "2026-11-19",
-   "closes": null,
-   "ref": "5555271",
-   "url": "https://www.governmentjobs.com/careers/pcgov/jobs/5555271/deputy-city-clerk",
-   "first_seen": "2026-11-19"
-  },
-  {
-   "board": "pc",
-   "gov_id": "pc",
-   "employer": "City of Panama City",
    "title": "Electrician I - (Full-Time or Part-Time)",
    "department": "Logistics",
    "job_type": "Full- Time",
@@ -1418,20 +1446,6 @@
    "ref": null,
    "url": "https://jobs.keldair.com/cityoflynnhaven/jobs/103061/wastewater-plant-operators-%28licensed-c-b-or-a%29",
    "first_seen": "2026-10-30"
-  },
-  {
-   "board": "lh",
-   "gov_id": "lh",
-   "employer": "City of Lynn Haven",
-   "title": "Firefighter/EMT",
-   "department": "Fire & EMS",
-   "job_type": null,
-   "pay": null,
-   "posted": "2026-10-29",
-   "closes": null,
-   "ref": null,
-   "url": "https://jobs.keldair.com/cityoflynnhaven/jobs/102429/firefighteremt",
-   "first_seen": "2026-11-06"
   },
   {
    "board": "lh",
