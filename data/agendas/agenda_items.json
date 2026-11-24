@@ -1,7 +1,62 @@
 {
- "generated": "2026-11-24T21:28:30+00:00",
+ "generated": "2026-11-24T22:27:06+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-12-09",
+   "meeting": "Planning Board",
+   "number": "3",
+   "section": null,
+   "title": "Approval of the November 12, 2026 Planning Board Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=232"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-12-09",
+   "meeting": "Planning Board",
+   "number": "5",
+   "section": null,
+   "title": "Code Enforcement Update",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=232"
+  },
+  {
+   "board": "pcb-planning",
+   "body": "Panama City Beach Planning Board",
+   "gov": "pcb",
+   "date": "2026-12-09",
+   "meeting": "Planning Board",
+   "number": "6.A",
+   "section": "Regular Agenda Items",
+   "title": "Tapestry Park Planned Unit Development (PUD) Modification",
+   "summary": "VCP Tapestry Park EATB, LLC (owner) and Toomer Street Development, LLC (applicant) request approval to modify the Tapestry Park PUD on about 14.87 acres on the north side of Hutchison Boulevard and east of Clara Avenue.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [
+    "VCP Tapestry Park EATB, LLC",
+    "Toomer Street Development, LLC"
+   ],
+   "addresses": [
+    "North side of Hutchison Boulevard, east of Clara Avenue",
+    "Parcel 34063-002-010",
+    "Parcel 34063-002-000"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=232"
+  },
   {
    "board": "lh",
    "body": "Lynn Haven City Commission",

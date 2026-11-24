@@ -8975,7 +8975,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 156,
+   "rows": 155,
    "columns": [
     {
      "name": "place_id",
@@ -15740,7 +15740,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 29,
+   "rows": 28,
    "columns": [
     {
      "name": "place_id",
@@ -15813,7 +15813,6 @@
      "type": "string",
      "values": [
       "2026-11-24T09:00:00-06:00",
-      "2026-11-24T13:30:00",
       "2026-11-24T14:00:00",
       "2026-11-24T15:00:00",
       "2026-11-24T16:00:00",
@@ -15838,7 +15837,6 @@
      "type": "string",
      "values": [
       "2026-11-24T15:00:00",
-      "2026-11-24T15:30:00",
       "2026-11-24T17:00:00",
       "2026-11-24T18:30:00",
       "2026-11-24T19:00:00",
@@ -16022,7 +16020,6 @@
       "https://www.nwrls.com/event/photography-club-adults-3/",
       "https://www.panamacity.gov/Calendar.aspx?EID=6365",
       "https://www.panamacity.gov/Calendar.aspx?EID=6711",
-      "https://www.panamacity.gov/Calendar.aspx?EID=6993",
       "https://www.panamacity.gov/Calendar.aspx?EID=7440",
       "https://www.panamacity.gov/Calendar.aspx?EID=7494",
       "https://www.panamacity.gov/Calendar.aspx?EID=7628",
@@ -17385,7 +17382,7 @@
    "id": "volunteer-needs",
    "title": "Volunteer needs",
    "description": "Open volunteer needs in the county, read every day from public volunteer boards (United Way of Northwest Florida's volunteer center and Idealist): what volunteers do, the organization, a plain cause, when (ongoing, one day or shifts), the city and ZIP, and the board's sign-up link. nonprofit_id and organization_entity_id link to the local nonprofit's profile where the name matches. No street addresses or contact details.",
-   "rows": 18,
+   "rows": 21,
    "columns": [
     {
      "name": "place_id",
@@ -17408,7 +17405,6 @@
      "values": [
       "American Red Cross - North Central Florida Region",
       "Bay Education Foundation",
-      "Big Brothers Big Sisters of Northwest Florida",
       "Boys & Girls Clubs of Bay County",
       "Club 360, Inc.",
       "Emerald Coast Hospice - Panama City",
@@ -17515,9 +17511,9 @@
      "values": [
       "2025-07-16",
       "2025-12-08",
-      "2026-04-13",
       "2026-04-20",
       "2026-05-05",
+      "2026-05-28",
       "2026-10-01"
      ]
     },
@@ -17525,37 +17521,41 @@
      "name": "closes",
      "type": "string",
      "values": [
-      "2027-03-10",
       "2027-03-26",
       "2027-03-30",
       "2027-03-31",
       "2027-04-18",
-      "2027-04-21"
+      "2027-04-21",
+      "2027-05-23"
      ]
     },
     {
      "name": "first_seen",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-27",
+      "2026-11-24"
      ]
     },
     {
      "name": "description",
      "type": "string",
      "values": [
+      "Are you a licensed Health Care Professional? Get prepared now to help people in disaster shelters. We need volunteers who can work in emergency shelters to help assess people’s health and provide hands on care in alignment with their professional licensure (RN and LPN/LVN). We also need volunteers who can provide care as delegated by a licensed Nurse in shelters. This could include assisting with activities of daily living, personal assistance services providing health education and helping to replace medications, durable medical equipment, or consumable supplies. Daily observation and health…",
       "Assist in setting up tables with linens and decorations, placement of chairs, photobooth, signage and that nature.",
       "Be Ready to help your local community! Due to predictions for an active hurricane and wildfire season and the complexities of COVID-19, the Red Cross will need thousands to care for people when disasters strike. Train now to be a Ready Red Cross Shelter Volunteer so you can answer the call when your community needs it most! We will need volunteers to help support emergency shelters by staffing different areas including reception, registration feeding, dormitory, information collection and other vital tasks. We have both associate and supervisory level opportunities available. Will you be…",
-      "Big Brothers Big Sisters of Northwest Florida seeks caring adults to serve as mentors to young children facing adversity in their lives. There are currently more than 100 children on our waiting list - mostly boys! Just a few hours each month can make a huge difference in the life of a child. As a volunteer you will be matched with a child between the ages of 5 and 13 who needs a caring adult role model and friend. In our community-based mentoring program, volunteers spend 1:1 time with their matched youth, known as \"Littles,\" in the community. Activities might include going to a sporting…",
       "Do you enjoy helping people get connected and providing good customer service? Join us as a Front Office Hero! Welcome clients and members of the public who visit the office, as well as answer the incoming calls. Connect inquiries to appropriate departments and people, and assist with office support projects. K Tasks include: Front Desk communication with guests, staff, and volunteers Assist in office administration in Red Cross department Answer telephones and take messages Light typing, data entry, work filing, spread sheets Assist is preparation of mailings, course materials packaging…",
       "For many in our communities, taxes can feel like a burden. VITA volunteers work to help lift that burden by offering low income families free tax preparation. Tax refunds give these families a springboard for the future by putting their hard-earned money back into their pockets. It's a simple way to offer a sense of hope. The United Way of Northwest Florida VITA program is now being offered in Bay, Calhoun, Gulf, Holmes, Jackson & Washington Counties. We need volunteers like you to help these families! Why Volunteer with VITA? Learn a New Skill - No experience is necessary. As a volunteer…",
       "Glenwood Marketplace is looking for volunteers to help with set up and break down. Set up starts at 7am, breakdown starts at 2pm. We will be doing heavy lifting, pulling, and walking. Every Saturday the Marketplace will be open. For more details call .",
       "Lasagna Love is a grassroots movement powered by thousands of volunteers cooking and delivering lasagna to neighbors in need. We are united by our commitment to offer a tangible act of love, compassion, and hope in communities often marked by uncertainty and stress. Together, we are proving that kindness has the power to nourish not only bodies, but also hearts and communities. Our purpose is simple yet profound: feed families, spread kindness, strengthen communities. As a volunteer Lasagna Chef, you decide what works for you. You choose how often you would like to volunteer—whether that’s…",
       "Listen, Read, Sing Hold a hand Make gifts for patients Run Errands or perform light housekeeping Share a gift or baked goods Veteran-to-veteran Support",
       "Mentoring is not rocket science. Check in and connect with a kid at the Club. It's that simple. We are in need of mentors who want to help young readers improve reading scores. Time on task in reading, site words, comprehension skills are so simple to lead, even a caveman can do it. Well almost...",
+      "PLACEMENT PURPOSE Assist the American Red Cross Mission by education community members, organizations and agencies to prevent and prepare for emergencies. OPEN TIME DAYS Flexible Commitment will depend on scheduling of community preparedness education opportunities and availability of volunteers Approximately 2 to 4 hours per presentation or booth event Suggested minimum of 4 times a year REQUIRED TRAINING Red Cross Orientation One on one training Learn local disaster hazards and history Community Disaster Education",
       "ReadingPals is a statewide early literacy initiative that provides volunteer mentors for students from Pre-K to 3rd grade who may need extra help, utilizing one-on-one or small group settings. In Bay & Washington Counties, ReadingPals volunteers help elementary students build strong early literacy skills necessary for success. Being a ReadingPals volunteer means becoming a real-life superhero in a child’s story—someone who sparks imagination, builds confidence, and opens doors to a lifetime of possibilities through the power of reading. As a ReadingPal, you’re more than a volunteer; you’re a…",
+      "Seven times a day, someone in this country dies in a home fire. The American Red Cross has launched a nationwide campaign to reduce this number and our volunteers can help save lives and prevent injuries. There are many ways you can be involved: Go door-to door and speak with residents about the importance of smoke alarms and promote the free smoke alarm installation service. Organize canvassing events and help residents develop a fire escape plan and complete a fire-safety checklist. Install smoke alarms and teach residents how to test and maintain their smoke alarms.",
       "The A.D. Harris Food Pantry provides nutritious food and essential grocery items to individuals and families facing food insecurity. Through regular distributions, food rescue, community partnerships, and volunteer support, the pantry helps ensure that Bay County residents have reliable access to food and other critical resources. Volunteers needed for receiving, stocking and driving (Tues/Fri), and distribution (Tues, Sat).",
       "The Bay Education Foundation is seeking caring adult volunteers to serve as mentors for students in the Take Stock in Children program. Mentors meet with their student just twice permonth during the school year, providing encouragement, guidance, and a positive role model as the student works toward graduation and a college scholarship provided by Bay Education Foundation. No special expertise is required, just a willingness to listen, support, and help a young person believe in their future. One hour a month can truly change a student’s life. If you’re interested in making a lasting…",
+      "The Volunteer Services Team Member will oversee the utilization and access to our volunteering platform; Volunteer Connection, the official American Red Cross volunteer engagement online system. Key Responsibilities: Provide expert support and guidance to the region and/or chapter Establish an ongoing system training calendar Conduct system training, using official American Red Cross training materials for volunteers and volunteer supervisors Serve as a champion of our volunteer system Time commitment: Approximately 4 hours per week, working remotely and/or on-site",
       "VITAS Healthcare(r) is looking for people who love to sew who are able to share their skills with hospice patients and families. A Memory Bear, sewn by a volunteer with compassion and love, is a forever friend who can ease a hurting heart after the death of a VITAS hospice patient. Sewn from a favorite pair of PJ's, a pullover top, dress, bathrobe or nightgown, a Memory Bear may recall the closeness of a loved one, bring a smile to someone in distress, or offer a sense of security to a child who feels alone after the loss of a parent or sibling. This is a great opportunity for you to give…",
       "Volunteer to Host a Foreign Exchange Student! Benefit from opening your home and heart to an exchange student for a term during the upcoming high school year by: Making life-long friendship connections abroad Giving a young person an opportunity to immerse themselves in our American culture and your family Gaining an international son/daughter Gain new perspectives on our American way of life through the eyes of your exchange student Choose from these ways to host; just a few weeks as a short-term Welcome Family, for a Semester, or school Year. You don't have to have your own child in high…"
      ]
@@ -18142,7 +18142,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 555,
+   "rows": 557,
    "columns": [
     {
      "name": "place_id",

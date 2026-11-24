@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-24T21:25:21.638Z",
+ "as_of": "2026-11-24T22:23:02.723Z",
  "boards": [
   {
    "key": "county",
@@ -18,7 +18,7 @@
    "url": "https://focus.bayschools.net/focus/jobs/#!Jobs",
    "read": true,
    "note": null,
-   "error": null,
+   "error": "page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://focus.bayschools.net/focus/jobs/#!Jobs\", waiting until \"networkidle\"\n",
    "count": 62
   },
   {
