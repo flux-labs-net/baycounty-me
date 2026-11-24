@@ -1,6 +1,6 @@
 {
  "place_id": "fl-bay",
- "fetched": "2026-11-17",
+ "fetched": "2026-11-24",
  "layers": [
   {
    "id": "county-do",
@@ -8,7 +8,7 @@
    "label": "Bay County development orders (unincorporated county)",
    "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
    "page": "https://www.baycountyfl.gov/157/Planning-Zoning",
-   "rows": 198
+   "rows": 199
   },
   {
    "id": "pcb-dev",
@@ -20,6 +20,25 @@
   }
  ],
  "projects": [
+  {
+   "project_id": "county-do:PLDO20260297",
+   "layer": "county-do",
+   "gov_id": "county",
+   "name": "Shrimp City",
+   "case_number": "PLDO20260297",
+   "description": "2,020 sq. ft. Seafood Market",
+   "size": "0.3 acres",
+   "location": "1815 Navy Boulevard",
+   "status": "Under review",
+   "applied_date": "2026-11-16",
+   "approved_date": null,
+   "permit_date": null,
+   "occupancy_date": null,
+   "plans_url": null,
+   "lat": 30.166743,
+   "lng": -85.756331,
+   "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18"
+  },
   {
    "project_id": "county-do:PLDO20260261",
    "layer": "county-do",

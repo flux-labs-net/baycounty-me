@@ -1,5 +1,5 @@
 {
-"as_of":"2026-11-17",
+"as_of":"2026-11-24",
 "county":"Bay County",
 "first_date":"2016-01-01",
 "source_url":"https://www.usaspending.gov/search",
@@ -14042,6 +14042,27 @@
 "description":"AEDT 2701 AL TALLANT",
 "start_date":"2026-10-25",
 "end_date":"2026-11-06",
+"agency":"Department of Justice",
+"sub_agency":"Bureau of Alcohol, Tobacco, Firearms and Explosives Acquisition and Property Management Division",
+"award_type":"BPA CALL",
+"naics":"611430",
+"naics_description":"PROFESSIONAL AND MANAGEMENT DEVELOPMENT TRAINING",
+"psc":"R499",
+"psc_description":"SUPPORT- PROFESSIONAL: OTHER",
+"performance_city":"Mexico Beach",
+"performance_county":"Bay",
+"performance_state":"FL"
+},
+{
+"award_key":"CONT_AWD_15A00027FABP00127_1560_15A00022AAQA00012_1560",
+"award_id":"15A00027FABP00127",
+"recipient":"ALBERT TALLANT",
+"uei":"KKPPSHMJPD66",
+"recipient_city":"Port Saint Joe",
+"award_amount":8000.0,
+"description":"AEDT 2702- AL TALLANT",
+"start_date":"2026-11-29",
+"end_date":"2026-12-11",
 "agency":"Department of Justice",
 "sub_agency":"Bureau of Alcohol, Tobacco, Firearms and Explosives Acquisition and Property Management Division",
 "award_type":"BPA CALL",
@@ -54537,6 +54558,27 @@
 "naics_description":"PLUMBING, HEATING, AND AIR-CONDITIONING CONTRACTORS",
 "psc":"Y1JZ",
 "psc_description":"CONSTRUCTION OF MISCELLANEOUS BUILDINGS",
+"performance_city":"Great Lakes",
+"performance_county":"Lake",
+"performance_state":"IL"
+},
+{
+"award_key":"CONT_AWD_N4008526F1432_9700_N4008523D0069_9700",
+"award_id":"N4008526F1432",
+"recipient":"AKTARIUS LLC",
+"uei":"ZE98MPEDJD37",
+"recipient_city":"Panama City",
+"award_amount":2208691.82,
+"description":"CONTRACTOR SHALL PROVIDE ALL-ENGINEERING, DESIGN, TRANSPORTATION, SUPERVISION, MATERIALS, EQUIPMENT AND LABOR TO REPLACE, SEPARATE, MOVE CONDENSERS AND REPLACE THE EXISTING TOWER WITH NEW COOLING TOWER AT BLDG 7114, RTC GREAT LAKES NAVAL STATION, IL.",
+"start_date":"2026-08-18",
+"end_date":"2027-08-18",
+"agency":"Department of Defense",
+"sub_agency":"Department of the Navy",
+"award_type":"DELIVERY ORDER",
+"naics":"238220",
+"naics_description":"PLUMBING, HEATING, AND AIR-CONDITIONING CONTRACTORS",
+"psc":"Z2FC",
+"psc_description":"REPAIR OR ALTERATION OF TROOP HOUSING FACILITIES",
 "performance_city":"Great Lakes",
 "performance_county":"Lake",
 "performance_state":"IL"
@@ -166871,7 +166913,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2017-12-04",
-"amount":332800.0,
+"amount":88400.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"17"
@@ -166882,7 +166924,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2017-12-04",
-"amount":88400.0,
+"amount":332800.0,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"17"
@@ -170028,7 +170070,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2018-03-06",
-"amount":-1071.23,
+"amount":-65878.16,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"21"
@@ -170039,7 +170081,7 @@
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
 "uei":"SCAKQLA3PUP5",
 "date":"2018-03-06",
-"amount":-65878.16,
+"amount":-1071.23,
 "agency":"Department of Defense",
 "sub_agency":"Department of the Navy",
 "mod":"21"
@@ -252666,17 +252708,6 @@
 "mod":"P00002"
 },
 {
-"award_key":"CONT_AWD_FA860423FB205_9700_GS35F0473S_4730",
-"award_id":"FA860423FB205",
-"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
-"uei":"CPXAXLLYQYT3",
-"date":"2025-06-12",
-"amount":54705.89,
-"agency":"Department of Defense",
-"sub_agency":"Department of the Air Force",
-"mod":"P00003"
-},
-{
 "award_key":"CONT_AWD_N3943021F4206_9700_N3943021D2206_9700",
 "award_id":"N3943021F4206",
 "recipient":"AKTARIUS LLC",
@@ -263457,6 +263488,17 @@
 "mod":"P00003"
 },
 {
+"award_key":"CONT_AWD_FA860423FB205_9700_GS35F0473S_4730",
+"award_id":"FA860423FB205",
+"recipient":"PROFESSIONAL SYSTEMS ASSOCIATES, INC.",
+"uei":"CPXAXLLYQYT3",
+"date":"2026-06-12",
+"amount":54705.89,
+"agency":"Department of Defense",
+"sub_agency":"Department of the Air Force",
+"mod":"P00003"
+},
+{
 "award_key":"CONT_AWD_N6133126F3001_9700_N0017819D7838_9700",
 "award_id":"N6133126F3001",
 "recipient":"INNOVATIVE PROFESSIONAL SOLUTIONS, INC.",
@@ -265008,6 +265050,17 @@
 "mod":"0"
 },
 {
+"award_key":"CONT_AWD_N4008526F1432_9700_N4008523D0069_9700",
+"award_id":"N4008526F1432",
+"recipient":"AKTARIUS LLC",
+"uei":"ZE98MPEDJD37",
+"date":"2026-08-18",
+"amount":2208691.82,
+"agency":"Department of Defense",
+"sub_agency":"Department of the Navy",
+"mod":"0"
+},
+{
 "award_key":"CONT_AWD_70Z08225FCEUM0019_7008_70Z08219DPMV11600_7008",
 "award_id":"70Z08225FCEUM0019",
 "recipient":"INLAND CONSTRUCTION & ENGINEERING INC",
@@ -265325,6 +265378,17 @@
 "agency":"Department of Commerce",
 "sub_agency":"National Oceanic and Atmospheric Administration",
 "mod":"P27010"
+},
+{
+"award_key":"CONT_AWD_15A00027FABP00127_1560_15A00022AAQA00012_1560",
+"award_id":"15A00027FABP00127",
+"recipient":"ALBERT TALLANT",
+"uei":"KKPPSHMJPD66",
+"date":"2026-11-18",
+"amount":8000.0,
+"agency":"Department of Justice",
+"sub_agency":"Bureau of Alcohol, Tobacco, Firearms and Explosives Acquisition and Property Management Division",
+"mod":"0"
 }
 ]
 }

@@ -2576,7 +2576,7 @@ CSV: https://baycounty.me/downloads/trails.csv · JSON: https://baycounty.me/dow
 
 ### Development projects (development-projects)
 Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.
-Rows: 244. Columns: place_id, project_id, gov_id, government, name, case_number, description, size, location, status, applied_date, approved_date, permit_date, occupancy_date, plans_url, lat, lng, source, source_page, fetched, source_url
+Rows: 245. Columns: place_id, project_id, gov_id, government, name, case_number, description, size, location, status, applied_date, approved_date, permit_date, occupancy_date, plans_url, lat, lng, source, source_page, fetched, source_url
 CSV: https://baycounty.me/downloads/development-projects.csv · JSON: https://baycounty.me/downloads/development-projects.json
 
 ### New homes permitted (housing-permits)
@@ -2666,7 +2666,7 @@ CSV: https://baycounty.me/downloads/disaster-declarations.csv · JSON: https://b
 
 ### Rebuild money by ZIP code (rebuild-money)
 Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.
-Rows: 197. Columns: place_id, zip, area_name, program, disaster_number, event, year, count, count_label, approved, amount_paid, repair_amount, rental_amount, inspected_damage, source_url, gov_id
+Rows: 198. Columns: place_id, zip, area_name, program, disaster_number, event, year, count, count_label, approved, amount_paid, repair_amount, rental_amount, inspected_damage, source_url, gov_id
 CSV: https://baycounty.me/downloads/rebuild-money.csv · JSON: https://baycounty.me/downloads/rebuild-money.json
 
 ### Elections since 2016 (elections)
@@ -2756,7 +2756,7 @@ CSV: https://baycounty.me/downloads/military-news.csv · JSON: https://baycounty
 
 ### Federal contracts to local companies (federal-contracts)
 Every federal contract with money obligated since 2016 to a company whose business address is in the county, from USAspending.gov: recipient (as registered in SAM.gov, with its city, never its street address), the agency and branch that signed it, what it buys (description, industry and product codes), start and end dates, and obligated, the money obligated from 2016 on (modifications and cuts included, so it can be negative). award_amount is USAspending's lifetime total, which can include earlier years. defense is true for Department of Defense contracts. recipient_entity_id links to the company's profile; recipient_match says how it was joined to other records (blank: by its own name only).
-Rows: 6,425. Columns: place_id, award_key, award_id, recipient, recipient_uei, recipient_city, recipient_entity_id, recipient_url, recipient_match, agency, sub_agency, agency_entity_id, defense, award_type, description, naics, naics_description, psc, psc_description, start_date, end_date, first_action_date, last_action_date, actions, obligated, award_amount, performance_city, performance_county, performance_state, source_url, gov_id
+Rows: 6,427. Columns: place_id, award_key, award_id, recipient, recipient_uei, recipient_city, recipient_entity_id, recipient_url, recipient_match, agency, sub_agency, agency_entity_id, defense, award_type, description, naics, naics_description, psc, psc_description, start_date, end_date, first_action_date, last_action_date, actions, obligated, award_amount, performance_city, performance_county, performance_state, source_url, gov_id
 CSV: https://baycounty.me/downloads/federal-contracts.csv · JSON: https://baycounty.me/downloads/federal-contracts.json
 
 ### Federal contracts to local companies by year (federal-contract-years)

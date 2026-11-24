@@ -1349,10 +1349,11 @@
       "Pending Award",
       "Pending Closeout Award",
       "Pending Closeout Completion",
+      "Pending Initial Project Development",
       "Pending Insurance Closeout Review",
       "Pending Large Project Review",
-      "Pending PDMG Project Review",
       "Pending Project Closeout Initial Review",
+      "Pending Recipient Closeout Review",
       "Pending Recipient Final Review",
       "Pending Scope and Cost Development",
       "Project Closed Out"
@@ -10513,7 +10514,7 @@
    "id": "development-projects",
    "title": "Development projects",
    "description": "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.",
-   "rows": 244,
+   "rows": 245,
    "columns": [
     {
      "name": "place_id",
@@ -10638,7 +10639,7 @@
      "name": "fetched",
      "type": "string",
      "values": [
-      "2026-11-17"
+      "2026-11-24"
      ]
     },
     {
@@ -13109,7 +13110,7 @@
    "id": "rebuild-money",
    "title": "Rebuild money by ZIP code",
    "description": "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.",
-   "rows": 197,
+   "rows": 198,
    "columns": [
     {
      "name": "place_id",
@@ -16318,7 +16319,7 @@
    "id": "federal-contracts",
    "title": "Federal contracts to local companies",
    "description": "Every federal contract with money obligated since 2016 to a company whose business address is in the county, from USAspending.gov: recipient (as registered in SAM.gov, with its city, never its street address), the agency and branch that signed it, what it buys (description, industry and product codes), start and end dates, and obligated, the money obligated from 2016 on (modifications and cuts included, so it can be negative). award_amount is USAspending's lifetime total, which can include earlier years. defense is true for Department of Defense contracts. recipient_entity_id links to the company's profile; recipient_match says how it was joined to other records (blank: by its own name only).",
-   "rows": 6425,
+   "rows": 6427,
    "columns": [
     {
      "name": "place_id",
