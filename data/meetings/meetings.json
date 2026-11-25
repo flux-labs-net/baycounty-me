@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-24T16:14:55-06:00",
+  "generated": "2026-11-25T05:10:45-06:00",
   "window": {
-    "from": "2026-11-24",
-    "to": "2027-01-23"
+    "from": "2026-11-25",
+    "to": "2027-01-24"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -95,12 +95,12 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/787/CRA-Board",
       "sources": {
-        "AgendaCenter": "ok (3 records)",
+        "AgendaCenter": "ok (4 records)",
         "calendar (iCal cat 22)": "ok (10 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
-        "calendar": 2,
+        "agenda_feed": 1,
+        "calendar": 1,
         "expected": 0
       }
     },
@@ -138,7 +138,7 @@
         "calendar (iCal cat 14)": "ok (3 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 3,
         "calendar": 0,
         "expected": 0
       }
@@ -256,7 +256,7 @@
       "coverage": {
         "agenda_feed": 2,
         "calendar": 0,
-        "expected": 3
+        "expected": 2
       }
     },
     {
@@ -824,23 +824,6 @@
     },
     {
       "board": "lh",
-      "title": "11/20/26 Special Commission Meeting",
-      "start": "2026-11-20T15:30:00-06:00",
-      "location": "825 Ohio Avenue, Lynn Haven",
-      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2180,plainText=false)",
-      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2185,plainText=false)",
-      "minutes_url": null,
-      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
-      "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/3154/files",
-      "past": true,
-      "items": [],
-      "agenda_items": [
-        "​Hiring ​of the new City Clerk/Treasurer."
-      ]
-    },
-    {
-      "board": "lh",
       "title": "City Commission Meeting",
       "start": "2026-11-24T17:30:00-06:00",
       "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
@@ -849,19 +832,8 @@
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1094/files"
-    },
-    {
-      "board": "mb",
-      "title": "Regular Meeting (expected)",
-      "start": "2026-11-24T09:00:00-06:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
-      "status": "expected",
-      "expected": true
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
+      "past": true
     },
     {
       "board": "county",
@@ -914,15 +886,44 @@
     },
     {
       "board": "pc-cra",
-      "title": "CRA Board Meeting",
+      "title": "Community Redevelopment Agency Board Meeting for December 1, 2026",
       "start": "2026-12-01T16:30:00-06:00",
       "location": "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927?html=true",
+      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927?packet=true",
       "minutes_url": null,
-      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
-      "status": "calendar",
-      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6077"
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6077",
+      "calendar_source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "items": [
+        {
+          "title": "Consideration and Approval of an Amendment to the Redevelopment Site Preparation (RSP) Grant Program.",
+          "amount": null
+        },
+        {
+          "title": "Consideration, approval, and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Jenks & Oak, LLC, in the amount of $38,400.00, for eligible site preparation costs associated with the property located at 402 Jenks Avenue, Panama City, FL (Parcel 19595-000-000), within the Downtown CRA District.",
+          "amount": "$38,400.00"
+        },
+        {
+          "title": "Consideration, approval and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Chautauqua Charter School, Inc. in an amount to be determined by the CRA Board, up to the requested amount of $30,875.00, for eligible site preparation costs associated with the property located at Magnolia Avenue, Panama City, Florida (Parcel ID 18067-000-000), within the Downtown Nort",
+          "amount": "$30,875.00"
+        }
+      ],
+      "agenda_items": [
+        "Agenda - 12/01/2026 CITY OF PANAMA CITY COMMUNITY REDEVELOPMENT AGENCY AGENDA 840 West 11th Street Panama City, FL 32401 December 1, 2025 4:30 PM",
+        "Opening Prayer by Rev. Adam Cabana, Lead Pastor at the First Church of the Nazarene.",
+        "Approval of Meeting Minutes",
+        "Audience Participation (Open to any issue related to the Panama City CRA’s authority, remarks are limited to three (3) minutes).",
+        "Consideration and approval of the amended Panama City Community Redevelopment Agency Tax Increment Rebate Program and Application.",
+        "Consideration and approval of the Amended FY 2027 CRA Goals, Objectives, Performance Measures and Standards and Annual Work Plan.",
+        "Consideration and Approval of an Amendment to the Redevelopment Site Preparation (RSP) Grant Program.",
+        "Consideration, approval, and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Jenks & Oak, LLC, in the amount of $38,400.00, for eligible site preparation costs associated with the property located at 402 Jenks Avenue, Panama City, FL (Parcel 19595-000-000), within the Downtown CRA District.",
+        "Consideration, approval and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Chautauqua Charter School, Inc. in an amount to be determined by the CRA Board, up to the requested amount of $30,875.00, for eligible site preparation costs associated with the property located at Magnolia Avenue, Panama City, Florida (Parcel ID 18067-000-000), within the Downtown Nort",
+        "Consideration to Approve the Memorandum of Understanding between CRA, Downtown North and Millville districts and World Changers Organization (WCO) for FY2027",
+        "Consideration and approval of a Lease Agreement between CK Rentals, Inc., the City of Panama City, and the Community Redevelopment Agency, Downtown district, for parking lot improvements and public parking on Luverne Avenue.",
+        "Motion to Adjourn Meeting Adjournment In accordance with the Americans with Disabilities Act and Section 286.26, Florida Statutes, persons with disabilities needing special accommodation to participate in this proceeding should contact the City's Human Resources Department one week prior to the proceeding at telephone (850) 872-3014 for assistance; if hearing impaired, telephone (850) 872-3028 (TD"
+      ]
     },
     {
       "board": "sp",

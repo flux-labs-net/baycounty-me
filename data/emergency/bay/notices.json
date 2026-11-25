@@ -1,7 +1,34 @@
 {
  "_about": "Every emergency notice BayCounty.me has seen for this place: weather alerts, boil-water notices, road closures, utility and storm updates. Written by data/emergency/fetch_emergency.js; the live list is /api/v1/emergency.",
- "checked": "2026-11-24",
+ "checked": "2026-11-25",
  "notices": [
+  {
+   "notice_id": "news:cw:2171",
+   "place_id": "fl-bay",
+   "kind": "road",
+   "source": "City of Callaway",
+   "source_type": "news",
+   "gov_id": "cw",
+   "title": "Thanksgiving Holiday Closure",
+   "summary": "In observance of the Thanksgiving holiday, City of Callaway offices will be closed on Thursday, November 26, and Friday, November 27, 2026. Normal business hours will resume on Monday, November 30.",
+   "instruction": null,
+   "severity": "minor",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-11-24T22:37:09.000Z",
+   "starts": null,
+   "ends": "2026-12-04T22:37:09.000Z",
+   "updated": "2026-11-24T22:37:09.000Z",
+   "status": "active",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2171",
+   "source_url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2171",
+   "first_seen": "2026-11-24T22:40:00.964378+00:00",
+   "last_seen": "2026-11-25T11:17:20.407Z",
+   "geometry": null
+  },
   {
    "notice_id": "news:lh:365",
    "place_id": "fl-bay",
@@ -26,7 +53,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=365",
    "first_seen": "2026-11-07T19:35:02.59984+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -53,7 +80,7 @@
    "url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2170",
    "source_url": "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2170",
    "first_seen": "2026-11-23T18:10:01.568911+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -581,7 +608,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=716",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-12T15:55:01.956941+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -662,7 +689,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=704",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-30T16:50:03.082394+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -689,7 +716,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=710",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-11-06T20:35:02.562709+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -2239,7 +2266,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -2266,7 +2293,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   },
   {
@@ -2293,7 +2320,7 @@
    "url": "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
    "source_url": "https://mexicobeachfl.gov/government/news/",
    "first_seen": "2026-10-28T21:06:37.512914+00:00",
-   "last_seen": "2026-11-24T22:22:29.337Z",
+   "last_seen": "2026-11-25T11:17:20.407Z",
    "geometry": null
   }
  ]

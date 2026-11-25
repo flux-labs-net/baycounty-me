@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-24",
- "fetched": "2026-11-24T17:20:58-0500",
+ "as_of": "2026-11-25",
+ "fetched": "2026-11-25T06:15:59-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -54,108 +54,6 @@
  },
  "events": [
   {
-   "event_id": "library:24067:2026-11-24",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City Beach",
-   "title": "Chapter Chat Book Club",
-   "starts": "2026-11-24T14:00:00",
-   "ends": "2026-11-24T15:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/chapter-chat-book-club-2/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
-   "event_id": "panama-city:7440:2026-11-24",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Dream Builders at MLK",
-   "starts": "2026-11-24T15:00:00",
-   "ends": "2026-11-24T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7440",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:6365:2026-11-24",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "55+ Club",
-   "starts": "2026-11-24T16:00:00",
-   "ends": "2026-11-24T20:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6365",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23405:2026-11-24",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "Photography Club (Adults)",
-   "starts": "2026-11-24T17:15:00",
-   "ends": "2026-11-24T18:30:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/photography-club-adults-3/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:7740:2026-11-24",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Public Meeting regarding State Avenue Repaving Project",
-   "starts": "2026-11-24T17:30:00",
-   "ends": "2026-11-24T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7740",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
-  },
-  {
-   "event_id": "panama-city:7714:2026-11-24",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Double Dutch - Jump Rope Program",
-   "starts": "2026-11-24T18:00:00",
-   "ends": "2026-11-24T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7714",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
    "event_id": "panama-city:7628:2026-11-25",
    "source_id": "panama-city",
    "source": "City of Panama City",
@@ -170,7 +68,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7628",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "panama-city:7494:2026-11-25",
@@ -663,7 +561,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7154",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "panama-city:7496:2026-12-02",
@@ -1380,6 +1278,57 @@
    "recurring": true
   },
   {
+   "event_id": "panama-city:7155:2026-12-09",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Help Me Grow - Playgroups",
+   "starts": "2026-12-09T10:30:00",
+   "ends": "2026-12-09T11:30:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7155",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:4189:2026-12-09",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "PC Senior Arts",
+   "starts": "2026-12-09T13:00:00",
+   "ends": "2026-12-09T15:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=4189",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7498:2026-12-09",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Card Club",
+   "starts": "2026-12-09T14:00:00",
+   "ends": "2026-12-09T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7498",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:24050:2026-12-09",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1394,6 +1343,23 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/youth-dungeons-dragons-ages-8-12/",
    "source_url": "https://www.nwrls.com/events",
+   "recurring": true
+  },
+  {
+   "event_id": "panama-city:7348:2026-12-09",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
+   "starts": "2026-12-09T16:00:00",
+   "ends": "2026-12-09T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7348",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": true
   },
   {
@@ -1412,6 +1378,23 @@
    "url": "https://pcbeach.org/local-event/14th-annual-bethlehem-christmas-village/",
    "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
+  },
+  {
+   "event_id": "panama-city:6713:2026-12-09",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "PC Art Club",
+   "starts": "2026-12-09T18:00:00",
+   "ends": "2026-12-09T21:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6713",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
   },
   {
    "event_id": "library:24157:2026-12-10",
@@ -1734,7 +1717,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/chapter-chat-book-club/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true
+   "recurring": false
   },
   {
    "event_id": "library:24218:2026-12-16",
