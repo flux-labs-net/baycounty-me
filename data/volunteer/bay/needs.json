@@ -1,11 +1,55 @@
 {
  "as_of": "2026-11-25",
  "fetched": {
-  "United Way of Northwest Florida": "2026-11-25T11:20:11+00:00",
-  "Idealist": "2026-11-25T11:20:51+00:00"
+  "United Way of Northwest Florida": "2026-11-25T21:41:52+00:00",
+  "Idealist": "2026-11-25T21:42:40+00:00"
  },
  "errors": [],
  "needs": [
+  {
+   "need_id": "idealist:83d28bb1add841e3ae15b309213225bd",
+   "board": "Idealist",
+   "title": "Community Outreach Volunteers - Panama City Area",
+   "organization": "American Red Cross - North Central Florida Region",
+   "organization_board_id": null,
+   "cause": null,
+   "schedule": "Ongoing",
+   "when": null,
+   "starts": null,
+   "ends": null,
+   "description": "Represent the Red Cross in your community at fairs, festivals, and other special events. Educate the public about our lifesaving work and share ways individuals can get involved.",
+   "details": null,
+   "city": "Panama City",
+   "zip": "32401",
+   "remote": false,
+   "posted": "2026-05-28",
+   "closes": "2027-05-24",
+   "url": "https://www.idealist.org/en/volunteer-opportunity/83d28bb1add841e3ae15b309213225bd-community-outreach-volunteers-panama-city-area-american-red-cross-north-central-florida-region-panama-city",
+   "source_url": "https://www.idealist.org/en/volunteer-in-panama-city-fl",
+   "first_seen": "2026-11-25"
+  },
+  {
+   "need_id": "idealist:65bfa5c4270949128b6d18d1d408184c",
+   "board": "Idealist",
+   "title": "Disaster Action Team (DAT) - Panama City Area",
+   "organization": "American Red Cross - North Central Florida Region",
+   "organization_board_id": null,
+   "cause": null,
+   "schedule": "Ongoing",
+   "when": null,
+   "starts": null,
+   "ends": null,
+   "description": "As a DAT member you help to provide 24-hour emergency response to local disasters, ensuring that those affected have access to resources for basic necessities such as food, shelter, and clothing. DAT Members: Attend regular team meetings and training's as required by the region/territory. Complete assigned projects and local response activities according to the needs of the DAT program. Work closely with all other DAT members to ensure goals are achieved.",
+   "details": null,
+   "city": "Panama City",
+   "zip": "32401",
+   "remote": false,
+   "posted": "2026-05-28",
+   "closes": "2027-05-24",
+   "url": "https://www.idealist.org/en/volunteer-opportunity/65bfa5c4270949128b6d18d1d408184c-disaster-action-team-dat-panama-city-area-american-red-cross-north-central-florida-region-panama-city",
+   "source_url": "https://www.idealist.org/en/volunteer-in-panama-city-fl",
+   "first_seen": "2026-11-25"
+  },
   {
    "need_id": "idealist:f15340ff00f344af9085cc7cae5d7f18",
    "board": "Idealist",
@@ -51,7 +95,7 @@
    "first_seen": "2026-11-24"
   },
   {
-   "need_id": "idealist:1f4c4348bbd0488eab7507a6b46e384a",
+   "need_id": "idealist:9a8b8aa314e349508036c540efcc8597",
    "board": "Idealist",
    "title": "Front Desk/Business Operations Volunteer - Panama City Area",
    "organization": "American Red Cross - North Central Florida Region",
@@ -66,11 +110,11 @@
    "city": "Panama City",
    "zip": "32401",
    "remote": false,
-   "posted": "2026-04-20",
-   "closes": "2027-04-21",
-   "url": "https://www.idealist.org/en/volunteer-opportunity/1f4c4348bbd0488eab7507a6b46e384a-front-deskbusiness-operations-volunteer-panama-city-area-american-red-cross-north-central-florida-region-panama-city",
+   "posted": "2026-05-28",
+   "closes": "2027-05-24",
+   "url": "https://www.idealist.org/en/volunteer-opportunity/9a8b8aa314e349508036c540efcc8597-front-deskbusiness-operations-volunteer-panama-city-area-american-red-cross-north-central-florida-region-panama-city",
    "source_url": "https://www.idealist.org/en/volunteer-in-panama-city-fl",
-   "first_seen": "2026-10-27"
+   "first_seen": "2026-11-25"
   },
   {
    "need_id": "idealist:660deaf9b64c420ebfecdf0867f02fa2",
@@ -95,7 +139,7 @@
    "first_seen": "2026-11-24"
   },
   {
-   "need_id": "idealist:ba5d1630dd1d471a9c847152eccdfece",
+   "need_id": "idealist:e164a5b5e0154295a273b4502529fa1b",
    "board": "Idealist",
    "title": "Shelter Service Associates (Panama City area)",
    "organization": "American Red Cross - North Central Florida Region",
@@ -110,11 +154,11 @@
    "city": "Panama City",
    "zip": null,
    "remote": false,
-   "posted": "2026-04-20",
-   "closes": "2027-04-21",
-   "url": "https://www.idealist.org/en/volunteer-opportunity/ba5d1630dd1d471a9c847152eccdfece-shelter-service-associates-panama-city-area-american-red-cross-north-central-florida-region-panama-city",
+   "posted": "2026-05-28",
+   "closes": "2027-05-24",
+   "url": "https://www.idealist.org/en/volunteer-opportunity/e164a5b5e0154295a273b4502529fa1b-shelter-service-associates-panama-city-area-american-red-cross-north-central-florida-region-panama-city",
    "source_url": "https://www.idealist.org/en/volunteer-in-panama-city-fl",
-   "first_seen": "2026-10-27"
+   "first_seen": "2026-11-25"
   },
   {
    "need_id": "idealist:e8ff0c2d8d3e4dcf9e4040f35d69929a",
@@ -157,28 +201,6 @@
    "posted": "2026-10-01",
    "closes": "2027-03-30",
    "url": "https://www.idealist.org/en/volunteer-opportunity/2b6773f676924988951576a78da13f42-volunteer-for-emerald-coast-hospice-emerald-coast-hospice-panama-city-panama-city",
-   "source_url": "https://www.idealist.org/en/volunteer-in-panama-city-fl",
-   "first_seen": "2026-10-27"
-  },
-  {
-   "need_id": "idealist:0c3cbacf798044f392288c449cbb5bf4",
-   "board": "Idealist",
-   "title": "Help a Neighbor in the Panama City, FL area with a Homemade Lasagna",
-   "organization": "Lasagna Love",
-   "organization_board_id": null,
-   "cause": null,
-   "schedule": "Ongoing",
-   "when": null,
-   "starts": null,
-   "ends": null,
-   "description": "Lasagna Love is a grassroots movement powered by thousands of volunteers cooking and delivering lasagna to neighbors in need. We are united by our commitment to offer a tangible act of love, compassion, and hope in communities often marked by uncertainty and stress. Together, we are proving that kindness has the power to nourish not only bodies, but also hearts and communities. Our purpose is simple yet profound: feed families, spread kindness, strengthen communities. As a volunteer Lasagna Chef, you decide what works for you. You choose how often you would like to volunteer—whether that’s…",
-   "details": null,
-   "city": "Panama City",
-   "zip": null,
-   "remote": true,
-   "posted": "2025-12-08",
-   "closes": "2027-03-26",
-   "url": "https://www.idealist.org/en/volunteer-opportunity/0c3cbacf798044f392288c449cbb5bf4-help-a-neighbor-in-the-panama-city-fl-area-with-a-homemade-lasagna-lasagna-love-panama-city",
    "source_url": "https://www.idealist.org/en/volunteer-in-panama-city-fl",
    "first_seen": "2026-10-27"
   },

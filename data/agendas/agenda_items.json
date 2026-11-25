@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25T11:20:58+00:00",
+ "generated": "2026-11-25T21:42:47+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -56,6 +56,110 @@
     "Parcel 34063-002-000"
    ],
    "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=232"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-12-01",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues and Expenditures",
+   "summary": "Board acknowledge receipt of the reports.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [
+    "Clerk of Courts"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1957"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-12-01",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Contract Administration Policy Resolution",
+   "summary": "Board approve the attached resolution relating to the county manager's authority to enforce executory contracts.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1957"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-12-01",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Human Resources",
+   "title": "Personnel Policy Amendment",
+   "summary": "Board approve changes to the personnel policy language for overtime work and pay.",
+   "kind": "personnel",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1957"
+  },
+  {
+   "board": "lh-planning",
+   "body": "Lynn Haven Planning Commission",
+   "gov": "lh",
+   "date": "2026-12-01",
+   "meeting": "Planning Commission",
+   "number": "2",
+   "section": null,
+   "title": "Minutes of Previous Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3189,plainText=false)"
+  },
+  {
+   "board": "lh-planning",
+   "body": "Lynn Haven Planning Commission",
+   "gov": "lh",
+   "date": "2026-12-01",
+   "meeting": "Planning Commission",
+   "number": "3a",
+   "section": "Continuation of Public Hearing",
+   "title": "Nature Walk Large Scale Future Land Use Map Amendment",
+   "summary": "Owners First Links Ink and Greenfield Village, LLC request to change the Future Land Use Map from Recreation/Open Space to Low Density Residential on two parcels.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [
+    "Greenfield Village, LLC"
+   ],
+   "addresses": [
+    "11281-000-000",
+    "11281-010-000",
+    "Lakeview Terrace and Highway 390"
+   ],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3189,plainText=false)"
+  },
+  {
+   "board": "lh-planning",
+   "body": "Lynn Haven Planning Commission",
+   "gov": "lh",
+   "date": "2026-12-01",
+   "meeting": "Planning Commission",
+   "number": "4",
+   "section": null,
+   "title": "Review of ULDC Sections 10.00.00 and 4.00.00 Amendments",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3189,plainText=false)"
   },
   {
    "board": "lh",
@@ -18617,6 +18721,157 @@
    "parties": [],
    "addresses": [],
    "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1847"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "4",
+   "section": null,
+   "title": "Approval Of Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "7",
+   "section": null,
+   "title": "Approval Of The Amended Panama City Community Redevelopment Agency Tax Increment Rebate Program And Application",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Panama City Community Redevelopment Agency"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "8",
+   "section": null,
+   "title": "Approval Of The Amended FY 2027 CRA Goals, Objectives, Performance Measures And Standards And Annual Work Plan",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Panama City Community Redevelopment Agency"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "9",
+   "section": null,
+   "title": "Approval Of An Amendment To The Redevelopment Site Preparation (RSP) Grant Program",
+   "summary": "The agenda lists documents on modifying the individual project award cap language in the RSP grant program.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "10",
+   "section": null,
+   "title": "Approval And Authorization To Execute A Redevelopment Site Preparation (RSP) Grant Agreement With Jenks & Oak, LLC",
+   "summary": "Grant for eligible site preparation costs for the property at 402 Jenks Avenue within the Downtown CRA District.",
+   "kind": "grant",
+   "amount": 38400.0,
+   "parties": [
+    "Jenks & Oak, LLC"
+   ],
+   "addresses": [
+    "402 Jenks Avenue, Panama City, FL",
+    "Parcel 19595-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "11",
+   "section": null,
+   "title": "Approval And Authorization To Execute A Redevelopment Site Preparation (RSP) Grant Agreement With Chautauqua Charter School, Inc.",
+   "summary": "Grant for eligible site preparation costs at Magnolia Avenue within the Downtown North CRA District, in an amount to be determined by the CRA Board up to the requested amount.",
+   "kind": "grant",
+   "amount": 30875.0,
+   "parties": [
+    "Chautauqua Charter School, Inc."
+   ],
+   "addresses": [
+    "Magnolia Avenue, Panama City, Florida",
+    "Parcel ID 18067-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "12",
+   "section": null,
+   "title": "Approve The Memorandum Of Understanding Between CRA, Downtown North And Millville Districts And World Changers Organization (WCO) For FY2027",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "World Changers Organization (WCO)",
+    "Panama City Community Redevelopment Agency"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2025-12-01",
+   "meeting": "Community Redevelopment Agency Board Meeting for December 1, 2026",
+   "number": "13",
+   "section": null,
+   "title": "Approval Of A Lease Agreement Between CK Rentals, Inc., The City Of Panama City, And The Community Redevelopment Agency, Downtown District, For Parking Lot Improvements And Public Parking On Luverne Avenue",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "CK Rentals, Inc.",
+    "City of Panama City",
+    "Community Redevelopment Agency, Downtown District"
+   ],
+   "addresses": [
+    "Luverne Avenue"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_12012026-927"
   },
   {
    "board": "mb",

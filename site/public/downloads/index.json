@@ -6760,7 +6760,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 22846,
+   "rows": 22849,
    "columns": [
     {
      "name": "link_id",
@@ -8975,7 +8975,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 154,
+   "rows": 153,
    "columns": [
     {
      "name": "place_id",
@@ -9687,7 +9687,7 @@
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
       "2026-11-24T16:19:00+00:00",
-      "2026-11-25T07:36:00+00:00"
+      "2026-11-25T16:44:00+00:00"
      ]
     },
     {
@@ -9695,10 +9695,10 @@
      "type": "string",
      "values": [
       "Friday",
+      "Rest Of Today",
       "Saturday",
       "Sunday",
-      "Thanksgiving Day",
-      "Today"
+      "Thanksgiving Day"
      ]
     },
     {
@@ -9735,7 +9735,7 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "Around 2 feet",
+      "Around 1 foot",
       "Around 4 feet",
       "around 3 feet"
      ]
@@ -9758,8 +9758,8 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Cloudy. Showers and a slight chance of",
-      "Mostly cloudy until 1 PM, then mostly"
+      "Mostly cloudy until 1 PM, then mostly",
+      "Mostly cloudy. Rain"
      ]
     },
     {
@@ -9782,15 +9782,15 @@
      "name": "sunrise",
      "type": "string",
      "values": [
-      "6:15 AM",
-      "6:16 AM"
+      "7:15 AM",
+      "7:16 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "4:43 PM"
+      "5:43 PM"
      ]
     },
     {
@@ -9804,7 +9804,7 @@
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
       "Moderate rip current risk*. Mostly cloudy. Highs in the mid 60s. Northeast winds around 5 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Strong northeast breezes today will push enough surf onto Franklin County beaches for a high risk of rip currents. A shift to strong west and northwest breezes early Thursday will expand the high risk out across all beaches. Winds over the Gulf and will decrease on Friday, leading to decrease surf and improving rip current conditions on Saturday. Then a turn to southeast and southerly breezes on Sunday will push surf more directly onshore and raise the rip current risk back to high for all beaches.",
+      "Strong northeast breezes today will push enough surf onto Franklin and south-facing Gulf County beaches for a high risk of rip currents. A shift to strong west and northwest breezes early Thursday will expand the high risk out across all beaches. Winds over the Gulf and will decrease on Friday, leading to decrease surf and improving rip current conditions on Saturday. Then a turn to southeast and southerly breezes on Sunday will push surf more directly onshore and raise the rip current risk back to high for all beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9831,8 +9831,8 @@
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
       "https://api.weather.gov/products/51d344a3-9ee7-46e7-9d03-8ddc4605f6ab",
+      "https://api.weather.gov/products/74572a69-ad91-4908-8ba0-06bf7b64c7f7",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
-      "https://api.weather.gov/products/ddd45574-f9eb-4d49-b093-2a778651d76e",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12647,7 +12647,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 85,
+   "rows": 86,
    "columns": [
     {
      "name": "notice_id",
@@ -12727,6 +12727,7 @@
       "Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely.",
       "Be especially cautious at night when it is harder to recognize the dangers of flooding. Be aware of your surroundings and do not drive on flooded roads. Please report observed flooding to local emergency services or law enforcement and request they pass this information to the National Weather Service when you can do so safely.",
       "If driving, slow down, use your headlights, and leave plenty of distance ahead of you.",
+      "If outdoors, consider seeking shelter inside a building.",
       "If you have any information on the whereabouts of this child please contact the New Smyrna Beach Police Department at 386-424-2000 or 911. #FLAMBER.",
       "Swim near a lifeguard. If caught in a rip current, relax and float. Don't swim against the current. If able, swim in a direction following the shoreline. If unable to escape, face the shore and call or wave for help.",
       "Take steps now to protect tender plants from the cold.",
@@ -12755,7 +12756,8 @@
       "Flood Advisory",
       "Frost Advisory",
       "Incident",
-      "Rip Current Statement"
+      "Rip Current Statement",
+      "Special Weather Statement"
      ]
     },
     {
@@ -12773,6 +12775,7 @@
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
       "FLORIDA-ALL",
       "Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Worth; Turner; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
+      "Geneva; North Walton; Central Walton; Holmes; Washington; Inland Bay; South Walton; Coastal Bay",
       "Left lane blocked",
       "Lynn Haven",
       "North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf",
@@ -13836,7 +13839,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only. The text has a blank line between paragraphs. reference is the bid, RFQ, ordinance or resolution number found in it; emails, phones and links list every email address, phone number and web address in it, separated by semicolons.",
-   "rows": 148,
+   "rows": 152,
    "columns": [
     {
      "name": "place_id",
@@ -13936,7 +13939,7 @@
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/IWs6mUXnnBJ2jDJa89W4/ac60./cropped-698.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Nc7tQmbT94sUg6TzK0Wo/dcd3./cropped-467.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
-      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/T66hGuJYdx02lVMM6rWT/c1d9./cropped-433.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/T66hGuJYdx02lVMM6rWT/c1d9./cropped-969.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/UMX3wC6UPG1etGBKTVM9/ccbf./cropped-847.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/VeWabPeG03Kf0uFQceYJ/0ccc./cropped-208.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/Vk8Ezs16PjUpMLJkZwYJ/fa36./cropped-007.pdf",
@@ -14027,6 +14030,7 @@
       "kmeyerl@panamacity.gov",
       "lynne.fasone@pcbfl.gov",
       "mell@mexicobeachfl.gov",
+      "mindy.lawyer@pcbfl.gov",
       "planning@baycountyfl.gov",
       "planning@cityoflynnhaven.gov",
       "planning@panamacity.gov",
@@ -14112,7 +14116,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 100,
+   "rows": 101,
    "columns": [
     {
      "name": "place_id",
@@ -14229,7 +14233,8 @@
       "2026-11-20",
       "2026-11-21",
       "2026-11-23",
-      "2026-11-24"
+      "2026-11-24",
+      "2026-11-25"
      ]
     },
     {
@@ -14273,7 +14278,8 @@
       "2026-11-20",
       "2026-11-21",
       "2026-11-22",
-      "2026-11-24"
+      "2026-11-24",
+      "2026-11-25"
      ]
     },
     {
@@ -15228,7 +15234,7 @@
    "id": "restaurants",
    "title": "Restaurants and food service",
    "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1442,
+   "rows": 1443,
    "columns": [
     {
      "name": "place_id",
@@ -15472,7 +15478,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17266,
+   "rows": 17272,
    "columns": [
     {
      "name": "place_id",
@@ -15743,7 +15749,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 21,
+   "rows": 20,
    "columns": [
     {
      "name": "place_id",
@@ -15813,7 +15819,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-25T13:00:00",
       "2026-11-25T14:00:00",
       "2026-11-25T18:00:00",
       "2026-11-26T07:30:00",
@@ -15830,7 +15835,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-25T15:00:00",
       "2026-11-25T17:00:00",
       "2026-11-25T21:00:00",
       "2026-11-26T08:00:00",
@@ -15997,7 +16001,6 @@
       "https://www.nwrls.com/event/lego-club-ages-6-12-7/",
       "https://www.panamacity.gov/Calendar.aspx?EID=6711",
       "https://www.panamacity.gov/Calendar.aspx?EID=7494",
-      "https://www.panamacity.gov/Calendar.aspx?EID=7628",
       "https://www.panamacity.gov/Calendar.aspx?EID=7708",
       "https://www.panamacity.gov/Calendar.aspx?EID=7733"
      ]
@@ -17353,7 +17356,7 @@
    "id": "volunteer-needs",
    "title": "Volunteer needs",
    "description": "Open volunteer needs in the county, read every day from public volunteer boards (United Way of Northwest Florida's volunteer center and Idealist): what volunteers do, the organization, a plain cause, when (ongoing, one day or shifts), the city and ZIP, and the board's sign-up link. nonprofit_id and organization_entity_id link to the local nonprofit's profile where the name matches. No street addresses or contact details.",
-   "rows": 21,
+   "rows": 22,
    "columns": [
     {
      "name": "place_id",
@@ -17380,7 +17383,6 @@
       "Club 360, Inc.",
       "Emerald Coast Hospice - Panama City",
       "LEAD Coalition of Bay County, Inc",
-      "Lasagna Love",
       "NorthWest Student Exchange",
       "Rebuild Bay County, Inc",
       "United Way of Northwest Florida",
@@ -17481,8 +17483,6 @@
      "type": "string",
      "values": [
       "2025-07-16",
-      "2025-12-08",
-      "2026-04-20",
       "2026-05-05",
       "2026-05-28",
       "2026-10-01"
@@ -17492,12 +17492,11 @@
      "name": "closes",
      "type": "string",
      "values": [
-      "2027-03-26",
       "2027-03-30",
       "2027-03-31",
       "2027-04-18",
-      "2027-04-21",
-      "2027-05-23"
+      "2027-05-23",
+      "2027-05-24"
      ]
     },
     {
@@ -17505,7 +17504,8 @@
      "type": "string",
      "values": [
       "2026-10-27",
-      "2026-11-24"
+      "2026-11-24",
+      "2026-11-25"
      ]
     },
     {
@@ -17513,16 +17513,17 @@
      "type": "string",
      "values": [
       "Are you a licensed Health Care Professional? Get prepared now to help people in disaster shelters. We need volunteers who can work in emergency shelters to help assess people’s health and provide hands on care in alignment with their professional licensure (RN and LPN/LVN). We also need volunteers who can provide care as delegated by a licensed Nurse in shelters. This could include assisting with activities of daily living, personal assistance services providing health education and helping to replace medications, durable medical equipment, or consumable supplies. Daily observation and health…",
+      "As a DAT member you help to provide 24-hour emergency response to local disasters, ensuring that those affected have access to resources for basic necessities such as food, shelter, and clothing. DAT Members: Attend regular team meetings and training's as required by the region/territory. Complete assigned projects and local response activities according to the needs of the DAT program. Work closely with all other DAT members to ensure goals are achieved.",
       "Assist in setting up tables with linens and decorations, placement of chairs, photobooth, signage and that nature.",
       "Be Ready to help your local community! Due to predictions for an active hurricane and wildfire season and the complexities of COVID-19, the Red Cross will need thousands to care for people when disasters strike. Train now to be a Ready Red Cross Shelter Volunteer so you can answer the call when your community needs it most! We will need volunteers to help support emergency shelters by staffing different areas including reception, registration feeding, dormitory, information collection and other vital tasks. We have both associate and supervisory level opportunities available. Will you be…",
       "Do you enjoy helping people get connected and providing good customer service? Join us as a Front Office Hero! Welcome clients and members of the public who visit the office, as well as answer the incoming calls. Connect inquiries to appropriate departments and people, and assist with office support projects. K Tasks include: Front Desk communication with guests, staff, and volunteers Assist in office administration in Red Cross department Answer telephones and take messages Light typing, data entry, work filing, spread sheets Assist is preparation of mailings, course materials packaging…",
       "For many in our communities, taxes can feel like a burden. VITA volunteers work to help lift that burden by offering low income families free tax preparation. Tax refunds give these families a springboard for the future by putting their hard-earned money back into their pockets. It's a simple way to offer a sense of hope. The United Way of Northwest Florida VITA program is now being offered in Bay, Calhoun, Gulf, Holmes, Jackson & Washington Counties. We need volunteers like you to help these families! Why Volunteer with VITA? Learn a New Skill - No experience is necessary. As a volunteer…",
       "Glenwood Marketplace is looking for volunteers to help with set up and break down. Set up starts at 7am, breakdown starts at 2pm. We will be doing heavy lifting, pulling, and walking. Every Saturday the Marketplace will be open. For more details call .",
-      "Lasagna Love is a grassroots movement powered by thousands of volunteers cooking and delivering lasagna to neighbors in need. We are united by our commitment to offer a tangible act of love, compassion, and hope in communities often marked by uncertainty and stress. Together, we are proving that kindness has the power to nourish not only bodies, but also hearts and communities. Our purpose is simple yet profound: feed families, spread kindness, strengthen communities. As a volunteer Lasagna Chef, you decide what works for you. You choose how often you would like to volunteer—whether that’s…",
       "Listen, Read, Sing Hold a hand Make gifts for patients Run Errands or perform light housekeeping Share a gift or baked goods Veteran-to-veteran Support",
       "Mentoring is not rocket science. Check in and connect with a kid at the Club. It's that simple. We are in need of mentors who want to help young readers improve reading scores. Time on task in reading, site words, comprehension skills are so simple to lead, even a caveman can do it. Well almost...",
       "PLACEMENT PURPOSE Assist the American Red Cross Mission by education community members, organizations and agencies to prevent and prepare for emergencies. OPEN TIME DAYS Flexible Commitment will depend on scheduling of community preparedness education opportunities and availability of volunteers Approximately 2 to 4 hours per presentation or booth event Suggested minimum of 4 times a year REQUIRED TRAINING Red Cross Orientation One on one training Learn local disaster hazards and history Community Disaster Education",
       "ReadingPals is a statewide early literacy initiative that provides volunteer mentors for students from Pre-K to 3rd grade who may need extra help, utilizing one-on-one or small group settings. In Bay & Washington Counties, ReadingPals volunteers help elementary students build strong early literacy skills necessary for success. Being a ReadingPals volunteer means becoming a real-life superhero in a child’s story—someone who sparks imagination, builds confidence, and opens doors to a lifetime of possibilities through the power of reading. As a ReadingPal, you’re more than a volunteer; you’re a…",
+      "Represent the Red Cross in your community at fairs, festivals, and other special events. Educate the public about our lifesaving work and share ways individuals can get involved.",
       "Seven times a day, someone in this country dies in a home fire. The American Red Cross has launched a nationwide campaign to reduce this number and our volunteers can help save lives and prevent injuries. There are many ways you can be involved: Go door-to door and speak with residents about the importance of smoke alarms and promote the free smoke alarm installation service. Organize canvassing events and help residents develop a fire escape plan and complete a fire-safety checklist. Install smoke alarms and teach residents how to test and maintain their smoke alarms.",
       "The A.D. Harris Food Pantry provides nutritious food and essential grocery items to individuals and families facing food insecurity. Through regular distributions, food rescue, community partnerships, and volunteer support, the pantry helps ensure that Bay County residents have reliable access to food and other critical resources. Volunteers needed for receiving, stocking and driving (Tues/Fri), and distribution (Tues, Sat).",
       "The Bay Education Foundation is seeking caring adult volunteers to serve as mentors for students in the Take Stock in Children program. Mentors meet with their student just twice permonth during the school year, providing encouragement, guidance, and a positive role model as the student works toward graduation and a college scholarship provided by Bay Education Foundation. No special expertise is required, just a willingness to listen, support, and help a young person believe in their future. One hour a month can truly change a student’s life. If you’re interested in making a lasting…",
@@ -18113,7 +18114,7 @@
    "id": "agenda-parties",
    "title": "Companies and organizations on agendas",
    "description": "One row per company, organization or government named on a board's agenda (agenda items read from the published agenda packets), linked to its profile where the name matches, with any campaign gifts from it (or from the owners who run it) to people who serve that government (gave_to_members, gave_to). rezoning is true for rezoning and land-use items.",
-   "rows": 557,
+   "rows": 568,
    "columns": [
     {
      "name": "place_id",
@@ -20645,6 +20646,7 @@
      "name": "next_agenda_url",
      "type": "string",
      "values": [
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3189,plainText=false)",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=232",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_12012026-432"
      ]
@@ -20933,8 +20935,10 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1952",
+      "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1957",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1151,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1160,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3189,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Meeting-Agenda.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=422",
@@ -20955,8 +20959,10 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1952&compileOutputType=1",
+      "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1957&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1152,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1161,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3190,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-5-2026-PZ-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/11/November-17-2026-City-Council-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",

@@ -1,24 +1,24 @@
 {
- "fetched_at": "2026-11-25T11:17:07+00:00",
- "issued": "2026-11-25T07:36:00+00:00",
- "product_url": "https://api.weather.gov/products/ddd45574-f9eb-4d49-b093-2a778651d76e",
+ "fetched_at": "2026-11-25T21:38:25+00:00",
+ "issued": "2026-11-25T16:44:00+00:00",
+ "product_url": "https://api.weather.gov/products/74572a69-ad91-4908-8ba0-06bf7b64c7f7",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
  "flag": null,
- "outlook": "Strong northeast breezes today will push enough surf onto Franklin County beaches for a high risk of rip currents. A shift to strong west and northwest breezes early Thursday will expand the high risk out across all beaches. Winds over the Gulf and will decrease on Friday, leading to decrease surf and improving rip current conditions on Saturday. Then a turn to southeast and southerly breezes on Sunday will push surf more directly onshore and raise the rip current risk back to high for all beaches.",
+ "outlook": "Strong northeast breezes today will push enough surf onto Franklin and south-facing Gulf County beaches for a high risk of rip currents. A shift to strong west and northwest breezes early Thursday will expand the high risk out across all beaches. Winds over the Gulf and will decrease on Friday, leading to decrease surf and improving rip current conditions on Saturday. Then a turn to southeast and southerly breezes on Sunday will push surf more directly onshore and raise the rip current risk back to high for all beaches.",
  "periods": [
   {
-   "period": "Today",
+   "period": "Rest Of Today",
    "rip_current_risk": "Moderate",
-   "surf_height": "Around 2 feet",
+   "surf_height": "Around 1 foot",
    "uv_index": "Low",
    "water_temperature": "68 degrees",
-   "weather": "Cloudy. Showers and a slight chance of",
+   "weather": "Mostly cloudy. Rain",
    "high_temperature": "In the lower 60s",
    "winds": "Northeast winds 15 to 20 mph",
-   "sunrise": "6:15 AM",
-   "sunset": "4:43 PM",
+   "sunrise": "7:15 AM",
+   "sunset": "5:43 PM",
    "summary": null
   },
   {
@@ -30,8 +30,8 @@
    "weather": "Mostly cloudy until 1 PM, then mostly",
    "high_temperature": "In the upper 50s",
    "winds": "Breezy. Northwest winds around 25 mph",
-   "sunrise": "6:16 AM",
-   "sunset": "4:43 PM",
+   "sunrise": "7:16 AM",
+   "sunset": "5:43 PM",
    "summary": null
   },
   {

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-25T11:17:48.811Z",
+ "as_of": "2026-11-25T21:39:30.185Z",
  "boards": [
   {
    "key": "county",
@@ -9,7 +9,7 @@
    "read": true,
    "note": null,
    "error": null,
-   "count": 9
+   "count": 10
   },
   {
    "key": "schools",
@@ -103,6 +103,20 @@
   }
  ],
  "jobs": [
+  {
+   "board": "county",
+   "gov_id": "county",
+   "employer": "Bay County",
+   "title": "Solid Waste Technician (Administrative)",
+   "department": "Steelfield Road Landfill",
+   "job_type": "Full time",
+   "pay": null,
+   "posted": "2026-11-25",
+   "closes": null,
+   "ref": "JR100083",
+   "url": "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site/job/Steelfield-Road-Landfill/Solid-Waste-Technician_JR100083",
+   "first_seen": "2026-11-25"
+  },
   {
    "board": "county",
    "gov_id": "county",

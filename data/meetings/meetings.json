@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-25T05:10:45-06:00",
+  "generated": "2026-11-25T15:31:55-06:00",
   "window": {
     "from": "2026-11-25",
     "to": "2027-01-24"
@@ -840,13 +840,24 @@
       "title": "BOCC Regular Meeting",
       "start": "2026-12-01T09:00:00-06:00",
       "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1957",
+      "packet_url": "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1957&compileOutputType=1",
       "minutes_url": null,
       "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
       "status": "posted",
       "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
-      "calendar_source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar"
+      "calendar_source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "items": [
+        {
+          "title": "Contract Administration Policy Resolution - Board approve the attached resolution relating to the county manager’s authority to enforce executory contracts.",
+          "amount": null
+        }
+      ],
+      "agenda_items": [
+        "Revenues and Expenditures - Board acknowledge receipt of the reports.",
+        "Contract Administration Policy Resolution - Board approve the attached resolution relating to the county manager’s authority to enforce executory contracts.",
+        "Personnel Policy Amendment - Board approve changes to the personnel policy language for overtime work and pay."
+      ]
     },
     {
       "board": "cw-planning",
@@ -864,13 +875,22 @@
       "title": "Planning Commission",
       "start": "2026-12-01T17:30:00-06:00",
       "location": "825 Ohio Ave, Lynn Haven",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3189,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=3190,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2137/files",
-      "items": []
+      "items": [],
+      "agenda_items": [
+        "1. Call to Order",
+        "2. Minutes of Previous Meeting",
+        "3. Continuation of Public Hearing",
+        "Nature Walk Large Scale Future Land Use Map Amendment, owners First Links Ink and Greenfield Village, LLC, requesting to change the Future Land Use Map from Recreation/Open Space to Low Density Residential on parcels 11281-000-000 and 11281-010-000, located at approximately Lakeview Terrace and Highway 390.",
+        "4. Review of ULDC Sections 10.00.00 and 4.00.00 Amendments",
+        "5. Director of Planning and Development's Report",
+        "6. Adjourn"
+      ]
     },
     {
       "board": "parker",

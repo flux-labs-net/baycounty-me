@@ -716,7 +716,7 @@ business:kristen-sheffield,business,Business,Kristen Sheffield,Business that gav
 business:kw-holdings-llc,business,Business,KW Holdings LLC,Business that gave to a local campaign,/profile/business/kw-holdings-llc,,1,,1000.0,,bay,
 business:kyle-meritt-photography,business,Business,Kyle Meritt Photography,Business that gave to a local campaign,/profile/business/kyle-meritt-photography,,1,,800.0,,bay,
 business:l-n-construction-services-inc,business,Business,"L & N Construction Services, Inc",Company with federal contracts,/profile/business/l-n-construction-services-inc,,1,10500.0,,,bay,https://www.usaspending.gov/search
-business:l00000000901,business,Business,"Greenfield Village, L.L.C.",Registered business,/profile/business/l00000000901,,5,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GREENFIELD%20VILLAGE%2C%20L.L.C./Page1
+business:l00000000901,business,Business,"Greenfield Village, L.L.C.",Registered business,/profile/business/l00000000901,,6,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GREENFIELD%20VILLAGE%2C%20L.L.C./Page1
 business:l00000002328,business,Business,Norcross Professional Center,Registered business,/profile/business/l00000002328,,3,,2000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Norcross%20Professional%20Center/Page1
 business:l00000002693,business,Business,"Teammove, L.L.C.",Registered business,/profile/business/l00000002693,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TEAMMOVE%2C%20L.L.C./Page1
 business:l00000003085,business,Business,"Destin Shopping Center, L.C.",Registered business,/profile/business/l00000003085,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/DESTIN%20SHOPPING%20CENTER%2C%20L.C./Page1
@@ -5191,12 +5191,12 @@ gov:cw,gov,Government,Callaway,City,/governments/callaway,,74,,19615972.29,cw,ba
 gov:destination_pc,gov,Government,Destination Panama City,Tourism agency,/profile/gov/destination_pc,,174,,4471596.43,destination_pc,bay,
 gov:fdot,gov,Government,Florida Department of Transportation,State agency: state highways and bridges,/profile/gov/fdot,,33,,,,bay,https://www.fdot.gov/
 gov:lake_powell_cdd,gov,Government,Lake Powell CDD,Special district,/profile/gov/lake_powell_cdd,,21,,,lake_powell_cdd,bay,
-gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,144,,70032287.37,lh,bay,
+gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,145,,70032287.37,lh,bay,
 gov:mb,gov,Government,Mexico Beach,City,/governments/mexico-beach,,88,132438.9,17922207.87,mb,bay,
 gov:mb_cdc,gov,Government,Mexico Beach CDC,Tourism agency,/profile/gov/mb_cdc,,72,,2071159.31,mb_cdc,bay,
 gov:nwfwmd,gov,Government,Water Management District,Special district,/profile/gov/nwfwmd,,0,,,nwfwmd,bay,
 gov:parker,gov,Government,Parker,City,/governments/parker,,43,,7755040.0,parker,bay,
-gov:pc,gov,Government,Panama City,City,/governments/panama-city,,181,32179.51,196021305.95,pc,bay,
+gov:pc,gov,Government,Panama City,City,/governments/panama-city,,183,32179.51,196021305.95,pc,bay,
 gov:pcb,gov,Government,Panama City Beach,City,/governments/panama-city-beach,,149,595378.66,90657832.11,pcb,bay,
 gov:port,gov,Government,Port Authority,Special district,/profile/gov/port,,1,,,port,bay,
 gov:property_appraiser,gov,Government,Property Appraiser,Constitutional,/profile/gov/property_appraiser,,5,,,property_appraiser,bay,
@@ -13974,7 +13974,7 @@ nonprofit:np-853651152,nonprofit,Nonprofit,Nine Lives Kitty Rescue Inc,Animals �
 nonprofit:np-854137303,nonprofit,Nonprofit,Callaway Historical Society Inc,Arts and culture · Panama City,/profile/nonprofit/np-854137303,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/854137303
 nonprofit:np-854247849,nonprofit,Nonprofit,40 & 8 Voiture 472,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-854247849,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/854247849
 nonprofit:np-861123234,nonprofit,Nonprofit,Sponsors of Hope Ministries Inc,Church or religious group · Panama City,/profile/nonprofit/np-861123234,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/861123234
-nonprofit:np-861145087,nonprofit,Nonprofit,Chautauqua Charter School Inc,Education · Panama City,/profile/nonprofit/np-861145087,,10,,,,bay,https://projects.propublica.org/nonprofits/organizations/861145087
+nonprofit:np-861145087,nonprofit,Nonprofit,Chautauqua Charter School Inc,Education · Panama City,/profile/nonprofit/np-861145087,,11,,,,bay,https://projects.propublica.org/nonprofits/organizations/861145087
 nonprofit:np-861148983,nonprofit,Nonprofit,Emmanuel Clgi,Church or religious group · Panama City,/profile/nonprofit/np-861148983,,0,,,,bay,https://projects.propublica.org/nonprofits/organizations/861148983
 nonprofit:np-861247748,nonprofit,Nonprofit,Radiant New Life Church Inc,Church or religious group · Lynn Haven,/profile/nonprofit/np-861247748,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/861247748
 nonprofit:np-861419065,nonprofit,Nonprofit,Tomorrow Foundation,Environment · Panama City,/profile/nonprofit/np-861419065,,1,,,,bay,https://projects.propublica.org/nonprofits/organizations/861419065
@@ -16711,7 +16711,7 @@ vendor:wmbb-tv,vendor,Company,WMBB-TV,Company paid or hired by local governments
 vendor:women-s-civic-club-pcb,vendor,Company,Women's Civic Club of PCB,Company paid or hired by local governments,/profile/vendor/women-s-civic-club-pcb,,1,53553.39,,visit_pcb,bay,
 vendor:woof,vendor,Company,WOOF,Company paid or hired by local governments,/profile/vendor/woof,,1,57141.25,,visit_pcb,bay,
 vendor:workmans,vendor,Company,The Workmans,Company paid or hired by local governments,/profile/vendor/workmans,,1,385.2,,mb_cdc,bay,
-vendor:world-changers-first-baptist-church-panama-city,vendor,Company,World Changers (with First Baptist Church of Panama City),Company paid or hired by local governments,/public-money/vendors/world-changers-first-baptist-church-panama-city,World Changers / First Baptist Church of Panama City; World Changers Organization,12,220000.0,,pc,bay,
+vendor:world-changers-first-baptist-church-panama-city,vendor,Company,World Changers (with First Baptist Church of Panama City),Company paid or hired by local governments,/public-money/vendors/world-changers-first-baptist-church-panama-city,World Changers / First Baptist Church of Panama City; World Changers Organization,13,220000.0,,pc,bay,
 vendor:world-triathalon,vendor,Company,World Triathalon Corporation,Company paid or hired by local governments,/profile/vendor/world-triathalon,,1,720000.0,,visit_pcb,bay,
 vendor:wow,vendor,Company,WOW,Company paid or hired by local governments,/profile/vendor/wow,,1,21435.69,,destination_pc,bay,
 vendor:wsb-tv,vendor,Company,WSB-TV,Company paid or hired by local governments,/profile/vendor/wsb-tv,,1,82276.6,,visit_pcb,bay,
