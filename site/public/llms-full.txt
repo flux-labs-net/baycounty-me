@@ -2552,7 +2552,7 @@ CSV: https://baycounty.me/downloads/beach-water-samples.csv · JSON: https://bay
 
 ### Beach conditions and flags (beach-conditions)
 From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.
-Rows: 13. Columns: place_id, zone, issued, period, flag_color, meaning, rip_current_risk, surf_height, uv_index, water_temperature, weather, high_temperature, winds, sunrise, sunset, summary, date, ends, sort_order, source_url, kind, gov_id
+Rows: 14. Columns: place_id, zone, issued, period, flag_color, meaning, rip_current_risk, surf_height, uv_index, water_temperature, weather, high_temperature, winds, sunrise, sunset, summary, date, ends, sort_order, source_url, kind, gov_id
 CSV: https://baycounty.me/downloads/beach-conditions.csv · JSON: https://baycounty.me/downloads/beach-conditions.json
 
 ### Parks (parks)
@@ -2652,7 +2652,7 @@ CSV: https://baycounty.me/downloads/emergency-resources.csv · JSON: https://bay
 
 ### Emergency notices archive (emergency-notices)
 Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.
-Rows: 86. Columns: notice_id, place_id, kind, source, source_type, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, updated, status, full_closure, roadway, first_seen, last_seen, url, source_url, same_as, first_posted
+Rows: 87. Columns: notice_id, place_id, kind, source, source_type, gov_id, title, summary, instruction, severity, event, area, zones, issued, starts, ends, updated, status, full_closure, roadway, first_seen, last_seen, url, source_url, same_as, first_posted
 CSV: https://baycounty.me/downloads/emergency-notices.csv · JSON: https://baycounty.me/downloads/emergency-notices.json
 
 ### Hurricane prep steps (hurricane-prep)
@@ -2742,7 +2742,7 @@ CSV: https://baycounty.me/downloads/new-businesses.csv · JSON: https://baycount
 
 ### This week in Bay County (weekly-roundup)
 This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.
-Rows: 20. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
+Rows: 17. Columns: place_id, week_of, section, rank, featured, record_id, title, summary, date, starts, ends, all_day, gov_id, government, board, town, venue, category, recurring, agenda_posted, amount, new_total, method, outcome, tally, split, voted_no, people, vendor, vendor_entity_id, vendor_url, url, page_url, source, source_url, first_seen
 CSV: https://baycounty.me/downloads/weekly-roundup.csv · JSON: https://baycounty.me/downloads/weekly-roundup.json
 
 ### Military installations (military-installations)

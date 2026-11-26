@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -9664,7 +9664,7 @@
    "id": "beach-conditions",
    "title": "Beach conditions and flags",
    "description": "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.",
-   "rows": 13,
+   "rows": 14,
    "columns": [
     {
      "name": "place_id",
@@ -9687,7 +9687,7 @@
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
       "2026-11-24T16:19:00+00:00",
-      "2026-11-25T16:44:00+00:00"
+      "2026-11-26T07:19:00+00:00"
      ]
     },
     {
@@ -9695,10 +9695,11 @@
      "type": "string",
      "values": [
       "Friday",
-      "Rest Of Today",
+      "Monday",
+      "Rip Current Statement",
       "Saturday",
       "Sunday",
-      "Thanksgiving Day"
+      "Today"
      ]
     },
     {
@@ -9735,38 +9736,36 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "Around 1 foot",
       "Around 4 feet",
-      "around 3 feet"
+      "around 2 feet"
      ]
     },
     {
      "name": "uv_index",
      "type": "string",
      "values": [
-      "Low"
+      "Moderate"
      ]
     },
     {
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "68 degrees"
+      "67 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy until 1 PM, then mostly",
-      "Mostly cloudy. Rain"
+      "Mostly sunny until 3 PM, then mostly",
+      "Partly sunny until 3 PM, then sunny"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 60s",
       "In the upper 50s"
      ]
     },
@@ -9775,22 +9774,22 @@
      "type": "string",
      "values": [
       "Breezy. Northwest winds around 25 mph",
-      "Northeast winds 15 to 20 mph"
+      "Northwest winds 15 to 20 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:15 AM",
-      "7:16 AM"
+      "6:16 AM",
+      "6:17 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "5:43 PM"
+      "4:43 PM"
      ]
     },
     {
@@ -9798,13 +9797,14 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Partly sunny. A chance of showers. Highs around 70. Southeast winds around 20 mph.",
-      "High rip current risk*. Surf height around 3 feet. Mostly sunny. Highs in the upper 50s. Northwest winds around 20 mph.",
+      "High rip current risk*. Mostly cloudy. Showers likely and a slight chance of thunderstorms. Highs in the lower 70s. South winds around 20 mph.",
+      "High rip current risk*. Partly sunny. Highs in the lower 60s. North winds around 15 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly cloudy. Highs in the mid 60s. Northeast winds around 5 mph.",
+      "Moderate rip current risk*. Surf height around 2 feet. Mostly cloudy. Highs in the mid 60s. East winds around 5 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Strong northeast breezes today will push enough surf onto Franklin and south-facing Gulf County beaches for a high risk of rip currents. A shift to strong west and northwest breezes early Thursday will expand the high risk out across all beaches. Winds over the Gulf and will decrease on Friday, leading to decrease surf and improving rip current conditions on Saturday. Then a turn to southeast and southerly breezes on Sunday will push surf more directly onshore and raise the rip current risk back to high for all beaches.",
+      "Rip Current Statement issued November 26 at 2:14AM EST until November 28 at 3:00AM EST by NWS Tallahassee FL",
+      "Strong west and northwest breezes will kick up enough surf for a high risk of rip currents. In fact, west-facing beaches in Gulf County will be most directly exposed, and surf heights will reach 5 feet today. Winds will start to diminish on Friday, but not soon enough to prevent one more day of high risk concerns on Friday. High risk on Saturday will be confined to west-facing Gulf County beaches. Then on Sunday, fresh to strong southerlies over the Gulf will push surf directly onto the beaches for a high risk at all beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9814,12 +9814,16 @@
      "values": [
       "2026-10-27",
       "2026-11-17",
-      "2026-11-24"
+      "2026-11-24",
+      "2026-11-26T02:14:00-05:00"
      ]
     },
     {
      "name": "ends",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-11-28T03:00:00-05:00"
+     ]
     },
     {
      "name": "sort_order",
@@ -9829,9 +9833,10 @@
      "name": "source_url",
      "type": "string",
      "values": [
+      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.b11157bc38df7e7bd9ffea0efabb33ded8203c42.001.1",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+      "https://api.weather.gov/products/45626e67-9744-4e09-8f89-4cf79954bf02",
       "https://api.weather.gov/products/51d344a3-9ee7-46e7-9d03-8ddc4605f6ab",
-      "https://api.weather.gov/products/74572a69-ad91-4908-8ba0-06bf7b64c7f7",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
@@ -9840,6 +9845,7 @@
      "name": "kind",
      "type": "string",
      "values": [
+      "alert",
       "flag",
       "forecast",
       "legend"
@@ -12498,7 +12504,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-25"
+      "2026-11-26"
      ]
     },
     {
@@ -12647,7 +12653,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 86,
+   "rows": 87,
    "columns": [
     {
      "name": "notice_id",
@@ -12783,7 +12789,8 @@
       "Right shoulder blocked",
       "South Walton; Coastal Bay",
       "South Walton; Coastal Bay; Coastal Franklin",
-      "South Walton; Coastal Bay; Coastal Gulf"
+      "South Walton; Coastal Bay; Coastal Gulf",
+      "South Walton; Coastal Bay; Coastal Gulf; Coastal Franklin"
      ]
     },
     {
@@ -14217,7 +14224,7 @@
       "2026-09-30",
       "2026-10-08",
       "2026-10-19",
-      "2026-10-26",
+      "2026-10-27",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
@@ -14371,7 +14378,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-25"
+      "2026-11-26"
      ]
     }
    ],
@@ -15749,7 +15756,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 20,
+   "rows": 17,
    "columns": [
     {
      "name": "place_id",
@@ -15820,7 +15827,6 @@
      "type": "string",
      "values": [
       "2026-11-25T14:00:00",
-      "2026-11-25T18:00:00",
       "2026-11-26T07:30:00",
       "2026-11-26T08:00:00",
       "2026-11-26T11:00:00",
@@ -15835,8 +15841,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-25T17:00:00",
-      "2026-11-25T21:00:00",
       "2026-11-26T08:00:00",
       "2026-11-26T10:00:00",
       "2026-11-26T11:00:00",
@@ -15895,7 +15899,6 @@
      "values": [
       "Aaron Bessant Park",
       "Barefoot Hide-A-Way",
-      "Bay County Public Library",
       "Gulf of America",
       "LaCo",
       "Parker Park",
@@ -15908,7 +15911,6 @@
      "type": "string",
      "values": [
       "Community",
-      "Library",
       "consent agenda",
       "ordinance",
       "other",
@@ -15996,11 +15998,8 @@
       "https://pcbeach.org/local-event/charlotte-claires-turkey-trot/",
       "https://pcbeach.org/local-event/thanksgiving-at-laco-2/",
       "https://pcbeach.org/local-event/thanksgiving-dinner-at-barefoot-hide-a-way/",
-      "https://www.baycountyfl.gov/Calendar.aspx?EID=1614",
-      "https://www.baycountyfl.gov/Calendar.aspx?EID=1615",
-      "https://www.nwrls.com/event/lego-club-ages-6-12-7/",
-      "https://www.panamacity.gov/Calendar.aspx?EID=6711",
-      "https://www.panamacity.gov/Calendar.aspx?EID=7494",
+      "https://www.baycountyfl.gov/m/calendar/event/detail/1614",
+      "https://www.baycountyfl.gov/m/calendar/event/detail/1615",
       "https://www.panamacity.gov/Calendar.aspx?EID=7708",
       "https://www.panamacity.gov/Calendar.aspx?EID=7733"
      ]
@@ -16020,7 +16019,6 @@
       "Bay County",
       "City of Panama City",
       "Mexico Beach (visitor events)",
-      "Northwest Regional Library System",
       "Panama City Beach Chamber"
      ]
     },
@@ -16033,7 +16031,6 @@
       "https://pcbeach.org/local-events/",
       "https://www.baycountyfl.gov/Calendar.aspx",
       "https://www.mexicobeach.com/events/",
-      "https://www.nwrls.com/events",
       "https://www.panamacity.gov/Calendar.aspx"
      ]
     },
@@ -17590,7 +17587,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-25"
+      "2026-11-26"
      ]
     },
     {
@@ -20571,7 +20568,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-25"
+      "2026-11-26"
      ]
     },
     {
@@ -20805,7 +20802,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-25"
+      "2026-11-26"
      ]
     },
     {
@@ -21043,11 +21040,6 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/3155/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1605",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1713",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1714",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
       "https://www.panamacity.gov/calendar.aspx?EID=6077",
       "https://www.panamacity.gov/calendar.aspx?EID=7549",

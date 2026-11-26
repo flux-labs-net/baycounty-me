@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-11-25",
- "fetched": "2026-11-25T16:37:17-0500",
+ "as_of": "2026-11-26",
+ "fetched": "2026-11-26T06:16:12-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -54,40 +54,6 @@
  },
  "events": [
   {
-   "event_id": "panama-city:7494:2026-11-25",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "Card Club",
-   "starts": "2026-11-25T14:00:00",
-   "ends": "2026-11-25T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7494",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
-  },
-  {
-   "event_id": "library:23688:2026-11-25",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "gov": null,
-   "town": "Panama City",
-   "title": "LEGO Club (Ages 6 – 12)",
-   "starts": "2026-11-25T14:00:00",
-   "ends": "2026-11-25T17:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/lego-club-ages-6-12-7/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true
-  },
-  {
    "event_id": "panama-city:7708:2026-11-25",
    "source_id": "panama-city",
    "source": "City of Panama City",
@@ -103,23 +69,6 @@
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7708",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
    "recurring": false
-  },
-  {
-   "event_id": "panama-city:6711:2026-11-25",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "gov": "pc",
-   "town": "Panama City",
-   "title": "PC Art Club",
-   "starts": "2026-11-25T18:00:00",
-   "ends": "2026-11-25T21:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6711",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27688",
@@ -139,7 +88,7 @@
    "recurring": false
   },
   {
-   "event_id": "bay-county:1614:2026-11-26",
+   "event_id": "bay-county:https://www.baycountyfl.gov/m/calendar/event/detail/1614:2026-11-26",
    "source_id": "bay-county",
    "source": "Bay County",
    "gov": "county",
@@ -151,7 +100,7 @@
    "venue": null,
    "category": "Community",
    "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1614",
+   "url": "https://www.baycountyfl.gov/m/calendar/event/detail/1614",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
    "recurring": false
   },
@@ -224,7 +173,7 @@
    "recurring": false
   },
   {
-   "event_id": "bay-county:1615:2026-11-27",
+   "event_id": "bay-county:https://www.baycountyfl.gov/m/calendar/event/detail/1615:2026-11-27",
    "source_id": "bay-county",
    "source": "Bay County",
    "gov": "county",
@@ -236,7 +185,7 @@
    "venue": null,
    "category": "Community",
    "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1615",
+   "url": "https://www.baycountyfl.gov/m/calendar/event/detail/1615",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
    "recurring": false
   },
@@ -326,7 +275,7 @@
    "recurring": true
   },
   {
-   "event_id": "lynn-haven:1322:2026-12-01",
+   "event_id": "lynn-haven:https://www.cityoflynnhaven.gov/m/calendar/event/detail/1322:2026-12-01",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
    "gov": "lh",
@@ -338,12 +287,12 @@
    "venue": null,
    "category": "Public meeting",
    "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1322",
+   "url": "https://www.cityoflynnhaven.gov/m/calendar/event/detail/1322",
    "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
    "recurring": false
   },
   {
-   "event_id": "bay-county:1595:2026-12-01",
+   "event_id": "bay-county:https://www.baycountyfl.gov/m/calendar/event/detail/1595:2026-12-01",
    "source_id": "bay-county",
    "source": "Bay County",
    "gov": "county",
@@ -355,7 +304,7 @@
    "venue": null,
    "category": "Public meeting",
    "cost": null,
-   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1595",
+   "url": "https://www.baycountyfl.gov/m/calendar/event/detail/1595",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
    "recurring": false
   },
@@ -612,7 +561,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6522",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24360:2026-12-03",
@@ -714,7 +663,7 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7727",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "library:24460:2026-12-04",
@@ -1176,7 +1125,7 @@
    "recurring": true
   },
   {
-   "event_id": "lynn-haven:1324:2026-12-08",
+   "event_id": "lynn-haven:https://www.cityoflynnhaven.gov/m/calendar/event/detail/1324:2026-12-08",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
    "gov": "lh",
@@ -1188,12 +1137,12 @@
    "venue": null,
    "category": "Public meeting",
    "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1324",
+   "url": "https://www.cityoflynnhaven.gov/m/calendar/event/detail/1324",
    "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
    "recurring": false
   },
   {
-   "event_id": "lynn-haven:1214:2026-12-08",
+   "event_id": "lynn-haven:https://www.cityoflynnhaven.gov/m/calendar/event/detail/1214:2026-12-08",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
    "gov": "lh",
@@ -1205,7 +1154,7 @@
    "venue": null,
    "category": "Public meeting",
    "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1214",
+   "url": "https://www.cityoflynnhaven.gov/m/calendar/event/detail/1214",
    "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
    "recurring": false
   },
@@ -1380,6 +1329,23 @@
    "recurring": true
   },
   {
+   "event_id": "panama-city:6523:2026-12-10",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "PC Senior Living",
+   "starts": "2026-12-10T09:00:00",
+   "ends": "2026-12-10T13:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6523",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
+  },
+  {
    "event_id": "library:24157:2026-12-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
@@ -1497,6 +1463,23 @@
    "url": "https://pcbeach.org/local-event/business-after-hours-annual-christmas-party-26/",
    "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
+  },
+  {
+   "event_id": "panama-city:7728:2026-12-10",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Sandy Steppers - Dance Class",
+   "starts": "2026-12-10T18:30:00",
+   "ends": "2026-12-10T22:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7728",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
   },
   {
    "event_id": "library:24458:2026-12-11",
@@ -1819,7 +1802,7 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/mini-makers-ages-5-7/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false
+   "recurring": true
   },
   {
    "event_id": "mexico-beach:10001866-1798272000-1798286400:2026-12-26",
@@ -2653,6 +2636,23 @@
    "url": "https://pcbeach.org/local-event/emerald-coast-philharmonic-mahlers-symphony-no-1-titan/",
    "source_url": "https://pcbeach.org/local-events/",
    "recurring": false
+  },
+  {
+   "event_id": "library:24358:2027-01-25",
+   "source_id": "library",
+   "source": "Northwest Regional Library System",
+   "gov": null,
+   "town": "Panama City",
+   "title": "Mini Makers (Ages 5 – 7)",
+   "starts": "2027-01-25T16:00:00",
+   "ends": "2027-01-25T17:00:00",
+   "all_day": false,
+   "venue": "Bay County Public Library",
+   "category": "Library",
+   "cost": null,
+   "url": "https://www.nwrls.com/event/mini-makers-ages-5-7-3/",
+   "source_url": "https://www.nwrls.com/events",
+   "recurring": true
   }
  ]
 }
