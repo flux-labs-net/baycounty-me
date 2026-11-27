@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-26",
+ "as_of": "2026-11-27",
  "fetched": {
-  "pcb-chamber": "2026-11-26T11:16:12+00:00",
+  "pcb-chamber": "2026-11-27T11:16:00+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,51 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27688",
-   "title": "Charlotte Claire’s Turkey Trot",
-   "starts": "2026-11-26T07:30:00",
-   "ends": "2026-11-26T10:00:00",
-   "all_day": false,
-   "venue": "SweetBay Community",
-   "city": "Panama City",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/charlotte-claires-turkey-trot/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27832",
-   "title": "Thanksgiving Dinner at Barefoot Hide-A-Way",
-   "starts": "2026-11-26T11:00:00",
-   "ends": "2026-11-26T20:00:00",
-   "all_day": false,
-   "venue": "Barefoot Hide-A-Way",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/thanksgiving-dinner-at-barefoot-hide-a-way/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27545",
-   "title": "Thanksgiving at LaCo",
-   "starts": "2026-11-26T11:00:00",
-   "ends": "2026-11-26T11:00:00",
-   "all_day": false,
-   "venue": "LaCo",
-   "city": "Seacrest",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/thanksgiving-at-laco-2/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27387",
