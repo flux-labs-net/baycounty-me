@@ -1,7 +1,7 @@
 {
- "as_of": "2026-11-27",
+ "as_of": "2026-11-28",
  "fetched": {
-  "pcb-chamber": "2026-11-27T11:16:00+00:00",
+  "pcb-chamber": "2026-11-28T11:15:58+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:27387",
-   "title": "Beach Home for the Holidays",
-   "starts": "2026-11-27T00:00:00",
-   "ends": "2026-11-28T23:59:59",
-   "all_day": true,
-   "venue": "Aaron Bessant Park",
-   "city": "Panama City Beach",
-   "category": "Community Events",
-   "chamber_event": false,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/beach-home-for-the-holidays-3/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27830",

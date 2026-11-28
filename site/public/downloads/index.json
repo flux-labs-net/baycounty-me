@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-11-27",
+ "updated": "2026-11-28",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -8716,7 +8716,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 40,
+   "rows": 39,
    "columns": [
     {
      "name": "place_id",
@@ -8804,7 +8804,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-27T00:00:00",
       "2026-12-03T18:00:00",
       "2026-12-05T00:00:00",
       "2026-12-06T09:00:00",
@@ -8833,7 +8832,6 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-28T23:59:59",
       "2026-12-03T21:00:00",
       "2026-12-05T23:59:59",
       "2026-12-06T11:00:00",
@@ -8870,7 +8868,6 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "Aaron Bessant Park",
       "Bay Point Golf Club",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
@@ -8966,7 +8963,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 155,
+   "rows": 156,
    "columns": [
     {
      "name": "place_id",
@@ -9054,7 +9051,6 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "Aaron Bessant Park",
       "Bay County Public Library",
       "Capt. Anderson’s Marina",
       "Captain Anderson’s Event Center",
@@ -9120,7 +9116,7 @@
      "name": "same_as",
      "type": "string",
      "values": [
-      "destination-pc:17846:2026-12-12"
+      "panama-city:7743:2026-12-12"
      ]
     },
     {
@@ -9674,7 +9670,7 @@
       "2026-10-27T16:01:00+00:00",
       "2026-11-17T17:31:00+00:00",
       "2026-11-24T16:19:00+00:00",
-      "2026-11-27T07:07:00+00:00"
+      "2026-11-28T07:27:00+00:00"
      ]
     },
     {
@@ -9683,10 +9679,10 @@
      "values": [
       "Monday",
       "Rip Current Statement",
-      "Saturday",
       "Sunday",
       "Today",
-      "Tuesday"
+      "Tuesday",
+      "Wednesday"
      ]
     },
     {
@@ -9715,7 +9711,8 @@
      "name": "rip_current_risk",
      "type": "string",
      "values": [
-      "High"
+      "High",
+      "Moderate"
      ]
     },
     {
@@ -9723,8 +9720,8 @@
      "type": "string",
      "values": [
       "Around 2 feet",
-      "Around 4 feet",
-      "around 5 feet"
+      "Around 5 feet",
+      "around 4 feet"
      ]
     },
     {
@@ -9738,22 +9735,22 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "64 degrees"
+      "63 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly cloudy",
-      "Mostly sunny until 3 PM, then mostly"
+      "Cloudy. Showers likely and a slight",
+      "Mostly cloudy"
      ]
     },
     {
      "name": "high_temperature",
      "type": "string",
      "values": [
-      "In the lower 60s",
+      "In the lower 70s",
       "In the mid 60s"
      ]
     },
@@ -9761,16 +9758,16 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "North winds around 5 mph, becoming",
-      "West winds 15 to 20 mph"
+      "Breezy. South winds around 15 mph,",
+      "North winds around 5 mph, becoming"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:17 AM",
-      "7:18 AM"
+      "7:18 AM",
+      "7:19 AM"
      ]
     },
     {
@@ -9785,14 +9782,14 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
-      "High rip current risk*. Mostly sunny. Cooler. Highs in the lower 60s. Northeast winds around 15 mph.",
-      "High rip current risk*. Mostly sunny. Highs in the mid 60s. Northeast winds around 10 mph.",
-      "High rip current risk*. Surf height around 5 feet. Mostly cloudy. Showers likely. Highs in the lower 70s. South winds around 20 mph.",
+      "High pressure will move across the northern Gulf today, switching winds from westerly to southwesterly while wind speeds gradually decreasing. Residual swell and elevated surf heights will maintain the high risk of rip currents at Bay and Gulf county beaches. Southwesterly winds increase Sunday ahead of a low pressure system leading to a high risk of rip currents at all beaches into early next week.",
+      "High rip current risk*. Sunny. Highs in the mid 60s. Northeast winds around 10 mph.",
+      "High rip current risk*. Surf height around 4 feet. Partly sunny. Cooler. Highs in the lower 60s. North winds around 15 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the upper 60s. East winds around 10 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Rip Current Statement issued November 27 at 2:59AM EST until November 28 at 3:00AM EST by NWS Tallahassee FL",
-      "Strong west to northwest winds will start the day with a gradual weakening of the winds this afternoon. The strong winds will keep 3 to 5 feet of surf on the Panhandle coast and 2 feet along Franklin county beaches. A high risk of rip currents will continue today with conditions not improving much this weekend into early next week. Beach goers are urged to heed posted beach flags and stay out of the water if red or double red flags are flying.",
+      "Rip Current Statement issued November 28 at 2:23AM EST until November 29 at 3:00AM EST by NWS Tallahassee FL",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9803,14 +9800,14 @@
       "2026-10-27",
       "2026-11-17",
       "2026-11-24",
-      "2026-11-27T02:59:00-05:00"
+      "2026-11-28T02:23:00-05:00"
      ]
     },
     {
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-28T03:00:00-05:00"
+      "2026-11-29T03:00:00-05:00"
      ]
     },
     {
@@ -9821,11 +9818,11 @@
      "name": "source_url",
      "type": "string",
      "values": [
-      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.0c7d6d3f6b096ab57b12d0f4e085bf625e30b0ae.001.1",
+      "https://api.weather.gov/alerts/urn:oid:2.49.0.1.840.0.8e0c7f2888d5be4f7e1c13cc48a46ae03258e925.002.1",
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
       "https://api.weather.gov/products/51d344a3-9ee7-46e7-9d03-8ddc4605f6ab",
       "https://api.weather.gov/products/82f24a68-8fe0-4270-8e63-cd5fbcfdf17a",
-      "https://api.weather.gov/products/b3b0a895-6bf5-484c-a2bd-a210c50dbdbc",
+      "https://api.weather.gov/products/a4714a6e-fa7f-4ef3-a511-07ea20f724b4",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12492,7 +12489,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-27"
+      "2026-11-28"
      ]
     },
     {
@@ -12641,7 +12638,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 88,
+   "rows": 89,
    "columns": [
     {
      "name": "notice_id",
@@ -12765,6 +12762,7 @@
       "Central Walton; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; Inland Franklin; Gadsden; Leon; Inland Jefferson; Madison; Inland Wakulla; Inland Taylor; Lafayette; Inland Dixie; Northern Liberty; Southern Liberty; Tift; Ben Hill; Irwin; Colquitt; Cook; Berrien; Seminole; Decatur; Grady; Thomas; Brooks; Lowndes; Lanier",
       "City of Lynn Haven",
       "Coastal Bay",
+      "Coastal Bay; Coastal Gulf",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; Inland Gulf; South Walton; Coastal Bay; Coastal Gulf; Quitman; Clay; Randolph; Calhoun; Terrell; Dougherty; Lee; Early; Miller; Baker; Seminole",
       "Coffee; Dale; Henry; Geneva; Houston; North Walton; Central Walton; Holmes; Washington; Jackson; Inland Bay; Calhoun; South Walton; Coastal Bay; Quitman; Clay; Randolph; Calhoun; Early; Miller; Seminole",
       "FLORIDA-ALL",
@@ -14367,7 +14365,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-11-27"
+      "2026-11-28"
      ]
     }
    ],
@@ -15745,7 +15743,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 12,
+   "rows": 8,
    "columns": [
     {
      "name": "place_id",
@@ -15803,8 +15801,6 @@
      "values": [
       "2026-10-13",
       "2026-10-27",
-      "2026-11-25",
-      "2026-11-27",
       "2026-11-28",
       "2026-11-29"
      ]
@@ -15813,10 +15809,6 @@
      "name": "starts",
      "type": "string",
      "values": [
-      "2026-11-25T14:00:00",
-      "2026-11-27T00:00:00",
-      "2026-11-27T08:00:00",
-      "2026-11-27T18:00:00",
       "2026-11-28T08:00:00",
       "2026-11-29T00:00:00"
      ]
@@ -15825,10 +15817,7 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-11-27T17:00:00",
-      "2026-11-27T19:00:00",
       "2026-11-28T12:00:00",
-      "2026-11-28T23:59:59",
       "2026-11-29T00:00:00"
      ]
     },
@@ -15866,17 +15855,13 @@
      "name": "town",
      "type": "string",
      "values": [
-      "Bay County",
-      "Mexico Beach",
-      "Panama City",
-      "Panama City Beach"
+      "Mexico Beach"
      ]
     },
     {
      "name": "venue",
      "type": "string",
      "values": [
-      "Aaron Bessant Park",
       "Gulf of America",
       "Parker Park"
      ]
@@ -15967,11 +15952,7 @@
       "https://baycounty.me/public-money/votes?q=The%20commission%20approved%20Resolution%202026-#all",
       "https://baycounty.me/public-money/votes?q=The%20commission%20approved%20the%20consent%20agen#all",
       "https://mexicobeach.com/event/farmers-market/2026-11-28/",
-      "https://mexicobeach.com/event/license-free-saltwater-fishing-day/",
-      "https://pcbeach.org/local-event/beach-home-for-the-holidays-3/",
-      "https://www.baycountyfl.gov/Calendar.aspx?EID=1615",
-      "https://www.panamacity.gov/Calendar.aspx?EID=7708",
-      "https://www.panamacity.gov/Calendar.aspx?EID=7733"
+      "https://mexicobeach.com/event/license-free-saltwater-fishing-day/"
      ]
     },
     {
@@ -15986,10 +15967,7 @@
      "name": "source",
      "type": "string",
      "values": [
-      "Bay County",
-      "City of Panama City",
-      "Mexico Beach (visitor events)",
-      "Panama City Beach Chamber"
+      "Mexico Beach (visitor events)"
      ]
     },
     {
@@ -15998,10 +15976,7 @@
      "values": [
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2181,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=2182,plainText=false)",
-      "https://pcbeach.org/local-events/",
-      "https://www.baycountyfl.gov/Calendar.aspx",
-      "https://www.mexicobeach.com/events/",
-      "https://www.panamacity.gov/Calendar.aspx"
+      "https://www.mexicobeach.com/events/"
      ]
     },
     {
@@ -17557,7 +17532,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-11-27"
+      "2026-11-28"
      ]
     },
     {
@@ -20538,7 +20513,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-27"
+      "2026-11-28"
      ]
     },
     {
@@ -20772,7 +20747,7 @@
       "2026-09-14",
       "2026-10-20",
       "2026-11-12",
-      "2026-11-27"
+      "2026-11-28"
      ]
     },
     {
